@@ -32,7 +32,7 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
             type="button"
             key={`${it.country.code}-${i}`}
             onClick={() => onSelect(it.country.code)}
-            className="wt-card px-7 py-6 cursor-pointer transition-all hover:-translate-y-0.5 text-left"
+            className="wt-card px-8 py-7 pr-10 cursor-pointer transition-all hover:-translate-y-0.5 text-left"
             style={{ borderLeft: `3px solid ${STATUS_COLOR[it.country.status]}` }}
           >
             <div className="flex items-center gap-3 mb-3 flex-wrap min-w-0">
