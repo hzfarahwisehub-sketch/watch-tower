@@ -57,6 +57,7 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
                 color: "var(--text)",
                 overflowWrap: "anywhere",
                 wordBreak: "break-word",
+                maxWidth: "55ch",
               }}
             >
               {it.title}
@@ -67,7 +68,8 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
                 color: "var(--text-2)",
                 overflowWrap: "anywhere",
                 wordBreak: "break-word",
-                lineHeight: 1.75,
+                lineHeight: 1.8,
+                maxWidth: "62ch",
               }}
             >
               {it.desc}
