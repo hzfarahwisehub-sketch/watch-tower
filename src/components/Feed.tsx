@@ -32,7 +32,7 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
             type="button"
             key={`${it.country.code}-${i}`}
             onClick={() => onSelect(it.country.code)}
-            className="wt-card px-6 py-5 cursor-pointer transition-all hover:-translate-y-0.5 text-left"
+            className="wt-card px-7 py-6 cursor-pointer transition-all hover:-translate-y-0.5 text-left"
             style={{ borderLeft: `3px solid ${STATUS_COLOR[it.country.status]}` }}
           >
             <div className="flex items-center gap-3 mb-3 flex-wrap min-w-0">
@@ -52,7 +52,7 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
               </span>
             </div>
             <h3
-              className="text-[14px] font-bold leading-snug mb-2"
+              className="text-[14px] font-bold leading-snug mb-2.5"
               style={{
                 color: "var(--text)",
                 overflowWrap: "anywhere",
@@ -62,11 +62,12 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
               {it.title}
             </h3>
             <p
-              className="text-[12px] leading-relaxed"
+              className="text-[12px]"
               style={{
                 color: "var(--text-2)",
                 overflowWrap: "anywhere",
                 wordBreak: "break-word",
+                lineHeight: 1.75,
               }}
             >
               {it.desc}
