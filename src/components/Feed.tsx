@@ -9,11 +9,6 @@ const STATUS_COLOR: Record<Status, string> = {
   warn: "var(--color-status-warning)",
   stable: "var(--color-status-stable)",
 };
-const STATUS_BG: Record<Status, string> = {
-  crit: "rgba(255,59,92,.05)",
-  warn: "rgba(255,138,31,.05)",
-  stable: "rgba(16,224,160,.05)",
-};
 
 export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: (code: string) => void }) {
   const items = useMemo(() => {
@@ -31,62 +26,67 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
       >
         📰 Feed de Mudanças por País
       </h2>
-
-      <div className="wt-card">
-        <div className="p-2">
-          {items.map((it, i) => (
-            <button
-              type="button"
-              key={`${it.country.code}-${i}`}
-              onClick={() => onSelect(it.country.code)}
-              className="w-full flex items-start gap-3 px-4 py-3 rounded-lg my-1 text-left cursor-pointer transition-colors hover:bg-[rgba(31,85,255,0.04)]"
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {items.map((it, i) => (
+          <button
+            type="button"
+            key={`${it.country.code}-${i}`}
+            onClick={() => onSelect(it.country.code)}
+            className="wt-card px-6 py-5 cursor-pointer transition-all hover:-translate-y-0.5 text-left"
+            style={{ borderLeft: `3px solid ${STATUS_COLOR[it.country.status]}` }}
+          >
+            <div className="flex items-center gap-3 mb-3 flex-wrap min-w-0">
+              <span className={`wt-flag md ${it.country.code} flex-shrink-0`} />
+              <span
+                className="text-[11.5px] tracking-[2px] uppercase font-extrabold flex-1 min-w-0 truncate"
+                style={{ color: "var(--color-wh-blue-light)" }}
+              >
+                {it.country.name}
+              </span>
+              <span className={`wt-status ${it.country.status} flex-shrink-0`} style={{ width: 8, height: 8 }} />
+              <span
+                className="text-[9.5px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-[10px] flex-shrink-0"
+                style={{ color: "var(--text-3)", background: "rgba(255,255,255,.05)" }}
+              >
+                {it.time}
+              </span>
+            </div>
+            <h3
+              className="text-[14px] font-bold leading-snug mb-2"
               style={{
-                borderLeft: `3px solid ${STATUS_COLOR[it.country.status]}`,
-                background: STATUS_BG[it.country.status],
+                color: "var(--text)",
+                overflowWrap: "anywhere",
+                wordBreak: "break-word",
               }}
             >
-              <span className={`wt-flag md ${it.country.code} flex-shrink-0 mt-0.5`} />
-              <div className="flex-1 min-w-0">
-                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
-                  <span
-                    className="text-[10.5px] tracking-[2px] uppercase font-extrabold"
-                    style={{ color: "var(--color-wh-blue-light)" }}
-                  >
-                    {it.country.name}
-                  </span>
-                  <span className={`wt-status ${it.country.status}`} style={{ width: 7, height: 7 }} />
-                  <span
-                    className="text-[9.5px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded"
-                    style={{ color: "var(--text-3)", background: "rgba(255,255,255,.05)" }}
-                  >
-                    {it.time}
-                  </span>
-                </div>
-                <h3
-                  className="text-[12.5px] font-bold leading-snug mb-1"
-                  style={{ color: "var(--text)", overflowWrap: "anywhere", wordBreak: "break-word" }}
-                >
-                  {it.title}
-                </h3>
-                <p
-                  className="text-[11px] leading-snug"
-                  style={{ color: "var(--text-2)", overflowWrap: "anywhere", wordBreak: "break-word" }}
-                >
-                  {it.desc}
-                </p>
-                <div
-                  className="flex flex-wrap gap-x-2 gap-y-0.5 mt-2 text-[9px] uppercase tracking-wide font-semibold leading-tight"
-                  style={{ color: "var(--text-3)" }}
-                >
-                  <span>
-                    {it.country.changes} mudança{it.country.changes > 1 ? "s" : ""}
-                  </span>
-                  <span style={{ color: "var(--color-wh-blue-light)" }}>· {it.src}</span>
-                </div>
-              </div>
-            </button>
-          ))}
-        </div>
+              {it.title}
+            </h3>
+            <p
+              className="text-[12px] leading-relaxed"
+              style={{
+                color: "var(--text-2)",
+                overflowWrap: "anywhere",
+                wordBreak: "break-word",
+              }}
+            >
+              {it.desc}
+            </p>
+            <div
+              className="flex justify-between items-center gap-3 text-[10px] uppercase tracking-wider mt-4 pt-3 font-semibold flex-wrap min-w-0"
+              style={{ color: "var(--text-3)", borderTop: "1px solid rgba(74,122,255,.15)" }}
+            >
+              <span className="truncate min-w-0">
+                {it.country.changes} mudança{it.country.changes > 1 ? "s" : ""} no período
+              </span>
+              <span
+                className="font-extrabold flex-shrink-0"
+                style={{ color: "var(--color-wh-blue-light)" }}
+              >
+                {it.src}
+              </span>
+            </div>
+          </button>
+        ))}
       </div>
     </section>
   );
