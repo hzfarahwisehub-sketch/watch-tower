@@ -124,11 +124,11 @@ export function DailyGrid() {
               type="button"
               key={a.id}
               onClick={() => toast(`Abrindo ${a.label} · integração Gmail/IMAP virá na Fase 3`)}
-              className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg my-0.5 transition-colors text-left cursor-pointer hover:bg-[rgba(31,85,255,0.06)]"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg my-1 transition-colors text-left cursor-pointer hover:bg-[rgba(31,85,255,0.06)]"
               style={{ borderLeft: "3px solid transparent", opacity: a.unread === 0 ? 0.45 : 1 }}
             >
               <div
-                className="w-[26px] h-[26px] rounded-[7px] flex items-center justify-center text-[12px] font-bold flex-shrink-0"
+                className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center text-[11px] font-bold flex-shrink-0"
                 style={{
                   background:
                     a.cls === "gmail"
@@ -142,14 +142,14 @@ export function DailyGrid() {
               </div>
               <div className="flex-1 min-w-0">
                 <div
-                  className="text-[11.5px] font-semibold truncate"
+                  className="text-[11px] font-semibold truncate leading-tight"
                   style={{ color: "var(--text)" }}
                   title={a.label}
                 >
                   {a.label}
                 </div>
                 <div
-                  className="text-[10px] mt-0.5 truncate"
+                  className="text-[9.5px] mt-1 truncate leading-tight"
                   style={{ color: "var(--text-3)" }}
                   title={a.last}
                 >
@@ -157,7 +157,7 @@ export function DailyGrid() {
                 </div>
               </div>
               <div
-                className="px-2 py-0.5 rounded-[11px] text-[10.5px] font-extrabold flex-shrink-0 min-w-[24px] text-center"
+                className="px-2 py-0.5 rounded-[11px] text-[10px] font-extrabold flex-shrink-0 min-w-[22px] text-center leading-tight"
                 style={{
                   background: a.unread === 0 ? "transparent" : "var(--color-status-critical)",
                   color: a.unread === 0 ? "var(--text-3)" : "#fff",
@@ -180,14 +180,14 @@ export function DailyGrid() {
           {scheduled.map((sa) => (
             <div
               key={sa.id}
-              className="flex items-start gap-2.5 px-3.5 py-2.5 rounded-lg my-0.5 group"
+              className="flex items-start gap-3 px-4 py-3 rounded-lg my-1 group"
               style={{
                 borderLeft: `3px solid ${sa.status === "active" ? "var(--color-status-stable)" : "var(--text-3)"}`,
                 background: sa.status === "active" ? "rgba(16,224,160,.05)" : "rgba(146,139,183,.05)",
                 opacity: sa.status === "active" ? 1 : 0.6,
               }}
             >
-              <div className="text-[15px] flex-shrink-0 mt-0.5" aria-hidden>
+              <div className="text-[14px] flex-shrink-0 mt-px" aria-hidden>
                 {sa.icon}
               </div>
               <div className="flex-1 min-w-0">
@@ -195,7 +195,7 @@ export function DailyGrid() {
                   contentEditable
                   suppressContentEditableWarning
                   onBlur={(e) => editScheduledTitle(sa.id, e.currentTarget.textContent || "")}
-                  className="text-[12px] font-semibold leading-snug outline-none"
+                  className="text-[11.5px] font-semibold leading-snug outline-none"
                   style={{
                     color: "var(--text)",
                     overflowWrap: "anywhere",
@@ -205,7 +205,7 @@ export function DailyGrid() {
                   {sa.title}
                 </div>
                 <div
-                  className="flex flex-wrap gap-x-2 gap-y-0.5 mt-1 text-[9.5px] uppercase tracking-wide font-semibold"
+                  className="flex flex-wrap gap-x-2 gap-y-0.5 mt-1.5 text-[9px] uppercase tracking-wide font-semibold leading-tight"
                   style={{ color: "var(--text-3)" }}
                 >
                   <span>🕒 {sa.frequency}</span>
@@ -218,7 +218,7 @@ export function DailyGrid() {
                 type="button"
                 onClick={() => toggleScheduled(sa.id)}
                 title={sa.status === "active" ? "Pausar" : "Ativar"}
-                className="flex-shrink-0 opacity-50 group-hover:opacity-100 transition-opacity text-[11px] px-1.5 py-0.5 rounded font-bold"
+                className="flex-shrink-0 opacity-50 group-hover:opacity-100 transition-opacity text-[10px] px-1.5 py-0.5 rounded font-bold"
                 style={{ background: "rgba(255,255,255,0.06)", color: "var(--text-2)" }}
               >
                 {sa.status === "active" ? "⏸" : "▶"}
@@ -244,7 +244,7 @@ export function DailyGrid() {
             onDragOver={onDragOver}
             onDrop={onDrop(a.id)}
             onDragEnd={onDragEnd}
-            className="grid grid-cols-[18px_50px_1fr] gap-2 px-3 py-2.5 rounded-lg my-0.5 items-start transition-opacity"
+            className="grid grid-cols-[16px_46px_1fr] gap-2.5 px-4 py-3 rounded-lg my-1 items-start transition-opacity"
             style={{
               borderLeft: "3px solid var(--color-wh-blue)",
               background: "rgba(31,85,255,.05)",
@@ -253,7 +253,7 @@ export function DailyGrid() {
             }}
           >
             <div
-              className="flex flex-col items-center justify-center text-[14px] leading-none select-none cursor-grab active:cursor-grabbing mt-0.5"
+              className="flex flex-col items-center justify-center text-[12px] leading-none select-none cursor-grab active:cursor-grabbing mt-px"
               style={{ color: "var(--text-3)" }}
               title="Arrastar para reordenar"
               aria-label="Arrastar"
@@ -261,7 +261,7 @@ export function DailyGrid() {
               ⋮⋮
             </div>
             <div
-              className="text-[12.5px] font-extrabold leading-tight tracking-wide outline-none whitespace-nowrap"
+              className="text-[11.5px] font-extrabold leading-tight tracking-wide outline-none whitespace-nowrap mt-px"
               style={{ color: "var(--color-wh-blue-light)" }}
               contentEditable
               suppressContentEditableWarning
@@ -271,7 +271,7 @@ export function DailyGrid() {
             </div>
             <div className="min-w-0">
               <div
-                className="text-[12px] font-semibold leading-snug mb-0.5 outline-none"
+                className="text-[11.5px] font-semibold leading-snug mb-1 outline-none"
                 style={{
                   color: "var(--text)",
                   overflowWrap: "anywhere",
@@ -284,7 +284,7 @@ export function DailyGrid() {
                 {a.title}
               </div>
               <div
-                className="text-[10px] outline-none"
+                className="text-[9.5px] outline-none leading-tight uppercase tracking-wide font-semibold"
                 style={{
                   color: "var(--text-3)",
                   overflowWrap: "anywhere",
@@ -312,13 +312,13 @@ export function DailyGrid() {
         {tasks.map((t) => (
           <div
             key={t.id}
-            className="flex items-start gap-2.5 px-3.5 py-2 rounded-lg my-0.5 group transition-colors"
+            className="flex items-start gap-3 px-4 py-2.5 rounded-lg my-1 group transition-colors"
             style={{ borderLeft: "3px solid transparent" }}
           >
             <button
               type="button"
               onClick={() => toggleTask(t.id)}
-              className="w-[18px] h-[18px] rounded-[5px] flex items-center justify-center cursor-pointer flex-shrink-0 transition-colors text-[11px] font-black mt-0.5"
+              className="w-[17px] h-[17px] rounded-[5px] flex items-center justify-center cursor-pointer flex-shrink-0 transition-colors text-[10px] font-black mt-0.5"
               style={{
                 border: "2px solid var(--color-wh-blue-light)",
                 background: t.done ? "var(--color-wh-blue)" : "transparent",
@@ -332,7 +332,7 @@ export function DailyGrid() {
               contentEditable
               suppressContentEditableWarning
               onBlur={(e) => editTask(t.id, e.currentTarget.textContent || "")}
-              className="flex-1 min-w-0 text-[12px] font-medium outline-none px-1 py-0.5 rounded leading-snug cursor-text"
+              className="flex-1 min-w-0 text-[11.5px] font-medium outline-none px-1 py-0.5 rounded leading-snug cursor-text"
               style={{
                 color: t.done ? "var(--text-3)" : "var(--text)",
                 textDecoration: t.done ? "line-through" : undefined,
@@ -346,7 +346,7 @@ export function DailyGrid() {
               type="button"
               onClick={() => deleteTask(t.id)}
               title="Remover"
-              className="opacity-0 group-hover:opacity-100 cursor-pointer text-[14px] px-1.5 transition-opacity flex-shrink-0"
+              className="opacity-0 group-hover:opacity-100 cursor-pointer text-[13px] px-1.5 transition-opacity flex-shrink-0"
               style={{ color: "var(--text-3)", background: "none", border: "none" }}
             >
               ✕
@@ -366,14 +366,14 @@ export function DailyGrid() {
         {reminders.map((r) => (
           <div
             key={r.id}
-            className="flex items-start gap-2.5 px-3.5 py-2.5 rounded-lg my-0.5"
+            className="flex items-start gap-3 px-4 py-3 rounded-lg my-1"
             style={{
               borderLeft: `3px solid ${r.crit ? "var(--color-status-critical)" : "var(--color-status-warning)"}`,
               background: r.crit ? "rgba(255,59,92,.06)" : "rgba(255,138,31,.06)",
             }}
           >
             <div
-              className="text-[14px] flex-shrink-0 mt-0.5"
+              className="text-[13px] flex-shrink-0 mt-px"
               style={{ color: r.crit ? "var(--color-status-critical)" : "var(--color-status-warning)" }}
             >
               {r.crit ? "⚠" : "🔔"}
@@ -383,7 +383,7 @@ export function DailyGrid() {
                 contentEditable
                 suppressContentEditableWarning
                 onBlur={(e) => editReminder(r.id, e.currentTarget.textContent || "")}
-                className="text-[12px] font-medium leading-snug outline-none"
+                className="text-[11.5px] font-medium leading-snug outline-none"
                 style={{
                   color: "var(--text)",
                   overflowWrap: "anywhere",
@@ -393,7 +393,7 @@ export function DailyGrid() {
                 {r.text}
               </div>
               <div
-                className="text-[10px] uppercase tracking-wide font-semibold mt-1"
+                className="text-[9.5px] uppercase tracking-wide font-semibold mt-1.5 leading-tight"
                 style={{ color: "var(--text-3)" }}
               >
                 {r.when}
@@ -425,7 +425,7 @@ function DailyCard({
 }) {
   return (
     <div className="wt-card flex flex-col">
-      <div className="px-4 py-3" style={{ borderBottom: "1px solid var(--border)" }}>
+      <div className="px-5 py-3.5" style={{ borderBottom: "1px solid var(--border)" }}>
         <div className="flex items-center justify-between gap-2">
           <h2
             className="text-[11px] tracking-[2.5px] uppercase font-bold flex items-center gap-2 min-w-0 truncate"
@@ -450,13 +450,13 @@ function DailyCard({
         </div>
       </div>
       <div
-        className="flex-1 px-1.5 py-1.5 pb-2 overflow-y-auto"
+        className="flex-1 px-2 py-2 pb-2.5 overflow-y-auto"
         style={{ maxHeight: bodyMaxHeight, minHeight: 120 }}
       >
         {children}
       </div>
       <div
-        className="px-3 py-2 flex justify-between items-center gap-2"
+        className="px-4 py-2.5 flex justify-between items-center gap-2"
         style={{ borderTop: "1px solid var(--border)", background: "rgba(15,12,30,.3)" }}
       >
         <span
@@ -469,7 +469,7 @@ function DailyCard({
         <button
           type="button"
           onClick={onAction}
-          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[14px] cursor-pointer text-[10px] font-bold tracking-wide uppercase transition-all hover:-translate-y-px flex-shrink-0 whitespace-nowrap"
+          className="inline-flex items-center gap-1 px-3 py-1 rounded-[14px] cursor-pointer text-[10px] font-bold tracking-wide uppercase transition-all hover:-translate-y-px flex-shrink-0 whitespace-nowrap"
           style={{
             background: "rgba(31,85,255,.15)",
             color: "var(--color-wh-blue-light)",
