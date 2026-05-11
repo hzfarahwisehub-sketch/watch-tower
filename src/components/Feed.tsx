@@ -32,7 +32,7 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
             type="button"
             key={`${it.country.code}-${i}`}
             onClick={() => onSelect(it.country.code)}
-            className="wt-card px-8 py-7 pr-10 cursor-pointer transition-all hover:-translate-y-0.5 text-left"
+            className="wt-card px-10 py-8 pr-12 cursor-pointer transition-all hover:-translate-y-0.5 text-left"
             style={{ borderLeft: `3px solid ${STATUS_COLOR[it.country.status]}` }}
           >
             <div className="flex items-center gap-3 mb-3 flex-wrap min-w-0">
@@ -57,7 +57,6 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
                 color: "var(--text)",
                 overflowWrap: "anywhere",
                 wordBreak: "break-word",
-                maxWidth: "55ch",
               }}
             >
               {it.title}
@@ -69,7 +68,6 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
                 overflowWrap: "anywhere",
                 wordBreak: "break-word",
                 lineHeight: 1.8,
-                maxWidth: "62ch",
               }}
             >
               {it.desc}
