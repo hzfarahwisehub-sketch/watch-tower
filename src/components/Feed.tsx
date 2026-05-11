@@ -1,8 +1,19 @@
 "use client";
 import { useMemo } from "react";
-import type { Country, CountryEvent } from "@/lib/types";
+import type { Country, CountryEvent, Status } from "@/lib/types";
 
 const TIME_ORDER: Record<string, number> = { "há 2h": 0, "há 10h": 1, "há 14h": 2, "há 18h": 3, "ontem": 4 };
+
+const STATUS_COLOR: Record<Status, string> = {
+  crit: "var(--color-status-critical)",
+  warn: "var(--color-status-warning)",
+  stable: "var(--color-status-stable)",
+};
+const STATUS_BG: Record<Status, string> = {
+  crit: "rgba(255,59,92,.05)",
+  warn: "rgba(255,138,31,.05)",
+  stable: "rgba(16,224,160,.05)",
+};
 
 export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: (code: string) => void }) {
   const items = useMemo(() => {
@@ -20,44 +31,62 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
       >
         📰 Feed de Mudanças por País
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {items.map((it, i) => (
-          <button
-            type="button"
-            key={`${it.country.code}-${i}`}
-            onClick={() => onSelect(it.country.code)}
-            className="wt-card px-5 py-4.5 cursor-pointer transition-all hover:-translate-y-0.5 text-left"
-          >
-            <div className="flex items-center gap-2.5 mb-3">
-              <span className={`wt-flag md ${it.country.code}`} />
-              <span className="text-[12px] tracking-[2px] uppercase font-extrabold flex-1" style={{ color: "var(--color-wh-blue-light)" }}>
-                {it.country.name}
-              </span>
-              <span className={`wt-status ${it.country.status}`} style={{ width: 8, height: 8 }} />
-              <span
-                className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-[10px]"
-                style={{ color: "var(--text-3)", background: "rgba(255,255,255,.05)" }}
-              >
-                {it.time}
-              </span>
-            </div>
-            <h3 className="text-[15.5px] font-bold leading-snug my-1 mb-2" style={{ color: "var(--text)" }}>
-              {it.title}
-            </h3>
-            <p className="text-[12.5px] leading-relaxed" style={{ color: "var(--text-2)" }}>
-              {it.desc}
-            </p>
-            <div
-              className="flex justify-between items-center text-[10.5px] uppercase tracking-wider mt-3 pt-2.5 font-semibold"
-              style={{ color: "var(--text-3)", borderTop: "1px solid rgba(74,122,255,.15)" }}
+
+      <div className="wt-card">
+        <div className="p-2">
+          {items.map((it, i) => (
+            <button
+              type="button"
+              key={`${it.country.code}-${i}`}
+              onClick={() => onSelect(it.country.code)}
+              className="w-full flex items-start gap-3 px-4 py-3 rounded-lg my-1 text-left cursor-pointer transition-colors hover:bg-[rgba(31,85,255,0.04)]"
+              style={{
+                borderLeft: `3px solid ${STATUS_COLOR[it.country.status]}`,
+                background: STATUS_BG[it.country.status],
+              }}
             >
-              <span>{it.country.changes} mudança{it.country.changes > 1 ? "s" : ""} no período</span>
-              <span className="font-extrabold" style={{ color: "var(--color-wh-blue-light)" }}>
-                {it.src}
-              </span>
-            </div>
-          </button>
-        ))}
+              <span className={`wt-flag md ${it.country.code} flex-shrink-0 mt-0.5`} />
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
+                  <span
+                    className="text-[10.5px] tracking-[2px] uppercase font-extrabold"
+                    style={{ color: "var(--color-wh-blue-light)" }}
+                  >
+                    {it.country.name}
+                  </span>
+                  <span className={`wt-status ${it.country.status}`} style={{ width: 7, height: 7 }} />
+                  <span
+                    className="text-[9.5px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded"
+                    style={{ color: "var(--text-3)", background: "rgba(255,255,255,.05)" }}
+                  >
+                    {it.time}
+                  </span>
+                </div>
+                <h3
+                  className="text-[12.5px] font-bold leading-snug mb-1"
+                  style={{ color: "var(--text)", overflowWrap: "anywhere", wordBreak: "break-word" }}
+                >
+                  {it.title}
+                </h3>
+                <p
+                  className="text-[11px] leading-snug"
+                  style={{ color: "var(--text-2)", overflowWrap: "anywhere", wordBreak: "break-word" }}
+                >
+                  {it.desc}
+                </p>
+                <div
+                  className="flex flex-wrap gap-x-2 gap-y-0.5 mt-2 text-[9px] uppercase tracking-wide font-semibold leading-tight"
+                  style={{ color: "var(--text-3)" }}
+                >
+                  <span>
+                    {it.country.changes} mudança{it.country.changes > 1 ? "s" : ""}
+                  </span>
+                  <span style={{ color: "var(--color-wh-blue-light)" }}>· {it.src}</span>
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
       </div>
     </section>
   );
