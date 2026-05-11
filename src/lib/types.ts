@@ -46,3 +46,12 @@ export interface Reminder {
   when: string;
   crit?: boolean;
 }
+
+export interface ScheduledAction {
+  id: number;
+  icon: string;
+  title: string;
+  frequency: string;
+  nextRun: string;
+  status: "active" | "paused";
+}

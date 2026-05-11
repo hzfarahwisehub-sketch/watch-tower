@@ -1,4 +1,4 @@
-import type { Country, InboxAccount, Task, AgendaItem, Reminder } from "./types";
+import type { Country, InboxAccount, Task, AgendaItem, Reminder, ScheduledAction } from "./types";
 
 export const COUNTRIES: Country[] = [
   { code:"ca", name:"Canadá", coords:[56.13,-106.35], status:"crit", changes:5, authority:"IRCC", events:[
@@ -86,4 +86,12 @@ export const DEFAULT_REMINDERS: Reminder[] = [
   {id:2, text:"Atualização Cowork sai 14/mai — testar Live Artifacts", when:"Em 3 dias"},
   {id:3, text:"Renovar API key Manus dia 5/jun", when:"Em 25 dias"},
   {id:4, text:"Backup mensal WiseRank DB — última 03/mai", when:"Esta semana"}
+];
+
+export const DEFAULT_SCHEDULED: ScheduledAction[] = [
+  {id:1, icon:"🌎", title:"Atualização diária do panorama de imigração", frequency:"Diário · 06:00", nextRun:"Amanhã 06:00", status:"active"},
+  {id:2, icon:"✍",  title:"Criação de notícias para postagem", frequency:"Diário · 09:00", nextRun:"Amanhã 09:00", status:"active"},
+  {id:3, icon:"⚖",  title:"Verificação de novas leis, regras ou eventos", frequency:"3× por dia · 08/14/20", nextRun:"Hoje 20:00", status:"active"},
+  {id:4, icon:"📊", title:"Snapshot semanal — relatório resumo", frequency:"Semanal · seg 07:00", nextRun:"Seg 07:00", status:"active"},
+  {id:5, icon:"🔍", title:"Scan de oportunidades — vistos abertos", frequency:"2× por semana", nextRun:"Qua 10:00", status:"active"}
 ];

@@ -3,6 +3,7 @@ export const STORAGE = {
   tasks: "wt-tasks",
   agenda: "wt-agenda",
   reminders: "wt-reminders",
+  scheduled: "wt-scheduled",
 } as const;
 
 export function load<T>(key: string, fallback: T): T {
