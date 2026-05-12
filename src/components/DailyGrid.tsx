@@ -9,6 +9,7 @@ import {
   DEFAULT_SCHEDULED,
   INBOX_ACCOUNTS,
 } from "@/lib/data";
+import { applySystemSeed } from "@/lib/systemSeed";
 import { useToast } from "./ToastProvider";
 
 export function DailyGrid() {
@@ -21,10 +22,21 @@ export function DailyGrid() {
   const toast = useToast();
 
   useEffect(() => {
-    setTasks(load(STORAGE.tasks, DEFAULT_TASKS));
+    const loadedTasks = load(STORAGE.tasks, DEFAULT_TASKS);
+    const loadedReminders = load(STORAGE.reminders, DEFAULT_REMINDERS);
+    const storedSeedVersion = load(STORAGE.seedVersion, 0);
+
+    const seed = applySystemSeed(loadedTasks, loadedReminders, storedSeedVersion);
+
+    setTasks(seed.tasks);
     setAgenda(load(STORAGE.agenda, DEFAULT_AGENDA));
-    setReminders(load(STORAGE.reminders, DEFAULT_REMINDERS));
+    setReminders(seed.reminders);
     setScheduled(load(STORAGE.scheduled, DEFAULT_SCHEDULED));
+
+    if (seed.changed || storedSeedVersion !== seed.newVersion) {
+      save(STORAGE.seedVersion, seed.newVersion);
+    }
+
     setHydrated(true);
   }, []);
 

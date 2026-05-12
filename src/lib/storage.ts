@@ -4,6 +4,7 @@ export const STORAGE = {
   agenda: "wt-agenda",
   reminders: "wt-reminders",
   scheduled: "wt-scheduled",
+  seedVersion: "wt-seed-version",
 } as const;
 
 export function load<T>(key: string, fallback: T): T {
