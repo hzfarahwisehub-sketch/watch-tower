@@ -72,11 +72,12 @@ async function fetchWithTimeout(url) {
 async function checkOne(entry) {
   const start = Date.now();
   const now = new Date().toISOString();
+  const fetchUrl = entry.monitorUrl || entry.url;
   let lastError = null;
 
   for (let attempt = 0; attempt <= RETRY_COUNT; attempt++) {
     try {
-      const { ok, status, text } = await fetchWithTimeout(entry.url);
+      const { ok, status, text } = await fetchWithTimeout(fetchUrl);
       const elapsed = Date.now() - start;
 
       if (!ok) {
