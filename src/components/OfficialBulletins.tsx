@@ -1,16 +1,35 @@
 "use client";
+import { useEffect, useState } from "react";
+
+type FreqColor = "live" | "monthly" | "quarterly" | "ondemand";
 
 type Bulletin = {
+  key: string;
   country: string;
   flag: string;
   source: string;
   frequency: string;
   url: string;
-  freqColor: "live" | "monthly" | "quarterly" | "ondemand";
+  freqColor: FreqColor;
+};
+
+type BulletinStatus = {
+  key: string;
+  url: string;
+  hash: string | null;
+  lastChangedAt: string | null;
+  lastCheckedAt: string | null;
+  lastStatus: string | null;
+};
+
+type StatusFile = {
+  lastRun: string | null;
+  bulletins: BulletinStatus[];
 };
 
 const BULLETINS: Bulletin[] = [
   {
+    key: "us",
     country: "Estados Unidos",
     flag: "🇺🇸",
     source: "Visa Bulletin · US Dept of State",
@@ -19,6 +38,7 @@ const BULLETINS: Bulletin[] = [
     freqColor: "monthly",
   },
   {
+    key: "ca",
     country: "Canadá",
     flag: "🇨🇦",
     source: "IRCC · Express Entry Draws",
@@ -27,6 +47,7 @@ const BULLETINS: Bulletin[] = [
     freqColor: "live",
   },
   {
+    key: "uk",
     country: "Reino Unido",
     flag: "🇬🇧",
     source: "Home Office · Migration Statistics",
@@ -35,6 +56,7 @@ const BULLETINS: Bulletin[] = [
     freqColor: "monthly",
   },
   {
+    key: "pt",
     country: "Portugal",
     flag: "🇵🇹",
     source: "AIMA · Agência para Integração, Migrações e Asilo",
@@ -43,6 +65,7 @@ const BULLETINS: Bulletin[] = [
     freqColor: "ondemand",
   },
   {
+    key: "es",
     country: "Espanha",
     flag: "🇪🇸",
     source: "Ministerio de Inclusión · Migraciones",
@@ -51,6 +74,7 @@ const BULLETINS: Bulletin[] = [
     freqColor: "ondemand",
   },
   {
+    key: "it",
     country: "Itália",
     flag: "🇮🇹",
     source: "Polizia di Stato · Permesso di Soggiorno",
@@ -59,6 +83,7 @@ const BULLETINS: Bulletin[] = [
     freqColor: "ondemand",
   },
   {
+    key: "fr",
     country: "França",
     flag: "🇫🇷",
     source: "OFII · Office Français de l'Immigration",
@@ -67,6 +92,7 @@ const BULLETINS: Bulletin[] = [
     freqColor: "ondemand",
   },
   {
+    key: "de",
     country: "Alemanha",
     flag: "🇩🇪",
     source: "BAMF · Bundesamt für Migration und Flüchtlinge",
@@ -75,6 +101,7 @@ const BULLETINS: Bulletin[] = [
     freqColor: "monthly",
   },
   {
+    key: "au",
     country: "Austrália",
     flag: "🇦🇺",
     source: "Home Affairs · SkillSelect Invitation Rounds",
@@ -83,6 +110,7 @@ const BULLETINS: Bulletin[] = [
     freqColor: "quarterly",
   },
   {
+    key: "ae",
     country: "Emirados Árabes",
     flag: "🇦🇪",
     source: "ICP · Federal Authority for Identity & Citizenship",
@@ -91,6 +119,7 @@ const BULLETINS: Bulletin[] = [
     freqColor: "ondemand",
   },
   {
+    key: "br",
     country: "Brasil",
     flag: "🇧🇷",
     source: "Polícia Federal · Portal de Imigração",
@@ -100,34 +129,64 @@ const BULLETINS: Bulletin[] = [
   },
 ];
 
-const FREQ_STYLES = {
-  live: {
-    bg: "rgba(45,142,74,.15)",
-    border: "rgba(45,142,74,.4)",
-    color: "#5DD580",
-    icon: "●",
-  },
-  monthly: {
-    bg: "rgba(31,85,255,.15)",
-    border: "rgba(31,85,255,.4)",
-    color: "#7BA0FF",
-    icon: "◐",
-  },
-  quarterly: {
-    bg: "rgba(212,168,42,.15)",
-    border: "rgba(212,168,42,.4)",
-    color: "#E5C156",
-    icon: "◇",
-  },
-  ondemand: {
-    bg: "rgba(125,125,140,.18)",
-    border: "rgba(125,125,140,.4)",
-    color: "#A8A8B8",
-    icon: "→",
-  },
+const FREQ_STYLES: Record<FreqColor, { color: string; icon: string }> = {
+  live:      { color: "#5DD580", icon: "●" },
+  monthly:   { color: "#7BA0FF", icon: "◐" },
+  quarterly: { color: "#E5C156", icon: "◇" },
+  ondemand:  { color: "#A8A8B8", icon: "→" },
 };
 
+const CHANGED_WINDOW_DAYS = 7;
+
+function fmtRelative(iso: string | null): string {
+  if (!iso) return "—";
+  const then = new Date(iso).getTime();
+  const now = Date.now();
+  const diff = Math.max(0, now - then);
+  const hours = Math.floor(diff / 3_600_000);
+  if (hours < 1) return "agora há pouco";
+  if (hours < 24) return `há ${hours}h`;
+  const days = Math.floor(hours / 24);
+  if (days === 1) return "ontem";
+  if (days < 7) return `há ${days}d`;
+  const weeks = Math.floor(days / 7);
+  if (weeks < 5) return `há ${weeks}sem`;
+  const months = Math.floor(days / 30);
+  return `há ${months}mês`;
+}
+
+function fmtCheckedAt(iso: string | null): string {
+  if (!iso) return "ainda não verificado";
+  return `verificado ${fmtRelative(iso)}`;
+}
+
+function isRecentlyChanged(b: BulletinStatus | undefined): boolean {
+  if (!b?.lastChangedAt || b.lastStatus !== "changed") return false;
+  const diff = Date.now() - new Date(b.lastChangedAt).getTime();
+  return diff < CHANGED_WINDOW_DAYS * 24 * 3_600_000;
+}
+
 export function OfficialBulletins() {
+  const [statusByKey, setStatusByKey] = useState<Record<string, BulletinStatus>>({});
+  const [lastRun, setLastRun] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/bulletins-status.json", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data: StatusFile | null) => {
+        if (!data) return;
+        const map: Record<string, BulletinStatus> = {};
+        for (const b of data.bulletins) map[b.key] = b;
+        setStatusByKey(map);
+        setLastRun(data.lastRun);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  const recentChanges = BULLETINS.filter((b) => isRecentlyChanged(statusByKey[b.key])).length;
+
   return (
     <section className="wt-card my-6 flex flex-col">
       <div
@@ -139,12 +198,28 @@ export function OfficialBulletins() {
           style={{ color: "var(--color-wh-blue-light)" }}
         >
           📜 Boletins Oficiais de Imigração
+          {recentChanges > 0 && (
+            <span
+              className="px-2 py-0.5 rounded-full text-[10px] tracking-wider"
+              style={{
+                background: "rgba(45,142,74,.18)",
+                border: "1px solid rgba(45,142,74,.4)",
+                color: "#5DD580",
+              }}
+            >
+              {recentChanges} ATUALIZADO{recentChanges > 1 ? "S" : ""}
+            </span>
+          )}
         </h2>
         <span
-          className="text-[10.5px] font-semibold tracking-wider uppercase"
+          className="text-[10.5px] font-semibold tracking-wider uppercase text-right"
           style={{ color: "var(--text-3)" }}
         >
           {BULLETINS.length} jurisdições · fontes oficiais
+          <br />
+          <span style={{ color: "var(--text-2)" }}>
+            Última varredura: {loading ? "carregando…" : fmtRelative(lastRun)}
+          </span>
         </span>
       </div>
 
@@ -162,25 +237,43 @@ export function OfficialBulletins() {
           <span className="flex items-center gap-1.5">
             <span style={{ color: FREQ_STYLES.ondemand.color }}>→</span> Sob demanda
           </span>
+          <span className="flex items-center gap-1.5 ml-auto">
+            <span style={{ color: "#5DD580" }}>✦</span> Mudança detectada nos últimos {CHANGED_WINDOW_DAYS} dias
+          </span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 p-4">
         {BULLETINS.map((b) => {
           const fs = FREQ_STYLES[b.freqColor];
+          const status = statusByKey[b.key];
+          const changed = isRecentlyChanged(status);
           return (
             <a
               key={b.country}
               href={b.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col gap-2 p-4 rounded-lg transition-all hover:scale-[1.02]"
+              className="group flex flex-col gap-2 p-4 rounded-lg transition-all hover:scale-[1.02] relative"
               style={{
                 background: "var(--bg2)",
-                border: "1px solid var(--border)",
+                border: changed ? "1px solid rgba(45,142,74,.5)" : "1px solid var(--border)",
+                boxShadow: changed ? "0 0 0 2px rgba(45,142,74,.12)" : undefined,
                 textDecoration: "none",
               }}
             >
+              {changed && (
+                <span
+                  className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full text-[9px] font-bold tracking-wider"
+                  style={{
+                    background: "#2D8E4A",
+                    color: "#fff",
+                    boxShadow: "0 2px 6px rgba(0,0,0,.3)",
+                  }}
+                >
+                  ✦ NOVO
+                </span>
+              )}
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-center gap-2.5">
                   <span className="text-[26px] leading-none">{b.flag}</span>
@@ -220,10 +313,12 @@ export function OfficialBulletins() {
                 style={{ borderTop: "1px dashed var(--border)" }}
               >
                 <span
-                  className="text-[10px] tracking-wider uppercase font-semibold"
-                  style={{ color: "var(--text-3)" }}
+                  className="text-[9.5px] tracking-wider uppercase"
+                  style={{ color: changed ? "#5DD580" : "var(--text-3)" }}
                 >
-                  Abrir boletim
+                  {changed
+                    ? `mudança ${fmtRelative(status?.lastChangedAt ?? null)}`
+                    : fmtCheckedAt(status?.lastCheckedAt ?? null)}
                 </span>
                 <span
                   className="text-[10.5px] font-bold transition-colors"
@@ -239,7 +334,7 @@ export function OfficialBulletins() {
 
       <div className="px-5 py-3" style={{ borderTop: "1px solid var(--border)" }}>
         <p className="text-[10.5px]" style={{ color: "var(--text-3)" }}>
-          Fontes governamentais oficiais das 11 jurisdições onde a WiseHub opera. Clique em qualquer card pra abrir o boletim no site da autoridade competente. Próxima fase: detecção automática de mudanças via cron diário + notificação no Watch Tower.
+          Fontes governamentais oficiais das 11 jurisdições onde a WiseHub opera. Varredura automática diária às 08h00 BRT detecta mudanças no conteúdo de cada boletim. Cards com selo <span style={{ color: "#5DD580" }}>✦ NOVO</span> tiveram alteração nos últimos {CHANGED_WINDOW_DAYS} dias.
         </p>
       </div>
     </section>
