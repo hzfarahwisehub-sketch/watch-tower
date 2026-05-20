@@ -209,18 +209,19 @@ body {
 }
 
 /* Resize handle (canto inferior direito) — chevron L azul sempre visível */
-.react-grid-item > .react-resizable-handle {
-  width: 26px;
-  height: 26px;
-  bottom: 2px;
-  right: 2px;
+.react-grid-item > .react-resizable-handle.react-resizable-handle-se {
+  width: 26px !important;
+  height: 26px !important;
+  bottom: 2px !important;
+  right: 2px !important;
   cursor: nwse-resize;
-  background-image: none;
+  background-image: none !important;
   z-index: 20;
   opacity: 0.6;
   transition: opacity .2s ease;
+  padding: 0 !important;
 }
-.react-grid-item > .react-resizable-handle::after {
+.react-grid-item > .react-resizable-handle.react-resizable-handle-se::after {
   content: "";
   position: absolute;
   inset: auto 5px 5px auto;
@@ -232,10 +233,10 @@ body {
   opacity: 1;
   transition: border-color .2s ease;
 }
-.react-grid-item > .react-resizable-handle:hover {
+.react-grid-item > .react-resizable-handle.react-resizable-handle-se:hover {
   opacity: 1;
 }
-.react-grid-item > .react-resizable-handle:hover::after {
+.react-grid-item > .react-resizable-handle.react-resizable-handle-se:hover::after {
   border-color: #fff;
 }
 
