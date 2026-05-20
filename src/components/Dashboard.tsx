@@ -1,6 +1,9 @@
 "use client";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Responsive, WidthProvider, type Layout, type ResponsiveLayouts } from "react-grid-layout/legacy";
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
 import { COUNTRIES } from "@/lib/data";
 import { Header } from "./Header";
 import { KpiRow } from "./KpiRow";
@@ -11,12 +14,14 @@ import { Feed } from "./Feed";
 import { Modal } from "./Modal";
 import { OfficialBulletins } from "./OfficialBulletins";
 
+const ResponsiveGridLayout = WidthProvider(Responsive);
+
 const MapZone = dynamic(() => import("./MapZone"), {
   ssr: false,
   loading: () => (
     <div
-      className="wt-card flex flex-col"
-      style={{ minHeight: 500 }}
+      className="wt-card flex flex-col h-full"
+      style={{ minHeight: 300 }}
     >
       <div className="px-5 py-4" style={{ borderBottom: "1px solid var(--border)" }}>
         <h2 className="text-[12px] tracking-[2.5px] uppercase font-bold" style={{ color: "var(--color-wh-blue-light)" }}>
@@ -30,28 +35,193 @@ const MapZone = dynamic(() => import("./MapZone"), {
   ),
 });
 
+const LAYOUT_STORAGE_KEY = "wt-layout-v2";
+
+// Layout padrão por breakpoint
+//   lg: ≥1200  · 12 cols   md: 996-1199 · 10 cols
+//   sm: 768-995 · 6 cols    xs: 480-767  · 4 cols
+//   xxs: <480 · 2 cols
+//
+// Cada unidade vertical (h) = rowHeight (40px) + margin (16px) = 56px
+const DEFAULT_LAYOUTS: ResponsiveLayouts = {
+  lg: [
+    { i: "alerts",    x: 0, y: 0,  w: 12, h: 2, minW: 6, minH: 1 },
+    { i: "kpis",      x: 0, y: 2,  w: 12, h: 2, minW: 4, minH: 2 },
+    { i: "map",       x: 0, y: 4,  w: 7,  h: 9, minW: 4, minH: 6 },
+    { i: "countries", x: 7, y: 4,  w: 5,  h: 9, minW: 3, minH: 6 },
+    { i: "daily",     x: 0, y: 13, w: 12, h: 10, minW: 6, minH: 6 },
+    { i: "bulletins", x: 0, y: 23, w: 12, h: 12, minW: 6, minH: 8 },
+    { i: "feed",      x: 0, y: 35, w: 12, h: 14, minW: 6, minH: 8 },
+  ],
+  md: [
+    { i: "alerts",    x: 0, y: 0,  w: 10, h: 2 },
+    { i: "kpis",      x: 0, y: 2,  w: 10, h: 2 },
+    { i: "map",       x: 0, y: 4,  w: 6,  h: 9 },
+    { i: "countries", x: 6, y: 4,  w: 4,  h: 9 },
+    { i: "daily",     x: 0, y: 13, w: 10, h: 10 },
+    { i: "bulletins", x: 0, y: 23, w: 10, h: 12 },
+    { i: "feed",      x: 0, y: 35, w: 10, h: 14 },
+  ],
+  sm: [
+    { i: "alerts",    x: 0, y: 0,  w: 6, h: 2 },
+    { i: "kpis",      x: 0, y: 2,  w: 6, h: 3 },
+    { i: "map",       x: 0, y: 5,  w: 6, h: 9 },
+    { i: "countries", x: 0, y: 14, w: 6, h: 9 },
+    { i: "daily",     x: 0, y: 23, w: 6, h: 12 },
+    { i: "bulletins", x: 0, y: 35, w: 6, h: 14 },
+    { i: "feed",      x: 0, y: 49, w: 6, h: 16 },
+  ],
+  xs: [
+    { i: "alerts",    x: 0, y: 0,  w: 4, h: 3 },
+    { i: "kpis",      x: 0, y: 3,  w: 4, h: 4 },
+    { i: "map",       x: 0, y: 7,  w: 4, h: 8 },
+    { i: "countries", x: 0, y: 15, w: 4, h: 8 },
+    { i: "daily",     x: 0, y: 23, w: 4, h: 12 },
+    { i: "bulletins", x: 0, y: 35, w: 4, h: 16 },
+    { i: "feed",      x: 0, y: 51, w: 4, h: 18 },
+  ],
+  xxs: [
+    { i: "alerts",    x: 0, y: 0,  w: 2, h: 4 },
+    { i: "kpis",      x: 0, y: 4,  w: 2, h: 5 },
+    { i: "map",       x: 0, y: 9,  w: 2, h: 7 },
+    { i: "countries", x: 0, y: 16, w: 2, h: 8 },
+    { i: "daily",     x: 0, y: 24, w: 2, h: 14 },
+    { i: "bulletins", x: 0, y: 38, w: 2, h: 20 },
+    { i: "feed",      x: 0, y: 58, w: 2, h: 22 },
+  ],
+};
+
 export function Dashboard() {
   const [selected, setSelected] = useState<string | null>(null);
+  const [editMode, setEditMode] = useState(false);
+  const [layouts, setResponsiveLayouts] = useState<ResponsiveLayouts>(DEFAULT_LAYOUTS);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(LAYOUT_STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored) as ResponsiveLayouts;
+        // Merge com defaults pra garantir todos os items presentes
+        const merged: ResponsiveLayouts = { ...DEFAULT_LAYOUTS };
+        for (const bp of Object.keys(parsed)) {
+          if (Array.isArray(parsed[bp])) merged[bp] = parsed[bp];
+        }
+        setResponsiveLayouts(merged);
+      }
+    } catch {}
+    setMounted(true);
+  }, []);
 
   const select = (code: string) => setSelected(code);
   const country = selected ? COUNTRIES.find((c) => c.code === selected) ?? null : null;
 
+  const onLayoutChange = (_current: Layout, all: ResponsiveLayouts) => {
+    setResponsiveLayouts(all);
+    if (editMode) {
+      try {
+        localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(all));
+      } catch {}
+    }
+  };
+
+  const resetLayout = () => {
+    setResponsiveLayouts(DEFAULT_LAYOUTS);
+    try {
+      localStorage.removeItem(LAYOUT_STORAGE_KEY);
+    } catch {}
+  };
+
+  // Pra cada item, wrapper que ocupa 100% × 100% do grid cell
+  // overflow:auto pra conteúdo grande caber sem estourar
+  const cellStyle: React.CSSProperties = {
+    width: "100%",
+    height: "100%",
+    overflow: "auto",
+  };
+
   return (
     <div className="max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-7 relative z-10">
       <Header />
-      <KpiRow />
-      <AlertsBanner onSelect={select} />
 
-      <section className="grid grid-cols-1 lg:grid-cols-[1.7fr_1fr] gap-4.5 mb-6">
-        <MapZone countries={COUNTRIES} selected={selected} onSelect={select} />
-        <CountriesSidebar countries={COUNTRIES} selected={selected} onSelect={select} />
-      </section>
+      <div
+        className="flex items-center justify-between gap-3 mb-4 flex-wrap"
+        style={{ marginTop: 16 }}
+      >
+        <div className="text-[11px] tracking-wider uppercase font-semibold" style={{ color: "var(--text-3)" }}>
+          {editMode ? "Modo edição: arraste pelo header das caixas · redimensione pelos cantos" : "Layout salvo automaticamente"}
+        </div>
+        <div className="flex items-center gap-2">
+          {editMode && (
+            <button
+              type="button"
+              onClick={resetLayout}
+              className="px-3 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-colors"
+              style={{
+                background: "var(--bg2)",
+                border: "1px solid var(--border)",
+                color: "var(--text-2)",
+                cursor: "pointer",
+              }}
+            >
+              ↻ Restaurar padrão
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={() => setEditMode((v) => !v)}
+            className="px-3 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-colors"
+            style={{
+              background: editMode ? "var(--color-wh-blue)" : "var(--bg2)",
+              border: `1px solid ${editMode ? "var(--border-hi)" : "var(--border)"}`,
+              color: editMode ? "#fff" : "var(--text-2)",
+              cursor: "pointer",
+            }}
+          >
+            {editMode ? "✓ Salvar layout" : "✎ Editar layout"}
+          </button>
+        </div>
+      </div>
 
-      <DailyGrid />
-
-      <OfficialBulletins />
-
-      <Feed countries={COUNTRIES} onSelect={select} />
+      {mounted && (
+        <ResponsiveGridLayout
+          className={editMode ? "wt-edit-mode" : ""}
+          layouts={layouts}
+          breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+          rowHeight={40}
+          margin={[16, 16]}
+          containerPadding={[0, 0]}
+          isDraggable={editMode}
+          isResizable={editMode}
+          onLayoutChange={onLayoutChange}
+          draggableCancel="button, a, input, select, textarea, .no-drag"
+          compactType="vertical"
+          useCSSTransforms
+        >
+          <div key="alerts" style={cellStyle}>
+            <AlertsBanner onSelect={select} />
+          </div>
+          <div key="kpis" style={cellStyle}>
+            <KpiRow />
+          </div>
+          <div key="map" style={cellStyle}>
+            <MapZone countries={COUNTRIES} selected={selected} onSelect={select} />
+          </div>
+          <div key="countries" style={cellStyle}>
+            <CountriesSidebar countries={COUNTRIES} selected={selected} onSelect={select} />
+          </div>
+          <div key="daily" style={cellStyle}>
+            <DailyGrid />
+          </div>
+          <div key="bulletins" style={cellStyle}>
+            <OfficialBulletins />
+          </div>
+          <div key="feed" style={cellStyle}>
+            <Feed countries={COUNTRIES} onSelect={select} />
+          </div>
+        </ResponsiveGridLayout>
+      )}
 
       <Modal country={country} onClose={() => setSelected(null)} />
     </div>

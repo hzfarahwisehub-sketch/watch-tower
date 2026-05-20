@@ -190,7 +190,7 @@ export function OfficialBulletins() {
   return (
     <section className="wt-card my-6 flex flex-col">
       <div
-        className="flex items-center justify-between gap-3 px-5 py-4"
+        className="flex items-center justify-between gap-3 px-7 py-5"
         style={{ borderBottom: "1px solid var(--border)" }}
       >
         <h2
@@ -223,7 +223,7 @@ export function OfficialBulletins() {
         </span>
       </div>
 
-      <div className="px-5 py-3" style={{ borderBottom: "1px solid var(--border)" }}>
+      <div className="px-7 py-4" style={{ borderBottom: "1px solid var(--border)" }}>
         <div className="flex flex-wrap items-center gap-3 text-[10.5px]" style={{ color: "var(--text-3)" }}>
           <span className="flex items-center gap-1.5">
             <span style={{ color: FREQ_STYLES.live.color }}>●</span> Quinzenal
@@ -243,7 +243,7 @@ export function OfficialBulletins() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-6">
         {BULLETINS.map((b) => {
           const fs = FREQ_STYLES[b.freqColor];
           const status = statusByKey[b.key];
@@ -254,12 +254,16 @@ export function OfficialBulletins() {
               href={b.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col gap-2 p-4 rounded-lg transition-all hover:scale-[1.02] relative"
+              className="group flex flex-col gap-2 rounded-lg transition-all hover:scale-[1.02] relative"
               style={{
                 background: "var(--bg2)",
                 border: changed ? "1px solid rgba(45,142,74,.5)" : "1px solid var(--border)",
                 boxShadow: changed ? "0 0 0 2px rgba(45,142,74,.12)" : undefined,
                 textDecoration: "none",
+                paddingTop: 20,
+                paddingBottom: 20,
+                paddingLeft: 24,
+                paddingRight: 24,
               }}
             >
               {changed && (
@@ -332,7 +336,7 @@ export function OfficialBulletins() {
         })}
       </div>
 
-      <div className="px-5 py-3" style={{ borderTop: "1px solid var(--border)" }}>
+      <div className="px-7 py-4" style={{ borderTop: "1px solid var(--border)" }}>
         <p className="text-[10.5px]" style={{ color: "var(--text-3)" }}>
           Fontes governamentais oficiais das 11 jurisdições onde a WiseHub opera. Varredura automática diária às 08h00 BRT detecta mudanças no conteúdo de cada boletim. Cards com selo <span style={{ color: "#5DD580" }}>✦ NOVO</span> tiveram alteração nos últimos {CHANGED_WINDOW_DAYS} dias.
         </p>

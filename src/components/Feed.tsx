@@ -26,14 +26,20 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
       >
         📰 Feed de Mudanças por País
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {items.map((it, i) => (
           <button
             type="button"
             key={`${it.country.code}-${i}`}
             onClick={() => onSelect(it.country.code)}
-            className="wt-card px-10 py-8 pr-12 cursor-pointer transition-all hover:-translate-y-0.5 text-left"
-            style={{ borderLeft: `3px solid ${STATUS_COLOR[it.country.status]}` }}
+            className="wt-card cursor-pointer transition-all hover:-translate-y-0.5 text-left"
+            style={{
+              borderLeft: `3px solid ${STATUS_COLOR[it.country.status]}`,
+              paddingTop: 28,
+              paddingBottom: 28,
+              paddingLeft: 36,
+              paddingRight: 36,
+            }}
           >
             <div className="flex items-center gap-3 mb-3 flex-wrap min-w-0">
               <span className={`wt-flag md ${it.country.code} flex-shrink-0`} />
