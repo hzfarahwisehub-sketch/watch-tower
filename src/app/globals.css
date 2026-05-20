@@ -147,3 +147,55 @@ body {
 .country-marker.warn .dot   { background: var(--color-status-warning);  box-shadow: 0 0 10px var(--color-status-warning),  0 0 0 2px rgba(0,0,0,.4); }
 .country-marker.stable .dot { background: var(--color-status-stable);   box-shadow: 0 0 8px  var(--color-status-stable),   0 0 0 2px rgba(0,0,0,.4); }
 .country-marker.crit::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--color-status-critical); opacity: .5; animation: wt-ping 2s infinite; }
+
+/* ===== react-grid-layout — visuais no modo edição ===== */
+.react-grid-item.react-grid-placeholder {
+  background: rgba(31,85,255,.18) !important;
+  border: 2px dashed var(--color-wh-blue-light) !important;
+  border-radius: 14px !important;
+  opacity: .9 !important;
+  transition-duration: 0ms !important;
+}
+.wt-edit-mode .react-grid-item {
+  outline: 2px dashed rgba(74,122,255,.45);
+  outline-offset: -1px;
+  border-radius: 14px;
+  cursor: move;
+}
+.wt-edit-mode .react-grid-item:hover {
+  outline-color: var(--color-wh-blue-light);
+}
+/* Handle de resize bottom-right visível e clicável */
+.wt-edit-mode .react-grid-item > .react-resizable-handle {
+  width: 22px;
+  height: 22px;
+  bottom: 4px;
+  right: 4px;
+  cursor: nwse-resize;
+  background-image: none;
+  z-index: 10;
+}
+.wt-edit-mode .react-grid-item > .react-resizable-handle::after {
+  content: "";
+  position: absolute;
+  inset: auto 4px 4px auto;
+  width: 12px;
+  height: 12px;
+  border-right: 2.5px solid var(--color-wh-blue-light);
+  border-bottom: 2.5px solid var(--color-wh-blue-light);
+  border-bottom-right-radius: 4px;
+  opacity: .9;
+}
+.wt-edit-mode .react-grid-item > .react-resizable-handle:hover::after {
+  border-color: #fff;
+  opacity: 1;
+}
+/* Items sendo arrastados ficam à frente e com sombra */
+.react-grid-item.react-draggable-dragging {
+  z-index: 100;
+  box-shadow: 0 12px 40px rgba(0,0,0,.5), 0 0 32px rgba(31,85,255,.4);
+}
+.react-grid-item.react-grid-item.resizing {
+  z-index: 100;
+  opacity: .92;
+}
