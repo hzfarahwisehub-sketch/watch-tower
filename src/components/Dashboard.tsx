@@ -9,6 +9,7 @@ import { CountriesSidebar } from "./CountriesSidebar";
 import { DailyGrid } from "./DailyGrid";
 import { Feed } from "./Feed";
 import { Modal } from "./Modal";
+import { OfficialBulletins } from "./OfficialBulletins";
 
 const MapZone = dynamic(() => import("./MapZone"), {
   ssr: false,
@@ -47,6 +48,8 @@ export function Dashboard() {
       </section>
 
       <DailyGrid />
+
+      <OfficialBulletins />
 
       <Feed countries={COUNTRIES} onSelect={select} />
 
