@@ -148,7 +148,98 @@ body {
 .country-marker.stable .dot { background: var(--color-status-stable);   box-shadow: 0 0 8px  var(--color-status-stable),   0 0 0 2px rgba(0,0,0,.4); }
 .country-marker.crit::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--color-status-critical); opacity: .5; animation: wt-ping 2s infinite; }
 
-/* ===== react-grid-layout — visuais no modo edição ===== */
+/* ===== react-grid-layout — handles sempre visíveis ===== */
+/* Wrapper de cada célula do grid: container relativo pra ancorar o drag handle */
+.wt-grid-cell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+/* Conteúdo do grid item — overflow auto pra conteúdo não estourar */
+.wt-grid-content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  border-radius: 14px;
+}
+
+/* Drag handle (canto superior direito de cada caixa) */
+.wt-drag-handle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-hi);
+  border: 1px solid var(--border-hi);
+  border-radius: 8px;
+  color: var(--color-wh-blue-light);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: grab;
+  z-index: 25;
+  opacity: 0.55;
+  transition: opacity .2s ease, transform .2s ease, background .2s ease, color .2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+.wt-drag-handle:hover {
+  opacity: 1;
+  transform: scale(1.08);
+  background: var(--color-wh-blue);
+  border-color: var(--color-wh-blue-light);
+  color: #fff;
+}
+.wt-drag-handle:active,
+.react-grid-item.react-draggable-dragging .wt-drag-handle {
+  cursor: grabbing;
+  transform: scale(.95);
+  opacity: 1;
+  background: var(--color-wh-blue);
+  color: #fff;
+}
+[data-theme="light"] .wt-drag-handle {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(31,85,255,.18);
+}
+
+/* Resize handle (canto inferior direito) — chevron L azul sempre visível */
+.react-grid-item > .react-resizable-handle {
+  width: 26px;
+  height: 26px;
+  bottom: 2px;
+  right: 2px;
+  cursor: nwse-resize;
+  background-image: none;
+  z-index: 20;
+  opacity: 0.6;
+  transition: opacity .2s ease;
+}
+.react-grid-item > .react-resizable-handle::after {
+  content: "";
+  position: absolute;
+  inset: auto 5px 5px auto;
+  width: 14px;
+  height: 14px;
+  border-right: 3px solid var(--color-wh-blue-light);
+  border-bottom: 3px solid var(--color-wh-blue-light);
+  border-bottom-right-radius: 4px;
+  opacity: 1;
+  transition: border-color .2s ease;
+}
+.react-grid-item > .react-resizable-handle:hover {
+  opacity: 1;
+}
+.react-grid-item > .react-resizable-handle:hover::after {
+  border-color: #fff;
+}
+
+/* Placeholder durante drop/move (sombra do destino) */
 .react-grid-item.react-grid-placeholder {
   background: rgba(31,85,255,.18) !important;
   border: 2px dashed var(--color-wh-blue-light) !important;
@@ -156,46 +247,13 @@ body {
   opacity: .9 !important;
   transition-duration: 0ms !important;
 }
-.wt-edit-mode .react-grid-item {
-  outline: 2px dashed rgba(74,122,255,.45);
-  outline-offset: -1px;
-  border-radius: 14px;
-  cursor: move;
-}
-.wt-edit-mode .react-grid-item:hover {
-  outline-color: var(--color-wh-blue-light);
-}
-/* Handle de resize bottom-right visível e clicável */
-.wt-edit-mode .react-grid-item > .react-resizable-handle {
-  width: 22px;
-  height: 22px;
-  bottom: 4px;
-  right: 4px;
-  cursor: nwse-resize;
-  background-image: none;
-  z-index: 10;
-}
-.wt-edit-mode .react-grid-item > .react-resizable-handle::after {
-  content: "";
-  position: absolute;
-  inset: auto 4px 4px auto;
-  width: 12px;
-  height: 12px;
-  border-right: 2.5px solid var(--color-wh-blue-light);
-  border-bottom: 2.5px solid var(--color-wh-blue-light);
-  border-bottom-right-radius: 4px;
-  opacity: .9;
-}
-.wt-edit-mode .react-grid-item > .react-resizable-handle:hover::after {
-  border-color: #fff;
-  opacity: 1;
-}
-/* Items sendo arrastados ficam à frente e com sombra */
+
+/* Visual feedback durante drag/resize */
 .react-grid-item.react-draggable-dragging {
   z-index: 100;
   box-shadow: 0 12px 40px rgba(0,0,0,.5), 0 0 32px rgba(31,85,255,.4);
 }
-.react-grid-item.react-grid-item.resizing {
+.react-grid-item.resizing {
   z-index: 100;
-  opacity: .92;
+  opacity: .94;
 }

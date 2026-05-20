@@ -188,7 +188,7 @@ export function OfficialBulletins() {
   const recentChanges = BULLETINS.filter((b) => isRecentlyChanged(statusByKey[b.key])).length;
 
   return (
-    <section className="wt-card my-6 flex flex-col">
+    <section className="wt-card flex flex-col h-full">
       <div
         className="flex items-center justify-between gap-3 px-7 py-5"
         style={{ borderBottom: "1px solid var(--border)" }}

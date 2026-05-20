@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Responsive, WidthProvider, type Layout, type ResponsiveLayouts } from "react-grid-layout/legacy";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
@@ -35,7 +35,7 @@ const MapZone = dynamic(() => import("./MapZone"), {
   ),
 });
 
-const LAYOUT_STORAGE_KEY = "wt-layout-v2";
+const LAYOUT_STORAGE_KEY = "wt-layout-v3";
 
 // Layout padrão por breakpoint
 //   lg: ≥1200  · 12 cols   md: 996-1199 · 10 cols
@@ -91,10 +91,25 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
   ],
 };
 
+function GridCell({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="wt-grid-cell">
+      <button
+        type="button"
+        className="wt-drag-handle"
+        aria-label={`Arrastar ${label} pra reposicionar`}
+        title={`Arrastar pra reposicionar — ${label}`}
+      >
+        <span aria-hidden>⠿</span>
+      </button>
+      <div className="wt-grid-content">{children}</div>
+    </div>
+  );
+}
+
 export function Dashboard() {
   const [selected, setSelected] = useState<string | null>(null);
-  const [editMode, setEditMode] = useState(false);
-  const [layouts, setResponsiveLayouts] = useState<ResponsiveLayouts>(DEFAULT_LAYOUTS);
+  const [layouts, setLayouts] = useState<ResponsiveLayouts>(DEFAULT_LAYOUTS);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -107,7 +122,7 @@ export function Dashboard() {
         for (const bp of Object.keys(parsed)) {
           if (Array.isArray(parsed[bp])) merged[bp] = parsed[bp];
         }
-        setResponsiveLayouts(merged);
+        setLayouts(merged);
       }
     } catch {}
     setMounted(true);
@@ -117,27 +132,17 @@ export function Dashboard() {
   const country = selected ? COUNTRIES.find((c) => c.code === selected) ?? null : null;
 
   const onLayoutChange = (_current: Layout, all: ResponsiveLayouts) => {
-    setResponsiveLayouts(all);
-    if (editMode) {
-      try {
-        localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(all));
-      } catch {}
-    }
-  };
-
-  const resetLayout = () => {
-    setResponsiveLayouts(DEFAULT_LAYOUTS);
+    setLayouts(all);
     try {
-      localStorage.removeItem(LAYOUT_STORAGE_KEY);
+      localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(all));
     } catch {}
   };
 
-  // Pra cada item, wrapper que ocupa 100% × 100% do grid cell
-  // overflow:auto pra conteúdo grande caber sem estourar
-  const cellStyle: React.CSSProperties = {
-    width: "100%",
-    height: "100%",
-    overflow: "auto",
+  const resetLayout = () => {
+    setLayouts(DEFAULT_LAYOUTS);
+    try {
+      localStorage.removeItem(LAYOUT_STORAGE_KEY);
+    } catch {}
   };
 
   return (
@@ -148,77 +153,78 @@ export function Dashboard() {
         className="flex items-center justify-between gap-3 mb-4 flex-wrap"
         style={{ marginTop: 16 }}
       >
-        <div className="text-[11px] tracking-wider uppercase font-semibold" style={{ color: "var(--text-3)" }}>
-          {editMode ? "Modo edição: arraste pelo header das caixas · redimensione pelos cantos" : "Layout salvo automaticamente"}
+        <div
+          className="text-[11px] tracking-wider uppercase font-semibold flex items-center gap-2"
+          style={{ color: "var(--text-3)" }}
+        >
+          <span style={{ color: "var(--color-wh-blue-light)", fontSize: 14 }}>⠿</span>
+          arraste pelo handle no canto superior direito · ⤡ redimensione pelo canto inferior direito · layout salvo automático
         </div>
-        <div className="flex items-center gap-2">
-          {editMode && (
-            <button
-              type="button"
-              onClick={resetLayout}
-              className="px-3 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-colors"
-              style={{
-                background: "var(--bg2)",
-                border: "1px solid var(--border)",
-                color: "var(--text-2)",
-                cursor: "pointer",
-              }}
-            >
-              ↻ Restaurar padrão
-            </button>
-          )}
-          <button
-            type="button"
-            onClick={() => setEditMode((v) => !v)}
-            className="px-3 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-colors"
-            style={{
-              background: editMode ? "var(--color-wh-blue)" : "var(--bg2)",
-              border: `1px solid ${editMode ? "var(--border-hi)" : "var(--border)"}`,
-              color: editMode ? "#fff" : "var(--text-2)",
-              cursor: "pointer",
-            }}
-          >
-            {editMode ? "✓ Salvar layout" : "✎ Editar layout"}
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={resetLayout}
+          className="px-3 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-colors"
+          style={{
+            background: "var(--bg2)",
+            border: "1px solid var(--border)",
+            color: "var(--text-2)",
+            cursor: "pointer",
+          }}
+        >
+          ↻ Restaurar layout padrão
+        </button>
       </div>
 
       {mounted && (
         <ResponsiveGridLayout
-          className={editMode ? "wt-edit-mode" : ""}
           layouts={layouts}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
           cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
           rowHeight={40}
           margin={[16, 16]}
           containerPadding={[0, 0]}
-          isDraggable={editMode}
-          isResizable={editMode}
+          isDraggable
+          isResizable
+          draggableHandle=".wt-drag-handle"
           onLayoutChange={onLayoutChange}
-          draggableCancel="button, a, input, select, textarea, .no-drag"
           compactType="vertical"
+          preventCollision={false}
           useCSSTransforms
         >
-          <div key="alerts" style={cellStyle}>
-            <AlertsBanner onSelect={select} />
+          <div key="alerts">
+            <GridCell label="Alertas críticos">
+              <AlertsBanner onSelect={select} />
+            </GridCell>
           </div>
-          <div key="kpis" style={cellStyle}>
-            <KpiRow />
+          <div key="kpis">
+            <GridCell label="KPIs globais">
+              <KpiRow />
+            </GridCell>
           </div>
-          <div key="map" style={cellStyle}>
-            <MapZone countries={COUNTRIES} selected={selected} onSelect={select} />
+          <div key="map">
+            <GridCell label="Mapa global">
+              <MapZone countries={COUNTRIES} selected={selected} onSelect={select} />
+            </GridCell>
           </div>
-          <div key="countries" style={cellStyle}>
-            <CountriesSidebar countries={COUNTRIES} selected={selected} onSelect={select} />
+          <div key="countries">
+            <GridCell label="Lista de países">
+              <CountriesSidebar countries={COUNTRIES} selected={selected} onSelect={select} />
+            </GridCell>
           </div>
-          <div key="daily" style={cellStyle}>
-            <DailyGrid />
+          <div key="daily">
+            <GridCell label="Operação diária">
+              <DailyGrid />
+            </GridCell>
           </div>
-          <div key="bulletins" style={cellStyle}>
-            <OfficialBulletins />
+          <div key="bulletins">
+            <GridCell label="Boletins oficiais">
+              <OfficialBulletins />
+            </GridCell>
           </div>
-          <div key="feed" style={cellStyle}>
-            <Feed countries={COUNTRIES} onSelect={select} />
+          <div key="feed">
+            <GridCell label="Feed de mudanças">
+              <Feed countries={COUNTRIES} onSelect={select} />
+            </GridCell>
           </div>
         </ResponsiveGridLayout>
       )}
