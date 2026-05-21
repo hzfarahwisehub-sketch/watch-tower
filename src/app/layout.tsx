@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ToastProvider } from "@/components/ToastProvider";
+import { SettingsProvider } from "@/components/SettingsProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,7 +29,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-BR" data-theme="dark" className={inter.variable}>
       <body data-theme="dark" style={{ fontFamily: "var(--font-inter), Inter, sans-serif" }}>
         <ThemeProvider>
-          <ToastProvider>{children}</ToastProvider>
+          <SettingsProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </SettingsProvider>
         </ThemeProvider>
       </body>
     </html>

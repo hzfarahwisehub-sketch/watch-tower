@@ -13,6 +13,8 @@ import { DailyGrid } from "./DailyGrid";
 import { Feed } from "./Feed";
 import { Modal } from "./Modal";
 import { OfficialBulletins } from "./OfficialBulletins";
+import { useSettings } from "./SettingsProvider";
+import { SettingsPanel } from "./SettingsPanel";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -95,23 +97,26 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
   ],
 };
 
-function GridCell({ label, children }: { label: string; children: ReactNode }) {
+function GridCell({ label, children, locked }: { label: string; children: ReactNode; locked: boolean }) {
   return (
-    <div className="wt-grid-cell">
-      <button
-        type="button"
-        className="wt-drag-handle"
-        aria-label={`Arrastar ${label} pra reposicionar`}
-        title={`Arrastar pra reposicionar — ${label}`}
-      >
-        <span aria-hidden>⠿</span>
-      </button>
+    <div className={`wt-grid-cell ${locked ? "wt-cell-locked" : ""}`}>
+      {!locked && (
+        <button
+          type="button"
+          className="wt-drag-handle"
+          aria-label={`Arrastar ${label} pra reposicionar`}
+          title={`Arrastar pra reposicionar — ${label}`}
+        >
+          <span aria-hidden>⠿</span>
+        </button>
+      )}
       <div className="wt-grid-content">{children}</div>
     </div>
   );
 }
 
 export function Dashboard() {
+  const { locked } = useSettings();
   const [selected, setSelected] = useState<string | null>(null);
   const [layouts, setLayouts] = useState<ResponsiveLayouts>(DEFAULT_LAYOUTS);
   const [mounted, setMounted] = useState(false);
@@ -161,22 +166,33 @@ export function Dashboard() {
           className="text-[11px] tracking-wider uppercase font-semibold flex items-center gap-2"
           style={{ color: "var(--text-3)" }}
         >
-          <span style={{ color: "var(--color-wh-blue-light)", fontSize: 14 }}>⠿</span>
-          arraste pelo handle no canto superior direito · ⤡ redimensione pelo canto inferior direito · layout salvo automático
+          {locked ? (
+            <>
+              <span style={{ color: "#FFB13B", fontSize: 14 }}>🔒</span>
+              layout travado · clica no cadeado pra liberar movimentação
+            </>
+          ) : (
+            <>
+              <span style={{ color: "var(--color-wh-blue-light)", fontSize: 14 }}>⠿</span>
+              arraste pelo handle no canto superior direito · ⤡ redimensione pelo canto inferior direito · layout salvo automático
+            </>
+          )}
         </div>
-        <button
-          type="button"
-          onClick={resetLayout}
-          className="px-3 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-colors"
-          style={{
-            background: "var(--bg2)",
-            border: "1px solid var(--border)",
-            color: "var(--text-2)",
-            cursor: "pointer",
-          }}
-        >
-          ↻ Restaurar layout padrão
-        </button>
+        {!locked && (
+          <button
+            type="button"
+            onClick={resetLayout}
+            className="px-3 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-colors"
+            style={{
+              background: "var(--bg2)",
+              border: "1px solid var(--border)",
+              color: "var(--text-2)",
+              cursor: "pointer",
+            }}
+          >
+            ↻ Restaurar layout padrão
+          </button>
+        )}
       </div>
 
       {mounted && (
@@ -187,8 +203,8 @@ export function Dashboard() {
           rowHeight={40}
           margin={[16, 16]}
           containerPadding={[0, 0]}
-          isDraggable
-          isResizable
+          isDraggable={!locked}
+          isResizable={!locked}
           draggableHandle=".wt-drag-handle"
           onLayoutChange={onLayoutChange}
           compactType="vertical"
@@ -196,37 +212,37 @@ export function Dashboard() {
           useCSSTransforms
         >
           <div key="alerts">
-            <GridCell label="Alertas críticos">
+            <GridCell label="Alertas críticos" locked={locked}>
               <AlertsBanner onSelect={select} />
             </GridCell>
           </div>
           <div key="kpis">
-            <GridCell label="KPIs globais">
+            <GridCell label="KPIs globais" locked={locked}>
               <KpiRow />
             </GridCell>
           </div>
           <div key="map">
-            <GridCell label="Mapa global">
+            <GridCell label="Mapa global" locked={locked}>
               <MapZone countries={COUNTRIES} selected={selected} onSelect={select} />
             </GridCell>
           </div>
           <div key="countries">
-            <GridCell label="Lista de países">
+            <GridCell label="Lista de países" locked={locked}>
               <CountriesSidebar countries={COUNTRIES} selected={selected} onSelect={select} />
             </GridCell>
           </div>
           <div key="daily">
-            <GridCell label="Operação diária">
+            <GridCell label="Operação diária" locked={locked}>
               <DailyGrid />
             </GridCell>
           </div>
           <div key="bulletins">
-            <GridCell label="Boletins oficiais">
+            <GridCell label="Boletins oficiais" locked={locked}>
               <OfficialBulletins />
             </GridCell>
           </div>
           <div key="feed">
-            <GridCell label="Feed de mudanças">
+            <GridCell label="Feed de mudanças" locked={locked}>
               <Feed countries={COUNTRIES} onSelect={select} />
             </GridCell>
           </div>
@@ -234,6 +250,7 @@ export function Dashboard() {
       )}
 
       <Modal country={country} onClose={() => setSelected(null)} />
+      <SettingsPanel />
     </div>
   );
 }

@@ -288,6 +288,15 @@ body {
   box-shadow: 0 2px 8px rgba(31,85,255,.18);
 }
 
+/* Quando travado: esconde resize handle, drag handle não renderiza */
+.wt-cell-locked .react-resizable-handle,
+.wt-cell-locked + .react-resizable-handle {
+  display: none !important;
+}
+.react-grid-item:has(.wt-cell-locked) > .react-resizable-handle {
+  display: none !important;
+}
+
 /* Placeholder durante drop/move (sombra do destino) */
 .react-grid-item.react-grid-placeholder {
   background: rgba(31,85,255,.18) !important;

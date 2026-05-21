@@ -3,9 +3,11 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useTheme } from "./ThemeProvider";
 import { useToast } from "./ToastProvider";
+import { useSettings } from "./SettingsProvider";
 
 export function Header() {
   const { theme, toggle } = useTheme();
+  const { locked, toggleLock, openPanel } = useSettings();
   const [refreshing, setRefreshing] = useState(false);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
   const [diffMin, setDiffMin] = useState(2);
@@ -115,7 +117,32 @@ export function Header() {
           </svg>
         </IconBtn>
 
-        <IconBtn title="Configurações" onClick={() => toast("Configurações em breve · próxima fase: integração de e-mails")}>
+        {/* Cadeado · trava/destrava drag+resize de todas as caixas */}
+        <IconBtn
+          title={locked ? "Layout travado · clica pra destravar" : "Layout livre · clica pra travar"}
+          onClick={() => {
+            toggleLock();
+            toast(locked ? "🔓 Layout destravado — caixas podem ser movidas e redimensionadas" : "🔒 Layout travado — caixas fixas no lugar");
+          }}
+          active={locked}
+          activeColor="#FFB13B"
+        >
+          {locked ? (
+            // Cadeado fechado
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          ) : (
+            // Cadeado aberto
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 9.9-1" />
+            </svg>
+          )}
+        </IconBtn>
+
+        <IconBtn title="Configurações · cor + fonte" onClick={openPanel}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="3" />
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
@@ -133,17 +160,32 @@ export function Header() {
   );
 }
 
-function IconBtn({ children, onClick, title }: { children: React.ReactNode; onClick: () => void; title: string }) {
+function IconBtn({
+  children,
+  onClick,
+  title,
+  active = false,
+  activeColor,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  title: string;
+  active?: boolean;
+  activeColor?: string;
+}) {
+  const color = active && activeColor ? activeColor : "var(--color-wh-blue-light)";
   return (
     <button
       type="button"
       onClick={onClick}
       title={title}
+      aria-pressed={active}
       className="w-[38px] h-[38px] rounded-[10px] flex items-center justify-center cursor-pointer transition-all hover:-translate-y-px"
       style={{
-        border: "1px solid var(--border)",
-        background: "var(--surface)",
-        color: "var(--color-wh-blue-light)",
+        border: active && activeColor ? `1px solid ${activeColor}` : "1px solid var(--border)",
+        background: active && activeColor ? `${activeColor}22` : "var(--surface)",
+        color,
+        boxShadow: active && activeColor ? `0 0 0 2px ${activeColor}33, 0 2px 8px ${activeColor}30` : undefined,
       }}
     >
       {children}
