@@ -37,7 +37,7 @@ const MapZone = dynamic(() => import("./MapZone"), {
   ),
 });
 
-const LAYOUT_STORAGE_KEY = "wt-layout-v5";
+const LAYOUT_STORAGE_KEY = "wt-layout-v6";
 
 // Layout padrão por breakpoint — COLS DOBRADOS pra free placement mais fino.
 //   lg: ≥1200  · 24 cols   md: 996-1199 · 20 cols
@@ -131,8 +131,31 @@ export function Dashboard() {
         const parsed = JSON.parse(stored) as ResponsiveLayouts;
         // Merge com defaults pra garantir todos os items presentes
         const merged: ResponsiveLayouts = { ...DEFAULT_LAYOUTS };
+        const REQUIRED_KEYS = ["alerts", "kpis", "map", "countries", "daily", "bulletins", "feed"];
         for (const bp of Object.keys(parsed)) {
-          if (Array.isArray(parsed[bp])) merged[bp] = parsed[bp];
+          const arr = parsed[bp];
+          if (!Array.isArray(arr)) continue;
+          // Sanitiza: garante que todos os 7 items estão presentes e dentro de bounds razoáveis
+          const itemsByKey = new Map(arr.map((it) => [it.i, it]));
+          const defaultArr = DEFAULT_LAYOUTS[bp] ?? DEFAULT_LAYOUTS.lg ?? [];
+          const fixed = REQUIRED_KEYS.map((key) => {
+            const item = itemsByKey.get(key);
+            const fallback = defaultArr.find((d) => d.i === key);
+            if (!item || typeof item.x !== "number" || typeof item.y !== "number") {
+              return fallback ?? { i: key, x: 0, y: 0, w: 4, h: 4, minW: 2, minH: 2 };
+            }
+            // Bound: x e y sempre >= 0; w e h >= 2 (mínimo viável)
+            return {
+              ...item,
+              x: Math.max(0, item.x),
+              y: Math.max(0, item.y),
+              w: Math.max(2, item.w ?? 4),
+              h: Math.max(2, item.h ?? 4),
+              minW: 2,
+              minH: 2,
+            };
+          });
+          merged[bp] = fixed;
         }
         setLayouts(merged);
       }
@@ -177,7 +200,7 @@ export function Dashboard() {
           ) : (
             <>
               <span style={{ color: "var(--color-wh-blue-light)", fontSize: 14 }}>⠿</span>
-              arraste pelo handle no canto superior direito · ⤡ redimensione pelo canto inferior direito · layout salvo automático
+              arraste · ⤡ redimensione · caixa sempre encaixa no espaço mais próximo · nenhuma some
             </>
           )}
         </div>
@@ -208,9 +231,10 @@ export function Dashboard() {
           containerPadding={[0, 0]}
           isDraggable={!locked}
           isResizable={!locked}
+          isBounded
           draggableHandle=".wt-drag-handle"
           onLayoutChange={onLayoutChange}
-          compactType={null}
+          compactType="vertical"
           preventCollision={false}
           allowOverlap={false}
           useCSSTransforms
