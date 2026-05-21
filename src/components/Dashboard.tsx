@@ -14,6 +14,7 @@ import { Feed } from "./Feed";
 import { Modal } from "./Modal";
 import { OfficialBulletins } from "./OfficialBulletins";
 import { CountryBenchmark } from "./CountryBenchmark";
+import { InfoCenters } from "./InfoCenters";
 import { useSettings } from "./SettingsProvider";
 import { SettingsPanel } from "./SettingsPanel";
 
@@ -38,7 +39,7 @@ const MapZone = dynamic(() => import("./MapZone"), {
   ),
 });
 
-const LAYOUT_STORAGE_KEY = "wt-layout-v7";
+const LAYOUT_STORAGE_KEY = "wt-layout-v8";
 
 // Layout padrão por breakpoint — COLS DOBRADOS pra free placement mais fino.
 //   lg: ≥1200  · 24 cols   md: 996-1199 · 20 cols
@@ -65,8 +66,9 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "scheduled", x: 0,  y: 38,  w: 12, h: 12, ...MIN },
     { i: "reminders", x: 12, y: 38,  w: 12, h: 12, ...MIN },
     { i: "benchmark", x: 0,  y: 50,  w: 24, h: 26, ...MIN },
-    { i: "bulletins", x: 0,  y: 76,  w: 24, h: 24, ...MIN },
-    { i: "feed",      x: 0,  y: 100, w: 24, h: 28, ...MIN },
+    { i: "info",      x: 0,  y: 76,  w: 24, h: 26, ...MIN },
+    { i: "bulletins", x: 0,  y: 102, w: 24, h: 24, ...MIN },
+    { i: "feed",      x: 0,  y: 126, w: 24, h: 28, ...MIN },
   ],
   md: [
     { i: "alerts",    x: 0,  y: 0,   w: 20, h: 4,  ...MIN },
@@ -79,8 +81,9 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "scheduled", x: 10, y: 38,  w: 10, h: 12, ...MIN },
     { i: "reminders", x: 0,  y: 50,  w: 20, h: 10, ...MIN },
     { i: "benchmark", x: 0,  y: 60,  w: 20, h: 26, ...MIN },
-    { i: "bulletins", x: 0,  y: 86,  w: 20, h: 24, ...MIN },
-    { i: "feed",      x: 0,  y: 110, w: 20, h: 28, ...MIN },
+    { i: "info",      x: 0,  y: 86,  w: 20, h: 26, ...MIN },
+    { i: "bulletins", x: 0,  y: 112, w: 20, h: 24, ...MIN },
+    { i: "feed",      x: 0,  y: 136, w: 20, h: 28, ...MIN },
   ],
   sm: [
     { i: "alerts",    x: 0, y: 0,    w: 12, h: 4,  ...MIN },
@@ -93,8 +96,9 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "scheduled", x: 0, y: 86,   w: 12, h: 12, ...MIN },
     { i: "reminders", x: 0, y: 98,   w: 12, h: 10, ...MIN },
     { i: "benchmark", x: 0, y: 108,  w: 12, h: 30, ...MIN },
-    { i: "bulletins", x: 0, y: 138,  w: 12, h: 28, ...MIN },
-    { i: "feed",      x: 0, y: 166,  w: 12, h: 32, ...MIN },
+    { i: "info",      x: 0, y: 138,  w: 12, h: 32, ...MIN },
+    { i: "bulletins", x: 0, y: 170,  w: 12, h: 28, ...MIN },
+    { i: "feed",      x: 0, y: 198,  w: 12, h: 32, ...MIN },
   ],
   xs: [
     { i: "alerts",    x: 0, y: 0,    w: 8, h: 6,  ...MIN },
@@ -107,8 +111,9 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "scheduled", x: 0, y: 96,   w: 8, h: 14, ...MIN },
     { i: "reminders", x: 0, y: 110,  w: 8, h: 12, ...MIN },
     { i: "benchmark", x: 0, y: 122,  w: 8, h: 36, ...MIN },
-    { i: "bulletins", x: 0, y: 158,  w: 8, h: 36, ...MIN },
-    { i: "feed",      x: 0, y: 194,  w: 8, h: 40, ...MIN },
+    { i: "info",      x: 0, y: 158,  w: 8, h: 40, ...MIN },
+    { i: "bulletins", x: 0, y: 198,  w: 8, h: 36, ...MIN },
+    { i: "feed",      x: 0, y: 234,  w: 8, h: 40, ...MIN },
   ],
   xxs: [
     { i: "alerts",    x: 0, y: 0,    w: 4, h: 8,  ...MIN },
@@ -121,12 +126,13 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "scheduled", x: 0, y: 112,  w: 4, h: 16, ...MIN },
     { i: "reminders", x: 0, y: 128,  w: 4, h: 14, ...MIN },
     { i: "benchmark", x: 0, y: 142,  w: 4, h: 44, ...MIN },
-    { i: "bulletins", x: 0, y: 186,  w: 4, h: 44, ...MIN },
-    { i: "feed",      x: 0, y: 230,  w: 4, h: 48, ...MIN },
+    { i: "info",      x: 0, y: 186,  w: 4, h: 50, ...MIN },
+    { i: "bulletins", x: 0, y: 236,  w: 4, h: 44, ...MIN },
+    { i: "feed",      x: 0, y: 280,  w: 4, h: 48, ...MIN },
   ],
 };
 
-const REQUIRED_KEYS = ["alerts","kpis","map","countries","inbox","agenda","tasks","scheduled","reminders","benchmark","bulletins","feed"];
+const REQUIRED_KEYS = ["alerts","kpis","map","countries","inbox","agenda","tasks","scheduled","reminders","benchmark","info","bulletins","feed"];
 
 function GridCell({ label, children, locked }: { label: string; children: ReactNode; locked: boolean }) {
   return (
@@ -335,6 +341,11 @@ export function Dashboard() {
           <div key="benchmark">
             <GridCell label="Benchmark do país" locked={locked}>
               <CountryBenchmark selectedCode={mapSelected} />
+            </GridCell>
+          </div>
+          <div key="info">
+            <GridCell label="Centros de Informação" locked={locked}>
+              <InfoCenters />
             </GridCell>
           </div>
           <div key="bulletins">
