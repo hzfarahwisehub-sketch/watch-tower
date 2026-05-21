@@ -16,6 +16,10 @@ export interface Country {
   changes: number;
   authority: string;
   events: CountryEvent[];
+  /** URL de imagem de destaque (landmark/cidade conhecida) — usada no CountryBenchmark */
+  imageUrl?: string;
+  /** Resumo executivo do país pra área de benchmark */
+  summary?: string;
 }
 
 export interface InboxAccount {

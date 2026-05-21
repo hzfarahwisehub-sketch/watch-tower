@@ -22,7 +22,9 @@ import {
 import { applySystemSeed } from "@/lib/systemSeed";
 import { useToast } from "./ToastProvider";
 
-export function DailyGrid() {
+export type DailyBlock = "inbox" | "scheduled" | "agenda" | "tasks" | "reminders";
+
+export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [agenda, setAgenda] = useState<AgendaItem[]>([]);
   const [reminders, setReminders] = useState<Reminder[]>([]);
@@ -128,11 +130,7 @@ export function DailyGrid() {
     setScheduled((s) => [...s, { id, icon: "⚡", title: "Nova ação programada", frequency: "Diário", nextRun: "Amanhã", status: "active" }]);
   };
 
-  return (
-    <section className="grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-4 gap-4 items-start">
-      {/* COLUNA 1: INBOX + AÇÕES PROGRAMADAS empilhadas */}
-      <div className="flex flex-col gap-4">
-        {/* INBOX */}
+  const inboxCard = (
         <DailyCard
           cardKey="inbox"
           title="📧 Inbox"
@@ -191,8 +189,9 @@ export function DailyGrid() {
             </button>
           ))}
         </DailyCard>
+  );
 
-        {/* AÇÕES PROGRAMADAS */}
+  const scheduledCard = (
         <DailyCard
           cardKey="scheduled"
           title="⚡ Ações Programadas"
@@ -250,9 +249,9 @@ export function DailyGrid() {
             </div>
           ))}
         </DailyCard>
-      </div>
+  );
 
-      {/* AGENDA com drag-and-drop */}
+  const agendaCard = (
       <DailyCard
         cardKey="agenda"
         title="📅 Agenda — Amanhã"
@@ -325,8 +324,9 @@ export function DailyGrid() {
           </div>
         ))}
       </DailyCard>
+  );
 
-      {/* TASKS */}
+  const tasksCard = (
       <DailyCard
         cardKey="tasks"
         title="✅ Tarefas do Dia"
@@ -380,8 +380,9 @@ export function DailyGrid() {
           </div>
         ))}
       </DailyCard>
+  );
 
-      {/* REMINDERS — max 4 visíveis com scroll */}
+  const remindersCard = (
       <DailyCard
         cardKey="reminders"
         title="🔔 Lembretes"
@@ -429,6 +430,26 @@ export function DailyGrid() {
           </div>
         ))}
       </DailyCard>
+  );
+
+  // Quando usado com `only`, retorna apenas aquele card isolado
+  // (Dashboard coloca cada um em sua célula independente do grid).
+  if (only === "inbox") return inboxCard;
+  if (only === "scheduled") return scheduledCard;
+  if (only === "agenda") return agendaCard;
+  if (only === "tasks") return tasksCard;
+  if (only === "reminders") return remindersCard;
+
+  // Modo legado: renderiza todos numa grade interna
+  return (
+    <section className="grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-4 gap-4 items-start">
+      <div className="flex flex-col gap-4">
+        {inboxCard}
+        {scheduledCard}
+      </div>
+      {agendaCard}
+      {tasksCard}
+      {remindersCard}
     </section>
   );
 }

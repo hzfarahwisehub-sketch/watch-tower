@@ -13,6 +13,7 @@ import { DailyGrid } from "./DailyGrid";
 import { Feed } from "./Feed";
 import { Modal } from "./Modal";
 import { OfficialBulletins } from "./OfficialBulletins";
+import { CountryBenchmark } from "./CountryBenchmark";
 import { useSettings } from "./SettingsProvider";
 import { SettingsPanel } from "./SettingsPanel";
 
@@ -37,7 +38,7 @@ const MapZone = dynamic(() => import("./MapZone"), {
   ),
 });
 
-const LAYOUT_STORAGE_KEY = "wt-layout-v6";
+const LAYOUT_STORAGE_KEY = "wt-layout-v7";
 
 // Layout padrão por breakpoint — COLS DOBRADOS pra free placement mais fino.
 //   lg: ≥1200  · 24 cols   md: 996-1199 · 20 cols
@@ -54,51 +55,78 @@ const MIN = { minW: 2, minH: 2 } as const;
 // Pra ocupar ~360px de altura → h=10. Pra ~720px → h=20.
 const DEFAULT_LAYOUTS: ResponsiveLayouts = {
   lg: [
-    { i: "alerts",    x: 0,  y: 0,  w: 24, h: 4,  ...MIN },
-    { i: "kpis",      x: 0,  y: 4,  w: 24, h: 4,  ...MIN },
-    { i: "map",       x: 0,  y: 8,  w: 14, h: 18, ...MIN },
-    { i: "countries", x: 14, y: 8,  w: 10, h: 18, ...MIN },
-    { i: "daily",     x: 0,  y: 26, w: 24, h: 20, ...MIN },
-    { i: "bulletins", x: 0,  y: 46, w: 24, h: 24, ...MIN },
-    { i: "feed",      x: 0,  y: 70, w: 24, h: 28, ...MIN },
+    { i: "alerts",    x: 0,  y: 0,   w: 24, h: 4,  ...MIN },
+    { i: "kpis",      x: 0,  y: 4,   w: 24, h: 4,  ...MIN },
+    { i: "map",       x: 0,  y: 8,   w: 14, h: 18, ...MIN },
+    { i: "countries", x: 14, y: 8,   w: 10, h: 18, ...MIN },
+    { i: "inbox",     x: 0,  y: 26,  w: 8,  h: 12, ...MIN },
+    { i: "agenda",    x: 8,  y: 26,  w: 8,  h: 12, ...MIN },
+    { i: "tasks",     x: 16, y: 26,  w: 8,  h: 12, ...MIN },
+    { i: "scheduled", x: 0,  y: 38,  w: 12, h: 12, ...MIN },
+    { i: "reminders", x: 12, y: 38,  w: 12, h: 12, ...MIN },
+    { i: "benchmark", x: 0,  y: 50,  w: 24, h: 26, ...MIN },
+    { i: "bulletins", x: 0,  y: 76,  w: 24, h: 24, ...MIN },
+    { i: "feed",      x: 0,  y: 100, w: 24, h: 28, ...MIN },
   ],
   md: [
-    { i: "alerts",    x: 0,  y: 0,  w: 20, h: 4,  ...MIN },
-    { i: "kpis",      x: 0,  y: 4,  w: 20, h: 4,  ...MIN },
-    { i: "map",       x: 0,  y: 8,  w: 12, h: 18, ...MIN },
-    { i: "countries", x: 12, y: 8,  w: 8,  h: 18, ...MIN },
-    { i: "daily",     x: 0,  y: 26, w: 20, h: 20, ...MIN },
-    { i: "bulletins", x: 0,  y: 46, w: 20, h: 24, ...MIN },
-    { i: "feed",      x: 0,  y: 70, w: 20, h: 28, ...MIN },
+    { i: "alerts",    x: 0,  y: 0,   w: 20, h: 4,  ...MIN },
+    { i: "kpis",      x: 0,  y: 4,   w: 20, h: 4,  ...MIN },
+    { i: "map",       x: 0,  y: 8,   w: 12, h: 18, ...MIN },
+    { i: "countries", x: 12, y: 8,   w: 8,  h: 18, ...MIN },
+    { i: "inbox",     x: 0,  y: 26,  w: 10, h: 12, ...MIN },
+    { i: "agenda",    x: 10, y: 26,  w: 10, h: 12, ...MIN },
+    { i: "tasks",     x: 0,  y: 38,  w: 10, h: 12, ...MIN },
+    { i: "scheduled", x: 10, y: 38,  w: 10, h: 12, ...MIN },
+    { i: "reminders", x: 0,  y: 50,  w: 20, h: 10, ...MIN },
+    { i: "benchmark", x: 0,  y: 60,  w: 20, h: 26, ...MIN },
+    { i: "bulletins", x: 0,  y: 86,  w: 20, h: 24, ...MIN },
+    { i: "feed",      x: 0,  y: 110, w: 20, h: 28, ...MIN },
   ],
   sm: [
-    { i: "alerts",    x: 0, y: 0,   w: 12, h: 4,  ...MIN },
-    { i: "kpis",      x: 0, y: 4,   w: 12, h: 6,  ...MIN },
-    { i: "map",       x: 0, y: 10,  w: 12, h: 18, ...MIN },
-    { i: "countries", x: 0, y: 28,  w: 12, h: 18, ...MIN },
-    { i: "daily",     x: 0, y: 46,  w: 12, h: 24, ...MIN },
-    { i: "bulletins", x: 0, y: 70,  w: 12, h: 28, ...MIN },
-    { i: "feed",      x: 0, y: 98,  w: 12, h: 32, ...MIN },
+    { i: "alerts",    x: 0, y: 0,    w: 12, h: 4,  ...MIN },
+    { i: "kpis",      x: 0, y: 4,    w: 12, h: 6,  ...MIN },
+    { i: "map",       x: 0, y: 10,   w: 12, h: 18, ...MIN },
+    { i: "countries", x: 0, y: 28,   w: 12, h: 18, ...MIN },
+    { i: "inbox",     x: 0, y: 46,   w: 12, h: 12, ...MIN },
+    { i: "agenda",    x: 0, y: 58,   w: 12, h: 14, ...MIN },
+    { i: "tasks",     x: 0, y: 72,   w: 12, h: 14, ...MIN },
+    { i: "scheduled", x: 0, y: 86,   w: 12, h: 12, ...MIN },
+    { i: "reminders", x: 0, y: 98,   w: 12, h: 10, ...MIN },
+    { i: "benchmark", x: 0, y: 108,  w: 12, h: 30, ...MIN },
+    { i: "bulletins", x: 0, y: 138,  w: 12, h: 28, ...MIN },
+    { i: "feed",      x: 0, y: 166,  w: 12, h: 32, ...MIN },
   ],
   xs: [
-    { i: "alerts",    x: 0, y: 0,   w: 8, h: 6,  ...MIN },
-    { i: "kpis",      x: 0, y: 6,   w: 8, h: 12, ...MIN },
-    { i: "map",       x: 0, y: 18,  w: 8, h: 16, ...MIN },
-    { i: "countries", x: 0, y: 34,  w: 8, h: 16, ...MIN },
-    { i: "daily",     x: 0, y: 50,  w: 8, h: 24, ...MIN },
-    { i: "bulletins", x: 0, y: 74,  w: 8, h: 36, ...MIN },
-    { i: "feed",      x: 0, y: 110, w: 8, h: 40, ...MIN },
+    { i: "alerts",    x: 0, y: 0,    w: 8, h: 6,  ...MIN },
+    { i: "kpis",      x: 0, y: 6,    w: 8, h: 12, ...MIN },
+    { i: "map",       x: 0, y: 18,   w: 8, h: 16, ...MIN },
+    { i: "countries", x: 0, y: 34,   w: 8, h: 16, ...MIN },
+    { i: "inbox",     x: 0, y: 50,   w: 8, h: 14, ...MIN },
+    { i: "agenda",    x: 0, y: 64,   w: 8, h: 16, ...MIN },
+    { i: "tasks",     x: 0, y: 80,   w: 8, h: 16, ...MIN },
+    { i: "scheduled", x: 0, y: 96,   w: 8, h: 14, ...MIN },
+    { i: "reminders", x: 0, y: 110,  w: 8, h: 12, ...MIN },
+    { i: "benchmark", x: 0, y: 122,  w: 8, h: 36, ...MIN },
+    { i: "bulletins", x: 0, y: 158,  w: 8, h: 36, ...MIN },
+    { i: "feed",      x: 0, y: 194,  w: 8, h: 40, ...MIN },
   ],
   xxs: [
-    { i: "alerts",    x: 0, y: 0,   w: 4, h: 8,  ...MIN },
-    { i: "kpis",      x: 0, y: 8,   w: 4, h: 22, ...MIN },
-    { i: "map",       x: 0, y: 30,  w: 4, h: 14, ...MIN },
-    { i: "countries", x: 0, y: 44,  w: 4, h: 16, ...MIN },
-    { i: "daily",     x: 0, y: 60,  w: 4, h: 28, ...MIN },
-    { i: "bulletins", x: 0, y: 88,  w: 4, h: 44, ...MIN },
-    { i: "feed",      x: 0, y: 132, w: 4, h: 48, ...MIN },
+    { i: "alerts",    x: 0, y: 0,    w: 4, h: 8,  ...MIN },
+    { i: "kpis",      x: 0, y: 8,    w: 4, h: 22, ...MIN },
+    { i: "map",       x: 0, y: 30,   w: 4, h: 14, ...MIN },
+    { i: "countries", x: 0, y: 44,   w: 4, h: 16, ...MIN },
+    { i: "inbox",     x: 0, y: 60,   w: 4, h: 16, ...MIN },
+    { i: "agenda",    x: 0, y: 76,   w: 4, h: 18, ...MIN },
+    { i: "tasks",     x: 0, y: 94,   w: 4, h: 18, ...MIN },
+    { i: "scheduled", x: 0, y: 112,  w: 4, h: 16, ...MIN },
+    { i: "reminders", x: 0, y: 128,  w: 4, h: 14, ...MIN },
+    { i: "benchmark", x: 0, y: 142,  w: 4, h: 44, ...MIN },
+    { i: "bulletins", x: 0, y: 186,  w: 4, h: 44, ...MIN },
+    { i: "feed",      x: 0, y: 230,  w: 4, h: 48, ...MIN },
   ],
 };
+
+const REQUIRED_KEYS = ["alerts","kpis","map","countries","inbox","agenda","tasks","scheduled","reminders","benchmark","bulletins","feed"];
 
 function GridCell({ label, children, locked }: { label: string; children: ReactNode; locked: boolean }) {
   return (
@@ -131,7 +159,6 @@ export function Dashboard() {
         const parsed = JSON.parse(stored) as ResponsiveLayouts;
         // Merge com defaults pra garantir todos os items presentes
         const merged: ResponsiveLayouts = { ...DEFAULT_LAYOUTS };
-        const REQUIRED_KEYS = ["alerts", "kpis", "map", "countries", "daily", "bulletins", "feed"];
         for (const bp of Object.keys(parsed)) {
           const arr = parsed[bp];
           if (!Array.isArray(arr)) continue;
@@ -259,9 +286,34 @@ export function Dashboard() {
               <CountriesSidebar countries={COUNTRIES} selected={selected} onSelect={select} />
             </GridCell>
           </div>
-          <div key="daily">
-            <GridCell label="Operação diária" locked={locked}>
-              <DailyGrid />
+          <div key="inbox">
+            <GridCell label="Inbox" locked={locked}>
+              <DailyGrid only="inbox" />
+            </GridCell>
+          </div>
+          <div key="agenda">
+            <GridCell label="Agenda" locked={locked}>
+              <DailyGrid only="agenda" />
+            </GridCell>
+          </div>
+          <div key="tasks">
+            <GridCell label="Tarefas do dia" locked={locked}>
+              <DailyGrid only="tasks" />
+            </GridCell>
+          </div>
+          <div key="scheduled">
+            <GridCell label="Ações programadas" locked={locked}>
+              <DailyGrid only="scheduled" />
+            </GridCell>
+          </div>
+          <div key="reminders">
+            <GridCell label="Lembretes" locked={locked}>
+              <DailyGrid only="reminders" />
+            </GridCell>
+          </div>
+          <div key="benchmark">
+            <GridCell label="Benchmark do país" locked={locked}>
+              <CountryBenchmark selectedCode={selected} />
             </GridCell>
           </div>
           <div key="bulletins">
