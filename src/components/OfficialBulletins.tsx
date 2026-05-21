@@ -86,9 +86,9 @@ const BULLETINS: Bulletin[] = [
     key: "fr",
     country: "França",
     flag: "🇫🇷",
-    source: "OFII · Office Français de l'Immigration",
+    source: "OFII · Actualités (boletim oficial)",
     frequency: "Sob demanda",
-    url: "https://www.ofii.fr/",
+    url: "https://www.ofii.fr/actualites/",
     freqColor: "ondemand",
   },
   {
