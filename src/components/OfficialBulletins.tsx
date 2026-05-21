@@ -212,6 +212,15 @@ const BULLETINS: Bulletin[] = [
     freqColor: "ondemand",
   },
   {
+    key: "is",
+    country: "Islândia",
+    flag: "🇮🇸",
+    source: "Útlendingastofnun · Directorate of Immigration",
+    frequency: "Sob demanda",
+    url: "https://utl.is/index.php/en/",
+    freqColor: "ondemand",
+  },
+  {
     key: "it",
     country: "Itália",
     flag: "🇮🇹",
@@ -257,6 +266,15 @@ const BULLETINS: Bulletin[] = [
     freqColor: "ondemand",
   },
   {
+    key: "no",
+    country: "Noruega",
+    flag: "🇳🇴",
+    source: "UDI · Norwegian Directorate of Immigration",
+    frequency: "Sob demanda",
+    url: "https://www.udi.no/en/",
+    freqColor: "ondemand",
+  },
+  {
     key: "pl",
     country: "Polônia",
     flag: "🇵🇱",
@@ -299,6 +317,15 @@ const BULLETINS: Bulletin[] = [
     source: "IGI · Inspectoratul General pentru Imigrări",
     frequency: "Sob demanda",
     url: "https://igi.mai.gov.ro/en",
+    freqColor: "ondemand",
+  },
+  {
+    key: "ru",
+    country: "Rússia",
+    flag: "🇷🇺",
+    source: "KDMID · Departamento Consular MID (visa & migração)",
+    frequency: "Sob demanda",
+    url: "https://www.kdmid.ru/",
     freqColor: "ondemand",
   },
   {
@@ -357,6 +384,15 @@ const BULLETINS: Bulletin[] = [
     source: "ISA · Immigration Services Agency Japan",
     frequency: "Sob demanda",
     url: "https://www.moj.go.jp/isa/index.html",
+    freqColor: "ondemand",
+  },
+  {
+    key: "nz",
+    country: "Nova Zelândia",
+    flag: "🇳🇿",
+    source: "Immigration New Zealand · INZ",
+    frequency: "Sob demanda",
+    url: "https://www.immigration.govt.nz/",
     freqColor: "ondemand",
   },
 ];
@@ -570,7 +606,7 @@ export function OfficialBulletins() {
 
       <div className="px-7 py-4" style={{ borderTop: "1px solid var(--border)" }}>
         <p className="text-[10.5px]" style={{ color: "var(--text-3)" }}>
-          Fontes governamentais oficiais das {BULLETINS.length} jurisdições monitoradas (América · 29 Europa · Oriente Médio · Ásia-Pacífico). Varredura automática diária às 08h00 BRT detecta mudanças no conteúdo de cada boletim. Cards com selo <span style={{ color: "#5DD580" }}>✦ NOVO</span> tiveram alteração nos últimos {CHANGED_WINDOW_DAYS} dias.
+          Fontes governamentais oficiais das {BULLETINS.length} jurisdições monitoradas (3 América · 32 Europa · 1 Oriente Médio · 4 Ásia-Pacífico/Oceania). Varredura automática diária às 08h00 BRT detecta mudanças no conteúdo de cada boletim. Cards com selo <span style={{ color: "#5DD580" }}>✦ NOVO</span> tiveram alteração nos últimos {CHANGED_WINDOW_DAYS} dias.
         </p>
       </div>
     </section>
