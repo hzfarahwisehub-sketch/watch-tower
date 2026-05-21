@@ -14,7 +14,7 @@ import { Feed } from "./Feed";
 import { Modal } from "./Modal";
 import { OfficialBulletins } from "./OfficialBulletins";
 import { CountryBenchmark } from "./CountryBenchmark";
-import { InfoCenters } from "./InfoCenters";
+import { InfoCenters, FinanceCenters } from "./InfoCenters";
 import { useSettings } from "./SettingsProvider";
 import { SettingsPanel } from "./SettingsPanel";
 
@@ -39,7 +39,7 @@ const MapZone = dynamic(() => import("./MapZone"), {
   ),
 });
 
-const LAYOUT_STORAGE_KEY = "wt-layout-v8";
+const LAYOUT_STORAGE_KEY = "wt-layout-v9";
 
 // Layout padrão por breakpoint — COLS DOBRADOS pra free placement mais fino.
 //   lg: ≥1200  · 24 cols   md: 996-1199 · 20 cols
@@ -67,8 +67,9 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "reminders", x: 12, y: 38,  w: 12, h: 12, ...MIN },
     { i: "benchmark", x: 0,  y: 50,  w: 24, h: 26, ...MIN },
     { i: "info",      x: 0,  y: 76,  w: 24, h: 26, ...MIN },
-    { i: "bulletins", x: 0,  y: 102, w: 24, h: 24, ...MIN },
-    { i: "feed",      x: 0,  y: 126, w: 24, h: 28, ...MIN },
+    { i: "finance",   x: 0,  y: 102, w: 24, h: 26, ...MIN },
+    { i: "bulletins", x: 0,  y: 128, w: 24, h: 24, ...MIN },
+    { i: "feed",      x: 0,  y: 152, w: 24, h: 28, ...MIN },
   ],
   md: [
     { i: "alerts",    x: 0,  y: 0,   w: 20, h: 4,  ...MIN },
@@ -82,8 +83,9 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "reminders", x: 0,  y: 50,  w: 20, h: 10, ...MIN },
     { i: "benchmark", x: 0,  y: 60,  w: 20, h: 26, ...MIN },
     { i: "info",      x: 0,  y: 86,  w: 20, h: 26, ...MIN },
-    { i: "bulletins", x: 0,  y: 112, w: 20, h: 24, ...MIN },
-    { i: "feed",      x: 0,  y: 136, w: 20, h: 28, ...MIN },
+    { i: "finance",   x: 0,  y: 112, w: 20, h: 26, ...MIN },
+    { i: "bulletins", x: 0,  y: 138, w: 20, h: 24, ...MIN },
+    { i: "feed",      x: 0,  y: 162, w: 20, h: 28, ...MIN },
   ],
   sm: [
     { i: "alerts",    x: 0, y: 0,    w: 12, h: 4,  ...MIN },
@@ -97,8 +99,9 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "reminders", x: 0, y: 98,   w: 12, h: 10, ...MIN },
     { i: "benchmark", x: 0, y: 108,  w: 12, h: 30, ...MIN },
     { i: "info",      x: 0, y: 138,  w: 12, h: 32, ...MIN },
-    { i: "bulletins", x: 0, y: 170,  w: 12, h: 28, ...MIN },
-    { i: "feed",      x: 0, y: 198,  w: 12, h: 32, ...MIN },
+    { i: "finance",   x: 0, y: 170,  w: 12, h: 32, ...MIN },
+    { i: "bulletins", x: 0, y: 202,  w: 12, h: 28, ...MIN },
+    { i: "feed",      x: 0, y: 230,  w: 12, h: 32, ...MIN },
   ],
   xs: [
     { i: "alerts",    x: 0, y: 0,    w: 8, h: 6,  ...MIN },
@@ -112,8 +115,9 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "reminders", x: 0, y: 110,  w: 8, h: 12, ...MIN },
     { i: "benchmark", x: 0, y: 122,  w: 8, h: 36, ...MIN },
     { i: "info",      x: 0, y: 158,  w: 8, h: 40, ...MIN },
-    { i: "bulletins", x: 0, y: 198,  w: 8, h: 36, ...MIN },
-    { i: "feed",      x: 0, y: 234,  w: 8, h: 40, ...MIN },
+    { i: "finance",   x: 0, y: 198,  w: 8, h: 40, ...MIN },
+    { i: "bulletins", x: 0, y: 238,  w: 8, h: 36, ...MIN },
+    { i: "feed",      x: 0, y: 274,  w: 8, h: 40, ...MIN },
   ],
   xxs: [
     { i: "alerts",    x: 0, y: 0,    w: 4, h: 8,  ...MIN },
@@ -127,12 +131,13 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "reminders", x: 0, y: 128,  w: 4, h: 14, ...MIN },
     { i: "benchmark", x: 0, y: 142,  w: 4, h: 44, ...MIN },
     { i: "info",      x: 0, y: 186,  w: 4, h: 50, ...MIN },
-    { i: "bulletins", x: 0, y: 236,  w: 4, h: 44, ...MIN },
-    { i: "feed",      x: 0, y: 280,  w: 4, h: 48, ...MIN },
+    { i: "finance",   x: 0, y: 236,  w: 4, h: 50, ...MIN },
+    { i: "bulletins", x: 0, y: 286,  w: 4, h: 44, ...MIN },
+    { i: "feed",      x: 0, y: 330,  w: 4, h: 48, ...MIN },
   ],
 };
 
-const REQUIRED_KEYS = ["alerts","kpis","map","countries","inbox","agenda","tasks","scheduled","reminders","benchmark","info","bulletins","feed"];
+const REQUIRED_KEYS = ["alerts","kpis","map","countries","inbox","agenda","tasks","scheduled","reminders","benchmark","info","finance","bulletins","feed"];
 
 function GridCell({ label, children, locked }: { label: string; children: ReactNode; locked: boolean }) {
   return (
@@ -346,6 +351,11 @@ export function Dashboard() {
           <div key="info">
             <GridCell label="Centros de Informação" locked={locked}>
               <InfoCenters />
+            </GridCell>
+          </div>
+          <div key="finance">
+            <GridCell label="Finanças & Mercados" locked={locked}>
+              <FinanceCenters />
             </GridCell>
           </div>
           <div key="bulletins">

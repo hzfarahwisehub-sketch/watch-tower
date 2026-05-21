@@ -4,6 +4,32 @@ import { INFO_CENTERS, GLOBAL_CRYPTO_SOURCES, categoryMeta, type InfoSource, typ
 
 const CAT_ORDER: InfoSourceCategory[] = ["news", "finance", "crypto", "legal"];
 
+/** Variants do componente — cada um filtra categorias diferentes */
+type Variant = "news" | "finance";
+
+const VARIANT_CONFIG: Record<Variant, {
+  title: string;
+  emoji: string;
+  categories: InfoSourceCategory[];
+  showGlobalCrypto: boolean;
+  accentColor: string;
+}> = {
+  news: {
+    title: "Centros de Informação",
+    emoji: "🌐",
+    categories: ["news", "legal"],
+    showGlobalCrypto: false,
+    accentColor: "var(--color-wh-blue-light)",
+  },
+  finance: {
+    title: "Finanças & Mercados",
+    emoji: "💰",
+    categories: ["finance", "crypto"],
+    showGlobalCrypto: true,
+    accentColor: "#10A570",
+  },
+};
+
 type Headline = { title: string; link: string; pubDate?: string };
 type FeedState =
   | { status: "idle" }
@@ -112,16 +138,30 @@ function SourceHeadlines({ source }: { source: InfoSource }) {
   );
 }
 
-export function InfoCenters() {
-  // Conta por categoria (pra header)
+export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
+  const cfg = VARIANT_CONFIG[variant];
+
+  // Filtra países que têm pelo menos 1 fonte da categoria do variant
+  const filteredCenters = INFO_CENTERS
+    .map((c) => ({
+      ...c,
+      sources: c.sources.filter((s) => cfg.categories.includes(s.category)),
+    }))
+    .filter((c) => c.sources.length > 0);
+
+  // Conta por categoria filtrada (pra header)
   const countByCat: Record<InfoSourceCategory, number> = { news: 0, finance: 0, crypto: 0, legal: 0 };
-  INFO_CENTERS.forEach((c) => c.sources.forEach((s) => (countByCat[s.category] += 1)));
-  GLOBAL_CRYPTO_SOURCES.forEach((s) => (countByCat[s.category] += 1));
+  filteredCenters.forEach((c) => c.sources.forEach((s) => (countByCat[s.category] += 1)));
+  if (cfg.showGlobalCrypto) {
+    GLOBAL_CRYPTO_SOURCES.forEach((s) => (countByCat[s.category] += 1));
+  }
+
   const totalSources =
-    INFO_CENTERS.reduce((sum, c) => sum + c.sources.length, 0) + GLOBAL_CRYPTO_SOURCES.length;
+    filteredCenters.reduce((sum, c) => sum + c.sources.length, 0) +
+    (cfg.showGlobalCrypto ? GLOBAL_CRYPTO_SOURCES.length : 0);
   const totalWithRss =
-    INFO_CENTERS.reduce((sum, c) => sum + c.sources.filter((s) => s.rss).length, 0) +
-    GLOBAL_CRYPTO_SOURCES.filter((s) => s.rss).length;
+    filteredCenters.reduce((sum, c) => sum + c.sources.filter((s) => s.rss).length, 0) +
+    (cfg.showGlobalCrypto ? GLOBAL_CRYPTO_SOURCES.filter((s) => s.rss).length : 0);
 
   return (
     <section className="wt-card h-full flex flex-col @container">
@@ -132,15 +172,15 @@ export function InfoCenters() {
       >
         <h2
           className="text-[12px] tracking-[2.5px] uppercase font-bold flex items-center gap-2"
-          style={{ color: "var(--color-wh-blue-light)" }}
+          style={{ color: cfg.accentColor }}
         >
-          🌐 Centros de Informação
+          {cfg.emoji} {cfg.title}
         </h2>
         <span
           className="text-[10px] tracking-wider uppercase font-semibold text-right"
           style={{ color: "var(--text-3)" }}
         >
-          {INFO_CENTERS.length} países · {totalSources} fontes · {totalWithRss} com headlines ao vivo
+          {filteredCenters.length} países · {totalSources} fontes · {totalWithRss} com headlines ao vivo
         </span>
       </header>
 
@@ -165,7 +205,7 @@ export function InfoCenters() {
       {/* Grid de países */}
       <div className="flex-1 overflow-auto p-5">
         <div className="grid grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 gap-4">
-          {INFO_CENTERS.map((center) => (
+          {filteredCenters.map((center) => (
             <article
               key={center.countryCode}
               className="rounded-xl flex flex-col"
@@ -265,7 +305,8 @@ export function InfoCenters() {
             </article>
           ))}
 
-          {/* Card especial: cripto global */}
+          {/* Card especial: cripto global (só no variant finance) */}
+          {cfg.showGlobalCrypto && (
           <article
             className="rounded-xl flex flex-col @md:col-span-2 @2xl:col-span-3 @4xl:col-span-4"
             style={{
@@ -325,6 +366,7 @@ export function InfoCenters() {
               ))}
             </ul>
           </article>
+          )}
         </div>
       </div>
 
@@ -339,4 +381,9 @@ export function InfoCenters() {
       </div>
     </section>
   );
+}
+
+/** Wrapper de conveniência pra variant "finance" */
+export function FinanceCenters() {
+  return <InfoCenters variant="finance" />;
 }
