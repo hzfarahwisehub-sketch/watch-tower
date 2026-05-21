@@ -288,9 +288,8 @@ body {
   box-shadow: 0 2px 8px rgba(31,85,255,.18);
 }
 
-/* ===== DailyCard body — resize vertical com handle azul WiseHub ===== */
+/* ===== DailyCard body — resize via react-resizable (mesmo sistema do grid) ===== */
 .wt-daily-body {
-  position: relative;
   scrollbar-width: thin;
   scrollbar-color: rgba(74,122,255,.22) transparent;
 }
@@ -307,43 +306,52 @@ body {
 .wt-daily-body::-webkit-scrollbar-thumb:hover {
   background: rgba(74,122,255,.45);
 }
-/* Handle nativo de resize (canto inferior direito) — chevron L azul */
-.wt-daily-body::-webkit-resizer {
-  background-color: transparent;
-  background-image:
-    linear-gradient(135deg,
-      transparent 0%,
-      transparent 55%,
-      var(--color-wh-blue-light) 55%,
-      var(--color-wh-blue-light) 70%,
-      transparent 70%,
-      transparent 78%,
-      var(--color-wh-blue-light) 78%,
-      var(--color-wh-blue-light) 93%,
-      transparent 93%);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  width: 16px;
-  height: 16px;
-}
-.wt-daily-body:hover::-webkit-resizer {
-  background-image:
-    linear-gradient(135deg,
-      transparent 0%,
-      transparent 50%,
-      #fff 50%,
-      #fff 70%,
-      transparent 70%,
-      transparent 78%,
-      #fff 78%,
-      #fff 95%,
-      transparent 95%);
-}
 [data-theme="light"] .wt-daily-body {
   scrollbar-color: rgba(31,85,255,.22) transparent;
 }
 [data-theme="light"] .wt-daily-body::-webkit-scrollbar-thumb {
   background: rgba(31,85,255,.18);
+}
+
+/* Handle de resize do DailyCard — mesmo visual do grid principal (chevron L azul) */
+.wt-daily-resize-handle {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  bottom: 4px;
+  right: 14px;
+  z-index: 8;
+  cursor: nwse-resize;
+  background: var(--surface-hi);
+  border: 1px solid var(--border-hi);
+  border-radius: 6px;
+  opacity: 0.7;
+  transition: opacity .2s ease, transform .2s ease, background .2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,.2);
+}
+.wt-daily-resize-handle::after {
+  content: "";
+  position: absolute;
+  inset: auto 5px 5px auto;
+  width: 14px;
+  height: 14px;
+  border-right: 2.5px solid var(--color-wh-blue-light);
+  border-bottom: 2.5px solid var(--color-wh-blue-light);
+  border-bottom-right-radius: 3px;
+  transition: border-color .2s ease;
+}
+.wt-daily-resize-handle:hover {
+  opacity: 1;
+  transform: scale(1.08);
+  background: var(--color-wh-blue);
+  border-color: var(--color-wh-blue-light);
+}
+.wt-daily-resize-handle:hover::after {
+  border-color: #fff;
+}
+[data-theme="light"] .wt-daily-resize-handle {
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(31,85,255,.15);
 }
 
 /* Quando travado: esconde resize handle, drag handle não renderiza */

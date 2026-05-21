@@ -1,6 +1,15 @@
 "use client";
-import { useEffect, useRef, useState, DragEvent } from "react";
+import { forwardRef, useEffect, useState, DragEvent } from "react";
+// @ts-expect-error - react-resizable v3 não envia types
+import { Resizable } from "react-resizable";
+import "react-resizable/css/styles.css";
 import { useSettings } from "./SettingsProvider";
+
+type ResizeData = {
+  node: HTMLElement;
+  size: { width: number; height: number };
+  handle: "s" | "w" | "e" | "n" | "sw" | "nw" | "se" | "ne";
+};
 import type { Task, AgendaItem, Reminder, ScheduledAction } from "@/lib/types";
 import { STORAGE, load, save } from "@/lib/storage";
 import {
@@ -424,6 +433,19 @@ export function DailyGrid() {
   );
 }
 
+// Custom handle pra ficar visualmente igual ao do grid principal (chevron L azul WiseHub)
+const CardResizeHandle = forwardRef<HTMLSpanElement, { handleAxis?: string }>(
+  function CardResizeHandle({ handleAxis, ...rest }, ref) {
+    return (
+      <span
+        ref={ref}
+        className={`wt-daily-resize-handle wt-daily-resize-handle-${handleAxis ?? "se"}`}
+        {...rest}
+      />
+    );
+  }
+);
+
 function DailyCard({
   cardKey,
   title,
@@ -444,41 +466,50 @@ function DailyCard({
   bodyMaxHeight?: number;
 }) {
   const { locked } = useSettings();
-  const bodyRef = useRef<HTMLDivElement>(null);
   const storageKey = `wt-daily-card-h-${cardKey}`;
+  const [height, setHeight] = useState<number>(bodyMaxHeight);
+  const [hydrated, setHydrated] = useState(false);
 
+  // Carrega altura salva
   useEffect(() => {
-    const el = bodyRef.current;
-    if (!el) return;
-    // Restaura altura salva
     try {
       const saved = localStorage.getItem(storageKey);
       const n = saved ? parseInt(saved, 10) : NaN;
-      el.style.height = (isFinite(n) && n >= 120 ? n : bodyMaxHeight) + "px";
-    } catch {
-      el.style.height = bodyMaxHeight + "px";
-    }
-    // Salva altura quando o usuário arrasta o handle (resize: vertical)
-    let saveTimer: ReturnType<typeof setTimeout> | undefined;
-    const observer = new ResizeObserver((entries) => {
-      const h = entries[0]?.contentRect.height;
-      if (!h || h <= 0) return;
-      if (saveTimer) clearTimeout(saveTimer);
-      saveTimer = setTimeout(() => {
-        try {
-          localStorage.setItem(storageKey, String(Math.round(h)));
-        } catch {}
-      }, 250);
-    });
-    observer.observe(el);
-    return () => {
-      observer.disconnect();
-      if (saveTimer) clearTimeout(saveTimer);
-    };
-  }, [storageKey, bodyMaxHeight]);
+      if (isFinite(n) && n >= 120) setHeight(n);
+    } catch {}
+    setHydrated(true);
+  }, [storageKey]);
+
+  // Persiste mudanças
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      localStorage.setItem(storageKey, String(Math.round(height)));
+    } catch {}
+  }, [height, storageKey, hydrated]);
+
+  const onResize = (_e: unknown, data: ResizeData) => {
+    setHeight(data.size.height);
+  };
+
+  const body = (
+    <div
+      className="wt-daily-body px-2 py-2 pb-2.5"
+      style={{
+        height,
+        minHeight: 120,
+        maxHeight: 1200,
+        overflow: "auto",
+        position: "relative",
+      }}
+      data-card-key={cardKey}
+    >
+      {children}
+    </div>
+  );
 
   return (
-    <div className="wt-card flex flex-col">
+    <div className="wt-card flex flex-col" style={{ position: "relative" }}>
       <div className="px-5 py-3.5" style={{ borderBottom: "1px solid var(--border)" }}>
         <div className="flex items-center justify-between gap-2">
           <h2
@@ -503,20 +534,24 @@ function DailyCard({
           )}
         </div>
       </div>
-      <div
-        ref={bodyRef}
-        className="wt-daily-body flex-1 px-2 py-2 pb-2.5"
-        style={{
-          minHeight: 120,
-          maxHeight: 1200,
-          overflow: "auto",
-          resize: locked ? "none" : "vertical",
-        }}
-        data-card-key={cardKey}
-        title={locked ? undefined : "↘ Arrasta o canto inferior direito pra esticar/diminuir"}
-      >
-        {children}
-      </div>
+
+      {locked ? (
+        body
+      ) : (
+        <Resizable
+          width={Infinity}
+          height={height}
+          axis="y"
+          resizeHandles={["se"]}
+          minConstraints={[Infinity, 120]}
+          maxConstraints={[Infinity, 1200]}
+          onResize={onResize}
+          handle={<CardResizeHandle />}
+        >
+          {body}
+        </Resizable>
+      )}
+
       <div
         className="px-4 py-2.5 flex justify-between items-center gap-2"
         style={{ borderTop: "1px solid var(--border)", background: "rgba(15,12,30,.3)" }}
