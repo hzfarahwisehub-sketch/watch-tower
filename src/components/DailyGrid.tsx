@@ -119,7 +119,7 @@ export function DailyGrid() {
   };
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6 items-start">
+    <section className="grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-4 gap-4 items-start">
       {/* COLUNA 1: INBOX + AÇÕES PROGRAMADAS empilhadas */}
       <div className="flex flex-col gap-4">
         {/* INBOX */}

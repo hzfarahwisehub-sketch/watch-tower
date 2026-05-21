@@ -35,7 +35,7 @@ const MapZone = dynamic(() => import("./MapZone"), {
   ),
 });
 
-const LAYOUT_STORAGE_KEY = "wt-layout-v3";
+const LAYOUT_STORAGE_KEY = "wt-layout-v4";
 
 // Layout padrão por breakpoint
 //   lg: ≥1200  · 12 cols   md: 996-1199 · 10 cols
@@ -43,51 +43,55 @@ const LAYOUT_STORAGE_KEY = "wt-layout-v3";
 //   xxs: <480 · 2 cols
 //
 // Cada unidade vertical (h) = rowHeight (40px) + margin (16px) = 56px
+// Mínimos baixos (1 col / 1 row) — usuário pode encolher caixa pra qualquer tamanho.
+// Conteúdo interno usa container queries (@xs:, @sm:, @md:, etc.) pra se reorganizar.
+const MIN = { minW: 1, minH: 1 } as const;
+
 const DEFAULT_LAYOUTS: ResponsiveLayouts = {
   lg: [
-    { i: "alerts",    x: 0, y: 0,  w: 12, h: 2, minW: 6, minH: 1 },
-    { i: "kpis",      x: 0, y: 2,  w: 12, h: 2, minW: 4, minH: 2 },
-    { i: "map",       x: 0, y: 4,  w: 7,  h: 9, minW: 4, minH: 6 },
-    { i: "countries", x: 7, y: 4,  w: 5,  h: 9, minW: 3, minH: 6 },
-    { i: "daily",     x: 0, y: 13, w: 12, h: 10, minW: 6, minH: 6 },
-    { i: "bulletins", x: 0, y: 23, w: 12, h: 12, minW: 6, minH: 8 },
-    { i: "feed",      x: 0, y: 35, w: 12, h: 14, minW: 6, minH: 8 },
+    { i: "alerts",    x: 0, y: 0,  w: 12, h: 2, ...MIN },
+    { i: "kpis",      x: 0, y: 2,  w: 12, h: 2, ...MIN },
+    { i: "map",       x: 0, y: 4,  w: 7,  h: 9, ...MIN },
+    { i: "countries", x: 7, y: 4,  w: 5,  h: 9, ...MIN },
+    { i: "daily",     x: 0, y: 13, w: 12, h: 10, ...MIN },
+    { i: "bulletins", x: 0, y: 23, w: 12, h: 12, ...MIN },
+    { i: "feed",      x: 0, y: 35, w: 12, h: 14, ...MIN },
   ],
   md: [
-    { i: "alerts",    x: 0, y: 0,  w: 10, h: 2 },
-    { i: "kpis",      x: 0, y: 2,  w: 10, h: 2 },
-    { i: "map",       x: 0, y: 4,  w: 6,  h: 9 },
-    { i: "countries", x: 6, y: 4,  w: 4,  h: 9 },
-    { i: "daily",     x: 0, y: 13, w: 10, h: 10 },
-    { i: "bulletins", x: 0, y: 23, w: 10, h: 12 },
-    { i: "feed",      x: 0, y: 35, w: 10, h: 14 },
+    { i: "alerts",    x: 0, y: 0,  w: 10, h: 2, ...MIN },
+    { i: "kpis",      x: 0, y: 2,  w: 10, h: 2, ...MIN },
+    { i: "map",       x: 0, y: 4,  w: 6,  h: 9, ...MIN },
+    { i: "countries", x: 6, y: 4,  w: 4,  h: 9, ...MIN },
+    { i: "daily",     x: 0, y: 13, w: 10, h: 10, ...MIN },
+    { i: "bulletins", x: 0, y: 23, w: 10, h: 12, ...MIN },
+    { i: "feed",      x: 0, y: 35, w: 10, h: 14, ...MIN },
   ],
   sm: [
-    { i: "alerts",    x: 0, y: 0,  w: 6, h: 2 },
-    { i: "kpis",      x: 0, y: 2,  w: 6, h: 3 },
-    { i: "map",       x: 0, y: 5,  w: 6, h: 9 },
-    { i: "countries", x: 0, y: 14, w: 6, h: 9 },
-    { i: "daily",     x: 0, y: 23, w: 6, h: 12 },
-    { i: "bulletins", x: 0, y: 35, w: 6, h: 14 },
-    { i: "feed",      x: 0, y: 49, w: 6, h: 16 },
+    { i: "alerts",    x: 0, y: 0,  w: 6, h: 2, ...MIN },
+    { i: "kpis",      x: 0, y: 2,  w: 6, h: 3, ...MIN },
+    { i: "map",       x: 0, y: 5,  w: 6, h: 9, ...MIN },
+    { i: "countries", x: 0, y: 14, w: 6, h: 9, ...MIN },
+    { i: "daily",     x: 0, y: 23, w: 6, h: 12, ...MIN },
+    { i: "bulletins", x: 0, y: 35, w: 6, h: 14, ...MIN },
+    { i: "feed",      x: 0, y: 49, w: 6, h: 16, ...MIN },
   ],
   xs: [
-    { i: "alerts",    x: 0, y: 0,  w: 4, h: 3 },
-    { i: "kpis",      x: 0, y: 3,  w: 4, h: 4 },
-    { i: "map",       x: 0, y: 7,  w: 4, h: 8 },
-    { i: "countries", x: 0, y: 15, w: 4, h: 8 },
-    { i: "daily",     x: 0, y: 23, w: 4, h: 12 },
-    { i: "bulletins", x: 0, y: 35, w: 4, h: 16 },
-    { i: "feed",      x: 0, y: 51, w: 4, h: 18 },
+    { i: "alerts",    x: 0, y: 0,  w: 4, h: 3, ...MIN },
+    { i: "kpis",      x: 0, y: 3,  w: 4, h: 6, ...MIN },
+    { i: "map",       x: 0, y: 9,  w: 4, h: 8, ...MIN },
+    { i: "countries", x: 0, y: 17, w: 4, h: 8, ...MIN },
+    { i: "daily",     x: 0, y: 25, w: 4, h: 12, ...MIN },
+    { i: "bulletins", x: 0, y: 37, w: 4, h: 18, ...MIN },
+    { i: "feed",      x: 0, y: 55, w: 4, h: 20, ...MIN },
   ],
   xxs: [
-    { i: "alerts",    x: 0, y: 0,  w: 2, h: 4 },
-    { i: "kpis",      x: 0, y: 4,  w: 2, h: 5 },
-    { i: "map",       x: 0, y: 9,  w: 2, h: 7 },
-    { i: "countries", x: 0, y: 16, w: 2, h: 8 },
-    { i: "daily",     x: 0, y: 24, w: 2, h: 14 },
-    { i: "bulletins", x: 0, y: 38, w: 2, h: 20 },
-    { i: "feed",      x: 0, y: 58, w: 2, h: 22 },
+    { i: "alerts",    x: 0, y: 0,  w: 2, h: 4, ...MIN },
+    { i: "kpis",      x: 0, y: 4,  w: 2, h: 11, ...MIN },
+    { i: "map",       x: 0, y: 15, w: 2, h: 7, ...MIN },
+    { i: "countries", x: 0, y: 22, w: 2, h: 8, ...MIN },
+    { i: "daily",     x: 0, y: 30, w: 2, h: 14, ...MIN },
+    { i: "bulletins", x: 0, y: 44, w: 2, h: 22, ...MIN },
+    { i: "feed",      x: 0, y: 66, w: 2, h: 24, ...MIN },
   ],
 };
 

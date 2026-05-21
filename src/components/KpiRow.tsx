@@ -18,7 +18,7 @@ function trendColor(cls?: "up" | "warn" | "crit" | "muted") {
 
 export function KpiRow() {
   return (
-    <section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 mb-5">
+    <section className="grid grid-cols-1 @xs:grid-cols-2 @sm:grid-cols-3 @xl:grid-cols-6 gap-3.5">
       {KPIS.map((k) => (
         <div key={k.label} className="wt-card p-4 hover:-translate-y-0.5 transition-transform relative overflow-hidden">
           <div

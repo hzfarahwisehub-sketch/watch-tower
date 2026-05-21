@@ -26,7 +26,7 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
       >
         📰 Feed de Mudanças por País
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 @lg:grid-cols-2 gap-5">
         {items.map((it, i) => (
           <button
             type="button"
