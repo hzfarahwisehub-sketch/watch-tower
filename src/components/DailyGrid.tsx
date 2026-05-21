@@ -79,6 +79,7 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
     const id = Math.max(0, ...agenda.map((a) => a.id)) + 1;
     setAgenda((a) => [...a, { id, time: "HH:MM", title: "Novo evento", where: "" }]);
   };
+  const deleteAgenda = (id: number) => setAgenda((a) => a.filter((x) => x.id !== id));
   const reorderAgenda = (sourceId: number, targetId: number) => {
     if (sourceId === targetId) return;
     setAgenda((prev) => {
@@ -268,7 +269,7 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
             onDragOver={onDragOver}
             onDrop={onDrop(a.id)}
             onDragEnd={onDragEnd}
-            className="grid grid-cols-[16px_46px_1fr] gap-2.5 px-4 py-3 rounded-lg my-1 items-start transition-opacity"
+            className="grid grid-cols-[16px_46px_1fr_22px] gap-2.5 px-4 py-3 rounded-lg my-1 items-start transition-opacity group"
             style={{
               borderLeft: "3px solid var(--color-wh-blue)",
               background: "rgba(31,85,255,.05)",
@@ -321,6 +322,20 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
                 {a.where || "—"}
               </div>
             </div>
+            <button
+              type="button"
+              onClick={() => deleteAgenda(a.id)}
+              title="Remover compromisso"
+              aria-label={`Remover ${a.title}`}
+              className="w-[22px] h-[22px] flex items-center justify-center rounded-md opacity-0 group-hover:opacity-100 transition-all cursor-pointer text-[12px] font-bold leading-none flex-shrink-0 mt-px hover:scale-110"
+              style={{
+                color: "var(--color-status-critical)",
+                background: "rgba(255,59,92,.08)",
+                border: "1px solid rgba(255,59,92,.25)",
+              }}
+            >
+              ✕
+            </button>
           </div>
         ))}
       </DailyCard>

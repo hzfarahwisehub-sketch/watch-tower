@@ -148,7 +148,12 @@ function GridCell({ label, children, locked }: { label: string; children: ReactN
 
 export function Dashboard() {
   const { locked } = useSettings();
-  const [selected, setSelected] = useState<string | null>(null);
+  // Separação intencional:
+  //  - mapSelected: país selecionado via MAPA → alimenta a caixa Benchmark
+  //  - modalCode: país selecionado via AlertsBanner/CountriesSidebar/Feed →
+  //    abre o Modal com detalhes completos (não mexe no Benchmark)
+  const [mapSelected, setMapSelected] = useState<string | null>(null);
+  const [modalCode, setModalCode] = useState<string | null>(null);
   const [layouts, setLayouts] = useState<ResponsiveLayouts>(DEFAULT_LAYOUTS);
   const [mounted, setMounted] = useState(false);
 
@@ -190,8 +195,10 @@ export function Dashboard() {
     setMounted(true);
   }, []);
 
-  const select = (code: string) => setSelected(code);
-  const country = selected ? COUNTRIES.find((c) => c.code === selected) ?? null : null;
+  // Handlers distintos:
+  const openModal = (code: string) => setModalCode(code);     // AlertsBanner, CountriesSidebar, Feed
+  const selectOnMap = (code: string) => setMapSelected(code); // MapZone
+  const modalCountry = modalCode ? COUNTRIES.find((c) => c.code === modalCode) ?? null : null;
 
   const onLayoutChange = (_current: Layout, all: ResponsiveLayouts) => {
     setLayouts(all);
@@ -268,7 +275,7 @@ export function Dashboard() {
         >
           <div key="alerts">
             <GridCell label="Alertas críticos" locked={locked}>
-              <AlertsBanner onSelect={select} />
+              <AlertsBanner onSelect={openModal} />
             </GridCell>
           </div>
           <div key="kpis">
@@ -278,12 +285,12 @@ export function Dashboard() {
           </div>
           <div key="map">
             <GridCell label="Mapa global" locked={locked}>
-              <MapZone countries={COUNTRIES} selected={selected} onSelect={select} />
+              <MapZone countries={COUNTRIES} selected={mapSelected} onSelect={selectOnMap} />
             </GridCell>
           </div>
           <div key="countries">
             <GridCell label="Lista de países" locked={locked}>
-              <CountriesSidebar countries={COUNTRIES} selected={selected} onSelect={select} />
+              <CountriesSidebar countries={COUNTRIES} selected={modalCode} onSelect={openModal} />
             </GridCell>
           </div>
           <div key="inbox">
@@ -313,7 +320,7 @@ export function Dashboard() {
           </div>
           <div key="benchmark">
             <GridCell label="Benchmark do país" locked={locked}>
-              <CountryBenchmark selectedCode={selected} />
+              <CountryBenchmark selectedCode={mapSelected} />
             </GridCell>
           </div>
           <div key="bulletins">
@@ -323,13 +330,13 @@ export function Dashboard() {
           </div>
           <div key="feed">
             <GridCell label="Feed de mudanças" locked={locked}>
-              <Feed countries={COUNTRIES} onSelect={select} />
+              <Feed countries={COUNTRIES} onSelect={openModal} />
             </GridCell>
           </div>
         </ResponsiveGridLayout>
       )}
 
-      <Modal country={country} onClose={() => setSelected(null)} />
+      <Modal country={modalCountry} onClose={() => setModalCode(null)} />
       <SettingsPanel />
     </div>
   );
