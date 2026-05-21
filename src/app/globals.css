@@ -117,6 +117,17 @@ body {
 .wt-flag.jp { background: radial-gradient(circle at 50% 50%,#bc002d 28%,#fff 28%); }
 .wt-flag.sg { background: linear-gradient(180deg,#ED2939 50%,#fff 50%); }
 .wt-flag.ae { background: linear-gradient(180deg,#00732F 33%,#fff 33% 66%,#000 66%); }
+.wt-flag.cn { background: linear-gradient(135deg,#EE1C25 0%,#EE1C25 100%); position:relative; }
+.wt-flag.cn::after { content:"★"; position:absolute; left:18%; top:14%; color:#FFFF00; font-size:60%; line-height:1; }
+.wt-flag.dk { background: #C8102E; position:relative; }
+.wt-flag.dk::after { content:""; position:absolute; inset:40% 0; background:#fff; }
+.wt-flag.dk::before { content:""; position:absolute; left:30%; top:0; bottom:0; width:18%; background:#fff; }
+.wt-flag.pl { background: linear-gradient(180deg,#fff 50%,#DC143C 50%); }
+.wt-flag.ie { background: linear-gradient(90deg,#169B62 33%,#fff 33% 66%,#FF883E 66%); }
+.wt-flag.ch { background: #DA291C; position:relative; }
+.wt-flag.ch::before { content:""; position:absolute; left:40%; right:40%; top:18%; bottom:18%; background:#fff; }
+.wt-flag.ch::after { content:""; position:absolute; left:18%; right:18%; top:40%; bottom:40%; background:#fff; }
+.wt-flag.nz { background: linear-gradient(135deg,#00247D 0%,#00247D 60%,#CC142B 60%); }
 
 .wt-status { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
 .wt-status.crit   { background: var(--color-status-critical); box-shadow: 0 0 8px var(--color-status-critical); }

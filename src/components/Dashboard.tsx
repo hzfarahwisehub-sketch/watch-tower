@@ -157,6 +157,20 @@ export function Dashboard() {
   const [layouts, setLayouts] = useState<ResponsiveLayouts>(DEFAULT_LAYOUTS);
   const [mounted, setMounted] = useState(false);
 
+  // Persistência do último país selecionado no mapa → restaura no próximo boot
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("wt-last-country");
+      if (saved && COUNTRIES.some((c) => c.code === saved)) {
+        setMapSelected(saved);
+      }
+    } catch {}
+  }, []);
+  useEffect(() => {
+    if (!mapSelected) return;
+    try { localStorage.setItem("wt-last-country", mapSelected); } catch {}
+  }, [mapSelected]);
+
   useEffect(() => {
     try {
       const stored = localStorage.getItem(LAYOUT_STORAGE_KEY);
