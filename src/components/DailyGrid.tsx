@@ -199,7 +199,7 @@ export function DailyGrid() {
                 opacity: sa.status === "active" ? 1 : 0.6,
               }}
             >
-              <div className="text-[14px] flex-shrink-0 mt-px" aria-hidden>
+              <div className="text-[18px] flex-shrink-0 mt-px" aria-hidden>
                 {sa.icon}
               </div>
               <div className="flex-1 min-w-0">
@@ -207,7 +207,7 @@ export function DailyGrid() {
                   contentEditable
                   suppressContentEditableWarning
                   onBlur={(e) => editScheduledTitle(sa.id, e.currentTarget.textContent || "")}
-                  className="text-[11.5px] font-semibold leading-snug outline-none"
+                  className="text-[13.5px] font-bold leading-snug outline-none"
                   style={{
                     color: "var(--text)",
                     overflowWrap: "anywhere",
@@ -217,7 +217,7 @@ export function DailyGrid() {
                   {sa.title}
                 </div>
                 <div
-                  className="flex flex-wrap gap-x-2 gap-y-0.5 mt-1.5 text-[9px] uppercase tracking-wide font-semibold leading-tight"
+                  className="flex flex-wrap gap-x-2.5 gap-y-1 mt-2 text-[10.5px] uppercase tracking-wide font-semibold leading-tight"
                   style={{ color: "var(--text-3)" }}
                 >
                   <span>🕒 {sa.frequency}</span>

@@ -1,12 +1,12 @@
 {
-  "lastRun": "2026-05-21T01:39:54.696Z",
+  "lastRun": "2026-05-21T02:51:48.402Z",
   "bulletins": [
     {
       "key": "us",
       "url": "https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html",
       "hash": "6102552182833ba168698db3f5b067a212206449143eaef3dcb343e8b5a33584",
       "lastChangedAt": "2026-05-20T04:19:09.932Z",
-      "lastCheckedAt": "2026-05-21T01:39:25.684Z",
+      "lastCheckedAt": "2026-05-21T02:51:06.537Z",
       "lastStatus": "unchanged"
     },
     {
@@ -15,16 +15,16 @@
       "monitorUrl": "https://api.io.canada.ca/io-server/gc/news/en/v2?dept=departmentofcitizenshipandimmigration&sort=publishedDate&orderBy=desc&pick=50&format=atom",
       "hash": "94f15a1a6f7a39b5d9d6f858813b4d5f86eb2a2a2c2913ab71753aaec10f8871",
       "lastChangedAt": "2026-05-20T04:57:24.113Z",
-      "lastCheckedAt": "2026-05-21T01:39:27.225Z",
+      "lastCheckedAt": "2026-05-21T02:51:07.872Z",
       "lastStatus": "unchanged"
     },
     {
       "key": "uk",
       "url": "https://www.gov.uk/government/collections/migration-statistics",
-      "hash": "8dfac5d02d94be5a86eedd23df23d89ea4a66d469721957e1235409c2a10ac56",
-      "lastChangedAt": "2026-05-21T01:39:28.543Z",
-      "lastCheckedAt": "2026-05-21T01:39:28.543Z",
-      "lastStatus": "changed"
+      "hash": "e8f9209c3a8083615b82731aa199631b997b7ec6e2fe5772f44fc58333dd9e2c",
+      "lastChangedAt": "2026-05-21T02:46:21.907Z",
+      "lastCheckedAt": "2026-05-21T02:51:09.279Z",
+      "lastStatus": "unchanged"
     },
     {
       "key": "pt",
@@ -32,16 +32,16 @@
       "monitorUrl": "https://aima.gov.pt/pt/a-aima",
       "hash": "c5025dd05219bc7c4d6d754c1fb22c32ef969f1d0de877c01b761f5b16cee584",
       "lastChangedAt": "2026-05-20T04:57:27.179Z",
-      "lastCheckedAt": "2026-05-21T01:39:31.040Z",
+      "lastCheckedAt": "2026-05-21T02:51:10.340Z",
       "lastStatus": "unchanged"
     },
     {
       "key": "es",
       "url": "https://www.inclusion.gob.es/web/migraciones",
       "monitorUrl": "https://www.inclusion.gob.es/en/web/migraciones",
-      "hash": "f416eafb95868a6d2ef9c582d2b497cfa9ba70c1bfcca6cd24b566cd5d596855",
-      "lastChangedAt": "2026-05-21T01:39:34.251Z",
-      "lastCheckedAt": "2026-05-21T01:39:34.251Z",
+      "hash": "d301715d7e8b8103cfda56268df478d9aa317abcf8b15e01ba41f8c87de9ca02",
+      "lastChangedAt": "2026-05-21T02:51:12.187Z",
+      "lastCheckedAt": "2026-05-21T02:51:12.187Z",
       "lastStatus": "changed"
     },
     {
@@ -49,15 +49,16 @@
       "url": "https://questure.poliziadistato.it/stranieri/",
       "hash": "45f6356766ed7fa1487ced23c89f134f480de9f4180ae0867b333a86f1e3e73e",
       "lastChangedAt": "2026-05-20T04:19:25.793Z",
-      "lastCheckedAt": "2026-05-21T01:39:41.412Z",
+      "lastCheckedAt": "2026-05-21T02:51:35.357Z",
       "lastStatus": "unchanged"
     },
     {
       "key": "fr",
-      "url": "https://www.ofii.fr/actualites/",
+      "url": "https://www.immigration.interieur.gouv.fr/actualites",
+      "monitorUrl": "https://www.ofii.fr/actualites/",
       "hash": "66286b932b30c185e21b551b02fe0f7be9af95fdf104363d9f0dfd6cb6849b9b",
-      "lastChangedAt": "2026-05-21T01:39:42.916Z",
-      "lastCheckedAt": "2026-05-21T01:39:42.916Z",
+      "lastChangedAt": "2026-05-21T02:51:36.877Z",
+      "lastCheckedAt": "2026-05-21T02:51:36.877Z",
       "lastStatus": "seed"
     },
     {
@@ -66,15 +67,15 @@
       "monitorUrl": "https://www.destatis.de/EN/Themes/Society-Environment/Population/Migration-Integration/_node.html",
       "hash": "83b00a17ea300abea58c53f98d6ba7368387c21ee8f9e5157fa862215b694c43",
       "lastChangedAt": "2026-05-21T01:39:44.360Z",
-      "lastCheckedAt": "2026-05-21T01:39:44.360Z",
-      "lastStatus": "seed"
+      "lastCheckedAt": "2026-05-21T02:51:39.086Z",
+      "lastStatus": "unchanged"
     },
     {
       "key": "au",
       "url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/invitation-rounds",
       "hash": "128b3db450398a980fcdf063be2d1a3c17ce3de9a1326267eefa2e657189bab8",
       "lastChangedAt": "2026-05-20T19:36:01.530Z",
-      "lastCheckedAt": "2026-05-21T01:39:46.644Z",
+      "lastCheckedAt": "2026-05-21T02:51:41.158Z",
       "lastStatus": "unchanged"
     },
     {
@@ -82,7 +83,7 @@
       "url": "https://icp.gov.ae/en/",
       "hash": "2442824c33e7a469e4aa659509ba362dfb25f83da583e9135754d91e54264555",
       "lastChangedAt": "2026-05-20T19:36:02.951Z",
-      "lastCheckedAt": "2026-05-21T01:39:48.830Z",
+      "lastCheckedAt": "2026-05-21T02:51:42.351Z",
       "lastStatus": "unchanged"
     },
     {
@@ -90,7 +91,7 @@
       "url": "https://www.gov.br/pf/pt-br/assuntos/imigracao/inicio",
       "hash": "23f93538e0f390e11476317b95c2057295c1e235098c36ee711c6fd42d28de49",
       "lastChangedAt": "2026-05-20T19:36:06.118Z",
-      "lastCheckedAt": "2026-05-21T01:39:53.255Z",
+      "lastCheckedAt": "2026-05-21T02:51:46.924Z",
       "lastStatus": "unchanged"
     }
   ]

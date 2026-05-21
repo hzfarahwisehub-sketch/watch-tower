@@ -37,63 +37,66 @@ const MapZone = dynamic(() => import("./MapZone"), {
   ),
 });
 
-const LAYOUT_STORAGE_KEY = "wt-layout-v4";
+const LAYOUT_STORAGE_KEY = "wt-layout-v5";
 
-// Layout padrão por breakpoint
-//   lg: ≥1200  · 12 cols   md: 996-1199 · 10 cols
-//   sm: 768-995 · 6 cols    xs: 480-767  · 4 cols
-//   xxs: <480 · 2 cols
+// Layout padrão por breakpoint — COLS DOBRADOS pra free placement mais fino.
+//   lg: ≥1200  · 24 cols   md: 996-1199 · 20 cols
+//   sm: 768-995 · 12 cols   xs: 480-767  · 8 cols
+//   xxs: <480 · 4 cols
 //
-// Cada unidade vertical (h) = rowHeight (40px) + margin (16px) = 56px
+// Cada unidade vertical (h) = rowHeight (24px) + margin (12px) = 36px
+// Granularidade maior = caixa "encaixa" no lugar mais próximo ao soltar.
 // Mínimos baixos (1 col / 1 row) — usuário pode encolher caixa pra qualquer tamanho.
 // Conteúdo interno usa container queries (@xs:, @sm:, @md:, etc.) pra se reorganizar.
-const MIN = { minW: 1, minH: 1 } as const;
+const MIN = { minW: 2, minH: 2 } as const;
 
+// Em granularidade 24-col, cada h vale 36px (24 rowHeight + 12 margin).
+// Pra ocupar ~360px de altura → h=10. Pra ~720px → h=20.
 const DEFAULT_LAYOUTS: ResponsiveLayouts = {
   lg: [
-    { i: "alerts",    x: 0, y: 0,  w: 12, h: 2, ...MIN },
-    { i: "kpis",      x: 0, y: 2,  w: 12, h: 2, ...MIN },
-    { i: "map",       x: 0, y: 4,  w: 7,  h: 9, ...MIN },
-    { i: "countries", x: 7, y: 4,  w: 5,  h: 9, ...MIN },
-    { i: "daily",     x: 0, y: 13, w: 12, h: 10, ...MIN },
-    { i: "bulletins", x: 0, y: 23, w: 12, h: 12, ...MIN },
-    { i: "feed",      x: 0, y: 35, w: 12, h: 14, ...MIN },
+    { i: "alerts",    x: 0,  y: 0,  w: 24, h: 4,  ...MIN },
+    { i: "kpis",      x: 0,  y: 4,  w: 24, h: 4,  ...MIN },
+    { i: "map",       x: 0,  y: 8,  w: 14, h: 18, ...MIN },
+    { i: "countries", x: 14, y: 8,  w: 10, h: 18, ...MIN },
+    { i: "daily",     x: 0,  y: 26, w: 24, h: 20, ...MIN },
+    { i: "bulletins", x: 0,  y: 46, w: 24, h: 24, ...MIN },
+    { i: "feed",      x: 0,  y: 70, w: 24, h: 28, ...MIN },
   ],
   md: [
-    { i: "alerts",    x: 0, y: 0,  w: 10, h: 2, ...MIN },
-    { i: "kpis",      x: 0, y: 2,  w: 10, h: 2, ...MIN },
-    { i: "map",       x: 0, y: 4,  w: 6,  h: 9, ...MIN },
-    { i: "countries", x: 6, y: 4,  w: 4,  h: 9, ...MIN },
-    { i: "daily",     x: 0, y: 13, w: 10, h: 10, ...MIN },
-    { i: "bulletins", x: 0, y: 23, w: 10, h: 12, ...MIN },
-    { i: "feed",      x: 0, y: 35, w: 10, h: 14, ...MIN },
+    { i: "alerts",    x: 0,  y: 0,  w: 20, h: 4,  ...MIN },
+    { i: "kpis",      x: 0,  y: 4,  w: 20, h: 4,  ...MIN },
+    { i: "map",       x: 0,  y: 8,  w: 12, h: 18, ...MIN },
+    { i: "countries", x: 12, y: 8,  w: 8,  h: 18, ...MIN },
+    { i: "daily",     x: 0,  y: 26, w: 20, h: 20, ...MIN },
+    { i: "bulletins", x: 0,  y: 46, w: 20, h: 24, ...MIN },
+    { i: "feed",      x: 0,  y: 70, w: 20, h: 28, ...MIN },
   ],
   sm: [
-    { i: "alerts",    x: 0, y: 0,  w: 6, h: 2, ...MIN },
-    { i: "kpis",      x: 0, y: 2,  w: 6, h: 3, ...MIN },
-    { i: "map",       x: 0, y: 5,  w: 6, h: 9, ...MIN },
-    { i: "countries", x: 0, y: 14, w: 6, h: 9, ...MIN },
-    { i: "daily",     x: 0, y: 23, w: 6, h: 12, ...MIN },
-    { i: "bulletins", x: 0, y: 35, w: 6, h: 14, ...MIN },
-    { i: "feed",      x: 0, y: 49, w: 6, h: 16, ...MIN },
+    { i: "alerts",    x: 0, y: 0,   w: 12, h: 4,  ...MIN },
+    { i: "kpis",      x: 0, y: 4,   w: 12, h: 6,  ...MIN },
+    { i: "map",       x: 0, y: 10,  w: 12, h: 18, ...MIN },
+    { i: "countries", x: 0, y: 28,  w: 12, h: 18, ...MIN },
+    { i: "daily",     x: 0, y: 46,  w: 12, h: 24, ...MIN },
+    { i: "bulletins", x: 0, y: 70,  w: 12, h: 28, ...MIN },
+    { i: "feed",      x: 0, y: 98,  w: 12, h: 32, ...MIN },
   ],
   xs: [
-    { i: "alerts",    x: 0, y: 0,  w: 4, h: 3, ...MIN },
-    { i: "kpis",      x: 0, y: 3,  w: 4, h: 6, ...MIN },
-    { i: "map",       x: 0, y: 9,  w: 4, h: 8, ...MIN },
-    { i: "countries", x: 0, y: 17, w: 4, h: 8, ...MIN },
-    { i: "daily",     x: 0, y: 25, w: 4, h: 12, ...MIN },
-    { i: "bulletins", x: 0, y: 37, w: 4, h: 18, ...MIN },
-    { i: "feed",      x: 0, y: 55, w: 4, h: 20, ...MIN },
+    { i: "alerts",    x: 0, y: 0,   w: 8, h: 6,  ...MIN },
+    { i: "kpis",      x: 0, y: 6,   w: 8, h: 12, ...MIN },
+    { i: "map",       x: 0, y: 18,  w: 8, h: 16, ...MIN },
+    { i: "countries", x: 0, y: 34,  w: 8, h: 16, ...MIN },
+    { i: "daily",     x: 0, y: 50,  w: 8, h: 24, ...MIN },
+    { i: "bulletins", x: 0, y: 74,  w: 8, h: 36, ...MIN },
+    { i: "feed",      x: 0, y: 110, w: 8, h: 40, ...MIN },
   ],
   xxs: [
-    { i: "alerts",    x: 0, y: 0,  w: 2, h: 4, ...MIN },
-    { i: "kpis",      x: 0, y: 4,  w: 2, h: 11, ...MIN },
-    { i: "map",       x: 0, y: 15, w: 2, h: 7, ...MIN },
-    { i: "countries", x: 0, y: 22, w: 2, h: 8, ...MIN },
-    { i: "daily",     x: 0, y: 30, w: 2, h: 14, ...MIN },
-    { i: "bulletins", x: 0, y: 44, w: 2, h: 22, ...MIN },
-    { i: "feed",      x: 0, y: 66, w: 2, h: 24, ...MIN },
+    { i: "alerts",    x: 0, y: 0,   w: 4, h: 8,  ...MIN },
+    { i: "kpis",      x: 0, y: 8,   w: 4, h: 22, ...MIN },
+    { i: "map",       x: 0, y: 30,  w: 4, h: 14, ...MIN },
+    { i: "countries", x: 0, y: 44,  w: 4, h: 16, ...MIN },
+    { i: "daily",     x: 0, y: 60,  w: 4, h: 28, ...MIN },
+    { i: "bulletins", x: 0, y: 88,  w: 4, h: 44, ...MIN },
+    { i: "feed",      x: 0, y: 132, w: 4, h: 48, ...MIN },
   ],
 };
 
@@ -199,16 +202,17 @@ export function Dashboard() {
         <ResponsiveGridLayout
           layouts={layouts}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
-          rowHeight={40}
-          margin={[16, 16]}
+          cols={{ lg: 24, md: 20, sm: 12, xs: 8, xxs: 4 }}
+          rowHeight={24}
+          margin={[12, 12]}
           containerPadding={[0, 0]}
           isDraggable={!locked}
           isResizable={!locked}
           draggableHandle=".wt-drag-handle"
           onLayoutChange={onLayoutChange}
-          compactType="vertical"
+          compactType={null}
           preventCollision={false}
+          allowOverlap={false}
           useCSSTransforms
         >
           <div key="alerts">
