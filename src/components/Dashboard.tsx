@@ -39,7 +39,15 @@ const MapZone = dynamic(() => import("./MapZone"), {
   ),
 });
 
-const LAYOUT_STORAGE_KEY = "wt-layout-v10";
+// Key estável — NÃO bumpa mais. A sanitização do useEffect lida com items
+// adicionados no futuro (preserva posições do user, completa com defaults).
+const LAYOUT_STORAGE_KEY = "wt-layout";
+// Chaves de versões anteriores — usadas só pra migração one-time se o user
+// já tinha layout salvo em algum bump antigo.
+const LEGACY_LAYOUT_KEYS = [
+  "wt-layout-v10","wt-layout-v9","wt-layout-v8","wt-layout-v7",
+  "wt-layout-v6","wt-layout-v5","wt-layout-v4","wt-layout-v3","wt-layout-v2",
+];
 
 // Layout padrão por breakpoint — COLS DOBRADOS pra free placement mais fino.
 //   lg: ≥1200  · 24 cols   md: 996-1199 · 20 cols
@@ -189,7 +197,23 @@ export function Dashboard() {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem(LAYOUT_STORAGE_KEY);
+      let stored = localStorage.getItem(LAYOUT_STORAGE_KEY);
+      // Migração one-time: se a key estável está vazia, procura em chaves
+      // legadas (de versions antigas que bumpávamos a cada novo item). Pega
+      // a primeira que existir, migra pra key nova e remove a antiga.
+      if (!stored) {
+        for (const legacy of LEGACY_LAYOUT_KEYS) {
+          const old = localStorage.getItem(legacy);
+          if (old) {
+            stored = old;
+            try {
+              localStorage.setItem(LAYOUT_STORAGE_KEY, old);
+              localStorage.removeItem(legacy);
+            } catch {}
+            break;
+          }
+        }
+      }
       if (stored) {
         const parsed = JSON.parse(stored) as ResponsiveLayouts;
         // Merge com defaults pra garantir todos os items presentes
