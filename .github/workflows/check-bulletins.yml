@@ -31,6 +31,15 @@ jobs:
           node-version: "20"
 
       - name: Run check-bulletins
+        env:
+          # Geo-proxy via Cloudflare Workers — resolve 403 em sites EU pra IP US.
+          # Setar via Settings → Secrets → Actions:
+          #   WT_GEO_PROXY_URL (https://wt-geo-proxy.<user>.workers.dev)
+          #   WT_GEO_PROXY_SECRET (opcional, string forte)
+          # Quando não configurado, fetch direto (entries com geoProxy:true
+          # vão dar 403 igual hoje — sem regressão).
+          WT_GEO_PROXY_URL: ${{ secrets.WT_GEO_PROXY_URL }}
+          WT_GEO_PROXY_SECRET: ${{ secrets.WT_GEO_PROXY_SECRET }}
         run: node scripts/check-bulletins.mjs
 
       - name: Commit updated status

@@ -18,6 +18,12 @@ const STATUS_PATH = resolve(process.cwd(), "public/bulletins-status.json");
 const TIMEOUT_MS = 40000;
 const RETRY_COUNT = 2;
 const RETRY_BACKOFF_MS = 3000;
+
+// Geo-proxy via Cloudflare Workers (cloudflare-worker/proxy.js).
+// Quando setado E o entry tem geoProxy:true, fetch passa pelo proxy.
+// Resolve 403 em sites EU (PT/ES/FR/DE) bloqueando IP US do GitHub Actions.
+const GEO_PROXY_URL = process.env.WT_GEO_PROXY_URL || "";
+const GEO_PROXY_SECRET = process.env.WT_GEO_PROXY_SECRET || "";
 // User-Agent realista de Chrome — sites governamentais (PT/ES/AU) bloqueiam
 // strings óbvias de bot. Mantemos uma referência ao projeto em headers extras.
 const USER_AGENT =
@@ -79,10 +85,23 @@ async function fetchWithTimeout(url) {
   }
 }
 
+function buildFetchUrl(entry) {
+  const target = entry.monitorUrl || entry.url;
+  // Se entry pede geo-proxy E temos URL do worker configurada, encapsula.
+  if (entry.geoProxy && GEO_PROXY_URL) {
+    const u = new URL(GEO_PROXY_URL);
+    u.searchParams.set("url", target);
+    if (GEO_PROXY_SECRET) u.searchParams.set("secret", GEO_PROXY_SECRET);
+    return u.toString();
+  }
+  return target;
+}
+
 async function checkOne(entry) {
   const start = Date.now();
   const now = new Date().toISOString();
-  const fetchUrl = entry.monitorUrl || entry.url;
+  const fetchUrl = buildFetchUrl(entry);
+  const viaProxy = entry.geoProxy && GEO_PROXY_URL;
   let lastError = null;
 
   for (let attempt = 0; attempt <= RETRY_COUNT; attempt++) {
@@ -121,7 +140,8 @@ async function checkOne(entry) {
 
       const flag = changed ? "✓ CHANGED" : entry.hash === null ? "✓ seed" : "= same";
       const retryNote = attempt > 0 ? ` (retry ${attempt})` : "";
-      console.log(`${flag} ${entry.key.toUpperCase()} ${hash.slice(0, 8)} (${elapsed}ms)${retryNote}`);
+      const proxyNote = viaProxy ? " [proxy]" : "";
+      console.log(`${flag} ${entry.key.toUpperCase()} ${hash.slice(0, 8)} (${elapsed}ms)${retryNote}${proxyNote}`);
       return result;
     } catch (err) {
       lastError = err.name === "AbortError" ? "timeout" : err.message || "fetch_error";

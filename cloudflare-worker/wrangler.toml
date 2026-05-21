@@ -1,0 +1,9 @@
+name = "wt-geo-proxy"
+main = "proxy.js"
+compatibility_date = "2026-05-01"
+
+# Workers free tier: 100k requests/dia · 10ms CPU por request
+# Pra <50 req/dia do cron (3 países × 1 hash check × 1 run/dia) sobra muito
+
+[observability]
+enabled = true
