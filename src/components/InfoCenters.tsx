@@ -5,7 +5,7 @@ import { INFO_CENTERS, GLOBAL_CRYPTO_SOURCES, categoryMeta, type InfoSource, typ
 const CAT_ORDER: InfoSourceCategory[] = ["news", "finance", "crypto", "legal"];
 
 /** Variants do componente — cada um filtra categorias diferentes */
-type Variant = "news" | "finance";
+type Variant = "news" | "finance" | "crypto";
 
 const VARIANT_CONFIG: Record<Variant, {
   title: string;
@@ -24,9 +24,16 @@ const VARIANT_CONFIG: Record<Variant, {
   finance: {
     title: "Finanças & Mercados",
     emoji: "💰",
-    categories: ["finance", "crypto"],
-    showGlobalCrypto: true,
+    categories: ["finance"],
+    showGlobalCrypto: false,
     accentColor: "#10A570",
+  },
+  crypto: {
+    title: "Cripto & Derivativos",
+    emoji: "🪙",
+    categories: ["crypto"],
+    showGlobalCrypto: true,
+    accentColor: "#E5C156",
   },
 };
 
@@ -386,4 +393,9 @@ export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
 /** Wrapper de conveniência pra variant "finance" */
 export function FinanceCenters() {
   return <InfoCenters variant="finance" />;
+}
+
+/** Wrapper de conveniência pra variant "crypto" */
+export function CryptoCenters() {
+  return <InfoCenters variant="crypto" />;
 }
