@@ -23,6 +23,10 @@ export type InfoSource = {
   language: "en" | "pt" | "de" | "fr" | "es" | "it" | "ja" | "zh";
   /** Nota editorial: por que essa fonte foi escolhida */
   note?: string;
+  /** RSS/Atom feed URL — quando presente, o card mostra as 3 manchetes mais
+   *  recentes via /api/rss. Fontes premium (Reuters/WSJ/Bloomberg/FT) não têm
+   *  feed público estável, então ficam só como link clicável. */
+  rss?: string;
 };
 
 export type CountryInfoCenter = {
@@ -62,7 +66,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇨🇦",
     sources: [
       { name: "Reuters · Americas", url: "https://www.reuters.com/world/americas", category: "news",    language: "en" },
-      { name: "Financial Post",     url: "https://financialpost.com/",             category: "finance", language: "en", note: "Principal jornal financeiro CA" },
+      { name: "Financial Post",     url: "https://financialpost.com/",             category: "finance", language: "en", note: "Principal jornal financeiro CA", rss: "https://financialpost.com/feed/" },
       { name: "BNN Bloomberg CA",   url: "https://www.bnnbloomberg.ca/",           category: "finance", language: "en", note: "Bloomberg vertical Canadá" },
     ],
   },
@@ -73,7 +77,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     sources: [
       { name: "Reuters · Americas", url: "https://www.reuters.com/world/americas", category: "news",    language: "en" },
       { name: "Valor Econômico",    url: "https://valor.globo.com/",               category: "finance", language: "pt", note: "Maior jornal financeiro do Brasil" },
-      { name: "G1 Economia",        url: "https://g1.globo.com/economia/",         category: "news",    language: "pt", note: "Cobertura ampla em português" },
+      { name: "G1 Economia",        url: "https://g1.globo.com/economia/",         category: "news",    language: "pt", note: "Cobertura ampla em português", rss: "http://g1.globo.com/dynamo/economia/rss2.xml" },
     ],
   },
 
@@ -85,7 +89,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     sources: [
       { name: "Reuters · UK",         url: "https://www.reuters.com/world/uk",  category: "news",    language: "en" },
       { name: "Financial Times",      url: "https://www.ft.com/",               category: "finance", language: "en", note: "Referência mundial em finanças/política UK" },
-      { name: "BBC Business",         url: "https://www.bbc.com/business",      category: "news",    language: "en", note: "Cobertura ampla, acesso livre" },
+      { name: "BBC Business",         url: "https://www.bbc.com/business",      category: "news",    language: "en", note: "Cobertura ampla, acesso livre", rss: "https://feeds.bbci.co.uk/news/business/rss.xml" },
     ],
   },
   {
@@ -94,8 +98,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇩🇪",
     sources: [
       { name: "Reuters · Europa",   url: "https://www.reuters.com/world/europe",          category: "news",    language: "en" },
-      { name: "Handelsblatt",       url: "https://www.handelsblatt.com/",                 category: "finance", language: "de", note: "Principal financial daily alemão" },
-      { name: "DW · Business",      url: "https://www.dw.com/en/business/s-1431",         category: "news",    language: "en", note: "Deutsche Welle em inglês" },
+      { name: "Handelsblatt",       url: "https://www.handelsblatt.com/",                 category: "finance", language: "de", note: "Principal financial daily alemão", rss: "https://www.handelsblatt.com/contentexport/feed/schlagzeilen" },
+      { name: "DW · Business",      url: "https://www.dw.com/en/business/s-1431",         category: "news",    language: "en", note: "Deutsche Welle em inglês", rss: "https://rss.dw.com/xml/rss-en-bus" },
     ],
   },
   {
@@ -104,8 +108,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇫🇷",
     sources: [
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
-      { name: "Les Échos",             url: "https://www.lesechos.fr/",                 category: "finance", language: "fr", note: "Principal jornal econômico francês" },
-      { name: "Le Figaro · Économie",  url: "https://www.lefigaro.fr/economie",         category: "finance", language: "fr" },
+      { name: "Les Échos",             url: "https://www.lesechos.fr/",                 category: "finance", language: "fr", note: "Principal jornal econômico francês", rss: "https://syndication.lesechos.fr/rss/rss_economie.xml" },
+      { name: "Le Figaro · Économie",  url: "https://www.lefigaro.fr/economie",         category: "finance", language: "fr", rss: "https://www.lefigaro.fr/rss/figaro_economie.xml" },
     ],
   },
   {
@@ -114,8 +118,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇪🇸",
     sources: [
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
-      { name: "Expansión",             url: "https://www.expansion.com/",               category: "finance", language: "es", note: "Principal jornal financeiro espanhol" },
-      { name: "El País · Economía",    url: "https://elpais.com/economia/",             category: "news",    language: "es" },
+      { name: "Expansión",             url: "https://www.expansion.com/",               category: "finance", language: "es", note: "Principal jornal financeiro espanhol", rss: "https://e00-expansion.uecdn.es/rss/portada.xml" },
+      { name: "El País · Economía",    url: "https://elpais.com/economia/",             category: "news",    language: "es", rss: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/economia/portada" },
     ],
   },
   {
@@ -124,8 +128,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇵🇹",
     sources: [
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
-      { name: "Jornal de Negócios",    url: "https://www.jornaldenegocios.pt/",         category: "finance", language: "pt", note: "Principal jornal financeiro PT" },
-      { name: "Público · Economia",    url: "https://www.publico.pt/economia",          category: "news",    language: "pt" },
+      { name: "Jornal de Negócios",    url: "https://www.jornaldenegocios.pt/",         category: "finance", language: "pt", note: "Principal jornal financeiro PT", rss: "https://www.jornaldenegocios.pt/rss/empresas" },
+      { name: "Público · Economia",    url: "https://www.publico.pt/economia",          category: "news",    language: "pt", rss: "https://feeds.feedburner.com/PublicoEconomia" },
     ],
   },
   {
@@ -134,8 +138,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇮🇹",
     sources: [
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
-      { name: "Il Sole 24 Ore",        url: "https://www.ilsole24ore.com/",             category: "finance", language: "it", note: "Principal jornal econômico italiano" },
-      { name: "ANSA · Economia",       url: "https://www.ansa.it/sito/notizie/economia/economia.shtml", category: "news", language: "it" },
+      { name: "Il Sole 24 Ore",        url: "https://www.ilsole24ore.com/",             category: "finance", language: "it", note: "Principal jornal econômico italiano", rss: "https://www.ilsole24ore.com/rss/economia.xml" },
+      { name: "ANSA · Economia",       url: "https://www.ansa.it/sito/notizie/economia/economia.shtml", category: "news", language: "it", rss: "https://www.ansa.it/sito/notizie/economia/economia_rss.xml" },
     ],
   },
   {
@@ -144,8 +148,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇨🇭",
     sources: [
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
-      { name: "Neue Zürcher Zeitung",  url: "https://www.nzz.ch/wirtschaft",            category: "finance", language: "de", note: "Principal financial CH" },
-      { name: "SwissInfo · Business",  url: "https://www.swissinfo.ch/eng/business",    category: "news",    language: "en" },
+      { name: "Neue Zürcher Zeitung",  url: "https://www.nzz.ch/wirtschaft",            category: "finance", language: "de", note: "Principal financial CH", rss: "https://www.nzz.ch/wirtschaft.rss" },
+      { name: "SwissInfo · Business",  url: "https://www.swissinfo.ch/eng/business",    category: "news",    language: "en", rss: "https://www.swissinfo.ch/eng/business/rss" },
     ],
   },
   {
@@ -154,8 +158,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇮🇪",
     sources: [
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
-      { name: "Irish Times · Business", url: "https://www.irishtimes.com/business/",    category: "finance", language: "en", note: "Cobertura macroeconômica IE" },
-      { name: "RTÉ Business",          url: "https://www.rte.ie/news/business/",        category: "news",    language: "en" },
+      { name: "Irish Times · Business", url: "https://www.irishtimes.com/business/",    category: "finance", language: "en", note: "Cobertura macroeconômica IE", rss: "https://www.irishtimes.com/cmlink/news-1.1319192" },
+      { name: "RTÉ Business",          url: "https://www.rte.ie/news/business/",        category: "news",    language: "en", rss: "https://www.rte.ie/news/rss/business-headlines.xml" },
     ],
   },
   {
@@ -164,8 +168,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇳🇱",
     sources: [
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
-      { name: "NL Times · Business",   url: "https://nltimes.nl/business",              category: "finance", language: "en", note: "Notícias holandesas em inglês" },
-      { name: "DutchNews",             url: "https://www.dutchnews.nl/",                category: "news",    language: "en" },
+      { name: "NL Times · Business",   url: "https://nltimes.nl/business",              category: "finance", language: "en", note: "Notícias holandesas em inglês", rss: "https://nltimes.nl/feed" },
+      { name: "DutchNews",             url: "https://www.dutchnews.nl/",                category: "news",    language: "en", rss: "https://www.dutchnews.nl/feed/" },
     ],
   },
   {
@@ -174,8 +178,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇵🇱",
     sources: [
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
-      { name: "Notes from Poland",     url: "https://notesfrompoland.com/",             category: "news",    language: "en", note: "Notícias PL em inglês com viés econômico" },
-      { name: "Polska Agencja Prasowa", url: "https://www.pap.pl/en",                   category: "news",    language: "en", note: "Agência oficial de notícias PL" },
+      { name: "Notes from Poland",     url: "https://notesfrompoland.com/",             category: "news",    language: "en", note: "Notícias PL em inglês com viés econômico", rss: "https://notesfrompoland.com/feed/" },
+      { name: "Polska Agencja Prasowa", url: "https://www.pap.pl/en",                   category: "news",    language: "en", note: "Agência oficial de notícias PL", rss: "https://www.pap.pl/en/rss.xml" },
     ],
   },
   {
@@ -195,8 +199,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     countryName: "Japão",
     flag: "🇯🇵",
     sources: [
-      { name: "Nikkei Asia",           url: "https://asia.nikkei.com/",                 category: "finance", language: "en", note: "Cobertura financeira asiática · referência institucional" },
-      { name: "Japan Times · Business", url: "https://www.japantimes.co.jp/business/",  category: "news",    language: "en" },
+      { name: "Nikkei Asia",           url: "https://asia.nikkei.com/",                 category: "finance", language: "en", note: "Cobertura financeira asiática · referência institucional", rss: "https://asia.nikkei.com/rss/feed/nar" },
+      { name: "Japan Times · Business", url: "https://www.japantimes.co.jp/business/",  category: "news",    language: "en", rss: "https://www.japantimes.co.jp/feed/topstories/" },
       { name: "Reuters · Ásia-Pacífico", url: "https://www.reuters.com/world/asia-pacific", category: "news", language: "en" },
     ],
   },
@@ -205,8 +209,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     countryName: "Singapura",
     flag: "🇸🇬",
     sources: [
-      { name: "Channel News Asia · Business", url: "https://www.channelnewsasia.com/business", category: "finance", language: "en", note: "Cobertura fintech ASEAN" },
-      { name: "Straits Times · Business",     url: "https://www.straitstimes.com/business",    category: "news",    language: "en" },
+      { name: "Channel News Asia · Business", url: "https://www.channelnewsasia.com/business", category: "finance", language: "en", note: "Cobertura fintech ASEAN", rss: "https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=6936" },
+      { name: "Straits Times · Business",     url: "https://www.straitstimes.com/business",    category: "news",    language: "en", rss: "https://www.straitstimes.com/news/business/rss.xml" },
       { name: "Reuters · Ásia-Pacífico",      url: "https://www.reuters.com/world/asia-pacific", category: "news",  language: "en" },
     ],
   },
@@ -215,7 +219,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     countryName: "China",
     flag: "🇨🇳",
     sources: [
-      { name: "SCMP · Business",       url: "https://www.scmp.com/business",            category: "finance", language: "en", note: "South China Morning Post — referência ocidental em CN" },
+      { name: "SCMP · Business",       url: "https://www.scmp.com/business",            category: "finance", language: "en", note: "South China Morning Post — referência ocidental em CN", rss: "https://www.scmp.com/rss/91/feed" },
       { name: "Caixin Global",         url: "https://www.caixinglobal.com/",            category: "finance", language: "en", note: "Mais respeitado business media nativo CN em EN" },
       { name: "Reuters · China",       url: "https://www.reuters.com/world/china",      category: "news",    language: "en" },
     ],
@@ -226,7 +230,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇦🇺",
     sources: [
       { name: "Australian Financial Review", url: "https://www.afr.com/",                category: "finance", language: "en", note: "Principal jornal financeiro AU" },
-      { name: "SMH · Business",              url: "https://www.smh.com.au/business",     category: "news",    language: "en", note: "Sydney Morning Herald" },
+      { name: "SMH · Business",              url: "https://www.smh.com.au/business",     category: "news",    language: "en", note: "Sydney Morning Herald", rss: "https://www.smh.com.au/rss/business.xml" },
       { name: "Reuters · Ásia-Pacífico",     url: "https://www.reuters.com/world/asia-pacific", category: "news", language: "en" },
     ],
   },
@@ -236,7 +240,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇳🇿",
     sources: [
       { name: "NZ Herald · Business",  url: "https://www.nzherald.co.nz/business/",     category: "finance", language: "en", note: "Principal jornal NZ" },
-      { name: "Stuff · Business",      url: "https://www.stuff.co.nz/business",         category: "news",    language: "en" },
+      { name: "Stuff · Business",      url: "https://www.stuff.co.nz/business",         category: "news",    language: "en", rss: "https://www.stuff.co.nz/rss" },
       { name: "Reuters · Ásia-Pacífico", url: "https://www.reuters.com/world/asia-pacific", category: "news", language: "en" },
     ],
   },
@@ -248,7 +252,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇦🇪",
     sources: [
       { name: "Gulf News · Business",  url: "https://gulfnews.com/business",            category: "finance", language: "en", note: "Cobertura UAE/região do Golfo" },
-      { name: "The National · Business", url: "https://www.thenationalnews.com/business/", category: "news", language: "en", note: "Diário oficial Abu Dhabi em inglês" },
+      { name: "The National · Business", url: "https://www.thenationalnews.com/business/", category: "news", language: "en", note: "Diário oficial Abu Dhabi em inglês", rss: "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml" },
       { name: "Khaleej Times · Business", url: "https://www.khaleejtimes.com/business",  category: "news",    language: "en" },
     ],
   },
@@ -257,8 +261,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
 /** Fontes globais de cripto/derivativos — agregadas separadamente (não-por-país) */
 export const GLOBAL_CRYPTO_SOURCES: InfoSource[] = [
   { name: "Coinglass",     url: "https://www.coinglass.com/",     category: "crypto", language: "en", note: "Derivativos cripto · liquidations · open interest em tempo real" },
-  { name: "CoinDesk",      url: "https://www.coindesk.com/",      category: "crypto", language: "en", note: "Maior portal editorial cripto" },
+  { name: "CoinDesk",      url: "https://www.coindesk.com/",      category: "crypto", language: "en", note: "Maior portal editorial cripto", rss: "https://www.coindesk.com/arc/outboundfeeds/rss/" },
   { name: "The Block",     url: "https://www.theblock.co/",       category: "crypto", language: "en", note: "Research institucional cripto" },
-  { name: "Cointelegraph", url: "https://cointelegraph.com/",     category: "crypto", language: "en", note: "Cobertura ampla cripto + regulação" },
-  { name: "Decrypt",       url: "https://decrypt.co/",            category: "crypto", language: "en", note: "Editorial cripto + Web3" },
+  { name: "Cointelegraph", url: "https://cointelegraph.com/",     category: "crypto", language: "en", note: "Cobertura ampla cripto + regulação", rss: "https://cointelegraph.com/rss" },
+  { name: "Decrypt",       url: "https://decrypt.co/",            category: "crypto", language: "en", note: "Editorial cripto + Web3", rss: "https://decrypt.co/feed" },
 ];

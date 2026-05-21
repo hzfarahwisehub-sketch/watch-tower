@@ -1,15 +1,117 @@
 "use client";
-import { INFO_CENTERS, GLOBAL_CRYPTO_SOURCES, categoryMeta, type InfoSourceCategory } from "@/lib/infoCenters";
+import { useEffect, useState } from "react";
+import { INFO_CENTERS, GLOBAL_CRYPTO_SOURCES, categoryMeta, type InfoSource, type InfoSourceCategory } from "@/lib/infoCenters";
 
 const CAT_ORDER: InfoSourceCategory[] = ["news", "finance", "crypto", "legal"];
 
+type Headline = { title: string; link: string; pubDate?: string };
+type FeedState =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "ok"; items: Headline[]; cached: boolean }
+  | { status: "error"; error: string };
+
 /**
- * InfoCenters — diretório curado de fontes oficiais de notícias, finanças e
- * cripto por país. Cada card é um país com 3 links principais clicáveis
- * (abrem em nova aba). Inclui seção global de cripto/derivativos.
- *
- * Container query: grid de países se reorganiza conforme o tamanho da caixa.
+ * Hook: busca headlines de um feed RSS via /api/rss (server-side cache 15min).
+ * Faz 1 fetch on-mount + refresh a cada 10min.
  */
+function useFeed(rssUrl: string | undefined): FeedState {
+  const [state, setState] = useState<FeedState>({ status: "idle" });
+
+  useEffect(() => {
+    if (!rssUrl) return;
+    let cancelled = false;
+    const load = async () => {
+      setState({ status: "loading" });
+      try {
+        const res = await fetch(`/api/rss?url=${encodeURIComponent(rssUrl)}`);
+        const data = await res.json();
+        if (cancelled) return;
+        if (!res.ok || data.error) {
+          setState({ status: "error", error: data.error ?? `HTTP ${res.status}` });
+          return;
+        }
+        setState({ status: "ok", items: data.items ?? [], cached: !!data.cached });
+      } catch (err) {
+        if (cancelled) return;
+        setState({ status: "error", error: String(err) });
+      }
+    };
+    load();
+    const interval = setInterval(load, 10 * 60 * 1000); // 10min
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [rssUrl]);
+
+  return state;
+}
+
+function fmtTimeAgo(iso?: string): string {
+  if (!iso) return "";
+  const date = new Date(iso);
+  if (isNaN(date.getTime())) return "";
+  const diff = Date.now() - date.getTime();
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return "agora";
+  if (m < 60) return `${m}min`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h`;
+  const d = Math.floor(h / 24);
+  if (d < 30) return `${d}d`;
+  const mo = Math.floor(d / 30);
+  return `${mo}mês`;
+}
+
+/** Bloco de headlines RSS pra um InfoSource (renderiza nada se sem rss) */
+function SourceHeadlines({ source }: { source: InfoSource }) {
+  const feed = useFeed(source.rss);
+  if (!source.rss) return null;
+
+  if (feed.status === "loading" || feed.status === "idle") {
+    return (
+      <div className="pl-7 pr-2 pb-1.5 text-[9.5px]" style={{ color: "var(--text-3)" }}>
+        <span className="opacity-60">carregando manchetes…</span>
+      </div>
+    );
+  }
+  if (feed.status === "error") {
+    return (
+      <div className="pl-7 pr-2 pb-1.5 text-[9.5px]" style={{ color: "var(--color-status-warning)" }}>
+        <span className="opacity-70">⚠ feed indisponível ({feed.error.slice(0, 40)})</span>
+      </div>
+    );
+  }
+  const items = feed.items.slice(0, 3);
+  if (items.length === 0) return null;
+
+  return (
+    <ul className="pl-7 pr-2 pb-2 flex flex-col gap-1">
+      {items.map((h, i) => (
+        <li key={`${h.link}-${i}`}>
+          <a
+            href={h.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-[10.5px] leading-snug hover:underline"
+            style={{ color: "var(--text-2)" }}
+            title={h.title}
+          >
+            <span className="opacity-80">›</span>{" "}
+            <span style={{ overflowWrap: "anywhere" }}>{h.title}</span>
+            {h.pubDate && (
+              <span className="ml-1.5 text-[9px] uppercase tracking-wider font-semibold" style={{ color: "var(--text-3)" }}>
+                {fmtTimeAgo(h.pubDate)}
+              </span>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function InfoCenters() {
   // Conta por categoria (pra header)
   const countByCat: Record<InfoSourceCategory, number> = { news: 0, finance: 0, crypto: 0, legal: 0 };
@@ -17,6 +119,9 @@ export function InfoCenters() {
   GLOBAL_CRYPTO_SOURCES.forEach((s) => (countByCat[s.category] += 1));
   const totalSources =
     INFO_CENTERS.reduce((sum, c) => sum + c.sources.length, 0) + GLOBAL_CRYPTO_SOURCES.length;
+  const totalWithRss =
+    INFO_CENTERS.reduce((sum, c) => sum + c.sources.filter((s) => s.rss).length, 0) +
+    GLOBAL_CRYPTO_SOURCES.filter((s) => s.rss).length;
 
   return (
     <section className="wt-card h-full flex flex-col @container">
@@ -35,11 +140,11 @@ export function InfoCenters() {
           className="text-[10px] tracking-wider uppercase font-semibold text-right"
           style={{ color: "var(--text-3)" }}
         >
-          {INFO_CENTERS.length} países · {totalSources} fontes curadas
+          {INFO_CENTERS.length} países · {totalSources} fontes · {totalWithRss} com headlines ao vivo
         </span>
       </header>
 
-      {/* Legenda de categorias */}
+      {/* Legenda */}
       <div className="px-5 py-3 flex flex-wrap items-center gap-3 text-[10.5px]" style={{ borderBottom: "1px solid var(--border)", color: "var(--text-3)" }}>
         {CAT_ORDER.filter((c) => countByCat[c] > 0).map((c) => {
           const m = categoryMeta(c);
@@ -51,6 +156,10 @@ export function InfoCenters() {
             </span>
           );
         })}
+        <span className="ml-auto flex items-center gap-1.5">
+          <span style={{ color: "var(--color-status-stable)" }}>●</span>
+          <span className="uppercase tracking-wider font-semibold">RSS ao vivo · refresh 10min</span>
+        </span>
       </div>
 
       {/* Grid de países */}
@@ -83,7 +192,7 @@ export function InfoCenters() {
                 </span>
               </div>
 
-              {/* Lista de fontes */}
+              {/* Lista de fontes + headlines */}
               <ul className="flex flex-col gap-1.5">
                 {center.sources.map((src) => {
                   const m = categoryMeta(src.category);
@@ -118,7 +227,7 @@ export function InfoCenters() {
                         </span>
                         <div className="flex-1 min-w-0">
                           <div
-                            className="text-[11.5px] font-bold leading-tight"
+                            className="text-[11.5px] font-bold leading-tight flex items-center gap-1.5"
                             style={{
                               color: "var(--text)",
                               overflowWrap: "anywhere",
@@ -126,6 +235,13 @@ export function InfoCenters() {
                             }}
                           >
                             {src.name}
+                            {src.rss && (
+                              <span
+                                className="inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"
+                                style={{ background: "var(--color-status-stable)", boxShadow: "0 0 4px var(--color-status-stable)" }}
+                                title="RSS ao vivo · headlines abaixo"
+                              />
+                            )}
                           </div>
                           <div
                             className="text-[9px] mt-0.5 uppercase tracking-wider font-semibold flex items-center gap-1.5"
@@ -141,6 +257,7 @@ export function InfoCenters() {
                           ↗
                         </span>
                       </a>
+                      <SourceHeadlines source={src} />
                     </li>
                   );
                 })}
@@ -174,7 +291,7 @@ export function InfoCenters() {
             </div>
             <ul className="grid grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-5 gap-2">
               {GLOBAL_CRYPTO_SOURCES.map((src) => (
-                <li key={src.url}>
+                <li key={src.url} className="flex flex-col">
                   <a
                     href={src.url}
                     target="_blank"
@@ -189,13 +306,21 @@ export function InfoCenters() {
                   >
                     <span className="text-[16px] flex-shrink-0" style={{ color: "#E5C156" }} aria-hidden>🪙</span>
                     <span
-                      className="text-[11.5px] font-bold leading-tight flex-1 min-w-0 truncate"
+                      className="text-[11.5px] font-bold leading-tight flex-1 min-w-0 truncate flex items-center gap-1.5"
                       style={{ color: "var(--text)" }}
                     >
                       {src.name}
+                      {src.rss && (
+                        <span
+                          className="inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"
+                          style={{ background: "var(--color-status-stable)", boxShadow: "0 0 4px var(--color-status-stable)" }}
+                          title="RSS ao vivo"
+                        />
+                      )}
                     </span>
                     <span className="text-[11px] flex-shrink-0 opacity-60" style={{ color: "#E5C156" }}>↗</span>
                   </a>
+                  <SourceHeadlines source={src} />
                 </li>
               ))}
             </ul>
@@ -206,10 +331,10 @@ export function InfoCenters() {
       {/* Footer */}
       <div className="px-5 py-3 flex-shrink-0" style={{ borderTop: "1px solid var(--border)" }}>
         <p className="text-[10.5px]" style={{ color: "var(--text-3)" }}>
-          Diretório curado · começamos com Reuters · WSJ · Coinglass como sementes,
-          ampliando pra cobrir mercado tradicional (Bloomberg/FT/Nikkei/SCMP/AFR) + cripto
-          (CoinDesk/The Block/Cointelegraph/Decrypt). Próxima fase: integração de RSS pra
-          headlines em tempo real dentro de cada card.
+          Fontes com bolinha verde ● têm <strong>RSS ao vivo</strong> (manchetes atualizadas a cada
+          10min via /api/rss · cache 15min). Reuters/WSJ/Bloomberg/FT/Coinglass não publicam feed
+          público estável — ficam apenas como link clicável. {totalWithRss} de {totalSources} fontes
+          com RSS conectado.
         </p>
       </div>
     </section>
