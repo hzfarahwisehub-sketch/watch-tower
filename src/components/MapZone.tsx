@@ -45,12 +45,13 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     const map = new maplibregl.Map({
       container: containerRef.current,
       style,
-      center: [10, 25],
-      zoom: 1.4,
-      minZoom: 0.6,
+      // Estado inicial: globo INTEIRO centralizado (zoom min, sem tilt/bearing)
+      center: [0, 20],
+      zoom: 0.6,
+      minZoom: 0.4,
       maxZoom: 8,
-      pitch: 25,
-      bearing: -5,
+      pitch: 0,
+      bearing: 0,
       attributionControl: { compact: true },
     });
     mapRef.current = map;
@@ -62,7 +63,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     // Scale bar
     map.addControl(new maplibregl.ScaleControl({ maxWidth: 100, unit: "metric" }), "bottom-left");
 
-    // Atmosfera (efeito visual do globo)
+    // Atmosfera (efeito visual do globo) + re-centra ao carregar estilo
     map.on("style.load", () => {
       try {
         map.setProjection({ type: "globe" });
@@ -75,12 +76,24 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
           "fog-color": "#15132A",
           "fog-ground-blend": 0.1,
         });
+        // Garante centralização inicial mesmo após swap de style
+        map.jumpTo({ center: [0, 20], zoom: 0.6, pitch: 0, bearing: 0 });
       } catch {}
     });
 
-    // Click no fundo deseleciona — opcional, pulamos por agora
+    // ResizeObserver: quando o container muda de tamanho (user redimensiona
+    // a caixa do grid), o map precisa redimensionar pra preencher e
+    // re-centralizar o globo. Sem isso, o globo fica colado em uma quina.
+    const resizeObserver = new ResizeObserver(() => {
+      if (!mapRef.current) return;
+      try {
+        mapRef.current.resize();
+      } catch {}
+    });
+    resizeObserver.observe(containerRef.current);
 
     return () => {
+      resizeObserver.disconnect();
       Object.values(markersRef.current).forEach((m) => m.remove());
       markersRef.current = {};
       map.remove();
@@ -174,7 +187,11 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
           {countries.length} países · click pra detalhes · arrasta + scroll pra navegar
         </span>
       </div>
-      <div ref={containerRef} className="flex-1 wt-map-canvas" style={{ minHeight: 240 }} />
+      <div
+        ref={containerRef}
+        className="flex-1 wt-map-canvas"
+        style={{ minHeight: 240, position: "relative", width: "100%" }}
+      />
     </div>
   );
 }
