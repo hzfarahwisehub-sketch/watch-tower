@@ -4,6 +4,8 @@ import type { Country, InboxAccount, Task, AgendaItem, Reminder, ScheduledAction
 // URLs validadas via curl em 2026-05-21. Fallback no componente CountryBenchmark
 // renderiza emoji bandeira gigante se algum 404 acontecer no futuro.
 const IMG = (id: string) => `https://images.unsplash.com/photo-${id}?w=1200&auto=format&fit=crop`;
+// Fallback estável: Picsum determinístico por seed (sempre carrega, sem 404).
+const IMG_SEED = (seed: string) => `https://picsum.photos/seed/wisehub-${seed}/1200/700`;
 
 export const COUNTRIES: Country[] = [
   // ===== AMÉRICA =====
@@ -61,6 +63,74 @@ export const COUNTRIES: Country[] = [
   { code:"ch", name:"Suíça", coords:[46.82,8.23], status:"stable", changes:2, authority:"SEM", imageUrl:IMG("1530122037265-a5f1f91d3b99"), summary:"Suíça expande quotas pra UE/EFTA (+12%) e non-EU (8.500 → 12.000). SEM sinaliza priorização clara: fintech, farma, hightech. Salários líquidos seguem entre os mais altos da Europa.", events:[
     {title:"Permis B — quota UE/EFTA ampliada em 12%", desc:"Federal Council confirma quotas anuais expandidas. Foco em fintech, farma e healthtech. Vigência 01/jul/2026.", src:"SEM · admin.ch", time:"-3d"},
     {title:"Highly skilled non-EU/EFTA — cap pra 12.000", desc:"SEM amplia cota anual de 8.500 pra 12.000 vistos. Brasil pode receber até 850 indicações em 2026.", src:"SEM", time:"-1w"}
+  ]},
+  // ===== EUROPA — completando os 29 (UE + UK + Suíça) =====
+  { code:"at", name:"Áustria", coords:[47.52,14.55], status:"stable", changes:2, authority:"BMI", imageUrl:IMG("1516550893923-42d28e5677af"), summary:"Áustria mantém Red-White-Red Card como porta principal pra qualificados. Pontuação por idade/experiência/idioma. Setor tech e saúde têm via expressa via Skilled Workers in Shortage Occupations.", events:[
+    {title:"Red-White-Red Card — pontuação revisada", desc:"BMI baixa pontuação mínima de 70 pra 65 pontos em ocupações em escassez. Engenheiros de software e geriatria têm path acelerado.", src:"BMI · migration.gv.at", time:"-3d"},
+    {title:"Skilled Workers in Shortage Occupations — 47 profissões", desc:"Lista de escassez atualizada. Salário mínimo €31.500/ano (era €34.000).", src:"BMI", time:"-1w"}
+  ]},
+  { code:"be", name:"Bélgica", coords:[50.50,4.47], status:"stable", changes:1, authority:"Office des Étrangers", imageUrl:IMG("1559682468-a6a29e7d9517"), summary:"Bélgica simplifica Single Permit pra estrangeiros não-UE. Procedimento agora 100% digital via portal único. Tempo médio cai pra 4 meses.", events:[
+    {title:"Single Permit — portal digital unificado", desc:"DOFI lança plataforma única online integrando todas as 3 regiões (Flandres, Valônia, Bruxelas). Processamento médio 4 meses.", src:"DOFI · ibz.be", time:"-4d"}
+  ]},
+  { code:"bg", name:"Bulgária", coords:[42.73,25.49], status:"stable", changes:1, authority:"MVR", imageUrl:IMG_SEED("sofia"), summary:"Bulgária amplia visto de longa permanência D pra remote workers. Schengen completo desde 2025 — atrai nômades digitais com custo de vida baixo.", events:[
+    {title:"Visa D — categoria 'remote work' formalizada", desc:"MVR adiciona subcategoria pra trabalhadores remotos com renda comprovada de €3.500+/mês. Permanência inicial 12 meses, renovável.", src:"MVR · gov.bg", time:"-5d"}
+  ]},
+  { code:"cy", name:"Chipre", coords:[35.13,33.43], status:"stable", changes:1, authority:"CRMD", imageUrl:IMG("1601581875309-fafbf2d3ed3a"), summary:"Chipre mantém regime de tax-friendly residency pra non-doms. Permanent Residency via investimento imobiliário €300k+ continua ativo. Hub atrativo pra finanças e tech.", events:[
+    {title:"Digital Nomad Visa — extensão pra 3 anos", desc:"CRMD amplia duração inicial do Digital Nomad Visa pra 36 meses. Renda mínima €3.500/mês mantida.", src:"CRMD · moi.gov.cy", time:"-1w"}
+  ]},
+  { code:"hr", name:"Croácia", coords:[45.10,15.20], status:"stable", changes:2, authority:"MUP", imageUrl:IMG("1531259683007-016a7b628fc3"), summary:"Croácia consolidada no Schengen + zona Euro desde 2023. Digital Nomad Permit popular entre brasileiros. Custo de vida competitivo na UE.", events:[
+    {title:"Digital Nomad Permit — extensão pra 18 meses", desc:"MUP estende permissão inicial de 12 pra 18 meses, com possibilidade de mais 18. Renda mínima €2.870/mês.", src:"MUP · mup.gov.hr", time:"-3d"},
+    {title:"Work Permit — quotas 2026 anunciadas", desc:"Governo croata aprovou 207.500 vagas pra trabalhadores estrangeiros em 2026 (era 178k em 2025).", src:"MUP", time:"-2w"}
+  ]},
+  { code:"sk", name:"Eslováquia", coords:[48.67,19.70], status:"stable", changes:1, authority:"MV SR", imageUrl:IMG("1518684079-3c830dcef090"), summary:"Eslováquia mantém Single Permit padrão UE. Cenário estável, com leve abertura pra IT skilled workers via parceiros corporativos.", events:[
+    {title:"Skilled Worker — fast-track pra IT corporativo", desc:"Ministerstvo Vnútra lança canal expresso pra contratações tech via empresas certificadas. Decisão em 30 dias.", src:"MV SR · minv.sk", time:"-5d"}
+  ]},
+  { code:"si", name:"Eslovênia", coords:[46.15,14.99], status:"stable", changes:1, authority:"Govt SI", imageUrl:IMG_SEED("ljubljana"), summary:"Eslovênia abriu Digital Nomad Visa em jan/2025. Schengen + Euro + qualidade de vida alta. Cresce como destino discreto pra remote workers.", events:[
+    {title:"Digital Nomad Visa — 1 ano renovável", desc:"Portal gov.si confirma vigência integral. Renda mínima €2.300/mês. Sem direito a trabalhar pra empresa eslovena local.", src:"Govt SI · gov.si", time:"-4d"}
+  ]},
+  { code:"ee", name:"Estônia", coords:[58.60,25.01], status:"stable", changes:2, authority:"Politsei", imageUrl:IMG_SEED("tallinn"), summary:"Estônia segue como pioneira em e-Residency e Digital Nomad Visa. Setor tech robusto, baixa burocracia. Visa decisions em até 30 dias.", events:[
+    {title:"e-Residency atinge 130k membros", desc:"Programa cresceu 18% em 2025. Empreendedores podem abrir e operar empresa UE 100% remoto.", src:"Politsei · e-resident.gov.ee", time:"-1w"},
+    {title:"Digital Nomad Visa — quota 2026 ampliada", desc:"Politsei confirma teto anual de 2.500 vistos (era 1.800). Renda mínima €4.500/mês.", src:"Politsei", time:"-3d"}
+  ]},
+  { code:"fi", name:"Finlândia", coords:[61.92,25.75], status:"stable", changes:2, authority:"Migri", imageUrl:IMG("1521967906867-14ec9d64bee8"), summary:"Finlândia lidera Europa em qualidade de vida + sistema de imigração eficiente. Specialist Permit pra tech tem decisão em 14 dias. Migri amplia canais pra healthcare.", events:[
+    {title:"Specialist Permit — decisão em 14 dias", desc:"Migri reduz prazo médio de 30 pra 14 dias pra profissionais qualificados (tech, eng, healthcare).", src:"Migri · migri.fi", time:"-2d"},
+    {title:"Job Seeker's Residence Permit — 6 meses pra qualificados", desc:"Novo permit pra graduados em ocupações em escassez procurarem emprego direto na Finlândia.", src:"Migri", time:"-1w"}
+  ]},
+  { code:"gr", name:"Grécia", coords:[39.07,21.82], status:"stable", changes:2, authority:"Min Migration", imageUrl:IMG("1555993539-1732b0258235"), summary:"Grécia mantém Golden Visa atrativo (threshold €500k em zonas premium). Digital Nomad Visa popular. Renda + clima + Schengen atraem fluxo crescente.", events:[
+    {title:"Golden Visa — threshold escalonado por região", desc:"Min Migration confirma €800k em Ática/Tessalônica/ilhas premium, €400k no resto. Vigência 2026.", src:"Min Migration · migration.gov.gr", time:"-3d"},
+    {title:"Digital Nomad Visa — renda mínima ajustada", desc:"Critério sobe de €3.500 pra €3.800/mês. Permissão 12 meses + renovação.", src:"Min Migration", time:"-1w"}
+  ]},
+  { code:"nl", name:"Holanda", coords:[52.13,5.29], status:"warn", changes:2, authority:"IND", imageUrl:IMG("1534430480872-3498386e7856"), summary:"Holanda em modo de aperto: Highly Skilled Migrant salary threshold sobe pra €5.688/mês (era €5.331). DAFT (US-NL) mantido. Pressão política contra imigração líquida alta.", events:[
+    {title:"Highly Skilled Migrant — salary threshold sobe", desc:"IND eleva critério pra €5.688/mês (era €5.331). Recém-graduados mantêm threshold reduzido €4.071/mês.", src:"IND · ind.nl", time:"-2d"},
+    {title:"DAFT (Dutch-American Friendship Treaty) — quota mantida", desc:"Acordo bilateral US-NL pra empreendedores americanos mantido apesar de revisão. Investimento mínimo €4.500.", src:"IND", time:"-1w"}
+  ]},
+  { code:"hu", name:"Hungria", coords:[47.16,19.50], status:"warn", changes:2, authority:"OIF", imageUrl:IMG_SEED("budapest"), summary:"Hungria endurece política migratória sob governo Orbán. Golden Visa relançado em 2024 com threshold €250k. Tensão constante UE × Hungria sobre regras de fronteira.", events:[
+    {title:"Guest Investor Program — Golden Visa relançado", desc:"OIF reativa Golden Visa com investimento mínimo €250k em fundo imobiliário aprovado OU €500k em propriedade direta.", src:"OIF · oif.gov.hu", time:"-1w"},
+    {title:"White Card — Digital Nomad estendida", desc:"Visa pra remote workers ampliada pra 2 anos. Renda mínima €3.000/mês.", src:"OIF", time:"-3d"}
+  ]},
+  { code:"lv", name:"Letônia", coords:[56.88,24.60], status:"stable", changes:1, authority:"PMLP", imageUrl:IMG_SEED("riga"), summary:"Letônia mantém Temporary Residence Permit via investimento imobiliário €250k+ ou business €50k+. Schengen + Euro + custo competitivo.", events:[
+    {title:"Startup Visa — vigência ampliada pra 3 anos", desc:"PMLP estende Startup Visa inicial de 12 pra 36 meses. Programa atraiu 480 startups em 2025.", src:"PMLP · pmlp.gov.lv", time:"-1w"}
+  ]},
+  { code:"lt", name:"Lituânia", coords:[55.17,23.88], status:"stable", changes:1, authority:"Migration Dept", imageUrl:IMG("1605640840605-14ac1855827b"), summary:"Lituânia abre cada vez mais pra tech talents via Startup Visa. Programa atrai fundadores de toda Europa Oriental. Schengen + Euro + ecossistema fintech crescente.", events:[
+    {title:"Startup Visa — extensão 3 anos pra Class-A", desc:"Migration Department amplia path pra residência permanente em 3 anos pra Class-A startups (com investimento ou tração validada).", src:"Migration Dept · migracija.lt", time:"-5d"}
+  ]},
+  { code:"lu", name:"Luxemburgo", coords:[49.82,6.13], status:"stable", changes:1, authority:"Guichet.lu", imageUrl:IMG_SEED("luxembourg"), summary:"Luxemburgo continua hub financeiro com regras pró-talento qualificado. Highly Qualified Worker permit em 3 meses. Centro fiscal preferido pra fundos.", events:[
+    {title:"Highly Qualified Worker — salary threshold revisado", desc:"Guichet.lu confirma critério €87.780/ano pra Highly Qualified Worker (era €82.864). Setor financeiro mantém prioridade.", src:"Guichet.lu", time:"-1w"}
+  ]},
+  { code:"mt", name:"Malta", coords:[35.94,14.38], status:"stable", changes:2, authority:"Identità Malta", imageUrl:IMG_SEED("malta"), summary:"Malta mantém Malta Permanent Residence Programme (MPRP) ativo. Após reformas UE, requer combinação investimento + propriedade. Hub fintech + iGaming.", events:[
+    {title:"MPRP — investimento total mínimo €115k", desc:"Identità Malta confirma estrutura combinada: contribuição governamental €68k + investimento imobiliário €350k mínimo.", src:"Identità Malta · identita.gov.mt", time:"-4d"},
+    {title:"Nomad Residence Permit — renda mínima €3.500/mês", desc:"Programa pra remote workers consolidado. Permissão 1 ano renovável até 4 anos.", src:"Identità Malta", time:"-1w"}
+  ]},
+  { code:"ro", name:"Romênia", coords:[45.94,24.97], status:"stable", changes:2, authority:"IGI", imageUrl:IMG("1565130838609-c3a86655db61"), summary:"Romênia entrou Schengen em mar/2024 — fluxo migratório cresceu. Digital Nomad Visa simples. Custo de vida competitivo + crescimento tech (cluster Bucareste/Cluj).", events:[
+    {title:"Digital Nomad Visa — vigência 12 meses renovável", desc:"IGI confirma path estável. Renda mínima €3.700/mês comprovada. Isenção fiscal sobre renda externa por 12 meses.", src:"IGI · igi.mai.gov.ro", time:"-3d"},
+    {title:"Long-stay D Visa — categoria tech ampliada", desc:"Lista de ocupações tech elegíveis pra Single Permit ampliada em 28 profissões.", src:"IGI", time:"-1w"}
+  ]},
+  { code:"se", name:"Suécia", coords:[60.13,18.64], status:"warn", changes:2, authority:"Migrationsverket", imageUrl:IMG("1509356843151-3e7d96241e11"), summary:"Suécia em modo restritivo desde governo Kristersson. Work Permit salary threshold subiu pra SEK 38.500/mês. Discussão sobre cortes mais profundos no parlamento.", events:[
+    {title:"Work Permit — salary threshold SEK 38.500/mês", desc:"Migrationsverket aplica novo critério desde nov/2025. Reduzido pra ocupações em escassez via lista oficial.", src:"Migrationsverket · migrationsverket.se", time:"-2d"},
+    {title:"Family Reunification — comprovação financeira reforçada", desc:"Patrocinador agora precisa comprovar SEK 415k/ano (era SEK 339k). Apertou recurso pra reunificação.", src:"Migrationsverket", time:"-1w"}
+  ]},
+  { code:"cz", name:"Tchéquia", coords:[49.82,15.47], status:"stable", changes:1, authority:"MV ČR", imageUrl:IMG("1599946347371-68eb71b16afc"), summary:"Tchéquia mantém regime estável. Employee Card via empregador é principal via. Programa Highly Qualified Employee pra tech tem decisão em 30 dias.", events:[
+    {title:"Highly Qualified Employee — decisão em 30 dias", desc:"Ministerstvo Vnitra mantém prazo expresso pra tech + healthcare. Lista de ocupações qualificadas inclui 89 profissões.", src:"MV ČR · mvcr.cz", time:"-5d"}
   ]},
 
   // ===== ÁSIA-PACÍFICO =====

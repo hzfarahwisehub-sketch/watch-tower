@@ -128,6 +128,30 @@ body {
 .wt-flag.ch::before { content:""; position:absolute; left:40%; right:40%; top:18%; bottom:18%; background:#fff; }
 .wt-flag.ch::after { content:""; position:absolute; left:18%; right:18%; top:40%; bottom:40%; background:#fff; }
 .wt-flag.nz { background: linear-gradient(135deg,#00247D 0%,#00247D 60%,#CC142B 60%); }
+.wt-flag.at { background: linear-gradient(180deg,#ED2939 33%,#fff 33% 66%,#ED2939 66%); }
+.wt-flag.be { background: linear-gradient(90deg,#000 33%,#FAE042 33% 66%,#ED2939 66%); }
+.wt-flag.bg { background: linear-gradient(180deg,#fff 33%,#00966E 33% 66%,#D62612 66%); }
+.wt-flag.cy { background: #fff; position:relative; }
+.wt-flag.cy::after { content:""; position:absolute; left:30%; right:30%; top:30%; bottom:30%; background:#D57800; border-radius:50%; }
+.wt-flag.sk { background: linear-gradient(180deg,#fff 33%,#0B4EA2 33% 66%,#EE1620 66%); }
+.wt-flag.si { background: linear-gradient(180deg,#fff 33%,#0000A0 33% 66%,#ED2939 66%); }
+.wt-flag.ee { background: linear-gradient(180deg,#0072CE 33%,#000 33% 66%,#fff 66%); }
+.wt-flag.fi { background: #fff; position:relative; }
+.wt-flag.fi::before { content:""; position:absolute; left:30%; top:0; bottom:0; width:18%; background:#003580; }
+.wt-flag.fi::after { content:""; position:absolute; left:0; right:0; top:40%; bottom:40%; background:#003580; }
+.wt-flag.gr { background: linear-gradient(180deg,#0D5EAF 0,#0D5EAF 22%,#fff 22% 33%,#0D5EAF 33% 44%,#fff 44% 55%,#0D5EAF 55% 66%,#fff 66% 77%,#0D5EAF 77% 88%,#fff 88%); }
+.wt-flag.nl { background: linear-gradient(180deg,#AE1C28 33%,#fff 33% 66%,#21468B 66%); }
+.wt-flag.hu { background: linear-gradient(180deg,#CE2939 33%,#fff 33% 66%,#477050 66%); }
+.wt-flag.lv { background: linear-gradient(180deg,#9E1B32 40%,#fff 40% 60%,#9E1B32 60%); }
+.wt-flag.lt { background: linear-gradient(180deg,#FDB913 33%,#006A44 33% 66%,#C1272D 66%); }
+.wt-flag.lu { background: linear-gradient(180deg,#ED2939 33%,#fff 33% 66%,#00A1DE 66%); }
+.wt-flag.mt { background: linear-gradient(90deg,#fff 50%,#CF142B 50%); }
+.wt-flag.ro { background: linear-gradient(90deg,#002B7F 33%,#FCD116 33% 66%,#CE1126 66%); }
+.wt-flag.se { background: #006AA7; position:relative; }
+.wt-flag.se::before { content:""; position:absolute; left:30%; top:0; bottom:0; width:18%; background:#FECC00; }
+.wt-flag.se::after { content:""; position:absolute; left:0; right:0; top:40%; bottom:40%; background:#FECC00; }
+.wt-flag.cz { background: linear-gradient(180deg,#fff 50%,#D7141A 50%); position:relative; }
+.wt-flag.cz::after { content:""; position:absolute; left:0; top:0; border-top:11px solid transparent; border-bottom:11px solid transparent; border-left:13px solid #11457E; }
 
 .wt-status { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
 .wt-status.crit   { background: var(--color-status-critical); box-shadow: 0 0 8px var(--color-status-critical); }
