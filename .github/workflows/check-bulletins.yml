@@ -17,6 +17,11 @@ concurrency:
   group: check-bulletins
   cancel-in-progress: false
 
+env:
+  # Força actions/checkout e actions/setup-node a rodar em Node 24
+  # (Node 20 está deprecated, será removido em set/2026).
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
 jobs:
   check:
     runs-on: ubuntu-latest
