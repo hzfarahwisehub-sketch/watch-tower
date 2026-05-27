@@ -55,6 +55,7 @@
     {
       "key": "bg",
       "url": "https://aref.government.bg/?explnum=21",
+      "geoProxy": true,
       "hash": "6cc715c773852bfeea0ce95cb9371cb67ce2980a8b0c98f74b1b581bf72fc282",
       "lastChangedAt": "2026-05-23T14:50:13.157Z",
       "lastCheckedAt": "2026-05-26T19:28:43.782Z",
@@ -113,6 +114,7 @@
     {
       "key": "ee",
       "url": "https://www.politsei.ee/en",
+      "geoProxy": true,
       "hash": "083322272aaf1916a51c53b1b9352c3b3792e0d45087c8348f0fec87cbd05881",
       "lastChangedAt": "2026-05-21T03:49:27.728Z",
       "lastCheckedAt": "2026-05-26T19:30:09.368Z",
@@ -277,6 +279,7 @@
     {
       "key": "ro",
       "url": "https://igi.mai.gov.ro/en",
+      "geoProxy": true,
       "hash": "098ddb6be9b01ec4105d74decd14dbf67f3bf06d713c1bb32c5b0cd6b204d744",
       "lastChangedAt": "2026-05-25T17:23:34.274Z",
       "lastCheckedAt": "2026-05-26T19:30:51.605Z",
