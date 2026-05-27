@@ -15,7 +15,8 @@ export default auth((req) => {
     pathname.startsWith("/api/agenda") ||
     pathname.startsWith("/api/reminders") ||
     pathname.startsWith("/api/scheduled") ||
-    pathname.startsWith("/api/admin");
+    pathname.startsWith("/api/admin") ||
+    pathname.startsWith("/api/export");
   const isProtectedPage = pathname.startsWith("/admin");
 
   if (!isProtectedApi && !isProtectedPage) return NextResponse.next();

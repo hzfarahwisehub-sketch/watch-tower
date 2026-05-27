@@ -1,17 +1,26 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { useTheme } from "./ThemeProvider";
 import { useToast } from "./ToastProvider";
 import { useSettings } from "./SettingsProvider";
+import { ExportButton } from "./ExportButton";
 
 export function Header() {
   const { theme, toggle } = useTheme();
   const { locked, toggleLock, openPanel } = useSettings();
+  const { data: session, status: sessionStatus } = useSession();
   const [refreshing, setRefreshing] = useState(false);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
   const [diffMin, setDiffMin] = useState(2);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const toast = useToast();
+
+  const isLoggedIn = sessionStatus === "authenticated" && !!session?.user?.email;
+  const isAdmin = isLoggedIn && (session.user as { role?: string }).role === "admin";
+  const userInitial = session?.user?.email?.[0]?.toUpperCase() ?? "?";
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -87,6 +96,8 @@ export function Header() {
           <span className="sm:hidden">{liveLabelShort}</span>
         </div>
 
+        {isAdmin && <ExportButton minimal />}
+
         <IconBtn title="Alternar tema" onClick={toggle}>
           {theme === "dark" ? (
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -157,6 +168,84 @@ export function Header() {
             <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
           </svg>
         </IconBtn>
+
+        {/* User menu / Login */}
+        {!isLoggedIn ? (
+          <button
+            type="button"
+            onClick={() => signIn()}
+            className="inline-flex items-center gap-2 px-3.5 py-[7px] rounded-full text-[11.5px] font-bold uppercase tracking-wider cursor-pointer transition-all hover:-translate-y-px"
+            style={{
+              background: "linear-gradient(135deg, var(--color-wh-blue), var(--color-wh-blue-dark))",
+              color: "#fff",
+              boxShadow: "0 4px 14px rgba(31,85,255,.35)",
+              border: "1px solid rgba(74,122,255,.5)",
+            }}
+          >
+            Entrar
+          </button>
+        ) : (
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setUserMenuOpen((v) => !v)}
+              title={session?.user?.email ?? ""}
+              className="w-[38px] h-[38px] rounded-full flex items-center justify-center cursor-pointer transition-all hover:-translate-y-px text-[14px] font-extrabold"
+              style={{
+                background: "linear-gradient(135deg, var(--color-wh-blue), var(--color-wh-blue-dark))",
+                color: "#fff",
+                boxShadow: "0 0 0 2px rgba(74,122,255,.3), 0 4px 14px rgba(31,85,255,.35)",
+                border: "1px solid rgba(74,122,255,.5)",
+              }}
+            >
+              {userInitial}
+            </button>
+            {userMenuOpen && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setUserMenuOpen(false)} />
+                <div
+                  className="absolute right-0 top-[44px] z-50 w-[260px] rounded-xl py-2 wt-card"
+                  style={{
+                    border: "1px solid var(--border-hi)",
+                    boxShadow: "var(--shadow-bar)",
+                  }}
+                >
+                  <div className="px-4 py-2.5 border-b" style={{ borderColor: "var(--border)" }}>
+                    <div className="text-[12px] font-bold truncate" style={{ color: "var(--text)" }}>
+                      {session?.user?.email}
+                    </div>
+                    <div className="text-[10px] uppercase tracking-wider font-bold mt-0.5" style={{ color: isAdmin ? "var(--color-wh-blue-light)" : "var(--text-3)" }}>
+                      {isAdmin ? "Admin master" : "Editor"}
+                    </div>
+                  </div>
+
+                  {isAdmin && (
+                    <Link
+                      href="/admin/allowlist"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="block px-4 py-2.5 text-[12.5px] hover:bg-white/5 transition-colors"
+                      style={{ color: "var(--text-2)" }}
+                    >
+                      🔐 Allowlist · gerenciar acesso
+                    </Link>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setUserMenuOpen(false);
+                      signOut({ callbackUrl: "/auth/signin" });
+                    }}
+                    className="w-full text-left px-4 py-2.5 text-[12.5px] hover:bg-white/5 transition-colors"
+                    style={{ color: "var(--color-status-critical)" }}
+                  >
+                    ↩ Sair
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </header>
   );
