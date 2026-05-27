@@ -51,14 +51,32 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async signIn({ user }) {
       if (!user.email) return false;
       const allowed = await prisma.allowedEmail.findUnique({ where: { email: user.email } });
-      if (!allowed) return false;
-      if (user.id) {
+      return !!allowed;
+    },
+  },
+  events: {
+    // Disparam DEPOIS que o PrismaAdapter cria/atualiza o User.
+    // updateMany nao explode quando count=0 (caso edge de timing).
+    async createUser({ user }) {
+      if (!user.email || !user.id) return;
+      const allowed = await prisma.allowedEmail.findUnique({ where: { email: user.email } });
+      if (allowed) {
         await prisma.user.update({
           where: { id: user.id },
           data: { allowlisted: true, role: allowed.role },
         });
       }
-      return true;
+    },
+    async signIn({ user }) {
+      if (!user?.email) return;
+      const allowed = await prisma.allowedEmail.findUnique({ where: { email: user.email } });
+      if (allowed) {
+        // Sync role/allowlisted em todo login (caso allowedEmail tenha mudado)
+        await prisma.user.updateMany({
+          where: { email: user.email },
+          data: { allowlisted: true, role: allowed.role },
+        });
+      }
     },
   },
 });
