@@ -6,7 +6,15 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY ?? "");
+// Lazy-init: o constructor do Resend explode se RESEND_API_KEY for vazia.
+// Inicializamos so quando precisar enviar (sendVerificationRequest).
+function getResend(): Resend {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) {
+    throw new Error("RESEND_API_KEY nao configurada — Fase 2 nao ativa");
+  }
+  return new Resend(key);
+}
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -32,7 +40,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
 
         const from = process.env.EMAIL_FROM ?? "Watch Tower <noreply@wisehubnow.online>";
-        const { error } = await resend.emails.send({
+        const { error } = await getResend().emails.send({
           from,
           to: email,
           subject: "Watch Tower · Acessar painel",
