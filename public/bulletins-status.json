@@ -104,8 +104,8 @@
     {
       "key": "es",
       "url": "https://www.inclusion.gob.es/web/migraciones",
-      "monitorUrl": "https://www.inclusion.gob.es/en/web/migraciones",
-      "geoProxy": true,
+      "monitorUrl": "https://www.boe.es/rss/canal.php?c=ultimas10dias",
+      "geoProxy": false,
       "hash": "8fa883df040d3e6e020070161913196d13ffc38badea110367bc8536d3a34fc2",
       "lastChangedAt": "2026-05-24T14:53:48.533Z",
       "lastCheckedAt": "2026-05-27T07:18:43.588Z",
@@ -114,7 +114,8 @@
     {
       "key": "ee",
       "url": "https://www.politsei.ee/en",
-      "geoProxy": true,
+      "monitorUrl": "https://www.eesti.ee/en/",
+      "geoProxy": false,
       "hash": "083322272aaf1916a51c53b1b9352c3b3792e0d45087c8348f0fec87cbd05881",
       "lastChangedAt": "2026-05-21T03:49:27.728Z",
       "lastCheckedAt": "2026-05-27T07:18:51.762Z",
@@ -253,8 +254,8 @@
     {
       "key": "pt",
       "url": "https://aima.gov.pt/pt",
-      "monitorUrl": "https://aima.gov.pt/pt/a-aima",
-      "geoProxy": true,
+      "monitorUrl": "https://dre.pt/dre/feeds/diariodarepublica",
+      "geoProxy": false,
       "hash": "c5025dd05219bc7c4d6d754c1fb22c32ef969f1d0de877c01b761f5b16cee584",
       "lastChangedAt": "2026-05-21T03:49:54.269Z",
       "lastCheckedAt": "2026-05-27T07:19:24.972Z",
