@@ -11,86 +11,63 @@ type ResizeData = {
   handle: "s" | "w" | "e" | "n" | "sw" | "nw" | "se" | "ne";
 };
 import type { Task, AgendaItem, Reminder, ScheduledAction } from "@/lib/types";
-import { STORAGE, load, save } from "@/lib/storage";
+import { INBOX_ACCOUNTS } from "@/lib/data";
+import { useDualStorage } from "@/lib/dual-storage";
 import {
-  DEFAULT_TASKS,
-  DEFAULT_AGENDA,
-  DEFAULT_REMINDERS,
-  DEFAULT_SCHEDULED,
-  INBOX_ACCOUNTS,
-} from "@/lib/data";
-import { applySystemSeed } from "@/lib/systemSeed";
+  tasksConfig,
+  agendaConfig,
+  remindersConfig,
+  scheduledConfig,
+} from "@/lib/dual-storage-configs";
 import { useToast } from "./ToastProvider";
 
 export type DailyBlock = "inbox" | "scheduled" | "agenda" | "tasks" | "reminders";
 
 export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [agenda, setAgenda] = useState<AgendaItem[]>([]);
-  const [reminders, setReminders] = useState<Reminder[]>([]);
-  const [scheduled, setScheduled] = useState<ScheduledAction[]>([]);
-  const [hydrated, setHydrated] = useState(false);
+  const tasksHook = useDualStorage(tasksConfig);
+  const agendaHook = useDualStorage(agendaConfig);
+  const remindersHook = useDualStorage(remindersConfig);
+  const scheduledHook = useDualStorage(scheduledConfig);
+
+  const tasks = tasksHook.items;
+  const agenda = agendaHook.items;
+  const reminders = remindersHook.items;
+  const scheduled = scheduledHook.items;
+  const hydrated =
+    tasksHook.hydrated && agendaHook.hydrated && remindersHook.hydrated && scheduledHook.hydrated;
+
   const [draggingId, setDraggingId] = useState<number | null>(null);
   const toast = useToast();
-
-  useEffect(() => {
-    const loadedTasks = load(STORAGE.tasks, DEFAULT_TASKS);
-    const loadedReminders = load(STORAGE.reminders, DEFAULT_REMINDERS);
-    const storedSeedVersion = load(STORAGE.seedVersion, 0);
-
-    const seed = applySystemSeed(loadedTasks, loadedReminders, storedSeedVersion);
-
-    setTasks(seed.tasks);
-    setAgenda(load(STORAGE.agenda, DEFAULT_AGENDA));
-    setReminders(seed.reminders);
-    setScheduled(load(STORAGE.scheduled, DEFAULT_SCHEDULED));
-
-    if (seed.changed || storedSeedVersion !== seed.newVersion) {
-      save(STORAGE.seedVersion, seed.newVersion);
-    }
-
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => { if (hydrated) save(STORAGE.tasks, tasks); }, [tasks, hydrated]);
-  useEffect(() => { if (hydrated) save(STORAGE.agenda, agenda); }, [agenda, hydrated]);
-  useEffect(() => { if (hydrated) save(STORAGE.reminders, reminders); }, [reminders, hydrated]);
-  useEffect(() => { if (hydrated) save(STORAGE.scheduled, scheduled); }, [scheduled, hydrated]);
 
   const inboxTotal = INBOX_ACCOUNTS.reduce((s, a) => s + a.unread, 0);
   const tasksRemaining = tasks.filter((t) => !t.done).length;
 
   // ===== task ops =====
-  const toggleTask = (id: number) => setTasks((ts) => ts.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
+  const toggleTask = (id: number) => {
+    const t = tasks.find((x) => x.id === id);
+    if (t) tasksHook.update(id, { done: !t.done });
+  };
   const editTask = (id: number, text: string) => {
-    if (!text.trim()) return setTasks((ts) => ts.filter((t) => t.id !== id));
-    setTasks((ts) => ts.map((t) => (t.id === id ? { ...t, text: text.trim() } : t)));
+    if (!text.trim()) return tasksHook.remove(id);
+    tasksHook.update(id, { text: text.trim() });
   };
-  const deleteTask = (id: number) => setTasks((ts) => ts.filter((t) => t.id !== id));
-  const addTask = () => {
-    const id = Math.max(0, ...tasks.map((t) => t.id)) + 1;
-    setTasks((ts) => [...ts, { id, text: "Nova tarefa", done: false }]);
-  };
+  const deleteTask = (id: number) => tasksHook.remove(id);
+  const addTask = () => tasksHook.add({ text: "Nova tarefa", done: false });
 
   // ===== agenda ops + drag =====
   const editAgenda = (id: number, field: "title" | "where" | "time", value: string) =>
-    setAgenda((a) => a.map((x) => (x.id === id ? { ...x, [field]: value } : x)));
-  const addAgenda = () => {
-    const id = Math.max(0, ...agenda.map((a) => a.id)) + 1;
-    setAgenda((a) => [...a, { id, time: "HH:MM", title: "Novo evento", where: "" }]);
-  };
-  const deleteAgenda = (id: number) => setAgenda((a) => a.filter((x) => x.id !== id));
+    agendaHook.update(id, { [field]: value } as Partial<AgendaItem>);
+  const addAgenda = () => agendaHook.add({ time: "00:00", title: "Novo evento", where: "" });
+  const deleteAgenda = (id: number) => agendaHook.remove(id);
   const reorderAgenda = (sourceId: number, targetId: number) => {
     if (sourceId === targetId) return;
-    setAgenda((prev) => {
-      const src = prev.findIndex((a) => a.id === sourceId);
-      const tgt = prev.findIndex((a) => a.id === targetId);
-      if (src === -1 || tgt === -1) return prev;
-      const next = [...prev];
-      const [moved] = next.splice(src, 1);
-      next.splice(tgt, 0, moved);
-      return next;
-    });
+    const src = agenda.findIndex((a) => a.id === sourceId);
+    const tgt = agenda.findIndex((a) => a.id === targetId);
+    if (src === -1 || tgt === -1) return;
+    const next = [...agenda];
+    const [moved] = next.splice(src, 1);
+    next.splice(tgt, 0, moved);
+    agendaHook.setAll(next);
   };
   const onDragStart = (id: number) => (e: DragEvent<HTMLDivElement>) => {
     setDraggingId(id);
@@ -111,25 +88,29 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
 
   // ===== reminder ops =====
   const editReminder = (id: number, text: string) => {
-    if (!text.trim()) return setReminders((r) => r.filter((x) => x.id !== id));
-    setReminders((r) => r.map((x) => (x.id === id ? { ...x, text: text.trim() } : x)));
+    if (!text.trim()) return remindersHook.remove(id);
+    remindersHook.update(id, { text: text.trim() });
   };
-  const addReminder = () => {
-    const id = Math.max(0, ...reminders.map((r) => r.id)) + 1;
-    setReminders((r) => [...r, { id, text: "Novo lembrete", when: "Hoje", crit: false }]);
-  };
+  const addReminder = () =>
+    remindersHook.add({ text: "Novo lembrete", when: "Hoje", crit: false });
 
   // ===== scheduled ops =====
   const editScheduledTitle = (id: number, title: string) => {
-    if (!title.trim()) return setScheduled((s) => s.filter((x) => x.id !== id));
-    setScheduled((s) => s.map((x) => (x.id === id ? { ...x, title: title.trim() } : x)));
+    if (!title.trim()) return scheduledHook.remove(id);
+    scheduledHook.update(id, { title: title.trim() });
   };
-  const toggleScheduled = (id: number) =>
-    setScheduled((s) => s.map((x) => (x.id === id ? { ...x, status: x.status === "active" ? "paused" : "active" } : x)));
-  const addScheduled = () => {
-    const id = Math.max(0, ...scheduled.map((a) => a.id)) + 1;
-    setScheduled((s) => [...s, { id, icon: "⚡", title: "Nova ação programada", frequency: "Diário", nextRun: "Amanhã", status: "active" }]);
+  const toggleScheduled = (id: number) => {
+    const s = scheduled.find((x) => x.id === id);
+    if (s) scheduledHook.update(id, { status: s.status === "active" ? "paused" : "active" });
   };
+  const addScheduled = () =>
+    scheduledHook.add({
+      icon: "⚡",
+      title: "Nova ação programada",
+      frequency: "Diário",
+      nextRun: "Amanhã",
+      status: "active",
+    });
 
   const inboxCard = (
         <DailyCard
