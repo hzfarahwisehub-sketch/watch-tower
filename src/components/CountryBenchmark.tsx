@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { COUNTRIES } from "@/lib/data";
 import type { Country, Status } from "@/lib/types";
+import { CountryLiveActivity } from "./CountryLiveActivity";
 
 const STATUS_COLOR: Record<Status, string> = {
   crit: "var(--color-status-critical)",
@@ -169,12 +170,14 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
               </div>
             )}
 
+            <CountryLiveActivity countryCode={country.code} />
+
             <div>
               <h4
                 className="text-[10.5px] tracking-[2px] uppercase font-bold mb-2 flex items-center gap-2"
                 style={{ color: "var(--color-wh-blue-light)" }}
               >
-                📰 Atualizações ({country.events.length})
+                📰 Histórico curado ({country.events.length})
               </h4>
               <ul className="flex flex-col gap-2.5">
                 {country.events.map((ev, i) => (
