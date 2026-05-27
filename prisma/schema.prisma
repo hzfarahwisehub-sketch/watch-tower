@@ -1,0 +1,153 @@
+// Watch Tower · Fase 2 — Auth + Persistencia
+// Banco: Neon Postgres (free tier 0.5GB)
+// Auth: NextAuth v5 + EmailProvider (Magic Link via Resend)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// NextAuth · tabelas obrigatorias do PrismaAdapter
+// ============================================================
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  role          String    @default("editor") // "admin" | "editor"
+  allowlisted   Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts          Account[]
+  sessions          Session[]
+  tasks             Task[]
+  agendaItems       AgendaItem[]
+  reminders         Reminder[]
+  scheduledActions  ScheduledAction[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ============================================================
+// Allowlist · controle de quem pode logar
+// ============================================================
+
+model AllowedEmail {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  role      String   @default("editor") // "admin" | "editor"
+  addedBy   String?  // email do admin que adicionou
+  addedAt   DateTime @default(now())
+  notes     String?
+}
+
+// ============================================================
+// Dominio Watch Tower · 4 entidades editaveis no dashboard
+// ============================================================
+
+model Task {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  done      Boolean  @default(false)
+  priority  String   @default("normal") // "low" | "normal" | "high" | "critical"
+  dueDate   DateTime?
+  notes     String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, done])
+  @@index([userId, dueDate])
+}
+
+model AgendaItem {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  description String?  @db.Text
+  scheduledAt DateTime
+  durationMin Int      @default(30)
+  location    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, scheduledAt])
+}
+
+model Reminder {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  triggerAt DateTime
+  recurring String?  // "daily" | "weekly" | "monthly" | null
+  done      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, triggerAt])
+  @@index([userId, done])
+}
+
+model ScheduledAction {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  cronExpr  String   // "0 8 * * *" formato cron
+  active    Boolean  @default(true)
+  lastRunAt DateTime?
+  nextRunAt DateTime?
+  payload   Json?    // dados arbitrários da acao
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, active])
+}
