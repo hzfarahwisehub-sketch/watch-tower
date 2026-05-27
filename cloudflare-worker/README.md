@@ -4,11 +4,15 @@ Cloudflare Worker que faz proxy de fetch pros sites EU bloqueados pro IP do GitH
 
 ## Por quê
 
-O cron `check-bulletins.mjs` roda no Azure US-East (datacenter do GitHub Actions). Alguns sites governamentais europeus (AIMA Portugal, Inclusión Espanha, DGEF França, BAMF Alemanha) bloqueiam IPs de datacenter US → cron retorna 403.
+O cron `check-bulletins.mjs` roda no Azure US-East (datacenter do GitHub Actions). Alguns sites governamentais europeus bloqueiam IPs de datacenter US → cron retorna 403/empty.
 
 Cloudflare Workers roda em PoPs globais (incluindo Europa). Worker faz fetch como se fosse usuário EU normal, devolve body pro cron.
 
-## Deploy (3 passos · 10min · $0)
+## Estado atual
+
+**O Worker NÃO está deployado (confirmado 2026-05-27).** Os 40 boletins funcionam por fetch direto + URLs alternativas (BOE RSS, DRE feed, eesti.ee). Mas alguns sites retornam body vazio (challenge HTML) — deploy do Worker resolve esses casos limítrofes.
+
+## Deploy (3 passos · 10min · $0 free tier)
 
 ### 1. Instalar wrangler
 
@@ -22,7 +26,7 @@ npm install -g wrangler
 wrangler login
 ```
 
-Abre browser, autoriza com tua conta Cloudflare (cria grátis em cloudflare.com se ainda não tem).
+Abre browser, autoriza com sua conta Cloudflare (cria grátis em [cloudflare.com](https://cloudflare.com) se ainda não tem).
 
 ### 3. Deploy
 
@@ -32,15 +36,15 @@ Daqui (`cloudflare-worker/`):
 wrangler deploy
 ```
 
-Output:
+Output esperado:
 
 ```
 Uploaded wt-geo-proxy (X.XX KB)
 Published wt-geo-proxy (X.XXs)
-  https://wt-geo-proxy.<teu-username>.workers.dev
+  https://wt-geo-proxy.<seu-username>.workers.dev
 ```
 
-Anota essa URL.
+**Anota essa URL** — vai precisar nos próximos passos.
 
 ### 4. (Opcional, recomendado) Adicionar secret de autenticação
 
@@ -50,33 +54,68 @@ Pra evitar que terceiros usem teu worker como proxy aberto:
 wrangler secret put PROXY_SECRET
 ```
 
-Digita uma string forte (ex: `openssl rand -hex 32`). Anota também.
+Digita uma string forte. Sugestão pra gerar: `openssl rand -hex 32`. Anota também.
 
 ### 5. Setar secrets no GitHub
 
-Repo Watch Tower → Settings → Secrets and variables → Actions → New repository secret:
+Você pode fazer via CLI:
 
-- **`WT_GEO_PROXY_URL`** = a URL do passo 3 (ex: `https://wt-geo-proxy.user.workers.dev`)
-- **`WT_GEO_PROXY_SECRET`** (opcional) = a string do passo 4
+```bash
+gh secret set WT_GEO_PROXY_URL --body "https://wt-geo-proxy.<seu-username>.workers.dev"
+gh secret set WT_GEO_PROXY_SECRET --body "<a-string-do-passo-4>"
+```
+
+Ou via UI: Repo Watch Tower → Settings → Secrets and variables → Actions → New repository secret.
 
 O workflow `.github/workflows/check-bulletins.yml` já está configurado pra ler essas vars.
 
+### 6. Validar com smoke test
+
+```bash
+WT_GEO_PROXY_URL=https://wt-geo-proxy.<seu-username>.workers.dev \
+WT_GEO_PROXY_SECRET=<opcional> \
+node smoke-test.mjs
+```
+
+Testa healthcheck + 7 sites geo-proxied. Sai com erro se algum falhar.
+
+### 7. Disparar workflow manualmente pra validar em produção
+
+```bash
+gh workflow run check-bulletins.yml
+gh run watch <run-id>
+```
+
+E confirmar que `public/bulletins-status.json` mostra `0 erros`.
+
 ## Como o cron usa
 
-O `check-bulletins.mjs` tem fallback:
+O `scripts/check-bulletins.mjs` tem fallback:
 
 1. Se `WT_GEO_PROXY_URL` setado E entry tem `geoProxy: true` → usa Worker
 2. Senão → fetch direto
 
-Entries em `public/bulletins-status.json` com `"geoProxy": true` passam pelo proxy:
-- 🇵🇹 PT (AIMA)
-- 🇪🇸 ES (Inclusión)
-- 🇫🇷 FR (DGEF)
-- 🇩🇪 DE (BAMF)
+Entries em `public/bulletins-status.json` com `"geoProxy": true` (7 países atualmente):
+- 🇵🇹 PT (DRE RSS · monitorUrl)
+- 🇪🇸 ES (BOE RSS · monitorUrl)
+- 🇪🇪 EE (Eesti.ee · monitorUrl)
+- 🇧🇬 BG (ARef Bulgaria)
+- 🇷🇴 RO (IGI Romania)
+- 🇫🇷 FR (OFII · monitorUrl)
+- 🇩🇪 DE (Destatis · monitorUrl)
 
 ## Healthcheck
 
 Visita `https://<teu-worker>.workers.dev/` → JSON com status.
+
+```json
+{
+  "service": "watch-tower-geo-proxy",
+  "ok": true,
+  "allowed_domains": 30,
+  "usage": "GET /?url=<target>&secret=<optional>"
+}
+```
 
 ## Allow-list
 
@@ -88,4 +127,8 @@ Visita `https://<teu-worker>.workers.dev/` → JSON com status.
 - 10ms CPU por request
 - Cache CF nativo (10min configurado)
 
-Pro nosso uso (1 cron/dia × 4 sites = 4 requests/dia) sobra bastante.
+Pro nosso uso (1 cron/dia × ~8 sites = ~8 requests/dia) sobra muito.
+
+## Tutorial em PDF
+
+Tem um tutorial PDF na raiz do projeto: `cloudflare-worker-deploy.pdf` (gerado em 2026-05-24).

@@ -29,14 +29,30 @@
  */
 
 const ALLOWED_DOMAINS = [
+  // PT — AIMA + Diario da Republica (RSS oficial)
   "aima.gov.pt",
+  "dre.pt",
+  // ES — Inclusión + BOE (RSS oficial usado como monitorUrl)
   "inclusion.gob.es",
+  "boe.es",
+  // FR
   "immigration.interieur.gouv.fr",
   "ofii.fr",
+  // DE
   "bamf.de",
   "destatis.de",
   "bmi.bund.de",
   "make-it-in-germany.com",
+  // EE — Politsei + Eesti.ee (portal cidadao usado como monitorUrl)
+  "politsei.ee",
+  "eesti.ee",
+  // BG
+  "aref.government.bg",
+  "government.bg",
+  // RO
+  "mai.gov.ro",
+  "igi.mai.gov.ro",
+  // Outros sites EU/UK monitorados
   "gov.uk",
   "gov.br",
   "gov.pl",
