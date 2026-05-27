@@ -1,13 +1,14 @@
-// NextAuth v5 + Magic Link via Resend + PrismaAdapter
-// Setup: env vars necessarias DATABASE_URL, AUTH_SECRET, RESEND_API_KEY,
-//        EMAIL_FROM (ex: "Watch Tower <noreply@wisehubnow.online>")
+// NextAuth v5 completo (Node runtime). Importa edge config + adiciona
+// PrismaAdapter + EmailProvider Resend. NAO importar daqui no middleware
+// (1MB limit). Pro middleware, usar src/middleware.ts que importa
+// auth.config.ts diretamente.
 import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { prisma } from "@/lib/prisma";
 import { Resend } from "resend";
+import { authConfig } from "@/auth.config";
+import { prisma } from "@/lib/prisma";
 
-// Lazy-init: o constructor do Resend explode se RESEND_API_KEY for vazia.
-// Inicializamos so quando precisar enviar (sendVerificationRequest).
+// Lazy-init: constructor do Resend explode se a key for vazia.
 function getResend(): Resend {
   const key = process.env.RESEND_API_KEY;
   if (!key) {
@@ -17,13 +18,8 @@ function getResend(): Resend {
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   adapter: PrismaAdapter(prisma),
-  session: { strategy: "jwt" },
-  pages: {
-    signIn: "/auth/signin",
-    verifyRequest: "/auth/verify",
-    error: "/auth/error",
-  },
   providers: [
     {
       id: "resend",
@@ -31,14 +27,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       type: "email",
       maxAge: 24 * 60 * 60, // 24h
       async sendVerificationRequest({ identifier: email, url }) {
-        // Allowlist check antes de enviar magic link
         const allowed = await prisma.allowedEmail.findUnique({ where: { email } });
         if (!allowed) {
-          // Loga mas nao envia (pra nao vazar quais emails estao na allowlist)
           console.warn(`[auth] tentativa de login fora da allowlist: ${email}`);
           return;
         }
-
         const from = process.env.EMAIL_FROM ?? "Watch Tower <noreply@wisehubnow.online>";
         const { error } = await getResend().emails.send({
           from,
@@ -54,11 +47,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     } as const,
   ],
   callbacks: {
+    ...authConfig.callbacks,
     async signIn({ user }) {
       if (!user.email) return false;
       const allowed = await prisma.allowedEmail.findUnique({ where: { email: user.email } });
       if (!allowed) return false;
-      // Sync role e allowlisted flag no User
       if (user.id) {
         await prisma.user.update({
           where: { id: user.id },
@@ -66,18 +59,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         });
       }
       return true;
-    },
-    async jwt({ token, user }) {
-      if (user) {
-        token.role = (user as { role?: string }).role ?? "editor";
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (session.user) {
-        (session.user as { role?: string }).role = (token.role as string) ?? "editor";
-      }
-      return session;
     },
   },
 });
