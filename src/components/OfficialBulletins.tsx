@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 
-type FreqColor = "live" | "monthly" | "quarterly" | "ondemand";
+export type FreqColor = "live" | "monthly" | "quarterly" | "ondemand";
 
-type Bulletin = {
+export type Bulletin = {
   key: string;
   country: string;
   flag: string;
@@ -13,7 +13,7 @@ type Bulletin = {
   freqColor: FreqColor;
 };
 
-type BulletinStatus = {
+export type BulletinStatus = {
   key: string;
   url: string;
   hash: string | null;
@@ -22,12 +22,12 @@ type BulletinStatus = {
   lastStatus: string | null;
 };
 
-type StatusFile = {
+export type StatusFile = {
   lastRun: string | null;
   bulletins: BulletinStatus[];
 };
 
-const BULLETINS: Bulletin[] = [
+export const BULLETINS: Bulletin[] = [
   // ===== AMÉRICA =====
   {
     key: "us",
