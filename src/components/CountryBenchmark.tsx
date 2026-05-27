@@ -214,11 +214,20 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
 
             <div>
               <h4
-                className="text-[10.5px] tracking-[2px] uppercase font-bold mb-2 flex items-center gap-2"
+                className="text-[10.5px] tracking-[2px] uppercase font-bold mb-1 flex items-center gap-2"
                 style={{ color: "var(--color-wh-blue-light)" }}
               >
-                📰 Histórico curado ({country.events.length})
+                📜 Marcos editoriais ({country.events.length})
+                <span
+                  className="text-[8.5px] tracking-wider font-bold px-1.5 py-0.5 rounded normal-case"
+                  style={{ color: "var(--text-3)", background: "rgba(255,255,255,.04)", letterSpacing: "1.5px" }}
+                >
+                  CURADO PELA EQUIPE
+                </span>
               </h4>
+              <p className="text-[10.5px] mb-2.5" style={{ color: "var(--text-3)" }}>
+                Contexto histórico selecionado pela equipe WiseHub. Para mudanças em tempo real, veja Atividade ao vivo acima.
+              </p>
               <ul className="flex flex-col gap-2.5">
                 {country.events.map((ev, i) => (
                   <li
@@ -240,15 +249,6 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
                       >
                         {ev.title}
                       </h5>
-                      <span
-                        className="text-[9.5px] uppercase tracking-wider font-bold flex-shrink-0 px-1.5 py-0.5 rounded"
-                        style={{
-                          color: "var(--text-3)",
-                          background: "rgba(255,255,255,.04)",
-                        }}
-                      >
-                        {ev.time}
-                      </span>
                     </div>
                     <p
                       className="text-[11.5px] leading-relaxed mb-1.5"
