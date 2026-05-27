@@ -149,8 +149,8 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
                 borderLeft: `3px solid ${STATUS_COLOR[status]}`,
                 paddingTop: 28,
                 paddingBottom: 28,
-                paddingLeft: 36,
-                paddingRight: 36,
+                paddingLeft: 32,
+                paddingRight: 44,
               }}
             >
               <div className="flex items-center gap-3 mb-3 flex-wrap min-w-0">
@@ -186,6 +186,8 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
                   overflowWrap: "anywhere",
                   wordBreak: "break-word",
                   lineHeight: 1.8,
+                  maxWidth: "56ch",
+                  paddingRight: 4,
                 }}
               >
                 Mudança detectada pelo cron diário no site oficial. Clique pra ver os detalhes do país ou abrir a fonte.

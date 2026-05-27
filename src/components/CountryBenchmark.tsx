@@ -3,6 +3,17 @@ import { useEffect, useState } from "react";
 import { COUNTRIES } from "@/lib/data";
 import type { Country, Status } from "@/lib/types";
 import { CountryLiveActivity } from "./CountryLiveActivity";
+import { useCountryChanges } from "@/lib/useCountryChanges";
+
+function fmtAge(days: number | null): string {
+  if (days === null) return "—";
+  if (days === 0) return "hoje";
+  if (days === 1) return "ontem";
+  if (days < 7) return `há ${days}d`;
+  if (days < 30) return `há ${Math.floor(days / 7)}sem`;
+  if (days < 365) return `há ${Math.floor(days / 30)}mês`;
+  return "+1 ano";
+}
 
 const STATUS_COLOR: Record<Status, string> = {
   crit: "var(--color-status-critical)",
@@ -40,6 +51,7 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
   }, [country.code]);
 
   const accent = STATUS_COLOR[country.status];
+  const changes = useCountryChanges(country.code);
 
   return (
     <section className="wt-card h-full flex flex-col @container">
@@ -70,8 +82,20 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
             {STATUS_LABEL[country.status]}
           </span>
         </div>
-        <span className="text-[10px] tracking-wider uppercase font-semibold text-right" style={{ color: "var(--text-3)" }}>
-          {country.changes} mudança{country.changes > 1 ? "s" : ""} · {country.authority}
+        <span className="text-[10px] tracking-wider uppercase font-semibold text-right flex items-center gap-2" style={{ color: "var(--text-3)" }}>
+          {changes.errored ? (
+            <span style={{ color: "var(--color-status-critical)" }}>● cron c/ erro</span>
+          ) : changes.lastChangedAt ? (
+            <>
+              <span style={{ color: changes.recentlyChanged ? "#10A570" : "var(--text-3)" }}>
+                {changes.recentlyChanged ? "✦ " : ""}última mudança {fmtAge(changes.daysSinceChange)}
+              </span>
+            </>
+          ) : (
+            <span>sem boletim monitorado</span>
+          )}
+          <span style={{ opacity: 0.5 }}>·</span>
+          <span>{country.authority}</span>
         </span>
       </header>
 
@@ -142,10 +166,26 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
                 style={{ background: "var(--bg2)", border: "1px solid var(--border)" }}
               >
                 <span className="uppercase tracking-wider font-bold" style={{ color: "var(--text-3)" }}>
-                  Mudanças
+                  Última mudança
                 </span>
-                <span className="font-extrabold text-[14px]" style={{ color: "var(--text)" }}>
-                  {country.changes} <span className="text-[10px] font-semibold" style={{ color: "var(--text-3)" }}>período</span>
+                <span
+                  className="font-extrabold text-[14px]"
+                  style={{
+                    color: changes.errored
+                      ? "var(--color-status-critical)"
+                      : changes.recentlyChanged
+                        ? "#10A570"
+                        : "var(--text)",
+                  }}
+                >
+                  {changes.errored
+                    ? "cron c/ erro"
+                    : changes.lastChangedAt
+                      ? fmtAge(changes.daysSinceChange)
+                      : "—"}
+                  {changes.recentlyChanged && (
+                    <span className="text-[10px] font-semibold ml-1" style={{ color: "#10A570" }}>NOVO</span>
+                  )}
                 </span>
               </div>
             </div>

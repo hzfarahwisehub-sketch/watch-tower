@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: check-bulletins
@@ -59,3 +60,53 @@ jobs:
           changed=$(node -e "const d=require('./public/bulletins-status.json');console.log(d.bulletins.filter(b=>b.lastStatus==='changed').map(b=>b.key.toUpperCase()).join(', ')||'(seed)');")
           git commit -m "chore(bulletins): auto-update status · $changed"
           git push
+
+      - name: Alert on errors (annotation + issue)
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Lê o JSON e classifica erros. Threshold: >= 3 erros abre issue.
+          # Quando volta pra 0, fecha automaticamente o issue aberto.
+          summary=$(node -e "
+            const d = require('./public/bulletins-status.json');
+            const errs = d.bulletins.filter(b => b.lastStatus && b.lastStatus.startsWith('error'));
+            const total = d.bulletins.length;
+            const out = {
+              total,
+              errorCount: errs.length,
+              errorKeys: errs.map(e => e.key.toUpperCase()).join(', '),
+              errorDetails: errs.map(e => '- ' + e.key.toUpperCase() + ': ' + e.lastStatus + ' (' + (e.monitorUrl || e.url) + ')').join('\\n'),
+              lastRun: d.lastRun,
+            };
+            console.log(JSON.stringify(out));
+          ")
+          count=$(echo "$summary" | node -e "console.log(JSON.parse(require('fs').readFileSync(0)).errorCount)")
+          total=$(echo "$summary" | node -e "console.log(JSON.parse(require('fs').readFileSync(0)).total)")
+          keys=$(echo "$summary" | node -e "console.log(JSON.parse(require('fs').readFileSync(0)).errorKeys)")
+          details=$(echo "$summary" | node -e "console.log(JSON.parse(require('fs').readFileSync(0)).errorDetails)")
+          lastRun=$(echo "$summary" | node -e "console.log(JSON.parse(require('fs').readFileSync(0)).lastRun)")
+
+          ISSUE_TITLE="Watch Tower · cron bulletins com erros"
+
+          # Busca issue aberta com esse título
+          existing=$(gh issue list --state open --search "in:title $ISSUE_TITLE" --json number,title --jq '.[] | select(.title=="'"$ISSUE_TITLE"'") | .number' | head -1 || echo "")
+
+          if [ "$count" -ge 3 ]; then
+            echo "::warning::Cron bulletins com $count erros ($keys) — abrindo/atualizando issue"
+            body=$(printf "## %s erros detectados no cron de %s\n\nÚltima varredura: %s\n\n%s\n\n---\nAuto-update via workflow check-bulletins. Issue fechado automaticamente quando errorCount voltar a 0." "$count" "$total" "$lastRun" "$details")
+            if [ -z "$existing" ]; then
+              gh issue create --title "$ISSUE_TITLE" --body "$body" --label "watch-tower,cron-alert" 2>&1 || gh issue create --title "$ISSUE_TITLE" --body "$body" 2>&1
+            else
+              gh issue comment "$existing" --body "$body"
+            fi
+          elif [ "$count" -gt 0 ]; then
+            echo "::warning::Cron bulletins com $count erro(s) ($keys) — abaixo do threshold (3) pra issue"
+          else
+            echo "Cron OK · 0 erros de $total bulletins"
+            if [ -n "$existing" ]; then
+              echo "::notice::Erros resolvidos · fechando issue #$existing"
+              gh issue comment "$existing" --body "Resolvido: 0 erros em $total bulletins na varredura de $lastRun. Fechando automaticamente."
+              gh issue close "$existing"
+            fi
+          fi

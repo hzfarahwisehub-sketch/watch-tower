@@ -24,6 +24,7 @@ export function Header() {
     diffMin === 0 ? "atualizado agora" :
     diffMin === 1 ? "atualizado há 1min" :
     `atualizado há ${diffMin}min`;
+  const liveLabelShort = diffMin === 0 ? "ao vivo" : `${diffMin}min`;
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -46,25 +47,25 @@ export function Header() {
         boxShadow: "var(--shadow-bar)",
       }}
     >
-      <div className="flex items-center gap-3.5 min-w-0 flex-1">
+      <div className="flex items-center gap-3 md:gap-3.5 min-w-0 flex-1">
         <Image
           src={logoSrc}
           alt="WiseHub"
           width={160}
           height={40}
           priority
-          className="h-9 w-auto flex-shrink-0"
+          className="h-7 md:h-9 w-auto flex-shrink-0"
         />
         <div
-          className="w-px h-8 flex-shrink-0"
+          className="hidden md:block w-px h-8 flex-shrink-0"
           style={{ background: "linear-gradient(180deg, transparent, var(--color-wh-blue), transparent)" }}
         />
         <div className="min-w-0">
-          <h1 className="text-[clamp(15px,1.8vw,20px)] font-extrabold tracking-[2px] uppercase leading-none truncate">
+          <h1 className="text-[clamp(13px,1.8vw,20px)] font-extrabold tracking-[1.5px] md:tracking-[2px] uppercase leading-none truncate">
             Watch <span style={{ color: "var(--color-wh-blue-light)" }}>Tower</span>
           </h1>
           <div
-            className="text-[10px] tracking-[2.5px] uppercase mt-1.5 font-medium truncate"
+            className="hidden sm:block text-[10px] tracking-[2.5px] uppercase mt-1.5 font-medium truncate"
             style={{ color: "var(--text-3)" }}
           >
             Monitoramento Global de Imigração
@@ -82,7 +83,8 @@ export function Header() {
           }}
         >
           <span className="wt-live-dot" />
-          <span>{liveLabel}</span>
+          <span className="hidden sm:inline">{liveLabel}</span>
+          <span className="sm:hidden">{liveLabelShort}</span>
         </div>
 
         <IconBtn title="Alternar tema" onClick={toggle}>
