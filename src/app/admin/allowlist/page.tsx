@@ -112,12 +112,12 @@ export default function AllowlistPage() {
         <header className="flex items-center justify-between gap-4 flex-wrap">
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             <Image
-              src="/brand/wisehub-logo-dark.svg"
-              alt="WiseHub"
-              width={150}
-              height={36}
+              src="/brand/watchtower-icon.png"
+              alt="WiseHub Watch Tower"
+              width={40}
+              height={40}
               priority
-              className="h-8 w-auto"
+              className="h-9 w-9 rounded-[10px]"
             />
             <span
               className="text-[14px] font-extrabold tracking-[2.5px] uppercase"

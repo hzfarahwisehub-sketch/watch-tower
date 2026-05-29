@@ -106,12 +106,12 @@ export default function AuthErrorPage() {
       <div className="w-full max-w-[440px] flex flex-col items-center gap-8 relative z-10">
         <div className="flex flex-col items-center gap-3">
           <Image
-            src="/brand/wisehub-logo-dark.svg"
-            alt="WiseHub"
-            width={180}
-            height={45}
+            src="/brand/watchtower-icon.png"
+            alt="WiseHub Watch Tower"
+            width={72}
+            height={72}
             priority
-            className="h-10 w-auto"
+            className="h-16 w-16 rounded-2xl"
           />
           <div className="flex items-center gap-2.5">
             <span

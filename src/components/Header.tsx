@@ -46,8 +46,6 @@ export function Header() {
     }, 1200);
   };
 
-  const logoSrc = theme === "dark" ? "/brand/wisehub-logo-dark.svg" : "/brand/wisehub-logo-light.svg";
-
   return (
     <header
       className="flex items-center justify-between gap-4 mb-6 px-5 py-4 flex-wrap rounded-2xl"
@@ -59,12 +57,13 @@ export function Header() {
     >
       <div className="flex items-center gap-3 md:gap-3.5 min-w-0 flex-1">
         <Image
-          src={logoSrc}
-          alt="WiseHub"
-          width={160}
-          height={40}
+          src="/brand/watchtower-icon.png"
+          alt="WiseHub Watch Tower"
+          width={48}
+          height={48}
           priority
-          className="h-7 md:h-9 w-auto flex-shrink-0"
+          className="h-9 w-9 md:h-10 md:w-10 rounded-[11px] flex-shrink-0"
+          style={{ boxShadow: "0 0 0 1px var(--border), 0 3px 12px rgba(31,85,255,.3)" }}
         />
         <div
           className="hidden md:block w-px h-8 flex-shrink-0"
