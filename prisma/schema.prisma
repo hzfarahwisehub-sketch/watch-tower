@@ -59,6 +59,25 @@ model User {
   agendaItems       AgendaItem[]
   reminders         Reminder[]
   scheduledActions  ScheduledAction[]
+  pushSubscriptions PushSubscription[]
+}
+
+// ============================================================
+// Push (Web Push / PWA) · inscrições por usuário+device
+// ============================================================
+
+model PushSubscription {
+  id        String   @id @default(cuid())
+  userId    String
+  endpoint  String   @unique
+  p256dh    String   // chave pública do device (base64url)
+  auth      String   // segredo de autenticação (base64url)
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model VerificationToken {
@@ -120,19 +139,21 @@ model AgendaItem {
 }
 
 model Reminder {
-  id        String   @id @default(cuid())
-  userId    String
-  title     String
-  triggerAt DateTime
-  recurring String?  // "daily" | "weekly" | "monthly" | null
-  done      Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String    @id @default(cuid())
+  userId     String
+  title      String
+  triggerAt  DateTime
+  recurring  String?   // "daily" | "weekly" | "monthly" | null
+  done       Boolean   @default(false)
+  notifiedAt DateTime? // quando o push deste disparo foi enviado (idempotência do cron)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, triggerAt])
   @@index([userId, done])
+  @@index([notifiedAt, triggerAt])
 }
 
 model ScheduledAction {

@@ -4,7 +4,13 @@
 import type { NextAuthConfig } from "next-auth";
 
 export const authConfig: NextAuthConfig = {
-  session: { strategy: "jwt" },
+  // Uso interno (4 sócios, máx ~10 pessoas) em devices próprios → sessão longa
+  // pra não forçar re-login a cada visita. 90 dias, renovada a cada 24h de uso.
+  session: {
+    strategy: "jwt",
+    maxAge: 90 * 24 * 60 * 60, // 90 dias
+    updateAge: 24 * 60 * 60, // renova o token no máx 1x/dia
+  },
   pages: {
     signIn: "/auth/signin",
     verifyRequest: "/auth/verify",

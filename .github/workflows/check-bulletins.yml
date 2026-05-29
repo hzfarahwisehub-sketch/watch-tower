@@ -61,6 +61,32 @@ jobs:
           git commit -m "chore(bulletins): auto-update status · $changed"
           git push
 
+      - name: Notify push subscribers (bulletins changed)
+        env:
+          WT_APP_URL: ${{ secrets.WT_APP_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          # Lê do JSON recém-escrito quais boletins mudaram nesta varredura.
+          changed=$(node -e "const d=require('./public/bulletins-status.json');console.log(d.bulletins.filter(b=>b.lastStatus==='changed').map(b=>b.key).join(','));")
+          if [ -z "$changed" ]; then
+            echo "Nenhum boletim mudou nesta varredura — sem push."
+            exit 0
+          fi
+          if [ -z "$WT_APP_URL" ] || [ -z "$CRON_SECRET" ]; then
+            echo "::notice::WT_APP_URL/CRON_SECRET não configurados — pulando push (sem regressão)."
+            exit 0
+          fi
+          echo "Disparando push pros boletins alterados: $changed"
+          code=$(curl -sS -o /tmp/push_resp.txt -w "%{http_code}" -X POST "$WT_APP_URL/api/cron/notify-bulletins" \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            -H "Content-Type: application/json" \
+            -d "{\"changed\":\"$changed\"}" \
+            --max-time 60 || echo "000")
+          echo "HTTP $code · resposta: $(cat /tmp/push_resp.txt 2>/dev/null)"
+          if [ "$code" != "200" ]; then
+            echo "::warning::Push de boletins não retornou 200 (got $code) — não bloqueia o workflow."
+          fi
+
       - name: Alert on errors (annotation + issue)
         if: always()
         env:

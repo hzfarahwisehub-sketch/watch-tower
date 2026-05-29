@@ -7,6 +7,7 @@ import { useTheme } from "./ThemeProvider";
 import { useToast } from "./ToastProvider";
 import { useSettings } from "./SettingsProvider";
 import { ExportButton } from "./ExportButton";
+import { PushToggle } from "./PushToggle";
 
 export function Header() {
   const { theme, toggle } = useTheme();
@@ -229,6 +230,12 @@ export function Header() {
                       🔐 Allowlist · gerenciar acesso
                     </Link>
                   )}
+
+                  <div className="my-1 border-t" style={{ borderColor: "var(--border)" }} />
+
+                  <PushToggle />
+
+                  <div className="my-1 border-t" style={{ borderColor: "var(--border)" }} />
 
                   <button
                     type="button"

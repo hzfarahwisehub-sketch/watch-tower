@@ -49,6 +49,33 @@ export function requireAdmin(session: ApiSession): NextResponse | null {
   return null;
 }
 
+/**
+ * Protege rotas de cron (chamadas por GitHub Actions / scheduler externo).
+ * Aceita o segredo via `Authorization: Bearer <CRON_SECRET>` ou header
+ * `x-cron-secret`. Sem CRON_SECRET configurado → 503 (feature desligada).
+ */
+export function requireCronSecret(
+  req: Request,
+): { ok: true } | { ok: false; response: NextResponse } {
+  const secret = process.env.CRON_SECRET;
+  if (!secret) {
+    return {
+      ok: false,
+      response: NextResponse.json({ error: "cron_not_configured" }, { status: 503 }),
+    };
+  }
+  const authHeader = req.headers.get("authorization") ?? "";
+  const bearer = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
+  const headerSecret = req.headers.get("x-cron-secret") ?? "";
+  if (bearer !== secret && headerSecret !== secret) {
+    return {
+      ok: false,
+      response: NextResponse.json({ error: "unauthorized" }, { status: 401 }),
+    };
+  }
+  return { ok: true };
+}
+
 export function badRequest(message: string, details?: unknown): NextResponse {
   return NextResponse.json({ error: "bad_request", message, details }, { status: 400 });
 }
