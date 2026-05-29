@@ -55,14 +55,14 @@ export function Header() {
         boxShadow: "var(--shadow-bar)",
       }}
     >
-      <div className="flex items-center gap-3 md:gap-3.5 min-w-0 flex-1">
+      <div className="flex items-center gap-3 md:gap-3.5 min-w-0 flex-auto">
         <Image
           src="/brand/watchtower-icon.png"
           alt="WiseHub Watch Tower"
           width={48}
           height={48}
           priority
-          className="h-9 w-9 md:h-10 md:w-10 rounded-[11px] flex-shrink-0"
+          className="h-9 w-9 md:h-10 md:w-10 min-w-9 md:min-w-10 max-w-none rounded-[11px] flex-shrink-0"
           style={{ boxShadow: "0 0 0 1px var(--border), 0 3px 12px rgba(31,85,255,.3)" }}
         />
         <div
