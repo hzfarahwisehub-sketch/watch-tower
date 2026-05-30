@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { requireSession, badRequest, notFound } from "@/lib/api-helpers";
+import { requireSession, badRequest, notFound, canMutateTeamItem } from "@/lib/api-helpers";
+import { notifyTeamChange } from "@/lib/team-notify";
 
 export const runtime = "nodejs";
 
@@ -22,11 +23,13 @@ export async function PATCH(req: NextRequest, ctx: { params: Promise<{ id: strin
   const parsed = UpdateAgenda.safeParse(body);
   if (!parsed.success) return badRequest("invalid_body", parsed.error.format());
 
-  const owned = await prisma.agendaItem.findFirst({
-    where: { id, userId: result.session.userId },
-    select: { id: true },
-  });
-  if (!owned) return notFound();
+  const item = await prisma.agendaItem.findUnique({ where: { id }, select: { id: true, userId: true, scope: true } });
+  if (!item) return notFound();
+  if (item.scope === "team") {
+    if (!canMutateTeamItem(item.userId, result.session)) return NextResponse.json({ error: "forbidden" }, { status: 403 });
+  } else if (item.userId !== result.session.userId) {
+    return notFound();
+  }
 
   const updateData: Record<string, unknown> = {};
   if (parsed.data.title !== undefined) updateData.title = parsed.data.title;
@@ -35,8 +38,11 @@ export async function PATCH(req: NextRequest, ctx: { params: Promise<{ id: strin
   if (parsed.data.durationMin !== undefined) updateData.durationMin = parsed.data.durationMin;
   if (parsed.data.location !== undefined) updateData.location = parsed.data.location;
 
-  const item = await prisma.agendaItem.update({ where: { id }, data: updateData });
-  return NextResponse.json({ item });
+  const updated = await prisma.agendaItem.update({ where: { id }, data: updateData });
+  if (item.scope === "team") {
+    await notifyTeamChange({ actorEmail: result.session.email, action: "editou", entity: "item de agenda", title: updated.title });
+  }
+  return NextResponse.json({ item: updated });
 }
 
 export async function DELETE(_req: NextRequest, ctx: { params: Promise<{ id: string }> }) {
@@ -44,12 +50,17 @@ export async function DELETE(_req: NextRequest, ctx: { params: Promise<{ id: str
   if (!result.ok) return result.response;
 
   const { id } = await ctx.params;
-  const owned = await prisma.agendaItem.findFirst({
-    where: { id, userId: result.session.userId },
-    select: { id: true },
-  });
-  if (!owned) return notFound();
+  const item = await prisma.agendaItem.findUnique({ where: { id }, select: { id: true, userId: true, scope: true, title: true } });
+  if (!item) return notFound();
+  if (item.scope === "team") {
+    if (!canMutateTeamItem(item.userId, result.session)) return NextResponse.json({ error: "forbidden" }, { status: 403 });
+  } else if (item.userId !== result.session.userId) {
+    return notFound();
+  }
 
   await prisma.agendaItem.delete({ where: { id } });
+  if (item.scope === "team") {
+    await notifyTeamChange({ actorEmail: result.session.email, action: "apagou", entity: "item de agenda", title: item.title });
+  }
   return NextResponse.json({ ok: true });
 }

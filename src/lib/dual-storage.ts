@@ -52,6 +52,8 @@ export type DualStorageConfig<TLocal extends { id: number }, TDb extends { id: s
   apiPath: string;
   /** Nome do array no JSON da API. ex: "tasks", "items", "reminders" */
   apiArrayKey: string;
+  /** Escopo: "personal" (default) ou "team" (quadro compartilhado da equipe). */
+  scope?: "personal" | "team";
   /** Adapter DB → local */
   fromDb: (dbItem: TDb, idMap: IdMap) => TLocal;
   /** Adapter local → DB (pra create POST body) */
@@ -80,7 +82,7 @@ export function useDualStorage<
       if (isLoggedIn) {
         // Carrega da API
         try {
-          const res = await fetch(config.apiPath, { cache: "no-store" });
+          const res = await fetch(`${config.apiPath}?scope=${config.scope ?? "personal"}`, { cache: "no-store" });
           if (res.status === 401) {
             // Fallback pra local (provavelmente token expirou)
             setItems(load(config.storageKey, config.defaults));
@@ -98,7 +100,8 @@ export function useDualStorage<
           // Migration one-shot: se localStorage tem items E nao foi migrado ainda
           const migrationFlag = `${config.storageKey}__migrated`;
           const wasMigrated = load(migrationFlag, false);
-          if (!wasMigrated) {
+          // Quadro de equipe nunca importa o localStorage pessoal antigo.
+          if (!wasMigrated && config.scope !== "team") {
             const localOnly = load(config.storageKey, config.defaults);
             // Filtra defaults (heuristica simples: nao migra defaults sem alteracao)
             const itemsToMigrate = localOnly.filter((local) => {
@@ -158,7 +161,7 @@ export function useDualStorage<
   /** Adiciona item. Retorna o id local atribuído. */
   const add = useCallback(async (item: Omit<TLocal, "id">): Promise<number | null> => {
     if (isLoggedIn) {
-      const res = await fetch(config.apiPath, {
+      const res = await fetch(`${config.apiPath}?scope=${config.scope ?? "personal"}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(config.toCreatePayload(item)),

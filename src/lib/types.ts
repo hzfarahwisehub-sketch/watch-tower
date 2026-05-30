@@ -35,6 +35,8 @@ export interface Task {
   id: number;
   text: string;
   done: boolean;
+  /** Executor (só itens de equipe) — "Friday", "Hammis", etc. */
+  author?: string;
 }
 
 export interface AgendaItem {
@@ -42,6 +44,7 @@ export interface AgendaItem {
   time: string;
   title: string;
   where: string;
+  author?: string;
 }
 
 export interface Reminder {
@@ -49,6 +52,7 @@ export interface Reminder {
   text: string;
   when: string;
   crit?: boolean;
+  author?: string;
 }
 
 export interface ScheduledAction {
@@ -58,4 +62,5 @@ export interface ScheduledAction {
   frequency: string;
   nextRun: string;
   status: "active" | "paused";
+  author?: string;
 }

@@ -1,5 +1,5 @@
 "use client";
-import { forwardRef, useEffect, useState, DragEvent } from "react";
+import { forwardRef, useEffect, useMemo, useState, DragEvent } from "react";
 // @ts-expect-error - react-resizable v3 não envia types
 import { Resizable } from "react-resizable";
 import "react-resizable/css/styles.css";
@@ -23,11 +23,36 @@ import { useToast } from "./ToastProvider";
 
 export type DailyBlock = "inbox" | "scheduled" | "agenda" | "tasks" | "reminders";
 
+export type BoardScope = "personal" | "team";
+
 export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
-  const tasksHook = useDualStorage(tasksConfig);
-  const agendaHook = useDualStorage(agendaConfig);
-  const remindersHook = useDualStorage(remindersConfig);
-  const scheduledHook = useDualStorage(scheduledConfig);
+  // Aba Pessoal | Equipe (lembrada por bloco). Default = Equipe, pra mostrar
+  // o trabalho compartilhado do time já de cara.
+  const scopeKey = `wt-scope-${only ?? "all"}`;
+  const [scope, setScope] = useState<BoardScope>("team");
+  const [scopeHydrated, setScopeHydrated] = useState(false);
+  useEffect(() => {
+    try {
+      const s = localStorage.getItem(scopeKey);
+      if (s === "personal" || s === "team") setScope(s);
+    } catch {}
+    setScopeHydrated(true);
+  }, [scopeKey]);
+  useEffect(() => {
+    if (scopeHydrated) {
+      try { localStorage.setItem(scopeKey, scope); } catch {}
+    }
+  }, [scope, scopeHydrated, scopeKey]);
+
+  const tCfg = useMemo(() => ({ ...tasksConfig, scope }), [scope]);
+  const aCfg = useMemo(() => ({ ...agendaConfig, scope }), [scope]);
+  const rCfg = useMemo(() => ({ ...remindersConfig, scope }), [scope]);
+  const sCfg = useMemo(() => ({ ...scheduledConfig, scope }), [scope]);
+
+  const tasksHook = useDualStorage(tCfg);
+  const agendaHook = useDualStorage(aCfg);
+  const remindersHook = useDualStorage(rCfg);
+  const scheduledHook = useDualStorage(sCfg);
 
   const tasks = tasksHook.items;
   const agenda = agendaHook.items;
@@ -181,6 +206,8 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
           action="+ Ação"
           onAction={addScheduled}
           bodyMaxHeight={300}
+          scope={scope}
+          onScopeChange={setScope}
         >
           {scheduled.map((sa) => (
             <div
@@ -217,6 +244,9 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
                   <span style={{ color: sa.status === "active" ? "var(--color-status-stable)" : "var(--text-3)" }}>
                     → {sa.nextRun}
                   </span>
+                  {scope === "team" && sa.author && (
+                    <span style={{ color: "var(--color-wh-blue-light)" }}>· {sa.author}</span>
+                  )}
                 </div>
               </div>
               <button
@@ -241,6 +271,8 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
         action="+ Evento"
         onAction={addAgenda}
         bodyMaxHeight={560}
+        scope={scope}
+        onScopeChange={setScope}
       >
         {agenda.map((a) => (
           <div
@@ -302,6 +334,11 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
               >
                 {a.where || "—"}
               </div>
+              {scope === "team" && a.author && (
+                <div className="text-[8.5px] uppercase tracking-wide font-bold mt-1" style={{ color: "var(--color-wh-blue-light)" }}>
+                  por {a.author}
+                </div>
+              )}
             </div>
             <button
               type="button"
@@ -330,6 +367,8 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
         action="+ Tarefa"
         onAction={addTask}
         bodyMaxHeight={560}
+        scope={scope}
+        onScopeChange={setScope}
       >
         {tasks.map((t) => (
           <div
@@ -350,19 +389,26 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
             >
               {t.done ? "✓" : ""}
             </button>
-            <div
-              contentEditable
-              suppressContentEditableWarning
-              onBlur={(e) => editTask(t.id, e.currentTarget.textContent || "")}
-              className="flex-1 min-w-0 text-[11.5px] font-medium outline-none px-1 py-0.5 rounded leading-snug cursor-text"
-              style={{
-                color: t.done ? "var(--text-3)" : "var(--text)",
-                textDecoration: t.done ? "line-through" : undefined,
-                overflowWrap: "anywhere",
-                wordBreak: "break-word",
-              }}
-            >
-              {t.text}
+            <div className="flex-1 min-w-0">
+              <div
+                contentEditable
+                suppressContentEditableWarning
+                onBlur={(e) => editTask(t.id, e.currentTarget.textContent || "")}
+                className="text-[11.5px] font-medium outline-none px-1 py-0.5 rounded leading-snug cursor-text"
+                style={{
+                  color: t.done ? "var(--text-3)" : "var(--text)",
+                  textDecoration: t.done ? "line-through" : undefined,
+                  overflowWrap: "anywhere",
+                  wordBreak: "break-word",
+                }}
+              >
+                {t.text}
+              </div>
+              {scope === "team" && t.author && (
+                <div className="text-[8.5px] uppercase tracking-wide font-bold mt-0.5 px-1" style={{ color: "var(--color-wh-blue-light)" }}>
+                  por {t.author}
+                </div>
+              )}
             </div>
             <button
               type="button"
@@ -386,6 +432,8 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
         action="+ Lembrete"
         onAction={addReminder}
         bodyMaxHeight={300}
+        scope={scope}
+        onScopeChange={setScope}
       >
         {reminders.map((r) => (
           <div
@@ -421,6 +469,9 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
                 style={{ color: "var(--text-3)" }}
               >
                 {r.when}
+                {scope === "team" && r.author && (
+                  <span style={{ color: "var(--color-wh-blue-light)" }}> · por {r.author}</span>
+                )}
               </div>
             </div>
           </div>
@@ -472,6 +523,8 @@ function DailyCard({
   onAction,
   children,
   bodyMaxHeight = 280,
+  scope,
+  onScopeChange,
 }: {
   cardKey: string;
   title: string;
@@ -481,6 +534,8 @@ function DailyCard({
   onAction: () => void;
   children: React.ReactNode;
   bodyMaxHeight?: number;
+  scope?: BoardScope;
+  onScopeChange?: (s: BoardScope) => void;
 }) {
   const { locked } = useSettings();
   const storageKey = `wt-daily-card-h-${cardKey}`;
@@ -536,6 +591,28 @@ function DailyCard({
           >
             {title}
           </h2>
+          {onScopeChange && (
+            <div
+              className="flex items-center gap-0.5 p-0.5 rounded-full flex-shrink-0"
+              style={{ background: "var(--bg2)", border: "1px solid var(--border)" }}
+              title="Alternar entre o quadro do time e o seu pessoal"
+            >
+              {(["team", "personal"] as const).map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => onScopeChange(s)}
+                  className="px-2 py-0.5 rounded-full text-[8.5px] font-extrabold uppercase tracking-wide transition-all cursor-pointer"
+                  style={{
+                    background: scope === s ? "var(--color-wh-blue)" : "transparent",
+                    color: scope === s ? "#fff" : "var(--text-3)",
+                  }}
+                >
+                  {s === "team" ? "Equipe" : "Pessoal"}
+                </button>
+              ))}
+            </div>
+          )}
           {subtitle && (
             <span
               className="text-[8.5px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wide flex-shrink-0"

@@ -54,6 +54,7 @@ export const tasksConfig: DualStorageConfig<Task, DbTask> = {
     id: idMap.register(db.id),
     text: db.title,
     done: db.done,
+    author: (db as { author?: string }).author,
   }),
   toCreatePayload: (item) => ({
     title: item.text,
@@ -92,6 +93,7 @@ export const agendaConfig: DualStorageConfig<AgendaItem, DbAgenda> = {
     time: isoToTimeStr(db.scheduledAt),
     title: db.title,
     where: db.location ?? "",
+    author: (db as { author?: string }).author,
   }),
   toCreatePayload: (item) => ({
     title: item.title,
@@ -150,6 +152,7 @@ export const remindersConfig: DualStorageConfig<Reminder, DbReminder> = {
     text: db.title,
     when: isoToWhen(db.triggerAt),
     crit: false,
+    author: (db as { author?: string }).author,
   }),
   toCreatePayload: (item) => ({
     title: item.text,
@@ -194,6 +197,7 @@ export const scheduledConfig: DualStorageConfig<ScheduledAction, DbScheduled> = 
       ? new Date(db.nextRunAt).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })
       : "—",
     status: db.active ? "active" : "paused",
+    author: (db as { author?: string }).author,
   }),
   toCreatePayload: (item) => ({
     name: item.title,

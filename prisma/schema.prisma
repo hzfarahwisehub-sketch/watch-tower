@@ -113,6 +113,7 @@ model AllowedEmail {
 model Task {
   id        String   @id @default(cuid())
   userId    String
+  scope     String   @default("personal") // "personal" | "team"
   title     String
   done      Boolean  @default(false)
   priority  String   @default("normal") // "low" | "normal" | "high" | "critical"
@@ -130,6 +131,7 @@ model Task {
 model AgendaItem {
   id          String   @id @default(cuid())
   userId      String
+  scope       String   @default("personal") // "personal" | "team"
   title       String
   description String?  @db.Text
   scheduledAt DateTime
@@ -146,6 +148,7 @@ model AgendaItem {
 model Reminder {
   id         String    @id @default(cuid())
   userId     String
+  scope      String    @default("personal") // "personal" | "team"
   title      String
   triggerAt  DateTime
   recurring  String?   // "daily" | "weekly" | "monthly" | null
@@ -164,6 +167,7 @@ model Reminder {
 model ScheduledAction {
   id        String   @id @default(cuid())
   userId    String
+  scope     String   @default("personal") // "personal" | "team"
   name      String
   cronExpr  String   // "0 8 * * *" formato cron
   active    Boolean  @default(true)

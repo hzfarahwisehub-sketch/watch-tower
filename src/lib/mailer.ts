@@ -42,3 +42,34 @@ function resetHtml(url: string, email: string): string {
 function resetText(url: string): string {
   return `Watch Tower — Redefinir senha\n\nAbra o link pra criar uma senha nova: ${url}\n\nO link expira em 1 hora. Se não foi você, ignore.`;
 }
+
+/**
+ * E-mail de alerta genérico (ex.: alteração no quadro da equipe, nova
+ * solicitação na caixa). Não explode se Resend falhar — apenas loga.
+ */
+export async function sendAlertEmail(to: string, subject: string, message: string): Promise<void> {
+  try {
+    const { error } = await getResend().emails.send({
+      from: FROM,
+      to,
+      subject: `Watch Tower · ${subject}`,
+      html: alertHtml(subject, message),
+      text: `Watch Tower — ${subject}\n\n${message}`,
+    });
+    if (error) console.warn("[mailer] alerta falhou:", JSON.stringify(error));
+  } catch (e) {
+    console.warn("[mailer] alerta exception:", e);
+  }
+}
+
+function alertHtml(subject: string, message: string): string {
+  return `<!DOCTYPE html>
+<html><body style="font-family:Inter,sans-serif;background:#0F0C1E;color:#E8E6F4;padding:32px;">
+  <div style="max-width:520px;margin:0 auto;background:#1A1730;border:1px solid rgba(123,160,255,.3);border-radius:14px;padding:32px;">
+    <h1 style="font-size:22px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#7BA0FF;margin:0 0 8px">Watch Tower</h1>
+    <p style="color:#9F9DBE;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin:0 0 24px">${subject}</p>
+    <p style="font-size:15px;line-height:1.6">${message}</p>
+    <p style="font-size:12px;color:#9F9DBE;margin-top:24px">Aviso automático do Watch Tower · WiseHub US LLC</p>
+  </div>
+</body></html>`;
+}

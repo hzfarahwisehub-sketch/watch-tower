@@ -49,6 +49,40 @@ export function requireAdmin(session: ApiSession): NextResponse | null {
   return null;
 }
 
+/** Nome amigável do executor pra exibir nos itens de equipe ("por Friday"). */
+const NAME_MAP: Record<string, string> = {
+  "hzfarah.wisehub@gmail.com": "Hammis",
+  "lucasbin181@gmail.com": "Lucas",
+  "marcelanogueiracidadania@gmail.com": "Marcela",
+  "diver.wisehub@gmail.com": "Jessé",
+  "adm.wisehub@gmail.com": "Admin",
+  "adm@wisehubnow.com": "Admin",
+  "friday@wisehubnow.online": "Friday",
+};
+export function friendlyName(email: string | null | undefined, name?: string | null): string {
+  if (email && NAME_MAP[email.toLowerCase()]) return NAME_MAP[email.toLowerCase()];
+  if (name?.trim()) return name.trim();
+  if (email) return email.split("@")[0];
+  return "—";
+}
+
+/** Lê ?scope= da URL. "team" = quadro compartilhado; default "personal". */
+export function getScope(req: { url: string }): "team" | "personal" {
+  try {
+    return new URL(req.url).searchParams.get("scope") === "team" ? "team" : "personal";
+  } catch {
+    return "personal";
+  }
+}
+
+/**
+ * Pode editar/apagar um item de EQUIPE? Sim se for o criador (executor) ou
+ * a conta master (Hammis). Itens pessoais usam a checagem de userId normal.
+ */
+export function canMutateTeamItem(itemUserId: string, session: ApiSession): boolean {
+  return itemUserId === session.userId || session.email.toLowerCase() === "hzfarah.wisehub@gmail.com";
+}
+
 /**
  * Protege rotas de cron (chamadas por GitHub Actions / scheduler externo).
  * Aceita o segredo via `Authorization: Bearer <CRON_SECRET>` ou header

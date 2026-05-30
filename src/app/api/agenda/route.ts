@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { requireSession, badRequest } from "@/lib/api-helpers";
+import { requireSession, badRequest, getScope, friendlyName } from "@/lib/api-helpers";
+import { notifyTeamChange } from "@/lib/team-notify";
 
 export const runtime = "nodejs";
 
@@ -16,10 +17,13 @@ const CreateAgenda = z.object({
 export async function GET(req: NextRequest) {
   const result = await requireSession();
   if (!result.ok) return result.response;
+  const scope = getScope(req);
+
+  const where: Record<string, unknown> =
+    scope === "team" ? { scope: "team" } : { userId: result.session.userId, scope: "personal" };
 
   const fromStr = req.nextUrl.searchParams.get("from");
   const toStr = req.nextUrl.searchParams.get("to");
-  const where: Record<string, unknown> = { userId: result.session.userId };
   if (fromStr || toStr) {
     const dateFilter: Record<string, Date> = {};
     if (fromStr) dateFilter.gte = new Date(fromStr);
@@ -27,16 +31,24 @@ export async function GET(req: NextRequest) {
     where.scheduledAt = dateFilter;
   }
 
-  const items = await prisma.agendaItem.findMany({
-    where,
-    orderBy: { scheduledAt: "asc" },
-  });
+  if (scope === "team") {
+    const rows = await prisma.agendaItem.findMany({
+      where,
+      orderBy: { scheduledAt: "asc" },
+      include: { user: { select: { name: true, email: true } } },
+    });
+    const items = rows.map(({ user, ...i }) => ({ ...i, author: friendlyName(user?.email, user?.name) }));
+    return NextResponse.json({ items });
+  }
+
+  const items = await prisma.agendaItem.findMany({ where, orderBy: { scheduledAt: "asc" } });
   return NextResponse.json({ items });
 }
 
 export async function POST(req: NextRequest) {
   const result = await requireSession();
   if (!result.ok) return result.response;
+  const scope = getScope(req);
 
   const body = await req.json().catch(() => null);
   const parsed = CreateAgenda.safeParse(body);
@@ -45,6 +57,7 @@ export async function POST(req: NextRequest) {
   const item = await prisma.agendaItem.create({
     data: {
       userId: result.session.userId,
+      scope,
       title: parsed.data.title,
       description: parsed.data.description ?? null,
       scheduledAt: new Date(parsed.data.scheduledAt),
@@ -52,5 +65,8 @@ export async function POST(req: NextRequest) {
       location: parsed.data.location ?? null,
     },
   });
+  if (scope === "team") {
+    await notifyTeamChange({ actorEmail: result.session.email, action: "criou", entity: "item de agenda", title: item.title });
+  }
   return NextResponse.json({ item }, { status: 201 });
 }
