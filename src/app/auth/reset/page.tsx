@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { PasswordInput } from "@/components/PasswordInput";
 
 export default function ResetPage() {
   const [token, setToken] = useState<string | null>(null);
@@ -108,11 +109,11 @@ export default function ResetPage() {
               </div>
               <label className="flex flex-col gap-2">
                 <span className="text-[10.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--text-3)" }}>Nova senha (mín. 8)</span>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="••••••••" autoFocus autoComplete="new-password" className="px-4 py-3 rounded-lg text-[14px] outline-none transition-all" style={inputStyle} onFocus={focusOn} onBlur={focusOff} />
+                <PasswordInput value={password} onChange={setPassword} required autoFocus autoComplete="new-password" />
               </label>
               <label className="flex flex-col gap-2">
                 <span className="text-[10.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--text-3)" }}>Confirmar senha</span>
-                <input type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} required placeholder="••••••••" autoComplete="new-password" className="px-4 py-3 rounded-lg text-[14px] outline-none transition-all" style={inputStyle} onFocus={focusOn} onBlur={focusOff} />
+                <PasswordInput value={confirm} onChange={setConfirm} required autoComplete="new-password" />
               </label>
               <button type="submit" disabled={submitting || !password || !confirm} className="px-4 py-3.5 rounded-lg font-extrabold tracking-[1.5px] uppercase text-[12.5px] transition-all hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" style={{ background: "linear-gradient(135deg, var(--color-wh-blue), var(--color-wh-blue-dark))", color: "#fff", boxShadow: "0 6px 20px rgba(31,85,255,.45), inset 0 1px 0 rgba(255,255,255,.15)", border: "1px solid rgba(74,122,255,.5)" }}>
                 {submitting ? "Salvando…" : "Redefinir senha"}

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import { PasswordInput } from "@/components/PasswordInput";
 
 export default function SetPasswordPage() {
   const [email, setEmail] = useState("");
@@ -95,24 +96,12 @@ export default function SetPasswordPage() {
 
           <label className="flex flex-col gap-2">
             <span className="text-[10.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--text-3)" }}>Nova senha (mín. 8)</span>
-            <input
-              type="password" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="••••••••" autoComplete="new-password"
-              className="px-4 py-3 rounded-lg text-[14px] outline-none transition-all"
-              style={{ background: "var(--bg2)", border: "1.5px solid var(--border)", color: "var(--text)" }}
-              onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-wh-blue-light)")}
-              onBlur={(e) => (e.currentTarget.style.borderColor = "var(--border)")}
-            />
+            <PasswordInput value={password} onChange={setPassword} required autoComplete="new-password" autoFocus={false} />
           </label>
 
           <label className="flex flex-col gap-2">
             <span className="text-[10.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--text-3)" }}>Confirmar senha</span>
-            <input
-              type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} required placeholder="••••••••" autoComplete="new-password"
-              className="px-4 py-3 rounded-lg text-[14px] outline-none transition-all"
-              style={{ background: "var(--bg2)", border: "1.5px solid var(--border)", color: "var(--text)" }}
-              onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-wh-blue-light)")}
-              onBlur={(e) => (e.currentTarget.style.borderColor = "var(--border)")}
-            />
+            <PasswordInput value={confirm} onChange={setConfirm} required autoComplete="new-password" />
           </label>
 
           <button

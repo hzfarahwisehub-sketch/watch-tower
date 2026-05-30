@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
+import { PasswordInput } from "@/components/PasswordInput";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -137,18 +138,7 @@ export default function SignInPage() {
             <span className="text-[10.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--text-3)" }}>
               Senha
             </span>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="••••••••"
-              autoComplete="current-password"
-              className="px-4 py-3 rounded-lg text-[14px] outline-none transition-all"
-              style={{ background: "var(--bg2)", border: "1.5px solid var(--border)", color: "var(--text)" }}
-              onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-wh-blue-light)")}
-              onBlur={(e) => (e.currentTarget.style.borderColor = "var(--border)")}
-            />
+            <PasswordInput value={password} onChange={setPassword} required autoComplete="current-password" />
           </label>
 
           <button

@@ -275,7 +275,9 @@ export function Dashboard() {
   };
 
   return (
-    <div className="max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-7 relative z-10">
+    <>
+      <div className="wt-watermark" aria-hidden />
+      <div className="max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-7 relative z-10">
       <Header />
 
       <div
@@ -418,6 +420,7 @@ export function Dashboard() {
 
       <Modal country={modalCountry} onClose={() => setModalCode(null)} />
       <SettingsPanel />
-    </div>
+      </div>
+    </>
   );
 }
