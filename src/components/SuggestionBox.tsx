@@ -1,6 +1,8 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
+import { useSettings } from "./SettingsProvider";
+import { playChime } from "@/lib/chime";
 
 type Suggestion = {
   id: string;
@@ -24,26 +26,42 @@ export function SuggestionBox() {
   const { data: session } = useSession();
   const isMaster = (session?.user?.email ?? "").toLowerCase() === MASTER_EMAIL;
   const isLoggedIn = !!session?.user?.email;
+  const { alarmVolume } = useSettings();
 
   const [items, setItems] = useState<Suggestion[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [draft, setDraft] = useState("");
   const [sending, setSending] = useState(false);
+  const seenRef = useRef<Set<string>>(new Set());
+  const firstRef = useRef(true);
 
   const reload = useCallback(async () => {
     try {
       const r = await fetch("/api/suggestions", { cache: "no-store" });
       if (r.ok) {
         const d = await r.json();
-        setItems(d.suggestions ?? []);
+        const list: Suggestion[] = d.suggestions ?? [];
+        // Toca o alarme leve quando chega uma solicitação nova de outra pessoa.
+        if (!firstRef.current && alarmVolume > 0) {
+          const hasNew = list.some((s) => !seenRef.current.has(s.id) && !s.mine);
+          if (hasNew) playChime(alarmVolume);
+        }
+        seenRef.current = new Set(list.map((s) => s.id));
+        firstRef.current = false;
+        setItems(list);
       }
     } catch {}
     setLoaded(true);
-  }, []);
+  }, [alarmVolume]);
 
   useEffect(() => {
-    if (isLoggedIn) reload();
-    else setLoaded(true);
+    if (!isLoggedIn) {
+      setLoaded(true);
+      return;
+    }
+    reload();
+    const id = setInterval(reload, 30000); // poll leve a cada 30s
+    return () => clearInterval(id);
   }, [isLoggedIn, reload]);
 
   const send = async () => {

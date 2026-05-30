@@ -71,6 +71,10 @@ type SettingsCtx = {
   openPanel: () => void;
   closePanel: () => void;
 
+  /** Volume do alarme leve (0-100). 0 = mudo. */
+  alarmVolume: number;
+  setAlarmVolume: (v: number) => void;
+
   resetAll: () => void;
 };
 
@@ -104,11 +108,16 @@ function saveToStorage(s: Settings) {
 export function SettingsProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<Settings>({ locked: false, accentKey: DEFAULT_ACCENT.key, fontKey: DEFAULT_FONT.key });
   const [panelOpen, setPanelOpen] = useState(false);
+  const [alarmVolume, setAlarmVol] = useState(50);
   const [hydrated, setHydrated] = useState(false);
 
   // Carrega do localStorage no mount
   useEffect(() => {
     setState(loadFromStorage());
+    try {
+      const v = parseInt(localStorage.getItem("wt-alarm-volume") ?? "", 10);
+      if (Number.isFinite(v)) setAlarmVol(Math.max(0, Math.min(100, v)));
+    } catch {}
     setHydrated(true);
   }, []);
 
@@ -146,6 +155,12 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   const openPanel = useCallback(() => setPanelOpen(true), []);
   const closePanel = useCallback(() => setPanelOpen(false), []);
 
+  const setAlarmVolume = useCallback((v: number) => {
+    const clamped = Math.max(0, Math.min(100, Math.round(v)));
+    setAlarmVol(clamped);
+    try { localStorage.setItem("wt-alarm-volume", String(clamped)); } catch {}
+  }, []);
+
   const resetAll = useCallback(() => {
     setState({ locked: false, accentKey: DEFAULT_ACCENT.key, fontKey: DEFAULT_FONT.key });
   }, []);
@@ -170,9 +185,11 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       panelOpen,
       openPanel,
       closePanel,
+      alarmVolume,
+      setAlarmVolume,
       resetAll,
     }),
-    [state.locked, toggleLock, accent, setAccentByKey, font, setFontByKey, panelOpen, openPanel, closePanel, resetAll]
+    [state.locked, toggleLock, accent, setAccentByKey, font, setFontByKey, panelOpen, openPanel, closePanel, alarmVolume, setAlarmVolume, resetAll]
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

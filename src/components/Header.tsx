@@ -8,15 +8,17 @@ import { useToast } from "./ToastProvider";
 import { useSettings } from "./SettingsProvider";
 import { ExportButton } from "./ExportButton";
 import { PushToggle } from "./PushToggle";
+import { playChime } from "@/lib/chime";
 
 export function Header() {
   const { theme, toggle } = useTheme();
-  const { locked, toggleLock, openPanel } = useSettings();
+  const { locked, toggleLock, openPanel, alarmVolume, setAlarmVolume } = useSettings();
   const { data: session, status: sessionStatus } = useSession();
   const [refreshing, setRefreshing] = useState(false);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
   const [diffMin, setDiffMin] = useState(2);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [alarmOpen, setAlarmOpen] = useState(false);
   const toast = useToast();
 
   const isLoggedIn = sessionStatus === "authenticated" && !!session?.user?.email;
@@ -154,6 +156,74 @@ export function Header() {
             </svg>
           )}
         </IconBtn>
+
+        {/* Alarme leve · volume / mudo (ao lado do cadeado) */}
+        <div className="relative">
+          <IconBtn
+            title={alarmVolume === 0 ? "Alarme mudo · clica pra ajustar" : `Alarme · ${alarmVolume}% · clica pra ajustar`}
+            onClick={() => setAlarmOpen((v) => !v)}
+          >
+            {alarmVolume === 0 ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M11 5 6 9H2v6h4l5 4V5z" />
+                <line x1="23" y1="9" x2="17" y2="15" />
+                <line x1="17" y1="9" x2="23" y2="15" />
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M11 5 6 9H2v6h4l5 4V5z" />
+                <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+                {alarmVolume > 55 && <path d="M19 5a9 9 0 0 1 0 14" />}
+              </svg>
+            )}
+          </IconBtn>
+          {alarmOpen && (
+            <>
+              <div className="fixed inset-0 z-40" onClick={() => setAlarmOpen(false)} />
+              <div
+                className="absolute right-0 top-[44px] z-50 w-[230px] rounded-xl p-4 wt-card"
+                style={{ border: "1px solid var(--border-hi)", boxShadow: "var(--shadow-bar)" }}
+              >
+                <div className="flex items-center justify-between mb-2.5">
+                  <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: "var(--color-wh-blue-light)" }}>🔔 Alarme</span>
+                  <span className="text-[11px] font-extrabold" style={{ color: "var(--text-2)" }}>{alarmVolume === 0 ? "Mudo" : `${alarmVolume}%`}</span>
+                </div>
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={alarmVolume}
+                  onChange={(e) => setAlarmVolume(Number(e.target.value))}
+                  onMouseUp={() => { if (alarmVolume > 0) playChime(alarmVolume); }}
+                  onTouchEnd={() => { if (alarmVolume > 0) playChime(alarmVolume); }}
+                  className="w-full cursor-pointer"
+                  style={{ accentColor: "var(--color-wh-blue)" }}
+                />
+                <div className="flex items-center justify-between mt-3 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setAlarmVolume(0)}
+                    className="text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-lg cursor-pointer"
+                    style={{ background: "var(--bg2)", border: "1px solid var(--border)", color: "var(--text-3)" }}
+                  >
+                    Mudo
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => playChime(alarmVolume || 50)}
+                    className="text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-lg cursor-pointer"
+                    style={{ background: "rgba(31,85,255,.15)", border: "1px solid var(--border-hi)", color: "var(--color-wh-blue-light)" }}
+                  >
+                    Testar 🔔
+                  </button>
+                </div>
+                <p className="text-[9px] mt-2.5 leading-snug" style={{ color: "var(--text-3)" }}>
+                  Toca um plin leve quando chega solicitação nova ou boletim novo.
+                </p>
+              </div>
+            </>
+          )}
+        </div>
 
         <IconBtn title="Configurações · cor + fonte" onClick={openPanel}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
