@@ -52,3 +52,26 @@ export async function notifyTeamChange(c: TeamChange): Promise<void> {
     console.warn("[team-notify] falhou (ignorado):", e);
   }
 }
+
+/**
+ * Avisa o Hammis (push + e-mail) quando chega uma nova solicitação na caixa.
+ * Sempre avisa, inclusive se foi o próprio Hammis (ele quer o registro), mas
+ * só faz sentido alertar quando NÃO é ele — então mantemos a mesma regra.
+ */
+export async function notifyNewSuggestion(c: { actorEmail: string; actorName?: string | null; body: string }): Promise<void> {
+  if (isMaster(c.actorEmail)) return;
+  try {
+    const who = c.actorName?.trim() || c.actorEmail;
+    const preview = c.body.length > 140 ? c.body.slice(0, 140) + "…" : c.body;
+    const msg = `${who} mandou uma solicitação: "${preview}"`;
+    const master = await prisma.user.findUnique({ where: { email: MASTER_EMAIL }, select: { id: true } });
+    await Promise.allSettled([
+      master?.id
+        ? sendPushToUser(master.id, { title: "Watch Tower · nova solicitação", body: msg, url: "/", tag: "suggestion" })
+        : Promise.resolve(),
+      sendAlertEmail(MASTER_EMAIL, "Nova solicitação na caixa", msg),
+    ]);
+  } catch (e) {
+    console.warn("[team-notify] suggestion falhou (ignorado):", e);
+  }
+}

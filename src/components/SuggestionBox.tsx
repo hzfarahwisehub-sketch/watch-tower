@@ -1,0 +1,196 @@
+"use client";
+import { useCallback, useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+
+type Suggestion = {
+  id: string;
+  body: string;
+  status: "open" | "applied" | "rejected";
+  response: string | null;
+  createdAt: string;
+  author: string;
+  mine: boolean;
+};
+
+const MASTER_EMAIL = "hzfarah.wisehub@gmail.com";
+
+const STATUS_META: Record<Suggestion["status"], { label: string; color: string; bg: string }> = {
+  open: { label: "Aberta", color: "var(--color-status-warning)", bg: "rgba(255,138,31,.12)" },
+  applied: { label: "Aplicada", color: "var(--color-status-stable)", bg: "rgba(16,224,160,.12)" },
+  rejected: { label: "Rejeitada", color: "var(--color-status-critical)", bg: "rgba(255,59,92,.12)" },
+};
+
+export function SuggestionBox() {
+  const { data: session } = useSession();
+  const isMaster = (session?.user?.email ?? "").toLowerCase() === MASTER_EMAIL;
+  const isLoggedIn = !!session?.user?.email;
+
+  const [items, setItems] = useState<Suggestion[]>([]);
+  const [loaded, setLoaded] = useState(false);
+  const [draft, setDraft] = useState("");
+  const [sending, setSending] = useState(false);
+
+  const reload = useCallback(async () => {
+    try {
+      const r = await fetch("/api/suggestions", { cache: "no-store" });
+      if (r.ok) {
+        const d = await r.json();
+        setItems(d.suggestions ?? []);
+      }
+    } catch {}
+    setLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) reload();
+    else setLoaded(true);
+  }, [isLoggedIn, reload]);
+
+  const send = async () => {
+    const body = draft.trim();
+    if (!body || sending) return;
+    setSending(true);
+    try {
+      const r = await fetch("/api/suggestions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ body }),
+      });
+      if (r.ok) {
+        setDraft("");
+        await reload();
+      }
+    } catch {}
+    setSending(false);
+  };
+
+  const setStatus = async (id: string, status: Suggestion["status"]) => {
+    let response: string | null = null;
+    if (status === "rejected") {
+      response = window.prompt("Motivo (vai aparecer pra todos):") ?? null;
+      if (response === null) return; // cancelou
+    } else if (status === "applied") {
+      response = window.prompt("Observação (opcional):") || null;
+    }
+    try {
+      const r = await fetch(`/api/suggestions/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status, response }),
+      });
+      if (r.ok) await reload();
+    } catch {}
+  };
+
+  const remove = async (id: string) => {
+    if (!window.confirm("Remover esta solicitação?")) return;
+    try {
+      const r = await fetch(`/api/suggestions/${id}`, { method: "DELETE" });
+      if (r.ok) await reload();
+    } catch {}
+  };
+
+  const openCount = items.filter((s) => s.status === "open").length;
+
+  return (
+    <div className="wt-card flex flex-col h-full" style={{ position: "relative" }}>
+      <div className="px-5 py-3.5" style={{ borderBottom: "1px solid var(--border)" }}>
+        <h2 className="text-[11px] tracking-[2.5px] uppercase font-bold flex items-center gap-2" style={{ color: "var(--color-wh-blue-light)" }}>
+          💬 Caixa de Solicitações
+          {openCount > 0 && (
+            <span className="px-1.5 py-0.5 rounded-full text-[9px] font-extrabold" style={{ background: "var(--color-status-warning)", color: "#fff" }}>
+              {openCount}
+            </span>
+          )}
+        </h2>
+      </div>
+
+      <div className="flex-1 overflow-auto px-3 py-2" style={{ minHeight: 120 }}>
+        {!isLoggedIn ? (
+          <p className="text-[11px] px-2 py-3" style={{ color: "var(--text-3)" }}>
+            Entre na sua conta pra ver e mandar solicitações pra equipe.
+          </p>
+        ) : !loaded ? (
+          <p className="text-[11px] px-2 py-3" style={{ color: "var(--text-3)" }}>Carregando…</p>
+        ) : items.length === 0 ? (
+          <p className="text-[11px] px-2 py-3 leading-relaxed" style={{ color: "var(--text-3)" }}>
+            Nenhuma solicitação ainda. Mande a primeira abaixo — ideias de melhoria, falhas que notou, sugestões. A Friday avisa o Hammis e decidimos juntos.
+          </p>
+        ) : (
+          items.map((s) => {
+            const sm = STATUS_META[s.status];
+            return (
+              <div
+                key={s.id}
+                className="rounded-lg my-1.5 px-3 py-2.5 group"
+                style={{ background: "var(--bg2)", border: "1px solid var(--border)", borderLeft: `3px solid ${sm.color}` }}
+              >
+                <div className="flex items-center justify-between gap-2 mb-1">
+                  <span className="text-[9px] uppercase tracking-wide font-extrabold" style={{ color: "var(--color-wh-blue-light)" }}>
+                    {s.author}
+                  </span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[8.5px] font-extrabold uppercase tracking-wide flex-shrink-0" style={{ color: sm.color, background: sm.bg }}>
+                    {sm.label}
+                  </span>
+                </div>
+                <div className="text-[11.5px] leading-snug" style={{ color: "var(--text)", overflowWrap: "anywhere" }}>
+                  {s.body}
+                </div>
+                {s.response && (
+                  <div className="text-[10.5px] leading-snug mt-1.5 pl-2" style={{ color: "var(--text-2)", borderLeft: "2px solid var(--border-hi)" }}>
+                    <b style={{ color: "var(--color-wh-blue-light)" }}>Resposta:</b> {s.response}
+                  </div>
+                )}
+                <div className="flex items-center gap-1.5 mt-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {isMaster && s.status === "open" && (
+                    <>
+                      <button type="button" onClick={() => setStatus(s.id, "applied")} className="text-[9px] font-bold uppercase px-2 py-0.5 rounded cursor-pointer" style={{ color: "var(--color-status-stable)", background: "rgba(16,224,160,.12)" }}>
+                        ✓ Aplicar
+                      </button>
+                      <button type="button" onClick={() => setStatus(s.id, "rejected")} className="text-[9px] font-bold uppercase px-2 py-0.5 rounded cursor-pointer" style={{ color: "var(--color-status-critical)", background: "rgba(255,59,92,.12)" }}>
+                        ✕ Rejeitar
+                      </button>
+                    </>
+                  )}
+                  {isMaster && s.status !== "open" && (
+                    <button type="button" onClick={() => setStatus(s.id, "open")} className="text-[9px] font-bold uppercase px-2 py-0.5 rounded cursor-pointer" style={{ color: "var(--text-3)", background: "rgba(146,139,183,.12)" }}>
+                      ↺ Reabrir
+                    </button>
+                  )}
+                  {(s.mine || isMaster) && (
+                    <button type="button" onClick={() => remove(s.id)} className="text-[9px] font-bold uppercase px-2 py-0.5 rounded cursor-pointer ml-auto" style={{ color: "var(--text-3)" }}>
+                      🗑
+                    </button>
+                  )}
+                </div>
+              </div>
+            );
+          })
+        )}
+      </div>
+
+      {isLoggedIn && (
+        <div className="px-3 py-2.5 flex items-end gap-2" style={{ borderTop: "1px solid var(--border)", background: "rgba(15,12,30,.3)" }}>
+          <textarea
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) send(); }}
+            placeholder="Sua ideia ou feedback… (Ctrl+Enter envia)"
+            rows={2}
+            className="flex-1 px-3 py-2 rounded-lg text-[11.5px] outline-none resize-none"
+            style={{ background: "var(--bg2)", border: "1px solid var(--border)", color: "var(--text)" }}
+          />
+          <button
+            type="button"
+            onClick={send}
+            disabled={sending || !draft.trim()}
+            className="px-3 py-2 rounded-lg text-[10.5px] font-extrabold uppercase tracking-wide cursor-pointer transition-all hover:-translate-y-px disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
+            style={{ background: "linear-gradient(135deg, var(--color-wh-blue), var(--color-wh-blue-dark))", color: "#fff", border: "1px solid rgba(74,122,255,.5)" }}
+          >
+            {sending ? "…" : "Enviar"}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}

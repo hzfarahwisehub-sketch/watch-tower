@@ -14,6 +14,7 @@ import { Feed } from "./Feed";
 import { Modal } from "./Modal";
 import { OfficialBulletins } from "./OfficialBulletins";
 import { CountryBenchmark } from "./CountryBenchmark";
+import { SuggestionBox } from "./SuggestionBox";
 import { InfoCenters, FinanceCenters, CryptoCenters } from "./InfoCenters";
 import { useSettings } from "./SettingsProvider";
 import { SettingsPanel } from "./SettingsPanel";
@@ -79,6 +80,7 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "crypto",    x: 12, y: 102, w: 12, h: 26, ...MIN },
     { i: "bulletins", x: 0,  y: 128, w: 24, h: 24, ...MIN },
     { i: "feed",      x: 0,  y: 152, w: 24, h: 28, ...MIN },
+    { i: "requests",  x: 0,  y: 180, w: 24, h: 12, ...MIN },
   ],
   md: [
     { i: "alerts",    x: 0,  y: 0,   w: 20, h: 4,  ...MIN },
@@ -96,6 +98,7 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "crypto",    x: 10, y: 112, w: 10, h: 26, ...MIN },
     { i: "bulletins", x: 0,  y: 138, w: 20, h: 24, ...MIN },
     { i: "feed",      x: 0,  y: 162, w: 20, h: 28, ...MIN },
+    { i: "requests",  x: 0,  y: 190, w: 20, h: 12, ...MIN },
   ],
   sm: [
     { i: "alerts",    x: 0, y: 0,    w: 12, h: 4,  ...MIN },
@@ -113,6 +116,7 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "crypto",    x: 0, y: 198,  w: 12, h: 26, ...MIN },
     { i: "bulletins", x: 0, y: 224,  w: 12, h: 28, ...MIN },
     { i: "feed",      x: 0, y: 252,  w: 12, h: 32, ...MIN },
+    { i: "requests",  x: 0, y: 284,  w: 12, h: 14, ...MIN },
   ],
   xs: [
     { i: "alerts",    x: 0, y: 0,    w: 8, h: 6,  ...MIN },
@@ -130,6 +134,7 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "crypto",    x: 0, y: 230,  w: 8, h: 30, ...MIN },
     { i: "bulletins", x: 0, y: 260,  w: 8, h: 36, ...MIN },
     { i: "feed",      x: 0, y: 296,  w: 8, h: 40, ...MIN },
+    { i: "requests",  x: 0, y: 336,  w: 8, h: 16, ...MIN },
   ],
   xxs: [
     { i: "alerts",    x: 0, y: 0,    w: 4, h: 8,  ...MIN },
@@ -147,10 +152,11 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
     { i: "crypto",    x: 0, y: 278,  w: 4, h: 38, ...MIN },
     { i: "bulletins", x: 0, y: 316,  w: 4, h: 44, ...MIN },
     { i: "feed",      x: 0, y: 360,  w: 4, h: 48, ...MIN },
+    { i: "requests",  x: 0, y: 408,  w: 4, h: 18, ...MIN },
   ],
 };
 
-const REQUIRED_KEYS = ["alerts","kpis","map","countries","inbox","agenda","tasks","scheduled","reminders","benchmark","info","finance","crypto","bulletins","feed"];
+const REQUIRED_KEYS = ["alerts","kpis","map","countries","inbox","agenda","tasks","scheduled","reminders","requests","benchmark","info","finance","crypto","bulletins","feed"];
 
 function GridCell({ label, children, locked }: { label: string; children: ReactNode; locked: boolean }) {
   return (
@@ -400,6 +406,11 @@ export function Dashboard() {
           <div key="feed">
             <GridCell label="Feed de mudanças" locked={locked}>
               <Feed countries={COUNTRIES} onSelect={openModal} />
+            </GridCell>
+          </div>
+          <div key="requests">
+            <GridCell label="Caixa de solicitações" locked={locked}>
+              <SuggestionBox />
             </GridCell>
           </div>
         </ResponsiveGridLayout>
