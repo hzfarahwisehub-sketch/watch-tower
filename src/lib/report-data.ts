@@ -15,7 +15,7 @@
 
 import { COUNTRIES } from "@/lib/data";
 import { INFO_CENTERS, type InfoSource } from "@/lib/infoCenters";
-import { BULLETINS, type BulletinStatus, type StatusFile } from "@/components/OfficialBulletins";
+import { BULLETINS, type BulletinStatus, type StatusFile } from "@/lib/bulletins";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 

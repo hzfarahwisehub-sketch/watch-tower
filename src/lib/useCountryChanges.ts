@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import type { StatusFile } from "@/components/OfficialBulletins";
+import type { StatusFile } from "@/lib/bulletins";
 
 /**
  * useCountryChanges — sumario do bulletin oficial do pais via /bulletins-status.json.
