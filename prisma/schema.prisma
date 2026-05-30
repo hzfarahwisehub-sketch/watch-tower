@@ -50,6 +50,11 @@ model User {
   image         String?
   role          String    @default("editor") // "admin" | "editor"
   allowlisted   Boolean   @default(false)
+  // Auth login+senha (substitui magic link). passwordHash null = ainda nao
+  // definiu senha (primeiro acesso). Reset via token expirável por email.
+  passwordHash         String?
+  passwordResetToken   String?   @unique
+  passwordResetExpires DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 

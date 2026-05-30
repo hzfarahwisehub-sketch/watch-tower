@@ -3,8 +3,10 @@
 // (1MB limit). Pro middleware, usar src/middleware.ts que importa
 // auth.config.ts diretamente.
 import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { Resend } from "resend";
+import bcrypt from "bcryptjs";
 import { authConfig } from "@/auth.config";
 import { prisma } from "@/lib/prisma";
 
@@ -21,6 +23,47 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   adapter: PrismaAdapter(prisma),
   providers: [
+    // ── Login + senha (PRIMÁRIO) ──────────────────────────────────────────
+    // Allowlist + senha (bcrypt). Sessão JWT; expiração por papel é aplicada
+    // no callback jwt do auth.config.ts (admin = permanente · editor = 24h).
+    Credentials({
+      id: "password",
+      name: "E-mail e senha",
+      credentials: {
+        email: { label: "E-mail", type: "email" },
+        password: { label: "Senha", type: "password" },
+      },
+      async authorize(raw) {
+        const email = String(raw?.email ?? "").trim().toLowerCase();
+        const password = String(raw?.password ?? "");
+        if (!email || !password) return null;
+
+        // Gate allowlist: só quem está autorizado pode logar.
+        const allowed = await prisma.allowedEmail.findUnique({ where: { email } });
+        if (!allowed) {
+          console.warn(`[auth] login fora da allowlist: ${email}`);
+          return null;
+        }
+
+        // Usuário precisa existir E ter senha definida (primeiro acesso usa
+        // /api/auth/register pra criar a senha).
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user?.passwordHash) return null;
+
+        const ok = await bcrypt.compare(password, user.passwordHash);
+        if (!ok) return null;
+
+        // role autoritativo vem da allowlist (não do User).
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name ?? undefined,
+          role: allowed.role,
+        };
+      },
+    }),
+    // ── Magic link (FALLBACK / emergência) ────────────────────────────────
+    // Mantido como rede de segurança e reaproveitado pelo reset de senha.
     {
       id: "resend",
       name: "Email",
