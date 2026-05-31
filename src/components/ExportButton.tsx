@@ -22,7 +22,15 @@ const FORMATS: Array<{ id: Format; label: string; hint: string }> = [
   { id: "md", label: "Markdown (.md)", hint: "Texto puro" },
 ];
 
-export function ExportButton({ minimal = false }: { minimal?: boolean }) {
+export function ExportButton({
+  minimal = false,
+  label = "Exportar relatório",
+  title,
+}: {
+  minimal?: boolean;
+  label?: string;
+  title?: string;
+}) {
   const [downloading, setDownloading] = useState<Format | null>(null);
   const [open, setOpen] = useState(false);
   const toast = useToast();
@@ -84,13 +92,19 @@ export function ExportButton({ minimal = false }: { minimal?: boolean }) {
           type="button"
           onClick={() => setOpen((v) => !v)}
           disabled={busy}
+          title={title}
           aria-haspopup="menu"
           aria-expanded={open}
-          className="inline-flex items-center gap-2 px-3.5 py-[7px] rounded-[18px] text-[12px] font-semibold cursor-pointer transition-all hover:-translate-y-px disabled:opacity-60 disabled:cursor-wait"
-          style={{ color: "var(--color-wh-blue-light)", background: "rgba(74,122,255,.12)", border: "1px solid rgba(74,122,255,.4)" }}
+          className="inline-flex items-center gap-2 px-4 py-[8px] rounded-[18px] text-[12px] font-bold tracking-wide cursor-pointer transition-all hover:-translate-y-px disabled:opacity-60 disabled:cursor-wait"
+          style={{
+            color: "#fff",
+            background: "linear-gradient(135deg, var(--color-wh-blue), var(--color-wh-blue-dark))",
+            border: "1px solid rgba(74,122,255,.5)",
+            boxShadow: "0 4px 14px rgba(31,85,255,.35)",
+          }}
         >
           {busy ? <Spinner size={14} /> : <DownloadIcon size={14} />}
-          {busy ? "Gerando…" : "Exportar relatório"}
+          {busy ? "Gerando…" : label}
         </button>
       )}
 

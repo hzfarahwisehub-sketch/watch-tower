@@ -15,6 +15,8 @@ import { Modal } from "./Modal";
 import { OfficialBulletins } from "./OfficialBulletins";
 import { CountryBenchmark } from "./CountryBenchmark";
 import { SuggestionBox } from "./SuggestionBox";
+import { ExportButton } from "./ExportButton";
+import { useSession } from "next-auth/react";
 import { InfoCenters, FinanceCenters, CryptoCenters } from "./InfoCenters";
 import { useSettings } from "./SettingsProvider";
 import { SettingsPanel } from "./SettingsPanel";
@@ -178,6 +180,8 @@ function GridCell({ label, children, locked }: { label: string; children: ReactN
 
 export function Dashboard() {
   const { locked } = useSettings();
+  const { data: session } = useSession();
+  const isLoggedIn = !!session?.user?.email;
   // Separação intencional:
   //  - mapSelected: país selecionado via MAPA → alimenta a caixa Benchmark
   //  - modalCode: país selecionado via AlertsBanner/CountriesSidebar/Feed →
@@ -300,21 +304,29 @@ export function Dashboard() {
             </>
           )}
         </div>
-        {!locked && (
-          <button
-            type="button"
-            onClick={resetLayout}
-            className="px-3 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-colors"
-            style={{
-              background: "var(--bg2)",
-              border: "1px solid var(--border)",
-              color: "var(--text-2)",
-              cursor: "pointer",
-            }}
-          >
-            ↻ Restaurar layout padrão
-          </button>
-        )}
+        <div className="flex items-center gap-2 flex-wrap justify-end">
+          {isLoggedIn && (
+            <ExportButton
+              label="REPAVET"
+              title="REPAVET — Resumo Elaborado dos Países e das Atualizações dos Vistos, Economia e Trabalho · gera o documento completo, país a país"
+            />
+          )}
+          {!locked && (
+            <button
+              type="button"
+              onClick={resetLayout}
+              className="px-3 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-colors"
+              style={{
+                background: "var(--bg2)",
+                border: "1px solid var(--border)",
+                color: "var(--text-2)",
+                cursor: "pointer",
+              }}
+            >
+              ↻ Restaurar layout padrão
+            </button>
+          )}
+        </div>
       </div>
 
       {mounted && (
