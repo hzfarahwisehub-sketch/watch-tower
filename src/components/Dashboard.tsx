@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Responsive, WidthProvider, type Layout, type ResponsiveLayouts } from "react-grid-layout/legacy";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
@@ -15,6 +15,7 @@ import { OfficialBulletins } from "./OfficialBulletins";
 import { CountryBenchmark } from "./CountryBenchmark";
 import { SuggestionBox } from "./SuggestionBox";
 import { ExportButton } from "./ExportButton";
+import { useUndo } from "./UndoProvider";
 import { useSession } from "next-auth/react";
 import { InfoCenters, FinanceCenters, CryptoCenters } from "./InfoCenters";
 import { useSettings } from "./SettingsProvider";
@@ -263,18 +264,57 @@ export function Dashboard() {
   const openModal = selectCountry;
   const selectOnMap = selectCountry;
 
+  // ── Histórico de Desfazer/Refazer (Voltar/Avançar) ──
+  const { push: pushUndo, undo, redo, canUndo, canRedo, nextUndoLabel, nextRedoLabel } = useUndo();
+  const layoutsRef = useRef<ResponsiveLayouts>(layouts);
+  const dragBeforeRef = useRef<ResponsiveLayouts | null>(null);
+  const cloneLayouts = (l: ResponsiveLayouts): ResponsiveLayouts => JSON.parse(JSON.stringify(l));
+
+  const applyLayouts = (all: ResponsiveLayouts, persist: boolean) => {
+    layoutsRef.current = all;
+    setLayouts(all);
+    try {
+      if (persist) localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(all));
+      else localStorage.removeItem(LAYOUT_STORAGE_KEY);
+    } catch {}
+  };
+
   const onLayoutChange = (_current: Layout, all: ResponsiveLayouts) => {
+    layoutsRef.current = all;
     setLayouts(all);
     try {
       localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(all));
     } catch {}
   };
 
+  // Captura o layout antes de arrastar/redimensionar; ao soltar, registra a ação.
+  const captureLayoutBefore = () => {
+    dragBeforeRef.current = cloneLayouts(layoutsRef.current);
+  };
+  const commitLayoutAction = (label: string) => {
+    const before = dragBeforeRef.current;
+    dragBeforeRef.current = null;
+    if (!before) return;
+    // espera o onLayoutChange final assentar, então compara e registra
+    setTimeout(() => {
+      const after = cloneLayouts(layoutsRef.current);
+      if (JSON.stringify(before) === JSON.stringify(after)) return;
+      pushUndo({
+        label,
+        undo: () => applyLayouts(before, true),
+        redo: () => applyLayouts(after, true),
+      });
+    }, 0);
+  };
+
   const resetLayout = () => {
-    setLayouts(DEFAULT_LAYOUTS);
-    try {
-      localStorage.removeItem(LAYOUT_STORAGE_KEY);
-    } catch {}
+    const before = cloneLayouts(layoutsRef.current);
+    applyLayouts(DEFAULT_LAYOUTS, false);
+    pushUndo({
+      label: "restaurar layout",
+      undo: () => applyLayouts(before, true),
+      redo: () => applyLayouts(DEFAULT_LAYOUTS, false),
+    });
   };
 
   return (
@@ -304,6 +344,31 @@ export function Dashboard() {
           )}
         </div>
         <div className="flex items-center gap-2 flex-wrap justify-end shrink-0">
+          {/* Voltar / Avançar (desfazer/refazer ações da sessão) */}
+          <div className="flex items-center rounded-lg overflow-hidden" style={{ border: "1px solid var(--border)", background: "var(--bg2)" }}>
+            <button
+              type="button"
+              onClick={undo}
+              disabled={!canUndo}
+              title={canUndo ? `Voltar${nextUndoLabel ? `: ${nextUndoLabel}` : ""}` : "Nada pra voltar"}
+              aria-label="Voltar (desfazer)"
+              className="px-2.5 py-1.5 text-[12px] font-bold transition-colors"
+              style={{ color: canUndo ? "var(--text-2)" : "var(--text-3)", opacity: canUndo ? 1 : 0.4, cursor: canUndo ? "pointer" : "default", borderRight: "1px solid var(--border)" }}
+            >
+              ↶ Voltar
+            </button>
+            <button
+              type="button"
+              onClick={redo}
+              disabled={!canRedo}
+              title={canRedo ? `Avançar${nextRedoLabel ? `: ${nextRedoLabel}` : ""}` : "Nada pra avançar"}
+              aria-label="Avançar (refazer)"
+              className="px-2.5 py-1.5 text-[12px] font-bold transition-colors"
+              style={{ color: canRedo ? "var(--text-2)" : "var(--text-3)", opacity: canRedo ? 1 : 0.4, cursor: canRedo ? "pointer" : "default" }}
+            >
+              Avançar ↷
+            </button>
+          </div>
           {isLoggedIn && (
             <ExportButton
               label="REPAVET"
@@ -341,6 +406,10 @@ export function Dashboard() {
           isBounded
           draggableHandle=".wt-drag-handle"
           onLayoutChange={onLayoutChange}
+          onDragStart={captureLayoutBefore}
+          onResizeStart={captureLayoutBefore}
+          onDragStop={() => commitLayoutAction("mover caixa")}
+          onResizeStop={() => commitLayoutAction("redimensionar caixa")}
           compactType="vertical"
           preventCollision={false}
           allowOverlap={false}

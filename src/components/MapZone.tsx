@@ -282,12 +282,14 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
               <div className="fixed inset-0 z-40" onClick={() => setMenuOpen(false)} />
               <div
                 role="menu"
-                className="absolute right-0 top-[42px] z-50 w-[230px] rounded-xl py-2 wt-card"
-                style={{ border: "1px solid var(--border-hi)", boxShadow: "var(--shadow-bar)" }}
+                className="absolute right-0 top-[40px] z-50 w-[170px] rounded-xl p-1 wt-card"
+                style={{
+                  border: "1px solid var(--border-hi)",
+                  boxShadow: "var(--shadow-bar)",
+                  transformOrigin: "top right",
+                  animation: "wt-menu-pop .14s ease-out",
+                }}
               >
-                <div className="px-4 py-1.5 text-[10px] uppercase tracking-[1.5px] font-bold" style={{ color: "var(--text-3)" }}>
-                  Estilo do globo
-                </div>
                 {STYLE_OPTIONS.map((o) => {
                   const active = o.key === styleKey;
                   return (
@@ -300,23 +302,12 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
                         setStyleKey(o.key);
                         setMenuOpen(false);
                       }}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-white/5"
-                      style={active ? { background: "rgba(74,122,255,.12)" } : undefined}
+                      className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-left text-[12.5px] font-semibold transition-colors hover:bg-white/5"
+                      style={active ? { background: "rgba(74,122,255,.14)", color: "var(--text)" } : { color: "var(--text-2)" }}
                     >
-                      <span className="flex items-center justify-center w-[26px] h-[26px] rounded-md flex-shrink-0 text-[14px]" style={{ background: "rgba(74,122,255,.12)" }}>
-                        {o.emoji}
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="block text-[12.5px] font-bold truncate" style={{ color: "var(--text)" }}>
-                          {o.label}
-                        </span>
-                        <span className="block text-[10.5px] truncate" style={{ color: "var(--text-3)" }}>
-                          {o.desc}
-                        </span>
-                      </span>
-                      {active && (
-                        <span style={{ color: "var(--color-wh-blue-light)", fontSize: 13, fontWeight: 700 }}>✓</span>
-                      )}
+                      <span className="text-[15px] leading-none">{o.emoji}</span>
+                      <span className="flex-1 truncate">{o.label}</span>
+                      {active && <span style={{ color: "var(--color-wh-blue-light)", fontSize: 12, fontWeight: 700 }}>✓</span>}
                     </button>
                   );
                 })}

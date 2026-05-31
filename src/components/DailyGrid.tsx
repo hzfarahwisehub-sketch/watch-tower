@@ -1,5 +1,5 @@
 "use client";
-import { forwardRef, useEffect, useMemo, useState, DragEvent } from "react";
+import { forwardRef, useEffect, useMemo, useRef, useState, DragEvent } from "react";
 // @ts-expect-error - react-resizable v3 não envia types
 import { Resizable } from "react-resizable";
 import "react-resizable/css/styles.css";
@@ -20,6 +20,7 @@ import {
   scheduledConfig,
 } from "@/lib/dual-storage-configs";
 import { useToast } from "./ToastProvider";
+import { useUndoOptional } from "./UndoProvider";
 
 export type DailyBlock = "inbox" | "scheduled" | "agenda" | "tasks" | "reminders";
 
@@ -64,6 +65,14 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
   const [draggingId, setDraggingId] = useState<number | null>(null);
   const toast = useToast();
 
+  // Undo/redo de "apagar" (só escopo Pessoal — itens de Equipe/Friday ficam de
+  // fora, alterá-los passa pelo aviso ao Hammis). Refs garantem o hook atual.
+  const undoCtx = useUndoOptional();
+  const tasksHookRef = useRef(tasksHook);
+  tasksHookRef.current = tasksHook;
+  const agendaHookRef = useRef(agendaHook);
+  agendaHookRef.current = agendaHook;
+
   const inboxTotal = INBOX_ACCOUNTS.reduce((s, a) => s + a.unread, 0);
   const tasksRemaining = tasks.filter((t) => !t.done).length;
 
@@ -76,14 +85,46 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
     if (!text.trim()) return tasksHook.remove(id);
     tasksHook.update(id, { text: text.trim() });
   };
-  const deleteTask = (id: number) => tasksHook.remove(id);
+  const deleteTask = (id: number) => {
+    const item = tasks.find((x) => x.id === id);
+    tasksHook.remove(id);
+    if (item && scope === "personal" && undoCtx) {
+      let curId = id;
+      undoCtx.push({
+        label: "apagar tarefa",
+        undo: async () => {
+          const nid = await tasksHookRef.current.add({ text: item.text, done: item.done });
+          if (nid) curId = nid;
+        },
+        redo: async () => {
+          await tasksHookRef.current.remove(curId);
+        },
+      });
+    }
+  };
   const addTask = () => tasksHook.add({ text: "Nova tarefa", done: false });
 
   // ===== agenda ops + drag =====
   const editAgenda = (id: number, field: "title" | "where" | "time", value: string) =>
     agendaHook.update(id, { [field]: value } as Partial<AgendaItem>);
   const addAgenda = () => agendaHook.add({ time: "00:00", title: "Novo evento", where: "" });
-  const deleteAgenda = (id: number) => agendaHook.remove(id);
+  const deleteAgenda = (id: number) => {
+    const item = agenda.find((a) => a.id === id);
+    agendaHook.remove(id);
+    if (item && scope === "personal" && undoCtx) {
+      let curId = id;
+      undoCtx.push({
+        label: "apagar compromisso",
+        undo: async () => {
+          const nid = await agendaHookRef.current.add({ time: item.time, title: item.title, where: item.where });
+          if (nid) curId = nid;
+        },
+        redo: async () => {
+          await agendaHookRef.current.remove(curId);
+        },
+      });
+    }
+  };
   const reorderAgenda = (sourceId: number, targetId: number) => {
     if (sourceId === targetId) return;
     const src = agenda.findIndex((a) => a.id === sourceId);
