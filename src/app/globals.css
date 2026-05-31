@@ -101,6 +101,15 @@ html::-webkit-scrollbar-thumb:hover {
   background: rgba(31, 85, 255, .28);
   background-clip: padding-box;
 }
+/* Setinha "quicando" do chip de download (representa o arquivo baixando) */
+@keyframes wt-arrow-bounce {
+  0%, 100% { transform: translateY(-1px); }
+  50% { transform: translateY(3px); }
+}
+@keyframes wt-chip-in {
+  from { opacity: 0; transform: translateY(12px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
 /* Marca d'água do brasão (olho) por trás de tudo — camada de profundidade.
    Fixa, central, bem sutil; os cards de vidro deixam ela transparecer. */
 .wt-watermark {

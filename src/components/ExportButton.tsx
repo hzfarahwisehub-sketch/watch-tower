@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useToast } from "./ToastProvider";
 
 /**
@@ -31,7 +31,39 @@ export function ExportButton({
 }) {
   const [downloading, setDownloading] = useState<Format | null>(null);
   const [open, setOpen] = useState(false);
+  const [lastDownload, setLastDownload] = useState<{ url: string; filename: string } | null>(null);
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastUrlRef = useRef<string | null>(null);
   const toast = useToast();
+
+  useEffect(
+    () => () => {
+      if (hideTimer.current) clearTimeout(hideTimer.current);
+      if (lastUrlRef.current) URL.revokeObjectURL(lastUrlRef.current);
+    },
+    [],
+  );
+
+  function showDownloadChip(url: string, filename: string) {
+    if (lastUrlRef.current && lastUrlRef.current !== url) URL.revokeObjectURL(lastUrlRef.current);
+    lastUrlRef.current = url;
+    setLastDownload({ url, filename });
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+    hideTimer.current = setTimeout(() => setLastDownload(null), 30000);
+  }
+
+  function dismissChip() {
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+    if (lastUrlRef.current) {
+      URL.revokeObjectURL(lastUrlRef.current);
+      lastUrlRef.current = null;
+    }
+    setLastDownload(null);
+  }
+
+  function openLastFile() {
+    if (lastDownload) window.open(lastDownload.url, "_blank", "noopener");
+  }
 
   async function download(format: Format) {
     if (downloading) return;
@@ -56,7 +88,8 @@ export function ExportButton({
       document.body.appendChild(a);
       a.click();
       a.remove();
-      URL.revokeObjectURL(url);
+      // mantém a URL viva pro chip "Arquivo baixado · abrir"
+      showDownloadChip(url, filename);
 
       const fmtName = format === "docx" ? "Word" : format.toUpperCase();
       toast(cacheHeader === "HIT" ? `${fmtName} baixado (cache)` : `${fmtName} gerado e baixado`);
@@ -71,13 +104,14 @@ export function ExportButton({
   const busy = downloading !== null;
 
   return (
+    <>
     <div className="relative">
       {minimal ? (
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
           disabled={busy}
-          title={busy ? "Gerando relatório…" : "Exportar relatório (PDF · Word · Markdown)"}
+          title={busy ? "Gerando relatório…" : "Exportar relatório (PDF · Word)"}
           aria-haspopup="menu"
           aria-expanded={open}
           className="w-[38px] h-[38px] rounded-[10px] flex items-center justify-center cursor-pointer transition-all hover:-translate-y-px disabled:opacity-60 disabled:cursor-wait"
@@ -136,12 +170,60 @@ export function ExportButton({
               </button>
             ))}
             <div className="px-4 pt-1.5 mt-1 text-[10px] leading-snug border-t" style={{ color: "var(--text-3)", borderColor: "var(--border)" }}>
-              Contém tudo: panorama, boletins, marcos, RSS e fontes por país.
+              Conteúdo pronto pra postar + fontes + dados técnicos, país a país.
             </div>
           </div>
         </>
       )}
     </div>
+
+    {lastDownload && (
+      <div
+        role="status"
+        className="fixed right-4 bottom-4 z-[60] flex items-center gap-2 pl-2.5 pr-2 py-2 rounded-2xl wt-card"
+        style={{
+          border: "1px solid var(--border-hi)",
+          boxShadow: "var(--shadow-bar)",
+          animation: "wt-chip-in .28s ease both",
+          maxWidth: "min(330px, calc(100vw - 2rem))",
+        }}
+      >
+        <button
+          type="button"
+          onClick={openLastFile}
+          title="Abrir o arquivo que você acabou de baixar"
+          className="flex items-center gap-2.5 cursor-pointer text-left min-w-0"
+          style={{ background: "transparent", border: "none", padding: 0 }}
+        >
+          <span
+            className="flex items-center justify-center w-9 h-9 rounded-full flex-shrink-0"
+            style={{ background: "linear-gradient(135deg, var(--color-wh-blue), var(--color-wh-blue-dark))", color: "#fff" }}
+          >
+            <span style={{ display: "inline-flex", animation: "wt-arrow-bounce 1.1s ease-in-out infinite" }}>
+              <DownloadIcon size={17} />
+            </span>
+          </span>
+          <span className="min-w-0">
+            <span className="block text-[12px] font-bold leading-tight" style={{ color: "var(--text)" }}>
+              Arquivo baixado
+            </span>
+            <span className="block text-[10.5px] truncate leading-tight" style={{ color: "var(--text-3)" }}>
+              {lastDownload.filename} · toque pra abrir
+            </span>
+          </span>
+        </button>
+        <button
+          type="button"
+          onClick={dismissChip}
+          aria-label="Fechar aviso de download"
+          className="flex items-center justify-center w-6 h-6 rounded-md flex-shrink-0 cursor-pointer text-[11px]"
+          style={{ background: "var(--bg2)", border: "1px solid var(--border)", color: "var(--text-3)" }}
+        >
+          ✕
+        </button>
+      </div>
+    )}
+    </>
   );
 }
 
