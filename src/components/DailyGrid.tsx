@@ -159,6 +159,25 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
   };
   const addReminder = () =>
     remindersHook.add({ text: "Novo lembrete", when: "Hoje", crit: false });
+  // Manda o lembrete como SOLICITAÇÃO pra Friday (reusa o canal de mensagens).
+  // Quando a Friday abrir uma sessão, ela pergunta ao Hammis se quer iniciar,
+  // explicando o quê foi e quem pediu.
+  const sendReminderToFriday = async (r: Reminder) => {
+    const authorPart = scope === "team" && r.author ? ` — lembrete de ${r.author}` : "";
+    const msg = `⚡ EXECUTAR · Watch Tower (lembrete): "${r.text}"${authorPart}`;
+    try {
+      const res = await fetch("/api/suggestions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ body: msg }),
+      });
+      if (res.ok) toast("Enviado pra Friday · ela te pergunta na próxima vez que você abrir");
+      else if (res.status === 401) toast("Faça login pra enviar pra Friday");
+      else toast(`Erro ${res.status} ao enviar pra Friday`);
+    } catch {
+      toast("Falha ao enviar pra Friday");
+    }
+  };
 
   // ===== scheduled ops =====
   const editScheduledTitle = (id: number, title: string) => {
@@ -515,6 +534,16 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
                 )}
               </div>
             </div>
+            <button
+              type="button"
+              onClick={() => sendReminderToFriday(r)}
+              title="Enviar pra Friday executar — ela te pergunta na próxima vez que você abrir"
+              aria-label={`Enviar lembrete "${r.text}" pra Friday`}
+              className="flex-shrink-0 self-center inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-bold tracking-wide transition-all hover:-translate-y-px cursor-pointer"
+              style={{ background: "rgba(31,85,255,.12)", color: "var(--color-wh-blue-light)", border: "1px solid var(--border-hi)" }}
+            >
+              ⚡ Friday
+            </button>
           </div>
         ))}
       </DailyCard>
