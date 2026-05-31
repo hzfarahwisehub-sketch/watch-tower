@@ -108,7 +108,10 @@ export function SuggestionBox() {
     } catch {}
   };
 
-  const openCount = items.filter((s) => s.status === "open").length;
+  // Esconde do mural as mensagens "⚡ EXECUTAR" (pedidos pra Friday via lembrete),
+  // que não são feedback da equipe — vão pelo /api/friday-requests.
+  const visible = items.filter((s) => !s.body.startsWith("⚡ EXECUTAR"));
+  const openCount = visible.filter((s) => s.status === "open").length;
 
   return (
     <div className="wt-card flex flex-col h-full" style={{ position: "relative" }}>
@@ -130,13 +133,13 @@ export function SuggestionBox() {
           </p>
         ) : !loaded ? (
           <p className="text-[11px] px-2 py-3" style={{ color: "var(--text-3)" }}>Carregando…</p>
-        ) : items.length === 0 ? (
+        ) : visible.length === 0 ? (
           <p className="text-[11px] px-2 py-3 leading-relaxed" style={{ color: "var(--text-3)" }}>
             Nenhuma solicitação ainda. Mande a primeira abaixo — ideias de melhoria, falhas que notou, sugestões. A Friday avisa o Hammis e decidimos juntos.
           </p>
         ) : (
-          items.map((s) => {
-            const sm = STATUS_META[s.status];
+          visible.map((s) => {
+            const sm = STATUS_META[s.status] ?? STATUS_META.open; // default seguro p/ status fora do mapa (ex.: "closed")
             return (
               <div
                 key={s.id}
