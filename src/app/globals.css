@@ -74,6 +74,33 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
+/* Reserva o espaço da barra de rolagem (Chrome usa overlay que flutua por cima
+   do conteúdo). Sem isso a barra cobre o canto direito (ex.: botão REPAVET). */
+html {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(74, 122, 255, .30) transparent;
+}
+html::-webkit-scrollbar {
+  width: 12px;
+}
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+html::-webkit-scrollbar-thumb {
+  background: rgba(74, 122, 255, .30);
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: rgba(74, 122, 255, .48);
+  background-clip: padding-box;
+}
+[data-theme="light"] html::-webkit-scrollbar-thumb {
+  background: rgba(31, 85, 255, .28);
+  background-clip: padding-box;
+}
 /* Marca d'água do brasão (olho) por trás de tudo — camada de profundidade.
    Fixa, central, bem sutil; os cards de vidro deixam ela transparecer. */
 .wt-watermark {

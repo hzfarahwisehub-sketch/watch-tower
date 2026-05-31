@@ -5,21 +5,19 @@ import { useToast } from "./ToastProvider";
 /**
  * Menu de exportação do relatório completo. Junta TODAS as informações do
  * Watch Tower (país a país: panorama, boletins oficiais, marcos editoriais,
- * RSS ao vivo e Centros de Informação) e baixa em 3 formatos:
+ * RSS ao vivo e Centros de Informação) e baixa em 2 formatos:
  *   - PDF   → leitura/compartilhamento
- *   - Word  → editável pelos sócios (.docx)
- *   - Markdown → texto puro (.md)
+ *   - Word  → editável no Word (.docx)
  *
  * Cache no servidor de 30min compartilhado entre formatos — a 1ª geração
  * leva ~30-60s (busca ~32 feeds RSS); as seguintes são instantâneas.
  */
 
-type Format = "pdf" | "docx" | "md";
+type Format = "pdf" | "docx";
 
 const FORMATS: Array<{ id: Format; label: string; hint: string }> = [
   { id: "pdf", label: "PDF", hint: "Pra ler e compartilhar" },
-  { id: "docx", label: "Word (.docx)", hint: "Editável pelos sócios" },
-  { id: "md", label: "Markdown (.md)", hint: "Texto puro" },
+  { id: "docx", label: "Word (.doc)", hint: "Editável no Word" },
 ];
 
 export function ExportButton({
@@ -113,11 +111,11 @@ export function ExportButton({
           <div className="fixed inset-0 z-40" onClick={() => !busy && setOpen(false)} />
           <div
             role="menu"
-            className="absolute right-0 top-[44px] z-50 w-[240px] rounded-xl py-2 wt-card"
+            className="absolute right-0 top-[44px] z-50 w-[min(260px,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] rounded-xl py-2 wt-card"
             style={{ border: "1px solid var(--border-hi)", boxShadow: "var(--shadow-bar)" }}
           >
             <div className="px-4 py-1.5 text-[10px] uppercase tracking-[1.5px] font-bold" style={{ color: "var(--text-3)" }}>
-              Exportar relatório completo
+              Escolha o formato
             </div>
             {FORMATS.map((f) => (
               <button

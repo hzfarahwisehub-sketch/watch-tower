@@ -281,7 +281,7 @@ export function Dashboard() {
   return (
     <>
       <div className="wt-watermark" aria-hidden />
-      <div className="max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-7 relative z-10">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-10">
       <Header />
 
       <div
@@ -289,7 +289,7 @@ export function Dashboard() {
         style={{ marginTop: 16 }}
       >
         <div
-          className="text-[11px] tracking-wider uppercase font-semibold flex items-center gap-2"
+          className="text-[11px] tracking-wider uppercase font-semibold flex items-center gap-2 min-w-0 flex-1"
           style={{ color: "var(--text-3)" }}
         >
           {locked ? (
@@ -304,7 +304,7 @@ export function Dashboard() {
             </>
           )}
         </div>
-        <div className="flex items-center gap-2 flex-wrap justify-end">
+        <div className="flex items-center gap-2 flex-wrap justify-end shrink-0">
           {isLoggedIn && (
             <ExportButton
               label="REPAVET"
