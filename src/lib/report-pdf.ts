@@ -11,12 +11,14 @@
 import { PDFDocument, type PDFFont, type PDFPage, StandardFonts, rgb, type RGB } from "pdf-lib";
 import {
   type ReportData,
+  type ReportCountry,
   fmtDate,
   relativeAge,
   statusText,
   bulletinStatusText,
   categoryName,
 } from "@/lib/report-data";
+import { EDITORIAL_GUIDE, type EditorialSource } from "@/lib/editorial";
 
 const A4 = { w: 595.28, h: 841.89 };
 const MARGIN = 50;
@@ -180,6 +182,68 @@ class PdfBuilder {
 }
 
 const H2: HeadingOpts = { size: 11.5, color: BLUE_LIGHT, spaceBefore: 6, gapAfter: 3 };
+const H3: HeadingOpts = { size: 11, color: DARK, spaceBefore: 6, gapAfter: 3 };
+
+/** Renderiza as fontes de uma peça editorial como texto (PDF não tem link clicável). */
+function sourcesPdf(b: PdfBuilder, sources?: EditorialSource[]) {
+  if (!sources?.length) return;
+  b.text("Fontes:", { size: 8.5, color: GREY, oblique: true, gapAfter: 0 });
+  for (const s of sources) b.text(`${s.label}: ${s.url}`, { size: 8, color: GREY, indent: 12, gapAfter: 1 });
+  b.text("", { gapAfter: 2 });
+}
+
+/** Divide um corpo em parágrafos ("\n\n") e escreve cada um. */
+function bodyPdf(b: PdfBuilder, text: string) {
+  for (const para of text.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean)) {
+    b.text(para, { size: 10, gapAfter: 3 });
+  }
+}
+
+/** Bloco editorial (3 destinos) de um país em PDF. */
+function editorialPdf(b: PdfBuilder, c: ReportCountry) {
+  b.heading("Conteudo pronto pra publicar", { size: 13, color: BLUE_LIGHT, spaceBefore: 8, gapAfter: 4 });
+  const ed = c.editorial;
+  if (!ed) {
+    b.text("Conteudo editorial em curadoria pela Friday. Por enquanto, use o Panorama acima e as manchetes ao vivo como base pros posts.", { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
+    return;
+  }
+
+  if (ed.community.length > 0) {
+    b.heading(`Para a Comunidade - posts objetivos (${ed.community.length})`, H3);
+    ed.community.forEach((p) => {
+      b.heading(p.title, { size: 10.5, color: BLUE_LIGHT, spaceBefore: 3, gapAfter: 2 });
+      bodyPdf(b, p.body);
+      if (p.cta) b.text(p.cta, { size: 10, color: BLUE, gapAfter: 2 });
+      sourcesPdf(b, p.sources);
+    });
+  }
+
+  if (ed.countryTab.length > 0) {
+    b.heading(`Para a aba do pais - noticia completa (${ed.countryTab.length})`, H3);
+    ed.countryTab.forEach((a) => {
+      b.heading(a.headline, { size: 11.5, color: BLUE_LIGHT, spaceBefore: 4, gapAfter: 2 });
+      b.text(a.standfirst, { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
+      bodyPdf(b, a.body);
+      if (a.keyFacts?.length) {
+        b.text("Dados-chave:", { size: 10, color: DARK, gapAfter: 1 });
+        a.keyFacts.forEach((f) => b.bullet(f, { size: 10, gapAfter: 0 }));
+        b.text("", { gapAfter: 2 });
+      }
+      sourcesPdf(b, a.sources);
+    });
+  }
+
+  if (ed.blog.length > 0) {
+    b.heading(`Para o Blog WiseHub News - materia (${ed.blog.length})`, H3);
+    ed.blog.forEach((p) => {
+      b.heading(p.headline, { size: 11.5, color: BLUE_LIGHT, spaceBefore: 4, gapAfter: 2 });
+      b.text(p.standfirst, { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
+      bodyPdf(b, p.body);
+      if (p.tags?.length) b.text(`Tags: ${p.tags.join(" - ")}`, { size: 8.5, color: GREY, gapAfter: 2 });
+      sourcesPdf(b, p.sources);
+    });
+  }
+}
 
 export async function renderPdf(data: ReportData): Promise<Uint8Array> {
   const { generatedAtStr, stats, countries } = data;
@@ -202,8 +266,16 @@ export async function renderPdf(data: ReportData): Promise<Uint8Array> {
     ["Feeds RSS curados (Centros de Informação)", String(stats.totalRssFeeds)],
     ["Manchetes ao vivo capturadas neste relatório", String(stats.totalHeadlines)],
     ["Última varredura do cron", stats.lastRun ? fmtDate(stats.lastRun, { full: true }) : "—"],
+    ["Países com conteúdo editorial curado", String(stats.editorialCountries)],
+    ["Peças prontas pra publicar", String(stats.editorialPieces)],
   ];
   for (const [k, v] of sm) b.bullet(`${k}: ${v}`, { size: 10, gapAfter: 1 });
+
+  // Guia editorial
+  b.heading("Guia editorial - como usar este documento", { size: 15, color: BLUE, spaceBefore: 12, gapAfter: 4 });
+  for (const para of EDITORIAL_GUIDE.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean)) {
+    b.text(para, { size: 10, gapAfter: 3 });
+  }
 
   // Índice por país
   b.heading("Índice por país", { size: 15, color: BLUE, spaceBefore: 10 });
@@ -220,6 +292,13 @@ export async function renderPdf(data: ReportData): Promise<Uint8Array> {
       b.heading("Panorama", H2);
       b.text(c.summary, { size: 10, gapAfter: 3 });
     }
+
+    // Conteúdo jornalístico pronto pra publicar (3 destinos)
+    editorialPdf(b, c);
+
+    // Dados técnicos do monitoramento (separados do conteúdo editorial)
+    b.heading("Dados tecnicos - monitoramento", { size: 12.5, color: BLUE, spaceBefore: 8, gapAfter: 2 });
+    b.text("Base factual que alimenta as noticias acima: boletins oficiais, marcos e manchetes ao vivo.", { size: 9, color: GREY, oblique: true, gapAfter: 3 });
 
     if (c.bulletin) {
       const bl = c.bulletin;

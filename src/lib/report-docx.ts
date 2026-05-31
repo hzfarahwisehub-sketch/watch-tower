@@ -30,6 +30,7 @@ import {
   categoryEmoji,
   categoryName,
 } from "@/lib/report-data";
+import { EDITORIAL_GUIDE, type EditorialSource } from "@/lib/editorial";
 
 const BLUE = "1F55FF";
 const BLUE_LIGHT = "3A6BFF";
@@ -84,6 +85,8 @@ function summaryTable(data: ReportData): Table {
     ["📡 Feeds RSS curados (Centros de Informação)", String(stats.totalRssFeeds)],
     ["📰 Manchetes ao vivo capturadas neste relatório", String(stats.totalHeadlines)],
     ["🤖 Última varredura do cron", stats.lastRun ? fmtDate(stats.lastRun, { full: true }) : "—"],
+    ["✍️ Países com conteúdo editorial curado", String(stats.editorialCountries)],
+    ["📝 Peças prontas pra publicar", String(stats.editorialPieces)],
   ];
 
   const headerRow = new TableRow({
@@ -123,6 +126,103 @@ function summaryTable(data: ReportData): Table {
   });
 }
 
+function h3(text: string): Paragraph {
+  return new Paragraph({
+    heading: HeadingLevel.HEADING_3,
+    spacing: { before: 140, after: 60 },
+    children: [new TextRun({ text, bold: true, color: DARK, size: 22 })],
+  });
+}
+
+/** Quebra um corpo em "\n\n" e devolve um parágrafo por bloco. */
+function bodyParas(text: string, opts: { italics?: boolean; color?: string } = {}): Paragraph[] {
+  return text
+    .split(/\n{2,}/)
+    .map((blk) => blk.trim())
+    .filter(Boolean)
+    .map(
+      (blk) =>
+        new Paragraph({
+          spacing: { after: 100 },
+          children: [new TextRun({ text: blk, color: opts.color ?? DARK, italics: opts.italics })],
+        }),
+    );
+}
+
+/** Linha "Fontes:" com hyperlinks reais separados por · */
+function sourcesLine(sources?: EditorialSource[]): Paragraph | null {
+  if (!sources?.length) return null;
+  const children: (TextRun | ExternalHyperlink)[] = [new TextRun({ text: "Fontes: ", bold: true, color: GREY, size: 18 })];
+  sources.forEach((s, i) => {
+    if (i > 0) children.push(new TextRun({ text: " · ", color: GREY, size: 18 }));
+    children.push(link(s.label, s.url));
+  });
+  return new Paragraph({ spacing: { after: 120 }, children });
+}
+
+/** Bloco editorial (3 destinos) de um país em Word. */
+function editorialDocx(c: ReportCountry): Paragraph[] {
+  const out: Paragraph[] = [];
+  out.push(h2("✍️ Conteúdo pronto pra publicar"));
+
+  const ed = c.editorial;
+  if (!ed) {
+    out.push(
+      new Paragraph({
+        spacing: { after: 100 },
+        children: [
+          new TextRun({
+            text: "Conteúdo editorial em curadoria pela Friday. Por enquanto, use o Panorama acima e as manchetes ao vivo dos Dados técnicos como base pros posts.",
+            italics: true,
+            color: GREY,
+          }),
+        ],
+      }),
+    );
+    return out;
+  }
+
+  if (ed.community.length > 0) {
+    out.push(h3(`📣 Para a Comunidade · posts objetivos (${ed.community.length})`));
+    ed.community.forEach((p) => {
+      out.push(new Paragraph({ spacing: { before: 60, after: 40 }, children: [new TextRun({ text: p.title, bold: true, color: BLUE_LIGHT, size: 21 })] }));
+      out.push(...bodyParas(p.body));
+      if (p.cta) out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: `👉 ${p.cta}`, bold: true, color: BLUE })] }));
+      const sl = sourcesLine(p.sources);
+      if (sl) out.push(sl);
+    });
+  }
+
+  if (ed.countryTab.length > 0) {
+    out.push(h3(`📰 Para a aba do país · notícia completa (${ed.countryTab.length})`));
+    ed.countryTab.forEach((a) => {
+      out.push(new Paragraph({ spacing: { before: 60, after: 30 }, children: [new TextRun({ text: a.headline, bold: true, color: BLUE_LIGHT, size: 23 })] }));
+      out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: a.standfirst, italics: true, color: DARK })] }));
+      out.push(...bodyParas(a.body));
+      if (a.keyFacts?.length) {
+        out.push(new Paragraph({ spacing: { before: 40, after: 30 }, children: [new TextRun({ text: "Dados-chave:", bold: true, color: DARK })] }));
+        a.keyFacts.forEach((f) => out.push(bullet([new TextRun({ text: f, color: DARK })])));
+      }
+      const sl = sourcesLine(a.sources);
+      if (sl) out.push(sl);
+    });
+  }
+
+  if (ed.blog.length > 0) {
+    out.push(h3(`📝 Para o Blog WiseHub News · matéria (${ed.blog.length})`));
+    ed.blog.forEach((p) => {
+      out.push(new Paragraph({ spacing: { before: 60, after: 30 }, children: [new TextRun({ text: p.headline, bold: true, color: BLUE_LIGHT, size: 23 })] }));
+      out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: p.standfirst, italics: true, color: DARK })] }));
+      out.push(...bodyParas(p.body));
+      if (p.tags?.length) out.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: `Tags: ${p.tags.join(" · ")}`, color: GREY, size: 18 })] }));
+      const sl = sourcesLine(p.sources);
+      if (sl) out.push(sl);
+    });
+  }
+
+  return out;
+}
+
 function countrySection(c: ReportCountry): (Paragraph | Table)[] {
   const out: (Paragraph | Table)[] = [];
 
@@ -136,9 +236,27 @@ function countrySection(c: ReportCountry): (Paragraph | Table)[] {
     out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: c.summary, color: DARK })] }));
   }
 
+  // Conteúdo jornalístico pronto pra publicar (3 destinos)
+  out.push(...editorialDocx(c));
+
+  // Dados técnicos do monitoramento (separados do conteúdo editorial)
+  out.push(h2("🔧 Dados técnicos · monitoramento"));
+  out.push(
+    new Paragraph({
+      spacing: { after: 80 },
+      children: [
+        new TextRun({
+          text: "Base factual que alimenta as notícias acima: boletins oficiais, marcos e manchetes ao vivo.",
+          italics: true,
+          color: GREY,
+        }),
+      ],
+    }),
+  );
+
   if (c.bulletin) {
     const b = c.bulletin;
-    out.push(h2("📜 Boletim oficial monitorado"));
+    out.push(h3("📜 Boletim oficial monitorado"));
     out.push(bullet([new TextRun({ text: "Fonte: ", bold: true }), new TextRun(b.source)]));
     out.push(bullet([new TextRun({ text: "Frequência declarada: ", bold: true }), new TextRun(b.frequency)]));
     out.push(bullet([new TextRun({ text: "URL pública: ", bold: true }), link(b.url, b.url)]));
@@ -182,7 +300,7 @@ function countrySection(c: ReportCountry): (Paragraph | Table)[] {
   }
 
   if (c.events.length > 0) {
-    out.push(h2(`📜 Marcos editoriais (${c.events.length})`));
+    out.push(h3(`📜 Marcos editoriais (${c.events.length})`));
     out.push(
       new Paragraph({
         spacing: { after: 80 },
@@ -205,7 +323,7 @@ function countrySection(c: ReportCountry): (Paragraph | Table)[] {
 
   if (c.headlines.length > 0) {
     const sorted = c.headlines;
-    out.push(h2(`📡 Atividade ao vivo · ${sorted.length} manchete${sorted.length !== 1 ? "s" : ""} via RSS`));
+    out.push(h3(`📡 Atividade ao vivo · ${sorted.length} manchete${sorted.length !== 1 ? "s" : ""} via RSS`));
     sorted.slice(0, 12).forEach((hd) => {
       const when = hd.pubDate ? ` (${fmtDate(hd.pubDate, { full: true })})` : "";
       out.push(
@@ -217,7 +335,7 @@ function countrySection(c: ReportCountry): (Paragraph | Table)[] {
       );
     });
   } else {
-    out.push(h2("📡 Atividade ao vivo"));
+    out.push(h3("📡 Atividade ao vivo"));
     out.push(
       new Paragraph({
         spacing: { after: 60 },
@@ -233,7 +351,7 @@ function countrySection(c: ReportCountry): (Paragraph | Table)[] {
   }
 
   if (c.sources.length > 0) {
-    out.push(h2(`🌐 Centros de Informação (${c.sources.length} fonte${c.sources.length !== 1 ? "s" : ""})`));
+    out.push(h3(`🌐 Centros de Informação (${c.sources.length} fonte${c.sources.length !== 1 ? "s" : ""})`));
     const byCategory = new Map<string, typeof c.sources>();
     for (const s of c.sources) {
       const arr = byCategory.get(s.category) ?? [];
@@ -285,6 +403,10 @@ export async function renderDocx(data: ReportData): Promise<Buffer> {
   // Sumário executivo
   children.push(h1("Sumário executivo"));
   children.push(summaryTable(data));
+
+  // Guia editorial
+  children.push(h1("📣 Guia editorial · como usar este documento"));
+  children.push(...bodyParas(EDITORIAL_GUIDE));
 
   // Índice por país
   children.push(h1("Índice por país"));

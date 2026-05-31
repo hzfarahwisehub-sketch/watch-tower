@@ -5,6 +5,7 @@
 
 import {
   type ReportData,
+  type ReportCountry,
   fmtDate,
   relativeAge,
   statusLabel,
@@ -14,6 +15,86 @@ import {
   categoryEmoji,
   categoryName,
 } from "@/lib/report-data";
+import { EDITORIAL_GUIDE } from "@/lib/editorial";
+
+/** Renderiza o bloco editorial (3 destinos) de um país em Markdown. */
+function editorialMd(c: ReportCountry): string[] {
+  const lines: string[] = [];
+  lines.push(`### ✍️ Conteúdo pronto pra publicar`);
+  lines.push(``);
+
+  const ed = c.editorial;
+  if (!ed) {
+    lines.push(`> _Conteúdo editorial em curadoria pela Friday. Por enquanto, use o Panorama acima e as manchetes ao vivo dos Dados técnicos como base pros posts._`);
+    lines.push(``);
+    return lines;
+  }
+
+  if (ed.community.length > 0) {
+    lines.push(`#### 📣 Para a Comunidade · posts objetivos (${ed.community.length})`);
+    lines.push(``);
+    ed.community.forEach((p) => {
+      lines.push(`**${p.title}**`);
+      lines.push(``);
+      lines.push(p.body);
+      lines.push(``);
+      if (p.cta) {
+        lines.push(`👉 ${p.cta}`);
+        lines.push(``);
+      }
+      if (p.sources?.length) {
+        lines.push(`_Fontes: ${p.sources.map((s) => `[${s.label}](${s.url})`).join(" · ")}_`);
+        lines.push(``);
+      }
+    });
+  }
+
+  if (ed.countryTab.length > 0) {
+    lines.push(`#### 📰 Para a aba do país · notícia completa (${ed.countryTab.length})`);
+    lines.push(``);
+    ed.countryTab.forEach((a) => {
+      lines.push(`**${a.headline}**`);
+      lines.push(``);
+      lines.push(`_${a.standfirst}_`);
+      lines.push(``);
+      lines.push(a.body);
+      lines.push(``);
+      if (a.keyFacts?.length) {
+        lines.push(`**Dados-chave:**`);
+        lines.push(``);
+        a.keyFacts.forEach((f) => lines.push(`- ${f}`));
+        lines.push(``);
+      }
+      if (a.sources?.length) {
+        lines.push(`_Fontes: ${a.sources.map((s) => `[${s.label}](${s.url})`).join(" · ")}_`);
+        lines.push(``);
+      }
+    });
+  }
+
+  if (ed.blog.length > 0) {
+    lines.push(`#### 📝 Para o Blog WiseHub News · matéria (${ed.blog.length})`);
+    lines.push(``);
+    ed.blog.forEach((p) => {
+      lines.push(`**${p.headline}**`);
+      lines.push(``);
+      lines.push(`_${p.standfirst}_`);
+      lines.push(``);
+      lines.push(p.body);
+      lines.push(``);
+      if (p.tags?.length) {
+        lines.push(`Tags: ${p.tags.map((t) => `\`${t}\``).join(" ")}`);
+        lines.push(``);
+      }
+      if (p.sources?.length) {
+        lines.push(`_Fontes: ${p.sources.map((s) => `[${s.label}](${s.url})`).join(" · ")}_`);
+        lines.push(``);
+      }
+    });
+  }
+
+  return lines;
+}
 
 export function renderMarkdown(data: ReportData): string {
   const { generatedAtStr, stats, countries } = data;
@@ -36,6 +117,14 @@ export function renderMarkdown(data: ReportData): string {
   lines.push(`| 📡 Feeds RSS curados (Centros de Informação) | **${stats.totalRssFeeds}** |`);
   lines.push(`| 📰 Manchetes ao vivo capturadas neste relatório | **${stats.totalHeadlines}** |`);
   lines.push(`| 🤖 Última varredura do cron | **${stats.lastRun ? fmtDate(stats.lastRun, { full: true }) : "—"}** |`);
+  lines.push(`| ✍️ Países com conteúdo editorial curado | **${stats.editorialCountries}** |`);
+  lines.push(`| 📝 Peças prontas pra publicar (posts + notícias + matérias) | **${stats.editorialPieces}** |`);
+  lines.push(``);
+  lines.push(`---`);
+  lines.push(``);
+  lines.push(`## 📣 Guia editorial · como usar este documento`);
+  lines.push(``);
+  lines.push(EDITORIAL_GUIDE);
   lines.push(``);
   lines.push(`---`);
   lines.push(``);
@@ -63,9 +152,18 @@ export function renderMarkdown(data: ReportData): string {
       lines.push(``);
     }
 
+    // Conteúdo jornalístico pronto pra publicar (3 destinos)
+    lines.push(...editorialMd(c));
+
+    // Dados técnicos do monitoramento (embasam o conteúdo acima)
+    lines.push(`### 🔧 Dados técnicos · monitoramento`);
+    lines.push(``);
+    lines.push(`> _Base factual que alimenta as notícias acima: boletins oficiais, marcos e manchetes ao vivo._`);
+    lines.push(``);
+
     if (c.bulletin) {
       const b = c.bulletin;
-      lines.push(`### 📜 Boletim oficial monitorado`);
+      lines.push(`#### 📜 Boletim oficial monitorado`);
       lines.push(``);
       lines.push(`- **Fonte:** ${b.source}`);
       lines.push(`- **Frequência declarada:** ${b.frequency}`);
@@ -82,7 +180,7 @@ export function renderMarkdown(data: ReportData): string {
     }
 
     if (c.events.length > 0) {
-      lines.push(`### 📜 Marcos editoriais (${c.events.length})`);
+      lines.push(`#### 📜 Marcos editoriais (${c.events.length})`);
       lines.push(``);
       lines.push(`> _Contexto histórico selecionado pela equipe WiseHub._`);
       lines.push(``);
@@ -98,7 +196,7 @@ export function renderMarkdown(data: ReportData): string {
 
     if (c.headlines.length > 0) {
       const sorted = c.headlines;
-      lines.push(`### 📡 Atividade ao vivo · ${sorted.length} manchete${sorted.length !== 1 ? "s" : ""} via RSS`);
+      lines.push(`#### 📡 Atividade ao vivo · ${sorted.length} manchete${sorted.length !== 1 ? "s" : ""} via RSS`);
       lines.push(``);
       sorted.slice(0, 12).forEach((h) => {
         const when = h.pubDate ? ` _(${fmtDate(h.pubDate, { full: true })})_` : "";
@@ -106,14 +204,14 @@ export function renderMarkdown(data: ReportData): string {
       });
       lines.push(``);
     } else {
-      lines.push(`### 📡 Atividade ao vivo`);
+      lines.push(`#### 📡 Atividade ao vivo`);
       lines.push(``);
       lines.push(`_Sem manchetes RSS disponíveis no momento (feed pode estar offline ou fora de horário comercial)._`);
       lines.push(``);
     }
 
     if (c.sources.length > 0) {
-      lines.push(`### 🌐 Centros de Informação (${c.sources.length} fonte${c.sources.length !== 1 ? "s" : ""})`);
+      lines.push(`#### 🌐 Centros de Informação (${c.sources.length} fonte${c.sources.length !== 1 ? "s" : ""})`);
       lines.push(``);
       const byCategory = new Map<string, typeof c.sources>();
       for (const s of c.sources) {

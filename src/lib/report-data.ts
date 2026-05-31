@@ -16,6 +16,7 @@
 import { COUNTRIES } from "@/lib/data";
 import { INFO_CENTERS, type InfoSource } from "@/lib/infoCenters";
 import { BULLETINS, type BulletinStatus, type StatusFile } from "@/lib/bulletins";
+import { getEditorial, editorialStats, type CountryEditorial } from "@/lib/editorial";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
@@ -43,6 +44,8 @@ export type ReportCountry = {
   /** manchetes RSS já ordenadas (mais recente primeiro) */
   headlines: ReportHeadline[];
   sources: InfoSource[];
+  /** conteúdo jornalístico curado pela Friday (3 destinos), se houver */
+  editorial?: CountryEditorial;
 };
 
 export type ReportStats = {
@@ -53,6 +56,10 @@ export type ReportStats = {
   totalRssFeeds: number;
   totalHeadlines: number;
   lastRun: string | null;
+  /** países com conteúdo editorial já curado pela Friday */
+  editorialCountries: number;
+  /** total de peças editoriais prontas (posts + notícias + matérias) */
+  editorialPieces: number;
 };
 
 export type ReportData = {
@@ -202,6 +209,7 @@ export async function gatherReportData(): Promise<ReportData> {
       events: c.events.map((ev) => ({ title: ev.title, desc: ev.desc, src: ev.src })),
       headlines: sortHeadlines(headlinesByCountry.get(c.code) ?? []),
       sources: center?.sources ?? [],
+      editorial: getEditorial(c.code),
     };
   });
 
@@ -214,6 +222,8 @@ export async function gatherReportData(): Promise<ReportData> {
     totalRssFeeds: allFeeds.length,
     totalHeadlines: countries.reduce((s, c) => s + c.headlines.length, 0),
     lastRun: statusFile?.lastRun ?? null,
+    editorialCountries: editorialStats().countries,
+    editorialPieces: editorialStats().pieces,
   };
 
   return { generatedAt, generatedAtStr, stats, countries };
