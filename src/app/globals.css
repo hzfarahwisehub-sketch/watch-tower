@@ -81,15 +81,19 @@ body {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background-image: url("/brand/wisehub-logo-light.svg");
+  background-image: url("/brand/watchtower-icon.png");
   background-repeat: no-repeat;
-  background-position: center 46%;
-  background-size: min(680px, 66vw) auto;
-  opacity: .11;
+  background-position: center 45%;
+  background-size: min(840px, 80vw);
+  /* screen tira o quadrado escuro do ícone — só o "olho que tudo vê" brilha */
+  mix-blend-mode: screen;
+  opacity: .5;
+  filter: brightness(1.2) saturate(1.1);
 }
 [data-theme="light"] .wt-watermark {
-  background-image: url("/brand/wisehub-logo-dark.svg");
-  opacity: .07;
+  mix-blend-mode: normal;
+  opacity: .06;
+  filter: none;
 }
 
 @keyframes wt-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(.85); } }
