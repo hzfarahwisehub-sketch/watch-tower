@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { ToastProvider } from "@/components/ToastProvider";
 import { SettingsProvider } from "@/components/SettingsProvider";
 import { UndoProvider } from "@/components/UndoProvider";
+import { NavPerf } from "@/components/NavPerf";
 import { AuthSessionProvider } from "@/components/AuthSessionProvider";
 import { PwaBootstrap } from "@/components/PwaBootstrap";
 
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <ToastProvider>
                 <UndoProvider>
                   {children}
+                  <NavPerf />
                   <PwaBootstrap />
                 </UndoProvider>
               </ToastProvider>

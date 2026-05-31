@@ -136,6 +136,10 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
       pitch: 0,
       bearing: 0,
       attributionControl: { compact: true },
+      // Perf: sem cross-fade de tiles (aparecem direto) + não re-renderiza à toa.
+      // Nitidez intacta (não mexe em pixelRatio nem antialias).
+      fadeDuration: 0,
+      refreshExpiredTiles: false,
     });
     mapRef.current = map;
 

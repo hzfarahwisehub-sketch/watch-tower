@@ -16,6 +16,7 @@ import { CountryBenchmark } from "./CountryBenchmark";
 import { SuggestionBox } from "./SuggestionBox";
 import { ExportButton } from "./ExportButton";
 import { useUndo } from "./UndoProvider";
+import { markNavigating } from "@/lib/nav-perf";
 import { useSession } from "next-auth/react";
 import { InfoCenters, FinanceCenters, CryptoCenters } from "./InfoCenters";
 import { useSettings } from "./SettingsProvider";
@@ -280,6 +281,7 @@ export function Dashboard() {
   };
 
   const onLayoutChange = (_current: Layout, all: ResponsiveLayouts) => {
+    markNavigating(); // arrasto/resize em andamento → navegação fluida
     layoutsRef.current = all;
     setLayouts(all);
     try {

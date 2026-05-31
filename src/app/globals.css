@@ -130,11 +130,26 @@ html::-webkit-scrollbar-thumb:hover {
   mix-blend-mode: screen;
   opacity: .16;
   filter: brightness(1.02) saturate(1);
+  transition: opacity .25s ease;
 }
 [data-theme="light"] .wt-watermark {
   mix-blend-mode: normal;
   opacity: .06;
   filter: none;
+}
+
+/* ── Navegação fluida ──────────────────────────────────────────────────────
+   Enquanto o usuário ROLA ou ARRASTA, suspendemos os efeitos caros que
+   recalculam a cada frame (backdrop-blur dos cards + mix-blend da marca
+   d'água). Em repouso, tudo volta. As IMAGENS e o GLOBO seguem nítidos: são
+   desenhados por cima, sem perder nada de qualidade. */
+html[data-navigating] .wt-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html[data-navigating] .wt-watermark {
+  mix-blend-mode: normal;
+  opacity: .04;
 }
 
 @keyframes wt-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(.85); } }
