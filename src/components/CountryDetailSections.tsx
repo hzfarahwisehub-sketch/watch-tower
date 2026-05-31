@@ -1,7 +1,13 @@
 "use client";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import type { Country } from "@/lib/types";
-import { getEditorial, DESTINATIONS } from "@/lib/editorial";
+import {
+  getEditorial,
+  DESTINATIONS,
+  DIMENSION_FILTERS,
+  pieceDimension,
+  type DimensionKey,
+} from "@/lib/editorial";
 import { INFO_CENTERS, type InfoSource } from "@/lib/infoCenters";
 
 const COMM = DESTINATIONS.find((d) => d.key === "community")!.colorHex;
@@ -34,14 +40,31 @@ function Title({ children, color }: { children: ReactNode; color?: string }) {
 }
 
 /**
- * Seções de detalhe do país (editorial curado + dicas + fontes), pra exibir
- * DENTRO do Benchmark. Sem overlay: o mapa continua visível ao lado.
+ * Seções de detalhe do país (editorial curado + dicas + fontes), exibidas
+ * DENTRO do Benchmark. Tem filtro por DIMENSÃO (Tudo · Vistos & Trabalho ·
+ * Educação · Saúde · Economia) — a dimensão é detectada pelo emoji do título.
  */
 export function CountryDetailSections({ country }: { country: Country }) {
   const ed = getEditorial(country.code);
+  const [dim, setDim] = useState<DimensionKey>("all");
+
   const center = INFO_CENTERS.find((ic) => ic.countryCode === country.code);
   const sources = center?.sources ?? [];
-  const tips = ed ? (ed.community.map((p) => p.cta).filter(Boolean) as string[]) : [];
+
+  const matchDim = (d: Exclude<DimensionKey, "all">) => dim === "all" || dim === d;
+  const community = ed ? ed.community.filter((p) => matchDim(pieceDimension(p.title))) : [];
+  const countryTab = ed ? ed.countryTab.filter((a) => matchDim(pieceDimension(a.headline))) : [];
+  const blog = ed ? ed.blog.filter((p) => matchDim(pieceDimension(p.headline))) : [];
+  const tips = community.map((p) => p.cta).filter(Boolean) as string[];
+
+  // dimensões realmente presentes (pros chips de filtro)
+  const present = new Set<Exclude<DimensionKey, "all">>();
+  if (ed) {
+    ed.community.forEach((p) => present.add(pieceDimension(p.title)));
+    ed.countryTab.forEach((a) => present.add(pieceDimension(a.headline)));
+    ed.blog.forEach((p) => present.add(pieceDimension(p.headline)));
+  }
+  const chips = DIMENSION_FILTERS.filter((f) => f.key === "all" || present.has(f.key));
 
   const byCategory = new Map<string, InfoSource[]>();
   for (const s of sources) {
@@ -50,8 +73,34 @@ export function CountryDetailSections({ country }: { country: Country }) {
     byCategory.set(s.category, arr);
   }
 
+  const nothingInDim = ed && dim !== "all" && community.length === 0 && countryTab.length === 0 && blog.length === 0;
+
   return (
     <>
+      {/* Filtro por dimensão (só aparece quando há mais de uma) */}
+      {ed && present.size > 1 && (
+        <div className="flex flex-wrap gap-1.5">
+          {chips.map((f) => {
+            const active = dim === f.key;
+            return (
+              <button
+                key={f.key}
+                type="button"
+                onClick={() => setDim(f.key)}
+                className="px-2.5 py-1 rounded-full text-[10.5px] font-bold tracking-wide transition-colors cursor-pointer"
+                style={{
+                  background: active ? "var(--color-wh-blue)" : "var(--bg2)",
+                  color: active ? "#fff" : "var(--text-3)",
+                  border: "1px solid var(--border)",
+                }}
+              >
+                {f.emoji} {f.label}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       {/* Dicas práticas */}
       {tips.length > 0 && (
         <div>
@@ -71,11 +120,11 @@ export function CountryDetailSections({ country }: { country: Country }) {
       )}
 
       {/* Notícia completa (editorial · aba do país) */}
-      {ed && ed.countryTab.length > 0 && (
+      {countryTab.length > 0 && (
         <div>
           <Title color={`#${TAB}`}>📰 Notícia completa</Title>
           <div className="flex flex-col gap-3">
-            {ed.countryTab.map((a, i) => (
+            {countryTab.map((a, i) => (
               <article key={i} className="rounded-lg p-3.5" style={{ background: "var(--bg2)", borderLeft: `3px solid #${TAB}` }}>
                 <h5 className="text-[14px] font-extrabold leading-snug mb-1" style={{ color: "var(--text)" }}>{a.headline}</h5>
                 <p className="text-[11.5px] italic mb-2" style={{ color: "var(--text-3)" }}>{a.standfirst}</p>
@@ -105,11 +154,11 @@ export function CountryDetailSections({ country }: { country: Country }) {
       )}
 
       {/* Posts da comunidade */}
-      {ed && ed.community.length > 0 && (
+      {community.length > 0 && (
         <div>
           <Title color={`#${COMM}`}>📣 Posts pra comunidade</Title>
           <div className="flex flex-col gap-2.5">
-            {ed.community.map((p, i) => (
+            {community.map((p, i) => (
               <div key={i} className="rounded-lg p-3" style={{ background: "var(--bg2)", borderLeft: `3px solid #${COMM}` }}>
                 <h5 className="text-[13px] font-bold mb-1.5" style={{ color: "var(--text)" }}>{p.title}</h5>
                 {paras(p.body).map((para, j) => (
@@ -122,11 +171,11 @@ export function CountryDetailSections({ country }: { country: Country }) {
       )}
 
       {/* Matéria do Blog */}
-      {ed && ed.blog.length > 0 && (
+      {blog.length > 0 && (
         <div>
           <Title color={`#${BLOG}`}>📝 Matéria do Blog WiseHub News</Title>
           <div className="flex flex-col gap-3">
-            {ed.blog.map((p, i) => (
+            {blog.map((p, i) => (
               <article key={i} className="rounded-lg p-3.5" style={{ background: "var(--bg2)", borderLeft: `3px solid #${BLOG}` }}>
                 <h5 className="text-[14px] font-extrabold leading-snug mb-1" style={{ color: "var(--text)" }}>{p.headline}</h5>
                 <p className="text-[11.5px] italic mb-2" style={{ color: "var(--text-3)" }}>{p.standfirst}</p>
@@ -137,6 +186,12 @@ export function CountryDetailSections({ country }: { country: Country }) {
             ))}
           </div>
         </div>
+      )}
+
+      {nothingInDim && (
+        <p className="text-[11.5px] italic" style={{ color: "var(--text-3)" }}>
+          Nada nesta dimensão ainda pra {country.name}. Em curadoria.
+        </p>
       )}
 
       {/* Centros de Informação (fontes) */}

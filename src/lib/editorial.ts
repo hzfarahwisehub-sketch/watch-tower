@@ -90,6 +90,27 @@ const SRC = {
   ukStudent: { label: "Reino Unido · Visto de estudante (gov.uk)", url: "https://www.gov.uk/student-visa" },
   boe: { label: "Bank of England (taxa de juros)", url: "https://www.bankofengland.co.uk" },
   ons: { label: "Office for National Statistics (UK)", url: "https://www.ons.gov.uk" },
+  // Austrália
+  studyAustralia: { label: "Study Australia · Visto de estudante 500 (oficial)", url: "https://www.studyaustralia.gov.au/en/plan-your-move/your-guide-to-visas/student-visa-subclass-500" },
+  ausHealth: { label: "Austrália · Dept of Health (oficial)", url: "https://www.health.gov.au" },
+  rba: { label: "Reserve Bank of Australia (juros)", url: "https://www.rba.gov.au" },
+  abs: { label: "Australian Bureau of Statistics", url: "https://www.abs.gov.au" },
+  // Emirados
+  uaeMoE: { label: "Emirados · Ministry of Education", url: "https://www.moe.gov.ae" },
+  khda: { label: "Dubai · KHDA (educação)", url: "https://www.khda.gov.ae" },
+  dhaHealth: { label: "Dubai Health Authority (DHA)", url: "https://www.dha.gov.ae" },
+  centralBankUAE: { label: "Central Bank of the UAE", url: "https://www.centralbank.ae" },
+  // França
+  campusFrance: { label: "Campus France · Mensalidades (oficial)", url: "https://www.campusfrance.org/en/tuition-fees-France" },
+  ameli: { label: "França · Assurance Maladie / Ameli", url: "https://www.ameli.fr" },
+  banqueFrance: { label: "Banque de France", url: "https://www.banque-france.fr" },
+  insee: { label: "INSEE (estatística · França)", url: "https://www.insee.fr" },
+  // EUA
+  educationUSA: { label: "EducationUSA (oficial)", url: "https://educationusa.state.gov" },
+  sevis: { label: "EUA · Taxa SEVIS I-901 (Study in the States)", url: "https://studyinthestates.dhs.gov/students/prepare/paying-the-i-901-sevis-fee" },
+  usHealthcare: { label: "EUA · HealthCare.gov", url: "https://www.healthcare.gov" },
+  fed: { label: "Federal Reserve (EUA · juros)", url: "https://www.federalreserve.gov" },
+  bls: { label: "Bureau of Labor Statistics (EUA)", url: "https://www.bls.gov" },
 } satisfies Record<string, EditorialSource>;
 
 export const EDITORIAL: Record<string, CountryEditorial> = {
@@ -193,6 +214,27 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
         cta: "Tem entre 18 e 30? Junte os documentos agora, essa fila anda rápido.",
         sources: [SRC.dhaWHV],
       },
+      {
+        title: "🎓 Educação: a Austrália tem o visto de estudante mais caro do mundo",
+        body:
+          "Estudar na Austrália ficou mais caro logo na entrada. Desde 1º de julho de 2025, a taxa do visto de estudante (subclasse 500) subiu pra AUD 2.000, um aumento de 25% sobre os AUD 1.600 anteriores. É hoje a taxa de visto de estudante mais cara do mundo.\n\nE não para no estudante: o cônjuge acima de 18 paga outros AUD 2.000, e cada filho menor, AUD 500. O país também apertou os requisitos de inglês e de \"estudante genuíno\".",
+        cta: "Vai estudar na Austrália? Inclua a taxa de AUD 2.000 (e a dos dependentes) no orçamento desde o início.",
+        sources: [SRC.studyAustralia],
+      },
+      {
+        title: "🏥 Saúde: estudante na Austrália precisa do OSHC obrigatório",
+        body:
+          "O Medicare, a saúde pública australiana, é pra cidadãos e residentes permanentes (e alguns países com acordo). Estudante internacional não entra: é obrigatório contratar o OSHC (Overseas Student Health Cover) por todo o período do visto.\n\nQuem vai a trabalho temporário também costuma precisar de cobertura privada. Então seguro-saúde entra no cálculo desde o começo.",
+        cta: "Vai de visto de estudante? O OSHC é obrigatório e cobre toda a estadia, contrate junto com a matrícula.",
+        sources: [SRC.studyAustralia, SRC.ausHealth],
+      },
+      {
+        title: "💰 Economia: juros do RBA e o custo de vida australiano",
+        body:
+          "Dois indicadores pesam pra quem vai pra Austrália: a taxa básica do Reserve Bank of Australia (RBA), que move o câmbio do dólar australiano, e o custo de vida, alto em Sydney e Melbourne, principalmente moradia.\n\nAcompanhar o RBA e os dados do Australian Bureau of Statistics ajuda a dimensionar o orçamento sem susto.",
+        cta: "Planeje a mudança olhando a taxa do RBA e o custo de vida no Australian Bureau of Statistics.",
+        sources: [SRC.rba, SRC.abs],
+      },
     ],
     countryTab: [
       {
@@ -208,6 +250,20 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
           "Lista de ocupações qualificadas em revisão profunda",
         ],
         sources: [SRC.dhaSkill, SRC.dhaWHV],
+      },
+      {
+        headline: "🎓 Austrália: estudar ficou mais caro e mais exigente",
+        standfirst:
+          "A taxa do visto de estudante saltou de patamar e os requisitos apertaram. Veja o custo real e como se preparar.",
+        body:
+          "A Austrália sempre foi um destino de peso pra estudantes internacionais, mas o custo de entrada deu um salto. Desde 1º de julho de 2025, a taxa do visto de estudante (subclasse 500) passou de AUD 1.600 pra AUD 2.000, um aumento de 25% que fez dela a taxa de visto de estudante mais cara do mundo.\n\nO valor sobe rápido pra quem vai em família: o cônjuge adulto paga outros AUD 2.000 e cada filho menor, AUD 500. E o custo não é só esse: o estudante internacional precisa do seguro OSHC pelo período inteiro, e o país endureceu os requisitos de inglês e o teste de \"estudante genuíno\".\n\nAinda assim, a Austrália segue valendo o esforço pra muita gente, pela qualidade das universidades e pela ligação entre estudo e trabalho pós-formatura. O ponto é planejar o orçamento real, somando visto, seguro e o custo de vida alto das grandes cidades, antes de decidir.",
+        keyFacts: [
+          "Visto de estudante (500): AUD 2.000 desde jul/2025 (+25%)",
+          "Dependente adulto +AUD 2.000, filho +AUD 500",
+          "OSHC (seguro-saúde) obrigatório por todo o visto",
+          "Requisitos de inglês e de 'estudante genuíno' mais rígidos",
+        ],
+        sources: [SRC.studyAustralia, SRC.ausHealth],
       },
     ],
     blog: [
@@ -239,6 +295,27 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
           "Dubai mantém um dos processos mais simples do mundo pra quem trabalha por conta própria. O visto de freelancer é totalmente digital, com taxa única de AED 7.500.\n\nPra nômades digitais e prestadores de serviço, é uma forma legal e rápida de fixar residência num hub global com tributação favorável.",
         cta: "Trabalha remoto? O freelancer visa de Dubai é um dos caminhos mais ágeis que existem.",
         sources: [SRC.dubaiFree],
+      },
+      {
+        title: "🎓 Educação: o ensino nos Emirados é internacional e privado",
+        body:
+          "A educação nos Emirados é majoritariamente privada e internacional, com escolas de currículo britânico, americano e indiano, e campi de universidades estrangeiras (como NYU e Sorbonne em Abu Dhabi). Não há limite de vagas pra estrangeiros, mas o custo das escolas privadas é alto.\n\nEm Dubai, a qualidade das escolas é fiscalizada e avaliada pelo KHDA; no nível federal, quem rege é o Ministério da Educação.",
+        cta: "Vai com a família pros Emirados? Cheque a avaliação da escola no KHDA (Dubai) e some a mensalidade privada ao orçamento.",
+        sources: [SRC.uaeMoE, SRC.khda],
+      },
+      {
+        title: "🏥 Saúde: seguro-saúde é obrigatório pra morar nos Emirados",
+        body:
+          "Nos Emirados, ter seguro-saúde é condição pra obter e renovar o visto de residência. Em Dubai e Abu Dhabi, o empregador costuma cobrir o funcionário, mas dependentes e autônomos precisam contratar por conta.\n\nA rede privada é de alto padrão, e a Dubai Health Authority (DHA) regula o sistema no emirado. Sem seguro, não há residência.",
+        cta: "Vai morar nos Emirados? Garanta o seguro-saúde, ele é exigido pra emitir e renovar o visto.",
+        sources: [SRC.dhaHealth],
+      },
+      {
+        title: "💰 Economia: nos Emirados, salário sem imposto de renda",
+        body:
+          "O grande atrativo financeiro dos Emirados é a ausência de imposto de renda sobre pessoa física: o que você ganha, você leva. O dirham (AED) é atrelado ao dólar americano, o que dá estabilidade cambial.\n\nDesde 2023 há um imposto corporativo de 9% pra empresas acima de um limite de lucro, mas o salário do trabalhador segue isento. O Banco Central dos Emirados rege a política monetária.",
+        cta: "Pensando nos Emirados? Lembre que o salário é isento de imposto de renda e o dirham é atrelado ao dólar.",
+        sources: [SRC.centralBankUAE],
       },
     ],
     countryTab: [
@@ -348,6 +425,27 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
         cta: "Tem perfil qualificado? O Passeport Talent ficou mais simples, vale mapear sua categoria.",
         sources: [SRC.frTalent],
       },
+      {
+        title: "🎓 Educação: estudar na França é barato, mas não-europeu paga mais",
+        body:
+          "A França tem ensino superior público de baixíssimo custo, mas desde 2019 cobra uma mensalidade diferenciada de estudantes de fora da União Europeia. Em 2025/2026, são cerca de €2.895 por ano na licenciatura e €3.770 no mestrado. Mesmo assim, o Estado ainda banca cerca de dois terços do custo real.\n\nMuitas universidades concedem isenções, e o doutorado custa apenas €380. As candidaturas e o visto passam pelo Campus France.",
+        cta: "Vai estudar na França sem passaporte europeu? Conte com ~€2.895/ano (licence) e cheque isenções no Campus France.",
+        sources: [SRC.campusFrance],
+      },
+      {
+        title: "🏥 Saúde: na França, todo residente entra no sistema (PUMA)",
+        body:
+          "A França tem um dos melhores sistemas de saúde do mundo, e quem mora de forma estável tem direito à cobertura pública pela PUMA (Proteção Universal de Doença). O reembolso costuma cobrir cerca de 70% das consultas, e a maioria complementa com uma \"mutuelle\" (seguro complementar).\n\nEstudantes e novos residentes se registram na Assurance Maladie pelo site Ameli.",
+        cta: "Mudou pra França? Registre-se na Assurance Maladie (Ameli) e considere uma mutuelle pra complementar.",
+        sources: [SRC.ameli],
+      },
+      {
+        title: "💰 Economia: euro estável, mas de olho na inflação",
+        body:
+          "A França usa o euro, o que dá previsibilidade cambial pra quem vem da zona do euro e exige atenção ao câmbio real/euro pra brasileiros. A Banque de France acompanha o sistema financeiro local.\n\nPra dimensionar custo de vida, os dados do INSEE, o instituto de estatística francês, são a referência oficial.",
+        cta: "Planeje a França acompanhando o câmbio real/euro e o custo de vida no INSEE.",
+        sources: [SRC.banqueFrance, SRC.insee],
+      },
     ],
     countryTab: [
       {
@@ -388,6 +486,27 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
         cta: "Mira os EUA pelo H-1B? Negocie o melhor salário possível, ele pesa na seleção.",
         sources: [SRC.usH1b],
       },
+      {
+        title: "🎓 Educação: nos EUA, o caminho é o F-1 com OPT no fim",
+        body:
+          "Pra estudar nos EUA, a via é o visto F-1, que exige o pagamento da taxa SEVIS de US$ 350 antes da entrevista. A mensalidade das universidades americanas é das mais altas do mundo, mas o grande atrativo vem no fim: o OPT, uma licença de trabalho de 12 meses após a formatura, estendida por mais 24 meses pra áreas de STEM (ciências, tecnologia, engenharia e matemática).\n\nEsse OPT é a ponte clássica entre estudar e conseguir um patrocínio de trabalho, o H-1B.",
+        cta: "Vai estudar nos EUA? Pague a SEVIS (US$ 350) e já planeje o OPT pós-formatura como ponte pro trabalho.",
+        sources: [SRC.sevis, SRC.educationUSA],
+      },
+      {
+        title: "🏥 Saúde: nos EUA, sem seguro a conta é assustadora",
+        body:
+          "Os EUA não têm saúde pública universal. O acesso depende de seguro privado, quase sempre via empregador, e sem ele uma simples ida ao hospital pode custar milhares de dólares.\n\nPra imigrante, ter um bom seguro-saúde não é luxo, é proteção financeira essencial. As universidades costumam exigir seguro dos estudantes internacionais.",
+        cta: "Vai pros EUA? Não pise lá sem seguro-saúde, uma emergência sem cobertura pode custar uma fortuna.",
+        sources: [SRC.usHealthcare],
+      },
+      {
+        title: "💰 Economia: dólar forte, juros do Fed e custo de vida",
+        body:
+          "Os EUA têm a maior economia do mundo e o dólar como moeda de referência, o que pesa no câmbio pra quem vem do Brasil. A taxa de juros é definida pelo Federal Reserve (o Fed), e ela move desde o financiamento até o valor do dólar.\n\nPra dimensionar custo de vida e salários por região e profissão, o Bureau of Labor Statistics (BLS) é a fonte oficial.",
+        cta: "Planeje os EUA acompanhando os juros do Fed e os dados de salário e custo de vida no BLS.",
+        sources: [SRC.fed, SRC.bls],
+      },
     ],
     countryTab: [
       {
@@ -403,6 +522,20 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
           "Extensão do OPT pra STEM em consulta pública",
         ],
         sources: [SRC.usH1b],
+      },
+      {
+        headline: "🏥 Saúde nos EUA: o custo que o imigrante não pode ignorar",
+        standfirst:
+          "Sem sistema público universal, ficar sem seguro nos EUA é um risco financeiro real. Entenda como se proteger.",
+        body:
+          "De todos os pontos que um brasileiro precisa entender antes de se mudar pros EUA, a saúde é talvez o mais subestimado. Diferente de Canadá, Reino Unido, França ou Austrália, os Estados Unidos não têm um sistema público universal de saúde. O acesso ao cuidado depende de seguro privado.\n\nNa prática, isso significa que a cobertura quase sempre vem pelo empregador, embutida no pacote de trabalho. Quem fica sem seguro se expõe a contas que assustam: uma ida à emergência pode custar milhares de dólares, e uma internação, dezenas de milhares.\n\nPor isso, pra quem imigra, contratar um bom seguro-saúde não é um luxo, é proteção financeira essencial, especialmente no intervalo entre chegar e começar um emprego com benefícios. As universidades, inclusive, costumam exigir comprovação de seguro dos estudantes internacionais.\n\nO recado é direto: ao montar o orçamento de mudança pros EUA, o seguro-saúde tem que entrar como item obrigatório, não como opcional. É a diferença entre uma emergência ser um susto ou uma catástrofe financeira.",
+        keyFacts: [
+          "Não há saúde pública universal nos EUA",
+          "Cobertura quase sempre via seguro do empregador",
+          "Sem seguro, uma emergência custa milhares de dólares",
+          "Universidades exigem seguro dos estudantes internacionais",
+        ],
+        sources: [SRC.usHealthcare],
       },
     ],
     blog: [],
@@ -551,4 +684,27 @@ export function consolidatedSources(
 /** Total de peças prontas pra postar (soma de todos os destinos). */
 export function totalPostables(countries: ReadonlyArray<EdCountryLike>): number {
   return buildPostables(countries).reduce((s, g) => s + g.pieces.length, 0);
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Dimensões (Mandato de Inteligência) — detectadas pelo emoji do título
+// ─────────────────────────────────────────────────────────────────────────
+
+export type DimensionKey = "all" | "core" | "education" | "health" | "economy";
+
+export const DIMENSION_FILTERS: ReadonlyArray<{ key: DimensionKey; label: string; emoji: string }> = [
+  { key: "all", label: "Tudo", emoji: "🗂" },
+  { key: "core", label: "Vistos & Trabalho", emoji: "🛂" },
+  { key: "education", label: "Educação", emoji: "🎓" },
+  { key: "health", label: "Saúde", emoji: "🏥" },
+  { key: "economy", label: "Economia", emoji: "💰" },
+];
+
+/** Descobre a dimensão de uma peça pelo emoji que prefixa o título/headline. */
+export function pieceDimension(titleOrHeadline: string): Exclude<DimensionKey, "all"> {
+  const t = titleOrHeadline.trimStart();
+  if (t.startsWith("🎓")) return "education";
+  if (t.startsWith("🏥")) return "health";
+  if (t.startsWith("💰")) return "economy";
+  return "core"; // sem prefixo = vistos/imigração/trabalho (conteúdo original)
 }
