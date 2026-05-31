@@ -79,6 +79,17 @@ const SRC = {
   ukGrad: { label: "Reino Unido · Graduate visa", url: "https://www.gov.uk/graduate-visa" },
   frTalent: { label: "França · Passeport Talent (service-public)", url: "https://www.service-public.fr/particuliers/vosdroits/F16922" },
   usH1b: { label: "EUA · H-1B (USCIS)", url: "https://www.uscis.gov/working-in-the-united-states/h-1b-specialty-occupations" },
+  // Educação / Saúde / Economia (novas dimensões)
+  iccStudentCap: { label: "IRCC · Limite de vistos de estudante (oficial)", url: "https://www.canada.ca/en/immigration-refugees-citizenship/news/notices/2025-provincial-territorial-allocations-under-international-student-cap.html" },
+  eduCanada: { label: "EduCanada · Portal oficial de estudo", url: "https://www.educanada.ca" },
+  healthCanada: { label: "Health Canada (oficial)", url: "https://www.canada.ca/en/health-canada.html" },
+  bankCanada: { label: "Bank of Canada (taxa de juros)", url: "https://www.bankofcanada.ca" },
+  statCan: { label: "Statistics Canada", url: "https://www.statcan.gc.ca" },
+  ukIHS: { label: "Reino Unido · Immigration Health Surcharge (gov.uk)", url: "https://www.gov.uk/healthcare-immigration-application" },
+  ucas: { label: "UCAS · Admissões universitárias (oficial)", url: "https://www.ucas.com" },
+  ukStudent: { label: "Reino Unido · Visto de estudante (gov.uk)", url: "https://www.gov.uk/student-visa" },
+  boe: { label: "Bank of England (taxa de juros)", url: "https://www.bankofengland.co.uk" },
+  ons: { label: "Office for National Statistics (UK)", url: "https://www.ons.gov.uk" },
 } satisfies Record<string, EditorialSource>;
 
 export const EDITORIAL: Record<string, CountryEditorial> = {
@@ -99,6 +110,27 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
         cta: "Trabalha com tech? Deixe o perfil do Express Entry pronto pra reagir no dia da abertura.",
         sources: [SRC.oinp, SRC.ircc],
       },
+      {
+        title: "🎓 Educação: Canadá apertou o visto de estudante",
+        body:
+          "O Canadá reduziu bastante a entrada de estudantes internacionais. Depois do limite criado em 2024, que cortou cerca de 40% dos vistos, o teto de 2025 ficou em 437 mil permissões de estudo, 10% a menos que no ano anterior.\n\nNa prática, a vaga ficou mais concorrida e surgiu uma exigência: a maioria dos candidatos precisa de uma carta de atestado provincial (a PAL/TAL), além da carta de aceite da instituição. Cada província tem a sua cota.",
+        cta: "Vai estudar no Canadá? Confirme se a instituição emite a PAL e entre cedo, as cotas provinciais esgotam.",
+        sources: [SRC.iccStudentCap, SRC.eduCanada],
+      },
+      {
+        title: "🏥 Saúde: a cobertura pública no Canadá tem carência",
+        body:
+          "O Canadá tem saúde pública, o Medicare, mas ela é administrada por cada província, e várias impõem um período de carência de até cerca de 3 meses pra novos residentes começarem a ser cobertos.\n\nNesse intervalo o recém-chegado fica fora do sistema público, então um seguro-saúde privado temporário costuma ser indispensável nos primeiros meses.",
+        cta: "Vai pro Canadá? Contrate um seguro-saúde pros primeiros meses até a cobertura provincial valer.",
+        sources: [SRC.healthCanada],
+      },
+      {
+        title: "💰 Economia: no Canadá, fique de olho nos juros e na moradia",
+        body:
+          "Dois números mexem com o bolso de quem vai pro Canadá: a taxa básica de juros do Bank of Canada, que influencia crédito e câmbio, e o custo de moradia, que segue pressionado nas grandes cidades.\n\nAcompanhar os dois ajuda a planejar o orçamento de mudança com realismo, sem surpresa no aluguel.",
+        cta: "Planeje a mudança olhando a taxa do Bank of Canada e o custo de aluguel no Statistics Canada.",
+        sources: [SRC.bankCanada, SRC.statCan],
+      },
     ],
     countryTab: [
       {
@@ -114,6 +146,21 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
           "Tendência: alta pra tecnologia e saúde, baixa pra ocupações genéricas",
         ],
         sources: [SRC.ircc, SRC.oinp],
+      },
+      {
+        headline: "🎓 Estudar no Canadá ficou mais concorrido: como se posicionar",
+        standfirst:
+          "O limite de vistos de estudante reduziu a entrada e criou exigências novas. Veja o que mudou e como aumentar suas chances.",
+        body:
+          "O Canadá, que por anos foi um dos destinos mais abertos pra estudantes internacionais, mudou de rota. Em 2024 o governo criou um limite de vistos de estudo, e o efeito foi forte: a entrada de estudantes caiu cerca de 40%. Pra 2025, o teto ficou em 437 mil permissões, 10% a menos que no ano anterior.\n\nO motivo declarado foi aliviar a pressão sobre moradia, saúde e serviços nas cidades com muitos estudantes. Junto do limite veio uma exigência nova: a maioria dos candidatos agora precisa de uma carta de atestado provincial, a PAL ou TAL, além da carta de aceite da instituição. E cada província recebe uma cota própria, que esgota.\n\nNa prática, a vaga ficou mais disputada e o planejamento conta mais do que nunca. Escolher uma instituição reconhecida, que emita a PAL, e entrar com o pedido cedo no calendário são o que separa quem consegue de quem fica de fora.\n\nVale lembrar o que torna o Canadá ainda atraente: o diploma costuma vir acompanhado da elegibilidade ao PGWP, a licença de trabalho pós-estudo, que liga o estudo a uma porta de permanência. Por isso o caminho do estudo segue valioso, desde que a pessoa jogue dentro das novas regras.",
+        keyFacts: [
+          "Teto 2025: 437 mil vistos de estudo, 10% a menos que 2024",
+          "Limite de 2024 já reduziu a entrada de estudantes em ~40%",
+          "Maioria precisa da carta provincial (PAL/TAL) + aceite da instituição",
+          "Cotas por província (Ontário, BC, Quebec, etc.) que esgotam",
+          "Diploma pode dar elegibilidade ao PGWP (trabalho pós-estudo)",
+        ],
+        sources: [SRC.iccStudentCap, SRC.eduCanada],
       },
     ],
     blog: [
@@ -239,6 +286,27 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
           "O piso salarial exigido pelo visto Skilled Worker está em revisão e deve mudar em outubro de 2026. Como o salário é parte central da elegibilidade, qualquer ajuste afeta quem está perto do limite.\n\nQuem negocia uma oferta de trabalho no Reino Unido deve acompanhar de perto, porque o número final pode decidir a aprovação.",
         cta: "Negociando emprego no Reino Unido? Confirme o piso salarial vigente antes de assinar.",
         sources: [SRC.ukSkilled],
+      },
+      {
+        title: "🏥 Saúde: no Reino Unido você paga a taxa do NHS antecipada",
+        body:
+          "O Reino Unido tem o NHS, a saúde pública gratuita no uso. Mas quem vai com visto paga antes uma taxa de saúde, a Immigration Health Surcharge (IHS), pra ter acesso ao sistema.\n\nEm 2025 ela é £1.035 por ano pra adultos e £776 pra estudantes e crianças, paga de uma vez pra todo o período do visto. Um visto de trabalho de 5 anos, por exemplo, sai £5.175 só de IHS. Estadias abaixo de 6 meses são isentas.",
+        cta: "Vai pro Reino Unido com visto? Some a IHS (£1.035/ano) ao orçamento, ela é cobrada de uma vez no pedido.",
+        sources: [SRC.ukIHS],
+      },
+      {
+        title: "🎓 Educação: estudar no Reino Unido e a regra dos dependentes",
+        body:
+          "As candidaturas a universidades no Reino Unido passam pelo UCAS, e o visto de estudante é a porta de entrada. Desde 2024, porém, a maioria dos cursos não permite mais trazer dependentes (cônjuge e filhos), com exceção de programas de pesquisa e pós, como doutorado.\n\nPra quem planeja ir em família, isso muda o jogo e exige checar o tipo de curso antes de aplicar.",
+        cta: "Vai estudar no Reino Unido com a família? Confirme se o seu curso permite dependentes antes de aplicar.",
+        sources: [SRC.ucas, SRC.ukStudent],
+      },
+      {
+        title: "💰 Economia: juros do Bank of England e inflação no Reino Unido",
+        body:
+          "Pra quem mira o Reino Unido, dois indicadores valem acompanhamento: a taxa de juros do Bank of England, que move o câmbio da libra e o custo do crédito, e a inflação medida pelo Office for National Statistics, que dita o custo de vida.\n\nMonitorar os dois ajuda a escolher a hora de enviar dinheiro e a dimensionar o custo da mudança.",
+        cta: "Acompanhe a taxa do Bank of England e a inflação do ONS pra planejar câmbio e custo de vida.",
+        sources: [SRC.boe, SRC.ons],
       },
     ],
     countryTab: [
