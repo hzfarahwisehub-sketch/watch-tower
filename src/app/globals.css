@@ -87,8 +87,8 @@ body {
   background-size: min(840px, 80vw);
   /* screen tira o quadrado escuro do ícone — só o "olho que tudo vê" brilha */
   mix-blend-mode: screen;
-  opacity: .5;
-  filter: brightness(1.2) saturate(1.1);
+  opacity: .28;
+  filter: brightness(1.05) saturate(1);
 }
 [data-theme="light"] .wt-watermark {
   mix-blend-mode: normal;
