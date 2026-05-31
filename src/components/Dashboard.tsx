@@ -16,6 +16,8 @@ import { CountryBenchmark } from "./CountryBenchmark";
 import { SuggestionBox } from "./SuggestionBox";
 import { ExportButton } from "./ExportButton";
 import { useUndo } from "./UndoProvider";
+import { WindowManagerProvider, WindowsMenu, useWindowManagerOptional } from "./WindowManager";
+import { type PanelId } from "./PanelRegistry";
 import { markNavigating } from "@/lib/nav-perf";
 import { useSession } from "next-auth/react";
 import { InfoCenters, FinanceCenters, CryptoCenters } from "./InfoCenters";
@@ -161,9 +163,11 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
 
 const REQUIRED_KEYS = ["alerts","kpis","map","countries","inbox","agenda","tasks","scheduled","reminders","requests","benchmark","info","finance","crypto","bulletins","feed"];
 
-function GridCell({ label, children, locked }: { label: string; children: ReactNode; locked: boolean }) {
+function GridCell({ panelId, label, children, locked }: { panelId?: PanelId; label: string; children: ReactNode; locked: boolean }) {
+  const wm = useWindowManagerOptional();
+  const poppedOut = !!(panelId && wm?.isOpen(panelId));
   return (
-    <div className={`wt-grid-cell ${locked ? "wt-cell-locked" : ""}`}>
+    <div className={`wt-grid-cell ${locked ? "wt-cell-locked" : ""}`} style={{ position: "relative" }}>
       {!locked && (
         <button
           type="button"
@@ -174,7 +178,54 @@ function GridCell({ label, children, locked }: { label: string; children: ReactN
           <span aria-hidden>⠿</span>
         </button>
       )}
-      <div className="wt-grid-content">{children}</div>
+      {panelId && wm && (
+        <button
+          type="button"
+          onClick={() => (poppedOut ? wm.dockBack(panelId) : wm.popOut(panelId))}
+          title={poppedOut ? `Trazer "${label}" de volta` : `Abrir "${label}" em janela separada`}
+          aria-label={poppedOut ? "Trazer de volta" : "Abrir em janela separada"}
+          style={{
+            position: "absolute",
+            top: 6,
+            right: 6,
+            zIndex: 6,
+            width: 24,
+            height: 24,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 7,
+            fontSize: 12,
+            background: "var(--bg2)",
+            border: "1px solid var(--border)",
+            color: "var(--text-3)",
+            cursor: "pointer",
+          }}
+        >
+          {poppedOut ? "↩" : "⧉"}
+        </button>
+      )}
+      <div className="wt-grid-content">
+        {poppedOut ? (
+          <div className="h-full w-full flex flex-col items-center justify-center gap-2.5 text-center px-4">
+            <span className="text-[26px]">🪟</span>
+            <span className="text-[12px] font-bold" style={{ color: "var(--text-2)" }}>{label}</span>
+            <span className="text-[11px] leading-snug" style={{ color: "var(--text-3)" }}>
+              Aberto numa janela separada.
+            </span>
+            <button
+              type="button"
+              onClick={() => panelId && wm?.dockBack(panelId)}
+              className="px-3 py-1.5 rounded-lg text-[11px] font-bold"
+              style={{ background: "rgba(31,85,255,.15)", color: "var(--color-wh-blue-light)", border: "1px solid var(--border-hi)", cursor: "pointer" }}
+            >
+              ↩ Trazer de volta
+            </button>
+          </div>
+        ) : (
+          children
+        )}
+      </div>
     </div>
   );
 }
@@ -323,6 +374,7 @@ export function Dashboard() {
     <>
       <div className="wt-watermark" aria-hidden />
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-10">
+      <WindowManagerProvider onSelectCountry={selectCountry}>
       <Header />
 
       <div
@@ -371,6 +423,7 @@ export function Dashboard() {
               Avançar ↷
             </button>
           </div>
+          <WindowsMenu />
           {isLoggedIn && (
             <ExportButton
               label="REPAVET"
@@ -418,82 +471,82 @@ export function Dashboard() {
           useCSSTransforms
         >
           <div key="alerts">
-            <GridCell label="Alertas críticos" locked={locked}>
+            <GridCell panelId="alerts" label="Alertas críticos" locked={locked}>
               <AlertsBanner onSelect={openModal} />
             </GridCell>
           </div>
           <div key="kpis">
-            <GridCell label="KPIs globais" locked={locked}>
+            <GridCell panelId="kpis" label="KPIs globais" locked={locked}>
               <KpiRow />
             </GridCell>
           </div>
           <div key="map">
-            <GridCell label="Mapa global" locked={locked}>
+            <GridCell panelId="map" label="Mapa global" locked={locked}>
               <MapZone countries={COUNTRIES} selected={mapSelected} onSelect={selectOnMap} />
             </GridCell>
           </div>
           <div key="countries">
-            <GridCell label="Lista de países" locked={locked}>
+            <GridCell panelId="countries" label="Lista de países" locked={locked}>
               <CountriesSidebar countries={COUNTRIES} selected={mapSelected} onSelect={openModal} />
             </GridCell>
           </div>
           <div key="inbox">
-            <GridCell label="Inbox" locked={locked}>
+            <GridCell panelId="inbox" label="Inbox" locked={locked}>
               <DailyGrid only="inbox" />
             </GridCell>
           </div>
           <div key="agenda">
-            <GridCell label="Agenda" locked={locked}>
+            <GridCell panelId="agenda" label="Agenda" locked={locked}>
               <DailyGrid only="agenda" />
             </GridCell>
           </div>
           <div key="tasks">
-            <GridCell label="Tarefas do dia" locked={locked}>
+            <GridCell panelId="tasks" label="Tarefas do dia" locked={locked}>
               <DailyGrid only="tasks" />
             </GridCell>
           </div>
           <div key="scheduled">
-            <GridCell label="Ações programadas" locked={locked}>
+            <GridCell panelId="scheduled" label="Ações programadas" locked={locked}>
               <DailyGrid only="scheduled" />
             </GridCell>
           </div>
           <div key="reminders">
-            <GridCell label="Lembretes" locked={locked}>
+            <GridCell panelId="reminders" label="Lembretes" locked={locked}>
               <DailyGrid only="reminders" />
             </GridCell>
           </div>
           <div key="benchmark">
-            <GridCell label="Benchmark do país" locked={locked}>
+            <GridCell panelId="benchmark" label="Benchmark do país" locked={locked}>
               <CountryBenchmark selectedCode={mapSelected} />
             </GridCell>
           </div>
           <div key="info">
-            <GridCell label="Centros de Informação" locked={locked}>
+            <GridCell panelId="info" label="Centros de Informação" locked={locked}>
               <InfoCenters />
             </GridCell>
           </div>
           <div key="finance">
-            <GridCell label="Finanças & Mercados" locked={locked}>
+            <GridCell panelId="finance" label="Finanças & Mercados" locked={locked}>
               <FinanceCenters />
             </GridCell>
           </div>
           <div key="crypto">
-            <GridCell label="Cripto & Derivativos" locked={locked}>
+            <GridCell panelId="crypto" label="Cripto & Derivativos" locked={locked}>
               <CryptoCenters />
             </GridCell>
           </div>
           <div key="bulletins">
-            <GridCell label="Boletins oficiais" locked={locked}>
+            <GridCell panelId="bulletins" label="Boletins oficiais" locked={locked}>
               <OfficialBulletins />
             </GridCell>
           </div>
           <div key="feed">
-            <GridCell label="Feed de mudanças" locked={locked}>
+            <GridCell panelId="feed" label="Feed de mudanças" locked={locked}>
               <Feed countries={COUNTRIES} onSelect={openModal} />
             </GridCell>
           </div>
           <div key="requests">
-            <GridCell label="Caixa de solicitações" locked={locked}>
+            <GridCell panelId="requests" label="Caixa de solicitações" locked={locked}>
               <SuggestionBox />
             </GridCell>
           </div>
@@ -501,6 +554,7 @@ export function Dashboard() {
       )}
 
       <SettingsPanel />
+      </WindowManagerProvider>
       </div>
     </>
   );
