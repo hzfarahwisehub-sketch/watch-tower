@@ -9,7 +9,7 @@
  *
  * Bump a versão do CACHE pra invalidar caches antigos num deploy.
  */
-const CACHE = "watch-tower-v3";
+const CACHE = "watch-tower-v5";
 const APP_SHELL = ["/", "/manifest.webmanifest", "/icons/icon-192.png", "/icons/icon-512.png"];
 
 // ---------- install: precache do shell ----------
@@ -44,7 +44,7 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       fetch(request)
         .then((res) => {
-          caches.open(CACHE).then((c) => c.put(request, res.clone()));
+          if (res.ok) caches.open(CACHE).then((c) => c.put(request, res.clone()));
           return res;
         })
         .catch(async () => (await caches.match(request)) || (await caches.match("/"))),
@@ -52,11 +52,11 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Estáticos do Next (_next/static, imutáveis): cache-first.
+  // Estáticos do Next (_next/static, imutáveis): cache-first, mas só guarda OK.
   if (url.pathname.startsWith("/_next/static") || url.pathname.startsWith("/icons/")) {
     event.respondWith(
       caches.match(request).then((cached) => cached || fetch(request).then((res) => {
-        caches.open(CACHE).then((c) => c.put(request, res.clone()));
+        if (res.ok) caches.open(CACHE).then((c) => c.put(request, res.clone()));
         return res;
       })),
     );

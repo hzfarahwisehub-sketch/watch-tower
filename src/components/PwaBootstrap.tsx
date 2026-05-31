@@ -23,15 +23,33 @@ export function PwaBootstrap() {
   const [show, setShow] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
 
-  // Registra o service worker.
+  // Registra o service worker + AUTO-CURA: força checagem de update e, quando um
+  // SW novo (após bump de versão) assume o controle, recarrega UMA vez pra puxar
+  // os assets frescos. Resolve PWA que ficou com cache velho/quebrado.
   useEffect(() => {
     if (!("serviceWorker" in navigator)) return;
+    let refreshing = false;
+    const hadController = navigator.serviceWorker.controller != null;
+    const onControllerChange = () => {
+      if (refreshing || !hadController) return; // não recarrega na 1ª instalação
+      refreshing = true;
+      window.location.reload();
+    };
+    navigator.serviceWorker.addEventListener("controllerchange", onControllerChange);
     const onLoad = () => {
-      navigator.serviceWorker.register("/sw.js", { scope: "/", updateViaCache: "none" }).catch(() => {});
+      navigator.serviceWorker
+        .register("/sw.js", { scope: "/", updateViaCache: "none" })
+        .then((reg) => {
+          reg.update().catch(() => {}); // força checar a versão nova já
+        })
+        .catch(() => {});
     };
     if (document.readyState === "complete") onLoad();
     else window.addEventListener("load", onLoad);
-    return () => window.removeEventListener("load", onLoad);
+    return () => {
+      window.removeEventListener("load", onLoad);
+      navigator.serviceWorker.removeEventListener("controllerchange", onControllerChange);
+    };
   }, []);
 
   // Detecta instalabilidade.
