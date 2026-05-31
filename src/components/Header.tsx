@@ -22,7 +22,7 @@ export function Header() {
   const toast = useToast();
 
   const isLoggedIn = sessionStatus === "authenticated" && !!session?.user?.email;
-  const isAdmin = isLoggedIn && (session.user as { role?: string }).role === "admin";
+  const isAdmin = isLoggedIn && ((session?.user ?? {}) as { role?: string }).role === "admin";
   const userInitial = session?.user?.email?.[0]?.toUpperCase() ?? "?";
 
   useEffect(() => {
