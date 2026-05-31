@@ -259,9 +259,16 @@ export function Dashboard() {
     setMounted(true);
   }, []);
 
-  // Handlers distintos:
-  const openModal = (code: string) => setModalCode(code);     // AlertsBanner, CountriesSidebar, Feed
-  const selectOnMap = (code: string) => setMapSelected(code); // MapZone
+  // Clicar num país (mapa, alertas, sidebar ou feed) abre a ÁREA COMPLETA do
+  // país (Modal com tudo) E conecta o benchmark + o voo do globo ao mesmo país.
+  const openModal = (code: string) => {
+    setModalCode(code);
+    setMapSelected(code);
+  };
+  const selectOnMap = (code: string) => {
+    setMapSelected(code);
+    setModalCode(code);
+  };
   const modalCountry = modalCode ? COUNTRIES.find((c) => c.code === modalCode) ?? null : null;
 
   const onLayoutChange = (_current: Layout, all: ResponsiveLayouts) => {
