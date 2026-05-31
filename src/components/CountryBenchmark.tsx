@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { COUNTRIES } from "@/lib/data";
 import type { Country, Status } from "@/lib/types";
 import { CountryLiveActivity } from "./CountryLiveActivity";
+import { CountryDetailSections } from "./CountryDetailSections";
 import { useCountryChanges } from "@/lib/useCountryChanges";
 
 function fmtAge(days: number | null): string {
@@ -53,8 +54,20 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
   const accent = STATUS_COLOR[country.status];
   const changes = useCountryChanges(country.code);
 
+  // Quando um país é selecionado (clique no mapa/alertas/sidebar/feed), traz o
+  // Benchmark pra vista suavemente, sem cobrir o mapa. Não rola na 1ª render.
+  const rootRef = useRef<HTMLElement | null>(null);
+  const didMountRef = useRef(false);
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      return;
+    }
+    if (selectedCode) rootRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [selectedCode]);
+
   return (
-    <section className="wt-card h-full flex flex-col @container">
+    <section ref={rootRef} className="wt-card h-full flex flex-col @container">
       {/* Header */}
       <header
         className="flex items-center justify-between gap-3 px-5 py-3.5 flex-shrink-0"
@@ -211,6 +224,9 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
             )}
 
             <CountryLiveActivity countryCode={country.code} />
+
+            {/* Editorial curado + dicas + fontes (tudo do local, aqui no benchmark) */}
+            <CountryDetailSections country={country} />
 
             <div>
               <h4

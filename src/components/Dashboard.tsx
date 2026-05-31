@@ -11,7 +11,6 @@ import { AlertsBanner } from "./AlertsBanner";
 import { CountriesSidebar } from "./CountriesSidebar";
 import { DailyGrid } from "./DailyGrid";
 import { Feed } from "./Feed";
-import { Modal } from "./Modal";
 import { OfficialBulletins } from "./OfficialBulletins";
 import { CountryBenchmark } from "./CountryBenchmark";
 import { SuggestionBox } from "./SuggestionBox";
@@ -182,12 +181,10 @@ export function Dashboard() {
   const { locked } = useSettings();
   const { data: session } = useSession();
   const isLoggedIn = !!session?.user?.email;
-  // Separação intencional:
-  //  - mapSelected: país selecionado via MAPA → alimenta a caixa Benchmark
-  //  - modalCode: país selecionado via AlertsBanner/CountriesSidebar/Feed →
-  //    abre o Modal com detalhes completos (não mexe no Benchmark)
+  // mapSelected: país em foco. Alimenta o Benchmark (a "área completa" do país,
+  // com tudo do local) e o voo do globo. Clicar em qualquer lugar (mapa,
+  // alertas, sidebar, feed) aponta todo mundo pro mesmo país, SEM modal cobrindo.
   const [mapSelected, setMapSelected] = useState<string | null>(null);
-  const [modalCode, setModalCode] = useState<string | null>(null);
   const [layouts, setLayouts] = useState<ResponsiveLayouts>(DEFAULT_LAYOUTS);
   const [mounted, setMounted] = useState(false);
 
@@ -259,17 +256,12 @@ export function Dashboard() {
     setMounted(true);
   }, []);
 
-  // Clicar num país (mapa, alertas, sidebar ou feed) abre a ÁREA COMPLETA do
-  // país (Modal com tudo) E conecta o benchmark + o voo do globo ao mesmo país.
-  const openModal = (code: string) => {
-    setModalCode(code);
-    setMapSelected(code);
-  };
-  const selectOnMap = (code: string) => {
-    setMapSelected(code);
-    setModalCode(code);
-  };
-  const modalCountry = modalCode ? COUNTRIES.find((c) => c.code === modalCode) ?? null : null;
+  // Clicar num país (mapa, alertas, sidebar ou feed) aponta o Benchmark + o voo
+  // do globo pra ele. O Benchmark é a "área completa" do país (tudo do local),
+  // sem modal cobrindo a tela. O Benchmark rola sozinho pra dentro da vista.
+  const selectCountry = (code: string) => setMapSelected(code);
+  const openModal = selectCountry;
+  const selectOnMap = selectCountry;
 
   const onLayoutChange = (_current: Layout, all: ResponsiveLayouts) => {
     setLayouts(all);
@@ -371,7 +363,7 @@ export function Dashboard() {
           </div>
           <div key="countries">
             <GridCell label="Lista de países" locked={locked}>
-              <CountriesSidebar countries={COUNTRIES} selected={modalCode} onSelect={openModal} />
+              <CountriesSidebar countries={COUNTRIES} selected={mapSelected} onSelect={openModal} />
             </GridCell>
           </div>
           <div key="inbox">
@@ -437,7 +429,6 @@ export function Dashboard() {
         </ResponsiveGridLayout>
       )}
 
-      <Modal country={modalCountry} onClose={() => setModalCode(null)} />
       <SettingsPanel />
       </div>
     </>
