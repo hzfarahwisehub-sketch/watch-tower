@@ -1,7 +1,12 @@
 /**
  * Renderiza o relatório completo em Word (.docx) editável a partir do ReportData.
- * Word nativo: os sócios podem abrir, editar e salvar normalmente. Inclui
- * tabela de sumário, índice por país, hyperlinks reais e títulos navegáveis.
+ *
+ * Estrutura (decidida com o Hammis em 2026-05-31):
+ *   1. Sumário + Legenda colorida (onde postar cada coisa)
+ *   2. PARTE 1 · TUDO PRA POSTAR  → conteúdo curado em sequência, por destino,
+ *      com TÍTULOS GRANDES e COR por destino + etiqueta colorida.
+ *   3. PARTE 2 · FONTES E MATERIAIS → fontes oficiais por país.
+ *   4. PARTE 3 · DADOS TÉCNICOS → monitoramento detalhado país a país.
  */
 
 import {
@@ -30,7 +35,15 @@ import {
   categoryEmoji,
   categoryName,
 } from "@/lib/report-data";
-import { EDITORIAL_GUIDE, type EditorialSource } from "@/lib/editorial";
+import {
+  DESTINATIONS,
+  buildPostables,
+  consolidatedSources,
+  totalPostables,
+  type PostablePiece,
+  type DestinationMeta,
+  type EditorialSource,
+} from "@/lib/editorial";
 
 const BLUE = "1F55FF";
 const BLUE_LIGHT = "3A6BFF";
@@ -65,6 +78,50 @@ function h2(text: string): Paragraph {
   });
 }
 
+function h3(text: string): Paragraph {
+  return new Paragraph({
+    heading: HeadingLevel.HEADING_3,
+    spacing: { before: 140, after: 60 },
+    children: [new TextRun({ text, bold: true, color: DARK, size: 22 })],
+  });
+}
+
+/** Título de PARTE (bem grande). */
+function partTitle(text: string): Paragraph {
+  return new Paragraph({
+    heading: HeadingLevel.HEADING_1,
+    spacing: { before: 360, after: 60 },
+    border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: "D0D7E6", space: 6 } },
+    children: [new TextRun({ text, bold: true, color: BLUE, size: 40 })],
+  });
+}
+
+/** Título grande e colorido da seção de um destino. */
+function destSectionTitle(text: string, colorHex: string): Paragraph {
+  return new Paragraph({
+    heading: HeadingLevel.HEADING_2,
+    spacing: { before: 280, after: 80 },
+    children: [new TextRun({ text, bold: true, color: colorHex, size: 34 })],
+  });
+}
+
+/** Título grande e colorido de uma peça pronta pra postar. */
+function pieceTitle(text: string, colorHex: string): Paragraph {
+  return new Paragraph({
+    heading: HeadingLevel.HEADING_3,
+    spacing: { before: 220, after: 30 },
+    children: [new TextRun({ text, bold: true, color: colorHex, size: 30 })],
+  });
+}
+
+/** Etiqueta colorida ([COMUNIDADE], [ABA DO PAÍS], [BLOG]). */
+function tagChip(tag: string, colorHex: string): Paragraph {
+  return new Paragraph({
+    spacing: { after: 60 },
+    children: [new TextRun({ text: `[ ${tag} ]`, bold: true, color: colorHex, size: 18 })],
+  });
+}
+
 function metaLine(labelTxt: string, value: string): Paragraph {
   return new Paragraph({
     spacing: { after: 30 },
@@ -75,18 +132,64 @@ function metaLine(labelTxt: string, value: string): Paragraph {
   });
 }
 
-function summaryTable(data: ReportData): Table {
+/** Quebra um corpo em "\n\n" e devolve um parágrafo por bloco. */
+function bodyParas(text: string): Paragraph[] {
+  return text
+    .split(/\n{2,}/)
+    .map((blk) => blk.trim())
+    .filter(Boolean)
+    .map(
+      (blk) =>
+        new Paragraph({ spacing: { after: 100 }, children: [new TextRun({ text: blk, color: DARK })] }),
+    );
+}
+
+/** Linha de fontes com hyperlinks reais. */
+function sourcesLine(sources: EditorialSource[] | undefined, prefix: string): Paragraph | null {
+  if (!sources?.length) return null;
+  const children: (TextRun | ExternalHyperlink)[] = [new TextRun({ text: prefix, bold: true, color: GREY, size: 18 })];
+  sources.forEach((s, i) => {
+    if (i > 0) children.push(new TextRun({ text: " · ", color: GREY, size: 18 }));
+    children.push(link(s.label, s.url));
+  });
+  return new Paragraph({ spacing: { after: 160 }, children });
+}
+
+/** Uma peça pronta pra postar (título grande colorido + etiqueta + corpo + fontes). */
+function pieceDocx(p: PostablePiece, dest: DestinationMeta): Paragraph[] {
+  const out: Paragraph[] = [];
+  out.push(pieceTitle(`${flagEmoji(p.countryCode)} ${p.countryName} · ${p.title}`, dest.colorHex));
+  out.push(tagChip(dest.tag, dest.colorHex));
+  if (p.standfirst) {
+    out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: p.standfirst, italics: true, color: DARK })] }));
+  }
+  out.push(...bodyParas(p.body));
+  if (p.keyFacts?.length) {
+    out.push(new Paragraph({ spacing: { before: 40, after: 30 }, children: [new TextRun({ text: "Dados-chave:", bold: true, color: DARK })] }));
+    p.keyFacts.forEach((f) => out.push(bullet([new TextRun({ text: f, color: DARK })])));
+  }
+  if (p.cta) {
+    out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: `👉 ${p.cta}`, bold: true, color: BLUE })] }));
+  }
+  if (p.tags?.length) {
+    out.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: `Tags: ${p.tags.join(" · ")}`, color: GREY, size: 18 })] }));
+  }
+  const sl = sourcesLine(p.sources, "📎 Fontes pra inserir no post: ");
+  if (sl) out.push(sl);
+  return out;
+}
+
+function summaryTable(data: ReportData, postCount: number): Table {
   const { stats } = data;
   const rows: Array<[string, string]> = [
+    ["📝 Peças prontas pra postar", String(postCount)],
+    ["✍️ Países com conteúdo editorial", String(stats.editorialCountries)],
     ["🌎 Países monitorados", String(stats.totalCountries)],
     ["📜 Boletins oficiais via cron", String(stats.totalBulletins)],
     ["✦ Boletins com mudança na última varredura", String(stats.bulletinChanged)],
-    ["⚠ Boletins em erro", String(stats.bulletinErrors)],
     ["📡 Feeds RSS curados (Centros de Informação)", String(stats.totalRssFeeds)],
     ["📰 Manchetes ao vivo capturadas neste relatório", String(stats.totalHeadlines)],
     ["🤖 Última varredura do cron", stats.lastRun ? fmtDate(stats.lastRun, { full: true }) : "—"],
-    ["✍️ Países com conteúdo editorial curado", String(stats.editorialCountries)],
-    ["📝 Peças prontas pra publicar", String(stats.editorialPieces)],
   ];
 
   const headerRow = new TableRow({
@@ -105,9 +208,7 @@ function summaryTable(data: ReportData): Table {
       new TableRow({
         children: [
           new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: k, color: DARK })] })] }),
-          new TableCell({
-            children: [new Paragraph({ children: [new TextRun({ text: v, bold: true, color: DARK })] })],
-          }),
+          new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: v, bold: true, color: DARK })] })] }),
         ],
       }),
   );
@@ -126,104 +227,8 @@ function summaryTable(data: ReportData): Table {
   });
 }
 
-function h3(text: string): Paragraph {
-  return new Paragraph({
-    heading: HeadingLevel.HEADING_3,
-    spacing: { before: 140, after: 60 },
-    children: [new TextRun({ text, bold: true, color: DARK, size: 22 })],
-  });
-}
-
-/** Quebra um corpo em "\n\n" e devolve um parágrafo por bloco. */
-function bodyParas(text: string, opts: { italics?: boolean; color?: string } = {}): Paragraph[] {
-  return text
-    .split(/\n{2,}/)
-    .map((blk) => blk.trim())
-    .filter(Boolean)
-    .map(
-      (blk) =>
-        new Paragraph({
-          spacing: { after: 100 },
-          children: [new TextRun({ text: blk, color: opts.color ?? DARK, italics: opts.italics })],
-        }),
-    );
-}
-
-/** Linha "Fontes:" com hyperlinks reais separados por · */
-function sourcesLine(sources?: EditorialSource[]): Paragraph | null {
-  if (!sources?.length) return null;
-  const children: (TextRun | ExternalHyperlink)[] = [new TextRun({ text: "Fontes: ", bold: true, color: GREY, size: 18 })];
-  sources.forEach((s, i) => {
-    if (i > 0) children.push(new TextRun({ text: " · ", color: GREY, size: 18 }));
-    children.push(link(s.label, s.url));
-  });
-  return new Paragraph({ spacing: { after: 120 }, children });
-}
-
-/** Bloco editorial (3 destinos) de um país em Word. */
-function editorialDocx(c: ReportCountry): Paragraph[] {
-  const out: Paragraph[] = [];
-  out.push(h2("✍️ Conteúdo pronto pra publicar"));
-
-  const ed = c.editorial;
-  if (!ed) {
-    out.push(
-      new Paragraph({
-        spacing: { after: 100 },
-        children: [
-          new TextRun({
-            text: "Conteúdo editorial em curadoria pela Friday. Por enquanto, use o Panorama acima e as manchetes ao vivo dos Dados técnicos como base pros posts.",
-            italics: true,
-            color: GREY,
-          }),
-        ],
-      }),
-    );
-    return out;
-  }
-
-  if (ed.community.length > 0) {
-    out.push(h3(`📣 Para a Comunidade · posts objetivos (${ed.community.length})`));
-    ed.community.forEach((p) => {
-      out.push(new Paragraph({ spacing: { before: 60, after: 40 }, children: [new TextRun({ text: p.title, bold: true, color: BLUE_LIGHT, size: 21 })] }));
-      out.push(...bodyParas(p.body));
-      if (p.cta) out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: `👉 ${p.cta}`, bold: true, color: BLUE })] }));
-      const sl = sourcesLine(p.sources);
-      if (sl) out.push(sl);
-    });
-  }
-
-  if (ed.countryTab.length > 0) {
-    out.push(h3(`📰 Para a aba do país · notícia completa (${ed.countryTab.length})`));
-    ed.countryTab.forEach((a) => {
-      out.push(new Paragraph({ spacing: { before: 60, after: 30 }, children: [new TextRun({ text: a.headline, bold: true, color: BLUE_LIGHT, size: 23 })] }));
-      out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: a.standfirst, italics: true, color: DARK })] }));
-      out.push(...bodyParas(a.body));
-      if (a.keyFacts?.length) {
-        out.push(new Paragraph({ spacing: { before: 40, after: 30 }, children: [new TextRun({ text: "Dados-chave:", bold: true, color: DARK })] }));
-        a.keyFacts.forEach((f) => out.push(bullet([new TextRun({ text: f, color: DARK })])));
-      }
-      const sl = sourcesLine(a.sources);
-      if (sl) out.push(sl);
-    });
-  }
-
-  if (ed.blog.length > 0) {
-    out.push(h3(`📝 Para o Blog WiseHub News · matéria (${ed.blog.length})`));
-    ed.blog.forEach((p) => {
-      out.push(new Paragraph({ spacing: { before: 60, after: 30 }, children: [new TextRun({ text: p.headline, bold: true, color: BLUE_LIGHT, size: 23 })] }));
-      out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: p.standfirst, italics: true, color: DARK })] }));
-      out.push(...bodyParas(p.body));
-      if (p.tags?.length) out.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: `Tags: ${p.tags.join(" · ")}`, color: GREY, size: 18 })] }));
-      const sl = sourcesLine(p.sources);
-      if (sl) out.push(sl);
-    });
-  }
-
-  return out;
-}
-
-function countrySection(c: ReportCountry): (Paragraph | Table)[] {
+/** Bloco de dados técnicos de um país. */
+function technicalDocx(c: ReportCountry): (Paragraph | Table)[] {
   const out: (Paragraph | Table)[] = [];
 
   out.push(h1(`${flagEmoji(c.code)} ${c.name}`));
@@ -236,24 +241,6 @@ function countrySection(c: ReportCountry): (Paragraph | Table)[] {
     out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: c.summary, color: DARK })] }));
   }
 
-  // Conteúdo jornalístico pronto pra publicar (3 destinos)
-  out.push(...editorialDocx(c));
-
-  // Dados técnicos do monitoramento (separados do conteúdo editorial)
-  out.push(h2("🔧 Dados técnicos · monitoramento"));
-  out.push(
-    new Paragraph({
-      spacing: { after: 80 },
-      children: [
-        new TextRun({
-          text: "Base factual que alimenta as notícias acima: boletins oficiais, marcos e manchetes ao vivo.",
-          italics: true,
-          color: GREY,
-        }),
-      ],
-    }),
-  );
-
   if (c.bulletin) {
     const b = c.bulletin;
     out.push(h3("📜 Boletim oficial monitorado"));
@@ -261,61 +248,20 @@ function countrySection(c: ReportCountry): (Paragraph | Table)[] {
     out.push(bullet([new TextRun({ text: "Frequência declarada: ", bold: true }), new TextRun(b.frequency)]));
     out.push(bullet([new TextRun({ text: "URL pública: ", bold: true }), link(b.url, b.url)]));
     if (b.lastStatus || b.lastCheckedAt || b.lastChangedAt || b.hash) {
-      out.push(
-        bullet([
-          new TextRun({ text: "Status última varredura: ", bold: true }),
-          new TextRun(bulletinStatusLabel(b.lastStatus)),
-        ]),
-      );
-      out.push(
-        bullet([
-          new TextRun({ text: "Última varredura: ", bold: true }),
-          new TextRun(`${fmtDate(b.lastCheckedAt, { full: true })} (${relativeAge(b.lastCheckedAt)})`),
-        ]),
-      );
-      out.push(
-        bullet([
-          new TextRun({ text: "Última mudança detectada: ", bold: true }),
-          new TextRun(`${fmtDate(b.lastChangedAt, { full: true })} (${relativeAge(b.lastChangedAt)})`),
-        ]),
-      );
-      if (b.hash) {
-        out.push(
-          bullet([
-            new TextRun({ text: "Hash atual (SHA-256, 16 chars): ", bold: true }),
-            new TextRun({ text: `${b.hash.slice(0, 16)}…`, font: "Consolas" }),
-          ]),
-        );
-      }
+      out.push(bullet([new TextRun({ text: "Status última varredura: ", bold: true }), new TextRun(bulletinStatusLabel(b.lastStatus))]));
+      out.push(bullet([new TextRun({ text: "Última varredura: ", bold: true }), new TextRun(`${fmtDate(b.lastCheckedAt, { full: true })} (${relativeAge(b.lastCheckedAt)})`)]));
+      out.push(bullet([new TextRun({ text: "Última mudança detectada: ", bold: true }), new TextRun(`${fmtDate(b.lastChangedAt, { full: true })} (${relativeAge(b.lastChangedAt)})`)]));
+      if (b.hash) out.push(bullet([new TextRun({ text: "Hash atual (SHA-256, 16 chars): ", bold: true }), new TextRun({ text: `${b.hash.slice(0, 16)}…`, font: "Consolas" })]));
     } else {
-      out.push(
-        new Paragraph({
-          spacing: { after: 60 },
-          children: [
-            new TextRun({ text: "Sem dados de status (bulletin não monitorado ainda).", italics: true, color: GREY }),
-          ],
-        }),
-      );
+      out.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: "Sem dados de status (bulletin não monitorado ainda).", italics: true, color: GREY })] }));
     }
   }
 
   if (c.events.length > 0) {
     out.push(h3(`📜 Marcos editoriais (${c.events.length})`));
-    out.push(
-      new Paragraph({
-        spacing: { after: 80 },
-        children: [
-          new TextRun({ text: "Contexto histórico selecionado pela equipe WiseHub.", italics: true, color: GREY }),
-        ],
-      }),
-    );
+    out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: "Contexto histórico selecionado pela equipe WiseHub.", italics: true, color: GREY })] }));
     c.events.forEach((ev, i) => {
-      out.push(
-        new Paragraph({
-          spacing: { before: 80, after: 20 },
-          children: [new TextRun({ text: `${i + 1}. ${ev.title}`, bold: true, color: DARK })],
-        }),
-      );
+      out.push(new Paragraph({ spacing: { before: 80, after: 20 }, children: [new TextRun({ text: `${i + 1}. ${ev.title}`, bold: true, color: DARK })] }));
       out.push(new Paragraph({ spacing: { after: 20 }, children: [new TextRun({ text: ev.desc, color: DARK })] }));
       out.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: `Fonte: ${ev.src}`, italics: true, color: GREY })] }));
     });
@@ -326,28 +272,11 @@ function countrySection(c: ReportCountry): (Paragraph | Table)[] {
     out.push(h3(`📡 Atividade ao vivo · ${sorted.length} manchete${sorted.length !== 1 ? "s" : ""} via RSS`));
     sorted.slice(0, 12).forEach((hd) => {
       const when = hd.pubDate ? ` (${fmtDate(hd.pubDate, { full: true })})` : "";
-      out.push(
-        bullet([
-          new TextRun({ text: `${hd.source}: `, bold: true }),
-          link(hd.title, hd.link),
-          new TextRun({ text: when, color: GREY, italics: true }),
-        ]),
-      );
+      out.push(bullet([new TextRun({ text: `${hd.source}: `, bold: true }), link(hd.title, hd.link), new TextRun({ text: when, color: GREY, italics: true })]));
     });
   } else {
     out.push(h3("📡 Atividade ao vivo"));
-    out.push(
-      new Paragraph({
-        spacing: { after: 60 },
-        children: [
-          new TextRun({
-            text: "Sem manchetes RSS disponíveis no momento (feed pode estar offline ou fora de horário comercial).",
-            italics: true,
-            color: GREY,
-          }),
-        ],
-      }),
-    );
+    out.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: "Sem manchetes RSS disponíveis no momento (feed pode estar offline ou fora de horário comercial).", italics: true, color: GREY })] }));
   }
 
   if (c.sources.length > 0) {
@@ -359,12 +288,7 @@ function countrySection(c: ReportCountry): (Paragraph | Table)[] {
       byCategory.set(s.category, arr);
     }
     for (const [cat, srcs] of byCategory) {
-      out.push(
-        new Paragraph({
-          spacing: { before: 80, after: 20 },
-          children: [new TextRun({ text: `${categoryEmoji(cat)} ${categoryName(cat)} (${srcs.length})`, bold: true, color: DARK })],
-        }),
-      );
+      out.push(new Paragraph({ spacing: { before: 80, after: 20 }, children: [new TextRun({ text: `${categoryEmoji(cat)} ${categoryName(cat)} (${srcs.length})`, bold: true, color: DARK })] }));
       for (const src of srcs) {
         const runs: (TextRun | ExternalHyperlink)[] = [link(src.name, src.url), new TextRun({ text: ` (${src.language.toUpperCase()})`, color: GREY })];
         if (src.rss) runs.push(new TextRun({ text: " · RSS ao vivo", color: "10A570" }));
@@ -379,45 +303,72 @@ function countrySection(c: ReportCountry): (Paragraph | Table)[] {
 
 export async function renderDocx(data: ReportData): Promise<Buffer> {
   const children: (Paragraph | Table)[] = [];
+  const postables = buildPostables(data.countries);
+  const postCount = totalPostables(data.countries);
+  const sourcesByCountry = consolidatedSources(data.countries);
 
-  // Capa / cabeçalho
-  children.push(
-    new Paragraph({
-      spacing: { after: 60 },
-      children: [new TextRun({ text: "WiseHub Watch Tower", bold: true, color: BLUE, size: 44 })],
-    }),
-  );
-  children.push(
-    new Paragraph({
-      spacing: { after: 40 },
-      children: [new TextRun({ text: "Relatório Completo · Monitoramento Global de Imigração", color: DARK, size: 24 })],
-    }),
-  );
-  children.push(
-    new Paragraph({
-      spacing: { after: 200 },
-      children: [new TextRun({ text: `Gerado em: ${data.generatedAtStr} (BRT)`, italics: true, color: GREY })],
-    }),
-  );
+  // Capa
+  children.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: "WiseHub Watch Tower", bold: true, color: BLUE, size: 44 })] }));
+  children.push(new Paragraph({ spacing: { after: 40 }, children: [new TextRun({ text: "Relatório Completo · Conteúdo pronto pra publicar + Monitoramento Global", color: DARK, size: 24 })] }));
+  children.push(new Paragraph({ spacing: { after: 200 }, children: [new TextRun({ text: `Gerado em: ${data.generatedAtStr} (BRT)`, italics: true, color: GREY })] }));
 
-  // Sumário executivo
+  // Sumário
   children.push(h1("Sumário executivo"));
-  children.push(summaryTable(data));
+  children.push(summaryTable(data, postCount));
 
-  // Guia editorial
-  children.push(h1("📣 Guia editorial · como usar este documento"));
-  children.push(...bodyParas(EDITORIAL_GUIDE));
+  // Legenda
+  children.push(h1("🧭 Legenda · onde postar cada coisa"));
+  children.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: "Cada peça já vem com a cor e a etiqueta do lugar onde deve ser publicada:", color: DARK })] }));
+  for (const d of DESTINATIONS) {
+    children.push(
+      new Paragraph({
+        spacing: { after: 50 },
+        children: [
+          new TextRun({ text: `[ ${d.tag} ] `, bold: true, color: d.colorHex, size: 22 }),
+          new TextRun({ text: d.legend, color: DARK }),
+        ],
+      }),
+    );
+  }
+  children.push(
+    new Paragraph({
+      spacing: { before: 80, after: 80 },
+      children: [
+        new TextRun({ text: "📎 Regra de ouro: ", bold: true, color: DARK }),
+        new TextRun({ text: "toda repostagem deve levar junto a fonte oficial correspondente (logo abaixo de cada peça e reunida na Parte 2). É o que dá credibilidade e embasamento ao post.", color: DARK }),
+      ],
+    }),
+  );
 
-  // Índice por país
-  children.push(h1("Índice por país"));
-  for (const c of data.countries) {
-    children.push(bullet([new TextRun({ text: `${flagEmoji(c.code)} ${c.name}`, color: DARK })]));
+  // ── PARTE 1 · TUDO PRA POSTAR ──
+  children.push(partTitle("🟦 PARTE 1 · TUDO PRA POSTAR"));
+  children.push(new Paragraph({ spacing: { after: 100 }, children: [new TextRun({ text: "Sequência pronta pra publicar, separada por destino. Cada peça indica o lugar (cor + etiqueta) e traz as fontes pra anexar.", color: DARK })] }));
+  for (const { dest, pieces } of postables) {
+    children.push(destSectionTitle(`${dest.emoji} ${dest.label} (${pieces.length})`, dest.colorHex));
+    children.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: dest.legend, italics: true, color: GREY })] }));
+    if (pieces.length === 0) {
+      children.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: "Nada nesta seção ainda.", italics: true, color: GREY })] }));
+      continue;
+    }
+    for (const p of pieces) children.push(...pieceDocx(p, dest));
   }
 
-  // Seções por país
-  for (const c of data.countries) {
-    children.push(...countrySection(c));
+  // ── PARTE 2 · FONTES E MATERIAIS ──
+  children.push(partTitle("🗂 PARTE 2 · FONTES E MATERIAIS"));
+  children.push(new Paragraph({ spacing: { after: 100 }, children: [new TextRun({ text: "Fontes oficiais usadas no conteúdo acima, por país. Inclua a fonte correspondente em cada post pra servir de referência e embasamento.", color: DARK })] }));
+  if (sourcesByCountry.length === 0) {
+    children.push(new Paragraph({ children: [new TextRun({ text: "Sem fontes editoriais ainda.", italics: true, color: GREY })] }));
+  } else {
+    for (const grp of sourcesByCountry) {
+      children.push(h3(`${flagEmoji(grp.countryCode)} ${grp.countryName}`));
+      for (const s of grp.sources) children.push(bullet([link(s.label, s.url)]));
+    }
   }
+
+  // ── PARTE 3 · DADOS TÉCNICOS ──
+  children.push(partTitle("🔧 PARTE 3 · DADOS TÉCNICOS · monitoramento"));
+  children.push(new Paragraph({ spacing: { after: 100 }, children: [new TextRun({ text: "Tudo que o Watch Tower monitora, detalhado país a país: boletins oficiais, marcos, manchetes ao vivo e Centros de Informação. É a base factual das Partes 1 e 2.", color: DARK })] }));
+  for (const c of data.countries) children.push(...technicalDocx(c));
 
   // Rodapé
   children.push(
@@ -431,14 +382,14 @@ export async function renderDocx(data: ReportData): Promise<Buffer> {
     new Paragraph({
       alignment: AlignmentType.CENTER,
       spacing: { before: 80 },
-      children: [new TextRun({ text: "© WiseHub US LLC · Watch Tower v2 · Friday", color: GREY, size: 16 })],
+      children: [new TextRun({ text: "© WiseHub US LLC · Watch Tower v2 · Conteúdo curado pela Friday", color: GREY, size: 16 })],
     }),
   );
 
   const doc = new Document({
     creator: "WiseHub Watch Tower",
     title: "WiseHub Watch Tower — Relatório Completo",
-    description: "Relatório completo de monitoramento global de imigração",
+    description: "Conteúdo pronto pra publicar + monitoramento global de imigração",
     sections: [
       {
         properties: { page: { margin: { top: 1080, bottom: 1080, left: 1080, right: 1080 } } },

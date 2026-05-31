@@ -1,11 +1,15 @@
 /**
  * Renderiza o relatório completo em PDF a partir do ReportData.
  *
- * Usa pdf-lib (JS puro, fontes StandardFonts embutidas) — sem dependência de
- * arquivos de fonte/chromium, então roda sem problemas no serverless da Vercel.
- * As StandardFonts só codificam WinAnsi (Latin-1), então emojis e símbolos
- * decorativos são removidos via pdfSafe(); todo o TEXTO/INFORMAÇÃO é preservado.
- * Layout (quebra de linha + paginação) é feito à mão por um mini-motor.
+ * Estrutura (decidida com o Hammis em 2026-05-31):
+ *   1. Sumário + Legenda colorida (onde postar cada coisa)
+ *   2. PARTE 1 · TUDO PRA POSTAR  → conteúdo curado em sequência, por destino,
+ *      com títulos grandes e COR por destino.
+ *   3. PARTE 2 · FONTES E MATERIAIS → fontes oficiais por país.
+ *   4. PARTE 3 · DADOS TÉCNICOS → monitoramento detalhado país a país.
+ *
+ * Usa pdf-lib (StandardFonts, WinAnsi). Emojis são removidos via pdfSafe(); a
+ * COR é o que sinaliza o destino de cada peça (a etiqueta [TAG] sai colorida).
  */
 
 import { PDFDocument, type PDFFont, type PDFPage, StandardFonts, rgb, type RGB } from "pdf-lib";
@@ -18,7 +22,15 @@ import {
   bulletinStatusText,
   categoryName,
 } from "@/lib/report-data";
-import { EDITORIAL_GUIDE, type EditorialSource } from "@/lib/editorial";
+import {
+  DESTINATIONS,
+  buildPostables,
+  consolidatedSources,
+  totalPostables,
+  type PostablePiece,
+  type DestinationMeta,
+  type EditorialSource,
+} from "@/lib/editorial";
 
 const A4 = { w: 595.28, h: 841.89 };
 const MARGIN = 50;
@@ -29,6 +41,11 @@ const DARK = rgb(0.1, 0.1, 0.18);
 const GREY = rgb(0.42, 0.45, 0.5);
 const RULE = rgb(0.82, 0.84, 0.9);
 
+function hexRgb(hex: string): RGB {
+  const n = parseInt(hex, 16);
+  return rgb(((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255);
+}
+
 /** Remove tudo que não é codificável em WinAnsi (emoji, símbolos), preservando
  *  acentos do português. Normaliza pontuação tipográfica pra ASCII. */
 function pdfSafe(s: string): string {
@@ -38,26 +55,14 @@ function pdfSafe(s: string): string {
     .replace(/[–—―]/g, "-")
     .replace(/…/g, "...")
     .replace(/[•‣◦⁃∙·]/g, "-")
-    .replace(/ /g, " ")
+    .replace(/ /g, " ")
     .replace(/[^\x20-\x7E¡-ÿ]/g, "")
     .replace(/ {2,}/g, " ")
     .trim();
 }
 
-type TextOpts = {
-  size?: number;
-  color?: RGB;
-  oblique?: boolean;
-  indent?: number;
-  gapAfter?: number;
-};
-
-type HeadingOpts = {
-  size?: number;
-  color?: RGB;
-  spaceBefore?: number;
-  gapAfter?: number;
-};
+type TextOpts = { size?: number; color?: RGB; oblique?: boolean; indent?: number; gapAfter?: number };
+type HeadingOpts = { size?: number; color?: RGB; spaceBefore?: number; gapAfter?: number };
 
 class PdfBuilder {
   private doc!: PDFDocument;
@@ -105,7 +110,6 @@ class PdfBuilder {
         } else {
           line = trial;
         }
-        // quebra forçada de tokens enormes (URLs longas)
         while (font.widthOfTextAtSize(line, size) > width && line.length > 1) {
           let cut = line.length;
           while (cut > 1 && font.widthOfTextAtSize(line.slice(0, cut), size) > width) cut--;
@@ -167,12 +171,7 @@ class PdfBuilder {
   rule() {
     this.ensure(12);
     this.y -= 2;
-    this.page.drawLine({
-      start: { x: MARGIN, y: this.y },
-      end: { x: A4.w - MARGIN, y: this.y },
-      thickness: 0.7,
-      color: RULE,
-    });
+    this.page.drawLine({ start: { x: MARGIN, y: this.y }, end: { x: A4.w - MARGIN, y: this.y }, thickness: 0.7, color: RULE });
     this.y -= 10;
   }
 
@@ -184,186 +183,189 @@ class PdfBuilder {
 const H2: HeadingOpts = { size: 11.5, color: BLUE_LIGHT, spaceBefore: 6, gapAfter: 3 };
 const H3: HeadingOpts = { size: 11, color: DARK, spaceBefore: 6, gapAfter: 3 };
 
-/** Renderiza as fontes de uma peça editorial como texto (PDF não tem link clicável). */
-function sourcesPdf(b: PdfBuilder, sources?: EditorialSource[]) {
-  if (!sources?.length) return;
-  b.text("Fontes:", { size: 8.5, color: GREY, oblique: true, gapAfter: 0 });
-  for (const s of sources) b.text(`${s.label}: ${s.url}`, { size: 8, color: GREY, indent: 12, gapAfter: 1 });
-  b.text("", { gapAfter: 2 });
-}
-
-/** Divide um corpo em parágrafos ("\n\n") e escreve cada um. */
 function bodyPdf(b: PdfBuilder, text: string) {
   for (const para of text.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean)) {
     b.text(para, { size: 10, gapAfter: 3 });
   }
 }
 
-/** Bloco editorial (3 destinos) de um país em PDF. */
-function editorialPdf(b: PdfBuilder, c: ReportCountry) {
-  b.heading("Conteudo pronto pra publicar", { size: 13, color: BLUE_LIGHT, spaceBefore: 8, gapAfter: 4 });
-  const ed = c.editorial;
-  if (!ed) {
-    b.text("Conteudo editorial em curadoria pela Friday. Por enquanto, use o Panorama acima e as manchetes ao vivo como base pros posts.", { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
-    return;
+function sourcesPdf(b: PdfBuilder, sources: EditorialSource[] | undefined, prefix: string) {
+  if (!sources?.length) return;
+  b.text(prefix, { size: 8.5, color: GREY, oblique: true, gapAfter: 0 });
+  for (const s of sources) b.text(`${s.label}: ${s.url}`, { size: 8, color: GREY, indent: 12, gapAfter: 1 });
+  b.text("", { gapAfter: 2 });
+}
+
+/** Uma peça pronta pra postar (título grande colorido + etiqueta + corpo + fontes). */
+function piecePdf(b: PdfBuilder, p: PostablePiece, dest: DestinationMeta) {
+  const color = hexRgb(dest.colorHex);
+  b.heading(`${p.countryName} - ${p.title}`, { size: 14, color, spaceBefore: 10, gapAfter: 2 });
+  b.text(`[ ${dest.tag} ]`, { size: 9, color, gapAfter: 2 });
+  if (p.standfirst) b.text(p.standfirst, { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
+  bodyPdf(b, p.body);
+  if (p.keyFacts?.length) {
+    b.text("Dados-chave:", { size: 10, color: DARK, gapAfter: 1 });
+    p.keyFacts.forEach((f) => b.bullet(f, { size: 10, gapAfter: 0 }));
+    b.text("", { gapAfter: 2 });
+  }
+  if (p.cta) b.text(p.cta, { size: 10, color: BLUE, gapAfter: 2 });
+  if (p.tags?.length) b.text(`Tags: ${p.tags.join(" - ")}`, { size: 8.5, color: GREY, gapAfter: 2 });
+  sourcesPdf(b, p.sources, "Fontes pra inserir no post:");
+}
+
+/** Bloco de dados técnicos de um país. */
+function technicalPdf(b: PdfBuilder, c: ReportCountry) {
+  b.heading(c.name, { size: 15, color: BLUE, spaceBefore: 14, gapAfter: 4 });
+  b.text(`Autoridade: ${c.authority}`, { size: 10, gapAfter: 1 });
+  b.text(`Status interno (dashboard): ${statusText(c.status)}`, { size: 10, gapAfter: 1 });
+  b.text(`Coordenadas: ${c.coords[0].toFixed(2)}, ${c.coords[1].toFixed(2)}`, { size: 10, gapAfter: 2 });
+
+  if (c.summary) {
+    b.heading("Panorama", H2);
+    b.text(c.summary, { size: 10, gapAfter: 3 });
   }
 
-  if (ed.community.length > 0) {
-    b.heading(`Para a Comunidade - posts objetivos (${ed.community.length})`, H3);
-    ed.community.forEach((p) => {
-      b.heading(p.title, { size: 10.5, color: BLUE_LIGHT, spaceBefore: 3, gapAfter: 2 });
-      bodyPdf(b, p.body);
-      if (p.cta) b.text(p.cta, { size: 10, color: BLUE, gapAfter: 2 });
-      sourcesPdf(b, p.sources);
+  if (c.bulletin) {
+    const bl = c.bulletin;
+    b.heading("Boletim oficial monitorado", H2);
+    b.bullet(`Fonte: ${bl.source}`, { size: 10 });
+    b.bullet(`Frequência declarada: ${bl.frequency}`, { size: 10 });
+    b.bullet(`URL pública: ${bl.url}`, { size: 10 });
+    if (bl.lastStatus || bl.lastCheckedAt || bl.lastChangedAt || bl.hash) {
+      b.bullet(`Status última varredura: ${bulletinStatusText(bl.lastStatus)}`, { size: 10 });
+      b.bullet(`Última varredura: ${fmtDate(bl.lastCheckedAt, { full: true })} (${relativeAge(bl.lastCheckedAt)})`, { size: 10 });
+      b.bullet(`Última mudança detectada: ${fmtDate(bl.lastChangedAt, { full: true })} (${relativeAge(bl.lastChangedAt)})`, { size: 10 });
+      if (bl.hash) b.bullet(`Hash atual (SHA-256, 16 chars): ${bl.hash.slice(0, 16)}…`, { size: 10 });
+    } else {
+      b.text("Sem dados de status (bulletin não monitorado ainda).", { size: 9.5, color: GREY, oblique: true, gapAfter: 2 });
+    }
+  }
+
+  if (c.events.length > 0) {
+    b.heading(`Marcos editoriais (${c.events.length})`, H2);
+    b.text("Contexto histórico selecionado pela equipe WiseHub.", { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
+    c.events.forEach((ev, i) => {
+      b.text(`${i + 1}. ${ev.title}`, { size: 10.5, color: DARK, gapAfter: 1 });
+      b.text(ev.desc, { size: 10, gapAfter: 1 });
+      b.text(`Fonte: ${ev.src}`, { size: 9, color: GREY, oblique: true, gapAfter: 3 });
     });
   }
 
-  if (ed.countryTab.length > 0) {
-    b.heading(`Para a aba do pais - noticia completa (${ed.countryTab.length})`, H3);
-    ed.countryTab.forEach((a) => {
-      b.heading(a.headline, { size: 11.5, color: BLUE_LIGHT, spaceBefore: 4, gapAfter: 2 });
-      b.text(a.standfirst, { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
-      bodyPdf(b, a.body);
-      if (a.keyFacts?.length) {
-        b.text("Dados-chave:", { size: 10, color: DARK, gapAfter: 1 });
-        a.keyFacts.forEach((f) => b.bullet(f, { size: 10, gapAfter: 0 }));
-        b.text("", { gapAfter: 2 });
+  if (c.headlines.length > 0) {
+    const sorted = c.headlines;
+    b.heading(`Atividade ao vivo · ${sorted.length} manchete${sorted.length !== 1 ? "s" : ""} via RSS`, H2);
+    sorted.slice(0, 12).forEach((hd) => {
+      const when = hd.pubDate ? ` (${fmtDate(hd.pubDate, { full: true })})` : "";
+      b.bullet(`${hd.source}: ${hd.title}${when}`, { size: 10, gapAfter: 0 });
+      b.text(hd.link, { size: 8, color: GREY, indent: 12, gapAfter: 2 });
+    });
+  } else {
+    b.heading("Atividade ao vivo", H2);
+    b.text("Sem manchetes RSS disponíveis no momento (feed pode estar offline ou fora de horário comercial).", { size: 9.5, color: GREY, oblique: true, gapAfter: 2 });
+  }
+
+  if (c.sources.length > 0) {
+    b.heading(`Centros de Informação (${c.sources.length} fonte${c.sources.length !== 1 ? "s" : ""})`, H2);
+    const byCategory = new Map<string, typeof c.sources>();
+    for (const s of c.sources) {
+      const arr = byCategory.get(s.category) ?? [];
+      arr.push(s);
+      byCategory.set(s.category, arr);
+    }
+    for (const [cat, srcs] of byCategory) {
+      b.heading(`${categoryName(cat)} (${srcs.length})`, { size: 10.5, color: DARK, spaceBefore: 4, gapAfter: 2 });
+      for (const src of srcs) {
+        const rssFlag = src.rss ? " · RSS ao vivo" : "";
+        const noteSuffix = src.note ? ` — ${src.note}` : "";
+        b.bullet(`${src.name} (${src.language.toUpperCase()})${rssFlag}${noteSuffix}`, { size: 10, gapAfter: 0 });
+        b.text(src.url, { size: 8, color: GREY, indent: 12, gapAfter: 2 });
       }
-      sourcesPdf(b, a.sources);
-    });
+    }
   }
 
-  if (ed.blog.length > 0) {
-    b.heading(`Para o Blog WiseHub News - materia (${ed.blog.length})`, H3);
-    ed.blog.forEach((p) => {
-      b.heading(p.headline, { size: 11.5, color: BLUE_LIGHT, spaceBefore: 4, gapAfter: 2 });
-      b.text(p.standfirst, { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
-      bodyPdf(b, p.body);
-      if (p.tags?.length) b.text(`Tags: ${p.tags.join(" - ")}`, { size: 8.5, color: GREY, gapAfter: 2 });
-      sourcesPdf(b, p.sources);
-    });
-  }
+  b.rule();
 }
 
 export async function renderPdf(data: ReportData): Promise<Uint8Array> {
   const { generatedAtStr, stats, countries } = data;
   const b = new PdfBuilder();
   await b.init();
+  const postables = buildPostables(countries);
+  const postCount = totalPostables(countries);
+  const sourcesByCountry = consolidatedSources(countries);
 
   // Cabeçalho
   b.heading("WiseHub Watch Tower", { size: 22, color: BLUE, gapAfter: 2 });
-  b.text("Relatório Completo · Monitoramento Global de Imigração", { size: 11, color: DARK, gapAfter: 2 });
+  b.text("Relatório Completo · Conteúdo pronto pra publicar + Monitoramento Global", { size: 11, color: DARK, gapAfter: 2 });
   b.text(`Gerado em: ${generatedAtStr} (BRT)`, { size: 9, color: GREY, oblique: true, gapAfter: 4 });
   b.rule();
 
-  // Sumário executivo
+  // Sumário
   b.heading("Sumário executivo", { size: 15, color: BLUE, spaceBefore: 4 });
   const sm: Array<[string, string]> = [
+    ["Peças prontas pra postar", String(postCount)],
+    ["Países com conteúdo editorial", String(stats.editorialCountries)],
     ["Países monitorados", String(stats.totalCountries)],
     ["Boletins oficiais via cron", String(stats.totalBulletins)],
     ["Boletins com mudança na última varredura", String(stats.bulletinChanged)],
-    ["Boletins em erro", String(stats.bulletinErrors)],
     ["Feeds RSS curados (Centros de Informação)", String(stats.totalRssFeeds)],
     ["Manchetes ao vivo capturadas neste relatório", String(stats.totalHeadlines)],
     ["Última varredura do cron", stats.lastRun ? fmtDate(stats.lastRun, { full: true }) : "—"],
-    ["Países com conteúdo editorial curado", String(stats.editorialCountries)],
-    ["Peças prontas pra publicar", String(stats.editorialPieces)],
   ];
   for (const [k, v] of sm) b.bullet(`${k}: ${v}`, { size: 10, gapAfter: 1 });
 
-  // Guia editorial
-  b.heading("Guia editorial - como usar este documento", { size: 15, color: BLUE, spaceBefore: 12, gapAfter: 4 });
-  for (const para of EDITORIAL_GUIDE.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean)) {
-    b.text(para, { size: 10, gapAfter: 3 });
+  // Legenda
+  b.heading("Legenda - onde postar cada coisa", { size: 15, color: BLUE, spaceBefore: 12, gapAfter: 4 });
+  b.text("Cada peça já vem com a cor e a etiqueta do lugar onde deve ser publicada:", { size: 10, gapAfter: 3 });
+  for (const d of DESTINATIONS) {
+    const color = hexRgb(d.colorHex);
+    b.text(`[ ${d.tag} ]`, { size: 11, color, gapAfter: 0 });
+    b.text(d.legend, { size: 9.5, color: DARK, indent: 12, gapAfter: 2 });
   }
+  b.text("Regra de ouro: toda repostagem deve levar junto a fonte oficial correspondente (logo abaixo de cada peça e reunida na Parte 2). E o que da credibilidade e embasamento ao post.", { size: 9.5, color: DARK, oblique: true, gapAfter: 3 });
+  b.rule();
 
-  // Índice por país
-  b.heading("Índice por país", { size: 15, color: BLUE, spaceBefore: 10 });
+  // ── PARTE 1 · TUDO PRA POSTAR ──
+  b.heading("PARTE 1 - TUDO PRA POSTAR", { size: 19, color: BLUE, spaceBefore: 8, gapAfter: 4 });
+  b.text("Sequência pronta pra publicar, separada por destino. Cada peça indica o lugar (cor + etiqueta) e traz as fontes pra anexar.", { size: 10, gapAfter: 4 });
+  for (const { dest, pieces } of postables) {
+    b.heading(`${dest.label} (${pieces.length})`, { size: 16, color: hexRgb(dest.colorHex), spaceBefore: 12, gapAfter: 3 });
+    b.text(dest.legend, { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
+    if (pieces.length === 0) {
+      b.text("Nada nesta seção ainda.", { size: 9.5, color: GREY, oblique: true, gapAfter: 2 });
+      continue;
+    }
+    for (const p of pieces) piecePdf(b, p, dest);
+  }
+  b.rule();
+
+  // ── PARTE 2 · FONTES E MATERIAIS ──
+  b.heading("PARTE 2 - FONTES E MATERIAIS", { size: 19, color: BLUE, spaceBefore: 8, gapAfter: 4 });
+  b.text("Fontes oficiais usadas no conteúdo acima, por país. Inclua a fonte correspondente em cada post pra servir de referência e embasamento.", { size: 10, gapAfter: 4 });
+  if (sourcesByCountry.length === 0) {
+    b.text("Sem fontes editoriais ainda.", { size: 9.5, color: GREY, oblique: true, gapAfter: 2 });
+  } else {
+    for (const grp of sourcesByCountry) {
+      b.heading(grp.countryName, { size: 12.5, color: DARK, spaceBefore: 6, gapAfter: 2 });
+      for (const s of grp.sources) {
+        b.bullet(s.label, { size: 10, gapAfter: 0 });
+        b.text(s.url, { size: 8, color: GREY, indent: 12, gapAfter: 1 });
+      }
+    }
+  }
+  b.rule();
+
+  // ── PARTE 3 · DADOS TÉCNICOS ──
+  b.heading("PARTE 3 - DADOS TÉCNICOS - monitoramento", { size: 19, color: BLUE, spaceBefore: 8, gapAfter: 4 });
+  b.text("Tudo que o Watch Tower monitora, detalhado país a país: boletins oficiais, marcos, manchetes ao vivo e Centros de Informação. É a base factual das Partes 1 e 2.", { size: 10, gapAfter: 4 });
+  b.heading("Índice por país", { size: 13, color: BLUE, spaceBefore: 6, gapAfter: 3 });
   for (const c of countries) b.bullet(c.name, { size: 10, gapAfter: 0 });
-
-  // Por país
-  for (const c of countries) {
-    b.heading(c.name, { size: 15, color: BLUE, spaceBefore: 14, gapAfter: 4 });
-    b.text(`Autoridade: ${c.authority}`, { size: 10, gapAfter: 1 });
-    b.text(`Status interno (dashboard): ${statusText(c.status)}`, { size: 10, gapAfter: 1 });
-    b.text(`Coordenadas: ${c.coords[0].toFixed(2)}, ${c.coords[1].toFixed(2)}`, { size: 10, gapAfter: 2 });
-
-    if (c.summary) {
-      b.heading("Panorama", H2);
-      b.text(c.summary, { size: 10, gapAfter: 3 });
-    }
-
-    // Conteúdo jornalístico pronto pra publicar (3 destinos)
-    editorialPdf(b, c);
-
-    // Dados técnicos do monitoramento (separados do conteúdo editorial)
-    b.heading("Dados tecnicos - monitoramento", { size: 12.5, color: BLUE, spaceBefore: 8, gapAfter: 2 });
-    b.text("Base factual que alimenta as noticias acima: boletins oficiais, marcos e manchetes ao vivo.", { size: 9, color: GREY, oblique: true, gapAfter: 3 });
-
-    if (c.bulletin) {
-      const bl = c.bulletin;
-      b.heading("Boletim oficial monitorado", H2);
-      b.bullet(`Fonte: ${bl.source}`, { size: 10 });
-      b.bullet(`Frequência declarada: ${bl.frequency}`, { size: 10 });
-      b.bullet(`URL pública: ${bl.url}`, { size: 10 });
-      if (bl.lastStatus || bl.lastCheckedAt || bl.lastChangedAt || bl.hash) {
-        b.bullet(`Status última varredura: ${bulletinStatusText(bl.lastStatus)}`, { size: 10 });
-        b.bullet(`Última varredura: ${fmtDate(bl.lastCheckedAt, { full: true })} (${relativeAge(bl.lastCheckedAt)})`, { size: 10 });
-        b.bullet(`Última mudança detectada: ${fmtDate(bl.lastChangedAt, { full: true })} (${relativeAge(bl.lastChangedAt)})`, { size: 10 });
-        if (bl.hash) b.bullet(`Hash atual (SHA-256, 16 chars): ${bl.hash.slice(0, 16)}…`, { size: 10 });
-      } else {
-        b.text("Sem dados de status (bulletin não monitorado ainda).", { size: 9.5, color: GREY, oblique: true, gapAfter: 2 });
-      }
-    }
-
-    if (c.events.length > 0) {
-      b.heading(`Marcos editoriais (${c.events.length})`, H2);
-      b.text("Contexto histórico selecionado pela equipe WiseHub.", { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
-      c.events.forEach((ev, i) => {
-        b.text(`${i + 1}. ${ev.title}`, { size: 10.5, color: DARK, gapAfter: 1 });
-        b.text(ev.desc, { size: 10, gapAfter: 1 });
-        b.text(`Fonte: ${ev.src}`, { size: 9, color: GREY, oblique: true, gapAfter: 3 });
-      });
-    }
-
-    if (c.headlines.length > 0) {
-      const sorted = c.headlines;
-      b.heading(`Atividade ao vivo · ${sorted.length} manchete${sorted.length !== 1 ? "s" : ""} via RSS`, H2);
-      sorted.slice(0, 12).forEach((hd) => {
-        const when = hd.pubDate ? ` (${fmtDate(hd.pubDate, { full: true })})` : "";
-        b.bullet(`${hd.source}: ${hd.title}${when}`, { size: 10, gapAfter: 0 });
-        b.text(hd.link, { size: 8, color: GREY, indent: 12, gapAfter: 2 });
-      });
-    } else {
-      b.heading("Atividade ao vivo", H2);
-      b.text("Sem manchetes RSS disponíveis no momento (feed pode estar offline ou fora de horário comercial).", { size: 9.5, color: GREY, oblique: true, gapAfter: 2 });
-    }
-
-    if (c.sources.length > 0) {
-      b.heading(`Centros de Informação (${c.sources.length} fonte${c.sources.length !== 1 ? "s" : ""})`, H2);
-      const byCategory = new Map<string, typeof c.sources>();
-      for (const s of c.sources) {
-        const arr = byCategory.get(s.category) ?? [];
-        arr.push(s);
-        byCategory.set(s.category, arr);
-      }
-      for (const [cat, srcs] of byCategory) {
-        b.heading(`${categoryName(cat)} (${srcs.length})`, { size: 10.5, color: DARK, spaceBefore: 4, gapAfter: 2 });
-        for (const src of srcs) {
-          const rssFlag = src.rss ? " · RSS ao vivo" : "";
-          const noteSuffix = src.note ? ` — ${src.note}` : "";
-          b.bullet(`${src.name} (${src.language.toUpperCase()})${rssFlag}${noteSuffix}`, { size: 10, gapAfter: 0 });
-          b.text(src.url, { size: 8, color: GREY, indent: 12, gapAfter: 2 });
-        }
-      }
-    }
-
-    b.rule();
-  }
+  b.text("", { gapAfter: 4 });
+  for (const c of countries) technicalPdf(b, c);
 
   // Rodapé
   b.text(`Gerado automaticamente pelo Watch Tower em ${generatedAtStr}.`, { size: 8, color: GREY, gapAfter: 1 });
-  b.text("© WiseHub US LLC · Watch Tower v2 · Friday", { size: 8, color: GREY });
+  b.text("© WiseHub US LLC · Watch Tower v2 · Conteúdo curado pela Friday", { size: 8, color: GREY });
 
   return b.bytes();
 }

@@ -356,3 +356,131 @@ export function editorialStats(): { countries: number; pieces: number } {
   }
   return { countries: codes.length, pieces };
 }
+
+// ─────────────────────────────────────────────────────────────────────────
+// Destinos de publicação (cores + legenda) e achatamento dos posts
+// ─────────────────────────────────────────────────────────────────────────
+
+export type Destination = "community" | "countryTab" | "blog";
+
+export type DestinationMeta = {
+  key: Destination;
+  /** rótulo da seção */
+  label: string;
+  /** etiqueta curta (vai colorida ao lado do título de cada peça) */
+  tag: string;
+  /** emoji da seção */
+  emoji: string;
+  /** bolinha colorida (proxy de cor pro Markdown, que não tem cor) */
+  dot: string;
+  /** cor hex (Word e proxy pro PDF) */
+  colorHex: string;
+  /** explicação pra legenda: onde e como postar */
+  legend: string;
+};
+
+/** Ordem oficial dos destinos no documento (Comunidade → Aba do país → Blog). */
+export const DESTINATIONS: ReadonlyArray<DestinationMeta> = [
+  {
+    key: "community",
+    label: "Para a Comunidade",
+    tag: "COMUNIDADE",
+    emoji: "📣",
+    dot: "🔵",
+    colorHex: "1F55FF",
+    legend: "Post curto e objetivo pra publicar na Comunidade (Circle). Copie, ajuste o tom e publique.",
+  },
+  {
+    key: "countryTab",
+    label: "Para a aba do país",
+    tag: "ABA DO PAÍS",
+    emoji: "📰",
+    dot: "🟢",
+    colorHex: "0B815A",
+    legend: "Notícia completa pra registrar na página do país, dentro do Watch Tower.",
+  },
+  {
+    key: "blog",
+    label: "Para o Blog WiseHub News",
+    tag: "BLOG WISEHUB NEWS",
+    emoji: "📝",
+    dot: "🟠",
+    colorHex: "B45309",
+    legend: "Matéria aprofundada pro Blog WiseHub News (wisehubnow / wisehubnews.com).",
+  },
+];
+
+/** Peça normalizada, pronta pra postar (independente do tipo de origem). */
+export type PostablePiece = {
+  destination: Destination;
+  countryCode: string;
+  countryName: string;
+  title: string;
+  standfirst?: string;
+  body: string;
+  cta?: string;
+  keyFacts?: string[];
+  tags?: string[];
+  sources?: EditorialSource[];
+};
+
+type EdCountryLike = { code: string; name: string; editorial?: CountryEditorial };
+
+/**
+ * Achata todo o conteúdo curado em sequência por destino: primeiro todos os
+ * posts de Comunidade, depois todas as notícias de aba do país, depois todas
+ * as matérias de blog. Dentro de cada destino, na ordem dos países recebidos.
+ */
+export function buildPostables(
+  countries: ReadonlyArray<EdCountryLike>,
+): Array<{ dest: DestinationMeta; pieces: PostablePiece[] }> {
+  return DESTINATIONS.map((dest) => {
+    const pieces: PostablePiece[] = [];
+    for (const c of countries) {
+      const ed = c.editorial;
+      if (!ed) continue;
+      if (dest.key === "community") {
+        for (const p of ed.community)
+          pieces.push({ destination: "community", countryCode: c.code, countryName: c.name, title: p.title, body: p.body, cta: p.cta, sources: p.sources });
+      } else if (dest.key === "countryTab") {
+        for (const a of ed.countryTab)
+          pieces.push({ destination: "countryTab", countryCode: c.code, countryName: c.name, title: a.headline, standfirst: a.standfirst, body: a.body, keyFacts: a.keyFacts, sources: a.sources });
+      } else {
+        for (const p of ed.blog)
+          pieces.push({ destination: "blog", countryCode: c.code, countryName: c.name, title: p.headline, standfirst: p.standfirst, body: p.body, tags: p.tags, sources: p.sources });
+      }
+    }
+    return { dest, pieces };
+  });
+}
+
+/** Fontes/materiais consolidados por país (deduplicados por URL). */
+export function consolidatedSources(
+  countries: ReadonlyArray<EdCountryLike>,
+): Array<{ countryCode: string; countryName: string; sources: EditorialSource[] }> {
+  const out: Array<{ countryCode: string; countryName: string; sources: EditorialSource[] }> = [];
+  for (const c of countries) {
+    const ed = c.editorial;
+    if (!ed) continue;
+    const all: EditorialSource[] = [
+      ...ed.community.flatMap((p) => p.sources ?? []),
+      ...ed.countryTab.flatMap((a) => a.sources ?? []),
+      ...ed.blog.flatMap((p) => p.sources ?? []),
+    ];
+    const seen = new Set<string>();
+    const sources: EditorialSource[] = [];
+    for (const s of all) {
+      if (!seen.has(s.url)) {
+        seen.add(s.url);
+        sources.push(s);
+      }
+    }
+    if (sources.length) out.push({ countryCode: c.code, countryName: c.name, sources });
+  }
+  return out;
+}
+
+/** Total de peças prontas pra postar (soma de todos os destinos). */
+export function totalPostables(countries: ReadonlyArray<EdCountryLike>): number {
+  return buildPostables(countries).reduce((s, g) => s + g.pieces.length, 0);
+}
