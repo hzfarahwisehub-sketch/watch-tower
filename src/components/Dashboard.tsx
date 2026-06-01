@@ -374,7 +374,7 @@ export function Dashboard() {
     <>
       <div className="wt-watermark" aria-hidden />
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-10">
-      <WindowManagerProvider onSelectCountry={selectCountry}>
+      <WindowManagerProvider onSelectCountry={selectCountry} selectedCountry={mapSelected}>
       <Header />
 
       <div

@@ -35,9 +35,11 @@ const WinCtx = createContext<Ctx | null>(null);
 
 export function WindowManagerProvider({
   onSelectCountry,
+  selectedCountry = null,
   children,
 }: {
   onSelectCountry?: (code: string) => void;
+  selectedCountry?: string | null;
   children: ReactNode;
 }) {
   const toast = useToast();
@@ -48,6 +50,11 @@ export function WindowManagerProvider({
   const [savedClosed, setSavedClosed] = useState<string[]>([]);
   const onSelectRef = useRef(onSelectCountry);
   onSelectRef.current = onSelectCountry;
+  // País selecionado na principal, espelhado num ref pra responder às filhas
+  // recém-abertas (hello) com o estado atual sem recriar o listener.
+  const selectedRef = useRef<string | null>(selectedCountry);
+  selectedRef.current = selectedCountry;
+  const busRef = useRef<BroadcastChannel | null>(null);
 
   const setOpen = useCallback((updater: (prev: string[]) => string[]) => {
     setOpenIds((prev) => {
@@ -134,6 +141,7 @@ export function WindowManagerProvider({
     setSavedClosed(saved.map((s) => s.id).filter(isPanelId));
 
     const bus = makeBus();
+    busRef.current = bus;
     if (bus) {
       bus.onmessage = (e: MessageEvent<WinMsg>) => {
         const msg = e.data;
@@ -146,6 +154,11 @@ export function WindowManagerProvider({
           geomRef.current.set(msg.id, { x: msg.x, y: msg.y, w: msg.w, h: msg.h });
         } else if (msg.type === "select") {
           onSelectRef.current?.(msg.code);
+        } else if (msg.type === "hello") {
+          // filha acabou de abrir — manda o país atual pra ela já nascer sincronizada
+          try {
+            bus.postMessage({ type: "selected", code: selectedRef.current ?? null });
+          } catch {}
         }
       };
     }
@@ -181,9 +194,19 @@ export function WindowManagerProvider({
       try {
         bus?.close();
       } catch {}
+      busRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Sempre que o país selecionado muda na principal, avisa todas as janelas
+  // filhas pra refletirem (globo voa, área do país atualiza). Fecha o ciclo:
+  // filha clica → "select" → principal muda estado → "selected" → todas as filhas.
+  useEffect(() => {
+    try {
+      busRef.current?.postMessage({ type: "selected", code: selectedCountry ?? null });
+    } catch {}
+  }, [selectedCountry]);
 
   const value: Ctx = {
     isOpen: (id) => openIds.includes(id),

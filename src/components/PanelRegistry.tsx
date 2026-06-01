@@ -50,14 +50,14 @@ export function isPanelId(id: string): id is PanelId {
 }
 
 /** Renderiza o conteúdo de um painel (usado na célula do grid e na janela). */
-export function renderPanel(id: PanelId, onSelectCountry: (code: string) => void): ReactNode {
+export function renderPanel(id: PanelId, onSelectCountry: (code: string) => void, selected: string | null = null): ReactNode {
   switch (id) {
-    case "map": return <MapZone countries={COUNTRIES} selected={null} onSelect={onSelectCountry} />;
-    case "benchmark": return <CountryBenchmark selectedCode={null} />;
+    case "map": return <MapZone countries={COUNTRIES} selected={selected} onSelect={onSelectCountry} />;
+    case "benchmark": return <CountryBenchmark selectedCode={selected} />;
     case "alerts": return <AlertsBanner onSelect={onSelectCountry} />;
     case "feed": return <Feed countries={COUNTRIES} onSelect={onSelectCountry} />;
     case "bulletins": return <OfficialBulletins />;
-    case "countries": return <CountriesSidebar countries={COUNTRIES} selected={null} onSelect={onSelectCountry} />;
+    case "countries": return <CountriesSidebar countries={COUNTRIES} selected={selected} onSelect={onSelectCountry} />;
     case "kpis": return <KpiRow />;
     case "tasks": return <DailyGrid only="tasks" />;
     case "agenda": return <DailyGrid only="agenda" />;

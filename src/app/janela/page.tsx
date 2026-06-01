@@ -10,6 +10,7 @@ import { renderPanel, panelTitle, panelEmoji, isPanelId, type PanelId } from "@/
 export default function JanelaPage() {
   const [id, setId] = useState<string>("");
   const [ready, setReady] = useState(false);
+  const [selected, setSelected] = useState<string | null>(null);
   const busRef = useRef<BroadcastChannel | null>(null);
 
   useEffect(() => {
@@ -47,10 +48,14 @@ export default function JanelaPage() {
     if (bus) {
       bus.onmessage = (e: MessageEvent<WinMsg>) => {
         const m = e.data;
-        if (m && m.type === "close" && m.id === id) {
+        if (!m || typeof m !== "object") return;
+        if (m.type === "close" && m.id === id) {
           try {
             window.close();
           } catch {}
+        } else if (m.type === "selected") {
+          // principal avisou qual país está selecionado → reflete aqui na filha
+          setSelected(m.code);
         }
       };
     }
@@ -110,7 +115,7 @@ export default function JanelaPage() {
         </button>
       </div>
       <div className="flex-1 min-h-0 overflow-auto p-3">
-        {valid ? renderPanel(id as PanelId, onSelectCountry) : (
+        {valid ? renderPanel(id as PanelId, onSelectCountry, selected) : (
           <p className="text-[13px] p-4" style={{ color: "var(--text-3)" }}>
             Painel não encontrado. Feche esta janela.
           </p>

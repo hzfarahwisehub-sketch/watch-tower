@@ -10,7 +10,8 @@ export type WinMsg =
   | { type: "bye"; id: string } // filha fechando
   | { type: "dock"; id: string } // filha pede pra voltar pra principal
   | { type: "geom"; id: string; x: number; y: number; w: number; h: number }
-  | { type: "select"; code: string } // filha selecionou um país
+  | { type: "select"; code: string } // filha selecionou um país (filha → principal)
+  | { type: "selected"; code: string | null } // principal avisa as filhas qual país está selecionado (principal → filhas)
   | { type: "close"; id: string } // principal manda a filha fechar
   | { type: "ping" }; // principal pergunta quem está vivo
 
