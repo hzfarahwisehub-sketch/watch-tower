@@ -1,17 +1,22 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { makeBus, type WinMsg } from "@/lib/window-bus";
+import { makeBus, HOST_TIMEOUT_MS, type WinMsg } from "@/lib/window-bus";
 import { renderPanel, panelTitle, panelEmoji, isPanelId, type PanelId } from "@/components/PanelRegistry";
 
 /**
  * Janela FILHA: renderiza UM painel (via ?panel=<id>) numa janela própria.
- * Conversa com a principal pelo BroadcastChannel (dock/fechar/geometria/seleção).
+ * Conversa com a principal pelo BroadcastChannel. Segue um lease: só fica
+ * aberta enquanto recebe o pulso `host-alive` da principal. Se o pulso para
+ * (principal fechada) por mais de HOST_TIMEOUT_MS, a janela se fecha sozinha,
+ * pra "fechar tudo junto". Num reload da principal o pulso volta a tempo e a
+ * filha apenas reconecta, sem fechar nem duplicar.
  */
 export default function JanelaPage() {
   const [id, setId] = useState<string>("");
   const [ready, setReady] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
   const busRef = useRef<BroadcastChannel | null>(null);
+  const lastHostSeenRef = useRef<number>(0);
 
   useEffect(() => {
     const p = new URLSearchParams(window.location.search).get("panel") ?? "";
@@ -23,45 +28,61 @@ export default function JanelaPage() {
     if (!ready || !id) return;
     const bus = makeBus();
     busRef.current = bus;
+    // Começa o lease com folga: a principal manda o primeiro pulso em até um
+    // batimento. Se nunca vier (janela aberta sem principal), o lease expira e
+    // esta janela se fecha.
+    lastHostSeenRef.current = Date.now();
+
+    const geom = () => ({ x: window.screenX, y: window.screenY, w: window.outerWidth, h: window.outerHeight });
     const post = (m: WinMsg) => {
       try {
         bus?.postMessage(m);
       } catch {}
     };
+    const announce = () => post({ type: "child-hello", id, ...geom() });
 
     if (isPanelId(id)) {
       document.title = `${panelEmoji(id)} ${panelTitle(id)} · Watch Tower`;
     }
-    post({ type: "hello", id });
-
-    const sendGeom = () =>
-      post({ type: "geom", id, x: window.screenX, y: window.screenY, w: window.outerWidth, h: window.outerHeight });
-    sendGeom();
-    const geomTimer = setInterval(sendGeom, 1500);
-
-    const onUnload = () => {
-      sendGeom();
-      post({ type: "bye", id });
-    };
-    window.addEventListener("beforeunload", onUnload);
+    announce();
 
     if (bus) {
       bus.onmessage = (e: MessageEvent<WinMsg>) => {
         const m = e.data;
         if (!m || typeof m !== "object") return;
-        if (m.type === "close" && m.id === id) {
-          try {
-            window.close();
-          } catch {}
+        if (m.type === "host-alive") {
+          // Principal viva: renova o lease e se re-anuncia (com a posição
+          // atual), pra principal reconstruir o estado sem duplicar.
+          lastHostSeenRef.current = Date.now();
+          announce();
         } else if (m.type === "selected") {
           // principal avisou qual país está selecionado → reflete aqui na filha
           setSelected(m.code);
+        } else if ((m.type === "close" && m.id === id) || m.type === "close-all") {
+          try {
+            window.close();
+          } catch {}
         }
       };
     }
 
+    // Lease watcher: se a principal sumiu (sem pulso) além do tolerado, fecha.
+    const lease = setInterval(() => {
+      if (Date.now() - lastHostSeenRef.current > HOST_TIMEOUT_MS) {
+        try {
+          window.close();
+        } catch {}
+      }
+    }, 500);
+
+    const onUnload = () => {
+      announce(); // última posição conhecida
+      post({ type: "bye", id });
+    };
+    window.addEventListener("beforeunload", onUnload);
+
     return () => {
-      clearInterval(geomTimer);
+      clearInterval(lease);
       window.removeEventListener("beforeunload", onUnload);
       try {
         bus?.close();

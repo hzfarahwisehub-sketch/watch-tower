@@ -1,22 +1,55 @@
 /**
- * Barramento entre a janela PRINCIPAL e as janelas FILHAS (pop-out de painéis).
- * Usa BroadcastChannel (mesma origem) pra coordenar dock/fechar/seleção, e
- * localStorage pra lembrar quais painéis estavam abertos + posição (pra
- * "Restaurar janelas" com 1 clique). Tudo same-origin, sem servidor.
+ * Barramento entre a janela PRINCIPAL (host) e as janelas FILHAS (pop-out de
+ * painéis). Modelo heartbeat/lease, tudo same-origin via BroadcastChannel:
+ *
+ *  - A principal emite `host-alive` continuamente (a cada HEARTBEAT_MS).
+ *  - Cada filha só segue viva enquanto recebe esse pulso. Se o pulso para por
+ *    mais de HOST_TIMEOUT_MS, a filha se fecha sozinha.
+ *
+ * Consequência: "fechar" e "reload" da principal viram ações sincronizadas,
+ * sem janela órfã nem painel duplicado.
+ *  - Reload da principal: o pulso some por um instante e volta antes do lease
+ *    expirar; a filha renova o lease e se re-anuncia (`child-hello`), e a
+ *    principal reconstrói o estado de janelas abertas. Nada duplica.
+ *  - Fechar a principal: o pulso some de vez; todas as filhas expiram o lease
+ *    e se fecham juntas.
+ *
+ * O localStorage guarda quais painéis estavam abertos + posição/tamanho, pra
+ * restaurar o mesmo layout quando o app reabre. Sem servidor, sem cookie.
  */
 
 export type WinMsg =
-  | { type: "hello"; id: string } // filha avisa que abriu/está viva
-  | { type: "bye"; id: string } // filha fechando
-  | { type: "dock"; id: string } // filha pede pra voltar pra principal
+  // principal → filhas: pulso de vida (host = id da instância principal viva)
+  | { type: "host-alive"; host: string; ts: number }
+  // filha → principal: nasci / continuo viva (responde ao pulso)
+  | { type: "child-hello"; id: string; x?: number; y?: number; w?: number; h?: number }
+  // filha → principal: estou fechando agora
+  | { type: "bye"; id: string }
+  // filha → principal: me traga de volta pra principal (dock)
+  | { type: "dock"; id: string }
+  // filha → principal: minha posição/tamanho atuais (pra salvar o layout)
   | { type: "geom"; id: string; x: number; y: number; w: number; h: number }
-  | { type: "select"; code: string } // filha selecionou um país (filha → principal)
-  | { type: "selected"; code: string | null } // principal avisa as filhas qual país está selecionado (principal → filhas)
-  | { type: "close"; id: string } // principal manda a filha fechar
-  | { type: "ping" }; // principal pergunta quem está vivo
+  // filha → principal: selecionei um país
+  | { type: "select"; code: string }
+  // principal → filhas: qual país está selecionado (espelha nas filhas)
+  | { type: "selected"; code: string | null }
+  // principal → filha específica: feche você
+  | { type: "close"; id: string }
+  // principal → todas as filhas: fechem
+  | { type: "close-all" };
 
 export const WIN_CHANNEL = "wt-windows-v1";
 export const OPEN_WINDOWS_KEY = "wt-open-windows";
+
+/**
+ * Tempos do lease (ms). HEARTBEAT_MS é o intervalo do pulso da principal;
+ * HOST_TIMEOUT_MS é quanto a filha aguenta sem pulso antes de se fechar.
+ * O timeout precisa ser > o gap típico de um reload da principal (parse +
+ * hydrate), senão um simples F5 fecharia as filhas. ~2.5s cobre o reload
+ * comum e ainda fecha as filhas rápido quando a principal é fechada de fato.
+ */
+export const HEARTBEAT_MS = 750;
+export const HOST_TIMEOUT_MS = 2500;
 
 export type StoredWin = { id: string; x?: number; y?: number; w?: number; h?: number };
 
