@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
     const out = await sendPushToUser(r.userId, {
       title: "⏰ Lembrete",
       body: r.title,
-      url: "/",
+      url: "/?panel=reminders&scope=personal",
       tag: `wt-reminder-${r.id}`,
     });
     sent += out.sent;

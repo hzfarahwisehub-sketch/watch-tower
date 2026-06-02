@@ -40,6 +40,15 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
     setScopeHydrated(true);
   }, [scopeKey]);
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("panel") !== "reminders") return;
+    const requestedScope = params.get("scope");
+    if (requestedScope === "personal" || requestedScope === "team") {
+      setScope(requestedScope);
+    }
+  }, []);
+  useEffect(() => {
     if (scopeHydrated) {
       try { localStorage.setItem(scopeKey, scope); } catch {}
     }

@@ -254,6 +254,14 @@ export function Dashboard() {
     if (!mapSelected) return;
     try { localStorage.setItem("wt-last-country", mapSelected); } catch {}
   }, [mapSelected]);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const panel = new URLSearchParams(window.location.search).get("panel");
+    if (!panel) return;
+    window.setTimeout(() => {
+      document.getElementById(`wt-panel-${panel}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 250);
+  }, []);
 
   useEffect(() => {
     try {
@@ -510,7 +518,7 @@ export function Dashboard() {
               <DailyGrid only="scheduled" />
             </GridCell>
           </div>
-          <div key="reminders">
+          <div key="reminders" id="wt-panel-reminders">
             <GridCell panelId="reminders" label="Lembretes" locked={locked}>
               <DailyGrid only="reminders" />
             </GridCell>
