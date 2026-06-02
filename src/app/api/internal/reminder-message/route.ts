@@ -3,13 +3,15 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireCronSecret } from "@/lib/api-helpers";
 import { sendPushToUser } from "@/lib/push";
+import { sendAlertEmail } from "@/lib/mailer";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const CreateReminderMessage = z.object({
   targetEmail: z.string().email(),
-  title: z.string().min(1).max(500),
+  title: z.string().min(1).max(500).optional(),
+  reminderId: z.string().min(1).optional(),
   triggerAt: z.string().datetime().optional(),
   notifyNow: z.boolean().optional(),
 });
@@ -47,19 +49,35 @@ export async function POST(req: NextRequest) {
     select: { id: true },
   });
 
+  if (!parsed.data.title && !parsed.data.reminderId) {
+    return NextResponse.json({ error: "title_or_reminder_required" }, { status: 400 });
+  }
+
   const triggerAt = parsed.data.triggerAt ? new Date(parsed.data.triggerAt) : new Date();
-  const reminder = await prisma.reminder.create({
-    data: {
-      userId: user.id,
-      scope: "personal",
-      title: parsed.data.title,
-      triggerAt,
-    },
-  });
+  const reminder = parsed.data.reminderId
+    ? await prisma.reminder.findFirst({
+        where: { id: parsed.data.reminderId, userId: user.id },
+        select: { id: true, title: true },
+      })
+    : await prisma.reminder.create({
+        data: {
+          userId: user.id,
+          scope: "personal",
+          title: parsed.data.title ?? "",
+          triggerAt,
+        },
+        select: { id: true, title: true },
+      });
+
+  if (!reminder) {
+    return NextResponse.json({ error: "reminder_not_found" }, { status: 404 });
+  }
 
   let sent = 0;
   let pruned = 0;
+  let emailed = false;
   if (parsed.data.notifyNow ?? true) {
+    const reminderUrl = new URL(REMINDERS_URL, req.nextUrl.origin).toString();
     const out = await sendPushToUser(user.id, {
       title: "Watch Tower · mensagem para MARCELA",
       body: "Você tem uma mensagem nova nos lembretes.",
@@ -73,8 +91,22 @@ export async function POST(req: NextRequest) {
         where: { id: reminder.id },
         data: { notifiedAt: new Date() },
       });
+    } else {
+      await sendAlertEmail(
+        targetEmail,
+        "Mensagem nova nos lembretes",
+        `MARCELA, você tem uma mensagem nova nos seus lembretes do Watch Tower. Abra aqui: ${reminderUrl}\n\nMensagem: ${reminder.title}`,
+      );
+      emailed = true;
+      await prisma.reminder.update({
+        where: { id: reminder.id },
+        data: { notifiedAt: new Date() },
+      });
     }
   }
 
-  return NextResponse.json({ ok: true, reminderId: reminder.id, sent, pruned, url: REMINDERS_URL }, { status: 201 });
+  return NextResponse.json(
+    { ok: true, reminderId: reminder.id, sent, pruned, emailed, url: REMINDERS_URL },
+    { status: parsed.data.reminderId ? 200 : 201 },
+  );
 }
