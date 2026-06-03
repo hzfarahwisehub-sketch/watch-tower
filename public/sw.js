@@ -9,7 +9,7 @@
  *
  * Bump a versão do CACHE pra invalidar caches antigos num deploy.
  */
-const CACHE = "watch-tower-v5";
+const CACHE = "watch-tower-v6";
 const APP_SHELL = ["/", "/manifest.webmanifest", "/icons/icon-192.png", "/icons/icon-512.png"];
 
 // ---------- install: precache do shell ----------
@@ -39,10 +39,12 @@ self.addEventListener("fetch", (event) => {
   if (url.origin !== self.location.origin) return; // ignora cross-origin
   if (url.pathname.startsWith("/api/auth")) return; // nunca toca no fluxo de login
 
-  // Navegação (abrir páginas): network-first → fallback pro shell "/".
+  // Navegação (abrir páginas): network-first SEM cache HTTP (no-store), pra o
+  // HTML vir sempre fresco e referenciar os chunks novos a cada deploy. Sem
+  // isso, um HTML cacheado prende a versão antiga do app. Fallback pro shell "/".
   if (request.mode === "navigate") {
     event.respondWith(
-      fetch(request)
+      fetch(request, { cache: "no-store" })
         .then((res) => {
           if (res.ok) caches.open(CACHE).then((c) => c.put(request, res.clone()));
           return res;
