@@ -219,11 +219,13 @@ export default function JanelaPage() {
         )}
       </div>
       <div
-        className="flex-shrink-0 px-3 py-1 text-[9px] font-mono truncate"
-        style={{ borderTop: "1px solid var(--border)", color: "var(--text-3)", background: "rgba(15,12,30,.5)" }}
-        title="Diagnóstico de posição: alvo salvo vs posição real desta janela"
+        className="flex-shrink-0 px-3 py-2 font-mono font-bold leading-tight"
+        style={{ borderTop: "2px solid #f5a623", color: "#1a1208", background: "#ffd24a" }}
       >
-        {dbg}
+        <div className="text-[10px] uppercase tracking-wide" style={{ color: "#7a5200" }}>
+          📸 Friday precisa desta linha · tira uma foto e manda:
+        </div>
+        <div className="text-[13px] break-all">{dbg}</div>
       </div>
     </div>
   );
