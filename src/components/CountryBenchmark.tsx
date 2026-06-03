@@ -4,6 +4,7 @@ import { COUNTRIES } from "@/lib/data";
 import type { Country, Status } from "@/lib/types";
 import { CountryLiveActivity } from "./CountryLiveActivity";
 import { CountryDetailSections } from "./CountryDetailSections";
+import { ImageZoomViewer } from "./ImageZoomViewer";
 import { useCountryChanges } from "@/lib/useCountryChanges";
 
 function fmtAge(days: number | null): string {
@@ -47,8 +48,10 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
     (selectedCode ? COUNTRIES.find((c) => c.code === selectedCode) : null) ?? defaultCountry;
 
   const [imgFailed, setImgFailed] = useState(false);
+  const [zoomOpen, setZoomOpen] = useState(false);
   useEffect(() => {
     setImgFailed(false);
+    setZoomOpen(false);
   }, [country.code]);
 
   const accent = STATUS_COLOR[country.status];
@@ -127,14 +130,28 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
               }}
             >
               {!imgFailed && country.imageUrl ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={country.imageUrl}
-                  alt={`${country.name} — imagem de destaque`}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  onError={() => setImgFailed(true)}
-                />
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={country.imageUrl}
+                    alt={`${country.name}, ponto turístico`}
+                    className="w-full h-full object-cover cursor-zoom-in transition-transform duration-300 hover:scale-[1.04]"
+                    loading="lazy"
+                    onError={() => setImgFailed(true)}
+                    onClick={() => setZoomOpen(true)}
+                    title="Clique pra ampliar"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setZoomOpen(true)}
+                    title="Ampliar imagem"
+                    aria-label="Ampliar imagem"
+                    className="absolute top-2 right-2 w-8 h-8 rounded-lg flex items-center justify-center text-[14px] cursor-pointer transition-all hover:scale-110 z-10"
+                    style={{ background: "rgba(15,12,30,.7)", border: "1px solid rgba(255,255,255,.2)", backdropFilter: "blur(4px)" }}
+                  >
+                    🔍
+                  </button>
+                </>
               ) : (
                 <div
                   className="w-full h-full flex flex-col items-center justify-center gap-3"
@@ -160,6 +177,14 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
                 </h3>
               </div>
             </div>
+
+            {zoomOpen && country.imageUrl && (
+              <ImageZoomViewer
+                src={country.imageUrl}
+                alt={`${country.name}, ${country.authority}`}
+                onClose={() => setZoomOpen(false)}
+              />
+            )}
 
             {/* Stats abaixo da imagem */}
             <div className="grid grid-cols-2 gap-2 text-[10.5px]">
