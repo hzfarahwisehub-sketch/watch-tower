@@ -118,10 +118,10 @@ export function WindowManagerProvider({
       const y = Math.round(g?.y ?? 90 + i * 28);
       const url = `/janela?panel=${id}&x=${x}&y=${y}&w=${w}&h=${h}`;
       const features = `popup=yes,width=${w},height=${h},left=${x},top=${y}`;
-      // Pede a permissão de telas (Window Management) dentro do gesto, pra o
-      // navegador permitir abrir/mover a janela em OUTRO monitor. Sem isso ele
-      // prende a janela na tela atual (em cima da principal).
-      void ensureScreenPermission();
+      // IMPORTANTE: nada de getScreenDetails AQUI. Pedir a permissao de telas
+      // antes do window.open consome a ativacao do gesto e o navegador derruba
+      // a janela recem-aberta (bug "a janela some" no pop-out). A permissao e
+      // pedida so na restauracao, depois das janelas ja abertas.
       const win = window.open(url, `wt-win-${id}`, features);
       if (!win || win.closed) {
         toast("Permita pop-ups deste site pra abrir em janela separada");
