@@ -1,27 +1,24 @@
 /**
  * Barramento entre a janela PRINCIPAL (host) e as janelas FILHAS (pop-out de
- * painéis). Modelo heartbeat/lease, tudo same-origin via BroadcastChannel:
+ * painéis). Same-origin, via BroadcastChannel. Tudo sem servidor.
  *
- *  - A principal emite `host-alive` continuamente (a cada HEARTBEAT_MS).
- *  - Cada filha só segue viva enquanto recebe esse pulso. Se o pulso para por
- *    mais de HOST_TIMEOUT_MS, a filha se fecha sozinha.
- *
- * Consequência: "fechar" e "reload" da principal viram ações sincronizadas,
- * sem janela órfã nem painel duplicado.
- *  - Reload da principal: o pulso some por um instante e volta antes do lease
- *    expirar; a filha renova o lease e se re-anuncia (`child-hello`), e a
- *    principal reconstrói o estado de janelas abertas. Nada duplica.
- *  - Fechar a principal: o pulso some de vez; todas as filhas expiram o lease
- *    e se fecham juntas.
- *
- * O localStorage guarda quais painéis estavam abertos + posição/tamanho, pra
- * restaurar o mesmo layout quando o app reabre. Sem servidor, sem cookie.
+ * Modelo:
+ *  - A principal e as filhas vivem juntas. Quando a principal fecha (ou
+ *    recarrega), ela fecha TODAS as filhas na hora (`close-all` no canal +
+ *    win.close() pelas referências). Fechamento simultâneo e imediato.
+ *  - Heartbeat `host-alive` serve só de rede de segurança: se a principal
+ *    morrer sem rodar o beforeunload (crash/kill), as filhas que ficarem sem
+ *    pulso por HOST_TIMEOUT_MS se fecham sozinhas.
+ *  - O layout (quais painéis + posição/tamanho de cada janela, em coordenadas
+ *    absolutas da área de trabalho, cobrindo múltiplos monitores) é salvo no
+ *    localStorage. Ao reabrir o app, restaura cada janela no MESMO monitor e
+ *    posição (via Window Management API + moveTo/resizeTo).
  */
 
 export type WinMsg =
-  // principal → filhas: pulso de vida (host = id da instância principal viva)
+  // principal → filhas: pulso de vida (rede de segurança do lease)
   | { type: "host-alive"; host: string; ts: number }
-  // filha → principal: nasci / continuo viva (responde ao pulso)
+  // filha → principal: nasci / continuo viva (responde ao pulso, carrega geom)
   | { type: "child-hello"; id: string; x?: number; y?: number; w?: number; h?: number }
   // filha → principal: estou fechando agora
   | { type: "bye"; id: string }
@@ -35,21 +32,19 @@ export type WinMsg =
   | { type: "selected"; code: string | null }
   // principal → filha específica: feche você
   | { type: "close"; id: string }
-  // principal → todas as filhas: fechem
+  // principal → todas as filhas: fechem (usado ao fechar/recarregar a principal)
   | { type: "close-all" };
 
 export const WIN_CHANNEL = "wt-windows-v1";
 export const OPEN_WINDOWS_KEY = "wt-open-windows";
 
 /**
- * Tempos do lease (ms). HEARTBEAT_MS é o intervalo do pulso da principal;
- * HOST_TIMEOUT_MS é quanto a filha aguenta sem pulso antes de se fechar.
- * O timeout precisa ser > o gap típico de um reload da principal (parse +
- * hydrate), senão um simples F5 fecharia as filhas. ~2.5s cobre o reload
- * comum e ainda fecha as filhas rápido quando a principal é fechada de fato.
+ * Tempos do lease (ms). Como o fechamento normal agora é imediato (via
+ * close-all + win.close()), o lease é só fallback pra principal que morreu sem
+ * avisar. Por isso o timeout pode ser folgado.
  */
-export const HEARTBEAT_MS = 750;
-export const HOST_TIMEOUT_MS = 2500;
+export const HEARTBEAT_MS = 1000;
+export const HOST_TIMEOUT_MS = 4000;
 
 export type StoredWin = { id: string; x?: number; y?: number; w?: number; h?: number };
 

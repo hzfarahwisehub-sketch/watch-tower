@@ -5,11 +5,12 @@ import { renderPanel, panelTitle, panelEmoji, isPanelId, type PanelId } from "@/
 
 /**
  * Janela FILHA: renderiza UM painel (via ?panel=<id>) numa janela própria.
- * Conversa com a principal pelo BroadcastChannel. Segue um lease: só fica
- * aberta enquanto recebe o pulso `host-alive` da principal. Se o pulso para
- * (principal fechada) por mais de HOST_TIMEOUT_MS, a janela se fecha sozinha,
- * pra "fechar tudo junto". Num reload da principal o pulso volta a tempo e a
- * filha apenas reconecta, sem fechar nem duplicar.
+ * Conversa com a principal pelo BroadcastChannel.
+ *  - Ao abrir, se a URL trouxer x/y/w/h, a janela se move/redimensiona pra
+ *    posição salva (inclusive em outro monitor, quando a permissão de
+ *    gerenciamento de janelas já foi concedida na principal).
+ *  - Lease: se a principal sumir sem avisar (crash) por mais de HOST_TIMEOUT_MS,
+ *    a janela se fecha sozinha. O fechamento normal é imediato, via `close-all`.
  */
 export default function JanelaPage() {
   const [id, setId] = useState<string>("");
@@ -19,18 +20,37 @@ export default function JanelaPage() {
   const lastHostSeenRef = useRef<number>(0);
 
   useEffect(() => {
-    const p = new URLSearchParams(window.location.search).get("panel") ?? "";
-    setId(p);
+    const sp = new URLSearchParams(window.location.search);
+    setId(sp.get("panel") ?? "");
+
+    // Reposiciona na geometria salva (move primeiro, depois redimensiona).
+    const num = (k: string) => {
+      const v = Number(sp.get(k));
+      return Number.isFinite(v) ? v : null;
+    };
+    const x = num("x");
+    const y = num("y");
+    const w = num("w");
+    const h = num("h");
+    const place = () => {
+      try {
+        if (x != null && y != null) window.moveTo(Math.round(x), Math.round(y));
+        if (w != null && h != null) window.resizeTo(Math.round(w), Math.round(h));
+      } catch {}
+    };
+    place();
+    // de novo no próximo frame, porque alguns navegadores ignoram o move
+    // enquanto a janela ainda está abrindo.
+    const raf = requestAnimationFrame(place);
+
     setReady(true);
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   useEffect(() => {
     if (!ready || !id) return;
     const bus = makeBus();
     busRef.current = bus;
-    // Começa o lease com folga: a principal manda o primeiro pulso em até um
-    // batimento. Se nunca vier (janela aberta sem principal), o lease expira e
-    // esta janela se fecha.
     lastHostSeenRef.current = Date.now();
 
     const geom = () => ({ x: window.screenX, y: window.screenY, w: window.outerWidth, h: window.outerHeight });
@@ -51,12 +71,9 @@ export default function JanelaPage() {
         const m = e.data;
         if (!m || typeof m !== "object") return;
         if (m.type === "host-alive") {
-          // Principal viva: renova o lease e se re-anuncia (com a posição
-          // atual), pra principal reconstruir o estado sem duplicar.
           lastHostSeenRef.current = Date.now();
           announce();
         } else if (m.type === "selected") {
-          // principal avisou qual país está selecionado → reflete aqui na filha
           setSelected(m.code);
         } else if ((m.type === "close" && m.id === id) || m.type === "close-all") {
           try {
@@ -66,7 +83,7 @@ export default function JanelaPage() {
       };
     }
 
-    // Lease watcher: se a principal sumiu (sem pulso) além do tolerado, fecha.
+    // Lease de segurança: principal sumiu sem avisar (crash) => fecha.
     const lease = setInterval(() => {
       if (Date.now() - lastHostSeenRef.current > HOST_TIMEOUT_MS) {
         try {

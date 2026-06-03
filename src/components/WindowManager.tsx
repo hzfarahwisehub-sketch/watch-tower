@@ -42,6 +42,19 @@ function newHostId(): string {
   return `h-${Date.now()}-${Math.floor(Math.random() * 1e9)}`;
 }
 
+/**
+ * Pede a permissão de gerenciamento de janelas (Window Management API). Uma vez
+ * concedida, `moveTo`/`resizeTo` passam a posicionar janelas em QUALQUER
+ * monitor (sem isso o navegador prende tudo na tela atual). É o que permite
+ * reabrir cada caixa no monitor onde ela estava.
+ */
+async function ensureScreenPermission(): Promise<void> {
+  try {
+    const w = window as unknown as { getScreenDetails?: () => Promise<unknown> };
+    if (typeof w.getScreenDetails === "function") await w.getScreenDetails();
+  } catch {}
+}
+
 export function WindowManagerProvider({
   onSelectCountry,
   selectedCountry = null,
@@ -54,20 +67,16 @@ export function WindowManagerProvider({
   const toast = useToast();
   const winRefs = useRef<Map<string, Window>>(new Map());
   const geomRef = useRef<Map<string, Geom>>(new Map());
-  // Último sinal de vida de cada filha (responde ao pulso). É como a principal
-  // sabe quem ainda está aberto sem depender da referência Window (que se perde
-  // num reload).
   const lastSeenRef = useRef<Map<string, number>>(new Map());
   const openIdsRef = useRef<string[]>([]);
   const hostIdRef = useRef<string>("");
+  const isUnloadingRef = useRef(false);
   const [openIds, setOpenIds] = useState<string[]>([]);
   const [savedClosed, setSavedClosed] = useState<string[]>([]);
   // > 0 quando o app reabriu e há janelas salvas pra restaurar (espera 1 gesto).
   const [pendingRestore, setPendingRestore] = useState(0);
   const onSelectRef = useRef(onSelectCountry);
   onSelectRef.current = onSelectCountry;
-  // País selecionado na principal, espelhado num ref pra responder às filhas
-  // recém-abertas com o estado atual sem recriar o listener.
   const selectedRef = useRef<string | null>(selectedCountry);
   selectedRef.current = selectedCountry;
   const busRef = useRef<BroadcastChannel | null>(null);
@@ -80,13 +89,18 @@ export function WindowManagerProvider({
     });
   }, []);
 
-  const persist = useCallback(() => {
+  // Salva a disposição atual (ids + posição/tamanho) na hora. Usado no
+  // beforeunload pra garantir que o layout fica gravado antes de fechar tudo.
+  const persistNow = useCallback(() => {
     const list: StoredWin[] = openIdsRef.current.map((id) => {
       const g = geomRef.current.get(id);
       return { id, ...(g ?? {}) };
     });
     saveOpenWindows(list);
   }, []);
+  const persist = useCallback(() => {
+    setTimeout(persistNow, 0);
+  }, [persistNow]);
 
   const post = useCallback((m: WinMsg) => {
     try {
@@ -94,31 +108,35 @@ export function WindowManagerProvider({
     } catch {}
   }, []);
 
+  // Abre um painel em janela própria. geomOverride (usado no restore) tem
+  // prioridade sobre a geometria em memória, pra reabrir na posição salva.
   const popOut = useCallback(
-    (id: PanelId) => {
+    (id: PanelId, geomOverride?: StoredWin): Window | null => {
       const existing = winRefs.current.get(id);
       if (existing && !existing.closed) {
         existing.focus();
-        return;
+        return existing;
       }
       const i = openIdsRef.current.length;
-      const g = geomRef.current.get(id);
-      const w = g?.w ?? 560;
-      const h = g?.h ?? 680;
-      const x = g?.x ?? 90 + i * 28;
-      const y = g?.y ?? 90 + i * 28;
+      const g = geomOverride ?? geomRef.current.get(id);
+      const w = Math.round(g?.w ?? 560);
+      const h = Math.round(g?.h ?? 680);
+      const x = Math.round(g?.x ?? 90 + i * 28);
+      const y = Math.round(g?.y ?? 90 + i * 28);
+      const url = `/janela?panel=${id}&x=${x}&y=${y}&w=${w}&h=${h}`;
       const features = `popup=yes,width=${w},height=${h},left=${x},top=${y}`;
-      const win = window.open(`/janela?panel=${id}`, `wt-win-${id}`, features);
+      const win = window.open(url, `wt-win-${id}`, features);
       if (!win) {
         toast("Permita pop-ups deste site pra abrir em janela separada");
-        return;
+        return null;
       }
       winRefs.current.set(id, win);
       lastSeenRef.current.set(id, Date.now());
-      if (!g) geomRef.current.set(id, { x, y, w, h });
+      geomRef.current.set(id, { x, y, w, h });
       setOpen((prev) => (prev.includes(id) ? prev : [...prev, id]));
       setSavedClosed((prev) => prev.filter((p) => p !== id));
-      setTimeout(persist, 0);
+      persist();
+      return win;
     },
     [persist, setOpen, toast],
   );
@@ -128,15 +146,13 @@ export function WindowManagerProvider({
       winRefs.current.delete(id);
       lastSeenRef.current.delete(id);
       setOpen((prev) => prev.filter((x) => x !== id));
-      setTimeout(persist, 0);
+      persist();
     },
     [persist, setOpen],
   );
 
   const dockBack = useCallback(
     (id: string) => {
-      // Pede pra filha fechar pelo canal (funciona mesmo sem a referência, ex:
-      // após um reload da principal) e fecha pela referência se ainda tivermos.
       post({ type: "close", id });
       const win = winRefs.current.get(id);
       try {
@@ -158,7 +174,7 @@ export function WindowManagerProvider({
     winRefs.current.clear();
     lastSeenRef.current.clear();
     setOpen(() => []);
-    setTimeout(persist, 0);
+    persist();
   }, [persist, post, setOpen]);
 
   const focusWindow = useCallback((id: string) => {
@@ -168,28 +184,50 @@ export function WindowManagerProvider({
     } catch {}
   }, []);
 
-  // Reabre as janelas salvas (lendo o layout do localStorage) que ainda não
-  // estão abertas, cada uma na posição salva. Usado pelo menu e pelo "restaurar
-  // no primeiro gesto".
-  const doRestore = useCallback(() => {
+  // Reabre as janelas salvas, cada uma no monitor/posição que estava. Abre
+  // primeiro (dentro do gesto, senão o navegador bloqueia o pop-up), depois
+  // pede a permissão de telas e reposiciona com precisão entre monitores.
+  const doRestore = useCallback(async () => {
     const saved = loadOpenWindows();
-    for (const s of saved) {
-      if (isPanelId(s.id) && !openIdsRef.current.includes(s.id)) popOut(s.id);
+    const toOpen = saved.filter((s) => isPanelId(s.id) && !openIdsRef.current.includes(s.id));
+    if (toOpen.length === 0) {
+      setPendingRestore(0);
+      return;
     }
-    setPendingRestore(0);
-  }, [popOut]);
+    let blocked = false;
+    for (const s of toOpen) {
+      const win = popOut(s.id as PanelId, s);
+      if (!win) blocked = true;
+    }
+    await ensureScreenPermission();
+    for (const s of toOpen) {
+      if (s.x == null || s.y == null || s.w == null || s.h == null) continue;
+      const win = winRefs.current.get(s.id);
+      if (win && !win.closed) {
+        try {
+          win.moveTo(Math.round(s.x), Math.round(s.y));
+          win.resizeTo(Math.round(s.w), Math.round(s.h));
+        } catch {}
+      }
+    }
+    if (blocked) {
+      toast("Permita pop-ups deste site e toque em Restaurar de novo");
+    } else {
+      setPendingRestore(0);
+    }
+  }, [popOut, toast]);
   const doRestoreRef = useRef(doRestore);
   doRestoreRef.current = doRestore;
 
   const restoreSaved = useCallback(() => {
-    doRestoreRef.current();
+    void doRestoreRef.current();
   }, []);
 
-  // Mount: carrega o layout salvo, sobe o barramento e o heartbeat, reconecta
-  // filhas vivas (sem duplicar), e arma a restauração no primeiro gesto quando
-  // o app reabre.
+  // Mount: carrega o layout salvo, sobe o barramento + heartbeat (rede de
+  // segurança), e arma a restauração no primeiro gesto quando o app reabre.
   useEffect(() => {
     hostIdRef.current = newHostId();
+    isUnloadingRef.current = false;
 
     const saved = loadOpenWindows();
     for (const s of saved) {
@@ -213,10 +251,6 @@ export function WindowManagerProvider({
         const msg = e.data;
         if (!msg || typeof msg !== "object") return;
         if (msg.type === "child-hello") {
-          // Uma filha viva se anunciou (na abertura ou respondendo ao pulso).
-          // Reconstrói o estado de "aberto" sem duplicar — é o que conserta o
-          // reaparecimento dos painéis na principal após um reload. Grava o
-          // layout só quando muda de fato (não a cada pulso).
           lastSeenRef.current.set(msg.id, Date.now());
           let changed = false;
           if (msg.x != null && msg.y != null && msg.w != null && msg.h != null) {
@@ -232,13 +266,14 @@ export function WindowManagerProvider({
               setSavedClosed((prev) => prev.filter((p) => p !== msg.id));
               changed = true;
             }
-            setPendingRestore((n) => (n === 0 ? n : 0)); // filha viva => não é reabertura
+            setPendingRestore((n) => (n === 0 ? n : 0));
           }
-          if (changed) setTimeout(persist, 0);
+          if (changed) persist();
         } else if (msg.type === "geom") {
           lastSeenRef.current.set(msg.id, Date.now());
           geomRef.current.set(msg.id, { x: msg.x, y: msg.y, w: msg.w, h: msg.h });
         } else if (msg.type === "dock" || msg.type === "bye") {
+          if (isUnloadingRef.current) return; // preserva o snapshot ao fechar a principal
           forget(msg.id);
         } else if (msg.type === "select") {
           onSelectRef.current?.(msg.code);
@@ -249,9 +284,10 @@ export function WindowManagerProvider({
     beat();
     const heartbeat = setInterval(beat, HEARTBEAT_MS);
 
-    // Varre filhas mortas: as que pararam de responder (lease vencido) ou cuja
-    // janela conhecida foi fechada pelo X do SO.
+    // Rede de segurança: remove filhas que sumiram sem avisar (lease vencido)
+    // ou cuja janela conhecida foi fechada pelo X do SO.
     const sweep = setInterval(() => {
+      if (isUnloadingRef.current) return;
       const now = Date.now();
       let changed = false;
       for (const id of [...openIdsRef.current]) {
@@ -267,19 +303,17 @@ export function WindowManagerProvider({
       }
       if (changed) {
         setOpen((prev) => prev.filter((x) => lastSeenRef.current.has(x)));
-        setTimeout(persist, 0);
+        persist();
       }
     }, 1000);
 
-    // Restaurar no primeiro gesto: se há layout salvo e, após uma janelinha de
-    // espera, nenhuma filha viva respondeu (ou seja, o app reabriu em vez de
-    // só recarregar), arma o restore no primeiro clique/toque/tecla. O
-    // navegador só permite abrir janelas a partir de um gesto do usuário.
+    // Restaurar no primeiro gesto: se há layout salvo e nenhuma filha viva
+    // respondeu numa janelinha de espera, arma o restore no 1º clique/toque.
     let armTimer: ReturnType<typeof setTimeout> | null = null;
     let gestureBound = false;
     const onGesture = () => {
       unbindGesture();
-      doRestoreRef.current();
+      void doRestoreRef.current();
     };
     const unbindGesture = () => {
       if (!gestureBound) return;
@@ -298,11 +332,31 @@ export function WindowManagerProvider({
       }, 1200);
     }
 
+    // Fechar/recarregar a principal => fecha TODAS as filhas na hora, depois de
+    // gravar a disposição. O guard isUnloading impede que os "bye" das filhas
+    // apaguem o snapshot salvo.
+    const onBeforeUnload = () => {
+      isUnloadingRef.current = true;
+      persistNow();
+      try {
+        bus?.postMessage({ type: "close-all" });
+      } catch {}
+      for (const win of winRefs.current.values()) {
+        try {
+          win.close();
+        } catch {}
+      }
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    window.addEventListener("pagehide", onBeforeUnload);
+
     return () => {
       clearInterval(heartbeat);
       clearInterval(sweep);
       if (armTimer) clearTimeout(armTimer);
       unbindGesture();
+      window.removeEventListener("beforeunload", onBeforeUnload);
+      window.removeEventListener("pagehide", onBeforeUnload);
       try {
         bus?.close();
       } catch {}
@@ -311,9 +365,6 @@ export function WindowManagerProvider({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Sempre que o país selecionado muda na principal, avisa todas as janelas
-  // filhas pra refletirem (globo voa, área do país atualiza). Fecha o ciclo:
-  // filha clica → "select" → principal muda estado → "selected" → todas as filhas.
   useEffect(() => {
     post({ type: "selected", code: selectedCountry ?? null });
   }, [selectedCountry, post]);
@@ -329,14 +380,14 @@ export function WindowManagerProvider({
     restoreSaved,
   };
 
-  const restoreCount = pendingRestore || savedClosed.filter((id) => !openIds.includes(id)).length;
+  const restoreCount = pendingRestore;
 
   return (
     <WinCtx.Provider value={value}>
       {pendingRestore > 0 && (
         <button
           type="button"
-          onClick={() => doRestoreRef.current()}
+          onClick={() => void doRestoreRef.current()}
           className="fixed left-1/2 -translate-x-1/2 top-3 z-[80] px-4 py-2.5 rounded-2xl text-[12px] font-bold tracking-wide flex items-center gap-2"
           style={{
             color: "#fff",
@@ -346,7 +397,7 @@ export function WindowManagerProvider({
             cursor: "pointer",
             animation: "wt-menu-pop .16s ease-out",
           }}
-          title="Reabre as janelas que estavam abertas, nas posições salvas"
+          title="Reabre as janelas que estavam abertas, nos mesmos monitores e posições"
         >
           <span className="text-[14px]">↻</span>
           Restaurar {restoreCount} {restoreCount === 1 ? "janela" : "janelas"}
@@ -450,7 +501,7 @@ export function WindowsMenu() {
                 }}
                 className="w-full mt-1 px-2.5 py-2 rounded-lg text-[11.5px] font-bold text-left"
                 style={{ color: "#fff", background: "linear-gradient(135deg, var(--color-wh-blue), var(--color-wh-blue-dark))", border: "1px solid rgba(74,122,255,.5)", cursor: "pointer" }}
-                title="Reabre as janelas que estavam abertas, nas posições salvas"
+                title="Reabre as janelas que estavam abertas, nos mesmos monitores e posições"
               >
                 ↻ Restaurar janelas · {wm.savedClosed.length}
               </button>
