@@ -126,7 +126,7 @@ export function WindowManagerProvider({
       const url = `/janela?panel=${id}&x=${x}&y=${y}&w=${w}&h=${h}`;
       const features = `popup=yes,width=${w},height=${h},left=${x},top=${y}`;
       const win = window.open(url, `wt-win-${id}`, features);
-      if (!win) {
+      if (!win || win.closed) {
         toast("Permita pop-ups deste site pra abrir em janela separada");
         return null;
       }
@@ -211,7 +211,15 @@ export function WindowManagerProvider({
           } catch {}
         }
       }
-      const missing = toOpen.length - opened;
+      // Reconta de verdade após um tick: pega o bloqueio "soft", quando o
+      // navegador devolve a janela mas a fecha logo em seguida.
+      await new Promise((r) => setTimeout(r, 500));
+      let alive = 0;
+      for (const s of toOpen) {
+        const w = winRefs.current.get(s.id);
+        if (w && !w.closed) alive += 1;
+      }
+      const missing = toOpen.length - alive;
       if (missing > 0) {
         // Navegador bloqueou pop-ups: mostra o botão; o efeito de pendingRestore
         // rearma o gesto pra tentar de novo no próximo clique/toque.
@@ -311,8 +319,10 @@ export function WindowManagerProvider({
         }
       }
       if (changed) {
+        // Some da UI, mas NÃO mexe no layout salvo: uma janela que sumiu por
+        // lease (sem comunicar) pode voltar na próxima abertura. Só dock/bye
+        // intencional reduz o layout.
         setOpen((prev) => prev.filter((x) => lastSeenRef.current.has(x)));
-        persist();
       }
     }, 1000);
 
@@ -325,6 +335,10 @@ export function WindowManagerProvider({
     if (saved.length > 0) {
       armTimer = setTimeout(() => {
         if (openIdsRef.current.length === 0 && lastSeenRef.current.size === 0) {
+          // Mostra o botão Restaurar JÁ (garantia visível) e tenta reabrir
+          // sozinho. Com pop-ups liberados, as janelas voltam e o botão some;
+          // senão, ele fica pro primeiro clique em qualquer lugar.
+          setPendingRestore(saved.filter((s) => isPanelId(s.id)).length);
           void doRestoreRef.current({ auto: true });
         }
       }, 1200);
@@ -335,7 +349,9 @@ export function WindowManagerProvider({
     // apaguem o snapshot salvo.
     const onBeforeUnload = () => {
       isUnloadingRef.current = true;
-      persistNow();
+      // Não reescreve o layout aqui: ele já fica salvo a cada pop-out e a cada
+      // movimento de janela. Reescrever no fechamento arriscaria gravar uma
+      // lista esvaziada pelo sweep e apagar o snapshot.
       try {
         bus?.postMessage({ type: "close-all" });
       } catch {}
