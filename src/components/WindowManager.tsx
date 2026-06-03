@@ -12,6 +12,7 @@ import {
   makeBus,
   loadOpenWindows,
   saveOpenWindows,
+  APP_BUILD,
   HEARTBEAT_MS,
   HOST_TIMEOUT_MS,
   type WinMsg,
@@ -89,18 +90,10 @@ export function WindowManagerProvider({
     });
   }, []);
 
-  // Salva a disposição atual (ids + posição/tamanho) na hora. Usado no
-  // beforeunload pra garantir que o layout fica gravado antes de fechar tudo.
-  const persistNow = useCallback(() => {
-    const list: StoredWin[] = openIdsRef.current.map((id) => {
-      const g = geomRef.current.get(id);
-      return { id, ...(g ?? {}) };
-    });
-    saveOpenWindows(list);
-  }, []);
-  const persist = useCallback(() => {
-    setTimeout(persistNow, 0);
-  }, [persistNow]);
+  // O layout salvo (localStorage) é gerenciado pelas PRÓPRIAS janelas filhas:
+  // cada uma faz upsert/remove de si mesma. A principal só LÊ no boot e na
+  // restauração. Isso evita a principal sobrescrever janelas que ela não
+  // chegou a registrar (o que furava tudo no app instalado / PWA).
 
   const post = useCallback((m: WinMsg) => {
     try {
@@ -135,10 +128,9 @@ export function WindowManagerProvider({
       geomRef.current.set(id, { x, y, w, h });
       setOpen((prev) => (prev.includes(id) ? prev : [...prev, id]));
       setSavedClosed((prev) => prev.filter((p) => p !== id));
-      persist();
       return win;
     },
-    [persist, setOpen, toast],
+    [setOpen, toast],
   );
 
   const forget = useCallback(
@@ -146,9 +138,8 @@ export function WindowManagerProvider({
       winRefs.current.delete(id);
       lastSeenRef.current.delete(id);
       setOpen((prev) => prev.filter((x) => x !== id));
-      persist();
     },
-    [persist, setOpen],
+    [setOpen],
   );
 
   const dockBack = useCallback(
@@ -164,7 +155,7 @@ export function WindowManagerProvider({
   );
 
   const dockAll = useCallback(() => {
-    post({ type: "close-all" });
+    post({ type: "close-all", dock: true });
     for (const id of [...openIdsRef.current]) {
       const win = winRefs.current.get(id);
       try {
@@ -174,8 +165,8 @@ export function WindowManagerProvider({
     winRefs.current.clear();
     lastSeenRef.current.clear();
     setOpen(() => []);
-    persist();
-  }, [persist, post, setOpen]);
+    saveOpenWindows([]); // trazer todas pra principal limpa o layout salvo
+  }, [post, setOpen]);
 
   const focusWindow = useCallback((id: string) => {
     const win = winRefs.current.get(id);
@@ -269,23 +260,16 @@ export function WindowManagerProvider({
         if (!msg || typeof msg !== "object") return;
         if (msg.type === "child-hello") {
           lastSeenRef.current.set(msg.id, Date.now());
-          let changed = false;
           if (msg.x != null && msg.y != null && msg.w != null && msg.h != null) {
-            const prev = geomRef.current.get(msg.id);
-            if (!prev || prev.x !== msg.x || prev.y !== msg.y || prev.w !== msg.w || prev.h !== msg.h) {
-              geomRef.current.set(msg.id, { x: msg.x, y: msg.y, w: msg.w, h: msg.h });
-              changed = true;
-            }
+            geomRef.current.set(msg.id, { x: msg.x, y: msg.y, w: msg.w, h: msg.h });
           }
           if (isPanelId(msg.id)) {
             if (!openIdsRef.current.includes(msg.id)) {
               setOpen((prev) => (prev.includes(msg.id) ? prev : [...prev, msg.id]));
               setSavedClosed((prev) => prev.filter((p) => p !== msg.id));
-              changed = true;
             }
             setPendingRestore((n) => (n === 0 ? n : 0));
           }
-          if (changed) persist();
         } else if (msg.type === "geom") {
           lastSeenRef.current.set(msg.id, Date.now());
           geomRef.current.set(msg.id, { x: msg.x, y: msg.y, w: msg.w, h: msg.h });
@@ -534,6 +518,12 @@ export function WindowsMenu() {
                 ↻ Restaurar janelas · {wm.savedClosed.length}
               </button>
             )}
+            <div
+              className="px-2.5 pt-2 mt-1 text-[9px] text-right font-semibold"
+              style={{ color: "var(--text-3)", borderTop: "1px solid var(--border)" }}
+            >
+              Watch Tower · {APP_BUILD}
+            </div>
           </div>
         </>
       )}

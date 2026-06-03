@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { makeBus, HOST_TIMEOUT_MS, type WinMsg } from "@/lib/window-bus";
+import { makeBus, HOST_TIMEOUT_MS, upsertOpenWindow, removeOpenWindow, type WinMsg } from "@/lib/window-bus";
 import { renderPanel, panelTitle, panelEmoji, isPanelId, type PanelId } from "@/components/PanelRegistry";
 
 /**
@@ -66,6 +66,13 @@ export default function JanelaPage() {
       document.title = `${panelEmoji(id)} ${panelTitle(id)} · Watch Tower`;
     }
     announce();
+    // Esta janela se registra no layout salvo JÁ ao abrir e mantém a própria
+    // posição/tamanho atualizados a cada 2s. Não depende da principal capturar
+    // nada (essencial no app instalado / PWA, onde o canal pode falhar).
+    upsertOpenWindow({ id, ...geom() });
+    const reg = setInterval(() => {
+      if (!closingByHostRef.current) upsertOpenWindow({ id, ...geom() });
+    }, 2000);
 
     if (bus) {
       bus.onmessage = (e: MessageEvent<WinMsg>) => {
@@ -76,10 +83,19 @@ export default function JanelaPage() {
           announce();
         } else if (m.type === "selected") {
           setSelected(m.code);
-        } else if ((m.type === "close" && m.id === id) || m.type === "close-all") {
-          // Fechamento ordenado pela principal: NÃO mandar "bye" (senão o host
-          // apagaria este painel do layout salvo). Só fecha.
+        } else if (m.type === "close" && m.id === id) {
+          // Dock individual (voltar pra principal): tira do layout salvo.
           closingByHostRef.current = true;
+          removeOpenWindow(id);
+          try {
+            window.close();
+          } catch {}
+        } else if (m.type === "close-all") {
+          // App fechando: grava a posição FINAL pra reabrir exatamente aqui.
+          // Se for dock (trazer todas pra principal), aí sim remove do layout.
+          closingByHostRef.current = true;
+          if (m.dock) removeOpenWindow(id);
+          else upsertOpenWindow({ id, ...geom() });
           try {
             window.close();
           } catch {}
@@ -90,6 +106,9 @@ export default function JanelaPage() {
     // Lease de segurança: principal sumiu sem avisar (crash) => fecha.
     const lease = setInterval(() => {
       if (Date.now() - lastHostSeenRef.current > HOST_TIMEOUT_MS) {
+        // Principal sumiu (crash/kill): preserva a posição pra reabrir depois.
+        closingByHostRef.current = true;
+        upsertOpenWindow({ id, ...geom() });
         try {
           window.close();
         } catch {}
@@ -97,16 +116,18 @@ export default function JanelaPage() {
     }, 500);
 
     const onUnload = () => {
-      announce(); // última posição conhecida
-      // Só avisa "bye" quando a janela foi fechada por conta própria (X do
-      // sistema). Se quem fechou foi a principal (close/close-all), o host
-      // preserva o snapshot pra poder restaurar depois.
-      if (!closingByHostRef.current) post({ type: "bye", id });
+      if (closingByHostRef.current) return; // já tratado (close/close-all/lease)
+      // X do sistema nesta janela: o usuário fechou ESTA caixa de propósito.
+      // Grava a posição (caso recupere) mas marca a intenção via "bye"; o host
+      // tira da UI. A própria caixa some do layout pra não reabrir sozinha.
+      removeOpenWindow(id);
+      post({ type: "bye", id });
     };
     window.addEventListener("beforeunload", onUnload);
 
     return () => {
       clearInterval(lease);
+      clearInterval(reg);
       window.removeEventListener("beforeunload", onUnload);
       try {
         bus?.close();
@@ -116,6 +137,8 @@ export default function JanelaPage() {
   }, [ready, id]);
 
   const dock = () => {
+    closingByHostRef.current = true;
+    removeOpenWindow(id); // o usuário trouxe pra principal: sai do layout
     try {
       busRef.current?.postMessage({ type: "dock", id });
     } catch {}

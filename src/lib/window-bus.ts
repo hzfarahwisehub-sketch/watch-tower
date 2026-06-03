@@ -32,8 +32,10 @@ export type WinMsg =
   | { type: "selected"; code: string | null }
   // principal → filha específica: feche você
   | { type: "close"; id: string }
-  // principal → todas as filhas: fechem (usado ao fechar/recarregar a principal)
-  | { type: "close-all" };
+  // principal → todas as filhas: fechem. dock=true significa "trazer pra
+  // principal" (limpa o layout salvo); sem dock = app fechando (preserva o
+  // layout, pra reabrir cada caixa onde estava).
+  | { type: "close-all"; dock?: boolean };
 
 export const WIN_CHANNEL = "wt-windows-v1";
 export const OPEN_WINDOWS_KEY = "wt-open-windows";
@@ -72,3 +74,29 @@ export function saveOpenWindows(list: StoredWin[]): void {
     localStorage.setItem(OPEN_WINDOWS_KEY, JSON.stringify(list));
   } catch {}
 }
+
+/**
+ * Insere ou atualiza a entrada DESTA janela no layout salvo (idempotente).
+ * Cada janela filha chama isto pra se registrar e manter a própria posição,
+ * sem depender de a principal capturar via BroadcastChannel (que pode falhar
+ * no app instalado / PWA). É a fonte da verdade do "onde cada caixa estava".
+ */
+export function upsertOpenWindow(win: StoredWin): void {
+  try {
+    const list = loadOpenWindows();
+    const i = list.findIndex((w) => w.id === win.id);
+    if (i >= 0) list[i] = { ...list[i], ...win };
+    else list.push(win);
+    saveOpenWindows(list);
+  } catch {}
+}
+
+/** Remove esta janela do layout salvo (dock intencional ou fechar a caixa). */
+export function removeOpenWindow(id: string): void {
+  try {
+    saveOpenWindows(loadOpenWindows().filter((w) => w.id !== id));
+  } catch {}
+}
+
+/** Versão do app, exibida no menu de janelas pra confirmar a build no ar. */
+export const APP_BUILD = "v7";
