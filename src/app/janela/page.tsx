@@ -18,6 +18,7 @@ export default function JanelaPage() {
   const [selected, setSelected] = useState<string | null>(null);
   const busRef = useRef<BroadcastChannel | null>(null);
   const lastHostSeenRef = useRef<number>(0);
+  const closingByHostRef = useRef(false);
 
   useEffect(() => {
     const sp = new URLSearchParams(window.location.search);
@@ -76,6 +77,9 @@ export default function JanelaPage() {
         } else if (m.type === "selected") {
           setSelected(m.code);
         } else if ((m.type === "close" && m.id === id) || m.type === "close-all") {
+          // Fechamento ordenado pela principal: NÃO mandar "bye" (senão o host
+          // apagaria este painel do layout salvo). Só fecha.
+          closingByHostRef.current = true;
           try {
             window.close();
           } catch {}
@@ -94,7 +98,10 @@ export default function JanelaPage() {
 
     const onUnload = () => {
       announce(); // última posição conhecida
-      post({ type: "bye", id });
+      // Só avisa "bye" quando a janela foi fechada por conta própria (X do
+      // sistema). Se quem fechou foi a principal (close/close-all), o host
+      // preserva o snapshot pra poder restaurar depois.
+      if (!closingByHostRef.current) post({ type: "bye", id });
     };
     window.addEventListener("beforeunload", onUnload);
 

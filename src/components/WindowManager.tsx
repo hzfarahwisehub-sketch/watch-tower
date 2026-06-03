@@ -187,35 +187,44 @@ export function WindowManagerProvider({
   // Reabre as janelas salvas, cada uma no monitor/posição que estava. Abre
   // primeiro (dentro do gesto, senão o navegador bloqueia o pop-up), depois
   // pede a permissão de telas e reposiciona com precisão entre monitores.
-  const doRestore = useCallback(async () => {
-    const saved = loadOpenWindows();
-    const toOpen = saved.filter((s) => isPanelId(s.id) && !openIdsRef.current.includes(s.id));
-    if (toOpen.length === 0) {
-      setPendingRestore(0);
-      return;
-    }
-    let blocked = false;
-    for (const s of toOpen) {
-      const win = popOut(s.id as PanelId, s);
-      if (!win) blocked = true;
-    }
-    await ensureScreenPermission();
-    for (const s of toOpen) {
-      if (s.x == null || s.y == null || s.w == null || s.h == null) continue;
-      const win = winRefs.current.get(s.id);
-      if (win && !win.closed) {
-        try {
-          win.moveTo(Math.round(s.x), Math.round(s.y));
-          win.resizeTo(Math.round(s.w), Math.round(s.h));
-        } catch {}
+  const doRestore = useCallback(
+    async (opts?: { auto?: boolean }) => {
+      const saved = loadOpenWindows();
+      const toOpen = saved.filter((s) => isPanelId(s.id) && !openIdsRef.current.includes(s.id));
+      if (toOpen.length === 0) {
+        setPendingRestore(0);
+        return;
       }
-    }
-    if (blocked) {
-      toast("Permita pop-ups deste site e toque em Restaurar de novo");
-    } else {
-      setPendingRestore(0);
-    }
-  }, [popOut, toast]);
+      let opened = 0;
+      for (const s of toOpen) {
+        const win = popOut(s.id as PanelId, s);
+        if (win) opened += 1;
+      }
+      if (opened > 0) await ensureScreenPermission();
+      for (const s of toOpen) {
+        if (s.x == null || s.y == null || s.w == null || s.h == null) continue;
+        const win = winRefs.current.get(s.id);
+        if (win && !win.closed) {
+          try {
+            win.moveTo(Math.round(s.x), Math.round(s.y));
+            win.resizeTo(Math.round(s.w), Math.round(s.h));
+          } catch {}
+        }
+      }
+      const missing = toOpen.length - opened;
+      if (missing > 0) {
+        // Navegador bloqueou pop-ups: mostra o botão; o efeito de pendingRestore
+        // rearma o gesto pra tentar de novo no próximo clique/toque.
+        setPendingRestore(missing);
+        if (!opts?.auto) {
+          toast("O navegador bloqueou. Libere pop-ups deste site pra reabrir as janelas de uma vez.");
+        }
+      } else {
+        setPendingRestore(0);
+      }
+    },
+    [popOut, toast],
+  );
   const doRestoreRef = useRef(doRestore);
   doRestoreRef.current = doRestore;
 
@@ -307,27 +316,16 @@ export function WindowManagerProvider({
       }
     }, 1000);
 
-    // Restaurar no primeiro gesto: se há layout salvo e nenhuma filha viva
-    // respondeu numa janelinha de espera, arma o restore no 1º clique/toque.
+    // Ao reabrir o app: se há layout salvo e nenhuma filha viva respondeu numa
+    // janelinha de espera, tenta reabrir AUTOMATICAMENTE. Com pop-ups liberados,
+    // as janelas voltam sozinhas, cada uma no seu monitor. Se o navegador
+    // bloquear, o botão Restaurar aparece e qualquer clique tenta de novo (efeito
+    // que observa pendingRestore mais abaixo).
     let armTimer: ReturnType<typeof setTimeout> | null = null;
-    let gestureBound = false;
-    const onGesture = () => {
-      unbindGesture();
-      void doRestoreRef.current();
-    };
-    const unbindGesture = () => {
-      if (!gestureBound) return;
-      gestureBound = false;
-      window.removeEventListener("pointerdown", onGesture);
-      window.removeEventListener("keydown", onGesture);
-    };
     if (saved.length > 0) {
       armTimer = setTimeout(() => {
         if (openIdsRef.current.length === 0 && lastSeenRef.current.size === 0) {
-          setPendingRestore(saved.filter((s) => isPanelId(s.id)).length);
-          gestureBound = true;
-          window.addEventListener("pointerdown", onGesture, { once: true });
-          window.addEventListener("keydown", onGesture, { once: true });
+          void doRestoreRef.current({ auto: true });
         }
       }, 1200);
     }
@@ -354,7 +352,6 @@ export function WindowManagerProvider({
       clearInterval(heartbeat);
       clearInterval(sweep);
       if (armTimer) clearTimeout(armTimer);
-      unbindGesture();
       window.removeEventListener("beforeunload", onBeforeUnload);
       window.removeEventListener("pagehide", onBeforeUnload);
       try {
@@ -364,6 +361,21 @@ export function WindowManagerProvider({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Enquanto houver janelas pendentes (pop-up bloqueado), o próximo clique ou
+  // toque em qualquer lugar tenta reabrir de novo. Some quando tudo restaurou.
+  useEffect(() => {
+    if (pendingRestore <= 0) return;
+    const onGesture = () => {
+      void doRestoreRef.current({ auto: false });
+    };
+    window.addEventListener("pointerdown", onGesture);
+    window.addEventListener("keydown", onGesture);
+    return () => {
+      window.removeEventListener("pointerdown", onGesture);
+      window.removeEventListener("keydown", onGesture);
+    };
+  }, [pendingRestore]);
 
   useEffect(() => {
     post({ type: "selected", code: selectedCountry ?? null });
