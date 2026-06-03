@@ -118,6 +118,10 @@ export function WindowManagerProvider({
       const y = Math.round(g?.y ?? 90 + i * 28);
       const url = `/janela?panel=${id}&x=${x}&y=${y}&w=${w}&h=${h}`;
       const features = `popup=yes,width=${w},height=${h},left=${x},top=${y}`;
+      // Pede a permissão de telas (Window Management) dentro do gesto, pra o
+      // navegador permitir abrir/mover a janela em OUTRO monitor. Sem isso ele
+      // prende a janela na tela atual (em cima da principal).
+      void ensureScreenPermission();
       const win = window.open(url, `wt-win-${id}`, features);
       if (!win || win.closed) {
         toast("Permita pop-ups deste site pra abrir em janela separada");
@@ -192,19 +196,28 @@ export function WindowManagerProvider({
         if (win) opened += 1;
       }
       if (opened > 0) await ensureScreenPermission();
-      for (const s of toOpen) {
-        if (s.x == null || s.y == null || s.w == null || s.h == null) continue;
-        const win = winRefs.current.get(s.id);
-        if (win && !win.closed) {
-          try {
-            win.moveTo(Math.round(s.x), Math.round(s.y));
-            win.resizeTo(Math.round(s.w), Math.round(s.h));
-          } catch {}
+      // Reposiciona cada caixa na tela/posição salva. Repete algumas vezes
+      // porque a janela recém-aberta costuma só aceitar o moveTo um instante
+      // depois, e o move cross-monitor depende da permissão de telas concedida.
+      const reposition = () => {
+        for (const s of toOpen) {
+          if (s.x == null || s.y == null || s.w == null || s.h == null) continue;
+          const win = winRefs.current.get(s.id);
+          if (win && !win.closed) {
+            try {
+              win.moveTo(Math.round(s.x), Math.round(s.y));
+              win.resizeTo(Math.round(s.w), Math.round(s.h));
+            } catch {}
+          }
         }
-      }
-      // Reconta de verdade após um tick: pega o bloqueio "soft", quando o
-      // navegador devolve a janela mas a fecha logo em seguida.
-      await new Promise((r) => setTimeout(r, 500));
+      };
+      reposition();
+      setTimeout(reposition, 150);
+      setTimeout(reposition, 450);
+      setTimeout(reposition, 900);
+      // Reconta após um tick: pega o bloqueio "soft", quando o navegador
+      // devolve a janela mas a fecha logo em seguida.
+      await new Promise((r) => setTimeout(r, 700));
       let alive = 0;
       for (const s of toOpen) {
         const w = winRefs.current.get(s.id);

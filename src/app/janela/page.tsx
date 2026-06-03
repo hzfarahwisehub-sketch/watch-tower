@@ -40,12 +40,20 @@ export default function JanelaPage() {
       } catch {}
     };
     place();
-    // de novo no próximo frame, porque alguns navegadores ignoram o move
-    // enquanto a janela ainda está abrindo.
+    // de novo no próximo frame e em alguns instantes, porque a janela recém
+    // aberta costuma ignorar o move/resize enquanto ainda está abrindo.
     const raf = requestAnimationFrame(place);
+    const t1 = setTimeout(place, 120);
+    const t2 = setTimeout(place, 400);
+    const t3 = setTimeout(place, 800);
 
     setReady(true);
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
   }, []);
 
   useEffect(() => {

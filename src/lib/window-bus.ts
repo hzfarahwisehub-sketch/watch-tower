@@ -99,4 +99,4 @@ export function removeOpenWindow(id: string): void {
 }
 
 /** Versão do app, exibida no menu de janelas pra confirmar a build no ar. */
-export const APP_BUILD = "v7";
+export const APP_BUILD = "v8";
