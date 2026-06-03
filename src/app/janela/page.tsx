@@ -16,6 +16,7 @@ export default function JanelaPage() {
   const [id, setId] = useState<string>("");
   const [ready, setReady] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
+  const [dbg, setDbg] = useState("");
   const busRef = useRef<BroadcastChannel | null>(null);
   const lastHostSeenRef = useRef<number>(0);
   const closingByHostRef = useRef(false);
@@ -39,6 +40,13 @@ export default function JanelaPage() {
         if (w != null && h != null) window.resizeTo(Math.round(w), Math.round(h));
       } catch {}
     };
+    // Ativa o modo multi-monitor NESTE contexto (a permissão já foi concedida na
+    // principal), depois reposiciona. Sem ativar aqui, alguns navegadores prendem
+    // o moveTo na tela atual mesmo com a permissão dada.
+    const wmApi = window as unknown as { getScreenDetails?: () => Promise<unknown> };
+    if (typeof wmApi.getScreenDetails === "function") {
+      wmApi.getScreenDetails().then(place).catch(() => {});
+    }
     place();
     // de novo no próximo frame e em alguns instantes, porque a janela recém
     // aberta costuma ignorar o move/resize enquanto ainda está abrindo.
@@ -46,6 +54,17 @@ export default function JanelaPage() {
     const t1 = setTimeout(place, 120);
     const t2 = setTimeout(place, 400);
     const t3 = setTimeout(place, 800);
+    const t4 = setTimeout(place, 1500);
+
+    // Medidor de diagnóstico: alvo salvo vs posição real desta janela + telas.
+    const updDbg = () => {
+      const ext = (window.screen as unknown as { isExtended?: boolean }).isExtended === true;
+      setDbg(
+        `alvo ${x},${y} ${w}x${h} · agora ${window.screenX},${window.screenY} ${window.outerWidth}x${window.outerHeight} · telas ${ext ? "2+" : "1"}`,
+      );
+    };
+    updDbg();
+    const dbgT = setInterval(updDbg, 1000);
 
     setReady(true);
     return () => {
@@ -53,6 +72,8 @@ export default function JanelaPage() {
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);
+      clearTimeout(t4);
+      clearInterval(dbgT);
     };
   }, []);
 
@@ -196,6 +217,13 @@ export default function JanelaPage() {
             Painel não encontrado. Feche esta janela.
           </p>
         )}
+      </div>
+      <div
+        className="flex-shrink-0 px-3 py-1 text-[9px] font-mono truncate"
+        style={{ borderTop: "1px solid var(--border)", color: "var(--text-3)", background: "rgba(15,12,30,.5)" }}
+        title="Diagnóstico de posição: alvo salvo vs posição real desta janela"
+      >
+        {dbg}
       </div>
     </div>
   );
