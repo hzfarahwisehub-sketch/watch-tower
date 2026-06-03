@@ -4,7 +4,7 @@ import type { Task, Reminder } from "./types";
 // Items are inserted only when stored version < current version.
 // Once merged, user can edit/delete freely — seed will NOT reinsert
 // on next load (because storedVersion is already at current).
-export const SYSTEM_SEED_VERSION = 2;
+export const SYSTEM_SEED_VERSION = 3;
 
 // IDs >= 9000 are reserved for system-seeded items (to avoid collision
 // with user-created IDs which start at 1 and increment).
@@ -108,6 +108,13 @@ export const SYSTEM_REMINDERS: Reminder[] = [
     text: "🔴 9 entregáveis pendentes pra fechar plano 100% dentro da lei (cap. 11 da v2.2): Agreement · Brand Guidelines · IDS · Regulamento · Tributário · Roadmap · Counsel · Transição",
     when: "Pré go-live",
     crit: true,
+  },
+  // ─── Adicionado 2026-06-02 — Site WiseHub ───
+  {
+    id: 9006,
+    text: "📌 [Site WiseHub] REATIVAR a Área de Membros quando o backend (Supabase) estiver pronto. Hoje ela está escondida de todos: ícone tirado do topo + rota /membros redireciona pra home (flag MEMBROS_ATIVA=false em membros/page.tsx). Pra religar: trocar a flag pra true e readicionar o ícone no Header.",
+    when: "Última etapa do site",
+    crit: false,
   },
 ];
 
