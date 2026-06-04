@@ -6,8 +6,9 @@ name: Check Bulletins
 
 on:
   schedule:
-    # 11:00 UTC = 08:00 BRT (horário padrão Brasil sem DST)
-    - cron: "0 11 * * *"
+    # A cada 2 horas (repo publico, GitHub Actions sem custo) pra detectar
+    # mudancas nos boletins oficiais muito mais rapido que 1x/dia.
+    - cron: "0 */2 * * *"
   workflow_dispatch: # permite trigger manual via UI do GitHub
 
 permissions:
