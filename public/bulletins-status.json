@@ -21,6 +21,7 @@
     {
       "key": "br",
       "url": "https://www.gov.br/pf/pt-br/assuntos/imigracao/inicio",
+      "geoProxy": true,
       "hash": "875069dd5969decd43376e3fb037138549f65107e8ea8068b4dc904894b3f75c",
       "lastChangedAt": "2026-05-28T14:31:46.238Z",
       "lastCheckedAt": "2026-06-03T15:25:38.918Z",
