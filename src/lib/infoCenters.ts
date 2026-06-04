@@ -101,7 +101,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     countryName: "Alemanha",
     flag: "🇩🇪",
     sources: [
-      { name: "BAMF · Meldungen", url: "https://www.bamf.de/", category: "legal", language: "de", note: "Autoridade federal alemã de migração e refugiados (BAMF) · asilo, integração e dados oficiais", rss: "https://www.bamf.de/SiteGlobals/Functions/RSS/DE/Feed/RSSNewsfeed_Meldungen.xml?nn=1363092" },
+      { name: "BAMF · Migração e Refugiados", url: "https://www.bamf.de/", category: "legal", language: "de", note: "Autoridade federal alemã de migração e refugiados (BAMF) · asilo, integração e dados oficiais. Site recusa acesso de datacenter, então fica como link oficial sem feed ao vivo" },
       { name: "Reuters · Europa",   url: "https://www.reuters.com/world/europe",          category: "news",    language: "en" },
       { name: "Handelsblatt",       url: "https://www.handelsblatt.com/",                 category: "finance", language: "de", note: "Principal financial daily alemão", rss: "https://www.handelsblatt.com/contentexport/feed/schlagzeilen" },
       { name: "DW · Business",      url: "https://www.dw.com/en/business/s-1431",         category: "news",    language: "en", note: "Deutsche Welle em inglês", rss: "https://rss.dw.com/xml/rss-en-bus" },
@@ -264,7 +264,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     countryName: "Emirados Árabes",
     flag: "🇦🇪",
     sources: [
-      { name: "ICP · Identidade e Cidadania", url: "https://icp.gov.ae/en/media-en/news-reports/", category: "legal", language: "en", note: "Autoridade federal de identidade, cidadania e imigração dos Emirados (ICP)", rss: "https://icp.gov.ae/en/feed/" },
+      { name: "ICP · Identidade e Cidadania", url: "https://icp.gov.ae/en/media-en/news-reports/", category: "legal", language: "en", note: "Autoridade federal de identidade, cidadania e imigração dos Emirados (ICP). Site recusa acesso de datacenter, então fica como link oficial sem feed ao vivo" },
       { name: "Gulf News · Business",  url: "https://gulfnews.com/business",            category: "finance", language: "en", note: "Cobertura UAE/região do Golfo" },
       { name: "The National · Business", url: "https://www.thenationalnews.com/business/", category: "news", language: "en", note: "Diário oficial Abu Dhabi em inglês", rss: "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml" },
       { name: "Khaleej Times · Business", url: "https://www.khaleejtimes.com/business",  category: "news",    language: "en" },

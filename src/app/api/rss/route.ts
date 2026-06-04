@@ -17,12 +17,13 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs"; // precisamos de fetch sem edge restrictions
 export const revalidate = 0;     // controle de cache feito manualmente
+export const preferredRegion = ["gru1"]; // Sao Paulo, fora do bloqueio US de varios sites gov (BR/DE/AE)
 
 type RssItem = { title: string; link: string; pubDate?: string };
 type CacheEntry = { fetchedAt: number; items: RssItem[] };
 
 const CACHE_TTL_MS = 15 * 60 * 1000; // 15min
-const FETCH_TIMEOUT_MS = 12_000;
+const FETCH_TIMEOUT_MS = 25_000;
 const MAX_ITEMS = 5;
 
 // Cache global ao processo Node — reset em cada cold start do serverless
@@ -59,11 +60,18 @@ export async function GET(req: NextRequest) {
     const res = await fetch(url, {
       headers: {
         "User-Agent": UA,
-        "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, */*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.9,pt;q=0.7",
+        "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, text/html;q=0.9, */*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9,pt;q=0.8,es;q=0.7,de;q=0.6,fr;q=0.5,it;q=0.4",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Cache-Control": "no-cache",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
+        "Upgrade-Insecure-Requests": "1",
       },
       signal: controller.signal,
-      // Não usar cache do fetch nativo — controlamos manualmente
+      redirect: "follow",
+      // Não usar cache do fetch nativo, controlamos manualmente
       cache: "no-store",
     });
     if (!res.ok) {
@@ -72,7 +80,7 @@ export async function GET(req: NextRequest) {
         { status: 502, headers: { "Cache-Control": "no-store" } }
       );
     }
-    const xml = await res.text();
+    const xml = decodeXml(await res.arrayBuffer());
     const items = parseFeed(xml).slice(0, MAX_ITEMS);
     cache.set(url, { fetchedAt: Date.now(), items });
     return NextResponse.json(
@@ -84,6 +92,28 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: msg }, { status: 502 });
   } finally {
     clearTimeout(timeout);
+  }
+}
+
+/* ============== Decoder ============== */
+
+// O fetch nativo nem sempre respeita o charset do feed (ex.: o DRE de Portugal
+// serve UTF-8 mas chega decodificado como Latin-1, virando "RepÃºblica").
+// Lemos os bytes crus e decodificamos pelo encoding declarado no prolog XML,
+// com UTF-8 como padrao (cobre a esmagadora maioria dos feeds modernos).
+function decodeXml(buf: ArrayBuffer): string {
+  const bytes = new Uint8Array(buf);
+  const head = new TextDecoder("ascii").decode(bytes.subarray(0, 256)).toLowerCase();
+  const declared = head.match(/encoding=["']([\w-]+)["']/)?.[1]?.toLowerCase() || "utf-8";
+  const enc =
+    declared === "iso-8859-1" || declared === "iso8859-1" || declared === "latin1" ||
+    declared === "windows-1252" || declared === "cp1252"
+      ? "windows-1252"
+      : "utf-8";
+  try {
+    return new TextDecoder(enc).decode(bytes);
+  } catch {
+    return new TextDecoder("utf-8").decode(bytes);
   }
 }
 
