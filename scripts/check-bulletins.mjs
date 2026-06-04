@@ -85,74 +85,80 @@ async function fetchWithTimeout(url) {
   }
 }
 
-function buildFetchUrl(entry) {
+function buildProxyUrl(target) {
+  const u = new URL(GEO_PROXY_URL);
+  u.searchParams.set("url", target);
+  if (GEO_PROXY_SECRET) u.searchParams.set("secret", GEO_PROXY_SECRET);
+  return u.toString();
+}
+
+// Monta a ordem de tentativas. Sites com geoProxy:true vao direto pro proxy.
+// Os demais tentam DIRETO primeiro e, havendo proxy configurado, usam ele como
+// FALLBACK automatico — resolve qualquer site que bloqueie o IP US do GitHub
+// Actions (mesmo intermitentemente), sem precisar marcar geoProxy um a um.
+function buildAttempts(entry) {
   const target = entry.monitorUrl || entry.url;
-  // Se entry pede geo-proxy E temos URL do worker configurada, encapsula.
   if (entry.geoProxy && GEO_PROXY_URL) {
-    const u = new URL(GEO_PROXY_URL);
-    u.searchParams.set("url", target);
-    if (GEO_PROXY_SECRET) u.searchParams.set("secret", GEO_PROXY_SECRET);
-    return u.toString();
+    return [{ url: buildProxyUrl(target), proxy: true }];
   }
-  return target;
+  const list = [{ url: target, proxy: false }];
+  if (GEO_PROXY_URL) list.push({ url: buildProxyUrl(target), proxy: true });
+  return list;
 }
 
 async function checkOne(entry) {
   const start = Date.now();
   const now = new Date().toISOString();
-  const fetchUrl = buildFetchUrl(entry);
-  const viaProxy = entry.geoProxy && GEO_PROXY_URL;
   let lastError = null;
 
-  for (let attempt = 0; attempt <= RETRY_COUNT; attempt++) {
-    try {
-      const { ok, status, text } = await fetchWithTimeout(fetchUrl);
-      const elapsed = Date.now() - start;
+  for (const att of buildAttempts(entry)) {
+    for (let attempt = 0; attempt <= RETRY_COUNT; attempt++) {
+      try {
+        const { ok, status, text } = await fetchWithTimeout(att.url);
+        const elapsed = Date.now() - start;
 
-      if (!ok) {
-        lastError = `http_${status}`;
-        if (status >= 500 && attempt < RETRY_COUNT) {
-          await new Promise((r) => setTimeout(r, RETRY_BACKOFF_MS));
-          continue;
+        if (!ok) {
+          lastError = `http_${status}`;
+          if (status >= 500 && attempt < RETRY_COUNT) {
+            await new Promise((r) => setTimeout(r, RETRY_BACKOFF_MS));
+            continue;
+          }
+          // 4xx (ex.: 403): retry no mesmo URL nao adianta. Quebra pra cair na
+          // proxima tentativa (o proxy), se houver.
+          break;
         }
-        console.log(`✗ ${entry.key.toUpperCase()} HTTP ${status} (${elapsed}ms)`);
-        return {
+
+        const normalized = normalize(text);
+        const hash = sha256(normalized);
+        const changed = entry.hash !== null && entry.hash !== hash;
+
+        const result = {
           ...entry,
+          hash,
           lastCheckedAt: now,
-          lastStatus: `error_http_${status}`,
+          lastStatus: changed ? "changed" : entry.hash === null ? "seed" : "unchanged",
         };
-      }
 
-      const normalized = normalize(text);
-      const hash = sha256(normalized);
-      const changed = entry.hash !== null && entry.hash !== hash;
+        if (changed || entry.lastChangedAt === null) {
+          result.lastChangedAt = now;
+        }
 
-      const result = {
-        ...entry,
-        hash,
-        lastCheckedAt: now,
-        lastStatus: changed ? "changed" : entry.hash === null ? "seed" : "unchanged",
-      };
-
-      if (changed || entry.lastChangedAt === null) {
-        result.lastChangedAt = now;
-      }
-
-      const flag = changed ? "✓ CHANGED" : entry.hash === null ? "✓ seed" : "= same";
-      const retryNote = attempt > 0 ? ` (retry ${attempt})` : "";
-      const proxyNote = viaProxy ? " [proxy]" : "";
-      console.log(`${flag} ${entry.key.toUpperCase()} ${hash.slice(0, 8)} (${elapsed}ms)${retryNote}${proxyNote}`);
-      return result;
-    } catch (err) {
-      lastError = err.name === "AbortError" ? "timeout" : err.message || "fetch_error";
-      if (attempt < RETRY_COUNT) {
-        await new Promise((r) => setTimeout(r, RETRY_BACKOFF_MS));
+        const flag = changed ? "✓ CHANGED" : entry.hash === null ? "✓ seed" : "= same";
+        const proxyNote = att.proxy ? " [proxy]" : "";
+        console.log(`${flag} ${entry.key.toUpperCase()} ${hash.slice(0, 8)} (${elapsed}ms)${proxyNote}`);
+        return result;
+      } catch (err) {
+        lastError = err.name === "AbortError" ? "timeout" : err.message || "fetch_error";
+        if (attempt < RETRY_COUNT) {
+          await new Promise((r) => setTimeout(r, RETRY_BACKOFF_MS));
+        }
       }
     }
+    // Essa tentativa falhou por completo; o loop externo cai pro proxy (fallback).
   }
 
   const elapsed = Date.now() - start;
-  console.log(`✗ ${entry.key.toUpperCase()} ERROR ${lastError} (${elapsed}ms · ${RETRY_COUNT} retries)`);
+  console.log(`✗ ${entry.key.toUpperCase()} ERROR ${lastError} (${elapsed}ms)`);
   return {
     ...entry,
     lastCheckedAt: now,

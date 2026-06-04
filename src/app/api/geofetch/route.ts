@@ -52,6 +52,22 @@ const ALLOWED_DOMAINS = [
   "guichet.public.lu",
   "identita.gov.mt",
   "ind.nl",
+  // Restante dos 35 monitorados, pro fallback automatico cobrir qualquer um:
+  "travel.state.gov",
+  "canada.ca",
+  "migration.gv.at",
+  "ibz.be",
+  "gov.cy",
+  "gov.hr",
+  "gov.si",
+  "mvcr.cz",
+  "mv.gov.cz",
+  "homeaffairs.gov.au",
+  "nia.gov.cn",
+  "moj.go.jp",
+  "immigration.govt.nz",
+  "icp.gov.ae",
+  "kdmid.ru",
 ];
 
 const UA =
