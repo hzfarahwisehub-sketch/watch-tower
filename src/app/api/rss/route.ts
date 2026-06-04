@@ -99,22 +99,20 @@ export async function GET(req: NextRequest) {
 
 // O fetch nativo nem sempre respeita o charset do feed (ex.: o DRE de Portugal
 // serve UTF-8 mas chega decodificado como Latin-1, virando "RepÃºblica").
-// Lemos os bytes crus e decodificamos pelo encoding declarado no prolog XML,
-// com UTF-8 como padrao (cobre a esmagadora maioria dos feeds modernos).
+// Lemos os bytes crus e decodificamos como UTF-8 (que cobre quase todos os
+// feeds modernos); so caimos pra Windows-1252 se aparecerem varios bytes
+// invalidos de verdade, sinal de um feed Latin-1 legitimo.
 function decodeXml(buf: ArrayBuffer): string {
   const bytes = new Uint8Array(buf);
-  const head = new TextDecoder("ascii").decode(bytes.subarray(0, 256)).toLowerCase();
-  const declared = head.match(/encoding=["']([\w-]+)["']/)?.[1]?.toLowerCase() || "utf-8";
-  const enc =
-    declared === "iso-8859-1" || declared === "iso8859-1" || declared === "latin1" ||
-    declared === "windows-1252" || declared === "cp1252"
-      ? "windows-1252"
-      : "utf-8";
-  try {
-    return new TextDecoder(enc).decode(bytes);
-  } catch {
-    return new TextDecoder("utf-8").decode(bytes);
-  }
+  // Decodifica como UTF-8 primeiro: cobre a esmagadora maioria dos feeds, inclusive
+  // os que mentem no prolog ("iso-8859-1") mas servem bytes UTF-8 de verdade
+  // (caso do gov.br e do Diario da Republica). Byte invalido em UTF-8 vira U+FFFD.
+  const utf8 = new TextDecoder("utf-8").decode(bytes);
+  let bad = 0;
+  for (let i = 0; i < utf8.length; i++) if (utf8.charCodeAt(i) === 0xfffd) bad++;
+  if (bad <= 2) return utf8;
+  // Muitos bytes nao-UTF-8: o feed e mesmo Latin-1/Windows-1252.
+  return new TextDecoder("windows-1252").decode(bytes);
 }
 
 /* ============== Parser ============== */
