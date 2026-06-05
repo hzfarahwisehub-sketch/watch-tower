@@ -34,7 +34,7 @@ const UA =
 
 const SUCCESS_HEADERS = {
   "Cache-Control": "public, s-maxage=900, stale-while-revalidate=1800",
-  "X-RSS-Decoder": "v3-demoji",
+  "X-RSS-Decoder": "v4-demoji",
 };
 
 export async function GET(req: NextRequest) {
@@ -199,7 +199,7 @@ function extractTag(block: string, tag: string): string {
 }
 
 function decodeEntities(s: string): string {
-  return s
+  const out = s
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
@@ -211,4 +211,7 @@ function decodeEntities(s: string): string {
     .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
     .replace(/<[^>]+>/g, "") // strip HTML residual
     .trim();
+  // As entidades numericas (&#195;&#186;) so viram chars aqui; o demojibake
+  // precisa rodar depois delas, nao so nos bytes crus do feed.
+  return fixMojibake(out);
 }
