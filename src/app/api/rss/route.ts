@@ -34,7 +34,7 @@ const UA =
 
 const SUCCESS_HEADERS = {
   "Cache-Control": "public, s-maxage=900, stale-while-revalidate=1800",
-  "X-RSS-Decoder": "v2-demoji",
+  "X-RSS-Decoder": "v3-demoji",
 };
 
 export async function GET(req: NextRequest) {
@@ -121,23 +121,28 @@ function decodeXml(buf: ArrayBuffer): string {
 // redecodificamos como UTF-8. Comparação por código numérico pra não pôr
 // caractere especial no fonte.
 function fixMojibake(s: string): string {
-  const count = (t: string): number => {
-    let n = 0;
-    for (let i = 0; i < t.length - 1; i++) {
-      const a = t.charCodeAt(i);
-      const b = t.charCodeAt(i + 1);
-      if (a >= 0xc2 && a <= 0xdf && b >= 0x80 && b <= 0xbf) n++;
-    }
-    return n;
-  };
-  const moji = count(s);
+  let moji = 0;
+  for (let i = 0; i < s.length - 1; i++) {
+    const a = s.charCodeAt(i);
+    const b = s.charCodeAt(i + 1);
+    if (a >= 0xc2 && a <= 0xdf && b >= 0x80 && b <= 0xbf) moji++;
+  }
   if (moji < 2) return s;
-  // Só desfaz se todo o texto cabe em Latin-1 (senão não é duplo-encoding puro).
-  for (let i = 0; i < s.length; i++) if (s.charCodeAt(i) > 0xff) return s;
-  const raw = new Uint8Array(s.length);
-  for (let i = 0; i < s.length; i++) raw[i] = s.charCodeAt(i);
-  const fixed = new TextDecoder("utf-8").decode(raw);
-  return count(fixed) < moji ? fixed : s;
+  // Reinterpreta cada trecho contiguo de chars Latin-1 (0x80-0xFF) como bytes e,
+  // se formarem UTF-8 valido, redecodifica. E LOCAL: nao toca em ASCII nem em
+  // chars > 0xFF (emoji/CJK ja corretos), entao nao desiste do feed inteiro por
+  // causa de um caractere solto, e acentos legitimos isolados (ex.: "cafe" -> e
+  // acentuado) nao formam UTF-8 valido e ficam intactos.
+  const re = new RegExp("[\\u0080-\\u00ff]+", "g");
+  return s.replace(re, (seg) => {
+    const raw = new Uint8Array(seg.length);
+    for (let i = 0; i < seg.length; i++) raw[i] = seg.charCodeAt(i);
+    try {
+      return new TextDecoder("utf-8", { fatal: true }).decode(raw);
+    } catch {
+      return seg;
+    }
+  });
 }
 
 /* ============== Parser ============== */
