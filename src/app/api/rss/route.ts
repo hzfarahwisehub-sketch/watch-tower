@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
   if (cached && Date.now() - cached.fetchedAt < CACHE_TTL_MS) {
     return NextResponse.json(
       { items: cached.items, cached: true, age: Math.floor((Date.now() - cached.fetchedAt) / 1000) },
-      { headers: { "Cache-Control": "public, s-maxage=900, stale-while-revalidate=1800" } }
+      { headers: { "Cache-Control": "public, s-maxage=900, stale-while-revalidate=1800", "X-RSS-Decoder": "utf8-first" } }
     );
   }
 
@@ -85,7 +85,7 @@ export async function GET(req: NextRequest) {
     cache.set(url, { fetchedAt: Date.now(), items });
     return NextResponse.json(
       { items, cached: false },
-      { headers: { "Cache-Control": "public, s-maxage=900, stale-while-revalidate=1800" } }
+      { headers: { "Cache-Control": "public, s-maxage=900, stale-while-revalidate=1800", "X-RSS-Decoder": "utf8-first" } }
     );
   } catch (err) {
     const msg = err instanceof Error ? err.message : "fetch failed";
