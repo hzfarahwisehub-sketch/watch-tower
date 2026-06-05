@@ -50,11 +50,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "private url not allowed" }, { status: 403 });
   }
 
-  const debug = req.nextUrl.searchParams.get("debug");
   const cacheKey = `${CACHE_VERSION}:${url}`;
 
-  // Cache check (pulado em modo debug pra inspecionar o processamento real)
-  const cached = debug ? undefined : cache.get(cacheKey);
+  // Cache check
+  const cached = cache.get(cacheKey);
   if (cached && Date.now() - cached.fetchedAt < CACHE_TTL_MS) {
     return NextResponse.json(
       { items: cached.items, cached: true, age: Math.floor((Date.now() - cached.fetchedAt) / 1000) },
@@ -92,18 +91,6 @@ export async function GET(req: NextRequest) {
       );
     }
     const xml = decodeXml(await res.arrayBuffer());
-    if (debug === "2") {
-      const ti = xml.search(/residente da Rep/i);
-      const around = ti >= 0 ? xml.slice(ti, ti + 45) : xml.slice(0, 60);
-      const dbgItems = parseFeed(xml).slice(0, 1);
-      const tt = dbgItems[0]?.title ?? "(vazio)";
-      return NextResponse.json({
-        xmlAround: around,
-        xmlCodes: Array.from(around).map((c) => c.charCodeAt(0).toString(16)).join(" "),
-        title: tt,
-        titleCodes: Array.from(tt.slice(0, 45)).map((c) => c.charCodeAt(0).toString(16)).join(" "),
-      });
-    }
     const items = parseFeed(xml).slice(0, MAX_ITEMS);
     cache.set(cacheKey, { fetchedAt: Date.now(), items });
     return NextResponse.json({ items, cached: false }, { headers: SUCCESS_HEADERS });
