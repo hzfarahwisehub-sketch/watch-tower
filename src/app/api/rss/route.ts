@@ -23,6 +23,7 @@ type RssItem = { title: string; link: string; pubDate?: string };
 type CacheEntry = { fetchedAt: number; items: RssItem[] };
 
 const CACHE_TTL_MS = 15 * 60 * 1000; // 15min
+const CACHE_VERSION = "v5"; // bump invalida caches antigos quando o decoder muda
 const FETCH_TIMEOUT_MS = 25_000;
 const MAX_ITEMS = 5;
 
@@ -34,7 +35,7 @@ const UA =
 
 const SUCCESS_HEADERS = {
   "Cache-Control": "public, s-maxage=900, stale-while-revalidate=1800",
-  "X-RSS-Decoder": "v5-demoji",
+  "X-RSS-Decoder": "v6-demoji",
 };
 
 export async function GET(req: NextRequest) {
@@ -50,9 +51,10 @@ export async function GET(req: NextRequest) {
   }
 
   const debug = req.nextUrl.searchParams.get("debug");
+  const cacheKey = `${CACHE_VERSION}:${url}`;
 
   // Cache check (pulado em modo debug pra inspecionar o processamento real)
-  const cached = debug ? undefined : cache.get(url);
+  const cached = debug ? undefined : cache.get(cacheKey);
   if (cached && Date.now() - cached.fetchedAt < CACHE_TTL_MS) {
     return NextResponse.json(
       { items: cached.items, cached: true, age: Math.floor((Date.now() - cached.fetchedAt) / 1000) },
@@ -103,7 +105,7 @@ export async function GET(req: NextRequest) {
       });
     }
     const items = parseFeed(xml).slice(0, MAX_ITEMS);
-    cache.set(url, { fetchedAt: Date.now(), items });
+    cache.set(cacheKey, { fetchedAt: Date.now(), items });
     return NextResponse.json({ items, cached: false }, { headers: SUCCESS_HEADERS });
   } catch (err) {
     const msg = err instanceof Error ? err.message : "fetch failed";
