@@ -62,7 +62,10 @@ export async function GET(req: NextRequest) {
         "User-Agent": UA,
         "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, text/html;q=0.9, */*;q=0.8",
         "Accept-Language": "en-US,en;q=0.9,pt;q=0.8,es;q=0.7,de;q=0.6,fr;q=0.5,it;q=0.4",
-        "Accept-Encoding": "gzip, deflate, br",
+        // "identity" de proposito: alguns feeds gov (DRE de Portugal, gov.br)
+        // servem a versao comprimida (.br) com o UTF-8 duplo-codificado de fabrica,
+        // enquanto a versao sem compressao vem com os acentos corretos.
+        "Accept-Encoding": "identity",
         "Cache-Control": "no-cache",
         "Sec-Fetch-Dest": "document",
         "Sec-Fetch-Mode": "navigate",
