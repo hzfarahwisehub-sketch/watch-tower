@@ -32,6 +32,11 @@ const cache = new Map<string, CacheEntry>();
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
 
+const SUCCESS_HEADERS = {
+  "Cache-Control": "public, s-maxage=900, stale-while-revalidate=1800",
+  "X-RSS-Decoder": "v2-demoji",
+};
+
 export async function GET(req: NextRequest) {
   const url = req.nextUrl.searchParams.get("url");
   if (!url || !/^https?:\/\//.test(url)) {
@@ -49,7 +54,7 @@ export async function GET(req: NextRequest) {
   if (cached && Date.now() - cached.fetchedAt < CACHE_TTL_MS) {
     return NextResponse.json(
       { items: cached.items, cached: true, age: Math.floor((Date.now() - cached.fetchedAt) / 1000) },
-      { headers: { "Cache-Control": "public, s-maxage=900, stale-while-revalidate=1800", "X-RSS-Decoder": "utf8-first" } }
+      { headers: SUCCESS_HEADERS }
     );
   }
 
@@ -62,9 +67,8 @@ export async function GET(req: NextRequest) {
         "User-Agent": UA,
         "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, text/html;q=0.9, */*;q=0.8",
         "Accept-Language": "en-US,en;q=0.9,pt;q=0.8,es;q=0.7,de;q=0.6,fr;q=0.5,it;q=0.4",
-        // "identity" de proposito: alguns feeds gov (DRE de Portugal, gov.br)
-        // servem a versao comprimida (.br) com o UTF-8 duplo-codificado de fabrica,
-        // enquanto a versao sem compressao vem com os acentos corretos.
+        // "identity" de proposito: alguns feeds gov tem a versao comprimida com o
+        // encoding corrompido; pedir sem compressao reduz a chance disso.
         "Accept-Encoding": "identity",
         "Cache-Control": "no-cache",
         "Sec-Fetch-Dest": "document",
@@ -83,28 +87,10 @@ export async function GET(req: NextRequest) {
         { status: 502, headers: { "Cache-Control": "no-store" } }
       );
     }
-    const ab = await res.arrayBuffer();
-    if (req.nextUrl.searchParams.get("debug") === "1") {
-      const dbg = new Uint8Array(ab);
-      const u8 = new TextDecoder("utf-8").decode(dbg);
-      let nbad = 0;
-      for (let i = 0; i < u8.length; i++) if (u8.charCodeAt(i) === 0xfffd) nbad++;
-      return NextResponse.json({
-        len: dbg.length,
-        contentEncoding: res.headers.get("content-encoding"),
-        contentType: res.headers.get("content-type"),
-        first40hex: Array.from(dbg.subarray(0, 40)).map((x) => x.toString(16).padStart(2, "0")).join(" "),
-        badCount: nbad,
-        sample: u8.slice(0, 220),
-      });
-    }
-    const xml = decodeXml(ab);
+    const xml = decodeXml(await res.arrayBuffer());
     const items = parseFeed(xml).slice(0, MAX_ITEMS);
     cache.set(url, { fetchedAt: Date.now(), items });
-    return NextResponse.json(
-      { items, cached: false },
-      { headers: { "Cache-Control": "public, s-maxage=900, stale-while-revalidate=1800", "X-RSS-Decoder": "utf8-first" } }
-    );
+    return NextResponse.json({ items, cached: false }, { headers: SUCCESS_HEADERS });
   } catch (err) {
     const msg = err instanceof Error ? err.message : "fetch failed";
     return NextResponse.json({ error: msg }, { status: 502 });
@@ -115,22 +101,43 @@ export async function GET(req: NextRequest) {
 
 /* ============== Decoder ============== */
 
-// O fetch nativo nem sempre respeita o charset do feed (ex.: o DRE de Portugal
-// serve UTF-8 mas chega decodificado como Latin-1, virando "RepÃºblica").
-// Lemos os bytes crus e decodificamos como UTF-8 (que cobre quase todos os
-// feeds modernos); so caimos pra Windows-1252 se aparecerem varios bytes
-// invalidos de verdade, sinal de um feed Latin-1 legitimo.
+// Lê os bytes crus e decodifica como UTF-8 (que cobre quase todos os feeds
+// modernos); só cai pra Windows-1252 se aparecerem vários bytes inválidos de
+// verdade, sinal de um feed Latin-1 legítimo. Depois passa pelo fixMojibake.
 function decodeXml(buf: ArrayBuffer): string {
   const bytes = new Uint8Array(buf);
-  // Decodifica como UTF-8 primeiro: cobre a esmagadora maioria dos feeds, inclusive
-  // os que mentem no prolog ("iso-8859-1") mas servem bytes UTF-8 de verdade
-  // (caso do gov.br e do Diario da Republica). Byte invalido em UTF-8 vira U+FFFD.
   const utf8 = new TextDecoder("utf-8").decode(bytes);
   let bad = 0;
   for (let i = 0; i < utf8.length; i++) if (utf8.charCodeAt(i) === 0xfffd) bad++;
-  if (bad <= 2) return utf8;
-  // Muitos bytes nao-UTF-8: o feed e mesmo Latin-1/Windows-1252.
-  return new TextDecoder("windows-1252").decode(bytes);
+  const text = bad <= 2 ? utf8 : new TextDecoder("windows-1252").decode(bytes);
+  return fixMojibake(text);
+}
+
+// Alguns feeds gov (DRE de Portugal, gov.br) entregam o conteúdo com UTF-8 DUPLO
+// codificado de fábrica: o "á" virou "Ã¡" e isso foi regravado como UTF-8 válido
+// (o decode normal não acusa erro, mas o texto já vem corrompido). Detectamos o
+// par [C2-DF][80-BF] (byte UTF-8 de 2 octetos lido como dois chars Latin-1) e
+// desfazemos a conta: reinterpretamos cada char como byte Latin-1 e
+// redecodificamos como UTF-8. Comparação por código numérico pra não pôr
+// caractere especial no fonte.
+function fixMojibake(s: string): string {
+  const count = (t: string): number => {
+    let n = 0;
+    for (let i = 0; i < t.length - 1; i++) {
+      const a = t.charCodeAt(i);
+      const b = t.charCodeAt(i + 1);
+      if (a >= 0xc2 && a <= 0xdf && b >= 0x80 && b <= 0xbf) n++;
+    }
+    return n;
+  };
+  const moji = count(s);
+  if (moji < 2) return s;
+  // Só desfaz se todo o texto cabe em Latin-1 (senão não é duplo-encoding puro).
+  for (let i = 0; i < s.length; i++) if (s.charCodeAt(i) > 0xff) return s;
+  const raw = new Uint8Array(s.length);
+  for (let i = 0; i < s.length; i++) raw[i] = s.charCodeAt(i);
+  const fixed = new TextDecoder("utf-8").decode(raw);
+  return count(fixed) < moji ? fixed : s;
 }
 
 /* ============== Parser ============== */
