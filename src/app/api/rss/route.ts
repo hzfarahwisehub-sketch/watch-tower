@@ -80,7 +80,22 @@ export async function GET(req: NextRequest) {
         { status: 502, headers: { "Cache-Control": "no-store" } }
       );
     }
-    const xml = decodeXml(await res.arrayBuffer());
+    const ab = await res.arrayBuffer();
+    if (req.nextUrl.searchParams.get("debug") === "1") {
+      const dbg = new Uint8Array(ab);
+      const u8 = new TextDecoder("utf-8").decode(dbg);
+      let nbad = 0;
+      for (let i = 0; i < u8.length; i++) if (u8.charCodeAt(i) === 0xfffd) nbad++;
+      return NextResponse.json({
+        len: dbg.length,
+        contentEncoding: res.headers.get("content-encoding"),
+        contentType: res.headers.get("content-type"),
+        first40hex: Array.from(dbg.subarray(0, 40)).map((x) => x.toString(16).padStart(2, "0")).join(" "),
+        badCount: nbad,
+        sample: u8.slice(0, 220),
+      });
+    }
+    const xml = decodeXml(ab);
     const items = parseFeed(xml).slice(0, MAX_ITEMS);
     cache.set(url, { fetchedAt: Date.now(), items });
     return NextResponse.json(
