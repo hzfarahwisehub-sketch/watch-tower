@@ -32,6 +32,7 @@ type Ctx = {
   dockAll: () => void;
   focusWindow: (id: string) => void;
   restoreSaved: () => void;
+  supported: boolean;
 };
 
 const WinCtx = createContext<Ctx | null>(null);
@@ -41,6 +42,32 @@ function newHostId(): string {
     if (typeof crypto !== "undefined" && crypto.randomUUID) return crypto.randomUUID();
   } catch {}
   return `h-${Date.now()}-${Math.floor(Math.random() * 1e9)}`;
+}
+
+/**
+ * Detecta se o app está rodando instalado como PWA (display standalone /
+ * fullscreen / minimal-ui). Nesse modo, window.open NÃO cria uma janela
+ * separada de verdade: abre fora do app ou é bloqueado. O sistema de pop-out
+ * (auto-restaurar + reposicionar) então fica tentando reabrir sem parar e o
+ * listener global de gesto acaba sequestrando todo toque, travando o globo e
+ * os cliques. Por isso o pop-out é DESLIGADO na PWA instalada e fica disponível
+ * só no navegador, onde funciona.
+ */
+function isStandalonePWA(): boolean {
+  try {
+    if (typeof window === "undefined") return false;
+    const mm = window.matchMedia;
+    if (
+      mm?.("(display-mode: standalone)").matches ||
+      mm?.("(display-mode: fullscreen)").matches ||
+      mm?.("(display-mode: minimal-ui)").matches
+    ) {
+      return true;
+    }
+    return (window.navigator as { standalone?: boolean }).standalone === true;
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -81,6 +108,12 @@ export function WindowManagerProvider({
   const selectedRef = useRef<string | null>(selectedCountry);
   selectedRef.current = selectedCountry;
   const busRef = useRef<BroadcastChannel | null>(null);
+  // No app instalado (PWA) o pop-out de janelas não funciona e trava os gestos;
+  // detectamos e desligamos o recurso, deixando-o disponível só no navegador.
+  const [supported, setSupported] = useState(true);
+  useEffect(() => {
+    setSupported(!isStandalonePWA());
+  }, []);
 
   const setOpen = useCallback((updater: (prev: string[]) => string[]) => {
     setOpenIds((prev) => {
@@ -105,6 +138,12 @@ export function WindowManagerProvider({
   // prioridade sobre a geometria em memória, pra reabrir na posição salva.
   const popOut = useCallback(
     (id: PanelId, geomOverride?: StoredWin): Window | null => {
+      // PWA instalada: window.open não abre janela separada de verdade, então
+      // nem tenta (evita roubar o foco e travar o globo). Pop-out só no navegador.
+      if (isStandalonePWA()) {
+        toast("As janelas separadas funcionam no navegador. No app instalado, o painel fica aqui mesmo.");
+        return null;
+      }
       const existing = winRefs.current.get(id);
       if (existing && !existing.closed) {
         existing.focus();
@@ -184,6 +223,12 @@ export function WindowManagerProvider({
   // pede a permissão de telas e reposiciona com precisão entre monitores.
   const doRestore = useCallback(
     async (opts?: { auto?: boolean }) => {
+      // PWA instalada: não há janelas pra restaurar (pop-out desligado). Zera o
+      // pendente pra nunca armar o listener global que sequestraria os gestos.
+      if (isStandalonePWA()) {
+        setPendingRestore(0);
+        return;
+      }
       const saved = loadOpenWindows();
       const toOpen = saved.filter((s) => isPanelId(s.id) && !openIdsRef.current.includes(s.id));
       if (toOpen.length === 0) {
@@ -329,7 +374,7 @@ export function WindowManagerProvider({
     // bloquear, o botão Restaurar aparece e qualquer clique tenta de novo (efeito
     // que observa pendingRestore mais abaixo).
     let armTimer: ReturnType<typeof setTimeout> | null = null;
-    if (saved.length > 0) {
+    if (saved.length > 0 && !isStandalonePWA()) {
       armTimer = setTimeout(() => {
         if (openIdsRef.current.length === 0 && lastSeenRef.current.size === 0) {
           // Mostra o botão Restaurar JÁ (garantia visível) e tenta reabrir
@@ -378,7 +423,7 @@ export function WindowManagerProvider({
   // Enquanto houver janelas pendentes (pop-up bloqueado), o próximo clique ou
   // toque em qualquer lugar tenta reabrir de novo. Some quando tudo restaurou.
   useEffect(() => {
-    if (pendingRestore <= 0) return;
+    if (pendingRestore <= 0 || isStandalonePWA()) return;
     const onGesture = () => {
       void doRestoreRef.current({ auto: false });
     };
@@ -403,6 +448,7 @@ export function WindowManagerProvider({
     dockAll,
     focusWindow,
     restoreSaved,
+    supported,
   };
 
   const restoreCount = pendingRestore;
@@ -447,7 +493,7 @@ export function useWindowManagerOptional(): Ctx | null {
 export function WindowsMenu() {
   const wm = useWindowManagerOptional();
   const [open, setOpen] = useState(false);
-  if (!wm) return null;
+  if (!wm || !wm.supported) return null; // pop-out só no navegador, não na PWA
 
   const count = wm.openIds.length;
   const canRestore = wm.savedClosed.length > 0;
