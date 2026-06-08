@@ -189,8 +189,8 @@ function GridCell({ panelId, label, children, locked }: { panelId?: PanelId; lab
             // seletor de globo) e posto ao lado do ⠿ de arrastar. zIndex acima do
             // header do painel pra ficar sempre clicável.
             position: "absolute",
-            top: 13,
-            right: 46,
+            top: 10,
+            right: 42,
             zIndex: 30,
             width: 24,
             height: 24,

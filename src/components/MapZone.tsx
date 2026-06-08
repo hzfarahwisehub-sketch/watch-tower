@@ -118,6 +118,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
   const mapRef = useRef<MLMap | null>(null);
   const markersRef = useRef<Record<string, Marker>>({});
   const firstLoadRef = useRef(true);
+  const lastMinDimRef = useRef(0);
   const [styleKey, setStyleKey] = useState<StyleKey>("dark");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -129,7 +130,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     const map = new maplibregl.Map({
       container: containerRef.current,
       style: resolveStyle(initialKey),
-      center: [0, 20],
+      center: [0, 0],
       zoom: 0.6,
       minZoom: 0.4,
       maxZoom: 8,
@@ -148,7 +149,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     // Inércia mais solta = ao largar o arrasto o globo desliza um pouco e para
     // macio (estilo Google Earth), em vez de travar seco. linearity baixa deixa
     // a desaceleração bem "ease-out"; deceleration baixa estende o deslize.
-    map.dragPan.enable({ linearity: 0.18, maxSpeed: 4200, deceleration: 600 });
+    map.dragPan.enable({ linearity: 0.1, maxSpeed: 6000, deceleration: 300 });
 
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
     map.addControl(new maplibregl.FullscreenControl(), "top-right");
@@ -166,16 +167,34 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
           "fog-ground-blend": 0.1,
         });
         if (firstLoadRef.current) {
-          map.jumpTo({ center: [0, 20], zoom: 0.6, pitch: 0, bearing: 0 });
+          map.jumpTo({ center: [0, 0], zoom: 0.6, pitch: 0, bearing: 0 });
           firstLoadRef.current = false;
         }
       } catch {}
     });
 
     const resizeObserver = new ResizeObserver(() => {
-      if (!mapRef.current) return;
+      const m = mapRef.current;
+      const el = containerRef.current;
+      if (!m || !el) return;
       try {
-        mapRef.current.resize();
+        m.resize();
+        // Globo responsivo + sempre centralizado: ao mudar o tamanho da caixa,
+        // ajusta o zoom na proporção da menor dimensão (cada vez que ela dobra,
+        // o globo dobra). Preserva o center e a rotação do usuário, então o
+        // globo "amplia" ao expandir e "reduz" ao encolher, sem sair do centro.
+        const minDim = Math.min(el.clientWidth, el.clientHeight);
+        if (minDim > 0) {
+          const prev = lastMinDimRef.current;
+          const ratio = prev > 0 ? minDim / prev : 0;
+          // Só acompanha mudanças graduais (você redimensionando a caixa);
+          // ignora saltos grandes da montagem inicial pra o globo não disparar.
+          if (ratio > 0.5 && ratio < 2) {
+            const z = m.getZoom() + Math.log2(ratio);
+            m.setZoom(Math.max(0.4, Math.min(8, z)));
+          }
+          lastMinDimRef.current = minDim;
+        }
       } catch {}
     });
     resizeObserver.observe(containerRef.current);
@@ -254,7 +273,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     <div className="wt-card flex flex-col h-full overflow-hidden" style={{ minHeight: 300 }}>
       <div
         className="flex items-center justify-between gap-2 px-4 sm:px-5 py-3"
-        style={{ borderBottom: "1px solid var(--border)", position: "relative", zIndex: 20, paddingRight: 76 }}
+        style={{ borderBottom: "1px solid var(--border)", position: "relative", zIndex: 20, paddingRight: 70 }}
       >
         <h2
           className="text-[12px] tracking-[2px] uppercase font-bold flex items-center gap-2 shrink-0"
