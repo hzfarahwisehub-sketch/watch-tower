@@ -178,7 +178,7 @@ function GridCell({ panelId, label, children, locked }: { panelId?: PanelId; lab
           <span aria-hidden>⠿</span>
         </button>
       )}
-      {panelId && wm && wm.supported && (
+      {panelId && wm && (
         <button
           type="button"
           onClick={() => (poppedOut ? wm.dockBack(panelId) : wm.popOut(panelId))}

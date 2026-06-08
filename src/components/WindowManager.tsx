@@ -138,12 +138,6 @@ export function WindowManagerProvider({
   // prioridade sobre a geometria em memória, pra reabrir na posição salva.
   const popOut = useCallback(
     (id: PanelId, geomOverride?: StoredWin): Window | null => {
-      // PWA instalada: window.open não abre janela separada de verdade, então
-      // nem tenta (evita roubar o foco e travar o globo). Pop-out só no navegador.
-      if (isStandalonePWA()) {
-        toast("As janelas separadas funcionam no navegador. No app instalado, o painel fica aqui mesmo.");
-        return null;
-      }
       const existing = winRefs.current.get(id);
       if (existing && !existing.closed) {
         existing.focus();
@@ -493,10 +487,12 @@ export function useWindowManagerOptional(): Ctx | null {
 export function WindowsMenu() {
   const wm = useWindowManagerOptional();
   const [open, setOpen] = useState(false);
-  if (!wm || !wm.supported) return null; // pop-out só no navegador, não na PWA
+  if (!wm) return null;
 
   const count = wm.openIds.length;
-  const canRestore = wm.savedClosed.length > 0;
+  // Soltar caixa funciona sempre; restaurar layout salvo só no navegador (na PWA
+  // o window.open não persiste, então não oferece a restauração automática).
+  const canRestore = wm.savedClosed.length > 0 && wm.supported;
   if (count === 0 && !canRestore) {
     return null; // nada pra gerenciar ainda
   }

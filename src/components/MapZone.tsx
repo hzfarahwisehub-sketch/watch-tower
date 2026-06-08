@@ -145,7 +145,10 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
 
     // Inércia estilo Google Earth: ao soltar o arrasto, o globo segue girando e
     // perde força aos poucos. deceleration baixo = desliza mais.
-    map.dragPan.enable({ linearity: 0.3, maxSpeed: 3000, deceleration: 900 });
+    // Inércia mais solta = ao largar o arrasto o globo desliza um pouco e para
+    // macio (estilo Google Earth), em vez de travar seco. linearity baixa deixa
+    // a desaceleração bem "ease-out"; deceleration baixa estende o deslize.
+    map.dragPan.enable({ linearity: 0.18, maxSpeed: 4200, deceleration: 600 });
 
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
     map.addControl(new maplibregl.FullscreenControl(), "top-right");

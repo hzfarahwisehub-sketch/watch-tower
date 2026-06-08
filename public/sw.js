@@ -9,7 +9,7 @@
  *
  * Bump a versão do CACHE pra invalidar caches antigos num deploy.
  */
-const CACHE = "watch-tower-v13";
+const CACHE = "watch-tower-v14";
 const APP_SHELL = ["/", "/manifest.webmanifest", "/icons/icon-192.png", "/icons/icon-512.png"];
 
 // ---------- install: precache do shell ----------
