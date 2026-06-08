@@ -119,6 +119,9 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
   const markersRef = useRef<Record<string, Marker>>({});
   const firstLoadRef = useRef(true);
   const lastMinDimRef = useRef(0);
+  const spinRafRef = useRef<number | null>(null);
+  const selectedRef = useRef<string | null>(selected);
+  selectedRef.current = selected;
   const [styleKey, setStyleKey] = useState<StyleKey>("dark");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -199,7 +202,37 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     });
     resizeObserver.observe(containerRef.current);
 
+    // Auto-rotação suave (estilo WiseHub): o globo gira sozinho devagar quando
+    // está parado, preso no eixo. Pausa assim que você toca/arrasta/zooma e
+    // volta a girar pouco depois que você solta. Como o giro só roda quando o
+    // mapa NÃO está em movimento, a inércia do arrasto desliza primeiro e o giro
+    // automático assume na sequência, sem corte seco. Não gira com país em foco.
+    const SPIN_DEG_PER_SEC = 4;
+    const RESUME_MS = 900;
+    let lastInteract = 0;
+    let lastTs = 0;
+    const spinFrame = (ts: number) => {
+      spinRafRef.current = requestAnimationFrame(spinFrame);
+      const m = mapRef.current;
+      if (!m) { lastTs = ts; return; }
+      const dt = lastTs ? Math.min(0.05, (ts - lastTs) / 1000) : 0;
+      lastTs = ts;
+      if (!selectedRef.current && ts - lastInteract > RESUME_MS && !m.isMoving()) {
+        const c = m.getCenter();
+        m.setCenter([c.lng - SPIN_DEG_PER_SEC * dt, c.lat]);
+      }
+    };
+    const markInteract = () => { lastInteract = performance.now(); };
+    map.on("mousedown", markInteract);
+    map.on("touchstart", markInteract);
+    map.on("wheel", markInteract);
+    map.on("dragstart", markInteract);
+    map.on("drag", markInteract);
+    map.on("zoomstart", markInteract);
+    spinRafRef.current = requestAnimationFrame(spinFrame);
+
     return () => {
+      if (spinRafRef.current) cancelAnimationFrame(spinRafRef.current);
       resizeObserver.disconnect();
       Object.values(markersRef.current).forEach((m) => m.remove());
       markersRef.current = {};
