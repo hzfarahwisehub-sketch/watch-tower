@@ -185,10 +185,13 @@ function GridCell({ panelId, label, children, locked }: { panelId?: PanelId; lab
           title={poppedOut ? `Trazer "${label}" de volta` : `Abrir "${label}" em janela separada`}
           aria-label={poppedOut ? "Trazer de volta" : "Abrir em janela separada"}
           style={{
+            // Afastado do canto direito (onde quase todo painel tem botão, ex.: o
+            // seletor de globo) e posto ao lado do ⠿ de arrastar. zIndex acima do
+            // header do painel pra ficar sempre clicável.
             position: "absolute",
-            top: 6,
-            right: 6,
-            zIndex: 6,
+            top: 13,
+            right: 46,
+            zIndex: 30,
             width: 24,
             height: 24,
             display: "flex",

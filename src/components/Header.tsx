@@ -55,6 +55,13 @@ export function Header() {
         background: "linear-gradient(180deg, var(--surface), var(--surface-hi))",
         border: "1px solid var(--border)",
         boxShadow: "var(--shadow-bar)",
+        // Fica grudada no topo ao rolar, pra o cadeado / atualizar / config
+        // estarem sempre à mão. backdrop-blur garante leitura sobre o conteúdo.
+        position: "sticky",
+        top: 6,
+        zIndex: 50,
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
       }}
     >
       <div className="flex items-center gap-3 md:gap-3.5 min-w-0 flex-auto">
