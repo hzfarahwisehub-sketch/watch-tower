@@ -119,7 +119,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
   const markersRef = useRef<Record<string, Marker>>({});
   const firstLoadRef = useRef(true);
   const lastMinDimRef = useRef(0);
-  const spinRafRef = useRef<number | null>(null);
+  const spinGlobeRef = useRef<(() => void) | null>(null);
   const selectedRef = useRef<string | null>(selected);
   selectedRef.current = selected;
   const [styleKey, setStyleKey] = useState<StyleKey>("dark");
@@ -174,6 +174,10 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
           firstLoadRef.current = false;
         }
       } catch {}
+      // (re)inicia o giro automático assim que o globo está pronto — também
+      // depois de uma troca de estilo, que recarrega o style. O loop via moveend
+      // mantém daí em diante.
+      spinGlobeRef.current?.();
     });
 
     const resizeObserver = new ResizeObserver(() => {
@@ -202,37 +206,48 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     });
     resizeObserver.observe(containerRef.current);
 
-    // Auto-rotação suave (estilo WiseHub): o globo gira sozinho devagar quando
-    // está parado, preso no eixo. Pausa assim que você toca/arrasta/zooma e
-    // volta a girar pouco depois que você solta. Como o giro só roda quando o
-    // mapa NÃO está em movimento, a inércia do arrasto desliza primeiro e o giro
-    // automático assume na sequência, sem corte seco. Não gira com país em foco.
-    const SPIN_DEG_PER_SEC = 4;
-    const RESUME_MS = 900;
-    let lastInteract = 0;
-    let lastTs = 0;
-    const spinFrame = (ts: number) => {
-      spinRafRef.current = requestAnimationFrame(spinFrame);
+    // Auto-rotação NATIVA estilo WiseHub: usa map.easeTo em loop (o mesmo padrão
+    // do exemplo oficial de globo giratório do maplibre). O easeTo interpola o
+    // movimento dentro do próprio engine — liso, sem o stutter do
+    // setCenter-quadro-a-quadro. Cada passo gira um tanto em 1s; ao terminar
+    // dispara "moveend", que chama de novo = giro contínuo e suave. Pausa
+    // enquanto você arrasta/zooma e retoma ao soltar. A inércia do arrasto
+    // desliza primeiro (isMoving) e o giro assume na sequência. Não gira com
+    // país em foco nem com zoom alto.
+    const SECONDS_PER_REVOLUTION = 63; // ~5.7°/s = 0.1 rad/s, igual o WiseHub
+    const MAX_SPIN_ZOOM = 4.5;
+    const SLOW_SPIN_ZOOM = 3;
+    let userInteracting = false;
+    const spinGlobe = () => {
       const m = mapRef.current;
-      if (!m) { lastTs = ts; return; }
-      const dt = lastTs ? Math.min(0.05, (ts - lastTs) / 1000) : 0;
-      lastTs = ts;
-      if (!selectedRef.current && ts - lastInteract > RESUME_MS && !m.isMoving()) {
-        const c = m.getCenter();
-        m.setCenter([c.lng - SPIN_DEG_PER_SEC * dt, c.lat]);
+      if (!m || userInteracting || selectedRef.current) return;
+      if (m.isMoving()) return; // deixa a inércia / animação atual terminar antes
+      const zoom = m.getZoom();
+      if (zoom >= MAX_SPIN_ZOOM) return;
+      let degPerSec = 360 / SECONDS_PER_REVOLUTION;
+      if (zoom > SLOW_SPIN_ZOOM) {
+        degPerSec *= (MAX_SPIN_ZOOM - zoom) / (MAX_SPIN_ZOOM - SLOW_SPIN_ZOOM);
       }
+      const center = m.getCenter();
+      center.lng -= degPerSec; // duração de 1s => degPerSec graus por segundo
+      m.easeTo({ center, duration: 1000, easing: (n) => n });
     };
-    const markInteract = () => { lastInteract = performance.now(); };
-    map.on("mousedown", markInteract);
-    map.on("touchstart", markInteract);
-    map.on("wheel", markInteract);
-    map.on("dragstart", markInteract);
-    map.on("drag", markInteract);
-    map.on("zoomstart", markInteract);
-    spinRafRef.current = requestAnimationFrame(spinFrame);
+    spinGlobeRef.current = spinGlobe;
+    const startInteract = () => { userInteracting = true; };
+    const endInteract = () => { userInteracting = false; spinGlobe(); };
+    map.on("mousedown", startInteract);
+    map.on("touchstart", startInteract);
+    map.on("dragstart", startInteract);
+    map.on("zoomstart", startInteract);
+    map.on("mouseup", endInteract);
+    map.on("touchend", endInteract);
+    map.on("dragend", endInteract);
+    map.on("zoomend", endInteract);
+    map.on("pitchend", endInteract);
+    map.on("rotateend", endInteract);
+    map.on("moveend", spinGlobe);
 
     return () => {
-      if (spinRafRef.current) cancelAnimationFrame(spinRafRef.current);
       resizeObserver.disconnect();
       Object.values(markersRef.current).forEach((m) => m.remove());
       markersRef.current = {};
@@ -290,10 +305,15 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     });
   }, [countries, onSelect]);
 
-  // VOO suave para o país selecionado
+  // VOO suave para o país selecionado; ao deselecionar, revive o giro automático
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !selected) return;
+    if (!map) return;
+    if (!selected) {
+      // o loop do giro tinha morrido com o país em foco; reativa
+      spinGlobeRef.current?.();
+      return;
+    }
     const c = countries.find((c) => c.code === selected);
     if (!c) return;
     const [lat, lng] = c.coords;
