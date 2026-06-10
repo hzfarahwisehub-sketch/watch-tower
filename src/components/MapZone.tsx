@@ -40,6 +40,7 @@ const STYLE_DARK = "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.
 // Satélite puro (imagem real, máximo detalhamento)
 const STYLE_SATELLITE: StyleSpecification = {
   version: 8,
+  projection: { type: "globe" },
   sources: { imagery: esriRaster("World_Imagery") },
   layers: [
     { id: "bg", type: "background", paint: { "background-color": "#06070f" } },
@@ -50,6 +51,7 @@ const STYLE_SATELLITE: StyleSpecification = {
 // "Google Earth": satélite + nomes de lugares + fronteiras + vias por cima
 const STYLE_GOOGLE: StyleSpecification = {
   version: 8,
+  projection: { type: "globe" },
   sources: {
     imagery: esriRaster("World_Imagery"),
     transport: esriRaster("Reference/World_Transportation"),
@@ -66,6 +68,7 @@ const STYLE_GOOGLE: StyleSpecification = {
 // Relevo / mapa físico topográfico (colorido, com terreno e rótulos)
 const STYLE_RELIEF: StyleSpecification = {
   version: 8,
+  projection: { type: "globe" },
   sources: { topo: esriRaster("World_Topo_Map") },
   layers: [
     { id: "bg", type: "background", paint: { "background-color": "#0a0f1a" } },
@@ -106,6 +109,15 @@ function resolveStyle(key: StyleKey): string | StyleSpecification {
   }
 }
 
+// Injeta a projeção globe no style que está CHEGANDO, antes de aplicá-lo. É o
+// transformStyle oficial do maplibre e cobre o caso do dark, que é URL externa
+// (CARTO) e chega SEM projeção. Sem isso, ao trocar de estilo o mapa cai em
+// mercator e o "giro" vira um deslize lateral plano (o "duro" pós-troca).
+const keepGlobe = (
+  _prev: StyleSpecification | undefined,
+  next: StyleSpecification,
+): StyleSpecification => ({ ...next, projection: { type: "globe" } });
+
 /**
  * MapZone 3D — MapLibre GL JS com projeção globe.
  *
@@ -120,6 +132,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
   const firstLoadRef = useRef(true);
   const lastMinDimRef = useRef(0);
   const spinGlobeRef = useRef<(() => void) | null>(null);
+  const styleLoadingRef = useRef(false);
   const selectedRef = useRef<string | null>(selected);
   selectedRef.current = selected;
   const [styleKey, setStyleKey] = useState<StyleKey>("dark");
@@ -174,9 +187,11 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
           firstLoadRef.current = false;
         }
       } catch {}
-      // (re)inicia o giro automático assim que o globo está pronto — também
-      // depois de uma troca de estilo, que recarrega o style. O loop via moveend
-      // mantém daí em diante.
+      // Style novo assentou: libera o giro (estava pausado durante a troca via
+      // styleLoadingRef) e (re)liga o loop. Como a projeção globe entra junto com
+      // o style (projection inline + transformStyle), o giro já roda no globo
+      // certo, nunca num mapa plano em transição.
+      styleLoadingRef.current = false;
       spinGlobeRef.current?.();
     });
 
@@ -221,7 +236,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     let spinQueued = false;
     const spinGlobe = () => {
       const m = mapRef.current;
-      if (!m || userInteracting || selectedRef.current) return;
+      if (!m || userInteracting || selectedRef.current || styleLoadingRef.current) return;
       if (m.isMoving()) return; // deixa a inércia / animação atual terminar antes
       const zoom = m.getZoom();
       if (zoom >= MAX_SPIN_ZOOM) return;
@@ -270,11 +285,14 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // TROCA DE ESTILO escolhido no botão
+  // TROCA DE ESTILO escolhido no botão. Pausa o giro durante a troca
+  // (styleLoadingRef) e injeta globe no style novo (transformStyle keepGlobe),
+  // pra a projeção nunca cair em mercator e o giro religar limpo no style.load.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-    map.setStyle(resolveStyle(styleKey));
+    styleLoadingRef.current = true;
+    map.setStyle(resolveStyle(styleKey), { transformStyle: keepGlobe });
     try {
       localStorage.setItem(STYLE_STORAGE_KEY, styleKey);
     } catch {}
