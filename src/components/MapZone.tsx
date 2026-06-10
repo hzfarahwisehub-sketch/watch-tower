@@ -218,6 +218,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     const MAX_SPIN_ZOOM = 4.5;
     const SLOW_SPIN_ZOOM = 3;
     let userInteracting = false;
+    let spinQueued = false;
     const spinGlobe = () => {
       const m = mapRef.current;
       if (!m || userInteracting || selectedRef.current) return;
@@ -230,11 +231,23 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
       }
       const center = m.getCenter();
       center.lng -= degPerSec; // duração de 1s => degPerSec graus por segundo
-      m.easeTo({ center, duration: 1000, easing: (n) => n });
+      // essential: true força a animação a rodar de verdade mesmo com "reduzir
+      // movimento" ligado no SO. Sem isso o easeTo vira instantâneo e dispara
+      // moveend de forma síncrona, recursando moveend->spinGlobe->easeTo até
+      // estourar a pilha (RangeError: Maximum call stack size exceeded).
+      m.easeTo({ center, duration: 1000, easing: (n) => n, essential: true });
     };
-    spinGlobeRef.current = spinGlobe;
+    // Agenda o giro pro PRÓXIMO quadro, nunca de forma reentrante. Mesmo que o
+    // easeTo dispare moveend na hora, o spinGlobe seguinte só roda no rAF, então
+    // a recursão síncrona fica impossível (trava de segurança contra o crash).
+    const queueSpin = () => {
+      if (spinQueued) return;
+      spinQueued = true;
+      requestAnimationFrame(() => { spinQueued = false; spinGlobe(); });
+    };
+    spinGlobeRef.current = queueSpin;
     const startInteract = () => { userInteracting = true; };
-    const endInteract = () => { userInteracting = false; spinGlobe(); };
+    const endInteract = () => { userInteracting = false; queueSpin(); };
     map.on("mousedown", startInteract);
     map.on("touchstart", startInteract);
     map.on("dragstart", startInteract);
@@ -245,7 +258,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     map.on("zoomend", endInteract);
     map.on("pitchend", endInteract);
     map.on("rotateend", endInteract);
-    map.on("moveend", spinGlobe);
+    map.on("moveend", queueSpin);
 
     return () => {
       resizeObserver.disconnect();
