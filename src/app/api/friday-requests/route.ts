@@ -24,6 +24,47 @@ export async function GET(req: NextRequest) {
   const gate = requireCronSecret(req);
   if (!gate.ok) return gate.response;
 
+  const url = new URL(req.url);
+  const box = url.searchParams.get("box") === "inbox" ? "inbox" : "friday";
+
+  if (box === "inbox") {
+    // Solicitações COMUNS da caixa (sem o marcador ⚡ EXECUTAR), de quem NÃO é o Hammis.
+    // É o "olho" da Friday pras mensagens normais da equipe: o briefing de sessão e o cron
+    // de 2h leem por aqui (Bearer CRON_SECRET) e passam ?since=<ISO> como cursor pra não
+    // repetir avisos. Leitura pura — nunca notifica (o e-mail/push já saíram na criação).
+    const sinceRaw = url.searchParams.get("since");
+    const since = sinceRaw ? new Date(sinceRaw) : null;
+    const validSince = since && !Number.isNaN(since.getTime()) ? since : null;
+
+    const rows = await prisma.suggestion.findMany({
+      where: {
+        status: "open",
+        NOT: [
+          { body: { startsWith: FRIDAY_MARKER } },
+          { user: { is: { email: "hzfarah.wisehub@gmail.com" } } },
+        ],
+        ...(validSince ? { createdAt: { gt: validSince } } : {}),
+      },
+      orderBy: [{ createdAt: "asc" }, { id: "asc" }], // cronológico estável pro cursor avançar limpo
+      include: { user: { select: { name: true, email: true } } },
+    });
+
+    const suggestions = rows.map((s) => ({
+      id: s.id,
+      body: s.body,
+      requestedBy: friendlyName(s.user?.email, s.user?.name),
+      createdAt: s.createdAt,
+    }));
+
+    return NextResponse.json({
+      box: "inbox",
+      count: suggestions.length,
+      since: validSince ? validSince.toISOString() : null,
+      suggestions,
+    });
+  }
+
+  // box === "friday" → comportamento ATUAL, inalterado (consumidores da REGRA #2 hoje)
   const rows = await prisma.suggestion.findMany({
     where: { status: "open", body: { startsWith: FRIDAY_MARKER } },
     orderBy: { createdAt: "desc" },
