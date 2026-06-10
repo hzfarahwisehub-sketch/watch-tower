@@ -47,7 +47,7 @@ function resetText(url: string): string {
  * E-mail de alerta genérico (ex.: alteração no quadro da equipe, nova
  * solicitação na caixa). Não explode se Resend falhar — apenas loga.
  */
-export async function sendAlertEmail(to: string, subject: string, message: string): Promise<void> {
+export async function sendAlertEmail(to: string | string[], subject: string, message: string): Promise<void> {
   try {
     const { error } = await getResend().emails.send({
       from: FROM,

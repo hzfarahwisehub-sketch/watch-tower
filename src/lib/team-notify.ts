@@ -9,6 +9,10 @@ import { sendAlertEmail } from "@/lib/mailer";
 /** Conta master que recebe os alertas e pode editar/apagar qualquer item de equipe. */
 export const MASTER_EMAIL = "hzfarah.wisehub@gmail.com";
 
+/** E-mails que recebem o alerta de nova solicitação. À prova de token: o aviso
+ *  sai do servidor via Resend, independente de a Friday/Codex estarem online. */
+export const ALERT_EMAILS = ["hzfarah.wisehub@gmail.com", "adm.wisehub@gmail.com"];
+
 export function isMaster(email: string | null | undefined): boolean {
   return !!email && email.toLowerCase() === MASTER_EMAIL;
 }
@@ -69,7 +73,7 @@ export async function notifyNewSuggestion(c: { actorEmail: string; actorName?: s
       master?.id
         ? sendPushToUser(master.id, { title: "Watch Tower · nova solicitação", body: msg, url: "/", tag: "suggestion" })
         : Promise.resolve(),
-      sendAlertEmail(MASTER_EMAIL, "Nova solicitação na caixa", msg),
+      sendAlertEmail(ALERT_EMAILS, "Nova solicitação na caixa", msg),
     ]);
   } catch (e) {
     console.warn("[team-notify] suggestion falhou (ignorado):", e);
