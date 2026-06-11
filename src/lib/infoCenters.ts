@@ -20,7 +20,8 @@ export type InfoSource = {
   name: string;
   url: string;
   category: InfoSourceCategory;
-  language: "en" | "pt" | "de" | "fr" | "es" | "it" | "ja" | "zh";
+  /** Código ISO do idioma da fonte (só exibição, ex.: "en", "de", "hr"). */
+  language: string;
   /** Nota editorial: por que essa fonte foi escolhida */
   note?: string;
   /** RSS/Atom feed URL — quando presente, o card mostra as 3 manchetes mais
@@ -101,7 +102,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     countryName: "Alemanha",
     flag: "🇩🇪",
     sources: [
-      { name: "BAMF · Migração e Refugiados", url: "https://www.bamf.de/", category: "legal", language: "de", note: "Autoridade federal alemã de migração e refugiados (BAMF) · asilo, integração e dados oficiais. Site recusa acesso de datacenter, então fica como link oficial sem feed ao vivo" },
+      { name: "BAMF · Migração e Refugiados", url: "https://www.bamf.de/", category: "legal", language: "de", note: "Autoridade federal alemã de migração e refugiados (BAMF) · asilo, integração e dados oficiais", rss: "https://www.bamf.de/SiteGlobals/Functions/RSS/DE/Feed/RSSNewsfeed_Meldungen.xml" },
       { name: "Reuters · Europa",   url: "https://www.reuters.com/world/europe",          category: "news",    language: "en" },
       { name: "Handelsblatt",       url: "https://www.handelsblatt.com/",                 category: "finance", language: "de", note: "Principal financial daily alemão", rss: "https://www.handelsblatt.com/contentexport/feed/schlagzeilen" },
       { name: "DW · Business",      url: "https://www.dw.com/en/business/s-1431",         category: "news",    language: "en", note: "Deutsche Welle em inglês", rss: "https://rss.dw.com/xml/rss-en-bus" },
@@ -112,6 +113,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     countryName: "França",
     flag: "🇫🇷",
     sources: [
+      { name: "France Info · Immigration", url: "https://www.franceinfo.fr/societe/immigration.html", category: "news", language: "fr", note: "Editoria de imigração da rádio pública francesa (Radio France)", rss: "https://www.franceinfo.fr/societe/immigration.rss" },
+      { name: "Le Monde · Immigration",  url: "https://www.lemonde.fr/immigration-et-diversite/", category: "news", language: "fr", note: "Editoria de imigração e diversidade do Le Monde", rss: "https://www.lemonde.fr/immigration-et-diversite/rss_full.xml" },
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
       { name: "Les Échos",             url: "https://www.lesechos.fr/",                 category: "finance", language: "fr", note: "Principal jornal econômico francês", rss: "https://syndication.lesechos.fr/rss/rss_economie.xml" },
       { name: "Le Figaro · Économie",  url: "https://www.lefigaro.fr/economie",         category: "finance", language: "fr", rss: "https://www.lefigaro.fr/rss/figaro_economie.xml" },
@@ -197,9 +200,12 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     countryName: "Dinamarca",
     flag: "🇩🇰",
     sources: [
+      { name: "Ny i Danmark · SIRI",   url: "https://www.nyidanmark.dk/",               category: "legal",   language: "en", note: "Serviço de Imigração dinamarquês (SIRI / Udlændingestyrelsen)" },
+      { name: "DR Nyheder · Indland",  url: "https://www.dr.dk/nyheder/indland",        category: "news",    language: "da", note: "Emissora pública dinamarquesa (DR)", rss: "https://www.dr.dk/nyheder/service/feeds/indland" },
+      { name: "DR Nyheder · Politik",  url: "https://www.dr.dk/nyheder/politik",        category: "news",    language: "da", rss: "https://www.dr.dk/nyheder/service/feeds/politik" },
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
       { name: "Børsen",                url: "https://borsen.dk/",                       category: "finance", language: "en", note: "Principal financial daily DK (paywall)" },
-      { name: "The Local Denmark",     url: "https://www.thelocal.dk/",                 category: "news",    language: "en", note: "Notícias DK em inglês pra expats" },
+      { name: "The Local Denmark",     url: "https://www.thelocal.dk/",                 category: "news",    language: "en", note: "Notícias DK em inglês pra expats", rss: "https://feeds.thelocal.com/rss/dk" },
     ],
   },
 
@@ -268,6 +274,196 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
       { name: "Gulf News · Business",  url: "https://gulfnews.com/business",            category: "finance", language: "en", note: "Cobertura UAE/região do Golfo" },
       { name: "The National · Business", url: "https://www.thenationalnews.com/business/", category: "news", language: "en", note: "Diário oficial Abu Dhabi em inglês", rss: "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml" },
       { name: "Khaleej Times · Business", url: "https://www.khaleejtimes.com/business",  category: "news",    language: "en" },
+    ],
+  },
+
+  // ===== EUROPA — DEMAIS PAÍSES (UE/EEE) · feeds oficiais + notícia verificados 2026-06-11 =====
+  {
+    countryCode: "at",
+    countryName: "Áustria",
+    flag: "🇦🇹",
+    sources: [
+      { name: "BMI · Ministério do Interior", url: "https://www.bmi.gv.at/", category: "legal", language: "de", note: "Ministério federal do Interior austríaco · imigração, asilo, residência", rss: "https://www.bmi.gv.at/rss/bmi_presse.xml" },
+      { name: "BFA · Imigração e Asilo", url: "https://www.bfa.gv.at/", category: "legal", language: "de", note: "Bundesamt für Fremdenwesen und Asyl · autoridade de estrangeiros e asilo", rss: "https://www.bmi.gv.at/rss/bfa_presse.xml" },
+      { name: "ORF · news.ORF.at", url: "https://orf.at/", category: "news", language: "de", note: "Emissora pública austríaca", rss: "https://rss.orf.at/news.xml" },
+      { name: "Der Standard · Inland", url: "https://www.derstandard.at/inland", category: "news", language: "de", rss: "https://www.derstandard.at/rss/inland" },
+    ],
+  },
+  {
+    countryCode: "be",
+    countryName: "Bélgica",
+    flag: "🇧🇪",
+    sources: [
+      { name: "Belga News Agency", url: "https://www.belganewsagency.eu/", category: "news", language: "en", note: "Agência de notícias belga", rss: "https://www.belganewsagency.eu/feed" },
+      { name: "VRT NWS", url: "https://www.vrt.be/vrtnws/nl/", category: "news", language: "nl", note: "Emissora pública flamenga", rss: "https://www.vrt.be/vrtnws/nl.rss.articles.xml" },
+      { name: "La Libre Belgique", url: "https://www.lalibre.be/", category: "news", language: "fr", rss: "https://www.lalibre.be/arc/outboundfeeds/rss/?outputType=xml" },
+      { name: "Office des Étrangers", url: "https://dofi.ibz.be/", category: "legal", language: "fr", note: "Autoridade de imigração belga (Immigration Office)" },
+    ],
+  },
+  {
+    countryCode: "bg",
+    countryName: "Bulgária",
+    flag: "🇧🇬",
+    sources: [
+      { name: "BTA · Agência Telegráfica Búlgara", url: "https://www.bta.bg/", category: "news", language: "bg", note: "Agência estatal de notícias da Bulgária", rss: "https://www.bta.bg/bg/rss/free" },
+      { name: "The Sofia Globe", url: "https://sofiaglobe.com/", category: "news", language: "en", note: "Notícias da Bulgária em inglês", rss: "https://sofiaglobe.com/feed/" },
+      { name: "Mediapool.bg", url: "https://www.mediapool.bg/", category: "news", language: "bg", rss: "https://www.mediapool.bg/rss" },
+      { name: "Държавен вестник · Diário Oficial", url: "http://dv.parliament.bg/", category: "legal", language: "bg", note: "Gazeta oficial do Estado búlgaro" },
+    ],
+  },
+  {
+    countryCode: "cy",
+    countryName: "Chipre",
+    flag: "🇨🇾",
+    sources: [
+      { name: "Cyprus Mail · Immigration", url: "https://cyprus-mail.com/tag/immigration/", category: "news", language: "en", note: "Editoria de imigração do principal jornal cipriota em inglês", rss: "https://cyprus-mail.com/tag/immigration/feed/" },
+      { name: "Cyprus Mail · Cyprus News", url: "https://cyprus-mail.com/category/news/cyprus/", category: "news", language: "en", rss: "https://cyprus-mail.com/category/news/cyprus/feed/" },
+      { name: "Cyprus Mail", url: "https://cyprus-mail.com/", category: "news", language: "en", rss: "https://cyprus-mail.com/feed/" },
+      { name: "Civil Registry & Migration Dept", url: "https://migration.moi.gov.cy/", category: "legal", language: "en", note: "Departamento de registo civil e migração de Chipre" },
+    ],
+  },
+  {
+    countryCode: "hr",
+    countryName: "Croácia",
+    flag: "🇭🇷",
+    sources: [
+      { name: "Vlada RH · Vijesti", url: "https://vlada.gov.hr/", category: "legal", language: "hr", note: "Governo da Croácia · comunicados oficiais", rss: "https://vlada.gov.hr/rss/18210" },
+      { name: "Ured za zakonodavstvo", url: "https://zakonodavstvo.gov.hr/", category: "legal", language: "hr", note: "Atos e regulamentos oficiais", rss: "https://zakonodavstvo.gov.hr/rss.aspx?ID=8" },
+      { name: "HRT · Vijesti", url: "https://vijesti.hrt.hr/", category: "news", language: "hr", note: "Rádio-televisão pública croata", rss: "https://feed.hrt.hr/vijesti/hrvatska.xml" },
+      { name: "Index.hr · Vijesti", url: "https://www.index.hr/", category: "news", language: "hr", rss: "https://www.index.hr/rss/vijesti-hrvatska" },
+    ],
+  },
+  {
+    countryCode: "sk",
+    countryName: "Eslováquia",
+    flag: "🇸🇰",
+    sources: [
+      { name: "Slovensko.sk · Oznamy", url: "https://www.slovensko.sk/", category: "legal", language: "sk", note: "Portal oficial do governo eslovaco · avisos", rss: "https://www.slovensko.sk/sk/rss/oznamy" },
+      { name: "TASR / TERAZ.sk", url: "https://www.teraz.sk/", category: "news", language: "sk", note: "Agência de notícias eslovaca (estatal)", rss: "https://www.teraz.sk/rss/slovensko.rss" },
+      { name: "Denník N", url: "https://dennikn.sk/", category: "news", language: "sk", rss: "https://dennikn.sk/feed/" },
+    ],
+  },
+  {
+    countryCode: "si",
+    countryName: "Eslovênia",
+    flag: "🇸🇮",
+    sources: [
+      { name: "GOV.SI · Notícias do Governo", url: "https://www.gov.si/en/news/", category: "legal", language: "en", note: "Governo da Eslovênia · imigração e estrangeiros", rss: "https://www.gov.si/en/news/rss/" },
+      { name: "RTV Slovenija · Slovenija", url: "https://www.rtvslo.si/", category: "news", language: "sl", note: "Rádio-televisão pública eslovena", rss: "https://www.rtvslo.si/feeds/01.xml" },
+      { name: "RTV Slovenija · Todas", url: "https://www.rtvslo.si/", category: "news", language: "sl", rss: "https://www.rtvslo.si/feeds/00.xml" },
+    ],
+  },
+  {
+    countryCode: "ee",
+    countryName: "Estônia",
+    flag: "🇪🇪",
+    sources: [
+      { name: "ERR News (EN)", url: "https://news.err.ee/", category: "news", language: "en", note: "Emissora pública estoniana em inglês", rss: "https://news.err.ee/rss" },
+      { name: "Riigikogu · Press releases", url: "https://www.riigikogu.ee/en/", category: "legal", language: "en", note: "Parlamento da Estônia", rss: "http://feeds.feedburner.com/RiigikoguPressReleases" },
+      { name: "ERR Uudised", url: "https://www.err.ee/", category: "news", language: "et", rss: "https://www.err.ee/rss" },
+      { name: "Politsei- ja Piirivalveamet", url: "https://www.politsei.ee/en/", category: "legal", language: "en", note: "Polícia e Guarda de Fronteiras (autoridade de imigração)" },
+    ],
+  },
+  {
+    countryCode: "fi",
+    countryName: "Finlândia",
+    flag: "🇫🇮",
+    sources: [
+      { name: "Migri · Comunicados", url: "https://migri.fi/en/", category: "legal", language: "en", note: "Serviço Finlandês de Imigração (Migri)", rss: "https://migri.fi/en/press-releases?p_p_id=com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_h86npU2Dqv2l&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=getRSS&p_p_cacheability=cacheLevelPage" },
+      { name: "Valtioneuvosto · Ministérios", url: "https://valtioneuvosto.fi/en/", category: "legal", language: "en", note: "Comunicados de todos os ministérios finlandeses", rss: "https://valtioneuvosto.fi/en/staattiset-feedit-en/-/asset_publisher/LOmkEPY4nk2s/rss" },
+      { name: "Yle News (EN)", url: "https://yle.fi/news", category: "news", language: "en", note: "Emissora pública finlandesa", rss: "https://feeds.yle.fi/uutiset/v1/recent.rss?publisherIds=YLE_NEWS" },
+    ],
+  },
+  {
+    countryCode: "gr",
+    countryName: "Grécia",
+    flag: "🇬🇷",
+    sources: [
+      { name: "Ministério da Imigração e Asilo", url: "https://migration.gov.gr/en/", category: "legal", language: "en", note: "Autoridade grega de imigração e asilo", rss: "https://migration.gov.gr/en/feed/" },
+      { name: "Ethniko Typografeio · Diário Oficial", url: "https://www.et.gr/", category: "legal", language: "el", note: "Imprensa Nacional / gazeta oficial grega (FEK)", rss: "https://www.et.gr/feed" },
+      { name: "Greek Reporter", url: "https://greekreporter.com/", category: "news", language: "en", rss: "https://greekreporter.com/feed/" },
+    ],
+  },
+  {
+    countryCode: "hu",
+    countryName: "Hungria",
+    flag: "🇭🇺",
+    sources: [
+      { name: "HVG · Itthon", url: "https://hvg.hu/", category: "news", language: "hu", note: "Portal de notícias húngaro", rss: "https://hvg.hu/rss/itthon" },
+      { name: "Telex.hu", url: "https://telex.hu/", category: "news", language: "hu", note: "Portal independente húngaro", rss: "https://telex.hu/rss" },
+      { name: "444.hu", url: "https://444.hu/", category: "news", language: "hu", rss: "https://444.hu/feed" },
+      { name: "Magyar Közlöny · Diário Oficial", url: "https://magyarkozlony.hu/", category: "legal", language: "hu", note: "Gazeta oficial da Hungria" },
+    ],
+  },
+  {
+    countryCode: "lv",
+    countryName: "Letônia",
+    flag: "🇱🇻",
+    sources: [
+      { name: "Ministério do Interior (IeM)", url: "https://www.iem.gov.lv/en", category: "legal", language: "en", note: "Ministério do Interior letão · OCMA/PMLP (cidadania e migração)", rss: "https://www.iem.gov.lv/en/rss/articles" },
+      { name: "Latvijas Vēstnesis · Diário Oficial", url: "https://www.vestnesis.lv/", category: "legal", language: "lv", note: "Gazeta oficial da Letônia", rss: "https://www.vestnesis.lv/feed/JL" },
+      { name: "LSM · Public Broadcasting (EN)", url: "https://eng.lsm.lv/", category: "news", language: "en", note: "Radiodifusão pública da Letônia", rss: "https://eng.lsm.lv/rss/?lang=en" },
+    ],
+  },
+  {
+    countryCode: "lt",
+    countryName: "Lituânia",
+    flag: "🇱🇹",
+    sources: [
+      { name: "LRT", url: "https://www.lrt.lt/", category: "news", language: "lt", note: "Rádio e Televisão Nacional da Lituânia", rss: "https://www.lrt.lt/?rss" },
+      { name: "15min.lt", url: "https://www.15min.lt/", category: "news", language: "lt", rss: "https://www.15min.lt/rss" },
+      { name: "Migracijos departamentas", url: "https://migracija.lrv.lt/en/", category: "legal", language: "en", note: "Departamento de Migração da Lituânia" },
+    ],
+  },
+  {
+    countryCode: "lu",
+    countryName: "Luxemburgo",
+    flag: "🇱🇺",
+    sources: [
+      { name: "Le gouvernement luxembourgeois", url: "https://gouvernement.lu/en.html", category: "legal", language: "en", note: "Governo de Luxemburgo · todas as atualidades", rss: "https://gouvernement.lu/en/actualites/toutes_actualites.rss" },
+      { name: "Affaires intérieures (DGIM)", url: "https://maint.gouvernement.lu/", category: "legal", language: "fr", note: "Direção de Imigração (Ministère des Affaires intérieures)", rss: "https://maint.gouvernement.lu/fr/actualites.rss" },
+      { name: "Luxembourg Times", url: "https://www.luxtimes.lu/", category: "news", language: "en", rss: "https://www.luxtimes.lu/rss" },
+    ],
+  },
+  {
+    countryCode: "mt",
+    countryName: "Malta",
+    flag: "🇲🇹",
+    sources: [
+      { name: "Office of the Prime Minister · Press", url: "https://opm.gov.mt/en/", category: "legal", language: "en", note: "Gabinete do PM de Malta · comunicados oficiais", rss: "https://opm.gov.mt/en/feed/" },
+      { name: "TVMnews.mt (PBS)", url: "https://tvmnews.mt/en/", category: "news", language: "en", note: "Emissora pública maltesa", rss: "https://tvmnews.mt/en/feed/" },
+      { name: "Newsbook.com.mt", url: "https://newsbook.com.mt/en/", category: "news", language: "en", rss: "https://newsbook.com.mt/en/feed/" },
+    ],
+  },
+  {
+    countryCode: "ro",
+    countryName: "Romênia",
+    flag: "🇷🇴",
+    sources: [
+      { name: "IGI · Inspectoratul General pentru Imigrări", url: "https://igi.mai.gov.ro/en/", category: "legal", language: "en", note: "Autoridade romena de imigração", rss: "https://igi.mai.gov.ro/en/category/press-releases-news/feed/" },
+      { name: "Monitorul Oficial al României", url: "https://monitoruloficial.ro/", category: "legal", language: "ro", note: "Gazeta oficial da Romênia", rss: "https://monitoruloficial.ro/rss/" },
+      { name: "Digi24 · Externe", url: "https://www.digi24.ro/", category: "news", language: "ro", rss: "https://www.digi24.ro/rss/externe" },
+      { name: "HotNews.ro", url: "https://hotnews.ro/", category: "news", language: "ro", rss: "https://hotnews.ro/feed" },
+    ],
+  },
+  {
+    countryCode: "se",
+    countryName: "Suécia",
+    flag: "🇸🇪",
+    sources: [
+      { name: "Migrationsverket · News (EN)", url: "https://www.migrationsverket.se/en/", category: "legal", language: "en", note: "Agência Sueca de Migração", rss: "https://www.migrationsverket.se/rss_en" },
+      { name: "Sveriges Radio · Ekot", url: "https://sverigesradio.se/ekot", category: "news", language: "sv", note: "Rádio pública sueca", rss: "https://api.sr.se/api/rss/program/83" },
+      { name: "SVT Nyheter", url: "https://www.svt.se/nyheter/", category: "news", language: "sv", note: "Televisão pública sueca", rss: "https://www.svt.se/nyheter/rss.xml" },
+    ],
+  },
+  {
+    countryCode: "cz",
+    countryName: "Tchéquia",
+    flag: "🇨🇿",
+    sources: [
+      { name: "Vláda ČR · Governo (EN)", url: "https://vlada.gov.cz/en/", category: "legal", language: "en", note: "Governo da Tchéquia · comunicados", rss: "https://vlada.gov.cz/en/rss.xml" },
+      { name: "ČTK / České noviny", url: "https://www.ceskenoviny.cz/", category: "news", language: "cs", note: "Agência de notícias tcheca (estatal)", rss: "https://www.ceskenoviny.cz/sluzby/rss/zpravy.php" },
+      { name: "ČT24 · Česká televize", url: "https://ct24.ceskatelevize.cz/", category: "news", language: "cs", note: "Televisão pública tcheca", rss: "https://ct24.ceskatelevize.cz/rss/hlavni-zpravy" },
     ],
   },
 ];
