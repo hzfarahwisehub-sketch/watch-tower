@@ -13,6 +13,14 @@ export const MASTER_EMAIL = "hzfarah.wisehub@gmail.com";
  *  sai do servidor via Resend, independente de a Friday/Codex estarem online. */
 export const ALERT_EMAILS = ["hzfarah.wisehub@gmail.com", "adm.wisehub@gmail.com"];
 
+/** Os 4 sócios — recebem e-mail quando um item de EQUIPE (tarefa/agenda) é criado. */
+export const SOCIO_EMAILS = [
+  "hzfarah.wisehub@gmail.com",
+  "lucasbin181@gmail.com",
+  "marcelanogueiracidadania@gmail.com",
+  "diver.wisehub@gmail.com",
+];
+
 export function isMaster(email: string | null | undefined): boolean {
   return !!email && email.toLowerCase() === MASTER_EMAIL;
 }
@@ -77,5 +85,19 @@ export async function notifyNewSuggestion(c: { actorEmail: string; actorName?: s
     ]);
   } catch (e) {
     console.warn("[team-notify] suggestion falhou (ignorado):", e);
+  }
+}
+
+/**
+ * Avisa TODOS os sócios (e-mail) quando um item de EQUIPE é criado (tarefa ou
+ * compromisso de agenda). Diferente do notifyTeamChange (que só alerta o Hammis),
+ * aqui os 4 sócios recebem, inclusive quem criou. Best-effort: nunca quebra a criação.
+ */
+export async function notifyItemCreated(c: { actorName: string; entity: string; title: string }): Promise<void> {
+  try {
+    const msg = `${c.actorName} criou ${c.entity} no quadro da equipe: "${c.title}"`;
+    await sendAlertEmail(SOCIO_EMAILS, `Watch Tower · ${c.entity} criada na equipe`, msg);
+  } catch (e) {
+    console.warn("[team-notify] item-created falhou (ignorado):", e);
   }
 }

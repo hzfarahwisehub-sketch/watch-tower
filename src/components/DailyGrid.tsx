@@ -96,6 +96,7 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
   };
   const deleteTask = (id: number) => {
     const item = tasks.find((x) => x.id === id);
+    if (!window.confirm(`Deseja eliminar esta tarefa?${item ? `\n\n"${item.text}"` : ""}`)) return;
     tasksHook.remove(id);
     if (item && scope === "personal" && undoCtx) {
       let curId = id;
@@ -111,14 +112,26 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
       });
     }
   };
-  const addTask = () => tasksHook.add({ text: "Nova tarefa", done: false });
+  const addTask = () => {
+    const text = window.prompt("Nova tarefa:")?.trim();
+    if (!text) return;
+    if (!window.confirm(`Deseja confirmar esta tarefa?\n\n"${text}"`)) return;
+    tasksHook.add({ text, done: false });
+  };
 
   // ===== agenda ops + drag =====
   const editAgenda = (id: number, field: "title" | "where" | "time", value: string) =>
     agendaHook.update(id, { [field]: value } as Partial<AgendaItem>);
-  const addAgenda = () => agendaHook.add({ time: "00:00", title: "Novo evento", where: "" });
+  const addAgenda = () => {
+    const title = window.prompt("Novo compromisso (título):")?.trim();
+    if (!title) return;
+    const time = (window.prompt("Horário (HH:MM):", "00:00") || "00:00").trim();
+    if (!window.confirm(`Deseja confirmar este compromisso?\n\n${time} — ${title}`)) return;
+    agendaHook.add({ time, title, where: "" });
+  };
   const deleteAgenda = (id: number) => {
     const item = agenda.find((a) => a.id === id);
+    if (!window.confirm(`Deseja eliminar este compromisso?${item ? `\n\n${item.time} — ${item.title}` : ""}`)) return;
     agendaHook.remove(id);
     if (item && scope === "personal" && undoCtx) {
       let curId = id;

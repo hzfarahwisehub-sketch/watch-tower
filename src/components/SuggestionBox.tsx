@@ -18,7 +18,7 @@ const MASTER_EMAIL = "hzfarah.wisehub@gmail.com";
 
 const STATUS_META: Record<Suggestion["status"], { label: string; color: string; bg: string }> = {
   open: { label: "Aberta", color: "var(--color-status-warning)", bg: "rgba(255,138,31,.12)" },
-  applied: { label: "Aplicada", color: "var(--color-status-stable)", bg: "rgba(16,224,160,.12)" },
+  applied: { label: "✓ Feito", color: "var(--color-status-stable)", bg: "rgba(16,224,160,.12)" },
   rejected: { label: "Rejeitada", color: "var(--color-status-critical)", bg: "rgba(255,59,92,.12)" },
 };
 
@@ -100,12 +100,16 @@ export function SuggestionBox() {
     } catch {}
   };
 
-  const remove = async (id: string) => {
-    if (!window.confirm("Remover esta solicitação?")) return;
+  const deleteItem = async (id: string) => {
     try {
       const r = await fetch(`/api/suggestions/${id}`, { method: "DELETE" });
       if (r.ok) await reload();
     } catch {}
+  };
+
+  const remove = async (id: string) => {
+    if (!window.confirm("Deseja eliminar este item?")) return;
+    await deleteItem(id);
   };
 
   // Esconde do mural as mensagens "⚡ EXECUTAR" (pedidos pra Friday via lembrete),
@@ -178,12 +182,31 @@ export function SuggestionBox() {
                       ↺ Reabrir
                     </button>
                   )}
-                  {(s.mine || isMaster) && (
+                  {(s.mine || isMaster) && s.status === "open" && (
                     <button type="button" onClick={() => remove(s.id)} className="text-[9px] font-bold uppercase px-2 py-0.5 rounded cursor-pointer ml-auto" style={{ color: "var(--text-3)" }}>
                       🗑
                     </button>
                   )}
                 </div>
+                {(s.mine || isMaster) && s.status !== "open" && (
+                  <label
+                    className="flex items-center gap-1.5 mt-2 w-fit text-[9.5px] font-bold uppercase tracking-wide cursor-pointer select-none"
+                    style={{ color: "var(--text-3)" }}
+                    title="Ticar para eliminar esta solicitação da caixa"
+                  >
+                    <input
+                      type="checkbox"
+                      onChange={(e) => {
+                        if (!e.target.checked) return;
+                        if (window.confirm("Deseja eliminar este item?")) deleteItem(s.id);
+                        else e.target.checked = false;
+                      }}
+                      className="cursor-pointer"
+                      style={{ accentColor: "var(--color-status-critical)", width: 13, height: 13 }}
+                    />
+                    Eliminar da caixa
+                  </label>
+                )}
               </div>
             );
           })
