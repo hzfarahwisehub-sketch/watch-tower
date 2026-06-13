@@ -177,7 +177,7 @@ export function CountriesSidebar({
       </div>
 
       {/* Lista de países — ocupa altura disponível */}
-      <div className="flex-1 overflow-y-auto p-1.5 min-h-0">
+      <div className="flex-1 overflow-y-auto p-1.5 pr-2.5 min-h-0">
         {filtered.length === 0 ? (
           <div className="py-8 text-center text-[12px] flex flex-col items-center gap-2" style={{ color: "var(--text-3)" }}>
             <span className="text-[24px] opacity-50">🔍</span>
@@ -202,7 +202,7 @@ export function CountriesSidebar({
               key={c.code}
               type="button"
               onClick={() => onSelect(c.code)}
-              className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg my-0.5 transition-colors text-left cursor-pointer"
+              className="w-full flex items-center gap-2.5 pl-3 pr-4 py-2.5 rounded-lg my-0.5 transition-colors text-left cursor-pointer"
               style={{
                 background: selected === c.code ? "rgba(31,85,255,.18)" : undefined,
                 borderLeft: `3px solid ${selected === c.code ? "var(--color-wh-blue)" : "transparent"}`,

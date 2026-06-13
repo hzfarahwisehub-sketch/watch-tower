@@ -184,26 +184,7 @@ function GridCell({ panelId, label, children, locked }: { panelId?: PanelId; lab
           onClick={() => (poppedOut ? wm.dockBack(panelId) : wm.popOut(panelId))}
           title={poppedOut ? `Trazer "${label}" de volta` : `Abrir "${label}" em janela separada`}
           aria-label={poppedOut ? "Trazer de volta" : "Abrir em janela separada"}
-          style={{
-            // Afastado do canto direito (onde quase todo painel tem botão, ex.: o
-            // seletor de globo) e posto ao lado do ⠿ de arrastar. zIndex acima do
-            // header do painel pra ficar sempre clicável.
-            position: "absolute",
-            top: 10,
-            right: 42,
-            zIndex: 30,
-            width: 24,
-            height: 24,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 7,
-            fontSize: 12,
-            background: "var(--bg2)",
-            border: "1px solid var(--border)",
-            color: "var(--text-3)",
-            cursor: "pointer",
-          }}
+          className="wt-popout-handle"
         >
           {poppedOut ? "↩" : "⧉"}
         </button>
@@ -466,7 +447,7 @@ export function Dashboard() {
           cols={{ lg: 24, md: 20, sm: 12, xs: 8, xxs: 4 }}
           rowHeight={24}
           margin={[12, 12]}
-          containerPadding={[0, 0]}
+          containerPadding={[12, 0]}
           isDraggable={!locked}
           isResizable={!locked}
           isBounded

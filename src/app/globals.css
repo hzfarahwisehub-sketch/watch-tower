@@ -377,8 +377,8 @@ html[data-navigating] .wt-watermark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--surface-hi);
-  border: 1px solid var(--border-hi);
+  background: transparent;
+  border: 1px solid transparent;
   border-radius: 8px;
   color: var(--color-wh-blue-light);
   font-size: 16px;
@@ -386,11 +386,11 @@ html[data-navigating] .wt-watermark {
   line-height: 1;
   cursor: grab;
   z-index: 25;
-  opacity: 0.55;
-  transition: opacity .2s ease, transform .2s ease, background .2s ease, color .2s ease;
+  opacity: 0.5;
+  transition: opacity .2s ease, transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+  box-shadow: none;
 }
 .wt-drag-handle:hover {
   opacity: 1;
@@ -408,8 +408,42 @@ html[data-navigating] .wt-watermark {
   color: #fff;
 }
 [data-theme="light"] .wt-drag-handle {
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(31,85,255,.18);
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Pop-out / desacoplar a caixa — mesmo cluster do ⠿, flat: so ganha fundo no
+   hover. Fica a esquerda do drag handle (right:44 = 6 + 32 + 6 de gap), mesmo
+   top/altura, sem sombra. Acaba a cara de "pastilha solta flutuando". */
+.wt-popout-handle {
+  position: absolute;
+  top: 6px;
+  right: 44px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--text-3);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 26;
+  opacity: 0.5;
+  transition: opacity .2s ease, transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: none;
+}
+.wt-popout-handle:hover {
+  opacity: 1;
+  transform: scale(1.08);
+  background: var(--color-wh-blue);
+  border-color: var(--color-wh-blue-light);
+  color: #fff;
 }
 
 /* Resize handle (canto inferior direito) — chevron L azul sempre visível.
@@ -460,6 +494,7 @@ html[data-navigating] .wt-watermark {
 .wt-daily-body {
   scrollbar-width: thin;
   scrollbar-color: rgba(74,122,255,.22) transparent;
+  scrollbar-gutter: stable;
 }
 .wt-daily-body::-webkit-scrollbar {
   width: 6px;

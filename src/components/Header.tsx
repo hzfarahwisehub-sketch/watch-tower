@@ -50,7 +50,7 @@ export function Header() {
 
   return (
     <header
-      className="flex items-center justify-between gap-4 mb-6 px-5 py-4 flex-wrap rounded-2xl"
+      className="flex items-center justify-between gap-4 mb-6 px-5 sm:px-6 lg:px-8 py-4 flex-wrap rounded-2xl"
       style={{
         background: "linear-gradient(180deg, var(--surface), var(--surface-hi))",
         border: "1px solid var(--border)",

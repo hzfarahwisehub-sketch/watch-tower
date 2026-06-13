@@ -619,7 +619,7 @@ function DailyCard({
   // "dupla" (e o scroll da página durante o arraste, que vinha desse resize).
   const body = (
     <div
-      className="wt-daily-body px-2 py-2 pb-2.5"
+      className="wt-daily-body pl-2.5 pr-4 py-2 pb-2.5"
       style={{
         flex: "1 1 auto",
         minHeight: 0,

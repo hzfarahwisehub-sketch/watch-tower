@@ -130,7 +130,7 @@ export function SuggestionBox() {
         </h2>
       </div>
 
-      <div className="flex-1 overflow-auto px-3 py-2" style={{ minHeight: 120 }}>
+      <div className="flex-1 overflow-auto pl-3 pr-4 py-2" style={{ minHeight: 120, scrollbarGutter: "stable" }}>
         {!isLoggedIn ? (
           <p className="text-[11px] px-2 py-3" style={{ color: "var(--text-3)" }}>
             Entre na sua conta pra ver e mandar solicitações pra equipe.
