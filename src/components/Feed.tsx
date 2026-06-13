@@ -108,7 +108,7 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
         className="text-[13px] tracking-[3px] uppercase font-extrabold flex items-center justify-between gap-2.5 mb-4 pb-3 flex-wrap"
         style={{ color: "var(--color-wh-blue-light)", borderBottom: "1px solid var(--border)" }}
       >
-        <span className="flex items-center gap-2.5">
+        <span className="flex items-center gap-2.5 pl-[80px]">
           📰 Feed de Mudanças por País
           <span
             className="text-[8.5px] tracking-wider font-bold px-1.5 py-0.5 rounded normal-case"

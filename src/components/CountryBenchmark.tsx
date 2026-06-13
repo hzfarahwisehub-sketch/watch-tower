@@ -66,7 +66,7 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
     <section className="wt-card h-full flex flex-col @container">
       {/* Header */}
       <header
-        className="flex items-center justify-between gap-3 px-5 py-3.5 flex-shrink-0"
+        className="flex items-center justify-between gap-3 pl-[84px] pr-5 py-3.5 flex-shrink-0"
         style={{ borderBottom: "1px solid var(--border)" }}
       >
         <div className="flex items-center gap-2.5 min-w-0">

@@ -174,7 +174,7 @@ export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
     <section className="wt-card h-full flex flex-col @container">
       {/* Header */}
       <header
-        className="flex items-center justify-between gap-3 px-5 py-3.5 flex-shrink-0"
+        className="flex items-center justify-between gap-3 pl-[84px] pr-5 py-3.5 flex-shrink-0"
         style={{ borderBottom: "1px solid var(--border)" }}
       >
         <h2

@@ -126,7 +126,7 @@ export function KpiRow() {
 
   if (kpis.length === 0) {
     return (
-      <section className="grid grid-cols-1 @xs:grid-cols-2 @sm:grid-cols-3 @xl:grid-cols-6 gap-3.5">
+      <section className="grid grid-cols-1 @xs:grid-cols-2 @sm:grid-cols-3 @xl:grid-cols-6 gap-3.5 @xl:pl-[80px]">
         {Array.from({ length: 6 }).map((_, i) => (
           <div key={i} className="wt-card p-4" style={{ opacity: 0.4, minHeight: 110 }}>
             <div className="text-[10px] tracking-[1.5px] uppercase font-bold" style={{ color: "var(--text-3)" }}>
@@ -139,7 +139,7 @@ export function KpiRow() {
   }
 
   return (
-    <section className="grid grid-cols-1 @xs:grid-cols-2 @sm:grid-cols-3 @xl:grid-cols-6 gap-3.5">
+    <section className="grid grid-cols-1 @xs:grid-cols-2 @sm:grid-cols-3 @xl:grid-cols-6 gap-3.5 @xl:pl-[80px]">
       {kpis.map((k) => (
         <div key={k.label} className="wt-card p-4 hover:-translate-y-0.5 transition-transform relative overflow-hidden">
           <div
