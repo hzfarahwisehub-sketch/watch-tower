@@ -1,15 +1,5 @@
 "use client";
-import { forwardRef, useEffect, useMemo, useRef, useState, DragEvent } from "react";
-// @ts-expect-error - react-resizable v3 não envia types
-import { Resizable } from "react-resizable";
-import "react-resizable/css/styles.css";
-import { useSettings } from "./SettingsProvider";
-
-type ResizeData = {
-  node: HTMLElement;
-  size: { width: number; height: number };
-  handle: "s" | "w" | "e" | "n" | "sw" | "nw" | "se" | "ne";
-};
+import { useEffect, useMemo, useRef, useState, DragEvent } from "react";
 import type { Task, AgendaItem, Reminder, ScheduledAction } from "@/lib/types";
 import { INBOX_ACCOUNTS } from "@/lib/data";
 import { useDualStorage } from "@/lib/dual-storage";
@@ -601,19 +591,6 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
   );
 }
 
-// Custom handle pra ficar visualmente igual ao do grid principal (chevron L azul WiseHub)
-const CardResizeHandle = forwardRef<HTMLSpanElement, { handleAxis?: string }>(
-  function CardResizeHandle({ handleAxis, ...rest }, ref) {
-    return (
-      <span
-        ref={ref}
-        className={`wt-daily-resize-handle wt-daily-resize-handle-${handleAxis ?? "se"}`}
-        {...rest}
-      />
-    );
-  }
-);
-
 function DailyCard({
   cardKey,
   title,
@@ -622,7 +599,6 @@ function DailyCard({
   action,
   onAction,
   children,
-  bodyMaxHeight = 280,
   scope,
   onScopeChange,
 }: {
@@ -637,40 +613,16 @@ function DailyCard({
   scope?: BoardScope;
   onScopeChange?: (s: BoardScope) => void;
 }) {
-  const { locked } = useSettings();
-  const storageKey = `wt-daily-card-h-${cardKey}`;
-  const [height, setHeight] = useState<number>(bodyMaxHeight);
-  const [hydrated, setHydrated] = useState(false);
-
-  // Carrega altura salva
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(storageKey);
-      const n = saved ? parseInt(saved, 10) : NaN;
-      if (isFinite(n) && n >= 120) setHeight(n);
-    } catch {}
-    setHydrated(true);
-  }, [storageKey]);
-
-  // Persiste mudanças
-  useEffect(() => {
-    if (!hydrated) return;
-    try {
-      localStorage.setItem(storageKey, String(Math.round(height)));
-    } catch {}
-  }, [height, storageKey, hydrated]);
-
-  const onResize = (_e: unknown, data: ResizeData) => {
-    setHeight(data.size.height);
-  };
-
+  // O tamanho do card é controlado SÓ pelo grid (react-grid-layout) — uma única
+  // forma de esticar/encolher, pelo ⤡ do canto. O corpo preenche a célula e rola
+  // por dentro quando o conteúdo passa do espaço. Sem resize interno: acabou a
+  // "dupla" (e o scroll da página durante o arraste, que vinha desse resize).
   const body = (
     <div
       className="wt-daily-body px-2 py-2 pb-2.5"
       style={{
-        height,
-        minHeight: 120,
-        maxHeight: 1200,
+        flex: "1 1 auto",
+        minHeight: 0,
         overflow: "auto",
         position: "relative",
       }}
@@ -681,8 +633,8 @@ function DailyCard({
   );
 
   return (
-    <div className="wt-card flex flex-col" style={{ position: "relative" }}>
-      <div className="px-5 py-3.5" style={{ borderBottom: "1px solid var(--border)" }}>
+    <div className="wt-card flex flex-col h-full" style={{ position: "relative" }}>
+      <div className="pl-5 pr-[68px] py-3.5" style={{ borderBottom: "1px solid var(--border)" }}>
         <div className="flex items-center justify-between gap-2">
           <h2
             className="text-[11px] tracking-[2.5px] uppercase font-bold flex items-center gap-2 min-w-0 truncate"
@@ -729,22 +681,7 @@ function DailyCard({
         </div>
       </div>
 
-      {locked ? (
-        body
-      ) : (
-        <Resizable
-          width={Infinity}
-          height={height}
-          axis="y"
-          resizeHandles={["se"]}
-          minConstraints={[Infinity, 120]}
-          maxConstraints={[Infinity, 1200]}
-          onResize={onResize}
-          handle={<CardResizeHandle />}
-        >
-          {body}
-        </Resizable>
-      )}
+      {body}
 
       <div
         className="px-4 py-2.5 flex justify-between items-center gap-2"
