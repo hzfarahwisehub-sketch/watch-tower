@@ -484,9 +484,9 @@ export function Dashboard() {
           layouts={layouts}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
           cols={{ lg: 24, md: 20, sm: 12, xs: 8, xxs: 4 }}
-          rowHeight={24}
-          margin={[12, 12]}
-          containerPadding={[12, 0]}
+          rowHeight={32}
+          margin={[4, 4]}
+          containerPadding={[8, 0]}
           isDraggable={!locked}
           isResizable={!locked}
           isBounded

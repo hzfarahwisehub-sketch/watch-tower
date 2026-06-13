@@ -379,7 +379,7 @@ html[data-navigating] .wt-watermark {
 .wt-drag-handle {
   position: absolute;
   top: 13px;
-  right: 36px;
+  right: 44px;
   width: 24px;
   height: 24px;
   display: inline-flex;
@@ -426,7 +426,7 @@ html[data-navigating] .wt-watermark {
 .wt-popout-handle {
   position: absolute;
   top: 13px;
-  right: 6px;
+  right: 14px;
   width: 24px;
   height: 24px;
   display: inline-flex;

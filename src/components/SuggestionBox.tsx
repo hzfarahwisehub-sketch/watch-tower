@@ -119,7 +119,7 @@ export function SuggestionBox() {
 
   return (
     <div className="wt-card flex flex-col h-full" style={{ position: "relative" }}>
-      <div className="pl-5 pr-[66px] py-3.5" style={{ borderBottom: "1px solid var(--border)" }}>
+      <div className="pl-5 pr-[64px] py-3.5" style={{ borderBottom: "1px solid var(--border)" }}>
         <h2 className="text-[11px] tracking-[2.5px] uppercase font-bold flex items-center gap-2" style={{ color: "var(--color-wh-blue-light)" }}>
           💬 Caixa de Solicitações
           {openCount > 0 && (
