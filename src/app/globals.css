@@ -378,16 +378,16 @@ html[data-navigating] .wt-watermark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: 1px solid var(--border-hi);
-  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   color: var(--color-wh-blue-light);
   font-size: 16px;
   font-weight: 700;
   line-height: 1;
   cursor: grab;
   z-index: 25;
-  opacity: 0.85;
+  opacity: 1;
   transition: opacity .2s ease, transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -395,7 +395,7 @@ html[data-navigating] .wt-watermark {
 }
 .wt-drag-handle:hover {
   opacity: 1;
-  transform: scale(1.08);
+  transform: translateY(-1px);
   background: var(--color-wh-blue);
   border-color: var(--color-wh-blue-light);
   color: #fff;
@@ -409,13 +409,13 @@ html[data-navigating] .wt-watermark {
   color: #fff;
 }
 [data-theme="light"] .wt-drag-handle {
-  background: transparent;
+  background: var(--surface);
   box-shadow: none;
 }
 
-/* Pop-out / desacoplar a caixa — mesmo cluster do ⠿, flat: so ganha fundo no
-   hover. Fica na QUINA superior direita (right:6); o ⠿ fica a esquerda dele.
-   Sempre visivel (mesmo travado), por isso ocupa a quina. Sem sombra. */
+/* Pop-out / desacoplar a caixa — mesmo cluster e padrao do IconBtn do app
+   (fundo solido var(--surface) + borda var(--border), botao definido, sem
+   sombra). Fica na QUINA superior direita (right:6); o ⠿ fica a esquerda. */
 .wt-popout-handle {
   position: absolute;
   top: 6px;
@@ -425,15 +425,15 @@ html[data-navigating] .wt-watermark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: 1px solid var(--border-hi);
-  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   color: var(--text-3);
   font-size: 13px;
   line-height: 1;
   cursor: pointer;
   z-index: 26;
-  opacity: 0.85;
+  opacity: 1;
   transition: opacity .2s ease, transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -441,7 +441,7 @@ html[data-navigating] .wt-watermark {
 }
 .wt-popout-handle:hover {
   opacity: 1;
-  transform: scale(1.08);
+  transform: translateY(-1px);
   background: var(--color-wh-blue);
   border-color: var(--color-wh-blue-light);
   color: #fff;
