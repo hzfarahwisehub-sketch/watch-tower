@@ -109,8 +109,11 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
       </header>
 
       {/* Body: grid layout fluido (container query) */}
+      {/* items-start + sem h-full: o conteúdo flui do TOPO e a sobra (quando a
+          caixa é maior que o conteúdo) fica embaixo — em vez de o grid esticar
+          as linhas e abrir um vão entre a linha de stats e o Panorama. */}
       <div className="flex-1 overflow-auto p-5 wt-benchmark-body">
-        <div className="grid grid-cols-1 @2xl:grid-cols-[minmax(240px,1fr)_2fr] gap-5 h-full">
+        <div className="grid grid-cols-1 @2xl:grid-cols-[minmax(240px,1fr)_2fr] gap-5 items-start">
           {/* IMAGEM destacada (quadrada, com glow) */}
           <div className="flex flex-col gap-3">
             <div
