@@ -362,6 +362,45 @@ export function Dashboard() {
     });
   };
 
+  // ── Auto-scroll ao ESTICAR pra baixo durante o resize ──
+  // A última caixa fica na base da página. Sem isto, não dá pra arrastar a alça
+  // de redimensionar além da borda inferior da janela (a página fica parada de
+  // propósito) — então a última caixa não tinha pra onde crescer. Aqui, só quando
+  // o ponteiro encosta perto da base DURANTE um resize, a página acompanha pra
+  // baixo, deixando esticar a caixa além da tela. Ao ENCOLHER (ponteiro longe da
+  // base) nada rola — respeita o "a tela fica parada" que o Hammis pediu antes.
+  const pointerYRef = useRef(0);
+  const autoScrollRaf = useRef<number | null>(null);
+  const pointerTrackerRef = useRef<((e: PointerEvent) => void) | null>(null);
+  const stopResizeAutoScroll = () => {
+    if (autoScrollRaf.current != null) {
+      cancelAnimationFrame(autoScrollRaf.current);
+      autoScrollRaf.current = null;
+    }
+    if (pointerTrackerRef.current) {
+      window.removeEventListener("pointermove", pointerTrackerRef.current);
+      pointerTrackerRef.current = null;
+    }
+  };
+  const startResizeAutoScroll = () => {
+    stopResizeAutoScroll(); // garante estado limpo
+    pointerYRef.current = 0;
+    const tracker = (e: PointerEvent) => {
+      pointerYRef.current = e.clientY;
+    };
+    pointerTrackerRef.current = tracker;
+    window.addEventListener("pointermove", tracker);
+    const EDGE = 90; // faixa perto da base da janela que dispara o scroll
+    const tick = () => {
+      const over = pointerYRef.current - (window.innerHeight - EDGE);
+      if (over > 0) window.scrollBy(0, Math.min(26, 6 + over / 4));
+      autoScrollRaf.current = requestAnimationFrame(tick);
+    };
+    autoScrollRaf.current = requestAnimationFrame(tick);
+  };
+  // Limpa qualquer loop/listener pendente se desmontar no meio de um resize.
+  useEffect(() => stopResizeAutoScroll, []);
+
   return (
     <>
       <div className="wt-watermark" aria-hidden />
@@ -454,9 +493,9 @@ export function Dashboard() {
           draggableHandle=".wt-drag-handle"
           onLayoutChange={onLayoutChange}
           onDragStart={captureLayoutBefore}
-          onResizeStart={captureLayoutBefore}
+          onResizeStart={() => { captureLayoutBefore(); startResizeAutoScroll(); }}
           onDragStop={() => commitLayoutAction("mover caixa")}
-          onResizeStop={() => commitLayoutAction("redimensionar caixa")}
+          onResizeStop={() => { stopResizeAutoScroll(); commitLayoutAction("redimensionar caixa"); }}
           compactType="vertical"
           preventCollision={false}
           allowOverlap={false}
