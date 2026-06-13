@@ -45,9 +45,13 @@ const MapZone = dynamic(() => import("./MapZone"), {
   ),
 });
 
-// Key estável — NÃO bumpa mais. A sanitização do useEffect lida com items
-// adicionados no futuro (preserva posições do user, completa com defaults).
-const LAYOUT_STORAGE_KEY = "wt-layout";
+// 2026-06-13: bump intencional pra "wt-layout-v11" a pedido do Hammis. O
+// DEFAULT_LAYOUTS.lg abaixo virou o ARRANJO DELE (capturado do localStorage do
+// navegador dele). Bumpar a chave faz TODO MUNDO (mesmo quem já tinha layout
+// salvo na chave antiga "wt-layout") abrir com esse arranjo na próxima vez;
+// depois cada um pode rearranjar (salva na chave nova). O "wt-layout" antigo
+// fica órfão de propósito (NÃO entra na migração legada abaixo).
+const LAYOUT_STORAGE_KEY = "wt-layout-v11";
 // Chaves de versões anteriores — usadas só pra migração one-time se o user
 // já tinha layout salvo em algum bump antigo.
 const LEGACY_LAYOUT_KEYS = [
@@ -69,23 +73,27 @@ const MIN = { minW: 2, minH: 2 } as const;
 // Em granularidade 24-col, cada h vale 36px (24 rowHeight + 12 margin).
 // Pra ocupar ~360px de altura → h=10. Pra ~720px → h=20.
 const DEFAULT_LAYOUTS: ResponsiveLayouts = {
+  // ARRANJO DO HAMMIS (capturado do localStorage dele em 2026-06-13 · "muito
+  // mais visual"). É o padrão de desktop agora. Editar aqui = mudar o que todos
+  // veem ao abrir/resetar. Os breakpoints md/sm/xs/xxs abaixo seguem o padrão
+  // responsivo (empilhado) — o arranjo dele é pra tela larga (lg ≥1200).
   lg: [
-    { i: "alerts",    x: 0,  y: 0,   w: 24, h: 4,  ...MIN },
-    { i: "kpis",      x: 0,  y: 4,   w: 24, h: 4,  ...MIN },
-    { i: "map",       x: 0,  y: 8,   w: 14, h: 18, ...MIN },
-    { i: "countries", x: 14, y: 8,   w: 10, h: 18, ...MIN },
-    { i: "inbox",     x: 0,  y: 26,  w: 8,  h: 12, ...MIN },
-    { i: "agenda",    x: 8,  y: 26,  w: 8,  h: 12, ...MIN },
-    { i: "tasks",     x: 16, y: 26,  w: 8,  h: 12, ...MIN },
-    { i: "scheduled", x: 0,  y: 38,  w: 12, h: 12, ...MIN },
-    { i: "reminders", x: 12, y: 38,  w: 12, h: 12, ...MIN },
-    { i: "benchmark", x: 0,  y: 50,  w: 24, h: 26, ...MIN },
-    { i: "info",      x: 0,  y: 76,  w: 24, h: 26, ...MIN },
-    { i: "finance",   x: 0,  y: 102, w: 12, h: 26, ...MIN },
-    { i: "crypto",    x: 12, y: 102, w: 12, h: 26, ...MIN },
-    { i: "bulletins", x: 0,  y: 128, w: 24, h: 24, ...MIN },
-    { i: "feed",      x: 0,  y: 152, w: 24, h: 28, ...MIN },
-    { i: "requests",  x: 0,  y: 180, w: 24, h: 12, ...MIN },
+    { i: "alerts",    x: 0,  y: 0,   w: 24, h: 2,  ...MIN },
+    { i: "kpis",      x: 0,  y: 2,   w: 24, h: 3,  ...MIN },
+    { i: "tasks",     x: 0,  y: 5,   w: 9,  h: 6,  ...MIN },
+    { i: "countries", x: 9,  y: 5,   w: 5,  h: 24, ...MIN },
+    { i: "benchmark", x: 14, y: 5,   w: 10, h: 62, ...MIN },
+    { i: "map",       x: 0,  y: 11,  w: 9,  h: 15, ...MIN },
+    { i: "inbox",     x: 0,  y: 26,  w: 4,  h: 10, ...MIN },
+    { i: "scheduled", x: 4,  y: 26,  w: 5,  h: 10, ...MIN },
+    { i: "reminders", x: 9,  y: 29,  w: 5,  h: 7,  ...MIN },
+    { i: "requests",  x: 0,  y: 36,  w: 14, h: 6,  ...MIN },
+    { i: "agenda",    x: 0,  y: 42,  w: 10, h: 25, ...MIN },
+    { i: "crypto",    x: 10, y: 42,  w: 4,  h: 25, ...MIN },
+    { i: "finance",   x: 0,  y: 67,  w: 24, h: 29, ...MIN },
+    { i: "info",      x: 0,  y: 96,  w: 24, h: 49, ...MIN },
+    { i: "bulletins", x: 0,  y: 145, w: 24, h: 24, ...MIN },
+    { i: "feed",      x: 0,  y: 169, w: 24, h: 17, ...MIN },
   ],
   md: [
     { i: "alerts",    x: 0,  y: 0,   w: 20, h: 4,  ...MIN },
