@@ -57,7 +57,14 @@
   --shadow-bar: 0 6px 24px rgba(31,85,255,.12), 0 0 16px -4px rgba(74,122,255,.2);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; }
+/* padding reset DENTRO de @layer base pra os utilitarios de padding do Tailwind
+   (px-*, p-*, pr-*, etc., que ficam na layer utilities) vencerem. Antes estava
+   fora de layer e sobrescrevia TODOS os paddings do app (conteudo colado nas
+   bordas, botoes em cima do texto). margin fica fora de layer de proposito. */
+@layer base {
+  * { padding: 0; }
+}
 html, body {
   background: var(--bg);
   color: var(--text);
@@ -371,7 +378,7 @@ html[data-navigating] .wt-watermark {
    pop-out. O conteudo de cada caixa e empurrado pra esquerda (pr-* no header). */
 .wt-drag-handle {
   position: absolute;
-  top: 1px;
+  top: 13px;
   right: 36px;
   width: 24px;
   height: 24px;
@@ -418,7 +425,7 @@ html[data-navigating] .wt-watermark {
    sombra). Fica na QUINA superior direita (right:6); o ⠿ fica a esquerda. */
 .wt-popout-handle {
   position: absolute;
-  top: 1px;
+  top: 13px;
   right: 6px;
   width: 24px;
   height: 24px;
