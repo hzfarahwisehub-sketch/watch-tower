@@ -167,7 +167,7 @@ function GridCell({ panelId, label, children, locked }: { panelId?: PanelId; lab
   const wm = useWindowManagerOptional();
   const poppedOut = !!(panelId && wm?.isOpen(panelId));
   return (
-    <div className={`wt-grid-cell ${locked ? "wt-cell-locked" : ""}`} style={{ position: "relative" }}>
+    <div className={`wt-grid-cell wt-cell-${panelId ?? "x"} ${locked ? "wt-cell-locked" : ""}`} style={{ position: "relative" }}>
       {!locked && (
         <button
           type="button"

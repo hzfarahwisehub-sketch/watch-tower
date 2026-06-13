@@ -454,6 +454,12 @@ html[data-navigating] .wt-watermark {
   color: #fff;
 }
 
+/* Ajuste fino do top por painel: cabecalhos com py diferente (mapa py-3,
+   boletins py-5, feed com mb/pb) centram os botoes em alturas diferentes. */
+.wt-cell-map .wt-drag-handle, .wt-cell-map .wt-popout-handle { top: 17px; }
+.wt-cell-bulletins .wt-drag-handle, .wt-cell-bulletins .wt-popout-handle { top: 25px; }
+.wt-cell-feed .wt-drag-handle, .wt-cell-feed .wt-popout-handle { top: 4px; }
+
 /* Resize handle (canto inferior direito) — chevron L azul sempre visível.
    Posicionado AFASTADO da scrollbar (6px largura + 8px gap = 14px de offset) */
 .react-grid-item > .react-resizable-handle.react-resizable-handle-se {

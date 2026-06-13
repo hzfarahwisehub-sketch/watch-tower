@@ -635,7 +635,7 @@ function DailyCard({
   return (
     <div className="wt-card flex flex-col h-full" style={{ position: "relative" }}>
       <div className="pl-5 pr-[66px] py-3.5" style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center justify-between gap-x-2 gap-y-0.5 flex-wrap">
           <h2
             className="text-[11px] tracking-[2.5px] uppercase font-bold flex items-center gap-2 min-w-0 truncate"
             style={{ color: "var(--color-wh-blue-light)" }}

@@ -356,7 +356,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
   return (
     <div className="wt-card flex flex-col h-full overflow-hidden" style={{ minHeight: 300 }}>
       <div
-        className="flex items-center justify-between gap-2 pl-4 sm:pl-5 pr-[70px] py-3"
+        className="flex items-center justify-between gap-x-2 gap-y-0.5 pl-4 sm:pl-5 pr-[70px] py-3 flex-wrap"
         style={{ borderBottom: "1px solid var(--border)", position: "relative", zIndex: 20 }}
       >
         <h2
