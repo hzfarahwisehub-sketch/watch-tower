@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { BULLETINS, type StatusFile } from "./OfficialBulletins";
+import { useLocale } from "./LocaleProvider";
+
+type TFn = (key: string, params?: Record<string, string | number>) => string;
 
 type TrendCls = "up" | "warn" | "crit" | "muted";
 
@@ -21,18 +24,18 @@ function trendColor(cls: TrendCls) {
   }
 }
 
-function fmtRelative(iso: string | null): string {
-  if (!iso) return "—";
+function fmtRelative(iso: string | null, t: TFn): string {
+  if (!iso) return t("common.dash");
   const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return "—";
+  if (Number.isNaN(date.getTime())) return t("common.dash");
   const delta = Date.now() - date.getTime();
   const m = Math.floor(delta / 60_000);
-  if (m < 1) return "agora";
-  if (m < 60) return `${m}min`;
+  if (m < 1) return t("common.rel.now");
+  if (m < 60) return t("common.rel.min", { n: m });
   const h = Math.floor(m / 60);
-  if (h < 24) return `${h}h`;
+  if (h < 24) return t("common.rel.hour", { n: h });
   const d = Math.floor(h / 24);
-  return `${d}d`;
+  return t("common.rel.day", { n: d });
 }
 
 /**
@@ -40,6 +43,7 @@ function fmtRelative(iso: string | null): string {
  * Fonte: /bulletins-status.json. Refresh a cada 5min.
  */
 export function KpiRow() {
+  const { t } = useLocale();
   const [kpis, setKpis] = useState<Kpi[]>([]);
 
   useEffect(() => {
@@ -70,44 +74,44 @@ export function KpiRow() {
         setKpis([
           {
             icon: "🌎",
-            label: "Países",
+            label: t("kpi.countries.label"),
             value: String(total),
-            trend: `${BULLETINS.length} fontes oficiais`,
+            trend: t("kpi.countries.trend", { n: BULLETINS.length }),
             trendCls: "muted",
           },
           {
             icon: "📰",
-            label: "Mudanças",
+            label: t("kpi.changes.label"),
             value: String(changed7d),
-            trend: "últimos 7 dias",
+            trend: t("kpi.changes.trend"),
             trendCls: changed7d > 0 ? "up" : "muted",
           },
           {
             icon: "⚠",
-            label: "Alertas",
+            label: t("kpi.alerts.label"),
             value: String(changed24h),
-            trend: changed24h > 0 ? "nas últimas 24h" : "nada nas 24h",
+            trend: changed24h > 0 ? t("kpi.alerts.trend.some") : t("kpi.alerts.trend.none"),
             trendCls: changed24h > 0 ? "crit" : "muted",
           },
           {
             icon: "🔥",
-            label: "Quentes",
+            label: t("kpi.hot.label"),
             value: String(changed48h),
-            trend: "mudanças em 48h",
+            trend: t("kpi.hot.trend"),
             trendCls: changed48h > 0 ? "warn" : "muted",
           },
           {
             icon: "⏱",
-            label: "Atualização",
-            value: fmtRelative(data.lastRun),
-            trend: "última varredura",
+            label: t("kpi.updated.label"),
+            value: fmtRelative(data.lastRun, t),
+            trend: t("kpi.updated.trend"),
             trendCls: "muted",
           },
           {
             icon: "📡",
-            label: "Fontes",
+            label: t("kpi.sources.label"),
             value: String(total - errors),
-            trend: errors > 0 ? `${errors} c/ erro` : "todas ativas",
+            trend: errors > 0 ? t("kpi.sources.trend.errors", { n: errors }) : t("kpi.sources.trend.ok"),
             trendCls: errors > 0 ? "warn" : "up",
           },
         ]);
@@ -122,7 +126,7 @@ export function KpiRow() {
       cancelled = true;
       clearInterval(interval);
     };
-  }, []);
+  }, [t]);
 
   if (kpis.length === 0) {
     return (
@@ -130,7 +134,7 @@ export function KpiRow() {
         {Array.from({ length: 6 }).map((_, i) => (
           <div key={i} className="wt-card p-4" style={{ opacity: 0.4, minHeight: 110 }}>
             <div className="text-[10px] tracking-[1.5px] uppercase font-bold" style={{ color: "var(--text-3)" }}>
-              Carregando…
+              {t("common.loading")}
             </div>
           </div>
         ))}

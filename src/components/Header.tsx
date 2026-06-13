@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useTheme } from "./ThemeProvider";
+import { useLocale } from "./LocaleProvider";
+import { LOCALE_SHORT } from "@/lib/i18n/config";
 import { useToast } from "./ToastProvider";
 import { useSettings } from "./SettingsProvider";
 import { ExportButton } from "./ExportButton";
@@ -12,6 +14,7 @@ import { playChime } from "@/lib/chime";
 
 export function Header() {
   const { theme, toggle } = useTheme();
+  const { locale, toggle: toggleLocale, t } = useLocale();
   const { locked, toggleLock, openPanel, alarmVolume, setAlarmVolume } = useSettings();
   const { data: session, status: sessionStatus } = useSession();
   const [refreshing, setRefreshing] = useState(false);
@@ -33,10 +36,10 @@ export function Header() {
   }, [lastRefresh]);
 
   const liveLabel =
-    diffMin === 0 ? "atualizado agora" :
-    diffMin === 1 ? "atualizado há 1min" :
-    `atualizado há ${diffMin}min`;
-  const liveLabelShort = diffMin === 0 ? "ao vivo" : `${diffMin}min`;
+    diffMin === 0 ? t("header.live.now") :
+    diffMin === 1 ? t("header.live.one") :
+    t("header.live.many", { n: diffMin });
+  const liveLabelShort = diffMin === 0 ? t("header.live.short.now") : t("header.live.short.many", { n: diffMin });
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -44,7 +47,7 @@ export function Header() {
       setRefreshing(false);
       setLastRefresh(new Date());
       setDiffMin(0);
-      toast("Dados atualizados das 8 fontes oficiais");
+      toast(t("header.refresh.toast"));
     }, 1200);
   };
 
@@ -86,7 +89,7 @@ export function Header() {
             className="hidden sm:block text-[10px] tracking-[2.5px] uppercase mt-1.5 font-medium truncate"
             style={{ color: "var(--text-3)" }}
           >
-            Monitoramento Global de Imigração
+            {t("header.subtitle")}
           </div>
         </div>
       </div>
@@ -107,7 +110,11 @@ export function Header() {
 
         {isAdmin && <ExportButton minimal />}
 
-        <IconBtn title="Alternar tema" onClick={toggle}>
+        <IconBtn title={t("header.lang.title")} onClick={toggleLocale}>
+          <span className="text-[12px] font-extrabold tracking-wide">{LOCALE_SHORT[locale]}</span>
+        </IconBtn>
+
+        <IconBtn title={t("header.theme.title")} onClick={toggle}>
           {theme === "dark" ? (
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="4" />
@@ -120,7 +127,7 @@ export function Header() {
           )}
         </IconBtn>
 
-        <IconBtn title="Atualizar agora" onClick={onRefresh}>
+        <IconBtn title={t("header.refresh.title")} onClick={onRefresh}>
           <svg
             width="16"
             height="16"
@@ -141,10 +148,10 @@ export function Header() {
 
         {/* Cadeado · trava/destrava drag+resize de todas as caixas */}
         <IconBtn
-          title={locked ? "Layout travado · clica pra destravar" : "Layout livre · clica pra travar"}
+          title={locked ? t("header.lock.locked.title") : t("header.lock.free.title")}
           onClick={() => {
             toggleLock();
-            toast(locked ? "🔓 Layout destravado — caixas podem ser movidas e redimensionadas" : "🔒 Layout travado — caixas fixas no lugar");
+            toast(locked ? t("header.lock.unlocked.toast") : t("header.lock.locked.toast"));
           }}
           active={locked}
           activeColor="#FFB13B"
@@ -167,7 +174,7 @@ export function Header() {
         {/* Alarme leve · volume / mudo (ao lado do cadeado) */}
         <div className="relative">
           <IconBtn
-            title={alarmVolume === 0 ? "Alarme mudo · clica pra ajustar" : `Alarme · ${alarmVolume}% · clica pra ajustar`}
+            title={alarmVolume === 0 ? t("header.alarm.muted.title") : t("header.alarm.title", { n: alarmVolume })}
             onClick={() => setAlarmOpen((v) => !v)}
           >
             {alarmVolume === 0 ? (
@@ -192,8 +199,8 @@ export function Header() {
                 style={{ border: "1px solid var(--border-hi)", boxShadow: "var(--shadow-bar)" }}
               >
                 <div className="flex items-center justify-between mb-2.5">
-                  <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: "var(--color-wh-blue-light)" }}>🔔 Alarme</span>
-                  <span className="text-[11px] font-extrabold" style={{ color: "var(--text-2)" }}>{alarmVolume === 0 ? "Mudo" : `${alarmVolume}%`}</span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: "var(--color-wh-blue-light)" }}>{t("header.alarm.heading")}</span>
+                  <span className="text-[11px] font-extrabold" style={{ color: "var(--text-2)" }}>{alarmVolume === 0 ? t("header.alarm.muted") : `${alarmVolume}%`}</span>
                 </div>
                 <input
                   type="range"
@@ -213,7 +220,7 @@ export function Header() {
                     className="text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-lg cursor-pointer"
                     style={{ background: "var(--bg2)", border: "1px solid var(--border)", color: "var(--text-3)" }}
                   >
-                    Mudo
+                    {t("header.alarm.mute")}
                   </button>
                   <button
                     type="button"
@@ -221,25 +228,25 @@ export function Header() {
                     className="text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-lg cursor-pointer"
                     style={{ background: "rgba(31,85,255,.15)", border: "1px solid var(--border-hi)", color: "var(--color-wh-blue-light)" }}
                   >
-                    Testar 🔔
+                    {t("header.alarm.test")}
                   </button>
                 </div>
                 <p className="text-[9px] mt-2.5 leading-snug" style={{ color: "var(--text-3)" }}>
-                  Toca um plin leve quando chega solicitação nova ou boletim novo.
+                  {t("header.alarm.desc")}
                 </p>
               </div>
             </>
           )}
         </div>
 
-        <IconBtn title="Configurações · cor + fonte" onClick={openPanel}>
+        <IconBtn title={t("header.settings.title")} onClick={openPanel}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="3" />
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
           </svg>
         </IconBtn>
 
-        <IconBtn title="Notificações" onClick={() => toast("3 alertas críticos · 2 novas mudanças aguardando")}>
+        <IconBtn title={t("header.notifications.title")} onClick={() => toast(t("header.notifications.toast"))}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
             <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
@@ -259,7 +266,7 @@ export function Header() {
               border: "1px solid rgba(74,122,255,.5)",
             }}
           >
-            Entrar
+            {t("header.signin")}
           </button>
         ) : (
           <div className="relative">
@@ -292,7 +299,7 @@ export function Header() {
                       {session?.user?.email}
                     </div>
                     <div className="text-[10px] uppercase tracking-wider font-bold mt-0.5" style={{ color: isAdmin ? "var(--color-wh-blue-light)" : "var(--text-3)" }}>
-                      {isAdmin ? "Admin master" : "Editor"}
+                      {isAdmin ? t("header.role.master") : t("header.role.editor")}
                     </div>
                   </div>
 
@@ -303,7 +310,7 @@ export function Header() {
                       className="block px-4 py-2.5 text-[12.5px] hover:bg-white/5 transition-colors"
                       style={{ color: "var(--text-2)" }}
                     >
-                      🔐 Allowlist · gerenciar acesso
+                      {t("header.allowlist")}
                     </Link>
                   )}
 
@@ -322,7 +329,7 @@ export function Header() {
                     className="w-full text-left px-4 py-2.5 text-[12.5px] hover:bg-white/5 transition-colors"
                     style={{ color: "var(--color-status-critical)" }}
                   >
-                    ↩ Sair
+                    {t("header.signout")}
                   </button>
                 </div>
               </>

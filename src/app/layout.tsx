@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { LocaleProvider } from "@/components/LocaleProvider";
 import { ToastProvider } from "@/components/ToastProvider";
 import { SettingsProvider } from "@/components/SettingsProvider";
 import { UndoProvider } from "@/components/UndoProvider";
@@ -47,17 +48,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-BR" data-theme="dark" className={inter.variable}>
       <body data-theme="dark" style={{ fontFamily: "var(--font-inter), Inter, sans-serif" }}>
         <AuthSessionProvider>
-          <ThemeProvider>
-            <SettingsProvider>
-              <ToastProvider>
-                <UndoProvider>
-                  {children}
-                  <NavPerf />
-                  <PwaBootstrap />
-                </UndoProvider>
-              </ToastProvider>
-            </SettingsProvider>
-          </ThemeProvider>
+          <LocaleProvider>
+            <ThemeProvider>
+              <SettingsProvider>
+                <ToastProvider>
+                  <UndoProvider>
+                    {children}
+                    <NavPerf />
+                    <PwaBootstrap />
+                  </UndoProvider>
+                </ToastProvider>
+              </SettingsProvider>
+            </ThemeProvider>
+          </LocaleProvider>
         </AuthSessionProvider>
       </body>
     </html>
