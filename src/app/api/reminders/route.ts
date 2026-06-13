@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireSession, badRequest, getScope, friendlyName } from "@/lib/api-helpers";
-import { notifyTeamChange } from "@/lib/team-notify";
+import { notifyTeamChange, notifyItemCreated } from "@/lib/team-notify";
 
 export const runtime = "nodejs";
 
@@ -54,6 +54,7 @@ export async function POST(req: NextRequest) {
   });
   if (scope === "team") {
     await notifyTeamChange({ actorEmail: result.session.email, action: "criou", entity: "lembrete", title: reminder.title });
+    await notifyItemCreated({ actorName: friendlyName(result.session.email), entity: "lembrete", title: reminder.title });
   }
   return NextResponse.json({ reminder }, { status: 201 });
 }

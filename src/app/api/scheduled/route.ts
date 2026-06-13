@@ -3,7 +3,7 @@ import { z } from "zod";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { requireSession, badRequest, getScope, friendlyName } from "@/lib/api-helpers";
-import { notifyTeamChange } from "@/lib/team-notify";
+import { notifyTeamChange, notifyItemCreated } from "@/lib/team-notify";
 
 export const runtime = "nodejs";
 
@@ -60,6 +60,7 @@ export async function POST(req: NextRequest) {
   });
   if (scope === "team") {
     await notifyTeamChange({ actorEmail: result.session.email, action: "criou", entity: "ação programada", title: action.name });
+    await notifyItemCreated({ actorName: friendlyName(result.session.email), entity: "ação programada", title: action.name });
   }
   return NextResponse.json({ action }, { status: 201 });
 }

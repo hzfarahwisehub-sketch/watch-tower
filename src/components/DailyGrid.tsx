@@ -179,8 +179,12 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
     if (!text.trim()) return remindersHook.remove(id);
     remindersHook.update(id, { text: text.trim() });
   };
-  const addReminder = () =>
-    remindersHook.add({ text: "Novo lembrete", when: "Hoje", crit: false });
+  const addReminder = () => {
+    const text = window.prompt("Novo lembrete:")?.trim();
+    if (!text) return;
+    if (!window.confirm(`Deseja confirmar este lembrete?\n\n"${text}"`)) return;
+    remindersHook.add({ text, when: "Hoje", crit: false });
+  };
   // Manda o lembrete como SOLICITAÇÃO pra Friday (reusa o canal de mensagens).
   // Quando a Friday abrir uma sessão, ela pergunta ao Hammis se quer iniciar,
   // explicando o quê foi e quem pediu.
@@ -210,14 +214,18 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
     const s = scheduled.find((x) => x.id === id);
     if (s) scheduledHook.update(id, { status: s.status === "active" ? "paused" : "active" });
   };
-  const addScheduled = () =>
+  const addScheduled = () => {
+    const title = window.prompt("Nova ação programada (nome):")?.trim();
+    if (!title) return;
+    if (!window.confirm(`Deseja confirmar esta ação programada?\n\n"${title}"`)) return;
     scheduledHook.add({
       icon: "⚡",
-      title: "Nova ação programada",
+      title,
       frequency: "Diário",
       nextRun: "Amanhã",
       status: "active",
     });
+  };
 
   const inboxCard = (
         <DailyCard
