@@ -75,7 +75,7 @@ export function AlertsBanner({ onSelect }: { onSelect: (code: string) => void })
 
   return (
     <div
-      className="flex items-center gap-3.5 pl-[84px] pr-5 py-4 mb-5 flex-wrap rounded-[14px]"
+      className="flex items-center gap-3.5 px-5 py-4 mb-5 flex-wrap rounded-[14px]"
       style={{
         background: "linear-gradient(90deg, rgba(255,59,92,.15), rgba(255,59,92,.04) 70%)",
         border: "1px solid rgba(255,59,92,.4)",

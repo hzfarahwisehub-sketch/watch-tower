@@ -70,7 +70,7 @@ export function OfficialBulletins() {
   return (
     <section className="wt-card flex flex-col h-full">
       <div
-        className="flex items-center justify-between gap-3 pl-[88px] pr-7 py-5"
+        className="flex items-center justify-between gap-3 px-7 py-5"
         style={{ borderBottom: "1px solid var(--border)" }}
       >
         <h2

@@ -367,11 +367,12 @@ html[data-navigating] .wt-watermark {
   background: rgba(31,85,255,.45);
 }
 
-/* Drag handle (canto superior ESQUERDO de cada caixa) */
+/* Drag handle (centralizado no topo de cada caixa — no vazio entre o titulo, a
+   esquerda, e o conteudo, a direita; junto com o pop-out forma o cluster) */
 .wt-drag-handle {
   position: absolute;
   top: 6px;
-  left: 6px;
+  left: calc(50% - 38px);
   width: 32px;
   height: 32px;
   display: inline-flex;
@@ -413,12 +414,12 @@ html[data-navigating] .wt-watermark {
 }
 
 /* Pop-out / desacoplar a caixa — mesmo cluster do ⠿, flat: so ganha fundo no
-   hover. Fica a direita do ⠿ no canto superior ESQUERDO (left:44 = 6 + 32 + 6
-   de gap), mesmo top/altura, sem sombra. Sem cara de "pastilha solta". */
+   hover. Fica a direita do ⠿, centralizado no topo (left: 50% + 6 = a metade do
+   par de 76px), mesmo top/altura, sem sombra. Sem cara de "pastilha solta". */
 .wt-popout-handle {
   position: absolute;
   top: 6px;
-  left: 44px;
+  left: calc(50% + 6px);
   width: 32px;
   height: 32px;
   display: inline-flex;
