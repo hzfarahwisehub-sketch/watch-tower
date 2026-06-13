@@ -105,7 +105,7 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
   return (
     <section>
       <h2
-        className="text-[13px] tracking-[3px] uppercase font-extrabold flex items-center justify-between gap-2.5 mb-4 pb-3 flex-wrap"
+        className="text-[13px] tracking-[3px] uppercase font-extrabold flex items-center justify-between gap-2.5 mb-4 pb-3 pr-[80px] flex-wrap"
         style={{ color: "var(--color-wh-blue-light)", borderBottom: "1px solid var(--border)" }}
       >
         <span className="flex items-center gap-2.5">

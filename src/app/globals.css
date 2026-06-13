@@ -367,12 +367,12 @@ html[data-navigating] .wt-watermark {
   background: rgba(31,85,255,.45);
 }
 
-/* Drag handle (centralizado no topo de cada caixa — no vazio entre o titulo, a
-   esquerda, e o conteudo, a direita; junto com o pop-out forma o cluster) */
+/* Drag handle — quina superior DIREITA (igual aos icones do app), a esquerda do
+   pop-out. O conteudo de cada caixa e empurrado pra esquerda (pr-* no header). */
 .wt-drag-handle {
   position: absolute;
   top: 6px;
-  left: calc(50% - 38px);
+  right: 44px;
   width: 32px;
   height: 32px;
   display: inline-flex;
@@ -414,12 +414,12 @@ html[data-navigating] .wt-watermark {
 }
 
 /* Pop-out / desacoplar a caixa — mesmo cluster do ⠿, flat: so ganha fundo no
-   hover. Fica a direita do ⠿, centralizado no topo (left: 50% + 6 = a metade do
-   par de 76px), mesmo top/altura, sem sombra. Sem cara de "pastilha solta". */
+   hover. Fica na QUINA superior direita (right:6); o ⠿ fica a esquerda dele.
+   Sempre visivel (mesmo travado), por isso ocupa a quina. Sem sombra. */
 .wt-popout-handle {
   position: absolute;
   top: 6px;
-  left: calc(50% + 6px);
+  right: 6px;
   width: 32px;
   height: 32px;
   display: inline-flex;

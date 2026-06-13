@@ -57,7 +57,7 @@ export function CountriesSidebar({
   return (
     <div className="wt-card flex flex-col h-full @container">
       <div
-        className="flex items-center justify-between gap-2 px-5 py-3.5 flex-shrink-0"
+        className="flex items-center justify-between gap-2 pl-5 pr-[80px] py-3.5 flex-shrink-0"
         style={{ borderBottom: "1px solid var(--border)" }}
       >
         <h2
