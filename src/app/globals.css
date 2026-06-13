@@ -379,7 +379,7 @@ html[data-navigating] .wt-watermark {
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: 1px solid transparent;
+  border: 1px solid var(--border-hi);
   border-radius: 8px;
   color: var(--color-wh-blue-light);
   font-size: 16px;
@@ -387,7 +387,7 @@ html[data-navigating] .wt-watermark {
   line-height: 1;
   cursor: grab;
   z-index: 25;
-  opacity: 0.5;
+  opacity: 0.85;
   transition: opacity .2s ease, transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -426,14 +426,14 @@ html[data-navigating] .wt-watermark {
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: 1px solid transparent;
+  border: 1px solid var(--border-hi);
   border-radius: 8px;
   color: var(--text-3);
   font-size: 13px;
   line-height: 1;
   cursor: pointer;
   z-index: 26;
-  opacity: 0.5;
+  opacity: 0.85;
   transition: opacity .2s ease, transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
