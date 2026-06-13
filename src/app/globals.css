@@ -371,10 +371,10 @@ html[data-navigating] .wt-watermark {
    pop-out. O conteudo de cada caixa e empurrado pra esquerda (pr-* no header). */
 .wt-drag-handle {
   position: absolute;
-  top: 6px;
-  right: 44px;
-  width: 32px;
-  height: 32px;
+  top: 1px;
+  right: 36px;
+  width: 24px;
+  height: 24px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -418,10 +418,10 @@ html[data-navigating] .wt-watermark {
    sombra). Fica na QUINA superior direita (right:6); o ⠿ fica a esquerda. */
 .wt-popout-handle {
   position: absolute;
-  top: 6px;
+  top: 1px;
   right: 6px;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
