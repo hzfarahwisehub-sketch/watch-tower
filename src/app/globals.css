@@ -460,7 +460,11 @@ html[data-navigating] .wt-watermark {
 .wt-cell-bulletins .wt-drag-handle, .wt-cell-bulletins .wt-popout-handle { top: 25px; }
 .wt-cell-feed .wt-drag-handle, .wt-cell-feed .wt-popout-handle { top: 4px; }
 
-/* Resize handle (canto inferior direito) — chevron L azul sempre visível.
+/* Resize handle (canto inferior direito) — chevron L azul.
+   Limpo por padrão (opacity 0): o canto direito NÃO fica com a "escadinha" de
+   alças soltas empilhadas. A alça aparece ao passar o mouse na caixa (ou durante
+   o próprio resize) — regras logo abaixo. Continua funcional mesmo invisível,
+   porque opacity:0 não bloqueia o ponteiro.
    Posicionado AFASTADO da scrollbar (6px largura + 8px gap = 14px de offset) */
 .react-grid-item > .react-resizable-handle.react-resizable-handle-se {
   width: 28px !important;
@@ -470,7 +474,7 @@ html[data-navigating] .wt-watermark {
   cursor: nwse-resize;
   background-image: none !important;
   z-index: 30;
-  opacity: 0.7;
+  opacity: 0;
   transition: opacity .2s ease, transform .2s ease;
   padding: 0 !important;
   background: var(--surface-hi);
@@ -502,6 +506,14 @@ html[data-navigating] .wt-watermark {
 [data-theme="light"] .react-grid-item > .react-resizable-handle.react-resizable-handle-se {
   background: #fff;
   box-shadow: 0 2px 8px rgba(31,85,255,.18);
+}
+/* Revela a alça só quando o mouse está na caixa, ou enquanto se redimensiona —
+   assim o canto direito fica limpo no estado normal (sem a escadinha) e a alça
+   continua descobrível e funcional na hora de esticar a caixa. */
+.react-grid-item:hover > .react-resizable-handle.react-resizable-handle-se,
+.react-grid-item.resizing > .react-resizable-handle.react-resizable-handle-se,
+.react-grid-item.react-resizable-resizing > .react-resizable-handle.react-resizable-handle-se {
+  opacity: 0.75;
 }
 
 /* ===== DailyCard body — resize via react-resizable (mesmo sistema do grid) ===== */
