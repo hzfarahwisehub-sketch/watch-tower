@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { INFO_CENTERS } from "@/lib/infoCenters";
+import { useLocale } from "./LocaleProvider";
+
+type TFn = (key: string, params?: Record<string, string | number>) => string;
 
 type Headline = {
   title: string;
@@ -32,19 +35,19 @@ type ActivityState =
 const REFRESH_MS = 10 * 60 * 1000;
 const BULLETIN_FRESH_DAYS = 7;
 
-function formatRelative(iso?: string): string {
+function formatRelative(iso: string | undefined, t: TFn, intl: string): string {
   if (!iso) return "";
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return "";
   const delta = Date.now() - date.getTime();
   const h = Math.floor(delta / 3_600_000);
-  if (h < 1) return "agora";
-  if (h < 24) return `há ${h}h`;
+  if (h < 1) return t("live.rel.now");
+  if (h < 24) return t("live.rel.hour", { n: h });
   const d = Math.floor(h / 24);
-  if (d < 7) return `há ${d}d`;
+  if (d < 7) return t("live.rel.day", { n: d });
   const w = Math.floor(d / 7);
-  if (w < 5) return `há ${w}sem`;
-  return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
+  if (w < 5) return t("live.rel.week", { n: w });
+  return date.toLocaleDateString(intl, { day: "2-digit", month: "2-digit" });
 }
 
 async function fetchFeed(rssUrl: string, sourceName: string): Promise<Headline[]> {
@@ -73,6 +76,7 @@ async function fetchFeed(rssUrl: string, sourceName: string): Promise<Headline[]
  * Custo: $0 (reaproveita /api/rss + cron de bulletins existentes).
  */
 export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
+  const { t, intl } = useLocale();
   const [state, setState] = useState<ActivityState>({ status: "idle" });
   const [bulletinFresh, setBulletinFresh] = useState<{ at: string; url: string } | null>(null);
 
@@ -151,12 +155,12 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
         className="text-[10.5px] tracking-[2px] uppercase font-bold mb-2 flex items-center gap-2"
         style={{ color: "#10A570" }}
       >
-        📡 Atividade ao vivo
+        📡 {t("live.title")}
         <span
           className="text-[8.5px] tracking-wider font-bold px-1.5 py-0.5 rounded"
           style={{ color: "#10A570", background: "rgba(16,165,112,.12)" }}
         >
-          ● AUTO · 10min
+          {t("live.badge.auto")}
         </span>
       </h4>
 
@@ -174,21 +178,21 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
         >
           <div className="flex items-center justify-between gap-2">
             <span className="text-[11px] font-bold" style={{ color: "#10A570" }}>
-              ✦ Boletim oficial atualizado
+              ✦ {t("live.bulletin.fresh")}
             </span>
             <span className="text-[9.5px] uppercase tracking-wider font-bold" style={{ color: "var(--text-3)" }}>
-              {formatRelative(bulletinFresh.at)}
+              {formatRelative(bulletinFresh.at, t, intl)}
             </span>
           </div>
           <div className="text-[10.5px] mt-0.5" style={{ color: "var(--text-2)" }}>
-            Mudança detectada pelo cron diário · clique pra ver
+            {t("live.bulletin.hint")}
           </div>
         </a>
       )}
 
       {state.status === "loading" && (
         <div className="text-[11px] py-2" style={{ color: "var(--text-3)" }}>
-          Carregando manchetes…
+          {t("live.loading")}
         </div>
       )}
 
@@ -222,7 +226,7 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
                       className="text-[9.5px] uppercase tracking-wider font-bold flex-shrink-0 px-1.5 py-0.5 rounded"
                       style={{ color: "var(--text-3)", background: "rgba(255,255,255,.04)" }}
                     >
-                      {formatRelative(h.pubDate)}
+                      {formatRelative(h.pubDate, t, intl)}
                     </span>
                   )}
                 </div>

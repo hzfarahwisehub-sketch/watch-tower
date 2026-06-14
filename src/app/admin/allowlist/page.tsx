@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useLocale } from "@/components/LocaleProvider";
 
 type AllowedEmail = {
   id: string;
@@ -19,6 +20,7 @@ type LoadState =
   | { status: "error"; message: string };
 
 export default function AllowlistPage() {
+  const { t, intl } = useLocale();
   const { data: session, status: sessionStatus } = useSession();
   const [state, setState] = useState<LoadState>({ status: "loading" });
   const [newEmail, setNewEmail] = useState("");
@@ -31,15 +33,15 @@ export default function AllowlistPage() {
     try {
       const res = await fetch("/api/admin/allowlist", { cache: "no-store" });
       if (res.status === 401) {
-        setState({ status: "error", message: "Não autenticado. Faça login." });
+        setState({ status: "error", message: t("admin.err.unauth.login") });
         return;
       }
       if (res.status === 403) {
-        setState({ status: "error", message: "Acesso restrito a admins." });
+        setState({ status: "error", message: t("admin.err.forbidden") });
         return;
       }
       if (!res.ok) {
-        setState({ status: "error", message: `Erro HTTP ${res.status}` });
+        setState({ status: "error", message: t("admin.err.http", { n: res.status }) });
         return;
       }
       const data = await res.json();
@@ -47,15 +49,15 @@ export default function AllowlistPage() {
     } catch (err) {
       setState({ status: "error", message: String(err) });
     }
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     if (sessionStatus === "authenticated") {
       load();
     } else if (sessionStatus === "unauthenticated") {
-      setState({ status: "error", message: "Não autenticado." });
+      setState({ status: "error", message: t("admin.err.unauth") });
     }
-  }, [sessionStatus, load]);
+  }, [sessionStatus, load, t]);
 
   async function add(e: React.FormEvent) {
     e.preventDefault();
@@ -74,7 +76,7 @@ export default function AllowlistPage() {
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        setActionError(body.message ?? `HTTP ${res.status}`);
+        setActionError(body.message ?? t("admin.err.http.short", { n: res.status }));
         return;
       }
       setNewEmail("");
@@ -87,7 +89,7 @@ export default function AllowlistPage() {
   }
 
   async function remove(email: string) {
-    if (!confirm(`Remover ${email} da allowlist?`)) return;
+    if (!confirm(t("admin.confirm.remove", { email }))) return;
     setActionError(null);
     try {
       const res = await fetch(
@@ -96,7 +98,7 @@ export default function AllowlistPage() {
       );
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        setActionError(body.message ?? `HTTP ${res.status}`);
+        setActionError(body.message ?? t("admin.err.http.short", { n: res.status }));
         return;
       }
       await load();
@@ -139,7 +141,7 @@ export default function AllowlistPage() {
                   color: "var(--text-2)",
                 }}
               >
-                Sair
+                {t("admin.signout")}
               </button>
             </div>
           )}
@@ -148,10 +150,10 @@ export default function AllowlistPage() {
         {/* Title */}
         <div className="flex flex-col gap-1.5">
           <h1 className="text-[22px] font-extrabold tracking-[2px] uppercase" style={{ color: "var(--text)" }}>
-            🔐 Allowlist · Quem pode entrar
+            {t("admin.title")}
           </h1>
           <p className="text-[13px]" style={{ color: "var(--text-2)" }}>
-            Lista de e-mails autorizados a fazer login no painel. Outros e-mails são silenciosamente rejeitados.
+            {t("admin.subtitle")}
           </p>
         </div>
 
@@ -161,7 +163,7 @@ export default function AllowlistPage() {
             className="wt-card p-6 text-center text-[13px]"
             style={{ color: "var(--text-3)" }}
           >
-            Carregando…
+            {t("admin.loading")}
           </div>
         )}
 
@@ -176,7 +178,7 @@ export default function AllowlistPage() {
           >
             <span className="text-[20px] leading-none" style={{ color: "var(--color-status-critical)" }}>⚠</span>
             <div className="flex-1">
-              <h3 className="font-bold mb-1">Não foi possível carregar</h3>
+              <h3 className="font-bold mb-1">{t("admin.error.heading")}</h3>
               <p className="text-[12.5px]" style={{ color: "var(--text-2)" }}>{state.message}</p>
               {sessionStatus === "unauthenticated" && (
                 <Link
@@ -187,7 +189,7 @@ export default function AllowlistPage() {
                     color: "#fff",
                   }}
                 >
-                  Fazer login
+                  {t("admin.signin")}
                 </Link>
               )}
             </div>
@@ -201,7 +203,7 @@ export default function AllowlistPage() {
             className="wt-card p-5 flex flex-col gap-3"
           >
             <h2 className="text-[12px] tracking-[2px] uppercase font-bold" style={{ color: "var(--color-wh-blue-light)" }}>
-              + Adicionar e-mail
+              {t("admin.form.heading")}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-[1fr_140px_auto] gap-3">
               <input
@@ -219,8 +221,8 @@ export default function AllowlistPage() {
                 className="px-3 py-2.5 rounded-lg text-[13px] outline-none cursor-pointer"
                 style={{ background: "var(--bg2)", border: "1px solid var(--border)", color: "var(--text)" }}
               >
-                <option value="editor">Editor</option>
-                <option value="admin">Admin</option>
+                <option value="editor">{t("admin.role.editor")}</option>
+                <option value="admin">{t("admin.role.admin")}</option>
               </select>
               <button
                 type="submit"
@@ -232,12 +234,12 @@ export default function AllowlistPage() {
                   boxShadow: "0 4px 14px rgba(31,85,255,.35)",
                 }}
               >
-                {submitting ? "Salvando…" : "Adicionar"}
+                {submitting ? t("admin.form.saving") : t("admin.form.add")}
               </button>
             </div>
             <input
               type="text"
-              placeholder="Anotação opcional (ex: 'Lucas Bin · sócio 30%')"
+              placeholder={t("admin.form.notes.placeholder")}
               value={newNotes}
               onChange={(e) => setNewNotes(e.target.value)}
               className="px-3 py-2 rounded-lg text-[12px] outline-none"
@@ -266,7 +268,9 @@ export default function AllowlistPage() {
               style={{ borderBottom: "1px solid var(--border)" }}
             >
               <h2 className="text-[12px] tracking-[2px] uppercase font-bold" style={{ color: "var(--color-wh-blue-light)" }}>
-                {state.allowed.length} {state.allowed.length === 1 ? "e-mail autorizado" : "e-mails autorizados"}
+                {state.allowed.length === 1
+                  ? t("admin.list.count.one", { n: state.allowed.length })
+                  : t("admin.list.count.many", { n: state.allowed.length })}
               </h2>
             </div>
             <ul className="divide-y" style={{ borderColor: "var(--border)" }}>
@@ -291,7 +295,7 @@ export default function AllowlistPage() {
                             border: `1px solid ${entry.role === "admin" ? "rgba(74,122,255,.4)" : "var(--border)"}`,
                           }}
                         >
-                          {entry.role}
+                          {entry.role === "admin" ? t("admin.role.admin") : t("admin.role.editor")}
                         </span>
                         {isSelf && (
                           <span
@@ -301,7 +305,7 @@ export default function AllowlistPage() {
                               background: "rgba(16,224,160,.12)",
                             }}
                           >
-                            você
+                            {t("admin.badge.you")}
                           </span>
                         )}
                       </div>
@@ -309,14 +313,14 @@ export default function AllowlistPage() {
                         <p className="text-[11.5px]" style={{ color: "var(--text-2)" }}>{entry.notes}</p>
                       )}
                       <p className="text-[10px] uppercase tracking-wider" style={{ color: "var(--text-3)" }}>
-                        adicionado {new Date(entry.addedAt).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" })}
-                        {entry.addedBy && ` · por ${entry.addedBy}`}
+                        {t("admin.added")} {new Date(entry.addedAt).toLocaleDateString(intl, { day: "2-digit", month: "2-digit", year: "numeric" })}
+                        {entry.addedBy && ` ${t("admin.added.by", { name: entry.addedBy })}`}
                       </p>
                     </div>
                     <button
                       onClick={() => remove(entry.email)}
                       disabled={isSelf}
-                      title={isSelf ? "Não pode remover você mesmo" : "Remover"}
+                      title={isSelf ? t("admin.remove.self.title") : t("admin.remove.title")}
                       className="px-3 py-1.5 rounded-lg uppercase tracking-wider font-bold text-[10.5px] transition-all hover:-translate-y-px disabled:opacity-30 disabled:cursor-not-allowed disabled:transform-none"
                       style={{
                         color: "var(--color-status-critical)",
@@ -324,7 +328,7 @@ export default function AllowlistPage() {
                         border: "1px solid rgba(255,59,92,.3)",
                       }}
                     >
-                      Remover
+                      {t("admin.remove")}
                     </button>
                   </li>
                 );
@@ -343,8 +347,8 @@ export default function AllowlistPage() {
               border: "1px solid var(--border)",
             }}
           >
-            <p className="mb-1.5"><strong style={{ color: "var(--text-2)" }}>Como funciona</strong></p>
-            <p>Quem está aqui pode fazer login via magic link. Quem não está, ao tentar logar, recebe a tela de &ldquo;link enviado&rdquo; — mas o link <em>nunca</em> é enviado (proteção pra não vazar quem está/não está na lista).</p>
+            <p className="mb-1.5"><strong style={{ color: "var(--text-2)" }}>{t("admin.help.heading")}</strong></p>
+            <p>{t("admin.help.body.1")}<em>{t("admin.help.body.em")}</em>{t("admin.help.body.2")}</p>
           </div>
         )}
       </div>

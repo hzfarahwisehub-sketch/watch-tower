@@ -9,6 +9,9 @@ import {
   type DimensionKey,
 } from "@/lib/editorial";
 import { INFO_CENTERS, type InfoSource } from "@/lib/infoCenters";
+import { useLocale } from "./LocaleProvider";
+
+type TFn = (key: string, params?: Record<string, string | number>) => string;
 
 const COMM = DESTINATIONS.find((d) => d.key === "community")!.colorHex;
 const TAB = DESTINATIONS.find((d) => d.key === "countryTab")!.colorHex;
@@ -18,13 +21,13 @@ function paras(text: string): string[] {
   return text.split(/\n{2,}/).map((s) => s.trim()).filter(Boolean);
 }
 
-function categoryLabel(c: string): string {
+function categoryLabel(c: string, t: TFn): string {
   switch (c) {
-    case "news": return "📰 Notícias gerais";
-    case "finance": return "💰 Finanças & Mercados";
-    case "crypto": return "🪙 Cripto & Derivativos";
-    case "legal": return "⚖ Leis & Regulação";
-    default: return "📌 Fontes oficiais";
+    case "news": return t("detail.cat.news");
+    case "finance": return t("detail.cat.finance");
+    case "crypto": return t("detail.cat.crypto");
+    case "legal": return t("detail.cat.legal");
+    default: return t("detail.cat.official");
   }
 }
 
@@ -45,6 +48,7 @@ function Title({ children, color }: { children: ReactNode; color?: string }) {
  * Educação · Saúde · Economia) — a dimensão é detectada pelo emoji do título.
  */
 export function CountryDetailSections({ country }: { country: Country }) {
+  const { t } = useLocale();
   const ed = getEditorial(country.code);
   const [dim, setDim] = useState<DimensionKey>("all");
 
@@ -104,7 +108,7 @@ export function CountryDetailSections({ country }: { country: Country }) {
       {/* Dicas práticas */}
       {tips.length > 0 && (
         <div>
-          <Title color="#D8AF54">💡 Dicas práticas</Title>
+          <Title color="#D8AF54">{t("detail.tips.title")}</Title>
           <ul className="flex flex-col gap-2">
             {tips.map((t, i) => (
               <li
@@ -122,7 +126,7 @@ export function CountryDetailSections({ country }: { country: Country }) {
       {/* Notícia completa (editorial · aba do país) */}
       {countryTab.length > 0 && (
         <div>
-          <Title color={`#${TAB}`}>📰 Notícia completa</Title>
+          <Title color={`#${TAB}`}>{t("detail.fullStory.title")}</Title>
           <div className="flex flex-col gap-3">
             {countryTab.map((a, i) => (
               <article key={i} className="rounded-lg p-3.5" style={{ background: "var(--bg2)", borderLeft: `3px solid #${TAB}` }}>
@@ -156,7 +160,7 @@ export function CountryDetailSections({ country }: { country: Country }) {
       {/* Posts da comunidade */}
       {community.length > 0 && (
         <div>
-          <Title color={`#${COMM}`}>📣 Posts pra comunidade</Title>
+          <Title color={`#${COMM}`}>{t("detail.community.title")}</Title>
           <div className="flex flex-col gap-2.5">
             {community.map((p, i) => (
               <div key={i} className="rounded-lg p-3" style={{ background: "var(--bg2)", borderLeft: `3px solid #${COMM}` }}>
@@ -173,7 +177,7 @@ export function CountryDetailSections({ country }: { country: Country }) {
       {/* Matéria do Blog */}
       {blog.length > 0 && (
         <div>
-          <Title color={`#${BLOG}`}>📝 Matéria do Blog WiseHub News</Title>
+          <Title color={`#${BLOG}`}>{t("detail.blog.title")}</Title>
           <div className="flex flex-col gap-3">
             {blog.map((p, i) => (
               <article key={i} className="rounded-lg p-3.5" style={{ background: "var(--bg2)", borderLeft: `3px solid #${BLOG}` }}>
@@ -190,18 +194,18 @@ export function CountryDetailSections({ country }: { country: Country }) {
 
       {nothingInDim && (
         <p className="text-[11.5px] italic" style={{ color: "var(--text-3)" }}>
-          Nada nesta dimensão ainda pra {country.name}. Em curadoria.
+          {t("detail.empty.dimension", { country: country.name })}
         </p>
       )}
 
       {/* Centros de Informação (fontes) */}
       {sources.length > 0 && (
         <div>
-          <Title>🌐 Centros de Informação ({sources.length})</Title>
+          <Title>{t("detail.infoCenters.title", { n: sources.length })}</Title>
           <div className="flex flex-col gap-2.5">
             {[...byCategory.entries()].map(([cat, srcs]) => (
               <div key={cat}>
-                <h5 className="text-[10.5px] font-bold mb-1" style={{ color: "var(--text-2)" }}>{categoryLabel(cat)} ({srcs.length})</h5>
+                <h5 className="text-[10.5px] font-bold mb-1" style={{ color: "var(--text-2)" }}>{categoryLabel(cat, t)} ({srcs.length})</h5>
                 <div className="flex flex-wrap gap-x-3.5 gap-y-1.5">
                   {srcs.map((s, i) => (
                     <a key={i} href={s.url} target="_blank" rel="noreferrer" className="text-[11.5px] flex items-center gap-1" style={{ color: "var(--color-wh-blue-light)" }}>
@@ -218,7 +222,7 @@ export function CountryDetailSections({ country }: { country: Country }) {
 
       {!ed && (
         <p className="text-[11.5px] italic" style={{ color: "var(--text-3)" }}>
-          Conteúdo editorial deste país em curadoria pela Friday. Por enquanto, veja o panorama, a atividade ao vivo e as fontes.
+          {t("detail.empty.noEditorial")}
         </p>
       )}
     </>

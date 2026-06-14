@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 
 import { BULLETINS } from "@/lib/bulletins";
 import type { FreqColor, Bulletin, BulletinStatus, StatusFile } from "@/lib/bulletins";
+import { useLocale } from "./LocaleProvider";
 
 // Re-export pra manter compat com importadores client já existentes.
 export { BULLETINS };
 export type { FreqColor, Bulletin, BulletinStatus, StatusFile };
+
+type TFn = (key: string, params?: Record<string, string | number>) => string;
 
 
 const FREQ_STYLES: Record<FreqColor, { color: string; icon: string }> = {
@@ -18,26 +21,26 @@ const FREQ_STYLES: Record<FreqColor, { color: string; icon: string }> = {
 
 const CHANGED_WINDOW_DAYS = 7;
 
-function fmtRelative(iso: string | null): string {
-  if (!iso) return "—";
+function fmtRelative(iso: string | null, t: TFn): string {
+  if (!iso) return t("bulletins.rel.dash");
   const then = new Date(iso).getTime();
   const now = Date.now();
   const diff = Math.max(0, now - then);
   const hours = Math.floor(diff / 3_600_000);
-  if (hours < 1) return "agora há pouco";
-  if (hours < 24) return `há ${hours}h`;
+  if (hours < 1) return t("bulletins.rel.justNow");
+  if (hours < 24) return t("bulletins.rel.hours", { n: hours });
   const days = Math.floor(hours / 24);
-  if (days === 1) return "ontem";
-  if (days < 7) return `há ${days}d`;
+  if (days === 1) return t("bulletins.rel.yesterday");
+  if (days < 7) return t("bulletins.rel.days", { n: days });
   const weeks = Math.floor(days / 7);
-  if (weeks < 5) return `há ${weeks}sem`;
+  if (weeks < 5) return t("bulletins.rel.weeks", { n: weeks });
   const months = Math.floor(days / 30);
-  return `há ${months}mês`;
+  return t("bulletins.rel.months", { n: months });
 }
 
-function fmtCheckedAt(iso: string | null): string {
-  if (!iso) return "ainda não verificado";
-  return `verificado ${fmtRelative(iso)}`;
+function fmtCheckedAt(iso: string | null, t: TFn): string {
+  if (!iso) return t("bulletins.card.notChecked");
+  return t("bulletins.card.checkedAt", { value: fmtRelative(iso, t) });
 }
 
 function isRecentlyChanged(b: BulletinStatus | undefined): boolean {
@@ -47,6 +50,7 @@ function isRecentlyChanged(b: BulletinStatus | undefined): boolean {
 }
 
 export function OfficialBulletins() {
+  const { t } = useLocale();
   const [statusByKey, setStatusByKey] = useState<Record<string, BulletinStatus>>({});
   const [lastRun, setLastRun] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -77,7 +81,7 @@ export function OfficialBulletins() {
           className="text-[12px] tracking-[2.5px] uppercase font-bold flex items-center gap-2"
           style={{ color: "var(--color-wh-blue-light)" }}
         >
-          📜 Boletins Oficiais de Imigração
+          {t("bulletins.title")}
           {recentChanges > 0 && (
             <span
               className="px-2 py-0.5 rounded-full text-[10px] tracking-wider"
@@ -87,7 +91,9 @@ export function OfficialBulletins() {
                 color: "#5DD580",
               }}
             >
-              {recentChanges} ATUALIZADO{recentChanges > 1 ? "S" : ""}
+              {recentChanges > 1
+                ? t("bulletins.badge.changed.many", { n: recentChanges })
+                : t("bulletins.badge.changed.one", { n: recentChanges })}
             </span>
           )}
         </h2>
@@ -95,10 +101,12 @@ export function OfficialBulletins() {
           className="text-[10.5px] font-semibold tracking-wider uppercase text-right"
           style={{ color: "var(--text-3)" }}
         >
-          {BULLETINS.length} jurisdições · fontes oficiais
+          {t("bulletins.meta.jurisdictions", { n: BULLETINS.length })}
           <br />
           <span style={{ color: "var(--text-2)" }}>
-            Última varredura: {loading ? "carregando…" : fmtRelative(lastRun)}
+            {t("bulletins.meta.lastScan", {
+              value: loading ? t("bulletins.meta.loading") : fmtRelative(lastRun, t),
+            })}
           </span>
         </span>
       </div>
@@ -106,19 +114,19 @@ export function OfficialBulletins() {
       <div className="px-7 py-4" style={{ borderBottom: "1px solid var(--border)" }}>
         <div className="flex flex-wrap items-center gap-3 text-[10.5px]" style={{ color: "var(--text-3)" }}>
           <span className="flex items-center gap-1.5">
-            <span style={{ color: FREQ_STYLES.live.color }}>●</span> Quinzenal
+            <span style={{ color: FREQ_STYLES.live.color }}>●</span> {t("bulletins.legend.biweekly")}
           </span>
           <span className="flex items-center gap-1.5">
-            <span style={{ color: FREQ_STYLES.monthly.color }}>◐</span> Mensal
+            <span style={{ color: FREQ_STYLES.monthly.color }}>◐</span> {t("bulletins.legend.monthly")}
           </span>
           <span className="flex items-center gap-1.5">
-            <span style={{ color: FREQ_STYLES.quarterly.color }}>◇</span> Trimestral
+            <span style={{ color: FREQ_STYLES.quarterly.color }}>◇</span> {t("bulletins.legend.quarterly")}
           </span>
           <span className="flex items-center gap-1.5">
-            <span style={{ color: FREQ_STYLES.ondemand.color }}>→</span> Sob demanda
+            <span style={{ color: FREQ_STYLES.ondemand.color }}>→</span> {t("bulletins.legend.ondemand")}
           </span>
           <span className="flex items-center gap-1.5 ml-auto">
-            <span style={{ color: "#5DD580" }}>✦</span> Mudança detectada nos últimos {CHANGED_WINDOW_DAYS} dias
+            <span style={{ color: "#5DD580" }}>✦</span> {t("bulletins.legend.changed", { n: CHANGED_WINDOW_DAYS })}
           </span>
         </div>
       </div>
@@ -155,7 +163,7 @@ export function OfficialBulletins() {
                     boxShadow: "0 2px 6px rgba(0,0,0,.3)",
                   }}
                 >
-                  ✦ NOVO
+                  {t("bulletins.card.new")}
                 </span>
               )}
               <div className="flex items-start justify-between gap-2">
@@ -201,8 +209,10 @@ export function OfficialBulletins() {
                   style={{ color: changed ? "#5DD580" : "var(--text-3)" }}
                 >
                   {changed
-                    ? `mudança ${fmtRelative(status?.lastChangedAt ?? null)}`
-                    : fmtCheckedAt(status?.lastCheckedAt ?? null)}
+                    ? t("bulletins.card.changedAt", {
+                        value: fmtRelative(status?.lastChangedAt ?? null, t),
+                      })
+                    : fmtCheckedAt(status?.lastCheckedAt ?? null, t)}
                 </span>
                 <span
                   className="text-[10.5px] font-bold transition-colors"
@@ -218,7 +228,19 @@ export function OfficialBulletins() {
 
       <div className="px-7 py-4" style={{ borderTop: "1px solid var(--border)" }}>
         <p className="text-[10.5px]" style={{ color: "var(--text-3)" }}>
-          Fontes governamentais oficiais das {BULLETINS.length} jurisdições monitoradas (3 América · 32 Europa · 1 Oriente Médio · 4 Ásia-Pacífico/Oceania). Varredura automática diária às 08h00 BRT detecta mudanças no conteúdo de cada boletim. Cards com selo <span style={{ color: "#5DD580" }}>✦ NOVO</span> tiveram alteração nos últimos {CHANGED_WINDOW_DAYS} dias.
+          {(() => {
+            const [before, after] = t("bulletins.footer", {
+              n: BULLETINS.length,
+              days: CHANGED_WINDOW_DAYS,
+            }).split("{badge}");
+            return (
+              <>
+                {before}
+                <span style={{ color: "#5DD580" }}>{t("bulletins.card.new")}</span>
+                {after}
+              </>
+            );
+          })()}
         </p>
       </div>
     </section>

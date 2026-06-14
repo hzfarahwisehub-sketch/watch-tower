@@ -11,12 +11,19 @@ import {
 } from "@/lib/dual-storage-configs";
 import { useToast } from "./ToastProvider";
 import { useUndoOptional } from "./UndoProvider";
+import { useLocale } from "./LocaleProvider";
+
+type TFn = (key: string, params?: Record<string, string | number>) => string;
 
 export type DailyBlock = "inbox" | "scheduled" | "agenda" | "tasks" | "reminders";
 
 export type BoardScope = "personal" | "team";
 
 export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
+  const { t } = useLocale();
+  // Alias estável da função de tradução para usar dentro de iterações onde a
+  // variável de item se chama `t` (ex.: tasks.map((t) => ...)), evitando shadowing.
+  const t2 = t;
   // Aba Pessoal | Equipe (lembrada por bloco). Default = Equipe, pra mostrar
   // o trabalho compartilhado do time já de cara.
   const scopeKey = `wt-scope-${only ?? "all"}`;
@@ -86,12 +93,12 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
   };
   const deleteTask = (id: number) => {
     const item = tasks.find((x) => x.id === id);
-    if (!window.confirm(`Deseja eliminar esta tarefa?${item ? `\n\n"${item.text}"` : ""}`)) return;
+    if (!window.confirm(`${t("daily.tasks.delete.confirm")}${item ? `\n\n"${item.text}"` : ""}`)) return;
     tasksHook.remove(id);
     if (item && scope === "personal" && undoCtx) {
       let curId = id;
       undoCtx.push({
-        label: "apagar tarefa",
+        label: t("daily.undo.deleteTask"),
         undo: async () => {
           const nid = await tasksHookRef.current.add({ text: item.text, done: item.done });
           if (nid) curId = nid;
@@ -103,9 +110,9 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
     }
   };
   const addTask = () => {
-    const text = window.prompt("Nova tarefa:")?.trim();
+    const text = window.prompt(t("daily.tasks.add.prompt"))?.trim();
     if (!text) return;
-    if (!window.confirm(`Deseja confirmar esta tarefa?\n\n"${text}"`)) return;
+    if (!window.confirm(`${t("daily.tasks.add.confirm")}\n\n"${text}"`)) return;
     tasksHook.add({ text, done: false });
   };
 
@@ -113,20 +120,20 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
   const editAgenda = (id: number, field: "title" | "where" | "time", value: string) =>
     agendaHook.update(id, { [field]: value } as Partial<AgendaItem>);
   const addAgenda = () => {
-    const title = window.prompt("Novo compromisso (título):")?.trim();
+    const title = window.prompt(t("daily.agenda.add.titlePrompt"))?.trim();
     if (!title) return;
-    const time = (window.prompt("Horário (HH:MM):", "00:00") || "00:00").trim();
-    if (!window.confirm(`Deseja confirmar este compromisso?\n\n${time} — ${title}`)) return;
+    const time = (window.prompt(t("daily.agenda.add.timePrompt"), "00:00") || "00:00").trim();
+    if (!window.confirm(`${t("daily.agenda.add.confirm")}\n\n${time} · ${title}`)) return;
     agendaHook.add({ time, title, where: "" });
   };
   const deleteAgenda = (id: number) => {
     const item = agenda.find((a) => a.id === id);
-    if (!window.confirm(`Deseja eliminar este compromisso?${item ? `\n\n${item.time} — ${item.title}` : ""}`)) return;
+    if (!window.confirm(`${t("daily.agenda.delete.confirm")}${item ? `\n\n${item.time} · ${item.title}` : ""}`)) return;
     agendaHook.remove(id);
     if (item && scope === "personal" && undoCtx) {
       let curId = id;
       undoCtx.push({
-        label: "apagar compromisso",
+        label: t("daily.undo.deleteAgenda"),
         undo: async () => {
           const nid = await agendaHookRef.current.add({ time: item.time, title: item.title, where: item.where });
           if (nid) curId = nid;
@@ -170,16 +177,16 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
     remindersHook.update(id, { text: text.trim() });
   };
   const addReminder = () => {
-    const text = window.prompt("Novo lembrete:")?.trim();
+    const text = window.prompt(t("daily.reminders.add.prompt"))?.trim();
     if (!text) return;
-    if (!window.confirm(`Deseja confirmar este lembrete?\n\n"${text}"`)) return;
-    remindersHook.add({ text, when: "Hoje", crit: false });
+    if (!window.confirm(`${t("daily.reminders.add.confirm")}\n\n"${text}"`)) return;
+    remindersHook.add({ text, when: t("daily.when.today"), crit: false });
   };
   // Manda o lembrete como SOLICITAÇÃO pra Friday (reusa o canal de mensagens).
   // Quando a Friday abrir uma sessão, ela pergunta ao Hammis se quer iniciar,
   // explicando o quê foi e quem pediu.
   const sendReminderToFriday = async (r: Reminder) => {
-    const authorPart = scope === "team" && r.author ? ` — lembrete de ${r.author}` : "";
+    const authorPart = scope === "team" && r.author ? `, ${t("daily.friday.reminderFrom", { author: r.author })}` : "";
     const msg = `⚡ EXECUTAR · Watch Tower (lembrete): "${r.text}"${authorPart}`;
     try {
       const res = await fetch("/api/suggestions", {
@@ -187,11 +194,11 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ body: msg }),
       });
-      if (res.ok) toast("Enviado pra Friday · ela te pergunta na próxima vez que você abrir");
-      else if (res.status === 401) toast("Faça login pra enviar pra Friday");
-      else toast(`Erro ${res.status} ao enviar pra Friday`);
+      if (res.ok) toast(t("daily.friday.sent"));
+      else if (res.status === 401) toast(t("daily.friday.signin"));
+      else toast(t("daily.friday.error", { n: res.status }));
     } catch {
-      toast("Falha ao enviar pra Friday");
+      toast(t("daily.friday.fail"));
     }
   };
 
@@ -205,33 +212,34 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
     if (s) scheduledHook.update(id, { status: s.status === "active" ? "paused" : "active" });
   };
   const addScheduled = () => {
-    const title = window.prompt("Nova ação programada (nome):")?.trim();
+    const title = window.prompt(t("daily.scheduled.add.prompt"))?.trim();
     if (!title) return;
-    if (!window.confirm(`Deseja confirmar esta ação programada?\n\n"${title}"`)) return;
+    if (!window.confirm(`${t("daily.scheduled.add.confirm")}\n\n"${title}"`)) return;
     scheduledHook.add({
       icon: "⚡",
       title,
-      frequency: "Diário",
-      nextRun: "Amanhã",
+      frequency: t("daily.freq.daily"),
+      nextRun: t("daily.when.tomorrow"),
       status: "active",
     });
   };
 
   const inboxCard = (
         <DailyCard
+          t={t}
           cardKey="inbox"
-          title="📧 Inbox"
-          subtitle="Mock · integração real na Fase 3"
-          total={`${inboxTotal} não lidos`}
-          action="↻ Sync"
-          onAction={() => toast(`Inbox sincronizado · ${inboxTotal} e-mails em ${INBOX_ACCOUNTS.length} contas`)}
+          title={t("daily.inbox.title")}
+          subtitle={t("daily.inbox.subtitle")}
+          total={t("daily.inbox.total", { n: inboxTotal })}
+          action={t("daily.inbox.action")}
+          onAction={() => toast(t("daily.inbox.synced", { n: inboxTotal, accounts: INBOX_ACCOUNTS.length }))}
           bodyMaxHeight={300}
         >
           {INBOX_ACCOUNTS.map((a) => (
             <button
               type="button"
               key={a.id}
-              onClick={() => toast(`Abrindo ${a.label} · integração Gmail/IMAP virá na Fase 3`)}
+              onClick={() => toast(t("daily.inbox.opening", { label: a.label }))}
               className="w-full flex items-center gap-3 px-4 py-3 rounded-lg my-1 transition-colors text-left cursor-pointer hover:bg-[rgba(31,85,255,0.06)]"
               style={{ borderLeft: "3px solid transparent", opacity: a.unread === 0 ? 0.45 : 1 }}
             >
@@ -280,10 +288,11 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
 
   const scheduledCard = (
         <DailyCard
+          t={t}
           cardKey="scheduled"
-          title="⚡ Ações Programadas"
-          total={`${scheduled.length} ações`}
-          action="+ Ação"
+          title={t("daily.scheduled.title")}
+          total={t("daily.scheduled.total", { n: scheduled.length })}
+          action={t("daily.scheduled.action")}
           onAction={addScheduled}
           bodyMaxHeight={300}
           scope={scope}
@@ -332,7 +341,7 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
               <button
                 type="button"
                 onClick={() => toggleScheduled(sa.id)}
-                title={sa.status === "active" ? "Pausar" : "Ativar"}
+                title={sa.status === "active" ? t("daily.scheduled.pause") : t("daily.scheduled.activate")}
                 className="flex-shrink-0 opacity-50 group-hover:opacity-100 transition-opacity text-[10px] px-1.5 py-0.5 rounded font-bold"
                 style={{ background: "rgba(255,255,255,0.06)", color: "var(--text-2)" }}
               >
@@ -345,10 +354,11 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
 
   const agendaCard = (
       <DailyCard
+        t={t}
         cardKey="agenda"
-        title="📅 Agenda — Amanhã"
-        total={`${agenda.length} compromissos`}
-        action="+ Evento"
+        title={t("daily.agenda.title")}
+        total={t("daily.agenda.total", { n: agenda.length })}
+        action={t("daily.agenda.action")}
         onAction={addAgenda}
         bodyMaxHeight={560}
         scope={scope}
@@ -373,8 +383,8 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
             <div
               className="flex flex-col items-center justify-center text-[12px] leading-none select-none cursor-grab active:cursor-grabbing mt-px"
               style={{ color: "var(--text-3)" }}
-              title="Arrastar para reordenar"
-              aria-label="Arrastar"
+              title={t("daily.agenda.dragReorder")}
+              aria-label={t("daily.agenda.drag")}
             >
               ⋮⋮
             </div>
@@ -412,19 +422,19 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
                 suppressContentEditableWarning
                 onBlur={(e) => editAgenda(a.id, "where", e.currentTarget.textContent || "")}
               >
-                {a.where || "—"}
+                {a.where || t("daily.common.dash")}
               </div>
               {scope === "team" && a.author && (
                 <div className="text-[8.5px] uppercase tracking-wide font-bold mt-1" style={{ color: "var(--color-wh-blue-light)" }}>
-                  por {a.author}
+                  {t("daily.by", { author: a.author })}
                 </div>
               )}
             </div>
             <button
               type="button"
               onClick={() => deleteAgenda(a.id)}
-              title="Remover compromisso"
-              aria-label={`Remover ${a.title}`}
+              title={t("daily.agenda.remove")}
+              aria-label={t("daily.agenda.removeNamed", { title: a.title })}
               className="w-[22px] h-[22px] flex items-center justify-center rounded-md opacity-0 group-hover:opacity-100 transition-all cursor-pointer text-[12px] font-bold leading-none flex-shrink-0 mt-px hover:scale-110"
               style={{
                 color: "var(--color-status-critical)",
@@ -441,10 +451,11 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
 
   const tasksCard = (
       <DailyCard
+        t={t}
         cardKey="tasks"
-        title="✅ Tarefas do Dia"
-        total={`${tasksRemaining} de ${tasks.length} restantes`}
-        action="+ Tarefa"
+        title={t("daily.tasks.title")}
+        total={t("daily.tasks.total", { n: tasksRemaining, total: tasks.length })}
+        action={t("daily.tasks.action")}
         onAction={addTask}
         bodyMaxHeight={560}
         scope={scope}
@@ -486,14 +497,14 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
               </div>
               {scope === "team" && t.author && (
                 <div className="text-[8.5px] uppercase tracking-wide font-bold mt-0.5 px-1" style={{ color: "var(--color-wh-blue-light)" }}>
-                  por {t.author}
+                  {t2("daily.by", { author: t.author })}
                 </div>
               )}
             </div>
             <button
               type="button"
               onClick={() => deleteTask(t.id)}
-              title="Remover"
+              title={t2("daily.remove")}
               className="opacity-0 group-hover:opacity-100 cursor-pointer text-[13px] px-1.5 transition-opacity flex-shrink-0"
               style={{ color: "var(--text-3)", background: "none", border: "none" }}
             >
@@ -506,10 +517,11 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
 
   const remindersCard = (
       <DailyCard
+        t={t}
         cardKey="reminders"
-        title="🔔 Lembretes"
-        total={`${reminders.length} ativos`}
-        action="+ Lembrete"
+        title={t("daily.reminders.title")}
+        total={t("daily.reminders.total", { n: reminders.length })}
+        action={t("daily.reminders.action")}
         onAction={addReminder}
         bodyMaxHeight={300}
         scope={scope}
@@ -550,15 +562,15 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
               >
                 {r.when}
                 {scope === "team" && r.author && (
-                  <span style={{ color: "var(--color-wh-blue-light)" }}> · por {r.author}</span>
+                  <span style={{ color: "var(--color-wh-blue-light)" }}> {t("daily.byInline", { author: r.author })}</span>
                 )}
               </div>
             </div>
             <button
               type="button"
               onClick={() => sendReminderToFriday(r)}
-              title="Enviar pra Friday executar — ela te pergunta na próxima vez que você abrir"
-              aria-label={`Enviar lembrete "${r.text}" pra Friday`}
+              title={t("daily.friday.btnTitle")}
+              aria-label={t("daily.friday.btnAria", { text: r.text })}
               className="flex-shrink-0 self-center inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-bold tracking-wide transition-all hover:-translate-y-px cursor-pointer"
               style={{ background: "rgba(31,85,255,.12)", color: "var(--color-wh-blue-light)", border: "1px solid var(--border-hi)" }}
             >
@@ -592,6 +604,7 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
 }
 
 function DailyCard({
+  t,
   cardKey,
   title,
   subtitle,
@@ -602,6 +615,7 @@ function DailyCard({
   scope,
   onScopeChange,
 }: {
+  t: TFn;
   cardKey: string;
   title: string;
   subtitle?: string;
@@ -647,7 +661,7 @@ function DailyCard({
             <div
               className="flex items-center gap-0.5 p-0.5 rounded-full flex-shrink-0"
               style={{ background: "var(--bg2)", border: "1px solid var(--border)" }}
-              title="Alternar entre o quadro do time e o seu pessoal"
+              title={t("daily.scope.toggleTitle")}
             >
               {(["team", "personal"] as const).map((s) => (
                 <button
@@ -660,7 +674,7 @@ function DailyCard({
                     color: scope === s ? "#fff" : "var(--text-3)",
                   }}
                 >
-                  {s === "team" ? "Equipe" : "Pessoal"}
+                  {s === "team" ? t("daily.scope.team") : t("daily.scope.personal")}
                 </button>
               ))}
             </div>
@@ -673,9 +687,9 @@ function DailyCard({
                 background: "rgba(255,138,31,.12)",
                 border: "1px solid rgba(255,138,31,.3)",
               }}
-              title="Mock — integração real virá na próxima fase"
+              title={t("daily.mock.title")}
             >
-              Pendente
+              {t("daily.mock.badge")}
             </span>
           )}
         </div>

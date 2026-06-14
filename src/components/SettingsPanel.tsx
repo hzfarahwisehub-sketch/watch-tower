@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { ACCENT_PRESETS, FONT_PRESETS, useSettings } from "./SettingsProvider";
+import { useLocale } from "./LocaleProvider";
 
 /**
  * SettingsPanel — overlay modal de configurações.
@@ -12,6 +13,7 @@ import { ACCENT_PRESETS, FONT_PRESETS, useSettings } from "./SettingsProvider";
  */
 export function SettingsPanel() {
   const { panelOpen, closePanel, accent, setAccentByKey, font, setFontByKey, resetAll } = useSettings();
+  const { t } = useLocale();
 
   useEffect(() => {
     if (!panelOpen) return;
@@ -64,17 +66,17 @@ export function SettingsPanel() {
             </div>
             <div>
               <h2 className="text-[15px] font-extrabold tracking-[2px] uppercase" style={{ color: "var(--text)" }}>
-                Configurações
+                {t("settings.title")}
               </h2>
               <p className="text-[10.5px] tracking-wider uppercase font-semibold" style={{ color: "var(--text-3)" }}>
-                Aparência · cor · fonte
+                {t("settings.subtitle")}
               </p>
             </div>
           </div>
           <button
             type="button"
             onClick={closePanel}
-            aria-label="Fechar"
+            aria-label={t("settings.close")}
             className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors"
             style={{
               background: "var(--bg2)",
@@ -95,10 +97,10 @@ export function SettingsPanel() {
           <section>
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-[11.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--color-wh-blue-light)" }}>
-                🎨 Cor de destaque
+                🎨 {t("settings.accent.heading")}
               </h3>
               <span className="text-[10px] tracking-wider uppercase" style={{ color: "var(--text-3)" }}>
-                Atual: {accent.label}
+                {t("settings.current", { value: accent.label })}
               </span>
             </div>
             <div className="grid grid-cols-4 gap-2.5">
@@ -140,10 +142,10 @@ export function SettingsPanel() {
           <section>
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-[11.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--color-wh-blue-light)" }}>
-                🔤 Tipografia
+                🔤 {t("settings.font.heading")}
               </h3>
               <span className="text-[10px] tracking-wider uppercase" style={{ color: "var(--text-3)" }}>
-                Atual: {font.label}
+                {t("settings.current", { value: font.label })}
               </span>
             </div>
             <div className="flex flex-col gap-2">
@@ -203,7 +205,7 @@ export function SettingsPanel() {
               cursor: "pointer",
             }}
           >
-            ↻ Restaurar padrões
+            ↻ {t("settings.reset")}
           </button>
           <button
             type="button"
@@ -217,7 +219,7 @@ export function SettingsPanel() {
               boxShadow: "0 4px 12px rgba(31,85,255,.3)",
             }}
           >
-            ✓ Aplicar e fechar
+            ✓ {t("settings.apply")}
           </button>
         </div>
       </div>

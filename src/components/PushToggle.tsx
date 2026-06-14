@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useToast } from "./ToastProvider";
+import { useLocale } from "./LocaleProvider";
 
 /**
  * PushToggle — opt-in de notificações push, pensado pro menu do usuário.
@@ -24,6 +25,7 @@ const ROW =
 
 export function PushToggle() {
   const toast = useToast();
+  const { t } = useLocale();
   const [supported, setSupported] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -49,9 +51,9 @@ export function PushToggle() {
     setBusy(true);
     try {
       const key = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
-      if (!key) { toast("Push não configurado no servidor"); return; }
+      if (!key) { toast(t("push.notConfigured")); return; }
       const perm = await Notification.requestPermission();
-      if (perm !== "granted") { toast("Permissão de notificação negada"); return; }
+      if (perm !== "granted") { toast(t("push.permissionDenied")); return; }
       const reg = await navigator.serviceWorker.ready;
       const sub = await reg.pushManager.subscribe({
         userVisibleOnly: true,
@@ -63,11 +65,11 @@ export function PushToggle() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ endpoint: json.endpoint, keys: json.keys }),
       });
-      if (!res.ok) { toast("Falha ao registrar no servidor"); return; }
+      if (!res.ok) { toast(t("push.registerFailed")); return; }
       setSubscribed(true);
-      toast("🔔 Notificações ativadas");
+      toast(t("push.enabled"));
     } catch {
-      toast("Erro ao ativar notificações");
+      toast(t("push.enableError"));
     } finally {
       setBusy(false);
     }
@@ -88,7 +90,7 @@ export function PushToggle() {
         await sub.unsubscribe();
       }
       setSubscribed(false);
-      toast("Notificações desativadas");
+      toast(t("push.disabled"));
     } finally {
       setBusy(false);
     }
@@ -97,8 +99,8 @@ export function PushToggle() {
   async function test() {
     const res = await fetch("/api/push/test", { method: "POST" });
     const data = await res.json().catch(() => ({}));
-    if (res.ok && data.sent > 0) toast("📨 Teste enviado pro seu device");
-    else toast("Nenhum device ativo recebeu");
+    if (res.ok && data.sent > 0) toast(t("push.testSent"));
+    else toast(t("push.testNone"));
   }
 
   if (!supported) return null;
@@ -106,7 +108,7 @@ export function PushToggle() {
   if (needsInstall && !subscribed) {
     return (
       <div className="px-4 py-2.5 text-[11px] leading-snug" style={{ color: "var(--text-3)" }}>
-        🔔 No iPhone, instale o app primeiro (Compartilhar → Adicionar à Tela de Início) pra ativar notificações.
+        {t("push.iosInstall")}
       </div>
     );
   }
@@ -120,11 +122,11 @@ export function PushToggle() {
         className={ROW}
         style={{ color: "var(--text-2)" }}
       >
-        {subscribed ? "🔕 Desativar notificações" : "🔔 Ativar notificações"}
+        {subscribed ? t("push.disable") : t("push.enable")}
       </button>
       {subscribed && (
         <button type="button" onClick={test} className={ROW} style={{ color: "var(--text-3)" }}>
-          📨 Enviar notificação de teste
+          {t("push.test")}
         </button>
       )}
     </>

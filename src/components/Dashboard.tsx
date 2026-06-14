@@ -17,32 +17,37 @@ import { SuggestionBox } from "./SuggestionBox";
 import { ExportButton } from "./ExportButton";
 import { useUndo } from "./UndoProvider";
 import { WindowManagerProvider, WindowsMenu, useWindowManagerOptional } from "./WindowManager";
-import { type PanelId } from "./PanelRegistry";
+import { panelTitleKey, type PanelId } from "./PanelRegistry";
 import { markNavigating } from "@/lib/nav-perf";
 import { useSession } from "next-auth/react";
 import { InfoCenters, FinanceCenters, CryptoCenters } from "./InfoCenters";
 import { useSettings } from "./SettingsProvider";
 import { SettingsPanel } from "./SettingsPanel";
+import { useLocale } from "./LocaleProvider";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-const MapZone = dynamic(() => import("./MapZone"), {
-  ssr: false,
-  loading: () => (
-    <div
-      className="wt-card flex flex-col h-full"
-      style={{ minHeight: 300 }}
-    >
+// Placeholder do mapa enquanto o chunk carrega. É um componente (não JSX inline)
+// pra poder usar useLocale — fica sob o LocaleProvider na árvore.
+function MapLoading() {
+  const { t } = useLocale();
+  return (
+    <div className="wt-card flex flex-col h-full" style={{ minHeight: 300 }}>
       <div className="px-5 py-4" style={{ borderBottom: "1px solid var(--border)" }}>
         <h2 className="text-[12px] tracking-[2.5px] uppercase font-bold" style={{ color: "var(--color-wh-blue-light)" }}>
-          🗺 Carregando mapa…
+          🗺 {t("dash.map.loading")}
         </h2>
       </div>
       <div className="flex-1 flex items-center justify-center" style={{ color: "var(--text-3)" }}>
-        <span className="wt-live-dot" /> &nbsp; conectando ao CartoDB
+        <span className="wt-live-dot" /> &nbsp; {t("dash.map.connecting")}
       </div>
     </div>
-  ),
+  );
+}
+
+const MapZone = dynamic(() => import("./MapZone"), {
+  ssr: false,
+  loading: () => <MapLoading />,
 });
 
 // 2026-06-13: bump intencional pra "wt-layout-v11" a pedido do Hammis. O
@@ -171,17 +176,20 @@ const DEFAULT_LAYOUTS: ResponsiveLayouts = {
 
 const REQUIRED_KEYS = ["alerts","kpis","map","countries","inbox","agenda","tasks","scheduled","reminders","requests","benchmark","info","finance","crypto","bulletins","feed"];
 
-function GridCell({ panelId, label, children, locked }: { panelId?: PanelId; label: string; children: ReactNode; locked: boolean }) {
+function GridCell({ panelId, children, locked }: { panelId?: PanelId; children: ReactNode; locked: boolean }) {
+  const { t } = useLocale();
   const wm = useWindowManagerOptional();
   const poppedOut = !!(panelId && wm?.isOpen(panelId));
+  // Nome do painel (localizado) derivado do panelId — mesma fonte do PanelRegistry.
+  const label = panelId ? t(panelTitleKey(panelId)) : "";
   return (
     <div className={`wt-grid-cell wt-cell-${panelId ?? "x"} ${locked ? "wt-cell-locked" : ""}`} style={{ position: "relative" }}>
       {!locked && (
         <button
           type="button"
           className="wt-drag-handle"
-          aria-label={`Arrastar ${label} pra reposicionar`}
-          title={`Arrastar pra reposicionar — ${label}`}
+          aria-label={t("dash.grid.dragAria", { label })}
+          title={t("dash.grid.dragTitle", { label })}
         >
           <span aria-hidden>⠿</span>
         </button>
@@ -190,8 +198,8 @@ function GridCell({ panelId, label, children, locked }: { panelId?: PanelId; lab
         <button
           type="button"
           onClick={() => (poppedOut ? wm.dockBack(panelId) : wm.popOut(panelId))}
-          title={poppedOut ? `Trazer "${label}" de volta` : `Abrir "${label}" em janela separada`}
-          aria-label={poppedOut ? "Trazer de volta" : "Abrir em janela separada"}
+          title={poppedOut ? t("dash.grid.dockTitle", { label }) : t("dash.grid.popTitle", { label })}
+          aria-label={poppedOut ? t("dash.grid.dockAria") : t("dash.grid.popAria")}
           className="wt-popout-handle"
         >
           {poppedOut ? "↩" : "⧉"}
@@ -203,7 +211,7 @@ function GridCell({ panelId, label, children, locked }: { panelId?: PanelId; lab
             <span className="text-[26px]">🪟</span>
             <span className="text-[12px] font-bold" style={{ color: "var(--text-2)" }}>{label}</span>
             <span className="text-[11px] leading-snug" style={{ color: "var(--text-3)" }}>
-              Aberto numa janela separada.
+              {t("dash.grid.poppedOut")}
             </span>
             <button
               type="button"
@@ -211,7 +219,7 @@ function GridCell({ panelId, label, children, locked }: { panelId?: PanelId; lab
               className="px-3 py-1.5 rounded-lg text-[11px] font-bold"
               style={{ background: "rgba(31,85,255,.15)", color: "var(--color-wh-blue-light)", border: "1px solid var(--border-hi)", cursor: "pointer" }}
             >
-              ↩ Trazer de volta
+              {t("dash.grid.dockBack")}
             </button>
           </div>
         ) : (
@@ -224,6 +232,7 @@ function GridCell({ panelId, label, children, locked }: { panelId?: PanelId; lab
 
 export function Dashboard() {
   const { locked } = useSettings();
+  const { t } = useLocale();
   const { data: session } = useSession();
   const isLoggedIn = !!session?.user?.email;
   // mapSelected: país em foco. Alimenta o Benchmark (a "área completa" do país,
@@ -364,7 +373,7 @@ export function Dashboard() {
     const before = cloneLayouts(layoutsRef.current);
     applyLayouts(DEFAULT_LAYOUTS, false);
     pushUndo({
-      label: "restaurar layout",
+      label: t("dash.action.reset"),
       undo: () => applyLayouts(before, true),
       redo: () => applyLayouts(DEFAULT_LAYOUTS, false),
     });
@@ -427,12 +436,12 @@ export function Dashboard() {
           {locked ? (
             <>
               <span style={{ color: "#FFB13B", fontSize: 14 }}>🔒</span>
-              layout travado · clica no cadeado pra liberar movimentação
+              {t("dash.hint.locked")}
             </>
           ) : (
             <>
               <span style={{ color: "var(--color-wh-blue-light)", fontSize: 14 }}>⠿</span>
-              arraste · ⤡ redimensione · caixa sempre encaixa no espaço mais próximo · nenhuma some
+              {t("dash.hint.free")}
             </>
           )}
         </div>
@@ -443,30 +452,30 @@ export function Dashboard() {
               type="button"
               onClick={undo}
               disabled={!canUndo}
-              title={canUndo ? `Voltar${nextUndoLabel ? `: ${nextUndoLabel}` : ""}` : "Nada pra voltar"}
-              aria-label="Voltar (desfazer)"
+              title={canUndo ? (nextUndoLabel ? t("dash.undo.titleActive", { label: nextUndoLabel }) : t("dash.undo.label")) : t("dash.undo.titleIdle")}
+              aria-label={t("dash.undo.aria")}
               className="px-2.5 py-1.5 text-[12px] font-bold transition-colors"
               style={{ color: canUndo ? "var(--text-2)" : "var(--text-3)", opacity: canUndo ? 1 : 0.4, cursor: canUndo ? "pointer" : "default", borderRight: "1px solid var(--border)" }}
             >
-              ↶ Voltar
+              {t("dash.undo.btn")}
             </button>
             <button
               type="button"
               onClick={redo}
               disabled={!canRedo}
-              title={canRedo ? `Avançar${nextRedoLabel ? `: ${nextRedoLabel}` : ""}` : "Nada pra avançar"}
-              aria-label="Avançar (refazer)"
+              title={canRedo ? (nextRedoLabel ? t("dash.redo.titleActive", { label: nextRedoLabel }) : t("dash.redo.label")) : t("dash.redo.titleIdle")}
+              aria-label={t("dash.redo.aria")}
               className="px-2.5 py-1.5 text-[12px] font-bold transition-colors"
               style={{ color: canRedo ? "var(--text-2)" : "var(--text-3)", opacity: canRedo ? 1 : 0.4, cursor: canRedo ? "pointer" : "default" }}
             >
-              Avançar ↷
+              {t("dash.redo.btn")}
             </button>
           </div>
           <WindowsMenu />
           {isLoggedIn && (
             <ExportButton
               label="REPAVET"
-              title="REPAVET — Resumo Elaborado dos Países e das Atualizações dos Vistos, Economia e Trabalho · gera o documento completo, país a país"
+              title={t("dash.repavet.title")}
             />
           )}
           {!locked && (
@@ -481,7 +490,7 @@ export function Dashboard() {
                 cursor: "pointer",
               }}
             >
-              ↻ Restaurar layout padrão
+              {t("dash.reset.btn")}
             </button>
           )}
         </div>
@@ -502,90 +511,90 @@ export function Dashboard() {
           onLayoutChange={onLayoutChange}
           onDragStart={captureLayoutBefore}
           onResizeStart={() => { captureLayoutBefore(); startResizeAutoScroll(); }}
-          onDragStop={() => commitLayoutAction("mover caixa")}
-          onResizeStop={() => { stopResizeAutoScroll(); commitLayoutAction("redimensionar caixa"); }}
+          onDragStop={() => commitLayoutAction(t("dash.action.move"))}
+          onResizeStop={() => { stopResizeAutoScroll(); commitLayoutAction(t("dash.action.resize")); }}
           compactType="vertical"
           preventCollision={false}
           allowOverlap={false}
           useCSSTransforms
         >
           <div key="alerts">
-            <GridCell panelId="alerts" label="Alertas críticos" locked={locked}>
+            <GridCell panelId="alerts" locked={locked}>
               <AlertsBanner onSelect={openModal} />
             </GridCell>
           </div>
           <div key="kpis">
-            <GridCell panelId="kpis" label="KPIs globais" locked={locked}>
+            <GridCell panelId="kpis" locked={locked}>
               <KpiRow />
             </GridCell>
           </div>
           <div key="map">
-            <GridCell panelId="map" label="Mapa global" locked={locked}>
+            <GridCell panelId="map" locked={locked}>
               <MapZone countries={COUNTRIES} selected={mapSelected} onSelect={selectOnMap} />
             </GridCell>
           </div>
           <div key="countries">
-            <GridCell panelId="countries" label="Lista de países" locked={locked}>
+            <GridCell panelId="countries" locked={locked}>
               <CountriesSidebar countries={COUNTRIES} selected={mapSelected} onSelect={openModal} />
             </GridCell>
           </div>
           <div key="inbox">
-            <GridCell panelId="inbox" label="Inbox" locked={locked}>
+            <GridCell panelId="inbox" locked={locked}>
               <DailyGrid only="inbox" />
             </GridCell>
           </div>
           <div key="agenda">
-            <GridCell panelId="agenda" label="Agenda" locked={locked}>
+            <GridCell panelId="agenda" locked={locked}>
               <DailyGrid only="agenda" />
             </GridCell>
           </div>
           <div key="tasks">
-            <GridCell panelId="tasks" label="Tarefas do dia" locked={locked}>
+            <GridCell panelId="tasks" locked={locked}>
               <DailyGrid only="tasks" />
             </GridCell>
           </div>
           <div key="scheduled">
-            <GridCell panelId="scheduled" label="Ações programadas" locked={locked}>
+            <GridCell panelId="scheduled" locked={locked}>
               <DailyGrid only="scheduled" />
             </GridCell>
           </div>
           <div key="reminders" id="wt-panel-reminders">
-            <GridCell panelId="reminders" label="Lembretes" locked={locked}>
+            <GridCell panelId="reminders" locked={locked}>
               <DailyGrid only="reminders" />
             </GridCell>
           </div>
           <div key="benchmark">
-            <GridCell panelId="benchmark" label="Benchmark do país" locked={locked}>
+            <GridCell panelId="benchmark" locked={locked}>
               <CountryBenchmark selectedCode={mapSelected} />
             </GridCell>
           </div>
           <div key="info">
-            <GridCell panelId="info" label="Centros de Informação" locked={locked}>
+            <GridCell panelId="info" locked={locked}>
               <InfoCenters />
             </GridCell>
           </div>
           <div key="finance">
-            <GridCell panelId="finance" label="Finanças & Mercados" locked={locked}>
+            <GridCell panelId="finance" locked={locked}>
               <FinanceCenters />
             </GridCell>
           </div>
           <div key="crypto">
-            <GridCell panelId="crypto" label="Cripto & Derivativos" locked={locked}>
+            <GridCell panelId="crypto" locked={locked}>
               <CryptoCenters />
             </GridCell>
           </div>
           <div key="bulletins">
-            <GridCell panelId="bulletins" label="Boletins oficiais" locked={locked}>
+            <GridCell panelId="bulletins" locked={locked}>
               <OfficialBulletins />
             </GridCell>
           </div>
           <div key="feed">
-            <GridCell panelId="feed" label="Feed de mudanças" locked={locked}>
+            <GridCell panelId="feed" locked={locked}>
               <Feed countries={COUNTRIES} onSelect={openModal} />
             </GridCell>
           </div>
           <div key="requests">
-            <GridCell panelId="requests" label="Caixa de solicitações" locked={locked}>
+            <GridCell panelId="requests" locked={locked}>
               <SuggestionBox />
             </GridCell>
           </div>

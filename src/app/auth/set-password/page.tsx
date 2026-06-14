@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { PasswordInput } from "@/components/PasswordInput";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function SetPasswordPage() {
+  const { t } = useLocale();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
@@ -16,11 +18,11 @@ export default function SetPasswordPage() {
     e.preventDefault();
     setError(null);
     if (password.length < 8) {
-      setError("A senha precisa ter pelo menos 8 caracteres.");
+      setError(t("authSetpw.error.minlen"));
       return;
     }
     if (password !== confirm) {
-      setError("As senhas não conferem.");
+      setError(t("authSetpw.error.mismatch"));
       return;
     }
     setSubmitting(true);
@@ -42,14 +44,14 @@ export default function SetPasswordPage() {
       }
       const data = (await res.json().catch(() => ({}))) as { error?: string; message?: string };
       if (res.status === 409) {
-        setError(data.message ?? "Esta conta já tem senha. Use \"Esqueci a senha\".");
+        setError(data.message ?? t("authSetpw.error.exists"));
       } else if (res.status === 403) {
-        setError(data.message ?? "Este e-mail não está autorizado.");
+        setError(data.message ?? t("authSetpw.error.unauthorized"));
       } else {
-        setError(data.message ?? "Não foi possível definir a senha. Tente de novo.");
+        setError(data.message ?? t("authSetpw.error.generic"));
       }
     } catch {
-      setError("Erro inesperado. Tente novamente.");
+      setError(t("authSetpw.error.unexpected"));
     } finally {
       setSubmitting(false);
     }
@@ -76,17 +78,17 @@ export default function SetPasswordPage() {
         <form onSubmit={handleSubmit} className="wt-card w-full p-7 flex flex-col gap-5" style={{ borderRadius: 16, boxShadow: "var(--shadow-bar)" }}>
           <div>
             <h2 className="text-[18px] font-extrabold mb-1.5" style={{ color: "var(--text)" }}>
-              Primeiro acesso
+              {t("authSetpw.heading")}
             </h2>
             <p className="text-[13px] leading-relaxed" style={{ color: "var(--text-2)" }}>
-              Defina sua senha. Seu e-mail precisa estar na lista de autorizados.
+              {t("authSetpw.subtitle")}
             </p>
           </div>
 
           <label className="flex flex-col gap-2">
-            <span className="text-[10.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--text-3)" }}>E-mail autorizado</span>
+            <span className="text-[10.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--text-3)" }}>{t("authSetpw.label.email")}</span>
             <input
-              type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="voce@wisehubnow.com" autoFocus autoComplete="email"
+              type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder={t("authSetpw.placeholder.email")} autoFocus autoComplete="email"
               className="px-4 py-3 rounded-lg text-[14px] outline-none transition-all"
               style={{ background: "var(--bg2)", border: "1.5px solid var(--border)", color: "var(--text)" }}
               onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-wh-blue-light)")}
@@ -95,12 +97,12 @@ export default function SetPasswordPage() {
           </label>
 
           <label className="flex flex-col gap-2">
-            <span className="text-[10.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--text-3)" }}>Nova senha (mín. 8)</span>
+            <span className="text-[10.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--text-3)" }}>{t("authSetpw.label.password")}</span>
             <PasswordInput value={password} onChange={setPassword} required autoComplete="new-password" autoFocus={false} />
           </label>
 
           <label className="flex flex-col gap-2">
-            <span className="text-[10.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--text-3)" }}>Confirmar senha</span>
+            <span className="text-[10.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--text-3)" }}>{t("authSetpw.label.confirm")}</span>
             <PasswordInput value={confirm} onChange={setConfirm} required autoComplete="new-password" />
           </label>
 
@@ -115,7 +117,7 @@ export default function SetPasswordPage() {
               border: "1px solid rgba(74,122,255,.5)",
             }}
           >
-            {submitting ? "Salvando…" : "Definir senha e entrar"}
+            {submitting ? t("authSetpw.submit.saving") : t("authSetpw.submit.idle")}
           </button>
 
           {error && (
@@ -126,7 +128,7 @@ export default function SetPasswordPage() {
           )}
 
           <Link href="/auth/signin" className="text-[11px] uppercase tracking-[2px] font-bold text-center hover:underline transition-all pt-2" style={{ color: "var(--color-wh-blue-light)", borderTop: "1px solid var(--border)" }}>
-            ← Já tenho senha
+            {t("authSetpw.haveAccount")}
           </Link>
         </form>
 

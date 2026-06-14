@@ -3,30 +3,29 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { useLocale } from "@/components/LocaleProvider";
 
-const ERROR_MESSAGES: Record<string, { title: string; body: string }> = {
-  Configuration: {
-    title: "Erro de configuração",
-    body: "O servidor de autenticação não está configurado corretamente. Avise o admin.",
-  },
-  AccessDenied: {
-    title: "Acesso negado",
-    body: "Seu e-mail não está na lista de autorizados. Peça pra administração adicionar.",
-  },
-  Verification: {
-    title: "Link expirado",
-    body: "O link mágico expirou ou já foi usado. Solicita outro na tela de login.",
-  },
-  Default: {
-    title: "Erro inesperado",
-    body: "Algo deu errado durante a autenticação. Tente novamente.",
-  },
+type TFn = (key: string, params?: Record<string, string | number>) => string;
+
+// Mapa de código de erro -> chaves i18n do título/corpo. O texto vive no
+// dicionário (namespace authError.*); resolvemos com t dentro do componente.
+const ERROR_KEYS: Record<string, { title: string; body: string }> = {
+  Configuration: { title: "authError.configuration.title", body: "authError.configuration.body" },
+  AccessDenied: { title: "authError.accessDenied.title", body: "authError.accessDenied.body" },
+  Verification: { title: "authError.verification.title", body: "authError.verification.body" },
+  Default: { title: "authError.default.title", body: "authError.default.body" },
 };
 
+function errorMessage(code: string, t: TFn): { title: string; body: string } {
+  const keys = ERROR_KEYS[code] ?? ERROR_KEYS.Default;
+  return { title: t(keys.title), body: t(keys.body) };
+}
+
 function ErrorContent() {
+  const { t } = useLocale();
   const params = useSearchParams();
   const code = params.get("error") ?? "Default";
-  const message = ERROR_MESSAGES[code] ?? ERROR_MESSAGES.Default;
+  const message = errorMessage(code, t);
 
   return (
     <div
@@ -58,7 +57,7 @@ function ErrorContent() {
         className="text-[10.5px] uppercase tracking-[1.5px] font-bold flex items-center gap-2 pt-4 w-full justify-center"
         style={{ color: "var(--text-3)", borderTop: "1px solid var(--border)" }}
       >
-        <span>código</span>
+        <span>{t("authError.codeLabel")}</span>
         <code
           style={{
             background: "var(--bg2)",
@@ -82,13 +81,14 @@ function ErrorContent() {
           border: "1px solid rgba(74,122,255,.5)",
         }}
       >
-        Tentar novamente
+        {t("authError.retry")}
       </Link>
     </div>
   );
 }
 
 export default function AuthErrorPage() {
+  const { t } = useLocale();
   return (
     <main
       className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden"
@@ -130,7 +130,7 @@ export default function AuthErrorPage() {
         <Suspense
           fallback={
             <div className="wt-card w-full p-8 text-center" style={{ color: "var(--text-3)" }}>
-              Carregando…
+              {t("authError.loading")}
             </div>
           }
         >

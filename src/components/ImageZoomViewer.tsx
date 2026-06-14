@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState, useCallback, type CSSProperties } from "react";
 import { createPortal } from "react-dom";
+import { useLocale } from "./LocaleProvider";
 
 /**
  * Visualizador de imagem em tela cheia, INDEPENDENTE da caixa que o abriu.
@@ -17,6 +18,7 @@ export function ImageZoomViewer({
   alt: string;
   onClose: () => void;
 }) {
+  const { t } = useLocale();
   const [scale, setScale] = useState(1);
   const [off, setOff] = useState({ x: 0, y: 0 });
   const [mounted, setMounted] = useState(false);
@@ -133,14 +135,14 @@ export function ImageZoomViewer({
           backdropFilter: "blur(8px)",
         }}
       >
-        <button onClick={() => setScale((s) => clamp(s - 0.5))} style={btn} aria-label="Diminuir">−</button>
+        <button onClick={() => setScale((s) => clamp(s - 0.5))} style={btn} aria-label={t("zoom.out")}>−</button>
         <span style={{ color: "#cfd2e6", fontSize: 12, fontWeight: 700, minWidth: 44, textAlign: "center" }}>
           {Math.round(scale * 100)}%
         </span>
-        <button onClick={() => setScale((s) => clamp(s + 0.5))} style={btn} aria-label="Aumentar">+</button>
+        <button onClick={() => setScale((s) => clamp(s + 0.5))} style={btn} aria-label={t("zoom.in")}>+</button>
         <span style={{ width: 1, height: 18, background: "rgba(255,255,255,.15)" }} />
-        <button onClick={reset} style={{ ...btn, width: "auto", padding: "0 10px", fontSize: 11 }}>Resetar</button>
-        <button onClick={onClose} style={{ ...btn, width: "auto", padding: "0 10px", fontSize: 11 }}>Fechar ✕</button>
+        <button onClick={reset} style={{ ...btn, width: "auto", padding: "0 10px", fontSize: 11 }}>{t("zoom.reset")}</button>
+        <button onClick={onClose} style={{ ...btn, width: "auto", padding: "0 10px", fontSize: 11 }}>{t("zoom.close")}</button>
       </div>
     </div>,
     document.body,

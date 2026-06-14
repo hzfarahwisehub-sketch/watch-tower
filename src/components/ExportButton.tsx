@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { useToast } from "./ToastProvider";
+import { useLocale } from "./LocaleProvider";
 
 /**
  * Menu de exportação do relatório completo. Junta TODAS as informações do
@@ -15,20 +16,18 @@ import { useToast } from "./ToastProvider";
 
 type Format = "pdf" | "docx";
 
-const FORMATS: Array<{ id: Format; label: string; hint: string }> = [
-  { id: "pdf", label: "PDF", hint: "Pra ler e compartilhar" },
-  { id: "docx", label: "Word (.doc)", hint: "Editável no Word" },
-];
+const FORMAT_IDS: Format[] = ["pdf", "docx"];
 
 export function ExportButton({
   minimal = false,
-  label = "Exportar relatório",
+  label,
   title,
 }: {
   minimal?: boolean;
   label?: string;
   title?: string;
 }) {
+  const { t } = useLocale();
   const [downloading, setDownloading] = useState<Format | null>(null);
   const [open, setOpen] = useState(false);
   const [lastDownload, setLastDownload] = useState<{ url: string; filename: string } | null>(null);
@@ -71,9 +70,9 @@ export function ExportButton({
     try {
       const res = await fetch(`/api/export/full-report?format=${format}`);
       if (!res.ok) {
-        if (res.status === 401) toast("Faça login pra exportar o relatório");
-        else if (res.status === 403) toast("Acesso restrito a admins");
-        else toast(`Erro ${res.status} ao gerar relatório`);
+        if (res.status === 401) toast(t("exportbtn.toast.needLogin"));
+        else if (res.status === 403) toast(t("exportbtn.toast.adminOnly"));
+        else toast(t("exportbtn.toast.httpError", { status: res.status }));
         return;
       }
       const blob = await res.blob();
@@ -92,10 +91,14 @@ export function ExportButton({
       showDownloadChip(url, filename);
 
       const fmtName = format === "docx" ? "Word" : format.toUpperCase();
-      toast(cacheHeader === "HIT" ? `${fmtName} baixado (cache)` : `${fmtName} gerado e baixado`);
+      toast(
+        cacheHeader === "HIT"
+          ? t("exportbtn.toast.cache", { fmt: fmtName })
+          : t("exportbtn.toast.generated", { fmt: fmtName }),
+      );
       setOpen(false);
     } catch (err) {
-      toast(`Falha: ${String(err)}`);
+      toast(t("exportbtn.toast.fail", { err: String(err) }));
     } finally {
       setDownloading(null);
     }
@@ -111,7 +114,7 @@ export function ExportButton({
           type="button"
           onClick={() => setOpen((v) => !v)}
           disabled={busy}
-          title={busy ? "Gerando relatório…" : "Exportar relatório (PDF · Word)"}
+          title={busy ? t("exportbtn.title.busy") : t("exportbtn.title.idle")}
           aria-haspopup="menu"
           aria-expanded={open}
           className="w-[38px] h-[38px] rounded-[10px] flex items-center justify-center cursor-pointer transition-all hover:-translate-y-px disabled:opacity-60 disabled:cursor-wait"
@@ -136,7 +139,7 @@ export function ExportButton({
           }}
         >
           {busy ? <Spinner size={14} /> : <DownloadIcon size={14} />}
-          {busy ? "Gerando…" : label}
+          {busy ? t("exportbtn.busy") : (label ?? t("exportbtn.label"))}
         </button>
       )}
 
@@ -149,28 +152,28 @@ export function ExportButton({
             style={{ border: "1px solid var(--border-hi)", boxShadow: "var(--shadow-bar)" }}
           >
             <div className="px-4 py-1.5 text-[10px] uppercase tracking-[1.5px] font-bold" style={{ color: "var(--text-3)" }}>
-              Escolha o formato
+              {t("exportbtn.menu.heading")}
             </div>
-            {FORMATS.map((f) => (
+            {FORMAT_IDS.map((id) => (
               <button
-                key={f.id}
+                key={id}
                 type="button"
                 role="menuitem"
-                onClick={() => download(f.id)}
+                onClick={() => download(id)}
                 disabled={busy}
                 className="w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-white/5 disabled:cursor-wait"
               >
                 <span className="flex items-center justify-center w-[26px] h-[26px] rounded-md flex-shrink-0" style={{ background: "rgba(74,122,255,.12)", color: "var(--color-wh-blue-light)" }}>
-                  {downloading === f.id ? <Spinner size={14} /> : <DownloadIcon size={14} />}
+                  {downloading === id ? <Spinner size={14} /> : <DownloadIcon size={14} />}
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-[12.5px] font-bold truncate" style={{ color: "var(--text)" }}>{f.label}</span>
-                  <span className="block text-[10.5px] truncate" style={{ color: "var(--text-3)" }}>{f.hint}</span>
+                  <span className="block text-[12.5px] font-bold truncate" style={{ color: "var(--text)" }}>{t(`exportbtn.format.${id}.label`)}</span>
+                  <span className="block text-[10.5px] truncate" style={{ color: "var(--text-3)" }}>{t(`exportbtn.format.${id}.hint`)}</span>
                 </span>
               </button>
             ))}
             <div className="px-4 pt-1.5 mt-1 text-[10px] leading-snug border-t" style={{ color: "var(--text-3)", borderColor: "var(--border)" }}>
-              Conteúdo pronto pra postar + fontes + dados técnicos, país a país.
+              {t("exportbtn.menu.footer")}
             </div>
           </div>
         </>
@@ -191,7 +194,7 @@ export function ExportButton({
         <button
           type="button"
           onClick={openLastFile}
-          title="Abrir o arquivo que você acabou de baixar"
+          title={t("exportbtn.chip.title")}
           className="flex items-center gap-2.5 cursor-pointer text-left min-w-0"
           style={{ background: "transparent", border: "none", padding: 0 }}
         >
@@ -205,17 +208,17 @@ export function ExportButton({
           </span>
           <span className="min-w-0">
             <span className="block text-[12px] font-bold leading-tight" style={{ color: "var(--text)" }}>
-              Arquivo baixado
+              {t("exportbtn.chip.done")}
             </span>
             <span className="block text-[10.5px] truncate leading-tight" style={{ color: "var(--text-3)" }}>
-              {lastDownload.filename} · toque pra abrir
+              {t("exportbtn.chip.sub", { filename: lastDownload.filename })}
             </span>
           </span>
         </button>
         <button
           type="button"
           onClick={dismissChip}
-          aria-label="Fechar aviso de download"
+          aria-label={t("exportbtn.chip.dismiss")}
           className="flex items-center justify-center w-6 h-6 rounded-md flex-shrink-0 cursor-pointer text-[11px]"
           style={{ background: "var(--bg2)", border: "1px solid var(--border)", color: "var(--text-3)" }}
         >

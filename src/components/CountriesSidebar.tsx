@@ -1,14 +1,15 @@
 "use client";
 import { useMemo, useState } from "react";
 import type { Country, Status } from "@/lib/types";
+import { useLocale } from "./LocaleProvider";
 
 type Filter = "all" | Status;
 type SortBy = "active" | "name" | "changes";
 
-const SORT_LABELS: Record<SortBy, string> = {
-  active: "Mais ativos",
-  name: "Alfabético",
-  changes: "Mudanças ↓",
+const SORT_KEY: Record<SortBy, string> = {
+  active: "sidebar.sort.active",
+  name: "sidebar.sort.name",
+  changes: "sidebar.sort.changes",
 };
 
 const STATUS_ORDER: Record<Status, number> = { crit: 0, warn: 1, stable: 2 };
@@ -22,6 +23,7 @@ export function CountriesSidebar({
   selected: string | null;
   onSelect: (code: string) => void;
 }) {
+  const { t } = useLocale();
   const [filter, setFilter] = useState<Filter>("all");
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState<SortBy>("active");
@@ -64,15 +66,15 @@ export function CountriesSidebar({
           className="text-[12px] tracking-[2.5px] uppercase font-bold flex items-center gap-2"
           style={{ color: "var(--color-wh-blue-light)" }}
         >
-          🏳 Países Monitorados
+          {t("sidebar.title")}
         </h2>
         <span
           className="text-[10px] tracking-wider uppercase font-semibold flex-shrink-0"
           style={{ color: "var(--text-3)" }}
         >
           {filtered.length === counts.all
-            ? `${counts.all} países`
-            : `${filtered.length} de ${counts.all}`}
+            ? t("sidebar.count.all", { n: counts.all })
+            : t("sidebar.count.some", { n: filtered.length, total: counts.all })}
         </span>
       </div>
 
@@ -85,7 +87,7 @@ export function CountriesSidebar({
         <div className="relative">
           <input
             type="text"
-            placeholder="🔍  Buscar país..."
+            placeholder={t("sidebar.search.placeholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full px-3 py-2 pr-8 rounded-lg text-[12.5px] outline-none font-sans transition-colors"
@@ -99,8 +101,8 @@ export function CountriesSidebar({
             <button
               type="button"
               onClick={() => setSearch("")}
-              aria-label="Limpar busca"
-              title="Limpar busca"
+              aria-label={t("sidebar.search.clear")}
+              title={t("sidebar.search.clear")}
               className="absolute right-2 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center rounded text-[11px] font-bold cursor-pointer transition-colors"
               style={{ color: "var(--text-3)", background: "rgba(255,255,255,.05)" }}
             >
@@ -135,12 +137,12 @@ export function CountriesSidebar({
                 }}
               >
                 {f === "all"
-                  ? "Todos"
+                  ? t("sidebar.filter.all")
                   : f === "crit"
-                    ? "Críticos"
+                    ? t("sidebar.filter.crit")
                     : f === "warn"
-                      ? "Atenção"
-                      : "Estáveis"}
+                      ? t("sidebar.filter.warn")
+                      : t("sidebar.filter.stable")}
                 <span className="ml-1 opacity-80">{counts[f]}</span>
               </button>
             );
@@ -153,7 +155,7 @@ export function CountriesSidebar({
             className="text-[9.5px] tracking-wider uppercase font-bold"
             style={{ color: "var(--text-3)" }}
           >
-            ↕ Ordenar:
+            {t("sidebar.sort.label")}
           </span>
           {(["active", "name", "changes"] as SortBy[]).map((s) => {
             const active = sortBy === s;
@@ -169,7 +171,7 @@ export function CountriesSidebar({
                   border: `1px solid ${active ? "var(--color-wh-blue-light)" : "transparent"}`,
                 }}
               >
-                {SORT_LABELS[s]}
+                {t(SORT_KEY[s])}
               </button>
             );
           })}
@@ -181,7 +183,7 @@ export function CountriesSidebar({
         {filtered.length === 0 ? (
           <div className="py-8 text-center text-[12px] flex flex-col items-center gap-2" style={{ color: "var(--text-3)" }}>
             <span className="text-[24px] opacity-50">🔍</span>
-            <span>Nenhum país encontrado</span>
+            <span>{t("sidebar.empty")}</span>
             {(search || filter !== "all") && (
               <button
                 type="button"
@@ -192,7 +194,7 @@ export function CountriesSidebar({
                 className="mt-1 text-[10.5px] uppercase tracking-wider font-bold cursor-pointer"
                 style={{ color: "var(--color-wh-blue-light)" }}
               >
-                ↺ Limpar filtros
+                {t("sidebar.clear")}
               </button>
             )}
           </div>
@@ -218,7 +220,7 @@ export function CountriesSidebar({
                   color: "var(--text-3)",
                   background: "rgba(255,255,255,.04)",
                 }}
-                title={`${c.changes} mudança(s) no período`}
+                title={t("sidebar.changes.title", { n: c.changes })}
               >
                 {c.changes}
               </span>

@@ -2,6 +2,9 @@
 import { useEffect, useState } from "react";
 import type { Country, Status } from "@/lib/types";
 import { BULLETINS, type StatusFile, type BulletinStatus } from "./OfficialBulletins";
+import { useLocale } from "./LocaleProvider";
+
+type TFn = (key: string, params?: Record<string, string | number>) => string;
 
 const STATUS_COLOR: Record<Status, string> = {
   crit: "var(--color-status-critical)",
@@ -9,21 +12,21 @@ const STATUS_COLOR: Record<Status, string> = {
   stable: "var(--color-status-stable)",
 };
 
-function fmtRelative(iso: string | null): string {
-  if (!iso) return "—";
+function fmtRelative(iso: string | null, t: TFn, intl: string): string {
+  if (!iso) return t("feed.dash");
   const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return "—";
+  if (Number.isNaN(date.getTime())) return t("feed.dash");
   const delta = Date.now() - date.getTime();
   const m = Math.floor(delta / 60_000);
-  if (m < 1) return "agora";
-  if (m < 60) return `há ${m}min`;
+  if (m < 1) return t("feed.rel.now");
+  if (m < 60) return t("feed.rel.min", { n: m });
   const h = Math.floor(m / 60);
-  if (h < 24) return `há ${h}h`;
+  if (h < 24) return t("feed.rel.hour", { n: h });
   const d = Math.floor(h / 24);
-  if (d < 7) return `há ${d}d`;
+  if (d < 7) return t("feed.rel.day", { n: d });
   const w = Math.floor(d / 7);
-  if (w < 5) return `há ${w}sem`;
-  return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
+  if (w < 5) return t("feed.rel.week", { n: w });
+  return date.toLocaleDateString(intl, { day: "2-digit", month: "2-digit" });
 }
 
 type FeedItem = {
@@ -45,6 +48,7 @@ type FeedItem = {
  * (crit/warn/stable) usado no border lateral.
  */
 export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: (code: string) => void }) {
+  const { t, intl } = useLocale();
   const [items, setItems] = useState<FeedItem[]>([]);
   const [lastRun, setLastRun] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -109,30 +113,30 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
         style={{ color: "var(--color-wh-blue-light)", borderBottom: "1px solid var(--border)" }}
       >
         <span className="flex items-center gap-2.5">
-          📰 Feed de Mudanças por País
+          {t("feed.heading")}
           <span
             className="text-[8.5px] tracking-wider font-bold px-1.5 py-0.5 rounded normal-case"
             style={{ color: "#10A570", background: "rgba(16,165,112,.12)", letterSpacing: "1.5px" }}
           >
-            ● AUTO
+            {t("feed.badge.auto")}
           </span>
         </span>
         <span className="text-[9.5px] uppercase tracking-wider font-bold normal-case" style={{ color: "var(--text-3)" }}>
-          Última varredura: {loading ? "carregando…" : fmtRelative(lastRun)}
+          {t("feed.lastScan.label", { value: loading ? t("feed.lastScan.loading") : fmtRelative(lastRun, t, intl) })}
         </span>
       </h2>
 
       {loading && (
         <div className="text-[11.5px] py-6 text-center" style={{ color: "var(--text-3)" }}>
-          Carregando mudanças do cron diário…
+          {t("feed.loading")}
         </div>
       )}
 
       {!loading && items.length === 0 && (
         <div className="text-[11.5px] py-6 text-center" style={{ color: "var(--text-3)" }}>
-          Nenhuma mudança detectada nas últimas varreduras.
+          {t("feed.empty.line1")}
           <br />
-          O cron roda diariamente às 11h UTC (08h BRT).
+          {t("feed.empty.line2")}
         </div>
       )}
 
@@ -166,7 +170,7 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
                   className="text-[9.5px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-[10px] flex-shrink-0"
                   style={{ color: "var(--text-3)", background: "rgba(255,255,255,.05)" }}
                 >
-                  {fmtRelative(it.lastChangedAt)}
+                  {fmtRelative(it.lastChangedAt, t, intl)}
                 </span>
               </div>
               <h3
@@ -177,7 +181,7 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
                   wordBreak: "break-word",
                 }}
               >
-                Boletim oficial atualizado
+                {t("feed.card.title")}
               </h3>
               <p
                 className="text-[12px]"
@@ -190,7 +194,7 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
                   paddingRight: 4,
                 }}
               >
-                Mudança detectada pelo cron diário no site oficial. Clique pra ver os detalhes do país ou abrir a fonte.
+                {t("feed.card.body")}
               </p>
               <div
                 className="flex justify-between items-center gap-3 text-[10px] uppercase tracking-wider mt-4 pt-3 font-semibold flex-wrap min-w-0"
@@ -204,7 +208,7 @@ export function Feed({ countries, onSelect }: { countries: Country[]; onSelect: 
                   className="truncate min-w-0 hover:underline"
                   style={{ color: "var(--color-wh-blue-light)" }}
                 >
-                  ↗ Abrir fonte oficial
+                  {t("feed.card.openSource")}
                 </a>
                 <span
                   className="font-extrabold flex-shrink-0 truncate"

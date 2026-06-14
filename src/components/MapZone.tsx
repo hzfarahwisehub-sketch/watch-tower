@@ -7,6 +7,7 @@ import maplibregl, {
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { Country, Status } from "@/lib/types";
+import { useLocale } from "./LocaleProvider";
 
 interface Props {
   countries: Country[];
@@ -78,11 +79,14 @@ const STYLE_RELIEF: StyleSpecification = {
 
 type StyleKey = "google" | "satellite" | "relief" | "dark";
 
-const STYLE_OPTIONS: Array<{ key: StyleKey; label: string; emoji: string; desc: string }> = [
-  { key: "google", label: "Google", emoji: "🌍", desc: "Satélite com nomes e fronteiras" },
-  { key: "satellite", label: "Satélite HD", emoji: "🛰️", desc: "Imagem real, sem rótulos" },
-  { key: "relief", label: "Relevo", emoji: "🏔️", desc: "Mapa físico topográfico" },
-  { key: "dark", label: "Escuro", emoji: "🌑", desc: "Globo preto minimalista" },
+// Apenas key + emoji no nível de módulo. Os rótulos/descrições traduzíveis são
+// resolvidos dentro do componente via t("map.style.<key>.label") (helpers de
+// módulo nunca chamam useLocale — segue o padrão do KpiRow).
+const STYLE_OPTIONS: Array<{ key: StyleKey; emoji: string }> = [
+  { key: "google", emoji: "🌍" },
+  { key: "satellite", emoji: "🛰️" },
+  { key: "relief", emoji: "🏔️" },
+  { key: "dark", emoji: "🌑" },
 ];
 
 const STYLE_STORAGE_KEY = "wt-map-style";
@@ -126,6 +130,7 @@ const keepGlobe = (
  * - Markers por país (cor = status), click seleciona · voo suave ao selecionar
  */
 export default function MapZone({ countries, selected, onSelect }: Props) {
+  const { t } = useLocale();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MLMap | null>(null);
   const markersRef = useRef<Record<string, Marker>>({});
@@ -320,7 +325,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
       el.className = "wt-map-marker";
       el.setAttribute("data-status", c.status);
       el.setAttribute("aria-label", `${c.name} · ${c.status}`);
-      el.title = `${c.name} · ${c.changes} mudança(s) · ${c.authority}`;
+      el.title = t("map.marker.title", { name: c.name, n: c.changes, authority: c.authority });
       el.innerHTML = `
         <span class="wt-map-dot" style="background:${STATUS_COLOR[c.status]};box-shadow:0 0 12px ${STATUS_COLOR[c.status]}, 0 0 0 2px rgba(0,0,0,.5)"></span>
         <span class="wt-map-pulse" style="background:${STATUS_COLOR[c.status]}"></span>
@@ -334,7 +339,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
         .addTo(map);
       markersRef.current[c.code] = marker;
     });
-  }, [countries, onSelect]);
+  }, [countries, onSelect, t]);
 
   // VOO suave para o país selecionado; ao deselecionar, revive o giro automático
   useEffect(() => {
@@ -352,6 +357,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
   }, [selected, countries]);
 
   const current = STYLE_OPTIONS.find((o) => o.key === styleKey) ?? STYLE_OPTIONS[3];
+  const currentLabel = t(`map.style.${current.key}.label`);
 
   return (
     <div className="wt-card flex flex-col h-full overflow-hidden" style={{ minHeight: 300 }}>
@@ -363,7 +369,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
           className="text-[12px] tracking-[2px] uppercase font-bold flex items-center gap-2 shrink-0"
           style={{ color: "var(--color-wh-blue-light)" }}
         >
-          🗺 Mapa Global 3D
+          🗺 {t("map.title")}
         </h2>
 
         {/* Botão de estilo (gradiente + menu) */}
@@ -373,7 +379,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
             onClick={() => setMenuOpen((v) => !v)}
             aria-haspopup="menu"
             aria-expanded={menuOpen}
-            title="Trocar o estilo do globo"
+            title={t("map.style.button.title")}
             className="inline-flex items-center gap-1.5 px-3 py-[7px] rounded-[16px] text-[11px] font-bold tracking-wide cursor-pointer transition-all hover:-translate-y-px"
             style={{
               color: "#fff",
@@ -383,7 +389,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
             }}
           >
             <span>{current.emoji}</span>
-            <span>{current.label}</span>
+            <span>{currentLabel}</span>
             <span style={{ fontSize: 9, opacity: 0.85 }}>▼</span>
           </button>
 
@@ -416,7 +422,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
                       style={active ? { background: "rgba(74,122,255,.14)", color: "var(--text)" } : { color: "var(--text-2)" }}
                     >
                       <span className="text-[15px] leading-none">{o.emoji}</span>
-                      <span className="flex-1 truncate">{o.label}</span>
+                      <span className="flex-1 truncate">{t(`map.style.${o.key}.label`)}</span>
                       {active && <span style={{ color: "var(--color-wh-blue-light)", fontSize: 12, fontWeight: 700 }}>✓</span>}
                     </button>
                   );

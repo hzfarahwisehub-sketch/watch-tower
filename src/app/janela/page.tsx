@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { makeBus, HOST_TIMEOUT_MS, upsertOpenWindow, removeOpenWindow, type WinMsg } from "@/lib/window-bus";
-import { renderPanel, panelTitle, panelEmoji, isPanelId, type PanelId } from "@/components/PanelRegistry";
+import { renderPanel, panelEmoji, panelTitleKey, isPanelId, type PanelId } from "@/components/PanelRegistry";
+import { useLocale } from "@/components/LocaleProvider";
 
 /**
  * Janela FILHA: renderiza UM painel (via ?panel=<id>) numa janela própria.
@@ -13,6 +14,7 @@ import { renderPanel, panelTitle, panelEmoji, isPanelId, type PanelId } from "@/
  *    a janela se fecha sozinha. O fechamento normal é imediato, via `close-all`.
  */
 export default function JanelaPage() {
+  const { t } = useLocale();
   const [id, setId] = useState<string>("");
   const [ready, setReady] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
@@ -60,7 +62,11 @@ export default function JanelaPage() {
     const updDbg = () => {
       const ext = (window.screen as unknown as { isExtended?: boolean }).isExtended === true;
       setDbg(
-        `alvo ${x},${y} ${w}x${h} · agora ${window.screenX},${window.screenY} ${window.outerWidth}x${window.outerHeight} · telas ${ext ? "2+" : "1"}`,
+        t("janela.dbg.line", {
+          target: `${x},${y} ${w}x${h}`,
+          now: `${window.screenX},${window.screenY} ${window.outerWidth}x${window.outerHeight}`,
+          screens: ext ? "2+" : "1",
+        }),
       );
     };
     updDbg();
@@ -92,7 +98,7 @@ export default function JanelaPage() {
     const announce = () => post({ type: "child-hello", id, ...geom() });
 
     if (isPanelId(id)) {
-      document.title = `${panelEmoji(id)} ${panelTitle(id)} · Watch Tower`;
+      document.title = `${panelEmoji(id)} ${t(panelTitleKey(id))} · Watch Tower`;
     }
     announce();
     // Esta janela se registra no layout salvo JÁ ao abrir e mantém a própria
@@ -195,26 +201,26 @@ export default function JanelaPage() {
         <div className="flex items-center gap-2 min-w-0">
           <span className="text-[15px]">{valid ? panelEmoji(id) : "🧩"}</span>
           <h1 className="text-[12px] tracking-[1.5px] uppercase font-bold truncate" style={{ color: "var(--color-wh-blue-light)" }}>
-            {valid ? panelTitle(id) : "Painel desconhecido"}
+            {valid ? t(panelTitleKey(id)) : t("janela.unknownPanel")}
           </h1>
           <span className="hidden sm:inline text-[10px] uppercase tracking-wider font-semibold" style={{ color: "var(--text-3)" }}>
-            · janela separada
+            {t("janela.separateWindow")}
           </span>
         </div>
         <button
           type="button"
           onClick={dock}
-          title="Fecha esta janela e devolve o painel pra janela principal"
+          title={t("janela.dock.title")}
           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[14px] text-[11px] font-bold tracking-wide cursor-pointer transition-all hover:-translate-y-px flex-shrink-0"
           style={{ color: "#fff", background: "linear-gradient(135deg, var(--color-wh-blue), var(--color-wh-blue-dark))", border: "1px solid rgba(74,122,255,.5)" }}
         >
-          ↩ Inserir na principal
+          {t("janela.dock.label")}
         </button>
       </div>
       <div className="flex-1 min-h-0 overflow-auto p-3">
         {valid ? renderPanel(id as PanelId, onSelectCountry, selected) : (
           <p className="text-[13px] p-4" style={{ color: "var(--text-3)" }}>
-            Painel não encontrado. Feche esta janela.
+            {t("janela.notFound")}
           </p>
         )}
       </div>
@@ -223,7 +229,7 @@ export default function JanelaPage() {
         style={{ borderTop: "2px solid #f5a623", color: "#1a1208", background: "#ffd24a" }}
       >
         <div className="text-[10px] uppercase tracking-wide" style={{ color: "#7a5200" }}>
-          📸 Friday precisa desta linha · tira uma foto e manda:
+          {t("janela.dbg.prompt")}
         </div>
         <div className="text-[13px] break-all">{dbg}</div>
       </div>

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useLocale } from "./LocaleProvider";
 
 /**
  * Campo de senha com olhinho 👁 pra mostrar/ocultar o que está sendo digitado.
@@ -20,6 +21,7 @@ export function PasswordInput({
   autoFocus?: boolean;
   required?: boolean;
 }) {
+  const { t } = useLocale();
   const [show, setShow] = useState(false);
   return (
     <div className="relative">
@@ -40,8 +42,8 @@ export function PasswordInput({
         type="button"
         onClick={() => setShow((s) => !s)}
         tabIndex={-1}
-        aria-label={show ? "Ocultar senha" : "Mostrar senha"}
-        title={show ? "Ocultar senha" : "Mostrar senha"}
+        aria-label={show ? t("pwd.hide") : t("pwd.show")}
+        title={show ? t("pwd.hide") : t("pwd.show")}
         className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-md cursor-pointer transition-colors hover:bg-white/5"
         style={{ color: show ? "var(--color-wh-blue-light)" : "var(--text-3)" }}
       >

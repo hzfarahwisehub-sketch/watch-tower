@@ -1,7 +1,10 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function VerifyPage() {
+  const { t } = useLocale();
   return (
     <main
       className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden"
@@ -57,11 +60,11 @@ export default function VerifyPage() {
 
           <div className="flex flex-col gap-2">
             <h2 className="text-[20px] font-extrabold" style={{ color: "var(--text)" }}>
-              Confira seu e-mail
+              {t("authVerify.heading")}
             </h2>
             <p className="text-[13.5px] leading-relaxed" style={{ color: "var(--text-2)" }}>
-              Mandamos um link mágico de acesso pro seu e-mail.<br />
-              Clica nele pra entrar no painel.
+              {t("authVerify.body.line1")}<br />
+              {t("authVerify.body.line2")}
             </p>
           </div>
 
@@ -71,11 +74,11 @@ export default function VerifyPage() {
           >
             <div className="flex items-start gap-2">
               <span style={{ color: "var(--color-wh-blue-light)" }}>⏱</span>
-              <span>Link válido por 24 horas.</span>
+              <span>{t("authVerify.validity")}</span>
             </div>
             <div className="flex items-start gap-2">
               <span style={{ color: "var(--color-wh-blue-light)" }}>📨</span>
-              <span>Não chegou? Veja a caixa de spam. Remetente: <code style={{ background: "var(--bg2)", padding: "1px 6px", borderRadius: 4, fontSize: 11 }}>noreply@wisehubnow.online</code></span>
+              <span>{t("authVerify.spam")} <code style={{ background: "var(--bg2)", padding: "1px 6px", borderRadius: 4, fontSize: 11 }}>noreply@wisehubnow.online</code></span>
             </div>
           </div>
 
@@ -84,7 +87,7 @@ export default function VerifyPage() {
             className="text-[11px] uppercase tracking-[2px] font-bold mt-2 hover:underline transition-all"
             style={{ color: "var(--color-wh-blue-light)" }}
           >
-            ← Voltar
+            {t("authVerify.back")}
           </Link>
         </div>
       </div>

@@ -1,11 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { BULLETINS, type StatusFile } from "./OfficialBulletins";
+import { useLocale } from "./LocaleProvider";
 
 type Alert = {
   code: string;
   flag: string;
-  label: string;
+  country: string;
   level: "crit" | "warn";
   ageMs: number;
 };
@@ -18,6 +19,7 @@ type Alert = {
  * Fonte: /bulletins-status.json. Refresh a cada 5min.
  */
 export function AlertsBanner({ onSelect }: { onSelect: (code: string) => void }) {
+  const { t } = useLocale();
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -45,7 +47,7 @@ export function AlertsBanner({ onSelect }: { onSelect: (code: string) => void })
             return {
               code: b.key,
               flag: b.key,
-              label: `${meta.country} · boletim oficial atualizado`,
+              country: meta.country,
               level: ageMs < day ? ("crit" as const) : ("warn" as const),
               ageMs,
             };
@@ -88,7 +90,7 @@ export function AlertsBanner({ onSelect }: { onSelect: (code: string) => void })
         className="text-[11px] tracking-[2.5px] uppercase font-extrabold flex-shrink-0"
         style={{ color: "var(--color-status-critical)" }}
       >
-        Alertas Recentes
+        {t("alerts.recent")}
       </span>
       {alerts.map((a) => (
         <button
@@ -103,7 +105,7 @@ export function AlertsBanner({ onSelect }: { onSelect: (code: string) => void })
           }}
         >
           <span className={`wt-flag sm ${a.flag}`} style={{ width: 18, height: 13 }} />
-          {a.label}
+          {t("alerts.bulletinUpdated", { country: a.country })}
         </button>
       ))}
     </div>

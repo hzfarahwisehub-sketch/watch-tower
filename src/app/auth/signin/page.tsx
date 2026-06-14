@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
 import { PasswordInput } from "@/components/PasswordInput";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function SignInPage() {
+  const { t } = useLocale();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -16,9 +18,9 @@ export default function SignInPage() {
   // Mensagens vindas por query (?reset=ok depois de redefinir a senha).
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
-    if (p.get("reset") === "ok") setNotice("Senha redefinida. Entre com a nova senha.");
-    if (p.get("registered") === "ok") setNotice("Senha criada. Entre com ela abaixo.");
-  }, []);
+    if (p.get("reset") === "ok") setNotice(t("authSignin.notice.reset"));
+    if (p.get("registered") === "ok") setNotice(t("authSignin.notice.registered"));
+  }, [t]);
 
   function callbackUrl(): string {
     const p = new URLSearchParams(window.location.search);
@@ -33,12 +35,12 @@ export default function SignInPage() {
     try {
       const res = await signIn("password", { email, password, redirect: false });
       if (res?.error) {
-        setError("E-mail ou senha incorretos. Verifique e tente de novo.");
+        setError(t("authSignin.error.credentials"));
       } else {
         window.location.href = callbackUrl();
       }
     } catch {
-      setError("Erro inesperado. Tente novamente.");
+      setError(t("authSignin.error.unexpected"));
     } finally {
       setSubmitting(false);
     }
@@ -47,7 +49,7 @@ export default function SignInPage() {
   // Rede de segurança: link mágico por e-mail (fallback de emergência).
   async function handleMagicLink() {
     if (!email) {
-      setError("Digite o e-mail pra receber o link de acesso.");
+      setError(t("authSignin.error.emailRequired"));
       return;
     }
     setMagicSubmitting(true);
@@ -56,12 +58,12 @@ export default function SignInPage() {
     try {
       const res = await signIn("resend", { email, redirect: false, callbackUrl: callbackUrl() });
       if (res?.error) {
-        setError("Não foi possível enviar o link. Verifique o e-mail.");
+        setError(t("authSignin.error.magicLink"));
       } else {
         window.location.href = "/auth/verify";
       }
     } catch {
-      setError("Erro inesperado. Tente novamente.");
+      setError(t("authSignin.error.unexpected"));
     } finally {
       setMagicSubmitting(false);
     }
@@ -97,7 +99,7 @@ export default function SignInPage() {
             </h1>
           </div>
           <p className="text-[10px] tracking-[2.5px] uppercase font-medium" style={{ color: "var(--text-3)" }}>
-            Monitoramento Global de Imigração
+            {t("authSignin.subtitle")}
           </p>
         </div>
 
@@ -108,16 +110,16 @@ export default function SignInPage() {
         >
           <div>
             <h2 className="text-[18px] font-extrabold mb-1.5" style={{ color: "var(--text)" }}>
-              Acessar painel
+              {t("authSignin.heading")}
             </h2>
             <p className="text-[13px] leading-relaxed" style={{ color: "var(--text-2)" }}>
-              Entre com seu e-mail autorizado e sua senha.
+              {t("authSignin.subheading")}
             </p>
           </div>
 
           <label className="flex flex-col gap-2">
             <span className="text-[10.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--text-3)" }}>
-              E-mail autorizado
+              {t("authSignin.label.email")}
             </span>
             <input
               type="email"
@@ -136,7 +138,7 @@ export default function SignInPage() {
 
           <label className="flex flex-col gap-2">
             <span className="text-[10.5px] tracking-[2px] uppercase font-bold" style={{ color: "var(--text-3)" }}>
-              Senha
+              {t("authSignin.label.password")}
             </span>
             <PasswordInput value={password} onChange={setPassword} required autoComplete="current-password" />
           </label>
@@ -152,7 +154,7 @@ export default function SignInPage() {
               border: "1px solid rgba(74,122,255,.5)",
             }}
           >
-            {submitting ? "Entrando…" : "Entrar"}
+            {submitting ? t("authSignin.button.submitting") : t("authSignin.button.submit")}
           </button>
 
           {notice && (
@@ -177,10 +179,10 @@ export default function SignInPage() {
 
           <div className="flex items-center justify-between text-[11.5px] pt-1">
             <Link href="/auth/set-password" className="font-bold hover:underline" style={{ color: "var(--color-wh-blue-light)" }}>
-              Primeiro acesso
+              {t("authSignin.link.firstAccess")}
             </Link>
             <Link href="/auth/reset" className="font-bold hover:underline" style={{ color: "var(--text-2)" }}>
-              Esqueci a senha
+              {t("authSignin.link.forgotPassword")}
             </Link>
           </div>
 
@@ -192,11 +194,11 @@ export default function SignInPage() {
               className="text-[11px] uppercase tracking-[1.5px] font-bold transition-all hover:opacity-80 disabled:opacity-50"
               style={{ color: "var(--text-3)" }}
             >
-              {magicSubmitting ? "Enviando…" : "Não consegue entrar? Receber link por e-mail"}
+              {magicSubmitting ? t("authSignin.magic.submitting") : t("authSignin.magic.cta")}
             </button>
             <div className="flex items-center gap-2 text-[11px]" style={{ color: "var(--text-3)" }}>
               <span className="text-[14px] leading-none">🔒</span>
-              <span>Acesso restrito · e-mails autorizados pela administração.</span>
+              <span>{t("authSignin.restricted")}</span>
             </div>
           </div>
         </form>

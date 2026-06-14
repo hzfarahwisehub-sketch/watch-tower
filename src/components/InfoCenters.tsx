@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { INFO_CENTERS, GLOBAL_CRYPTO_SOURCES, categoryMeta, type InfoSource, type InfoSourceCategory } from "@/lib/infoCenters";
+import { useLocale } from "./LocaleProvider";
+
+type TFn = (key: string, params?: Record<string, string | number>) => string;
 
 const CAT_ORDER: InfoSourceCategory[] = ["news", "finance", "crypto", "legal"];
 
@@ -8,34 +11,39 @@ const CAT_ORDER: InfoSourceCategory[] = ["news", "finance", "crypto", "legal"];
 type Variant = "news" | "finance" | "crypto";
 
 const VARIANT_CONFIG: Record<Variant, {
-  title: string;
+  titleKey: string;
   emoji: string;
   categories: InfoSourceCategory[];
   showGlobalCrypto: boolean;
   accentColor: string;
 }> = {
   news: {
-    title: "Centros de Informação",
+    titleKey: "info.title.news",
     emoji: "🌐",
     categories: ["news", "legal"],
     showGlobalCrypto: false,
     accentColor: "var(--color-wh-blue-light)",
   },
   finance: {
-    title: "Finanças & Mercados",
+    titleKey: "info.title.finance",
     emoji: "💰",
     categories: ["finance"],
     showGlobalCrypto: false,
     accentColor: "#10A570",
   },
   crypto: {
-    title: "Cripto & Derivativos",
+    titleKey: "info.title.crypto",
     emoji: "🪙",
     categories: ["crypto"],
     showGlobalCrypto: true,
     accentColor: "#E5C156",
   },
 };
+
+/** Resolve o rótulo traduzido de uma categoria (icon/cor vêm do categoryMeta). */
+function catLabel(c: InfoSourceCategory, t: TFn): string {
+  return t(`info.cat.${c}`);
+}
 
 type Headline = { title: string; link: string; pubDate?: string };
 type FeedState =
@@ -81,38 +89,39 @@ function useFeed(rssUrl: string | undefined): FeedState {
   return state;
 }
 
-function fmtTimeAgo(iso?: string): string {
+function fmtTimeAgo(iso: string | undefined, t: TFn): string {
   if (!iso) return "";
   const date = new Date(iso);
   if (isNaN(date.getTime())) return "";
   const diff = Date.now() - date.getTime();
   const m = Math.floor(diff / 60000);
-  if (m < 1) return "agora";
-  if (m < 60) return `${m}min`;
+  if (m < 1) return t("info.time.now");
+  if (m < 60) return t("info.time.min", { n: m });
   const h = Math.floor(m / 60);
-  if (h < 24) return `${h}h`;
+  if (h < 24) return t("info.time.hour", { n: h });
   const d = Math.floor(h / 24);
-  if (d < 30) return `${d}d`;
+  if (d < 30) return t("info.time.day", { n: d });
   const mo = Math.floor(d / 30);
-  return `${mo}mês`;
+  return t("info.time.month", { n: mo });
 }
 
 /** Bloco de headlines RSS pra um InfoSource (renderiza nada se sem rss) */
 function SourceHeadlines({ source }: { source: InfoSource }) {
+  const { t } = useLocale();
   const feed = useFeed(source.rss);
   if (!source.rss) return null;
 
   if (feed.status === "loading" || feed.status === "idle") {
     return (
       <div className="pl-7 pr-2 pb-1.5 text-[9.5px]" style={{ color: "var(--text-3)" }}>
-        <span className="opacity-60">carregando manchetes…</span>
+        <span className="opacity-60">{t("info.headlines.loading")}</span>
       </div>
     );
   }
   if (feed.status === "error") {
     return (
       <div className="pl-7 pr-2 pb-1.5 text-[9.5px]" style={{ color: "var(--color-status-warning)" }}>
-        <span className="opacity-70">⚠ feed indisponível ({feed.error.slice(0, 40)})</span>
+        <span className="opacity-70">{t("info.headlines.error", { err: feed.error.slice(0, 40) })}</span>
       </div>
     );
   }
@@ -135,7 +144,7 @@ function SourceHeadlines({ source }: { source: InfoSource }) {
             <span style={{ overflowWrap: "anywhere" }}>{h.title}</span>
             {h.pubDate && (
               <span className="ml-1.5 text-[9px] uppercase tracking-wider font-semibold" style={{ color: "var(--text-3)" }}>
-                {fmtTimeAgo(h.pubDate)}
+                {fmtTimeAgo(h.pubDate, t)}
               </span>
             )}
           </a>
@@ -146,6 +155,7 @@ function SourceHeadlines({ source }: { source: InfoSource }) {
 }
 
 export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
+  const { t } = useLocale();
   const cfg = VARIANT_CONFIG[variant];
 
   // Filtra países que têm pelo menos 1 fonte da categoria do variant
@@ -181,13 +191,13 @@ export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
           className="text-[12px] tracking-[2.5px] uppercase font-bold flex items-center gap-2"
           style={{ color: cfg.accentColor }}
         >
-          {cfg.emoji} {cfg.title}
+          {cfg.emoji} {t(cfg.titleKey)}
         </h2>
         <span
           className="text-[10px] tracking-wider uppercase font-semibold text-right"
           style={{ color: "var(--text-3)" }}
         >
-          {filteredCenters.length} países · {totalSources} fontes · {totalWithRss} com headlines ao vivo
+          {t("info.header.counts", { countries: filteredCenters.length, sources: totalSources, rss: totalWithRss })}
         </span>
       </header>
 
@@ -198,14 +208,14 @@ export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
           return (
             <span key={c} className="flex items-center gap-1.5">
               <span style={{ color: m.color }}>{m.icon}</span>
-              <span className="uppercase tracking-wider font-semibold">{m.label}</span>
+              <span className="uppercase tracking-wider font-semibold">{catLabel(c, t)}</span>
               <span className="opacity-60">({countByCat[c]})</span>
             </span>
           );
         })}
         <span className="ml-auto flex items-center gap-1.5">
           <span style={{ color: "var(--color-status-stable)" }}>●</span>
-          <span className="uppercase tracking-wider font-semibold">RSS ao vivo · refresh 10min</span>
+          <span className="uppercase tracking-wider font-semibold">{t("info.legend.live")}</span>
         </span>
       </div>
 
@@ -235,7 +245,7 @@ export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
                   className="ml-auto text-[9.5px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded flex-shrink-0"
                   style={{ background: "rgba(31,85,255,.10)", color: "var(--color-wh-blue-light)" }}
                 >
-                  {center.sources.length} fontes
+                  {t("info.card.sources", { n: center.sources.length })}
                 </span>
               </div>
 
@@ -286,7 +296,7 @@ export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
                               <span
                                 className="inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"
                                 style={{ background: "var(--color-status-stable)", boxShadow: "0 0 4px var(--color-status-stable)" }}
-                                title="RSS ao vivo · headlines abaixo"
+                                title={t("info.card.rssBadge")}
                               />
                             )}
                           </div>
@@ -294,7 +304,7 @@ export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
                             className="text-[9px] mt-0.5 uppercase tracking-wider font-semibold flex items-center gap-1.5"
                             style={{ color: m.color }}
                           >
-                            {m.label} · <span style={{ opacity: 0.7 }}>{src.language.toUpperCase()}</span>
+                            {catLabel(src.category, t)} · <span style={{ opacity: 0.7 }}>{src.language.toUpperCase()}</span>
                           </div>
                         </div>
                         <span
@@ -328,13 +338,13 @@ export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
                 className="text-[12px] font-extrabold uppercase tracking-wider"
                 style={{ color: "#E5C156" }}
               >
-                Cripto global · derivativos & on-chain
+                {t("info.global.title")}
               </h3>
               <span
                 className="ml-auto text-[9.5px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded flex-shrink-0"
                 style={{ background: "rgba(229,193,86,.15)", color: "#E5C156" }}
               >
-                {GLOBAL_CRYPTO_SOURCES.length} fontes
+                {t("info.card.sources", { n: GLOBAL_CRYPTO_SOURCES.length })}
               </span>
             </div>
             <ul className="grid grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-5 gap-2">
@@ -362,7 +372,7 @@ export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
                         <span
                           className="inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"
                           style={{ background: "var(--color-status-stable)", boxShadow: "0 0 4px var(--color-status-stable)" }}
-                          title="RSS ao vivo"
+                          title={t("info.card.rssBadge.short")}
                         />
                       )}
                     </span>
@@ -380,10 +390,7 @@ export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
       {/* Footer */}
       <div className="px-5 py-3 flex-shrink-0" style={{ borderTop: "1px solid var(--border)" }}>
         <p className="text-[10.5px]" style={{ color: "var(--text-3)" }}>
-          Fontes com bolinha verde ● têm <strong>RSS ao vivo</strong> (manchetes atualizadas a cada
-          10min via /api/rss · cache 15min). Reuters/WSJ/Bloomberg/FT/Coinglass não publicam feed
-          público estável — ficam apenas como link clicável. {totalWithRss} de {totalSources} fontes
-          com RSS conectado.
+          {t("info.footer", { rss: totalWithRss, sources: totalSources })}
         </p>
       </div>
     </section>

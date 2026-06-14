@@ -8,6 +8,33 @@
 
 import type { Locale } from "./config";
 
+import map from "./messages/map";
+import sidebar from "./messages/sidebar";
+import bench from "./messages/bench";
+import live from "./messages/live";
+import info from "./messages/info";
+import feed from "./messages/feed";
+import bulletins from "./messages/bulletins";
+import daily from "./messages/daily";
+import suggest from "./messages/suggest";
+import exportbtn from "./messages/exportbtn";
+import alerts from "./messages/alerts";
+import detail from "./messages/detail";
+import settings from "./messages/settings";
+import push from "./messages/push";
+import zoom from "./messages/zoom";
+import windowmgr from "./messages/windowmgr";
+import pwd from "./messages/pwd";
+import janela from "./messages/janela";
+import authSignin from "./messages/authSignin";
+import authSetpw from "./messages/authSetpw";
+import authReset from "./messages/authReset";
+import authVerify from "./messages/authVerify";
+import authError from "./messages/authError";
+import admin from "./messages/admin";
+import dash from "./messages/dash";
+import registry from "./messages/registry";
+
 type Dict = Record<string, string>;
 
 const pt: Dict = {
@@ -124,4 +151,65 @@ const en: Dict = {
   "common.dash": "—",
 };
 
-export const MESSAGES: Record<Locale, Dict> = { "pt-BR": pt, en };
+export const MESSAGES: Record<Locale, Dict> = {
+  "pt-BR": Object.assign(
+    {},
+    pt,
+    map.pt,
+    sidebar.pt,
+    bench.pt,
+    live.pt,
+    info.pt,
+    feed.pt,
+    bulletins.pt,
+    daily.pt,
+    suggest.pt,
+    exportbtn.pt,
+    alerts.pt,
+    detail.pt,
+    settings.pt,
+    push.pt,
+    zoom.pt,
+    windowmgr.pt,
+    pwd.pt,
+    janela.pt,
+    authSignin.pt,
+    authSetpw.pt,
+    authReset.pt,
+    authVerify.pt,
+    authError.pt,
+    admin.pt,
+    dash.pt,
+    registry.pt,
+  ),
+  en: Object.assign(
+    {},
+    en,
+    map.en,
+    sidebar.en,
+    bench.en,
+    live.en,
+    info.en,
+    feed.en,
+    bulletins.en,
+    daily.en,
+    suggest.en,
+    exportbtn.en,
+    alerts.en,
+    detail.en,
+    settings.en,
+    push.en,
+    zoom.en,
+    windowmgr.en,
+    pwd.en,
+    janela.en,
+    authSignin.en,
+    authSetpw.en,
+    authReset.en,
+    authVerify.en,
+    authError.en,
+    admin.en,
+    dash.en,
+    registry.en,
+  ),
+};

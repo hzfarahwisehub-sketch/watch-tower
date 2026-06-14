@@ -6,15 +6,18 @@ import { CountryLiveActivity } from "./CountryLiveActivity";
 import { CountryDetailSections } from "./CountryDetailSections";
 import { ImageZoomViewer } from "./ImageZoomViewer";
 import { useCountryChanges } from "@/lib/useCountryChanges";
+import { useLocale } from "./LocaleProvider";
 
-function fmtAge(days: number | null): string {
-  if (days === null) return "—";
-  if (days === 0) return "hoje";
-  if (days === 1) return "ontem";
-  if (days < 7) return `há ${days}d`;
-  if (days < 30) return `há ${Math.floor(days / 7)}sem`;
-  if (days < 365) return `há ${Math.floor(days / 30)}mês`;
-  return "+1 ano";
+type TFn = (key: string, params?: Record<string, string | number>) => string;
+
+function fmtAge(days: number | null, t: TFn): string {
+  if (days === null) return t("bench.age.none");
+  if (days === 0) return t("bench.age.today");
+  if (days === 1) return t("bench.age.yesterday");
+  if (days < 7) return t("bench.age.days", { n: days });
+  if (days < 30) return t("bench.age.weeks", { n: Math.floor(days / 7) });
+  if (days < 365) return t("bench.age.months", { n: Math.floor(days / 30) });
+  return t("bench.age.year");
 }
 
 const STATUS_COLOR: Record<Status, string> = {
@@ -23,10 +26,10 @@ const STATUS_COLOR: Record<Status, string> = {
   stable: "var(--color-status-stable)",
 };
 
-const STATUS_LABEL: Record<Status, string> = {
-  crit: "Crítico",
-  warn: "Atenção",
-  stable: "Estável",
+const STATUS_LABEL_KEY: Record<Status, string> = {
+  crit: "bench.status.crit",
+  warn: "bench.status.warn",
+  stable: "bench.status.stable",
 };
 
 /**
@@ -40,6 +43,7 @@ const STATUS_LABEL: Record<Status, string> = {
  * Quando outro componente seleciona país (mapa/sidebar/feed), refletimos.
  */
 export function CountryBenchmark({ selectedCode }: { selectedCode: string | null }) {
+  const { t } = useLocale();
   // Default = primeiro país crítico, ou primeiro da lista
   const defaultCountry: Country =
     COUNTRIES.find((c) => c.status === "crit") ?? COUNTRIES[0]!;
@@ -74,7 +78,7 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
             className="text-[12px] tracking-[2.5px] uppercase font-bold flex items-center gap-2"
             style={{ color: "var(--color-wh-blue-light)" }}
           >
-            🎯 Benchmark do País
+            🎯 {t("bench.title")}
           </h2>
           <span
             className="px-2 py-0.5 rounded-full text-[9.5px] uppercase tracking-wider font-bold flex items-center gap-1.5"
@@ -88,20 +92,20 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
               className="inline-block w-1.5 h-1.5 rounded-full"
               style={{ background: accent, boxShadow: `0 0 6px ${accent}` }}
             />
-            {STATUS_LABEL[country.status]}
+            {t(STATUS_LABEL_KEY[country.status])}
           </span>
         </div>
         <span className="text-[10px] tracking-wider uppercase font-semibold text-right flex items-center gap-2" style={{ color: "var(--text-3)" }}>
           {changes.errored ? (
-            <span style={{ color: "var(--color-status-critical)" }}>● cron c/ erro</span>
+            <span style={{ color: "var(--color-status-critical)" }}>● {t("bench.cronError")}</span>
           ) : changes.lastChangedAt ? (
             <>
               <span style={{ color: changes.recentlyChanged ? "#10A570" : "var(--text-3)" }}>
-                {changes.recentlyChanged ? "✦ " : ""}última mudança {fmtAge(changes.daysSinceChange)}
+                {changes.recentlyChanged ? "✦ " : ""}{t("bench.lastChange")} {fmtAge(changes.daysSinceChange, t)}
               </span>
             </>
           ) : (
-            <span>sem boletim monitorado</span>
+            <span>{t("bench.noBulletin")}</span>
           )}
           <span style={{ opacity: 0.5 }}>·</span>
           <span>{country.authority}</span>
@@ -130,18 +134,18 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={country.imageUrl}
-                    alt={`${country.name}, ponto turístico`}
+                    alt={`${country.name}, ${t("bench.img.landmark")}`}
                     className="w-full h-full object-cover cursor-zoom-in transition-transform duration-300 hover:scale-[1.04]"
                     loading="lazy"
                     onError={() => setImgFailed(true)}
                     onClick={() => setZoomOpen(true)}
-                    title="Clique pra ampliar"
+                    title={t("bench.img.clickToZoom")}
                   />
                   <button
                     type="button"
                     onClick={() => setZoomOpen(true)}
-                    title="Ampliar imagem"
-                    aria-label="Ampliar imagem"
+                    title={t("bench.img.zoom")}
+                    aria-label={t("bench.img.zoom")}
                     className="absolute top-2 right-2 w-8 h-8 rounded-lg flex items-center justify-center text-[14px] cursor-pointer transition-all hover:scale-110 z-10"
                     style={{ background: "rgba(15,12,30,.7)", border: "1px solid rgba(255,255,255,.2)", backdropFilter: "blur(4px)" }}
                   >
@@ -189,10 +193,10 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
                 style={{ background: "var(--bg2)", border: "1px solid var(--border)" }}
               >
                 <span className="uppercase tracking-wider font-bold" style={{ color: "var(--text-3)" }}>
-                  Status
+                  {t("bench.stat.status")}
                 </span>
                 <span className="font-extrabold text-[14px]" style={{ color: accent }}>
-                  {STATUS_LABEL[country.status]}
+                  {t(STATUS_LABEL_KEY[country.status])}
                 </span>
               </div>
               <div
@@ -200,7 +204,7 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
                 style={{ background: "var(--bg2)", border: "1px solid var(--border)" }}
               >
                 <span className="uppercase tracking-wider font-bold" style={{ color: "var(--text-3)" }}>
-                  Última mudança
+                  {t("bench.stat.lastChange")}
                 </span>
                 <span
                   className="font-extrabold text-[14px]"
@@ -213,12 +217,12 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
                   }}
                 >
                   {changes.errored
-                    ? "cron c/ erro"
+                    ? t("bench.cronError")
                     : changes.lastChangedAt
-                      ? fmtAge(changes.daysSinceChange)
-                      : "—"}
+                      ? fmtAge(changes.daysSinceChange, t)
+                      : t("bench.age.none")}
                   {changes.recentlyChanged && (
-                    <span className="text-[10px] font-semibold ml-1" style={{ color: "#10A570" }}>NOVO</span>
+                    <span className="text-[10px] font-semibold ml-1" style={{ color: "#10A570" }}>{t("bench.new")}</span>
                   )}
                 </span>
               </div>
@@ -233,7 +237,7 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
                   className="text-[10.5px] tracking-[2px] uppercase font-bold mb-2"
                   style={{ color: "var(--color-wh-blue-light)" }}
                 >
-                  📋 Panorama
+                  📋 {t("bench.panorama")}
                 </h4>
                 <p
                   className="text-[13px] leading-relaxed"
@@ -254,16 +258,16 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
                 className="text-[10.5px] tracking-[2px] uppercase font-bold mb-1 flex items-center gap-2"
                 style={{ color: "var(--color-wh-blue-light)" }}
               >
-                📜 Marcos editoriais ({country.events.length})
+                📜 {t("bench.milestones", { n: country.events.length })}
                 <span
                   className="text-[8.5px] tracking-wider font-bold px-1.5 py-0.5 rounded normal-case"
                   style={{ color: "var(--text-3)", background: "rgba(255,255,255,.04)", letterSpacing: "1.5px" }}
                 >
-                  CURADO PELA EQUIPE
+                  {t("bench.curated")}
                 </span>
               </h4>
               <p className="text-[10.5px] mb-2.5" style={{ color: "var(--text-3)" }}>
-                Contexto histórico selecionado pela equipe WiseHub. Para mudanças em tempo real, veja Atividade ao vivo acima.
+                {t("bench.milestones.caption")}
               </p>
               <ul className="flex flex-col gap-2.5">
                 {country.events.map((ev, i) => (

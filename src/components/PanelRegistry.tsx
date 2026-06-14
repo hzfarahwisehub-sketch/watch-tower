@@ -42,6 +42,12 @@ export const PANELS: { id: PanelId; title: string; emoji: string }[] = [
 export function panelTitle(id: string): string {
   return PANELS.find((p) => p.id === id)?.title ?? id;
 }
+/** Chave i18n do título do painel (resolva com t(panelTitleKey(id))). O título
+ *  localizado vive em src/lib/i18n/messages/registry.ts. panelTitle() acima
+ *  segue como fallback PT (ex.: usos fora de componente). */
+export function panelTitleKey(id: string): string {
+  return "registry." + id;
+}
 export function panelEmoji(id: string): string {
   return PANELS.find((p) => p.id === id)?.emoji ?? "🧩";
 }

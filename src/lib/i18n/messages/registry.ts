@@ -1,0 +1,42 @@
+// Títulos dos 16 painéis (catálogo do PanelRegistry). Usados na célula do grid
+// (tooltip/aria + placeholder de janela destacada), no menu de janelas e no
+// título da aba da janela destacada. Chave = "registry." + PanelId.
+const dict = {
+  pt: {
+    "registry.map": "Mapa Global 3D",
+    "registry.benchmark": "Benchmark do País",
+    "registry.alerts": "Alertas críticos",
+    "registry.feed": "Feed de mudanças",
+    "registry.bulletins": "Boletins oficiais",
+    "registry.countries": "Lista de países",
+    "registry.kpis": "KPIs globais",
+    "registry.tasks": "Tarefas do dia",
+    "registry.agenda": "Agenda",
+    "registry.reminders": "Lembretes",
+    "registry.scheduled": "Ações programadas",
+    "registry.inbox": "Inbox",
+    "registry.requests": "Caixa de solicitações",
+    "registry.info": "Centros de Informação",
+    "registry.finance": "Finanças & Mercados",
+    "registry.crypto": "Cripto & Derivativos",
+  },
+  en: {
+    "registry.map": "Global 3D Map",
+    "registry.benchmark": "Country Benchmark",
+    "registry.alerts": "Critical Alerts",
+    "registry.feed": "Changes Feed",
+    "registry.bulletins": "Official Bulletins",
+    "registry.countries": "Country List",
+    "registry.kpis": "Global KPIs",
+    "registry.tasks": "Today's Tasks",
+    "registry.agenda": "Agenda",
+    "registry.reminders": "Reminders",
+    "registry.scheduled": "Scheduled Actions",
+    "registry.inbox": "Inbox",
+    "registry.requests": "Requests Box",
+    "registry.info": "Info Centers",
+    "registry.finance": "Finance & Markets",
+    "registry.crypto": "Crypto & Derivatives",
+  },
+} as const;
+export default dict;

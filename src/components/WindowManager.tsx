@@ -18,8 +18,9 @@ import {
   type WinMsg,
   type StoredWin,
 } from "@/lib/window-bus";
-import { panelTitle, panelEmoji, isPanelId, type PanelId } from "./PanelRegistry";
+import { panelEmoji, panelTitleKey, isPanelId, type PanelId } from "./PanelRegistry";
 import { useToast } from "./ToastProvider";
+import { useLocale } from "./LocaleProvider";
 
 type Geom = { x: number; y: number; w: number; h: number };
 
@@ -93,6 +94,7 @@ export function WindowManagerProvider({
   children: ReactNode;
 }) {
   const toast = useToast();
+  const { t } = useLocale();
   const winRefs = useRef<Map<string, Window>>(new Map());
   const geomRef = useRef<Map<string, Geom>>(new Map());
   const lastSeenRef = useRef<Map<string, number>>(new Map());
@@ -157,7 +159,7 @@ export function WindowManagerProvider({
       // pedida so na restauracao, depois das janelas ja abertas.
       const win = window.open(url, `wt-win-${id}`, features);
       if (!win || win.closed) {
-        toast("Permita pop-ups deste site pra abrir em janela separada");
+        toast(t("windowmgr.toast.allowPopups"));
         return null;
       }
       winRefs.current.set(id, win);
@@ -167,7 +169,7 @@ export function WindowManagerProvider({
       setSavedClosed((prev) => prev.filter((p) => p !== id));
       return win;
     },
-    [setOpen, toast],
+    [setOpen, toast, t],
   );
 
   const forget = useCallback(
@@ -268,13 +270,13 @@ export function WindowManagerProvider({
         // rearma o gesto pra tentar de novo no próximo clique/toque.
         setPendingRestore(missing);
         if (!opts?.auto) {
-          toast("O navegador bloqueou. Libere pop-ups deste site pra reabrir as janelas de uma vez.");
+          toast(t("windowmgr.toast.blocked"));
         }
       } else {
         setPendingRestore(0);
       }
     },
-    [popOut, toast],
+    [popOut, toast, t],
   );
   const doRestoreRef = useRef(doRestore);
   doRestoreRef.current = doRestore;
@@ -462,11 +464,13 @@ export function WindowManagerProvider({
             cursor: "pointer",
             animation: "wt-menu-pop .16s ease-out",
           }}
-          title="Reabre as janelas que estavam abertas, nos mesmos monitores e posições"
+          title={t("windowmgr.restore.title")}
         >
           <span className="text-[14px]">↻</span>
-          Restaurar {restoreCount} {restoreCount === 1 ? "janela" : "janelas"}
-          <span className="hidden sm:inline font-semibold opacity-80">· toque em qualquer lugar</span>
+          {restoreCount === 1
+            ? t("windowmgr.restore.btn.one", { n: restoreCount })
+            : t("windowmgr.restore.btn.many", { n: restoreCount })}
+          <span className="hidden sm:inline font-semibold opacity-80">{t("windowmgr.restore.tapHint")}</span>
         </button>
       )}
       {children}
@@ -486,6 +490,7 @@ export function useWindowManagerOptional(): Ctx | null {
 /** Menu da faixa do Dashboard pra gerenciar as janelas abertas. */
 export function WindowsMenu() {
   const wm = useWindowManagerOptional();
+  const { t } = useLocale();
   const [open, setOpen] = useState(false);
   if (!wm) return null;
 
@@ -502,13 +507,13 @@ export function WindowsMenu() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        title="Gerenciar janelas separadas"
+        title={t("windowmgr.menu.title")}
         aria-haspopup="menu"
         aria-expanded={open}
         className="px-3 py-1.5 rounded-lg text-[11px] font-bold tracking-wider uppercase transition-colors"
         style={{ background: "var(--bg2)", border: "1px solid var(--border)", color: "var(--text-2)", cursor: "pointer" }}
       >
-        🪟 Janelas{count > 0 ? ` · ${count}` : ""}
+        🪟 {t("windowmgr.menu.label")}{count > 0 ? ` · ${count}` : ""}
       </button>
       {open && (
         <>
@@ -521,7 +526,7 @@ export function WindowsMenu() {
             {wm.openIds.length > 0 && (
               <>
                 <div className="px-2.5 py-1 text-[9.5px] uppercase tracking-[1.5px] font-bold" style={{ color: "var(--text-3)" }}>
-                  Abertas em janela
+                  {t("windowmgr.menu.openInWindow")}
                 </div>
                 {wm.openIds.map((id) => (
                   <div key={id} className="flex items-center gap-1 px-1.5 py-1 rounded-lg hover:bg-white/5">
@@ -530,15 +535,15 @@ export function WindowsMenu() {
                       onClick={() => wm.focusWindow(id)}
                       className="flex-1 flex items-center gap-2 text-left text-[12px] font-semibold truncate"
                       style={{ color: "var(--text-2)", background: "transparent", border: "none", cursor: "pointer" }}
-                      title="Focar a janela"
+                      title={t("windowmgr.menu.focus")}
                     >
                       <span>{panelEmoji(id)}</span>
-                      <span className="truncate">{panelTitle(id)}</span>
+                      <span className="truncate">{t(panelTitleKey(id))}</span>
                     </button>
                     <button
                       type="button"
                       onClick={() => wm.dockBack(id)}
-                      title="Trazer de volta pra principal"
+                      title={t("windowmgr.menu.dockBack")}
                       className="text-[10px] font-bold px-1.5 py-1 rounded-md flex-shrink-0"
                       style={{ background: "rgba(31,85,255,.15)", color: "var(--color-wh-blue-light)", border: "1px solid var(--border-hi)", cursor: "pointer" }}
                     >
@@ -555,7 +560,7 @@ export function WindowsMenu() {
                   className="w-full mt-1 px-2.5 py-1.5 rounded-lg text-[11px] font-bold text-left hover:bg-white/5"
                   style={{ color: "var(--text-2)", background: "transparent", border: "none", cursor: "pointer" }}
                 >
-                  ↩ Trazer todas de volta
+                  ↩ {t("windowmgr.menu.dockAll")}
                 </button>
               </>
             )}
@@ -568,9 +573,9 @@ export function WindowsMenu() {
                 }}
                 className="w-full mt-1 px-2.5 py-2 rounded-lg text-[11.5px] font-bold text-left"
                 style={{ color: "#fff", background: "linear-gradient(135deg, var(--color-wh-blue), var(--color-wh-blue-dark))", border: "1px solid rgba(74,122,255,.5)", cursor: "pointer" }}
-                title="Reabre as janelas que estavam abertas, nos mesmos monitores e posições"
+                title={t("windowmgr.restore.title")}
               >
-                ↻ Restaurar janelas · {wm.savedClosed.length}
+                ↻ {t("windowmgr.menu.restore")} · {wm.savedClosed.length}
               </button>
             )}
             <div
