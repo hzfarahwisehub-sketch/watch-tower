@@ -116,14 +116,15 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
       {/* items-start + sem h-full: o conteúdo flui do TOPO e a sobra (quando a
           caixa é maior que o conteúdo) fica embaixo — em vez de o grid esticar
           as linhas e abrir um vão entre a linha de stats e o Panorama. */}
-      <div className="flex-1 overflow-auto p-5 wt-benchmark-body">
-        <div className="grid grid-cols-1 @2xl:grid-cols-[minmax(240px,1fr)_2fr] gap-5 items-start">
-          {/* IMAGEM destacada (quadrada, com glow) */}
+      <div className="flex-1 overflow-auto p-5 wt-benchmark-body flex flex-col gap-5">
+        {/* ZONA SUPERIOR: imagem (estica em altura pra acompanhar o conteúdo do
+            lado) + STATUS à esquerda · Panorama + Atividade ao vivo à direita. */}
+        <div className="grid grid-cols-1 @2xl:grid-cols-[minmax(220px,260px)_1fr] gap-5 items-stretch">
+          {/* IMAGEM destacada (estica em altura) + stats */}
           <div className="flex flex-col gap-3">
             <div
-              className="relative rounded-xl overflow-hidden flex-shrink-0"
+              className="relative rounded-xl overflow-hidden flex-1 min-h-[200px]"
               style={{
-                aspectRatio: "1 / 1",
                 background: `linear-gradient(135deg, ${accent}22, var(--bg2))`,
                 border: `1px solid ${accent}66`,
                 boxShadow: `0 8px 32px ${accent}33, inset 0 0 0 1px rgba(255,255,255,.05)`,
@@ -249,13 +250,18 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
             )}
 
             <CountryLiveActivity countryCode={country.code} />
+          </div>
+        </div>
 
-            {/* Editorial curado + dicas + fontes (tudo do local, aqui no benchmark) */}
-            <CountryDetailSections country={country} />
+        {/* ZONA INFERIOR (largura inteira): dicas, editorial e marcos preenchem
+            toda a extensão da caixa, abaixo da imagem — sem faixa vazia na esquerda. */}
+        <div className="flex flex-col gap-4">
+          {/* Editorial curado + dicas + fontes (tudo do local, aqui no benchmark) */}
+          <CountryDetailSections country={country} />
 
-            <div>
-              <h4
-                className="text-[10.5px] tracking-[2px] uppercase font-bold mb-1 flex items-center gap-2"
+          <div>
+            <h4
+              className="text-[10.5px] tracking-[2px] uppercase font-bold mb-1 flex items-center gap-2"
                 style={{ color: "var(--color-wh-blue-light)" }}
               >
                 📜 {t("bench.milestones", { n: country.events.length })}
@@ -313,7 +319,6 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 }
