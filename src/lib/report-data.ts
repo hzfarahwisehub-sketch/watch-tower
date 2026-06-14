@@ -17,6 +17,7 @@ import { COUNTRIES } from "@/lib/data";
 import { INFO_CENTERS, type InfoSource } from "@/lib/infoCenters";
 import { BULLETINS, type BulletinStatus, type StatusFile } from "@/lib/bulletins";
 import { getEditorial, editorialStats, type CountryEditorial } from "@/lib/editorial";
+import { normalizeTitle, type TransMap } from "@/lib/rss-translations";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
@@ -69,59 +70,31 @@ export type ReportData = {
   countries: ReportCountry[];
 };
 
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
+// Busca as manchetes pelo MESMO /api/rss de produção que o app + o cron usam,
+// pra os títulos virem idênticos (mesmo parse/decode) e baterem com as chaves do
+// rss-translated.json — senão a tradução do relatório não casaria nas manchetes
+// acentuadas. Também foge do bloqueio US (o /api/rss roda em gru) e melhora a
+// decodificação das manchetes no relatório.
+const APP_BASE = (process.env.WT_APP_URL || "https://watchtower.wisehubnow.online").replace(/\/$/, "");
 
 async function fetchFeed(rssUrl: string, sourceName: string, maxItems = 5): Promise<ReportHeadline[]> {
   try {
     const ctrl = new AbortController();
     const t = setTimeout(() => ctrl.abort(), 12000);
-    const res = await fetch(rssUrl, {
-      headers: { "User-Agent": UA, Accept: "application/rss+xml,application/xml,*/*" },
-      signal: ctrl.signal,
-    });
+    const res = await fetch(`${APP_BASE}/api/rss?url=${encodeURIComponent(rssUrl)}`, { signal: ctrl.signal });
     clearTimeout(t);
     if (!res.ok) return [];
-    const xml = await res.text();
-    return parseRss(xml, sourceName).slice(0, maxItems);
+    const data = await res.json();
+    const items: Array<{ title?: string; link?: string; pubDate?: string }> = Array.isArray(data?.items) ? data.items : [];
+    return items.slice(0, maxItems).map((it) => ({
+      title: (it.title || "").trim(),
+      link: it.link || "",
+      pubDate: it.pubDate,
+      source: sourceName,
+    }));
   } catch {
     return [];
   }
-}
-
-function parseRss(xml: string, source: string): ReportHeadline[] {
-  const items: ReportHeadline[] = [];
-  // RSS 2.0
-  const itemRe = /<item\b[^>]*>([\s\S]*?)<\/item>/gi;
-  let m: RegExpExecArray | null;
-  while ((m = itemRe.exec(xml)) !== null && items.length < 10) {
-    const block = m[1];
-    const title = pick(block, /<title>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/title>/i);
-    const link = pick(block, /<link>([\s\S]*?)<\/link>/i);
-    const pubDate = pick(block, /<pubDate>([\s\S]*?)<\/pubDate>/i);
-    if (title && link) items.push({ title: title.trim(), link: link.trim(), pubDate, source });
-  }
-  // Atom fallback
-  if (items.length === 0) {
-    const entryRe = /<entry\b[^>]*>([\s\S]*?)<\/entry>/gi;
-    while ((m = entryRe.exec(xml)) !== null && items.length < 10) {
-      const block = m[1];
-      const title = pick(block, /<title[^>]*>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/title>/i);
-      const link = pickAttr(block, /<link[^>]*href=["']([^"']+)["']/i);
-      const pubDate = pick(block, /<(?:updated|published)>([\s\S]*?)<\/(?:updated|published)>/i);
-      if (title && link) items.push({ title: title.trim(), link, pubDate, source });
-    }
-  }
-  return items;
-}
-
-function pick(s: string, re: RegExp): string | undefined {
-  const m = s.match(re);
-  return m?.[1]?.replace(/<[^>]+>/g, "").trim();
-}
-function pickAttr(s: string, re: RegExp): string | undefined {
-  const m = s.match(re);
-  return m?.[1];
 }
 
 /** Ordena manchetes mais recentes primeiro (sem data vai pro fim). */
@@ -138,7 +111,7 @@ function sortHeadlines(arr: ReportHeadline[]): ReportHeadline[] {
  * dos Centros de Informação (em lotes de 8 pra ser gentil com os servidores)
  * e monta a estrutura país a país.
  */
-export async function gatherReportData(): Promise<ReportData> {
+export async function gatherReportData(lang: "pt" | "en" = "pt"): Promise<ReportData> {
   const generatedAt = new Date();
   const generatedAtStr = generatedAt.toLocaleString("pt-BR", {
     dateStyle: "full",
@@ -160,6 +133,22 @@ export async function gatherReportData(): Promise<ReportData> {
   if (statusFile) {
     for (const b of statusFile.bulletins) statusByKey.set(b.key, b);
   }
+
+  // Traduções das manchetes (mesmo padrão fs do bulletins-status). Gerado pelo
+  // cron collect-rss. Traduz o título da notícia pro idioma do app no download.
+  let rssTrans: TransMap = {};
+  try {
+    const tp = path.join(process.cwd(), "public", "rss-translated.json");
+    const raw = await fs.readFile(tp, "utf-8");
+    rssTrans = (JSON.parse(raw)?.translations ?? {}) as TransMap;
+  } catch {
+    // sem traduções → manchetes saem no idioma original
+  }
+  const translateTitle = (title: string): string => {
+    const tr = rssTrans[normalizeTitle(title)];
+    const want = lang === "en" ? tr?.en : tr?.pt;
+    return want && normalizeTitle(want) !== normalizeTitle(title) ? want : title;
+  };
 
   // Junta todos os feeds RSS catalogados nos Centros de Informação
   const allFeeds: Array<{ countryCode: string; sourceName: string; rss: string }> = [];
@@ -207,7 +196,10 @@ export async function gatherReportData(): Promise<ReportData> {
       summary: c.summary,
       bulletin,
       events: c.events.map((ev) => ({ title: ev.title, desc: ev.desc, src: ev.src })),
-      headlines: sortHeadlines(headlinesByCountry.get(c.code) ?? []),
+      headlines: sortHeadlines(headlinesByCountry.get(c.code) ?? []).map((h) => ({
+        ...h,
+        title: translateTitle(h.title),
+      })),
       sources: center?.sources ?? [],
       editorial: getEditorial(c.code),
     };

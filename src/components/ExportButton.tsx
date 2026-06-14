@@ -27,7 +27,7 @@ export function ExportButton({
   label?: string;
   title?: string;
 }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [downloading, setDownloading] = useState<Format | null>(null);
   const [open, setOpen] = useState(false);
   const [lastDownload, setLastDownload] = useState<{ url: string; filename: string } | null>(null);
@@ -68,7 +68,7 @@ export function ExportButton({
     if (downloading) return;
     setDownloading(format);
     try {
-      const res = await fetch(`/api/export/full-report?format=${format}`);
+      const res = await fetch(`/api/export/full-report?format=${format}&lang=${locale === "en" ? "en" : "pt"}`);
       if (!res.ok) {
         if (res.status === 401) toast(t("exportbtn.toast.needLogin"));
         else if (res.status === 403) toast(t("exportbtn.toast.adminOnly"));

@@ -26,7 +26,8 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const CACHE_TTL_MS = 30 * 60 * 1000;
-let cache: { generatedAt: number; data: ReportData } | null = null;
+// Cache por idioma — as manchetes saem traduzidas pro idioma pedido.
+const cache: Partial<Record<"pt" | "en", { generatedAt: number; data: ReportData }>> = {};
 
 type Format = "md" | "docx" | "pdf";
 
@@ -53,15 +54,18 @@ export async function GET(req: NextRequest) {
   const raw = (req.nextUrl.searchParams.get("format") ?? "md").toLowerCase();
   const format: Format = raw === "docx" || raw === "pdf" ? raw : "md";
   const meta = FORMAT_META[format];
+  const lang: "pt" | "en" = req.nextUrl.searchParams.get("lang") === "en" ? "en" : "pt";
 
-  // Coleta (compartilhada entre formatos) com cache de 30min
+  // Coleta (compartilhada entre formatos) com cache de 30min, por idioma
   let cacheState: "HIT" | "MISS" = "HIT";
-  if (!cache || Date.now() - cache.generatedAt >= CACHE_TTL_MS) {
-    const data = await gatherReportData();
-    cache = { generatedAt: Date.now(), data };
+  let slot = cache[lang];
+  if (!slot || Date.now() - slot.generatedAt >= CACHE_TTL_MS) {
+    const data = await gatherReportData(lang);
+    slot = { generatedAt: Date.now(), data };
+    cache[lang] = slot;
     cacheState = "MISS";
   }
-  const data = cache.data;
+  const data = slot.data;
 
   // Renderiza o formato pedido
   let body: string | Uint8Array;
@@ -84,7 +88,7 @@ export async function GET(req: NextRequest) {
     headers: {
       "Content-Type": meta.contentType,
       "X-Cache": cacheState,
-      "X-Generated-At": new Date(cache.generatedAt).toISOString(),
+      "X-Generated-At": new Date(slot.generatedAt).toISOString(),
       "Cache-Control": "private, max-age=300",
       "Content-Disposition": `attachment; filename="watch-tower-relatorio-${dateStamp()}.${meta.ext}"`,
     },
