@@ -421,7 +421,12 @@ export function Dashboard() {
   return (
     <>
       <div className="wt-watermark" aria-hidden />
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-10">
+      {/* Sem max-w: o layout ENCHE a largura da tela (o Hammis não quer o vazio
+          na direita). O grid de 24 cols escala junto, mantendo o arranjo dele.
+          Obs.: mx-auto aqui é no-op porque o reset global `* { margin:0 }` (fora
+          de layer, linha ~60) zera margens auto; por isso não dá pra "centralizar
+          com teto" sem mexer no reset (que arriscaria o espaçamento do app todo). */}
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-10">
       <WindowManagerProvider onSelectCountry={selectCountry} selectedCountry={mapSelected}>
       <Header />
 
