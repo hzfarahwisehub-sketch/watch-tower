@@ -251,10 +251,10 @@ export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
 
               {/* Lista de fontes + headlines */}
               <ul className="flex flex-col gap-1.5">
-                {center.sources.map((src) => {
+                {center.sources.map((src, i) => {
                   const m = categoryMeta(src.category);
                   return (
-                    <li key={src.url}>
+                    <li key={`${src.url}-${i}`}>
                       <a
                         href={src.url}
                         target="_blank"
@@ -348,8 +348,8 @@ export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
               </span>
             </div>
             <ul className="grid grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-5 gap-2">
-              {GLOBAL_CRYPTO_SOURCES.map((src) => (
-                <li key={src.url} className="flex flex-col">
+              {GLOBAL_CRYPTO_SOURCES.map((src, i) => (
+                <li key={`${src.url}-${i}`} className="flex flex-col">
                   <a
                     href={src.url}
                     target="_blank"
