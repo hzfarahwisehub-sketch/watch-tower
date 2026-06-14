@@ -201,7 +201,7 @@ export async function gatherReportData(lang: "pt" | "en" = "pt"): Promise<Report
         title: translateTitle(h.title),
       })),
       sources: center?.sources ?? [],
-      editorial: getEditorial(c.code),
+      editorial: getEditorial(c.code, lang === "en" ? "en" : "pt-BR"),
     };
   });
 

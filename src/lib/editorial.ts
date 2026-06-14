@@ -15,6 +15,9 @@
  * daqui. NUNCA usar travessão no meio das frases (padrão de escrita do Hammis).
  */
 
+import type { Locale } from "./i18n/config";
+import { EDITORIAL_EN } from "./editorial-en";
+
 export type EditorialSource = { label: string; url: string };
 
 /** Post curto pra Comunidade: objetivo, claro, explicativo. */
@@ -863,8 +866,10 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   },
 };
 
-/** Retorna o conteúdo editorial curado de um país, se houver. */
-export function getEditorial(code: string): CountryEditorial | undefined {
+/** Retorna o conteúdo editorial curado de um país, se houver, no idioma do app.
+ *  EN cai no PT quando ainda não há versão EN (a rotina diária preenche). */
+export function getEditorial(code: string, lang: Locale = "pt-BR"): CountryEditorial | undefined {
+  if (lang === "en") return EDITORIAL_EN[code] ?? EDITORIAL[code];
   return EDITORIAL[code];
 }
 

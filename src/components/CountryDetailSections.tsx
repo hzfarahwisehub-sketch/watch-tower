@@ -48,8 +48,8 @@ function Title({ children, color }: { children: ReactNode; color?: string }) {
  * Educação · Saúde · Economia) — a dimensão é detectada pelo emoji do título.
  */
 export function CountryDetailSections({ country }: { country: Country }) {
-  const { t } = useLocale();
-  const ed = getEditorial(country.code);
+  const { t, locale } = useLocale();
+  const ed = getEditorial(country.code, locale);
   const [dim, setDim] = useState<DimensionKey>("all");
 
   const center = INFO_CENTERS.find((ic) => ic.countryCode === country.code);
