@@ -134,7 +134,7 @@ function technicalMd(c: ReportCountry): string[] {
   } else {
     lines.push(`### 📡 Atividade ao vivo`);
     lines.push(``);
-    lines.push(`_Sem manchetes RSS disponíveis no momento (feed pode estar offline ou fora de horário comercial)._`);
+    lines.push(`**SEM NOTÍCIAS** · nenhuma manchete nova nos feeds monitorados.`);
     lines.push(``);
   }
 

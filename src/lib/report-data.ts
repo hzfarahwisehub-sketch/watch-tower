@@ -269,18 +269,18 @@ export function statusText(s: string): string {
 
 /** Status do boletim COM emoji (Markdown/Word). */
 export function bulletinStatusLabel(s: string | null | undefined): string {
-  if (!s) return "—";
+  if (!s) return "✓ SEM ATUALIZAÇÕES";
   if (s === "changed") return "✦ Mudança detectada";
-  if (s === "unchanged") return "✓ Sem mudanças";
+  if (s === "unchanged") return "✓ SEM ATUALIZAÇÕES";
   if (s.startsWith("error")) return `⚠ Erro · ${s}`;
   return s;
 }
 
 /** Status do boletim SEM emoji (PDF). */
 export function bulletinStatusText(s: string | null | undefined): string {
-  if (!s) return "—";
+  if (!s) return "SEM ATUALIZAÇÕES";
   if (s === "changed") return "Mudança detectada";
-  if (s === "unchanged") return "Sem mudanças";
+  if (s === "unchanged") return "SEM ATUALIZAÇÕES";
   if (s.startsWith("error")) return `Erro · ${s}`;
   return s;
 }

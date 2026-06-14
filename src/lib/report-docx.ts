@@ -276,7 +276,7 @@ function technicalDocx(c: ReportCountry): (Paragraph | Table)[] {
     });
   } else {
     out.push(h3("📡 Atividade ao vivo"));
-    out.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: "Sem manchetes RSS disponíveis no momento (feed pode estar offline ou fora de horário comercial).", italics: true, color: GREY })] }));
+    out.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: "SEM NOTÍCIAS", bold: true }), new TextRun({ text: " · nenhuma manchete nova nos feeds monitorados.", color: GREY })] }));
   }
 
   if (c.sources.length > 0) {

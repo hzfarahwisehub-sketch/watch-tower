@@ -261,7 +261,7 @@ function technicalPdf(b: PdfBuilder, c: ReportCountry) {
     });
   } else {
     b.heading("Atividade ao vivo", H2);
-    b.text("Sem manchetes RSS disponíveis no momento (feed pode estar offline ou fora de horário comercial).", { size: 9.5, color: GREY, oblique: true, gapAfter: 2 });
+    b.text("SEM NOTÍCIAS · nenhuma manchete nova nos feeds monitorados.", { size: 10, gapAfter: 2 });
   }
 
   if (c.sources.length > 0) {
