@@ -1,0 +1,59 @@
+name: Collect RSS translations
+
+# Tradutor das manchetes RSS dos países (PT + EN). Reusa o /api/rss de produção
+# pra pegar os títulos limpos e traduz os NOVOS via MyMemory (grátis, sem chave,
+# não-LLM). Grava public/rss-translated.json. Incremental (só títulos novos).
+# SEM banco, SEM segredo obrigatório. Custo: $0 (GitHub Actions free + Node 24).
+
+on:
+  schedule:
+    - cron: "30 */3 * * *" # a cada 3h (offset do cron de boletins)
+  workflow_dispatch: # trigger manual via UI do GitHub
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect-rss
+  cancel-in-progress: false
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install (tsx + tipos, sem postinstall)
+        run: npm ci --ignore-scripts
+
+      - name: Run collect-rss
+        env:
+          # Opcionais: default já aponta pra produção e um e-mail de quota.
+          WT_APP_URL: ${{ vars.WT_APP_URL }}
+          MYMEMORY_EMAIL: ${{ vars.MYMEMORY_EMAIL }}
+        run: node --import tsx scripts/collect-rss.ts
+
+      - name: Commit updated translations
+        run: |
+          [ -f public/rss-translated.json ] || { echo "sem JSON gerado — skip"; exit 0; }
+          git config user.name "watch-tower-bot"
+          git config user.email "watch-tower-bot@users.noreply.github.com"
+          git add public/rss-translated.json
+          if git diff --staged --quiet; then
+            echo "Nenhuma mudança nas traduções RSS — skip commit"
+            exit 0
+          fi
+          n=$(node -e "const d=require('./public/rss-translated.json');console.log(d.count||0);")
+          git commit -m "chore(rss): auto-update translations · ${n} títulos"
+          git push

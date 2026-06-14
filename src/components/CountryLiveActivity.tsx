@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { INFO_CENTERS } from "@/lib/infoCenters";
 import { useLocale } from "./LocaleProvider";
+import { loadTranslationMap, pickTitle, type TransMap } from "@/lib/rss-translations";
 
 type TFn = (key: string, params?: Record<string, string | number>) => string;
 
@@ -76,9 +77,12 @@ async function fetchFeed(rssUrl: string, sourceName: string): Promise<Headline[]
  * Custo: $0 (reaproveita /api/rss + cron de bulletins existentes).
  */
 export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
-  const { t, intl } = useLocale();
+  const { t, intl, locale } = useLocale();
   const [state, setState] = useState<ActivityState>({ status: "idle" });
   const [bulletinFresh, setBulletinFresh] = useState<{ at: string; url: string } | null>(null);
+  // Mapa de traduções automáticas das manchetes (carregado 1x, memoizado).
+  const [transMap, setTransMap] = useState<TransMap>({});
+  useEffect(() => { loadTranslationMap().then(setTransMap); }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -198,7 +202,9 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
 
       {state.status === "ok" && (
         <ul className="flex flex-col gap-1.5">
-          {state.headlines.map((h, i) => (
+          {state.headlines.map((h, i) => {
+            const tr = pickTitle(h.title, locale, transMap);
+            return (
             <li key={`${h.link}-${i}`}>
               <a
                 href={h.link}
@@ -219,7 +225,7 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
                       wordBreak: "break-word",
                     }}
                   >
-                    {h.title}
+                    {tr.text}
                   </h5>
                   {h.pubDate && (
                     <span
@@ -230,15 +236,34 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
                     </span>
                   )}
                 </div>
-                <div
-                  className="text-[9.5px] tracking-wider uppercase font-bold"
-                  style={{ color: "var(--color-wh-blue-light)" }}
-                >
-                  ↗ {h.source}
+                {tr.isTranslation && (
+                  <div
+                    className="text-[10px] leading-snug mb-1"
+                    style={{ color: "var(--text-3)", overflowWrap: "anywhere", wordBreak: "break-word" }}
+                  >
+                    {tr.original}
+                  </div>
+                )}
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span
+                    className="text-[9.5px] tracking-wider uppercase font-bold"
+                    style={{ color: "var(--color-wh-blue-light)" }}
+                  >
+                    ↗ {h.source}
+                  </span>
+                  {tr.isTranslation && (
+                    <span
+                      className="text-[8px] tracking-wider uppercase font-bold px-1.5 py-0.5 rounded"
+                      style={{ color: "#10A570", background: "rgba(16,165,112,.12)" }}
+                    >
+                      🌐 {t("rsstr.auto")}
+                    </span>
+                  )}
                 </div>
               </a>
             </li>
-          ))}
+            );
+          })}
         </ul>
       )}
     </div>

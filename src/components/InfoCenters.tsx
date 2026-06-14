@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { INFO_CENTERS, GLOBAL_CRYPTO_SOURCES, categoryMeta, type InfoSource, type InfoSourceCategory } from "@/lib/infoCenters";
 import { useLocale } from "./LocaleProvider";
+import { loadTranslationMap, pickTitle, type TransMap } from "@/lib/rss-translations";
 
 type TFn = (key: string, params?: Record<string, string | number>) => string;
 
@@ -107,8 +108,10 @@ function fmtTimeAgo(iso: string | undefined, t: TFn): string {
 
 /** Bloco de headlines RSS pra um InfoSource (renderiza nada se sem rss) */
 function SourceHeadlines({ source }: { source: InfoSource }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const feed = useFeed(source.rss);
+  const [transMap, setTransMap] = useState<TransMap>({});
+  useEffect(() => { loadTranslationMap().then(setTransMap); }, []);
   if (!source.rss) return null;
 
   if (feed.status === "loading" || feed.status === "idle") {
@@ -130,7 +133,9 @@ function SourceHeadlines({ source }: { source: InfoSource }) {
 
   return (
     <ul className="pl-7 pr-2 pb-2 flex flex-col gap-1">
-      {items.map((h, i) => (
+      {items.map((h, i) => {
+        const tr = pickTitle(h.title, locale, transMap);
+        return (
         <li key={`${h.link}-${i}`}>
           <a
             href={h.link}
@@ -138,18 +143,29 @@ function SourceHeadlines({ source }: { source: InfoSource }) {
             rel="noopener noreferrer"
             className="block text-[10.5px] leading-snug hover:underline"
             style={{ color: "var(--text-2)" }}
-            title={h.title}
+            title={tr.isTranslation ? `${tr.text}\n${t("rsstr.original")}: ${tr.original}` : h.title}
           >
             <span className="opacity-80">›</span>{" "}
-            <span style={{ overflowWrap: "anywhere" }}>{h.title}</span>
+            <span style={{ overflowWrap: "anywhere" }}>{tr.text}</span>
             {h.pubDate && (
               <span className="ml-1.5 text-[9px] uppercase tracking-wider font-semibold" style={{ color: "var(--text-3)" }}>
                 {fmtTimeAgo(h.pubDate, t)}
               </span>
             )}
+            {tr.isTranslation && (
+              <span className="ml-1.5 text-[8px] uppercase tracking-wider font-bold px-1 py-0.5 rounded" style={{ color: "#10A570", background: "rgba(16,165,112,.12)" }}>
+                🌐 {t("rsstr.auto")}
+              </span>
+            )}
           </a>
+          {tr.isTranslation && (
+            <div className="pl-3 text-[9px] leading-snug" style={{ color: "var(--text-3)", overflowWrap: "anywhere" }}>
+              {tr.original}
+            </div>
+          )}
         </li>
-      ))}
+        );
+      })}
     </ul>
   );
 }

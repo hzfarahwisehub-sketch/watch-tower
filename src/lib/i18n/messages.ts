@@ -34,6 +34,7 @@ import authError from "./messages/authError";
 import admin from "./messages/admin";
 import dash from "./messages/dash";
 import registry from "./messages/registry";
+import rsstr from "./messages/rsstr";
 
 type Dict = Record<string, string>;
 
@@ -181,6 +182,7 @@ export const MESSAGES: Record<Locale, Dict> = {
     admin.pt,
     dash.pt,
     registry.pt,
+    rsstr.pt,
   ),
   en: Object.assign(
     {},
@@ -211,5 +213,6 @@ export const MESSAGES: Record<Locale, Dict> = {
     admin.en,
     dash.en,
     registry.en,
+    rsstr.en,
   ),
 };
