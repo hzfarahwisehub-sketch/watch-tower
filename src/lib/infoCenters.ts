@@ -28,6 +28,10 @@ export type InfoSource = {
    *  recentes via /api/rss. Fontes premium (Reuters/WSJ/Bloomberg/FT) não têm
    *  feed público estável, então ficam só como link clicável. */
   rss?: string;
+  /** Fonte de COMUNIDADE (não-oficial): portais/blogs mantidos pela comunidade,
+   *  não por governo. As manchetes entram marcadas como "a confirmar" e passam
+   *  pela checagem cruzada da Friday (ver italianismo-checagem.ts). */
+  community?: boolean;
 };
 
 export type CountryInfoCenter = {
@@ -148,9 +152,12 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇮🇹",
     sources: [
       { name: "Gazzetta Ufficiale · Serie Generale", url: "https://www.gazzettaufficiale.it/", category: "legal", language: "it", note: "Diário oficial do Estado italiano · leis e decreti, incluindo os decreti flussi de imigração", rss: "https://www.gazzettaufficiale.it/rss/SG" },
+      { name: "Italianismo · Cidadania", url: "https://italianismo.com.br/category/cidadania/", category: "news", language: "pt", community: true, note: "Portal brasileiro da comunidade ítalo-descendente (NÃO-oficial). Notícias de cidadania entram marcadas como 'a confirmar' e passam pela checagem cruzada da Friday em fontes oficiais.", rss: "https://italianismo.com.br/category/cidadania/feed/" },
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
       { name: "Il Sole 24 Ore",        url: "https://www.ilsole24ore.com/",             category: "finance", language: "it", note: "Principal jornal econômico italiano", rss: "https://www.ilsole24ore.com/rss/economia.xml" },
       { name: "ANSA · Economia",       url: "https://www.ansa.it/sito/notizie/economia/economia.shtml", category: "news", language: "it", rss: "https://www.ansa.it/sito/notizie/economia/economia_rss.xml" },
+      { name: "Corte Costituzionale · Sentenze", url: "https://www.cortecostituzionale.it/", category: "legal", language: "it", note: "Corte Constitucional italiana · decisões sobre a reforma do jure sanguinis (ex. sentença 63/2026). Fonte oficial primária descoberta via Italianismo." },
+      { name: "Questione Giustizia",   url: "https://www.questionegiustizia.it/",       category: "legal", language: "it", note: "Revista jurídica da magistratura italiana · análise técnica das decisões de cidadania. Fonte de referência confiável citada pelo Italianismo." },
     ],
   },
   {

@@ -11,6 +11,8 @@ type Headline = {
   link: string;
   pubDate?: string;
   source: string;
+  /** Fonte de comunidade (não-oficial), ex.: Italianismo · confirmação pendente. */
+  community?: boolean;
 };
 
 type BulletinEntry = {
@@ -51,7 +53,7 @@ function formatRelative(iso: string | undefined, t: TFn, intl: string): string {
   return date.toLocaleDateString(intl, { day: "2-digit", month: "2-digit" });
 }
 
-async function fetchFeed(rssUrl: string, sourceName: string): Promise<Headline[]> {
+async function fetchFeed(rssUrl: string, sourceName: string, community = false): Promise<Headline[]> {
   try {
     const res = await fetch(`/api/rss?url=${encodeURIComponent(rssUrl)}`);
     if (!res.ok) return [];
@@ -62,6 +64,7 @@ async function fetchFeed(rssUrl: string, sourceName: string): Promise<Headline[]
       link: it.link,
       pubDate: it.pubDate,
       source: sourceName,
+      community: community || undefined,
     }));
   } catch {
     return [];
@@ -122,7 +125,7 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
     const load = async () => {
       setState((prev) => (prev.status === "ok" ? prev : { status: "loading" }));
       const results = await Promise.all(
-        feeds.map((f) => fetchFeed(f.rss!, f.name)),
+        feeds.map((f) => fetchFeed(f.rss!, f.name, f.community)),
       );
       if (cancelled) return;
       const merged = results
@@ -251,6 +254,15 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
                   >
                     ↗ {h.source}
                   </span>
+                  {h.community && (
+                    <span
+                      className="text-[8px] tracking-wider uppercase font-bold px-1.5 py-0.5 rounded"
+                      style={{ color: "#E5A100", background: "rgba(229,193,86,.14)" }}
+                      title="Fonte de comunidade (não-oficial) · confirmação em fontes oficiais pendente, curada pela Friday no relatório (REPAVET)"
+                    >
+                      🏘 comunidade · a confirmar
+                    </span>
+                  )}
                   {tr.isTranslation && (
                     <span
                       className="text-[8px] tracking-wider uppercase font-bold px-1.5 py-0.5 rounded"

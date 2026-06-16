@@ -129,6 +129,17 @@ function technicalMd(c: ReportCountry): string[] {
     sorted.slice(0, 12).forEach((h) => {
       const when = h.pubDate ? ` _(${fmtDate(h.pubDate, { full: true })})_` : "";
       lines.push(`- **${h.source}**${when}: [${h.title}](${h.link})`);
+      if (h.community && h.checagem) {
+        const ck = h.checagem;
+        lines.push(`  - 🏘 _Fonte de comunidade (não-oficial)_ · ${ck.rotulo}`);
+        if (ck.nota) lines.push(`  - 🔎 ${ck.nota}`);
+        if (ck.fontesCitadas.length) {
+          const refs = ck.fontesCitadas
+            .map((f) => `${f.oficial ? "✓ " : ""}${f.url ? `[${f.nome}](${f.url})` : f.nome}`)
+            .join(" · ");
+          lines.push(`  - 📎 Fontes que a matéria usou de referência: ${refs}`);
+        }
+      }
     });
     lines.push(``);
   } else {

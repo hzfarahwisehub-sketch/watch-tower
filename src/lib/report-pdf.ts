@@ -257,7 +257,16 @@ function technicalPdf(b: PdfBuilder, c: ReportCountry) {
     sorted.slice(0, 12).forEach((hd) => {
       const when = hd.pubDate ? ` (${fmtDate(hd.pubDate, { full: true })})` : "";
       b.bullet(`${hd.source}: ${hd.title}${when}`, { size: 10, gapAfter: 0 });
-      b.text(hd.link, { size: 8, color: GREY, indent: 12, gapAfter: 2 });
+      b.text(hd.link, { size: 8, color: GREY, indent: 12, gapAfter: hd.community ? 0 : 2 });
+      if (hd.community && hd.checagem) {
+        const ck = hd.checagem;
+        b.text(`Fonte de comunidade (nao-oficial) - ${ck.rotulo}`, { size: 8.5, color: GREY, oblique: true, indent: 12, gapAfter: 0 });
+        if (ck.nota) b.text(ck.nota, { size: 8.5, color: GREY, indent: 12, gapAfter: 0 });
+        if (ck.fontesCitadas.length) {
+          const refs = ck.fontesCitadas.map((f) => `${f.oficial ? "[oficial] " : ""}${f.nome}${f.url ? ` (${f.url})` : ""}`).join("; ");
+          b.text(`Fontes que a materia usou de referencia: ${refs}`, { size: 8, color: GREY, indent: 12, gapAfter: 2 });
+        }
+      }
     });
   } else {
     b.heading("Atividade ao vivo", H2);

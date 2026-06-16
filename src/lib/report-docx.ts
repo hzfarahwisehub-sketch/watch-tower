@@ -273,6 +273,20 @@ function technicalDocx(c: ReportCountry): (Paragraph | Table)[] {
     sorted.slice(0, 12).forEach((hd) => {
       const when = hd.pubDate ? ` (${fmtDate(hd.pubDate, { full: true })})` : "";
       out.push(bullet([new TextRun({ text: `${hd.source}: `, bold: true }), link(hd.title, hd.link), new TextRun({ text: when, color: GREY, italics: true })]));
+      if (hd.community && hd.checagem) {
+        const ck = hd.checagem;
+        out.push(new Paragraph({ indent: { left: 460 }, spacing: { after: 10 }, children: [new TextRun({ text: `🏘 Fonte de comunidade (não-oficial) · ${ck.rotulo}`, italics: true, color: GREY, size: 17 })] }));
+        if (ck.nota) out.push(new Paragraph({ indent: { left: 460 }, spacing: { after: 10 }, children: [new TextRun({ text: `🔎 ${ck.nota}`, color: GREY, size: 17 })] }));
+        if (ck.fontesCitadas.length) {
+          const runs: (TextRun | ExternalHyperlink)[] = [new TextRun({ text: "📎 Fontes que a matéria usou de referência: ", color: GREY, size: 16 })];
+          ck.fontesCitadas.forEach((f, i) => {
+            if (i > 0) runs.push(new TextRun({ text: " · ", color: GREY, size: 16 }));
+            const label = `${f.oficial ? "✓ " : ""}${f.nome}`;
+            runs.push(f.url ? link(label, f.url) : new TextRun({ text: label, color: GREY, size: 16 }));
+          });
+          out.push(new Paragraph({ indent: { left: 460 }, spacing: { after: 40 }, children: runs }));
+        }
+      }
     });
   } else {
     out.push(h3("📡 Atividade ao vivo"));

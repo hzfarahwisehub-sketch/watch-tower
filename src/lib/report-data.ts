@@ -18,10 +18,20 @@ import { INFO_CENTERS, type InfoSource } from "@/lib/infoCenters";
 import { BULLETINS, type BulletinStatus, type StatusFile } from "@/lib/bulletins";
 import { getEditorial, editorialStats, type CountryEditorial } from "@/lib/editorial";
 import { normalizeTitle, type TransMap } from "@/lib/rss-translations";
+import { resolverChecagem, type ChecagemResultado } from "@/lib/italianismo-checagem";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
-export type ReportHeadline = { title: string; link: string; pubDate?: string; source: string };
+export type ReportHeadline = {
+  title: string;
+  link: string;
+  pubDate?: string;
+  source: string;
+  /** Manchete vinda de fonte de comunidade (não-oficial), ex.: Italianismo. */
+  community?: boolean;
+  /** Veredito da checagem cruzada curada pela Friday (só em fontes community). */
+  checagem?: ChecagemResultado;
+};
 
 export type ReportBulletin = {
   source: string;
@@ -77,7 +87,7 @@ export type ReportData = {
 // decodificação das manchetes no relatório.
 const APP_BASE = (process.env.WT_APP_URL || "https://watchtower.wisehubnow.online").replace(/\/$/, "");
 
-async function fetchFeed(rssUrl: string, sourceName: string, maxItems = 5): Promise<ReportHeadline[]> {
+async function fetchFeed(rssUrl: string, sourceName: string, maxItems = 5, community = false): Promise<ReportHeadline[]> {
   try {
     const ctrl = new AbortController();
     const t = setTimeout(() => ctrl.abort(), 12000);
@@ -91,6 +101,7 @@ async function fetchFeed(rssUrl: string, sourceName: string, maxItems = 5): Prom
       link: it.link || "",
       pubDate: it.pubDate,
       source: sourceName,
+      community: community || undefined,
     }));
   } catch {
     return [];
@@ -151,10 +162,10 @@ export async function gatherReportData(lang: "pt" | "en" = "pt"): Promise<Report
   };
 
   // Junta todos os feeds RSS catalogados nos Centros de Informação
-  const allFeeds: Array<{ countryCode: string; sourceName: string; rss: string }> = [];
+  const allFeeds: Array<{ countryCode: string; sourceName: string; rss: string; community?: boolean }> = [];
   for (const center of INFO_CENTERS) {
     for (const src of center.sources) {
-      if (src.rss) allFeeds.push({ countryCode: center.countryCode, sourceName: src.name, rss: src.rss });
+      if (src.rss) allFeeds.push({ countryCode: center.countryCode, sourceName: src.name, rss: src.rss, community: src.community });
     }
   }
 
@@ -163,7 +174,7 @@ export async function gatherReportData(lang: "pt" | "en" = "pt"): Promise<Report
   const BATCH = 8;
   for (let i = 0; i < allFeeds.length; i += BATCH) {
     const batch = allFeeds.slice(i, i + BATCH);
-    const results = await Promise.all(batch.map((f) => fetchFeed(f.rss, f.sourceName)));
+    const results = await Promise.all(batch.map((f) => fetchFeed(f.rss, f.sourceName, 5, f.community)));
     batch.forEach((f, idx) => {
       const existing = headlinesByCountry.get(f.countryCode) ?? [];
       headlinesByCountry.set(f.countryCode, [...existing, ...results[idx]]);
@@ -199,6 +210,8 @@ export async function gatherReportData(lang: "pt" | "en" = "pt"): Promise<Report
       headlines: sortHeadlines(headlinesByCountry.get(c.code) ?? []).map((h) => ({
         ...h,
         title: translateTitle(h.title),
+        // Fonte de comunidade (Italianismo): anexa a checagem cruzada curada.
+        checagem: h.community ? resolverChecagem(h.link, h.title) : undefined,
       })),
       sources: center?.sources ?? [],
       editorial: getEditorial(c.code, lang === "en" ? "en" : "pt-BR"),
