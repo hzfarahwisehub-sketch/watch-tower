@@ -33,6 +33,7 @@ type DbReminder = {
   triggerAt: string;
   recurring: "daily" | "weekly" | "monthly" | null;
   done: boolean;
+  notifiedAt: string | null;
 };
 type DbScheduled = {
   id: string;
@@ -152,6 +153,7 @@ export const remindersConfig: DualStorageConfig<Reminder, DbReminder> = {
     text: db.title,
     when: isoToWhen(db.triggerAt),
     crit: false,
+    fired: !!db.notifiedAt,
     author: (db as { author?: string }).author,
   }),
   toCreatePayload: (item) => ({

@@ -13,12 +13,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { requireCronSecret, friendlyName } from "@/lib/api-helpers";
+import { requireCronSecret, friendlyName, FRIDAY_MARKER } from "@/lib/api-helpers";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-export const FRIDAY_MARKER = "⚡ EXECUTAR";
 
 export async function GET(req: NextRequest) {
   const gate = requireCronSecret(req);
@@ -28,8 +26,11 @@ export async function GET(req: NextRequest) {
   const box = url.searchParams.get("box") === "inbox" ? "inbox" : "friday";
 
   if (box === "inbox") {
-    // Solicitações COMUNS da caixa (sem o marcador ⚡ EXECUTAR), de quem NÃO é o Hammis.
-    // É o "olho" da Friday pras mensagens normais da equipe: o briefing de sessão e o cron
+    // Solicitações COMUNS da caixa (sem o marcador ⚡ EXECUTAR), de QUALQUER pessoa
+    // — incluindo o próprio Hammis (decisão 2026-06-16: ele também registra pedidos
+    // aqui e quer que a ronda os enxergue; antes o Hammis era excluído e por isso a
+    // ronda voltava vazia mesmo com pedidos no app). Reflete a caixa do app.
+    // É o "olho" da Friday pras mensagens da equipe: o briefing de sessão e o cron
     // de 2h leem por aqui (Bearer CRON_SECRET) e passam ?since=<ISO> como cursor pra não
     // repetir avisos. Leitura pura — nunca notifica (o e-mail/push já saíram na criação).
     const sinceRaw = url.searchParams.get("since");
@@ -39,10 +40,7 @@ export async function GET(req: NextRequest) {
     const rows = await prisma.suggestion.findMany({
       where: {
         status: "open",
-        NOT: [
-          { body: { startsWith: FRIDAY_MARKER } },
-          { user: { is: { email: "hzfarah.wisehub@gmail.com" } } },
-        ],
+        NOT: [{ body: { startsWith: FRIDAY_MARKER } }],
         ...(validSince ? { createdAt: { gt: validSince } } : {}),
       },
       orderBy: [{ createdAt: "asc" }, { id: "asc" }], // cronológico estável pro cursor avançar limpo

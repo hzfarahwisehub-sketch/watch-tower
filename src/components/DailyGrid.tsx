@@ -534,6 +534,7 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
             style={{
               borderLeft: `3px solid ${r.crit ? "var(--color-status-critical)" : "var(--color-status-warning)"}`,
               background: r.crit ? "rgba(255,59,92,.06)" : "rgba(255,138,31,.06)",
+              opacity: r.fired ? 0.6 : 1,
             }}
           >
             <div
@@ -561,6 +562,15 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
                 style={{ color: "var(--text-3)" }}
               >
                 {r.when}
+                {r.fired && (
+                  <span
+                    className="ml-1.5 px-1.5 py-0.5 rounded text-[8px] font-extrabold tracking-wide"
+                    style={{ color: "var(--color-status-stable)", background: "rgba(16,224,160,.14)" }}
+                    title="Este lembrete já disparou o aviso/push no horário agendado."
+                  >
+                    ✓ JÁ DISPAROU
+                  </span>
+                )}
                 {scope === "team" && r.author && (
                   <span style={{ color: "var(--color-wh-blue-light)" }}> {t("daily.byInline", { author: r.author })}</span>
                 )}

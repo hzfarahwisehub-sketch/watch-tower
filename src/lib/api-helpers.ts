@@ -110,6 +110,13 @@ export function requireCronSecret(
   return { ok: true };
 }
 
+/**
+ * Marcador no início do corpo de uma Suggestion que a transforma num PEDIDO
+ * DE EXECUÇÃO pra Friday (botão "⚡ Friday" dos lembretes + motor das Atividades
+ * Programadas). A ronda da Friday (box=friday) lista exatamente estes.
+ */
+export const FRIDAY_MARKER = "⚡ EXECUTAR";
+
 export function badRequest(message: string, details?: unknown): NextResponse {
   return NextResponse.json({ error: "bad_request", message, details }, { status: 400 });
 }

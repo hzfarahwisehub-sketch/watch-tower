@@ -53,6 +53,8 @@ export interface Reminder {
   when: string;
   crit?: boolean;
   author?: string;
+  /** Lembrete único que já disparou o push (notifiedAt setado no banco pelo cron). */
+  fired?: boolean;
 }
 
 export interface ScheduledAction {
