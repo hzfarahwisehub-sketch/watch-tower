@@ -73,3 +73,56 @@ function alertHtml(subject: string, message: string): string {
   </div>
 </body></html>`;
 }
+
+/** Remetente padrão da Friday pra disparos (convites, avisos, mensagens). */
+const FRIDAY_FROM = process.env.FRIDAY_EMAIL_FROM ?? "Friday · WiseHub <friday@wisehubnow.online>";
+
+/**
+ * Disparo genérico de e-mail via Resend. Usado pelo endpoint interno
+ * /api/internal/send-email (a Friday dispara com o CRON_SECRET). Diferente do
+ * sendAlertEmail, NÃO prefixa assunto nem força a moldura de "alerta": manda
+ * exatamente o que recebe (se vier só texto, embrulha num HTML neutro). Explode
+ * no erro — o caller decide o que fazer.
+ */
+export async function sendEmail(opts: {
+  to: string | string[];
+  subject: string;
+  text?: string;
+  html?: string;
+  cc?: string | string[];
+  bcc?: string | string[];
+  from?: string;
+  replyTo?: string | string[];
+}): Promise<{ id: string | null }> {
+  const html = opts.html ?? basicHtml(opts.subject, opts.text ?? opts.subject);
+  const { data, error } = await getResend().emails.send({
+    from: opts.from ?? FRIDAY_FROM,
+    to: opts.to,
+    cc: opts.cc,
+    bcc: opts.bcc,
+    replyTo: opts.replyTo,
+    subject: opts.subject,
+    html,
+    text: opts.text,
+  });
+  if (error) throw new Error(`Resend falhou: ${JSON.stringify(error)}`);
+  return { id: data?.id ?? null };
+}
+
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+/** Moldura neutra (sem o rótulo "alerta") pra disparos diretos só com texto. */
+function basicHtml(subject: string, message: string): string {
+  const body = escapeHtml(message).replace(/\n/g, "<br>");
+  return `<!DOCTYPE html>
+<html><body style="font-family:Inter,Arial,sans-serif;background:#0F0C1E;color:#E8E6F4;padding:32px;">
+  <div style="max-width:560px;margin:0 auto;background:#1A1730;border:1px solid rgba(123,160,255,.3);border-radius:14px;padding:32px;">
+    <h1 style="font-size:22px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#7BA0FF;margin:0 0 8px">WiseHub</h1>
+    <p style="color:#9F9DBE;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin:0 0 24px">${escapeHtml(subject)}</p>
+    <div style="font-size:15px;line-height:1.7">${body}</div>
+    <p style="font-size:12px;color:#9F9DBE;margin-top:28px">Friday · Assistente estratégica do Hammis · WiseHub</p>
+  </div>
+</body></html>`;
+}
