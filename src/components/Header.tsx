@@ -10,6 +10,7 @@ import { useToast } from "./ToastProvider";
 import { useSettings } from "./SettingsProvider";
 import { ExportButton } from "./ExportButton";
 import { PushToggle } from "./PushToggle";
+import { CalendarConnect } from "./CalendarConnect";
 import { playChime } from "@/lib/chime";
 
 export function Header() {
@@ -317,6 +318,10 @@ export function Header() {
                   <div className="my-1 border-t" style={{ borderColor: "var(--border)" }} />
 
                   <PushToggle />
+
+                  <div className="my-1 border-t" style={{ borderColor: "var(--border)" }} />
+
+                  <CalendarConnect />
 
                   <div className="my-1 border-t" style={{ borderColor: "var(--border)" }} />
 
