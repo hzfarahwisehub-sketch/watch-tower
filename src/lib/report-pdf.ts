@@ -12,7 +12,7 @@
  * COR é o que sinaliza o destino de cada peça (a etiqueta [TAG] sai colorida).
  */
 
-import { PDFDocument, type PDFFont, type PDFPage, StandardFonts, rgb, type RGB } from "pdf-lib";
+import { PDFDocument, type PDFFont, type PDFPage, type PDFImage, StandardFonts, rgb, type RGB } from "pdf-lib";
 import {
   type ReportData,
   type ReportCountry,
@@ -21,6 +21,8 @@ import {
   statusText,
   bulletinStatusText,
   categoryName,
+  type ReportImage,
+  readPublicImage,
 } from "@/lib/report-data";
 import {
   DESTINATIONS,
@@ -175,6 +177,26 @@ class PdfBuilder {
     this.y -= 10;
   }
 
+  /** Embute uma imagem no documento (1x), pra desenhar depois com image(). */
+  async embedImage(im: ReportImage): Promise<PDFImage> {
+    return im.type === "png" ? this.doc.embedPng(im.data) : this.doc.embedJpg(im.data);
+  }
+
+  /** Desenha uma imagem já embutida na largura do conteúdo (limitada por maxH). */
+  image(img: PDFImage, maxH = 200) {
+    const scaleW = this.maxW / img.width;
+    let drawW = this.maxW;
+    let drawH = img.height * scaleW;
+    if (drawH > maxH) {
+      const s = maxH / img.height;
+      drawW = img.width * s;
+      drawH = maxH;
+    }
+    this.ensure(drawH + 8);
+    this.page.drawImage(img, { x: MARGIN, y: this.y - drawH, width: drawW, height: drawH });
+    this.y -= drawH + 8;
+  }
+
   async bytes(): Promise<Uint8Array> {
     return this.doc.save();
   }
@@ -214,8 +236,9 @@ function piecePdf(b: PdfBuilder, p: PostablePiece, dest: DestinationMeta) {
 }
 
 /** Bloco de dados técnicos de um país. */
-function technicalPdf(b: PdfBuilder, c: ReportCountry) {
+function technicalPdf(b: PdfBuilder, c: ReportCountry, img?: PDFImage) {
   b.heading(c.name, { size: 15, color: BLUE, spaceBefore: 14, gapAfter: 4 });
+  if (img) b.image(img);
   b.text(`Autoridade: ${c.authority}`, { size: 10, gapAfter: 1 });
   b.text(`Status interno (dashboard): ${statusText(c.status)}`, { size: 10, gapAfter: 1 });
   b.text(`Coordenadas: ${c.coords[0].toFixed(2)}, ${c.coords[1].toFixed(2)}`, { size: 10, gapAfter: 2 });
@@ -370,7 +393,14 @@ export async function renderPdf(data: ReportData): Promise<Uint8Array> {
   b.heading("Índice por país", { size: 13, color: BLUE, spaceBefore: 6, gapAfter: 3 });
   for (const c of countries) b.bullet(c.name, { size: 10, gapAfter: 0 });
   b.text("", { gapAfter: 4 });
-  for (const c of countries) technicalPdf(b, c);
+  const pdfImgMap = new Map<string, PDFImage>();
+  for (const c of countries) {
+    const im = await readPublicImage(c.imageUrl);
+    if (im) {
+      try { pdfImgMap.set(c.code, await b.embedImage(im)); } catch { /* ignora imagem ruim */ }
+    }
+  }
+  for (const c of countries) technicalPdf(b, c, pdfImgMap.get(c.code));
 
   // Rodapé
   b.text(`Gerado automaticamente pela WiseHub em ${generatedAtStr}.`, { size: 8, color: GREY, gapAfter: 1 });

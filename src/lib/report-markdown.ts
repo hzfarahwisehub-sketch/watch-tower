@@ -24,6 +24,7 @@ import {
   flagEmoji,
   categoryEmoji,
   categoryName,
+  publicAssetUrl,
 } from "@/lib/report-data";
 import {
   DESTINATIONS,
@@ -77,6 +78,10 @@ function technicalMd(c: ReportCountry): string[] {
   const lines: string[] = [];
   lines.push(`## ${flagEmoji(c.code)} ${c.name}`);
   lines.push(``);
+  if (c.imageUrl) {
+    lines.push(`![${c.name}](${publicAssetUrl(c.imageUrl)})`);
+    lines.push(``);
+  }
   lines.push(`**Autoridade:** ${c.authority}  `);
   lines.push(`**Status interno (dashboard):** ${statusLabel(c.status)}  `);
   lines.push(`**Coordenadas:** ${c.coords[0].toFixed(2)}, ${c.coords[1].toFixed(2)}`);

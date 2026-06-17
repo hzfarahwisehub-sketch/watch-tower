@@ -57,6 +57,8 @@ export type ReportCountry = {
   sources: InfoSource[];
   /** conteúdo jornalístico curado pela Friday (3 destinos), se houver */
   editorial?: CountryEditorial;
+  /** imagem representativa do país (landmark) · caminho público local, ex.: /landmarks/ca.jpg */
+  imageUrl?: string;
 };
 
 export type ReportStats = {
@@ -215,6 +217,7 @@ export async function gatherReportData(lang: "pt" | "en" = "pt"): Promise<Report
       })),
       sources: center?.sources ?? [],
       editorial: getEditorial(c.code, lang === "en" ? "en" : "pt-BR"),
+      imageUrl: c.imageUrl,
     };
   });
 
@@ -338,4 +341,70 @@ export function categoryName(c: string): string {
     case "legal": return "Leis & Regulação";
     default: return c;
   }
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Imagens do relatório · cada país tem uma imagem local (public/landmarks/xx.jpg).
+// Lidas direto do disco no servidor (sem rede) pra embutir no PDF/Word.
+// ─────────────────────────────────────────────────────────────────────────
+
+export type ReportImage = { data: Uint8Array; type: "jpg" | "png"; width: number; height: number };
+
+/** Dimensões de um JPEG lendo o marcador SOF (sem decodificar a imagem). */
+function jpegDims(b: Uint8Array): { width: number; height: number } | null {
+  if (b[0] !== 0xff || b[1] !== 0xd8) return null;
+  let i = 2;
+  while (i + 9 < b.length) {
+    if (b[i] !== 0xff) { i++; continue; }
+    const marker = b[i + 1];
+    if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
+      const height = (b[i + 5] << 8) | b[i + 6];
+      const width = (b[i + 7] << 8) | b[i + 8];
+      return { width, height };
+    }
+    const len = (b[i + 2] << 8) | b[i + 3];
+    if (len <= 0) return null;
+    i += 2 + len;
+  }
+  return null;
+}
+
+/** Dimensões de um PNG lendo o IHDR. */
+function pngDims(b: Uint8Array): { width: number; height: number } | null {
+  if (b.length < 24) return null;
+  const width = (b[16] << 24) | (b[17] << 16) | (b[18] << 8) | b[19];
+  const height = (b[20] << 24) | (b[21] << 16) | (b[22] << 8) | b[23];
+  return width > 0 && height > 0 ? { width, height } : null;
+}
+
+/**
+ * Lê os bytes de uma imagem em public/ (ex.: "/landmarks/ca.jpg") + suas
+ * dimensões. Retorna null se o arquivo não existir ou não for jpg/png válido —
+ * o relatório segue sem a imagem (princípio "sempre que possível").
+ */
+export async function readPublicImage(publicPath: string | undefined): Promise<ReportImage | null> {
+  if (!publicPath || !publicPath.startsWith("/")) return null;
+  try {
+    const p = path.join(process.cwd(), "public", publicPath.replace(/^\/+/, ""));
+    const buf = await fs.readFile(p);
+    const data = new Uint8Array(buf);
+    const isPng = data[0] === 0x89 && data[1] === 0x50 && data[2] === 0x4e && data[3] === 0x47;
+    const dims = isPng ? pngDims(data) : jpegDims(data);
+    if (!dims) return null;
+    return { data, type: isPng ? "png" : "jpg", width: dims.width, height: dims.height };
+  } catch {
+    return null;
+  }
+}
+
+/** URL pública absoluta de um asset (pro Markdown, que abre fora do app). */
+export function publicAssetUrl(publicPath: string): string {
+  return `${APP_BASE}${publicPath.startsWith("/") ? publicPath : `/${publicPath}`}`;
+}
+
+/** Calcula largura/altura preservando o aspecto, cabendo em maxW × maxH. */
+export function fitDims(w: number, h: number, maxW: number, maxH: number): { width: number; height: number } {
+  if (w <= 0 || h <= 0) return { width: maxW, height: maxH };
+  const s = Math.min(maxW / w, maxH / h);
+  return { width: Math.round(w * s), height: Math.round(h * s) };
 }

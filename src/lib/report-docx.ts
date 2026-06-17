@@ -23,6 +23,7 @@ import {
   BorderStyle,
   AlignmentType,
   ShadingType,
+  ImageRun,
 } from "docx";
 import {
   type ReportData,
@@ -34,6 +35,9 @@ import {
   flagEmoji,
   categoryEmoji,
   categoryName,
+  type ReportImage,
+  readPublicImage,
+  fitDims,
 } from "@/lib/report-data";
 import {
   DESTINATIONS,
@@ -228,10 +232,14 @@ function summaryTable(data: ReportData, postCount: number): Table {
 }
 
 /** Bloco de dados técnicos de um país. */
-function technicalDocx(c: ReportCountry): (Paragraph | Table)[] {
+function technicalDocx(c: ReportCountry, img?: ReportImage): (Paragraph | Table)[] {
   const out: (Paragraph | Table)[] = [];
 
   out.push(h1(`${flagEmoji(c.code)} ${c.name}`));
+  if (img) {
+    const { width, height } = fitDims(img.width, img.height, 500, 300);
+    out.push(new Paragraph({ spacing: { after: 100 }, children: [new ImageRun({ type: img.type, data: img.data, transformation: { width, height } })] }));
+  }
   out.push(metaLine("Autoridade", c.authority));
   out.push(metaLine("Status interno (dashboard)", statusLabel(c.status)));
   out.push(metaLine("Coordenadas", `${c.coords[0].toFixed(2)}, ${c.coords[1].toFixed(2)}`));
@@ -382,7 +390,14 @@ export async function renderDocx(data: ReportData): Promise<Buffer> {
   // ── PARTE 3 · DADOS TÉCNICOS ──
   children.push(partTitle("🔧 PARTE 3 · DADOS TÉCNICOS · monitoramento"));
   children.push(new Paragraph({ spacing: { after: 100 }, children: [new TextRun({ text: "Tudo que a WiseHub monitora, detalhado país a país: boletins oficiais, marcos, manchetes ao vivo e Centros de Informação. É a base factual das Partes 1 e 2.", color: DARK })] }));
-  for (const c of data.countries) children.push(...technicalDocx(c));
+  const imgMap = new Map<string, ReportImage>();
+  await Promise.all(
+    data.countries.map(async (c) => {
+      const im = await readPublicImage(c.imageUrl);
+      if (im) imgMap.set(c.code, im);
+    }),
+  );
+  for (const c of data.countries) children.push(...technicalDocx(c, imgMap.get(c.code)));
 
   // Rodapé
   children.push(
