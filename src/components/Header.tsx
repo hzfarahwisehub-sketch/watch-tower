@@ -109,7 +109,7 @@ export function Header() {
           <span className="sm:hidden">{liveLabelShort}</span>
         </div>
 
-        {isAdmin && <ExportButton minimal />}
+        {isLoggedIn && <ExportButton minimal />}
 
         <IconBtn title={t("header.lang.title")} onClick={toggleLocale}>
           <span className="text-[12px] font-extrabold tracking-wide">{LOCALE_SHORT[locale]}</span>

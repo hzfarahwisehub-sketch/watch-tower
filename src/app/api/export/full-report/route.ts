@@ -2,8 +2,9 @@
  * GET /api/export/full-report?format=md|docx|pdf
  *
  * Compila TUDO que o Watch Tower monitora num único documento, país por país,
- * detalhado nos mínimos detalhes. Pra que admins (sócios) baixem, usem como
- * material de referência e — no caso do Word — editem livremente.
+ * detalhado nos mínimos detalhes. Qualquer usuário logado e na allowlist
+ * (sócios e colaboradores) pode baixar, usar como referência e, no caso do
+ * Word, editar livremente.
  *
  * Formatos:
  *  - md   (padrão) → Markdown (text/markdown)
@@ -12,7 +13,8 @@
  *
  * A coleta de dados (leitura do bulletins-status.json + busca de ~32 feeds RSS)
  * é cara, então fica em cache de 30min em memória do Node runtime e é
- * compartilhada pelos três formatos. Acesso: admin-only (middleware já garante).
+ * compartilhada pelos três formatos. Acesso: qualquer usuário logado e na
+ * allowlist (login garantido por requireSession + middleware).
  */
 
 import { NextResponse, type NextRequest } from "next/server";
@@ -20,7 +22,7 @@ import { gatherReportData, type ReportData } from "@/lib/report-data";
 import { renderMarkdown } from "@/lib/report-markdown";
 import { renderDocx } from "@/lib/report-docx";
 import { renderPdf } from "@/lib/report-pdf";
-import { requireSession, requireAdmin } from "@/lib/api-helpers";
+import { requireSession } from "@/lib/api-helpers";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -48,8 +50,6 @@ function dateStamp(): string {
 export async function GET(req: NextRequest) {
   const result = await requireSession();
   if (!result.ok) return result.response;
-  const adminErr = requireAdmin(result.session);
-  if (adminErr) return adminErr;
 
   const raw = (req.nextUrl.searchParams.get("format") ?? "md").toLowerCase();
   const format: Format = raw === "docx" || raw === "pdf" ? raw : "md";
