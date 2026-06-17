@@ -1,5 +1,5 @@
 /**
- * Coleta TUDO que o Watch Tower monitora numa estrutura única (ReportData),
+ * Coleta TUDO que a WiseHub monitora numa estrutura única (ReportData),
  * país por país. É a fonte de verdade compartilhada pelos três renderizadores
  * do relatório completo: Markdown (.md), Word (.docx) e PDF.
  *

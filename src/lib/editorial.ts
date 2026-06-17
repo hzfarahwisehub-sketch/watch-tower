@@ -6,7 +6,7 @@
  * operação usa:
  *
  *   📣 community  → posts curtos e objetivos pra Comunidade (Circle)
- *   📰 countryTab → notícia completa pra aba de cada país no Watch Tower
+ *   📰 countryTab → notícia completa pra aba de cada país
  *   📝 blog       → matéria aprofundada pro Blog WiseHub News
  *
  * Os números refletem o monitoramento e a curadoria da equipe WiseHub; cada
@@ -63,7 +63,7 @@ export const EDITORIAL_GUIDE = [
   "",
   "📣 PARA A COMUNIDADE (Circle): posts curtos, diretos e explicativos. Servem pra avisar e engajar rápido. Copie, ajuste o tom se quiser e publique.",
   "",
-  "📰 PARA A ABA DO PAÍS (Watch Tower): a notícia completa, com contexto e dados-chave. É a versão de referência que fica registrada na página do país.",
+  "📰 PARA A ABA DO PAÍS: a notícia completa, com contexto e dados-chave. É a versão de referência que fica registrada na página do país.",
   "",
   "📝 PARA O BLOG WISEHUB NEWS: a matéria aprofundada, com análise e narrativa. É o material de marca, pra atrair e posicionar a WiseHub como autoridade.",
   "",
@@ -444,7 +444,7 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       {
         title: "Express Entry 2026: o corte subiu pra 481 pontos",
         body:
-          "O Canadá começou 2026 com o Express Entry mais disputado da década. No último corte acompanhado pelo Watch Tower, a nota mínima (CRS) ficou em 481 pontos, doze a mais que no trimestre anterior.\n\nNa prática, quem está na faixa dos 470 precisa somar pontos rápido. Os caminhos mais diretos são melhorar a nota de idioma, conseguir uma oferta de trabalho válida ou garantir uma nomeação provincial.",
+          "O Canadá começou 2026 com o Express Entry mais disputado da década. No último corte registrado, a nota mínima (CRS) ficou em 481 pontos, doze a mais que no trimestre anterior.\n\nNa prática, quem está na faixa dos 470 precisa somar pontos rápido. Os caminhos mais diretos são melhorar a nota de idioma, conseguir uma oferta de trabalho válida ou garantir uma nomeação provincial.",
         cta: "Está perto do corte? Refaça o teste de idioma antes do próximo draw, é o ponto que sobe mais rápido.",
         sources: [SRC.ircc],
       },
@@ -483,7 +483,7 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
         standfirst:
           "O Express Entry de 2026 ficou mais seletivo, com corte em 481 pontos e prioridade clara pra tecnologia e saúde. Veja o que mudou e como se posicionar.",
         body:
-          "O Canadá entrou em 2026 com a política de imigração qualificada mais agressiva dos últimos dez anos. O corte do Express Entry, a nota que separa quem recebe o convite de quem fica na fila, subiu pra 481 pontos no levantamento mais recente do Watch Tower, doze pontos acima do trimestre anterior.\n\nA leitura é direta: o país está mais exigente, mas continua abrindo a porta. A diferença é que agora escolhe com mais precisão. As ocupações de tecnologia e saúde ganharam prioridade, enquanto funções genéricas perderam espaço nos sorteios.\n\nPra quem está perto do corte, três alavancas decidem o jogo. A primeira é o idioma: subir de um nível bom pra um nível alto no IELTS ou no CELPIP rende dezenas de pontos. A segunda é a nomeação provincial, que sozinha adiciona 600 pontos. A terceira é uma oferta de trabalho formal de um empregador canadense.\n\nO recado pra quem mira o Canadá este ano é planejar com antecedência. O perfil precisa estar completo e atualizado antes da abertura das janelas, porque elas são curtas e os sorteios não esperam.",
+          "O Canadá entrou em 2026 com a política de imigração qualificada mais agressiva dos últimos dez anos. O corte do Express Entry, a nota que separa quem recebe o convite de quem fica na fila, subiu pra 481 pontos no levantamento mais recente, doze pontos acima do trimestre anterior.\n\nA leitura é direta: o país está mais exigente, mas continua abrindo a porta. A diferença é que agora escolhe com mais precisão. As ocupações de tecnologia e saúde ganharam prioridade, enquanto funções genéricas perderam espaço nos sorteios.\n\nPra quem está perto do corte, três alavancas decidem o jogo. A primeira é o idioma: subir de um nível bom pra um nível alto no IELTS ou no CELPIP rende dezenas de pontos. A segunda é a nomeação provincial, que sozinha adiciona 600 pontos. A terceira é uma oferta de trabalho formal de um empregador canadense.\n\nO recado pra quem mira o Canadá este ano é planejar com antecedência. O perfil precisa estar completo e atualizado antes da abertura das janelas, porque elas são curtas e os sorteios não esperam.",
         keyFacts: [
           "CRS mínimo no último corte: 481 pontos, alta de 12 no trimestre",
           "Ontário, trilha de tecnologia: 2.500 vagas reabrindo",
@@ -924,7 +924,7 @@ export const DESTINATIONS: ReadonlyArray<DestinationMeta> = [
     emoji: "📰",
     dot: "🟢",
     colorHex: "0B815A",
-    legend: "Notícia completa pra registrar na página do país, dentro do Watch Tower.",
+    legend: "Notícia completa pra registrar na página do país.",
   },
   {
     key: "blog",

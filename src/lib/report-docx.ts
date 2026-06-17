@@ -322,7 +322,7 @@ export async function renderDocx(data: ReportData): Promise<Buffer> {
   const sourcesByCountry = consolidatedSources(data.countries);
 
   // Capa
-  children.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: "WiseHub Watch Tower", bold: true, color: BLUE, size: 44 })] }));
+  children.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: "WiseHub", bold: true, color: BLUE, size: 44 })] }));
   children.push(new Paragraph({ spacing: { after: 40 }, children: [new TextRun({ text: "Relatório Completo · Conteúdo pronto pra publicar + Monitoramento Global", color: DARK, size: 24 })] }));
   children.push(new Paragraph({ spacing: { after: 200 }, children: [new TextRun({ text: `Gerado em: ${data.generatedAtStr} (BRT)`, italics: true, color: GREY })] }));
 
@@ -381,7 +381,7 @@ export async function renderDocx(data: ReportData): Promise<Buffer> {
 
   // ── PARTE 3 · DADOS TÉCNICOS ──
   children.push(partTitle("🔧 PARTE 3 · DADOS TÉCNICOS · monitoramento"));
-  children.push(new Paragraph({ spacing: { after: 100 }, children: [new TextRun({ text: "Tudo que o Watch Tower monitora, detalhado país a país: boletins oficiais, marcos, manchetes ao vivo e Centros de Informação. É a base factual das Partes 1 e 2.", color: DARK })] }));
+  children.push(new Paragraph({ spacing: { after: 100 }, children: [new TextRun({ text: "Tudo que a WiseHub monitora, detalhado país a país: boletins oficiais, marcos, manchetes ao vivo e Centros de Informação. É a base factual das Partes 1 e 2.", color: DARK })] }));
   for (const c of data.countries) children.push(...technicalDocx(c));
 
   // Rodapé
@@ -389,20 +389,20 @@ export async function renderDocx(data: ReportData): Promise<Buffer> {
     new Paragraph({
       spacing: { before: 280, after: 40 },
       border: { top: { style: BorderStyle.SINGLE, size: 4, color: "D0D7E6", space: 8 } },
-      children: [new TextRun({ text: `Gerado automaticamente pelo Watch Tower em ${data.generatedAtStr}.`, color: GREY, size: 18 })],
+      children: [new TextRun({ text: `Gerado automaticamente pela WiseHub em ${data.generatedAtStr}.`, color: GREY, size: 18 })],
     }),
   );
   children.push(
     new Paragraph({
       alignment: AlignmentType.CENTER,
       spacing: { before: 80 },
-      children: [new TextRun({ text: "© WiseHub US LLC · Watch Tower v2 · Conteúdo curado pela Friday", color: GREY, size: 16 })],
+      children: [new TextRun({ text: "© WiseHub US LLC · Conteúdo curado pela Friday", color: GREY, size: 16 })],
     }),
   );
 
   const doc = new Document({
-    creator: "WiseHub Watch Tower",
-    title: "WiseHub Watch Tower — Relatório Completo",
+    creator: "WiseHub",
+    title: "WiseHub — Relatório Completo",
     description: "Conteúdo pronto pra publicar + monitoramento global de imigração",
     sections: [
       {

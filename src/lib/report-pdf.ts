@@ -304,7 +304,7 @@ export async function renderPdf(data: ReportData): Promise<Uint8Array> {
   const sourcesByCountry = consolidatedSources(countries);
 
   // Cabeçalho
-  b.heading("WiseHub Watch Tower", { size: 22, color: BLUE, gapAfter: 2 });
+  b.heading("WiseHub", { size: 22, color: BLUE, gapAfter: 2 });
   b.text("Relatório Completo · Conteúdo pronto pra publicar + Monitoramento Global", { size: 11, color: DARK, gapAfter: 2 });
   b.text(`Gerado em: ${generatedAtStr} (BRT)`, { size: 9, color: GREY, oblique: true, gapAfter: 4 });
   b.rule();
@@ -366,15 +366,15 @@ export async function renderPdf(data: ReportData): Promise<Uint8Array> {
 
   // ── PARTE 3 · DADOS TÉCNICOS ──
   b.heading("PARTE 3 - DADOS TÉCNICOS - monitoramento", { size: 19, color: BLUE, spaceBefore: 8, gapAfter: 4 });
-  b.text("Tudo que o Watch Tower monitora, detalhado país a país: boletins oficiais, marcos, manchetes ao vivo e Centros de Informação. É a base factual das Partes 1 e 2.", { size: 10, gapAfter: 4 });
+  b.text("Tudo que a WiseHub monitora, detalhado país a país: boletins oficiais, marcos, manchetes ao vivo e Centros de Informação. É a base factual das Partes 1 e 2.", { size: 10, gapAfter: 4 });
   b.heading("Índice por país", { size: 13, color: BLUE, spaceBefore: 6, gapAfter: 3 });
   for (const c of countries) b.bullet(c.name, { size: 10, gapAfter: 0 });
   b.text("", { gapAfter: 4 });
   for (const c of countries) technicalPdf(b, c);
 
   // Rodapé
-  b.text(`Gerado automaticamente pelo Watch Tower em ${generatedAtStr}.`, { size: 8, color: GREY, gapAfter: 1 });
-  b.text("© WiseHub US LLC · Watch Tower v2 · Conteúdo curado pela Friday", { size: 8, color: GREY });
+  b.text(`Gerado automaticamente pela WiseHub em ${generatedAtStr}.`, { size: 8, color: GREY, gapAfter: 1 });
+  b.text("© WiseHub US LLC · Conteúdo curado pela Friday", { size: 8, color: GREY });
 
   return b.bytes();
 }

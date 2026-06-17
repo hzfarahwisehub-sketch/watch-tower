@@ -7,7 +7,7 @@
  *      destino (Comunidade → aba do país → Blog), com títulos grandes e cor.
  *   3. PARTE 2 · FONTES E MATERIAIS → fontes oficiais por país, pra anexar a
  *      cada post como embasamento.
- *   4. PARTE 3 · DADOS TÉCNICOS → tudo que o Watch Tower monitora, detalhado.
+ *   4. PARTE 3 · DADOS TÉCNICOS → tudo que a WiseHub monitora, detalhado.
  *
  * Markdown não tem cor de fonte, então usamos bolinhas coloridas (🔵🟢🟠) como
  * proxy da legenda; PDF e Word aplicam a cor de verdade.
@@ -182,7 +182,7 @@ export function renderMarkdown(data: ReportData): string {
   const postCount = totalPostables(countries);
   const sourcesByCountry = consolidatedSources(countries);
 
-  lines.push(`# WiseHub Watch Tower · Relatório Completo`);
+  lines.push(`# WiseHub · Relatório Completo`);
   lines.push(``);
   lines.push(`**Gerado em:** ${generatedAtStr} (BRT)`);
   lines.push(``);
@@ -262,7 +262,7 @@ export function renderMarkdown(data: ReportData): string {
   // ── PARTE 3 · DADOS TÉCNICOS ──
   lines.push(`# 🔧 PARTE 3 · DADOS TÉCNICOS · monitoramento`);
   lines.push(``);
-  lines.push(`Tudo que o Watch Tower monitora, detalhado país a país: boletins oficiais, marcos editoriais, manchetes ao vivo e Centros de Informação. É a base factual que embasa o conteúdo das Partes 1 e 2.`);
+  lines.push(`Tudo que a WiseHub monitora, detalhado país a país: boletins oficiais, marcos editoriais, manchetes ao vivo e Centros de Informação. É a base factual que embasa o conteúdo das Partes 1 e 2.`);
   lines.push(``);
   lines.push(`### Índice por país`);
   lines.push(``);
@@ -275,11 +275,11 @@ export function renderMarkdown(data: ReportData): string {
   lines.push(``);
   lines.push(`## Fim do relatório`);
   lines.push(``);
-  lines.push(`Gerado automaticamente pelo Watch Tower em ${generatedAtStr}.`);
+  lines.push(`Gerado automaticamente pela WiseHub em ${generatedAtStr}.`);
   lines.push(``);
   lines.push(`Conteúdo editorial curado pela Friday · próxima geração: cache invalida em 30 minutos.`);
   lines.push(``);
-  lines.push(`© WiseHub US LLC · Watch Tower v2 · Friday`);
+  lines.push(`© WiseHub US LLC · Friday`);
 
   return lines.join("\n");
 }
