@@ -37,6 +37,10 @@ const dict = {
     "info.card.rssBadge": "RSS ao vivo · headlines abaixo",
     "info.card.rssBadge.short": "RSS ao vivo",
 
+    // ---- Separador Federal / Estadual ----
+    "info.scope.federal": "Federal / Nacional",
+    "info.scope.state": "Estadual / Provincial",
+
     // ---- Card especial: cripto global ----
     "info.global.title": "Cripto global · derivativos & on-chain",
 
@@ -76,6 +80,10 @@ const dict = {
     "info.card.sources": "{n} sources",
     "info.card.rssBadge": "Live RSS · headlines below",
     "info.card.rssBadge.short": "Live RSS",
+
+    // ---- Federal / State separator ----
+    "info.scope.federal": "Federal / National",
+    "info.scope.state": "State / Provincial",
 
     // ---- Special card: global crypto ----
     "info.global.title": "Global crypto · derivatives & on-chain",

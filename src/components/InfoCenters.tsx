@@ -269,8 +269,21 @@ export function InfoCenters({ variant = "news" }: { variant?: Variant } = {}) {
               <ul className="flex flex-col gap-1.5">
                 {center.sources.map((src, i) => {
                   const m = categoryMeta(src.category);
+                  const hasState = center.sources.some((s) => s.scope === "state");
+                  const isFirstFederal = hasState && i === 0;
+                  const isFirstState = src.scope === "state" && (i === 0 || center.sources[i - 1].scope !== "state");
                   return (
                     <li key={`${src.url}-${i}`}>
+                      {isFirstFederal && (
+                        <div className="text-[9px] uppercase tracking-[1.5px] font-bold pb-1 pt-0.5" style={{ color: "var(--text-3)" }}>
+                          {t("info.scope.federal")}
+                        </div>
+                      )}
+                      {isFirstState && (
+                        <div className="text-[9px] uppercase tracking-[1.5px] font-bold pb-1 pt-2 mt-1.5" style={{ color: "var(--text-3)", borderTop: "1px dashed var(--border)" }}>
+                          {t("info.scope.state")}
+                        </div>
+                      )}
                       <a
                         href={src.url}
                         target="_blank"
