@@ -23,6 +23,7 @@ import { renderMarkdown } from "@/lib/report-markdown";
 import { renderDocx } from "@/lib/report-docx";
 import { renderPdf } from "@/lib/report-pdf";
 import { requireSession } from "@/lib/api-helpers";
+import { acionarGeracaoConteudo } from "@/lib/content-trigger";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -66,6 +67,10 @@ export async function GET(req: NextRequest) {
     cacheState = "MISS";
   }
   const data = slot.data;
+
+  // Gatilho: o clique no REPAVET aciona a Friday pra gerar o conteúdo das
+  // notícias novas (sob solicitação, decisão do Hammis). Best-effort + dedup 12h.
+  await acionarGeracaoConteudo(data, result.session.userId);
 
   // Renderiza o formato pedido
   let body: string | Uint8Array;

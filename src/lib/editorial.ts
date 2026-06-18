@@ -51,21 +51,50 @@ export type BlogPost = {
   sources?: EditorialSource[];
 };
 
+/** Roteiro de vídeo pro YouTube da WiseHub: gancho de abertura + blocos. */
+export type YouTubeScript = {
+  title: string;
+  /** gancho dos primeiros segundos, que prende o espectador. */
+  hook?: string;
+  /** corpo do roteiro, em blocos separados por linha em branco. */
+  body: string;
+  cta?: string;
+  sources?: EditorialSource[];
+};
+
+/** Post pro Instagram da WiseHub: legenda/carrossel + hashtags. */
+export type InstagramPost = {
+  title: string;
+  /** legenda do post ou roteiro do carrossel. Parágrafos separados por linha em branco. */
+  body: string;
+  hashtags?: string[];
+  cta?: string;
+  sources?: EditorialSource[];
+};
+
 export type CountryEditorial = {
   community: CommunityPost[];
   countryTab: CountryArticle[];
   blog: BlogPost[];
+  /** Roteiros de vídeo (YouTube WiseHub). Opcional: nem todo país tem ainda. */
+  youtube?: YouTubeScript[];
+  /** Posts de Instagram (WiseHub). Opcional. */
+  instagram?: InstagramPost[];
 };
 
 /** Texto-guia que abre a seção editorial do relatório. */
 export const EDITORIAL_GUIDE = [
-  "Este documento separa o conteúdo em três destinos de publicação. Use cada peça onde ela rende mais:",
+  "Este documento separa o conteúdo em cinco destinos de publicação. Use cada peça onde ela rende mais:",
   "",
   "📣 PARA A COMUNIDADE (Circle): posts curtos, diretos e explicativos. Servem pra avisar e engajar rápido. Copie, ajuste o tom se quiser e publique.",
   "",
   "📰 PARA A ABA DO PAÍS: a notícia completa, com contexto e dados-chave. É a versão de referência que fica registrada na página do país.",
   "",
   "📝 PARA O BLOG WISEHUB NEWS: a matéria aprofundada, com análise e narrativa. É o material de marca, pra atrair e posicionar a WiseHub como autoridade.",
+  "",
+  "🎬 PARA O YOUTUBE: o roteiro de vídeo pronto pra gravar, com gancho de abertura, blocos e chamada final.",
+  "",
+  "📸 PARA O INSTAGRAM: a legenda e o roteiro de post ou carrossel, já com hashtags.",
   "",
   "Abaixo de cada país, primeiro vem o conteúdo pronto pra publicar; depois, separados, os dados técnicos do monitoramento (boletins oficiais, marcos e manchetes ao vivo) que embasam tudo.",
 ].join("\n");
@@ -879,7 +908,7 @@ export function editorialStats(): { countries: number; pieces: number } {
   let pieces = 0;
   for (const code of codes) {
     const e = EDITORIAL[code];
-    pieces += e.community.length + e.countryTab.length + e.blog.length;
+    pieces += e.community.length + e.countryTab.length + e.blog.length + (e.youtube?.length ?? 0) + (e.instagram?.length ?? 0);
   }
   return { countries: codes.length, pieces };
 }
@@ -888,7 +917,7 @@ export function editorialStats(): { countries: number; pieces: number } {
 // Destinos de publicação (cores + legenda) e achatamento dos posts
 // ─────────────────────────────────────────────────────────────────────────
 
-export type Destination = "community" | "countryTab" | "blog";
+export type Destination = "community" | "countryTab" | "blog" | "youtube" | "instagram";
 
 export type DestinationMeta = {
   key: Destination;
@@ -935,6 +964,24 @@ export const DESTINATIONS: ReadonlyArray<DestinationMeta> = [
     colorHex: "B45309",
     legend: "Matéria aprofundada pro Blog WiseHub News (wisehubnow / wisehubnews.com).",
   },
+  {
+    key: "youtube",
+    label: "Para o YouTube",
+    tag: "ROTEIRO YOUTUBE",
+    emoji: "🎬",
+    dot: "🔴",
+    colorHex: "FF0000",
+    legend: "Roteiro de vídeo pronto pra gravar no canal da WiseHub no YouTube (gancho + blocos + chamada).",
+  },
+  {
+    key: "instagram",
+    label: "Para o Instagram",
+    tag: "POST INSTAGRAM",
+    emoji: "📸",
+    dot: "🟡",
+    colorHex: "E1306C",
+    legend: "Legenda e roteiro de post ou carrossel pro Instagram da WiseHub (com hashtags).",
+  },
 ];
 
 /** Peça normalizada, pronta pra postar (independente do tipo de origem). */
@@ -972,9 +1019,15 @@ export function buildPostables(
       } else if (dest.key === "countryTab") {
         for (const a of ed.countryTab)
           pieces.push({ destination: "countryTab", countryCode: c.code, countryName: c.name, title: a.headline, standfirst: a.standfirst, body: a.body, keyFacts: a.keyFacts, sources: a.sources });
-      } else {
+      } else if (dest.key === "blog") {
         for (const p of ed.blog)
           pieces.push({ destination: "blog", countryCode: c.code, countryName: c.name, title: p.headline, standfirst: p.standfirst, body: p.body, tags: p.tags, sources: p.sources });
+      } else if (dest.key === "youtube") {
+        for (const p of ed.youtube ?? [])
+          pieces.push({ destination: "youtube", countryCode: c.code, countryName: c.name, title: p.title, standfirst: p.hook, body: p.body, cta: p.cta, sources: p.sources });
+      } else if (dest.key === "instagram") {
+        for (const p of ed.instagram ?? [])
+          pieces.push({ destination: "instagram", countryCode: c.code, countryName: c.name, title: p.title, body: p.body, cta: p.cta, tags: p.hashtags, sources: p.sources });
       }
     }
     return { dest, pieces };
@@ -993,6 +1046,8 @@ export function consolidatedSources(
       ...ed.community.flatMap((p) => p.sources ?? []),
       ...ed.countryTab.flatMap((a) => a.sources ?? []),
       ...ed.blog.flatMap((p) => p.sources ?? []),
+      ...(ed.youtube ?? []).flatMap((p) => p.sources ?? []),
+      ...(ed.instagram ?? []).flatMap((p) => p.sources ?? []),
     ];
     const seen = new Set<string>();
     const sources: EditorialSource[] = [];
