@@ -64,6 +64,31 @@ export const ITALIANISMO_CHECAGENS: ItalianismoChecagem[] = [
       "O FATO de base (sentença 63/2026 da Corte Constitucional e o Decreto 36/2025) é confirmável em fonte oficial e está correto. Já a TESE da matéria, de que quem preparava documentos antes do decreto manteria o direito, é OPINIÃO jurídica do prof. Ciervo publicada na Questione Giustizia, não um ato oficial nem decisão vinculante. Tratar como interpretação, não como regra confirmada.",
     curadoEm: "2026-06-16",
   },
+  {
+    match: "cidadania-italiana-recurso-vira-regra-diante-de-onda-de-sentencas-negativas",
+    titulo:
+      "Cidadania italiana: recurso vira regra diante de onda de sentenças negativas",
+    status: "confirmado",
+    fontesCitadas: [
+      { nome: "Corte Costituzionale — sentença n. 63/2026 (art. 3-bis)", url: "https://www.cortecostituzionale.it/", oficial: true },
+      { nome: "Decreto-Legge 36/2025 (Lei 74/2025) — corte 27/03/2025", url: "https://www.normattiva.it/", oficial: true },
+      { nome: "Corte di Cassazione — 1ª Seção Civil, sent. n. 13818/2026, de 12/05/2026", url: "https://www.cortedicassazione.it/", oficial: true },
+    ],
+    nota:
+      "O FATO de base é confirmável: a Cassação (1ª Seção Civil, sent. 13818/2026, de 12/05/2026) reafirmou a cidadania por descendência como direito permanente e imprescritível, em tensão com a leitura restritiva da Consulta (63/2026). A decisão das Seções Unidas ainda é AGUARDADA. Os relatos de rejeições individuais em tribunais regionais são casos concretos narrados por advogados, NÃO jurisprudência vinculante.",
+    curadoEm: "2026-06-16",
+  },
+  {
+    match: "tajani-volta-a-comparar-cidadania-a-black-friday-e-mira-america-do-sul",
+    titulo: "Tajani volta a comparar cidadania à Black Friday e mira América do Sul",
+    status: "confirmado",
+    fontesCitadas: [
+      { nome: "Ministero degli Affari Esteri (MAECI) — Conferenza dei Consoli, Farnesina, 12/06/2026", url: "https://www.esteri.it/", oficial: true },
+    ],
+    nota:
+      "O EVENTO é confirmado em fonte oficial: a Conferência dos Cônsules da Itália no Mundo abriu em 12/06/2026 na Farnesina, com Tajani e Piantedosi, ~172 cônsules, primeira em 8 anos. As citações textuais do discurso (Black Friday, Miami) são reportadas pela matéria de origem e batem com a linha pública já conhecida do ministro (que usou a mesma imagem em mar/2025). Discurso político, não ato normativo: não muda direito por si só.",
+    curadoEm: "2026-06-16",
+  },
 ];
 
 export type ChecagemResultado = {
