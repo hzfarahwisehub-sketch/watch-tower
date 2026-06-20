@@ -4,13 +4,16 @@ name: Check Reminders
 # (que tem acesso a DB + VAPID). Job minimalista (só curl, sem checkout nem
 # setup-node) pra gastar pouquíssimo minuto de Actions.
 #
-# Cadência: a cada 15min. Pode ser afrouxada (*/30) se quiser economizar
-# minutos do free tier. Schedules do GitHub Actions podem atrasar alguns
-# minutos sob carga — aceitável pra um app de uso interno.
+# Cadencia: DE HORA EM HORA (minuto 0), alinhado com check-scheduled.yml.
+# Motivo: cada disparo acorda o compute do Neon (free tier suspende apos 5min
+# ocioso). A */15 o banco ficava acordado ~1/3 do tempo e estourava as
+# 100 CU-horas/mes do plano free (era a causa do aviso de 80% sem ninguem usar).
+# No minuto 0, reminders e scheduled acordam o banco na MESMA janela, gastando
+# compute uma vez por hora. Lembretes podem atrasar ate ~1h, ok pra uso interno.
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 concurrency:
