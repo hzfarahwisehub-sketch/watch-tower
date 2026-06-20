@@ -41,7 +41,7 @@ export async function acionarGeracaoConteudo(data: ReportData, userId: string): 
     const extra = pendentes.length > 10 ? ` (+${pendentes.length - 10})` : "";
     const body =
       `${FRIDAY_MARKER} · ${TRIGGER_TAG} · Gerar conteúdo WiseHub de ${pendentes.length} notícia(s) nova(s): ` +
-      `curar a veracidade e escrever pros 5 destinos (Comunidade, Aba do país, Blog, YouTube, Instagram). ` +
+      `curar a veracidade e escrever pros destinos (Comunidade, Aba do país, WiseHub News, Dicas Práticas no tom do Hubby, YouTube, Instagram). ` +
       `${lista}${extra}`;
     await prisma.suggestion.create({ data: { userId, body } });
   } catch {

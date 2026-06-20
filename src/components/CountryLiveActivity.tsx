@@ -10,6 +10,8 @@ type Headline = {
   title: string;
   link: string;
   pubDate?: string;
+  /** Briefing curto da própria fonte (resumo do item RSS) · sempre no ar, sem gerar conteúdo. */
+  desc?: string;
   source: string;
   /** Fonte de comunidade (não-oficial), ex.: Italianismo · confirmação pendente. */
   community?: boolean;
@@ -59,10 +61,11 @@ async function fetchFeed(rssUrl: string, sourceName: string, community = false):
     if (!res.ok) return [];
     const data = await res.json();
     if (!Array.isArray(data.items)) return [];
-    return data.items.slice(0, 3).map((it: { title: string; link: string; pubDate?: string }) => ({
+    return data.items.slice(0, 3).map((it: { title: string; link: string; pubDate?: string; desc?: string }) => ({
       title: it.title,
       link: it.link,
       pubDate: it.pubDate,
+      desc: it.desc,
       source: sourceName,
       community: community || undefined,
     }));
@@ -245,6 +248,14 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
                     style={{ color: "var(--text-3)", overflowWrap: "anywhere", wordBreak: "break-word" }}
                   >
                     {tr.original}
+                  </div>
+                )}
+                {h.desc && (
+                  <div
+                    className="text-[10.5px] leading-snug mb-1.5"
+                    style={{ color: "var(--text-2)", overflowWrap: "anywhere", wordBreak: "break-word" }}
+                  >
+                    {h.desc}
                   </div>
                 )}
                 <div className="flex items-center gap-2 flex-wrap">

@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from "next/server";
  *  - Permite cache compartilhado entre usuários
  *  - User-Agent realista pra reduzir 403 anti-bot
  *
- * Resposta: { items: [{ title, link, pubDate }] } limitada a 5 manchetes.
+ * Resposta: { items: [{ title, link, pubDate, desc }] } limitada a 5 manchetes (desc = briefing curto da fonte).
  * Pra erros: { error: string } com status 4xx/5xx.
  */
 
@@ -19,11 +19,11 @@ export const runtime = "nodejs"; // precisamos de fetch sem edge restrictions
 export const revalidate = 0;     // controle de cache feito manualmente
 export const preferredRegion = ["gru1"]; // Sao Paulo, fora do bloqueio US de varios sites gov (BR/DE/AE)
 
-type RssItem = { title: string; link: string; pubDate?: string };
+type RssItem = { title: string; link: string; pubDate?: string; desc?: string };
 type CacheEntry = { fetchedAt: number; items: RssItem[] };
 
 const CACHE_TTL_MS = 15 * 60 * 1000; // 15min
-const CACHE_VERSION = "v5"; // bump invalida caches antigos quando o decoder muda
+const CACHE_VERSION = "v6"; // bump invalida caches antigos quando o decoder muda · v6 inclui desc (briefing)
 const FETCH_TIMEOUT_MS = 25_000;
 const MAX_ITEMS = 5;
 
@@ -150,6 +150,13 @@ function fixMojibake(s: string): string {
 
 /* ============== Parser ============== */
 
+// Encurta o resumo/descrição da fonte pra virar um "briefing" curto na vitrine.
+function clip(s: string, n: number): string {
+  const t = s.replace(/\s+/g, " ").trim();
+  if (t.length <= n) return t;
+  return t.slice(0, n - 1).trimEnd() + "…";
+}
+
 function parseFeed(xml: string): RssItem[] {
   // Tenta RSS 2.0 (<item>) primeiro
   const rssItems = parseRssItems(xml);
@@ -167,7 +174,8 @@ function parseRssItems(xml: string): RssItem[] {
     const title = extractTag(block, "title");
     const link = extractTag(block, "link");
     const pubDate = extractTag(block, "pubDate") || extractTag(block, "dc:date");
-    if (title && link) items.push({ title, link, pubDate: pubDate || undefined });
+    const desc = clip(extractTag(block, "description") || extractTag(block, "content:encoded"), 220);
+    if (title && link) items.push({ title, link, pubDate: pubDate || undefined, desc: desc || undefined });
   }
   return items;
 }
@@ -185,7 +193,8 @@ function parseAtomEntries(xml: string): RssItem[] {
       block.match(/<link[^>]*href=["']([^"']+)["'][^>]*\/?>/i);
     const link = linkMatch ? linkMatch[1] : "";
     const pubDate = extractTag(block, "published") || extractTag(block, "updated");
-    if (title && link) items.push({ title, link, pubDate: pubDate || undefined });
+    const desc = clip(extractTag(block, "summary") || extractTag(block, "content"), 220);
+    if (title && link) items.push({ title, link, pubDate: pubDate || undefined, desc: desc || undefined });
   }
   return items;
 }
