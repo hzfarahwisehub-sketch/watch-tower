@@ -289,6 +289,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇨🇭",
     sources: [
       { name: "SEM · Secretaria de Migração", url: "https://www.sem.admin.ch/sem/en/home/sem/aktuell.html", category: "legal", language: "en", note: "Secretaria de Estado para Migração da Suíça (SEM) · asilo, residência e acesso ao trabalho", rss: "https://d-nsbc-p.admin.ch/NSBSubscriber/feeds/rss?lang=en&org-nr=405&kind=M" },
+      { name: "The Local Switzerland", url: "https://www.thelocal.ch/", category: "news", language: "en", community: true, note: "Maior rede de notícias em inglês da Europa · seção de imigração suíça (permis, naturalização), cruza com SEM. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://feeds.thelocal.com/rss/ch/immigration" },
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
       { name: "Neue Zürcher Zeitung",  url: "https://www.nzz.ch/wirtschaft",            category: "finance", language: "de", note: "Principal financial CH", rss: "https://www.nzz.ch/wirtschaft.rss" },
       { name: "SwissInfo · Business",  url: "https://www.swissinfo.ch/eng/business",    category: "news",    language: "en", rss: "https://www.swissinfo.ch/eng/business/rss" },
@@ -376,6 +377,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇯🇵",
     sources: [
       { name: "NHK World · Japão", url: "https://www3.nhk.or.jp/nhkworld/en/news/", category: "news", language: "en", note: "Emissora pública oficial do Japão (NHK) em inglês · fonte estatal pois a ISA/MOJ não publica RSS", rss: "https://www3.nhk.or.jp/nhkworld/data/en/news/backstory/rss.xml" },
+      { name: "GaijinPot Blog", url: "https://blog.gaijinpot.com/", category: "news", language: "en", community: true, note: "Maior portal para estrangeiros no Japão (em inglês) · vistos, taxas, mudança para o Japão. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://blog.gaijinpot.com/feed/" },
       { name: "Nikkei Asia",           url: "https://asia.nikkei.com/",                 category: "finance", language: "en", note: "Cobertura financeira asiática · referência institucional", rss: "https://asia.nikkei.com/rss/feed/nar" },
       { name: "Japan Times · Business", url: "https://www.japantimes.co.jp/business/",  category: "news",    language: "en", rss: "https://www.japantimes.co.jp/feed/topstories/" },
       { name: "Reuters · Ásia-Pacífico", url: "https://www.reuters.com/world/asia-pacific", category: "news", language: "en" },
@@ -480,6 +482,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇦🇹",
     sources: [
       { name: "BMI · Ministério do Interior", url: "https://www.bmi.gv.at/", category: "legal", language: "de", note: "Ministério federal do Interior austríaco · imigração, asilo, residência", rss: "https://www.bmi.gv.at/rss/bmi_presse.xml" },
+      { name: "The Local Austria", url: "https://www.thelocal.at/", category: "news", language: "en", community: true, note: "Versão austríaca da The Local (em inglês) · mudanças de imigração para estrangeiros, RWR Card. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://feeds.thelocal.com/rss/at/immigration" },
       { name: "BFA · Imigração e Asilo", url: "https://www.bfa.gv.at/", category: "legal", language: "de", note: "Bundesamt für Fremdenwesen und Asyl · autoridade de estrangeiros e asilo", rss: "https://www.bmi.gv.at/rss/bfa_presse.xml" },
       { name: "ORF · news.ORF.at", url: "https://orf.at/", category: "news", language: "de", note: "Emissora pública austríaca", rss: "https://rss.orf.at/news.xml" },
       { name: "Der Standard · Inland", url: "https://www.derstandard.at/inland", category: "news", language: "de", rss: "https://www.derstandard.at/rss/inland" },
@@ -500,6 +503,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇧🇪",
     sources: [
       { name: "Belga News Agency", url: "https://www.belganewsagency.eu/", category: "news", language: "en", note: "Agência de notícias belga", rss: "https://www.belganewsagency.eu/feed" },
+      { name: "The Bulletin", url: "https://www.thebulletin.be/", category: "news", language: "en", community: true, note: "Publicação em inglês mais antiga da Bélgica (desde 1962) · portal da comunidade expat na capital da UE, cobertura de imigração. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://www.thebulletin.be/rss.xml" },
       { name: "VRT NWS", url: "https://www.vrt.be/vrtnws/nl/", category: "news", language: "nl", note: "Emissora pública flamenga", rss: "https://www.vrt.be/vrtnws/nl.rss.articles.xml" },
       { name: "La Libre Belgique", url: "https://www.lalibre.be/", category: "news", language: "fr", rss: "https://www.lalibre.be/arc/outboundfeeds/rss/?outputType=xml" },
       { name: "Office des Étrangers", url: "https://dofi.ibz.be/", category: "legal", language: "fr", note: "Autoridade de imigração belga (Immigration Office)" },
@@ -587,6 +591,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇪🇪",
     sources: [
       { name: "ERR News (EN)", url: "https://news.err.ee/", category: "news", language: "en", note: "Emissora pública estoniana em inglês", rss: "https://news.err.ee/rss" },
+      { name: "Estonian World", url: "https://estonianworld.com/", category: "news", language: "en", community: true, note: "Principal publicação em inglês sobre a Estônia · sociedade e imigração. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://estonianworld.com/feed/" },
       { name: "Riigikogu · Press releases", url: "https://www.riigikogu.ee/en/", category: "legal", language: "en", note: "Parlamento da Estônia", rss: "http://feeds.feedburner.com/RiigikoguPressReleases" },
       { name: "ERR Uudised", url: "https://www.err.ee/", category: "news", language: "et", rss: "https://www.err.ee/rss" },
       { name: "Politsei- ja Piirivalveamet", url: "https://www.politsei.ee/en/", category: "legal", language: "en", note: "Polícia e Guarda de Fronteiras (autoridade de imigração)" },
@@ -627,6 +632,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇭🇺",
     sources: [
       { name: "HVG · Itthon", url: "https://hvg.hu/", category: "news", language: "hu", note: "Portal de notícias húngaro", rss: "https://hvg.hu/rss/itthon" },
+      { name: "Daily News Hungary", url: "https://dailynewshungary.com/", category: "news", language: "en", community: true, note: "Diário independente em inglês sobre a Hungria (desde 2013) · seção de expats/imigração. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://dailynewshungary.com/feed/" },
       { name: "Telex.hu", url: "https://telex.hu/", category: "news", language: "hu", note: "Portal independente húngaro", rss: "https://telex.hu/rss" },
       { name: "444.hu", url: "https://444.hu/", category: "news", language: "hu", rss: "https://444.hu/feed" },
       { name: "Magyar Közlöny · Diário Oficial", url: "https://magyarkozlony.hu/", category: "legal", language: "hu", note: "Gazeta oficial da Hungria · promulgação de leis e decretos", rss: "https://magyarkozlony.hu/feed" },
@@ -691,6 +697,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇷🇴",
     sources: [
       { name: "IGI · Inspectoratul General pentru Imigrări", url: "https://igi.mai.gov.ro/en/", category: "legal", language: "en", note: "Autoridade romena de imigração", rss: "https://igi.mai.gov.ro/en/category/press-releases-news/feed/" },
+      { name: "Romania Insider", url: "https://www.romania-insider.com/", category: "news", language: "en", community: true, note: "Site de notícias em inglês mais lido da Romênia · forte foco expat (vistos, residência). NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://www.romania-insider.com/feed" },
       { name: "Monitorul Oficial al României", url: "https://monitoruloficial.ro/", category: "legal", language: "ro", note: "Gazeta oficial da Romênia", rss: "https://monitoruloficial.ro/rss/" },
       { name: "Digi24 · Externe", url: "https://www.digi24.ro/", category: "news", language: "ro", rss: "https://www.digi24.ro/rss/externe" },
       { name: "HotNews.ro", url: "https://hotnews.ro/", category: "news", language: "ro", rss: "https://hotnews.ro/feed" },
@@ -703,6 +710,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇸🇪",
     sources: [
       { name: "Migrationsverket · News (EN)", url: "https://www.migrationsverket.se/en/", category: "legal", language: "en", note: "Agência Sueca de Migração", rss: "https://www.migrationsverket.se/rss_en" },
+      { name: "The Local Sweden", url: "https://www.thelocal.se/", category: "news", language: "en", community: true, note: "Versão sueca da The Local (em inglês) · regras de residência/cidadania, salary threshold, cruza com Migrationsverket. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://feeds.thelocal.com/rss/se/immigration" },
       { name: "Sveriges Radio · Ekot", url: "https://sverigesradio.se/ekot", category: "news", language: "sv", note: "Rádio pública sueca", rss: "https://api.sr.se/api/rss/program/83" },
       { name: "SVT Nyheter", url: "https://www.svt.se/nyheter/", category: "news", language: "sv", note: "Televisão pública sueca", rss: "https://www.svt.se/nyheter/rss.xml" },
       { name: "Migrationsverket · MIGRFS", url: "https://www.migrationsverket.se/om-migrationsverket/styrning-och-uppfoljning/lagar-och-regler/migrationsverkets-foreskrifter.html", category: "legal", language: "sv", note: "Regulamentos vinculantes da Agência de Migração (MIGRFS)", rss: "https://www.migrationsverket.se/rss_migrfs" },
@@ -717,6 +725,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇨🇿",
     sources: [
       { name: "Vláda ČR · Governo (EN)", url: "https://vlada.gov.cz/en/", category: "legal", language: "en", note: "Governo da Tchéquia · comunicados", rss: "https://vlada.gov.cz/en/rss.xml" },
+      { name: "Expats.cz", url: "https://www.expats.cz/", category: "news", language: "en", community: true, note: "Principal mídia em inglês para expats na Tchéquia · notícias diárias incl. imigração/visto/residência. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://www.expats.cz/czech-news/rss-feed" },
       { name: "ČTK / České noviny", url: "https://www.ceskenoviny.cz/", category: "news", language: "cs", note: "Agência de notícias tcheca (estatal)", rss: "https://www.ceskenoviny.cz/sluzby/rss/zpravy.php" },
       { name: "ČT24 · Česká televize", url: "https://ct24.ceskatelevize.cz/", category: "news", language: "cs", note: "Televisão pública tcheca", rss: "https://ct24.ceskatelevize.cz/rss/hlavni-zpravy" },
       { name: "Ministerstvo vnitra · Azyl a migrace", url: "https://www.mvcr.cz/clanek/migration.aspx", category: "legal", language: "cs", note: "Min. do Interior · asilo e migração", rss: "https://www.mvcr.cz/rss/" },
