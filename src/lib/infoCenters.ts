@@ -64,6 +64,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇺🇸",
     sources: [
       { name: "USCIS · News Releases", url: "https://www.uscis.gov/newsroom/news-releases", category: "legal", language: "en", note: "Órgão oficial de imigração dos EUA (USCIS/DHS) · vistos, cidadania e política migratória", rss: "https://www.uscis.gov/news/rss-feed/23269" },
+      { name: "Murthy Law Firm", url: "https://www.murthy.com/view-all-news/", category: "legal", language: "en", community: true, note: "Escritório de imigração dos EUA muito estabelecido (newsletter histórica) · Visa Bulletin, H-1B, naturalização. NÃO-oficial: entra como 'a confirmar' e passa pela checagem cruzada da Friday.", rss: "https://www.murthy.com/feed/" },
+      { name: "ImmigrationProf Blog", url: "https://immprof.com/", category: "news", language: "en", community: true, note: "Blog de professores de direito de imigração (Law Professor Blogs) · alto volume noticioso. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://immprof.com/feed/" },
       { name: "USCIS · All News",     url: "https://www.uscis.gov/newsroom", category: "legal", language: "en", note: "Todas as notícias da USCIS (releases, alertas, fact sheets)", rss: "https://www.uscis.gov/news/rss-feed/59144" },
       { name: "Federal Register · USCIS", url: "https://www.federalregister.gov/agencies/u-s-citizenship-and-immigration-services", category: "legal", language: "en", note: "Diário oficial federal · regras e notices da USCIS (fonte jurídica primária)", rss: "https://www.federalregister.gov/api/v1/documents.rss?conditions%5Bagencies%5D%5B%5D=u-s-citizenship-and-immigration-services" },
       { name: "Federal Register · State Dept", url: "https://www.federalregister.gov/agencies/state-department", category: "legal", language: "en", note: "Regras de visto/consular do Department of State no diário oficial", rss: "https://www.federalregister.gov/api/v1/documents.rss?conditions%5Bagencies%5D%5B%5D=state-department" },
@@ -97,6 +99,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇨🇦",
     sources: [
       { name: "IRCC · Imigração Canadá", url: "https://www.canada.ca/en/immigration-refugees-citizenship/news.html", category: "legal", language: "en", note: "Departamento federal de imigração do Canadá (IRCC) · vistos, residência e cidadania", rss: "https://api.io.canada.ca/io-server/gc/news/en/v2?dept=departmentofcitizenshipandimmigration&sort=publishedDate&orderBy=desc&format=atom" },
+      { name: "CIC News", url: "https://www.cicnews.com/", category: "news", language: "en", community: true, note: "Maior portal de imigração canadense (escritório Campbell Cohen) · Express Entry, PNP, vistos. Equivalente direto do Italianismo. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://www.cicnews.com/feed" },
+      { name: "Moving2Canada", url: "https://moving2canada.com/news-and-features/", category: "news", language: "en", community: true, note: "Recurso independente para recém-chegados, muito ativo · IRCC, Quebec, Express Entry. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://moving2canada.com/feed/" },
       { name: "Canada Gazette · Part I",  url: "https://gazette.gc.ca/rp-pr/p1/index-eng.html", category: "legal", language: "en", note: "Diário oficial federal · Parte I (avisos e regulamentos propostos)", rss: "https://www.gazette.gc.ca/rss/p1-eng.xml" },
       { name: "Canada Gazette · Part II", url: "https://gazette.gc.ca/rp-pr/p2/index-eng.html", category: "legal", language: "en", note: "Diário oficial federal · Parte II (regulamentos oficiais promulgados)", rss: "https://www.gazette.gc.ca/rss/p2-eng.xml" },
       { name: "ESDC · Emprego e Trabalho", url: "https://www.canada.ca/en/employment-social-development.html", category: "legal", language: "en", note: "Ministério federal de emprego · gere o LMIA que sustenta vistos de trabalho", rss: "https://api.io.canada.ca/io-server/gc/news/en/v2?dept=departmentofemploymentandsocialdevelopment&sort=publishedDate&orderBy=desc&format=atom" },
@@ -147,6 +151,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇬🇧",
     sources: [
       { name: "UK Visas & Immigration", url: "https://www.gov.uk/government/organisations/uk-visas-and-immigration", category: "legal", language: "en", note: "Órgão oficial de vistos do Reino Unido (Home Office) · vistos, ETA e regras de imigração", rss: "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=uk-visas-and-immigration" },
+      { name: "Free Movement", url: "https://freemovement.org.uk/", category: "legal", language: "en", community: true, note: "Referência nº1 de imigração do Reino Unido (Colin Yeo, desde 2007) · regras do Home Office, nacionalidade, asilo. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://freemovement.org.uk/feed/" },
+      { name: "DavidsonMorris", url: "https://www.davidsonmorris.com/", category: "legal", language: "en", community: true, note: "Escritório de imigração de Londres, blog muito ativo · Skilled Worker, naturalização, mudanças de regra. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://www.davidsonmorris.com/feed/" },
       { name: "Reuters · UK",         url: "https://www.reuters.com/world/uk",  category: "news",    language: "en" },
       { name: "Financial Times",      url: "https://www.ft.com/",               category: "finance", language: "en", note: "Referência mundial em finanças/política UK" },
       { name: "BBC Business",         url: "https://www.bbc.com/business",      category: "news",    language: "en", note: "Cobertura ampla, acesso livre", rss: "https://feeds.bbci.co.uk/news/business/rss.xml" },
@@ -166,6 +172,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇩🇪",
     sources: [
       { name: "BAMF · Migração e Refugiados", url: "https://www.bamf.de/", category: "legal", language: "de", note: "Autoridade federal alemã de migração e refugiados (BAMF) · asilo, integração e dados oficiais", rss: "https://www.bamf.de/SiteGlobals/Functions/RSS/DE/Feed/RSSNewsfeed_Meldungen.xml" },
+      { name: "IamExpat in Germany", url: "https://www.iamexpat.de/", category: "news", language: "en", community: true, note: "Portal de comunidade de expatriados (em inglês) · visto/residência/cidadania alemã, Chancenkarte, naturalização. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://www.iamexpat.de/rss/news-germany/news" },
+      { name: "The Local Germany", url: "https://www.thelocal.de/", category: "news", language: "en", community: true, note: "Jornalismo em inglês com seção forte de imigração alemã. Feed é do país inteiro (filtrar por tema). NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://feeds.thelocal.com/rss/de" },
       { name: "BAMF · Imprensa",    url: "https://www.bamf.de/DE/Startseite/startseite_node.html", category: "legal", language: "de", note: "Comunicados de imprensa (Pressemitteilungen) do BAMF", rss: "https://www.bamf.de/SiteGlobals/Functions/RSS/DE/Feed/RSSNewsfeed_Pressemitteilungen.xml?nn=282672" },
       { name: "Bundesgesetzblatt · Diário Oficial", url: "https://www.recht.bund.de/", category: "legal", language: "de", note: "Diário oficial federal eletrônico (BGBl. I + II) · promulgação de leis e portarias", rss: "https://www.recht.bund.de/rss/feeds/rss_bgbl-1-2.xml?nn=211452" },
       { name: "Auswärtiges Amt · Vistos", url: "https://www.auswaertiges-amt.de/de/service/visa-und-aufenthalt", category: "legal", language: "de", note: "Ministério das Relações Exteriores · vistos nacionais e serviços consulares", rss: "https://www.auswaertiges-amt.de/static/includes/rss/Presse-RSS-Feed.xml" },
@@ -198,6 +206,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇫🇷",
     sources: [
       { name: "France Info · Immigration", url: "https://www.franceinfo.fr/societe/immigration.html", category: "news", language: "fr", note: "Editoria de imigração da rádio pública francesa (Radio France)", rss: "https://www.franceinfo.fr/societe/immigration.rss" },
+      { name: "The Local France", url: "https://www.thelocal.fr/", category: "news", language: "en", community: true, note: "Melhor cobertura em inglês das mudanças francesas (carte de séjour, teste de língua/cívico 2026, naturalização). Feed do país inteiro. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://feeds.thelocal.com/rss/fr" },
+      { name: "Frenchly", url: "https://frenchly.us/", category: "news", language: "en", community: true, note: "Portal de comunidade francófila em inglês · guias de residência/naturalização. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://www.frenchly.us/feed/" },
       { name: "Le Monde · Immigration",  url: "https://www.lemonde.fr/immigration-et-diversite/", category: "news", language: "fr", note: "Editoria de imigração e diversidade do Le Monde", rss: "https://www.lemonde.fr/immigration-et-diversite/rss_full.xml" },
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
       { name: "Les Échos",             url: "https://www.lesechos.fr/",                 category: "finance", language: "fr", note: "Principal jornal econômico francês", rss: "https://syndication.lesechos.fr/rss/rss_economie.xml" },
@@ -217,6 +227,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇪🇸",
     sources: [
       { name: "BOE · Disposiciones generales", url: "https://www.boe.es/rss/", category: "legal", language: "es", note: "Diário oficial do Estado espanhol · publica toda a normativa de extranjería e migração", rss: "https://www.boe.es/rss/boe.php?s=1" },
+      { name: "The Local Spain", url: "https://www.thelocal.es/", category: "news", language: "en", community: true, note: "Jornalismo em inglês para residentes · NIE/TIE, residência, nacionalidade. Feed do país inteiro. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://feeds.thelocal.com/rss/es" },
+      { name: "Immigration Lawyers Spain", url: "https://www.immigrationspain.es/en", category: "legal", language: "en", community: true, note: "Escritório especializado (blog em inglês) · nacionalidade (inclui rota sefardita), arraigo, vistos. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://www.immigrationspain.es/en/feed/" },
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
       { name: "Expansión",             url: "https://www.expansion.com/",               category: "finance", language: "es", note: "Principal jornal financeiro espanhol", rss: "https://e00-expansion.uecdn.es/rss/portada.xml" },
       { name: "El País · Economía",    url: "https://elpais.com/economia/",             category: "news",    language: "es", rss: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/economia/portada" },
@@ -237,6 +249,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇵🇹",
     sources: [
       { name: "Diário da República · Série I", url: "https://diariodarepublica.pt/dr/home", category: "legal", language: "pt", note: "Diário oficial português · leis e decretos, incluindo a Lei de Estrangeiros gerida pela AIMA", rss: "https://files.diariodarepublica.pt/rss/serie1-html.xml" },
+      { name: "The Portugal News", url: "https://www.theportugalnews.com/", category: "news", language: "en", community: true, note: "Jornal em inglês mais antigo de Portugal (desde 1977) · nacionalidade, golden visa, AIMA. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://www.theportugalnews.com/rss" },
+      { name: "Portugal Resident", url: "https://www.portugalresident.com/", category: "news", language: "en", community: true, note: "Portal de comunidade de expatriados · residência/cidadania/golden visa. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://www.portugalresident.com/feed/" },
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
       { name: "Jornal de Negócios",    url: "https://www.jornaldenegocios.pt/",         category: "finance", language: "pt", note: "Principal jornal financeiro PT", rss: "https://www.jornaldenegocios.pt/rss/empresas" },
       { name: "Público · Economia",    url: "https://www.publico.pt/economia",          category: "news",    language: "pt", rss: "https://feeds.feedburner.com/PublicoEconomia" },
@@ -295,6 +309,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇮🇪",
     sources: [
       { name: "Irish Immigration Service", url: "https://www.irishimmigration.ie/news/", category: "legal", language: "en", note: "Serviço de imigração do Ministério da Justiça da Irlanda · vistos, residência e cidadania", rss: "https://www.irishimmigration.ie/feed/" },
+      { name: "Sinnott Solicitors", url: "https://sinnott.ie/", category: "legal", language: "en", community: true, note: "Escritório de imigração de Dublin/Cork (preside a Irish Immigration Lawyers Association) · cidadania/naturalização, vistos de trabalho. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://sinnott.ie/feed/" },
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
       { name: "Irish Times · Business", url: "https://www.irishtimes.com/business/",    category: "finance", language: "en", note: "Cobertura macroeconômica IE", rss: "https://www.irishtimes.com/cmlink/news-1.1319192" },
       { name: "RTÉ Business",          url: "https://www.rte.ie/news/business/",        category: "news",    language: "en", rss: "https://www.rte.ie/news/rss/business-headlines.xml" },
@@ -312,6 +327,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
       { name: "Reuters · Europa",      url: "https://www.reuters.com/world/europe",     category: "news",    language: "en" },
       { name: "NL Times · Business",   url: "https://nltimes.nl/business",              category: "finance", language: "en", note: "Notícias holandesas em inglês", rss: "https://nltimes.nl/feed" },
       { name: "DutchNews",             url: "https://www.dutchnews.nl/",                category: "news",    language: "en", rss: "https://www.dutchnews.nl/feed/" },
+      { name: "IamExpat in the Netherlands", url: "https://www.iamexpat.nl/", category: "news", language: "en", community: true, note: "Portal de comunidade expat líder na Holanda (em inglês) · cruza com IND. Equivalente ao Italianismo. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://www.iamexpat.nl/rss/news-netherlands/news" },
       { name: "IND · Imigração e Naturalização", url: "https://ind.nl/nl", category: "legal", language: "nl", note: "Autoridade nacional de imigração e naturalização · vistos, residência, taxas" },
       { name: "Rijksoverheid · Asiel- en migratiebeleid", url: "https://www.rijksoverheid.nl/themas/migratie-en-reizen/asielbeleid", category: "legal", language: "nl", note: "Governo central · política de asilo e migração, notícias e legislação" },
       { name: "Netherlands worldwide · Vistos (MinBuZa)", url: "https://www.netherlandsworldwide.nl/", category: "legal", language: "nl", note: "Serviço consular do Min. das Relações Exteriores · MVV/Schengen e legalização" },
@@ -405,6 +421,8 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇦🇺",
     sources: [
       { name: "Home Affairs · Imigração", url: "https://immi.homeaffairs.gov.au/", category: "legal", language: "en", note: "Portal oficial de vistos, residência e cidadania (Department of Home Affairs) · governo bloqueia robô, só link" },
+      { name: "Migration Alliance", url: "https://migrationalliance.com.au/immigration-daily-news/latest.html", category: "legal", language: "en", community: true, note: "Maior associação de agentes/advogados de migração da Austrália · 'breaking immigration news' focada em instrumentos legislativos. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://migrationalliance.com.au/immigration-daily-news/latest.html?format=feed&type=rss" },
+      { name: "VisaEnvoy · Immigration News", url: "https://visaenvoy.com/immigration-news-australia/", category: "legal", language: "en", community: true, note: "Agentes MARA registrados (Melbourne) · subclasses de visto, orçamento federal, vistos de parceiro. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://visaenvoy.com/feed/" },
       { name: "Home Affairs · Departamento", url: "https://www.homeaffairs.gov.au/", category: "legal", language: "en", note: "Site institucional do Department of Home Affairs (imigração, fronteiras, cidadania)" },
       { name: "Federal Register of Legislation", url: "https://www.legislation.gov.au/", category: "legal", language: "en", note: "Legislação federal · Migration Act 1958 e Migration Regulations 1994" },
       { name: "Commonwealth Gazette", url: "https://www.legislation.gov.au/gazettes", category: "legal", language: "en", note: "Diário/gazeta oficial da Commonwealth" },
@@ -445,6 +463,7 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
     flag: "🇦🇪",
     sources: [
       { name: "ICP · Identidade e Cidadania", url: "https://icp.gov.ae/en/media-en/news-reports/", category: "legal", language: "en", note: "Autoridade federal de identidade, cidadania e imigração dos Emirados (ICP). Site recusa acesso de datacenter, então fica como link oficial sem feed ao vivo" },
+      { name: "The National · UAE", url: "https://www.thenationalnews.com/news/uae/", category: "news", language: "en", community: true, note: "Seção UAE do diário de Abu Dhabi (em inglês) · vistos, Golden Visa, Emirates ID, residência (cruza com GDRFA/ICP). NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://www.thenationalnews.com/arc/outboundfeeds/rss/category/news/uae/?outputType=xml" },
       { name: "Gulf News · Business",  url: "https://gulfnews.com/business",            category: "finance", language: "en", note: "Cobertura UAE/região do Golfo" },
       { name: "The National · Business", url: "https://www.thenationalnews.com/business/", category: "news", language: "en", note: "Diário oficial Abu Dhabi em inglês", rss: "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml" },
       { name: "Khaleej Times · Business", url: "https://www.khaleejtimes.com/business",  category: "news",    language: "en" },
