@@ -28,7 +28,7 @@ const APP = (process.env.WT_APP_URL || "https://watchtower.wisehubnow.online").r
 // E-mail (qualquer válido) sobe o limite do MyMemory de ~5k pra ~50k palavras/dia.
 const MM_EMAIL = process.env.MYMEMORY_EMAIL || "adm.wisehub@gmail.com";
 
-const PER_FEED = 3;             // top-N manchetes por feed (igual ao app)
+const PER_FEED = 12;            // top-N manchetes por feed (cobre o que o app/relatório mostram)
 const MAX_NEW_PER_RUN = 600;    // teto de títulos novos traduzidos por execução
 const POOL = 4;                 // títulos em paralelo
 const TARGETS = [

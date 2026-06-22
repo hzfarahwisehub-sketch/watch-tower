@@ -31,6 +31,8 @@ export type ReportHeadline = {
   community?: boolean;
   /** Veredito da checagem cruzada curada pela Friday (só em fontes community). */
   checagem?: ChecagemResultado;
+  /** idioma de origem do feed (ex.: "de", "fr") — usado na tradução ao vivo. */
+  sourceLang?: string;
 };
 
 export type ReportBulletin = {
@@ -89,7 +91,7 @@ export type ReportData = {
 // decodificação das manchetes no relatório.
 const APP_BASE = (process.env.WT_APP_URL || "https://watchtower.wisehubnow.online").replace(/\/$/, "");
 
-async function fetchFeed(rssUrl: string, sourceName: string, maxItems = 5, community = false): Promise<ReportHeadline[]> {
+async function fetchFeed(rssUrl: string, sourceName: string, maxItems = 5, community = false, sourceLang = "auto"): Promise<ReportHeadline[]> {
   try {
     const ctrl = new AbortController();
     const t = setTimeout(() => ctrl.abort(), 12000);
@@ -104,9 +106,41 @@ async function fetchFeed(rssUrl: string, sourceName: string, maxItems = 5, commu
       pubDate: it.pubDate,
       source: sourceName,
       community: community || undefined,
+      sourceLang,
     }));
   } catch {
     return [];
+  }
+}
+
+/** Normaliza o idioma de origem pro código que o MyMemory entende. */
+function srcCode(lang: string): string {
+  const l = (lang || "").toLowerCase();
+  if (l.startsWith("pt")) return "pt-br";
+  if (l.startsWith("en")) return "en-gb";
+  return l || "auto";
+}
+
+/** Traduz um texto via MyMemory (grátis, sem chave). Timeout 8s; null em erro/quota. */
+async function mmTranslate(text: string, src: string, tgt: string): Promise<string | null> {
+  if (!text || src === "auto" || src === tgt) return null;
+  try {
+    const q = text.slice(0, 480);
+    const email = process.env.MYMEMORY_EMAIL || "adm.wisehub@gmail.com";
+    const u = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(q)}&langpair=${encodeURIComponent(src + "|" + tgt)}&de=${encodeURIComponent(email)}`;
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 8000);
+    const res = await fetch(u, { signal: ctrl.signal });
+    clearTimeout(t);
+    if (!res.ok) return null;
+    const data = (await res.json()) as { responseStatus?: number | string; responseData?: { translatedText?: string } };
+    const status = Number(data?.responseStatus);
+    const out = (data?.responseData?.translatedText ?? "").trim();
+    if (status !== 200 || !out) return null;
+    if (/MYMEMORY WARNING|YOU USED ALL|INVALID|PLEASE SELECT|NO QUERY SPECIFIED/i.test(out)) return null;
+    return out;
+  } catch {
+    return null;
   }
 }
 
@@ -157,17 +191,25 @@ export async function gatherReportData(lang: "pt" | "en" = "pt"): Promise<Report
   } catch {
     // sem traduções → manchetes saem no idioma original
   }
+  // Cache de tradução AO VIVO (preenchido após coletar os feeds): completa o que
+  // o mapa estático do cron não cobre, pra Atividade ao Vivo sair 100% no idioma
+  // do app. translateTitle consulta primeiro o cron, depois este cache, senão original.
+  const liveMap = new Map<string, string>();
   const translateTitle = (title: string): string => {
-    const tr = rssTrans[normalizeTitle(title)];
+    const key = normalizeTitle(title);
+    const tr = rssTrans[key];
     const want = lang === "en" ? tr?.en : tr?.pt;
-    return want && normalizeTitle(want) !== normalizeTitle(title) ? want : title;
+    if (want && normalizeTitle(want) !== key) return want;
+    const live = liveMap.get(key);
+    if (live && normalizeTitle(live) !== key) return live;
+    return title;
   };
 
   // Junta todos os feeds RSS catalogados nos Centros de Informação
-  const allFeeds: Array<{ countryCode: string; sourceName: string; rss: string; community?: boolean }> = [];
+  const allFeeds: Array<{ countryCode: string; sourceName: string; rss: string; community?: boolean; lang: string }> = [];
   for (const center of INFO_CENTERS) {
     for (const src of center.sources) {
-      if (src.rss) allFeeds.push({ countryCode: center.countryCode, sourceName: src.name, rss: src.rss, community: src.community });
+      if (src.rss) allFeeds.push({ countryCode: center.countryCode, sourceName: src.name, rss: src.rss, community: src.community, lang: src.language });
     }
   }
 
@@ -176,11 +218,44 @@ export async function gatherReportData(lang: "pt" | "en" = "pt"): Promise<Report
   const BATCH = 8;
   for (let i = 0; i < allFeeds.length; i += BATCH) {
     const batch = allFeeds.slice(i, i + BATCH);
-    const results = await Promise.all(batch.map((f) => fetchFeed(f.rss, f.sourceName, 5, f.community)));
+    const results = await Promise.all(batch.map((f) => fetchFeed(f.rss, f.sourceName, 5, f.community, f.lang)));
     batch.forEach((f, idx) => {
       const existing = headlinesByCountry.get(f.countryCode) ?? [];
       headlinesByCountry.set(f.countryCode, [...existing, ...results[idx]]);
     });
+  }
+
+  // Tradução AO VIVO das manchetes que o mapa estático (cron) não cobre, pro
+  // idioma do app. Garante a Atividade ao Vivo 100% traduzida no relatório.
+  // MyMemory (grátis), com teto (300) e pool (6); falha = mantém o original.
+  {
+    const targetPair = lang === "en" ? "en-gb" : "pt-br";
+    const seen = new Set<string>();
+    const gaps: Array<{ title: string; src: string }> = [];
+    for (const arr of headlinesByCountry.values()) {
+      for (const h of arr) {
+        const key = normalizeTitle(h.title);
+        if (!h.title || seen.has(key)) continue;
+        seen.add(key);
+        const tr = rssTrans[key];
+        const already = lang === "en" ? tr?.en : tr?.pt;
+        if (already && normalizeTitle(already) !== key) continue; // já traduzido pelo cron
+        const src = srcCode(h.sourceLang ?? "auto");
+        if (src.startsWith(lang)) continue; // fonte já está no idioma do app
+        gaps.push({ title: h.title, src });
+      }
+    }
+    const queue = gaps.slice(0, 300);
+    await Promise.all(
+      Array.from({ length: 6 }, async () => {
+        while (queue.length) {
+          const g = queue.shift();
+          if (!g) break;
+          const out = await mmTranslate(g.title, g.src, targetPair);
+          if (out) liveMap.set(normalizeTitle(g.title), out);
+        }
+      }),
+    );
   }
 
   // Monta país a país
