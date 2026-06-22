@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { INFO_CENTERS, GLOBAL_CRYPTO_SOURCES, categoryMeta, type InfoSource, type InfoSourceCategory } from "@/lib/infoCenters";
 import { useLocale } from "./LocaleProvider";
-import { loadTranslationMap, pickTitle, type TransMap } from "@/lib/rss-translations";
 
 type TFn = (key: string, params?: Record<string, string | number>) => string;
 
@@ -46,7 +45,7 @@ function catLabel(c: InfoSourceCategory, t: TFn): string {
   return t(`info.cat.${c}`);
 }
 
-type Headline = { title: string; link: string; pubDate?: string };
+type Headline = { title: string; link: string; pubDate?: string; titleTr?: string; isTr?: boolean };
 type FeedState =
   | { status: "idle" }
   | { status: "loading" }
@@ -57,7 +56,7 @@ type FeedState =
  * Hook: busca headlines de um feed RSS via /api/rss (server-side cache 15min).
  * Faz 1 fetch on-mount + refresh a cada 10min.
  */
-function useFeed(rssUrl: string | undefined): FeedState {
+function useFeed(rssUrl: string | undefined, appLang = "pt", sourceLang = "auto"): FeedState {
   const [state, setState] = useState<FeedState>({ status: "idle" });
 
   useEffect(() => {
@@ -66,7 +65,7 @@ function useFeed(rssUrl: string | undefined): FeedState {
     const load = async () => {
       setState({ status: "loading" });
       try {
-        const res = await fetch(`/api/rss?url=${encodeURIComponent(rssUrl)}`);
+        const res = await fetch(`/api/rss?url=${encodeURIComponent(rssUrl)}&lang=${appLang}&src=${encodeURIComponent(sourceLang)}`);
         const data = await res.json();
         if (cancelled) return;
         if (!res.ok || data.error) {
@@ -85,7 +84,7 @@ function useFeed(rssUrl: string | undefined): FeedState {
       cancelled = true;
       clearInterval(interval);
     };
-  }, [rssUrl]);
+  }, [rssUrl, appLang]);
 
   return state;
 }
@@ -109,9 +108,8 @@ function fmtTimeAgo(iso: string | undefined, t: TFn): string {
 /** Bloco de headlines RSS pra um InfoSource (renderiza nada se sem rss) */
 function SourceHeadlines({ source }: { source: InfoSource }) {
   const { t, locale } = useLocale();
-  const feed = useFeed(source.rss);
-  const [transMap, setTransMap] = useState<TransMap>({});
-  useEffect(() => { loadTranslationMap().then(setTransMap); }, []);
+  const appLang = locale === "en" ? "en" : "pt";
+  const feed = useFeed(source.rss, appLang, source.language);
   if (!source.rss) return null;
 
   if (feed.status === "loading" || feed.status === "idle") {
@@ -134,7 +132,8 @@ function SourceHeadlines({ source }: { source: InfoSource }) {
   return (
     <ul className="pl-7 pr-2 pb-2 flex flex-col gap-1">
       {items.map((h, i) => {
-        const tr = pickTitle(h.title, locale, transMap);
+        const displayTitle = h.titleTr ?? h.title;
+        const isTr = !!h.isTr;
         return (
         <li key={`${h.link}-${i}`}>
           <a
@@ -143,24 +142,24 @@ function SourceHeadlines({ source }: { source: InfoSource }) {
             rel="noopener noreferrer"
             className="block text-[10.5px] leading-snug hover:underline"
             style={{ color: "var(--text-2)" }}
-            title={tr.isTranslation ? `${tr.text}\n${t("rsstr.original")}: ${tr.original}` : h.title}
+            title={isTr ? `${displayTitle}\n${t("rsstr.original")}: ${h.title}` : h.title}
           >
             <span className="opacity-80">›</span>{" "}
-            <span style={{ overflowWrap: "anywhere" }}>{tr.text}</span>
+            <span style={{ overflowWrap: "anywhere" }}>{displayTitle}</span>
             {h.pubDate && (
               <span className="ml-1.5 text-[9px] uppercase tracking-wider font-semibold" style={{ color: "var(--text-3)" }}>
                 {fmtTimeAgo(h.pubDate, t)}
               </span>
             )}
-            {tr.isTranslation && (
+            {isTr && (
               <span className="ml-1.5 text-[8px] uppercase tracking-wider font-bold px-1 py-0.5 rounded" style={{ color: "#10A570", background: "rgba(16,165,112,.12)" }}>
                 🌐 {t("rsstr.auto")}
               </span>
             )}
           </a>
-          {tr.isTranslation && (
+          {isTr && (
             <div className="pl-3 text-[9px] leading-snug" style={{ color: "var(--text-3)", overflowWrap: "anywhere" }}>
-              {tr.original}
+              {h.title}
             </div>
           )}
         </li>

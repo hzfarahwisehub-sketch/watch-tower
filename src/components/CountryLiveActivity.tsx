@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { INFO_CENTERS } from "@/lib/infoCenters";
 import { useLocale } from "./LocaleProvider";
-import { loadTranslationMap, pickTitle, type TransMap } from "@/lib/rss-translations";
 
 type TFn = (key: string, params?: Record<string, string | number>) => string;
 
@@ -15,6 +14,10 @@ type Headline = {
   source: string;
   /** Fonte de comunidade (não-oficial), ex.: Italianismo · confirmação pendente. */
   community?: boolean;
+  /** título/resumo traduzidos pro idioma do app (vindos do /api/rss?lang=). */
+  titleTr?: string;
+  descTr?: string;
+  isTr?: boolean;
 };
 
 type BulletinEntry = {
@@ -55,19 +58,22 @@ function formatRelative(iso: string | undefined, t: TFn, intl: string): string {
   return date.toLocaleDateString(intl, { day: "2-digit", month: "2-digit" });
 }
 
-async function fetchFeed(rssUrl: string, sourceName: string, community = false): Promise<Headline[]> {
+async function fetchFeed(rssUrl: string, sourceName: string, community = false, sourceLang = "auto", appLang = "pt"): Promise<Headline[]> {
   try {
-    const res = await fetch(`/api/rss?url=${encodeURIComponent(rssUrl)}`);
+    const res = await fetch(`/api/rss?url=${encodeURIComponent(rssUrl)}&lang=${appLang}&src=${encodeURIComponent(sourceLang)}`);
     if (!res.ok) return [];
     const data = await res.json();
     if (!Array.isArray(data.items)) return [];
-    return data.items.slice(0, 3).map((it: { title: string; link: string; pubDate?: string; desc?: string }) => ({
+    return data.items.slice(0, 3).map((it: { title: string; link: string; pubDate?: string; desc?: string; titleTr?: string; descTr?: string; isTr?: boolean }) => ({
       title: it.title,
       link: it.link,
       pubDate: it.pubDate,
       desc: it.desc,
       source: sourceName,
       community: community || undefined,
+      titleTr: it.titleTr,
+      descTr: it.descTr,
+      isTr: it.isTr,
     }));
   } catch {
     return [];
@@ -84,11 +90,9 @@ async function fetchFeed(rssUrl: string, sourceName: string, community = false):
  */
 export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
   const { t, intl, locale } = useLocale();
+  const appLang = locale === "en" ? "en" : "pt";
   const [state, setState] = useState<ActivityState>({ status: "idle" });
   const [bulletinFresh, setBulletinFresh] = useState<{ at: string; url: string } | null>(null);
-  // Mapa de traduções automáticas das manchetes (carregado 1x, memoizado).
-  const [transMap, setTransMap] = useState<TransMap>({});
-  useEffect(() => { loadTranslationMap().then(setTransMap); }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -128,7 +132,7 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
     const load = async () => {
       setState((prev) => (prev.status === "ok" ? prev : { status: "loading" }));
       const results = await Promise.all(
-        feeds.map((f) => fetchFeed(f.rss!, f.name, f.community)),
+        feeds.map((f) => fetchFeed(f.rss!, f.name, f.community, f.language, appLang)),
       );
       if (cancelled) return;
       const merged = results
@@ -152,7 +156,7 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
       cancelled = true;
       clearInterval(interval);
     };
-  }, [countryCode]);
+  }, [countryCode, appLang]);
 
   const hasContent =
     bulletinFresh !== null || (state.status === "ok" && state.headlines.length > 0);
@@ -209,7 +213,9 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
       {state.status === "ok" && (
         <ul className="flex flex-col gap-1.5">
           {state.headlines.map((h, i) => {
-            const tr = pickTitle(h.title, locale, transMap);
+            const displayTitle = h.titleTr ?? h.title;
+            const displayDesc = h.descTr ?? h.desc;
+            const isTr = !!h.isTr;
             return (
             <li key={`${h.link}-${i}`}>
               <a
@@ -231,7 +237,7 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
                       wordBreak: "break-word",
                     }}
                   >
-                    {tr.text}
+                    {displayTitle}
                   </h5>
                   {h.pubDate && (
                     <span
@@ -242,20 +248,20 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
                     </span>
                   )}
                 </div>
-                {tr.isTranslation && (
+                {isTr && (
                   <div
                     className="text-[10px] leading-snug mb-1"
                     style={{ color: "var(--text-3)", overflowWrap: "anywhere", wordBreak: "break-word" }}
                   >
-                    {tr.original}
+                    {h.title}
                   </div>
                 )}
-                {h.desc && (
+                {displayDesc && (
                   <div
                     className="text-[10.5px] leading-snug mb-1.5"
                     style={{ color: "var(--text-2)", overflowWrap: "anywhere", wordBreak: "break-word" }}
                   >
-                    {h.desc}
+                    {displayDesc}
                   </div>
                 )}
                 <div className="flex items-center gap-2 flex-wrap">
@@ -274,7 +280,7 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
                       🏘 comunidade · a confirmar
                     </span>
                   )}
-                  {tr.isTranslation && (
+                  {isTr && (
                     <span
                       className="text-[8px] tracking-wider uppercase font-bold px-1.5 py-0.5 rounded"
                       style={{ color: "#10A570", background: "rgba(16,165,112,.12)" }}

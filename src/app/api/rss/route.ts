@@ -19,16 +19,76 @@ export const runtime = "nodejs"; // precisamos de fetch sem edge restrictions
 export const revalidate = 0;     // controle de cache feito manualmente
 export const preferredRegion = ["gru1"]; // Sao Paulo, fora do bloqueio US de varios sites gov (BR/DE/AE)
 
-type RssItem = { title: string; link: string; pubDate?: string; desc?: string };
+type RssItem = { title: string; link: string; pubDate?: string; desc?: string; titleTr?: string; descTr?: string; isTr?: boolean };
 type CacheEntry = { fetchedAt: number; items: RssItem[] };
 
 const CACHE_TTL_MS = 15 * 60 * 1000; // 15min
-const CACHE_VERSION = "v6"; // bump invalida caches antigos quando o decoder muda · v6 inclui desc (briefing)
+const CACHE_VERSION = "v7"; // v7: traducao opcional (lang+src) de titulo+desc no idioma do app
 const FETCH_TIMEOUT_MS = 25_000;
 const MAX_ITEMS = 5;
 
 // Cache global ao processo Node — reset em cada cold start do serverless
 const cache = new Map<string, CacheEntry>();
+
+/* ============== Tradução automática (idioma do app) ============== */
+// Traduz título + resumo das manchetes pro idioma do app (PT padrão / EN) via
+// MyMemory (grátis, $0, não-LLM). Cache em memória dedup entre requests; falha
+// = mantém o original (nunca quebra). Só roda quando vem `?lang=` (o cron chama
+// /api/rss SEM lang, então não é afetado).
+
+function srcCode(lang: string): string {
+  const l = (lang || "").toLowerCase();
+  if (l.startsWith("pt")) return "pt-br";
+  if (l.startsWith("en")) return "en-gb";
+  return l || "auto";
+}
+
+async function mmTranslate(text: string, src: string, tgt: string): Promise<string | null> {
+  if (!text || src === tgt || src === "auto") return null;
+  try {
+    const q = text.slice(0, 480);
+    const email = process.env.MYMEMORY_EMAIL || "adm.wisehub@gmail.com";
+    const u = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(q)}&langpair=${encodeURIComponent(src + "|" + tgt)}&de=${encodeURIComponent(email)}`;
+    const ctrl = new AbortController();
+    const to = setTimeout(() => ctrl.abort(), 8000);
+    const r = await fetch(u, { signal: ctrl.signal });
+    clearTimeout(to);
+    if (!r.ok) return null;
+    const d = (await r.json()) as { responseStatus?: number | string; responseData?: { translatedText?: string } };
+    const status = Number(d?.responseStatus);
+    const out = (d?.responseData?.translatedText ?? "").trim();
+    if (status !== 200 || !out) return null;
+    if (/MYMEMORY WARNING|YOU USED ALL|INVALID|PLEASE SELECT|NO QUERY SPECIFIED/i.test(out)) return null;
+    return out;
+  } catch {
+    return null;
+  }
+}
+
+const trCache = new Map<string, string>(); // dedup de traduções no processo
+async function tr(text: string, src: string, tgt: string): Promise<string | null> {
+  if (!text) return null;
+  const key = `${src}|${tgt}|${text}`;
+  const hit = trCache.get(key);
+  if (hit !== undefined) return hit || null;
+  const out = await mmTranslate(text, src, tgt);
+  trCache.set(key, out ?? "");
+  return out;
+}
+
+async function translateItems(items: RssItem[], src: string, tgtPair: string): Promise<RssItem[]> {
+  if (src === tgtPair) return items; // fonte já está no idioma do app
+  return Promise.all(
+    items.map(async (it) => {
+      const [titleTr, descTr] = await Promise.all([
+        tr(it.title, src, tgtPair),
+        it.desc ? tr(it.desc, src, tgtPair) : Promise.resolve(null),
+      ]);
+      const isTr = !!(titleTr || descTr);
+      return { ...it, titleTr: titleTr ?? undefined, descTr: descTr ?? undefined, isTr: isTr || undefined };
+    }),
+  );
+}
 
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
@@ -50,7 +110,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "private url not allowed" }, { status: 403 });
   }
 
-  const cacheKey = `${CACHE_VERSION}:${url}`;
+  const langParam = req.nextUrl.searchParams.get("lang");
+  const lang = langParam === "en" ? "en" : langParam === "pt" ? "pt" : null;
+  const rawSrc = req.nextUrl.searchParams.get("src") || "auto";
+  const cacheKey = `${CACHE_VERSION}:${lang ?? ""}:${rawSrc}:${url}`;
 
   // Cache check
   const cached = cache.get(cacheKey);
@@ -91,7 +154,12 @@ export async function GET(req: NextRequest) {
       );
     }
     const xml = decodeXml(await res.arrayBuffer());
-    const items = parseFeed(xml).slice(0, MAX_ITEMS);
+    let items = parseFeed(xml).slice(0, MAX_ITEMS);
+    if (lang) {
+      const tgtPair = lang === "en" ? "en-gb" : "pt-br";
+      const src = srcCode(rawSrc);
+      if (src !== tgtPair) items = await translateItems(items, src, tgtPair);
+    }
     cache.set(cacheKey, { fetchedAt: Date.now(), items });
     return NextResponse.json({ items, cached: false }, { headers: SUCCESS_HEADERS });
   } catch (err) {
