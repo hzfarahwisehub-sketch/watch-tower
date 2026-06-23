@@ -94,6 +94,45 @@ function technicalMd(c: ReportCountry): string[] {
     lines.push(``);
   }
 
+  if (c.labor) {
+    const L = c.labor;
+    lines.push(`### 💼 Mercado de Trabalho`);
+    lines.push(``);
+    lines.push(L.overview);
+    lines.push(``);
+    if (L.hotSectors.length) { lines.push(`**Setores em alta:** ${L.hotSectors.join(" · ")}`); lines.push(``); }
+    if (L.coolingSectors?.length) { lines.push(`**Setores em baixa:** ${L.coolingSectors.join(" · ")}`); lines.push(``); }
+    if (L.inDemandRoles.length) {
+      lines.push(`**Profissões em demanda:**`);
+      lines.push(``);
+      L.inDemandRoles.forEach((r) => lines.push(`- **${r.role}**${r.note ? `: ${r.note}` : ""}`));
+      lines.push(``);
+    }
+    if (L.byQualification?.length) {
+      lines.push(`**Por formação:**`);
+      lines.push(``);
+      L.byQualification.forEach((q) => lines.push(`- **${q.area}:** ${q.advice}`));
+      lines.push(``);
+    }
+    if (L.salaries?.length) {
+      lines.push(`**Faixas salariais:**`);
+      lines.push(``);
+      L.salaries.forEach((s) => lines.push(`- ${s.role}: ${s.range}${s.source ? ` ([${s.source.label}](${s.source.url}))` : ""}`));
+      lines.push(``);
+    }
+    if (L.foreignerRules) { lines.push(`**Regras pra estrangeiro:** ${L.foreignerRules}`); lines.push(``); }
+    if (L.opportunityWindows?.length) {
+      lines.push(`**Janelas de oportunidade:**`);
+      lines.push(``);
+      L.opportunityWindows.forEach((w) => lines.push(`- ${w}`));
+      lines.push(``);
+    }
+    if (L.jobBoards.length) {
+      lines.push(`**Onde se candidatar:** ${L.jobBoards.map((bd) => `[${bd.label}](${bd.url})`).join(" · ")}`);
+      lines.push(``);
+    }
+  }
+
   if (c.bulletin) {
     const b = c.bulletin;
     lines.push(`### 📜 Boletim oficial monitorado`);

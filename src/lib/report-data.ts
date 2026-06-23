@@ -17,6 +17,7 @@ import { COUNTRIES } from "@/lib/data";
 import { INFO_CENTERS, type InfoSource } from "@/lib/infoCenters";
 import { BULLETINS, type BulletinStatus, type StatusFile } from "@/lib/bulletins";
 import { getEditorial, editorialStats, type CountryEditorial } from "@/lib/editorial";
+import { getLaborMarket, type LaborMarketCountry } from "@/lib/labor-market";
 import { normalizeTitle, type TransMap } from "@/lib/rss-translations";
 import { resolverChecagem, type ChecagemResultado } from "@/lib/italianismo-checagem";
 import { promises as fs } from "node:fs";
@@ -61,6 +62,8 @@ export type ReportCountry = {
   editorial?: CountryEditorial;
   /** imagem representativa do país (landmark) · caminho público local, ex.: /landmarks/ca.jpg */
   imageUrl?: string;
+  /** mercado de trabalho curado (setores, salários, regras, onde se candidatar) */
+  labor?: LaborMarketCountry;
 };
 
 export type ReportStats = {
@@ -293,6 +296,7 @@ export async function gatherReportData(lang: "pt" | "en" = "pt"): Promise<Report
       sources: center?.sources ?? [],
       editorial: getEditorial(c.code, lang === "en" ? "en" : "pt-BR"),
       imageUrl: c.imageUrl,
+      labor: getLaborMarket(c.code, lang),
     };
   });
 

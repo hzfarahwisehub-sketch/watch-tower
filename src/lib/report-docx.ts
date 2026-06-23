@@ -249,6 +249,50 @@ function technicalDocx(c: ReportCountry, img?: ReportImage): (Paragraph | Table)
     out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: c.summary, color: DARK })] }));
   }
 
+  if (c.labor) {
+    const L = c.labor;
+    out.push(h2("💼 Mercado de Trabalho"));
+    out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: L.overview, color: DARK })] }));
+    if (L.hotSectors.length) out.push(metaLine("Setores em alta", L.hotSectors.join(" · ")));
+    if (L.coolingSectors?.length) out.push(metaLine("Setores em baixa", L.coolingSectors.join(" · ")));
+    if (L.inDemandRoles.length) {
+      out.push(h3("Profissões em demanda"));
+      L.inDemandRoles.forEach((r) =>
+        out.push(bullet([new TextRun({ text: r.role, bold: true, color: DARK }), ...(r.note ? [new TextRun({ text: `: ${r.note}`, color: DARK })] : [])])),
+      );
+    }
+    if (L.byQualification?.length) {
+      out.push(h3("Por formação"));
+      L.byQualification.forEach((q) =>
+        out.push(bullet([new TextRun({ text: `${q.area}: `, bold: true, color: DARK }), new TextRun({ text: q.advice, color: DARK })])),
+      );
+    }
+    if (L.salaries?.length) {
+      out.push(h3("Faixas salariais"));
+      L.salaries.forEach((s) =>
+        out.push(
+          bullet([
+            new TextRun({ text: `${s.role}: `, bold: true, color: DARK }),
+            new TextRun({ text: s.range, color: DARK }),
+            ...(s.source ? [new TextRun({ text: " · ", color: GREY }), link(s.source.label, s.source.url)] : []),
+          ]),
+        ),
+      );
+    }
+    if (L.foreignerRules) {
+      out.push(h3("Regras pra estrangeiro"));
+      out.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: L.foreignerRules, color: DARK })] }));
+    }
+    if (L.opportunityWindows?.length) {
+      out.push(h3("Janelas de oportunidade"));
+      L.opportunityWindows.forEach((w) => out.push(bullet([new TextRun({ text: w, color: DARK })])));
+    }
+    if (L.jobBoards.length) {
+      out.push(h3("Onde se candidatar"));
+      L.jobBoards.forEach((bd) => out.push(bullet([link(bd.label, bd.url)])));
+    }
+  }
+
   if (c.bulletin) {
     const b = c.bulletin;
     out.push(h3("📜 Boletim oficial monitorado"));

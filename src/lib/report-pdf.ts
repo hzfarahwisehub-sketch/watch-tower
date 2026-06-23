@@ -248,6 +248,48 @@ function technicalPdf(b: PdfBuilder, c: ReportCountry, img?: PDFImage) {
     b.text(c.summary, { size: 10, gapAfter: 3 });
   }
 
+  if (c.labor) {
+    const L = c.labor;
+    b.heading("Mercado de Trabalho", H2);
+    b.text(L.overview, { size: 10, gapAfter: 3 });
+    if (L.hotSectors.length) b.text(`Setores em alta: ${L.hotSectors.join(" · ")}`, { size: 10, gapAfter: 1 });
+    if (L.coolingSectors?.length) b.text(`Setores em baixa: ${L.coolingSectors.join(" · ")}`, { size: 10, gapAfter: 2 });
+    if (L.inDemandRoles.length) {
+      b.heading("Profissões em demanda", H3);
+      L.inDemandRoles.forEach((r) => b.bullet(`${r.role}${r.note ? `: ${r.note}` : ""}`, { size: 10, gapAfter: 0 }));
+      b.text("", { gapAfter: 2 });
+    }
+    if (L.byQualification?.length) {
+      b.heading("Por formação", H3);
+      L.byQualification.forEach((q) => b.bullet(`${q.area}: ${q.advice}`, { size: 10, gapAfter: 0 }));
+      b.text("", { gapAfter: 2 });
+    }
+    if (L.salaries?.length) {
+      b.heading("Faixas salariais", H3);
+      L.salaries.forEach((s) => {
+        b.bullet(`${s.role}: ${s.range}`, { size: 10, gapAfter: 0 });
+        if (s.source) b.text(`${s.source.label}: ${s.source.url}`, { size: 8, color: GREY, indent: 12, gapAfter: 1 });
+      });
+      b.text("", { gapAfter: 2 });
+    }
+    if (L.foreignerRules) {
+      b.heading("Regras pra estrangeiro", H3);
+      b.text(L.foreignerRules, { size: 10, gapAfter: 2 });
+    }
+    if (L.opportunityWindows?.length) {
+      b.heading("Janelas de oportunidade", H3);
+      L.opportunityWindows.forEach((w) => b.bullet(w, { size: 10, gapAfter: 0 }));
+      b.text("", { gapAfter: 2 });
+    }
+    if (L.jobBoards.length) {
+      b.heading("Onde se candidatar", H3);
+      L.jobBoards.forEach((bd) => {
+        b.bullet(bd.label, { size: 10, gapAfter: 0 });
+        b.text(bd.url, { size: 8, color: GREY, indent: 12, gapAfter: 1 });
+      });
+    }
+  }
+
   if (c.bulletin) {
     const bl = c.bulletin;
     b.heading("Boletim oficial monitorado", H2);
