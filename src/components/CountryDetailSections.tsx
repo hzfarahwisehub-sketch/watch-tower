@@ -10,6 +10,7 @@ import {
 } from "@/lib/editorial";
 import { INFO_CENTERS, type InfoSource } from "@/lib/infoCenters";
 import { useLocale } from "./LocaleProvider";
+import { CountryLaborMarket } from "./CountryLaborMarket";
 
 type TFn = (key: string, params?: Record<string, string | number>) => string;
 
@@ -104,6 +105,9 @@ export function CountryDetailSections({ country }: { country: Country }) {
           })}
         </div>
       )}
+
+      {/* Mercado de Trabalho (curado pela equipe, links oficiais) */}
+      <CountryLaborMarket countryCode={country.code} />
 
       {/* Dicas práticas */}
       {tips.length > 0 && (
