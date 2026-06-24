@@ -251,15 +251,22 @@ export function renderMarkdown(data: ReportData): string {
   lines.push(``);
 
   // ── Legenda ──
-  lines.push(`## 🧭 Legenda · onde postar cada coisa`);
+  const COLOR_NAME: Record<string, string> = { community: "Azul", countryTab: "Verde", blog: "Laranja" };
+  lines.push(`## 🧭 Como usar este documento`);
   lines.push(``);
-  lines.push(`Cada peça abaixo já vem marcada com a cor e a etiqueta do lugar onde deve ser publicada:`);
+  lines.push(`Este relatório está organizado em 3 partes, pra equipe achar tudo rápido:`);
+  lines.push(``);
+  lines.push(`1. **PARTE 1 · Tudo pra postar.** Todo o conteúdo já redigido e pronto pra publicar, separado pelo lugar onde vai. Cada peça vem com uma cor e uma etiqueta indicando o destino.`);
+  lines.push(`2. **PARTE 2 · Fontes e materiais.** As fontes oficiais de cada país, pra anexar a cada post como embasamento.`);
+  lines.push(`3. **PARTE 3 · Dados técnicos.** O monitoramento detalhado por país (boletins oficiais, mercado de trabalho, marcos e manchetes ao vivo), que embasa as Partes 1 e 2.`);
+  lines.push(``);
+  lines.push(`**As cores e as etiquetas indicam ONDE publicar cada peça:**`);
   lines.push(``);
   for (const d of DESTINATIONS) {
-    lines.push(`- ${d.dot} **${d.tag}** — ${d.legend}`);
+    lines.push(`- ${d.dot} **${COLOR_NAME[d.key] ?? ""} · ${d.tag}:** ${d.legend}`);
   }
   lines.push(``);
-  lines.push(`> 📎 **Regra de ouro:** toda repostagem deve levar junto a fonte oficial correspondente (vem logo abaixo de cada peça e reunida na Parte 2). É o que dá credibilidade e embasamento ao post.`);
+  lines.push(`> 📎 **Regra de ouro:** toda repostagem leva junto a fonte oficial correspondente. Ela aparece logo abaixo de cada peça e também reunida na Parte 2. É o que dá credibilidade e embasamento ao post.`);
   lines.push(``);
   lines.push(`---`);
   lines.push(``);

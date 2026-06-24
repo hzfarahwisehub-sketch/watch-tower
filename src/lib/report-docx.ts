@@ -383,14 +383,19 @@ export async function renderDocx(data: ReportData): Promise<Buffer> {
   children.push(summaryTable(data, postCount));
 
   // Legenda
-  children.push(h1("🧭 Legenda · onde postar cada coisa"));
-  children.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: "Cada peça já vem com a cor e a etiqueta do lugar onde deve ser publicada:", color: DARK })] }));
+  const COLOR_NAME: Record<string, string> = { community: "Azul", countryTab: "Verde", blog: "Laranja" };
+  children.push(h1("🧭 Como usar este documento"));
+  children.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: "Este relatório está organizado em 3 partes, pra equipe achar tudo rápido:", color: DARK })] }));
+  children.push(new Paragraph({ spacing: { after: 30 }, children: [new TextRun({ text: "PARTE 1 · Tudo pra postar. ", bold: true, color: BLUE }), new TextRun({ text: "Todo o conteúdo já redigido e pronto pra publicar, separado pelo lugar onde vai. Cada peça vem com uma cor e uma etiqueta indicando o destino.", color: DARK })] }));
+  children.push(new Paragraph({ spacing: { after: 30 }, children: [new TextRun({ text: "PARTE 2 · Fontes e materiais. ", bold: true, color: BLUE }), new TextRun({ text: "As fontes oficiais de cada país, pra anexar a cada post como embasamento.", color: DARK })] }));
+  children.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: "PARTE 3 · Dados técnicos. ", bold: true, color: BLUE }), new TextRun({ text: "O monitoramento detalhado por país (boletins oficiais, mercado de trabalho, marcos e manchetes ao vivo), que embasa as Partes 1 e 2.", color: DARK })] }));
+  children.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: "As cores e as etiquetas indicam ONDE publicar cada peça:", bold: true, color: DARK })] }));
   for (const d of DESTINATIONS) {
     children.push(
       new Paragraph({
         spacing: { after: 50 },
         children: [
-          new TextRun({ text: `[ ${d.tag} ] `, bold: true, color: d.colorHex, size: 22 }),
+          new TextRun({ text: `[ ${COLOR_NAME[d.key] ?? ""} · ${d.tag} ] `, bold: true, color: d.colorHex, size: 22 }),
           new TextRun({ text: d.legend, color: DARK }),
         ],
       }),

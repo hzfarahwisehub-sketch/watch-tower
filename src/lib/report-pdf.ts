@@ -389,14 +389,19 @@ export async function renderPdf(data: ReportData): Promise<Uint8Array> {
   for (const [k, v] of sm) b.bullet(`${k}: ${v}`, { size: 10, gapAfter: 1 });
 
   // Legenda
-  b.heading("Legenda - onde postar cada coisa", { size: 15, color: BLUE, spaceBefore: 12, gapAfter: 4 });
-  b.text("Cada peça já vem com a cor e a etiqueta do lugar onde deve ser publicada:", { size: 10, gapAfter: 3 });
+  const COLOR_NAME: Record<string, string> = { community: "Azul", countryTab: "Verde", blog: "Laranja" };
+  b.heading("Como usar este documento", { size: 15, color: BLUE, spaceBefore: 12, gapAfter: 4 });
+  b.text("Este relatório está organizado em 3 partes, pra equipe achar tudo rápido:", { size: 10, gapAfter: 3 });
+  b.text("PARTE 1 · Tudo pra postar: todo o conteúdo já redigido e pronto pra publicar, separado pelo lugar onde vai. Cada peça vem com uma cor e uma etiqueta indicando o destino.", { size: 9.5, color: DARK, gapAfter: 1 });
+  b.text("PARTE 2 · Fontes e materiais: as fontes oficiais de cada país, pra anexar a cada post como embasamento.", { size: 9.5, color: DARK, gapAfter: 1 });
+  b.text("PARTE 3 · Dados técnicos: o monitoramento detalhado por país (boletins oficiais, mercado de trabalho, marcos e manchetes ao vivo), que embasa as Partes 1 e 2.", { size: 9.5, color: DARK, gapAfter: 3 });
+  b.text("As cores e as etiquetas indicam ONDE publicar cada peça:", { size: 10, gapAfter: 2 });
   for (const d of DESTINATIONS) {
     const color = hexRgb(d.colorHex);
-    b.text(`[ ${d.tag} ]`, { size: 11, color, gapAfter: 0 });
+    b.text(`[ ${COLOR_NAME[d.key] ?? ""} · ${d.tag} ]`, { size: 11, color, gapAfter: 0 });
     b.text(d.legend, { size: 9.5, color: DARK, indent: 12, gapAfter: 2 });
   }
-  b.text("Regra de ouro: toda repostagem deve levar junto a fonte oficial correspondente (logo abaixo de cada peça e reunida na Parte 2). E o que da credibilidade e embasamento ao post.", { size: 9.5, color: DARK, oblique: true, gapAfter: 3 });
+  b.text("Regra de ouro: toda repostagem leva junto a fonte oficial correspondente. Ela aparece logo abaixo de cada peça e também reunida na Parte 2. É o que dá credibilidade e embasamento ao post.", { size: 9.5, color: DARK, oblique: true, gapAfter: 3 });
   b.rule();
 
   // ── PARTE 1 · TUDO PRA POSTAR ──
