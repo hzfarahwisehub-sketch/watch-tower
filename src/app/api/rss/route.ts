@@ -12,7 +12,11 @@ import { NextRequest, NextResponse } from "next/server";
  *  - User-Agent realista pra reduzir 403 anti-bot
  *
  * Resposta: { items: [{ title, link, pubDate, desc }] } limitada a 5 manchetes (desc = briefing curto da fonte).
- * Pra erros: { error: string } com status 4xx/5xx.
+ * Erros de PEDIDO (url ausente/privada) = { error } com 4xx.
+ * Erros de UPSTREAM (feed gov fora/bloqueio/timeout) = HTTP 200 com { items: [], error, upstream: true }:
+ *   o feed cair é condição esperada e tolerada (gov flaky), todos os consumidores já tratam
+ *   items vazio/data.error como "sem manchetes", e responder 5xx só dispararia alarme falso de
+ *   anomalia na Vercel. O erro fica no corpo + header X-RSS-Upstream-Error pra investigação.
  */
 
 export const runtime = "nodejs"; // precisamos de fetch sem edge restrictions
@@ -148,9 +152,13 @@ export async function GET(req: NextRequest) {
       cache: "no-store",
     });
     if (!res.ok) {
+      // Falha do feed upstream (gov flaky / bloqueio anti-bot) NÃO é erro do nosso
+      // servidor: 200 com items:[] + marcador, pra UI degradar (consumidores já tratam
+      // items vazio/data.error como "sem manchetes") e pra não poluir as métricas 5xx da
+      // Vercel com alarme falso. Erro preservado no corpo + header. Sem cache da falha.
       return NextResponse.json(
-        { error: `upstream ${res.status}` },
-        { status: 502, headers: { "Cache-Control": "no-store" } }
+        { items: [], error: `upstream ${res.status}`, upstream: true },
+        { status: 200, headers: { "Cache-Control": "no-store", "X-RSS-Upstream-Error": String(res.status) } }
       );
     }
     const xml = decodeXml(await res.arrayBuffer());
@@ -163,8 +171,14 @@ export async function GET(req: NextRequest) {
     cache.set(cacheKey, { fetchedAt: Date.now(), items });
     return NextResponse.json({ items, cached: false }, { headers: SUCCESS_HEADERS });
   } catch (err) {
+    // Timeout/abort/erro de rede ao alcançar o feed upstream (AbortError dispara no
+    // FETCH_TIMEOUT_MS). Mesmo tratamento: 200 + items:[] pra degradar sem falso 5xx
+    // na Vercel. Erro preservado no corpo + header.
     const msg = err instanceof Error ? err.message : "fetch failed";
-    return NextResponse.json({ error: msg }, { status: 502 });
+    return NextResponse.json(
+      { items: [], error: msg, upstream: true },
+      { status: 200, headers: { "Cache-Control": "no-store", "X-RSS-Upstream-Error": "fetch" } }
+    );
   } finally {
     clearTimeout(timeout);
   }
