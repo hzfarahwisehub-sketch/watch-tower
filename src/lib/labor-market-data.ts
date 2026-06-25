@@ -258,617 +258,505 @@ export const LABOR_MARKET: LaborMarketMap = {
   },
   "au": {
     "updatedAt": "2026-06-22",
-    "overview": "O mercado de trabalho australiano em 2026 vive um momento de transicao: depois de anos de aperto recorde, as pressoes comecaram a afrouxar, mas a economia segue criando vagas em ritmo mais lento. A taxa de desemprego subiu para 4,5% em abril de 2026 (de 4,3% em marco), com cerca de 692,5 mil desempregados, e o crescimento anual do emprego desacelerou para 0,9% no ano ate abril, contra a media de 1,9% dos tres anos anteriores (ABS). O numero de anuncios de vaga ainda esta cerca de 25% acima da media de 2019, mas caiu 5% em fevereiro e segue recuando, sinal de que empregadores estao mais cautelosos. Pela Lista de Ocupacoes em Escassez 2025 (Jobs and Skills Australia), 29% das 1.022 ocupacoes avaliadas estao em falta, ante 33% em 2024 e 36% em 2023, queda explicada por mais candidatos qualificados e demanda mais fraca.\n\nMesmo com o alivio geral, a escassez se concentra exatamente onde o imigrante qualificado encontra porta de entrada: quase metade das profissoes tecnicas e de oficio (trades) e duas em cada cinco profissoes de nivel superior seguem em falta, sobretudo em saude, educacao e construcao. Tecnicos e trabalhadores de oficio respondem por 51% de toda a escassez persistente. Em paralelo, ocupacoes de colarinho branco mais expostas a IA, como servicos financeiros, juridicos, administrativos e parte de TI, esfriaram, e setores como varejo, hotelaria e industria perderam folego. A leitura para quem quer trabalhar ou empreender la: as melhores chances estao em saude, cuidados (aged care e deficiencia), construcao/engenharia, energia limpa e educacao, com forte vantagem para quem aceita regioes fora das grandes capitais.",
+    "overview": "Australia entra em 2026 com um mercado de trabalho ainda apertado, mas em afrouxamento gradual. A taxa de desemprego ficou em 4,4% em maio de 2026 (ajustada sazonalmente), com 671,3 mil pessoas desempregadas, segundo a Australian Bureau of Statistics. O salario medio semanal de tempo integral (AWOTE) atingiu 2.051,10 dolares australianos em novembro de 2025, alta anual de 3,8%. A escassez de mao de obra recuou em relacao ao ano anterior, mas continua estrutural: a Jobs and Skills Australia (JSA) apontou que 29% das ocupacoes avaliadas (293 de 1.022) estavam em falta no pais em 2025, ante 33% em 2024. As lacunas se concentram em saude, construcao e trades qualificados, ensino e educacao infantil, engenharia e ciencia. Tecnicos e trabalhadores de trades respondem por cerca de metade da escassez persistente; 139 ocupacoes estao em falta todos os anos desde 2021. Ha um descompasso claro de qualificacao: em media havia 27,4 candidatos por vaga, mas apenas 9,3 considerados qualificados e 4,3 adequados. Para o imigrante, o caminho principal e a migracao qualificada via Core Skills Occupation List (CSOL) e o visto Skills in Demand (subclasse 482), que substituiu o antigo Temporary Skill Shortage em dezembro de 2024. Regioes fora das capitais oferecem janela extra: 21 ocupacoes estao em falta exclusivamente em areas regionais, e os programas de patrocinio estadual e regional priorizam essas vagas. Empreender e possivel, mas o sistema nao permite autossponsorship simples no 482; quem quer abrir negocio recorre a vistos de inovacao ou estrutura societaria com separacao genuina de controle.",
     "hotSectors": [
-      "Saude e assistencia social (enfermagem, medicina, terapias) - lidera a lista de escassez",
-      "Cuidados a idosos (aged care) e a pessoas com deficiencia - nova stream Essential Skills de visto",
-      "Construcao e habitacao - meta nacional de moradias e infraestrutura",
-      "Engenharia (civil, mineracao, energia renovavel) - 28 ocupacoes em demanda",
-      "Energia limpa / net zero e mineracao de minerais criticos",
-      "Educacao (professores de educacao infantil, ensino fundamental e educacao especial)",
-      "TI especializada (ciberseguranca, engenharia de software, dados) - projecao de +58 mil vagas ate 2028",
-      "Oficios qualificados / trades (eletricistas, encanadores, soldadores, mecanicos) - 51% da escassez persistente",
-      "Agricultura e manufatura avancada (prioridade de nomeacao estadual)"
+      "Saude e cuidados (enfermagem, cuidado a idosos, saude aliada, saude mental, clinicos gerais)",
+      "Construcao e trades qualificados (eletricistas, carpinteiros, encanadores, gerentes de obra)",
+      "Educacao (professores secundarios de STEM, educacao infantil, educadores de creche)",
+      "Engenharia (civil, estrutural, eletrica, mecanica)",
+      "TI e tecnologia (desenvolvedores de software, gerentes de TIC, ciberseguranca)",
+      "Tecnologias criticas, energia renovavel e baixas emissoes (setores prioritarios do visto de inovacao)"
     ],
     "coolingSectors": [
-      "Varejo",
-      "Hotelaria e servicos de alimentacao",
-      "Industria / manufatura tradicional",
-      "Servicos administrativos e clericais gerais (alta competicao)",
-      "Servicos financeiros e de seguros (exposicao a automacao/IA)",
-      "Servicos profissionais, cientificos e tecnicos de escritorio (contratacao desacelerando por IA)",
-      "Midia e informacao",
-      "Administracao publica e setores nao-mercado (restricao fiscal de governos)"
+      "Ocupacoes profissionais em geral viram a maior queda de escassez de 2024 para 2025 (recuo puxado por Professionals, embora saude e engenharia sigam em falta)",
+      "Reducao geral do numero de ocupacoes em falta no pais (de 333 em 2024 para 293 em 2025), indicando afrouxamento amplo do mercado fora dos nucleos criticos"
     ],
     "inDemandRoles": [
       {
         "role": "Enfermeiro(a) registrado(a) (Registered Nurse)",
-        "note": "Grupo mais subofertado do pais segundo o Labour Supply Index; exige registro na AHPRA/ANMAC"
-      },
-      {
-        "role": "Clinico geral (GP) e medicos residentes",
-        "note": "Demanda alta puxada pelo envelhecimento populacional"
-      },
-      {
-        "role": "Profissionais de cuidado a idosos e a pessoas com deficiencia (aged care / disability support)",
-        "note": "Cobertos pela nova stream Essential Skills do visto Skills in Demand"
+        "note": "Em escassez critica em todos os estados; segunda ocupacao mais empregada do pais (cerca de 262 mil) e crescendo. Avaliacao via ANMAC."
       },
       {
         "role": "Eletricista",
-        "note": "Oficio regulamentado, exige licenca estadual; forte escassez"
+        "note": "Uma das maiores faltas em trades; estimativa de 32 a 42 mil eletricistas adicionais necessarios ate 2030. Avaliacao via TRA."
       },
       {
-        "role": "Encanador, soldador, carpinteiro e mecanicos",
-        "note": "Trades concentram 51% da escassez persistente"
+        "role": "Carpinteiro / Encanador / Pedreiro",
+        "note": "Trades de construcao em falta em areas metropolitanas e regionais; trades respondem por cerca de 51% da escassez persistente."
       },
       {
-        "role": "Engenheiro civil, de minas e de energia renovavel",
-        "note": "Engenharia tem 28 ocupacoes em demanda alinhadas a infraestrutura"
+        "role": "Professor(a) do ensino secundario (STEM) e educador(a) infantil",
+        "note": "Falta em todos os niveis, com demanda aguda por professores de STEM e profissionais de educacao infantil/creche."
       },
       {
-        "role": "Engenheiro de software, especialista em ciberseguranca e cientista de dados",
-        "note": "Alvo de programas de nomeacao estadual de talento tech"
+        "role": "Cuidador(a) de idosos e profissionais de saude aliada",
+        "note": "Envelhecimento populacional sustenta demanda por aged care, saude mental e allied health."
       },
       {
-        "role": "Professor de educacao infantil, ensino fundamental e educacao especial",
-        "note": "Escassez persistente no setor educacional"
+        "role": "Desenvolvedor(a) de software e gerente de TIC",
+        "note": "Software and Applications Programmers somaram 13.700 trabalhadores em um ano (cerca de 203 mil empregados); gerentes de TIC com salario mediano elevado. Avaliacao via ACS."
       },
       {
-        "role": "Operadores de maquinas (machinery operation)",
-        "note": "Entre as 29 ocupacoes recem-adicionadas a lista de escassez em 2025"
+        "role": "Engenheiro(a) civil, estrutural e eletrico",
+        "note": "Demanda continua em engenharia ligada a construcao e infraestrutura. Avaliacao via Engineers Australia."
+      },
+      {
+        "role": "Gerente de construcao / Construction Manager",
+        "note": "Entre as ocupacoes mais demandadas, ligado ao pipeline de obras e habitacao."
       }
     ],
     "byQualification": [
       {
-        "area": "Enfermagem / formacao em saude (enfermeiro)",
-        "advice": "Setor numero 1 em escassez. O caminho obrigatorio passa por registro na AHPRA (orgao regulador da saude) e avaliacao de competencias pela ANMAC; ha uma Modified Skills Assessment para enfermeiros migrantes. Vale tanto nas capitais quanto, com salario e demanda ainda maiores, em areas regionais (visto 491 da +15 pontos). Registered Nurse e o grupo mais subofertado do pais."
+        "area": "Enfermagem e saude",
+        "advice": "Caminho mais solido para PR. Faca a avaliacao de competencias na ANMAC (enfermeiros/parteiras) ou no orgao da sua profissao aliada, comprove ingles (geralmente IELTS/OET academico) e registre-se na AHPRA. Profissao em falta em todos os estados, com forte patrocinio estadual e regional."
       },
       {
-        "area": "Medicina (clinico geral / especialista)",
-        "advice": "Demanda altissima, sobretudo em regioes rurais e remotas, com remuneracao entre as maiores do mercado. Exige registro na AHPRA e reconhecimento via Australian Medical Council/colegios de especialidade. GP em tempo integral chega a faixa de AUD 345 mil/ano."
+        "area": "Trades de construcao (eletricista, carpinteiro, encanador)",
+        "advice": "Avaliacao via Trades Recognition Australia (TRA), que pode exigir Job Ready Program ou teste pratico. Trades sao o maior bloco de escassez; priorize ofertas regionais, onde a demanda e maior e ha pontos extras em vistos de patrocinio regional."
       },
       {
-        "area": "Engenharia (civil, mineracao, energia, software)",
-        "advice": "Mire infraestrutura, energia limpa e mineracao de minerais criticos. Avaliacao de competencias pela Engineers Australia (ou ACS, para TI). Engenharia e TI sao prioridade tanto na lista federal quanto nas nomeacoes estaduais (NSW, QLD, VIC) em ICT/ciberseguranca e net zero."
+        "area": "Engenharia",
+        "advice": "Avaliacao via Engenheiros Australia (Engineers Australia), incluindo via Competency Demonstration Report (CDR) para quem nao tem diploma acreditado por acordos como Washington Accord. Civil, estrutural e eletrica tem maior tracao."
       },
       {
-        "area": "TI e tecnologia",
-        "advice": "Ciberseguranca, engenharia de software e dados seguem aquecidos (+58 mil vagas projetadas ate 2028), mas TI de escritorio mais generica esfriou com a IA. Skills assessment via ACS (Australian Computer Society). Programas estaduais de talento tech sao a melhor porta. Salario senior facil acima de AUD 150 mil."
+        "area": "TI e software",
+        "advice": "Avaliacao via Australian Computer Society (ACS). Confirme o codigo ANZSCO na CSOL antes de aplicar; muitos papeis de software seguem em demanda, mas o mercado de TI afrouxou em relacao ao pico, entao tenha oferta concreta."
       },
       {
-        "area": "Oficios qualificados / trades (eletricista, encanador, soldador, carpinteiro)",
-        "advice": "O maior bloco de escassez do pais (51% da escassez persistente esta em trades). Quase sempre regulamentados: exigem licenca/registro estadual alem da avaliacao de competencias (ex.: TRA - Trades Recognition Australia). Otimo encaixe no visto 491 regional, competitivo ja com 65 pontos."
+        "area": "Educacao / ensino",
+        "advice": "Demanda aguda em professores secundarios de STEM e educacao infantil. E preciso avaliacao da AITSL e registro estadual de docencia. Considere areas regionais, onde a falta e mais severa."
       },
       {
-        "area": "Educacao (professores)",
-        "advice": "Faltam professores de educacao infantil, ensino fundamental e educacao especial. Profissao regulamentada: exige registro no orgao docente do estado e avaliacao pela AITSL. Muito presente nas listas de nomeacao estadual."
+        "area": "Profissoes gerais e administrativas (sem orgao especifico)",
+        "advice": "A maioria e avaliada pela VETASSESS (mais de 340 ocupacoes profissionais e gerais; prazos tipicos de 6 a 8 semanas para profissionais). Verifique primeiro se a ocupacao esta na CSOL, pois muitas funcoes administrativas ficaram de fora."
       },
       {
-        "area": "Cuidado a idosos / pessoas com deficiencia",
-        "advice": "Demanda estrutural pelo envelhecimento. Salarios menores, mas agora com porta de visto propria (stream Essential Skills do Skills in Demand), pensada para ocupacoes de menor remuneracao em setores de escassez critica. Bom ponto de entrada para quem ainda nao tem alta pontuacao."
-      },
-      {
-        "area": "Administracao, financas, midia e areas de colarinho branco generico",
-        "advice": "Cautela. Sao os setores que mais esfriaram, com forte competicao e exposicao a automacao/IA. Vale especializar (ex.: secretaria juridica, recepcao medica, administrador financeiro sofrem menos pressao) ou redirecionar para um setor em alta."
+        "area": "Empreendedores e talentos de elite",
+        "advice": "Sem diploma diretamente empregavel mas com historico de destaque (tech critica, saude, energia limpa), avalie o National Innovation Visa (subclasse 858), que da PR imediata sem exigir investimento de capital nem residencia em estado especifico."
       }
     ],
     "salaries": [
       {
-        "role": "Salario medio nacional (full-time, AWOTE adulto)",
-        "range": "AUD 2.051,10/semana (aprox. AUD 106.700/ano), nov/2025",
+        "role": "Media nacional (tempo integral, ordinary time - AWOTE)",
+        "range": "AUD 2.051,10 por semana (nov/2025), cerca de AUD 106.700/ano",
         "source": {
-          "label": "ABS - Average Weekly Earnings, nov/2025",
+          "label": "ABS - Average Weekly Earnings, Australia, Nov 2025",
           "url": "https://www.abs.gov.au/statistics/labour/earnings-and-working-conditions/average-weekly-earnings-australia/latest-release",
           "official": true
         }
       },
       {
-        "role": "Salario minimo nacional",
-        "range": "AUD 24,95/h ou AUD 948/semana (desde 1 jul 2025); sobe para AUD 26,44/h ou AUD 1.004,90/semana em 1 jul 2026",
+        "role": "Managers (mediana semanal, todas as formas de emprego)",
+        "range": "AUD 2.072 por semana (ago/2025)",
         "source": {
-          "label": "Fair Work Ombudsman - Annual Wage Review",
-          "url": "https://www.fairwork.gov.au/about-us/workplace-laws/annual-wage-review/annual-wage-review-2026",
+          "label": "ABS - Employee earnings, August 2025",
+          "url": "https://www.abs.gov.au/statistics/labour/earnings-and-working-conditions/employee-earnings/latest-release",
           "official": true
         }
       },
       {
-        "role": "Enfermeiro(a) registrado(a)",
-        "range": "AUD 83.000 a 103.000+/ano (medio ~AUD 82.500-83.000)",
+        "role": "Professionals (mediana semanal)",
+        "range": "AUD 1.900 por semana (ago/2025)",
         "source": {
-          "label": "SEEK - Registered Nurse salary",
-          "url": "https://au.seek.com/career-advice/role/registered-nurse/salary",
+          "label": "ABS - Employee earnings, August 2025",
+          "url": "https://www.abs.gov.au/statistics/labour/earnings-and-working-conditions/employee-earnings/latest-release",
           "official": true
         }
       },
       {
-        "role": "Clinico geral (GP, tempo integral)",
-        "range": "AUD 345.000 a 390.000/ano (8+ sessoes/semana)",
+        "role": "Industria de construcao (media semanal)",
+        "range": "AUD 1.958,20 por semana (nov/2025)",
         "source": {
-          "label": "SEEK - General Practitioner salary",
-          "url": "https://au.seek.com/career-advice/role/general-practitioner/salary",
+          "label": "ABS - Average Weekly Earnings, Australia, Nov 2025",
+          "url": "https://www.abs.gov.au/statistics/labour/earnings-and-working-conditions/average-weekly-earnings-australia/latest-release",
           "official": true
         }
       },
       {
-        "role": "Eletricista",
-        "range": "AUD 79.000 a 110.000/ano (medio ~AUD 100.800; AUD 48-52/h)",
+        "role": "Gerente de TIC (mediana semanal)",
+        "range": "AUD 3.310 por semana",
         "source": {
-          "label": "SEEK - Electrician salary",
-          "url": "https://au.seek.com/career-advice/role/electrician/salary",
+          "label": "Jobs and Skills Australia - Occupation and Industry Profiles",
+          "url": "https://www.jobsandskills.gov.au/data/occupation-and-industry-profiles/occupations",
           "official": true
         }
       },
       {
-        "role": "Carpinteiro",
-        "range": "AUD 62.000 a 100.000/ano (medio ~AUD 88.000; AUD 30-48/h)",
+        "role": "Piso salarial para visto qualificado (Core Skills Income Threshold)",
+        "range": "AUD 76.515/ano (desde 1 jul 2025); previsto subir para AUD 79.499 em 1 jul 2026",
         "source": {
-          "label": "PayScale - Carpenter hourly pay Australia",
-          "url": "https://www.payscale.com/research/AU/Job=Carpenter/Hourly_Rate",
-          "official": true
-        }
-      },
-      {
-        "role": "Engenheiro de software",
-        "range": "AUD 105.000 a 130.000/ano; senior AUD 150.000-200.000+",
-        "source": {
-          "label": "SEEK - Software Engineer salary",
-          "url": "https://au.seek.com/career-advice/role/software-engineer/salary",
+          "label": "Department of Home Affairs - Skills in Demand visa (Core Skills stream)",
+          "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skills-in-demand-visa-subclass-482/core-skills-stream",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Para trabalhar legalmente, o estrangeiro precisa de um visto com direito a trabalho. As principais portas em 2026: (1) Skills in Demand visa (subclasse 482), que substituiu o antigo TSS e e patrocinado por empregador, com tres streams por salario - Specialist Skills (renda minima AUD 141.210, subindo para AUD 146.717 em 1 jul 2026), Core Skills (limite CSIT de AUD 76.515, subindo para AUD 79.499) e Essential Skills (ocupacoes de menor remuneracao em setores de escassez critica, como aged care); (2) vistos de migracao qualificada por pontos - 189 (independente), 190 (nomeado por estado, +5 pontos) e 491 (regional, +15 pontos). O 482 usa a Core Skills Occupation List (CSOL), lista unica com 456 ocupacoes. Em todos os casos e obrigatorio: passar por avaliacao de competencias (skills assessment) feita pela autoridade do seu setor (ex.: ANMAC para enfermagem, Engineers Australia para engenharia, ACS para TI, VETASSESS/TRA para varias profissoes e oficios), comprovar ingles (testes valem 3 anos; ingles superior, tipo IELTS 8, pesa muito), e o salario deve atender ao maior valor entre o limite da stream e a taxa de mercado da funcao/regiao (AMSR), com cruzamento trimestral de folha entre ATO e Home Affairs. A nota minima do pool de pontos e 65, mas convites reais costumam exigir 85-95+ no 189 e 75+ no 190. Profissoes regulamentadas tem trava extra de REGISTRO/LICENCA, alem do skills assessment: saude (enfermeiros, medicos e mais 15 profissoes) precisam de registro na AHPRA antes de exercer; eletricistas, encanadores e varios oficios precisam de licenca estadual; professores precisam de registro no orgao docente do estado. Para empreender, ha vistos de negocios/investimento (Business Innovation and Investment), embora o programa esteja mais restrito; muitos imigrantes abrem empresa apos obter residencia.",
+    "foreignerRules": "Para trabalhar legalmente como estrangeiro, e necessario um visto com direito de trabalho. O caminho principal de patrocinio empregaticio e o visto Skills in Demand (subclasse 482), que substituiu o Temporary Skill Shortage em 7 de dezembro de 2024. A via Core Skills exige que a ocupacao esteja na Core Skills Occupation List (CSOL, com 456 ocupacoes), que o empregador seja um Standard Business Sponsor aprovado e que o salario seja igual ou superior ao Core Skills Income Threshold (AUD 76.515 desde 1 jul 2025, previsto AUD 79.499 em 1 jul 2026) e tambem ao Annual Market Salary Rate da funcao, o que for maior. Quase todas as ocupacoes exigem skills assessment de orgao designado: ANMAC (enfermagem), Engineers Australia (engenharia), ACS (TI), TRA (trades), AITSL (docencia) e VETASSESS (maioria das profissoes gerais). Profissoes regulamentadas tem registro obrigatorio: saude via AHPRA, professores via conselho estadual, e diversas trades exigem licenca/registro estadual (ex.: eletricista licenciado). Nao e permitido autossponsorship simples no 482: a lei exige relacao genuina empregador-empregado, entao o dono que controla sozinho a empresa nao pode patrocinar a si mesmo (estruturas com socios independentes ou entidade separada podem ser possiveis). Para empreender, alternativas incluem o National Innovation Visa (subclasse 858), permanente, voltado a quem tem historico de destaque excepcional em areas como tecnologias criticas, saude e energia limpa, com residencia permanente imediata, sem exigencia de investimento de capital nem de residir em estado especifico (requer nomeacao por individuo ou organizacao de reputacao nacional via Form 1000 e ingles funcional).",
     "opportunityWindows": [
-      "Lista de Ocupacoes em Escassez 2025 trouxe 29 ocupacoes novas (saude, ciencia, oficios e operacao de maquinas) - janela aberta para esses perfis",
-      "Visto 491 regional: +15 pontos e convites competitivos ja a partir de 65 pontos para quem aceita morar fora das grandes capitais - 21 ocupacoes em escassez SO em regioes",
-      "Nomeacao estadual de Queensland mais que dobrou (de 1.200 para 2.600 vagas no 190, +117%), virando um dos destinos mais atrativos de 2026",
-      "Stream Essential Skills do Skills in Demand abre porta nova para ocupacoes de menor salario em aged care, deficiencia e parte de hotelaria/agricultura",
-      "Prioridades de nomeacao do NSW: saude e aged care, construcao e habitacao, ICT e ciberseguranca, net zero/energia, agricultura e manufatura avancada",
-      "Boom de construcao, habitacao e energia renovavel sustenta demanda por engenharia e trades mesmo com a economia desacelerando",
-      "Projecao de mais de 58 mil novas vagas em tecnologia ate 2028 (ciberseguranca e software)"
+      "Saude e cuidados: enfermagem, aged care, allied health e saude mental em falta em todos os estados, sustentadas pelo envelhecimento populacional",
+      "Trades de construcao: eletricistas, carpinteiros e encanadores com deficit estrutural (trades = cerca de 51% da escassez persistente; ate 42 mil eletricistas faltando ate 2030)",
+      "Areas regionais: 21 ocupacoes em falta exclusivamente fora das capitais; fill rate regional menor (cerca de 65,8% vs 72,2% metro), abrindo espaco para patrocinio estadual e regional",
+      "Educacao STEM e infantil: professores secundarios de ciencias/matematica e educadores de creche em demanda aguda",
+      "Talentos de elite e empreendedores em tecnologias criticas, saude e energia limpa: porta direta para PR via National Innovation Visa (subclasse 858)"
     ],
     "jobBoards": [
       {
-        "label": "Workforce Australia (portal oficial de empregos do governo federal)",
+        "label": "Workforce Australia (servico oficial de emprego do governo)",
         "url": "https://www.workforceaustralia.gov.au/",
         "official": true
       },
       {
-        "label": "APSjobs (vagas no servico publico federal australiano)",
+        "label": "Your Career (portal oficial de carreira e mercado de trabalho)",
+        "url": "https://www.yourcareer.gov.au/",
+        "official": true
+      },
+      {
+        "label": "Jobs and Skills Australia - Occupation and Industry Profiles",
+        "url": "https://www.jobsandskills.gov.au/data/occupation-and-industry-profiles",
+        "official": true
+      },
+      {
+        "label": "APS Jobs (empregos no servico publico federal)",
         "url": "https://www.apsjobs.gov.au/",
         "official": true
       },
       {
-        "label": "SkillSelect / Home Affairs - Expression of Interest para vistos qualificados",
-        "url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect",
+        "label": "Department of Home Affairs - Skilled occupation list (CSOL)",
+        "url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skill-occupation-list",
         "official": true
-      },
-      {
-        "label": "SEEK (maior plataforma privada de vagas da Australia)",
-        "url": "https://www.seek.com.au/",
-        "official": false
-      },
-      {
-        "label": "Indeed Australia",
-        "url": "https://au.indeed.com/",
-        "official": false
-      },
-      {
-        "label": "LinkedIn Jobs Australia",
-        "url": "https://www.linkedin.com/jobs/",
-        "official": false
       }
     ],
     "sources": [
       {
-        "label": "Jobs and Skills Australia - 2025 Occupation Shortage List (resultados)",
-        "url": "https://www.jobsandskills.gov.au/news/shortages-ease-gaps-persist-2025-occupation-shortage-list",
+        "label": "Jobs and Skills Australia - Occupation Shortage List (2025)",
+        "url": "https://www.jobsandskills.gov.au/data/occupation-shortage/occupation-shortage-list",
         "official": true
       },
       {
-        "label": "Jobs and Skills Australia - Occupation Shortage (dados)",
-        "url": "https://www.jobsandskills.gov.au/data/occupation-shortage",
+        "label": "Jobs and Skills Australia - 2025 OSL Key Findings Report (PDF)",
+        "url": "https://www.jobsandskills.gov.au/sites/default/files/2025-10/2025%20OSL%20Key%20Findings%20Report_0.pdf",
         "official": true
       },
       {
-        "label": "Jobs and Skills Australia - Internet Vacancy Index",
-        "url": "https://www.jobsandskills.gov.au/data/internet-vacancy-index",
+        "label": "ABS - Labour Force, Australia, May 2026",
+        "url": "https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/may-2026",
         "official": true
       },
       {
-        "label": "Jobs and Skills Australia - Job ads down 5% (fev/2026)",
-        "url": "https://www.jobsandskills.gov.au/news/job-ads-down-5-nationally-february-2026",
-        "official": true
-      },
-      {
-        "label": "ABS - Labour Force, Australia (release mais recente)",
-        "url": "https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/latest-release",
-        "official": true
-      },
-      {
-        "label": "ABS - Unemployment rate rises to 4.5% in April",
-        "url": "https://www.abs.gov.au/media-centre/media-releases/unemployment-rate-rises-45-april",
-        "official": true
-      },
-      {
-        "label": "ABS - Average Weekly Earnings (nov/2025)",
+        "label": "ABS - Average Weekly Earnings, Australia, November 2025",
         "url": "https://www.abs.gov.au/statistics/labour/earnings-and-working-conditions/average-weekly-earnings-australia/latest-release",
         "official": true
       },
       {
-        "label": "Fair Work Ombudsman - Annual Wage Review 2026",
-        "url": "https://www.fairwork.gov.au/about-us/workplace-laws/annual-wage-review/annual-wage-review-2026",
+        "label": "ABS - Employee earnings, August 2025",
+        "url": "https://www.abs.gov.au/statistics/labour/earnings-and-working-conditions/employee-earnings/latest-release",
         "official": true
       },
       {
-        "label": "Department of Home Affairs - Skilled occupation list",
+        "label": "Department of Home Affairs - Skills in Demand visa (subclass 482), Core Skills stream",
+        "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skills-in-demand-visa-subclass-482/core-skills-stream",
+        "official": true
+      },
+      {
+        "label": "Department of Home Affairs - Core Skills Occupation List (CSOL)",
         "url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skill-occupation-list",
         "official": true
       },
       {
-        "label": "Department of Home Affairs - SkillSelect (invitation rounds)",
-        "url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/invitation-rounds",
+        "label": "Department of Home Affairs - National Innovation Visa (subclass 858)",
+        "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/national-innovation-visa-858",
         "official": true
       },
       {
-        "label": "AHPRA - Information for international practitioners",
-        "url": "https://www.ahpra.gov.au/Registration/International-practitioners.aspx",
+        "label": "Department of Home Affairs - Skills assessment (orgaos por ocupacao)",
+        "url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skills-assessment",
         "official": true
       },
       {
-        "label": "ANMAC - Modified Skills Assessment (enfermagem)",
-        "url": "https://anmac.org.au/skilled-migrants/modified-skills-assessment",
+        "label": "VETASSESS - Skills Assessment for Migration",
+        "url": "https://www.vetassess.com.au/skills-assessment-for-migration",
         "official": true
       },
       {
-        "label": "Workforce Australia (portal de empregos)",
-        "url": "https://www.workforceaustralia.gov.au/",
+        "label": "Your Career - Australian Jobs 2025 (PDF)",
+        "url": "https://content.yourcareer.gov.au/sites/default/files/2025-06/Australian%20Jobs%202025.pdf",
         "official": true
-      },
-      {
-        "label": "SEEK - Registered Nurse salary",
-        "url": "https://au.seek.com/career-advice/role/registered-nurse/salary",
-        "official": false
-      },
-      {
-        "label": "SEEK - Software Engineer / GP / Electrician salaries",
-        "url": "https://au.seek.com/career-advice/role/software-engineer/salary",
-        "official": false
-      },
-      {
-        "label": "Hays Australia - Jobs Report 2026",
-        "url": "https://www.hays.com.au/industry-insights/jobs-report",
-        "official": false
       }
     ]
   },
   "ae": {
     "updatedAt": "2026-06-22",
-    "overview": "Os Emirados Arabes Unidos, e Dubai em especial, seguem entre os mercados de trabalho mais aquecidos e cobicados do mundo para estrangeiros em 2026. Quase 90% da forca de trabalho do pais e expatriada, e a economia esta diversificada bem alem do petroleo, puxada por tecnologia, financas, turismo, saude, construcao e logistica. A Estrategia de IA 2031 e o Roteiro de IA de Dubai abriram demanda recorde por talento digital, enquanto o setor fintech deve triplicar de tamanho ate o fim de 2026. Salarios sao livres de imposto de renda pessoal, o que sustenta o apelo do destino mesmo com custo de vida alto. Toda contratacao formal passa pelo Ministerio de Recursos Humanos e Emiratizacao (MOHRE), que exige permissao de trabalho (work permit) e contrato registrado antes de qualquer atividade legal.\n\nO outro lado da moeda e a competicao. Pesquisas recentes apontam que cerca de 65% dos profissionais acham mais dificil achar vaga hoje do que um ano atras, e mais de 70% planejam trocar de emprego em 2026, o que lota especialmente as vagas de entrada e generalistas. A regra de ouro do mercado emiradense ficou clara: especialistas com certificacao, licenca regulada e historico comprovado recebem premio salarial e sao disputados via recrutamento internacional, enquanto perfis juniores genericos enfrentam fila. Para empreender, as reformas de 2021 tornaram a propriedade 100% estrangeira o padrao em mais de mil atividades de mainland, e as free zones seguem como porta de entrada barata e rapida. O caminho de residencia de longo prazo (Golden Visa de 5 ou 10 anos) foi ampliado em abril de 2026 para incluir enfermeiros, professores, criadores de conteudo e profissionais de e-sports, alargando as opcoes de fixacao.",
+    "overview": "Os Emirados Arabes Unidos seguem entre os mercados de trabalho mais atrativos do mundo para estrangeiros, sustentados por gasto publico forte, diversificacao economica e a ausencia de imposto de renda pessoal, o que faz o salario bruto equivaler ao liquido. Toda atividade remunerada exige autorizacao do Ministerio de Recursos Humanos e Emiratizacao (MOHRE): trabalhar sem permissao de trabalho valida e ilegal, e mesmo titulares de Golden Visa, visto de investidor, Green Visa ou visto familiar precisam de permissao de trabalho separada do MOHRE antes de iniciar um emprego assalariado. Em 2026 o mercado e seletivo, com contratacao concentrada em tecnologia, construcao, energia, saude e servicos financeiros, enquanto funcoes administrativas de rotina e atendimento de primeiro nivel perdem espaco para automacao. Dubai e Abu Dhabi continuam como os polos de oportunidade, com Abu Dhabi puxando energia e financa (ADGM) e Dubai concentrando tecnologia, imobiliario, turismo e comercio. Para quem quer empreender, a reforma da Lei das Sociedades Comerciais (Decreto-Lei Federal n. 32 de 2021) permite hoje 100% de propriedade estrangeira na maioria das atividades de mainland, alem das free zones que sempre permitiram capital estrangeiro integral.",
     "hotSectors": [
-      "Tecnologia e Inteligencia Artificial",
-      "Financas e Fintech",
-      "Saude",
-      "Construcao e Infraestrutura",
-      "Turismo e hotelaria de luxo",
-      "Imobiliario",
-      "Logistica e e-commerce",
-      "Energia renovavel"
+      "Tecnologia e Inteligencia Artificial (IA/ML, ciberseguranca, cloud, dados)",
+      "Construcao e infraestrutura de grande porte",
+      "Energia (petroleo, gas e renovaveis/sustentabilidade)",
+      "Saude (medicos, enfermeiros, profissionais aliados, turismo medico)",
+      "Servicos financeiros e gestao de patrimonio (ADGM e DIFC)",
+      "Imobiliario e construcao civil",
+      "Comercio eletronico e logistica"
     ],
     "coolingSectors": [
-      "Vagas de entrada genericas em TI e administracao (excesso de candidatos, resposta lenta dos empregadores)",
-      "Funcoes juniores sem certificacao ou especializacao (mercado saturado e altamente competitivo)",
-      "Petroleo e gas tradicional de campo (nao colapsa, mas migra para perfis digitais, smart oilfields e HSE em vez das funcoes petroleiras classicas)"
+      "Atendimento ao cliente e call centers de primeiro nivel (substituidos por IA)",
+      "Funcoes administrativas e analistas generalistas de rotina",
+      "Marketing imobiliario e partes do varejo de shopping/especializado (demanda mais fraca)",
+      "Hospitalidade e turismo em segmentos sensiveis a oscilacoes regionais",
+      "Cargos de entrada repetitivos em geral, pressionados pela automacao"
     ],
     "inDemandRoles": [
       {
         "role": "Engenheiro de IA / Machine Learning",
-        "note": "Senior pode chegar a AED 45.000-80.000/mes; puxado pela Estrategia de IA 2031 e Roteiro de IA de Dubai."
-      },
-      {
-        "role": "Cientista e analista de dados",
-        "note": "Pleno na faixa de AED 25.000-40.000/mes; um dos perfis de crescimento mais rapido."
+        "note": "Escassez aguda de lideres de IA capazes de entregar em escala; premio salarial de 15% a 25% acima da media."
       },
       {
         "role": "Especialista em ciberseguranca",
-        "note": "Escassez aguda; entre os maiores reajustes salariais de 2026."
+        "note": "Entre os campos com maior carencia de talento no pais."
       },
       {
-        "role": "Medico especialista",
-        "note": "Entre as profissoes mais bem pagas do pais; exige licenca DHA/DOH/MOH."
+        "role": "Gerente de data center",
+        "note": "Prioridade de contratacao com a expansao de infraestrutura digital."
       },
       {
-        "role": "Enfermeiro de cuidados criticos, oncologia e neonatal",
-        "note": "Escassez severa, recrutamento internacional agressivo; elegivel a Golden Visa."
+        "role": "Gerente e diretor de projetos",
+        "note": "Demanda forte em construcao, tecnologia e energia; valoriza-se experiencia previa no Golfo (GCC)."
       },
       {
-        "role": "Banqueiro de investimento e gestor de patrimonio",
-        "note": "Senior pode chegar a AED 50.000-90.000/mes."
+        "role": "Engenheiro civil",
+        "note": "Impulsionado por projetos de infraestrutura de grande escala."
       },
       {
-        "role": "Especialista em compliance e regulatorio",
-        "note": "AED 30.000-55.000/mes; demanda sustentada pelo crescimento fintech."
+        "role": "Gestor de patrimonio (wealth manager)",
+        "note": "Crescimento puxado por ADGM e DIFC."
       },
       {
-        "role": "Engenheiro civil, gerente de projetos e quantity surveyor",
-        "note": "Demanda estavel puxada por mega-projetos de infraestrutura."
+        "role": "Medicos especialistas e enfermeiros",
+        "note": "Expansao de redes hospitalares e turismo medico eleva salarios; exige licenca DHA, DOH ou MOHAP."
       },
       {
-        "role": "Corretor imobiliario",
-        "note": "Em ciclos de pico pode superar AED 50.000-100.000/mes, mas e fortemente comissionado."
+        "role": "Profissionais de energia renovavel e sustentabilidade",
+        "note": "Setor entre os de maior crescimento com investimento em energia limpa."
       },
       {
-        "role": "Gerente de projetos verdes e profissional HSE",
-        "note": "Projecao de alta de ~15% na demanda ate 2026 em energia e sustentabilidade."
-      },
-      {
-        "role": "Profissional de supply chain, logistica e e-commerce",
-        "note": "Crescimento ligado ao hub logistico e digital de Dubai."
+        "role": "Profissionais de vendas de alta performance",
+        "note": "Pacotes em alta para perfis que entregam resultado."
       }
     ],
     "byQualification": [
       {
-        "area": "Enfermagem",
-        "advice": "Mercado em forte escassez, especialmente em cuidados criticos, oncologia e neonatologia, com recrutamento internacional ativo. Primeiro passo e obter licenca DHA (Dubai), DOH (Abu Dhabi) ou MOH (Emirados do Norte): exige diploma reconhecido, verificacao DataFlow, Certificado de Bom Conducta (Good Standing) emitido nos ultimos 6 meses e aprovacao em exame da autoridade. Enfermeiros com 15+ anos de experiencia ou em cargos de lideranca (nurse manager, clinical nurse specialist) podem pleitear o Golden Visa pela via de profissional qualificado ou por nomeacao de orgao de saude, mesmo sem o salario de AED 30.000."
+        "area": "Tecnologia da Informacao / Engenharia de Software",
+        "advice": "Setor com a maior carencia de talento do pais. Foco em IA/ML, ciberseguranca, cloud e dados rende premio de 15% a 25% sobre a media. Vale buscar Golden Visa por qualificacao (salario a partir de AED 30.000/mes com diploma autenticado) ou abrir empresa em free zone de tecnologia."
       },
       {
-        "area": "Medicina",
-        "advice": "Entre as carreiras mais bem pagas dos Emirados (especialistas podem chegar a AED 80.000-150.000/mes). Obrigatorio licenciar-se na DHA, DOH ou MOH conforme o emirado. Clinico geral precisa de no minimo 2 anos de experiencia pos-internato; todos passam por verificacao DataFlow, exame de licenca e GSC. Especialistas de elite em saude tem trilha dedicada de Golden Visa em Abu Dhabi."
+        "area": "Engenharia (civil, infraestrutura, energia)",
+        "advice": "Construcao e energia lideram a contratacao em 2026. Engenheiros civis e gerentes de projeto com perfil tecnico mais lideranca sao prioridade. Engenharia e profissao regulamentada: verificar registro junto a Society of Engineers/autoridade do emirato antes de exercer."
       },
       {
-        "area": "Engenharia",
-        "advice": "Civil, de projetos e disciplinas ligadas a energia limpa estao em alta. Para exercer e preciso credenciar-se na Society of Engineers (SOE) com diploma de engenharia atestado pelo Ministerio de Relacoes Exteriores dos Emirados (MOFA) e, quando aplicavel, equivalencia do MOHESR; taxa tipica de AED 500-1.000. Engenheiros qualificados em ciencia de dados, IA e energia limpa podem pleitear Golden Visa com salario de AED 30.000+."
+        "area": "Saude (medicina, enfermagem, areas aliadas)",
+        "advice": "Demanda alta e crescente, mas o exercicio depende de licenca da autoridade do emirato: DHA em Dubai, DOH em Abu Dhabi e MOHAP nos emirados do Norte. O processo passa por verificacao DataFlow, avaliacao de qualificacao e exame. O pais avanca para uma plataforma unificada de licenciamento ate 2026."
       },
       {
-        "area": "Tecnologia e dados",
-        "advice": "Setor mais aquecido para estrangeiros. IA, machine learning, cloud, ciberseguranca e ciencia de dados lideram demanda e reajustes. Certificacoes de mercado (AWS, Azure, CISSP, etc.) e portfolio comprovado pesam mais que diploma generico. Perfis de elite com salario de AED 30.000+ e nivel 1 ou 2 da classificacao ocupacional MOHRE qualificam para Golden Visa."
+        "area": "Financas, contabilidade e gestao de patrimonio",
+        "advice": "ADGM e DIFC concentram as melhores vagas e mostram crescimento de dois digitos. Gerentes de nivel medio e cargos de VP/diretor pagam bem. Experiencia previa no Golfo e diferencial relevante."
       },
       {
-        "area": "Financas e contabilidade",
-        "advice": "Banco de investimento, wealth management, compliance e fintech sao os nichos mais bem pagos. Certificacoes internacionais como ACCA, CFA e CPA sao valorizadas e devem ser atestadas e traduzidas. Contador pleno tipicamente AED 20.000-27.000/mes; funcoes de compliance AED 30.000-55.000/mes."
+        "area": "Administracao, atendimento e funcoes de rotina",
+        "advice": "Area sob maior pressao da automacao. Recomenda-se requalificar para perfis hibridos que combinem competencia humana com fluencia digital, ou migrar para funcoes de coordenacao/projeto."
       },
       {
-        "area": "Educacao / professores",
-        "advice": "Para lecionar em Dubai e preciso licenca de professor da KHDA, alem de atestacao MOFA e equivalencia MOHESR; o registro leva cerca de 4 a 8 semanas. Desde abril de 2026, professores entraram nas categorias elegiveis ao Golden Visa conforme conquistas e reconhecimento."
-      },
-      {
-        "area": "Vendas, marketing e RH",
-        "advice": "Funcoes de gestao tem boa remuneracao (gerente de PR/comunicacao AED 30.000-65.000/mes; RH de topo AED 60.000-80.000/mes), mas vagas de entrada estao saturadas. Diferencie-se com especializacao setorial, idioma arabe ou experiencia em mercados do Golfo."
+        "area": "Empreendedores e investidores",
+        "advice": "100% de propriedade estrangeira permitida na maioria das atividades de mainland (DED) e em todas as free zones (DMCC, IFZA, DIFC, Meydan, RAKEZ e outras). Projeto a partir de AED 500.000 abre caminho para Golden Visa de empreendedor. Conferir se a atividade nao esta na lista restrita (defesa, utilities)."
       }
     ],
     "salaries": [
       {
-        "role": "Engenheiro de IA senior",
-        "range": "AED 45.000-80.000/mes",
+        "role": "Media geral de salario em Dubai",
+        "range": "AED 15.800 a 18.000/mes (mediana ~AED 13.800)",
         "source": {
-          "label": "Qureos / Saviorhire - UAE Tech Hiring Trends 2026",
-          "url": "https://www.saviorhire.com/post/uae-tech-hiring-trends",
-          "official": true
-        }
-      },
-      {
-        "role": "Cientista de dados pleno",
-        "range": "AED 25.000-40.000/mes",
-        "source": {
-          "label": "Qureos - Top In-Demand Jobs in the UAE",
-          "url": "https://www.qureos.com/career-guide/top-in-demand-jobs-in-the-uae",
-          "official": true
-        }
-      },
-      {
-        "role": "Banqueiro de investimento senior",
-        "range": "AED 50.000-90.000/mes",
-        "source": {
-          "label": "Gulf Workforce - UAE Salary Guide 2026",
-          "url": "https://gulfworkforce.com/uae-salary-guide-2026/",
-          "official": true
-        }
-      },
-      {
-        "role": "Especialista em compliance / regulatorio",
-        "range": "AED 30.000-55.000/mes",
-        "source": {
-          "label": "Gulf Workforce - UAE Salary Guide 2026",
-          "url": "https://gulfworkforce.com/uae-salary-guide-2026/",
-          "official": true
-        }
-      },
-      {
-        "role": "Medico especialista",
-        "range": "AED 80.000-150.000/mes",
-        "source": {
-          "label": "Gulf Workforce - Highest Paying Jobs Dubai 2026",
-          "url": "https://gulfworkforce.com/blog-highest-paying-jobs-dubai-2026/",
-          "official": true
-        }
-      },
-      {
-        "role": "Contador pleno",
-        "range": "AED 20.000-27.000/mes",
-        "source": {
-          "label": "Michael Page - UAE Salary Guide 2026",
+          "label": "Sintese Michael Page, Hays e Cooper Fitch (via guias de mercado 2026)",
           "url": "https://www.michaelpage.ae/salary-guide-uae",
           "official": true
         }
       },
       {
-        "role": "Associado de investimentos pleno",
-        "range": "AED 50.000-60.000/mes",
+        "role": "Financas - analista junior",
+        "range": "AED 8.000 a 12.000/mes",
         "source": {
-          "label": "Michael Page - UAE Salary Guide 2026",
+          "label": "Guia de salarios Dubai 2026 (consolidado de mercado)",
           "url": "https://www.michaelpage.ae/salary-guide-uae",
           "official": true
         }
       },
       {
-        "role": "Gerente de PR e comunicacao",
-        "range": "AED 30.000-65.000/mes",
+        "role": "Financas - gerente (nivel medio)",
+        "range": "AED 20.000 a 35.000/mes",
         "source": {
-          "label": "Gulf Workforce - UAE Salary Guide 2026",
-          "url": "https://gulfworkforce.com/uae-salary-guide-2026/",
+          "label": "Guia de salarios Dubai 2026 (consolidado de mercado)",
+          "url": "https://www.michaelpage.ae/salary-guide-uae",
           "official": true
         }
       },
       {
-        "role": "RH (entrada a topo)",
-        "range": "AED 25.000 (entrada) a AED 60.000-80.000 (topo)/mes",
+        "role": "Financas - VP/Diretor",
+        "range": "AED 45.000 a 75.000/mes",
         "source": {
-          "label": "Gulf Workforce - UAE Salary Guide 2026",
-          "url": "https://gulfworkforce.com/uae-salary-guide-2026/",
+          "label": "Guia de salarios Dubai 2026 (consolidado de mercado)",
+          "url": "https://www.michaelpage.ae/salary-guide-uae",
           "official": true
         }
       },
       {
-        "role": "Corretor imobiliario (em ciclos de pico)",
-        "range": "AED 50.000-100.000+/mes (comissionado)",
+        "role": "Tecnologia - desenvolvedor junior",
+        "range": "AED 7.000 a 12.000/mes",
         "source": {
-          "label": "Gulf Workforce - UAE Salary Guide 2026",
-          "url": "https://gulfworkforce.com/uae-salary-guide-2026/",
+          "label": "Guia de salarios Dubai 2026 (consolidado de mercado)",
+          "url": "https://www.michaelpage.ae/salary-guide-uae",
           "official": true
         }
       },
       {
-        "role": "Salario medio do profissional em Dubai",
-        "range": "AED 15.800-18.000/mes",
+        "role": "Tecnologia / TI - media geral",
+        "range": "~AED 28.000/mes",
         "source": {
-          "label": "Michael Page / Hays via Dubai Money Matters",
-          "url": "https://dubaimoneymatters.com/uae-salary-guide-2026/",
+          "label": "Guia de salarios Dubai 2026 (consolidado de mercado)",
+          "url": "https://www.michaelpage.ae/salary-guide-uae",
+          "official": true
+        }
+      },
+      {
+        "role": "Saude - nivel de entrada",
+        "range": "AED 6.000 a 10.000/mes",
+        "source": {
+          "label": "Guia de salarios Dubai 2026 (consolidado de mercado)",
+          "url": "https://www.michaelpage.ae/salary-guide-uae",
+          "official": true
+        }
+      },
+      {
+        "role": "Saude - nivel senior",
+        "range": "AED 50.000 a 80.000/mes",
+        "source": {
+          "label": "Guia de salarios Dubai 2026 (consolidado de mercado)",
+          "url": "https://www.michaelpage.ae/salary-guide-uae",
+          "official": true
+        }
+      },
+      {
+        "role": "Salario minimo de emirati no setor privado (referencia de piso de mercado)",
+        "range": "AED 6.000/mes (vigente desde 01/01/2026)",
+        "source": {
+          "label": "MOHRE / Khaleej Times",
+          "url": "https://www.khaleejtimes.com/uae/firms-6-month-adjustment-period-dh6000-minimum-wage-citizens",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Trabalhar legalmente nos Emirados exige permissao de trabalho (work permit) emitida pelo MOHRE, conforme o Decreto-Lei Federal n. 33 de 2021: e ilegal exercer atividade sem ela. O MOHRE oferece 13 tipos de permissao conforme a natureza do cargo, e a ocupacao precisa estar alinhada a atividade da empresa contratante. Idade minima de 18 anos (salvo permissoes especiais de jovem aprendiz ou estagio estudantil). A taxa de emissao/renovacao varia de cerca de AED 250 a AED 3.450 conforme a classificacao A, B ou C da empresa, e o processo deve ser finalizado em ate 60 dias da entrada no pais ou mudanca de status de residencia. Profissoes reguladas exigem licenca adicional: saude (DHA em Dubai, DOH em Abu Dhabi, MOH nos Emirados do Norte, com verificacao DataFlow, exame e Good Standing Certificate), engenharia (Society of Engineers, com atestacao MOFA) e ensino (licenca KHDA em Dubai). Diplomas estrangeiros geralmente precisam de atestacao MOFA e, quando exigido, equivalencia MOHESR. Para empreender, as reformas de 2021 permitem propriedade 100% estrangeira no mainland em mais de mil atividades (poucas atividades de impacto estrategico mantem restricoes); free zones tambem dao 100% de propriedade. Licenca de mainland custa tipicamente AED 12.000-20.000 (setup total AED 25.000-40.000 fora aluguel e vistos), enquanto free zones tem pacotes a partir de cerca de AED 5.750-18.000. Residencia de longo prazo via Golden Visa: 10 anos para investidores e talentos excepcionais (limites como AED 2.000.000 em investimento/imovel ou AED 250.000/ano em imposto pago) e 5 anos para empreendedores (projeto inovador de AED 500.000+), profissionais qualificados (nivel 1 ou 2 do MOHRE, diploma de bacharel e salario de AED 30.000+/mes) e freelancers com permissao de free zone e renda anual de pelo menos AED 360.000. Em abril de 2026 a lista foi ampliada para enfermeiros, professores, criadores de conteudo e profissionais de e-sports, e o conjuge e filhos passam a ser cobertos pelo mesmo visto de 10 anos sem limite de idade dos filhos.",
+    "foreignerRules": "Trabalhar nos Emirados sem permissao de trabalho valida emitida pelo MOHRE e ilegal. O MOHRE mantem 13 tipos de permissao de trabalho, concedidas a empresas registradas conforme a natureza do cargo. O custo de emissao/renovacao varia de AED 250 a AED 3.450 conforme a classificacao da empresa (categoria A, B ou C), e a permissao costuma sair em cerca de cinco dias uteis pela iniciativa Work Bundle. A permissao de trabalho nao se confunde com o visto de residencia: e a aprovacao laboral que habilita o trabalho sob a lei trabalhista, enquanto a residencia segue por canal proprio (ICP). Ponto critico: mesmo titulares de Golden Visa, visto de investidor, Green Visa ou visto familiar precisam obter permissao de trabalho separada do MOHRE antes de comecar um emprego assalariado. Profissoes regulamentadas: saude exige licenca da autoridade do emirato (DHA em Dubai, DOH em Abu Dhabi, MOHAP nos emirados do Norte), com verificacao DataFlow, avaliacao de qualificacao (PQR) e exame; engenharia e direito tambem exigem registro/licenciamento local. Emiratizacao: empresas de mainland com 50+ funcionarios devem ampliar a contratacao de emiratis em cargos qualificados (meta de 2% ao ano, rumo a 10% em 2026), com multa de AED 6.000/mes por vaga emirati nao preenchida; isso pressiona a concorrencia por vagas qualificadas, embora a maioria das free zones esteja isenta. O programa Nafis e o portal nafis.gov.ae sao exclusivos para cidadaos emiratis, nao para estrangeiros. Empreender: desde a reforma de 2021, ha 100% de propriedade estrangeira na maioria das atividades de mainland (DED) e em todas as free zones; atividades restritas (defesa, utilities) ainda exigem aprovacoes especiais.",
     "opportunityWindows": [
-      "Golden Visa ampliado em abril de 2026 para enfermeiros, professores, criadores de conteudo e profissionais de e-sports, com via de nomeacao para enfermeiros abaixo do teto salarial",
-      "Escassez severa de enfermeiros de cuidados criticos, oncologia e neonatologia gera campanhas de recrutamento internacional agressivas",
-      "Setor fintech projetado para triplicar de tamanho ate o fim de 2026, abrindo vagas em compliance, dados e produto",
-      "Estrategia de IA 2031 e Roteiro de IA de Dubai sustentam demanda recorde por engenheiros de IA, dados e ciberseguranca",
-      "Programa Nafis de Emiratizacao mira 75.000 nacionais no setor privado em 5 anos, o que abre espaco para estrangeiros em funcoes especializadas nao preenchidas localmente",
-      "Mega-projetos de infraestrutura (Dubai Urban Master Plan 2040, extensoes do metro, Expo City) mantem construcao aquecida",
-      "Alta projetada de ~15% na demanda por gerentes de projetos verdes e profissionais HSE ate 2026",
-      "Free zones com pacotes baratos (a partir de ~AED 5.750) facilitam entrada rapida de empreendedores e freelancers"
+      "Golden Visa por qualificacao: profissionais com salario a partir de AED 30.000/mes e diploma autenticado obtem residencia renovavel de 5 ou 10 anos",
+      "Golden Visa de empreendedor: projeto avaliado em AED 500.000 ou mais",
+      "Golden Visa de investidor: AED 2.000.000 em investimento/imovel, sem exigencia de entrada minima desde fevereiro de 2026",
+      "Expansao de categorias do Golden Visa (2025-2026): criadores de conteudo, educadores, enfermeiros com 15+ anos, doadores de Waqf e profissionais de e-sports",
+      "100% de propriedade estrangeira em mainland e free zones para abrir empresa sem socio local",
+      "Premio de 15% a 25% para perfis de IA, ciberseguranca, cloud e blockchain",
+      "Expansao hospitalar e turismo medico elevando salarios de especialistas e enfermeiros",
+      "Crescimento de ADGM e DIFC abrindo vagas em banca, investimento e gestao de patrimonio"
     ],
     "jobBoards": [
       {
-        "label": "Plataforma Oficial do Governo dos Emirados - Busca de Emprego",
-        "url": "https://u.ae/en/information-and-services/jobs/searching-for-a-job",
+        "label": "Nafis (portal oficial do governo - exclusivo para cidadaos emiratis)",
+        "url": "https://nafis.gov.ae/",
         "official": true
       },
       {
-        "label": "MOHRE - Ministerio de Recursos Humanos e Emiratizacao (Carreiras e Servicos)",
-        "url": "https://www.mohre.gov.ae/en/careers",
+        "label": "MOHRE - Ministerio de Recursos Humanos e Emiratizacao (servicos e permissoes de trabalho)",
+        "url": "https://www.mohre.gov.ae/en/",
         "official": true
       },
       {
-        "label": "Nafis - Programa de Emiratizacao (setor privado)",
-        "url": "https://www.nafis.gov.ae/",
+        "label": "Portal Oficial do Governo dos Emirados - emprego no setor privado",
+        "url": "https://u.ae/en/information-and-services/jobs/employment-in-the-private-sector",
         "official": true
       },
       {
-        "label": "Bayt.com - maior portal de empregos do Oriente Medio",
-        "url": "https://www.bayt.com/en/uae/jobs/",
+        "label": "Bayt.com (lider de mercado MENA)",
+        "url": "https://www.bayt.com/en/uae/",
         "official": false
       },
       {
-        "label": "GulfTalent - vagas medio-senior no Golfo",
-        "url": "https://www.gulftalent.com/uae/jobs",
+        "label": "GulfTalent (profissionais do Golfo)",
+        "url": "https://www.gulftalent.com/",
         "official": false
       },
       {
-        "label": "LinkedIn - rede profissional e sourcing de recrutadores",
-        "url": "https://www.linkedin.com/jobs/",
+        "label": "Naukrigulf",
+        "url": "https://www.naukrigulf.com/",
+        "official": false
+      },
+      {
+        "label": "Michael Page UAE (guia de salarios e vagas executivas)",
+        "url": "https://www.michaelpage.ae/",
         "official": false
       }
     ],
     "sources": [
       {
-        "label": "Plataforma Oficial do Governo dos Emirados (u.ae) - Permissoes de trabalho",
+        "label": "Portal Oficial do Governo dos Emirados (u.ae) - Permissoes de trabalho",
         "url": "https://u.ae/en/information-and-services/jobs/employment-in-the-private-sector/job-offers-and-work-permits-and-contracts/work-permits",
         "official": true
       },
       {
-        "label": "MOHRE - Emissao de nova permissao de trabalho (overseas)",
+        "label": "MOHRE - Emissao de nova permissao de trabalho",
         "url": "https://www.mohre.gov.ae/en/services/recruiting-a-worker-from-overseas-2022",
         "official": true
       },
       {
-        "label": "u.ae - Golden Visa (residencia de longo prazo)",
+        "label": "u.ae - Golden Visa (categorias e requisitos)",
         "url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa",
         "official": true
       },
       {
-        "label": "ICP - Golden Residency",
-        "url": "https://icp.gov.ae/en/services/golden-residency/",
-        "official": true
-      },
-      {
-        "label": "ADDED Abu Dhabi - Golden Visa para profissionais qualificados",
-        "url": "https://www.added.gov.ae/en/live/long-term-residency/abu-dhabi-golden-visa/for-specialists/for-skilled-professionals",
-        "official": true
-      },
-      {
-        "label": "ADDED Abu Dhabi - Golden Visa para especialistas de elite em saude",
-        "url": "https://www.added.gov.ae/en/live/long-term-residency/abu-dhabi-golden-visa/for-specialists/for-elite-specialists-in-health-fields",
-        "official": true
-      },
-      {
-        "label": "DOH Abu Dhabi - Professional Qualification Requirement (PQR)",
-        "url": "https://www.doh.gov.ae/en/pqr",
-        "official": true
-      },
-      {
-        "label": "KHDA - Knowledge and Human Development Authority (Dubai)",
-        "url": "https://web.khda.gov.ae/en/",
-        "official": true
-      },
-      {
-        "label": "u.ae - Busca de emprego",
-        "url": "https://u.ae/en/information-and-services/jobs/searching-for-a-job",
-        "official": true
-      },
-      {
-        "label": "u.ae - Emprego de emiratis no setor privado (Nafis)",
+        "label": "u.ae - Emprego de emiratis no setor privado (Emiratizacao)",
         "url": "https://u.ae/en/information-and-services/jobs/employment-in-the-private-sector/emiratis-employment-in-private-sector",
         "official": true
       },
       {
-        "label": "Michael Page - UAE Salary Guide 2026",
+        "label": "Department of Health Abu Dhabi (DOH) - Professional Qualification Requirement",
+        "url": "https://www.doh.gov.ae/en/pqr",
+        "official": true
+      },
+      {
+        "label": "Ministerio da Saude e Prevencao (MOHAP) - Licenciamento de medico",
+        "url": "https://mohap.gov.ae/en/w/licensing-of-a-doctor",
+        "official": true
+      },
+      {
+        "label": "Nafis - Programa federal de emiratizacao (cidadaos emiratis)",
+        "url": "https://nafis.gov.ae/",
+        "official": true
+      },
+      {
+        "label": "Gulf News - Setores que mais vao contratar em Dubai e Abu Dhabi em 2026",
+        "url": "https://gulfnews.com/business/markets/looking-for-a-job-these-sectors-will-hire-the-most-in-dubai-and-abu-dhabi-in-2026-1.500334767",
+        "official": false
+      },
+      {
+        "label": "Michael Page - Guia de Salarios UAE 2026",
         "url": "https://www.michaelpage.ae/salary-guide-uae",
         "official": false
       },
       {
-        "label": "Gulf Workforce - UAE Salary Guide 2026",
-        "url": "https://gulfworkforce.com/uae-salary-guide-2026/",
+        "label": "Khaleej Times - Salario minimo de emiratis no setor privado (AED 6.000)",
+        "url": "https://www.khaleejtimes.com/uae/firms-6-month-adjustment-period-dh6000-minimum-wage-citizens",
         "official": false
       },
       {
-        "label": "Qureos - Top In-Demand Jobs in the UAE",
-        "url": "https://www.qureos.com/career-guide/top-in-demand-jobs-in-the-uae",
+        "label": "The National - Mercado de trabalho do Golfo com contratacao seletiva em 2026",
+        "url": "https://www.thenationalnews.com/business/money/2026/04/28/uae-and-gulf-jobs-market-sees-selective-hiring-amid-war-driven-tourism-slump/",
         "official": false
       },
       {
-        "label": "Saviorhire - UAE Tech Hiring Trends 2026",
-        "url": "https://www.saviorhire.com/post/uae-tech-hiring-trends",
-        "official": false
-      },
-      {
-        "label": "Khaleej Times - 7 em 10 empregados planejam trocar de vaga em 2026",
-        "url": "https://www.khaleejtimes.com/uae/employees-plan-switch-bobs-2026-competition-market",
-        "official": false
-      },
-      {
-        "label": "Middle East Briefing - Setting up a business in Dubai 2026",
-        "url": "https://www.middleeastbriefing.com/news/setting-up-a-business-in-dubai-a-2026-guide/",
-        "official": false
-      },
-      {
-        "label": "Erickson Immigration Group - UAE Expands Golden Visa 2026",
-        "url": "https://eiglaw.com/uae-expands-golden-visa-program-eligibility/",
-        "official": false
-      },
-      {
-        "label": "Takhlees - UAE Engineering License 2026 (SOE)",
-        "url": "https://takhleesbusiness.com/blog/uae-engineering-license-2026-step-by-step-guide-for-abu-dhabi-and-dubai",
+        "label": "Moores Rowland - 100% de propriedade estrangeira no UAE (Decreto-Lei 32/2021)",
+        "url": "https://mooresrowlanduae.com/blog/can-foreigners-own-100-of-company-in-uae/",
         "official": false
       }
     ]
@@ -2793,208 +2681,191 @@ export const LABOR_MARKET: LaborMarketMap = {
   },
   "it": {
     "updatedAt": "2026-06-22",
-    "overview": "O mercado de trabalho italiano fechou 2025 em terreno positivo, ainda que com sinais de desaceleracao no fim do ano. Segundo o ISTAT, a taxa de ocupacao media do ano subiu para 62,4 por cento e a de desemprego recuou para 6,1 por cento, o menor patamar em anos, com cerca de 24,1 milhoes de ocupados. O problema central deixou de ser falta de vagas e passou a ser falta de candidatos: o sistema Excelsior da Unioncamere aponta que as empresas tem dificuldade para preencher quase metade das contratacoes previstas, percentual que ultrapassa 60 por cento entre dirigentes e operarios especializados, num quadro de envelhecimento populacional e encolhimento da forca de trabalho jovem. O tempo medio para preencher uma vaga de dificil reperimento chega a 4,5 meses. Para o estrangeiro, isso significa portas abertas em setores especificos, mas dentro de um sistema de cotas. O trabalho subordinado nao sazonal e o sazonal dependem do Decreto Flussi, com cotas anuais definidas para o trienio 2026-2028 e ingresso por meio dos chamados click day. Ja perfis altamente qualificados podem entrar fora da cota, pela Carta Azul UE. Persiste forte divisao territorial: o Norte e o Centro concentram ocupacao alta e desemprego de 2 a 4 por cento em regioes como Lombardia, Veneto e Bolzano, enquanto o Sul, em regioes como Calabria e Campania, registra desemprego acima de 15 por cento. O salario tambem acompanha esse mapa, sendo maior no Norte e nos setores financeiro, de engenharia e farmaceutico.",
+    "overview": "O mercado de trabalho italiano em 2026 vive um paradoxo estrutural: desemprego em mínimos históricos convivendo com escassez aguda de mão de obra. Segundo o ISTAT (abril de 2026), a taxa de desemprego caiu para 5,1%, a taxa de ocupação subiu para 63,1% e o desemprego juvenil recuou para 16,9%, com cerca de 25,3 milhões de ocupados e crescimento anual de aproximadamente 269 mil postos. Por trás dos números favoráveis há um envelhecimento populacional acelerado, baixa natalidade e emigração de jovens qualificados (brain drain), que esvaziam a oferta de trabalhadores. A consequência é um mismatch severo: a pesquisa Excelsior da Unioncamere com o Ministério do Trabalho aponta que em junho de 2026 cerca de 42% dos perfis procurados pelas empresas eram difíceis de encontrar, com picos acima de 56% para operários especializados e 51% para profissões técnicas. Esse cenário abre espaço real para o trabalhador e o empreendedor estrangeiro. Uma em cada três empresas italianas planeja contratar trabalhadores não comunitários, e o Estado respondeu ampliando o Decreto Flussi 2026-2028 para mais de 497 mil ingressos no triênio. A divisão é geográfica e setorial: o Norte industrializado concentra a maior dificuldade de contratação, enquanto o Sul mantém salários mais baixos e desemprego mais alto. Para o imigrante, as portas mais largas estão na saúde, no turismo, na construção, na indústria especializada, na agricultura sazonal e na tecnologia. Para o empreendedor, existem trilhas específicas via lavoro autonomo e o programa Italia Startup Visa.",
     "hotSectors": [
-      "Turismo e hotelaria",
-      "Saude e assistencia social (enfermagem, cuidadores, tecnicos)",
-      "Tecnologia da informacao e telecomunicacoes (software, ciberseguranca)",
-      "Energia verde e construcao sustentavel",
-      "Logistica e transporte (motoristas de caminhao)",
-      "Comercio e varejo",
-      "Industria metalmecanica (operarios especializados, soldadores)",
-      "Agricultura sazonal"
+      "Saúde e assistência (enfermagem, técnicos de saúde, cuidadores)",
+      "Turismo e hotelaria (cozinheiros, garçons, recepcionistas)",
+      "Construção civil (soldadores, eletricistas, pedreiros)",
+      "Tecnologia da informação e cibersegurança",
+      "Indústria especializada (metalurgia, têxtil-vestuário, madeira-mobiliário)",
+      "Agricultura sazonal (colheita de frutas e hortaliças)",
+      "Energia renovável e transição ecológica (green jobs)",
+      "Mecatrônica e operadores de máquinas e plantas"
     ],
     "coolingSectors": [
-      "Manufatura industrial em geral (queda de cerca de 3,4 por cento no ano)",
-      "Construcao civil em ritmo de obras tradicionais (recuo apos o fim de incentivos, embora a construcao sustentavel cresca)"
+      "Manufatura industrial tradicional",
+      "Construção em alguns segmentos com queda anual de obras",
+      "Funções administrativas e burocráticas de baixa qualificação",
+      "Trabalho geral não especializado e mão de obra agrícola sem qualificação"
     ],
     "inDemandRoles": [
       {
-        "role": "Enfermeiros e tecnicos de saude",
-        "note": "Carencia estrutural no sistema de saude; idioma italiano costuma ser obrigatorio e a profissao e regulamentada."
+        "role": "Enfermeiro(a)",
+        "note": "Escassez estimada em cerca de 65 mil vagas não preenchidas, num país com 23,5% da população acima de 65 anos. Profissão regulamentada, exige reconhecimento do título."
       },
       {
-        "role": "Cuidadores e assistentes familiares (badanti, colf)",
-        "note": "Cota propria no Decreto Flussi (assistencia familiar e domestica), com forte presenca de mao de obra estrangeira."
+        "role": "Operário especializado",
+        "note": "Difícil de encontrar em 56,4% dos casos segundo a Excelsior de junho de 2026, com pico acima de 60% na metalurgia, têxtil e móveis."
       },
       {
-        "role": "Operarios especializados (soldadores, eletricistas, pedreiros, metalurgicos)",
-        "note": "Um dos grupos com maior dificuldade de reperimento segundo a Unioncamere/Excelsior."
+        "role": "Técnico (perfis técnicos qualificados)",
+        "note": "Difícil de encontrar em 51,8% dos casos; inclui técnicos de engenharia, de saúde e de design de aplicações."
       },
       {
-        "role": "Profissionais de TI (analistas, programadores, ciberseguranca)",
-        "note": "Setor critico elegivel a Carta Azul UE com limiar salarial reduzido (cerca de 1,2x a media); ingles costuma ser aceito."
+        "role": "Desenvolvedor de software e especialista em TI",
+        "note": "Roles digitais lideram a lista de mais difíceis de preencher por três anos consecutivos segundo Unioncamere-Excelsior."
       },
       {
-        "role": "Trabalhadores de hotelaria e restauracao (garcons, cozinheiros, bartenders)",
-        "note": "Alta demanda sazonal, com cota dedicada ao turismo no Decreto Flussi."
+        "role": "Trabalhador da construção civil",
+        "note": "Déficit estimado em cerca de 100 mil trabalhadores no setor."
       },
       {
-        "role": "Motoristas de caminhao e profissionais de logistica",
-        "note": "Escassez recorrente apontada pela EURES."
+        "role": "Cuidador e assistente familiar (badante)",
+        "note": "13.600 cotas reservadas para assistência familiar no Decreto Flussi 2026."
       },
       {
-        "role": "Trabalhadores agricolas sazonais",
-        "note": "Maior cota individual do Decreto Flussi (47 mil por ano)."
+        "role": "Trabalhador sazonal agrícola e de turismo",
+        "note": "88 mil cotas sazonais no Decreto Flussi; agricultura prevê cerca de 44 mil contratos só em junho de 2026."
       },
       {
-        "role": "Operadores de maquinas e instalacoes fixas",
-        "note": "Apontados pela EURES como o grupo com maior incidencia de escassez na Italia."
+        "role": "Soldador, eletricista e pedreiro",
+        "note": "Perfis de construção citados pela EURES com dificuldade de recrutamento entre as mais altas."
       },
       {
-        "role": "Engenheiros",
-        "note": "Setor entre os mais bem remunerados e com demanda por perfis tecnicos qualificados."
+        "role": "Cozinheiro, garçom e recepcionista de hotel",
+        "note": "Turismo é setor em expansão, com centenas de milhares de pedidos de contratação no ano."
+      },
+      {
+        "role": "Especialista em cibersegurança e analista de dados",
+        "note": "Demanda puxada pela transformação digital e pela transição verde."
       }
     ],
     "byQualification": [
       {
-        "area": "Baixa qualificacao / sem diploma",
-        "advice": "O caminho mais realista e via Decreto Flussi nas cotas de trabalho sazonal (agricultura e turismo), assistencia familiar/domestica e trabalho subordinado nao sazonal. Exige empregador disposto a patrocinar o nulla osta e participacao no click day. Vagas em agricultura, hotelaria, cuidado de idosos e construcao sao as mais acessiveis, mas o italiano e quase sempre necessario."
+        "area": "Saúde (medicina, enfermagem, fisioterapia)",
+        "advice": "Setor com a maior escassez do país e demanda crônica. O passo decisivo é o reconhecimento do título estrangeiro junto ao Ministério da Saúde (Ministero della Salute), competente para médico, enfermeiro, fisioterapeuta, farmacêutico e afins. São profissões regulamentadas: sem reconhecimento e, em geral, comprovação de italiano (frequentemente nível B2), não há exercício legal."
       },
       {
-        "area": "Tecnico / profissionalizante (operarios especializados, ITS Academy)",
-        "advice": "Perfis tecnico-operativos estao entre os mais dificeis de preencher no pais. Soldadores, eletricistas, mecanicos, tecnicos de saude e diplomados de ITS Academy tem demanda alta. A entrada continua dependente do Decreto Flussi para nao UE, mas a empregabilidade e a estabilidade tendem a ser maiores. Reconhecimento de qualificacoes pode ser exigido em profissoes regulamentadas."
+        "area": "Tecnologia da informação e engenharia de software",
+        "advice": "Uma das áreas mais quentes e com menos barreiras formais de habilitação para perfis não regulamentados (programador, dev, dados, cibersegurança). Faixas salariais entre as melhores do país. Inglês abre portas, mas o italiano amplia muito o leque. Caminho natural também para o Italia Startup Visa."
       },
       {
-        "area": "Ensino superior / altamente qualificado",
-        "advice": "Melhor rota e a Carta Azul UE, que fica fora da cota do Decreto Flussi, exige diploma de nivel superior (ou 5 anos de experiencia equivalente) e contrato acima do limiar salarial. Setores criticos como TI, saude e engenharia tem limiar reduzido (cerca de 1,2x a media, ~28 mil euros) frente ao geral (~1,5x, ~35 mil euros). Da mobilidade na UE apos 12 meses e reagrupamento familiar facilitado."
+        "area": "Engenharia (civil, mecânica, elétrica)",
+        "advice": "Forte demanda por técnicos e engenheiros, sobretudo no Norte industrial e em energia/transição verde. Engenharia é profissão regulamentada pelo Ministério da Justiça quando se usa o título de engenheiro habilitado; verificar reconhecimento e inscrição na ordem (Albo). Salários médios de 35 a 42 mil euros, com picos em software e óleo e gás."
       },
       {
-        "area": "Empreendedor / autonomo",
-        "advice": "O visto de trabalho autonomo (lavoro autonomo) tem cota propria e muito restrita no Decreto Flussi (500 vagas por ano), exige plano de negocios, comprovacao de capital e renda. Fundadores de startups inovadoras tem rota especifica pela Italia Startup Visa, fora da cota geral. Planeje com antecedencia e assessoria, pois e a via mais concorrida e burocratica."
+        "area": "Construção e ofícios técnicos (trades)",
+        "advice": "Déficit de cerca de 100 mil trabalhadores. Soldadores, eletricistas e pedreiros entram com relativa facilidade, inclusive por cotas do Decreto Flussi. Não exigem diploma universitário, mas valorizam certificação técnica e experiência comprovada."
+      },
+      {
+        "area": "Hotelaria, gastronomia e turismo",
+        "advice": "Porta de entrada clássica para o imigrante, com forte componente sazonal e cotas dedicadas. Cozinheiros, garçons e recepcionistas são muito procurados. Italiano funcional é o principal diferencial de empregabilidade."
+      },
+      {
+        "area": "Agricultura",
+        "advice": "Caminho mais acessível via cotas sazonais (88 mil no Decreto Flussi 2026). Colheita em Puglia, Sicília e Veneto sofre escassez crônica. Baixa exigência de qualificação formal, mas trabalho fisicamente intenso e majoritariamente temporário."
+      },
+      {
+        "area": "Profissões jurídicas, contábeis e regulamentadas (advogado, contador, jornalista)",
+        "advice": "Caminho mais difícil para estrangeiros: reconhecimento pelo Ministério da Justiça, prova de aptidão e domínio avançado do italiano. Recomendado só a quem já tem base sólida e disposição para o processo longo de habilitação."
+      },
+      {
+        "area": "Empreendedores e investidores",
+        "advice": "Duas trilhas principais: lavoro autonomo (exige projeto de interesse econômico com recursos próprios de pelo menos 500 mil euros e criação de ao menos 3 empregos, dentro das cotas) e o Italia Startup Visa para startups inovadoras (capital de 50 mil euros para nova empresa, fora das cotas do Decreto Flussi e com processo mais ágil)."
       }
     ],
     "salaries": [
       {
-        "role": "Salario medio nacional (privado, RAL media 2025)",
-        "range": "cerca de 32.991 euros/ano brutos",
+        "role": "Salário médio nacional (RAL)",
+        "range": "29.000 a 32.000 euros brutos/ano (líquido mensal aprox. 1.650 a 1.750 euros em 13 salários)",
         "source": {
-          "label": "Remitly (compilacao de dados de mercado 2025)",
+          "label": "JobPricing/ISTAT 2026 via PMI.it",
+          "url": "https://www.pmi.it/economia/lavoro/404244/stipendi-classifica-italiana-delle-retribuzioni.html",
+          "official": true
+        }
+      },
+      {
+        "role": "Engenheiro",
+        "range": "35.000 a 42.000 euros brutos/ano; picos de 50.000 a 60.000 em software e óleo e gás (sênior)",
+        "source": {
+          "label": "JobPricing 2026 via PMI.it",
+          "url": "https://www.pmi.it/economia/lavoro/404244/stipendi-classifica-italiana-delle-retribuzioni.html",
+          "official": true
+        }
+      },
+      {
+        "role": "Desenvolvedor de software",
+        "range": "Júnior aprox. 26.000 a 27.000; middle 45.000 a 55.000 euros brutos/ano; sênior acima",
+        "source": {
+          "label": "JobPricing 2026 via PMI.it",
+          "url": "https://www.pmi.it/economia/lavoro/404244/stipendi-classifica-italiana-delle-retribuzioni.html",
+          "official": true
+        }
+      },
+      {
+        "role": "Enfermeiro (SSN, CCNL Sanità)",
+        "range": "26.000 a 32.000 euros brutos/ano (líquido mensal aprox. 1.600 a 1.900 euros)",
+        "source": {
+          "label": "JobPricing 2026 via PMI.it",
+          "url": "https://www.pmi.it/economia/lavoro/404244/stipendi-classifica-italiana-delle-retribuzioni.html",
+          "official": true
+        }
+      },
+      {
+        "role": "Diferença regional (Norte vs Sul)",
+        "range": "Norte aprox. 31.921 euros vs Sul aprox. 28.254 euros brutos/ano",
+        "source": {
+          "label": "Remitly Blog Itália 2026",
           "url": "https://www.remitly.com/blog/it/lavori/stipendi-medi-in-italia/",
-          "official": true
-        }
-      },
-      {
-        "role": "Salario medio bruto anual em tempo integral (referencia ISTAT, ano-base 2022)",
-        "range": "cerca de 37.302 euros/ano brutos",
-        "source": {
-          "label": "ISTAT (via Remitly)",
-          "url": "https://www.remitly.com/blog/it/lavori/stipendi-medi-in-italia/",
-          "official": true
-        }
-      },
-      {
-        "role": "Bancos e servicos financeiros (setor mais remunerado)",
-        "range": "cerca de 45.000 a 46.000 euros/ano brutos (RAL media)",
-        "source": {
-          "label": "Remitly (dados de mercado 2025)",
-          "url": "https://www.remitly.com/blog/it/lavori/stipendi-medi-in-italia/",
-          "official": true
-        }
-      },
-      {
-        "role": "Engenharia",
-        "range": "cerca de 40.372 euros/ano brutos (RAL media)",
-        "source": {
-          "label": "Remitly (dados de mercado 2025)",
-          "url": "https://www.remitly.com/blog/it/lavori/stipendi-medi-in-italia/",
-          "official": true
-        }
-      },
-      {
-        "role": "Farmaceutica e biotecnologia",
-        "range": "cerca de 39.640 euros/ano brutos (RAL media)",
-        "source": {
-          "label": "Remitly (dados de mercado 2025)",
-          "url": "https://www.remitly.com/blog/it/lavori/stipendi-medi-in-italia/",
-          "official": true
-        }
-      },
-      {
-        "role": "Telecomunicacoes",
-        "range": "cerca de 38.950 euros/ano brutos (RAL media)",
-        "source": {
-          "label": "Remitly (dados de mercado 2025)",
-          "url": "https://www.remitly.com/blog/it/lavori/stipendi-medi-in-italia/",
-          "official": true
-        }
-      },
-      {
-        "role": "Hotelaria e restauracao (entre os menos remunerados)",
-        "range": "cerca de 25.855 euros/ano brutos (RAL media)",
-        "source": {
-          "label": "Remitly (dados de mercado 2025)",
-          "url": "https://www.remitly.com/blog/it/lavori/stipendi-medi-in-italia/",
-          "official": true
-        }
-      },
-      {
-        "role": "Servicos a pessoa / cuidado (menor faixa)",
-        "range": "cerca de 24.916 euros/ano brutos (RAL media)",
-        "source": {
-          "label": "Remitly (dados de mercado 2025)",
-          "url": "https://www.remitly.com/blog/it/lavori/stipendi-medi-in-italia/",
-          "official": true
-        }
-      },
-      {
-        "role": "Limiar salarial Carta Azul UE - setores criticos (TI, saude)",
-        "range": "cerca de 28.000 euros/ano (1,2x a media)",
-        "source": {
-          "label": "Damiani & Damiani (guia juridico Carta Azul)",
-          "url": "https://damianianddamiani.com/complete-guide-blue-card-reform/",
-          "official": true
-        }
-      },
-      {
-        "role": "Limiar salarial Carta Azul UE - regra geral",
-        "range": "cerca de 35.000 euros/ano (1,5x a media)",
-        "source": {
-          "label": "Damiani & Damiani (guia juridico Carta Azul)",
-          "url": "https://damianianddamiani.com/complete-guide-blue-card-reform/",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE/EEE e da Suica trabalham livremente, sem necessidade de autorizacao. Para nao UE, a regra geral e o sistema nulla osta mais visto nacional (tipo D): o empregador na Italia solicita a autorizacao de trabalho (nulla osta) dentro das cotas do Decreto Flussi, e so depois o trabalhador pede o visto e, ja na Italia, o permesso di soggiorno. O Decreto Flussi 2026-2028 (DPCM de 02/10/2025) preve 164.850 ingressos em 2026, 165.850 em 2027 e 166.850 em 2028, distribuidos entre trabalho subordinado nao sazonal (cerca de 76.200/ano, com parcela reservada a paises prioritarios como Albania, Marrocos e Bangladesh), sazonal agricola (47.000/ano), sazonal turismo (13.000 em 2026), assistencia familiar/domestica (13.600 em 2026) e trabalho autonomo (apenas 500/ano). O ingresso ocorre por click day, com datas definidas: 9 de fevereiro de 2026 (sazonal turismo), 16 de fevereiro de 2026 (subordinado nao sazonal) e 18 de fevereiro de 2026 (assistencia familiar), apos fase de precompilacao. Perfis altamente qualificados podem usar a Carta Azul UE, fora da cota, exigindo diploma superior ou 5 anos de experiencia e contrato acima do limiar salarial (cerca de 1,5x a media geral, ou 1,2x em setores criticos como TI e saude). Profissoes regulamentadas (saude, engenharia, direito, ensino) exigem reconhecimento do titulo estrangeiro e, em muitos casos, inscricao em ordem profissional e dominio do italiano. Transferencias dentro de multinacionais (ICT) e startups inovadoras (Italia Startup Visa) tambem ficam fora da cota geral.",
+    "foreignerRules": "Trabalhadores não comunitários (extracomunitari) entram majoritariamente pelas cotas anuais do Decreto Flussi. O D.P.C.M. de 2 de outubro de 2025 fixou mais de 497 mil ingressos no triênio 2026-2028, com 164.850 entradas só em 2026, distribuídas em: 76.200 para trabalho subordinado não sazonal, 88.000 para trabalho sazonal (agricultura e turismo) e 650 para lavoro autonomo. Há cotas reservadas, incluindo 13.600 para assistência familiar (badanti) e fatias para países prioritários e com acordos de cooperação migratória. O processo passa por nulla osta (autorização) e click day. O empregador na Itália inicia o pedido; o trabalhador obtém o visto no consulado e, após chegar, tem 8 dias para solicitar o permesso di soggiorno via kit postal na Questura. Cidadãos da UE não precisam de permissão de trabalho. Para o lavoro autonomo, além das cotas, o empreendedor precisa de projeto de interesse econômico com recursos próprios de pelo menos 500.000 euros e criação de ao menos 3 empregos, ou ser profissional reconhecido em profissão regulamentada; renda mínima de referência cerca de 8.400 euros/ano e permesso de até 2 anos. O Italia Startup Visa é uma trilha separada, fora das cotas, para startups inovadoras (incorporadas há até 5 anos, P&D igual ou acima de 15% do faturamento, equipe altamente qualificada, capital de 50.000 euros para criar nova empresa ou 100.000 para entrar em existente), com nulla osta emitido em cerca de 30 dias e visto nacional tipo D válido por 1 ano. Profissões regulamentadas (médico, enfermeiro, fisioterapeuta, farmacêutico, veterinário, psicólogo pelo Ministério da Saúde; advogado, engenheiro, contador, biólogo, químico, geólogo, jornalista pelo Ministério da Justiça) exigem reconhecimento formal do título estrangeiro, eventual prova de aptidão e inscrição na ordem profissional (Albo) antes do exercício legal. O CIMEA cuida do reconhecimento acadêmico, mas não do profissional.",
     "opportunityWindows": [
-      "Click day do Decreto Flussi 2026: 9 de fevereiro (sazonal turismo), 16 de fevereiro (subordinado nao sazonal) e 18 de fevereiro (assistencia familiar), com precompilacao previa. Empregador e candidato precisam estar prontos antes da data.",
-      "Temporada turistica e agricola (verao europeu) abre vagas sazonais em hotelaria, restauracao e colheita, dentro das cotas dedicadas.",
-      "Carta Azul UE para qualificados em TI, saude e engenharia: rota fora da cota, com limiar salarial reduzido em setores criticos e mobilidade na UE apos 12 meses.",
-      "Carencia estrutural de operarios especializados e diplomados de ITS Academy: alta empregabilidade para perfis tecnico-profissionalizantes.",
-      "Norte e Centro (Lombardia, Veneto, Bolzano) com desemprego de 2 a 4 por cento concentram as melhores oportunidades e os maiores salarios."
+      "Click day do Decreto Flussi: janelas anuais e datadas para envio dos pedidos de nulla osta dentro das cotas; perder a data significa esperar o ciclo seguinte",
+      "Temporada turística (estimativa de cerca de 190 mil postos em junho de 2026 e cerca de 1,5 milhão de contratos no trimestre junho-agosto), com pico de contratação na primavera/verão",
+      "Colheita agrícola sazonal em Puglia, Sicília e Veneto, com escassez crônica de mão de obra",
+      "Cotas sazonais amplas (88 mil em 2026) renovadas a cada ano, com prioridade para agricultura e turismo",
+      "Demanda permanente e crescente em saúde e enfermagem, sustentada pelo envelhecimento da população (23,5% acima de 65 anos)",
+      "Avaliação contínua do comitê do Italia Startup Visa, com nulla osta em cerca de 30 dias, fora do calendário de cotas"
     ],
     "jobBoards": [
       {
-        "label": "Cliclavoro (portal oficial do Ministero del Lavoro)",
-        "url": "https://www.cliclavoro.gov.it",
+        "label": "Cliclavoro (Ministero del Lavoro e delle Politiche Sociali) - portal oficial de ofertas e serviços de emprego",
+        "url": "https://www.cliclavoro.gov.it/",
         "official": true
       },
       {
-        "label": "Portal EURES (rede europeia de empregos)",
-        "url": "https://eures.europa.eu/index_en",
+        "label": "EURES - portal europeu de mobilidade laboral, seção Itália",
+        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-italy_en",
         "official": true
       },
       {
-        "label": "ANPAL (Agenzia Nazionale Politiche Attive Lavoro) - coordenacao EURES Italia",
-        "url": "https://www.anpal.gov.it",
+        "label": "Italia Startup Visa (MIMIT/MISE) - portal oficial para empreendedores não comunitários",
+        "url": "https://italiastartupvisa.mise.gov.it/",
+        "official": true
+      },
+      {
+        "label": "Sistema Informativo Excelsior (Unioncamere) - dados oficiais de demanda de profissões e previsões de contratação",
+        "url": "https://excelsior.unioncamere.net/",
+        "official": true
+      },
+      {
+        "label": "Integrazione Migranti (Ministero dell'Interno e del Lavoro) - guia oficial sobre ingresso para trabalho",
+        "url": "https://www.integrazionemigranti.gov.it/",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "ISTAT - Occupati e disoccupati, dezembro 2025",
-        "url": "https://www.istat.it/comunicato-stampa/occupati-e-disoccupati-dati-provvisori-dicembre-2025/",
+        "label": "ISTAT - Employment and unemployment (provisional data), April 2026",
+        "url": "https://www.istat.it/en/press-release/employment-and-unemployment-provisional-data-april-2026/",
         "official": true
       },
       {
-        "label": "ISTAT - Il mercato del lavoro IV trimestre 2025 (PDF)",
-        "url": "https://www.istat.it/wp-content/uploads/2026/03/Mercato-del-lavoro-IV-trim_2025.pdf",
-        "official": true
-      },
-      {
-        "label": "EURES - Labour Market Information: Italy",
-        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-italy_en",
+        "label": "ISTAT - Labour Market Q1 2026",
+        "url": "https://www.istat.it/en/press-release/labour-market-q1-2026/",
         "official": true
       },
       {
@@ -3003,275 +2874,303 @@ export const LABOR_MARKET: LaborMarketMap = {
         "official": true
       },
       {
-        "label": "Ministero del Lavoro - Flussi 2026, click day subordinato 16 fevereiro",
-        "url": "https://www.lavoro.gov.it/notizie/pagine/flussi-2026-attribuite-le-quote-per-lavoro-subordinato-non-stagionale-click-day-il-16-febbraio",
+        "label": "EURES - Labour Market Information Italy",
+        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-italy_en",
         "official": true
       },
       {
-        "label": "Excelsior/Unioncamere - Report previsivo 2025-2029 (PDF)",
-        "url": "https://excelsior.unioncamere.net/sites/default/files/pubblicazioni/2025/report_previsivo_2025-29.pdf",
+        "label": "Sistema Informativo Excelsior (Unioncamere) - bollettino e previsioni",
+        "url": "https://excelsior.unioncamere.net/",
         "official": true
       },
       {
-        "label": "Unioncamere - Report sul mismatch domanda/offerta di lavoro (PDF)",
+        "label": "Unioncamere - Report semestrale sul mismatch domanda-offerta di lavoro 2-2026",
         "url": "https://www.unioncamere.gov.it/sites/default/files/articoli/2026-02/Report%20semestrale_2-2026_def2402%20versione%20PDF.pdf",
         "official": true
       },
       {
-        "label": "ANPAL - EURES (coordenacao nacional)",
-        "url": "https://www.anpal.gov.it/en/eures",
+        "label": "Ministero dell'Interno - Visto e permesso di soggiorno",
+        "url": "https://www.interno.gov.it/it/temi/immigrazione-e-asilo/modalita-dingresso/visto-e-permesso-soggiorno",
         "official": true
       },
       {
-        "label": "ELA/EURES - Report on labour shortages and surpluses 2025",
-        "url": "https://www.ela.europa.eu/en/publications/labour-shortages-and-surpluses-europe-2025",
+        "label": "Italia Startup Visa (MIMIT/MISE)",
+        "url": "https://italiastartupvisa.mise.gov.it/",
         "official": true
       },
       {
-        "label": "Prefettura La Spezia - Decreto Flussi 2026-2028 (quote)",
-        "url": "https://prefettura.interno.gov.it/it/prefetture/spezia/decreto-flussi-2026-2028",
+        "label": "MIMIT - Startup innovative, programmi",
+        "url": "https://www.mimit.gov.it/it/impresa/competitivita-e-nuove-imprese/start-up-innovative/programmi",
         "official": true
       },
       {
-        "label": "Damiani & Damiani - Guia Carta Azul UE Italia (corroboracao juridica)",
-        "url": "https://damianianddamiani.com/complete-guide-blue-card-reform/",
+        "label": "Ministero della Giustizia - Riconoscimento titoli professionali conseguiti all'estero",
+        "url": "https://www.giustizia.it/giustizia/it/mg_2_4_1.wp",
+        "official": true
+      },
+      {
+        "label": "CIMEA - Professional recognition",
+        "url": "https://www.cimea.it/EN/pagina-riconoscimento-professionale",
+        "official": true
+      },
+      {
+        "label": "Cliclavoro (Ministero del Lavoro) - domanda e offerta di lavoro",
+        "url": "https://www.cliclavoro.gov.it/",
+        "official": true
+      },
+      {
+        "label": "JobPricing/ISTAT 2026 - stipendi per professione via PMI.it",
+        "url": "https://www.pmi.it/economia/lavoro/404244/stipendi-classifica-italiana-delle-retribuzioni.html",
         "official": false
       },
       {
-        "label": "Remitly - Stipendi medi in Italia 2025 (corroboracao salarial)",
+        "label": "Remitly - Stipendi medi in Italia 2026 (variabilità regionale)",
         "url": "https://www.remitly.com/blog/it/lavori/stipendi-medi-in-italia/",
-        "official": false
-      },
-      {
-        "label": "Tutela Previdenziale - Click Day Decreto Flussi 2026 (datas)",
-        "url": "https://www.tutelaprevidenziale.it/decreto-flussi-2026-2028-nuovi-click-day-di-febbraio-9-16-e-18-febbraio-2026-cosa-fare-e-cosa-aspettarsi/",
         "official": false
       }
     ]
   },
   "dk": {
     "updatedAt": "2026-06-22",
-    "overview": "A Dinamarca entrou em 2026 com um mercado de trabalho ainda saudavel pelos padroes europeus, mas claramente mais frio do que nos anos anteriores. A taxa de desemprego ficou em torno de 2,7% a 3,0% no comeco do ano, segundo a Danmarks Statistik, com cerca de 81 mil desempregados, o nivel mais alto desde 2021. Em fevereiro, o emprego assalariado caiu pela primeira vez em 17 meses, puxado pela industria e por uma onda de demissoes em grandes empregadores. O pais combina salarios altos, forte protecao via acordos coletivos (nao existe salario minimo legal, e sim pisos negociados por setor) e uma carga tributaria elevada sobre o trabalhador, que pode chegar perto de 56% na margem.\n\nPara o estrangeiro, o cenario e de duas portas distintas. Cidadaos da UE/EEE e da Suica entram e trabalham livremente, bastando registro se a estadia passar de tres meses. Ja quem vem de fora do bloco depende de esquemas com exigencia salarial alta, que subiu em janeiro de 2026 (Pay Limit Scheme passou a DKK 552.000/ano) ou de estar numa profissao das Positive Lists de escassez. As demissoes recentes na Novo Nordisk, Maersk, Orsted e Nordea esfriaram a industria farmaceutica, o transporte maritimo e o setor bancario, enquanto TI, saude, construcao civil qualificada e energia verde seguem com falta cronica de mao de obra.",
+    "overview": "A Dinamarca entra em 2026 com um mercado de trabalho em transicao: o desemprego registrado subiu para 2,7% em abril de 2026, o maior patamar desde 2021, segundo dados da Danmarks Statistik. Apesar da alta, o nivel permanece baixo no contexto europeu e a economia ainda convive com escassez estrutural de mao de obra qualificada em tecnologia, engenharia, saude e construcao. O ano traz dois sinais opostos. De um lado, demissoes de peso, com destaque para a Novo Nordisk, que anunciou corte de cerca de 9.000 vagas globalmente, sendo 5.000 na Dinamarca, alem de dispensas crescentes em varios setores publicos e privados. De outro, o pais segue dependente de talento estrangeiro e atualizou suas Listas Positivas e regras de imigracao em janeiro de 2026. Para imigrantes de fora da UE, o caminho passa pelos esquemas de autorizacao de trabalho administrados pela SIRI (Agencia Dinamarquesa de Recrutamento e Integracao Internacional). Os limites salariais subiram: o Pay Limit Scheme exige salario anual minimo de DKK 552.000 em 2026. Uma novidade relevante para brasileiros e o novo esquema baseado em acordos coletivos, com salario minimo mais baixo, proposto para nacionais de 16 paises, entre eles o Brasil. A maioria das vagas qualificadas nao exige dinamarques, com excecao notavel da area de saude.",
     "hotSectors": [
-      "Tecnologia da informacao e ciberseguranca",
-      "Engenharia (automacao, eletronica, civil)",
-      "Saude e cuidados (enfermagem, social and health care)",
-      "Construcao civil e trades qualificados (eletricista, encanador, soldador, carpinteiro)",
-      "Energia verde e cleantech (eolica offshore, transicao energetica)",
-      "Ciencias da vida e biotech (apesar dos cortes pontuais)",
-      "Hotelaria e gastronomia (chefs)"
+      "Tecnologia da informacao (desenvolvimento de software, ciberseguranca, cloud, IA e machine learning)",
+      "Engenharia (mecanica, eletrica e civil, com forte demanda em energia verde e eolica offshore)",
+      "Energia verde e renovaveis",
+      "Saude e cuidados (enfermagem, assistentes sociais e de saude)",
+      "Oficios qualificados (eletricistas, encanadores, soldadores, mecanicos industriais, carpinteiros)",
+      "Ciencias da vida e biotecnologia",
+      "Industria e manufatura",
+      "Transporte e logistica",
+      "Construcao civil",
+      "Negocios e financas"
     ],
     "coolingSectors": [
-      "Industria farmaceutica de grande porte (cortes da Novo Nordisk, ~5.000 vagas na Dinamarca)",
-      "Transporte maritimo e logistica corporativa (cortes na Maersk)",
-      "Setor bancario administrativo (cortes na Nordea, ~1.500 vagas em 2026-2027)",
-      "Energia eolica corporativa em reestruturacao (Orsted)",
-      "Varejo de vestuario (Bestseller)",
-      "Industria de transformacao em geral (queda de empregos industriais no inicio de 2026)"
+      "Farmaceutico de grande porte, impactado pelos cortes da Novo Nordisk (cerca de 5.000 vagas eliminadas na Dinamarca)",
+      "Setores afetados por demissoes generalizadas que se tornaram comuns ao longo de 2026, em organizacoes publicas e privadas",
+      "Profissoes regulamentadas de saude para estrangeiros de fora da UE, com a cota de autorizacao de enfermeiros e medicos fixada em zero ate 31 de dezembro de 2026"
     ],
     "inDemandRoles": [
       {
-        "role": "Engenheiro de TI / desenvolvedor de software",
-        "note": "Carro-chefe da Positive List de ensino superior; escassez cronica em Copenhague e Aarhus"
+        "role": "Especialista em ciberseguranca",
+        "note": "Apontada como a vaga mais dificil de preencher no pais, pressionada pela diretiva NIS2 e por escassez de profissionais"
       },
       {
-        "role": "Consultor de ciberseguranca",
-        "note": "Entre as profissoes de maior demanda na lista de 2026"
+        "role": "Desenvolvedor de software",
+        "note": "Demanda alta e estavel; entre as ocupacoes mais buscadas em TI"
       },
       {
-        "role": "Engenheiro de automacao e desenvolvedor de hardware",
-        "note": "Na Positive List de ensino superior"
+        "role": "Engenheiro de IA e machine learning"
+      },
+      {
+        "role": "Engenheiro de cloud / cloud engineer",
+        "note": "Consta nas Listas Positivas oficiais"
+      },
+      {
+        "role": "Cientista de dados / data scientist",
+        "note": "Consta nas Listas Positivas oficiais"
+      },
+      {
+        "role": "Engenheiro mecanico",
+        "note": "Consta nas Listas Positivas; forte demanda em energia verde"
+      },
+      {
+        "role": "Engenheiro de energias renovaveis",
+        "note": "Projetos de eolica offshore e redes inteligentes"
+      },
+      {
+        "role": "Enfermeiro / healthcare nurse",
+        "note": "Consta na Lista Positiva, mas autorizacao para nao-UE esta com cota zero ate 31/12/2026"
+      },
+      {
+        "role": "Assistente social e de saude (SOSU)",
+        "note": "Deficit projetado de 15.000 trabalhadores na proxima decada"
+      },
+      {
+        "role": "Eletricista, encanador, soldador, mecanico industrial",
+        "note": "Oficios qualificados na Lista Positiva para trabalho especializado"
+      },
+      {
+        "role": "Professor de educacao profissional (VET teacher)",
+        "note": "Consta nas Listas Positivas oficiais"
       },
       {
         "role": "Business Intelligence Manager",
-        "note": "Novidade adicionada a Positive List em 2026"
-      },
-      {
-        "role": "Enfermeiro(a) (sygeplejerske)",
-        "note": "Exige autorizacao dinamarquesa para exercer; setor publico com falta estrutural"
-      },
-      {
-        "role": "Social and Health Care Worker/Assistant",
-        "note": "Na Positive List de trabalho qualificado; exige autorizacao dinamarquesa"
-      },
-      {
-        "role": "Eletricista, encanador, soldador, carpinteiro, pedreiro",
-        "note": "Trades na Positive List for Skilled Work"
-      },
-      {
-        "role": "Chef de cozinha",
-        "note": "Na Positive List for Skilled Work"
-      },
-      {
-        "role": "Tecnico de aeronaves e mecanicos especializados",
-        "note": "Na Positive List for Skilled Work"
-      },
-      {
-        "role": "Profissionais de energia eolica offshore e cleantech",
-        "note": "Setor estrategico da transicao verde dinamarquesa"
+        "note": "Adicionado a Lista Positiva de ensino superior em janeiro de 2026"
       }
     ],
     "byQualification": [
       {
-        "area": "TI, engenharia e tecnologia (ensino superior)",
-        "advice": "Melhor porta de entrada para nao europeus. A Positive List for People with a Higher Education traz cerca de 180 cargos em 2026, com forte peso de TI, ciberseguranca, automacao e dados. Quem tem diploma e oferta de emprego nessas areas consegue permit pela lista; alternativamente, salarios de TI senior costumam ultrapassar com folga o Pay Limit Scheme (DKK 552.000/ano), abrindo a via salarial e o Fast-track em empresas certificadas."
+        "area": "TI e Computacao (ensino superior)",
+        "advice": "Setor com maior carencia do pais. Vagas como desenvolvedor, especialista em ciberseguranca, engenheiro de cloud, dados e IA estao na Lista Positiva para Pessoas com Ensino Superior, o que reduz a exigencia salarial. Ingles costuma bastar. Empregadores certificados pela SIRI permitem contratacao rapida pelo Fast-Track Scheme."
       },
       {
-        "area": "Saude (enfermagem, cuidados)",
-        "advice": "Demanda alta e estrutural, mas profissao regulamentada: enfermeiros e social/health care assistants precisam de autorizacao dinamarquesa (autorisation) e, na pratica, de dinamarques funcional para o atendimento. Vale comecar o reconhecimento do diploma cedo e investir no idioma antes de buscar a vaga."
+        "area": "Engenharia (ensino superior)",
+        "advice": "Deficit projetado de profissionais STEM de 13.000 ate 2030. Engenheiros mecanicos, eletricos e civis com perfil de energia verde e eolica offshore tem caminho facilitado pela Lista Positiva. Verifique se o titulo exato consta na lista vigente publicada no nyidanmark.dk."
       },
       {
-        "area": "Trades e construcao civil (ensino tecnico/vocacional)",
-        "advice": "A Positive List for Skilled Work (cerca de 47 a 54 cargos em 2026) cobre eletricista, encanador, soldador, carpinteiro, pedreiro, mecanicos e chefs. O salario e os termos precisam corresponder aos padroes dinamarqueses (acordos coletivos), e o empregador deve cumprir exigencias de aprendizagem (Laerepladse-AUB). Idioma tecnico ajuda muito na contratacao."
+        "area": "Saude (profissoes regulamentadas)",
+        "advice": "Atencao critica: medico e enfermeiro sao profissoes regulamentadas e a cota de autorizacao para nao-UE esta fixada em ZERO ate 31 de dezembro de 2026, o que impede a concessao de residencia para quem busca essa autorizacao. Para sete profissoes (enfermeiro de cuidados gerais, parteira, medico, dentista, farmaceutico, veterinario e arquiteto) ha reconhecimento automatico apenas sob regras da UE. Recomenda-se acompanhar a reabertura da cota antes de planejar a mudanca."
       },
       {
-        "area": "Ciencias da vida e biotech",
-        "advice": "Setor forte e qualificado, mas em reestruturacao apos os cortes da Novo Nordisk em 2026. Ha oportunidade para perfis especializados (P&D, regulatorio, producao GMP), porem o momento exige seletividade: priorizar empresas em crescimento e nichos terapeuticos fora da area afetada pelos cortes."
+        "area": "Oficios qualificados / ensino tecnico (VET)",
+        "advice": "Eletricistas, encanadores, soldadores, carpinteiros, mecanicos industriais e cozinheiros constam na Lista Positiva para Trabalho Especializado (54 titulos em 2026). Exige qualificacao vocacional comprovada. Pode haver necessidade de reconhecimento de qualificacao junto a agencia dinamarquesa."
       },
       {
-        "area": "Empreendedores e fundadores de startup",
-        "advice": "Quem quer empreender (nao UE/EEE) deve mirar o Start-up Denmark: plano de negocio inovador e escalavel avaliado por painel de especialistas, em setores-chave (Tech, Cleantech, Life science, Food, Maritime, Design e Inovacao). Cota de 75 permits por ano, valido por ate 2 anos e renovavel. Cidadaos da UE nao usam esse esquema, pois ja tem liberdade de estabelecimento."
+        "area": "Negocios, financas e dados",
+        "advice": "Demanda solida em analise de dados, business intelligence e financas. Business Intelligence Manager e Communication Officer entraram na Lista Positiva em 2026. Para perfis fora da lista, o Pay Limit Scheme (DKK 552.000/ano) abre porta independentemente da ocupacao."
       },
       {
-        "area": "Cidadaos da UE/EEE e Suica",
-        "advice": "Acesso mais simples de todos: podem entrar e comecar a trabalhar imediatamente, sem work permit. Para estadias acima de tres meses, solicitar o registration certificate (certificado de registro) no nyidanmark.dk antes de expirar a estadia legal."
+        "area": "Empreendedores e autonomos",
+        "advice": "O esquema Start-up Denmark e a via para nao-europeus que querem abrir negocio inovador e escalavel, idealmente em alta tecnologia ou energia verde. Negocios tradicionais como restaurantes, varejo e consultoria normalmente nao sao elegiveis. O plano de negocios e avaliado por um painel de especialistas e a cota anual gira em torno de 75 aprovacoes."
       }
     ],
     "salaries": [
       {
-        "role": "Salario medio geral (Dinamarca)",
-        "range": "Cerca de DKK 47.000/mes bruto (mediana ~DKK 44.500)",
+        "role": "Media geral (todos os setores, ganho-hora padronizado)",
+        "range": "DKK 315,92 por hora (2024); crescimento de +3,2% no 1o trimestre de 2026",
         "source": {
-          "label": "Danmarks Statistik (referencia oficial de salarios)",
+          "label": "Danmarks Statistik (Statistics Denmark) - Earnings",
           "url": "https://www.dst.dk/en/Statistik/emner/arbejde-og-indkomst/indkomst-og-loen/loen",
           "official": true
         }
       },
       {
-        "role": "Engenheiro de software",
-        "range": "Junior ~DKK 38.000-45.000/mes; pleno ~DKK 52.000-62.000; senior ~DKK 68.000-90.000 (bruto)",
+        "role": "Desenvolvedor/engenheiro de software (junior, ate 2 anos)",
+        "range": "DKK 400.000 a 500.000 por ano",
         "source": {
-          "label": "Glassdoor / Levels.fyi (comunidade, nao oficial)",
-          "url": "https://www.glassdoor.com/Salaries/copenhagen-denmark-software-engineer-salary-SRCH_IL.0,18_IM958_KO19,36.htm",
-          "official": true
-        }
-      },
-      {
-        "role": "Desenvolvedor de software",
-        "range": "Cerca de DKK 45.000-65.000/mes em posicoes permanentes",
-        "source": {
-          "label": "Glassdoor (comunidade, nao oficial)",
+          "label": "Glassdoor / IT-Jobs-DK (referencia de mercado)",
           "url": "https://www.glassdoor.com/Salaries/copenhagen-denmark-software-developer-salary-SRCH_IL.0,18_IM958_KO19,37.htm",
           "official": true
         }
       },
       {
-        "role": "Enfermeiro(a) registrado(a)",
-        "range": "Base ~DKK 30.000-42.000+/mes (cerca de DKK 400.000-500.000/ano), mais adicionais de turno",
+        "role": "Engenheiro de software (pleno, 2 a 5 anos)",
+        "range": "DKK 500.000 a 650.000 por ano",
         "source": {
-          "label": "Glassdoor / PayScale (comunidade, nao oficial)",
-          "url": "https://www.glassdoor.com/Salaries/denmark-registered-nurse-salary-SRCH_IL.0,7_IN63_KO8,24.htm",
+          "label": "Glassdoor / IT-Jobs-DK (referencia de mercado)",
+          "url": "https://www.it-jobs-dk.com/software-engineer-salary-denmark/",
           "official": true
         }
       },
       {
-        "role": "Piso salarial para work permit (Pay Limit Scheme ordinario)",
-        "range": "DKK 552.000/ano (minimo legal para o esquema em 2026)",
+        "role": "Engenheiro de software (senior, +5 anos)",
+        "range": "DKK 650.000 a 800.000 por ano",
         "source": {
-          "label": "New to Denmark (SIRI / nyidanmark.dk, oficial)",
-          "url": "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Work/Pay-limit-scheme",
+          "label": "Glassdoor / IT-Jobs-DK (referencia de mercado)",
+          "url": "https://www.it-jobs-dk.com/software-engineer-salary-denmark/",
           "official": true
         }
       },
       {
-        "role": "Piso salarial Supplementary Pay Limit Scheme",
-        "range": "DKK 446.000/ano em 2026 (esquema suplementar, com regras mais rigidas)",
+        "role": "Engenheiro especializado (entrada)",
+        "range": "DKK 45.000 a 50.000 por mes",
         "source": {
-          "label": "Bird & Bird (sintese de fonte oficial)",
-          "url": "https://www.twobirds.com/en/insights/2026/denmark/udenlandsk-arbejdskraft---nye-bel%C3%B8bsgr%C3%A6nser-under-bel%C3%B8bsordningerne-og-opdateret-positivlister",
+          "label": "Edstellar / referencia de mercado",
+          "url": "https://www.edstellar.com/blog/skills-in-demand-in-denmark",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE/EEE e da Suica nao precisam de work permit: entram e comecam a trabalhar de imediato, e so precisam solicitar o registration certificate no nyidanmark.dk se a estadia ultrapassar tres meses. Para nacionais de fora do bloco, as principais vias em 2026 sao: (1) Pay Limit Scheme, que concede permit quando ha oferta com salario anual de pelo menos DKK 552.000 (limite que subiu DKK 38.000 em janeiro de 2026); (2) Supplementary Pay Limit Scheme, com piso menor (DKK 446.000) porem regras mais duras, incluindo divulgacao publica da vaga e desemprego nacional abaixo de certo nivel; (3) Fast-track Scheme, para empresas certificadas, com processamento mais rapido e a mesma via salarial; e (4) as Positive Lists, que permitem permit a quem tem oferta numa profissao em escassez (cerca de 180 cargos na lista de ensino superior e cerca de 47 a 54 na lista de trabalho qualificado, ambas atualizadas em 1 de janeiro e 1 de julho). Em todos os esquemas o salario e os termos devem corresponder aos padroes dinamarqueses, aferidos pelo registro de salarios da Danmarks Statistik, e o salario deve ser pago em conta bancaria dinamarquesa em nome do trabalhador (aberta em ate 180 dias). Profissoes regulamentadas, como enfermagem e social/health care, exigem autorizacao dinamarquesa (autorisation) para exercer. Os novos pisos valem so para primeiros pedidos; renovacoes seguem o limite vigente na concessao original. Para empreender, nao europeus usam o Start-up Denmark (plano de negocio inovador avaliado por painel, cota de 75 permits/ano, valido por ate 2 anos e renovavel por 3 de cada vez), nos setores-chave Tech, Cleantech, Life science, Food, Maritime e Design e Inovacao.",
+    "foreignerRules": "Cidadaos da UE, EEE e Suica podem trabalhar imediatamente, mas devem se registrar na SIRI se permanecerem mais de tres meses (certificado de registro). Para nacionais de fora da UE, e necessaria residencia e autorizacao de trabalho concedida pela SIRI, com varias vias. Pay Limit Scheme: exige oferta com salario anual minimo de DKK 552.000 (nivel 2026), valido para qualquer ocupacao; taxa de DKK 6.810; minimo de 30 horas semanais; salario pago em conta bancaria dinamarquesa. Supplementary Pay Limit Scheme: salario minimo de DKK 446.000, com exigencia de a vaga ter sido publicada no Jobnet e no portal EURES por ao menos 2 semanas. Listas Positivas (atualizadas 2x ao ano, em janeiro e julho): permitem exigencia salarial menor quando o cargo consta na lista; em 2026 ha 180 titulos na Lista de Ensino Superior e 54 na Lista de Trabalho Especializado. Fast-Track Scheme: via mais rapida para empresas certificadas pela SIRI (requisito que cai de 20 para 10 funcionarios em tempo integral). Novo esquema de acordo coletivo (proposta de 2026): salario minimo mais baixo (DKK 300.000, nivel 2025) para nacionais de 16 paises, incluindo o BRASIL, alem de Albania, Australia, Canada, China, India, Japao, Malasia, Moldavia, Montenegro, Macedonia do Norte, Servia, Singapura, Ucrania, Reino Unido e Estados Unidos; condicionado ao desemprego bruto ajustado permanecer em ate 3,75%. Profissoes regulamentadas: cerca de 120 profissoes exigem autorizacao (medico, enfermeiro, professor municipal, entre outras); para sete profissoes ha reconhecimento automatico sob regras da UE. ALERTA: a cota de autorizacao para enfermeiros e medicos esta fixada em ZERO ate 31 de dezembro de 2026, impedindo concessao de residencia a quem busca essa autorizacao. Empreendedores nao-UE usam o Start-up Denmark (negocio inovador e escalavel aprovado por painel de especialistas; permissao de ate 2 anos, renovavel).",
     "opportunityWindows": [
-      "Positive Lists atualizadas em 1 de janeiro e 1 de julho: vale conferir cada nova versao, pois cargos entram e saem (em 2026 a lista de ensino superior tem ~180 cargos e a de trabalho qualificado ~47-54)",
-      "TI, ciberseguranca e dados seguem como a via mais aberta para nao europeus, tanto pela Positive List quanto pelos salarios altos que cruzam o Pay Limit Scheme",
-      "Energia verde e eolica offshore, prioridade estrategica nacional, sustentam demanda mesmo em desaceleracao",
-      "Trades qualificados (eletricista, encanador, soldador) com falta estrutural na construcao civil",
-      "Start-up Denmark com cota anual de 75 permits e janela de submissao continua (avaliacoes suspensas em julho); planejar envio fora dessa pausa",
-      "Saude: quem inicia cedo o reconhecimento de diploma e o dinamarques se posiciona para a falta estrutural de enfermeiros"
+      "Listas Positivas atualizadas em janeiro de 2026: 180 titulos no ensino superior e 54 em trabalho especializado, com revisao seguinte em julho; conferir o titulo exato no nyidanmark.dk antes de aplicar",
+      "Proposta do esquema de acordo coletivo de 2026 inclui o Brasil entre os 16 paises com limite salarial reduzido (DKK 300.000), uma porta nova e relevante para brasileiros",
+      "Reducao do requisito de empresas certificadas no Fast-Track de 20 para 10 funcionarios, ampliando o numero de empregadores aptos a contratar estrangeiros com agilidade",
+      "Demanda persistente e estrutural em TI, ciberseguranca, engenharia e energia verde mantem aberta a via da Lista Positiva e do Pay Limit Scheme",
+      "Isencao para eventos (desde 19/12/2025): nacionais de terceiros paises podem trabalhar em conferencias e feiras com mais de 400 participantes por ate 10 dias uteis sem autorizacao",
+      "Janela de atencao: cota zero para autorizacao de enfermeiros e medicos nao-UE vigora ate 31/12/2026, entao quem mira saude deve aguardar a eventual reabertura"
     ],
     "jobBoards": [
       {
-        "label": "Workindenmark (portal oficial de vagas em ingles, parte do Ministerio do Emprego / EURES)",
-        "url": "https://www.workindenmark.dk/",
+        "label": "Workindenmark (portal oficial do governo para profissionais internacionais)",
+        "url": "https://www.workindenmark.dk",
         "official": true
       },
       {
-        "label": "Jobnet / STAR (Styrelsen for Arbejdsmarked og Rekruttering, servico publico de emprego)",
-        "url": "https://job.jobnet.dk/",
+        "label": "Jobnet (banco de vagas oficial da STAR / Agencia do Mercado de Trabalho)",
+        "url": "https://job.jobnet.dk",
         "official": true
       },
       {
-        "label": "EURES (portal europeu de mobilidade laboral, vagas e condicoes na Dinamarca)",
-        "url": "https://eures.europa.eu/index_en",
+        "label": "EURES (rede oficial europeia de mobilidade no emprego)",
+        "url": "https://eures.europa.eu",
         "official": true
       },
       {
-        "label": "New to Denmark / nyidanmark.dk (SIRI, autoridade de imigracao para vistos e permits)",
-        "url": "https://www.nyidanmark.dk/en-GB",
+        "label": "Nyidanmark.dk (SIRI - autorizacoes de trabalho e residencia)",
+        "url": "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Work",
         "official": true
       },
       {
         "label": "Start-up Denmark (programa oficial para empreendedores estrangeiros)",
-        "url": "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Work/Start-up-Denmark",
+        "url": "https://startupdenmarkprogramme.dk",
+        "official": true
+      },
+      {
+        "label": "Life in Denmark (portal oficial do cidadao - borger.dk)",
+        "url": "https://lifeindenmark.borger.dk/working/finding-a-job",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "New to Denmark (nyidanmark.dk) - Positive List for Skilled Work",
-        "url": "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Work/The-Positive-Lists/Positive-List-for-skilled-work",
-        "official": true
-      },
-      {
-        "label": "New to Denmark (nyidanmark.dk) - Pay Limit Scheme",
-        "url": "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Work/Pay-limit-scheme",
-        "official": true
-      },
-      {
-        "label": "New to Denmark (nyidanmark.dk) - Start-up Denmark",
-        "url": "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Work/Start-up-Denmark",
-        "official": true
-      },
-      {
-        "label": "Workindenmark - Residence and work permit",
-        "url": "https://www.workindenmark.dk/getting-started/rules-and-regulations/residence-and-work-permit",
-        "official": true
-      },
-      {
-        "label": "Danmarks Statistik - desemprego e emprego",
-        "url": "https://www.dst.dk/en/Statistik/emner/arbejde-og-indkomst/beskaeftigelse-og-arbejdsloeshed",
-        "official": true
-      },
-      {
-        "label": "Danmarks Statistik - salarios (Earnings)",
+        "label": "Danmarks Statistik (Statistics Denmark) - Earnings",
         "url": "https://www.dst.dk/en/Statistik/emner/arbejde-og-indkomst/indkomst-og-loen/loen",
         "official": true
       },
       {
-        "label": "EURES - Living and working conditions: Denmark",
-        "url": "https://eures.europa.eu/living-and-working/living-and-working-conditions-europe/living-and-working-conditions-denmark_en",
+        "label": "Danmarks Statistik - Unemployment / Employment",
+        "url": "https://www.dst.dk/en/Statistik/emner/arbejde-og-indkomst/beskaeftigelse-og-arbejdsloeshed",
         "official": true
       },
       {
-        "label": "Bird & Bird - novos limites salariais e Positive Lists 2026",
-        "url": "https://www.twobirds.com/en/insights/2026/denmark/udenlandsk-arbejdskraft---nye-bel%C3%B8bsgr%C3%A6nser-under-bel%C3%B8bsordningerne-og-opdateret-positivlister",
+        "label": "Nyidanmark.dk (SIRI) - Pay Limit Scheme",
+        "url": "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Work/Pay-limit-scheme",
+        "official": true
+      },
+      {
+        "label": "Nyidanmark.dk (SIRI) - Positive List for skilled work",
+        "url": "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Work/The-Positive-Lists",
+        "official": true
+      },
+      {
+        "label": "Nyidanmark.dk (SIRI) - Fast-Track Scheme",
+        "url": "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Work/Fast-track",
+        "official": true
+      },
+      {
+        "label": "Nyidanmark.dk (SIRI) - Start-up Denmark",
+        "url": "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Work/Start-up-Denmark",
+        "official": true
+      },
+      {
+        "label": "Nyidanmark.dk (SIRI) - Authorisation (regulated professions)",
+        "url": "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Work/Authorisation/Authorisation",
+        "official": true
+      },
+      {
+        "label": "Workindenmark - Sectors with high demand",
+        "url": "https://www.workindenmark.dk/working-in-denmark/sectors-with-high-demand",
+        "official": true
+      },
+      {
+        "label": "Workindenmark - Authorisation for regulated professions",
+        "url": "https://www.workindenmark.dk/getting-started/rules-and-regulations/authorisation-for-regulated-professions",
+        "official": true
+      },
+      {
+        "label": "UFM - Recognition of regulated professions (EU rules)",
+        "url": "https://ufm.dk/en/education/recognition-and-transparency/regulated-professions/applications-under-eu-rules",
+        "official": true
+      },
+      {
+        "label": "Trading Economics - Denmark Unemployment Rate (dados Danmarks Statistik)",
+        "url": "https://tradingeconomics.com/denmark/unemployment-rate",
         "official": false
       },
       {
-        "label": "Deloitte - Immigration News January 2026 (Dinamarca)",
+        "label": "Deloitte - Danish Immigration News January 2026",
         "url": "https://www.deloitte.com/dk/en/services/tax/perspectives/immigration-news-january-2026.html",
         "official": false
       },
@@ -3281,18 +3180,18 @@ export const LABOR_MARKET: LaborMarketMap = {
         "official": false
       },
       {
-        "label": "Bloomberg - Danish Jobs Drop / Novo Nordisk cuts (abril 2026)",
+        "label": "Erickson Immigration Group - Denmark eases work permit rules for 16 countries",
+        "url": "https://eiglaw.com/denmark-eases-work-permit-rules-for-nationals-of-16-countries/",
+        "official": false
+      },
+      {
+        "label": "Bloomberg - Novo Nordisk layoffs and Danish jobs data",
         "url": "https://www.bloomberg.com/news/articles/2026-04-28/danish-jobs-drop-snapping-growth-streak-as-novo-cuts-hit-data",
         "official": false
       },
       {
-        "label": "The Local Denmark - cortes de grandes empresas dinamarquesas em 2026",
-        "url": "https://www.thelocal.dk/20260317/key-points-which-major-danish-companies-have-announced-job-cuts-in-2026",
-        "official": false
-      },
-      {
-        "label": "Glassdoor - salarios de software e enfermagem (Dinamarca, 2026)",
-        "url": "https://www.glassdoor.com/Salaries/copenhagen-denmark-software-engineer-salary-SRCH_IL.0,18_IM958_KO19,36.htm",
+        "label": "The Copenhagen Post - Novo Nordisk layoffs push Danish employment down",
+        "url": "https://cphpost.dk/2026-04-28/news/round-up/novo-nordisk-layoffs-push-danish-employment-down-for-first-time-in-18-months/",
         "official": false
       }
     ]
@@ -3523,470 +3422,427 @@ export const LABOR_MARKET: LaborMarketMap = {
   },
   "ie": {
     "updatedAt": "2026-06-22",
-    "overview": "A Irlanda chega a meados de 2026 com um mercado de trabalho ainda aquecido, mas em ajuste. Segundo a Pesquisa de Força de Trabalho do CSO (Central Statistics Office) referente ao 1o trimestre de 2026, o emprego total alcancou 2.794.500 pessoas e a taxa de desemprego ficou em 4,9%, patamar baixo para os padroes europeus, embora acima dos 4,3% registrados um ano antes. A taxa de emprego entre 15 e 64 anos recuou de 74,7% para 73,3% no periodo. O retrato setorial mostra dois movimentos opostos: a Construcao foi o setor que mais cresceu, com 20.500 novos postos (+11,7%), puxada pela meta governamental de entregar 300 mil moradias ate 2030, enquanto Informacao e Comunicacao foi o que mais encolheu, com queda de 20.300 vagas (-10,7%), concentrada em programacao e consultoria de TI.\n\nApesar dos cortes pontuais em tecnologia, o pais segue marcado por escassez de mao de obra qualificada. Levantamentos de mercado apontam que cerca de 76% dos empregadores irlandeses relatam dificuldade para preencher vagas, um dos indices mais altos da Europa, e o problema e descrito menos como falta de empregos e mais como falta de competencias. Saude, construcao, engenharia e areas de tecnologia de ponta como ciberseguranca permanecem com demanda firme. Os salarios continuaram subindo: o ganho medio semanal chegou a 1.074,61 euros no 1o trimestre de 2026, alta de 4,4% em doze meses, acima da inflacao. Para o estrangeiro, o cenario combina abertura via Critical Skills Employment Permit e listas de ocupacoes ampliadas em 2026 com exigencias salariais mais rigorosas a partir de 1o de marco de 2026.",
+    "overview": "A Irlanda combina pleno emprego técnico com um mercado seletivo para quem chega de fora. No primeiro trimestre de 2026, o emprego total atingiu 2.794.500 pessoas e a taxa de desemprego ficou em 4,9% (contra 4,3% um ano antes), segundo o Labour Force Survey do CSO. A força de trabalho cresceu apenas 0,6% no ano, o menor avanço em cinco anos, sinal de um mercado mais apertado depois de anos de expansão acelerada. O retrato setorial está dividido: a construção foi o grande motor, com mais 20.500 postos (+11,7%) em doze meses, enquanto Informação e Comunicação recuou 20.300 postos (-10,7%), refletindo o ajuste do setor de tecnologia após a euforia pós-pandemia. Para o imigrante qualificado, a porta principal continua sendo o Critical Skills Employment Permit, que dispensa teste de mercado de trabalho, libera o cônjuge para trabalhar e abre caminho mais curto para residência permanente. Os grupos ocupacionais com maior escassez, segundo o EURES e o Departamento de Empresa, são profissionais de ciência e engenharia, de tecnologia da informação e da saúde. Para quem quer empreender, a Irlanda mantém o Start-up Entrepreneur Programme, voltado a fundadores não-europeus com projetos inovadores e financiamento mínimo de 50 mil euros.",
     "hotSectors": [
-      "Saude e assistencia social (mais de 7.500 vagas na HSE, incluindo 3.400+ de enfermagem)",
-      "Construcao civil e engenharia (setor que mais cresceu, +11,7% no 1o tri 2026; meta de 300 mil moradias ate 2030)",
-      "Tecnologia de ponta e ciberseguranca (ciberseguranca com vacancias medias de 18+ meses)",
-      "Engenharia (civil, estrutural, mecanica, eletrica, eletronica)",
-      "Farmaceutico e ciencias da vida (cientistas quimicos e biologicos em manufatura)",
-      "Servicos financeiros e profissionais (contadores, atuarios, analistas)",
-      "Agroalimentar e transporte (novas ocupacoes adicionadas em 2026)"
+      "Construção e habitação (meta de 300 mil casas até 2030, déficit estimado de 50 mil trabalhadores)",
+      "Saúde e enfermagem (HSE com cerca de 7.500 vagas em enfermagem, parteiras e profissões aliadas)",
+      "Tecnologia da informação de alto valor (desenvolvimento de software, cibersegurança, IA e dados de nuvem)",
+      "Engenharia (civil, mecânica, elétrica, eletrônica e química)",
+      "Serviços financeiros e profissionais, científicos e técnicos (maiores taxas de vagas em aberto)",
+      "Agroalimentar e setores regionais (novas ocupações abertas em maio de 2026, como agrônomo)"
     ],
     "coolingSectors": [
-      "Informacao e Comunicacao / TI generalista (queda de 20.300 postos, -10,7% no 1o tri 2026)",
-      "Programacao e consultoria de TI (recuo de 16.200 vagas no periodo)",
-      "Trabalho remoto integral (home office recuou 4,3% com retorno presencial superando o nivel pre-pandemia)"
+      "Informação e Comunicação (queda de 20.300 postos, -10,7% no ano até o 1º tri de 2026, com ajuste das big techs)",
+      "Funções de tecnologia generalistas e juniores sem especialização (vagas de cibersegurança e software sênior seguem abertas, mas o nível de entrada esfriou)"
     ],
     "inDemandRoles": [
       {
-        "role": "Enfermeiros e parteiras registrados",
-        "note": "Mais de 3.400 vagas de enfermagem na HSE; constam na Critical Skills List"
+        "role": "Enfermeiro(a) registrado(a) (geral, saúde mental, parteira, UTI, centro cirúrgico)",
+        "note": "Vaga em hospitais públicos acima de 10%; exige registro no NMBI. Consta na Critical Skills."
       },
       {
-        "role": "Medicos (clinicos gerais e especialistas)",
-        "note": "Medical practitioners na Critical Skills List; envelhecimento populacional pressiona demanda"
+        "role": "Desenvolvedor(a) de software e engenheiro(a) de software",
+        "note": "Topo da lista de habilidades mais procuradas; elegível ao Critical Skills Employment Permit."
       },
       {
-        "role": "Desenvolvedores de software e profissionais de programacao",
-        "note": "Apesar de cortes em TI generalista, perfis especializados seguem na Critical Skills List"
+        "role": "Especialista em cibersegurança",
+        "note": "Uma das funções mais difíceis de preencher, com vagas que ficam abertas 18 meses ou mais."
       },
       {
-        "role": "Analistas e especialistas em ciberseguranca",
-        "note": "Apontada como a competencia mais dificil de recrutar, com vacancias de 18+ meses"
+        "role": "Engenheiro(a) civil, mecânico(a), elétrico(a), eletrônico(a) e químico(a)",
+        "note": "Grupo de ciência e engenharia lidera a escassez segundo EURES."
       },
       {
-        "role": "Engenheiros de dados",
-        "note": "Forte demanda em tecnologia de ponta"
+        "role": "Profissional de obras: gestor de canteiro, planejador/programador de construção",
+        "note": "Planejador/Programador de Construção entrou no Critical Skills em maio de 2026."
       },
       {
-        "role": "Engenheiros civis, estruturais e de obra (site engineers)",
-        "note": "Critical Skills List; impulsionados pelo plano habitacional"
+        "role": "Contador(a) qualificado(a) e atuário(a)",
+        "note": "Escassez persistente em finanças; consta na Critical Skills."
       },
       {
-        "role": "Engenheiros mecanicos, eletricos e eletronicos",
-        "note": "Critical Skills List, incluindo design de chips e automacao"
+        "role": "Arquiteto(a) e medidor(a) de quantidades (quantity surveyor)",
+        "note": "Demanda puxada pelo plano nacional de habitação."
       },
       {
-        "role": "Eletricistas, encanadores e carpinteiros",
-        "note": "Setor precisa de 50 mil trabalhadores adicionais ate 2030; trades em geral fora da Critical Skills List, mas em alta demanda"
+        "role": "Profissionais de saúde aliados: fisioterapeuta, terapeuta ocupacional, radiografista, farmacêutico(a)",
+        "note": "Constam na Critical Skills; exigem reconhecimento do conselho regulador respectivo."
       },
       {
-        "role": "Fisioterapeutas e terapeutas ocupacionais",
-        "note": "Profissionais de saude aliada na Critical Skills List"
+        "role": "Agrônomo(a), optometrista, agrimensor(a) geoespacial e profissional de propriedade intelectual",
+        "note": "Adicionados ao Critical Skills nas regras de maio de 2026."
       },
       {
-        "role": "Contadores e atuarios",
-        "note": "Chartered and certified accountants, atuarios e estatisticos na Critical Skills List"
-      },
-      {
-        "role": "Cientistas quimicos e biologicos / biochemistas",
-        "note": "Demanda do polo farmaceutico e de ciencias da vida"
-      },
-      {
-        "role": "Arquitetos e planejadores urbanos",
-        "note": "Architect e Town Planning Officer na Critical Skills List"
-      },
-      {
-        "role": "Assistentes sociais",
-        "note": "Social Worker consta na Critical Skills List"
+        "role": "Assistente de saúde e cuidador(a) domiciliar",
+        "note": "Escassez em volume; categoria com permissão setorial e salário mínimo próprio."
       }
     ],
     "byQualification": [
       {
-        "area": "Saude (enfermagem, medicina, terapias)",
-        "advice": "Setor de maior escassez do pais e o caminho mais direto para o estrangeiro. Enfermeiros, medicos, fisioterapeutas e terapeutas ocupacionais estao na Critical Skills List, o que da acesso ao permit mais vantajoso e residencia familiar imediata. Necessario registro no orgao profissional competente (NMBI para enfermeiros, Medical Council para medicos, CORU para terapias) e prova de ingles. A HSE recruta ativamente no exterior."
+        "area": "Tecnologia da informação e computação",
+        "advice": "Concentre-se em funções especializadas e seniores: desenvolvimento de software, cibersegurança, IA/machine learning, dados de nuvem e DevOps. O nível de entrada esfriou com o recuo das big techs, então chegue com portfólio sólido e mire empregadores que patrocinam o Critical Skills Employment Permit, que dispensa teste de mercado e libera o cônjuge para trabalhar."
       },
       {
-        "area": "Tecnologia e ciberseguranca",
-        "advice": "Mesmo com a contracao da TI generalista, perfis especializados como ciberseguranca, engenharia de dados e desenvolvimento senior seguem disputados e na Critical Skills List. Vale focar em empregadores estabelecidos e em nicho de alta demanda, evitando funcoes de programacao basica que sofreram cortes. Portfolio e certificacoes contam mais que diploma generico."
+        "area": "Enfermagem e saúde",
+        "advice": "Inicie cedo o registro no NMBI (enfermagem e parteira) ou no conselho regulador correspondente, pois é pré-requisito legal antes de trabalhar. A escassez é estrutural (mais de 7.500 vagas no HSE), e a maioria das funções clínicas consta na Critical Skills, com pisos salariais previsíveis nas tabelas públicas do HSE."
       },
       {
-        "area": "Engenharia",
-        "advice": "Engenheiros civis, estruturais, mecanicos, eletricos e eletronicos tem caminho solido pela Critical Skills List, reforcado pelo boom da construcao e por industrias como semicondutores e energia. Buscar reconhecimento junto a Engineers Ireland fortalece a candidatura."
+        "area": "Engenharia e ciências",
+        "advice": "Engenheiros civis, mecânicos, elétricos, eletrônicos e químicos, além de cientistas de laboratório, estão entre os grupos de maior escassez segundo o EURES. A maioria entra pelo Critical Skills; vale buscar empresas de manufatura avançada, farmacêutica e construção pesada."
       },
       {
-        "area": "Construcao e trades qualificados",
-        "advice": "A demanda e enorme (50 mil trabalhadores ate 2030), mas a maioria dos oficios de obra como eletricista, encanador e carpinteiro NAO esta na Critical Skills List, exigindo via General Employment Permit com teste de mercado de trabalho. Em 2026 foram adicionadas funcoes como planejador/programador de obra. Compensa buscar empregador disposto a patrocinar."
+        "area": "Construção e arquitetura",
+        "advice": "É o setor que mais cresce, com déficit estimado de 50 mil trabalhadores até 2030. Arquitetos, medidores de quantidades, gestores de canteiro e planejadores de construção têm rota pelo Critical Skills; ofícios manuais e funções de canteiro costumam entrar pelo General Employment Permit."
       },
       {
-        "area": "Financas, contabilidade e negocios",
-        "advice": "Contadores certificados, atuarios, economistas, estatisticos e analistas de negocio estao na Critical Skills List. Qualificacao reconhecida (ACCA, ACA, CFA) e diferencial competitivo em Dublin, polo de servicos financeiros."
+        "area": "Finanças, contabilidade e negócios",
+        "advice": "Contadores qualificados, atuários e gestores de finanças, logística e RH seguem escassos. Certificações reconhecidas internacionalmente ajudam; muitas funções qualificam ao Critical Skills, e o polo de serviços financeiros de Dublin concentra as vagas."
       },
       {
-        "area": "Ciencias da vida e farmaceutico",
-        "advice": "Cientistas quimicos, biologicos e de laboratorio medico tem demanda no forte cluster farmaceutico irlandes e constam na Critical Skills List. Mestrado/doutorado e experiencia em manufatura regulada aumentam as chances."
+        "area": "Agroalimentar e funções regionais",
+        "advice": "As regras de maio de 2026 abriram novas ocupações, como agrônomo no Critical Skills e funções agrícolas e de processamento no General Employment Permit. Boa rota para quem tem formação técnica agrícola e aceita vagas fora da grande Dublin."
       },
       {
-        "area": "Empreendedores e investidores",
-        "advice": "Quem nao tem oferta de emprego mas tem capital e ideia inovadora pode entrar pelo Start-up Entrepreneur Programme (STEP), com financiamento minimo de 50.000 euros e projeto de potencial exportador. Negocios de servico local comum nao se qualificam: o programa exige inovacao e escala internacional."
-      },
-      {
-        "area": "Baixa qualificacao / sem profissao listada",
-        "advice": "Ocupacoes na Ineligible List (como agente imobiliario, instrutor de fitness, oficial de condicional) nao geram permit. Sem profissao em demanda, o acesso ao mercado depende de ja ter direito de residencia (cidadania UE/EEE, reagrupamento familiar, estudante com permissao de trabalho) ou de migrar para uma area listada via qualificacao."
+        "area": "Empreendedores e fundadores",
+        "advice": "Quem quer abrir negócio deve avaliar o Start-up Entrepreneur Programme (STEP), voltado a projetos inovadores de alto potencial com financiamento mínimo de 50 mil euros, expectativa de criar 10 empregos e atingir 1 milhão de euros em vendas em três a quatro anos. A avaliação é trimestral pela Enterprise Ireland."
       }
     ],
     "salaries": [
       {
-        "role": "Ganho medio semanal (todos os setores)",
-        "range": "1.074,61 euros/semana (1o tri 2026, +4,4% em 12 meses)",
+        "role": "Enfermeiro(a) (Staff Nurse, HSE, início de carreira)",
+        "range": "A partir de cerca de €37.788/ano, chegando a cerca de €56.032 no topo da escala, mais incrementos por tempo de serviço e adicionais (noturno, domingo, localização)",
         "source": {
-          "label": "CSO - Earnings and Labour Costs",
-          "url": "https://www.cso.ie/en/releasesandpublications/ep/p-elcq/earningsandlabourcostsq42025finalq12026preliminaryestimates/",
+          "label": "HSE Consolidated Salary Scales (Departamento de Saúde)",
+          "url": "https://healthservice.hse.ie/staff/pay/pay-scales/",
           "official": true
         }
       },
       {
-        "role": "Ganho medio horario (todos os setores)",
-        "range": "33,13 euros/hora (1o tri 2026, +4,0% em 12 meses)",
+        "role": "Piso salarial Critical Skills Employment Permit",
+        "range": "€40.904/ano (ou €36.848 para quem se qualificou nos 12 meses anteriores), em vigor desde 1 de março de 2026",
         "source": {
-          "label": "CSO - Earnings and Labour Costs",
-          "url": "https://www.cso.ie/en/releasesandpublications/ep/p-elcq/earningsandlabourcostsq42025finalq12026preliminaryestimates/",
+          "label": "Departamento de Empresa, Comércio e Emprego (DETE)",
+          "url": "https://enterprise.gov.ie/en/news-and-events/department-news/2025/december/20251202.html",
           "official": true
         }
       },
       {
-        "role": "Informacao e Comunicacao (custo horario total de mao de obra, mais alto)",
-        "range": "62,65 euros/hora (1o tri 2026)",
+        "role": "Piso salarial General Employment Permit",
+        "range": "€36.605/ano (cerca de €18,05/hora), em vigor desde 1 de março de 2026",
         "source": {
-          "label": "CSO - Earnings and Labour Costs",
-          "url": "https://www.cso.ie/en/releasesandpublications/ep/p-elcq/earningsandlabourcostsq42025finalq12026preliminaryestimates/",
+          "label": "Departamento de Empresa, Comércio e Emprego (DETE)",
+          "url": "https://enterprise.gov.ie/en/news-and-events/department-news/2025/december/20251202.html",
           "official": true
         }
       },
       {
-        "role": "Acomodacao e Alimentacao (custo horario total, mais baixo)",
-        "range": "20,39 euros/hora (1o tri 2026)",
+        "role": "Piso salarial setorial (processadores de carne, horticultura, assistentes de saúde e cuidadores domiciliares)",
+        "range": "€32.691/ano, em vigor desde 1 de março de 2026",
         "source": {
-          "label": "CSO - Earnings and Labour Costs",
-          "url": "https://www.cso.ie/en/releasesandpublications/ep/p-elcq/earningsandlabourcostsq42025finalq12026preliminaryestimates/",
-          "official": true
-        }
-      },
-      {
-        "role": "Educacao (ganho medio semanal)",
-        "range": "1.133,29 euros/semana (1o tri 2026, +6,7%)",
-        "source": {
-          "label": "CSO - Earnings and Labour Costs",
-          "url": "https://www.cso.ie/en/releasesandpublications/ep/p-elcq/earningsandlabourcostsq42025finalq12026preliminaryestimates/",
-          "official": true
-        }
-      },
-      {
-        "role": "Servicos administrativos e de apoio (ganho medio semanal)",
-        "range": "848,65 euros/semana (1o tri 2026, +7,7%)",
-        "source": {
-          "label": "CSO - Earnings and Labour Costs",
-          "url": "https://www.cso.ie/en/releasesandpublications/ep/p-elcq/earningsandlabourcostsq42025finalq12026preliminaryestimates/",
-          "official": true
-        }
-      },
-      {
-        "role": "Engenheiro de software (referencia de mercado)",
-        "range": "50.000 a 70.000 euros/ano (varia muito por senioridade e fonte)",
-        "source": {
-          "label": "Morgan McKinley Salary Guide (comunidade, nao oficial)",
-          "url": "https://www.morganmckinley.com/ie/salary-guide/data/software-engineer/ireland",
-          "official": true
-        }
-      },
-      {
-        "role": "Salario minimo nacional",
-        "range": "14,15 euros/hora (cerca de 28.696 euros/ano) desde 01/01/2026",
-        "source": {
-          "label": "Citizens Information (oficial)",
-          "url": "https://www.citizensinformation.ie/en/employment/employment-rights-and-conditions/pay-and-employment/minimum-wage/",
+          "label": "Departamento de Empresa, Comércio e Emprego (DETE)",
+          "url": "https://enterprise.gov.ie/en/news-and-events/department-news/2025/december/20251202.html",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE, do EEE e da Suica trabalham na Irlanda sem necessidade de permit. Para nacionais de fora desse bloco, o sistema central e o de Employment Permits do Department of Enterprise, Tourism and Employment (DETE). O principal e o Critical Skills Employment Permit, voltado a ocupacoes da Critical Skills Occupations List (saude, TI especializada, engenharia, ciencias, financas, arquitetura): permite trazer a familia desde o inicio e abre caminho mais rapido para residencia de longo prazo. Os limites salariais foram elevados em 1o de marco de 2026: cerca de 40.904 euros/ano para ocupacoes listadas pela rota padrao, 36.848 euros para recem-formados elegiveis de instituicoes irlandesas em ocupacoes listadas, e acima de 68.911 euros para funcoes nao listadas (desde que fora da Ineligible List). O General Employment Permit cobre ocupacoes fora da lista critica, com salario minimo que subiu de 34.000 para 36.605 euros a partir de 1o de marco de 2026 e, em regra, exige o Labour Market Needs Test (comprovar que nao havia candidato da UE/EEE). O DETE reforcou em 2026 a fiscalizacao contra salary padding: o salario-base do contrato deve atingir o piso sozinho, sem somar bonus, horas extras ou beneficios. Em 2026, 32 mudancas ampliaram as listas, adicionando funcoes em construcao, saude, transporte e agroalimentar, e cinco ocupacoes sairam da Ineligible List (entre elas tecnicos farmaceuticos e dentarios e trabalhadores florestais). O salario minimo nacional e de 14,15 euros/hora desde 1o de janeiro de 2026 (cerca de 28.696 euros/ano). Profissoes regulamentadas exigem registro no orgao competente antes de exercer: enfermeiros e parteiras no NMBI, medicos no Medical Council, fisioterapeutas e terapeutas no CORU, engenheiros via Engineers Ireland, alem de prova de proficiencia em ingles. Para empreender sem oferta de emprego existe o Start-up Entrepreneur Programme (STEP), com financiamento minimo de 50.000 euros (mais 30.000 por cofundador adicional) e exigencia de negocio inovador, com potencial de exportacao, capaz de gerar cerca de 10 empregos e 1 milhao de euros em vendas em tres a quatro anos; concede residencia inicial de 2 anos, renovavel por mais 3, com caminho a residencia de longo prazo.",
+    "foreignerRules": "Cidadãos da UE/EEE, Suíça e Reino Unido trabalham livremente, sem permissão. Não europeus precisam de uma employment permit do Departamento de Empresa, Comércio e Emprego (DETE). A principal é o Critical Skills Employment Permit, para profissões da Critical Skills Occupations List (TI, saúde, engenharia, ciência, finanças, construção qualificada), com piso de €40.904/ano (€36.848 para recém-formados) desde 1 de março de 2026; dispensa teste de mercado de trabalho, permite que o cônjuge trabalhe via Stamp 1G e dá caminho mais rápido à residência. Para profissões fora dessa lista vale o General Employment Permit, com piso de €36.605/ano e, em geral, teste de mercado de trabalho exigido. Há ainda pisos setoriais (€32.691) para processamento de carne, horticultura, assistentes de saúde e cuidadores domiciliares. Os pisos sobem de forma gradual até 2030. Em maio de 2026 (Employment Permits (Amendment) Regulations 2026, em vigor desde 22 de maio), foram feitas 32 mudanças, incluindo seis novas funções no Critical Skills (como agrônomo, planejador/programador de construção, optometrista, agrimensor geoespacial, profissional de propriedade intelectual e rigger da indústria de jogos) e nova abertura de funções no General Permit. Profissões regulamentadas exigem reconhecimento antes de exercer: enfermeiros e parteiras devem registrar-se no NMBI (Nursing and Midwifery Board of Ireland), e médicos, farmacêuticos, fisioterapeutas e demais profissões de saúde nos respectivos conselhos. Para empreender, o Start-up Entrepreneur Programme (STEP) concede residência a fundadores não europeus com projeto inovador de alto potencial, financiamento mínimo de €50.000, taxa de €350 e avaliação trimestral pela Enterprise Ireland; a residência inicial é de dois anos, renovável por mais três.",
     "opportunityWindows": [
-      "Plano habitacional Housing for All: necessidade de 50 mil trabalhadores adicionais na construcao ate 2030, abrindo vagas continuas em engenharia e trades qualificados",
-      "Escassez critica na saude: mais de 7.500 vagas na HSE (3.400+ de enfermagem), com recrutamento internacional ativo e perfis na Critical Skills List",
-      "Ampliacao das listas de ocupacoes em 2026: 32 mudancas adicionaram funcoes em construcao, saude, transporte e agroalimentar, e 5 ocupacoes sairam da Ineligible List",
-      "Ciberseguranca com vacancias medias de 18+ meses, indicando janela longa para profissionais especializados",
-      "Pressao salarial favoravel: 80% dos empregadores preveem aumentos em 2026 (media de 3,1%), com ganhos medios subindo acima da inflacao",
-      "Recem-formados de instituicoes irlandesas em ocupacoes listadas tem piso salarial reduzido (36.848 euros) no Critical Skills Permit"
+      "Construção em alta acelerada (+11,7% no emprego em um ano) puxada pela meta de 300 mil casas até 2030",
+      "Vagas crônicas de enfermagem no HSE (cerca de 7.500 abertas, taxa acima de 10% em hospitais públicos)",
+      "Cibersegurança com vagas abertas por 18 meses ou mais, indicando escassez aguda e poder de negociação para o candidato",
+      "Janela das regras de maio de 2026: novas ocupações elegíveis ao Critical Skills e ao General Employment Permit em construção, saúde, transporte e agroalimentar",
+      "Funções de ciência, engenharia e TI de alto valor seguem em escassez estrutural segundo EURES e DETE",
+      "STEP aberto a aplicações o ano todo, com avaliação trimestral, para fundadores não europeus com projetos inovadores"
     ],
     "jobBoards": [
       {
-        "label": "JobsIreland.ie - servico publico de emprego (Intreo / Department of Social Protection)",
-        "url": "https://jobsireland.ie",
+        "label": "JobsIreland (serviço público de emprego do Departamento de Proteção Social)",
+        "url": "https://www.jobsireland.ie",
         "official": true
       },
       {
-        "label": "EURES - portal europeu de mobilidade de trabalho",
+        "label": "EURES Portal Europeu de Mobilidade Profissional (vagas em Irlanda)",
         "url": "https://eures.europa.eu",
         "official": true
       },
       {
-        "label": "gov.ie - EURES: como encontrar trabalho na Irlanda",
-        "url": "https://www.gov.ie/en/department-of-social-protection/publications/eures-how-to-find-work-in-ireland/",
+        "label": "Department of Enterprise, Trade and Employment (sistema de Employment Permits)",
+        "url": "https://enterprise.gov.ie/en/what-we-do/workplace-and-skills/employment-permits/",
         "official": true
       },
       {
-        "label": "HSE - carreiras no servico de saude irlandes",
-        "url": "https://www.hse.ie/eng/staff/jobs/",
+        "label": "Immigration Service Delivery (vistos e Start-up Entrepreneur Programme)",
+        "url": "https://www.irishimmigration.ie",
         "official": true
       },
       {
-        "label": "publicjobs.ie - vagas no servico publico irlandes",
-        "url": "https://www.publicjobs.ie",
+        "label": "HSE Careers (vagas em saúde no serviço público)",
+        "url": "https://www.hse.ie/eng/careers/",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "CSO - Labour Force Survey Q1 2026 (Key Findings)",
+        "label": "CSO Labour Force Survey Q1 2026 (Key Findings)",
         "url": "https://www.cso.ie/en/releasesandpublications/ep/p-lfs/labourforcesurveyquarter12026/keyfindings/",
         "official": true
       },
       {
-        "label": "CSO - Earnings and Labour Costs Q4 2025 / Q1 2026",
-        "url": "https://www.cso.ie/en/releasesandpublications/ep/p-elcq/earningsandlabourcostsq42025finalq12026preliminaryestimates/",
-        "official": true
-      },
-      {
-        "label": "DETE - Critical Skills Employment Permit",
-        "url": "https://enterprise.gov.ie/en/what-we-do/workplace-and-skills/employment-permits/permit-types/critical-skills-employment-permit/",
-        "official": true
-      },
-      {
-        "label": "DETE - Critical Skills (Highly Skilled Eligible) Occupations List",
+        "label": "DETE Critical Skills Occupations List",
         "url": "https://enterprise.gov.ie/en/what-we-do/workplace-and-skills/employment-permits/employment-permit-eligibility/highly-skilled-eligible-occupations-list/",
         "official": true
       },
       {
-        "label": "DETE - Labour Market Needs Test",
-        "url": "https://enterprise.gov.ie/en/what-we-do/workplace-and-skills/employment-permits/employment-permit-eligibility/labour-market-needs-test/",
+        "label": "DETE Critical Skills Employment Permit (tipo de permissão)",
+        "url": "https://enterprise.gov.ie/en/what-we-do/workplace-and-skills/employment-permits/permit-types/critical-skills-employment-permit/",
         "official": true
       },
       {
-        "label": "DETE - Latest employment permits updates",
+        "label": "DETE roadmap de pisos salariais de Employment Permits (dez/2025, vigência 1 mar 2026)",
+        "url": "https://enterprise.gov.ie/en/news-and-events/department-news/2025/december/20251202.html",
+        "official": true
+      },
+      {
+        "label": "DETE atualizações recentes de Employment Permits",
         "url": "https://enterprise.gov.ie/en/what-we-do/workplace-and-skills/employment-permits/latest-updates/",
         "official": true
       },
       {
-        "label": "ISD (Immigration Service Delivery) - Start-up Entrepreneur Programme (STEP)",
+        "label": "EURES Labour Market Information: Ireland",
+        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-ireland_en",
+        "official": true
+      },
+      {
+        "label": "Immigration Service Delivery Start-up Entrepreneur Programme (STEP)",
         "url": "https://www.irishimmigration.ie/coming-to-work-in-ireland/what-are-my-options-for-working-in-ireland/coming-to-work-for-more-than-90-days/start-up-entrepreneur-programme-step/",
         "official": true
       },
       {
-        "label": "Citizens Information - Minimum wage",
-        "url": "https://www.citizensinformation.ie/en/employment/employment-rights-and-conditions/pay-and-employment/minimum-wage/",
+        "label": "HSE Pay Scales (tabelas salariais do serviço de saúde)",
+        "url": "https://healthservice.hse.ie/staff/pay/pay-scales/",
         "official": true
       },
       {
-        "label": "Citizens Information - Coming to set up a business in Ireland",
-        "url": "https://www.citizensinformation.ie/en/moving-country/working-in-ireland/migrant-workers/coming-to-set-up-a-business-in-ireland/",
+        "label": "Citizens Information: General Employment Permit",
+        "url": "https://www.citizensinformation.ie/en/moving-country/working-in-ireland/employment-permits/work-permits/",
         "official": true
       },
       {
-        "label": "RTE - Increase in unemployment amid drop in tech jobs (CSO)",
+        "label": "RTE/CSO: aumento do desemprego com queda em empregos de tech (mai/2026)",
         "url": "https://www.rte.ie/news/business/2026/0521/1574502-cso-labour-survey-q1/",
-        "official": false
-      },
-      {
-        "label": "RTE - Average earnings up to 1.074 a week in 2026 (CSO)",
-        "url": "https://www.rte.ie/news/business/2026/0526/1575315-cso-earnings-q1-2026/",
-        "official": false
-      },
-      {
-        "label": "Silicon Republic - Ireland facing skills wall as hiring demand remains strong",
-        "url": "https://www.siliconrepublic.com/careers/ireland-facing-skills-wall-hiring-demand-strong-unemployment-concerns",
-        "official": false
-      },
-      {
-        "label": "Morgan McKinley - Software Engineer Salary Guide Ireland",
-        "url": "https://www.morganmckinley.com/ie/salary-guide/data/software-engineer/ireland",
         "official": false
       }
     ]
   },
   "ch": {
     "updatedAt": "2026-06-22",
-    "overview": "A Suica entra em 2026 com um dos mercados de trabalho mais ricos e estaveis do mundo, mas tambem um dos mais protegidos para quem vem de fora. O salario mediano bruto nacional foi de CHF 7.024 por mes em 2024 (tempo integral, setores publico e privado juntos), segundo a Pesquisa de Estrutura Salarial do Bundesamt fur Statistik (BFS), com o decimo inferior abaixo de CHF 4.635 e o decimo superior acima de CHF 12.526. O desemprego segue baixo para padroes europeus: a taxa registrada pelo SECO ficou em torno de 3,0% em maio de 2026, ainda que a leitura da OIT (mais ampla) tenha marcado 5,2% no primeiro trimestre. O quadro e de mercado apertado em ocupacoes tecnicas e de saude, mas com sinais de esfriamento em banca, seguros e parte da industria, pressionados pela integracao UBS-Credit Suisse, fusoes e tarifas dos EUA.\n\nPara o estrangeiro, a regra de ouro e a divisao em dois mundos. Cidadaos da UE/EFTA circulam quase livremente sob o Acordo de Livre Circulacao de Pessoas e nao estao sujeitos a cotas quando contratados localmente. Ja os nacionais de terceiros paises (incluindo brasileiros) enfrentam um dos regimes mais restritivos do mundo: so podem ser admitidos como gestores, especialistas ou trabalhadores altamente qualificados, dentro de cotas anuais fixas, e somente se o empregador comprovar que nao encontrou candidato prioritario na Suica ou na UE/EFTA. Para 2026, o Conselho Federal congelou as cotas no mesmo nivel de 2025: 4.500 autorizacoes B e 4.000 autorizacoes L para terceiros paises. Quem quer empreender encontra portas abertas se for da UE/EFTA, mas exigencias pesadas de impacto economico se vier de fora do bloco.",
+    "overview": "A Suica combina um dos mercados de trabalho mais ricos da Europa com forte protecao ao trabalhador local, o que torna o acesso de estrangeiros bem regulado e dividido em dois regimes. Cidadaos da UE/EFTA circulam quase livremente sob o Acordo de Livre Circulacao de Pessoas, enquanto nacionais de terceiros paises (incluindo brasileiros) enfrentam cotas anuais rigidas e criterios de qualificacao elevados. Para 2026 o Conselho Federal manteve as cotas inalteradas: ate 8.500 autorizacoes para trabalhadores altamente qualificados de paises terceiros, sendo 4.500 autorizacoes de residencia B e 4.000 de curta duracao L. A nova Portaria de Admissao (ASEO) entrou em vigor em 1 de janeiro de 2026. Em 2024 nem todas as cotas foram usadas (74% das de terceiros paises, 50% das de prestadores de servico UE/EFTA e apenas 21% das do Reino Unido), sinal de que ha espaco para perfis muito qualificados. O salario mediano bruto em tempo integral foi de CHF 7.024 por mes em 2024 segundo o Bundesamt fur Statistik (BFS), o mais alto entre os grandes mercados europeus. O indice de escassez de mao de obra recuou cerca de 22% em 2025, voltando a niveis pre-pandemia, com queda de 8% nas vagas e aumento de 17% nos candidatos, mas a escassez estrutural persiste em saude, engenharia e tecnologia. Empreender e possivel para nao europeus, porem sob condicoes cumulativas: interesse para a economia suica, capital inicial suficiente, plano de negocio e rendimento que cubra custos operacionais e de vida.",
     "hotSectors": [
-      "Saude e enfermagem (deficit estrutural estimado em mais de 12 mil profissionais de enfermagem ate 2025 pela associacao do setor)",
-      "Desenvolvimento de software e engenharia de software (72% dos empregadores relatam dificuldade em preencher vagas, recorde historico)",
-      "Engenharia (mecanica, eletrica, automacao, controle e sistemas, sobretudo em industria regulada, energia e automacao industrial)",
-      "Eletrotecnica e tecnicos eletricistas (impulsionados por eletrificacao, energia renovavel e infraestrutura inteligente)",
-      "Lideranca de canteiro de obras e oficios qualificados da construcao",
-      "Farmaceutica e ciencias da vida (segue entre os setores que mais pagam, apesar de cortes pontuais)"
+      "Saude e enfermagem",
+      "Engenharia e automacao",
+      "Eletrica e eletronica",
+      "Tecnologia da informacao e software",
+      "Farmaceutica e ciencias da vida",
+      "Construcao civil",
+      "Servicos financeiros e bancarios"
     ],
     "coolingSectors": [
-      "Banca e servicos financeiros (desemprego no setor 19,4% acima de um ano antes; UBS projeta cerca de 3.000 cortes na Suica, concentrados no 2o semestre de 2026, pela integracao do Credit Suisse)",
-      "Seguros (grupo segurador anunciou eliminacao de 1.400 a 1.800 vagas em tres anos apos fusao)",
-      "Funcoes administrativas, comerciais e de escritorio (ja apontadas como excesso de oferta de mao de obra)",
-      "TI generalista (estabilizando, com excesso de oferta em varios grupos de ICT, embora desenvolvimento de software siga escasso)",
-      "Industria afetada por tarifas dos EUA e deslocalizacao (ex.: fabricante Bernina movendo producao para a Tailandia)"
+      "Industria MEM (maquinas, equipamentos eletricos e metal) pressionada por fraca demanda de exportacao",
+      "Funcoes administrativas e de escritorio com excesso de candidatos",
+      "Setores ciclicos sensiveis a desaceleracao economica de 2025"
     ],
     "inDemandRoles": [
       {
-        "role": "Enfermeiro(a) e profissional de cuidados",
-        "note": "Profissao regulamentada; exige reconhecimento de diploma (Cruz Vermelha Suica/SRC). Deficit estrutural por envelhecimento populacional e aposentadorias."
+        "role": "Enfermeiro(a) e cuidador especializado",
+        "note": "Profissao regulamentada; exige reconhecimento de diploma pela SERI/Cruz Vermelha Suica"
       },
       {
-        "role": "Desenvolvedor(a) de software / engenheiro(a) de software",
-        "note": "Maior taxa de dificuldade de contratacao ja registrada. Hubs em Zurique, Zug e Lausanne."
+        "role": "Medico(a) e especialista de saude",
+        "note": "Profissao regulamentada com reconhecimento obrigatorio de titulo"
       },
       {
-        "role": "Engenheiro(a) mecanico(a), eletrico(a), de automacao, de controle e de sistemas",
-        "note": "Demanda intensa em industria regulada, manufatura, energia e automacao industrial."
+        "role": "Engenheiro(a) mecanico, de automacao e de sistemas",
+        "note": "Entre os grupos com maior escassez estrutural"
       },
       {
-        "role": "Eletricista certificado(a) e tecnico(a) eletronico(a)",
-        "note": "Demanda acima da oferta domestica por eletrificacao e energia renovavel."
+        "role": "Eletricista e tecnico(a) em eletronica",
+        "note": "Demanda puxada pela carteira de obras da construcao"
       },
       {
-        "role": "Medico(a) e demais profissoes de saude regulamentadas",
-        "note": "Profissao regulamentada; reconhecimento via SERI/SRC obrigatorio antes de exercer."
+        "role": "Desenvolvedor(a) de software e profissional de TIC",
+        "note": "Salarios entre os mais altos; alta procura por seniores"
       },
       {
-        "role": "Lider/chefe de canteiro de obras e tecnicos especializados da construcao",
-        "note": "Familia de empregos estruturalmente escassa segundo o Skills Shortage Index."
+        "role": "Profissional de farmaceutica e ciencias da vida",
+        "note": "Setor de altissimo valor agregado, polo em Basileia"
+      },
+      {
+        "role": "Trabalhador qualificado da construcao",
+        "note": "Eletricistas, encanadores e tecnicos de obra"
       }
     ],
     "byQualification": [
       {
-        "area": "Profissionais de saude (enfermeiros, medicos, fisioterapeutas, parteiras)",
-        "advice": "Sao profissoes regulamentadas: o diploma estrangeiro deve ser reconhecido antes de exercer. Para enfermagem e profissoes de saude nao universitarias, o orgao e a Cruz Vermelha Suica (SRC); para medicos e demais, o ponto de contato e o SERI. Inicie o reconhecimento cedo, prepare proficiencia no idioma da regiao (alemao, frances ou italiano) e mire cantons com hospitais grandes. Demanda alta e estrutural."
+        "area": "Saude (enfermagem, medicina, farmacia)",
+        "advice": "Mercado mais aberto e carente, mas profissoes regulamentadas. Inicie cedo o reconhecimento do diploma estrangeiro junto a SERI (antiga SBFI) e, no caso da enfermagem, a Cruz Vermelha Suica. O dominio do idioma local (alemao, frances ou italiano conforme o canton) costuma ser exigido."
       },
       {
-        "area": "Profissionais de TI e engenharia de software",
-        "advice": "Maior gargalo de contratacao do pais. Para terceiros paises (ex.: brasileiros), o caminho realista e ser contratado como especialista qualificado por empresa que patrocine a autorizacao dentro da cota, normalmente exigindo diploma superior e experiencia. Foque em Zurique, Zug e arco lemanico. Para UE/EFTA, basta a oferta de emprego local."
+        "area": "Engenharia e tecnologia (TI, software, automacao)",
+        "advice": "Forte demanda e salarios elevados. Para nao europeus, a contratacao depende de cota e de o empregador comprovar que nao encontrou candidato local ou da UE/EFTA. Perfis seniores e especializados tem mais chance de passar pelo criterio de qualificacao."
       },
       {
-        "area": "Engenheiros e tecnicos (mecanica, eletrica, automacao, eletrotecnica)",
-        "advice": "Setor estruturalmente curto. Certificacoes tecnicas e experiencia em industria regulada, energia e automacao pesam muito. Para nao UE/EFTA, e preciso enquadrar-se como especialista qualificado dentro da cota; reconhecimento de titulo de engenharia pode ser necessario conforme a funcao."
+        "area": "Oficios qualificados (eletrica, construcao, manutencao)",
+        "advice": "Alta procura, sobretudo na construcao. Certificacoes e equivalencia de formacao profissional ajudam. Para nao europeus o caminho e mais estreito por causa das cotas; vale priorizar empregadores que ja patrocinam autorizacoes."
       },
       {
-        "area": "Profissionais de banca, seguros, financas e administracao",
-        "advice": "Cautela: setor em retracao em 2026 (cortes na UBS pela integracao do Credit Suisse, fusoes em seguros) e excesso de oferta em funcoes administrativas e comerciais. Para estrangeiros de terceiros paises, a regra de precedencia torna a contratacao ainda mais dificil quando ha candidatos locais e da UE/EFTA disponiveis. Avalie nichos especializados (compliance, fintech, gestao de risco) em vez de funcoes generalistas."
+        "area": "Administracao, escritorio e funcoes generalistas",
+        "advice": "Setor com excesso de candidatos e menor escassez. Sem qualificacao diferenciada ou idioma local fluente, a janela para estrangeiros nao europeus e estreita. Foque em nichos com lacuna real."
       },
       {
         "area": "Empreendedores e autonomos",
-        "advice": "Se for da UE/EFTA, e relativamente direto: obtem-se a autorizacao B UE/EFTA comprovando a atividade autonoma planejada e capacidade de autossustento (plano de negocio, registro comercial, escritorio, contabilidade). Se for de terceiro pais, a barra e alta: e preciso provar impacto economico duradouro e positivo (diversificacao da economia regional, criacao/manutencao de empregos para locais, investimento relevante, novos pedidos para a economia suica), com plano de negocio convincente e dentro de cota. O status de autonomo e concedido pela caixa de compensacao (AVS) e o registro no Registro Comercial costuma ser exigido."
+        "advice": "Cidadaos da UE/EFTA obtem permissao com relativa facilidade (permit B de 5 anos). Nao europeus precisam atender condicoes cumulativas: interesse economico para a Suica, capital suficiente, plano de negocio solido e renda que cubra custos. So especialistas, executivos ou perfis altamente qualificados sao admitidos."
       }
     ],
     "salaries": [
       {
-        "role": "Mediana nacional (todos os setores, tempo integral, bruto/mes)",
-        "range": "CHF 7.024/mes (~CHF 84.288/ano); P10 CHF 4.635, P90 CHF 12.526",
+        "role": "Salario mediano bruto (tempo integral, todos os setores)",
+        "range": "CHF 7.024/mes (mediano 2024); P10 abaixo de CHF 4.635, P90 acima de CHF 12.526",
         "source": {
-          "label": "Bundesamt fur Statistik (BFS/FSO) - Pesquisa de Estrutura Salarial 2024",
+          "label": "Bundesamt fur Statistik (BFS) - Pesquisa de Estrutura Salarial 2024",
           "url": "https://www.bfs.admin.ch/asset/en/36195850",
           "official": true
         }
       },
       {
-        "role": "Setores que mais pagam (TI, farmaceutica, banca, tabaco) - bruto/mes",
-        "range": "CHF 9.900 a CHF 14.300/mes (mediana setorial)",
+        "role": "Farmaceutica",
+        "range": "CHF 10.159/mes (mediano)",
         "source": {
-          "label": "Bundesamt fur Statistik (BFS/FSO) - Pesquisa de Estrutura Salarial 2024",
+          "label": "Bundesamt fur Statistik (BFS) 2024",
           "url": "https://www.bfs.admin.ch/asset/en/36195850",
           "official": true
         }
       },
       {
-        "role": "Desenvolvedor(a) / engenheiro(a) de software (mediana de mercado)",
-        "range": "CHF 105.000 a ~CHF 114.500/ano; pleno entre ~CHF 106k e CHF 130k",
+        "role": "Bancos e servicos financeiros",
+        "range": "CHF 10.723/mes (mediano)",
         "source": {
-          "label": "Levantamentos de mercado (PayScale/levels.fyi/Upreer) - corroboracao de comunidade, nao oficial",
+          "label": "Bundesamt fur Statistik (BFS) 2024",
+          "url": "https://www.bfs.admin.ch/asset/en/36195850",
+          "official": true
+        }
+      },
+      {
+        "role": "Pesquisa e desenvolvimento",
+        "range": "CHF 9.139/mes (mediano)",
+        "source": {
+          "label": "Bundesamt fur Statistik (BFS) 2024",
+          "url": "https://www.bfs.admin.ch/asset/en/36195850",
+          "official": true
+        }
+      },
+      {
+        "role": "Desenvolvedor(a) / engenheiro(a) de software",
+        "range": "CHF 95.000 a 140.000/ano (junior 75-95 mil; senior 125-180 mil)",
+        "source": {
+          "label": "Levantamentos de mercado (Payscale, Levels.fyi, SwissDevJobs)",
           "url": "https://www.payscale.com/research/CH/Job=Software_Engineer/Salary",
           "official": true
         }
       },
       {
-        "role": "Enfermeiro(a) (tempo integral, bruto, inclui 13o salario)",
-        "range": "~CHF 79.300/ano (media); registrados ate ~CHF 90.000/ano em levantamentos privados",
+        "role": "Enfermeiro(a) (full-time)",
+        "range": "CHF 79.300/ano (media); entrada CHF 60.000-75.000",
         "source": {
-          "label": "Levantamentos de mercado (terratern/SalaryExpert) - corroboracao de comunidade, nao oficial",
-          "url": "https://www.salaryexpert.com/salary/job/registered-nurse/switzerland",
+          "label": "Lohncheck / jobs.ch (referencia de mercado)",
+          "url": "https://lohncheck.ch/en/lohn/soziales/krankenschwester",
           "official": true
         }
       }
     ],
-    "foreignerRules": "A admissao ao mercado de trabalho suico depende fortemente da nacionalidade. Cidadaos da UE/EFTA circulam sob o Acordo de Livre Circulacao de Pessoas e, quando contratados localmente, NAO estao sujeitos a cotas anuais. Nacionais de terceiros paises (incluindo brasileiros) enfrentam regras restritivas da Lei de Estrangeiros e Integracao (LEI/FNIA): (1) Regra de precedencia (Art. 21): o empregador so pode contratar um nacional de terceiro pais se comprovar esforco genuino e malsucedido de recrutar entre os grupos prioritarios (suicos, titulares de permit C, titulares de permit B, admitidos temporarios, e nacionais UE/EFTA). (2) Qualificacao (Art. 23): admissao limitada a gestores, especialistas e outros trabalhadores qualificados, em geral com diploma universitario/superior e varios anos de experiencia, alem de fatores de integracao (idioma, idade, adaptabilidade). (3) Salario e condicoes (Art. 22): remuneracao, contribuicoes sociais e condicoes devem seguir os padroes locais, profissionais e setoriais; varios setores tem convencoes coletivas vinculantes. (4) Cotas (Art. 20): para 2026 o Conselho Federal congelou as cotas de terceiros paises em 4.500 permits B (longa duracao) e 4.000 permits L (ate 12 meses). Ha cotas separadas para prestadores de servico UE/EFTA (3.000 L e 500 B) e para nacionais do Reino Unido (1.400 L e 2.100 B). Nos ultimos anos as cotas nao foram totalmente usadas (74% das de terceiros paises ate o fim de 2024). PROFISSOES REGULAMENTADAS: medicos, dentistas, farmaceuticos, psicologos, psicoterapeutas, veterinarios, quiropraticos, enfermeiros, fisioterapeutas, parteiras, professores, advogados e notarios exigem reconhecimento do diploma estrangeiro antes do exercicio; o ponto de contato nacional e o SERI (SBFI), e para profissoes de saude o reconhecimento costuma passar pela Cruz Vermelha Suica (SRC). A plataforma recognition.swiss indica o orgao competente por profissao. AUTONOMOS/EMPREENDEDORES: UE/EFTA comprovam a atividade planejada e autossustento; terceiros paises precisam demonstrar impacto economico duradouro e positivo (empregos para locais, investimento, diversificacao), com aprovacao das autoridades cantonais e dentro de cota.",
+    "foreignerRules": "Existem dois regimes distintos. Cidadaos da UE/EFTA tem livre circulacao sob o Acordo de Livre Circulacao de Pessoas: trabalham e abrem negocio com registro no cantao e recebem permit B de 5 anos renovavel; atividades de ate 90 dias por ano dispensam autorizacao mediante notificacao previa. Nacionais de terceiros paises (como brasileiros) estao sujeitos a cotas anuais e so sao admitidos como trabalhadores altamente qualificados, executivos ou especialistas. Para 2026 as cotas foram congeladas em ate 8.500 autorizacoes para terceiros paises (4.500 do tipo B e 4.000 do tipo L de curta duracao), alem de contingentes separados para prestadores de servico UE/EFTA (3.000 L e 500 B) e nacionais do Reino Unido (1.400 L e 2.100 B). Vigora a prioridade do trabalhador nacional e da UE/EFTA: o empregador deve demonstrar que nao encontrou candidato no mercado local antes de contratar fora. Autonomia para nao europeus exige condicoes cumulativas (interesse economico, capital, plano de negocio, renda suficiente). Profissoes regulamentadas (medico, enfermeiro, arquiteto, advogado, notario, entre outras) exigem reconhecimento do diploma estrangeiro; europeus que prestam servico declaram a qualificacao no sistema online da SERI (antiga SBFI). Desde 1 de janeiro de 2020 vigora a obrigacao de registro de vagas (Stellenmeldepflicht): em profissoes com desemprego nacional igual ou acima de 5%, a vaga deve ser publicada na area protegida do Job-Room por 5 dias uteis antes de ser anunciada em outro lugar.",
     "opportunityWindows": [
-      "Cotas de terceiros paises subutilizadas (apenas ~74% usadas ate o fim de 2024), o que indica espaco real para candidatos altamente qualificados patrocinados por empregadores.",
-      "Deficit estrutural e persistente em saude/enfermagem, engenharia, eletrotecnica e lideranca de construcao, pouco sensivel ao ciclo economico.",
-      "Onda de eletrificacao, energia renovavel e infraestrutura inteligente puxando demanda por eletricistas e tecnicos acima da oferta domestica.",
-      "Estabilidade de planejamento: cotas congeladas para 2026 dao previsibilidade a empregadores e candidatos.",
-      "Para UE/EFTA, ausencia de cota na contratacao local mantem a porta aberta o ano todo, inclusive para autonomos."
+      "Cotas 2026 congeladas e historicamente subutilizadas (so 74% das de terceiros paises usadas em 2024), abrindo espaco para perfis muito qualificados",
+      "Escassez estrutural cronica em saude e enfermagem por causa do envelhecimento populacional",
+      "Demanda continua por engenheiros e eletricistas sustentada pela construcao e automacao",
+      "Salarios em franco suico entre os mais altos do mundo, com setores de farmaceutica, banca e pesquisa acima de CHF 9.000/mes mediano",
+      "Empreendedorismo viavel para europeus e para nao europeus altamente qualificados com plano de negocio robusto"
     ],
     "jobBoards": [
       {
-        "label": "Job-Room (plataforma oficial do servico publico de emprego, via work.swiss / arbeit.swiss)",
+        "label": "Job-Room (portal oficial do servico publico de emprego, work.swiss)",
         "url": "https://www.job-room.ch/",
         "official": true
       },
       {
-        "label": "arbeit.swiss (SECO - servico publico de emprego e seguro-desemprego)",
-        "url": "https://www.arbeit.swiss/secoalv/en/home.html",
+        "label": "arbeit.swiss (SECO - seguro-desemprego e RAV)",
+        "url": "https://www.arbeit.swiss/en",
         "official": true
       },
       {
-        "label": "EURES - vagas e mobilidade profissional na UE/EFTA (portal oficial da Comissao Europeia)",
-        "url": "https://europa.eu/eures/portal/jv-se/search?locationCodes=ch",
+        "label": "EURES - mobilidade profissional UE/EFTA",
+        "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "ch.ch - portal oficial de informacoes para estrangeiros que querem trabalhar na Suica",
-        "url": "https://www.ch.ch/en/foreign-nationals-in-switzerland/working-in-switzerland/",
-        "official": true
+        "label": "jobs.ch (maior portal privado de vagas)",
+        "url": "https://www.jobs.ch/en/",
+        "official": false
+      },
+      {
+        "label": "SwissDevJobs (vagas de TI)",
+        "url": "https://swissdevjobs.ch/",
+        "official": false
       }
     ],
     "sources": [
       {
-        "label": "State Secretariat for Migration (SEM) - Bases para admissao ao mercado de trabalho (LEI/FNIA, precedencia, qualificacao, salario, cotas)",
+        "label": "Conselho Federal - cotas de terceiros paises 2026 inalteradas (admin.ch)",
+        "url": "https://www.admin.ch/en/newnsb/7HwBjdg5HpBA",
+        "official": true
+      },
+      {
+        "label": "SEM - Bases para admissao no mercado de trabalho suico (nao UE/EFTA)",
         "url": "https://www.sem.admin.ch/sem/en/home/themen/arbeit/nicht-eu_efta-angehoerige/grundlagen_zur_arbeitsmarktzulassung.html",
         "official": true
       },
       {
-        "label": "Bundesamt fur Statistik (BFS/FSO) - Pesquisa de Estrutura Salarial 2024 (mediana CHF 7.024)",
+        "label": "SEM - Procedimento de notificacao para trabalho de curta duracao",
+        "url": "https://www.sem.admin.ch/sem/en/home/themen/fza_schweiz-eu-efta/meldeverfahren.html",
+        "official": true
+      },
+      {
+        "label": "KMU/admin.ch - Diretrizes de trabalho autonomo",
+        "url": "https://www.kmu.admin.ch/kmu/en/home/concrete-know-how/setting-up-sme/starting-business/first-step/self-employment-guidelines.html",
+        "official": true
+      },
+      {
+        "label": "Bundesamt fur Statistik (BFS) - Estrutura salarial 2024, salario mediano CHF 7.024",
         "url": "https://www.bfs.admin.ch/asset/en/36195850",
         "official": true
       },
       {
-        "label": "Bundesamt fur Statistik (BFS/FSO) - Desemprego, subemprego e vagas (dados OIT)",
-        "url": "https://www.bfs.admin.ch/bfs/en/home/statistics/work-income/unemployment-underemployment.html",
+        "label": "BFS - Salarium, calculadora oficial de salarios",
+        "url": "https://www.bfs.admin.ch/bfs/en/home/statistics/work-income/wages-income-employment-labour-costs/earnings-structure.html",
         "official": true
       },
       {
-        "label": "arbeit.swiss (SECO) - servico publico de emprego, EURES e seguro-desemprego",
-        "url": "https://www.arbeit.swiss/secoalv/en/home.html",
+        "label": "arbeit.swiss (SECO) - obrigacao de registro de vagas (Stellenmeldepflicht)",
+        "url": "https://www.arbeit.swiss/secoalv/en/home/menue/unternehmen/stellenmeldepflicht.html",
         "official": true
       },
       {
-        "label": "SERI/SBFI - Reconhecimento de qualificacoes profissionais e profissoes regulamentadas",
-        "url": "https://www.sbfi.admin.ch/en/recognition-of-professional-qualifications",
-        "official": true
-      },
-      {
-        "label": "KMU/admin.ch (Confederacao Suica) - Autonomia e abertura de empresa por estrangeiros (UE/EFTA e terceiros paises)",
-        "url": "https://www.kmu.admin.ch/kmu/en/home/concrete-know-how/setting-up-sme/starting-business/foreign-national/citizen-of-third-state.html",
-        "official": true
-      },
-      {
-        "label": "ch.ch (portal oficial da Confederacao) - Trabalhar na Suica como estrangeiro",
-        "url": "https://www.ch.ch/en/foreign-nationals-in-switzerland/working-in-switzerland/",
-        "official": true
-      },
-      {
-        "label": "Fragomen - Cotas de imigracao da Suica para 2026 (corroboracao das cotas congeladas)",
-        "url": "https://www.fragomen.com/insights/swiss-immigration-quotas-for-2026-what-employers-and-workers-need-to-know.html",
-        "official": false
-      },
-      {
-        "label": "Adecco Group - Swiss Skills Shortage Index (familias de empregos escassas)",
+        "label": "Adecco Group / UZH - Swiss Skills Shortage Index 2025",
         "url": "https://www.adeccogroup.com/en-ch/future-of-work/swiss-skills-shortage",
         "official": false
       },
       {
-        "label": "The Local Switzerland - Lista de cortes de empregos anunciados para 2026 (banca, seguros, farma, industria)",
-        "url": "https://www.thelocal.ch/20251126/how-many-jobs-are-set-to-be-lost-in-switzerland-in-2026",
+        "label": "Stellenmarktmonitor UZH - Swiss Skills Shortage Index",
+        "url": "https://www.stellenmarktmonitor.uzh.ch/en/indices/Swiss-Skills-Shortage-Index.html",
+        "official": false
+      },
+      {
+        "label": "Fragomen - Cotas de imigracao da Suica 2026",
+        "url": "https://www.fragomen.com/insights/swiss-immigration-quotas-for-2026-what-employers-and-workers-need-to-know.html",
         "official": false
       }
     ]
@@ -6528,237 +6384,262 @@ export const LABOR_MARKET: LaborMarketMap = {
   },
   "nl": {
     "updatedAt": "2026-06-22",
-    "overview": "O mercado de trabalho holandes segue apertado em padroes historicos, mas perdeu folego ao longo de 2025 e 2026. Segundo o CBS, o desemprego ficou em 3,9% da forca de trabalho em abril de 2026 (cerca de 397 mil pessoas), um dos niveis mais baixos desde 2024, enquanto o numero de vagas em aberto recuou para 378 mil no fim do primeiro trimestre, queda continua quase a cada trimestre desde o terceiro tri de 2022. A relacao ainda favorece quem procura emprego, com 91 vagas para cada 100 desempregados, e saude, comercio e servicos empresariais concentram mais da metade das vagas abertas. O UWV mantem mais de 300 profissoes classificadas como kansrijk (boas chances de emprego), sinal de que a escassez persiste em nichos especificos mesmo com o esfriamento geral.\n\nPara o estrangeiro, a Holanda continua sendo um dos destinos europeus mais estruturados graças ao regime de kennismigrant (migrante altamente qualificado), que dispensa teste de mercado de trabalho e roda via empregadores reconhecidos pela IND. O ponto de atencao em 2026 e duplo: os pisos salariais subiram cerca de 4,5% frente a 2025, e o beneficio fiscal para expatriados (a antiga regra dos 30%) sera reduzido para 27% a partir de 1 de janeiro de 2027, com novo padrao de renda. A demanda real concentra-se em TI, engenharia, tecnica, construcao, logistica, saude e educacao, ao passo que varejo nao alimentar, hotelaria e parte dos servicos empresariais perderam vagas e confianca empresarial.",
+    "overview": "A Holanda entra em 2026 com um mercado de trabalho que segue apertado, mas em afrouxamento gradual depois de anos de escassez extrema. Segundo o CBS, o desemprego ficou em 3,9% em abril e maio de 2026 (cerca de 397 mil pessoas), perto da mínima histórica, enquanto o número de vagas caiu para 378 mil no fim do primeiro trimestre, queda quase contínua desde o terceiro trimestre de 2022. A relação ainda gira em torno de 91 vagas para cada 100 desempregados, a mais alta do Espaço Econômico Europeu. Saúde, comércio e serviços empresariais concentram mais da metade das vagas abertas. O UWV identifica 193 profissões em falta (tekortberoepen) e, para 184 delas, ao menos um país da UE tem excedente de mão de obra, sinal de que a porta de entrada europeia está aberta, sobretudo via rede EURES. Para imigrantes de fora da UE, o caminho mais usado segue sendo o de trabalhador altamente qualificado (kennismigrant), com patrocínio de empregador reconhecido pela IND, enquanto quem quer empreender conta com o visto de startup e a autorização de trabalhador autônomo por pontos. Vale notar a mudança fiscal relevante: o benefício para expatriados, conhecido como regra dos 30%, cai para 27% a partir de 1 de janeiro de 2027.",
     "hotSectors": [
-      "Tecnologia da informacao e ICT",
-      "Engenharia e profissoes tecnicas",
-      "Construcao civil",
-      "Energia e instalacoes tecnicas",
-      "Transporte e logistica",
-      "Saude",
-      "Educacao",
-      "Hotelaria e servicos de alimentacao (funcoes operacionais)"
+      "Tecnologia e TI (desenvolvimento de software, ciberseguranca, cloud, dados, IA)",
+      "Saude e cuidados (enfermagem, medicina especializada, cuidado a idosos)",
+      "Construcao civil e trades tecnicos (pedreiros, eletricistas, manutencao de infraestrutura)",
+      "Energia e expansao da rede eletrica",
+      "Logistica e transporte (motoristas, especialistas em supply chain)",
+      "Engenharia (mecanica, eletrica, tecnica)",
+      "Educacao (professores e assistentes em falta estrutural)",
+      "Hotelaria e turismo (concentrado na regiao de Amsterda)"
     ],
     "coolingSectors": [
-      "Varejo nao alimentar (artigos domesticos, presentes, lojas especializadas pequenas)",
-      "Servicos empresariais (queda de 2 mil vagas, total 63 mil)",
-      "Industria (queda de 2 mil vagas, total 28 mil)",
-      "Comercio em geral (queda de 3 mil vagas, total 68 mil)",
-      "Aluguel de ferias e camping (turnover -4,2% no 1o tri de 2026)"
+      "Copywriting e redacao publicitaria (UWV desaconselha por impacto da IA)",
+      "Traducao",
+      "Design grafico",
+      "Gerencia de contas de publicidade",
+      "Fotografia",
+      "Cuidadores de animais (alta concorrencia)",
+      "Coaching de vida e treinadores de comunicacao (poucas vagas, muita concorrencia)"
     ],
     "inDemandRoles": [
       {
-        "role": "Profissionais de ICT e desenvolvedores de software",
-        "note": "Kansrijk em todo o pais segundo o UWV; entre os perfis que mais qualificam para o regime de kennismigrant e o beneficio fiscal de expatriado."
+        "role": "Desenvolvedor de software",
+        "note": "Demanda alta e persistente; 33% das empresas holandesas planejam ampliar times de TI em 2026 (Robert Half)."
       },
       {
-        "role": "Engenheiros e tecnicos (mecanica, eletrica, instalacoes)",
-        "note": "Escassez estrutural; energia e instalacoes tecnicas entre os 5 setores de melhores oportunidades."
+        "role": "Especialista em ciberseguranca",
+        "note": "Area de TI com crescimento de seguranca, infraestrutura e suporte."
       },
       {
-        "role": "Enfermeiros e profissionais de saude",
-        "note": "Kansrijk em todo o pais; exige registro no BIG register (profissao regulamentada)."
+        "role": "Engenheiro de cloud / DevOps",
+        "note": "Perfil tech entre os mais procurados."
       },
       {
-        "role": "Professores e docentes",
-        "note": "Educacao listada como setor de escassez pelo UWV, embora docente universitario tenha saido da lista kansrijk."
+        "role": "Cientista / analista de dados",
+        "note": "Forte demanda no setor de tecnologia."
       },
       {
-        "role": "Pedreiros, assentadores e operarios da construcao",
-        "note": "Novos na lista kansrijk 2026; demanda forte por quem trabalha com as maos."
+        "role": "Enfermeiro(a)",
+        "note": "Falta estrutural; profissao apontada pelo UWV com boas chances em todo o pais."
       },
       {
-        "role": "Trabalhadores de logistica, operadores e motoristas",
-        "note": "Transporte e logistica entre os 5 setores com mais oportunidades."
+        "role": "Medico e tecnico de laboratorio",
+        "note": "Entre as 9 profissoes sem excedente em nenhum pais da UE; escassez aguda."
       },
       {
-        "role": "Hovenier (jardineiro/paisagista)",
-        "note": "Citado pelo UWV como kansrijk em todo o territorio nacional."
+        "role": "Profissional de TI (ICT-er)",
+        "note": "UWV lista como profissao com boas chances em todo o territorio nacional."
       },
       {
-        "role": "Gestores de facilities, coordenadores de eventos e consultores de orcamento",
-        "note": "Funcoes HBO/WO destacadas como kansrijk na edicao 2025-2026."
+        "role": "Engenheiro mecanico / eletrico",
+        "note": "Setor de engenharia em crescimento."
+      },
+      {
+        "role": "Eletricista (instalacao e conexao predial)",
+        "note": "Impulsionado pela construcao nova e expansao da rede eletrica."
+      },
+      {
+        "role": "Pedreiro (bricklayer)",
+        "note": "Apontado pelo UWV como profissao promissora a nivel MBO."
+      },
+      {
+        "role": "Motorista de caminhao / especialista em logistica",
+        "note": "Demanda alta com expansao de logistica e transporte."
+      },
+      {
+        "role": "Soldador e cortador de metais",
+        "note": "Profissao em falta; ha excedente em paises como a Finlandia."
+      },
+      {
+        "role": "Jardineiro / paisagista (hovenier)",
+        "note": "UWV lista com boas chances em todo o pais."
+      },
+      {
+        "role": "Gerente de facilities / gerente de eventos / consultor de orcamento",
+        "note": "Apontados pelo UWV como promissores em nivel superior."
       }
     ],
     "byQualification": [
       {
-        "area": "Ensino superior em TI / Computacao",
-        "advice": "Caminho mais direto: contrato com empregador reconhecido pela IND no regime de kennismigrant, que dispensa teste de mercado de trabalho. Em 2026 o piso e de 5.942 euros/mes (30+) ou 4.357 euros/mes (sub-30), excluindo ferias. Recem-formados em universidade holandesa ou no zoekjaar entram pelo piso reduzido de 3.122 euros/mes."
+        "area": "Tecnologia da Informacao",
+        "advice": "Caminho mais forte para estrangeiros. A rota de kennismigrant (altamente qualificado) com patrocinio de empregador reconhecido pela IND e a mais usada. Recem-formados em universidades holandesas e quem usa o ano de orientacao (zoekjaar) entram pelo limiar reduzido de salario, bem mais acessivel. Ingles costuma bastar em muitas vagas tech."
       },
       {
-        "area": "Engenharia e areas tecnicas (HBO/WO)",
-        "advice": "Setor em escassez estrutural; busque empregadores patrocinadores (recognised sponsor) e considere o EU Blue Card como alternativa (mesmo piso de 5.942 euros/mes em 2026, com piso reduzido de 4.754 euros para recem-formados). Muitos cargos qualificam para o beneficio fiscal de expatriado."
+        "area": "Saude e Enfermagem",
+        "advice": "Escassez estrutural e profunda, mas profissao regulamentada: e obrigatorio registro no BIG-register e, em geral, dominio do holandes para contato com pacientes. Diplomas estrangeiros passam por reconhecimento. Medicos, tecnicos de laboratorio e enfermeiros estao entre as profissoes sem excedente em nenhum pais da UE."
       },
       {
-        "area": "Saude (enfermagem, medicina, fisioterapia)",
-        "advice": "Profissao regulamentada: e obrigatorio o registro no BIG register sob a lei BIG antes de exercer e usar o titulo protegido. Planeje reconhecimento de diploma e exame de idioma (neerlandes) com antecedencia; a demanda e alta mas a barreira regulatoria e real."
+        "area": "Engenharia e Trades Tecnicos",
+        "advice": "Alta demanda em engenharia mecanica, eletrica e construcao. Eletricistas, soldadores e pedreiros tem boas chances. Para trades, certificacoes e equivalencia de qualificacoes ajudam; muitas vagas aceitam recrutamento dentro da UE via EURES."
       },
       {
-        "area": "Construcao, instalacoes e oficios tecnicos (MBO)",
-        "advice": "Forte demanda por praticos (pedreiros, montadores, operadores). Para nao europeu sem qualificacao alta, o caminho costuma ser GVVA com teste de mercado de trabalho (o empregador precisa provar que nao achou candidato europeu), o que e mais dificil; europeus/EEE entram sem permissao de trabalho."
+        "area": "Educacao",
+        "advice": "Falta estrutural de professores, mas em geral exige proficiencia em holandes e reconhecimento de diploma para a maioria dos cargos em escolas publicas."
       },
       {
-        "area": "Recem-formado por universidade holandesa",
-        "advice": "Use o zoekjaar (residencia de orientacao para altamente qualificados): 1 ano para trabalhar sem restricao de horas, empreender ou achar emprego, com acesso ao piso salarial reduzido de 3.122 euros/mes ao migrar para kennismigrant, o que abre portas em PMEs e startups."
+        "area": "Negocios, Marketing e Criativos",
+        "advice": "Atencao: o UWV desaconselha copywriting, traducao, design grafico e contas de publicidade por causa do impacto da IA. Perfis de gestao (facilities, eventos, orcamento) tem melhores chances. Para negocios em geral, o ingles abre portas em multinacionais sediadas no pais."
       },
       {
-        "area": "Empreendedor / autonomo",
-        "advice": "Cidadao dos EUA tem via simplificada pelo DAFT (Dutch American Friendship Treaty), com capital inicial de 4.500 euros e sem sistema de pontos. Demais nacionalidades passam pela residencia de self-employed da IND, avaliada por sistema de pontos (valor agregado a economia). Startups inovadoras tem visto de 1 ano via facilitador reconhecido."
+        "area": "Empreendedores e Autonomos",
+        "advice": "Duas rotas oficiais: o visto de startup (1 ano, exige produto inovador e parceria com um facilitador reconhecido) e a autorizacao de trabalhador autonomo por pontos (minimo de 90 pontos, com pelo menos 30 em cada eixo: experiencia, plano de negocio e valor agregado para a economia holandesa). Ambas exigem registro na Camara de Comercio (KvK)."
       }
     ],
     "salaries": [
       {
-        "role": "Piso kennismigrant (30 anos ou mais) - 2026",
-        "range": "5.942 euros/mes bruto (exclui ferias)",
+        "role": "Salario medio nacional (todas as funcoes)",
+        "range": "Cerca de 53.436 euros brutos/ano (aprox. 4.453 euros/mes, incluindo o subsidio de ferias de 8%)",
         "source": {
-          "label": "IND - Required amounts income requirements",
+          "label": "CBS (Labour and income)",
+          "url": "https://www.cbs.nl/en-gb/labour-and-income",
+          "official": true
+        }
+      },
+      {
+        "role": "Salario minimo legal (21+)",
+        "range": "14,71 euros brutos/hora a partir de 1 de janeiro de 2026 (aprox. 2.350 euros/mes em jornada de 40h)",
+        "source": {
+          "label": "Government.nl / Business.gov.nl",
+          "url": "https://business.gov.nl/amendments/minimum-wage-up-january-2026/",
+          "official": true
+        }
+      },
+      {
+        "role": "Limiar salarial kennismigrant (30 anos ou mais)",
+        "range": "5.942 euros brutos/mes (exclui ferias), valido de 1 jan a 30 jun 2026",
+        "source": {
+          "label": "IND (Required amounts)",
           "url": "https://ind.nl/en/required-amounts-income-requirements",
           "official": true
         }
       },
       {
-        "role": "Piso kennismigrant (menor de 30 anos) - 2026",
-        "range": "4.357 euros/mes bruto (exclui ferias)",
+        "role": "Limiar salarial kennismigrant (menor de 30 anos)",
+        "range": "4.357 euros brutos/mes, valido de 1 jan a 30 jun 2026",
         "source": {
-          "label": "IND - Required amounts income requirements",
+          "label": "IND (Required amounts)",
           "url": "https://ind.nl/en/required-amounts-income-requirements",
           "official": true
         }
       },
       {
-        "role": "Piso reduzido (recem-formado / zoekjaar) - 2026",
-        "range": "3.122 euros/mes bruto (exclui ferias)",
+        "role": "Limiar reduzido (recem-formados / ano de orientacao)",
+        "range": "3.122 euros brutos/mes, valido de 1 jan a 30 jun 2026",
         "source": {
-          "label": "IND - Required amounts income requirements",
+          "label": "IND (Required amounts)",
           "url": "https://ind.nl/en/required-amounts-income-requirements",
           "official": true
         }
       },
       {
-        "role": "EU Blue Card - 2026",
-        "range": "5.942 euros/mes bruto (4.754 euros piso reduzido para recem-formados)",
+        "role": "Blue Card Europeu",
+        "range": "5.942 euros brutos/mes (criterio reduzido: 4.754 euros/mes)",
         "source": {
-          "label": "IND - Required amounts income requirements",
+          "label": "IND (Required amounts)",
           "url": "https://ind.nl/en/required-amounts-income-requirements",
           "official": true
         }
       },
       {
-        "role": "Salario medio nacional - 2026",
-        "range": "cerca de 4.453 euros/mes bruto (53.436 euros/ano, inclui ferias)",
+        "role": "Trabalhador autonomo (lucro bruto minimo)",
+        "range": "1.734,57 euros/mes, valido de 1 jan a 30 jun 2026",
         "source": {
-          "label": "Jobted.nl (agregador, base CBS/CAO) - referencia de comunidade",
-          "url": "https://www.jobted.nl/salaris",
+          "label": "IND (Required amounts)",
+          "url": "https://ind.nl/en/required-amounts-income-requirements",
           "official": true
         }
       },
       {
-        "role": "Software Engineer - 2026",
-        "range": "3.220 a 4.355 euros/mes bruto (media ~3.785)",
+        "role": "Pessoal essencial de startup",
+        "range": "3.122 euros brutos/mes, valido de 1 jan a 31 dez 2026",
         "source": {
-          "label": "Jobted.nl (comunidade, nao oficial)",
-          "url": "https://www.jobted.nl/salaris",
+          "label": "IND (Required amounts)",
+          "url": "https://ind.nl/en/required-amounts-income-requirements",
           "official": true
         }
       },
       {
-        "role": "Enfermagem / saude - 2026",
-        "range": "2.800 a 4.200 euros/mes bruto",
-        "source": {
-          "label": "Monetise / salarisperberoep.nl (comunidade, nao oficial)",
-          "url": "https://monetise.nl/salaris-werk/gemiddeld-salaris-in-nederland-2026-cijfers-uitgelegd-per-sector/",
-          "official": true
-        }
+        "role": "TI (DevOps, ciberseguranca, ciencia de dados)",
+        "range": "Faixa de mercado em torno de 68.000 a 75.000+ euros/ano (estimativa de mercado, nao oficial)"
       },
       {
-        "role": "Construcao (vakmensen) - 2026",
-        "range": "3.000 a 4.500 euros/mes bruto",
-        "source": {
-          "label": "salarisperberoep.nl (comunidade, nao oficial)",
-          "url": "https://salarisperberoep.nl/",
-          "official": true
-        }
+        "role": "Engenharia e funcoes tecnicas",
+        "range": "Faixa de mercado em torno de 55.000 a 65.000 euros/ano (estimativa de mercado, nao oficial)"
       }
     ],
-    "foreignerRules": "Cidadaos da UE, EEE e Suica trabalham livremente, sem permissao de trabalho. Para nao europeus existem dois caminhos principais: a TWV (tewerkstellingsvergunning), permissao de trabalho avulsa emitida pelo UWV para ate 90 dias e sem taxa governamental, e a GVVA (gecombineerde vergunning voor verblijf en arbeid), permissao combinada de residencia e trabalho para periodos acima de 90 dias, valida por ate 1 ano e renovavel por ate 5; ambas em regra exigem teste de mercado de trabalho (o empregador prova que nao achou candidato europeu). O regime de kennismigrant (migrante altamente qualificado) e a via mais usada por qualificados: dispensa o teste de mercado de trabalho, mas exige empregador reconhecido pela IND (recognised sponsor) e cumprimento do piso salarial (5.942 euros/mes para 30+, 4.357 para sub-30, 3.122 reduzido para recem-formados, valores 2026 que excluem ferias). Recem-formados por universidade holandesa podem usar o zoekjaar (residencia de orientacao, 1 ano) para procurar emprego ou empreender sem restricao de horas. Profissoes regulamentadas exigem reconhecimento: na saude e obrigatorio o registro no BIG register sob a lei BIG (Wet BIG) antes de exercer e de usar o titulo protegido. Beneficio fiscal: a regra dos 30% (remuneracao isenta para cobrir custos extra do expatriado) continua em 30% em 2026, mas cai para 27% a partir de 1 de janeiro de 2027 para quem comecou em 2024 ou depois, com padrao de renda elevado para 50.436 euros (38.388 euros para menores de 30 com mestrado). Empreendedores: norte-americanos tem via simplificada pelo DAFT (capital de 4.500 euros, sem sistema de pontos, taxa IND de 423 euros em 2026); outras nacionalidades passam pela residencia de self-employed avaliada por sistema de pontos da IND; startups inovadoras usam o visto de startup de 1 ano com facilitador reconhecido.",
+    "foreignerRules": "Cidadaos da UE, EEE e Suica trabalham livremente, sem visto nem autorizacao. Para nacionais de fora da UE, a contratacao por mais de 90 dias exige a autorizacao combinada GVVA (residencia + trabalho num so documento), solicitada na IND, que consulta o UWV sobre o aspecto de mercado de trabalho; para ate 90 dias usa-se a TWV emitida pelo UWV. Em muitas profissoes nao isentas o empregador precisa passar pelo teste de mercado de trabalho, provando que nao ha candidato adequado na UE. A rota mais agil e a de trabalhador altamente qualificado (kennismigrant), que dispensa o teste de mercado mas exige patrocinio de empregador reconhecido (recognised sponsor) pela IND e o cumprimento do limiar salarial. Profissoes regulamentadas tem exigencias adicionais: na saude e obrigatorio o registro no BIG-register, e areas como medicina, enfermagem, ensino e direito exigem reconhecimento de diploma e, em geral, proficiencia em holandes. Para empreender ha duas vias oficiais: o visto de startup (1 ano, produto inovador e parceria com facilitador reconhecido) e a autorizacao de autonomo por sistema de pontos (90 pontos no minimo, 30 em cada eixo), ambas com registro obrigatorio na Camara de Comercio (KvK). Importante: a regra dos 30% para expatriados sera reduzida para 27% a partir de 1 de janeiro de 2027.",
     "opportunityWindows": [
-      "Escassez estrutural e persistente em TI, engenharia, tecnica e saude, mantida pelo UWV mesmo com o esfriamento geral do mercado",
-      "Construcao em alta: pedreiros e assentadores entraram na lista kansrijk de 2026, refletindo demanda por mao de obra pratica",
-      "Janela para recem-formados em universidade holandesa via zoekjaar com piso salarial reduzido (3.122 euros), que viabiliza contratacao por PMEs e startups",
-      "Beneficio fiscal de expatriado ainda em 30% durante 2026, antes da reducao para 27% em 2027 - vantagem para quem inicia o vinculo ja em 2026",
-      "Via DAFT aberta e barata (4.500 euros de capital) para empreendedores norte-americanos, sem sistema de pontos"
+      "Saude: medicos, tecnicos de laboratorio e enfermeiros estao entre as 9 profissoes em falta sem excedente em nenhum pais da UE, o que abre espaco real para recrutamento de fora da Europa",
+      "TI e engenharia: escassez persistente e 33% das empresas planejando ampliar times de TI em 2026 mantem a janela aberta para perfis tech qualificados",
+      "Construcao e energia: boom da construcao nova, expansao da rede eletrica e manutencao de pontes elevam a demanda por eletricistas, pedreiros e trades tecnicos",
+      "Recrutamento intra-UE via EURES: para 184 das 193 profissoes em falta ha excedente em algum pais da UE, facilitando a mudanca de cidadaos europeus",
+      "Recem-formados em universidades holandesas: o ano de orientacao (zoekjaar) e o limiar salarial reduzido de 3.122 euros/mes baixam muito a barreira de entrada",
+      "Empreendedores inovadores: o visto de startup oferece via rapida de 1 ano com transicao posterior para a autorizacao de autonomo"
     ],
     "jobBoards": [
       {
-        "label": "UWV werk.nl - portal oficial de empregos e mercado de trabalho",
-        "url": "https://www.werk.nl/",
+        "label": "werk.nl (UWV) - portal oficial de emprego",
+        "url": "https://www.werk.nl",
         "official": true
       },
       {
-        "label": "EURES - portal europeu de mobilidade profissional (vagas oficiais)",
-        "url": "https://eures.europa.eu/index_en",
+        "label": "EURES - portal europeu de mobilidade profissional",
+        "url": "https://eures.europa.eu",
         "official": true
       },
       {
-        "label": "UWV - Kansrijke beroepen (profissoes com boas chances)",
-        "url": "https://www.uwv.nl/nl/arbeidsmarktinformatie/kansen-beroep/kansrijke-beroepen",
+        "label": "Working in NL (governo holandes / EURES)",
+        "url": "https://www.workinnl.nl",
         "official": true
       },
       {
-        "label": "Business.gov.nl - guia oficial para trabalhar e empreender na Holanda",
-        "url": "https://business.gov.nl/",
+        "label": "IND - permissoes de residencia para trabalho",
+        "url": "https://ind.nl/en/residence-permits/work",
         "official": true
       },
       {
-        "label": "IND - regras de residencia e trabalho para estrangeiros",
-        "url": "https://ind.nl/en",
+        "label": "Business.gov.nl - empreender e contratar na Holanda",
+        "url": "https://business.gov.nl",
         "official": true
       }
     ],
     "sources": [
-      {
-        "label": "IND - Required amounts income requirements (pisos salariais 2026)",
-        "url": "https://ind.nl/en/required-amounts-income-requirements",
-        "official": true
-      },
-      {
-        "label": "UWV - Kansrijke beroepen 2025-2026",
-        "url": "https://www.uwv.nl/nl/arbeidsmarktinformatie/kansen-beroep/kansrijke-beroepen",
-        "official": true
-      },
-      {
-        "label": "UWV - Arbeidsmarkt opnieuw iets minder krap, alsnog honderden beroepen kansrijk",
-        "url": "https://www.uwv.nl/nl/nieuws/arbeidsmarkt-opnieuw-iets-minder-krap-alsnog-honderden-beroepen-kansrijk",
-        "official": true
-      },
-      {
-        "label": "CBS - Unemployment down in April (abril 2026)",
-        "url": "https://www.cbs.nl/en-gb/news/2026/21/unemployment-down-in-april",
-        "official": true
-      },
       {
         "label": "CBS - Labour market dashboard",
         "url": "https://www.cbs.nl/en-gb/visualisations/labour-market-dashboard",
         "official": true
       },
       {
-        "label": "CBS - Turnover in accommodation and food services Q1 2026",
-        "url": "https://www.cbs.nl/en-gb/news/2026/23/turnover-in-accommodation-and-food-services-sector-up-by-2-2-percent-in-q1",
+        "label": "CBS - Unemployment down in April (2026)",
+        "url": "https://www.cbs.nl/en-gb/news/2026/21/unemployment-down-in-april",
         "official": true
       },
       {
-        "label": "Business.gov.nl - The expat scheme (30% / 27% ruling)",
-        "url": "https://business.gov.nl/staff/employing-staff/the-expat-scheme-30-percent-ruling-in-the-netherlands/",
+        "label": "CBS - Vacancies seasonally adjusted",
+        "url": "https://www.cbs.nl/en-gb/figures/detail/80474eng",
         "official": true
       },
       {
-        "label": "Business.gov.nl - Work permit employees (TWV/GVVA)",
-        "url": "https://business.gov.nl/regulations/work-permit-employees/",
+        "label": "UWV - Para quase todas as profissoes em falta ha pessoas em outros paises da UE",
+        "url": "https://www.uwv.nl/nl/nieuws/voor-bijna-alle-tekortberoepen-in-nederland-zijn-in-andere-eu-landen-mensen-beschikbaar",
         "official": true
       },
       {
-        "label": "Business.gov.nl - Residence permit for orientation year (zoekjaar)",
-        "url": "https://business.gov.nl/coming-to-the-netherlands/permits-and-visa/residence-permit-for-orientation-year/",
+        "label": "UWV - Kansrijke beroepen per regio",
+        "url": "https://www.uwv.nl/nl/arbeidsmarktinformatie/kansen-beroep/regionale-kansrijke-beroepen",
+        "official": true
+      },
+      {
+        "label": "UWV reveals most promising professions 2026 (via IamExpat)",
+        "url": "https://www.iamexpat.nl/career/employment-news/uwv-reveals-most-promising-professions-netherlands-2026",
+        "official": false
+      },
+      {
+        "label": "IND - Required amounts income requirements",
+        "url": "https://ind.nl/en/required-amounts-income-requirements",
         "official": true
       },
       {
@@ -6767,23 +6648,33 @@ export const LABOR_MARKET: LaborMarketMap = {
         "official": true
       },
       {
-        "label": "Government.nl - BIG register / Individual Healthcare Professions Act",
-        "url": "https://www.bigregister.nl/en",
+        "label": "IND - Single Permit GVVA",
+        "url": "https://ind.nl/en/residence-permits/work/single-permit-gvva",
         "official": true
       },
       {
-        "label": "EURES - European employment mobility portal",
-        "url": "https://eures.europa.eu/index_en",
+        "label": "Business.gov.nl - Work permit for employees",
+        "url": "https://business.gov.nl/regulations/work-permit-employees/",
         "official": true
       },
       {
-        "label": "Jobted.nl - salarios medios (agregador, base CBS/CAO, nao oficial)",
-        "url": "https://www.jobted.nl/salaris",
-        "official": false
+        "label": "Business.gov.nl - Residence permit for foreign startups",
+        "url": "https://business.gov.nl/coming-to-the-netherlands/permits-and-visa/residence-permit-for-foreign-startups/",
+        "official": true
       },
       {
-        "label": "Monetise / salarisperberoep.nl - salarios por setor (comunidade, nao oficial)",
-        "url": "https://monetise.nl/salaris-werk/gemiddeld-salaris-in-nederland-2026-cijfers-uitgelegd-per-sector/",
+        "label": "Business.gov.nl - Minimum wage up January 2026",
+        "url": "https://business.gov.nl/amendments/minimum-wage-up-january-2026/",
+        "official": true
+      },
+      {
+        "label": "Government.nl - 30% facility reduced to 27%",
+        "url": "https://www.government.nl/themes/taxes-benefits-and-allowances/income-tax/shortening-30-percent-ruling",
+        "official": true
+      },
+      {
+        "label": "NL Times - Employers can fix staff shortages by recruiting in EU (2026)",
+        "url": "https://nltimes.nl/2026/05/29/employers-can-fix-netherlands-staff-shortages-poaching-workers-eu-states",
         "official": false
       }
     ]
@@ -8075,217 +7966,225 @@ export const LABOR_MARKET: LaborMarketMap = {
   },
   "se": {
     "updatedAt": "2026-06-22",
-    "overview": "A Suecia chega a 2026 com um mercado de trabalho em recuperacao lenta apos dois anos de desaceleracao. Segundo a SCB (Statistics Sweden), no primeiro trimestre de 2026 havia cerca de 5,2 milhoes de pessoas ocupadas, com taxa de emprego perto de 69 por cento e desemprego ajustado em torno de 8,7 por cento, ainda elevado para o padrao sueco. O emprego voltou a crescer pelo segundo trimestre seguido, puxado sobretudo por mulheres e por contratos por tempo determinado, mas o desemprego de longa duracao tambem subiu. A Arbetsformedlingen, agencia publica de emprego, projeta fortalecimento gradual ao longo de 2026 e 2027, com recuperacao desigual entre regioes e setores. O traco mais marcante do mercado sueco e a coexistencia de escassez aguda de mao de obra qualificada com um contingente grande de desempregados de longa duracao que nao tem as competencias procuradas pelos empregadores. Para o estrangeiro, o ano de 2026 traz uma mudanca decisiva: desde 1 de junho passou a valer uma exigencia salarial mais alta para a maioria das autorizacoes de trabalho, atrelada a 90 por cento do salario mediano nacional, o que eleva a barreira de entrada para empregos de baixa remuneracao e favorece perfis qualificados em saude, tecnologia, engenharia e na transicao verde do norte do pais.",
+    "overview": "A Suecia vive um momento de mercado de trabalho dividido em 2026. A recuperacao geral avanca devagar, com a taxa de desemprego registrada caindo de cerca de 7,1% no primeiro trimestre de 2025 para 6,7% no mesmo periodo de 2026 segundo a Arbetsformedlingen, enquanto as series do SCB mostram leituras mensais mais altas (em torno de 8% a 9%) por usarem metodologia distinta. O quadro e de contraste: setores tradicionais como construcao, industria pesada de metais, automotivo, florestal e logistica enfrentam pressao e demissoes, com cortes anunciados na Ericsson e na cadeia automotiva, ao mesmo tempo em que saude, tecnologia, defesa, energia verde e engenharia seguem com escassez estrutural de mao de obra. O salario medio em 2025 ficou em torno de SEK 37.400 por mes e a mediana em cerca de SEK 35.700 (SCB). A Suecia nao tem salario minimo legal: pisos e condicoes saem de acordos coletivos, que cobrem cerca de 88% dos trabalhadores. Para o estrangeiro de fora da UE, a regra mais relevante mudou em 1 de junho de 2026: o salario para work permit passou a exigir no minimo 90% da mediana nacional, elevando o piso de entrada e tornando a qualificacao tecnica e a aderencia a setor em falta decisivos para conseguir vaga e permissao.",
     "hotSectors": [
-      "Saude e cuidados (enfermeiros, enfermeiros especialistas, medicos, parteiras, dentistas, fisioterapeutas, auxiliares de enfermagem)",
-      "Tecnologia da informacao (desenvolvedores de software e sistemas, analistas de sistemas, arquitetos de TI, ciberseguranca, IA)",
-      "Transicao verde e energia (energia eolica e hidrica, industrias verdes no norte da Suecia)",
-      "Engenharia (engenheiros civis e tecnicos de construcao e manufatura)",
-      "Construcao e oficios qualificados (eletricistas, encanadores, carpinteiros, soldadores)",
-      "Educacao (professores, professores de pre-escola, professores de formacao profissional)",
-      "Transporte (motoristas de onibus e caminhao)"
+      "Saude e cuidados (enfermeiros, enfermeiros especialistas, auxiliares de enfermagem, medicos)",
+      "Tecnologia da informacao (desenvolvedores de software e sistemas, ciberseguranca, engenheiros de rede, IA)",
+      "Engenharia (civil, mecanica, eletrica e tecnicos de engenharia)",
+      "Construcao e oficios certificados (eletricistas, encanadores, soldadores, carpinteiros, telhadistas, pintores)",
+      "Energia verde e transicao energetica no norte (eolica, hidrica, fabricas de baterias)",
+      "Defesa e industria de seguranca",
+      "Educacao (professores de pre-escola, ensino vocacional e educacao especial)",
+      "Transporte e logistica de motoristas (caminhao e onibus) e armazem",
+      "Industria de manufatura especializada (soldadores, operadores CNC, operadores de maquina)"
     ],
     "coolingSectors": [
-      "Comunicacao e relacoes publicas (comunicadores, especialistas em PR, informadores, com excedente projetado para os proximos cinco anos)",
-      "Funcoes administrativas e de apoio (recepcionistas, assistentes administrativos)",
-      "Hotelaria e restauracao em parte das regioes (atendentes de cafe e pessoal de cozinha em excedente)",
-      "Industria dependente de manufatura no sul da Suecia (Scania e Vastmanland, com desemprego estrutural mais alto)"
+      "Construcao residencial e incorporacao imobiliaria (em pressao desde 2025)",
+      "Industria pesada de metais e mineracao de transformacao",
+      "Industria automotiva e de veiculos (demissoes em curso)",
+      "Setor florestal e madeireiro",
+      "Transporte, logistica e frete de carga (pressao ciclica)",
+      "Telecom equipamentos (cortes anunciados na Ericsson)",
+      "Funcoes administrativas e de recepcao (recepcionistas e assistentes administrativos em excesso de oferta)",
+      "Suporte e operacao de TI de baixa complexidade (tecnicos de suporte e de operacao)",
+      "Hotelaria e restauracao em funcoes basicas (recepcionistas de hotel, pessoal de restaurante, cozinha fria)"
     ],
     "inDemandRoles": [
       {
-        "role": "Enfermeiros especialistas (specialistsjukskoterskor)",
-        "note": "Apontado pela Arbetsformedlingen como talvez a escassez de competencia mais aguda da Suecia, no curto e no longo prazo"
+        "role": "Enfermeiro e enfermeiro especialista",
+        "note": "Profissao regulamentada; exige licenca (legitimation) do Socialstyrelsen. Escassez recorrente em todo o pais."
       },
       {
-        "role": "Enfermeiros (sjukskoterskor)",
-        "note": "Escassez persistente em todas as regioes; salario medio cerca de 45.100 SEK/mes (SCB 2025)"
+        "role": "Auxiliar de enfermagem (underskoterska)",
+        "note": "Demanda alta e estavel; titulo protegido desde 2023, exige comprovacao de competencia."
       },
       {
-        "role": "Medicos (lakare)",
-        "note": "Escassez estrutural; profissao regulamentada, exige licenca sueca (legitimation) do Socialstyrelsen"
+        "role": "Medico e medico especialista",
+        "note": "Profissao regulamentada; precisa de legitimation do Socialstyrelsen e, em geral, de conhecimento de sueco."
       },
       {
-        "role": "Desenvolvedores de software e sistemas (mjukvaru- och systemutvecklare)",
-        "note": "TI lidera as listas de escassez ano apos ano; salario medio cerca de 47.300 SEK/mes (SCB 2025)"
+        "role": "Desenvolvedor de software e de sistemas",
+        "note": "Um dos setores com melhores perspectivas; demanda forte em IA e nuvem."
       },
       {
-        "role": "Analistas de sistemas e arquitetos de TI",
-        "note": "Demanda forte sobretudo em Estocolmo e nas regioes de crescimento"
+        "role": "Especialista em ciberseguranca",
+        "note": "Deficit estimado de dezenas de milhares de profissionais no setor de TI e seguranca."
       },
       {
-        "role": "Parteiras (barnmorskor)",
-        "note": "Profissao de nivel superior com escassez recorrente; regulamentada"
+        "role": "Engenheiro civil e tecnico de engenharia",
+        "note": "Recorrente entre as vagas dificeis de preencher, sobretudo no norte e em projetos verdes."
       },
       {
-        "role": "Dentistas (tandlakare)",
-        "note": "Escassez de profissionais qualificados; profissao regulamentada"
+        "role": "Eletricista, encanador e soldador certificado",
+        "note": "Oficios com escassez constante; exigem certificacao tecnica reconhecida."
       },
       {
-        "role": "Auxiliares de enfermagem (underskoterskor)",
-        "note": "Alta demanda; faz parte das ocupacoes com limite salarial reduzido de 75 por cento"
+        "role": "Motorista de caminhao e de onibus",
+        "note": "Falta cronica em varias regioes; exige carteira de habilitacao categoria correspondente e CAP."
       },
       {
-        "role": "Eletricistas (elektriker)",
-        "note": "Oficio qualificado em falta; certificacao exigida no setor eletrico"
+        "role": "Professor de pre-escola e de educacao especial",
+        "note": "Profissao com habilitacao (legitimation) emitida pelo Skolverket para cargos efetivos."
       },
       {
-        "role": "Engenheiros civis (civilingenjorer)",
-        "note": "Demanda ligada a construcao, industria e transicao verde"
-      },
-      {
-        "role": "Professores e professores de pre-escola (larare, forskollarare)",
-        "note": "Escassez ampla; posto efetivo exige licenca (lararlegitimation)"
-      },
-      {
-        "role": "Soldadores e operadores de maquinas (svetsare, CNC)",
-        "note": "Demanda na industria; entre as ocupacoes com limite salarial reduzido"
-      },
-      {
-        "role": "Tecnicos de energia renovavel e industrias verdes",
-        "note": "Expansao no norte (Upper Norrland) com milhares de vagas previstas"
+        "role": "Operador de maquina CNC e tecnico de manufatura",
+        "note": "Demanda em industria especializada e nas novas plantas do norte."
       }
     ],
     "byQualification": [
       {
-        "area": "Saude (enfermagem, medicina, odontologia)",
-        "advice": "Setor com maior escassez estrutural e melhor porta de entrada, mas todas essas profissoes sao regulamentadas: e preciso obter a licenca sueca (legitimation) junto ao Socialstyrelsen, o que costuma exigir comprovacao de formacao, prova de conhecimento e, em geral, proficiencia em sueco. Profissionais com qualificacao estrangeira que buscam emprego para obter a licenca sueca entram numa categoria com exigencia salarial reduzida (75 por cento da mediana). Investir no sueco e essencial."
+        "area": "Saude e enfermagem",
+        "advice": "Caminho dos mais solidos para estrangeiros. Reconhecimento e obrigatorio: medicos, dentistas e enfermeiros precisam da legitimation do Socialstyrelsen, o que envolve prova de conhecimento, estagio supervisionado e, na pratica, sueco. Vale iniciar o reconhecimento cedo e mirar regioes com maior escassez, inclusive o norte."
       },
       {
-        "area": "Tecnologia da informacao e engenharia",
-        "advice": "Melhor caminho para estrangeiros altamente qualificados. Desenvolvedores, arquitetos de TI e engenheiros tem demanda alta e salarios acima da media (45.000 a 50.000 SEK ou mais), o que facilita cumprir o novo limite salarial. Quem tem diploma superior (minimo 180 creditos) ou cinco anos de experiencia e oferta com salario a partir de 52.000 SEK/mes pode usar o EU Blue Card, agora valido por ate quatro anos. Ingles costuma bastar em muitas empresas de tecnologia."
+        "area": "TI, dados e ciberseguranca",
+        "advice": "Setor mais aberto a profissional internacional, com processos em ingles e funcoes na lista de profissoes que podem ter piso salarial reduzido. Foco em desenvolvimento de software, IA, nuvem e seguranca. Portfolio e GitHub pesam tanto quanto diploma."
       },
       {
-        "area": "Oficios qualificados e construcao",
-        "advice": "Eletricistas, encanadores, carpinteiros e soldadores estao em falta. Varias dessas ocupacoes constam na lista com limite salarial reduzido a 75 por cento da mediana, o que abre espaco mesmo com salarios menores. Certificacoes do setor (sobretudo eletrico) e algum sueco aumentam muito a empregabilidade."
+        "area": "Engenharia",
+        "advice": "Boa janela em engenharia civil, mecanica e eletrica, puxada pela transicao verde no norte. Engenharias nao sao reguladas para exercer, mas titulos protegidos pedem avaliacao do UHR para equivalencia academica. Sueco ajuda em obra e gestao."
+      },
+      {
+        "area": "Oficios e construcao",
+        "advice": "Demanda real para eletricista, encanador, soldador e telhadista, mas o mercado valoriza certificacao tecnica reconhecida na Suecia e filiacao a acordos coletivos. Validar competencias junto ao orgao do oficio antes de chegar."
       },
       {
         "area": "Educacao",
-        "advice": "Professores e professores de pre-escola estao entre os perfis em falta, mas postos efetivos exigem a licenca de professor (lararlegitimation) e dominio do sueco. Caminho viavel para quem ja domina o idioma ou esta disposto a um percurso de validacao mais longo."
+        "advice": "Para lecionar de forma efetiva e preciso da legitimation do Skolverket, que exige sueco. Sem ela, atuacao limitada a contratos temporarios. Caminho mais longo para quem nao domina o idioma."
       },
       {
-        "area": "Baixa qualificacao e baixos salarios",
-        "advice": "Ficou mais dificil em 2026. O novo limite salarial de 90 por cento da mediana barra grande parte dos empregos de baixa remuneracao, e as autorizacoes para apanhador de frutas silvestres e assistente pessoal foram extintas. Funcoes administrativas, recepcao e parte da hotelaria estao em excedente. Recomenda-se mirar ocupacoes da lista de 75 por cento (auxiliar de enfermagem, soldador, trabalhador agricola) ou requalificar-se."
+        "area": "Administracao, recepcao e hotelaria basica",
+        "advice": "Areas com excesso de oferta e forte concorrencia; pouco indicadas como porta de entrada via work permit. Sueco fluente e quase sempre exigido e o salario tende a ficar perto do piso, o que dificulta atingir o limite migratorio."
       },
       {
         "area": "Empreendedores e autonomos",
-        "advice": "E possivel obter autorizacao de residencia para trabalhar por conta propria desde que se detenha pelo menos 51 por cento do negocio, com plano de negocios e orcamento credivel, e capacidade de se sustentar (cerca de 200.000 SEK para o titular, mais 100.000 SEK para conjuge e 50.000 SEK por filho, cobrindo dois anos). O conhecimento de sueco ou ingles e exigido, e sueco muito bom se houver muito contato com clientes e fornecedores locais."
+        "advice": "Quem tem capital, plano de negocio solido e experiencia no ramo pode buscar a residencia de trabalhador autonomo. Exige controle de pelo menos 51% do negocio, recursos proprios comprovados e capacidade de o negocio se sustentar. Setores de servicos qualificados, tecnologia e consultoria sao os mais viaveis."
       }
     ],
     "salaries": [
       {
-        "role": "Salario medio mensal (todas as ocupacoes, Suecia)",
-        "range": "Media 37.400 SEK / mediana 35.700 SEK por mes (2025)",
+        "role": "Media nacional (todas as ocupacoes)",
+        "range": "cerca de SEK 37.400/mes (mediana cerca de SEK 35.700)",
         "source": {
-          "label": "SCB - Average monthly salary by occupation 2025",
+          "label": "SCB - Average monthly salary by occupation, 2025",
           "url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/labour-market/wages-salaries-and-labour-costs/wage-and-salary-structures-and-employment-in-the-municipalities/pong/tables-and-graphs/average-monthly-salary-by-occupation/",
           "official": true
         }
       },
       {
-        "role": "Desenvolvedores de software e sistemas",
-        "range": "Media 47.300 SEK por mes (2025)",
+        "role": "Desenvolvedor de software",
+        "range": "cerca de SEK 47.300/mes",
         "source": {
-          "label": "SCB - Average monthly salary by occupation 2025",
+          "label": "SCB - Average monthly salary by occupation, 2025",
           "url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/labour-market/wages-salaries-and-labour-costs/wage-and-salary-structures-and-employment-in-the-municipalities/pong/tables-and-graphs/average-monthly-salary-by-occupation/",
           "official": true
         }
       },
       {
-        "role": "Enfermeiros",
-        "range": "Media 45.100 SEK por mes (2025)",
+        "role": "Tecnico de engenharia",
+        "range": "cerca de SEK 48.900/mes",
         "source": {
-          "label": "SCB - Average monthly salary by occupation 2025",
+          "label": "SCB - Average monthly salary by occupation, 2025",
           "url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/labour-market/wages-salaries-and-labour-costs/wage-and-salary-structures-and-employment-in-the-municipalities/pong/tables-and-graphs/average-monthly-salary-by-occupation/",
           "official": true
         }
       },
       {
-        "role": "Tecnicos de construcao e manufatura",
-        "range": "Media 48.900 SEK por mes (2025)",
+        "role": "Enfermeiro",
+        "range": "cerca de SEK 45.100/mes",
         "source": {
-          "label": "SCB - Average monthly salary by occupation 2025",
+          "label": "SCB - Average monthly salary by occupation, 2025",
           "url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/labour-market/wages-salaries-and-labour-costs/wage-and-salary-structures-and-employment-in-the-municipalities/pong/tables-and-graphs/average-monthly-salary-by-occupation/",
           "official": true
         }
       },
       {
-        "role": "Gerentes de arquitetura e engenharia",
-        "range": "Media 59.600 SEK por mes (2025)",
+        "role": "Gerente de arquitetura e engenharia",
+        "range": "cerca de SEK 59.600/mes",
         "source": {
-          "label": "SCB - Average monthly salary by occupation 2025",
+          "label": "SCB - Average monthly salary by occupation, 2025",
           "url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/labour-market/wages-salaries-and-labour-costs/wage-and-salary-structures-and-employment-in-the-municipalities/pong/tables-and-graphs/average-monthly-salary-by-occupation/",
           "official": true
         }
       },
       {
-        "role": "Auxiliares de creche / cuidadores (menor faixa)",
-        "range": "Media 28.700 SEK por mes (2025)",
+        "role": "Professor do ensino secundario",
+        "range": "cerca de SEK 45.000/mes",
         "source": {
-          "label": "SCB - Average monthly salary by occupation 2025",
+          "label": "SCB - Average monthly salary by occupation, 2025",
           "url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/labour-market/wages-salaries-and-labour-costs/wage-and-salary-structures-and-employment-in-the-municipalities/pong/tables-and-graphs/average-monthly-salary-by-occupation/",
           "official": true
         }
       },
       {
-        "role": "Diretores de escola (maior faixa)",
-        "range": "Media 60.900 SEK por mes (2025)",
+        "role": "Auxiliar de enfermagem",
+        "range": "cerca de SEK 34.200/mes",
         "source": {
-          "label": "SCB - Average monthly salary by occupation 2025",
+          "label": "SCB - Average monthly salary by occupation, 2025",
+          "url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/labour-market/wages-salaries-and-labour-costs/wage-and-salary-structures-and-employment-in-the-municipalities/pong/tables-and-graphs/average-monthly-salary-by-occupation/",
+          "official": true
+        }
+      },
+      {
+        "role": "Faxineiro de escritorio",
+        "range": "cerca de SEK 28.100/mes",
+        "source": {
+          "label": "SCB - Average monthly salary by occupation, 2025",
           "url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/labour-market/wages-salaries-and-labour-costs/wage-and-salary-structures-and-employment-in-the-municipalities/pong/tables-and-graphs/average-monthly-salary-by-occupation/",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE/EEE e da Suica nao precisam de autorizacao de trabalho e podem viver e trabalhar livremente na Suecia. Para nacionais de paises terceiros (caso de brasileiros), e necessaria autorizacao de trabalho concedida pelo Migrationsverket. Desde 1 de junho de 2026 vale uma nova regra salarial: para a maioria das autorizacoes, o salario oferecido deve corresponder a pelo menos 90 por cento do salario mediano sueco no momento do pedido (a referencia divulgada foi de cerca de 33.390 SEK/mes, sobre uma mediana de aproximadamente 37.100 SEK). Cerca de vinte grupos ocupacionais ficam isentos desse piso e seguem um limite reduzido de 75 por cento da mediana, entre eles funcoes de TI (administradores de sistemas, tecnicos de suporte e de rede), auxiliares de enfermagem e cuidadores, trabalhadores agricolas e florestais, soldadores e metalurgicos, operadores de maquinas de processamento de alimentos, auxiliares de creche e acougueiros. Quatro categorias extras tambem usam o limite de 75 por cento: ex-estudantes que pedem a autorizacao de dentro da Suecia, profissionais com qualificacao estrangeira que buscam emprego para obter licenca sueca (farmaceutico, medico, enfermeiro, dentista), beneficiarios de protecao temporaria da UE e empregados de startups jovens de tecnologia ou ciencias da vida. Duas ocupacoes deixaram de dar direito a autorizacao de trabalho: apanhador de frutas silvestres e assistente pessoal. Passou a existir tambem a exigencia de o empregador notificar o Migrationsverket se o trabalhador nao iniciar o emprego em ate quatro meses. Profissionais altamente qualificados podem optar pelo EU Blue Card, que exige diploma superior de pelo menos 180 creditos (ou cinco anos de experiencia relevante), contrato de no minimo seis meses e salario a partir de 52.000 SEK/mes (1,25 vez o salario medio); a validade do Blue Card foi estendida de dois para quatro anos. Profissoes regulamentadas (medico, enfermeiro, dentista, farmaceutico, professor, entre outras) exigem licenca/legitimation emitida pela autoridade sueca competente (Socialstyrelsen na saude), com validacao de formacao, prova e em geral proficiencia em sueco. Para empreender, ha autorizacao de residencia para trabalho por conta propria: e preciso deter ao menos 51 por cento do negocio, apresentar plano e orcamento credivel, conhecimento de sueco ou ingles, e comprovar meios de sustento por dois anos (cerca de 200.000 SEK para o titular, 100.000 SEK para o conjuge e 50.000 SEK por filho). Esse permit e concedido por ate dois anos, com possibilidade de permanencia permanente apos dois anos de atividade.",
+    "foreignerRules": "Cidadaos da UE/EEE e suicos nao precisam de work permit e podem trabalhar livremente. Para nacionais de fora da UE, a regra padrao e ter oferta de emprego antes de chegar e obter a permissao de trabalho junto ao Migrationsverket. Desde 1 de junho de 2026 vigora uma exigencia salarial mais alta: o salario precisa equivaler a pelo menos 90% da mediana nacional, o que corresponde a cerca de SEK 33.390 por mes (mediana de referencia de cerca de SEK 37.100). Salario e condicoes devem estar alinhados aos acordos coletivos suecos ou a pratica do setor. Ha uma lista oficial de profissoes isentas que podem usar piso reduzido de 75% da mediana, em torno de SEK 27.825 por mes, abrangendo certas funcoes de TI, saude, engenharia, agricultura e manufatura, alem de ex-estudantes, pesquisadores e empregados de startups de tecnologia e ciencias da vida com menos de cinco anos e menos de 100 funcionarios. Para estadas de ate um ano e obrigatorio comprovar seguro saude abrangente. Profissoes regulamentadas exigem reconhecimento antes de exercer: medicos, dentistas, enfermeiros e farmaceuticos precisam de legitimation do Socialstyrelsen, professores precisam de legitimation do Skolverket, e diversos oficios pedem certificacao tecnica reconhecida; em geral o sueco e exigido nesses casos. Quem quer empreender pode pedir residencia de trabalhador autonomo: e preciso controlar ao menos 51% do negocio, ter conhecimento relevante de sueco ou ingles, apresentar plano financeiro critico e crivel e comprovar recursos proprios para sustentar a si e a familia por dois anos (SEK 200.000 para o titular, SEK 100.000 para conjuge e SEK 50.000 por filho); emprestimos normalmente nao sao aceitos. A permissao de autonomo vale por ate dois anos e pode levar a residencia permanente. Taxas: cerca de SEK 2.200 para empregado e SEK 2.000 para autonomo, alem de valores menores para familiares.",
     "opportunityWindows": [
-      "Expansao da transicao verde no norte da Suecia (Upper Norrland), com energia eolica e hidrica e novas industrias gerando milhares de vagas e o menor desemprego do pais",
-      "Recuperacao gradual do emprego prevista pela Arbetsformedlingen para 2026-2027, com fortalecimento progressivo do mercado",
-      "Escassez cronica em saude (especialmente enfermeiros especialistas) e em TI, que tende a persistir no medio e longo prazo",
-      "EU Blue Card mais atrativo a partir de 2026, com validade estendida para quatro anos, beneficiando profissionais altamente qualificados",
-      "Lista de cerca de vinte ocupacoes com limite salarial reduzido (75 por cento), que mantem aberta a porta para oficios e funcoes de saude de apoio mesmo com o novo piso salarial",
-      "Necessidade de mao de obra no norte do pais tambem em educacao, comercio, restauracao e transporte"
+      "Transicao verde no norte da Suecia (Norrbotten e Vasterbotten): novas plantas de baterias, hidrogenio e energia renovavel criando milhares de vagas em engenharia, construcao e operacao",
+      "Saude com escassez estrutural e envelhecimento populacional: demanda firme e continua por enfermeiros, auxiliares e medicos em todo o pais",
+      "TI, IA e ciberseguranca: deficit estimado em dezenas de milhares de profissionais, com processos seletivos frequentemente em ingles",
+      "Defesa e seguranca: expansao do setor abrindo vagas tecnicas e de engenharia",
+      "Profissoes na lista de isencao salarial: estrangeiros qualificados em TI, saude e engenharia podem se qualificar com piso reduzido de 75% da mediana",
+      "Startups de tecnologia e ciencias da vida (menos de 5 anos e menos de 100 funcionarios): regra especial de salario facilita contratacao de talento estrangeiro"
     ],
     "jobBoards": [
       {
-        "label": "Platsbanken (Arbetsformedlingen) - banco oficial de vagas da agencia publica de emprego",
+        "label": "Arbetsformedlingen - Platsbanken (servico publico de emprego)",
         "url": "https://arbetsformedlingen.se/platsbanken",
         "official": true
       },
       {
-        "label": "Arbetsformedlingen - Agencia Publica de Emprego da Suecia",
-        "url": "https://arbetsformedlingen.se/",
-        "official": true
-      },
-      {
-        "label": "EURES - portal europeu de mobilidade profissional (vagas na Suecia)",
+        "label": "EURES - Portal Europeu de Mobilidade Profissional",
         "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "Migrationsverket - autorizacoes de trabalho e residencia",
+        "label": "Migrationsverket - permissoes de trabalho e residencia",
         "url": "https://www.migrationsverket.se/en/you-want-to-apply/work.html",
+        "official": true
+      },
+      {
+        "label": "Arbetsformedlingen - Yrkesbarometer (barometro de ocupacoes)",
+        "url": "https://data.arbetsformedlingen.se/data/yrkesbarometer",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "SCB (Statistics Sweden) - Labour Force Survey, 1o trimestre de 2026",
-        "url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/labour-market/labour-force-supply/labour-force-surveys-lfs/pong/statistical-news/labour-force-survey-lfs-first-quarter-2026/",
+        "label": "Arbetsformedlingen - Yrkesbarometer (dados abertos de ocupacoes)",
+        "url": "https://data.arbetsformedlingen.se/data/yrkesbarometer",
         "official": true
       },
       {
-        "label": "SCB (Statistics Sweden) - Average monthly salary by occupation 2025",
+        "label": "Arbetsformedlingen - Analises e prognosticos do mercado de trabalho",
+        "url": "https://arbetsformedlingen.se/statistik/analyser-och-prognoser",
+        "official": true
+      },
+      {
+        "label": "SCB - Average monthly salary by occupation, 2025",
         "url": "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/labour-market/wages-salaries-and-labour-costs/wage-and-salary-structures-and-employment-in-the-municipalities/pong/tables-and-graphs/average-monthly-salary-by-occupation/",
         "official": true
       },
       {
-        "label": "Migrationsverket - New rules for labour immigration, occupations exempted (25/05/2026)",
-        "url": "https://www.migrationsverket.se/en/news-archive/news/2026-05-25-new-rules-for-labour-immigration---these-occupations-are-exempted.html",
-        "official": true
-      },
-      {
-        "label": "Migrationsverket - New rules for work permits from 1 June 2026",
-        "url": "https://www.migrationsverket.se/nyheter/news-archive/2026-04-17-new-rules-for-work-permits-from-1-june-2026.html",
+        "label": "Migrationsverket - Novas regras de work permit a partir de 1 de junho de 2026",
+        "url": "https://www.migrationsverket.se/nyheter/news-archive/2026-06-01-new-rules-for-work-permits-now-apply.html",
         "official": true
       },
       {
@@ -8294,13 +8193,13 @@ export const LABOR_MARKET: LaborMarketMap = {
         "official": true
       },
       {
-        "label": "Migrationsverket - Residence permit to run your own business (self-employed)",
+        "label": "Migrationsverket - Residencia para trabalhador autonomo",
         "url": "https://www.migrationsverket.se/en/you-want-to-apply/work/employee-or-self-employed/self-employed-people.html",
         "official": true
       },
       {
-        "label": "Migrationsverket - EU Blue Card for highly qualified employment",
-        "url": "https://www.migrationsverket.se/en/you-want-to-apply/work/employee-or-self-employed/eu-blue-cards.html",
+        "label": "Migrationsverket - Salary requirements for a work permit",
+        "url": "https://www.migrationsverket.se/en/word-explanations/salary-requirements-for-a-work-permit.html",
         "official": true
       },
       {
@@ -8309,9 +8208,19 @@ export const LABOR_MARKET: LaborMarketMap = {
         "official": true
       },
       {
-        "label": "Arbetsformedlingen - Analyser och prognoser (yrkesprognoser/bristyrken)",
-        "url": "https://arbetsformedlingen.se/statistik/analyser-och-prognoser",
+        "label": "ELA/EURES - Report on labour shortages and surpluses in Europe",
+        "url": "https://www.ela.europa.eu/en/publications/labour-shortages-and-surpluses-europe-2025",
         "official": true
+      },
+      {
+        "label": "Cedefop - Sweden: Mismatch priority occupations",
+        "url": "https://www.cedefop.europa.eu/en/data-insights/sweden-mismatch-priority-occupations",
+        "official": true
+      },
+      {
+        "label": "The Local - What job losses are expected in Sweden in 2026 (corroboracao de comunidade/imprensa)",
+        "url": "https://www.thelocal.se/20251128/what-job-losses-are-expected-in-sweden-in-2026",
+        "official": false
       }
     ]
   },
