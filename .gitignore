@@ -41,3 +41,6 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# labor-market: lock de runtime do deploy-labor.sh
+.deploy-labor.lock
