@@ -5,13 +5,14 @@ name: Check Scheduled Actions
 # solicitação ⚡ EXECUTAR pra Friday e re-arma pro próximo horário.
 # Job minimalista (só curl) pra gastar pouquíssimo minuto de Actions.
 #
-# Cadência: de hora em hora. As atividades disparam em horários cheios (presets
-# diário/semanal/mensal às 9h), então checagem horária pega no horário; se o
-# GitHub atrasar, o `nextRunAt <= agora` garante o disparo na passagem seguinte.
+# Cadência: a cada 2 horas, alinhado com check-reminders.yml pra compartilhar a
+# janela que acorda o Neon (metade do compute de cron). As atividades disparam
+# em horários cheios (presets diário/semanal/mensal às 9h); como o disparo usa
+# `nextRunAt <= agora`, nada é perdido, só atrasa até ~2h na pior hora.
 
 on:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "0 */2 * * *"
   workflow_dispatch:
 
 concurrency:

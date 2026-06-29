@@ -4,16 +4,18 @@ name: Check Reminders
 # (que tem acesso a DB + VAPID). Job minimalista (só curl, sem checkout nem
 # setup-node) pra gastar pouquíssimo minuto de Actions.
 #
-# Cadencia: DE HORA EM HORA (minuto 0), alinhado com check-scheduled.yml.
-# Motivo: cada disparo acorda o compute do Neon (free tier suspende apos 5min
-# ocioso). A */15 o banco ficava acordado ~1/3 do tempo e estourava as
-# 100 CU-horas/mes do plano free (era a causa do aviso de 80% sem ninguem usar).
-# No minuto 0, reminders e scheduled acordam o banco na MESMA janela, gastando
-# compute uma vez por hora. Lembretes podem atrasar ate ~1h, ok pra uso interno.
+# Cadencia: A CADA 2 HORAS (minuto 0 das horas pares), alinhado com
+# check-scheduled.yml. Motivo: cada disparo acorda o compute do Neon (free tier
+# suspende apos 5min ocioso). A */15 o banco ficava acordado ~1/3 do tempo e
+# estourava as CU-horas/mes do plano free; de hora em hora ainda dava ~24
+# despertares/dia. A cada 2h, reminders e scheduled acordam o banco na MESMA
+# janela ~12x/dia (metade do compute de cron), e os lembretes atrasam ate ~2h,
+# ok pra uso interno. Se a cota apertar da pra ir a 3h; o fim do gargalo de vez
+# e o reset mensal do Neon ou a VDS.
 
 on:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "0 */2 * * *"
   workflow_dispatch:
 
 concurrency:
