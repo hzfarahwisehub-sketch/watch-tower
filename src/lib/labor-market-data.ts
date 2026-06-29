@@ -5790,156 +5790,140 @@ export const LABOR_MARKET: LaborMarketMap = {
     ]
   },
   "gr": {
-    "updatedAt": "2026-06-26",
-    "overview": "O mercado de trabalho grego segue em trajetoria de recuperacao sustentada. Segundo a Autoridade Estatistica Helenica (ELSTAT), a taxa de desemprego ajustada sazonalmente caiu para 9,5% em abril de 2026, o nivel mais baixo desde a crise da divida, embora ainda permaneca acima da media da Uniao Europeia. A pressao demografica e o envelhecimento da forca de trabalho transformaram a escassez de mao de obra no principal desafio estrutural do pais: projecoes de mecanismos europeus de diagnostico apontam necessidade de mais de dois milhoes de trabalhadores ate 2035, com cerca de 42% das vagas exigindo alta qualificacao. O emprego concentra-se no comercio (cerca de 24,5% dos ocupados) e em alojamento e alimentacao (em torno de 21%), refletindo o peso do turismo. As maiores taxas de vagas em aberto registraram-se em abastecimento de agua e gestao de residuos, alojamento e alimentacao, atividades profissionais e cientificas e setor de artes e recreacao. Persistem disparidades regionais expressivas, do Egeu Sul (com desemprego em torno de 7%) a Macedonia Ocidental (acima de 16%).",
+    "updatedAt": "2026-06-29",
+    "overview": "O mercado de trabalho grego segue em trajetoria de recuperacao, com a taxa de desemprego em 9,5% em abril de 2026, segundo a Autoridade Estatistica Helenica (ELSTAT), abaixo dos dois digitos registrados em marco. O pais contava com cerca de 4,32 milhoes de pessoas empregadas e 452 mil desempregadas no mesmo periodo. Apesar da melhora geral, a economia convive com escassez aguda de mao de obra em setores como turismo, saude e construcao, agravada pelo envelhecimento populacional e pela forte sazonalidade das ilhas. A taxa de emprego nacional ainda fica abaixo da media da Uniao Europeia, com diferencas regionais marcantes entre Atica e o sul do Egeu, mais dinamicos, e a Macedonia Ocidental, com desemprego mais elevado.",
     "hotSectors": [
-      "Turismo, alojamento e alimentacao",
-      "Tecnologia da informacao e software",
-      "Saude e cuidados pessoais",
-      "Engenharia e atividades tecnicas e cientificas",
-      "Logistica e cadeia de suprimentos",
-      "Construcao e oficios qualificados",
-      "Abastecimento de agua e gestao de residuos",
-      "Servicos de atendimento ao cliente"
+      "Turismo, hotelaria e alimentacao",
+      "Saude e servicos sociais",
+      "Tecnologia e transformacao digital",
+      "Construcao e engenharia",
+      "Economia azul e setor maritimo",
+      "Comercio atacadista e varejista"
     ],
     "coolingSectors": [
-      "Profissoes juridicas, sociais e culturais (excedente de oferta segundo o EURES)",
-      "Profissoes de ciencia e engenharia em nivel academico generico (excedente em algumas categorias)",
-      "Profissoes do ensino (excedente de oferta)"
+      "Profissoes juridicas",
+      "Ensino e docencia",
+      "Profissoes sociais e culturais"
     ],
     "inDemandRoles": [
       {
-        "role": "Profissionais de saude (medicos e enfermeiros)",
-        "note": "Grupo com maior incidencia de escassez segundo o EURES; demanda reforcada pelo envelhecimento populacional"
+        "role": "Profissionais de saude (enfermeiros, medicos, cuidadores, fisioterapeutas)",
+        "note": "Demanda continua puxada pelo envelhecimento populacional e falta cronica de pessoal."
       },
       {
-        "role": "Trabalhadores sazonais de turismo e hotelaria",
-        "note": "Forte demanda de abril a outubro; visto sazonal regulado pela nova Lei 5275/2026"
+        "role": "Trabalhadores de hotelaria e turismo",
+        "note": "Escassez aguda nas ilhas de Santorini, Mykonos, Paros e Rodes durante a alta temporada."
       },
       {
-        "role": "Engenheiros de software e especialistas de TI",
-        "note": "Inclui cientistas de dados, especialistas em aprendizado de maquina e desenvolvedores"
+        "role": "Desenvolvedores de software e profissionais de TI",
+        "note": "Procura crescente em desenvolvimento, ciberseguranca, ciencia de dados e marketing digital."
       },
       {
-        "role": "Operadores de instalacoes e maquinas fixas",
-        "note": "Apontado pelo EURES entre os grupos de maior escassez"
+        "role": "Engenheiros (civil, mecanico, eletrico, ambiental)",
+        "note": "Setor de construcao e infraestrutura aquecido."
       },
       {
-        "role": "Atendentes de servico ao cliente",
-        "note": "Setor com escassez recorrente e contratacao de falantes de varios idiomas"
+        "role": "Operadores de maquinas",
+        "note": "Vaga de dificil preenchimento apontada pela EURES."
       },
       {
-        "role": "Tecnicos de automacao e manutencao industrial"
+        "role": "Atendentes e auxiliares de servico ao cliente",
+        "note": "Escassez persistente segundo dados oficiais do mercado."
       },
       {
-        "role": "Profissionais de logistica e operadores de armazem"
-      },
-      {
-        "role": "Trabalhadores de cuidados pessoais e assistencia a idosos"
-      },
-      {
-        "role": "Trabalhadores qualificados da construcao civil"
+        "role": "Profissionais do setor maritimo e portuario",
+        "note": "Operacoes de navegacao, gestao portuaria e renovaveis offshore em expansao."
       }
     ],
     "byQualification": [
       {
-        "area": "Saude e enfermagem",
-        "advice": "Area com a maior escassez estrutural do pais. Vale reconhecer o diploma junto as autoridades gregas e demonstrar nivel de grego para funcoes assistenciais; oportunidades estaveis e de longo prazo, inclusive em regioes fora dos grandes centros."
+        "area": "Saude",
+        "advice": "Enfermagem, medicina, fisioterapia e cuidados de idosos estao entre as carreiras mais demandadas. O reconhecimento de diplomas estrangeiros e o conhecimento de grego sao diferenciais para acesso ao sistema publico e privado de saude."
       },
       {
-        "area": "Tecnologia e engenharia de software",
-        "advice": "Demanda crescente em programacao, dados e inteligencia artificial. O ingles costuma bastar em empresas internacionais e centros de servicos; portfolio tecnico e certificacoes pesam mais do que diploma local."
+        "area": "Tecnologia da Informacao",
+        "advice": "Desenvolvimento de software, ciberseguranca e ciencia de dados tem alta procura, com empregadores frequentemente aceitando ingles no ambiente de trabalho. Perfis qualificados podem se enquadrar no EU Blue Card."
       },
       {
-        "area": "Turismo, hotelaria e gastronomia",
-        "advice": "Maior porta de entrada para estrangeiros, sobretudo na temporada de abril a outubro. Dominio de varios idiomas e experiencia em atendimento sao diferenciais; atencao ao limite de duracao do contrato sazonal."
+        "area": "Engenharia",
+        "advice": "Engenharia civil, mecanica, eletrica e ambiental seguem aquecidas pela construcao e infraestrutura. Vale validar o registro profissional junto a Camara Tecnica da Grecia."
       },
       {
-        "area": "Engenharia industrial e oficios tecnicos",
-        "advice": "Operadores de maquinas, tecnicos de manutencao e automacao tem boa absorcao. Certificacoes profissionais e experiencia pratica comprovada abrem portas mais rapido que titulacao academica."
+        "area": "Turismo e Hotelaria",
+        "advice": "Setor com maior carencia sazonal, sobretudo nas ilhas. Contratos costumam ser temporarios, com pico entre primavera e outono, e idiomas adicionais ampliam as chances."
       },
       {
-        "area": "Direito, ensino e ciencias humanas",
-        "advice": "Setores com excedente de oferta local segundo o EURES. Recomenda-se buscar nichos especializados, funcoes bilingues ou organizacoes internacionais, e evitar competir por vagas generalistas saturadas."
-      },
-      {
-        "area": "Logistica e operacoes",
-        "advice": "Crescimento puxado pela posicao geografica e portos. Funcoes de armazem, transporte e cadeia de suprimentos tem demanda constante; habilidades digitais de gestao de estoque agregam valor."
+        "area": "Setor maritimo",
+        "advice": "A economia azul abre espaco em navegacao, gestao portuaria, turismo marinho e renovaveis offshore, area tradicionalmente forte na Grecia."
       }
     ],
     "salaries": [
       {
-        "role": "Salario minimo nacional (bruto mensal)",
-        "range": "EUR 920/mes",
+        "role": "Salario minimo (trabalhador administrativo)",
+        "range": "920,00 EUR brutos por mes (a partir de 1 abr 2026)",
         "source": {
-          "label": "Ius Laboris / Ministerio do Trabalho da Grecia (aumento de 1 abr 2026)",
-          "url": "https://iuslaboris.com/insights/greece-minimum-wage-increase-april-2026/",
-          "official": false
+          "label": "Ministerio do Trabalho e Assuntos Sociais da Grecia",
+          "url": "https://ypergasias.gov.gr/en/labour-relations/collective-employment-relations/minimum-wage/",
+          "official": true
         }
       },
       {
-        "role": "Diaria de trabalhador qualificado",
-        "range": "EUR 41,09/dia",
+        "role": "Salario minimo (trabalhador especializado, diaria)",
+        "range": "41,09 EUR brutos por dia (a partir de 1 abr 2026)",
         "source": {
-          "label": "Ius Laboris (reajuste de 1 abr 2026)",
-          "url": "https://iuslaboris.com/insights/greece-minimum-wage-increase-april-2026/",
-          "official": false
+          "label": "Ministerio do Trabalho e Assuntos Sociais da Grecia",
+          "url": "https://ypergasias.gov.gr/en/labour-relations/collective-employment-relations/minimum-wage/",
+          "official": true
+        }
+      },
+      {
+        "role": "Limiar salarial para EU Blue Card (alta qualificacao)",
+        "range": "A partir de 31.919 EUR brutos por ano (1,6x a media nacional)",
+        "source": {
+          "label": "Portal de Imigracao da Comissao Europeia (EU Blue Card Grecia)",
+          "url": "https://immigration-portal.ec.europa.eu/eu-blue-card/greece_en",
+          "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE, do EEE e da Suica trabalham livremente na Grecia, sem necessidade de autorizacao de trabalho. Para nacionais de paises terceiros, o regime foi modernizado pelo novo Codigo de Migracao (em vigor desde 2024) e consolidado pela Lei 5275/2026, que transpoe as diretivas europeias sobre trabalhadores sazonais, transferencias dentro de empresas e trabalho altamente qualificado. A regra geral exige Autorizacao Unica de residencia e trabalho, que combina os dois direitos num so documento; trabalhadores sazonais, destacados e sob protecao temporaria ficam fora desse regime de permissao unica. O pais opera por cotas: uma decisao ministerial conjunta, revista a cada dois anos, fixa o numero maximo de admissoes de trabalhadores estrangeiros por regiao e por especialidade. O trabalho sazonal e limitado a contratos de ate seis meses por ano em setores dependentes das estacoes (agricultura, turismo, hotelaria), com pre-registro obrigatorio de cada vaga pelo empregador junto a autoridade migratoria antes do recrutamento. Existe ainda o regime de profissional altamente qualificado (Cartao Azul UE) para vagas de maior remuneracao e qualificacao. O processo padrao envolve oferta de emprego previa, visto de entrada no consulado e emissao da autorizacao de residencia ja na Grecia.",
+    "foreignerRules": "Cidadaos da UE, do EEE e da Suica tem livre circulacao e direito a trabalhar na Grecia sem visto de trabalho. Para estadias acima de tres meses precisam apenas solicitar um certificado de registro de residencia junto as autoridades locais. Cidadaos de fora da UE precisam de autorizacao de residencia para trabalho: o emprego exige contrato com empregador grego, sendo a autorizacao emitida inicialmente por 2 anos e renovavel por periodos de 3 anos. Profissionais altamente qualificados podem solicitar o EU Blue Card, que exige diploma de ensino superior reconhecido (ou ao menos 5 anos de experiencia equivalente) e salario acima do limiar legal de 31.919 EUR brutos anuais; o cartao tambem vale 2 anos, renovavel por mais 3. As regras e procedimentos para nacionais de paises terceiros sao publicados pelo Ministerio da Imigracao e Asilo (migration.gov.gr) e pelo Ministerio do Trabalho.",
     "opportunityWindows": [
-      "Temporada turistica de abril a outubro concentra a maior abertura de vagas sazonais em hotelaria, restauracao e servicos",
-      "Renovacao bienal das cotas de admissao de trabalhadores de paises terceiros abre janelas por regiao e especialidade",
-      "Escassez estrutural permanente em saude, TI e oficios tecnicos garante demanda fora de pico",
-      "Necessidade projetada de mais de dois milhoes de trabalhadores ate 2035 sinaliza demanda de longo prazo"
+      "Escassez aguda de trabalhadores de turismo e hotelaria nas ilhas de Santorini, Mykonos, Paros e Rodes na alta temporada",
+      "Programas de qualificacao e requalificacao da DYPA com meta de 150.000 novos beneficiarios em 2026",
+      "Escolas de aprendizagem profissional da DYPA com mais de 35 especialidades, com enfase em competencias digitais e verdes (ano letivo 2025-2026)",
+      "Carencia estrutural de profissionais de saude impulsionada pelo envelhecimento da populacao"
     ],
     "jobBoards": [
       {
-        "label": "DYPA - Servico Publico de Emprego (ex-OAED)",
-        "url": "https://www.dypa.gov.gr/",
+        "label": "DYPA - Servico Publico de Emprego (EURES Grecia)",
+        "url": "https://www.dypa.gov.gr/en/eures-1",
         "official": true
       },
       {
-        "label": "EURES Grecia - Portal Europeu de Emprego",
+        "label": "DYPA - Servico Publico de Emprego (portal principal)",
+        "url": "https://www.dypa.gov.gr/en",
+        "official": true
+      },
+      {
+        "label": "EURES - Portal Europeu de Mobilidade Profissional (Grecia)",
         "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "Ministerio de Migracao e Asilo (autorizacoes de trabalho)",
-        "url": "https://migration.gov.gr/en/",
-        "official": true
-      },
-      {
-        "label": "Ministerio do Trabalho e Seguranca Social",
-        "url": "https://ypergasias.gov.gr/en/",
+        "label": "Gov.gr - Servico Publico de Emprego",
+        "url": "https://www.gov.gr/en/org/dypa",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "ELSTAT - Pesquisa da Forca de Trabalho, abril 2026",
-        "url": "https://www.statistics.gr/documents/20181/8107e1f1-6ae3-78c3-dc83-68c644ddcf7a",
+        "label": "ELSTAT - Pesquisa de Forca de Trabalho (abril 2026)",
+        "url": "https://www.statistics.gr/en/statistics/-/publication/SJO02/-",
         "official": true
       },
       {
-        "label": "ELSTAT - Autoridade Estatistica Helenica",
-        "url": "https://www.statistics.gr/en/home",
-        "official": true
-      },
-      {
-        "label": "EURES - Informacao do Mercado de Trabalho: Grecia",
-        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-greece_en",
-        "official": true
-      },
-      {
-        "label": "DYPA - Servico Publico de Emprego",
-        "url": "https://www.dypa.gov.gr/",
-        "official": true
-      },
-      {
-        "label": "Ministerio de Migracao e Asilo da Grecia",
-        "url": "https://migration.gov.gr/en/",
+        "label": "Ministerio do Trabalho e Assuntos Sociais - Salario Minimo",
+        "url": "https://ypergasias.gov.gr/en/labour-relations/collective-employment-relations/minimum-wage/",
         "official": true
       },
       {
@@ -5948,8 +5932,18 @@ export const LABOR_MARKET: LaborMarketMap = {
         "official": true
       },
       {
-        "label": "Mecanismo de Diagnostico do Mercado de Trabalho da Grecia (Comissao Europeia)",
-        "url": "https://digital-skills-jobs.europa.eu/en/inspiration/good-practices/labour-market-diagnostic-mechanism-greece",
+        "label": "EURES - Informacao do Mercado de Trabalho da Grecia",
+        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-greece_en",
+        "official": true
+      },
+      {
+        "label": "Comissao Europeia - EU Blue Card Grecia",
+        "url": "https://immigration-portal.ec.europa.eu/eu-blue-card/greece_en",
+        "official": true
+      },
+      {
+        "label": "DYPA - Servico Publico de Emprego (balanco de acoes 2025)",
+        "url": "https://www.dypa.gov.gr/en",
         "official": true
       }
     ]
@@ -6252,165 +6246,220 @@ export const LABOR_MARKET: LaborMarketMap = {
     ]
   },
   "hu": {
-    "updatedAt": "2026-06-26",
-    "overview": "O mercado de trabalho húngaro opera perto do pleno emprego e segue apertado em 2025 e início de 2026. Segundo o Instituto Central de Estatística da Hungria (KSH), o desemprego ficou em torno de 4,3% a 4,5% ao longo de 2025, com cerca de 4,65 milhoes de pessoas ocupadas e aproximadamente 210 a 217 mil desempregados, patamar baixo para os padroes da Uniao Europeia. A taxa de emprego entre 15 e 64 anos permanece acima de 75%, uma das mais altas do bloco. A escassez de mao de obra qualificada e o traco estrutural mais marcante: o KSH registrou em torno de 65 mil vagas em aberto na media de 2024 e picos proximos de 69 mil no primeiro semestre de 2025. Os salarios continuam subindo em ritmo forte, com ganhos reais positivos. O rendimento medio bruto de tempo integral situou-se em torno de HUF 687 mil em setembro de 2025, com crescimento anual nominal proximo de 9% a 10% e ganho real na casa de 5% a 9%. O ponto de atencao para estrangeiros e que, desde janeiro de 2025, a Hungria endureceu de forma significativa a entrada de trabalhadores de fora da UE, reduzindo cotas e restringindo nacionalidades elegiveis.",
+    "updatedAt": "2026-06-29",
+    "overview": "O mercado de trabalho húngaro segue entre os mais aquecidos da União Europeia, com taxa de desemprego de 4,5% em março e abril de 2026, segundo o Instituto Central de Estatística (KSH), abaixo da média de 5,8% do bloco. Cerca de 4,6 milhões de pessoas de 15 a 74 anos estavam empregadas no período, e o salário bruto médio em tempo integral alcançou 779.800 forints em março, com ganho real de 9,3% sobre o ano anterior. A escassez de mão de obra é estrutural, puxada pela queda demográfica, e atinge indústria, construção, logística, saúde e agricultura. Para suprir o déficit, o governo manteve em 2026 uma cota de 35 mil autorizações de residência para trabalhadores convidados de fora da UE.",
     "hotSectors": [
-      "Tecnologia da informacao e novas tecnologias",
-      "Engenharia e industria automotiva",
-      "Energia renovavel",
-      "Industria farmaceutica e quimica",
-      "Saude e servicos pessoais de cuidado",
-      "Construcao civil e trades",
-      "Transporte e logistica",
-      "Turismo e hotelaria"
+      "Indústria automotiva e manufatura",
+      "Energia renovável",
+      "Indústria farmaceutica e química",
+      "TI e novas tecnologias",
+      "Transporte e logística",
+      "Turismo e hotelaria (HORECA)",
+      "Construção",
+      "Saude e cuidados (health e social care)"
     ],
     "coolingSectors": [
       "Agricultura tradicional",
-      "Metalurgia e fabricacao de metais"
+      "Metalurgia e indústria metalúrgica"
     ],
     "inDemandRoles": [
       {
-        "role": "Profissionais de TI (desenvolvedores, especialistas em dados e seguranca)",
-        "note": "Setor com a maior pressao de contratacao; projecoes de mercado apontam expansao de vagas em TI em 2025, com milhares de novas posicoes."
+        "role": "Operador de máquina CNC",
+        "note": "Forte demanda na manufatura e automotivo."
       },
       {
-        "role": "Engenheiros (mecanica, eletrica, producao)",
-        "note": "Demanda puxada pela industria automotiva, manufatura avancada e projetos de energia."
+        "role": "Soldador",
+        "note": "Escassez recorrente na indústria e construção."
       },
       {
-        "role": "Profissionais de saude (enfermeiros, cuidadores, medicos)",
-        "note": "Escassez cronica de pessoal, agravada pelo envelhecimento populacional."
+        "role": "Eletricista"
       },
       {
-        "role": "Trabalhadores da construcao e trades de edificacao",
-        "note": "Grupo ocupacional apontado pela EURES como dos mais escassos, exceto eletricistas."
+        "role": "Tecnico de mecatronica"
       },
       {
-        "role": "Trabalhadores de servicos pessoais",
-        "note": "Identificado pela EURES como grupo em escassez."
+        "role": "Motorista de caminhão"
       },
       {
-        "role": "Operadores e auxiliares de industria, construcao e transporte",
-        "note": "Vagas concentradas em grandes fabricas, canteiros e logistica, setores que mais empregam mao de obra estrangeira."
+        "role": "Operador de empilhadeira"
       },
       {
-        "role": "Profissionais de servicos de negocios e SSC",
-        "note": "Centros de servicos compartilhados em Budapeste demandam perfis multilingues."
+        "role": "Pedreiro e encanador",
+        "note": "Construção segue com vagas em aberto."
+      },
+      {
+        "role": "Engenheiro mecânico e eletrico"
+      },
+      {
+        "role": "Engenheiro de automação e de produção"
+      },
+      {
+        "role": "Desenvolvedor de software"
+      },
+      {
+        "role": "Analista de dados"
+      },
+      {
+        "role": "Especialista em ciberseguranca"
+      },
+      {
+        "role": "Enfermeiro",
+        "note": "Consta na lista oficial de ocupações em falta para Blue Card."
+      },
+      {
+        "role": "Medico clínico geral",
+        "note": "Ocupação em falta com limiar salarial reduzido para Blue Card."
+      },
+      {
+        "role": "Farmacêutico",
+        "note": "Profissão de saude na lista de escassez."
+      },
+      {
+        "role": "Fisioterapeuta",
+        "note": "Profissão de saude na lista de escassez."
+      },
+      {
+        "role": "Parteira",
+        "note": "Profissão de saude na lista de escassez."
+      },
+      {
+        "role": "Cuidador"
       }
     ],
     "byQualification": [
       {
-        "area": "Tecnologia da informacao e computacao",
-        "advice": "Setor mais aquecido do pais e relativamente aberto a estrangeiros qualificados, especialmente em Budapeste. Ingles costuma bastar em muitas posicoes de SSC e produto, mas hungaro abre portas no mercado local. Buscar empregadores que patrocinam Cartao Azul UE para perfis seniores."
+        "area": "Saude (medicina, enfermagem, farmácia, fisioterapia)",
+        "advice": "Setor com escassez crônica e reconhecido na lista oficial de ocupações em falta. Profissionais de saude de fora da UE acessam o EU Blue Card com limiar salarial reduzido (800.838 HUF/mês em 2026), o que facilita a contratação. Validação do diploma junto às autoridades húngaras é etapa indispensável."
       },
       {
-        "area": "Engenharia",
-        "advice": "Forte demanda na industria automotiva e manufatura. Vale priorizar regioes industriais e empresas com plantas grandes que ja contratam estrangeiros e oferecem patrocinio de visto."
+        "area": "Engenharia (mecânica, eletrica, automação, produção)",
+        "advice": "Demanda alta puxada pelo polo automotivo, eletrônica e novas fábricas. Perfis de engenharia qualificam-se ao EU Blue Card pelo nível de formação superior. Inglês cobre muitas vagas em multinacionais; húngaro amplia o leque."
       },
       {
-        "area": "Saude e enfermagem",
-        "advice": "Escassez estrutural cria oportunidade, mas exige reconhecimento de diploma e, em geral, conhecimento de hungaro para contato com pacientes. Planejar a validacao profissional antes da mudanca."
+        "area": "Tecnologia da informação",
+        "advice": "TI, dados e ciberseguranca estão entre os setores em expansão. Vagas costumam aceitar inglês, e o perfil se enquadra no EU Blue Card. Budapeste concentra a maior parte das oportunidades."
       },
       {
-        "area": "Construcao e trades tecnicos",
-        "advice": "Alta demanda por trabalhadores qualificados de edificacao. Para nao UE, as vagas tendem a depender de empregadores credenciados sob o regime de trabalhador convidado ou do Cartao Nacional para nacionalidades elegiveis."
+        "area": "Indústria e ofícios tecnicos (CNC, solda, eletricidade, mecatrônica)",
+        "advice": "Vagas operacionais abundantes na manufatura e construção. Para quem vem de fora da UE, o caminho usual é a autorização única de trabalho ou a cota de trabalhador convidado, e não o Blue Card. Certificações tecnicas e experiência comprovada pesam mais que diploma universitário."
       },
       {
-        "area": "Areas administrativas e de negocios multilingue",
-        "advice": "Os centros de servicos compartilhados de Budapeste valorizam fluencia em varios idiomas europeus. Perfis com lingua materna alem do ingles tem vantagem competitiva."
-      },
-      {
-        "area": "Agricultura e metalurgia",
-        "advice": "Setores em retracao relativa; recomenda-se requalificacao para areas tecnicas, energia ou industria de maior valor agregado."
+        "area": "Construção civil",
+        "advice": "Pedreiro, encanador e eletricista seguem em falta. Acesso de estrangeiros de fora da UE via autorização única ou cota de trabalhador convidado, normalmente com oferta de emprego prévia."
       }
     ],
     "salaries": [
       {
-        "role": "Salario medio bruto nacional (tempo integral)",
-        "range": "HUF 687.100/mes (set/2025)",
+        "role": "Media nacional (tempo integral, bruto)",
+        "range": "779.800 HUF/mês bruto (cerca de 546.000 HUF liquido), março de 2026",
         "source": {
-          "label": "KSH - Instituto Central de Estatistica da Hungria",
+          "label": "KSH - Instituto Central de Estatística da Hungria",
           "url": "https://www.ksh.hu/labour",
           "official": true
         }
       },
       {
-        "role": "Salario medio liquido nacional (tempo integral)",
-        "range": "HUF 475.100/mes (set/2025)",
+        "role": "Setor empresarial (ganho bruto regular)",
+        "range": "703.100 HUF/mês, março de 2026",
         "source": {
-          "label": "KSH - Instituto Central de Estatistica da Hungria",
+          "label": "KSH - Instituto Central de Estatística da Hungria",
           "url": "https://www.ksh.hu/labour",
           "official": true
         }
       },
       {
-        "role": "Salario minimo legal (minimalber)",
-        "range": "HUF 322.800/mes bruto (a partir de jan/2026)",
+        "role": "Setor publico (ganho bruto regular)",
+        "range": "708.300 HUF/mês, março de 2026",
         "source": {
-          "label": "Decreto Governamental 394/2024 (Magyar Kozlony) / Eurofound",
-          "url": "https://www.eurofound.europa.eu/en/countries/hungary/minimum-wage",
+          "label": "KSH - Instituto Central de Estatística da Hungria",
+          "url": "https://www.ksh.hu/labour",
           "official": true
         }
       },
       {
-        "role": "Salario minimo garantido (garantalt berminimum, cargos com qualificacao secundaria)",
-        "range": "HUF 373.200/mes bruto (a partir de jan/2026)",
+        "role": "Setor sem fins lucrativos (ganho bruto regular)",
+        "range": "738.200 HUF/mês, março de 2026",
         "source": {
-          "label": "Decreto Governamental 394/2024 (Magyar Kozlony) / Eurofound",
-          "url": "https://www.eurofound.europa.eu/en/countries/hungary/minimum-wage",
+          "label": "KSH - Instituto Central de Estatística da Hungria",
+          "url": "https://www.ksh.hu/labour",
+          "official": true
+        }
+      },
+      {
+        "role": "Limiar salarial EU Blue Card (geral)",
+        "range": "1.001.048 HUF/mês bruto mínimo em 2026",
+        "source": {
+          "label": "OIF - Diretoria Nacional de Estrangeiria da Hungria",
+          "url": "https://www.oif.gov.hu/factsheets/eu-blue-card",
+          "official": true
+        }
+      },
+      {
+        "role": "Limiar salarial EU Blue Card (ocupações em falta / saude)",
+        "range": "800.838 HUF/mês bruto mínimo em 2026",
+        "source": {
+          "label": "OIF - Diretoria Nacional de Estrangeiria da Hungria",
+          "url": "https://www.oif.gov.hu/factsheets/eu-blue-card",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE, do EEE e da Suica trabalham livremente na Hungria sem necessidade de autorizacao de trabalho. Para nacionais de paises terceiros, a Hungria endureceu fortemente as regras a partir de 1 de janeiro de 2025. Em geral, o emprego ocorre por um titulo unico (residencia com finalidade de trabalho) e o empregador precisa demonstrar a vaga. As principais vias atuais sao: 1) Cartao Azul da UE, para profissionais altamente qualificados com oferta de emprego e salario acima do limiar, rota preferida para perfis de TI, engenharia e gestao; 2) Cartao Nacional (National Card), aberto a oito nacionalidades, entre elas Ucrania, Servia, Bosnia e Herzegovina, Macedonia do Norte, Belarus, Moldavia, Montenegro e Russia, sem restricao por ocupacao desde julho de 2024; 3) Permissao de Trabalhador Convidado (Guest Worker), com cota maxima reduzida para 35 mil em 2025 e, na pratica, limitada a nacionais de Armenia, Georgia e Filipinas, valida por dois anos com uma prorrogacao de doze meses e restrita a empregadores credenciados (preferential employers ou qualified lenders), com cerca de 300 ocupacoes excluidas. Recomenda-se sempre confirmar elegibilidade e cota vigente no portal oficial enterhungary.gov.hu antes de planejar a mudanca.",
+    "foreignerRules": "Cidadãos da UE, do EEE e da Suíça têm livre circulação e não precisam de autorização de trabalho para atuar na Hungria, bastando registrar residência se ficarem mais de 90 dias. Para nacionais de fora da UE o acesso é controlado. O caminho mais comum é a autorização única (single permit), que combina residência e trabalho a partir de uma oferta de emprego. Profissionais altamente qualificados, com diploma superior de no mínimo três anos ou experiência equivalente, podem solicitar o EU Blue Card, que em 2026 exige remuneração bruta mínima de 1.001.048 HUF/mês, reduzida para 800.838 HUF/mês em ocupações designadas como em falta, sobretudo da saude. Para trabalho menos qualificado, vigora a cota de trabalhador convidado (guest worker), limitada a 35 mil autorizações de residência em 2026. Validação de diploma e contrato de trabalho prévio costumam ser exigidos. Fonte oficial: OIF (oif.gov.hu).",
     "opportunityWindows": [
-      "Escassez estrutural de mao de obra qualificada com cerca de 65 a 69 mil vagas em aberto, abrindo espaco para profissionais de TI, engenharia e saude",
-      "Crescimento salarial real positivo e reajustes anuais expressivos do minimo e do minimo garantido em 2026",
-      "Demanda concentrada em TI e servicos de negocios em Budapeste, com posicoes que aceitam ingles",
-      "Cartao Azul da UE como porta de entrada relativamente acessivel para altamente qualificados de fora da UE",
-      "Cartao Nacional sem restricao por ocupacao para oito nacionalidades elegiveis"
+      "Cota de 35 mil autorizações de residência para trabalhadores convidados (guest worker) de fora da UE em 2026",
+      "Lista oficial de ocupações em falta da saude com limiar salarial reduzido para EU Blue Card: clínico geral, farmacêutico, optometrista, nutricionista, fisioterapeuta, enfermeiro de distrito, técnico de ambulância, enfermeiro e parteira"
     ],
     "jobBoards": [
       {
-        "label": "EURES - Portal Europeu de Mobilidade Profissional (Hungria)",
+        "label": "Virtuális Munkaerőpiac Portál (VMP) - portal de vagas do Serviço Nacional de Emprego",
+        "url": "https://vmp.munka.hu/",
+        "official": true
+      },
+      {
+        "label": "NFSZ - Serviço Nacional de Emprego da Hungria",
+        "url": "https://nfsz.munka.hu/",
+        "official": true
+      },
+      {
+        "label": "EURES - portal europeu de empregos (vagas na Hungria)",
         "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "Servico Nacional de Emprego da Hungria (munka.hu)",
-        "url": "https://www.munka.hu/",
-        "official": true
-      },
-      {
-        "label": "Enter Hungary - portal oficial de imigracao e residencia",
-        "url": "https://enterhungary.gov.hu/",
+        "label": "OIF - Diretoria Nacional de Estrangeiria (vistos e autorizações)",
+        "url": "https://www.oif.gov.hu/",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "KSH - Instituto Central de Estatistica da Hungria (Labour)",
+        "label": "KSH - Instituto Central de Estatística da Hungria (Labour)",
         "url": "https://www.ksh.hu/labour",
         "official": true
       },
       {
-        "label": "EURES - Informacoes do Mercado de Trabalho: Hungria",
+        "label": "OIF - Diretoria Nacional de Estrangeiria (EU Blue Card)",
+        "url": "https://www.oif.gov.hu/factsheets/eu-blue-card",
+        "official": true
+      },
+      {
+        "label": "EURES - Informação de mercado de trabalho: Hungria",
         "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-hungary_en",
         "official": true
       },
       {
-        "label": "Eurofound - Salario minimo na Hungria",
-        "url": "https://www.eurofound.europa.eu/en/countries/hungary/minimum-wage",
+        "label": "EURES - Condições de vida e trabalho: Hungria",
+        "url": "https://eures.europa.eu/living-and-working/living-and-working-conditions-europe/living-and-working-conditions-hungary_en",
         "official": true
       },
       {
-        "label": "Enter Hungary - aviso oficial sobre trabalhador convidado e Cartao Nacional (2025)",
-        "url": "https://enterhungary.gov.hu/eh/assets/tajekoztato2025-en.pdf",
+        "label": "NFSZ - Serviço Nacional de Emprego da Hungria",
+        "url": "https://nfsz.munka.hu/",
         "official": true
       },
       {
-        "label": "OECD - International Migration Outlook 2025: Hungria",
-        "url": "https://www.oecd.org/en/publications/international-migration-outlook-2025_ae26c893-en/full-report/hungary_0717facf.html",
+        "label": "Comissão Europeia - EU Blue Card Hungria",
+        "url": "https://immigration-portal.ec.europa.eu/eu-blue-card/hungary_en",
         "official": true
       }
     ]
@@ -7233,160 +7282,137 @@ export const LABOR_MARKET: LaborMarketMap = {
     ]
   },
   "ro": {
-    "updatedAt": "2026-06-26",
-    "overview": "O mercado de trabalho romeno em 2025 e 2026 combina baixo desemprego com escassez estrutural de mao de obra, o que mantem o pais como um dos destinos europeus mais abertos a trabalhadores estrangeiros. A taxa de desemprego ficou em torno de 5,9% a 6,2% no fim de 2025, abaixo da media da Uniao Europeia, segundo dados do Eurostat. A economia depende fortemente do setor de servicos, que concentra a maior parte do emprego, com polos tecnologicos em expansao em Bucareste e Cluj-Napoca e clusters automotivo e aeronautico na regiao Centro. O salario medio bruto na economia chegou a 9.371 lei e o liquido a 5.615 lei em novembro de 2025, conforme o Instituto Nacional de Estatistica. A maior fragilidade do mercado e a falta de trabalhadores qualificados e operacionais, que empurra empregadores a recrutar fora da Uniao Europeia. Para 2026, o governo aprovou um contingente de 90.000 novos trabalhadores estrangeiros, reduzido em relacao aos 100.000 de anos anteriores, embora as empresas tenham pedido cerca de 150.000 vagas, sinal de que a demanda supera com folga a oferta autorizada. Ha forte variacao regional: Bucareste-Ilfov e a regiao Oeste registram desemprego perto de 2,8%, enquanto Sudeste e Sul-Muntenia ficam acima de 7%.",
+    "updatedAt": "2026-06-29",
+    "overview": "A economia romena combina mercado de trabalho apertado com forte desigualdade regional. O emprego industrial ainda lidera, com a manufatura respondendo por 24,2% dos postos, seguida por comercio atacadista e varejista (21,5%) e construcao (10,7%), segundo o painel do EURES. A taxa de desemprego ficou em torno de 5,6% no plano nacional, mas Bucareste-Ilfov registra apenas 2,8% enquanto regioes do leste passam de 9%. O EURES de 2025 aponta escassez estrutural de mao de obra nas regioes de Bucareste, noroeste, centro e oeste, ao mesmo tempo em que a demanda segue fraca no leste do pais. O salario medio liquido na economia chegou a 5.443 lei em setembro de 2025, conforme o Instituto Nacional de Estatistica.",
     "hotSectors": [
-      "Tecnologia da informacao e servicos de TI (Bucareste e Cluj-Napoca)",
-      "Construcao civil e obras de infraestrutura",
+      "Construcao civil",
       "Transporte rodoviario de carga e logistica",
-      "Entregas e correios (couriers e movimentacao de mercadorias)",
-      "Industria automotiva e aeronautica (regiao Centro)",
-      "Saude e cuidados",
-      "Comercio varejista e alimentacao/restauracao"
+      "Manufatura e operacao de maquinas industriais",
+      "Tecnologia da informacao e desenvolvimento de software (regiao de Bucareste)",
+      "Telecomunicacoes",
+      "Servicos financeiros e bancarios",
+      "Seguranca privada",
+      "Comercio varejista"
     ],
     "coolingSectors": [
-      "Setor publico, com cortes e demissoes previstos que motivaram a reducao do contingente de estrangeiros para 2026",
-      "Ocupacoes com excedente de candidatos segundo o EURES, como tecnicos de ciencias e engenharia de nivel medio, profissionais juridicos, sociais e culturais, e tradutores e linguistas"
+      "Agricultura e trabalho rural",
+      "Trabalho florestal",
+      "Cuidado pessoal domiciliar",
+      "Profissoes tecnicas e cientificas de nivel medio (excesso de oferta)",
+      "Profissoes juridicas, sociais e culturais (excesso de oferta)"
     ],
     "inDemandRoles": [
       {
-        "role": "Entregador / courier",
-        "note": "Maior necessidade operacional declarada, cerca de 26.275 vagas segundo o levantamento de ocupacoes prioritarias"
+        "role": "Motorista de caminhao pesado e carreta",
+        "note": "Uma das maiores faltas registradas pelo EURES 2025."
       },
       {
-        "role": "Carregador e movimentador de mercadorias",
-        "note": "Cerca de 20.912 vagas"
+        "role": "Trabalhador da construcao civil e operario de obras",
+        "note": "Grupo ocupacional com maior incidencia de escassez no pais."
       },
       {
-        "role": "Trabalhador da construcao civil",
-        "note": "Cerca de 17.799 vagas; pedreiros, carpinteiros e ajudantes muito procurados"
+        "role": "Operador de maquina de costura",
+        "note": "Falta recorrente na industria textil/confeccao."
       },
       {
-        "role": "Trabalhador do comercio varejista",
-        "note": "Cerca de 16.246 vagas"
+        "role": "Pedreiro e estucador (gesseiro)",
+        "note": "Demanda alta na construcao."
       },
       {
-        "role": "Motorista de van e de caminhao de carga",
-        "note": "Van cerca de 12.237 e caminhao cerca de 11.135 vagas"
+        "role": "Soldador e operador de corte a chama",
+        "note": "Apontado em destaque pelo painel do EURES."
       },
       {
-        "role": "Ajudante de cozinha",
-        "note": "Cerca de 12.077 vagas, ligado a restauracao e turismo"
+        "role": "Vendedor e atendente de loja",
+        "note": "Escassez no varejo."
       },
       {
-        "role": "Eletricista da construcao",
-        "note": "Oficio qualificado em escassez recorrente segundo o EURES"
+        "role": "Faxineiro e auxiliar de limpeza (escritorios, hoteis)",
+        "note": "Falta de mao de obra em servicos."
       },
       {
-        "role": "Soldador e cortador a chama",
-        "note": "Escassez recorrente na industria e construcao"
+        "role": "Vigilante / agente de seguranca privada",
+        "note": "Demanda elevada."
       },
       {
-        "role": "Profissional de TI e engenharia",
-        "note": "Alta demanda de longo prazo; estima-se necessidade de mais de 600.000 profissionais altamente qualificados ate 2030"
-      },
-      {
-        "role": "Profissional de saude",
-        "note": "Medicos e enfermeiros entre as ocupacoes de alta qualificacao em falta"
-      },
-      {
-        "role": "Vigilante / guarda de seguranca",
-        "note": "Listado pelo EURES entre as ocupacoes em falta"
+        "role": "Desenvolvedor de software",
+        "note": "Em falta principalmente na regiao de Bucareste."
       }
     ],
     "byQualification": [
       {
-        "area": "Tecnologia e engenharia de software",
-        "advice": "Setor de maior potencial de longo prazo, com polos em Bucareste e Cluj-Napoca e cultura de trabalho remoto comum em TI. Vale buscar empresas com operacao internacional e considerar o Cartao Azul da UE para perfis altamente qualificados."
+        "area": "Engenharia e tecnologia",
+        "advice": "Desenvolvimento de software tem demanda concentrada em Bucareste, mas profissoes tecnicas e cientificas de nivel medio aparecem em excesso de oferta no EURES, entao foco em especializacao e idiomas (ingles e romeno) faz diferenca."
       },
       {
-        "area": "Engenharia industrial, automotiva e aeronautica",
-        "advice": "Boa absorcao na regiao Centro. Atencao ao fato de que tecnicos de nivel medio de ciencias e engenharia aparecem como excedente no EURES, entao diferenciais de qualificacao e experiencia pesam."
+        "area": "Construcao civil",
+        "advice": "Setor em forte escassez de mao de obra qualificada e operacional. Pedreiros, estucadores, soldadores e engenheiros de obra encontram colocacao nas regioes de Bucareste, noroeste, centro e oeste."
       },
       {
-        "area": "Construcao civil e oficios tecnicos",
-        "advice": "Demanda alta e persistente para eletricistas, soldadores, pedreiros, carpinteiros e encanadores. Certificacoes de oficio reconhecidas aumentam a empregabilidade e o salario."
+        "area": "Logistica e transporte",
+        "advice": "Motoristas de caminhao pesado estao entre as maiores faltas do pais. Habilitacao categoria CE e Certificado de Qualificacao Profissional ampliam as chances."
       },
       {
-        "area": "Saude",
-        "advice": "Medicos e enfermeiros estao entre as ocupacoes de alta qualificacao em falta. Reconhecimento de diploma e nivel de romeno costumam ser exigidos para atuacao clinica."
+        "area": "Industria e producao",
+        "advice": "Operadores de maquinas industriais, costureiras e soldadores tem boa absorcao. Disposicao para trabalhar nas regioes oeste e centro melhora a empregabilidade."
       },
       {
-        "area": "Transporte e logistica",
-        "advice": "Motoristas de caminhao e de van tem vagas abundantes. Carteira de habilitacao categoria adequada e certificacoes profissionais de transporte sao decisivas."
+        "area": "Saude e cuidado pessoal",
+        "advice": "O cuidado domiciliar aparece com excesso de oferta no painel oficial, portanto avaliar regiao e especializacao antes de migrar para essa area."
       },
       {
-        "area": "Direito, ciencias sociais e traducao",
-        "advice": "Areas com excedente de candidatos segundo o EURES. Especializacao de nicho, dominio de varios idiomas e experiencia internacional ajudam a se destacar."
-      },
-      {
-        "area": "Hotelaria e restauracao",
-        "advice": "Ajudantes de cozinha e funcionarios de alimentacao tem muitas vagas, sobretudo em turismo. Bom ponto de entrada para quem chega com contingente de trabalhador estrangeiro."
+        "area": "Agricultura",
+        "advice": "Trabalho rural e florestal figura entre os excedentes de mao de obra. Sem qualificacao adicional, a colocacao e mais dificil."
       }
     ],
     "salaries": [
       {
-        "role": "Salario medio bruto na economia (todos os setores)",
-        "range": "9.371 lei/mes (bruto), 5.615 lei/mes (liquido) em novembro de 2025",
+        "role": "Salario medio na economia (liquido)",
+        "range": "5.443 lei/mes (setembro de 2025)",
         "source": {
-          "label": "Institutul National de Statistica (INS), comunicado castig salarial",
+          "label": "Institutul National de Statistica (INSSE)",
           "url": "https://insse.ro/cms/ro/content/c%C3%A2%C8%99tigul-salarial-mediu-lunar-132",
           "official": true
         }
       },
       {
-        "role": "Salario minimo nacional (1o semestre de 2026)",
-        "range": "4.050 lei/mes (bruto), cerca de 2.574 lei (liquido)",
+        "role": "Salario medio na economia (bruto)",
+        "range": "9.078 lei/mes (setembro de 2025)",
         "source": {
-          "label": "Ministerul Muncii / OUG 89/2025 (salariul minim 2026)",
-          "url": "https://mmuncii.gov.ro/",
+          "label": "Institutul National de Statistica (INSSE)",
+          "url": "https://insse.ro/cms/ro/content/c%C3%A2%C8%99tigul-salarial-mediu-lunar-132",
           "official": true
         }
       },
       {
-        "role": "Salario minimo nacional (2o semestre de 2026)",
-        "range": "4.325 lei/mes (bruto), cerca de 2.699 lei (liquido)",
+        "role": "Salario minimo nacional (bruto)",
+        "range": "4.050 lei/mes (a partir de 1 de janeiro de 2025), liquido aprox. 2.574 lei",
         "source": {
-          "label": "Ministerul Muncii / OUG 89/2025 (salariul minim 2026)",
-          "url": "https://mmuncii.gov.ro/",
+          "label": "Eurofound - Minimum wage in Romania",
+          "url": "https://www.eurofound.europa.eu/en/countries/romania/minimum-wage",
+          "official": true
+        }
+      },
+      {
+        "role": "Salario minimo no setor de construcao (bruto)",
+        "range": "4.582 lei/mes",
+        "source": {
+          "label": "Eurofound - Minimum wage in Romania",
+          "url": "https://www.eurofound.europa.eu/en/countries/romania/minimum-wage",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Trabalhadores da Uniao Europeia e do Espaco Economico Europeu tem livre circulacao e nao precisam de autorizacao de trabalho na Romenia. Cidadaos de fora da UE precisam de autorizacao de trabalho, chamada aviz de angajare, emitida pela Inspetoria Geral de Imigracao (IGI). O processo e iniciado pelo empregador, que deve ser pessoa juridica ativa registrada na Romenia, sem dividas fiscais, com atividade economica comprovada e oferta de pelo menos o salario minimo legal. Apos a emissao do aviz, o trabalhador solicita o visto de longa permanencia para trabalho (tipo D/AM) na missao diplomatica romena no exterior e, ja na Romenia, obtem a permissao de residencia. A troca de empregador exige novo aviz. Ha varios tipos de autorizacao, entre eles trabalhadores permanentes, sazonais (agricultura e turismo), altamente qualificados, destacados e transferidos dentro do mesmo grupo empresarial. O acesso de nao europeus e limitado por um contingente anual: para 2026 o governo aprovou 90.000 novos trabalhadores estrangeiros, numero menor que o de anos anteriores e bem abaixo das cerca de 150.000 vagas pedidas pelas empresas, o que torna a obtencao mais competitiva. Recomenda-se atuar cedo no ano, pois o contingente pode se esgotar, e contar com empregador que conduza formalmente o pedido junto a IGI.",
+    "foreignerRules": "Cidadaos da Uniao Europeia, do Espaco Economico Europeu e da Suica tem livre circulacao e nao precisam de autorizacao de trabalho para atuar na Romenia, bastando registrar a residencia se permanecerem mais de 90 dias. Para nacionais de fora da UE, o empregador deve obter junto ao Inspetorado Geral para a Imigracao (IGI) a autorizacao de emprego (aviz de angajare), processada em ate 30 dias, prazo prorrogavel por mais 15 dias quando ha verificacoes adicionais. O governo fixa anualmente uma cota de autorizacoes de trabalho para estrangeiros: foram 100.000 vagas em 2024, mesmo numero de 2022 e 2023. Profissionais altamente qualificados podem solicitar o Cartao Azul da UE (EU Blue Card), que serve como autorizacao de residencia e trabalho. Atualizacoes recentes passaram a aceitar experiencia profissional relevante como alternativa a formacao academica e ampliaram a validade do Cartao Azul para ate tres anos. Quem ja possui Cartao Azul emitido em outro Estado-membro tem o pedido analisado em 15 dias.",
     "opportunityWindows": [
-      "Contingente de 90.000 novos trabalhadores estrangeiros para 2026: melhor candidatar-se no inicio do ano, antes de o limite se esgotar",
-      "Escassez persistente na construcao civil e em oficios qualificados (eletricistas, soldadores, pedreiros), com demanda projetada de dezenas de milhares de trabalhadores em 2026",
-      "Setor de TI e profissoes altamente qualificadas, com necessidade estimada de mais de 600.000 profissionais ate 2030",
-      "Logistica, transporte de carga e entregas concentram o maior numero de vagas operacionais abertas",
-      "Polos tecnologicos de Bucareste e Cluj-Napoca, com forte adesao ao trabalho remoto em TI, administracao e financas"
+      "Cota anual de 100.000 autorizacoes de trabalho para nacionais de fora da UE (referencia de 2024).",
+      "Escassez estrutural de mao de obra nas regioes de Bucareste, noroeste, centro e oeste.",
+      "Cartao Azul da UE com regras flexibilizadas: experiencia profissional aceita no lugar de diploma e validade ampliada para ate tres anos."
     ],
     "jobBoards": [
       {
-        "label": "ANOFM - Locuri de munca vacante (vagas oficiais nacionais)",
-        "url": "https://www.anofm.ro/locuri-de-munca-vacante/",
-        "official": true
-      },
-      {
-        "label": "Mediere ANOFM - plataforma de vagas da agencia nacional de emprego",
-        "url": "https://mediere.anofm.ro/app/module/mediere/jobs",
-        "official": true
-      },
-      {
-        "label": "EURES - portal europeu de empregos (vagas na Romenia e na UE)",
+        "label": "EURES - Portal Europeu da Mobilidade Profissional",
         "url": "https://eures.europa.eu/index_en",
-        "official": true
-      },
-      {
-        "label": "IGI - Inspetoria Geral de Imigracao (regras de aviz de angajare e residencia)",
-        "url": "https://igi.mai.gov.ro/",
-        "official": true
-      }
-    ],
-    "sources": [
-      {
-        "label": "Institutul National de Statistica (INS) - castig salarial mediu",
-        "url": "https://insse.ro/cms/ro/content/c%C3%A2%C8%99tigul-salarial-mediu-lunar-132",
         "official": true
       },
       {
@@ -7395,23 +7421,50 @@ export const LABOR_MARKET: LaborMarketMap = {
         "official": true
       },
       {
-        "label": "Ministerul Muncii - contingent de 90.000 lucratori straini para 2026",
-        "url": "https://mmuncii.gov.ro/guvernul-a-aprobat-un-contingent-de-90-000-de-lucratori-straini/",
+        "label": "EURES Romenia - informacoes do mercado de trabalho",
+        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-romania_en",
         "official": true
       },
       {
-        "label": "IGI - Inspectoratul General pentru Imigrari",
-        "url": "https://igi.mai.gov.ro/",
+        "label": "EURAXESS Romania (pesquisadores e qualificados)",
+        "url": "https://www.euraxess.gov.ro/romania/information-assistance/work-permit",
         "official": true
-      },
+      }
+    ],
+    "sources": [
       {
         "label": "EURES - Labour Market Information: Romania",
         "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-romania_en",
         "official": true
       },
       {
-        "label": "Eurostat - Unemployment statistics",
-        "url": "https://ec.europa.eu/eurostat/web/lfs/data/database",
+        "label": "European Labour Authority - Labour shortages and surpluses in Europe 2025",
+        "url": "https://www.ela.europa.eu/en/publications/labour-shortages-and-surpluses-europe-2025",
+        "official": true
+      },
+      {
+        "label": "INSSE - Castigul salarial mediu lunar",
+        "url": "https://insse.ro/cms/ro/content/c%C3%A2%C8%99tigul-salarial-mediu-lunar-132",
+        "official": true
+      },
+      {
+        "label": "IGI - General Inspectorate for Immigration (Employment and Posting)",
+        "url": "https://igi.mai.gov.ro/en/employment-and-posting/",
+        "official": true
+      },
+      {
+        "label": "Comissao Europeia - Highly-qualified worker in Romania (EU Blue Card)",
+        "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/highly-qualified-worker-romania_en",
+        "official": true
+      },
+      {
+        "label": "Eurofound - Minimum wage in Romania",
+        "url": "https://www.eurofound.europa.eu/en/countries/romania/minimum-wage",
+        "official": true
+      },
+      {
+        "label": "OECD Reviews of Labour Market and Social Policies: Romania 2025",
+        "url": "https://www.oecd.org/en/publications/oecd-reviews-of-labour-market-and-social-policies-romania-2025_f0532908-en.html",
         "official": true
       }
     ]
@@ -7677,201 +7730,156 @@ export const LABOR_MARKET: LaborMarketMap = {
     ]
   },
   "cz": {
-    "updatedAt": "2026-06-26",
-    "overview": "A Tchequia mantem um dos mercados de trabalho mais aquecidos da Uniao Europeia, com taxa de desemprego historicamente baixa. Pelos dados do Eurostat e do Czech Statistical Office (CZSO), a economia tcheca opera proxima do pleno emprego, embora 2025 e 2026 tenham trazido leve esfriamento ligado a atividade industrial mais fraca. A taxa geral de desemprego ficou em 3,2% em dezembro de 2025 (CZSO), enquanto a taxa administrativa dos escritorios de trabalho subiu para perto de 4,8% em meados de 2026. O traco estrutural do pais e o descompasso de qualificacoes: ha escassez persistente de mao de obra em industria, construcao, saude e tecnologia, com centenas de milhares de vagas abertas e demanda forte por trabalhadores tecnicos e qualificados. O salario medio bruto mensal chegou a CZK 49.215 em 2025, alta de 7,2% no ano (CZSO), com crescimento real positivo. Praga concentra os maiores salarios do pais. Para estrangeiros de fora da UE, o principal canal e o Employee Card, um permite unico que combina autorizacao de residencia e de trabalho.",
+    "updatedAt": "2026-06-29",
+    "overview": "A Republica Tcheca segue como um dos mercados de trabalho mais apertados da Uniao Europeia, com taxa de desemprego entre as menores do bloco, em torno de 2,6% pela metodologia internacional no inicio de 2025, segundo o Czech Statistical Office. O pais convive com escassez estrutural de mao de obra, agravada pelo envelhecimento populacional e pela saida de geracoes do mercado, o que mantem milhares de vagas abertas, sobretudo em areas tecnicas, de saude e de tecnologia. O salario medio bruto mensal alcancou cerca de 46.924 coroas no primeiro trimestre de 2025, com crescimento real de 3,9% no periodo. Os setores de servicos profissionais, cientificos e tecnicos, construcao e atividades imobiliarias lideraram a alta de remuneracao.",
     "hotSectors": [
-      "Tecnologia da informacao e servicos digitais (desenvolvimento de software, dados, ciberseguranca)",
-      "Industria e manufatura avancada (engenharia mecanica, automotivo, operadores de maquinas)",
-      "Construcao e infraestrutura",
-      "Saude e farmaceutica",
-      "Energia, com destaque para renovaveis",
-      "Logistica e transporte"
+      "Tecnologia da informacao e servicos de software",
+      "Saude e farmaceutico",
+      "Manufatura de alta tecnologia e engenharia",
+      "Energias renovaveis (solar e eolica)",
+      "Servicos profissionais, cientificos e tecnicos",
+      "Construcao civil"
     ],
     "coolingSectors": [
-      "Varejo tradicional",
-      "Setores dependentes de combustiveis fosseis e mineracao",
-      "Funcoes administrativas e operacionais expostas a automacao"
+      "Varejo fisico tradicional, pressionado pelo e-commerce",
+      "Manufatura automotiva convencional, em transicao para veiculos eletricos",
+      "Industrias intensivas em energia fossil",
+      "Mineracao e extracao"
     ],
     "inDemandRoles": [
       {
-        "role": "Desenvolvedores de software e especialistas em TIC",
-        "note": "Escassez persistente apontada pelo EURES; inclui analistas de dados e especialistas em ciberseguranca"
+        "role": "Especialistas em TI e desenvolvedores de software",
+        "note": "Demanda puxada pela digitalizacao acelerada e pelo ritmo da tecnologia acima da resposta do sistema educacional."
       },
       {
-        "role": "Especialistas em ciberseguranca e em inteligencia artificial",
-        "note": "Entre as profissoes adicionadas a lista de escassez a partir de 2025"
+        "role": "Profissionais de saude (medicos, enfermeiros e parteiras)",
+        "note": "Escassez agravada pela migracao de profissionais para a Europa Ocidental e pelo aumento das exigencias de qualificacao."
       },
       {
-        "role": "Engenheiros mecanicos e civis",
-        "note": "Demanda alta na industria e na construcao"
+        "role": "Engenheiros (mecanica, eletrica e civil)"
       },
       {
-        "role": "Operadores de maquinas e equipamentos estacionarios",
-        "note": "Grupo ocupacional com maior incidencia de escassez segundo o CZSO"
+        "role": "Operadores de maquinas e plantas industriais"
       },
       {
-        "role": "Trabalhadores qualificados da construcao (pedreiros, soldadores, encanadores, eletricistas)",
-        "note": "Setor criticamente carente de mao de obra"
+        "role": "Trabalhadores da construcao civil, pedreiros e profissionais de obras"
       },
       {
-        "role": "Profissionais de saude (medicos, enfermeiros, cuidadores, farmaceuticos)"
+        "role": "Soldadores, serralheiros e oficios tecnicos qualificados"
       },
       {
-        "role": "Motoristas profissionais e operadores de armazem",
-        "note": "Logistica e transporte com demanda sustentada"
+        "role": "Motoristas de caminhao"
       },
       {
-        "role": "Engenheiros de energias renovaveis",
-        "note": "Profissao recente na lista de escassez"
+        "role": "Cozinheiros e trabalhadores de servicos"
+      },
+      {
+        "role": "Professores",
+        "note": "Poucos formados seguem na carreira por causa dos salarios baixos frente a outras profissoes de nivel superior."
       }
     ],
     "byQualification": [
       {
         "area": "Tecnologia da informacao",
-        "advice": "Profissionais de software, dados, nuvem e ciberseguranca estao entre os mais disputados e mais bem pagos do pais. O setor figura na lista de ocupacoes em escassez, o que facilita o enquadramento em vias de imigracao qualificada e o uso do Blue Card para vagas de alta qualificacao."
+        "advice": "Area com escassez consistente e dos setores que mais elevaram salarios. Vale investir em desenvolvimento de software, ciberseguranca e automacao, com ingles solido."
       },
       {
-        "area": "Engenharia",
-        "advice": "Engenharia mecanica, civil, automotiva e de energias renovaveis tem absorcao rapida na industria e na construcao. Diplomas e registros profissionais reconhecidos aceleram a contratacao e o cumprimento dos requisitos do Employee Card."
+        "area": "Saude e enfermagem",
+        "advice": "Demanda alta e cronica, mas o exercicio exige reconhecimento de diploma e, em geral, conhecimento de tcheco. Planeje a validacao da formacao com antecedencia."
       },
       {
-        "area": "Saude",
-        "advice": "Medicos, enfermeiros, cuidadores e farmaceuticos sao demanda estrutural. O exercicio costuma exigir reconhecimento de diploma (nostrifikace) e comprovacao de proficiencia em tcheco, etapas que devem ser planejadas com antecedencia."
+        "area": "Engenharia e areas tecnicas",
+        "advice": "Engenheiros e tecnicos seguem entre as ocupacoes prioritarias. Perfis de mecanica, eletrica e civil encontram boa absorcao na industria de alta tecnologia."
       },
       {
-        "area": "Construcao e oficios tecnicos",
-        "advice": "Soldadores, eletricistas, encanadores e pedreiros encontram vagas com facilidade. Certificacoes tecnicas e experiencia comprovada pesam mais do que diploma universitario."
+        "area": "Construcao civil e oficios",
+        "advice": "Oficios qualificados como soldador, serralheiro e pedreiro tem procura forte e o setor liderou parte da alta de salarios em 2025."
       },
       {
-        "area": "Logistica e transporte",
-        "advice": "Motoristas profissionais e operadores de armazem tem boa colocacao. Para motoristas, a habilitacao europeia e os certificados de qualificacao profissional sao determinantes."
+        "area": "Educacao",
+        "advice": "Ha falta de professores, mas a remuneracao do setor e um limitante historico. Avalie o custo-beneficio frente a outras areas em alta."
       }
     ],
     "salaries": [
       {
-        "role": "Media nacional (salario bruto mensal)",
-        "range": "CZK 49.215/mes (media de 2025)",
+        "role": "Salario medio bruto mensal (geral)",
+        "range": "46.924 CZK/mes (1o trimestre de 2025)",
         "source": {
-          "label": "Czech Statistical Office (CZSO)",
-          "url": "https://csu.gov.cz/employees-and-wages",
-          "official": true
-        }
-      },
-      {
-        "role": "Mediana salarial (bruto mensal)",
-        "range": "CZK 38.385/mes (1o trimestre de 2025)",
-        "source": {
-          "label": "CZSO, Average wages 1Q 2025",
+          "label": "Czech Statistical Office (CSU)",
           "url": "https://csu.gov.cz/rychle-informace/average-wages-1-quarter-of-2025",
           "official": true
         }
       },
       {
-        "role": "Media nacional (bruto mensal, 1o trimestre de 2025)",
-        "range": "CZK 46.924/mes",
+        "role": "Salario mediano mensal (geral)",
+        "range": "38.385 CZK/mes (1o trimestre de 2025)",
         "source": {
-          "label": "CZSO, Average wages 1Q 2025",
+          "label": "Czech Statistical Office (CSU)",
           "url": "https://csu.gov.cz/rychle-informace/average-wages-1-quarter-of-2025",
           "official": true
         }
       },
       {
-        "role": "Salario minimo",
-        "range": "CZK 22.400/mes (a partir de 1 de janeiro de 2026)",
+        "role": "Faixa central (80% dos empregados)",
+        "range": "de 21.136 a 73.611 CZK/mes (1o trimestre de 2025)",
         "source": {
-          "label": "Ministerio do Trabalho e Assuntos Sociais (MPSV)",
-          "url": "https://www.mpsv.cz/en/minimum-wage",
-          "official": true
-        }
-      },
-      {
-        "role": "Praga (media regional, a maior do pais)",
-        "range": "Acima de CZK 62.000/mes",
-        "source": {
-          "label": "CZSO, dados regionais de salarios",
-          "url": "https://csu.gov.cz/kraje-spolecne/employees-and-wages",
+          "label": "Czech Statistical Office (CSU)",
+          "url": "https://csu.gov.cz/rychle-informace/average-wages-1-quarter-of-2025",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE, do Espaco Economico Europeu e da Suica trabalham na Tchequia sem necessidade de autorizacao. Para nacionais de paises terceiros, o principal instrumento e o Employee Card, um permite unico que combina autorizacao de residencia e de trabalho por mais de tres meses, valido para qualquer nivel de qualificacao e vinculado a uma vaga especifica. O pedido e feito, em regra, presencialmente em embaixada ou consulado tcheco, ou na unidade regional do Ministerio do Interior (OAMP) para quem ja reside legalmente no pais. O prazo legal de analise e de 60 dias e a taxa consular e de CZK 5.000. O cartao e emitido pela duracao do emprego, ate o maximo de dois anos, e pode ser renovado por igual periodo. O candidato costuma precisar indicar o numero de referencia da vaga, registrada na base central de vagas administrada pelo MPSV. Para profissionais de alta qualificacao com diploma superior existe o Blue Card da UE, alternativa ao Employee Card. A Tchequia mantem ainda uma lista de ocupacoes em escassez, atualizada com profissoes como especialistas em inteligencia artificial, engenheiros de energias renovaveis e especialistas em ciberseguranca, que pode facilitar e agilizar o enquadramento de trabalhadores estrangeiros nessas areas. Algumas profissoes reguladas (notadamente na saude) exigem reconhecimento de diploma e comprovacao de proficiencia em tcheco.",
+    "foreignerRules": "Cidadaos da Uniao Europeia, do Espaco Economico Europeu e da Suica tem livre circulacao e nao precisam de autorizacao para trabalhar na Republica Tcheca. Para nacionais de fora da UE, o principal instrumento e o Employee Card (zamestnanecka karta), uma autorizacao unica que combina residencia e trabalho de longo prazo, valida por ate dois anos e renovavel. O cartao e vinculado a um emprego, empregador e posicao especificos, e qualquer mudanca de empregador ou funcao precisa ser comunicada ao Ministerio do Interior. Em regra, exige uma vaga registrada na base central de vagas do pais ou acesso livre ao mercado de trabalho. Profissionais altamente qualificados podem optar pelo EU Blue Card, e ha programas governamentais como o Highly Qualified Worker Programme e o Key and Research Staff Programme, que simplificam exigencias. As cotas anuais para Employee Cards sao limitadas e priorizam esses programas. Fontes oficiais: Ministerio do Interior (mvcr.cz) e o portal de imigracao IPC (ipc.gov.cz).",
     "opportunityWindows": [
-      "Mercado proximo do pleno emprego, com centenas de milhares de vagas abertas e escassez estrutural em industria, construcao, saude e TI",
-      "Lista de ocupacoes em escassez ampliada a partir de 2025 com inteligencia artificial, energias renovaveis e ciberseguranca, abrindo caminho mais rapido para esses perfis",
-      "Crescimento salarial real positivo em 2025 e 2026, com altas expressivas em TI, finance, energia, atividades profissionais e cientificas e imobiliario",
-      "Praga e demais regioes urbanas concentram as melhores remuneracoes e a maior densidade de vagas qualificadas",
-      "Demanda sustentada por oficios tecnicos, onde certificacao e experiencia valem mais do que diploma superior"
+      "Programas governamentais para trabalhadores qualificados e altamente qualificados (Highly Qualified Worker Programme e Key and Research Staff Programme) com exigencias simplificadas para nacionais de fora da UE",
+      "EU Blue Card como via para profissionais altamente qualificados",
+      "Cerca de 264 mil vagas abertas no pais e deficit anual estimado em torno de 70 mil trabalhadores, segundo levantamentos de mercado"
     ],
     "jobBoards": [
       {
-        "label": "MPSV, base central de vagas (portal do Ministerio do Trabalho e Assuntos Sociais)",
-        "url": "https://www.mpsv.cz/web/cz/uchazeci-o-zamestnani",
+        "label": "Urad prace - Servico Publico de Emprego da Republica Tcheca",
+        "url": "https://uradprace.cz",
         "official": true
       },
       {
-        "label": "Urad prace CR, Servico Publico de Emprego",
-        "url": "https://www.uradprace.cz/en/",
+        "label": "EURES - Portal Europeu de Mobilidade Profissional",
+        "url": "https://eures.europa.eu",
         "official": true
       },
       {
-        "label": "EURES Czechia (portal europeu de empregos)",
-        "url": "https://eures.europa.eu/index_en",
-        "official": true
-      },
-      {
-        "label": "Integrated Portal MPSV (vagas para estrangeiros, com numero de referencia)",
-        "url": "https://www.mpsv.cz/",
+        "label": "IPC - Portal oficial de imigracao (Employee Card)",
+        "url": "https://ipc.gov.cz/en/",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "Czech Statistical Office (CZSO) - Employees and wages",
-        "url": "https://csu.gov.cz/employees-and-wages",
-        "official": true
-      },
-      {
-        "label": "CZSO - Average wages, 1st quarter of 2025",
+        "label": "Czech Statistical Office (CSU) - Salarios medios 1o trimestre de 2025",
         "url": "https://csu.gov.cz/rychle-informace/average-wages-1-quarter-of-2025",
         "official": true
       },
       {
-        "label": "CZSO - Rates of employment, unemployment and economic activity, December 2025",
-        "url": "https://csu.gov.cz/rychle-informace/rates-of-employment-unemployment-and-economic-activity-december-2025",
+        "label": "Czech Statistical Office (CSU) - Taxas de emprego e desemprego, janeiro 2025",
+        "url": "https://csu.gov.cz/rychle-informace/rates-of-employment-unemployment-and-economic-activity-january-2025",
         "official": true
       },
       {
-        "label": "CZSO - Employment and unemployment (LFS)",
-        "url": "https://csu.gov.cz/employment-and-unemployment-lfs",
-        "official": true
-      },
-      {
-        "label": "EURES - Labour Market Information: Czechia",
+        "label": "EURES - Informacoes do mercado de trabalho (Chequia)",
         "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-czechia_en",
         "official": true
       },
       {
-        "label": "Urad prace CR - Employee card, information for employers",
-        "url": "https://www.uradprace.cz/en/for-employers-1",
-        "official": true
-      },
-      {
-        "label": "Czech Immigration Portal (ipc.gov.cz) - Employee Card",
+        "label": "IPC / Ministerio do Interior - Employee Card",
         "url": "https://ipc.gov.cz/en/visa-and-residence-permit-types/third-country-nationals/long-term-residence-permits/employee-card/",
         "official": true
       },
       {
-        "label": "Ministry of the Interior of the Czech Republic - Employee Card",
-        "url": "https://www.mvcr.cz/mvcren/article/employee-card.aspx",
+        "label": "Ministerio dos Negocios Estrangeiros - Employee Card",
+        "url": "https://mzv.gov.cz/jnp/en/information_for_aliens/long_stay_visa/employment_card.html",
         "official": true
       },
       {
-        "label": "EU Immigration Portal - Highly-qualified worker in Czechia",
-        "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/highly-qualified-worker-czechia_en",
-        "official": true
-      },
-      {
-        "label": "CEDEFOP - Czech Republic: Mismatch priority occupations",
+        "label": "Cedefop - Ocupacoes prioritarias com desajuste de competencias (Chequia)",
         "url": "https://www.cedefop.europa.eu/en/data-insights/czech-republic-mismatch-priority-occupations",
         "official": true
       }
