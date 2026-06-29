@@ -1,4 +1,4 @@
-// GERADO pela equipe de agentes (rodada semanal do Mercado de Trabalho) · ultima geracao 2026-06-26.
+// GERADO pela equipe de agentes (rodada semanal do Mercado de Trabalho) · ultima geracao 2026-06-29.
 // NAO editar a mao: regenerado a cada rodada de pesquisa (_gen-labor.mjs).
 import type { LaborMarketMap } from "./labor-market";
 
@@ -3197,200 +3197,176 @@ export const LABOR_MARKET: LaborMarketMap = {
     ]
   },
   "pl": {
-    "updatedAt": "2026-06-26",
-    "overview": "A Polonia mantem um mercado de trabalho aquecido e com baixo desemprego, ainda que em leve alta no comparativo anual. Segundo o Statistics Poland (GUS), a taxa de desemprego registrado ficou em torno de 5,9% em maio de 2026, contra 5,1% um ano antes, com cerca de 916 mil pessoas registradas como desempregadas. A maior parte dessas pessoas (mais de 87%) nao tem direito a beneficio, reflexo de um mercado em que o problema central nao e falta de vagas, mas escassez estrutural de mao de obra qualificada. O salario medio bruto no setor empresarial girou em torno de PLN 8.800 a 8.900 ao longo de 2025, com crescimento nominal proximo de 9% no ano. A demografia desfavoravel, com envelhecimento da populacao e baixa natalidade, pressiona setores inteiros e abre espaco consistente para trabalhadores estrangeiros, sobretudo em saude, construcao, transporte e industria. A partir de dezembro de 2025 entrou em vigor uma reforma ampla das regras de emprego de estrangeiros, com submissao 100% eletronica de pedidos de autorizacao de trabalho e fim do teste de mercado de trabalho, o que tende a simplificar a contratacao.",
+    "updatedAt": "2026-06-29",
+    "overview": "A Polonia mantem um dos mercados de trabalho mais firmes da Uniao Europeia, com taxa de desemprego registrado de 5,6% em novembro de 2025 segundo o Statistics Poland (GUS), bem abaixo da media do bloco. O salario medio bruto no setor empresarial chegou a 8.881,84 zlotys mensais em junho de 2025, alta nominal de 9,0% em relacao ao ano anterior. As faltas de mao de obra ficaram estruturais, concentradas em construcao, saude, tecnologia e oficios industriais, enquanto a economia ainda gera vagas em servicos modernos e energia renovavel. A partir de junho de 2025 entrou em vigor uma ampla reforma das regras de emprego de estrangeiros, com processo 100% digital e fim do teste de mercado de trabalho.",
     "hotSectors": [
-      "Saude e cuidados (medicos, enfermeiros, parteiras, cuidadores)",
       "Construcao civil e oficios especializados",
-      "Transporte rodoviario e logistica (motoristas de caminhao e onibus, armazenagem)",
-      "Industria de transformacao e manufatura (operadores de maquinas, soldadores, montadores)",
-      "Educacao (professores de varias especialidades)",
-      "Tecnologia da informacao, com forte alta em IA e machine learning",
-      "Servicos financeiros e contabilidade"
+      "Saude e cuidados",
+      "Tecnologia da informacao e cibersseguranca",
+      "Servicos modernos de negocio (BPO/SSC)",
+      "Energia renovavel",
+      "Logistica e transporte",
+      "Financas, contabilidade e e-commerce"
     ],
     "coolingSectors": [
-      "Funcoes administrativas e de escritorio de baixa especializacao, onde ha mais candidatos do que vagas",
-      "Ocupacoes classificadas como excedentes no Barometr Zawodow, com mais profissionais do que ofertas em alguns condados"
+      "Reparo de veiculos",
+      "Mineracao",
+      "Manufatura tradicional em algumas regioes"
     ],
     "inDemandRoles": [
       {
-        "role": "Enfermeiros e parteiras",
-        "note": "Deficit nacional persistente ligado ao envelhecimento populacional"
+        "role": "Eletricista e montador eletrico",
+        "note": "Escassez ampla apontada pelo EURES e por servicos publicos de emprego."
       },
       {
-        "role": "Medicos",
-        "note": "Escassez aguda em servicos de saude em quase todo o pais"
+        "role": "Soldador",
+        "note": "Uma das maiores faltas de mao de obra do pais."
       },
       {
-        "role": "Motoristas de caminhao e de onibus",
-        "note": "Ocupacao cronicamente deficitaria em transporte e logistica"
+        "role": "Pedreiro, rebocador e telhadista",
+        "note": "Construcao concentra o maior numero de ocupacoes em falta."
       },
       {
-        "role": "Soldadores",
-        "note": "Alta demanda na industria de transformacao"
+        "role": "Carpinteiro e marceneiro"
       },
       {
-        "role": "Operadores de maquinas e montadores",
-        "note": "Cerca de 23,5% das vagas industriais segundo dados do mercado"
+        "role": "Enfermeiro e parteira",
+        "note": "Saude com escassez cronica em varias especialidades."
       },
       {
-        "role": "Trabalhadores da construcao e oficios afins",
-        "note": "Maior grupo de ocupacoes em deficit; exclui eletricistas em alguns recortes"
+        "role": "Medico",
+        "note": "Diversas especialidades em demanda."
       },
       {
-        "role": "Telhadistas e funileiros (chapeiros)",
-        "note": "Listados entre as ocupacoes em deficit nacional em 2025"
+        "role": "Professor",
+        "note": "Ensino geral, vocacional, infantil e especial."
       },
       {
-        "role": "Professores de varias especialidades",
-        "note": "Deficit estrutural, com dependencia de professores aposentados"
+        "role": "Motorista de caminhao pesado e de onibus"
       },
       {
-        "role": "Contadores independentes",
-        "note": "Demanda firme em servicos financeiros"
+        "role": "Especialista em TI, IA e cibersseguranca"
       },
       {
-        "role": "Profissionais de TI, IA e machine learning",
-        "note": "TI representou cerca de 10% das vagas de especialistas em 2025, com forte crescimento em IA"
+        "role": "Engenheiro civil, eletrico e de energia"
+      },
+      {
+        "role": "Especialista em contabilidade, analista de negocios e economia"
+      },
+      {
+        "role": "Cuidador de idosos e pessoas com deficiencia"
+      },
+      {
+        "role": "Cozinheiro"
       }
     ],
     "byQualification": [
       {
-        "area": "Saude e enfermagem",
-        "advice": "Setor com escassez aguda e prioridade nacional. Profissoes medicas reguladas passaram a ter facilitacoes na nova legislacao de dezembro de 2025. Vale investir no reconhecimento do diploma e do registro profissional na Polonia antes de migrar."
+        "area": "Construcao e engenharia",
+        "advice": "Setor com a maior carencia de mao de obra do pais. Oficios como soldador, eletricista, pedreiro e telhadista, alem de engenheiros civis, eletricos e de energia, encontram colocacao rapida. Certificacoes reconhecidas e experiencia pratica pesam mais que o idioma no inicio."
       },
       {
-        "area": "Construcao e oficios tecnicos",
-        "advice": "Demanda alta e estavel para pedreiros, telhadistas, funileiros, soldadores e montadores. Certificacoes tecnicas e experiencia comprovada pesam mais que diploma formal nesses cargos."
-      },
-      {
-        "area": "Transporte e logistica",
-        "advice": "Motoristas de caminhao e onibus estao entre as maiores carencias. Habilitacao categoria C/D e o Certificado de Competencia Profissional (Kod 95 / CPC) sao essenciais e abrem vagas rapidamente."
-      },
-      {
-        "area": "Engenharia e industria",
-        "advice": "Manufatura concentra milhares de vagas em aberto. Engenheiros e tecnicos com pratica em producao e automacao tem boa colocacao."
+        "area": "Saude",
+        "advice": "Enfermeiros, parteiras e medicos seguem em falta cronica em diversas especialidades. O caminho exige reconhecimento de diploma e, na pratica, dominio do polones para atendimento direto ao paciente."
       },
       {
         "area": "Tecnologia da informacao",
-        "advice": "Mercado saudavel e em alta, sobretudo em IA, dados e desenvolvimento. Ingles tecnico costuma bastar em muitas empresas, mas polones amplia oportunidades."
+        "advice": "TI, implementacao de inteligencia artificial e cibersseguranca puxam vagas nos polos de servicos modernos como Varsovia, Cracovia e Wroclaw, com ingles frequentemente suficiente nas empresas internacionais."
       },
       {
         "area": "Educacao",
-        "advice": "Professores sao deficit nacional. Para lecionar e preciso validar formacao e, em geral, dominio do polones; professores de lingua estrangeira passaram a ser isentos de autorizacao de trabalho."
+        "advice": "Professores aparecem entre as ocupacoes em falta no ensino geral, tecnico, infantil e especial. A atuacao costuma exigir polones e validacao de credenciais."
       },
       {
-        "area": "Financas e contabilidade",
-        "advice": "Contadores e analistas financeiros tem demanda firme. Conhecimento das normas contabeis locais e de softwares de gestao e diferencial."
+        "area": "Financas e administracao",
+        "advice": "Contabilidade, analise de negocios e economia tem procura no setor financeiro e de e-commerce, sobretudo nos centros de servicos compartilhados. Atencao: economistas e pessoal administrativo geral aparecem como excedente em varias regioes, entao especializacao faz diferenca."
+      },
+      {
+        "area": "Transporte e logistica",
+        "advice": "Motoristas de caminhao pesado e de onibus, alem de especialistas em logistica, estao entre as vagas mais comuns. Habilitacoes e certificados profissionais validos no pais sao decisivos."
       }
     ],
     "salaries": [
       {
-        "role": "Salario medio bruto no setor empresarial (referencia nacional)",
-        "range": "PLN 8.800 a 8.900 por mes",
+        "role": "Salario medio bruto no setor empresarial",
+        "range": "8.881,84 PLN/mes bruto (junho de 2025)",
         "source": {
-          "label": "Statistics Poland (GUS), setor empresarial 2025",
+          "label": "Statistics Poland (GUS)",
           "url": "https://stat.gov.pl/en/topics/labour-market/working-employed-wages-and-salaries-cost-of-labour/average-paid-employment-and-average-gross-wages-and-salaries-in-enterprise-sector-in-june-2025,3,171.html",
           "official": true
         }
       },
       {
-        "role": "Salario medio mensal bruto na economia nacional (3o trimestre de 2025)",
-        "range": "PLN 8.771 por mes",
+        "role": "Salario minimo nacional",
+        "range": "4.666 PLN/mes bruto (vigente em 2025); 4.806 PLN/mes bruto a partir de janeiro de 2026",
         "source": {
-          "label": "Statistics Poland (GUS)",
-          "url": "https://stat.gov.pl/en/topics/labour-market/working-employed-wages-and-salaries-cost-of-labour/",
+          "label": "Ministerio da Familia, Trabalho e Politica Social (gov.pl)",
+          "url": "https://www.gov.pl/web/family/minimum-wage",
           "official": true
         }
       },
       {
-        "role": "Mediana salarial (agosto de 2025, cerca de 17% abaixo da media)",
-        "range": "PLN 7.280 por mes",
+        "role": "Piso salarial para Cartao Azul da UE",
+        "range": "12.272,58 PLN/mes bruto (aplicacoes de 2025)",
         "source": {
-          "label": "Statistics Poland (GUS), distribuicao de salarios",
-          "url": "https://stat.gov.pl/en/topics/labour-market/working-employed-wages-and-salaries-cost-of-labour/",
-          "official": true
-        }
-      },
-      {
-        "role": "Piso salarial de referencia para autorizacao de trabalho em tempo integral (2026)",
-        "range": "PLN 4.806 brutos por mes",
-        "source": {
-          "label": "Servicos publicos de emprego / praca.gov.pl",
-          "url": "https://www.praca.gov.pl",
+          "label": "Comissao Europeia, EU Immigration Portal",
+          "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/eu-blue-card/eu-blue-card-poland_en",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos de fora da UE em geral precisam de autorizacao de trabalho. O modelo mais comum e a autorizacao Tipo A, solicitada pelo empregador junto ao escritorio do Voivoda (Wojewoda). Desde 1 de agosto de 2025, todos os pedidos de autorizacao Tipo A devem ser feitos exclusivamente de forma eletronica pelo portal oficial praca.gov.pl, regra reforcada pela reforma que entrou em vigor em 1 de dezembro de 2025. A Lei de 20 de marco de 2025 eliminou o teste de mercado de trabalho, ou seja, o empregador nao precisa mais comprovar a ausencia de candidato local antes de contratar estrangeiro. Para estadias e trabalho acima de tres meses, a opcao mais pratica costuma ser a autorizacao unica (jednolite zezwolenie na pobyt i prace), que reune residencia temporaria e trabalho em um unico documento, solicitada apos a entrada na Polonia. Profissionais altamente qualificados podem usar o Cartao Azul da UE. Existe ainda o sistema simplificado de declaracao de confiar trabalho (oswiadczenie), restrito desde dezembro de 2025 a cidadaos de Armenia, Belarus, Moldova e Ucrania, com a Georgia excluida da lista. As taxas aumentaram em dezembro de 2025: autorizacao de trabalho ate tres meses custa PLN 200, acima de tres meses PLN 400, trabalho sazonal PLN 100, delegacao PLN 800 e a declaracao PLN 400. Foram criadas isencoes de autorizacao para categorias como professores de lingua estrangeira, pesquisadores, profissoes medicas reguladas, atletas e artistas (com limites de dias por ano). Para vagas em tempo integral a partir de 2026, o piso salarial de referencia para autorizacoes e de PLN 4.806 brutos por mes.",
+    "foreignerRules": "Cidadaos da UE, do Espaco Economico Europeu (EEE) e da Suica tem livre circulacao e trabalham na Polonia sem necessidade de autorizacao de trabalho, em igualdade com os nacionais. Quem vem de fora da UE (terceiros paises) precisa, em regra, de uma autorizacao de trabalho antes de comecar, salvo isencoes como familiares de cidadao da UE, titulares de certas residencias temporarias (pesquisadores, formados em universidades polonesas, reagrupamento familiar) e beneficiarios de protecao internacional. Desde 1 de junho de 2025, uma reforma ampla tornou o processo totalmente eletronico via praca.gov.pl, eliminou o teste de mercado de trabalho e deu aos voivodas o poder de recusar autorizacoes para profissoes em listas restritivas locais. Para profissionais altamente qualificados existe o Cartao Azul da UE, com contrato minimo reduzido para 6 meses e piso salarial de 12.272,58 PLN brutos/mes nas aplicacoes de 2025. Os prazos de analise variam de 2 a 5 meses conforme a regiao.",
     "opportunityWindows": [
-      "Reforma de dezembro de 2025 simplificou a contratacao de estrangeiros com submissao eletronica e fim do teste de mercado de trabalho",
-      "Escassez estrutural por envelhecimento populacional garante demanda continua em saude, construcao, transporte e industria",
-      "Profissoes medicas reguladas e professores de lingua estrangeira ganharam isencao de autorizacao de trabalho",
-      "Crescimento acelerado de vagas em IA e machine learning dentro do setor de TI",
-      "Cerca de 22 mil vagas em aberto so na industria de transformacao, com maioria em oficios e operacao de maquinas"
+      "Lista de ocupacoes em falta do EURES concentrada em construcao, oficios industriais (soldador, eletricista), saude (enfermeiro, medico) e ensino",
+      "Cartao Azul da UE como via para profissionais altamente qualificados de fora da UE, com regras flexibilizadas em 2025",
+      "Polos de servicos modernos de negocio (BPO/SSC) em Varsovia, Cracovia e Wroclaw absorvendo TI, financas e analise de negocios"
     ],
     "jobBoards": [
       {
-        "label": "praca.gov.pl (portal oficial dos servicos publicos de emprego e autorizacoes de trabalho)",
-        "url": "https://www.praca.gov.pl",
+        "label": "praca.gov.pl (Servicos Publicos de Emprego / Urzad Pracy)",
+        "url": "https://psz.praca.gov.pl/",
         "official": true
       },
       {
-        "label": "EURES Poland (portal europeu de empregos)",
+        "label": "Portal EURES (mobilidade profissional na UE)",
         "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "Barometr Zawodow (barometro oficial de ocupacoes em deficit e excedente)",
-        "url": "https://barometrzawodow.pl/en/",
+        "label": "gov.pl, secao Estrangeiros na Polonia",
+        "url": "https://www.gov.pl/web/udsc-en",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "Statistics Poland (GUS) - Mercado de Trabalho",
-        "url": "https://stat.gov.pl/en/topics/labour-market/",
-        "official": true
-      },
-      {
-        "label": "Statistics Poland (GUS) - Taxa de desemprego 1990-2025",
-        "url": "https://stat.gov.pl/en/topics/labour-market/registered-unemployment/unemployment-rate-1990-2025,3,1.html",
-        "official": true
-      },
-      {
-        "label": "Statistics Poland (GUS) - Salarios brutos no setor empresarial (junho 2025)",
-        "url": "https://stat.gov.pl/en/topics/labour-market/working-employed-wages-and-salaries-cost-of-labour/average-paid-employment-and-average-gross-wages-and-salaries-in-enterprise-sector-in-june-2025,3,171.html",
-        "official": true
-      },
-      {
-        "label": "EURES - Labour Market Information: Poland",
+        "label": "EURES, Informacao do mercado de trabalho da Polonia",
         "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-poland_en",
         "official": true
       },
       {
-        "label": "EURES / ELA - Labour shortages and surpluses in Europe 2025",
+        "label": "Statistics Poland (GUS), taxa de desemprego registrado 1990-2025",
+        "url": "https://stat.gov.pl/en/topics/labour-market/registered-unemployment/unemployment-rate-1990-2025,3,1.html",
+        "official": true
+      },
+      {
+        "label": "Statistics Poland (GUS), salario medio bruto no setor empresarial (junho 2025)",
+        "url": "https://stat.gov.pl/en/topics/labour-market/working-employed-wages-and-salaries-cost-of-labour/average-paid-employment-and-average-gross-wages-and-salaries-in-enterprise-sector-in-june-2025,3,171.html",
+        "official": true
+      },
+      {
+        "label": "European Labour Authority, Relatorio EURES de faltas e excedentes 2025",
         "url": "https://www.ela.europa.eu/en/publications/labour-shortages-and-surpluses-europe-2025",
         "official": true
       },
       {
-        "label": "Barometr Zawodow (barometro oficial de ocupacoes)",
-        "url": "https://barometrzawodow.pl/en/",
+        "label": "Ministerio da Familia, Trabalho e Politica Social (gov.pl), salario minimo",
+        "url": "https://www.gov.pl/web/family/minimum-wage",
         "official": true
       },
       {
-        "label": "praca.gov.pl - Autorizacoes de trabalho (servicos publicos de emprego)",
-        "url": "https://lang-psz.praca.gov.pl/en/-/10217858-zezwolenia-na-prace",
-        "official": true
-      },
-      {
-        "label": "Voivoda de Poznan / Departamento de Estrangeiros - Novas regras de 1 de dezembro de 2025",
-        "url": "https://migrant.poznan.uw.gov.pl/en/legal-alert-1-december-2025-new-regulations-employment-foreigners",
-        "official": true
-      },
-      {
-        "label": "Cedefop - 2025 Skills Forecast Poland",
-        "url": "https://www.cedefop.europa.eu/files/skills_forecast_-_poland_2025.pdf",
+        "label": "Comissao Europeia, Cartao Azul da UE na Polonia",
+        "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/eu-blue-card/eu-blue-card-poland_en",
         "official": true
       }
     ]
@@ -3823,378 +3799,298 @@ export const LABOR_MARKET: LaborMarketMap = {
     ]
   },
   "at": {
-    "updatedAt": "2026-06-26",
-    "overview": "O mercado de trabalho austríaco entrou em 2026 com sinais de esfriamento conjuntural, mas mantém escassez estrutural de mão de obra qualificada. Segundo o AMS, em maio de 2026 havia 301.676 pessoas registradas como desempregadas, somadas a 76.602 em programas de qualificação, com a taxa nacional de desemprego em torno de 7,5 por cento no fim de abril. A Statistik Austria registrou, no primeiro trimestre de 2026, uma média de 133.100 vagas em aberto, número que subiu na margem mas permanece abaixo do nível do ano anterior. O desemprego de longa duração cresceu cerca de 13 por cento na comparação anual (102.788 pessoas em maio de 2026), concentrado mais entre mulheres. Apesar do quadro mais cauteloso, o EURES aponta que 78 por cento dos empregadores ainda relatam algum grau de escassez de pessoal, e a Áustria figura entre os países da UE com maior taxa de vagas em aberto (cerca de 3,1 por cento no primeiro trimestre de 2026, segundo o Eurostat). A demanda concentra-se nos estados federais do oeste, enquanto a maior parte dos candidatos reside no leste, o que cria um desequilíbrio regional persistente.",
+    "updatedAt": "2026-06-29",
+    "overview": "O mercado de trabalho austriaco entrou em 2026 com sinais mistos. A taxa de desemprego subiu para cerca de 7,5% em abril de 2026 no calculo nacional do servico publico de emprego, enquanto o emprego dependente cresceu cerca de 23 mil vagas em relacao ao ano anterior, chegando a perto de 3,96 milhoes de ocupados, segundo a Statistik Austria e o AMS. Apesar do desemprego em leve alta, a escassez de mao de obra qualificada continua sendo o tema central, com a lista oficial de profissoes em falta expandida para 64 ocupacoes nacionais em 2026. A Austria nao tem salario minimo legal, mas a negociacao coletiva cobre cerca de 98% dos trabalhadores e fixa os pisos por setor.",
     "hotSectors": [
-      "Saúde e enfermagem (cuidados de longa duração e hospitalar)",
-      "Tecnologia da informação e desenvolvimento de software",
-      "Engenharia e técnica industrial (mecânica, eletrotécnica, mecatrônica)",
-      "Artesanato e ofícios qualificados (eletricistas, encanadores, telhadistas)",
-      "Hotelaria, gastronomia e turismo",
-      "Transporte e logística (motoristas profissionais)",
-      "Construção civil"
+      "Saude e cuidados (enfermagem, medicina, cuidadores)",
+      "Tecnologia da informacao e comunicacao",
+      "Eletrotecnica e alta tensao",
+      "Construcao civil e oficios qualificados",
+      "Tecnologias verdes e transicao energetica",
+      "Industria digital e engenharia",
+      "Hotelaria e gastronomia (HORECA)",
+      "Transporte ferroviario e rodoviario de carga"
     ],
     "coolingSectors": [
-      "Setores expostos à indústria e à conjuntura, com aumento do desemprego de longa duração na comparação anual",
-      "Funções administrativas e de escritório de baixa qualificação, pressionadas pela retração do número geral de vagas frente ao ano anterior"
+      "Manufatura de baixa qualificacao afetada pela automacao",
+      "Trabalho manual repetitivo na industria"
     ],
     "inDemandRoles": [
       {
-        "role": "Enfermeiros e profissionais de cuidados de saúde",
-        "note": "Profissão recorrente na lista federal de profissões em falta (Mangelberufsliste); demanda estrutural ligada ao envelhecimento populacional."
+        "role": "Enfermeiros diplomados em saude e cuidados",
+        "note": "Inclui especializacoes em psiquiatria, pediatria e geriatria; consta na lista nacional de profissoes em falta 2026."
       },
       {
-        "role": "Desenvolvedores de software e profissionais de TI",
-        "note": "Escassez persistente apontada por AMS e EURES; setor de salários mais altos."
+        "role": "Medicos de varias especialidades",
+        "note": "De clinica geral a urologia, na lista oficial de profissoes em falta."
       },
       {
-        "role": "Engenheiros eletrotécnicos diplomados",
-        "note": "Citado pela migration.gv.at entre as profissões em falta de 2026."
+        "role": "Eletrotecnicos",
+        "note": "Varios niveis de qualificacao; especialistas em alta tensao com prioridade."
       },
       {
-        "role": "Técnicos de engenharia mecânica e mecatrônicos",
-        "note": "Constam entre as profissões em falta de 2026."
+        "role": "Desenvolvedores de software, analistas de sistemas e programadores",
+        "note": "Profissionais de TIC lideram as listas de escassez."
       },
       {
-        "role": "Eletricistas, encanadores e telhadistas (Dachdecker)",
-        "note": "Ofícios qualificados citados como profissões em falta; telhadista mencionado pela migration.gv.at."
+        "role": "Engenheiros mecanicos, eletricos e civis"
       },
       {
-        "role": "Motoristas profissionais (transporte e caminhão)",
-        "note": "Setor com muitas vagas em aberto segundo o AMS."
+        "role": "Oficios qualificados: soldadores, serralheiros, telhadistas, funileiros, carpinteiros"
       },
       {
-        "role": "Profissionais de hotelaria e gastronomia",
-        "note": "Escassez generalizada, sobretudo nos estados do oeste; salários na faixa mais baixa do mercado."
+        "role": "Mecanicos de veiculos automotores"
+      },
+      {
+        "role": "Cozinheiros de restaurante (HORECA)"
+      },
+      {
+        "role": "Maquinistas de locomotiva",
+        "note": "Nova adicao em 2026, refletindo lacuna no transporte ferroviario."
+      },
+      {
+        "role": "Especialistas em folha de pagamento",
+        "note": "Nova adicao em 2026, ligada a digitalizacao de RH."
+      },
+      {
+        "role": "Pedagogos da primeira infancia (inclusivos)",
+        "note": "Nova adicao em 2026 na area de servicos sociais."
+      },
+      {
+        "role": "Construtores de maquinas agricolas"
       }
     ],
     "byQualification": [
       {
-        "area": "Saúde e enfermagem",
-        "advice": "Profissão prioritária e recorrente na lista federal de profissões em falta, o que facilita a Rot-Weiss-Rot-Karte. O reconhecimento do diploma (Nostrifizierung) e o nível de alemão (em geral B2 para atuação clínica) são os principais filtros; vale iniciar o reconhecimento antes mesmo de migrar."
+        "area": "Saude e enfermagem",
+        "advice": "Area com a maior demanda estrutural do pais. Enfermeiros diplomados e medicos constam na lista nacional de profissoes em falta, o que abre caminho prioritario via Cartao Vermelho-Branco-Vermelho. Reconhecimento do diploma e nivel de alemao sao decisivos."
       },
       {
-        "area": "Tecnologia da informação",
-        "advice": "Setor de alta demanda e bons salários. Para funções onde o idioma da empresa é o inglês há pontuação extra no sistema de pontos da Rot-Weiss-Rot-Karte; ainda assim, alemão amplia o leque de vagas fora de Viena."
+        "area": "Tecnologia da informacao",
+        "advice": "Desenvolvedores, analistas e especialistas em ciberseguranca estao entre as ocupacoes de maior escassez. Para profissionais de TIC, a Austria aceita tres anos de experiencia relevante no lugar do diploma universitario no EU Blue Card."
       },
       {
-        "area": "Engenharia e técnica industrial",
-        "advice": "Engenheiros eletrotécnicos, técnicos de mecânica e mecatrônicos estão entre as profissões em falta de 2026, abrindo caminho direto pela carta de profissões em falta. Comprovar formação técnica formal e experiência documentada é decisivo na pontuação."
+        "area": "Engenharia e eletrotecnica",
+        "advice": "Engenheiros mecanicos, eletricos e civis, alem de eletrotecnicos de alta tensao, tem prioridade. Varios niveis de qualificacao sao aceitos na lista oficial."
       },
       {
-        "area": "Ofícios e construção",
-        "advice": "Eletricistas, encanadores, telhadistas e demais ofícios qualificados têm demanda alta, sobretudo no oeste do país. Formação profissional concluída (Lehre ou equivalente) é o pré-requisito central; sem qualificação formal reconhecida, a via da carta para profissões em falta não se aplica."
+        "area": "Oficios e construcao",
+        "advice": "Soldadores, serralheiros, telhadistas e carpinteiros constam na lista de profissoes em falta. Formacao profissional concluida (vocational training) e o requisito-chave para o Cartao Vermelho-Branco-Vermelho de fachkraft."
       },
       {
-        "area": "Hotelaria e turismo",
-        "advice": "Muitas vagas, porém salários na faixa mais baixa (em torno de 28.000 euros anuais no setor). Boa porta de entrada sazonal nos estados alpinos do oeste; conferir se a função específica consta na lista regional de profissões em falta."
-      },
-      {
-        "area": "Sem qualificação formal reconhecida",
-        "advice": "As vias de imigração qualificada (Rot-Weiss-Rot-Karte para profissões em falta) exigem formação concluída e pontuação mínima. Sem isso, o acesso ao mercado é mais restrito; priorizar reconhecimento de qualificação ou as categorias de trabalhador altamente qualificado e profissional-chave."
+        "area": "Hotelaria e gastronomia",
+        "advice": "Cozinheiros de restaurante estao na lista nacional. Setor com escassez persistente, mas com pisos salariais definidos por acordo coletivo."
       }
     ],
     "salaries": [
       {
-        "role": "Eletrotécnico (entrada, formação técnica média BMS)",
-        "range": "a partir de 2.920 euros brutos/mês",
+        "role": "Rendimento bruto medio de pessoa solteira",
+        "range": "4.757 EUR/mes bruto (dado 2023, contra 3.417 EUR na media da UE27)",
         "source": {
-          "label": "AMS Karrierekompass",
-          "url": "https://www.karrierekompass.at/berufe/1832-ElektrotechnikerIn/",
+          "label": "EURES, Informacao do Mercado de Trabalho: Austria (Comissao Europeia)",
+          "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-austria_en",
           "official": true
         }
       },
       {
-        "role": "Eletrotécnico (entrada, formação técnica superior BHS)",
-        "range": "a partir de 3.340 euros brutos/mês",
+        "role": "Limiar salarial EU Blue Card 2026 (altamente qualificados)",
+        "range": "55.678 EUR/ano bruto (cerca de 3.977 EUR/mes em 14 pagamentos)",
         "source": {
-          "label": "AMS Karrierekompass",
-          "url": "https://www.karrierekompass.at/berufe/1832-ElektrotechnikerIn/",
-          "official": true
-        }
-      },
-      {
-        "role": "Mediana nacional (todos os assalariados)",
-        "range": "38.043 euros brutos/ano (cerca de 2.717 euros brutos/mês)",
-        "source": {
-          "label": "Statistik Austria - Verdienststruktur",
-          "url": "https://www.statistik.at/statistiken/bevoelkerung-und-soziales/einkommen-und-soziale-lage/verdienststruktur",
-          "official": true
-        }
-      },
-      {
-        "role": "Mediana de trabalhadores em tempo integral o ano todo",
-        "range": "55.678 euros brutos/ano",
-        "source": {
-          "label": "Statistik Austria - Verdienststruktur",
-          "url": "https://www.statistik.at/statistiken/bevoelkerung-und-soziales/einkommen-und-soziale-lage/verdienststruktur",
-          "official": true
-        }
-      },
-      {
-        "role": "Hotelaria e gastronomia (referência setorial)",
-        "range": "em torno de 28.000 euros brutos/ano",
-        "source": {
-          "label": "AMS Gehaltskompass",
-          "url": "https://www.gehaltskompass.at/",
+          "label": "migration.gv.at, Ministerio Federal do Trabalho e Economia da Austria",
+          "url": "https://www.migration.gv.at/en/types-of-immigration/permanent-immigration/eubluecard/",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadãos da UE/EEE e da Suíça têm livre acesso ao mercado de trabalho austríaco, sem necessidade de autorização. Para nacionais de países terceiros, a principal via é a Rot-Weiss-Rot-Karte (carta vermelho-branco-vermelho), válida por 24 meses com acesso restrito ao mercado, voltada a trabalhadores qualificados. Uma das categorias mais acessíveis é a de Fachkräfte in Mangelberufen (mão de obra em profissões em falta): para 2026 há 64 profissões em falta em nível federal e 66 em nível regional, definidas anualmente por portaria do Ministério do Trabalho e Economia conforme a situação do mercado. Os requisitos são: formação profissional concluída em uma profissão da lista; oferta de emprego vinculante na Áustria com salário igual ou superior ao mínimo legal ou do acordo coletivo; e atingir ao menos 55 de 90 pontos no sistema que avalia qualificação (até 30), experiência profissional (até 20), conhecimentos de idioma (até 25) e idade (até 15), com bônus de 5 pontos quando o idioma da empresa é o inglês. A taxa de solicitação é de 218 euros. Após a primeira fase, é possível migrar para a Rot-Weiss-Rot-Karte plus, com acesso mais amplo ao mercado. Para empregar candidatos da UE, empregadores contam com a rede EURES operada pelo AMS. O reconhecimento de qualificações estrangeiras (Nostrifizierung ou Anerkennung) costuma ser etapa obrigatória, sobretudo em saúde.",
+    "foreignerRules": "Cidadaos da UE, do EEE e da Suica tem livre circulacao e podem trabalhar na Austria sem autorizacao de trabalho, bastando o registro de residencia. Para nacionais de terceiros paises (fora da UE/EEE), o acesso ao trabalho exige titulo de residencia com permissao de trabalho. As principais vias sao o Cartao Vermelho-Branco-Vermelho (Rot-Weiss-Rot-Karte) e o EU Blue Card. Na via para fachkraft em profissoes em falta, exige-se formacao profissional concluida numa ocupacao da lista oficial, oferta de emprego vinculante, pagamento do piso salarial do acordo coletivo e no minimo 55 de 90 pontos no sistema de avaliacao (qualificacao ate 30, experiencia ate 20, idioma ate 25, idade ate 15); nessa via dispensa-se o teste de mercado de trabalho. O EU Blue Card destina-se a altamente qualificados, exige diploma superior de pelo menos 3 anos (ou, para TIC, 3 anos de experiencia relevante), contrato de no minimo 6 meses, teste de mercado de trabalho pelo AMS e salario bruto anual minimo de 55.678 euros em 2026. Os pedidos passam pela verificacao do AMS antes de a autoridade de residencia emitir o cartao.",
     "opportunityWindows": [
-      "Lista federal de profissões em falta de 2026 com 64 ocupações, mais 66 profissões em falta regionais, abrindo via direta para a Rot-Weiss-Rot-Karte de trabalhadores qualificados",
-      "Demanda concentrada nos estados federais do oeste (regiões alpinas), com escassez aguda em hotelaria, gastronomia e ofícios qualificados",
-      "Bônus de pontuação para candidatos de TI e áreas onde o inglês é o idioma da empresa, reduzindo a barreira do alemão na entrada",
-      "Escassez estrutural e duradoura em saúde, enfermagem e cuidados de longa duração, sustentada pelo envelhecimento populacional",
-      "Possibilidade de transição da carta inicial para a Rot-Weiss-Rot-Karte plus, ampliando o acesso ao mercado após o primeiro vínculo"
+      "Lista de profissoes em falta 2026: 64 ocupacoes nacionais (expansao a partir de 58 em 2025) mais 66 ocupacoes regionais, valida de 1 de janeiro a 31 de dezembro de 2026",
+      "Novas ocupacoes incluidas em 2026: maquinistas de locomotiva, especialistas em folha de pagamento e pedagogos inclusivos da primeira infancia",
+      "Quem trabalha numa profissao da lista ganha ate 20 pontos de bonus rumo ao limiar de 55 pontos e dispensa do teste de mercado de trabalho",
+      "Mangelberufe regionais permitem vias adicionais por estado (Bundesland) conforme a escassez local"
     ],
     "jobBoards": [
       {
-        "label": "AMS eJob-Room (portal oficial de vagas do serviço público de emprego)",
-        "url": "https://jobs.ams.at/",
+        "label": "AMS eJob-Room (servico publico de emprego)",
+        "url": "https://www.ams.at/",
         "official": true
       },
       {
-        "label": "AMS Karrierekompass (informação profissional e de carreira)",
-        "url": "https://www.karrierekompass.at/",
-        "official": true
-      },
-      {
-        "label": "EURES - Portal Europeu da Mobilidade Profissional",
+        "label": "EURES Portal de Mobilidade Profissional Europeia",
         "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "migration.gv.at - portal oficial de imigração e Rot-Weiss-Rot-Karte",
-        "url": "https://www.migration.gv.at/en/",
+        "label": "migration.gv.at (vias de imigracao e profissoes em falta)",
+        "url": "https://www.migration.gv.at/",
         "official": true
       },
       {
-        "label": "Work in Austria (ABA, agência oficial de atração de talentos)",
-        "url": "https://www.workinaustria.com/en/",
+        "label": "oesterreich.gv.at (portal oficial do governo austriaco)",
+        "url": "https://www.oesterreich.gv.at/",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "AMS - Dados do mercado de trabalho (Arbeitsmarktdaten)",
+        "label": "AMS, Dados do Mercado de Trabalho da Austria",
         "url": "https://www.ams.at/arbeitsmarktdaten-und-medien/arbeitsmarkt-daten-und-arbeitsmarkt-forschung/arbeitsmarktdaten",
         "official": true
       },
       {
-        "label": "Statistik Austria - Vagas em aberto e desemprego",
+        "label": "Statistik Austria, Desemprego e procura de trabalho",
         "url": "https://www.statistik.at/statistiken/arbeitsmarkt/arbeitslosigkeit/arbeitslose-arbeitssuchende",
         "official": true
       },
       {
-        "label": "Statistik Austria - Estrutura de remuneração (Verdienststruktur)",
-        "url": "https://www.statistik.at/statistiken/bevoelkerung-und-soziales/einkommen-und-soziale-lage/verdienststruktur",
+        "label": "migration.gv.at, Profissoes em falta a nivel nacional 2026",
+        "url": "https://www.migration.gv.at/de/formen-der-zuwanderung/dauerhafte-zuwanderung/bundesweite-mangelberufe/",
         "official": true
       },
       {
-        "label": "migration.gv.at - Profissões em falta (Fachkräfte in Mangelberufen)",
+        "label": "migration.gv.at, Fachkraefte in Mangelberufen (Cartao Vermelho-Branco-Vermelho)",
         "url": "https://www.migration.gv.at/de/formen-der-zuwanderung/dauerhafte-zuwanderung/fachkraefte-in-mangelberufen/",
         "official": true
       },
       {
-        "label": "migration.gv.at - Profissões em falta regionais",
-        "url": "https://www.migration.gv.at/de/formen-der-zuwanderung/dauerhafte-zuwanderung/regionale-mangelberufe/",
+        "label": "migration.gv.at, EU Blue Card",
+        "url": "https://www.migration.gv.at/en/types-of-immigration/permanent-immigration/eubluecard/",
         "official": true
       },
       {
-        "label": "AMS Gehaltskompass (referência oficial de salários)",
-        "url": "https://www.gehaltskompass.at/",
-        "official": true
-      },
-      {
-        "label": "EURES - Informação do mercado de trabalho da Áustria",
+        "label": "EURES, Informacao do Mercado de Trabalho: Austria (Comissao Europeia)",
         "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-austria_en",
-        "official": true
-      },
-      {
-        "label": "Eurostat - Estatísticas de vagas em aberto (job vacancy statistics)",
-        "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Job_vacancy_statistics",
         "official": true
       }
     ]
   },
   "be": {
-    "updatedAt": "2026-06-26",
-    "overview": "O mercado de trabalho belga segue aquecido e historicamente apertado em 2025, com escassez estrutural de mao de obra qualificada. Segundo o Statbel, a taxa de emprego entre pessoas de 20 a 64 anos atingiu 72,8% em 2025 (ante 72,3% em 2024), enquanto a taxa de desemprego (15-64 anos, padrao OIT) ficou em 6,2%. A distancia regional e marcante: 77,3% de emprego em Flandres, 67,9% na Valonia e 63,9% em Bruxelas. Flandres concentra o menor desemprego do pais, ao passo que Bruxelas registra os indices mais altos. O governo federal mira chegar a 80% de emprego ate 2029, o que exigiria cerca de 530 mil pessoas a mais ocupadas, pressao que sustenta a abertura a trabalhadores estrangeiros. A Belgica gerencia tres listas regionais de profissoes em falta (knelpuntberoepen), atualizadas por VDAB (Flandres), Le Forem (Valonia) e Actiris (Bruxelas), cada uma com criterios e datas proprias. Em 2025 e inicio de 2026 essas listas foram reduzidas e tiveram seu foco deslocado para perfis de media e alta qualificacao, sinal de que o pais quer atrair talento tecnico e de saude e nao mais funcoes pouco qualificadas pela via rapida.",
+    "updatedAt": "2026-06-29",
+    "overview": "A Belgica fechou 2025 com taxa de emprego de 72,8% entre as pessoas de 20 a 64 anos e desemprego (medida OIT) estimado em 6,2%, ambos acima dos numeros de 2024, segundo o instituto de estatistica Statbel. O mercado e fortemente regionalizado: a Flandres opera perto do pleno emprego, com desemprego de 4,3%, enquanto a Valonia registra 7,9% e Bruxelas 12,7%. A escassez de mao de obra continua estrutural, puxada pelo envelhecimento da populacao, e atinge sobretudo funcoes tecnicas da industria, construcao e saude. As autoridades regionais mantem listas oficiais de profissoes em falta que abrem caminho a contratacao de estrangeiros qualificados.",
     "hotSectors": [
-      "Tecnologia da informacao e digital (desenvolvimento de software, redes, ciberseguranca)",
-      "Saude e cuidados (enfermagem, cuidadores, profissionais de saude)",
-      "Construcao e oficios tecnicos (eletricistas, instaladores, manutencao industrial)",
-      "Engenharia e perfis tecnicos/STEAM",
-      "Servicos de consultoria e gestao empresarial",
-      "Manutencao de edificios, jardinagem e paisagismo",
-      "Financas e servicos financeiros"
-    ],
-    "coolingSectors": [
-      "Manufatura de equipamentos de transporte",
-      "Trabalho temporario (agencias de emprego)",
-      "Comercio varejista",
-      "Fabricacao de eletrodomesticos e aparelhos eletricos",
-      "Funcoes de vendas e administrativas (excedente de candidatos)",
-      "Logistica e armazem de baixa qualificacao"
+      "Construcao",
+      "Industria e manufatura",
+      "Saude e cuidados sociais",
+      "Transporte e logistica",
+      "Tecnologia e engenharia industrial",
+      "Horticultura e agricultura"
     ],
     "inDemandRoles": [
       {
-        "role": "Desenvolvedor de software",
-        "note": "Demanda crescente, especialmente em Bruxelas; novas funcoes de TI entraram na lista de Bruxelas em julho de 2025"
-      },
-      {
-        "role": "Engenheiro de redes",
-        "note": "Adicionado ao escopo de perfis digitais em falta em Bruxelas"
-      },
-      {
-        "role": "Especialista em ciberseguranca",
-        "note": "Reflete a expansao da economia digital de Bruxelas"
-      },
-      {
         "role": "Enfermeiro(a)",
-        "note": "Saude segue em falta no pais, embora a enfermagem tenha saido da lista de escassez da Valonia em outubro de 2025; verificar a lista regional aplicavel"
+        "note": "Profissao em falta persistente nas tres regioes, listada pela VDAB (Flandres) e pelo Le Forem (Valonia)."
       },
       {
-        "role": "Eletricista de instalacao industrial",
-        "note": "Adicionado a lista da Valonia em outubro de 2025"
+        "role": "Motorista de caminhao",
+        "note": "Falta cronica de candidatos no setor de transporte, no topo da lista da VDAB."
       },
       {
-        "role": "Gestor de manutencao industrial",
-        "note": "Novo na lista da Valonia (out/2025)"
+        "role": "Eletromecanico industrial",
+        "note": "Funcao tecnica entre as mais persistentes da lista de profissoes em falta da Flandres."
       },
       {
-        "role": "Mecanico de carros e veiculos leves",
-        "note": "Novo na lista da Valonia (out/2025)"
+        "role": "Contador(a)",
+        "note": "Encabeca a lista de knelpuntberoepen 2026 da VDAB."
       },
       {
-        "role": "Profissionais associados de ciencia e engenharia",
-        "note": "Apontados pelo EURES como categoria estrutural em falta"
+        "role": "Chefe de obra (werfleider) e calculista de construcao",
+        "note": "Construcao e o setor mais representado nas listas de escassez da Valonia e da Flandres."
       },
       {
-        "role": "Trabalhadores de construcao e oficios afins (exceto eletricistas)",
-        "note": "Categoria de escassez recorrente segundo o EURES"
+        "role": "Tecnico de manutencao industrial",
+        "note": "Demanda alta na industria, dificil preenchimento por escassez qualitativa."
       },
       {
-        "role": "Operadores de maquinas e instalacoes fixas",
-        "note": "Falta estrutural identificada pelo EURES"
+        "role": "Operador-ajustador de maquinas (usinagem)",
+        "note": "Funcao tecnica industrial em falta na Flandres."
       },
       {
-        "role": "Cuidadores e profissionais de saude",
-        "note": "Crescimento consistente do setor de saude e servicos sociais"
+        "role": "Trabalhador de horticultura",
+        "note": "Falta de mao de obra no setor agricola flamengo."
+      },
+      {
+        "role": "Cozinheiro(a) / chef",
+        "note": "Adicionado a lista de profissoes em falta da Valonia."
+      },
+      {
+        "role": "Assistente social",
+        "note": "Incluido na lista de funcoes criticas da Valonia."
+      },
+      {
+        "role": "Maquinista de trem e pessoal de ambulancia",
+        "note": "Entre as 26 novas funcoes criticas adicionadas pela Valonia em relacao a lista anterior."
       }
     ],
     "byQualification": [
       {
-        "area": "Tecnologia da informacao",
-        "advice": "Setor com maior abertura a estrangeiros em 2025-2026. Funcoes de software, redes e ciberseguranca entraram na lista de escassez de Bruxelas, que facilita o single permit. TI de programacao esta entre os setores mais bem pagos do pais. Priorizar Bruxelas e Flandres, onde a demanda digital e maior."
-      },
-      {
         "area": "Saude e enfermagem",
-        "advice": "Demanda estrutural e sustentada no pais inteiro. Atencao: a enfermagem saiu da lista de escassez da Valonia em outubro de 2025, entao convem checar a lista regional vigente (VDAB para Flandres, Actiris para Bruxelas) antes de planejar a via rapida. Reconhecimento de diploma e nivel de neerlandes ou frances costumam ser decisivos."
+        "advice": "Enfermagem esta entre as profissoes em falta nas tres regioes. Diplomas estrangeiros precisam de reconhecimento (equivalencia) junto a autoridade regional competente, e o registro profissional e exigido para exercer."
       },
       {
-        "area": "Engenharia e perfis tecnicos/STEAM",
-        "advice": "Engenheiros e tecnicos de ciencia e engenharia figuram entre as faltas estruturais apontadas pelo EURES. Boas perspectivas em Flandres (industria e tecnologia) e em polos quimicos e energeticos. Competencia em ferramentas tecnicas e idioma local ampliam as chances."
+        "area": "Engenharia e tecnico industrial",
+        "advice": "Eletromecanica, manutencao industrial e usinagem concentram vagas dificeis de preencher na Flandres. Perfil tecnico de nivel medio passou a ser priorizado na migracao economica flamenga a partir de 2026."
       },
       {
-        "area": "Construcao e oficios manuais",
-        "advice": "Eletricistas, instaladores e mecanicos de manutencao industrial seguem requisitados, com novas funcoes adicionadas a lista da Valonia em 2025. Os salarios em construcao subiram 3,9% no quarto trimestre de 2025. Atencao: Flandres deixou de aceitar funcoes pouco qualificadas na via rapida a partir de janeiro de 2026."
+        "area": "Construcao civil",
+        "advice": "Construcao e o setor com mais funcoes criticas na Valonia e forte na Flandres. Chefe de obra, calculista e tecnico de maquinas de obra tem alta demanda."
       },
       {
-        "area": "Vendas, administracao e logistica",
-        "advice": "Areas com excedente de candidatos segundo o EURES e reducao expressiva na lista de Bruxelas (vendas caiu de nove para duas funcoes). A entrada por via de escassez ficou mais dificil; o caminho costuma exigir oferta de emprego firme e, muitas vezes, teste de mercado de trabalho."
+        "area": "Transporte e logistica",
+        "advice": "Motorista de caminhao e carencia cronica. Exige carteira de habilitacao europeia (categoria C/CE) e certificado de aptidao profissional (CAP)."
       },
       {
-        "area": "Consultoria e gestao empresarial",
-        "advice": "Setor em crescimento e entre os mais bem remunerados (sedes e gestao empresarial). Indicado para perfis seniores com experiencia internacional, idiomas e qualificacao comprovada."
+        "area": "Contabilidade e financas",
+        "advice": "Contador encabeca a lista de profissoes em falta da Flandres em 2026, sinal de demanda firme para perfis qualificados."
       }
     ],
     "salaries": [
       {
-        "role": "Media nacional (todos os setores)",
-        "range": "4.076 EUR/mes (bruto)",
+        "role": "Media nacional (tempo integral)",
+        "range": "4.076 EUR/mes bruto (referencia out/2022; mediana 3.728 EUR/mes)",
         "source": {
-          "label": "Statbel, Visao geral dos salarios belgas (ref. out/2022)",
-          "url": "https://statbel.fgov.be/en/themes/work-training/wages-and-labourcost/overview-belgian-wages-and-salaries",
+          "label": "Statbel, salario mensal bruto medio",
+          "url": "https://statbel.fgov.be/en/news/average-gross-monthly-salary-4076-euros",
           "official": true
         }
       },
       {
-        "role": "Mediana nacional",
-        "range": "3.728 EUR/mes (bruto)",
+        "role": "Setor mais bem pago (industria petroquimica)",
+        "range": "6.431 EUR/mes bruto",
         "source": {
-          "label": "Statbel, Visao geral dos salarios belgas (ref. out/2022)",
-          "url": "https://statbel.fgov.be/en/themes/work-training/wages-and-labourcost/overview-belgian-wages-and-salaries",
+          "label": "Statbel, salario mensal bruto medio",
+          "url": "https://statbel.fgov.be/en/news/average-gross-monthly-salary-4076-euros",
           "official": true
         }
       },
       {
-        "role": "Industria petroquimica (setor mais bem pago)",
-        "range": "6.431 EUR/mes (bruto)",
+        "role": "Setor mais baixo (hotelaria e alimentacao)",
+        "range": "2.863 EUR/mes bruto",
         "source": {
-          "label": "Statbel, Visao geral dos salarios belgas",
-          "url": "https://statbel.fgov.be/en/themes/work-training/wages-and-labourcost/overview-belgian-wages-and-salaries",
+          "label": "Statbel, salario mensal bruto medio",
+          "url": "https://statbel.fgov.be/en/news/average-gross-monthly-salary-4076-euros",
           "official": true
         }
       },
       {
-        "role": "Programacao e servicos de TI",
-        "range": "5.356 EUR/mes (bruto)",
+        "role": "Faixa geral (10% mais baixos a 10% mais altos)",
+        "range": "menos de 2.443 EUR/mes ate ao menos 6.305 EUR/mes bruto",
         "source": {
-          "label": "Statbel, Visao geral dos salarios belgas",
-          "url": "https://statbel.fgov.be/en/themes/work-training/wages-and-labourcost/overview-belgian-wages-and-salaries",
-          "official": true
-        }
-      },
-      {
-        "role": "Servicos financeiros",
-        "range": "5.472 EUR/mes (bruto)",
-        "source": {
-          "label": "Statbel, Visao geral dos salarios belgas",
-          "url": "https://statbel.fgov.be/en/themes/work-training/wages-and-labourcost/overview-belgian-wages-and-salaries",
-          "official": true
-        }
-      },
-      {
-        "role": "Sedes e gestao empresarial",
-        "range": "5.696 EUR/mes (bruto)",
-        "source": {
-          "label": "Statbel, Visao geral dos salarios belgas",
-          "url": "https://statbel.fgov.be/en/themes/work-training/wages-and-labourcost/overview-belgian-wages-and-salaries",
-          "official": true
-        }
-      },
-      {
-        "role": "Alojamento e alimentacao (setor mais baixo)",
-        "range": "2.863 EUR/mes (bruto)",
-        "source": {
-          "label": "Statbel, Visao geral dos salarios belgas",
-          "url": "https://statbel.fgov.be/en/themes/work-training/wages-and-labourcost/overview-belgian-wages-and-salaries",
-          "official": true
-        }
-      },
-      {
-        "role": "Media na Regiao de Bruxelas-Capital",
-        "range": "4.748 EUR/mes (bruto, 16% acima da media nacional)",
-        "source": {
-          "label": "Statbel, Visao geral dos salarios belgas",
-          "url": "https://statbel.fgov.be/en/themes/work-training/wages-and-labourcost/overview-belgian-wages-and-salaries",
+          "label": "Statbel, salario mensal bruto medio",
+          "url": "https://statbel.fgov.be/en/news/average-gross-monthly-salary-4076-euros",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Para trabalhar na Belgica por mais de 90 dias, o trabalhador nao europeu precisa do single permit, autorizacao unica que combina residencia e direito de trabalho num so documento, solicitada pelo empregador a regiao onde o emprego sera exercido (Flandres, Valonia ou Bruxelas). Em regra exige-se oferta de emprego e teste de mercado de trabalho, ou seja, comprovar que nao ha candidato local disponivel. A grande excecao e a lista de profissoes em falta (knelpuntberoepen): se a vaga consta na lista da regiao, o empregador fica dispensado do teste de mercado, o que acelera e simplifica a contratacao do estrangeiro. Cada regiao mantem sua propria lista, com criterios e datas distintas. Em Bruxelas (Actiris), a lista vigente desde 1 de julho de 2025 tem 81 profissoes, com varias funcoes de TI adicionadas e forte reducao das vagas de vendas. Na Valonia (Le Forem), a lista caiu para 56 profissoes a partir de 1 de outubro de 2025, valida ate 30 de setembro de 2026, com adicao de eletricista industrial e mecanico de veiculos e remocao de enfermeiro, entre outros. Em Flandres (VDAB), a lista de funcoes de media qualificacao foi revista para 1 de janeiro de 2026, reduzida de 29 para 21 profissoes, e funcoes pouco qualificadas deixaram de qualificar para a via rapida. A recomendacao pratica e confirmar sempre a lista da regiao especifica do emprego antes de planejar a mudanca, pois uma profissao pode estar em falta numa regiao e nao em outra.",
+    "foreignerRules": "Cidadaos da Uniao Europeia, do Espaco Economico Europeu e da Suica tem livre circulacao e nao precisam de autorizacao de trabalho para atuar na Belgica. Quem vem de fora da UE e quer ficar e trabalhar por mais de 90 dias precisa do Single Permit (permis unique), documento combinado que reune autorizacao de trabalho e de residencia em um unico pedido. O empregador inicia o processo junto a autoridade regional competente (Flandres, Valonia ou Bruxelas), e a regiao mais o Servico de Imigracao analisam em ate quatro meses. Profissoes que constam das listas regionais de escassez (VDAB na Flandres, Le Forem na Valonia) ficam isentas do teste de mercado de trabalho, o que agiliza a contratacao de estrangeiros. Para perfis altamente qualificados existe o EU Blue Card, com salario minimo anual bruto definido por regiao em 2026: cerca de 63.586 EUR na Flandres, 68.815 EUR na Valonia e 56.976 EUR em Bruxelas (esta publica valor mensal, em torno de 4.748 EUR). A partir de 1 de janeiro de 2026, a Flandres reformulou as regras de emprego de trabalhadores estrangeiros para priorizar migracao de conhecimento e perfis de nivel medio em funcoes de escassez, excluindo mao de obra pouco qualificada da migracao economica.",
     "opportunityWindows": [
-      "TI e perfis digitais em Bruxelas: novas funcoes de software, redes e ciberseguranca entraram na lista de escassez em julho de 2025, abrindo via rapida de single permit",
-      "Construcao e oficios tecnicos na Valonia: eletricista de instalacao industrial, gestor de manutencao industrial e mecanico de veiculos foram adicionados a lista em outubro de 2025 (valida ate set/2026)",
-      "Saude: demanda estrutural sustentada em todo o pais, embora a regiao de destino importe para a via rapida",
-      "Flandres para perfis de media e alta qualificacao: a regiao de menor desemprego do pais segue carente de tecnicos e engenheiros, mesmo apos enxugar a lista para 2026"
+      "Lista de profissoes em falta da Flandres (knelpuntberoepen VDAB 2026): 227 ocupacoes, com destaque para contador, eletromecanico industrial, enfermeiro, motorista de caminhao e funcoes tecnicas de construcao e industria.",
+      "Lista de funcoes criticas e profissoes em falta da Valonia (Le Forem): 146 ocupacoes (82 em penuria, 64 criticas), com construcao, industria e saude representando 58% da lista; 26 novas funcoes adicionadas, incluindo maquinista de trem, pessoal de ambulancia e gestor de seguros.",
+      "Profissoes nas listas regionais de escassez ficam isentas do teste de mercado de trabalho, agilizando o Single Permit para estrangeiros.",
+      "Le Forem oferece 199 programas de formacao voltados as funcoes criticas e profissoes em falta, alguns com auxilio financeiro e dispensa de busca ativa de emprego."
     ],
     "jobBoards": [
       {
-        "label": "VDAB (servico publico de emprego de Flandres)",
+        "label": "VDAB (servico publico de emprego da Flandres)",
         "url": "https://www.vdab.be",
         "official": true
       },
@@ -4209,50 +4105,45 @@ export const LABOR_MARKET: LaborMarketMap = {
         "official": true
       },
       {
-        "label": "EURES Belgica (portal europeu de empregos)",
-        "url": "https://eures.europa.eu/index_en",
+        "label": "EURES (portal europeu de mobilidade profissional)",
+        "url": "https://eures.europa.eu",
         "official": true
       },
       {
-        "label": "Working in Belgium / Working in the EU (informacao oficial de migracao economica)",
-        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-belgium_en",
+        "label": "Single Permit (balcao unico, working in Belgium)",
+        "url": "https://www.international.socialsecurity.be/working_in_belgium/en/single-permit.html",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "Statbel - Emprego e desemprego (resultados anuais LFS 2025)",
+        "label": "Statbel, emprego e desemprego (dados 2025)",
         "url": "https://statbel.fgov.be/en/themes/work-training/labour-market/employment-and-unemployment",
         "official": true
       },
       {
-        "label": "Statbel - Visao geral dos salarios belgas",
-        "url": "https://statbel.fgov.be/en/themes/work-training/wages-and-labourcost/overview-belgian-wages-and-salaries",
+        "label": "Statbel, salario mensal bruto medio",
+        "url": "https://statbel.fgov.be/en/news/average-gross-monthly-salary-4076-euros",
         "official": true
       },
       {
-        "label": "Statbel - Salarios brutos",
-        "url": "https://statbel.fgov.be/en/themes/indicators/labour/gross-wages-and-salaries",
+        "label": "VDAB, profissoes em falta 2026 (knelpuntberoepen)",
+        "url": "https://www.vdab.be/orienteren/knelpuntberoepen",
         "official": true
       },
       {
-        "label": "EURES - Informacao do mercado de trabalho: Belgica",
+        "label": "Le Forem, profissoes em falta e funcoes criticas (Valonia)",
+        "url": "https://www.leforem.be/citoyens/metiers-penurie.html",
+        "official": true
+      },
+      {
+        "label": "IBZ / Office des Etrangers, Single Permit",
+        "url": "https://dofi.ibz.be/en/themas/onderdanen-van-derde-landen/werk/single-permit",
+        "official": true
+      },
+      {
+        "label": "EURES, informacao do mercado de trabalho belga",
         "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-belgium_en",
-        "official": true
-      },
-      {
-        "label": "Brussels Economy and Employment - Lista de profissoes em falta 2025 (Actiris)",
-        "url": "https://economy-employment.brussels/news-professions-labour-shortage-2025",
-        "official": true
-      },
-      {
-        "label": "Brussels Economy and Employment - Pessoa em posicao com escassez de mao de obra",
-        "url": "https://economy-employment.brussels/authorisation-work-profession-shortage",
-        "official": true
-      },
-      {
-        "label": "Flanders.be - Empregar estrangeiro em Flandres: posicao de media qualificacao (VDAB)",
-        "url": "https://www.vlaanderen.be/en/working-enterprise-and-investment/working/employing-a-foreigner-in-flanders/categories/medium-skilled-position",
         "official": true
       }
     ]
@@ -5748,175 +5639,152 @@ export const LABOR_MARKET: LaborMarketMap = {
     ]
   },
   "fi": {
-    "updatedAt": "2026-06-26",
-    "overview": "O mercado de trabalho finlandes atravessa um periodo de enfraquecimento ciclico combinado com escassez estrutural de mao de obra qualificada. Segundo a Pesquisa de Forca de Trabalho do Statistics Finland, a taxa de desemprego entre pessoas de 15 a 74 anos foi de 9,7 por cento em 2025, alta de 1,3 ponto percentual sobre 2024, com media de 2.590.000 ocupados e 278.000 desempregados. A taxa de emprego na faixa de 20 a 64 anos recuou para 76,0 por cento. Apesar do esfriamento geral, a Finlandia convive com um paradoxo recorrente, ja que o Barometro Ocupacional do Ministerio do Trabalho (TEM) continua apontando dezenas de profissoes em escassez, concentradas sobretudo em saude e servicos sociais. O envelhecimento populacional e a baixa natalidade mantem pressao estrutural por trabalhadores estrangeiros, e o pais simplificou regras de imigracao laboral mesmo em meio ao desemprego elevado. O cenario, portanto, favorece candidatos qualificados em areas de demanda, enquanto perfis genericos enfrentam mercado mais competitivo.",
+    "updatedAt": "2026-06-29",
+    "overview": "O mercado de trabalho finlandes vive um momento de dois lados. De acordo com os servicos publicos de emprego (tyomarkkinatori.fi), a taxa de emprego ficou em 75,2 por cento, com cerca de 325 mil desempregados e queda no numero de vagas novas em relacao ao ano anterior, sinal de uma recuperacao mais lenta. Ao mesmo tempo, o Barometro Ocupacional do governo aponta que a escassez de mao de obra desacelerou, mas continua aguda em saude e servicos sociais, que concentram as principais profissoes em falta. O pais mantem demanda estrutural por profissionais de saude, educacao infantil e tecnologia, enquanto a construcao civil enfrenta dificuldades. As maiores concentracoes de emprego estao na regiao de Helsinque-Uusimaa, polo de tecnologia e negocios.",
     "hotSectors": [
-      "Saude e servicos sociais (enfermagem, medicina, cuidados a idosos)",
-      "Educacao infantil (professores e cuidadores de ECEC)",
-      "Tecnologia da informacao (ciberseguranca, nuvem, inteligencia artificial)",
-      "Construcao civil e oficios especializados",
-      "Industria e metalurgia (soldadores e operadores de processamento de metais)"
+      "Saude e servicos sociais",
+      "Educacao infantil",
+      "Tecnologia da informacao e desenvolvimento de software",
+      "Energia verde e renovavel",
+      "Industria de alimentos",
+      "Tecnologia naval e maritima"
     ],
     "coolingSectors": [
-      "Servicos administrativos e de escritorio de baixa qualificacao",
-      "Comercio varejista",
-      "Setores sensiveis ao ciclo economico com excesso de oferta de candidatos segundo o Barometro Ocupacional"
+      "Construcao civil",
+      "Setor automotivo"
     ],
     "inDemandRoles": [
       {
-        "role": "Enfermeiros (sairaanhoitaja)",
-        "note": "Topo persistente da lista de escassez do Barometro Ocupacional; deficit projetado de crescer fortemente ate 2030."
+        "role": "Enfermeiros e cuidadores de saude",
+        "note": "Saude e servicos sociais lideram as profissoes em falta segundo o Barometro Ocupacional."
       },
       {
-        "role": "Auxiliares de enfermagem e cuidadores (lahihoitaja)",
-        "note": "Demanda alta em todo o pais por causa do envelhecimento populacional."
+        "role": "Medicos",
+        "note": "Mais de 220 vagas de medico em tempo integral nao preenchidas no pais."
       },
       {
-        "role": "Medicos clinicos gerais e especialistas",
-        "note": "Incluidos na lista de profissoes em escassez critica do decreto de 2025."
+        "role": "Profissionais de educacao infantil (ECEC)",
+        "note": "Escassez estrutural; so as seis maiores cidades relatam falta de 2.600 ou mais profissionais."
       },
       {
-        "role": "Professores e profissionais de educacao infantil (ECEC)",
-        "note": "As seis maiores cidades projetam necessidade de milhares de profissionais com formacao superior ate 2030."
+        "role": "Desenvolvedores de software",
+        "note": "Falta apontada por fontes oficiais e barometros regionais."
       },
       {
-        "role": "Profissionais de TI (ciberseguranca, nuvem, IA, desenvolvimento de software)"
+        "role": "Assistentes sociais"
       },
       {
-        "role": "Soldadores e operadores de processamento de metais",
-        "note": "Listados como ocupacao de escassez critica para trabalhadores estrangeiros."
+        "role": "Trabalhadores qualificados da construcao (encanadores, soldadores, eletricistas)",
+        "note": "Oficios de construcao entre os grupos com maior incidencia de escassez."
       },
       {
-        "role": "Trabalhadores qualificados da construcao civil"
-      },
-      {
-        "role": "Fonoaudiologos, higienistas dentais e audiologistas",
-        "note": "Constam na lista de escassez critica do decreto governamental."
-      },
-      {
-        "role": "Bombeiros"
+        "role": "Cozinheiros e trabalhadores qualificados de restaurante"
       }
     ],
     "byQualification": [
       {
         "area": "Saude e enfermagem",
-        "advice": "Maior porta de entrada do pais. E necessario o registro profissional junto ao Valvira (autoridade de licenciamento) e, na maioria dos casos, conhecimento de finlandes ou sueco para atendimento direto ao paciente. Vale priorizar cursos de idioma desde o inicio."
+        "advice": "E a area com maior abertura no pais. O governo firmou acordos bilaterais de recrutamento com India, Brasil, Vietna e Filipinas para trazer profissionais de saude, o que torna o caminho mais estruturado para quem tem formacao na area."
+      },
+      {
+        "area": "Educacao infantil",
+        "advice": "Ha falta estrutural de professores de educacao infantil com qualificacao superior. A projecao oficial aponta necessidade de milhares de novos profissionais ate 2030, abrindo espaco para formados na area que validem o diploma."
       },
       {
         "area": "Tecnologia da informacao",
-        "advice": "Setor com forte demanda e onde o ingles costuma ser suficiente em muitas empresas. Perfis em ciberseguranca, nuvem e IA tem vantagem; o permit de especialista oferece via rapida de duas semanas para diplomados de ensino superior."
+        "advice": "Desenvolvedores de software seguem em demanda mesmo com a recuperacao mais lenta. Vale mirar funcoes de especialista, que se enquadram em vistos de tramitacao rapida."
       },
       {
-        "area": "Educacao",
-        "advice": "Forte carencia em educacao infantil, mas exige qualificacao reconhecida e, em geral, fluencia em finlandes. Recomenda-se validar o diploma e investir no idioma antes de aplicar."
-      },
-      {
-        "area": "Engenharia e industria",
-        "advice": "Oficios de metalurgia e soldagem estao entre as ocupacoes de escassez critica, com mobilidade facilitada entre empregadores. Certificacoes de soldagem reconhecidas aumentam a empregabilidade."
+        "area": "Engenharia e ciencias",
+        "advice": "Atencao: profissionais de ciencias e engenharia aparecem entre os grupos com excedente de candidatos em algumas regioes, o que aumenta a concorrencia. Energia verde e tecnologia naval sao nichos mais aquecidos dentro da area."
       },
       {
         "area": "Construcao civil",
-        "advice": "Demanda consistente por oficios especializados. O cartao de identificacao do setor (Valttikortti) e o numero fiscal sao requisitos praticos para trabalhar em canteiros."
-      },
-      {
-        "area": "Formacoes administrativas e de servicos genericos",
-        "advice": "Mercado mais competitivo e sensivel ao ciclo. Convem direcionar a busca para nichos de demanda ou requalificar para areas em alta como saude e TI."
+        "advice": "O setor passa por dificuldades, mas oficios qualificados especificos (encanador, soldador, eletricista) seguem em falta. A demanda varia muito por estacao e regiao."
       }
     ],
     "salaries": [
       {
-        "role": "Media geral (todos os setores)",
-        "range": "cerca de 4.070 EUR/mes (mediana 3.611 EUR/mes, dados 2024)",
+        "role": "Trabalho com acordo coletivo (requisito minimo de visto)",
+        "range": "3.937 EUR/mes bruto (2026)",
         "source": {
-          "label": "Statistics Finland - Structure of Earnings",
-          "url": "https://stat.fi/en/publication/cm1ks981cdm5107w7zeme1ot7",
+          "label": "Migri (Servico de Imigracao da Finlandia)",
+          "url": "https://migri.fi/en/specialist",
           "official": true
         }
       },
       {
-        "role": "Salario medio mensal (full-time, por setor)",
-        "range": "em torno de 4.250 EUR/mes (4o trimestre de 2025)",
+        "role": "Trabalho sem acordo coletivo ou tempo parcial (requisito minimo de visto)",
+        "range": "1.463 EUR/mes bruto (2026)",
         "source": {
-          "label": "Statistics Finland - Average monthly earnings (PxWeb)",
-          "url": "https://pxweb2.stat.fi/PxWeb/pxweb/en/StatFin/StatFin__ati/statfin_ati_pxt_14uv.px/",
+          "label": "Migri (Servico de Imigracao da Finlandia)",
+          "url": "https://migri.fi/en/working-in-finland/income-requirement",
+          "official": true
+        }
+      },
+      {
+        "role": "Especialista / EU Blue Card (requisito minimo de visto)",
+        "range": "A partir de 3.937 EUR/mes bruto (2026), sem contar beneficios",
+        "source": {
+          "label": "Migri (Servico de Imigracao da Finlandia)",
+          "url": "https://migri.fi/en/specialist",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE/EEE e da Suica nao precisam de autorizacao de trabalho e podem trabalhar livremente, bastando registrar o direito de residencia se a estadia ultrapassar tres meses. Nacionais de paises de fora da UE precisam de uma autorizacao de residencia para trabalho (single permit), emitida pela Migri (Servico de Imigracao da Finlandia). As principais vias sao: a autorizacao de residencia para pessoa empregada (TTOL), que exige salario bruto total minimo de 1.600 EUR/mes (limite em vigor desde 1 de janeiro de 2025); e a autorizacao para especialista (highly skilled), que exige diploma de ensino superior e salario minimo de 3.827 EUR/mes em 2025, elevado para 3.937 EUR/mes em 2026, com via rapida de cerca de duas semanas. A Finlandia mantem ainda uma lista de ocupacoes em escassez critica definida por decreto governamental (junho de 2025) com nove profissoes, incluindo clinicos gerais, especialistas, enfermeiros, auxiliares de enfermagem, audiologistas, fonoaudiologos, higienistas dentais, soldadores/operadores de metal e bombeiros, nas quais o trabalhador estrangeiro pode trocar de empregador sem solicitar nova autorizacao. As autorizacoes baseadas em emprego estao sujeitas a teste de disponibilidade de mao de obra regional, exceto especialistas e ocupacoes em escassez.",
+    "foreignerRules": "Cidadaos da UE/EEE tem direito de trabalhar na Finlandia sem visto de trabalho, bastando registrar o direito de residencia junto as autoridades finlandesas. Quem vem de fora da UE normalmente precisa de uma autorizacao de residencia para trabalhar. Os principais tipos sao: trabalhador empregado, especialista, EU Blue Card, trabalho sazonal, pesquisador, empreendedor de startup e transferencia intracorporativa. Em 2026, o salario bruto minimo exigido e de 3.937 EUR/mes em setores com acordo coletivo, ou 1.463 EUR/mes sem acordo coletivo ou em tempo parcial. O EU Blue Card e destinado a empregos altamente qualificados, exige diploma superior de no minimo 3 anos ou cerca de 5 anos de experiencia profissional, contrato confirmado com duracao minima de seis meses e e emitido por ate 2 anos. Especialistas, cargos de gestao, EU Blue Card e empreendedores de startup podem usar o servico de tramitacao rapida (fast-track) e receber a autorizacao em duas semanas. A autorizacao de trabalho sazonal vale por ate 9 meses dentro de um periodo de 12 meses e fica vinculada a um empregador especifico, aplicada a areas como agricultura, jardinagem, silvicultura e turismo.",
     "opportunityWindows": [
-      "Decreto de escassez critica (jun/2025) facilita troca de empregador para nove profissoes, sobretudo de saude e metalurgia",
-      "Via rapida de cerca de duas semanas para especialistas com diploma de ensino superior",
-      "Carencia estrutural de enfermeiros e cuidadores que deve se agravar ate 2030 por causa do envelhecimento",
-      "Demanda crescente em educacao infantil nas seis maiores cidades, com necessidade de milhares de profissionais ate 2030",
-      "Setor de TI mantem contratacoes em ciberseguranca, nuvem e IA, com muitos cargos aceitando ingles"
+      "Acordos bilaterais de recrutamento de profissionais de saude com India, Brasil, Vietna e Filipinas",
+      "Necessidade projetada de cerca de 9.000 novos profissionais de educacao infantil com qualificacao superior ate 2030",
+      "Mais de 220 vagas de medico em tempo integral nao preenchidas no pais",
+      "Tramitacao rapida (fast-track, 2 semanas) para especialistas, gestores e EU Blue Card"
     ],
     "jobBoards": [
       {
-        "label": "Tyomarkkinatori (Job Market Finland, portal oficial de empregos)",
+        "label": "Job Market Finland (tyomarkkinatori.fi)",
         "url": "https://tyomarkkinatori.fi/en",
         "official": true
       },
       {
-        "label": "Work in Finland (Business Finland, programa oficial de talentos)",
-        "url": "https://www.workinfinland.com/en/",
-        "official": true
-      },
-      {
-        "label": "EURES Finland (rede europeia de empregos)",
+        "label": "EURES - Portal Europeu da Mobilidade Profissional",
         "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "Migri - Trabalhar na Finlandia (regras de autorizacao)",
-        "url": "https://migri.fi/en/work-in-finland",
+        "label": "Migri - Servico de Imigracao (vistos de trabalho)",
+        "url": "https://migri.fi/en/coming-to-finland-for-work",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "Statistics Finland - Desemprego cresceu em 2025 (Labour Force Survey)",
-        "url": "https://stat.fi/en/publication/cmfpdadi40gsg07un1urfrm3q",
-        "official": true
-      },
-      {
-        "label": "Statistics Finland - Labour Force Survey (estatistica)",
-        "url": "https://stat.fi/en/statistics/tyti",
-        "official": true
-      },
-      {
-        "label": "Statistics Finland - Mediana de ganhos 3.611 EUR/mes (2024)",
-        "url": "https://stat.fi/en/publication/cm1ks981cdm5107w7zeme1ot7",
-        "official": true
-      },
-      {
-        "label": "Finnish Government - Barometro Ocupacional (saude e servicos sociais no topo da escassez)",
+        "label": "Governo da Finlandia - Barometro Ocupacional (valtioneuvosto.fi)",
         "url": "https://valtioneuvosto.fi/en/-/1410877/occupational-barometer-increase-in-labour-shortages-has-slowed-down-but-health-and-social-services-continue-to-account-for-top-shortage-occupations",
         "official": true
       },
       {
-        "label": "Migri - Requisito de renda para autorizacoes de residencia",
-        "url": "https://migri.fi/en/working-in-finland/income-requirement",
+        "label": "Job Market Finland - Emprego e estatisticas (tyomarkkinatori.fi)",
+        "url": "https://tyomarkkinatori.fi/en/employment-and-statistics",
         "official": true
       },
       {
-        "label": "Migri - Autorizacao de residencia para pessoa empregada (TTOL)",
-        "url": "https://migri.fi/en/residence-permit-for-an-employed-person",
+        "label": "EURES - Informacoes do mercado de trabalho da Finlandia",
+        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-finland_en",
         "official": true
       },
       {
-        "label": "Migri - Autorizacao para especialista",
+        "label": "Migri - Especialista e requisito salarial 2026",
         "url": "https://migri.fi/en/specialist",
         "official": true
       },
       {
-        "label": "Ministerio dos Assuntos Economicos e do Emprego (TEM) - Limite de renda para autorizacao de residencia",
-        "url": "https://tem.fi/en/income-limit-for-residence-permit-for-an-employed-person",
+        "label": "Migri - Vir trabalhar na Finlandia",
+        "url": "https://migri.fi/en/coming-to-finland-for-work",
         "official": true
       },
       {
-        "label": "EURES - Informacao do mercado de trabalho da Finlandia",
-        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-finland_en",
+        "label": "Migri - EU Blue Card",
+        "url": "https://migri.fi/en/eu-blue-card",
         "official": true
       }
     ]
