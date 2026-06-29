@@ -9,9 +9,26 @@ export type ApiSession = {
   role: "admin" | "editor";
 };
 
+// Allowlist de RESERVA: usada SOMENTE quando o banco esta fora (ex.: Neon com
+// cota de compute esgotada). Mantem a equipe conhecida acessando recursos de
+// LEITURA (ex.: REPAVET) durante uma queda do banco. Mutacoes continuam exigindo
+// o banco de volta. Sem brecha: so estes e-mails fixos da equipe entram pelo
+// fallback, e so quando o findUnique lanca (banco inacessivel). A sessao em si
+// (auth) e JWT, entao nao depende do banco.
+const FALLBACK_ALLOWLIST: Record<string, "admin" | "editor"> = {
+  "hzfarah.wisehub@gmail.com": "admin",
+  "adm.wisehub@gmail.com": "admin",
+  "adm@wisehubnow.com": "admin",
+  "friday@wisehubnow.online": "admin",
+  "lucasbin181@gmail.com": "editor",
+  "marcelanogueiracidadania@gmail.com": "editor",
+  "diver.wisehub@gmail.com": "editor",
+};
+
 /**
  * Garante sessao autenticada + verifica allowlist. Retorna NextResponse
- * 401 quando nao autenticado, 403 quando fora da allowlist.
+ * 401 quando nao autenticado, 403 quando fora da allowlist, 503 quando o banco
+ * esta fora e o e-mail nao esta na allowlist de reserva.
  */
 export async function requireSession(): Promise<
   { ok: true; session: ApiSession } | { ok: false; response: NextResponse }
@@ -23,23 +40,35 @@ export async function requireSession(): Promise<
       response: NextResponse.json({ error: "unauthenticated" }, { status: 401 }),
     };
   }
-  const allowed = await prisma.allowedEmail.findUnique({
-    where: { email: session.user.email },
-  });
-  if (!allowed) {
+  const email = session.user.email;
+  try {
+    const allowed = await prisma.allowedEmail.findUnique({ where: { email } });
+    if (!allowed) {
+      return {
+        ok: false,
+        response: NextResponse.json({ error: "forbidden" }, { status: 403 }),
+      };
+    }
+    return {
+      ok: true,
+      session: {
+        userId: session.user.id,
+        email,
+        role: (allowed.role as "admin" | "editor") ?? "editor",
+      },
+    };
+  } catch {
+    // Banco inacessivel (ex.: Neon cota esgotada). Fallback: libera a equipe
+    // conhecida pra leitura; nega o resto com 503 (nao da pra verificar).
+    const fbRole = FALLBACK_ALLOWLIST[email.toLowerCase()];
+    if (fbRole) {
+      return { ok: true, session: { userId: session.user.id, email, role: fbRole } };
+    }
     return {
       ok: false,
-      response: NextResponse.json({ error: "forbidden" }, { status: 403 }),
+      response: NextResponse.json({ error: "db_unavailable" }, { status: 503 }),
     };
   }
-  return {
-    ok: true,
-    session: {
-      userId: session.user.id,
-      email: session.user.email,
-      role: (allowed.role as "admin" | "editor") ?? "editor",
-    },
-  };
 }
 
 export function requireAdmin(session: ApiSession): NextResponse | null {
