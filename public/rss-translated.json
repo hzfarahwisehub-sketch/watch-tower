@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "lastRun": "2026-06-30T17:25:20.294Z",
-  "count": 747,
+  "lastRun": "2026-06-30T20:29:38.720Z",
+  "count": 758,
   "translations": {
     "Man Sentenced to One Year Home Detention for Visa Fraud": {
       "pt": "Homem condenado a um ano de detenção domiciliar por fraude de visto"
@@ -18,6 +18,9 @@
     "USCIS Assists Federal Partners in Arrest of MS-13 Gang Member": {
       "pt": "USCIS auxilia parceiros federais na prisão de membro da gangue MS-13"
     },
+    "When is the EB5 investment amount expected to increase? How much will it increase, and which EB5 categories are affected?": {
+      "pt": "Quando se espera que o valor do investimento EB5 aumente? Quanto aumentará e quais categorias do EB5 serão afetadas?"
+    },
     "SCOTUS Upholds Birthright Citizenship": {
       "pt": "SCOTUS Defende a Cidadania por Direito de Nascimento"
     },
@@ -29,9 +32,6 @@
     },
     "I noticed that the July 2026 Visa Bulletin shows a “U” for India in the EB2 and EB5 Unreserved categories. What does that mean?": {
       "pt": "Percebi que o Boletim de Vistos de julho de 2026 mostra um “U” para a Índia nas categorias EB2 e EB5 Sem Reserva. O que isso significa?"
-    },
-    "DHS Proposes Citizenship Fee Increase": {
-      "pt": "DHS Propõe Aumento da Taxa de Cidadania"
     },
     "Immigration Article of the Day: The Market For Deportation: Private Profits & The Machinery Of Removal by Laura I Appleman": {
       "pt": "Artigo do dia sobre imigração: The Market For Deportation: Private Profits & The Machinery Of Removal por Laura I Appleman"
@@ -138,17 +138,17 @@
     "Recent Videos": {
       "pt": "Vídeos recentes"
     },
-    "participatingAgencies06262026pm": {
-      "pt": "participatingAgencies06262026pm"
+    "HSI Atlanta": {
+      "pt": "HSI Atlanta"
     },
-    "Mexican national admits to role in the stash house death of illegal alien": {
-      "pt": "Cidadão mexicano admite papel na morte de imigrante ilegal em esconderijo"
+    "HSI Buffalo": {
+      "pt": "HSI Buffalo"
     },
-    "Mexican national living abroad extradited to US to face charges for producing child sexual abuse material following ICE HSI investigation": {
-      "pt": "Cidadão mexicano que vive no exterior é extraditado para os EUA para enfrentar acusações por produzir material de abuso sexual infantil após investigação DO ICE HSI"
+    "HSI Chicago": {
+      "pt": "HSI Chicago"
     },
-    "participatingAgencies06242026pm": {
-      "pt": "participatingAgencies06242026pm"
+    "HSI Kansas City": {
+      "pt": "Kansas City"
     },
     "Kuwait - Level 3: Reconsider Travel": {
       "pt": "Kuwait - Nível 3: reconsidere as viagens"
@@ -165,6 +165,12 @@
     "Lesotho - Level 2: Exercise Increased Caution": {
       "pt": "Lesoto - Nível 2: Exercício Maior Cautela"
     },
+    "Minister Diab to participate in a Canada Day citizenship ceremony in Ottawa (afternoon)": {
+      "pt": "Ministro Diab participará de uma cerimônia de cidadania do Dia do Canadá em Ottawa (tarde)"
+    },
+    "Minister Diab to participate in a Canada Day citizenship ceremony in Ottawa (morning)": {
+      "pt": "Ministro Diab participará de uma cerimônia de cidadania do Dia do Canadá em Ottawa (manhã)"
+    },
     "Federal–Provincial–Territorial Immigration Ministers meet to discuss sustainable immigration": {
       "pt": "Ministros da Imigração Federal-Provincial-Territorial se reúnem para discutir imigração sustentável"
     },
@@ -174,8 +180,11 @@
     "Canada marks World Refugee Day and reflects on 75 years of refugee protection": {
       "pt": "Canadá marca Dia Mundial do Refugiado e reflete sobre 75 anos de proteção aos refugiados"
     },
-    "Canada proposes new regulations to modernize the asylum process and support timely decisions": {
-      "pt": "Canadá propõe novos regulamentos para modernizar o processo de asilo e apoiar decisões oportunas"
+    "Saskatchewan announces it has used over half of this year’s provincial immigration quota": {
+      "pt": "Saskatchewan anuncia que usou mais da metade da cota de imigração provincial deste ano"
+    },
+    "BREAKING: IRCC claims only 1% of citizenship by descent applicants impacted, in first official statement on certificate surrenders": {
+      "pt": "QUEBRA: IRCC reivindica apenas 1% da cidadania por candidatos descendentes impactados, na primeira declaração oficial sobre entregas de certificados"
     },
     "A 1947 law cut Americans’ ancestors out of Canada. A new law just made their descendants citizens again": {
       "pt": "Uma lei de 1947 cortou os antepassados dos americanos do Canadá. Uma nova lei acabou de tornar seus descendentes cidadãos novamente"
@@ -186,11 +195,11 @@
     "Entrepreneurs see their last chance to apply for permanent residence through the Start-up Visa program": {
       "pt": "Os empreendedores veem sua última chance de solicitar residência permanente por meio do programa Startup Visa"
     },
-    "Citizens of these countries can get priority access to Canadian work permits on repeat": {
-      "pt": "Os cidadãos desses países podem obter acesso prioritário às autorizações de trabalho canadenses"
+    "New Canada Groceries and Essentials Benefit (CGEB) Payments Start July 3. Who Qualifies?": {
+      "pt": "Os novos pagamentos do Canada Groceries and Essentials Benefit (CGEB) começam em 3 de julho. Quem se qualifica?"
     },
-    "Your Irish ancestors lived in Canada generations ago. You might still be Canadian": {
-      "pt": "Seus ancestrais irlandeses viveram no Canadá gerações atrás. Você ainda pode ser canadense"
+    "IRCC Finally Gives Answers on Bill C-3 Canadian Citizenship-by-Descent Fiasco": {
+      "pt": "IRCC Finalmente Dá Respostas sobre o Fiasco da Cidadania Canadense por Descendente do Projeto de Lei C-3"
     },
     "CRA Benefit Payments Coming in July 2026: What Newcomers Could Get": {
       "pt": "Pagamentos de benefícios da CRA em julho de 2026: o que os recém-chegados podem obter"
@@ -200,12 +209,6 @@
     },
     "New Ontario PNP Stream Announced – The Ontario Workforce Priority Stream": {
       "pt": "Novo Ontario PNP Stream anunciado – O Ontario Workforce Priority Stream"
-    },
-    "Fewer Foreign Researchers Are Coming to Canada — And Even Fewer Are Staying Permanently: StatCan": {
-      "pt": "Menos pesquisadores estrangeiros estão vindo para o Canadá — e ainda menos estão permanecendo permanentemente: StatCan"
-    },
-    "Ontario Needs a Million University Graduates. Changing Our Approach to International Students Can Help.": {
-      "pt": "Ontário precisa de um milhão de graduados universitários. Mudar nossa abordagem para estudantes internacionais pode ajudar."
     },
     "Canada Gazette - Part I, June 27, 2026, volume 160, number 26": {
       "pt": "Diário Oficial do Canadá - Parte I, 27 de junho de 2026, volume 160, número 26"
@@ -237,6 +240,9 @@
     "Canada Gazette - Part II, June 3, 2026, volume 159, number 11": {
       "pt": "Diário Oficial do Canadá - Parte II, 3 de junho de 2026, volume 159, número 11"
     },
+    "Parliamentary Secretary Church highlights launch of National Food Security Strategy": {
+      "pt": "Secretário Parlamentar Church destaca lançamento da Estratégia Nacional de Segurança Alimentar"
+    },
     "Parliamentary Secretary Church to announce support for food security in Toronto": {
       "pt": "Secretário Parlamentar da Igreja anuncia apoio à segurança alimentar em Toronto"
     },
@@ -249,23 +255,23 @@
     "National Seniors Council – New Appointments": {
       "pt": "Conselho Nacional do Idoso – Novas Nomeações"
     },
-    "National School Food Program takes shape across Canada": {
-      "pt": "Programa Nacional de Alimentação Escolar toma forma em todo o Canadá"
+    "Purpose Investments Inc. Announces 2026 Second Quarter Distributions for Purpose Specialty Lending Trust": {
+      "pt": "Purpose Investments Inc. Anuncia 2026 Distribuições do Segundo Trimestre para o Purpose Specialty Lending Trust"
     },
-    "‘False alarm’ on recession: economists react to April’s GDP numbers": {
-      "pt": "‘Alarme falso’ sobre recessão: economistas reagem aos números do PIB de abril"
+    "House of Doge Completes Merger with Brag House Holdings and Set to Trade on Nasdaq Under Ticker ‘HODO’": {
+      "pt": "House of Doge conclui fusão com Brag House Holdings e começa a operar na Nasdaq sob o código ‘HODO’"
     },
-    "Canada Reflects a More Measured Path to Connected Living with Rising Expectations for Flexibility and Trust": {
-      "pt": "O Canadá reflete um caminho mais medido para uma vida conectada com expectativas crescentes de flexibilidade e confiança"
+    "Constellation Brands Reports First Quarter Fiscal 2027 Financial Results": {
+      "pt": "Constellation Brands divulga resultados financeiros do primeiro trimestre fiscal de 2027"
     },
-    "Call centre stocks fall on fear AI makes them ‘uninvestible’": {
-      "pt": "As ações do call center caem por medo de que a IA as torne \"não investigáveis\""
+    "Waste Connections of Canada Opens $100 Million Renewable Natural Gas Facility in Chatham-Kent": {
+      "pt": "Conexões de resíduos do Canadá abrem instalação de gás natural renovável de $ 100 milhões em Chatham-Kent"
     },
-    "Firan Technology Group Corporation (“FTG”) Announces Second Quarter Results on July 8, 2026": {
-      "pt": "A Firan Technology Group Corporation (\"FTG\") anuncia os resultados do segundo trimestre em 8 de julho de 2026"
+    "Solaris Announces Results of Annual General Meeting of Shareholders": {
+      "pt": "Solaris Anuncia Resultados da Assembleia Geral Ordinária de Acionistas"
     },
-    "Aeroplan and Club Avolta Forge Loyalty Program Partnership in North America": {
-      "pt": "Parceria do Programa de Fidelidade Aeroplan e Club Avolta Forge na América do Norte"
+    "PF faz operação de combate ao tráfico internacional de drogas": {
+      "en": "PF carries out an operation to combat international drug trafficking"
     },
     "Dispensa Eletrônica 200380 - 62/2026": {
       "en": "Electronic Waiver 200380 - 62/2026"
@@ -279,23 +285,20 @@
     "FICCO/SP apreende 18 fuzis e cerca de 200 kg de drogas em Ourinhos": {
       "en": "FICCO/SP seizes 18 rifles and about 200 kg of drugs in Ourinhos"
     },
-    "Panamá": {
-      "en": "Panama"
+    "EUA pedem aval do governo Lula para indicação de Daniel Perez como embaixador no Brasil": {
+      "en": "USA requests endorsement from the Lula government for the appointment of Daniel Perez as ambassador to Brazil"
     },
-    "Brasil cria 73 mil empregos formais em maio; com forte queda de 52% em comparação ao mesmo mês de 2025": {
-      "en": "Brazil creates 73,000 formal jobs in May; with a strong drop of 52% compared to the same month in 2025"
+    "GWM confirma nova fábrica no Espírito Santo; ORA 5 será um dos modelos produzidos": {
+      "en": "GWM confirms new plant in Espírito Santo; NOW 5 will be one of the models produced"
     },
-    "Nova líder do governo no Senado se reúne com Alcolumbre para tentar travar 'pauta-bomba'": {
-      "en": "New government leader in the Senate meets with Alcolumbre to try to stop 'bomb agenda'"
+    "Governo anuncia retirada de parte da subvenção ao diesel a partir de quarta; medida semelhante para gasolina deve ocorrer em breve": {
+      "en": "Government announces withdrawal of part of diesel subsidy from Wednesday; similar measure for gasoline to take place soon"
     },
-    "Mercosul critica assimetrias com UE e prepara negociações comerciais com a China": {
-      "en": "Mercosur criticizes asymmetries with the EU and prepares trade negotiations with China"
+    "Uber amplia categoria de viagens com motoristas mulheres para todo o Brasil; veja como usar": {
+      "en": "Uber expands the category of trips with women drivers to the whole of Brazil; see how to use"
     },
-    "Jogo do Brasil faz consumo de energia cair e obriga ONS a reduzir geração eólica e solar": {
-      "en": "Brazil's game makes energy consumption fall and forces ons to reduce wind and solar generation"
-    },
-    "No Mercosul, Lula diz que 'ninguém é dono da América do Sul' e que vai disputar reeleição para 'garantir' democracia no Brasil": {
-      "en": "In Mercosur, Lula says that 'no one owns South America' and that he will run for reelection to 'guarantee' democracy in Brazil"
+    "Fila do INSS recua para 1,8 milhão de pedidos, o menor patamar em 21 meses, segundo o órgão": {
+      "en": "INSS queue drops to 1.8 million requests, the lowest level in 21 months, according to the agency"
     },
     "Paraná recebe Defensoras Populares e conclui implementação da iniciativa em dez estados": {
       "en": "Paraná receives Popular Defenders and completes implementation of the initiative in ten states"
@@ -312,20 +315,20 @@
     "Blitz do Autismo fortalece conscientização e aproxima a segurança pública da comunidade": {
       "en": "Autism Blitz strengthens awareness and brings public safety closer to the community"
     },
+    "MDHC lança unidade do Cidadania PopRua em Maceió para ampliar o acesso a direitos da população em situação de rua": {
+      "en": "MDHC launches Cidadania PopRua unit in Maceió to expand access to rights for the homeless population"
+    },
+    "Governo do Brasil se consolida como liderança internacional na promoção dos direitos das pessoas LGBTQIA+": {
+      "en": "Government of Brazil consolidates itself as an international leader in promoting the rights of LGBTQIA+ people"
+    },
+    "Viva Mais Cidadania: MDHC fortalece diálogo sobre envelhecimento ativo e valorização das múltiplas velhices": {
+      "en": "Viva Mais Cidadania: MDHC strengthens dialogue on active aging and valuing multiple old ages"
+    },
+    "Programa Viva Mais Cidadania expande ações em São Paulo com formaturas e capacitações": {
+      "en": "Viva Mais Cidadania Program expands actions in São Paulo with graduations and training"
+    },
     "\"Renadipi é alicerce fundamental”, destaca MDHC no I Encontro da Rede Brasileira de Pesquisa em Cuidados": {
       "en": "\"Renadipi is a fundamental foundation\", highlights MDHC at the 1st Meeting of the Brazilian Network for Research in Care"
-    },
-    "Cidadania Pop Rua chega a Florianópolis para fortalecer o acesso a direitos da população em situação de rua": {
-      "en": "Pop Street Citizenship arrives in Florianópolis to strengthen access to rights for the homeless population"
-    },
-    "MDHC participa de curso internacional para aprimorar implementação de decisões da Corte Interamericana": {
-      "en": "MDHC participates in an international course to improve the implementation of decisions of the Inter-American Court"
-    },
-    "Governo do Brasil realiza sepultamento de Grenaldo de Jesus Silva e reafirma compromisso com a memória, a verdade e a reparação": {
-      "en": "Government of Brazil carries out burial of Grenaldo de Jesus Silva and reaffirms commitment to memory, truth and reparation"
-    },
-    "Brasil debate a violência contra mulheres LBTI+ com a Embaixada Britânica": {
-      "en": "Brazil discusses violence against LBTI+ women with the British Embassy"
     },
     "Estado promove ação de empregabilidade para migrantes e refugiados nesta terça": {
       "en": "State promotes employability action for migrants and refugees this Tuesday"
@@ -342,8 +345,8 @@
     "Estado promove ação de empregabilidade para migrantes e refugiados no dia de hoje": {
       "en": "State promotes employability action for migrants and refugees today"
     },
-    "Assistência Social cria central de informações para imigrantes venezuelanos após terremoto": {
-      "en": "Social Assistance creates information center for Venezuelan immigrants after earthquake"
+    "Assistência Social capacita profissionais sobre acesso de migrantes à Previdência Social": {
+      "en": "Social Assistance trains professionals on migrants' access to Social Security"
     },
     "Universities face ban on international students over visa abuse": {
       "pt": "Universidades enfrentam proibição de estudantes internacionais por abuso de visto"
@@ -390,6 +393,9 @@
     "New Form for Accompanying an eVisa Published by the Home Office": {
       "pt": "Novo Formulário para Acompanhamento de e-Visa Publicado pelo Home Office"
     },
+    "Australia sues Amazon for making allegedly unfair contracts with subscribers": {
+      "pt": "Austrália processa Amazon por fazer contratos supostamente injustos com assinantes"
+    },
     "Cruise passengers 'stranded' after air con failure to be flown home": {
       "pt": "Passageiros do cruzeiro 'encalhados' após falha no ar-condicionado para serem levados para casa"
     },
@@ -401,9 +407,6 @@
     },
     "Chinese tycoon sentenced to 30 years in US jail": {
       "pt": "Magnata chinês condenado a 30 anos de prisão nos EUA"
-    },
-    "Hollywood director gets two and a half years in prison for defrauding Netflix": {
-      "pt": "Diretor de Hollywood pega dois anos e meio de prisão por fraudar a Netflix"
     },
     "Asylum seekers will pay towards costs of accommodation": {
       "pt": "Os requerentes de asilo pagarão os custos de alojamento"
@@ -435,6 +438,12 @@
     "MAC commissioned to review salary requirements and the new TSL": {
       "pt": "MAC encarregado de revisar os requisitos salariais e o novo TSL"
     },
+    "UNRWA remains indispensable to the delivery of essential services to millions of Palestinian refugees across Gaza and the Middle East: UK statement at the UNRWA Pledging Conference": {
+      "pt": "A UNRWA continua a ser indispensável para a prestação de serviços essenciais a milhões de refugiados palestinos em Gaza e no Oriente Médio: declaração do Reino Unido na Conferência de Doadores da UNRWA"
+    },
+    "UK deploys search and rescue team and emergency funding to support Venezuela earthquake response": {
+      "pt": "Reino Unido implanta equipe de busca e salvamento e financiamento de emergência para apoiar a resposta ao terremoto na Venezuela"
+    },
     "Change of His Majesty's Ambassador to Laos: Jemima Gordon-Duff": {
       "pt": "Mudança da Embaixadora de Sua Majestade no Laos: Jemima Gordon-Duff"
     },
@@ -443,12 +452,6 @@
     },
     "UN Human Rights Council 62: UK Statement for the Interactive Dialogue on Belarus.": {
       "pt": "Conselho de Direitos Humanos da ONU 62: Declaração do Reino Unido para o Diálogo Interativo sobre a Bielorrússia."
-    },
-    "Change of Ambassador to Turkey: Jennifer Anderson": {
-      "pt": "Mudança de Embaixadora na Turquia: Jennifer Anderson"
-    },
-    "Civilians must never bear the consequences of conflict: UK statement at the UN Security Council": {
-      "pt": "Civis nunca devem arcar com as consequências do conflito: declaração do Reino Unido no Conselho de Segurança da ONU"
     },
     "The Immigration (Restrictions on Employment and Residential Accommodation) (Prescribed Requirements and Codes of Practice) (Amendment) Regulations 2026": {
       "pt": "Os Regulamentos de Imigração (Restrições ao Emprego e Acomodação Residencial) (Requisitos Prescritos e Códigos de Prática) (Alteração) 2026"
@@ -587,25 +590,25 @@
       "pt": "Discurso do Ministro das Relações Exteriores Johann Wadephul na recepção de verão organizada pela Igreja Protestante na Alemanha (EKD)",
       "en": "Speech by Foreign Minister Johann Wadephul at the summer reception hosted by the Protestant Church in Germany (EKD)"
     },
-    "Wall Street: Wall Street öffnet unverändert – Indizes steuern auf stärkstes Quartal seit Jahren zu": {
-      "pt": "Wall Street: Wall Street abre inalterada – Índices seguem para trimestre mais forte em anos",
-      "en": "Wall Street: Wall Street opens unchanged – Indices head for strongest quarter in years"
+    "Wall Street: Indizes schließen im Plus und steuern auf stärkstes Quartal seit Jahren zu": {
+      "pt": "Wall Street: Índices fecham em mais e seguem para o trimestre mais forte em anos",
+      "en": "Wall Street: Indices close in plus and head for strongest quarter in years"
     },
-    "Gründer: „Diese Unternehmen werden zu Talentmagneten“ – Investoren verteilen mehr Geld auf weniger Start-ups": {
-      "pt": "Fundador: \"Essas empresas estão se tornando ímãs de talentos\" – os investidores distribuem mais dinheiro para menos startups",
-      "en": "Founder: \"These companies are becoming talent magnets\" – investors distribute more money to fewer start-ups"
+    "Agrar: Einigung auf neues Sanierungskonzept für die Baywa": {
+      "pt": "Agricultura: acordo sobre um novo conceito de renovação para o Baywa",
+      "en": "Agriculture: agreement on a new renovation concept for the Baywa"
     },
-    "Kommentar: Deutschlands wichtigstes K.-o.-Spiel kommt jetzt erst noch": {
-      "pt": "Comentário: O jogo de mata-mata mais importante da Alemanha só agora está chegando",
-      "en": "Comment: Germany's most important knockout game is only now coming"
+    "Krisenunternehmen: Baywa-Sanierung wird zur Hängepartie - neues Zieldatum 2030": {
+      "pt": "Empresa de crise: renovação de Baywa se torna um jogo suspenso - nova data-alvo 2030",
+      "en": "Crisis company: Baywa renovation becomes a hanging game - new target date 2030"
     },
-    "+++ Ukraine-Krieg +++: Ukraine attackiert Satellitenkommunikation nahe Moskau": {
-      "pt": "+++ Guerra da Ucrânia +++: Ucrânia ataca comunicações por satélite perto de Moscou",
-      "en": "+++ Ukraine war +++: Ukraine attacks satellite communications near Moscow"
+    "Fußball-Weltmeisterschaft: Merz' WM-Kommentar stellt sich als Panne heraus": {
+      "pt": "Copa do Mundo de Futebol: o comentário de Merz sobre a Copa do Mundo acaba sendo uma falha",
+      "en": "Football World Cup: Merz's World Cup comment turns out to be a glitch"
     },
-    "US-Geburtsrecht: Supreme Court: US-Staatsbürgerschaft bei Geburt in den USA": {
-      "pt": "Lei de Nascimento dos EUA: Suprema Corte: Cidadania dos EUA ao Nascer nos EUA",
-      "en": "U.S. Birth Law: Supreme Court: U.S. Citizenship at Birth in the U.S."
+    "Geldpolitik: EZB erwägt offenbar, Mindestreserve für Banken zu verdoppeln": {
+      "pt": "Política monetária: aparentemente, o BCE está a considerar duplicar as reservas mínimas obrigatórias para os bancos",
+      "en": "Monetary policy: ECB apparently considering doubling reserve requirements for banks"
     },
     "Portugal's 'golden visa' delays spark legal fight": {
       "pt": "Atrasos no 'visto dourado' de Portugal provocam briga legal"
@@ -642,6 +645,26 @@
       "pt": "Nova fundação dos Departamentos F e M a partir de 10.01.2025",
       "en": "New foundation of Departments F and M as of 01.10.2025"
     },
+    "Pflegesensibles Quartier: Land und Pflegekassen fördern Modellprojekt zur Stärkung von Pflege und Nachbarschaft in Kiel": {
+      "pt": "Vizinhança sensível aos cuidados: os fundos de terra e de enfermagem apoiam o projeto modelo para fortalecer os cuidados e a vizinhança em Kiel",
+      "en": "Care-sensitive neighbourhood: Land and nursing funds support model project to strengthen care and neighbourhood in Kiel"
+    },
+    "Schutzlücken schließen und Vielfalt stärken: Entwurf für ein Antidiskriminierungsgesetz in den Landtag eingebracht": {
+      "pt": "Fechando lacunas de proteção e fortalecendo a diversidade: Projeto de lei antidiscriminação introduzido no parlamento estadual",
+      "en": "Closing protection gaps and strengthening diversity: Draft anti-discrimination law introduced into the state parliament"
+    },
+    "Staatliche Arbeitsschutzbehörde kontrolliert verstärkt auf der Kieler Woche": {
+      "pt": "A autoridade estadual de saúde e segurança ocupacional está monitorando cada vez mais o Kieler Woche",
+      "en": "The state occupational health and safety authority is increasingly monitoring the Kieler Woche"
+    },
+    "Sozialministerin Aminata Touré zu dem vom Bundesministerium für Gesundheit erarbeiteten Gesetzesentwurf für eine Pflegereform": {
+      "pt": "Ministro dos Assuntos Sociais Aminata Touré sobre o projeto de lei para uma reforma da enfermagem desenvolvido pelo Ministério Federal da Saúde",
+      "en": "Minister of Social Affairs Aminata Touré on the draft law for a nursing reform developed by the Federal Ministry of Health"
+    },
+    "100.000 Euro zur Unterstützung pflegender Angehöriger: Land und Pflegeversicherung setzen Förderung von „wir pflegen! SH e.V.“ fort": {
+      "pt": "100.000 euros para apoiar os familiares cuidadores: o estado e o seguro de assistência de enfermagem promovem \"nós cuidamos! SH e.V.\" continuação",
+      "en": "100,000 euros to support caring relatives: the state and nursing care insurance promote \"we care! SH e.V.\" continued"
+    },
     "Un \"guide de retour\" de l'agence européenne Frontex accusé de romantiser le parcours des enfants expulsés": {
       "pt": "Um \"guia de regresso\" da agência europeia Frontex acusado de romantizar a viagem de crianças expulsas",
       "en": "A \"return guide\" from the European agency Frontex accused of romanticizing the journey of expelled children"
@@ -677,6 +700,10 @@
     "What's on the agenda at the next EU-UK summit... if it takes place?": {
       "pt": "O que está na agenda da próxima cimeira UE-Reino Unido... se acontecer?"
     },
+    "En Espagne, les autorités ont trois mois pour examiner les demandes d’un million de candidats à la régularisation": {
+      "pt": "Na Espanha, as autoridades têm três meses para examinar os pedidos de regularização de um milhão de candidatos",
+      "en": "In Spain, the authorities have three months to examine the applications of one million candidates for regularization"
+    },
     "L’interdiction des mariages d’étrangers sans papiers de retour à l’Assemblée nationale, avec le soutien du gouvernement": {
       "pt": "A proibição de casamentos de estrangeiros indocumentados que retornam à Assembleia Nacional, com o apoio do governo",
       "en": "The prohibition of marriages of undocumented foreigners returning to the National Assembly, with the support of the government"
@@ -693,29 +720,25 @@
       "pt": "Dia Mundial do Refugiado: “A hospitalidade acadêmica é uma força moral na base da nossa soberania”",
       "en": "World Refugee Day: “Academic hospitality is a moral force at the very foundation of our sovereignty”"
     },
-    "« Un exemple de “résistance affective” face aux inégalités toujours plus grandes de l’accueil et du soin des personnes »": {
-      "pt": "“Um exemplo de“ resistência emocional ”diante das crescentes desigualdades no acolhimento e cuidado das pessoas”",
-      "en": "\"An example of\" emotional resistance \"in the face of growing inequalities in the reception and care of people\""
+    "Le directeur de la CIA compare les derniers modèles d’IA à des «armes nucléaires numériques»": {
+      "pt": "Diretor da CIA compara os mais recentes modelos de IA com 'Armas Nucleares Digitais'",
+      "en": "CIA Director Compares Latest AI Models to 'Digital Nuclear Weapons'"
+    },
+    "Pourquoi le gouvernement français recule sur la taxe sur les petits colis": {
+      "pt": "Por que o governo francês está revertendo o imposto sobre encomendas pequenas",
+      "en": "Why the French government is rolling back the small parcel tax"
+    },
+    "Climatisation, nouveaux horaires… Comment l’Espagne protège ses salariés face aux canicules": {
+      "pt": "Ar condicionado, novos horários... Como a Espanha protege seus funcionários contra ondas de calor",
+      "en": "Air conditioning, new schedules... How Spain protects its employees against heatwaves"
     },
     "Âge de départ à la retraite, aides aux entreprises… Les propositions explosives de l’OCDE pour redresser la France": {
       "pt": "Idade de aposentadoria, apoio empresarial, etc. Propostas explosivas da OCDE para a recuperação da França",
       "en": "Retirement age, business support, etc. The OECD's explosive proposals for France's recovery"
     },
-    "Après le sulfureux Polymarket, Meta lance une application dédiée aux paris financiers sur l’avenir": {
-      "pt": "Após o Polymarket sulfuroso, a Meta lança um aplicativo dedicado a apostas financeiras no futuro",
-      "en": "After the sulphurous Polymarket, Meta launches an application dedicated to financial betting on the future"
-    },
-    "L’Allemagne continue de faire face à un chômage élevé, fruit d’un manque de dynamisme de son économie": {
-      "pt": "A Alemanha continua a enfrentar um elevado desemprego como resultado da falta de dinamismo na sua economia",
-      "en": "Germany continues to face high unemployment as a result of a lack of dynamism in its economy"
-    },
-    "« Les consommateurs sont moins à la fête » : dans un contexte incertain, les Français continuent d’arbitrer leur consommation": {
-      "pt": "“Os consumidores são menos festivos”: num contexto incerto, os franceses continuam a arbitrar o seu consumo",
-      "en": "\"Consumers are less celebratory\": in an uncertain context, the French continue to arbitrate their consumption"
-    },
-    "Panneau de bienvenue, «jolis costumes» et vieux pistolet... Les perles 2025 des inspecteurs des finances": {
-      "pt": "Placa de boas-vindas, \"trajes bonitos\" e arma velha... As pérolas 2025 dos inspetores financeiros",
-      "en": "Welcome sign, \"pretty costumes\" and old gun... The 2025 pearls of the financial inspectors"
+    "L’Europe peut combler son retard face aux États-Unis en dopant sa productivité sur des secteurs clés": {
+      "pt": "A Europa pode alcançar os EUA aumentando a produtividade em setores-chave",
+      "en": "Europe can catch up with the US by boosting productivity in key sectors"
     },
     "Annulation des « Perspectives Asile » consacrée à la protection des personnes contre l’homophobie, la biphobie et la transphobie": {
       "pt": "Cancelamento das \"Perspectivas de Asilo\" dedicadas à proteção das pessoas contra a homofobia, bifobia e transfobia",
@@ -812,9 +835,9 @@
       "pt": "O Governo está a pedir a Bruxelas até março de 2027 que pare a temporalidade no setor público e evite um processo perante o TJUE",
       "en": "The Government is asking Brussels until March 2027 to stop the temporality in the public sector and avoid a lawsuit before the CJEU"
     },
-    "El precio de la vivienda se dispara un 15,2% en el segundo trimestre, la tasa más alta en 20 años": {
-      "pt": "Os preços das casas subiram 15,2% no segundo trimestre, a maior taxa em 20 anos",
-      "en": "Home prices soared 15.2% in the second quarter, the highest rate in 20 years"
+    "El economista jefe de OpenAI pide calma ante los banqueros centrales: “Que tu tarea esté expuesta a la IA no significa que vayas a perder el trabajo”": {
+      "pt": "Economista-chefe da OpenAI pede calma aos bancos centrais: \"Só porque sua tarefa está exposta à IA não significa que você vai perder seu emprego\"",
+      "en": "OpenAI's chief economist asks central bankers for calm: “Just because your task is exposed to AI doesn't mean you're going to lose your job”"
     },
     "“¡El mocho se cabrea!”: las limpiadoras de edificios protestan en 30 ciudades para pedir mejores salarios": {
       "pt": "“O mocho fica puto!”: construtoras protestam em 30 cidades para exigir melhores salários",
@@ -839,20 +862,20 @@
     "Resolução do Conselho de Ministros n.º 141/2026 - Diário da República n.º 124/2026, Série I de 2026-06-30": {
       "en": "Resolution of the Council of Ministers No. 141/2026 - Diário da República No. 124/2026, Series I of 2026-06-30"
     },
-    "Lisbon to build new river terminal": {
-      "pt": "Lisboa vai construir novo terminal fluvial"
+    "Algarve to introduce beach maps to end confusion over beach umbrellas": {
+      "pt": "Algarve introduz mapas de praia para acabar com a confusão sobre guarda-sóis de praia"
     },
-    "The United Kingdom is still the main market for tourism in Portugal": {
-      "pt": "O Reino Unido continua a ser o principal mercado para o turismo em Portugal"
+    "Stellar Charity Night Under The Stars in the Algarve": {
+      "pt": "Noite de caridade estelar sob as estrelas no Algarve"
     },
-    "Portugal launch new AI model": {
-      "pt": "Portugal lança novo modelo de IA"
+    "Air passengers could be entitled to compensation if flights are disrupted by unruly travellers": {
+      "pt": "Os passageiros aéreos podem ter direito a compensação se os voos forem interrompidos por viajantes indisciplinados"
     },
-    "Portugal emerges among EU’s most appealing industrial investment destinations": {
-      "pt": "Portugal surge entre os destinos de investimento industrial mais apelativos da UE"
+    "Conclusion of TAP's restructuring plan confirmed": {
+      "pt": "Conclusão do plano de reestruturação da TAP CONFIRMADA"
     },
-    "Wildfire mobilises 8 aircraft and 147 firefighters in Portugal": {
-      "pt": "Incêndio mobiliza 8 aeronaves e 147 bombeiros em Portugal"
+    "Portugal Park to host stargazing event in July": {
+      "pt": "Portugal Park vai acolher evento de observação de estrelas em julho"
     },
     "São Brás de Alportel launches charity drive for victims of Venezuela disaster": {
       "pt": "São Brás de Alportel lança campanha de caridade para vítimas do desastre na Venezuela"
@@ -869,28 +892,40 @@
     "105 Portuguese degree courses have graduate unemployment above national average": {
       "pt": "105 cursos de licenciatura em português têm desemprego de pós-graduação acima da média nacional"
     },
+    "Em Portugal 15% dos desempregados são jovens com o ensino superior? Verdadeiro": {
+      "en": "In Portugal 15% of the unemployed are young people with higher education? True"
+    },
+    "Fórum BCE: a Europa à procura de antídotos para o atraso na corrida à IA": {
+      "en": "ECB Forum: Europe looking for antidotes to lagging AI race"
+    },
+    "Fim da reestruturação permite à TAP usar todos os novos aviões": {
+      "en": "End of restructuring allows tap to use all new airplanes"
+    },
     "Lançada primeira pedra da fábrica de comboios que será suportada pela CP": {
       "en": "First stone laid of the train factory that will be supported by CP"
     },
     "Maio fez inverter queda das receitas de turismo no Centro, Oeste e Setúbal": {
       "en": "May reversed the fall in tourism revenues in the Center, West and Setúbal"
     },
-    "Dinheiro enviado de Portugal para paraísos fiscais sobe para 9400 milhões em 2025": {
-      "en": "Money sent from Portugal to tax havens rises to 9400 million in 2025"
+    "MINISTERO DELLA GIUSTIZIA - DECRETO 26 giugno 2026, n.114": {
+      "pt": "MINISTÉRIO DA JUSTIÇA - DECRETO N.º 114, de 26 de junho de 2026",
+      "en": "MINISTRY OF JUSTICE - DECREE NO. 114 of 26 June 2026"
     },
-    "Combustíveis cedem e levam a abrandamento ligeiro da inflação para 3,2%": {
-      "en": "Fuels give way and lead to slight slowdown in inflation to 3.2%"
+    "DELIBERA DEL CONSIGLIO DEI MINISTRI 28 aprile 2026": {
+      "pt": "RESOLUÇÃO DO CONSELHO DE MINISTROS DE 28 de abril de 2026",
+      "en": "RESOLUTION OF THE COUNCIL OF MINISTERS 28 April 2026"
     },
-    "Bruxelas não dá folga a Governo para publicação de regras da nova prestação única": {
-      "en": "Brussels does not give the Government time off to publish rules for the new one-time installment"
+    "MINISTERO DELL'AGRICOLTURA, DELLA SOVRANITA' ALIMENTARE E DELLE FORESTE - DECRETO 19 maggio 2026": {
+      "pt": "MINISTÉRIO DA AGRICULTURA, SOBERANIA ALIMENTAR E FLORESTAS - DECRETO 19 de maio de 2026",
+      "en": "MINISTRY OF AGRICULTURE, FOOD SOVEREIGNTY AND FORESTS - DECREE 19 May 2026"
     },
-    "MINISTERO DELL'ECONOMIA E DELLE FINANZE - DECRETO 19 maggio 2026": {
-      "pt": "MINISTÉRIO DA ECONOMIA E FINANÇAS - DECRETO 19 de maio de 2026",
-      "en": "MINISTRY OF ECONOMY AND FINANCE - DECREE 19 May 2026"
+    "MINISTERO DELL'AGRICOLTURA, DELLA SOVRANITA' ALIMENTARE E DELLE FORESTE - DECRETO 22 giugno 2026": {
+      "pt": "MINISTÉRIO DA AGRICULTURA, SOBERANIA ALIMENTAR E FLORESTAS - DECRETO 22 DE Junho DE 2026",
+      "en": "MINISTRY OF AGRICULTURE, FOOD SOVEREIGNTY AND FORESTS - DECREE 22 June 2026"
     },
-    "MINISTERO DELLE IMPRESE E DEL MADE IN ITALY - DECRETO 8 giugno 2026": {
-      "pt": "MINISTÉRIO DE NEGÓCIOS E MADE IN ITALY - DECRETO 8 DE Junho DE 2026",
-      "en": "MINISTRY OF BUSINESS and MADE IN ITALY - DECREE 8 June 2026"
+    "MINISTERO DELL'ECONOMIA E DELLE FINANZE - DECRETO 23 giugno 2026": {
+      "pt": "MINISTÉRIO DA ECONOMIA E FINANÇAS - DECRETO 23 DE Junho DE 2026",
+      "en": "MINISTRY OF ECONOMY AND FINANCE - DECREE 23 June 2026"
     },
     "Suprema Corte dos EUA mantém cidadania a todo bebê nascido em solo americano": {
       "en": "U.S. Supreme Court upholds citizenship for every baby born on U.S. soil"
@@ -927,25 +962,25 @@
       "pt": "Impostos dos EUA, empresas de médio porte são atingidas: três em cada quatro mantêm os preços e nos colocam de volta nas margens",
       "en": "US duties, medium-sized companies take the hit: three out of four keep prices and put us back on the margins"
     },
+    "Il petrolio chiude in calo a New York, Wti torna sotto i 70 dollari al barile": {
+      "pt": "Petróleo fecha em Nova York, WTI retorna abaixo de US $ 70 o barril",
+      "en": "Oil closes down in New York, WTI returns below $70 a barrel"
+    },
+    "Poligrafico e Carabinieri insieme per la sicurezza digitale dello Stato": {
+      "pt": "Poligrafico e Carabinieri juntos pela segurança digital do Estado",
+      "en": "Poligrafico and Carabinieri together for the digital security of the State"
+    },
+    "Futures, 'come sostenibilità e innovazione ridisegnano l'impresa'": {
+      "pt": "Futuros, 'como a sustentabilidade e a inovação redesenham a empresa'",
+      "en": "Futures, 'how sustainability and innovation redesign the company'"
+    },
+    "Ddl Merito: premi selettivi e carriere, cosa cambia nella Pa": {
+      "pt": "Ddl Merito: prêmios e carreiras seletivas, o que muda em Pa",
+      "en": "Ddl Merito: selective awards and careers, what changes in Pa"
+    },
     "Il prezzo del gas chiude in rialzo a 43,65 euro": {
       "pt": "Preço do gás fecha em 43,65 euros",
       "en": "The price of gas closes up at 43.65 euros"
-    },
-    "Borsa: Milano chiude in rialzo con l'Europa, brilla Avio": {
-      "pt": "Bolsa de Valores: Milão fecha em alta com a Europa, Avio brilha",
-      "en": "Stock Exchange: Milan closes higher with Europe, Avio shines"
-    },
-    "Lo spread tra Btp e Bund chiude in rialzo a 77 punti": {
-      "pt": "O spread entre BTP e Bund fecha em 77 pontos",
-      "en": "The spread between BTP and Bund closes up at 77 points"
-    },
-    "Dal 1 luglio scattano nuove norme su cripto, 8 operatori autorizzati in Italia": {
-      "pt": "A partir de 1º de julho, novas regras sobre criptomoedas entram em vigor, 8 operadoras autorizadas na Itália",
-      "en": "From 1 July new rules on crypto take effect, 8 operators authorized in Italy"
-    },
-    "Selex, 2025 sopra le attese, nel 2026 attesi ricavi in crescita del 4,5%": {
-      "pt": "Selex, 2025 acima do esperado, em 2026 receitas esperadas sobem 4,5%",
-      "en": "Selex, 2025 above expectations, in 2026 expected revenues up 4.5%"
     },
     "Protection status S after March 2027: Federal Council launches consultation": {
       "pt": "Status DE proteção S após março DE 2027: Conselho Federal lança consulta"
@@ -1067,20 +1102,20 @@
     "Dublin Live: Irish citizenship applications surge 63% as Americans seek ‘plan B’ EU passport": {
       "pt": "Dublin Live: Os pedidos de cidadania irlandesa aumentam 63% à medida que os americanos procuram o passaporte da UE \"plano B\""
     },
-    "New rural housing policy will end ‘Eircode lottery’ approach to planning, Minister says": {
-      "pt": "Nova política de habitação rural acabará com a abordagem de planejamento da ’loteria Eircode', diz ministro"
+    "Supreme Court to hear appeal potentially significant to wards of court awaiting discharge": {
+      "pt": "Supremo Tribunal para ouvir recurso potencialmente significativo para as alas do tribunal que aguardam quitação"
     },
-    "NTA reviewing Irish Rail proposal to end contract for delayed IT system": {
-      "pt": "NTA revisa proposta da Irish Rail para encerrar contrato para sistema de TI atrasado"
+    "Data Protection Commission reconsidering TikTok data-transfer ban after court ruling": {
+      "pt": "Comissão de Proteção de Dados reconsidera proibição de transferência de dados do TikTok após decisão judicial"
     },
-    "Guilty plea over manslaughter of Co Offaly man who died during stag party in Athlone": {
-      "pt": "Confissão de culpa pelo homicídio culposo de um homem de Co Offaly que morreu durante uma despedida de solteiro em Athlone"
+    "‘It is a huge honour’: Ship traces journey Spanish Armada sailors made in 1588": {
+      "pt": "‘É uma grande honra’: viagem de rastros de navio feita por marinheiros da Armada Espanhola em 1588"
     },
-    "Blockades of key infrastructure will not be tolerated during EU presidency, Garda chief says": {
-      "pt": "Bloqueios de infraestruturas-chave não serão tolerados durante a presidência da UE, diz chefe da Garda"
+    "Maximum sentence sought for Dublin-based woman accused of murdering daughter": {
+      "pt": "Pena máxima pedida para mulher com sede em Dublin acusada de assassinar filha"
     },
-    "Jury in Noah Donohoe inquest to continue deliberations on Wednesday": {
-      "pt": "Júri no inquérito Noah Donohoe para continuar as deliberações na quarta-feira"
+    "Man charged in connection with suspected arson attack at Dublin Islamic prayer centre": {
+      "pt": "Homem acusado de ligação com suspeita de incêndio criminoso no centro de oração islâmico de Dublin"
     },
     "Nestle to cut artificial colourings from all products": {
       "pt": "Nestlé corta corantes artificiais de todos os produtos"
@@ -1097,20 +1132,20 @@
     "Annual inflation slows to 4-month low of 3.3% - estimate": {
       "pt": "Inflação anual desacelera para mínima de 4 meses de 3,3% - estimativa"
     },
+    "Streaming revenue surpasses traditional TV in the Netherlands for first time": {
+      "pt": "Receita de streaming supera TV tradicional na Holanda pela primeira vez"
+    },
+    "Trial over fatal Marken teen collision concludes with eight-week sentence recommendation": {
+      "pt": "Julgamento sobre colisão fatal de adolescentes da Marken é concluído com recomendação de sentença de oito semanas"
+    },
+    "Disinformation and vaccine hesitancy among top new health risks, says Dutch institute": {
+      "pt": "Desinformação e hesitação vacinal entre os principais novos riscos para a saúde, diz instituto holandês"
+    },
+    "Dutch FA to report online racist abuse of Oranje trio after Morocco defeat": {
+      "pt": "A Federação Holandesa de Futebol denunciará o abuso racista online do trio de Oranje após a derrota de Marrocos"
+    },
     "Former Utrecht prison guard gets 3 years for raping female inmate in her cell": {
       "pt": "Ex-guarda da prisão de Utrecht pega 3 anos por estuprar uma detenta em sua cela"
-    },
-    "Extra cinema hall added in Rotterdam for sold-out Cape Verde–Argentina screening": {
-      "pt": "Salão de cinema extra adicionado em Roterdã para exibição esgotada de Cabo Verde-Argentina"
-    },
-    "Counterterrorism agency warns of growing Iran-related, online extremist terror threats": {
-      "pt": "Agência de contraterrorismo alerta para crescentes ameaças terroristas extremistas online relacionadas ao Irã"
-    },
-    "Former police officer acquitted in rape case involving 17-year-old": {
-      "pt": "Ex-policial absolvido em caso de estupro envolvendo jovem de 17 anos"
-    },
-    "Schiphol selects KLM, dnata and Viggo as sole ground handlers for next seven years": {
-      "pt": "Schiphol seleciona KLM, dnata e Viggo como únicos manipuladores de solo para os próximos sete anos"
     },
     "Cabinet moves to make psychological abuse a crime for first time": {
       "pt": "O gabinete se move para tornar o abuso psicológico um crime pela primeira vez"
@@ -1163,6 +1198,18 @@
     "Mohawk Industries, Inc. Invites You to Join the Fourth Quarter 2022 Earnings Conference Call": {
       "pt": "Mohawk Industries, Inc. convida você a participar da teleconferência de resultados do quarto trimestre de 2022"
     },
+    "100 internationale forskere rydder op efter københavnerne": {
+      "pt": "100 pesquisadores internacionais limpam após Copenhageners",
+      "en": "100 international researchers clean up after Copenhageners"
+    },
+    "ANALYSE Rigspolitichefen er færdig. Det var der nok brug for 'for at rydde op'": {
+      "pt": "ANÁLISE O Comissário Nacional de Polícia está terminado. Provavelmente era necessário 'limpar'",
+      "en": "ANALYSIS The National Police Commissioner is finished. It was probably needed 'to clean up'"
+    },
+    "Verdens største megalodon-fund kommer fra Danmark: 'Det bliver ikke større'": {
+      "pt": "A maior descoberta de megalodon do mundo vem da Dinamarca: 'Não vai ficar maior'",
+      "en": "The world's largest megalodon discovery comes from Denmark: 'It won't get any bigger'"
+    },
     "250.000 kroner skal sikre arbejdet med unik natur på Christiansø": {
       "pt": "250.000 coroas para garantir o trabalho com uma natureza única em Christiansø",
       "en": "250,000 kroner to ensure the work with unique nature on Christiansø"
@@ -1171,17 +1218,13 @@
       "pt": "Ave rara 'extremamente' apareceu agora em um novo lugar na Dinamarca: 'Não pode ficar mais selvagem'",
       "en": "'Extremely' rare bird has now appeared in a new place in Denmark: 'It can't get any wilder'"
     },
-    "Tårnhøjt millionkrav er kun første skridt: Så lang tid går der, før ansvaret for jordskred kan placeres": {
-      "pt": "Reivindicações de milhões de torres são apenas o primeiro passo: é quanto tempo leva para que a responsabilidade por deslizamentos de terra possa ser colocada",
-      "en": "Tower-high million claims are only the first step: That's how long it takes before responsibility for landslides can be placed"
+    "Glemmer du, så husker Ringberg – seks vilde måneder i dansk politik": {
+      "pt": "Se você esquecer, Ringberg lembra – seis meses selvagens na política dinamarquesa",
+      "en": "If you forget, Ringberg remembers – six wild months in Danish politics"
     },
-    "To 'dejlige Karens' i protest mod SAS-planer: Det her er et skridt i den forkerte retning": {
-      "pt": "Duas \"adoráveis Karen's\" em protesto contra os planos do SAS: este é um passo na direção errada",
-      "en": "Two 'lovely Karen's' in protest against SAS plans: This is a step in the wrong direction"
-    },
-    "'Larven fra helvede' får kommune til at lukke børnehus": {
-      "pt": "'A lagarta do inferno' faz com que o município feche a casa das crianças",
-      "en": "'The caterpillar from hell' causes municipality to close children's house"
+    "Præst i Folketinget kaldes for 'besynderlig signal', men arkitekten bag jubler: 'Mange af os kan have brug for sjælesorg'": {
+      "pt": "Um padre no Folketing é chamado de \"sinal peculiar\", mas o arquiteto dos aplausos: \"Muitos de nós podem precisar de cuidados pastorais\"",
+      "en": "A priest in the Folketing is called a 'peculiar signal', but the architect of the cheers: 'Many of us may need pastoral care'"
     },
     "Danmark sender 4,4 milliarder stor donationspakke til Ukraine": {
       "pt": "Dinamarca envia pacote de doação de 4,4 bilhões para a Ucrânia",
@@ -1194,14 +1237,6 @@
     "Jeppe Bruus har besøgt Zelenskyj i Kyiv": {
       "pt": "Jeppe Bruus visitou Zelenskyi em Kiev",
       "en": "Jeppe Bruus has visited Zelenskyi in Kyiv"
-    },
-    "Undersøgelse af Samsam-sagen er i gang": {
-      "pt": "A investigação do caso Samsam está em andamento",
-      "en": "Investigation of the Samsam case is underway"
-    },
-    "Minister vil orientere Folketinget om to sager i Skatteforvaltningen": {
-      "pt": "Ministro informará o Folketing sobre dois casos na Administração Tributária",
-      "en": "Minister will inform the Folketing about two cases in the Tax Administration"
     },
     "Danish word of the day: Lækkersulten": {
       "pt": "Palavra dinamarquesa do dia: Lækkersulten"
@@ -1230,20 +1265,35 @@
     "Why Japan is obsessed with 3D bubble stickers": {
       "pt": "Por que o Japão é obcecado por adesivos de bolha 3D"
     },
+    "Improve Your Japanese from Watching NHK Asadora": {
+      "pt": "Melhore seu japonês assistindo NHK Asadora"
+    },
+    "2026 Top Jobs in Japan Week 27": {
+      "pt": "Melhores empregos de 2026 no Japão Semana 27"
+    },
+    "Kifune Myojin Shrine Kanazawa: Love and Separation Shrine": {
+      "pt": "Santuário Kifune Myojin Kanazawa: Santuário de Amor e Separação"
+    },
+    "From Volcanoes to Sea Caves: A Tokyo Weekend Trip Through Izu": {
+      "pt": "De vulcões a cavernas marinhas: uma viagem de fim de semana por Izu"
+    },
+    "SHEN on Music, Identity and Finding Aloha in Japan": {
+      "pt": "SHEN fala sobre música, identidade e como encontrar Aloha no Japão"
+    },
+    "Hong Kong's wealth crown reveals China's capital control dilemma": {
+      "pt": "A coroa de riqueza de Hong Kong revela o dilema do controle de capital da China"
+    },
+    "China chip material makers battle Japan rivals for $73bn market": {
+      "pt": "Fabricantes de material de chips da China disputam mercado de $ 73 bilhões com rivais do Japão"
+    },
+    "China's UBTech launches lifelike humanoid robots for consumers": {
+      "pt": "UBTech da China lança robôs humanoides realistas para consumidores"
+    },
+    "ANA, JAL set record fuel surcharges for July-August Japan travel season": {
+      "pt": "ANA E JAL estabeleceram sobretaxas recordes de combustível para a temporada de viagens de julho a agosto no Japão"
+    },
     "US tariff refunds set to boost Japan Inc. profits by up to $3bn": {
       "pt": "Reembolsos de tarifas dos EUA devem aumentar os lucros da Japan Inc. em até $ 3 bilhões"
-    },
-    "Activist investors reap paltry returns from Japanese stockholdings": {
-      "pt": "Investidores ativistas obtêm retornos irrisórios das ações japonesas"
-    },
-    "Japan backs SoftBank-led AI models with up to $6.2bn in chasing US, China": {
-      "pt": "Japão apoia modelos de IA liderados pelo SoftBank com até $ 6,2 bilhões em busca de EUA e China"
-    },
-    "Japan, UK and Italy to extend next-gen fighter jet contract through 2027": {
-      "pt": "Japão, Reino Unido e Itália estenderão o contrato de jatos de combate da próxima geração até 2027"
-    },
-    "Toyota to launch joint venture with US flying car maker Joby Aviation": {
-      "pt": "Toyota lançará joint venture com a fabricante de carros voadores Joby Aviation"
     },
     "Nissan management shake-up plans reported as sharks circle": {
       "pt": "Planos de reorganização da gestão da Nissan relatados como Sharks Circle"
@@ -1260,20 +1310,20 @@
     "Extreme heat and weather conditions attributed to stagnant jet stream": {
       "pt": "Condições extremas de calor e clima atribuídas à corrente de jato estagnada"
     },
-    "Anthropic unveils 'Claude Science' AI platform for scientific research": {
-      "pt": "Anthropic revela plataforma de IA 'Claude Science' para pesquisa científica"
+    "TikTok settles with minor plaintiff ahead of second individual trial over social media harm to children, law firm says": {
+      "pt": "TikTok fecha acordo com autor menor antes do segundo julgamento individual por danos a crianças nas redes sociais, diz escritório de advocacia"
     },
-    "US Supreme Court to hear Apple appeal of contempt in Epic Games lawsuit": {
-      "pt": "Suprema Corte dos EUA ouvirá recurso de desacato da Apple em processo da Epic Games"
+    "Exclusive-Activist Jana Partners has new stake in Everpure, sources": {
+      "pt": "Exclusive-Activist Jana Partners tem nova participação na Everpure, fontes"
     },
-    "Italy's Hodli says it has approval to be country's first crypto asset manager": {
-      "pt": "Hodli, da Itália, diz que tem aprovação para ser a primeira gestora de criptoativos do país"
+    "US telecoms watchdog to vote on barring sales of devices with parts from blacklisted firms": {
+      "pt": "Órgão de fiscalização de telecomunicações dos EUA votará sobre a proibição de vendas de dispositivos com peças de empresas na lista negra"
     },
-    "Consortium including Visa, Mastercard jointly launch new global stablecoin": {
-      "pt": "Consórcio incluindo Visa e Mastercard lançam em conjunto nova stablecoin global"
+    "NASA awards Astrobotic, Firefly, Intuitive Machines lunar lander contracts in moon base project": {
+      "pt": "NASA concede contratos de aterrissagem lunar Astrobotic, Firefly, Intuitive Machines em projeto de base lunar"
     },
-    "Amazon’s AWS commits $1 billion toward new unit for embedded AI engineers": {
-      "pt": "AWS da Amazon investe $ 1 bilhão em nova unidade para engenheiros de IA incorporada"
+    "FCC says it will move toward 2027 auction of mid-band wireless spectrum": {
+      "pt": "FCC diz que avançará para leilão de espectro sem fio de banda média em 2027"
     },
     "Jumbo Group unit in joint venture to bring Chinese quick-service restaurant Lausanjee to Singapore": {
       "pt": "Unidade do Grupo Jumbo em joint venture para trazer o restaurante chinês de serviço rápido Lausanjee para Cingapura"
@@ -1305,20 +1355,20 @@
     "Local Insights: At the 13th Baku Global Forum, global participants look to China for new path of multilateralism and stability": {
       "pt": "Insights locais: no 13º Fórum Global de Baku, participantes globais olham para a China em busca de um novo caminho de multilateralismo e estabilidade"
     },
+    "Blake Lively wants US$8 million from Justin Baldoni over It Ends With Us dispute": {
+      "pt": "Blake Lively quer 8 milhões de $ de Justin Baldoni por causa da disputa It Ends With Us"
+    },
+    "Macron warns against restarting death penalty debate as executions rise around the world": {
+      "pt": "Macron adverte contra o reinício do debate sobre pena de morte à medida que as execuções aumentam em todo o mundo"
+    },
+    "UK investors sue Binance and founder Zhao Changpeng for US$200 million": {
+      "pt": "Investidores do Reino Unido processam Binance e o fundador Zhao Changpeng por US$ 200 milhões"
+    },
+    "UK may intervene in Paramount’s US$110 billion takeover of Warner Bros Discovery": {
+      "pt": "Reino Unido pode intervir na aquisição da Warner Bros Discovery pela Paramount por $ 110 bilhões"
+    },
     "Roof collapse kills 14 children at tutoring centre in Pakistan’s Lahore, officials say": {
       "pt": "Colapso de telhado mata 14 crianças em centro de tutoria em Lahore, no Paquistão, dizem autoridades"
-    },
-    "Hong Kong can develop further with deeper integration, liaison office chief says": {
-      "pt": "Hong Kong pode se desenvolver ainda mais com uma integração mais profunda, diz chefe do escritório de ligação"
-    },
-    "US Supreme Court again rejects cap on political campaign spending limits": {
-      "pt": "Suprema Corte dos EUA rejeita novamente limite de gastos de campanha política"
-    },
-    "Fallen firefighter Ho awarded Medal for Bravery in Hong Kong’s 2026 Honours List": {
-      "pt": "Bombeiro caído Ho recebe Medalha por Bravura na Lista de Honras de Hong Kong em 2026"
-    },
-    "US Supreme Court upholds state bans on transgender student athletes": {
-      "pt": "Suprema Corte dos EUA mantém proibições estaduais a estudantes atletas transgêneros"
     },
     "Administrative Review Tribunal (ART) Fee Increases from 1 July 2026": {
       "pt": "Taxa do Tribunal de Revisão Administrativa (ART) aumenta a partir de 1º de julho de 2026"
@@ -1350,20 +1400,20 @@
     "485 visa (TR) Application Fees": {
       "pt": "485 Taxas de Solicitação de Visto (TR)"
     },
-    "Ex-transport minister John Sharp, directors cleared of breaching duties at Rex": {
-      "pt": "Ex-ministro dos Transportes John Sharp, diretores inocentados de violar deveres na Rex"
+    "‘Destroyed lives’: Chinese billionaire sentenced to 30 years in US prison": {
+      "pt": "‘Vidas destruídas’: bilionário chinês condenado a 30 anos de prisão nos EUA"
     },
-    "The humiliating saga for a highly paid master of the universe": {
-      "pt": "A saga humilhante de um mestre do universo altamente pago"
+    "ASX set to edge up as Wall Street advances": {
+      "pt": "ASX pronto para subir à medida que Wall Street avança"
     },
-    "‘Left with no choice’: Amazon accused of ripping off Prime customers with ads": {
-      "pt": "‘Sem escolha’: Amazon acusada de roubar clientes Prime com anúncios"
+    "Consulting giants face break-up threat to restore trust after scandals": {
+      "pt": "Gigantes da consultoria enfrentam ameaça de separação para restaurar a confiança após escândalos"
     },
-    "‘Better than smelling like fear’: How a perfumed private equity boss faced the judge": {
-      "pt": "‘Melhor do que cheirar a medo’: como um chefe perfumado de private equity enfrentou o juiz"
+    "Grill’d flips on racy SuperBuns burger ad, pulls image": {
+      "pt": "Grill 'd lança anúncio de hambúrguer SuperBuns picante, puxa imagem"
     },
-    "Amplia reshapes board for next phase of cancer drug push": {
-      "pt": "O Amplia remodela o quadro para a próxima fase do impulso de medicamentos contra o câncer"
+    "I’m in two minds about climate change. But not like Hanson": {
+      "pt": "Estou em duas mentes sobre as mudanças climáticas. Mas não como Hanson"
     },
     "Bill passed to tackle antisocial road users": {
       "pt": "Projeto de lei aprovado para combater usuários anti-sociais da estrada"
@@ -1380,20 +1430,20 @@
     "Corded blinds to be made safer for children": {
       "pt": "Persianas com fio devem ser mais seguras para as crianças"
     },
-    "Blake Lively wants $14 million in legal fees from Justin Baldoni after 'It Ends With Us' dispute": {
-      "pt": "Blake Lively quer $ 14 milhões em honorários advocatícios de Justin Baldoni após disputa de 'It Ends With Us'"
+    "Bus driver charged over crash that killed pregnant mum": {
+      "pt": "Motorista de ônibus é cobrado por acidente que matou mãe grávida"
     },
-    "Harry Brook says it would be a 'privilege' to succeed Ben Stokes as England test cricket captain": {
-      "pt": "Harry Brook diz que seria um \"privilégio\" suceder Ben Stokes como capitão de críquete de teste da Inglaterra"
+    "Long traffic jam as multi-vehicle crash blocks major Auckland motorway": {
+      "pt": "Longo engarrafamento enquanto a colisão de vários veículos bloqueia a principal autoestrada de Auckland"
     },
-    "‘Talk, eat, dress like a Kiwi’: Parents and childhood coaches on how Anton Segner became the first German All Black": {
-      "pt": "‘Fale, coma, vista-se como um kiwi’: pais e treinadores de infância sobre como Anton Segner se tornou o primeiro All Black alemão"
+    "Supreme Court upholds state laws banning transgender girls and women from school athletic teams": {
+      "pt": "Suprema Corte mantém leis estaduais que proíbem meninas e mulheres transgênero de participarem de equipes atléticas escolares"
     },
-    "‘Cultural performers’ who overstayed their entertainment visas apply for asylum": {
-      "pt": "‘Artistas culturais’ que ultrapassaram seus vistos de entretenimento solicitam asilo"
+    "Harvard professor with polarizing alien theories is picked to lead new White House UFO council": {
+      "pt": "Professor de Harvard com teorias alienígenas polarizadoras é escolhido para liderar novo conselho de OVNIs da Casa Branca"
     },
-    "Death threat, conflict claims and an 850-home subdivision: The row engulfing Matt Doocey": {
-      "pt": "Ameaça de morte, reivindicações de conflito e uma subdivisão de 850 casas: a briga engolindo Matt Doocey"
+    "Man charged with arson after early morning Christchurch blaze": {
+      "pt": "Homem acusado de incêndio criminoso após incêndio em Christchurch no início da manhã"
     },
     "Dubai's education strategy aims to build tomorrow's leaders, Sheikh Hamdan says": {
       "pt": "A estratégia de educação de Dubai visa construir os líderes de amanhã, diz Sheikh Hamdan"
@@ -1410,17 +1460,20 @@
     "Meet the young Emiratis striving to shape the country's economic future": {
       "pt": "Conheça os jovens Emirados que se esforçam para moldar o futuro econômico do país"
     },
-    "Iraq seeks to repair Gulf ties strained by Iran war": {
-      "pt": "Iraque busca reparar laços do Golfo tensionados pela guerra do Irã"
+    "Ivory Coast v Norway: Erling Haaland grabs late winner to set up World Cup clash with Brazil": {
+      "pt": "Costa do Marfim x Noruega: Erling Haaland agarra o falecido vencedor para organizar o confronto da Copa do Mundo com o Brasil"
     },
-    "Wimbledon 2026: Emotional Iga Swiatek made to fight for second-round spot": {
-      "pt": "Wimbledon 2026: Emocional Iga Swiatek feita para lutar pela vaga na segunda rodada"
+    "US Energy Secretary says 'there's nothing wrong' with data centre critics": {
+      "pt": "Secretário de Energia dos EUA diz que \"não há nada de errado\" com os críticos do data center"
     },
-    "Gaza mediators table modified proposal for disarming Hamas in bid to revive Trump's peace plan": {
-      "pt": "Mediadores de Gaza apresentam proposta modificada para desarmar o Hamas na tentativa de reviver o plano de paz de Trump"
+    "US and Gulf partners announce more sanctions on Hezbollah-linked institutions": {
+      "pt": "Parceiros dos EUA e do Golfo anunciam mais sanções contra instituições ligadas ao Hezbollah"
     },
-    "Britain's £15bn defence reset prepares for age of robot warfare": {
-      "pt": "A redefinição de defesa de £ 15 bilhões da Grã-Bretanha se prepara para a era da guerra de robôs"
+    "Iran war latest: Iran and Qatar to discuss interim US deal and frozen funds in Doha": {
+      "pt": "Guerra do Irã mais recente: Irã e Catar discutirão acordo provisório com os EUA e congelamento de fundos em Doha"
+    },
+    "US envoys to meet Qatari mediators in Doha but no talks with Iranian officials planned": {
+      "pt": "Enviados dos EUA se encontrarão com mediadores do Catar em Doha, mas não há conversas planejadas com autoridades iranianas"
     },
     "Feierliche Ausmusterung und Angelobung in Schönbrunn": {
       "pt": "Aposentadoria formal e posse em Schönbrunn",
@@ -1471,25 +1524,25 @@
       "pt": "Formulário online – informações DO SIS, correção DO SIS E exclusão DO SIS",
       "en": "Online form – SIS information, SIS correction and SIS deletion"
     },
-    "Tote nach russischen Angriffen auf Saporischschja": {
-      "pt": "Mortos após ataques russos a Zaporizhzhia",
-      "en": "Dead after Russian attacks on Zaporizhzhia"
+    "14 Kinder bei Dacheinsturz in Pakistan getötet": {
+      "pt": "14 crianças mortas em desabamento de telhado no Paquistão",
+      "en": "14 children killed in roof collapse in Pakistan"
     },
-    "Tausende bei Protesten gegen Migranten": {
-      "pt": "Milhares protestam contra migrantes",
-      "en": "Thousands protesting against migrants"
+    "Netanjahu befiehlt Zerstörung von Hisbollah-Infrastruktur": {
+      "pt": "Netanyahu ordena destruição da infraestrutura do Hezbollah",
+      "en": "Netanyahu orders destruction of Hezbollah infrastructure"
     },
-    "Hochner-Preis für ORF-Journalistin Ertl": {
-      "pt": "Prêmio Hochner para jornalista da ORF Ertl",
-      "en": "Hochner Prize for ORF journalist Ertl"
+    "Wöginger kandidiert wieder als ÖAAB-Obmann": {
+      "pt": "Wöginger está correndo novamente como ÖAAB-Obmann",
+      "en": "Wöginger is running again as ÖAAB-Obmann"
     },
-    "Uche Yara wird neue Live-Leadgitarristin bei Bilderbuch": {
-      "pt": "Uche Yara se torna nova guitarrista ao vivo no Bilderbuch",
-      "en": "Uche Yara becomes new live lead guitarist at Bilderbuch"
+    "Erfolg und Grenzen für Trump": {
+      "pt": "Sucesso e limites para Trump",
+      "en": "Success and limits for Trump"
     },
-    "Euroclear klagt russische Zentralbank in Belgien": {
-      "pt": "Euroclear processa banco central russo na Bélgica",
-      "en": "Euroclear sues Russian central bank in Belgium"
+    "Venezuela: Dreijähriger sechs Tage nach Beben gerettet": {
+      "pt": "Venezuela: Menina de três anos é resgatada seis dias após terremoto",
+      "en": "Venezuela: Three-year-old rescued six days after quake"
     },
     "Prozess gegen Strache: Kein Zeuge bestätigt Beschlüsse zur Lebensversicherung": {
       "pt": "Julgamento contra Strache: Nenhuma testemunha confirma decisões sobre seguro de vida",
@@ -1503,28 +1556,19 @@
       "pt": "\"Heat Panic\" e \"Climate Communism\": como a extrema direita está distorcendo a crise climática",
       "en": "\"Heat Panic\" and \"Climate Communism\": How the far right is distorting the climate crisis"
     },
-    "Warum internationale Konflikte auch aus dem Burgenland befriedet werden": {
-      "pt": "Por que os conflitos internacionais também são pacificados a partir de Burgenland",
-      "en": "Why international conflicts are also pacified from Burgenland"
-    },
     "Mehrheit der Spitzenverdiener im Nationalrat kommt aus dem FPÖ-Klub": {
       "pt": "A maioria dos principais ganhadores do Conselho Nacional vem do clube FPÖ",
       "en": "The majority of the top earners in the National Council come from the FPÖ club"
     },
-    "Brussels court sides with Uber Eats over courier status": {
-      "pt": "O tribunal de Bruxelas apoia o estatuto de estafeta do Uber Eats"
+    "Warum internationale Konflikte auch aus dem Burgenland befriedet werden": {
+      "pt": "Por que os conflitos internacionais também são pacificados a partir de Burgenland",
+      "en": "Why international conflicts are also pacified from Burgenland"
     },
-    "Tap water consumption peaks to highest level in five years": {
-      "pt": "Consumo de água da torneira atinge o nível mais alto em cinco anos"
+    "Ixelle’s iconic Delhaize Molière building to finally get new lease of life": {
+      "pt": "O icônico edifício Delhaize Molière de Ixelle para finalmente ter uma nova vida"
     },
-    "Brussels shuts both tourist offices amid budget cuts": {
-      "pt": "Bruxelas fecha ambos os escritórios de turismo em meio a cortes orçamentários"
-    },
-    "Long heat waves five times more frequent than in the 1980s, Flemish study finds": {
-      "pt": "Ondas de calor longas cinco vezes mais frequentes do que na década de 1980, segundo estudo flamengo"
-    },
-    "Flämische Universitäten erhöhen Studiengebühren für Studierende aus Nicht-EU-Staaten": {
-      "pt": "Flämische Universitäten erhöhen Studiengebühren für Studierende aus Nicht-EU-Staaten"
+    "Two rare works join the Magritte Museum, shining a light on a lesser-known aspect of the Surrealist’s early career": {
+      "pt": "Duas obras raras se juntam ao Museu Magritte, iluminando um aspecto menos conhecido do início da carreira do surrealista"
     },
     "Expat Q&A: Integration programme in Brussels: what are your obligations?": {
       "pt": "Perguntas e respostas para expatriados: Programa de integração em Bruxelas: quais são as suas obrigações?"
@@ -1535,51 +1579,45 @@
     "Vouchers, maternity leave and parcel costs: What changes on 1 July": {
       "pt": "Vouchers, licença de maternidade e custos de encomendas: o que muda em 1 de julho"
     },
-    "Tomorrowland and Formula 1 Belgian Grand Prix unite to launch exclusive summer travel experience": {
-      "pt": "O Grande Prêmio da Bélgica do Tomorrowland e da Fórmula 1 se unem para lançar uma experiência exclusiva de viagem de verão"
+    "Wie is Vadim Ermolaev, de oligarch uit Oekraïne die waarschijnlijk doelwit was van aanslag in Monaco?": {
+      "pt": "Quem é Vadim Ermolaev, o oligarca da Ucrânia que provavelmente foi alvo de um ataque em Mônaco?",
+      "en": "Who is Vadim Ermolaev, the oligarch from Ukraine who was probably targeted by attack in Monaco?"
     },
-    "Brussels reinforces public transport for upcoming concerts at King Baudouin Stadium": {
-      "pt": "Bruxelas reforça transportes públicos para os próximos concertos no Estádio King Baudouin"
+    "Filip Dewinter over arrestatie Aimen Horch: \"Risico's van het vak, hang dan niet slachtoffer uit\"": {
+      "pt": "Filip Dewinter sobre a prisão de Aimen Horch: \"Riscos da profissão, não seja uma vítima\"",
+      "en": "Filip Dewinter on the arrest of Aimen Horch: \"Risks of the profession, do not be a victim\""
     },
-    "Kortrijkse drugsverdachte vrijgelaten omdat gevangenentransport misliep, parket in beroep": {
-      "pt": "Suspeito de drogas de Kortrijk libertado porque o transporte de prisioneiros deu errado, apelações do promotor",
-      "en": "Kortrijk drug suspect released because prisoner transport went wrong, prosecutor appeals"
+    "Frankrijk maakt zich op voor nieuwe hittegolf vanaf dit weekend": {
+      "pt": "França se prepara para nova onda de calor a partir deste fim de semana",
+      "en": "France gears up for new heatwave starting this weekend"
     },
-    "\"Ik zorg zelf wel voor de sfeer\": Carmela staat met smoutebollen en frieten als enige kraam op wijkkermis in Turnhout": {
-      "pt": "“Eu mesmo vou cuidar da atmosfera”: Carmela é a única barraca na feira distrital de Turnhout com smoutbollen e batatas fritas",
-      "en": "\"I'll take care of the atmosphere myself\": Carmela is the only stall at the district fair in Turnhout with smoutbollen and fries"
+    "Maximaal 5 nachtwinkels in het centrum en op 300 meter van elkaar: Zottegem scherpt reglement aan": {
+      "pt": "Um máximo de 5 lojas noturnas no centro e a 300 metros de distância: Zottegem reforça os regulamentos",
+      "en": "A maximum of 5 night shops in the centre and 300 metres apart: Zottegem tightens regulations"
     },
-    "Twintigers uit Leuven krijgen 4 jaar alcoholverbod: hoe controleert justitie dat, en is het nuttig?": {
-      "pt": "Vinte e poucos anos de Leuven recebem 4 anos de proibição do álcool: como o judiciário controla isso e é útil?",
-      "en": "Twentysomethings from Leuven get 4 years of alcohol prohibition: how does the judiciary control that, and is it useful?"
+    "Fietsster van 71 jaar levensgevaarlijk gewond bij ongeval in Herent": {
+      "pt": "Ciclista de 71 anos gravemente ferido em acidente em Herent",
+      "en": "71-year-old cyclist dangerously injured in accident in Herent"
     },
-    "Amerikaanse Hooggerechtshof weigert geboorterecht in te perken, Trump reageert strijdlustig": {
-      "pt": "Suprema Corte dos EUA se recusa a restringir o direito de primogenitura, Trump responde combativamente",
-      "en": "US Supreme Court refuses to curtail birthright, Trump responds combatively"
+    "Coupe du monde 2026: les Bleus vont-ils assumer leur statut? Suivez France - Suède (DIRECT 23H)": {
+      "pt": "Copa do Mundo de 2026: os Blues assumirão seu status? Siga França - Suécia (DIRETO ÀS 23H)",
+      "en": "2026 World Cup: will the Blues assume their status? Follow France - Sweden (DIRECT 11PM)"
     },
-    "Tank gratis water voor je tuin in Wilsele: \"Zonde om opgepompt grondwater te laten wegvloeien\"": {
-      "pt": "Tanque de água gratuita para o seu jardim em Wilsele: \"Sin to drain pumped groundwater\"",
-      "en": "Tank free water for your garden in Wilsele: \"Sin to drain pumped groundwater\""
+    "Plusieurs polémiques et un parcours atypique... Qui est ce \"Mathématicien\" qui dirigera la rencontre des Diables face au Sénégal?": {
+      "pt": "Várias controvérsias e uma jornada atípica… Quem é esse “Matemático” que vai liderar o encontro dos Demônios contra o Senegal?",
+      "en": "Several controversies and an atypical journey... Who is this \"Mathematician\" who will lead the meeting of the Devils against Senegal?"
     },
-    "Wimbledon : Bergs et Mertens se qualifient pour le deuxième tour, Collignon éliminé": {
-      "pt": "Wimbledon: Bergs e Mertens se qualificam para a segunda rodada, Collignon eliminado",
-      "en": "Wimbledon: Bergs and Mertens qualify for the second round, Collignon eliminated"
+    "Wall Street: le Nasdaq conclut son meilleur trimestre depuis le Covid-19, à +21%": {
+      "pt": "Wall Street: Nasdaq fecha seu melhor trimestre desde a Covid-19, com +21%",
+      "en": "Wall Street: Nasdaq closes its best quarter since Covid-19, at +21%"
     },
-    "Wimbledon: du lourd pour Mertens au 1er tour au contraire de Vandewinkel, Serena Williams connait son adversaire pour son retour": {
-      "pt": "Wimbledon: pesado para Mertens na 1ª rodada ao contrário de Vandewinkel, Serena Williams conhece seu oponente pelo seu retorno",
-      "en": "Wimbledon: heavy for Mertens in the 1st round unlike Vandewinkel, Serena Williams knows her opponent for his return"
+    "Que s'est-il passé lors d'un vol Varsovie - Tel-Aviv ce mercredi? L'Airbus intercepté et contraint d'atterrir en urgence": {
+      "pt": "O que aconteceu em um voo de Varsóvia para Tel Aviv na quarta-feira? Airbus interceptado e forçado a pousar em emergência",
+      "en": "What happened on a flight from Warsaw to Tel Aviv on Wednesday? The Airbus intercepted and forced to land in emergency"
     },
-    "”Certains témoins ont manifestement été bridés…” : une députée démissionne de sa fonction au sein de la commission sur le Foyer anderlechtois": {
-      "pt": "\"Algumas testemunhas foram obviamente contidas...\": uma deputada renuncia ao seu cargo na comissão do Anderlecht Home",
-      "en": "\"Some witnesses have obviously been restrained...\": a deputy resigns from her position on the commission on the Anderlecht Home"
-    },
-    "Le numéro 1733 quasi inaccessible durant le week-end de canicule : “On a sacrifié l’aide médicale non urgente, c’est honteux”": {
-      "pt": "Número 1733 quase inacessível durante o fim de semana da onda de calor: \"Sacrificamos ajuda médica não urgente, é vergonhoso\"",
-      "en": "Number 1733 almost inaccessible during the heatwave weekend: \"We sacrificed non-urgent medical aid, it's shameful\""
-    },
-    "Pourquoi les résultats du CEB 2026 sont-ils les plus bas de ces dix dernières années?": {
-      "pt": "Por que os resultados do CEB 2026 são os mais baixos dos últimos dez anos?",
-      "en": "Why are the results of the CEB 2026 the lowest in the last ten years?"
+    "La SNCB préfère sévir que servir": {
+      "pt": "A SNCB prefere reprimir em vez de servir",
+      "en": "SNCB prefers to crack down rather than serve"
     },
     "Pacte européen sur l’asile et la migration : nouvelles règles à partir du 12 juin 2026": {
       "pt": "Pacto Europeu sobre Asilo e Migração: novas regras a partir de 12 de junho de 2026",
@@ -1589,25 +1627,25 @@
       "pt": "Helpdesk Advogados aberto entre o Natal e o Ano Novo",
       "en": "Lawyers Helpdesk open between Christmas and New Year"
     },
-    "Очаква се селекционерът на Нидерландия Роналд Куман да напусне след ранното отпадане от Световното първенство": {
-      "pt": "Espera-se que o técnico da Holanda, Ronald Koeman, saia após a saída antecipada da Copa do Mundo",
-      "en": "Netherlands coach Ronald Koeman is expected to leave after the early exit from the World Cup"
+    "След заседание на Изпълнителния комитет на ВМРО-ДПМНЕ Християн Мицкоски обяви промените в правителството на страната": {
+      "pt": "Após uma reunião do Comitê Executivo do VMRO-DPMNE, Hristijan Mickoski anunciou as mudanças no governo do país",
+      "en": "After a meeting of the Executive Committee of VMRO-DPMNE, Hristijan Mickoski announced the changes in the country's government"
     },
-    "Европейските борси затвориха предимно с повишения на индексите в последната за юни търговска сесия": {
-      "pt": "Bolsas europeias fecharam principalmente com índices subindo no último pregão de junho",
-      "en": "European exchanges closed mostly with indexes rising in the last trading session for June"
+    "Хакан Фидан обяви след среща с тримата еврокомисари в Анкара, че очаква отношенията между Турция и ЕС да почиват върху обективни критерии": {
+      "pt": "Hakan Fidan anunciou após uma reunião com os três comissários da UE em Ancara que espera que as relações entre a Turquia e a UE se baseiem em critérios objetivos",
+      "en": "Hakan Fidan announced after a meeting with the three EU commissioners in Ankara that he expects relations between Turkey and the EU to be based on objective criteria"
     },
-    "Шестима са пострадали при инцидент с надуваемо водно съоръжение на нерегистрирана водна база край Ахелой, съобщиха от Министерството на транспорта": {
-      "pt": "Seis pessoas ficaram feridas em um acidente com uma instalação de água inflável em uma base de água não registrada perto de Aheloy, anunciou o Ministério dos Transportes",
-      "en": "Six people were injured in an accident with an inflatable water facility on an unregistered water base near Aheloy, the Ministry of Transport announced"
+    "Рокът и класиката се срещнаха в концерта „Сигнал Symphonic“ в Плевен": {
+      "pt": "Rock e música clássica se conheceram no concerto Symphonic Signal em Pleven",
+      "en": "Rock and classical met at the Symphonic Signal concert in Pleven"
     },
-    "Билетите за домакинския мач на ЦСКА срещу Дери Сити ще са в продажба от утре": {
-      "pt": "Os ingressos para o jogo em casa do CSKA contra o Derry City estarão à venda a partir de amanhã",
-      "en": "Tickets for CSKA's home game against Derry City will be on sale starting tomorrow"
+    "Мицкоски: Няма да позволя конституцията да бъде унижавана и омаловажавана, без ясна гаранция, сигурно и предвидимо бъдеще за гражданите": {
+      "pt": "Mickoski: Não vou permitir que a constituição seja humilhada e menosprezada, sem uma garantia clara, um futuro seguro e previsível para os cidadãos",
+      "en": "Mickoski: I will not allow the constitution to be humiliated and belittled, without a clear guarantee, a secure and predictable future for citizens"
     },
-    "Управителният съвет на Българска федерация по баскетбол прие нова система за провеждане на Sesame НБЛ за 2026/2027": {
-      "pt": "O Conselho de Administração da Federação Búlgara de Basquete adotou um novo sistema para a realização do Sesame NBL para 2026/2027",
-      "en": "The Management Board of the Bulgarian Basketball Federation adopted a new system for holding Sesame NBL for 2026/2027"
+    "Общинският съвет в Банско одобри подписване на меморандум за сътрудничество, както и подпомагане за сдружения от общината": {
+      "pt": "A Câmara Municipal de Bansko aprovou a assinatura de um memorando de cooperação, bem como o apoio a associações do município",
+      "en": "The Municipal Council in Bansko approved the signing of a memorandum of cooperation, as well as support for associations from the municipality"
     },
     "Seven illegal immigrants arrested in Nicosia raid": {
       "pt": "Sete imigrantes ilegais presos em ataque a Nicósia"
@@ -1624,26 +1662,29 @@
     "Human Rights Watch urges Fifa to push for ‘ICE Truce’ at World Cup": {
       "pt": "Human Rights Watch insta Fifa a pressionar por ‘trégua ICE’ na Copa do Mundo"
     },
-    "Cyprus Green Line crossings up last year, European Commission says": {
-      "pt": "Cruzamentos da Linha Verde do Chipre no ano passado, diz a Comissão Europeia"
+    "US Congress hears renewed calls for tougher stance on Turkey over Cyprus": {
+      "pt": "Congresso dos EUA ouve pedidos renovados por posição mais dura sobre a Turquia em relação ao Chipre"
     },
-    "Unclear if Board of Peace meeting went ahead in Limassol": {
-      "pt": "Não está claro se a reunião do Conselho de Paz foi realizada em Limassol"
+    "“The Greeks of Cyprus cannot be turned into a minority in their own land”": {
+      "pt": "\"Os gregos de Chipre não podem ser transformados em minoria em sua própria terra\""
     },
-    "France rejects Turkish criticism of Cyprus defence agreement": {
-      "pt": "França rejeita críticas turcas ao acordo de defesa de Chipre"
+    "German experts to examine locked car system in children death investigation": {
+      "pt": "Especialistas alemães examinarão sistema de carro trancado em investigação de morte de crianças"
     },
-    "Israel-bound flight seeks Cyprus landing after hijack alert error": {
-      "pt": "Voo com destino a Israel busca pouso em Chipre após erro de alerta de sequestro"
+    "Protestors lambast planned Board of Peace meeting in Cyprus": {
+      "pt": "Manifestantes criticam reunião planejada do Conselho de Paz em Chipre"
     },
-    "Von der Leyen, Metsola praise Cyprus’ EU presidency": {
-      "pt": "Von der Leyen e Metsola elogiam a presidência cipriota da UE"
+    "MPs warn water crisis threatens future of farming": {
+      "pt": "Deputados alertam que crise hídrica ameaça futuro da agricultura"
     },
-    "Bill seeks to crack down on greenwashing": {
-      "pt": "Projeto de lei busca reprimir o greenwashing"
+    "Serena returns to Wimbledon after four-year absence": {
+      "pt": "Serena retorna a Wimbledon após quatro anos de ausência"
     },
-    "This Limassol gallery marks season end with closing party": {
-      "pt": "Esta galeria de Limassol marca o final da temporada com a festa de encerramento"
+    "Haaland fires Norway into World Cup last 16 with dramatic late winner": {
+      "pt": "Haaland demite a Noruega nas oitavas de final da Copa do Mundo com dramático vencedor tardio"
+    },
+    "Hundreds of thousands of Lebanese head home as fighting eases": {
+      "pt": "Centenas de milhares de libaneses voltam para casa à medida que os combates diminuem"
     },
     "Vrednovanje propisa kao instrument politike boljih propisa": {
       "pt": "Avaliação da regulamentação como instrumento de uma política de melhor regulamentação",
@@ -1665,45 +1706,45 @@
       "pt": "Relatório Anual de Implementação da Consulta Pública nos Procedimentos de Adoção de Leis e Outros Regulamentos para 2025",
       "en": "Annual Report on the Implementation of Public Consultation in the Procedures for the Adoption of Laws and Other Regulations for 2025"
     },
-    "Nevrijeme stiglo u dio zemlje, udar groma izazvao požar na vrhu Čiova": {
-      "pt": "A tempestade chegou a uma parte do país, um raio causou um incêndio no topo de Čiovo",
-      "en": "The storm arrived in a part of the country, a lightning strike caused a fire at the top of Čiovo"
+    "Grmljavinsko nevrijeme izazvalo požare na Čiovu i Pelješcu": {
+      "pt": "Tempestades causaram incêndios em Čiovo e Pelješac",
+      "en": "Thunderstorms caused fires on Čiovo and Pelješac"
     },
-    "Eskalirao sukob predsjednika i premijera, nižu se reakcije": {
-      "pt": "Conflito entre presidente e primeiro-ministro aumentou, reações diminuíram",
-      "en": "Conflict between president and prime minister escalated, reactions lowered"
+    "OECD postavlja nove standarde: Što to znači za hrvatsko zdravstvo?": {
+      "pt": "A OCDE estabelece novos padrões: o que isso significa para os cuidados de saúde croatas?",
+      "en": "OECD sets new standards: What does this mean for Croatian health care?"
     },
-    "Milanović pozvao Plenkovića na hitan sastanak; Premijer: Neka zove Vučića": {
-      "pt": "Milanovic convida Plenkovic para uma reunião urgente; PM: Deixe-o ligar para Vucic",
-      "en": "Milanovic invites Plenkovic to an urgent meeting; PM: Let him call Vucic"
+    "Nevrijeme stiglo u dio zemlje, temperatura pala i više od 10 °C": {
+      "pt": "A tempestade chegou em uma parte do país, a temperatura caiu e mais de 10°C",
+      "en": "The storm arrived in a part of the country, the temperature dropped and more than 10° C"
     },
     "Završena sanacije otpada u Brezju, uklonjene 120.802 bale otpada": {
       "pt": "Remediação de resíduos concluída em Brezje, 120.802 fardos de resíduos removidos",
       "en": "Waste remediation completed in Brezje, 120,802 bales of waste removed"
     },
-    "Vlada predlaže Saboru da ne prihvati istražno povjerenstvo oko HZZO-a i Medikola": {
-      "pt": "O Governo propõe ao Parlamento que não aceite a Comissão de Inquérito sobre o HZZO e a Medicol",
-      "en": "The Government proposes to the Parliament not to accept the Commission of Inquiry on the HZZO and Medicol"
+    "U Hrvatsku na liječenje stigla nova skupina ukrajinskih ranjenika": {
+      "pt": "Novo grupo de feridos ucranianos chega à Croácia para tratamento",
+      "en": "New group of Ukrainian wounded arrives in Croatia for treatment"
     },
-    "VIDEO Velik požar na Čiovu, vatra se približila kućama": {
-      "pt": "VÍDEO Grande incêndio em Ciovo, o fogo se aproximou das casas",
-      "en": "VIDEO Great fire on Ciovo, fire approached houses"
+    "Ovo su danas bili najtopliji gradovi u Hrvatskoj": {
+      "pt": "Estas foram as cidades mais quentes da Croácia hoje",
+      "en": "These were the hottest cities in Croatia today"
     },
-    "Srušeni rekordi u tri hrvatska grada. Oluja u Dalmaciji, pala tuča, izbila tri požara": {
-      "pt": "Recordes quebrados em três cidades croatas. Tempestade na Dalmácia, queda de granizo, três incêndios",
-      "en": "Records broken in three Croatian cities. Storm in Dalmatia, hail falls, three fires break out"
+    "Teologinja: Papa Franjo je učinio nezamislivo, postavio žene na visok položaj u Crkvi": {
+      "pt": "Teólogo: O Papa Francisco fez o impensável, nomeou mulheres para uma alta posição na Igreja",
+      "en": "Theologian: Pope Francis did the unthinkable, appointed women to a high position in the Church"
     },
-    "U Zagrebu po vrućini vozio vlak bez klimatizacije. HŽ: Nemamo ih dovoljno": {
-      "pt": "Em Zagreb, havia um trem sem ar condicionado no calor. HŽ: Não temos o suficiente deles",
-      "en": "In Zagreb, there was a train with no air conditioning in the heat. HŽ: We don't have enough of them"
+    "Rekordi u tri grada, oluja u Dalmaciji. Meteorologinja: Prijeti razorno nevrijeme": {
+      "pt": "Registros em três cidades, uma tempestade na Dalmácia. Meteorologista: Ameaças climáticas destrutivas",
+      "en": "Records in three cities, a storm in Dalmatia. Meteorologist: Destructive weather threatens"
     },
-    "Bulj objavio sliku tuče kod Sinja": {
-      "pt": "Bulj publicou uma foto de um granizo perto de Sinj",
-      "en": "Bulj published a picture of a hail near Sinj"
+    "Munje izazvale niz požara u Dalmaciji. Obranjene kuće na Čiovu, gori kod Orebića": {
+      "pt": "Relâmpagos causaram uma série de incêndios na Dalmácia. Casas defendidas em Ciovo, perto de Orebic",
+      "en": "Lightning caused a series of fires in Dalmatia. Defended houses on Ciovo, near Orebic"
     },
-    "Europa se klanja književnici Slavenki, a (službena) Hrvatska teroristici Julienne": {
-      "pt": "A Europa se curva ao escritor Slavenka, e (oficial) a Croácia se curva à terrorista Julienne",
-      "en": "Europe bows to the writer Slavenka, and (official) Croatia bows to the terrorist Julienne"
+    "VIDEO Nova skupina ukrajinskih ranjenika stigla na liječenje u Hrvatsku": {
+      "pt": "VÍDEO Um novo grupo de feridos ucranianos chegou para tratamento na Croácia",
+      "en": "VIDEO A new group of Ukrainian wounded has arrived for treatment in Croatia"
     },
     "Phishingová kampaň Ústredného portálu verejnej správy": {
       "pt": "Campanha de phishing no portal do governo central",
@@ -1745,25 +1786,25 @@
       "pt": "Takač pediu aos V4 que atuem juntos na reforma da política agrária",
       "en": "Takač called on the V4 to act together in the reform of agrarian policy"
     },
-    "Newsfilter: Nitre pre sucho hrozí krízový stav, ministra Takáča klimatická kríza prekvapila": {
-      "pt": "Filtro de notícias: Nitra corre o risco de uma crise devido à seca, o ministro Takáč foi surpreendido pela crise climática",
-      "en": "Newsfilter: Nitra is at risk of a crisis due to drought, Minister Takáč was surprised by the climate crisis"
+    "Mordor alebo Gondor? Aké je miesto Slovenska v Európe?": {
+      "pt": "Mordor ou Gondor? Qual é o lugar da Eslováquia na Europa?",
+      "en": "Mordor or Gondor? What is Slovakia's place in Europe?"
+    },
+    "Nepozvali ich na žiadny festival, tak si založili vlastný. Vrbovské vetry oslavujú 20 rokov": {
+      "pt": "Eles não foram convidados para nenhum festival, então montaram o seu próprio. Wiatria de Vrbovské comemora 20 anos",
+      "en": "They were not invited to any festival, so they set up their own. Vrbovské wiatry celebrates 20 years"
+    },
+    "Ostrý právnik Krátký prichádza o svoju veľkú agroskupinu. Firma, cez ktorú v nej drží podiel, padla do konkurzu": {
+      "pt": "O advogado perspicaz Krátký perde seu grande grupo agrícola. A empresa através da qual detém uma ação foi à falência",
+      "en": "The sharp lawyer Krátký loses his large agro-group. The company through which it holds a share in it has gone bankrupt"
+    },
+    "Newsfilter: Minister Takáč je stelesnením nepripravenosti Slovenska na iný svet": {
+      "pt": "Newsfilter: Ministro Takáč é a personificação do despreparo da Eslováquia para outro mundo",
+      "en": "Newsfilter: Minister Takáč is the embodiment of Slovakia's unpreparedness for another world"
     },
     "Začiatok politického leta: PS chystá koalícii prekvapenie z Dubaja, Matovič pozýva na kvíz o Ficovi": {
       "pt": "O início do verão político: PS prepara uma surpresa para a coligação do Dubai, Matovič convida-o para um questionário sobre a fico",
       "en": "The beginning of the political summer: PS prepares a surprise for the coalition from Dubai, Matovič invites you to a quiz about Fico"
-    },
-    "Zlomené srdce naozaj bolí a mozog si od lásky musí odvyknúť ako od drogy, hovorí neurobiologička Fričová": {
-      "pt": "Um coração partido realmente dói, e o cérebro tem que se afastar do amor como uma droga, diz a neurocientista Fričová",
-      "en": "A broken heart really hurts, and the brain has to wean itself off love like a drug, says neuroscientist Fričová"
-    },
-    "Thomas Jefferson písal deklaráciu v časovom strese, myšlienku na nezávislosť kolonisti dlho odmietali, vraví historik Zajac": {
-      "pt": "Thomas Jefferson escreveu a declaração sob pressão de tempo, a ideia de independência tem sido rejeitada pelos colonos, diz o historiador Zajac",
-      "en": "Thomas Jefferson wrote the declaration under time pressure, the idea of independence has long been rejected by colonists, says historian Zajac"
-    },
-    "Nefungujú bankomaty a benzín už dochádza aj na čiernom trhu. Ako ukrajinské útoky menia život na Kryme": {
-      "pt": "Os caixas eletrônicos não funcionam e a gasolina já está acabando no mercado negro. Como os ataques ucranianos estão mudando a vida na Crimeia",
-      "en": "ATMs do not work and gasoline is already running out on the black market. How Ukrainian Attacks Are Changing Life in Crimea"
     },
     "V Novom Targu sa diskutovalo o ekologickej bezpečnosti na poľsko-slovenskom pohraničí": {
       "pt": "Em Nowy Targ, a segurança ecológica na fronteira polaco-eslovaca foi discutida",
@@ -1800,6 +1841,10 @@
     "Prime Minister Janez Janša for Planet TV: The politics of exclusion should not become the new normal": {
       "pt": "Primeiro-ministro Janez Janša para Planet TV: A política de exclusão não deve se tornar o novo normal"
     },
+    "Nova direktorica DSO-ja Rakičan je Ines Magdič": {
+      "pt": "Ines Magdič é a nova diretora da DSO Rakičan",
+      "en": "Ines Magdič is the new director of DSO Rakičan"
+    },
     "Nomago prevzema upravljanje avtobusne postaje Ljubljana. Kmalu plačilo s karticami.": {
       "pt": "Nomago assume a gestão da rodoviária de Liubliana. Pagamento com cartão em breve.",
       "en": "Nomago takes over the management of the Ljubljana bus station. Card payment coming soon."
@@ -1816,9 +1861,9 @@
       "pt": "Uma nova fábrica da Yaskawa no valor de 32 milhões de euros foi inaugurada em Kočevje",
       "en": "A new Yaskawa plant worth EUR 32 million opened in Kočevje"
     },
-    "Dejan Kink na čelo novomeške policijske uprave": {
-      "pt": "Dejan Kink lidera o Departamento de Polícia de Novo mesto",
-      "en": "Dejan Kink heads the Novo mesto Police Department"
+    "Ines Magdič imenovana za novo direktorico DSO-ja Rakičan": {
+      "pt": "Ines Magdič nomeada como nova diretora da DSO Rakičan",
+      "en": "Ines Magdič appointed as new director of DSO Rakičan"
     },
     "Neporaženi Mehičani proti neugodnim Ekvadorcem": {
       "pt": "Mexicanos invictos vs equatorianos desfavoráveis",
@@ -1835,10 +1880,6 @@
     "Slovenski košarkarji kljub številnim odsotnostim po prvo mesto v skupini": {
       "pt": "Apesar de inúmeras ausências, os jogadores de basquete eslovenos estão em primeiro lugar no grupo",
       "en": "Despite numerous absences, Slovenian basketball players are ranked first in the group"
-    },
-    "LeBron James bo zapustil Lakerse": {
-      "pt": "LeBron James deixa o Lakers",
-      "en": "LeBron James to leave Lakers"
     },
     "Veiko Randlaine: Nest drones and smarter emergency response": {
       "pt": "Veiko Randlaine: Ninho de drones e resposta de emergência mais inteligente"
@@ -1885,25 +1926,25 @@
     "The Riigikogu passed an Act": {
       "pt": "O Riigikogu aprovou uma Lei"
     },
-    "VAATA OTSE | Kas Norra pääseb esimese Euroopa koondisena 16 hulka?": {
-      "pt": "ASSISTA AO VIVO | A Noruega será a primeira equipe europeia a chegar ao 16º lugar?",
-      "en": "WATCH LIVE | Will Norway be the first European team to make it to the 16th place?"
+    "Bigbank/Kalev lisas koosseisu mullu Coolbetis mänginud ääre": {
+      "pt": "Bigbank/Kalev adicionou a vantagem que jogou na Coolbet no ano passado",
+      "en": "Bigbank/Kalev added the edge that played in Coolbet last year"
     },
-    "Ülemkohus lükkas tagasi Trumpi plaani piirata sünnijärgset kodakondsust": {
-      "pt": "A Suprema Corte rejeitou o plano de Trump de restringir a cidadania por nascimento",
-      "en": "The Supreme Court rejected Trump's plan to restrict citizenship by birth"
+    "ETV spordisaade, 30. juuni": {
+      "pt": "Show esportivo da ETV, 30 de junho",
+      "en": "ETV sports show, 30 June"
     },
-    "LeBron jätkab karjääri, aga mitte Lakersis": {
-      "pt": "LeBron continuará sua carreira, mas não nos Lakers",
-      "en": "LeBron will continue his career, but not in the Lakers"
+    "Venemaa sulgeb ajutiselt raudteepiiripunktid Eesti, Läti ja Soomega": {
+      "pt": "Rússia fecha temporariamente fronteiras ferroviárias com Estônia, Letônia e Finlândia",
+      "en": "Russia temporarily closes railway border crossings with Estonia, Latvia and Finland"
     },
-    "Aktuaalne kaamera kell 19:00": {
-      "pt": "Câmera real às 19:00",
-      "en": "Actual camera at 19:00"
+    "Haalandi värav viis Norra 16 hulka": {
+      "pt": "O portão de Haaland elevou a Noruega para 16",
+      "en": "Haaland's gate brought Norway to 16"
     },
-    "Fraktsioonitud saadikud esitavad presidendi valimistele ka oma kandidaadid": {
-      "pt": "Os eurodeputados não fracionados também apresentam os seus candidatos para as eleições presidenciais",
-      "en": "Unfractionated MEPs also put forward their candidates for the presidential elections"
+    "Uuring: praegu pole majanduslikult mõtet Toolses fosforiiti kaevandada": {
+      "pt": "Estudo: Atualmente, não há razão econômica para minerar fosforito no Toolse",
+      "en": "Study: There is currently no economic reason to mine phosphorite in Toolse"
     },
     "The European Migration Network's Annual Report 2025: immigration to Finland declined, citizenship granted to a record number of applicants": {
       "pt": "Relatório Anual 2025 da Rede Europeia das Migrações: a imigração para a Finlândia diminuiu, a cidadania foi concedida a um número recorde de candidatos"
@@ -2000,20 +2041,32 @@
       "pt": "Classificação como monumentos de objetos do equipamento móvel histórico da Imprensa Nacional",
       "en": "Classification as monuments of objects of the historical mobile equipment of the National Printing Office"
     },
-    "How Roman Engineer Vitruvius Still Shapes the Way We Build": {
-      "pt": "Como o engenheiro romano Vitruvius ainda molda a maneira como construímos"
+    "Ancient Obsidian Tools Reveal Hidden Trade Networks in Peru": {
+      "pt": "Ferramentas antigas de obsidiana revelam redes comerciais ocultas no Peru"
     },
-    "Athens Apartment Collapse: All Four Missing Residents Found Safe; Five Detained": {
-      "pt": "Desabamento de apartamento em Atenas: todos os quatro moradores desaparecidos foram encontrados em segurança; cinco detidos"
+    "Greece Plans E-Scooter Ban for Under-17s and Steeper Fines": {
+      "pt": "Grécia planeja proibição de patinetes elétricos para menores de 17 anos e multas mais altas"
     },
-    "Ancient Greek King Celeus and the First Divine Revelation of the Eleusinian Mysteries": {
-      "pt": "O antigo rei grego Celeus e a Primeira Revelação Divina dos Mistérios Eleusinos"
+    "Bronze Age Boat Carvings Suggest Ancient Contacts Between Iberia and Scandinavia": {
+      "pt": "Esculturas de barco da Idade do Bronze sugerem contatos antigos entre a Península Ibérica e a Escandinávia"
     },
-    "The Greek Prime Ministers Who Died Penniless, Sacrificing Everything for the State": {
-      "pt": "Os primeiros-ministros gregos que morreram sem um tostão, sacrificando tudo pelo Estado"
+    "First Dinosaur Bone Ever Collected in Antarctica Finally Identified": {
+      "pt": "Primeiro osso de dinossauro coletado na Antártida finalmente identificado"
     },
-    "July Concert Guide: Athens Braces for an Explosive Month of Live Music": {
-      "pt": "Guia de concertos de julho: Atenas se prepara para um mês explosivo de música ao vivo"
+    "Thessaloniki Wildfire Turns Deadly as Body Found in Burned Area": {
+      "pt": "Incêndio em Tessalônica se torna mortal quando corpo é encontrado em área queimada"
+    },
+    "Helyettes államtitkárt jelentett be Görög Márta igazságügyi miniszter": {
+      "pt": "Secretário de Estado Adjunto anunciou Marta Hellenic Ministra da Justiça",
+      "en": "Deputy State Secretary announced Marta Hellenic Minister of Justice"
+    },
+    "Magyar Péter nemzeti összefogást kér a hőség miatt": {
+      "pt": "Péter Magyar pede cooperação nacional devido ao calor",
+      "en": "Péter Magyar calls for national cooperation due to the heat"
+    },
+    "A megszüntetett Szuverenitásvédelmi Hivatal fotókon mutatja be, hol dolgoztak, hogy Magyar Péternek ne kelljen": {
+      "pt": "O Escritório de Proteção à Soberania abolido mostra em fotos onde eles trabalharam para que Péter Magyar não precise",
+      "en": "The abolished Office of Sovereignty Protection shows in photos where they worked so that Péter Magyar does not have to"
     },
     "444.hu: Tanúvallomások igazolhatják, hogy Hajdu Jánost Orbán Viktor instruálta telefonon az aranykonvoj elfogásakor": {
       "pt": "444.hu: Depoimentos de testemunhas podem provar que János Hajdu foi instruído por Viktor Orbán ao telefone durante a captura do comboio de ouro",
@@ -2023,17 +2076,11 @@
       "pt": "Trinta trens de paquera se renderam em calor extremo",
       "en": "Thirty Flirt trains surrendered in extreme heat"
     },
-    "Három gyanúsítottat hallgattak ki a nagykőrösi szolgálati Skoda ügyében": {
-      "pt": "Três suspeitos interrogados no caso Nagykőrös Duty Skoda",
-      "en": "Three suspects questioned in Nagykőrös duty Skoda case"
+    "Photos: Biodome urban oasis opens in Budapest": {
+      "pt": "Fotos: oásis urbano de Biodome é inaugurado em Budapeste"
     },
-    "Helsinki Bizottság: Hiányoznak a jogállami garanciák a vagyonvisszaszerzési hivatal tervéből": {
-      "pt": "Comitê de Helsinque: Faltam garantias de Estado de Direito no Escritório do Plano de Recuperação de Ativos",
-      "en": "Helsinki Committee: Rule of law guarantees missing from Office of Asset Recovery Plan"
-    },
-    "Sulyok Tamás közzétette a Polt Péternek írt levelét": {
-      "pt": "Tamás Sulyok publicou sua carta a Péter Polt",
-      "en": "Tamás Sulyok published his letter to Péter Polt"
+    "Lake Balaton heats up alarmingly – what that means for tourists, ecosystem": {
+      "pt": "O Lago Balaton aquece de forma alarmante – o que isso significa para os turistas, ecossistema"
     },
     "Hungary’s Great Plain is slowly drying out, with a Lake Balaton’s worth of water missing": {
       "pt": "A Grande Planície da Hungria está secando lentamente, faltando o equivalente a um lago Balaton de água"
@@ -2041,54 +2088,52 @@
     "Astonishing late Baroque Teleki Palace to be refurbished – photos": {
       "pt": "Palácio Teleki barroco tardio surpreendente a ser reformado – fotos"
     },
-    "Record heat to break with violent storms — but not before fresh highs: what to expext in next 24–36 hours": {
+    "Record heat to break with violent storms — but not before fresh highs: what to expect in next 24–36 hours": {
       "pt": "Calor recorde para quebrar com tempestades violentas — mas não antes de novas máximas: o que esperar nas próximas 24–36 horas"
     },
-    "Health ministry develops methodology to gauge nosocomial infections": {
-      "pt": "Ministério da Saúde desenvolve metodologia para medir infecções nosocomiais"
+    "Alsó hangon 120 milliárd forint kellene most azonnal, hogy kijavítsuk a vízrendszerünk leglepusztultabb részeit": {
+      "pt": "A conclusão é que precisamos de 120 bilhões de forints agora para consertar as partes mais degradadas do nosso sistema de água",
+      "en": "Bottom line is we need 120 billion forints right now to fix the most degraded parts of our water system"
     },
-    "Signs of a serious rift between PM Péter Magyar and Speaker Ágnes Forsthoffer – video": {
-      "pt": "Sinais de uma grave divergência entre o PM Péter Magyar e a Palestrante Ágnes Forsthoffer – vídeo"
+    "LeBron James távozik a Los Angeles Lakerstől": {
+      "pt": "LeBron James deixa Los Angeles Lakers",
+      "en": "LeBron James to leave Los Angeles Lakers"
     },
-    "Itt a térkép, amire egy emberként vár az egész ország": {
-      "pt": "Aqui está o mapa que todo o país está esperando como uma pessoa",
-      "en": "Here is the map the whole country is waiting for as one person"
+    "Gigászi, 265 centis harcsát fogtak a Tiszából": {
+      "pt": "Gigászi, bagre de 265 cm capturado no Tisza",
+      "en": "Gigászi, 265 cm catfish caught from the Tisza"
     },
-    "Kiderült, ki lesz a mentális egészségügyi ellátás fejlesztésére kijelölt miniszteri biztos": {
-      "pt": "Acontece que quem será o comissário ministerial para o desenvolvimento dos cuidados de saúde mental",
-      "en": "It turns out who will be the ministerial commissioner for the development of mental health care"
+    "Több napra Kefalóniában ragadtak a Wizz Air utasai, akiket azért nem engedtek fel a járatra, mert a személyzet egyik tagjának lejárt a munkaideje": {
+      "pt": "Os passageiros da Wizz Air ficaram presos em Kefalonia por vários dias e tiveram o embarque negado porque um membro da tripulação ficou sem tempo",
+      "en": "Wizz Air passengers were stuck in Kefalonia for several days and were denied boarding because a crew member had run out of time"
     },
-    "A paraguayiak kapusának a mezét is el kellett adnia a fia születésekor, most nemzeti hős lett belőle": {
-      "pt": "Goleiro paraguaio teve que vender sua camisa quando seu filho nasceu, agora ele é um herói nacional",
-      "en": "Paraguayan goalkeeper had to sell his jersey when his son was born, now he's a national hero"
+    "Haaland sorozatban a tizenharmadik válogatott meccsén is betalált Elefántcsontpart ellen, Norvégia továbbjutott": {
+      "pt": "Haaland marcou no 13º jogo da seleção contra a Costa do Marfim, a Noruega avançou",
+      "en": "Haaland scored in the 13th national team match against Côte d 'Ivoire, Norway advanced"
     },
-    "Mi hűsít hatékonyan 40 fokban? Hát egy jó forró tea!": {
-      "pt": "O que esfria efetivamente a 40 graus? Bem, um bom chá quente!",
-      "en": "What cools effectively at 40 degrees? Well, a good hot tea!"
+    "A társadalomkutatók arra kérik a KSH-t, hogy öntsön tiszta vizet a pohárba a buheragyanús szegénységi adatok kapcsán": {
+      "pt": "Cientistas sociais pedem ao HCSO que despeje água limpa em copos em conexão com dados de pobreza suspeitos de bolhas",
+      "en": "Social scientists ask HCSO to pour clean water into glasses in connection with bubble-suspected poverty data"
     },
-    "Elutasította a Fővárosi Törvényszék a Doktor24 kifogását": {
-      "pt": "O Tribunal Metropolitano rejeitou a objeção da Doctor24",
-      "en": "The Metropolitan Court rejected Doctor24's objection"
+    "Norvégia az első európai csapat a nyolcaddöntőben a vébén": {
+      "pt": "A Noruega é a primeira equipe europeia na semifinal da Copa do Mundo",
+      "en": "Norway are the first European team in the semi-final at the World Cup"
     },
-    "Még mindig a NER tenderbajnoka dolgozik a kórházaknak, ők újítják fel az elromló klímákat is": {
-      "pt": "Ner tender champion ainda trabalha para hospitais, também renovam climas quebrados",
-      "en": "NER tender champion still works for hospitals, they also renovate broken climates"
+    "Ukrajna 16 Gripent vett Svédországtól": {
+      "pt": "Ucrânia comprou 16 Gripens da Suécia",
+      "en": "Ukraine bought 16 Gripens from Sweden"
     },
-    "Őrsi Gergely letartóztatását meghosszabbítanák, egy fideszest viszont kiengedtek a parkbiznisz gyanúsítottjai közül": {
-      "pt": "A prisão de Gergely Őrsi seria prolongada, mas um membro do Fidesz foi libertado dos suspeitos do negócio do parque",
-      "en": "Gergely Őrsi's arrest would be extended, but a Fidesz member was released from the suspects of the park business"
+    "Nyomozni kezdett az ügyészség a lengyel Legfelsőbb Bíróság elnöke ellen": {
+      "pt": "Ministério Público investiga presidente da Suprema Corte polonesa",
+      "en": "Prosecutor's Office Investigates Polish Supreme Court President"
     },
-    "Elszámolási biztos veszi leltárba a kekvák vagyonát": {
-      "pt": "Comissário de Contabilidade faz inventário dos ativos de biscoitos",
-      "en": "Accounting Commissioner takes inventory of the assets of biscuits"
+    "Az Európai Bizottság szerint nem lesz általános schengeni vízumtilalom az oroszokkal szemben": {
+      "pt": "De acordo com a Comissão Europeia, não haverá proibição geral de vistos Schengen contra os russos",
+      "en": "According to the European Commission, there will be no general Schengen visa ban against Russians"
     },
-    "Sorra állnak le a hőség miatt a MÁV legmodernebb vonatai": {
-      "pt": "Os trens mais modernos da MÁV estão parando devido ao calor",
-      "en": "The most modern trains of MÁV are shutting down due to the heat"
-    },
-    "Magyarország nem támogatja az uniós javaslatot, amely korlátozná a katonaköteles ukrán férfiak belépését": {
-      "pt": "A Hungria não apoia a proposta da UE de restringir a entrada de homens ucranianos no serviço militar",
-      "en": "Hungary does not support the EU proposal to restrict the entry of Ukrainian men in military service"
+    "Magyar Közlöny 2026. évi 82. szám": {
+      "pt": "Boletim Húngaro nº 82 de 2026",
+      "en": "Hungarian Gazette No. 82 of 2026"
     },
     "Hivatalos Értesítő 2026. évi 28. szám": {
       "pt": "D.O.U. nº 28 de 2026",
@@ -2105,10 +2150,6 @@
     "Indokolások Tára 2026. évi 43. szám": {
       "pt": "Exposição de Motivos nº 43 de 2026",
       "en": "Explanatory Memorandum No. 43 of 2026"
-    },
-    "Magyar Közlöny 2026. évi 80. szám": {
-      "pt": "Diário Húngaro nº 80 de 2026",
-      "en": "Hungarian Gazette No. 80 of 2026"
     },
     "Since the launch of the Entry/Exit System in Latvia, a total of 163 580 entry/exit events have been registered": {
       "pt": "Desde o lançamento do Sistema de Entrada/Saída na Letônia, um total de 163 580 eventos de entrada/saída foram registrados"
@@ -2145,11 +2186,14 @@
       "pt": "Sobre os serviços sociais no município de Kekava",
       "en": "About social services in Kekava municipality"
     },
+    "Young woman drowns at popular Jēkabpils bathing spot": {
+      "pt": "Jovem se afoga no popular ponto de banho de Jēkabpils"
+    },
     "Military handover ceremony takes place on Latvia-Estonia border": {
       "pt": "Cerimônia de entrega militar ocorre na fronteira Letônia-Estônia"
     },
-    "Smoke threat from warehouse fire in Rīga suburb": {
-      "pt": "Ameaça de fumaça por incêndio em armazém no subúrbio de Riga"
+    "Fire now under control at warehouse in Rīga suburb": {
+      "pt": "Incêndio agora sob controle em armazém no subúrbio de Riga"
     },
     "Children in Latvia get salmonella after eating raw instant noodles": {
       "pt": "Crianças na Letônia recebem salmonela depois de comer macarrão instantâneo cru"
@@ -2157,28 +2201,25 @@
     "Inna from Odesa can tell you all about Rīga": {
       "pt": "Inna de Odessa pode contar tudo sobre Riga"
     },
-    "Latvian Defence Ministry to spend 58,000 euros on WWII bunker": {
-      "pt": "Ministério da Defesa da Letônia vai gastar 58 mil euros em bunker da Segunda Guerra Mundial"
+    "Pasaulio pamirštas karas virto šių dienų apokalipse: „Bombos krenta nuolat“": {
+      "pt": "A guerra esquecida do mundo se transformou no apocalipse de hoje: \"As bombas estão caindo constantemente\"",
+      "en": "The world's forgotten war has turned into the apocalypse of today: \"Bombs are falling constantly\""
     },
-    "Donaldas Trumpas smerkia „blogą“ sprendimą dėl teisės į pilietybę, ragina Kongresą imtis veiksmų": {
-      "pt": "Donald Trump condena decisão 'ruim' sobre direito à cidadania e insta o Congresso a agir",
-      "en": "Donald Trump condemns' bad 'decision on right to citizenship, urges Congress to take action"
+    "Prašoma pagalbos: Klaipėdoje ieškomas pradingęs jaunas vyras": {
+      "pt": "Ajuda solicitada: Jovem desaparecido procurado em Klaipėda",
+      "en": "Help requested: Missing young man wanted in Klaipėda"
     },
-    "Valinskas sureagavo į Sinkevičiaus lyginimą su Brazausku": {
-      "pt": "Valinskas reagiu à comparação de Sinkevičius com Brazauskas",
-      "en": "Valinskas reacted to Sinkevičius' comparison with Brazauskas"
+    "Slovakijoje užfiksuotas naujas temperatūros rekordas": {
+      "pt": "Eslováquia estabelece novo recorde de temperatura",
+      "en": "Slovakia sets new temperature record"
     },
-    "Dekonstravo Kremliaus planą: kam reikalingi karo veteranai Valstybės Dūmoje": {
-      "pt": "Desconstruiu o plano do Kremlin: por que veteranos de guerra são necessários na Duma",
-      "en": "Deconstructed the Kremlin's plan: why war veterans are needed in the State Duma"
+    "Švedijos karinės žvalgybos vadovas: Rusijos grėsmė išliks ir po Vladimiro Putino": {
+      "pt": "Chefe da Inteligência Militar Sueca: Ameaça da Rússia permanecerá após Vladimir Putin",
+      "en": "Swedish Chief of Military Intelligence: Russia's Threat Will Remain After Vladimir Putin"
     },
-    "Benjaminas Netanyahu: Izraelis Pietų Libane liks tol, kol „Hezbollah“ kelia mums grėsmę": {
-      "pt": "Benjamin Netanyahu: Israel permanecerá no sul do Líbano enquanto o Hezbollah nos ameaçar",
-      "en": "Benjamin Netanyahu: Israel will remain in southern Lebanon as long as Hezbollah threatens us"
-    },
-    "„Karalius Šiaurėje“: kas tas Andy Burnhamas, kuris gali tapti naujuoju britų premjeru?": {
-      "pt": "Rei do Norte: Quem é Andy Burnham para se tornar o próximo primeiro-ministro britânico?",
-      "en": "King of the North: Who is Andy Burnham to become the next British Prime Minister?"
+    "Vengrijoje užfiksuotas naujas temperatūros rekordas – 42 Celsijaus laipsniai": {
+      "pt": "A Hungria estabeleceu um novo recorde de temperatura de 42 graus Celsius",
+      "en": "Hungary set a new temperature record of 42 degrees Celsius"
     },
     "Change of Opening Hours": {
       "pt": "Alteração do Horário de Funcionamento"
@@ -2307,45 +2348,45 @@
       "pt": "Lançamento do álbum Danube Delta",
       "en": "Danube Delta album launch"
     },
-    "Ultimul apel pe telefonul fix tradiţional în Finlanda. Ce fac alte țări în acest timp": {
-      "pt": "Última chamada de telefone fixo tradicional na Finlândia. O que outros países estão fazendo durante esse período",
-      "en": "Last traditional landline call in Finland. What other countries are doing during this time"
+    "O mare editură germană a preluat cotidianul The Telegraph": {
+      "pt": "Uma grande editora alemã assumiu o jornal The Telegraph",
+      "en": "A large German publishing house has taken over The Telegraph newspaper"
     },
-    "Cu o întârziere de aproape cinci ani, Angela Merkel primește în sfârșit portretul oficial la Cancelarie. „Așadar acolo voi atârna”": {
-      "pt": "Com um atraso de quase cinco anos, Angela Merkel finalmente recebe o retrato oficial na Chancelaria. \"Então é aí que eu vou ficar\"",
-      "en": "With a delay of almost five years, Angela Merkel finally receives the official portrait at the Chancellery. “So that's where I'm going to hang”"
+    "Un avion care zbura de la Varşovia la Tel Aviv a fost interceptat de un MIG-29 al Bulgariei după o alertă falsă de deturnare": {
+      "pt": "Um avião que voava de Varsóvia para Tel Aviv foi interceptado por um MIG-29 búlgaro após um falso alerta de sequestro",
+      "en": "A plane flying from Warsaw to Tel Aviv was intercepted by a Bulgarian MIG-29 after a false hijacking alert"
     },
-    "Sportivele transgender sunt eliminate din competiții, potrivit unei decizii a Curții Supreme a SUA": {
-      "pt": "Atletas transexuais do sexo feminino são removidas da competição, de acordo com uma decisão da Suprema Corte dos EUA",
-      "en": "Transgender female athletes are removed from competition, according to a U.S. Supreme Court ruling"
+    "Un bloc de locuințe cu cinci etaje s-a prăbușit la Atena": {
+      "pt": "Bloco de apartamentos de cinco andares desabou em Atenas",
+      "en": "Five-story block of flats collapsed in Athens"
     },
-    "Netanyahu afirmă, din sudul Libanului, că armata sa va rămâne acolo atâta timp cât Hezbollah „amenință Israelul”": {
-      "pt": "Netanyahu diz do sul do Líbano que seu exército permanecerá lá enquanto o Hezbollah \"ameaçar Israel\"",
-      "en": "Netanyahu says from southern Lebanon that his army will remain there as long as Hezbollah “threatens Israel”"
+    "Papa Leon al XIV-lea a numit a treia femeie la conducerea unui departament de la Vatican": {
+      "pt": "O Papa Leão XIV nomeou a terceira mulher para chefiar um departamento do Vaticano",
+      "en": "Pope Leo XIV appointed the third woman to head a Vatican department"
     },
-    "Ucraina anunță că a atacat două poduri importante pentru Rusia, situate în Zaporojie şi Crimeea": {
-      "pt": "Ucrânia anuncia que atacou duas pontes importantes para a Rússia, localizadas em Zaporizhia e Crimeia",
-      "en": "Ukraine announces that it has attacked two important bridges for Russia, located in Zaporizhia and Crimea"
+    "Kaja Kallas s-a întâlnit cu Recep Erdogan înaintea summitului NATO. Ce au discutat cei doi lideri": {
+      "pt": "Kaja Kallas reuniu-se com Recep Erdogan antes da cimeira da NATO. O que os dois líderes discutiram",
+      "en": "Kaja Kallas met with Recep Erdogan ahead of the NATO summit. What the two leaders discussed"
     },
-    "Primăria Capitalei anunţă o reţea extinsă de „adăposturi climatice” în această perioadă de caniculă: Zeci de instituţii publice și 200 de farmacii, deschise trecătorilor": {
-      "pt": "A Câmara Municipal de Bucareste anuncia uma extensa rede de \"abrigos climáticos\" durante este período quente: Dezenas de instituições públicas e 200 farmácias, abertas aos transeuntes",
-      "en": "The City Hall of Bucharest announces an extensive network of \"climate shelters\" during this hot period: Dozens of public institutions and 200 pharmacies, open to passers-by"
+    "Situație mai puțin obișnuită: o nouă furtună în București, a doua în această seară. A fost emis RO-ALERT din nou. Trafic restricționat în centrul Capitalei, un acoperiș stă să cadă": {
+      "pt": "Situação menos comum: uma nova tempestade em Bucareste, a segunda esta noite. RO-ALERT foi emitido novamente. Tráfego restrito no centro da capital, um telhado está prestes a cair",
+      "en": "Less common situation: a new storm in Bucharest, the second one this evening. RO-ALERT has been issued again. Restricted traffic in the center of the capital, a roof is about to fall"
     },
-    "Furtună în București acum, mesaj RO-Alert emis de autorități. Cât ține și cât de puternică e vijelia": {
-      "pt": "Tempestade em Bucareste agora, mensagem RO-Alert emitida pelas autoridades. Quanto tempo dura e quão forte é a tempestade",
-      "en": "Storm in Bucharest now, RO-Alert message issued by the authorities. How long it lasts and how strong the storm is"
+    "Eșec major pentru Trump la Curtea Supremă a SUA, care blochează tentativa sa de a limita dreptul la cetățenie prin naștere": {
+      "pt": "Grande falha de Trump na Suprema Corte dos EUA, bloqueando sua tentativa de limitar o direito à cidadania por nascimento",
+      "en": "Major failure for Trump at the U.S. Supreme Court, blocking his attempt to limit the right to citizenship by birth"
     },
-    "Ultimul apel de telefonie fixă în Finlanda. Ziua în care s-a stins o tradiție de aproape 150 de ani": {
-      "pt": "Última chamada de telefone fixo na Finlândia. O dia em que uma tradição de quase 150 anos morreu",
-      "en": "Last landline call in Finland. The day a tradition of nearly 150 years died"
+    "PNL nu va bloca alegerile anticipate, anunță Ilie Bolojan. Ce spune despre suspendarea președintelui": {
+      "pt": "O PNL não bloqueará eleições antecipadas, anuncia Ilie Bolojan. O que diz sobre o impeachment do presidente",
+      "en": "PNL will not block early elections, announces Ilie Bolojan. What it says about impeaching the president"
     },
-    "Rezultate la Evaluarea Națională. Un profesor universitar vorbește despre trei lecții pe care le-am primit în acest an": {
-      "pt": "Resultados da Avaliação Nacional. Um professor universitário fala sobre três lições que recebi este ano",
-      "en": "Results of the National Evaluation. A university professor talks about three lessons I've received this year"
+    "Armata Română angajează aproape 7.000 de oameni. „Un record pentru ultimul deceniu”, spune ministrul Apărării": {
+      "pt": "O Exército romeno emprega quase 7.000 pessoas. \"Um recorde para a última década\", diz o ministro da Defesa",
+      "en": "The Romanian Army employs almost 7,000 people. “A record for the last decade,” says the Minister of Defense"
     },
-    "Noua declarație de avere a lui Nicușor Dan: de ce a rămas președintele cu 1,2 milioane de lei în cont": {
-      "pt": "A nova declaração de riqueza de Nicusor Dan: por que o presidente permaneceu com 1,2 milhão de Ron em sua conta",
-      "en": "Nicusor Dan's new wealth statement: why the president remained with Ron 1.2 million in his account"
+    "Alertă de deturnare a unui Airbus în Bulgaria. Un avion de vânătoare a fost trimis să intercepteze aeronava": {
+      "pt": "Alerta de sequestro da Airbus na Bulgária. Um jato de combate foi enviado para interceptar a aeronave",
+      "en": "Airbus hijacking alert in Bulgaria. A fighter jet was sent to intercept the aircraft"
     },
     "The Swedish Migration Agency introduces a new logo featuring a heraldic coat of arms": {
       "pt": "A Agência Sueca de Migração apresenta um novo logotipo com um brasão heráldico"
@@ -2371,45 +2412,45 @@
     "Swedish parliament slams brakes on bill to extend child migration detention": {
       "pt": "Parlamento sueco freia projeto de lei para estender detenção de crianças migrantes"
     },
-    "Jakt på hantverkare efter ubåtsaffären med Polen": {
-      "pt": "Caça a artesãos após o acordo de submarinos com a Polônia",
-      "en": "Hunting for craftsmen after the submarine deal with Poland"
+    "Kontrakt klart för leverans av Jas Gripen till Ukraina": {
+      "pt": "Contrato pronto para entrega do Jas Gripen à Ucrânia",
+      "en": "Contract ready for delivery of Jas Gripen to Ukraine"
     },
-    "Regeringen försvarar nya kontantlagen": {
-      "pt": "Governo defende nova lei de caixa",
-      "en": "Government defends new cash law"
+    "Här är lagarna som träder i kraft 1 juli": {
+      "pt": "Aqui estão as leis que entram em vigor em 1º de julho",
+      "en": "Here are the laws that go into effect July 1"
     },
-    "Krocktester visar livsfarliga brister i lastbilssläp": {
-      "pt": "Testes de colisão mostram deficiências fatais em reboques de caminhões",
-      "en": "Crash tests show fatal deficiencies in truck trailers"
+    "Patient i Skottland testas för ebola – uppsökte sjukhuset själv": {
+      "pt": "Paciente na Escócia testado para Ebola – ele mesmo foi ao hospital",
+      "en": "Patient in Scotland tested for Ebola – went to hospital himself"
     },
-    "Kritiken mot Sjöfartsverket efter upphandlingen: ”Får inte hända”": {
-      "pt": "Críticas à Administração Marítima Sueca após a contratação: \"Não deve acontecer\"",
-      "en": "Criticism of the Swedish Maritime Administration after the procurement: \"Must not happen\""
+    "Svenskar laddar upp världen över: ”Man vill ju spöa Frankrike”": {
+      "pt": "Suecos fazem upload ao redor do mundo: \"Você quer bater na França\"",
+      "en": "Swedes upload around the world: \"You want to beat up France\""
     },
-    "Noah ska se Sverigematchen på jobbet: ”Lever på hoppet”": {
-      "pt": "Noah vai assistir à partida da Suécia no trabalho: \"Ao vivo no salto\"",
-      "en": "Noah will watch the Sweden match at work: \"Live on the jump\""
+    "Två döda i en villa utanför Eslöv": {
+      "pt": "Dois mortos em uma vila fora de Eslöv",
+      "en": "Two dead in a villa outside Eslöv"
+    },
+    "Man skjuten av polis i Svalöv": {
+      "pt": "Homem baleado pela polícia em Svalöv",
+      "en": "Man shot by police in Svalöv"
+    },
+    "Två personer döda utanför Eslöv – polisen misstänker mord": {
+      "pt": "Duas pessoas mortas fora de Eslöv – suspeito de assassinato pela polícia",
+      "en": "Two people killed outside Eslöv – police suspect murder"
     },
     "Isak Hien opererad efter mardrömmen i VM": {
       "pt": "Isak Hien operou após o pesadelo na Copa do Mundo",
       "en": "Isak Hien operated after the nightmare in the World Cup"
     },
-    "Skogsbrand med meterhöga lågor utanför Avesta": {
-      "pt": "Incêndio florestal com chamas de metros de altura fora do Avesta",
-      "en": "Forest fire with meter-high flames outside Avesta"
+    "Skogsbrand utanför Avesta under kontroll": {
+      "pt": "Incêndio florestal fora do Avesta sob controle",
+      "en": "Forest fire outside Avesta under control"
     },
     "Bortsprungna nanduer i Junsele efter regnoväder": {
       "pt": "Nandus perdido em Junsele após a tempestade",
       "en": "Missed nandus in Junsele after rainstorm"
-    },
-    "Planerat elavbrott får Husumsborna att missa viktiga VM-matchen": {
-      "pt": "A queda de energia planejada faz com que os moradores de Husum percam uma partida importante da Copa do Mundo",
-      "en": "Planned power outage causes Husum residents to miss important World Cup match"
-    },
-    "Mark- och miljööverdomstolen säger nej till Hyttstens avverkning": {
-      "pt": "Tribunal de Apelação de Terras e Meio Ambiente diz não à derrubada de Hyttsten",
-      "en": "Land and Environmental Court of Appeal says no to Hyttsten's felling"
     },
     "MIGRFS 2026:9": {
       "pt": "MIGRFS 2026:9",
@@ -2431,6 +2472,9 @@
       "pt": "MIGRFS 2026:4",
       "en": "MIGRFS 2026:4"
     },
+    "Sick abroad? Here's how Czech insurance and vacation rules apply": {
+      "pt": "Doente no exterior? Veja como se aplicam as regras de seguro e férias da República Tcheca"
+    },
     "Czech news in brief for June 30: Tuesday's top afternoon headlines": {
       "pt": "Notícias tchecas em resumo para 30 de junho: as principais manchetes da tarde de terça-feira"
     },
@@ -2443,32 +2487,33 @@
     "Czech news in brief for June 30: Tuesday's top morning headlines": {
       "pt": "Notícias tchecas em resumo para 30 de junho: as principais manchetes da manhã de terça-feira"
     },
-    "Everything changing in Czechia in July 2026 – and what else is new this month": {
-      "pt": "Tudo muda na República Tcheca em julho de 2026 – e o que mais há de novo este mês"
+    "Lehečka, Menšík, Nosková, Plíšková a Bouzková jsou ve 2. kole Wimbledonu": {
+      "pt": "Lehčka, Menšík, Nosková, Plíšková e Bouzková estão na 2ª rodada de Wimbledon",
+      "en": "Lehčka, Menšík, Nosková, Plíšková and Bouzková are in the 2nd round of Wimbledon"
     },
-    "James bude pokračovat v NBA, už ne ale jako hráč Los Angeles Lakers": {
-      "pt": "James continuará na NBA, mas não mais como jogador do Los Angeles Lakers",
-      "en": "James will continue in the NBA, but no longer as a Los Angeles Lakers player"
+    "Policie podniká razie kvůli údajnému zneužití peněz EU parlamentní frakcí ID": {
+      "pt": "Invasão policial por alegado uso indevido de dinheiro da UE pela facção parlamentar ID",
+      "en": "Police raid for alleged misuse of EU money by Parliamentary faction ID"
     },
-    "Poslanecká debata ke změnám programu schůze vyplnila čtyři hodiny": {
-      "pt": "O debate parlamentar sobre mudanças na pauta da reunião preencheu quatro horas",
-      "en": "The parliamentary debate on changes to the agenda of the meeting filled in four hours"
+    "Norové porazili Pobřeží slonoviny a jsou v osmifinále MS, rozhodl Haaland": {
+      "pt": "Os noruegueses venceram a Costa do Marfim e estão nas oitavas de final da Copa do Mundo, decidiu Haaland",
+      "en": "Norwegians beat Côte d 'Ivoire and are in the World Cup Round of 16, Haaland decided"
     },
-    "Krejčíková vyzve ve středu Andrejevovou na wimbledonském centrkurtu": {
-      "pt": "Krejčíková desafiará Andreeva na quadra central de Wimbledon na quarta-feira",
-      "en": "Krejčíková will challenge Andreeva at the Wimbledon centre court on Wednesday"
+    "Opoziční poslanci navrhli několik možností zavedení valorizace rodičovské": {
+      "pt": "Os deputados da oposição propuseram várias opções para introduzir a valorização parental",
+      "en": "Opposition MPs have proposed several options for introducing parental valorisation"
     },
-    "V Maďarsku a na Slovensku padly teplotní rekordy": {
-      "pt": "Registros de temperatura foram estabelecidos na Hungria e na Eslováquia",
-      "en": "Temperature records have been set in Hungary and Slovakia"
+    "Basketbalista Satoranský po celkem šesti sezonách skončil v Barceloně": {
+      "pt": "O jogador de basquete Satoranský acabou em Barcelona após um total de seis temporadas",
+      "en": "Basketball player Satoranský ended up in Barcelona after a total of six seasons"
     },
-    "Akcie na pražské burze v 1. pololetí klesly, index PX ztratil 4,4 procenta": {
-      "pt": "As ações da Bolsa de Valores de Praga caíram no primeiro semestre do ano, o índice PX perdeu 4,4%",
-      "en": "Shares on the Prague Stock Exchange fell in the first half of the year, the PX index lost 4.4 percent"
+    "Zastoupení na summitu NATO by mělo odpovídat politickému systému země, míní Zůna": {
+      "pt": "Representação na cúpula da OTAN deve corresponder ao sistema político do país, acredita Zůna",
+      "en": "Representation at the NATO summit should correspond to the political system of the country, Zůna believes"
     },
-    "V Caracasu vyprostili z trosek šest dní po zemětřesení živého chlapce": {
-      "pt": "Seis dias após o terremoto, um menino vivo foi resgatado dos escombros em Caracas",
-      "en": "Six days after the earthquake, a live boy was rescued from the rubble in Caracas"
+    "Obětí otřesů ve Venezuele jsou téměř dva tisíce, z trosek vytáhli živého hocha": {
+      "pt": "As vítimas do terremoto na Venezuela são quase duas mil, tiraram um menino vivo dos destroços",
+      "en": "The victims of the earthquake in Venezuela are almost two thousand, they pulled a live boy out of the wreckage"
     },
     "Nejvyšší soud odmítl Trumpovu snahu omezit udělování občanství dětem narozeným v USA": {
       "pt": "Suprema Corte rejeita esforço de Trump para restringir cidadania de crianças nascidas nos EUA",
@@ -2481,10 +2526,6 @@
     "Orbán zatajil reálnou výši deficitu rozpočtu, prohlásil Magyar": {
       "pt": "Orbán ocultou o valor real do déficit orçamentário, disse Magyar",
       "en": "Orbán concealed the real amount of the budget deficit, Magyar said"
-    },
-    "Česko neplní většinu protikorupčních doporučení, tvrdí skupina Rady Evropy": {
-      "pt": "República Tcheca não cumpre a maioria das recomendações anticorrupção, diz grupo do Conselho da Europa",
-      "en": "Czech Republic fails to comply with most anti-corruption recommendations, Council of Europe group says"
     },
     "VEŘEJNÁ VYHLÁŠKA, oznámení o možnosti převzít písemnost - SZIRMAI Alex": {
       "pt": "DECRETO PÚBLICO, notificação da possibilidade de aceitação do documento - SZIRMAI Alex",
