@@ -322,6 +322,12 @@ function toAddressList(value: AddressObject | AddressObject[] | undefined): stri
     .filter(Boolean);
 }
 
+/** Normaliza o campo References do mailparser (string | string[]) em array. */
+function refsOf(refs: string | string[] | undefined): string[] {
+  if (!refs) return [];
+  return (Array.isArray(refs) ? refs : refs.split(/\s+/)).filter(Boolean);
+}
+
 export async function fetchMessage(
   creds: MailCreds,
   uid: number,
@@ -368,6 +374,9 @@ export async function fetchMessage(
             html: null,
             text: null,
             attachments: [],
+            messageId: parsed.messageId || null,
+            references: refsOf(parsed.references),
+            cc: toAddressList(parsed.cc),
             remoteImagesBlocked: false,
             oversized: true,
           };
@@ -425,6 +434,9 @@ export async function fetchMessage(
             html: null,
             text: null,
             attachments: [],
+            messageId: parsed.messageId || null,
+            references: refsOf(parsed.references),
+            cc: toAddressList(parsed.cc),
             remoteImagesBlocked: false,
             oversized: true,
           };
@@ -450,6 +462,9 @@ export async function fetchMessage(
           html: safeHtml,
           text,
           attachments: meta,
+          messageId: parsed.messageId || null,
+          references: refsOf(parsed.references),
+          cc: toAddressList(parsed.cc),
           remoteImagesBlocked: remoteBlocked,
           oversized: false,
         };
@@ -519,5 +534,102 @@ export async function fetchAttachment(
     }),
     35_000,
     `attachment ${creds.address}#${uid}/${index}`,
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Operações de pasta (mini-cliente): mover pra Lixeira, guardar em Enviados /
+// Rascunhos. As pastas especiais são achadas pelo flag special-use (\Trash,
+// \Sent, \Drafts), com fallback pros nomes cPanel (INBOX.Trash etc.).
+// ---------------------------------------------------------------------------
+
+const FALLBACK_FOLDERS: Record<"trash" | "sent" | "drafts", string[]> = {
+  trash: ["INBOX.Trash", "Trash", "INBOX.Deleted", "Deleted Items"],
+  sent: ["INBOX.Sent", "Sent", "Sent Items", "INBOX.Sent Items"],
+  drafts: ["INBOX.Drafts", "Drafts", "INBOX.Draft"],
+};
+
+/**
+ * Acha a pasta especial que REALMENTE existe. Se o list() funcionar, só devolve
+ * nome que esteja na lista (nunca um "INBOX.Trash" fantasma). Se o list() falhar
+ * e `blindFallback`, tenta o 1º nome conhecido (melhor esforço).
+ */
+async function findSpecialFolder(
+  client: ImapFlow,
+  use: "trash" | "sent" | "drafts",
+  blindFallback = true,
+): Promise<string | null> {
+  const flag = use === "trash" ? "\\Trash" : use === "sent" ? "\\Sent" : "\\Drafts";
+  try {
+    const list = await client.list();
+    const byFlag = list.find((m) => m.specialUse === flag);
+    if (byFlag) return byFlag.path;
+    const paths = new Set(list.map((m) => m.path));
+    for (const name of FALLBACK_FOLDERS[use]) if (paths.has(name)) return name;
+    return null; // list ok mas a pasta não existe → não inventa
+  } catch {
+    return blindFallback ? (FALLBACK_FOLDERS[use][0] ?? null) : null;
+  }
+}
+
+/** Move uma mensagem da INBOX pra Lixeira (ou apaga de vez se não houver Trash). */
+export async function deleteMessage(creds: MailCreds, uid: number): Promise<void> {
+  await withTimeout(
+    withImap(creds, async (client) => {
+      const trash = await findSpecialFolder(client, "trash");
+      const lock = await client.getMailboxLock("INBOX");
+      try {
+        if (trash && trash !== "INBOX") {
+          try {
+            // messageMove NÃO lança em falha comum (pasta inexistente/permissão):
+            // retorna false. Só damos por movido se o retorno for verdadeiro.
+            const moved = await client.messageMove(String(uid), trash, { uid: true });
+            if (moved) return;
+          } catch {
+            /* cai pro delete definitivo abaixo */
+          }
+        }
+        // sem Trash (ou move falhou): marca \Deleted e expunge (remoção definitiva)
+        await client.messageFlagsAdd(String(uid), ["\\Deleted"], { uid: true });
+        await client.messageDelete(String(uid), { uid: true });
+      } finally {
+        lock.release();
+      }
+    }),
+    25_000,
+    `delete ${creds.address}#${uid}`,
+  );
+}
+
+/** Guarda uma cópia (buffer MIME) numa pasta especial. Cria a pasta se faltar.
+ *  Retorna false se não conseguir guardar. */
+export async function appendToFolder(
+  creds: MailCreds,
+  use: "sent" | "drafts",
+  raw: Buffer,
+  flags: string[],
+): Promise<boolean> {
+  return withTimeout(
+    withImap(creds, async (client) => {
+      let folder = await findSpecialFolder(client, use, false);
+      if (!folder) {
+        // pasta não existe → tenta criar a convencional (INBOX.Sent/INBOX.Drafts)
+        const want = FALLBACK_FOLDERS[use][0];
+        try {
+          await client.mailboxCreate(want);
+          folder = want;
+        } catch {
+          return false;
+        }
+      }
+      try {
+        const res = await client.append(folder, raw, flags, new Date());
+        return res !== false;
+      } catch {
+        return false;
+      }
+    }),
+    25_000,
+    `append ${use} ${creds.address}`,
   );
 }

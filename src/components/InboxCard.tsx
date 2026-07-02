@@ -7,6 +7,7 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { DailyCard } from "./DailyCard";
 import { MailViewer } from "./MailViewer";
+import { MailCompose, type ComposePrefill } from "./MailCompose";
 import { useLocale } from "./LocaleProvider";
 import { useToast } from "./ToastProvider";
 import type { MailAccountStatus, MailStatusResponse } from "@/lib/mail/types";
@@ -22,6 +23,7 @@ export function InboxCard() {
   const [dbDown, setDbDown] = useState(false);
   const [viewer, setViewer] = useState<MailAccountStatus | null>(null);
   const [showAdd, setShowAdd] = useState(false);
+  const [compose, setCompose] = useState<ComposePrefill | null>(null);
 
   const load = useCallback(async (force = false): Promise<MailAccountStatus[] | null> => {
     try {
@@ -147,6 +149,18 @@ export function InboxCard() {
 
         {phase === "ok" && accounts.length > 0 && (
           <>
+            {accounts.some((a) => a.state === "live") && (
+              <div className="px-4 pt-2.5 pb-1">
+                <button
+                  type="button"
+                  onClick={() => setCompose({ mode: "new" })}
+                  className="w-full py-1.5 rounded-md text-[11px] font-bold uppercase tracking-wide cursor-pointer transition-all hover:-translate-y-px"
+                  style={{ background: "var(--color-wh-blue)", color: "#fff", boxShadow: "0 2px 8px rgba(31,85,255,.3)" }}
+                >
+                  {t("mail.compose.new")}
+                </button>
+              </div>
+            )}
             {shared.length > 0 && sectionHeader(t("mail.shared.header"))}
             {shared.map((a) => (
               <AccountRow key={a.id} a={a} onOpen={openAccount} t={t} />
@@ -190,6 +204,9 @@ export function InboxCard() {
       {viewer && (
         <MailViewer
           account={viewer}
+          onCompose={(p) => setCompose(p)}
+          onDeleted={() => load(true)}
+          suspendEscape={!!compose}
           onClose={() => {
             setViewer(null);
             // force=true: o markSeen bustou o cache, mas em serverless o status
@@ -197,6 +214,13 @@ export function InboxCard() {
             // obsoleto de ~5min pra ≤30s (piso do refresh).
             load(true);
           }}
+        />
+      )}
+      {compose && (
+        <MailCompose
+          accounts={accounts}
+          prefill={compose}
+          onClose={() => setCompose(null)}
         />
       )}
       {showAdd && (

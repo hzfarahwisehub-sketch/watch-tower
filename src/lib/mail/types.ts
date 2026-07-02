@@ -65,6 +65,11 @@ export interface MailDetail {
   html: string | null; // sanitizado no servidor
   text: string | null;
   attachments: MailAttachmentMeta[];
+  /** Message-ID do original (pra encadear resposta via In-Reply-To/References) */
+  messageId: string | null;
+  references: string[];
+  /** cc do original (pra "Responder a todos") */
+  cc: string[];
   /** true quando havia imagens remotas e elas foram bloqueadas (privacidade) */
   remoteImagesBlocked: boolean;
   /**

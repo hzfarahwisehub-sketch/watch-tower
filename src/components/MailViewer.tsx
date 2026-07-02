@@ -7,6 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useLocale } from "./LocaleProvider";
 import { useToast } from "./ToastProvider";
+import type { ComposePrefill } from "./MailCompose";
 import type {
   MailAccountStatus,
   MailDetail,
@@ -22,15 +23,29 @@ function fmtBytes(n: number): string {
   return `${n}B`;
 }
 
+/** Remove prefixos Re:/Fwd:/Enc: repetidos do assunto. */
+function stripPrefix(subject: string): string {
+  return subject.replace(/^((re|fwd|enc|fw)\s*:\s*)+/i, "").trim();
+}
+
 export function MailViewer({
   account,
+  onCompose,
+  onDeleted,
   onClose,
+  suspendEscape = false,
 }: {
   account: MailAccountStatus;
+  onCompose: (prefill: ComposePrefill) => void;
+  onDeleted: () => void;
   onClose: () => void;
+  /** true quando um modal por cima (compositor) está aberto: não trata Escape. */
+  suspendEscape?: boolean;
 }) {
   const { t, intl } = useLocale();
   const toast = useToast();
+  const suspendRef = useRef(suspendEscape);
+  suspendRef.current = suspendEscape;
 
   const [items, setItems] = useState<MailListItem[]>([]);
   const [total, setTotal] = useState(0);
@@ -44,6 +59,7 @@ export function MailViewer({
   const [imagesOn, setImagesOn] = useState(false);
   const [atEnd, setAtEnd] = useState(false);
   const [markingUnread, setMarkingUnread] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const itemsRef = useRef(items);
   itemsRef.current = items;
@@ -94,10 +110,11 @@ export function MailViewer({
     loadList(0);
   }, [loadList]);
 
-  // ESC fecha o viewer
+  // ESC fecha o viewer — mas NÃO quando o compositor está por cima (senão um
+  // único Esc fecharia os dois modais de uma vez).
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape" && !suspendRef.current) onClose();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -161,6 +178,124 @@ export function MailViewer({
       setMarkingUnread(false);
     }
   }, [account.id, detailUid, markingUnread, t, toast]);
+
+  // ---- citação pra responder/encaminhar ----
+  const quotedBody = useCallback(
+    (d: MailDetail, forward = false): string => {
+      const when = d.date ? new Date(d.date).toLocaleString(intl) : "";
+      const who = d.fromName ? `${d.fromName} <${d.fromAddress}>` : d.fromAddress;
+      const text = d.text || "";
+      if (forward) {
+        const header = [
+          `De: ${who}`,
+          d.to.length ? `Para: ${d.to.join(", ")}` : "",
+          when ? `Data: ${when}` : "",
+          `Assunto: ${d.subject}`,
+        ]
+          .filter(Boolean)
+          .join("\n");
+        return `\n\n---------- Mensagem encaminhada ----------\n${header}\n\n${text}`;
+      }
+      const original = text.split("\n").map((l) => `> ${l}`).join("\n");
+      return `\n\n${when} ${who}:\n${original}`;
+    },
+    [intl],
+  );
+
+  const doReply = useCallback(
+    (all: boolean) => {
+      const d = detail;
+      if (!d) return;
+      const own = account.address.toLowerCase();
+      const cc = all
+        ? [...d.to, ...d.cc]
+            .filter((a) => a && a.toLowerCase() !== own && a.toLowerCase() !== d.fromAddress.toLowerCase())
+            .join(", ")
+        : "";
+      onCompose({
+        mode: "reply",
+        fromAccountId: account.id,
+        to: d.fromAddress,
+        cc,
+        subject: t("mail.compose.replyPrefix") + stripPrefix(d.subject),
+        body: quotedBody(d),
+        inReplyTo: d.messageId || undefined,
+        references: [...d.references, d.messageId || ""].filter(Boolean),
+      });
+    },
+    [detail, account.address, account.id, onCompose, t, quotedBody],
+  );
+
+  const [forwarding, setForwarding] = useState(false);
+  const doForward = useCallback(async () => {
+    const d = detail;
+    if (!d || forwarding) return;
+    // Encaminhar carrega os anexos do original (dentro do teto de 4MB); avisa
+    // se algum for grande demais pra levar junto.
+    let files: File[] = [];
+    let skipped = 0;
+    if (d.attachments.length) {
+      setForwarding(true);
+      let budget = 4 * 1024 * 1024;
+      try {
+        for (const a of d.attachments) {
+          if (a.size > budget) {
+            skipped++;
+            continue;
+          }
+          const res = await fetch(
+            `/api/mail/attachment?account=${encodeURIComponent(account.id)}&uid=${d.uid}&index=${a.index}`,
+          );
+          if (!res.ok) {
+            skipped++;
+            continue;
+          }
+          const blob = await res.blob();
+          budget -= blob.size;
+          files.push(new File([blob], a.filename, { type: a.contentType }));
+        }
+      } catch {
+        skipped = d.attachments.length - files.length;
+      } finally {
+        setForwarding(false);
+      }
+    }
+    if (skipped > 0) toast(t("mail.viewer.fwdSkipped", { n: skipped }));
+    onCompose({
+      mode: "forward",
+      fromAccountId: account.id,
+      subject: t("mail.compose.fwdPrefix") + stripPrefix(d.subject),
+      body: quotedBody(d, true),
+      attachments: files.length ? files : undefined,
+    });
+  }, [detail, forwarding, account.id, onCompose, t, toast, quotedBody]);
+
+  const doDelete = useCallback(async () => {
+    if (!detailUid || deleting) return;
+    if (!window.confirm(t("mail.viewer.delete.confirm"))) return;
+    setDeleting(true);
+    try {
+      const res = await fetch("/api/mail/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ account: account.id, uid: detailUid }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      const wasUnseen = itemsRef.current.some((i) => i.uid === detailUid && !i.seen);
+      setItems((prev) => prev.filter((i) => i.uid !== detailUid));
+      setTotal((n) => Math.max(0, n - 1));
+      if (wasUnseen) setUnseen((u) => Math.max(0, u - 1));
+      setDetail(null);
+      setDetailUid(null);
+      setDetailState("idle");
+      toast(t("mail.viewer.deleted"));
+      onDeleted();
+    } catch {
+      toast(t("mail.viewer.deleteError"));
+    } finally {
+      setDeleting(false);
+    }
+  }, [account.id, detailUid, deleting, onDeleted, t, toast]);
 
   const dateShort = (iso: string | null) =>
     iso
@@ -375,6 +510,42 @@ export function MailViewer({
                 )}
 
                 <div className="flex flex-wrap items-center gap-2 mt-3">
+                  <button
+                    type="button"
+                    onClick={() => doReply(false)}
+                    className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide cursor-pointer"
+                    style={{ background: "rgba(31,85,255,.15)", color: "var(--color-wh-blue-light)", border: "1px solid var(--border-hi)" }}
+                  >
+                    {t("mail.viewer.reply")}
+                  </button>
+                  {(detail.to.length + detail.cc.length > 1) && (
+                    <button
+                      type="button"
+                      onClick={() => doReply(true)}
+                      className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide cursor-pointer"
+                      style={{ background: "rgba(31,85,255,.1)", color: "var(--color-wh-blue-light)", border: "1px solid var(--border-hi)" }}
+                    >
+                      {t("mail.viewer.replyAll")}
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={doForward}
+                    disabled={forwarding}
+                    className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide cursor-pointer"
+                    style={{ background: "rgba(255,255,255,.05)", color: "var(--text-2)", border: "1px solid var(--border)", opacity: forwarding ? 0.5 : 1 }}
+                  >
+                    {forwarding ? t("mail.viewer.forwarding") : t("mail.viewer.forward")}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={doDelete}
+                    disabled={deleting}
+                    className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide cursor-pointer"
+                    style={{ background: "rgba(255,59,92,.08)", color: "var(--color-status-critical)", border: "1px solid rgba(255,59,92,.25)", opacity: deleting ? 0.5 : 1 }}
+                  >
+                    {t("mail.viewer.delete")}
+                  </button>
                   <button
                     type="button"
                     onClick={markUnread}
