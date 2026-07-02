@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useMemo, useRef, useState, DragEvent } from "react";
 import type { Task, AgendaItem, Reminder, ScheduledAction } from "@/lib/types";
-import { INBOX_ACCOUNTS } from "@/lib/data";
 import { useDualStorage } from "@/lib/dual-storage";
 import {
   tasksConfig,
@@ -12,8 +11,8 @@ import {
 import { useToast } from "./ToastProvider";
 import { useUndoOptional } from "./UndoProvider";
 import { useLocale } from "./LocaleProvider";
-
-type TFn = (key: string, params?: Record<string, string | number>) => string;
+import { DailyCard } from "./DailyCard";
+import { InboxCard } from "./InboxCard";
 
 export type DailyBlock = "inbox" | "scheduled" | "agenda" | "tasks" | "reminders";
 
@@ -79,7 +78,6 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
   const agendaHookRef = useRef(agendaHook);
   agendaHookRef.current = agendaHook;
 
-  const inboxTotal = INBOX_ACCOUNTS.reduce((s, a) => s + a.unread, 0);
   const tasksRemaining = tasks.filter((t) => !t.done).length;
 
   // ===== task ops =====
@@ -224,67 +222,8 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
     });
   };
 
-  const inboxCard = (
-        <DailyCard
-          t={t}
-          cardKey="inbox"
-          title={t("daily.inbox.title")}
-          subtitle={t("daily.inbox.subtitle")}
-          total={t("daily.inbox.total", { n: inboxTotal })}
-          action={t("daily.inbox.action")}
-          onAction={() => toast(t("daily.inbox.synced", { n: inboxTotal, accounts: INBOX_ACCOUNTS.length }))}
-          bodyMaxHeight={300}
-        >
-          {INBOX_ACCOUNTS.map((a) => (
-            <button
-              type="button"
-              key={a.id}
-              onClick={() => toast(t("daily.inbox.opening", { label: a.label }))}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg my-1 transition-colors text-left cursor-pointer hover:bg-[rgba(31,85,255,0.06)]"
-              style={{ borderLeft: "3px solid transparent", opacity: a.unread === 0 ? 0.45 : 1 }}
-            >
-              <div
-                className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center text-[11px] font-bold flex-shrink-0"
-                style={{
-                  background:
-                    a.cls === "gmail"
-                      ? "linear-gradient(135deg,#EA4335,#C5221F)"
-                      : "linear-gradient(135deg,var(--color-wh-blue),var(--color-wh-blue-dark))",
-                  color: "#fff",
-                  boxShadow: "0 2px 6px rgba(31,85,255,.3)",
-                }}
-              >
-                {a.icon}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div
-                  className="text-[11px] font-semibold truncate leading-tight"
-                  style={{ color: "var(--text)" }}
-                  title={a.label}
-                >
-                  {a.label}
-                </div>
-                <div
-                  className="text-[9.5px] mt-1 truncate leading-tight"
-                  style={{ color: "var(--text-3)" }}
-                  title={a.last}
-                >
-                  {a.last}
-                </div>
-              </div>
-              <div
-                className="px-2 py-0.5 rounded-[11px] text-[10px] font-extrabold flex-shrink-0 min-w-[22px] text-center leading-tight"
-                style={{
-                  background: a.unread === 0 ? "transparent" : "var(--color-status-critical)",
-                  color: a.unread === 0 ? "var(--text-3)" : "#fff",
-                }}
-              >
-                {a.unread}
-              </div>
-            </button>
-          ))}
-        </DailyCard>
-  );
+  // Inbox real (Fase 3): contadores IMAP ao vivo + viewer embutido — componente próprio.
+  const inboxCard = <InboxCard />;
 
   const scheduledCard = (
         <DailyCard
@@ -610,127 +549,5 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
       {tasksCard}
       {remindersCard}
     </section>
-  );
-}
-
-function DailyCard({
-  t,
-  cardKey,
-  title,
-  subtitle,
-  total,
-  action,
-  onAction,
-  children,
-  scope,
-  onScopeChange,
-}: {
-  t: TFn;
-  cardKey: string;
-  title: string;
-  subtitle?: string;
-  total: string;
-  action: string;
-  onAction: () => void;
-  children: React.ReactNode;
-  bodyMaxHeight?: number;
-  scope?: BoardScope;
-  onScopeChange?: (s: BoardScope) => void;
-}) {
-  // O tamanho do card é controlado SÓ pelo grid (react-grid-layout) — uma única
-  // forma de esticar/encolher, pelo ⤡ do canto. O corpo preenche a célula e rola
-  // por dentro quando o conteúdo passa do espaço. Sem resize interno: acabou a
-  // "dupla" (e o scroll da página durante o arraste, que vinha desse resize).
-  const body = (
-    <div
-      className="wt-daily-body pl-2.5 pr-4 py-2 pb-2.5"
-      style={{
-        flex: "1 1 auto",
-        minHeight: 0,
-        overflow: "auto",
-        position: "relative",
-      }}
-      data-card-key={cardKey}
-    >
-      {children}
-    </div>
-  );
-
-  return (
-    <div className="wt-card flex flex-col h-full" style={{ position: "relative" }}>
-      <div className="pl-5 pr-[64px] py-3.5" style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="flex items-center justify-between gap-x-2 gap-y-0.5 flex-wrap">
-          <h2
-            className="text-[11px] tracking-[2.5px] uppercase font-bold flex items-center gap-2 min-w-0 truncate"
-            style={{ color: "var(--color-wh-blue-light)" }}
-            title={title}
-          >
-            {title}
-          </h2>
-          {onScopeChange && (
-            <div
-              className="flex items-center gap-0.5 p-0.5 rounded-full flex-shrink-0"
-              style={{ background: "var(--bg2)", border: "1px solid var(--border)" }}
-              title={t("daily.scope.toggleTitle")}
-            >
-              {(["team", "personal"] as const).map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => onScopeChange(s)}
-                  className="px-2 py-0.5 rounded-full text-[8.5px] font-extrabold uppercase tracking-wide transition-all cursor-pointer"
-                  style={{
-                    background: scope === s ? "var(--color-wh-blue)" : "transparent",
-                    color: scope === s ? "#fff" : "var(--text-3)",
-                  }}
-                >
-                  {s === "team" ? t("daily.scope.team") : t("daily.scope.personal")}
-                </button>
-              ))}
-            </div>
-          )}
-          {subtitle && (
-            <span
-              className="text-[8.5px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wide flex-shrink-0"
-              style={{
-                color: "var(--color-status-warning)",
-                background: "rgba(255,138,31,.12)",
-                border: "1px solid rgba(255,138,31,.3)",
-              }}
-              title={t("daily.mock.title")}
-            >
-              {t("daily.mock.badge")}
-            </span>
-          )}
-        </div>
-      </div>
-
-      {body}
-
-      <div
-        className="px-4 py-2.5 flex justify-between items-center gap-2"
-        style={{ borderTop: "1px solid var(--border)", background: "rgba(15,12,30,.3)" }}
-      >
-        <span
-          className="text-[10px] uppercase tracking-wider font-bold truncate min-w-0"
-          style={{ color: "var(--text-3)" }}
-          title={total}
-        >
-          {total}
-        </span>
-        <button
-          type="button"
-          onClick={onAction}
-          className="inline-flex items-center gap-1 px-3 py-1 rounded-[14px] cursor-pointer text-[10px] font-bold tracking-wide uppercase transition-all hover:-translate-y-px flex-shrink-0 whitespace-nowrap"
-          style={{
-            background: "rgba(31,85,255,.15)",
-            color: "var(--color-wh-blue-light)",
-            border: "1px solid var(--border-hi)",
-          }}
-        >
-          {action}
-        </button>
-      </div>
-    </div>
   );
 }

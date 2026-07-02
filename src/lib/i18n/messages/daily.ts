@@ -26,13 +26,7 @@ const dict = {
     "daily.undo.deleteTask": "apagar tarefa",
     "daily.undo.deleteAgenda": "apagar compromisso",
 
-    // ---- Inbox ----
-    "daily.inbox.title": "📧 Inbox",
-    "daily.inbox.subtitle": "Mock · integração real na Fase 3",
-    "daily.inbox.total": "{n} não lidos",
-    "daily.inbox.action": "↻ Sync",
-    "daily.inbox.synced": "Inbox sincronizado · {n} e-mails em {accounts} contas",
-    "daily.inbox.opening": "Abrindo {label} · integração Gmail/IMAP virá na Fase 3",
+    // ---- Inbox: agora é real (namespace "mail", componente InboxCard) ----
 
     // ---- Ações Programadas ----
     "daily.scheduled.title": "⚡ Ações Programadas",
@@ -103,13 +97,7 @@ const dict = {
     "daily.undo.deleteTask": "delete task",
     "daily.undo.deleteAgenda": "delete event",
 
-    // ---- Inbox ----
-    "daily.inbox.title": "📧 Inbox",
-    "daily.inbox.subtitle": "Mock · real integration in Phase 3",
-    "daily.inbox.total": "{n} unread",
-    "daily.inbox.action": "↻ Sync",
-    "daily.inbox.synced": "Inbox synced · {n} emails across {accounts} accounts",
-    "daily.inbox.opening": "Opening {label} · Gmail/IMAP integration coming in Phase 3",
+    // ---- Inbox: agora é real (namespace "mail", componente InboxCard) ----
 
     // ---- Ações Programadas ----
     "daily.scheduled.title": "⚡ Scheduled Actions",

@@ -184,6 +184,27 @@ model ScheduledAction {
 }
 
 // ============================================================
+// Inbox Fase 3 · contas de e-mail PESSOAIS conectadas via IMAP.
+// Cada usuário cadastra a própria (só ele vê/acessa). A senha fica
+// criptografada (AES-256-GCM, chave MAIL_CRED_KEY só no servidor) e
+// NUNCA é retornada ao client. Contas corporativas compartilhadas
+// não ficam aqui — são config em código + senha em env.
+// ============================================================
+
+model MailAccount {
+  id          String   @id @default(cuid())
+  ownerEmail  String   // e-mail de LOGIN do dono (allowlist)
+  address     String   // endereço da caixa conectada
+  host        String
+  port        Int      @default(993)
+  encPassword String   // iv:tag:cipher (base64) · AES-256-GCM
+  createdAt   DateTime @default(now())
+
+  @@unique([ownerEmail, address])
+  @@index([ownerEmail])
+}
+
+// ============================================================
 // Caixa de solicitações · sócios mandam feedback/ideias pra Friday.
 // Mural compartilhado: visível a todos. Friday avisa o Hammis a cada
 // nova; Hammis decide aplicar/rejeitar com justificativa.

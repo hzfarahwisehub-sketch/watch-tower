@@ -22,15 +22,6 @@ export interface Country {
   summary?: string;
 }
 
-export interface InboxAccount {
-  id: string;
-  label: string;
-  icon: string;
-  cls?: "gmail";
-  unread: number;
-  last: string;
-}
-
 export interface Task {
   id: number;
   text: string;

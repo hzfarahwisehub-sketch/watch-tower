@@ -1,4 +1,4 @@
-import type { Country, InboxAccount, Task, AgendaItem, Reminder, ScheduledAction } from "./types";
+import type { Country, Task, AgendaItem, Reminder, ScheduledAction } from "./types";
 
 // Imagens curadas via Unsplash CDN — landmarks reais de cada país.
 // URLs validadas via curl em 2026-05-21. Fallback no componente CountryBenchmark
@@ -160,17 +160,8 @@ export const COUNTRIES: Country[] = [
   ]}
 ];
 
-export const INBOX_ACCOUNTS: InboxAccount[] = [
-  {id:"gmail",   label:"hzfarah.wisehub@gmail.com", icon:"G", cls:"gmail", unread:12, last:"Stripe — Receipt #INV-2841"},
-  {id:"adm",     label:"adm@wisehubnow.com",        icon:"A", unread:5,  last:"Solicitação de fatura — Maria Silva"},
-  {id:"support", label:"support@wisehubnow.com",    icon:"S", unread:8,  last:"Ticket #4421 — login issue"},
-  {id:"sales",   label:"sales@wisehubnow.com",      icon:"$", unread:3,  last:"Lead enterprise — Lisboa"},
-  {id:"team",    label:"team@wisehubnow.com",       icon:"T", unread:2,  last:"Sprint review — 13/mai 10h"},
-  {id:"hzfarah", label:"hzfarah@wisehubnow.com",    icon:"H", unread:4,  last:"Contrato US LLC — assinatura"},
-  {id:"suporte", label:"suporte@wisehubnow.com",    icon:"?", unread:6,  last:"Usuário BR não consegue logar"},
-  {id:"contact", label:"contact@wisehubnow.com",    icon:"@", unread:1,  last:"Parceria — Travel Tech LATAM"},
-  {id:"info",    label:"info@wisehubnow.com",       icon:"i", unread:7,  last:"Imprensa — Globo News"}
-];
+// INBOX_ACCOUNTS (mock) removido 2026-07-01 — Inbox Fase 3 é real:
+// contas compartilhadas em src/lib/mail/config.ts + pessoais no banco.
 
 export const DEFAULT_TASKS: Task[] = [
   {id:1, text:"Revisar PR Watch Tower #007", done:false},
