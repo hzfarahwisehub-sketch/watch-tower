@@ -10,7 +10,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireSession, badRequest } from "@/lib/api-helpers";
-import { guessImapHost } from "@/lib/mail/config";
+import { guessImapHost, isFounder } from "@/lib/mail/config";
 import { encryptSecret, mailCryptoReady } from "@/lib/mail/crypto";
 import { verifyLogin, bustStatusCache } from "@/lib/mail/imap";
 import { assertPublicHost } from "@/lib/mail/net-guard";
@@ -75,6 +75,11 @@ export async function POST(req: NextRequest) {
   if (!gate.ok) return gate.response;
   const { session } = gate;
 
+  // Só fundadores cadastram caixa própria; não-fundador não tem acesso a nada
+  // no Inbox até o Hammis autorizar.
+  if (!isFounder(session.email)) {
+    return NextResponse.json({ error: "forbidden" }, { status: 403 });
+  }
   if (!rateAllow(`mail-personal:${session.userId}`, 10, 60_000)) {
     return NextResponse.json({ error: "rate_limited" }, { status: 429 });
   }

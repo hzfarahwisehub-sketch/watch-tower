@@ -139,9 +139,15 @@ export function InboxCard() {
           </div>
         )}
 
-        {phase === "ok" && (
+        {phase === "ok" && accounts.length === 0 && (
+          <div className="px-4 py-4 text-[11px] leading-relaxed" style={{ color: "var(--text-3)" }}>
+            {t("mail.noAccounts")}
+          </div>
+        )}
+
+        {phase === "ok" && accounts.length > 0 && (
           <>
-            {sectionHeader(t("mail.shared.header"))}
+            {shared.length > 0 && sectionHeader(t("mail.shared.header"))}
             {shared.map((a) => (
               <AccountRow key={a.id} a={a} onOpen={openAccount} t={t} />
             ))}
@@ -166,13 +172,16 @@ export function InboxCard() {
                 {t("mail.personal.dbdown")}
               </div>
             )}
-            {!dbDown && personal.length === 0 && (
-              <div className="px-4 py-2 text-[10.5px]" style={{ color: "var(--text-3)" }}>
-                {t("mail.personal.empty")}
-              </div>
-            )}
             {personal.map((a) => (
-              <AccountRow key={a.id} a={a} onOpen={openAccount} onRemove={removePersonal} t={t} />
+              <AccountRow
+                key={a.id}
+                a={a}
+                onOpen={openAccount}
+                // remover só as self-service (id "p_"); as pré-configuradas
+                // (me_wh/me_gmail) não têm botão de remover.
+                onRemove={a.id.startsWith("p_") ? removePersonal : undefined}
+                t={t}
+              />
             ))}
           </>
         )}

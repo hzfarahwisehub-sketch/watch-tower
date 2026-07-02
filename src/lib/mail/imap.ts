@@ -197,6 +197,72 @@ export async function verifyLogin(
 }
 
 // ---------------------------------------------------------------------------
+// Resolução de senha por CANDIDATAS (caixas @wisehubnow.com podem ter
+// Tradeiros*#2026 ou Wisehub2026$ durante a transição). Testa cada candidata
+// com um login real e cacheia a que funcionou por endereço, pra não repetir o
+// teste toda vez (e não martelar o cPanel com logins falhos → risco cPHulk).
+// ---------------------------------------------------------------------------
+export interface MailBase {
+  address: string;
+  host: string;
+  port: number;
+  guardHost?: boolean;
+}
+
+const pwCache = new Map<string, string>(); // key → senha que funcionou
+const pwFail = new Map<string, number>(); // key → timestamp do último "todas falharam"
+const PW_FAIL_TTL = 10 * 60 * 1000; // não re-tenta todas as candidatas por 10min
+
+function baseKey(base: MailBase): string {
+  return `${base.host}:${base.port}:${base.address.toLowerCase()}`;
+}
+
+/**
+ * Retorna a senha que autentica nesta caixa (dentre as candidatas), ou null se
+ * nenhuma funciona / não há candidata. Cacheia o acerto e o "todas falharam".
+ */
+export async function resolveWorkingPassword(
+  base: MailBase,
+  candidates: string[],
+  force = false,
+): Promise<string | null> {
+  const key = baseKey(base);
+  const cached = pwCache.get(key);
+  if (cached && candidates.includes(cached)) return cached;
+  if (candidates.length === 0) return null;
+
+  // force (Sync manual) ignora o "todas falharam" pra re-tentar na hora — é o
+  // caso de quem acabou de criar/ajustar a caixa no cPanel e quer ver ligar já.
+  if (force) {
+    pwFail.delete(key);
+  } else {
+    const failedAt = pwFail.get(key);
+    if (failedAt && Date.now() - failedAt < PW_FAIL_TTL) return null;
+  }
+
+  for (const pw of candidates) {
+    const res = await verifyLogin({ ...base, password: pw });
+    if (res.ok) {
+      pwCache.set(key, pw);
+      pwFail.delete(key);
+      return pw;
+    }
+    // erro de conexão (não-auth) → aborta o loop, é falha temporária de rede,
+    // não adianta testar outras senhas nem marcar "todas falharam".
+    if (!res.ok && res.reason === "connect") return null;
+  }
+  pwFail.set(key, Date.now());
+  return null;
+}
+
+/** Esquece a senha cacheada de um endereço (ex.: op deu auth-fail → mudou). */
+export function bustPasswordCache(address: string): void {
+  const suffix = `:${address.toLowerCase()}`;
+  for (const key of pwCache.keys()) if (key.endsWith(suffix)) pwCache.delete(key);
+  for (const key of pwFail.keys()) if (key.endsWith(suffix)) pwFail.delete(key);
+}
+
+// ---------------------------------------------------------------------------
 // Lista de mensagens (envelopes, mais recentes primeiro)
 // ---------------------------------------------------------------------------
 
