@@ -235,6 +235,8 @@ export function Dashboard() {
   const { t } = useLocale();
   const { data: session } = useSession();
   const isLoggedIn = !!session?.user?.email;
+  // Agenda é só de admin (regra do Hammis 2026-07-02): Igor (editor) não enxerga o painel Agenda.
+  const isAdmin = ((session?.user ?? {}) as { role?: string }).role === "admin";
   // mapSelected: país em foco. Alimenta o Benchmark (a "área completa" do país,
   // com tudo do local) e o voo do globo. Clicar em qualquer lugar (mapa,
   // alertas, sidebar, feed) aponta todo mundo pro mesmo país, SEM modal cobrindo.
@@ -548,11 +550,14 @@ export function Dashboard() {
               <DailyGrid only="inbox" />
             </GridCell>
           </div>
-          <div key="agenda">
-            <GridCell panelId="agenda" locked={locked}>
-              <DailyGrid only="agenda" />
-            </GridCell>
-          </div>
+          {/* Agenda: só admin. Regra do Hammis (2026-07-02) — Igor (editor) NÃO enxerga esta aba. */}
+          {isAdmin && (
+            <div key="agenda">
+              <GridCell panelId="agenda" locked={locked}>
+                <DailyGrid only="agenda" />
+              </GridCell>
+            </div>
+          )}
           <div key="tasks">
             <GridCell panelId="tasks" locked={locked}>
               <DailyGrid only="tasks" />

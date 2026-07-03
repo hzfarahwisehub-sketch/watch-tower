@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { requireSession, badRequest, getScope, friendlyName } from "@/lib/api-helpers";
+import { requireSession, requireAdmin, badRequest, getScope, friendlyName } from "@/lib/api-helpers";
 import { notifyTeamChange, notifyItemCreated } from "@/lib/team-notify";
 
 export const runtime = "nodejs";
@@ -17,6 +17,9 @@ const CreateAgenda = z.object({
 export async function GET(req: NextRequest) {
   const result = await requireSession();
   if (!result.ok) return result.response;
+  // Regra do Hammis (2026-07-02): Agenda é SÓ de admin. Igor (editor) NÃO enxerga a agenda dos sócios.
+  const adminGate = requireAdmin(result.session);
+  if (adminGate) return adminGate;
   const scope = getScope(req);
 
   const where: Record<string, unknown> =
@@ -48,6 +51,9 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const result = await requireSession();
   if (!result.ok) return result.response;
+  // Regra do Hammis (2026-07-02): Agenda é SÓ de admin. Igor (editor) NÃO enxerga a agenda dos sócios.
+  const adminGate = requireAdmin(result.session);
+  if (adminGate) return adminGate;
   const scope = getScope(req);
 
   const body = await req.json().catch(() => null);
