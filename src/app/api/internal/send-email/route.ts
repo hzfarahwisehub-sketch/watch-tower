@@ -29,8 +29,16 @@ const Body = z
   .refine((b) => !!b.text || !!b.html, { message: "text_or_html_required" });
 
 export async function POST(req: NextRequest) {
+  // Autoriza por CRON_SECRET (crons) OU FRIDAY_MAIL_SECRET (canal de e-mail
+  // próprio da Friday). Assim a Friday dispara e-mail como secretária, saindo de
+  // friday@wisehubnow.online, sem depender do segredo compartilhado dos crons.
   const gate = requireCronSecret(req);
-  if (!gate.ok) return gate.response;
+  if (!gate.ok) {
+    const fridaySecret = process.env.FRIDAY_MAIL_SECRET;
+    const authHeader = req.headers.get("authorization") ?? "";
+    const bearer = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
+    if (!fridaySecret || bearer !== fridaySecret) return gate.response;
+  }
 
   const body = await req.json().catch(() => null);
   const parsed = Body.safeParse(body);
