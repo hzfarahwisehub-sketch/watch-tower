@@ -5,6 +5,7 @@ import { Responsive, WidthProvider, type Layout, type ResponsiveLayouts } from "
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { COUNTRIES } from "@/lib/data";
+import { agendaAllowed } from "@/lib/agenda-access";
 import { Header } from "./Header";
 import { KpiRow } from "./KpiRow";
 import { AlertsBanner } from "./AlertsBanner";
@@ -235,8 +236,11 @@ export function Dashboard() {
   const { t } = useLocale();
   const { data: session } = useSession();
   const isLoggedIn = !!session?.user?.email;
-  // Agenda é só de admin (regra do Hammis 2026-07-02): Igor (editor) não enxerga o painel Agenda.
-  const isAdmin = ((session?.user ?? {}) as { role?: string }).role === "admin";
+  // Agenda é dos sócios (admins), MENOS o Igor (regra do Hammis 2026-07-02, bloqueio por e-mail).
+  const canSeeAgenda = agendaAllowed(
+    (session?.user as { role?: string })?.role,
+    session?.user?.email,
+  );
   // mapSelected: país em foco. Alimenta o Benchmark (a "área completa" do país,
   // com tudo do local) e o voo do globo. Clicar em qualquer lugar (mapa,
   // alertas, sidebar, feed) aponta todo mundo pro mesmo país, SEM modal cobrindo.
@@ -550,8 +554,8 @@ export function Dashboard() {
               <DailyGrid only="inbox" />
             </GridCell>
           </div>
-          {/* Agenda: só admin. Regra do Hammis (2026-07-02) — Igor (editor) NÃO enxerga esta aba. */}
-          {isAdmin && (
+          {/* Agenda: só sócios (admins), MENOS o Igor. Regra do Hammis (2026-07-02). */}
+          {canSeeAgenda && (
             <div key="agenda">
               <GridCell panelId="agenda" locked={locked}>
                 <DailyGrid only="agenda" />

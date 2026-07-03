@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireSession, requireAdmin } from "@/lib/api-helpers";
+import { requireSession } from "@/lib/api-helpers";
+import { agendaAllowed } from "@/lib/agenda-access";
 import { calendarToken } from "@/lib/calendar-feed";
 
 export const runtime = "nodejs";
@@ -13,9 +14,10 @@ export const dynamic = "force-dynamic";
 export async function GET(req: NextRequest) {
   const result = await requireSession();
   if (!result.ok) return result.response;
-  // O feed de calendário inclui a Agenda → só admin. Igor (editor) não puxa a agenda por aqui.
-  const adminGate = requireAdmin(result.session);
-  if (adminGate) return adminGate;
+  // O feed de calendário inclui a Agenda → dos sócios (admins) menos o Igor (bloqueio por e-mail).
+  if (!agendaAllowed(result.session.role, result.session.email)) {
+    return NextResponse.json({ error: "forbidden" }, { status: 403 });
+  }
 
   const userId = result.session.userId;
   const token = calendarToken(userId);

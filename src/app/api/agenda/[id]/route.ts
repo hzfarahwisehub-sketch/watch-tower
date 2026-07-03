@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { requireSession, requireAdmin, badRequest, notFound, canMutateTeamItem } from "@/lib/api-helpers";
+import { requireSession, badRequest, notFound, canMutateTeamItem } from "@/lib/api-helpers";
+import { agendaAllowed } from "@/lib/agenda-access";
 import { notifyTeamChange } from "@/lib/team-notify";
 
 export const runtime = "nodejs";
@@ -17,9 +18,10 @@ const UpdateAgenda = z.object({
 export async function PATCH(req: NextRequest, ctx: { params: Promise<{ id: string }> }) {
   const result = await requireSession();
   if (!result.ok) return result.response;
-  // Agenda é SÓ de admin (regra do Hammis 2026-07-02). Igor (editor) não vê/altera agenda.
-  const adminGate = requireAdmin(result.session);
-  if (adminGate) return adminGate;
+  // Agenda é dos sócios (admins), MENOS o Igor (regra do Hammis 2026-07-02, bloqueio por e-mail).
+  if (!agendaAllowed(result.session.role, result.session.email)) {
+    return NextResponse.json({ error: "forbidden" }, { status: 403 });
+  }
 
   const { id } = await ctx.params;
   const body = await req.json().catch(() => null);
@@ -51,9 +53,10 @@ export async function PATCH(req: NextRequest, ctx: { params: Promise<{ id: strin
 export async function DELETE(_req: NextRequest, ctx: { params: Promise<{ id: string }> }) {
   const result = await requireSession();
   if (!result.ok) return result.response;
-  // Agenda é SÓ de admin (regra do Hammis 2026-07-02). Igor (editor) não vê/altera agenda.
-  const adminGate = requireAdmin(result.session);
-  if (adminGate) return adminGate;
+  // Agenda é dos sócios (admins), MENOS o Igor (regra do Hammis 2026-07-02, bloqueio por e-mail).
+  if (!agendaAllowed(result.session.role, result.session.email)) {
+    return NextResponse.json({ error: "forbidden" }, { status: 403 });
+  }
 
   const { id } = await ctx.params;
   const item = await prisma.agendaItem.findUnique({ where: { id }, select: { id: true, userId: true, scope: true, title: true } });
