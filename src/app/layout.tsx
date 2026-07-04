@@ -9,6 +9,7 @@ import { UndoProvider } from "@/components/UndoProvider";
 import { NavPerf } from "@/components/NavPerf";
 import { AuthSessionProvider } from "@/components/AuthSessionProvider";
 import { PwaBootstrap } from "@/components/PwaBootstrap";
+import { VdsStatusBadge } from "@/components/VdsStatusBadge";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     {children}
                     <NavPerf />
                     <PwaBootstrap />
+                    <VdsStatusBadge />
                   </UndoProvider>
                 </ToastProvider>
               </SettingsProvider>
