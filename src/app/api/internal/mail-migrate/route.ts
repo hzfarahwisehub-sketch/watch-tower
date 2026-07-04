@@ -27,6 +27,17 @@ const DDL: string[] = [
      ON "MailAccount"("ownerEmail", "address")`,
   `CREATE INDEX IF NOT EXISTS "MailAccount_ownerEmail_idx"
      ON "MailAccount"("ownerEmail")`,
+  `CREATE TABLE IF NOT EXISTS "GoogleCalendarAccount" (
+    "id" TEXT NOT NULL,
+    "userEmail" TEXT NOT NULL,
+    "googleEmail" TEXT,
+    "encRefresh" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "GoogleCalendarAccount_pkey" PRIMARY KEY ("id")
+  )`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "GoogleCalendarAccount_userEmail_key"
+     ON "GoogleCalendarAccount"("userEmail")`,
 ];
 
 export async function POST(req: NextRequest) {

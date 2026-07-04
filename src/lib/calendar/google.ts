@@ -1,0 +1,187 @@
+// Importação Google Calendar → Watch Tower (leitura). OAuth 2.0 (Authorization
+// Code), tudo no servidor. Guarda só o refresh token (criptografado, reusa o
+// MAIL_CRED_KEY). Escopo SÓ-LEITURA (calendar.readonly): a gente exibe os
+// eventos, nunca escreve. O sentido inverso (WT → Google) é o feed .ics
+// (calendar-feed.ts) e não precisa de OAuth.
+import crypto from "node:crypto";
+
+const AUTH_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
+const TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token";
+const EVENTS_ENDPOINT =
+  "https://www.googleapis.com/calendar/v3/calendars/primary/events";
+export const GOOGLE_SCOPE = "https://www.googleapis.com/auth/calendar.readonly";
+
+export function clientId(): string {
+  return process.env.GOOGLE_CLIENT_ID || "";
+}
+function clientSecret(): string {
+  return process.env.GOOGLE_CLIENT_SECRET || "";
+}
+export function redirectUri(): string {
+  return (
+    process.env.GOOGLE_REDIRECT_URI ||
+    "https://watchtower.wisehubnow.online/api/calendar/google/callback"
+  );
+}
+export function googleConfigured(): boolean {
+  return !!clientId() && !!clientSecret();
+}
+
+// --- state assinado (anti-CSRF no callback) -------------------------------
+function stateSecret(): string {
+  return process.env.CALENDAR_FEED_SECRET || process.env.CRON_SECRET || "wt-oauth-state";
+}
+// A identidade assinada no state é a MESMA chave que guarda o token (o e-mail
+// da sessão), pra o anti-CSRF proteger exatamente o que é gravado. O e-mail é
+// base64url no payload pra não colidir com o separador ".".
+export function signState(identityEmail: string): string {
+  const id = Buffer.from(identityEmail).toString("base64url");
+  const nonce = crypto.randomBytes(8).toString("hex");
+  const payload = `${id}.${nonce}`;
+  const mac = crypto.createHmac("sha256", stateSecret()).update(payload).digest("hex").slice(0, 32);
+  return `${payload}.${mac}`;
+}
+export function verifyState(state: string, expectedEmail: string): boolean {
+  const parts = (state || "").split(".");
+  if (parts.length !== 3) return false;
+  const [id, nonce, mac] = parts;
+  let email = "";
+  try {
+    email = Buffer.from(id, "base64url").toString("utf8");
+  } catch {
+    return false;
+  }
+  if (email.toLowerCase() !== expectedEmail.toLowerCase()) return false;
+  const expected = crypto
+    .createHmac("sha256", stateSecret())
+    .update(`${id}.${nonce}`)
+    .digest("hex")
+    .slice(0, 32);
+  try {
+    return crypto.timingSafeEqual(Buffer.from(mac), Buffer.from(expected));
+  } catch {
+    return false;
+  }
+}
+
+// --- fluxo OAuth ----------------------------------------------------------
+export function buildAuthUrl(state: string): string {
+  const p = new URLSearchParams({
+    client_id: clientId(),
+    redirect_uri: redirectUri(),
+    response_type: "code",
+    scope: GOOGLE_SCOPE,
+    access_type: "offline", // pede refresh token
+    prompt: "consent", // garante refresh token mesmo em re-autorização
+    include_granted_scopes: "true",
+    state,
+  });
+  return `${AUTH_ENDPOINT}?${p.toString()}`;
+}
+
+export interface TokenResult {
+  accessToken: string;
+  refreshToken: string | null;
+  expiresIn: number;
+  email: string | null;
+}
+
+async function tokenRequest(body: Record<string, string>): Promise<Record<string, unknown>> {
+  const res = await fetch(TOKEN_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(body).toString(),
+    signal: AbortSignal.timeout(15_000),
+  });
+  const data = (await res.json().catch(() => ({}))) as Record<string, unknown>;
+  if (!res.ok) {
+    throw new Error(`google_token_${res.status}:${String(data.error ?? "")}`);
+  }
+  return data;
+}
+
+/** Troca o code por tokens. O refresh token só vem na 1ª autorização. */
+export async function exchangeCode(code: string): Promise<TokenResult> {
+  const data = await tokenRequest({
+    code,
+    client_id: clientId(),
+    client_secret: clientSecret(),
+    redirect_uri: redirectUri(),
+    grant_type: "authorization_code",
+  });
+  return {
+    accessToken: String(data.access_token ?? ""),
+    refreshToken: data.refresh_token ? String(data.refresh_token) : null,
+    expiresIn: Number(data.expires_in ?? 3600),
+    email: extractEmailFromIdToken(data.id_token),
+  };
+}
+
+/** Renova o access token a partir do refresh token guardado. */
+export async function refreshAccessToken(refreshToken: string): Promise<string> {
+  const data = await tokenRequest({
+    refresh_token: refreshToken,
+    client_id: clientId(),
+    client_secret: clientSecret(),
+    grant_type: "refresh_token",
+  });
+  return String(data.access_token ?? "");
+}
+
+function extractEmailFromIdToken(idToken: unknown): string | null {
+  if (typeof idToken !== "string") return null;
+  try {
+    const payload = idToken.split(".")[1];
+    const json = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
+    return typeof json.email === "string" ? json.email : null;
+  } catch {
+    return null;
+  }
+}
+
+// --- eventos --------------------------------------------------------------
+export interface GoogleEvent {
+  id: string;
+  summary: string;
+  start: string | null; // ISO
+  end: string | null;
+  allDay: boolean;
+  location: string | null;
+  htmlLink: string | null;
+}
+
+/** Próximos eventos da agenda principal (só-leitura). */
+export async function fetchUpcomingEvents(
+  accessToken: string,
+  maxResults = 15,
+): Promise<GoogleEvent[]> {
+  const now = new Date().toISOString();
+  const p = new URLSearchParams({
+    timeMin: now,
+    maxResults: String(Math.min(50, Math.max(1, maxResults))),
+    singleEvents: "true",
+    orderBy: "startTime",
+  });
+  const res = await fetch(`${EVENTS_ENDPOINT}?${p.toString()}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+    signal: AbortSignal.timeout(15_000),
+  });
+  if (res.status === 401) throw new Error("google_unauthorized");
+  if (!res.ok) throw new Error(`google_events_${res.status}`);
+  const data = (await res.json()) as { items?: Array<Record<string, unknown>> };
+  const items = data.items ?? [];
+  return items.map((ev) => {
+    const start = ev.start as { dateTime?: string; date?: string } | undefined;
+    const end = ev.end as { dateTime?: string; date?: string } | undefined;
+    const allDay = !!start?.date && !start?.dateTime;
+    return {
+      id: String(ev.id ?? ""),
+      summary: typeof ev.summary === "string" ? ev.summary : "(sem título)",
+      start: start?.dateTime ?? (start?.date ? `${start.date}T00:00:00` : null),
+      end: end?.dateTime ?? (end?.date ? `${end.date}T00:00:00` : null),
+      allDay,
+      location: typeof ev.location === "string" ? ev.location : null,
+      htmlLink: typeof ev.htmlLink === "string" ? ev.htmlLink : null,
+    };
+  });
+}

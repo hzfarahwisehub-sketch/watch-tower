@@ -13,6 +13,7 @@ import { useUndoOptional } from "./UndoProvider";
 import { useLocale } from "./LocaleProvider";
 import { DailyCard } from "./DailyCard";
 import { InboxCard } from "./InboxCard";
+import { GoogleCalendar } from "./GoogleCalendar";
 
 export type DailyBlock = "inbox" | "scheduled" | "agenda" | "tasks" | "reminders";
 
@@ -303,6 +304,7 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
         scope={scope}
         onScopeChange={setScope}
       >
+        <GoogleCalendar />
         {agenda.map((a) => (
           <div
             key={a.id}

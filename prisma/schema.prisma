@@ -12,6 +12,25 @@ datasource db {
 }
 
 // ============================================================
+// Olhos de dados (Projeto Jarvis) — coletores diarios conectados a
+// central Watch Tower. A Friday le essas metricas e da parecer.
+// ============================================================
+
+model YouTubeMetric {
+  id          String   @id @default(cuid())
+  channelId   String
+  channelName String?
+  date        DateTime // dia da coleta (00:00 UTC)
+  subscribers Int      @default(0)
+  views       Int      @default(0)
+  videoCount  Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  @@unique([channelId, date])
+  @@index([channelId, date])
+}
+
+// ============================================================
 // NextAuth · tabelas obrigatorias do PrismaAdapter
 // ============================================================
 
@@ -202,6 +221,21 @@ model MailAccount {
 
   @@unique([ownerEmail, address])
   @@index([ownerEmail])
+}
+
+// ============================================================
+// Google Calendar (importação Google → Watch Tower, só-leitura).
+// Guarda SÓ o refresh token, criptografado (AES-256-GCM, MAIL_CRED_KEY).
+// Uma conexão por usuário. O access token é derivado em runtime, nunca salvo.
+// ============================================================
+
+model GoogleCalendarAccount {
+  id           String   @id @default(cuid())
+  userEmail    String   @unique // login do dono (allowlist)
+  googleEmail  String? // e-mail da conta Google conectada (informativo)
+  encRefresh   String   // iv:tag:cipher (base64) · AES-256-GCM
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 // ============================================================

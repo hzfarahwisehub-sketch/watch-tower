@@ -28,6 +28,21 @@ const dict = {
 
     // ---- Inbox: agora é real (namespace "mail", componente InboxCard) ----
 
+    // ---- Google Agenda (importação Google → Watch Tower) ----
+    "daily.gcal.title": "📆 Google Agenda",
+    "daily.gcal.connect": "Conectar meu Google Agenda",
+    "daily.gcal.connecting": "Abrindo o Google…",
+    "daily.gcal.connected": "Google Agenda conectado ✓",
+    "daily.gcal.cancelled": "Conexão cancelada",
+    "daily.gcal.error": "Não deu pra conectar o Google Agenda",
+    "daily.gcal.expired": "A conexão do Google expirou · reconecte",
+    "daily.gcal.empty": "Sem eventos próximos no Google",
+    "daily.gcal.disconnect": "Desconectar",
+    "daily.gcal.disconnected": "Google Agenda desconectado",
+    "daily.gcal.readonly": "só leitura",
+    "daily.gcal.allday": "dia inteiro",
+    "daily.gcal.loading": "Carregando eventos do Google…",
+
     // ---- Ações Programadas ----
     "daily.scheduled.title": "⚡ Ações Programadas",
     "daily.scheduled.total": "{n} ações",
@@ -98,6 +113,21 @@ const dict = {
     "daily.undo.deleteAgenda": "delete event",
 
     // ---- Inbox: agora é real (namespace "mail", componente InboxCard) ----
+
+    // ---- Google Calendar (import Google → Watch Tower) ----
+    "daily.gcal.title": "📆 Google Calendar",
+    "daily.gcal.connect": "Connect my Google Calendar",
+    "daily.gcal.connecting": "Opening Google…",
+    "daily.gcal.connected": "Google Calendar connected ✓",
+    "daily.gcal.cancelled": "Connection cancelled",
+    "daily.gcal.error": "Couldn't connect Google Calendar",
+    "daily.gcal.expired": "Google connection expired · reconnect",
+    "daily.gcal.empty": "No upcoming Google events",
+    "daily.gcal.disconnect": "Disconnect",
+    "daily.gcal.disconnected": "Google Calendar disconnected",
+    "daily.gcal.readonly": "read-only",
+    "daily.gcal.allday": "all day",
+    "daily.gcal.loading": "Loading Google events…",
 
     // ---- Ações Programadas ----
     "daily.scheduled.title": "⚡ Scheduled Actions",
