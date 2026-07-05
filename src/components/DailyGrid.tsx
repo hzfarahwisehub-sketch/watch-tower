@@ -13,8 +13,6 @@ import { useUndoOptional } from "./UndoProvider";
 import { useLocale } from "./LocaleProvider";
 import { DailyCard } from "./DailyCard";
 import { InboxCard } from "./InboxCard";
-import { GoogleCalendar } from "./GoogleCalendar";
-import { SafeBoundary } from "./SafeBoundary";
 
 export type DailyBlock = "inbox" | "scheduled" | "agenda" | "tasks" | "reminders";
 
@@ -305,9 +303,9 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
         scope={scope}
         onScopeChange={setScope}
       >
-        <SafeBoundary>
-          <GoogleCalendar />
-        </SafeBoundary>
+        {/* Google Agenda temporariamente desligado (2026-07-02): estava
+            derrubando o card de Agenda. Religar só depois de achar o erro
+            exato pelo console. Backend/OAuth continuam prontos. */}
         {agenda.map((a) => (
           <div
             key={a.id}
