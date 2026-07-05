@@ -13,6 +13,8 @@ import { useUndoOptional } from "./UndoProvider";
 import { useLocale } from "./LocaleProvider";
 import { DailyCard } from "./DailyCard";
 import { InboxCard } from "./InboxCard";
+import { GoogleCalendar } from "./GoogleCalendar";
+import { SafeBoundary } from "./SafeBoundary";
 
 export type DailyBlock = "inbox" | "scheduled" | "agenda" | "tasks" | "reminders";
 
@@ -303,9 +305,12 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
         scope={scope}
         onScopeChange={setScope}
       >
-        {/* Google Agenda temporariamente desligado (2026-07-02): estava
-            derrubando o card de Agenda. Religar só depois de achar o erro
-            exato pelo console. Backend/OAuth continuam prontos. */}
+        {/* Seção Google Agenda (importação Google → WT). Protegida por
+            SafeBoundary: se falhar por qualquer motivo, some sozinha e a
+            Agenda continua intacta. Nunca derruba o card. */}
+        <SafeBoundary>
+          <GoogleCalendar />
+        </SafeBoundary>
         {agenda.map((a) => (
           <div
             key={a.id}
