@@ -56,7 +56,11 @@ const MapZone = dynamic(() => import("./MapZone"), {
 // salvo na chave antiga "wt-layout") abrir com esse arranjo na próxima vez;
 // depois cada um pode rearranjar (salva na chave nova). O "wt-layout" antigo
 // fica órfão de propósito (NÃO entra na migração legada abaixo).
-const LAYOUT_STORAGE_KEY = "wt-layout-v11";
+// 2026-07-05: bump pra "wt-layout-v12". Motivo: no v11 a caixa da AGENDA tinha
+// ficado ESMAGADA (tamanho mínimo, só as alças apareciam — invisível na prática).
+// Bumpar descarta esses layouts salvos quebrados e devolve o DEFAULT com a
+// Agenda em tamanho decente (w:10 h:25 no desktop). v11 NÃO entra na migração.
+const LAYOUT_STORAGE_KEY = "wt-layout-v12";
 // Chaves de versões anteriores — usadas só pra migração one-time se o user
 // já tinha layout salvo em algum bump antigo.
 const LEGACY_LAYOUT_KEYS = [
