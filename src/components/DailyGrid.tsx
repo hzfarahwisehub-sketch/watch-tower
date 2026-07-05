@@ -14,6 +14,7 @@ import { useLocale } from "./LocaleProvider";
 import { DailyCard } from "./DailyCard";
 import { InboxCard } from "./InboxCard";
 import { GoogleCalendar } from "./GoogleCalendar";
+import { SafeBoundary } from "./SafeBoundary";
 
 export type DailyBlock = "inbox" | "scheduled" | "agenda" | "tasks" | "reminders";
 
@@ -304,7 +305,9 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
         scope={scope}
         onScopeChange={setScope}
       >
-        <GoogleCalendar />
+        <SafeBoundary>
+          <GoogleCalendar />
+        </SafeBoundary>
         {agenda.map((a) => (
           <div
             key={a.id}

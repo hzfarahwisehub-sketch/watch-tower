@@ -59,9 +59,13 @@ export function GoogleCalendar() {
     }
   }, [t, toast]);
 
+  // Carrega uma vez no mount (via ref, pra o efeito NÃO depender da identidade
+  // de `load` — evita qualquer risco de re-execução em cadeia).
+  const loadRef = useRef(load);
+  loadRef.current = load;
   useEffect(() => {
-    load();
-  }, [load]);
+    loadRef.current();
+  }, []);
 
   // feedback do callback (?gcal=...) uma vez
   useEffect(() => {
