@@ -5,7 +5,6 @@ import { Responsive, WidthProvider, type Layout, type ResponsiveLayouts } from "
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { COUNTRIES } from "@/lib/data";
-import { agendaAllowed } from "@/lib/agenda-access";
 import { Header } from "./Header";
 import { KpiRow } from "./KpiRow";
 import { AlertsBanner } from "./AlertsBanner";
@@ -236,11 +235,6 @@ export function Dashboard() {
   const { t } = useLocale();
   const { data: session } = useSession();
   const isLoggedIn = !!session?.user?.email;
-  // Agenda é dos sócios (admins), MENOS o Igor (regra do Hammis 2026-07-02, bloqueio por e-mail).
-  const canSeeAgenda = agendaAllowed(
-    (session?.user as { role?: string })?.role,
-    session?.user?.email,
-  );
   // mapSelected: país em foco. Alimenta o Benchmark (a "área completa" do país,
   // com tudo do local) e o voo do globo. Clicar em qualquer lugar (mapa,
   // alertas, sidebar, feed) aponta todo mundo pro mesmo país, SEM modal cobrindo.
@@ -554,14 +548,16 @@ export function Dashboard() {
               <DailyGrid only="inbox" />
             </GridCell>
           </div>
-          {/* Agenda: só sócios (admins), MENOS o Igor. Regra do Hammis (2026-07-02). */}
-          {canSeeAgenda && (
-            <div key="agenda">
-              <GridCell panelId="agenda" locked={locked}>
-                <DailyGrid only="agenda" />
-              </GridCell>
-            </div>
-          )}
+          {/* Agenda: SEMPRE renderiza. A trava por sessão (canSeeAgenda) escondia
+              a Agenda de TODOS — inclusive dos sócios/Hammis — porque a sessão do
+              cliente não vinha com o papel esperado. Removida 2026-07-05 pra
+              devolver a Agenda. O bloqueio do Igor será refeito depois de forma
+              robusta (server-side), sem risco de sumir com a Agenda de novo. */}
+          <div key="agenda">
+            <GridCell panelId="agenda" locked={locked}>
+              <DailyGrid only="agenda" />
+            </GridCell>
+          </div>
           <div key="tasks">
             <GridCell panelId="tasks" locked={locked}>
               <DailyGrid only="tasks" />
