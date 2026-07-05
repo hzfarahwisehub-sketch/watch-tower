@@ -1,33 +1,26 @@
 // Controle de acesso à AGENDA do Watch Tower (client-safe, sem imports de servidor).
-// Regra do Hammis (2026-07-02): a Agenda é dos SÓCIOS + Hammis, MENOS o Igor.
 //
-// Correção 2026-07-05: a versão anterior liberava só por papel "admin". Mas os
-// sócios Lucas/Marcela/Jessé são papel "editor", então perdiam a Agenda (e até o
-// Hammis sumia quando a sessão não vinha como admin). Agora a liberação é por
-// E-MAIL dos 4 fundadores (independente do papel), OU qualquer admin — e sempre
-// bloqueando a lista de exceção (Igor). Isso casa com a intenção: sócios veem,
-// Igor não.
-export const AGENDA_ALLOW_EMAILS = new Set<string>([
-  "hzfarah.wisehub@gmail.com", // Hammis
-  "lucasbin181@gmail.com", // Lucas
-  "marcelanogueiracidadania@gmail.com", // Marcela
-  "diver.wisehub@gmail.com", // Jessé
-]);
-
+// Regra do Hammis (confirmada 2026-07-05): TODOS os que têm acesso são admin
+// (Hammis, Lucas, Marcela, Jessé, Igor). A Agenda é da equipe; a ÚNICA exceção é
+// o Igor, que tem acesso ao sistema mas NÃO enxerga a agenda de ninguém.
+//
+// Por isso a regra é uma LISTA DE EXCEÇÃO (deny-list), não por papel: qualquer
+// pessoa LOGADA vê a Agenda, MENOS quem estiver na lista de bloqueio. Assim não
+// depende do "role" da sessão (que pode vir desatualizado) — some a fonte de bug
+// que escondia a Agenda até dos sócios/admins.
 export const AGENDA_DENY_EMAILS = new Set<string>([
-  "igormncidadaniaitaliana@gmail.com", // Igor — braço direito, admin, sem agenda
+  "igormncidadaniaitaliana@gmail.com", // Igor — tem acesso, mas sem agenda
 ]);
 
 /**
- * Pode ver/editar a Agenda? Um dos 4 fundadores (por e-mail) OU qualquer admin,
- * desde que NÃO esteja na lista de exceção (Igor). Sem e-mail/deslogado = não.
+ * Pode ver/editar a Agenda? Qualquer usuário LOGADO (com e-mail), MENOS quem
+ * estiver na lista de exceção. Deslogado = não. O parâmetro `role` é aceito por
+ * compatibilidade, mas a decisão NÃO depende dele.
  */
 export function agendaAllowed(
-  role: string | null | undefined,
+  _role: string | null | undefined,
   email: string | null | undefined,
 ): boolean {
   if (!email) return false;
-  const e = email.toLowerCase();
-  if (AGENDA_DENY_EMAILS.has(e)) return false;
-  return AGENDA_ALLOW_EMAILS.has(e) || role === "admin";
+  return !AGENDA_DENY_EMAILS.has(email.toLowerCase());
 }
