@@ -9,7 +9,7 @@
  *
  * Bump a versão do CACHE pra invalidar caches antigos num deploy.
  */
-const CACHE = "watch-tower-v46";
+const CACHE = "watch-tower-v47";
 const APP_SHELL = ["/", "/manifest.webmanifest", "/icons/icon-192.png", "/icons/icon-512.png"];
 
 // ---------- install: precache do shell ----------
@@ -17,6 +17,11 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE).then((cache) => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()),
   );
+});
+
+// ---------- mensagem do app: forçar o SW novo a assumir (botão Atualizar) ----------
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") self.skipWaiting();
 });
 
 // ---------- activate: limpa caches antigos ----------
