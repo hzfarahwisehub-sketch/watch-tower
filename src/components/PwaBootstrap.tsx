@@ -74,15 +74,30 @@ export function PwaBootstrap() {
     };
   }, []);
 
-  function applyUpdate() {
-    const reg = regRef.current;
-    // se houver um SW novo "esperando", pede pra ele assumir; depois recarrega
-    // pra puxar os assets frescos (o SW já roda skipWaiting no install, então
-    // normalmente basta recarregar).
+  const [updating, setUpdating] = useState(false);
+
+  // Atualização FORTE ("limpa e recarrega"): apaga TODOS os caches + desregistra
+  // os service workers + recarrega do zero. Garante que o app pega os arquivos
+  // novos mesmo quando ficou preso num SW velho (o "reload" simples não bastava).
+  async function applyUpdate() {
+    if (updating) return;
+    setUpdating(true);
     try {
-      reg?.waiting?.postMessage({ type: "SKIP_WAITING" });
-    } catch {}
-    window.location.reload();
+      if ("caches" in window) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map((k) => caches.delete(k)));
+      }
+      if ("serviceWorker" in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.map((r) => r.unregister()));
+      }
+    } catch {
+      /* segue pro reload de qualquer forma */
+    }
+    // reload forçando ignorar o cache HTTP; sem SW no 1º load = tudo da rede.
+    const url = new URL(window.location.href);
+    url.searchParams.set("_r", String(Date.now() % 100000)); // cache-bust do HTML
+    window.location.replace(url.pathname + url.search + url.hash);
   }
 
   // Detecta instalabilidade.
@@ -141,16 +156,17 @@ export function PwaBootstrap() {
             Nova versão disponível
           </div>
           <div className="text-[11px] leading-snug" style={{ color: "var(--text-dim, #9F9DBE)" }}>
-            Atualize pra pegar as últimas melhorias do Watch Tower.
+            Limpa o cache e recarrega com os arquivos novos.
           </div>
         </div>
         <button
           type="button"
           onClick={applyUpdate}
+          disabled={updating}
           className="px-3.5 py-1.5 rounded-[10px] text-[12px] font-bold cursor-pointer shrink-0"
-          style={{ color: "#fff", background: "linear-gradient(135deg,#1F55FF,#7BA0FF)" }}
+          style={{ color: "#fff", background: "linear-gradient(135deg,#1F55FF,#7BA0FF)", opacity: updating ? 0.6 : 1 }}
         >
-          Atualizar
+          {updating ? "Limpando…" : "Atualizar"}
         </button>
       </div>
     );
