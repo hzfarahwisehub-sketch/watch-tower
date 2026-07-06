@@ -1,4 +1,4 @@
-// GERADO pela equipe de agentes (rodada semanal do Mercado de Trabalho) · ultima geracao 2026-06-29.
+// GERADO pela equipe de agentes (rodada semanal do Mercado de Trabalho) · ultima geracao 2026-07-06.
 // NAO editar a mao: regenerado a cada rodada de pesquisa (_gen-labor.mjs).
 import type { LaborMarketMap } from "./labor-market";
 
@@ -4149,1150 +4149,951 @@ export const LABOR_MARKET: LaborMarketMap = {
     ]
   },
   "bg": {
-    "updatedAt": "2026-06-22",
-    "overview": "A Bulgaria entrou em 2026 com um dos mercados de trabalho mais aquecidos da sua historia recente. Segundo os dados anuais de 2025 do Instituto Nacional de Estatistica (NSI), a taxa de desemprego caiu para 3,5%, recuo de 0,7 ponto frente a 2024, enquanto a taxa de emprego na faixa de 15 a 64 anos ficou em 70,9%. A populacao economicamente ativa somou cerca de 2,91 milhoes de pessoas e o emprego concentra-se fortemente nos servicos (68,4%), seguidos por industria (26,9%) e agricultura (4,8%). O quadro e de escassez de mao de obra mais do que de falta de vagas: em dezembro de 2025, 34,8% das empresas industriais apontaram a falta de trabalhadores como fator que limita a atividade. Para o estrangeiro qualificado, sobretudo em tecnologia e saude, isso significa portas abertas; para o trabalhador sem qualificacao, o cenario e mais restrito, com excedente estrutural de mao de obra de baixa escolaridade registrado pelo EURES.",
+    "updatedAt": "2026-07-06",
+    "overview": "O mercado de trabalho bulgaro segue apertado e com desemprego em queda. Segundo o Instituto Nacional de Estatistica (NSI), a taxa de desemprego caiu para 3,2% no quarto trimestre de 2025, o menor patamar do ano, com cerca de 95,7 mil desempregados e taxa de emprego de 70,7% na faixa de 15 a 64 anos. O emprego concentra-se em servicos (69,1%), industria (26,6%) e agricultura (4,3%). A escassez de mao de obra qualificada, o envelhecimento populacional e a adocao do euro em 1 de janeiro de 2026 marcam o cenario atual, com salarios em alta forte (crescimento de 12% no salario medio no terceiro trimestre de 2025 ante igual periodo de 2024, segundo o NSI).",
     "hotSectors": [
-      "Tecnologia da informacao e comunicacao (software e outsourcing)",
+      "Tecnologia da informacao e comunicacao (TIC)",
       "Servicos financeiros e de seguros",
-      "Industria e manufatura (operadores de maquinas, eletricistas, soldadores)",
-      "Construcao civil",
-      "Saude (medicos, enfermeiros, farmaceuticos, tecnicos)",
-      "Turismo, hotelaria e restauracao",
-      "Educacao e ensino"
+      "Saude e assistencia social",
+      "Construcao civil e oficios relacionados",
+      "Industria de manufatura (leve e pesada)",
+      "Turismo e hotelaria (sazonal)",
+      "Educacao"
     ],
     "coolingSectors": [
-      "Funcoes administrativas e de apoio a negocios de nivel medio (excedente de candidatos)",
-      "Vendas e atendimento comercial nao especializado",
-      "Trabalho bracal nao qualificado e de baixa escolaridade (excedente estrutural)"
+      "Profissionais associados de administracao e negocios (excesso de oferta)",
+      "Trabalhadores de vendas",
+      "Graduados em economia, direito, psicologia e administracao de empresas",
+      "Trabalhadores sem qualificacao e de baixa escolaridade"
     ],
     "inDemandRoles": [
       {
-        "role": "Desenvolvedor / engenheiro de software",
-        "note": "Setor de TI com maior crescimento de contratacoes do pais (+23%) e deficit estrutural de cerca de 40% de desenvolvedores especializados (McKinsey). Sofia concentra cerca de 70% dos profissionais de TI."
+        "role": "Medicos e enfermeiros",
+        "note": "Escassez permanente de especialistas medicos, sobretudo em hospitais menores; inclui parteiras, tecnicos de laboratorio e farmaceuticos (fonte: EURES/Agencia de Emprego)"
       },
       {
-        "role": "Medico, enfermeiro e tecnico de saude",
-        "note": "Profissoes regulamentadas com escassez critica, citadas pelo EURES entre os grupos de maior carencia."
+        "role": "Especialistas de software e programadores",
+        "note": "Setor de TIC com demanda continua e maiores salarios do pais (fonte: EURES)"
       },
       {
-        "role": "Engenheiro mecanico"
+        "role": "Engenheiros mecanicos e tecnicos",
+        "note": "Demanda em manufatura e polos industriais (fonte: EURES)"
       },
       {
-        "role": "Eletricista, soldador e operador de maquinas",
-        "note": "Vagas ligadas a industria e construcao com dificil preenchimento."
+        "role": "Soldadores, eletricistas e trabalhadores da construcao",
+        "note": "Oficios da construcao entre as maiores carencias (fonte: EURES)"
       },
       {
-        "role": "Trabalhador e tecnico da construcao civil"
+        "role": "Professores e educadores",
+        "note": "Carencia estrutural no setor de educacao (fonte: EURES)"
       },
       {
-        "role": "Processamento de alimentos, marcenaria e confeccao (costureiro)",
-        "note": "Oficios artesanais apontados pelo EURES como de maior incidencia de escassez."
+        "role": "Operadores de maquinas e montadores",
+        "note": "Demanda na industria (fonte: EURES)"
       },
       {
-        "role": "Professor e formador"
+        "role": "Cozinheiros e garcons",
+        "note": "Pico de demanda no verao na hotelaria e restauracao (fonte: EURES)"
       },
       {
-        "role": "Farmaceutico"
+        "role": "Motoristas",
+        "note": "Escassez em transporte e logistica (fonte: EURES)"
       },
       {
-        "role": "Contador operacional e especialista financeiro"
-      },
-      {
-        "role": "Designer grafico"
+        "role": "Trabalhadores de processamento de alimentos, madeira e confeccao",
+        "note": "Grupos ocupacionais com maior incidencia de escassez em 2024 (fonte: EURES/ELA)"
       }
     ],
     "byQualification": [
       {
-        "area": "Alta qualificacao em tecnologia (TI/software)",
-        "advice": "E o caminho mais aberto para estrangeiros. O setor cresce acima da media, paga os melhores salarios do pais e ofertas em TI dispensam o teste de mercado de trabalho na via do Cartao Azul UE. Sofia e o polo dominante de outsourcing e nearshoring."
+        "area": "Saude e enfermagem",
+        "advice": "Area de maior carencia estrutural, com escassez permanente de medicos, enfermeiros, parteiras e farmaceuticos, especialmente fora dos grandes centros. Profissao regulada exige reconhecimento de diploma."
       },
       {
-        "area": "Saude (medicos, enfermeiros, farmaceuticos)",
-        "advice": "Ha escassez real e demanda firme, mas sao profissoes regulamentadas: o diploma estrangeiro precisa de reconhecimento formal e de habilitacao adicional para exercer. Diplomas da UE seguem a Diretiva 2005/36/CE com reconhecimento automatico; de fora da UE passam pelo NACID."
+        "area": "Tecnologia da informacao",
+        "advice": "Setor mais aquecido e mais bem pago do pais (salario medio de 5.512 BGN no setor de TIC no terceiro trimestre de 2025, segundo o NSI). Boas chances para desenvolvedores de software e programadores, inclusive via EU Blue Card, que nao exige teste de mercado de trabalho."
       },
       {
-        "area": "Engenharia e tecnicos industriais",
-        "advice": "Boa janela em engenharia mecanica, eletricistas, soldadores e operadores de maquina. Para fora da UE, a via usual e a Autorizacao Unica, com teste de mercado de 15 dias feito pelo empregador."
+        "area": "Engenharia",
+        "advice": "Engenheiros mecanicos e tecnicos tem demanda em manufatura e polos industriais como Plovdiv. Atencao: parte da engenharia aparece tambem entre ocupacoes em excesso, entao o encaixe depende da especializacao industrial."
       },
       {
-        "area": "Oficios e construcao",
-        "advice": "Demanda em construcao, alimentos, marcenaria e confeccao, via Autorizacao Unica com patrocinio do empregador; exige comprovacao de qualificacao e experiencia."
+        "area": "Construcao civil e oficios",
+        "advice": "Alta procura por soldadores, eletricistas e trabalhadores qualificados. Setor em crescimento e entre as maiores carencias reportadas."
       },
       {
-        "area": "Baixa qualificacao",
-        "advice": "Segmento mais dificil: ha excedente estrutural de mao de obra nao qualificada e o empregador precisa justificar a contratacao de estrangeiro. Melhores chances em turismo e hotelaria sazonais."
+        "area": "Educacao",
+        "advice": "Professores e educadores estao entre as profissoes com carencia. Profissao regulada, sujeita a reconhecimento de qualificacao."
       },
       {
-        "area": "Empreendedor",
-        "advice": "Abrir empresa e simples: EOOD com capital simbolico de 2 BGN, registro remoto por procuracao em poucos dias. Ser dono de empresa nao concede residencia automatica; a permanencia exige visto e autorizacao especificos."
+        "area": "Hotelaria e turismo",
+        "advice": "Forte demanda sazonal no verao por cozinheiros, garcons e afins nas regioes litoraneas. Salarios entre os mais baixos do pais (1.586 BGN em alojamento e alimentacao no terceiro trimestre de 2025, segundo o NSI)."
+      },
+      {
+        "area": "Administracao, economia e direito",
+        "advice": "Areas com excesso de oferta de diplomados. A concorrencia e maior e as oportunidades, mais limitadas, segundo o mapeamento da EURES."
       }
     ],
     "salaries": [
       {
-        "role": "Media nacional (sob contrato)",
-        "range": "2.549 BGN/mes brutos (cerca de 1.303 EUR), Q3 2025",
+        "role": "Salario medio bruto mensal (todos os setores)",
+        "range": "2.549 BGN/mes (3o trim. 2025)",
         "source": {
-          "label": "NSI Q3 2025",
+          "label": "NSI - Empregados e salarios medios, 3o trimestre de 2025",
           "url": "https://www.nsi.bg/en/press-release/employees-and-average-wages-and-salaries-third-quarter-of-2025-8846",
           "official": true
         }
       },
       {
         "role": "Tecnologia da informacao e comunicacao",
-        "range": "5.512 BGN/mes brutos (cerca de 2.818 EUR), setor mais bem pago",
+        "range": "5.512 BGN/mes (3o trim. 2025)",
         "source": {
-          "label": "NSI Q3 2025",
+          "label": "NSI - Empregados e salarios medios, 3o trimestre de 2025",
           "url": "https://www.nsi.bg/en/press-release/employees-and-average-wages-and-salaries-third-quarter-of-2025-8846",
           "official": true
         }
       },
       {
         "role": "Atividades financeiras e de seguros",
-        "range": "3.716 BGN/mes brutos (cerca de 1.900 EUR)",
+        "range": "3.716 BGN/mes (3o trim. 2025)",
         "source": {
-          "label": "NSI Q3 2025",
+          "label": "NSI - Empregados e salarios medios, 3o trimestre de 2025",
           "url": "https://www.nsi.bg/en/press-release/employees-and-average-wages-and-salaries-third-quarter-of-2025-8846",
           "official": true
         }
       },
       {
-        "role": "Hotelaria e restauracao",
-        "range": "1.586 BGN/mes brutos (cerca de 811 EUR), menor faixa",
+        "role": "Eletricidade, gas e ar condicionado",
+        "range": "3.539 BGN/mes (3o trim. 2025)",
         "source": {
-          "label": "NSI Q3 2025",
+          "label": "NSI - Empregados e salarios medios, 3o trimestre de 2025",
           "url": "https://www.nsi.bg/en/press-release/employees-and-average-wages-and-salaries-third-quarter-of-2025-8846",
           "official": true
         }
       },
       {
-        "role": "Salario minimo nacional",
-        "range": "EUR 477,04/mes (referencia EURES)",
+        "role": "Alojamento e alimentacao (mais baixo)",
+        "range": "1.586 BGN/mes (3o trim. 2025)",
         "source": {
-          "label": "EURES Bulgaria",
-          "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-bulgaria_en",
+          "label": "NSI - Empregados e salarios medios, 3o trimestre de 2025",
+          "url": "https://www.nsi.bg/en/press-release/employees-and-average-wages-and-salaries-third-quarter-of-2025-8846",
+          "official": true
+        }
+      },
+      {
+        "role": "Salario minimo (a partir de 1o jan. 2026)",
+        "range": "620,20 EUR/mes (1.213 BGN); hora 3,74 EUR (7,31 BGN)",
+        "source": {
+          "label": "BTA - Agencia de Noticias da Bulgaria (governo)",
+          "url": "https://www.bta.bg/en/news/bulgaria/1036420-minimum-wage-rises-to-eur-620-20-poverty-line-up",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE/EEE e da Suica trabalham livremente na Bulgaria, sem necessidade de autorizacao de trabalho. Nacionais de paises terceiros (incluindo brasileiros) em geral precisam de autorizacao, sob a Lei de Migracao e Mobilidade Laboral. Vias principais: (1) Autorizacao Unica (Single Permit), que junta residencia e trabalho num so documento e exige que o empregador comprove publicacao da vaga por 15 dias sem candidato adequado da Bulgaria ou da UE (teste de mercado), que estrangeiros nao ultrapassem 20% do quadro medio (35% em PMEs), salario igual ao de um bulgaro em posicao equivalente e qualificacao comprovada; (2) Cartao Azul UE, para altamente qualificados, que exige diploma de ensino superior (minimo 3 anos) ou 5 anos de experiencia (lista especial inclui TI), contrato de no minimo 6 meses, salario de pelo menos 1,5 vez a media nacional e nao aplica teste de mercado; valido por ate 5 anos, taxa de emissao em torno de 110 BGN. Mudancas recentes: desde julho de 2025 o empregador deve inscrever titulares de Single Permit no seguro-saude estatal obrigatorio; e o reconhecimento de diploma estrangeiro pelo NACID passou a ser obrigatorio quando o pedido se apoia em titulo academico de fora. Profissoes regulamentadas (medico, dentista, farmaceutico, veterinario, advogado) exigem procedimento adicional de habilitacao. Empreender e aberto a estrangeiros (100% de propriedade, EOOD com capital de 2 BGN), mas ser dono de empresa nao concede residencia automatica.",
+    "foreignerRules": "Cidadaos da UE/EEE e da Suica trabalham livremente na Bulgaria, sem necessidade de autorizacao. Nacionais de paises terceiros precisam de autorizacao: as vias principais sao a Autorizacao Unica de residencia e trabalho (Single Permit), valida por ate 3 anos e renovavel, para quem tem oferta concreta de emprego; e o Cartao Azul da UE (EU Blue Card), para profissionais altamente qualificados, que exige ensino superior de no minimo 3 anos, ou 5 anos de experiencia, ou experiencia em posicoes de lista especial (incluindo TI). O contrato pode ter duracao minima de 6 meses e o cartao vale ate 5 anos (no minimo 24 meses); a Bulgaria nao aplica teste de mercado de trabalho ao Cartao Azul. O limiar salarial do Cartao Azul equivale a 1,5 vez o salario medio anual (referencia de cerca de 23.500 EUR brutos anuais para 2026, segundo fontes de imigracao; o valor oficial e reajustado anualmente pela Agencia de Emprego). Mudancas em vigor em 2025: reconhecimento de diploma passou a ser obrigatorio quando o pedido se baseia em titulo estrangeiro, e desde 1 de julho de 2025 o empregador deve inscrever o titular de Single Permit no seguro-saude estatutario do Estado. Desde 1 de janeiro de 2026 todos os valores (salarios, contribuicoes, limites) sao calculados em euros, a taxa fixa de 1,95583 BGN por 1 EUR.",
     "opportunityWindows": [
-      "Setor de TI/software com maior crescimento de contratacoes do pais (+23%) e deficit estrutural; ofertas de TI no Cartao Azul dispensam teste de mercado de trabalho.",
-      "Escassez declarada de mao de obra: 34,8% das empresas industriais apontam falta de trabalhadores como fator limitante (NSI, dez/2025).",
-      "Saude com carencia critica e continua de medicos, enfermeiros e tecnicos.",
-      "Construcao e industria com vagas de dificil preenchimento (eletricistas, soldadores, operadores de maquina).",
-      "Turismo e hotelaria com escassez de pessoal, incluindo oportunidades sazonais.",
-      "Sofia como segundo polo tecnologico de crescimento mais rapido da Europa, concentrando cerca de 70% dos profissionais de TI.",
-      "Abertura de empresa rapida e barata para empreendedores estrangeiros (EOOD remota, capital simbolico)."
+      "Mercado apertado com desemprego de 3,2% (menor de 2025) e alta forte de salarios, favorecendo quem busca recolocacao",
+      "Escassez permanente de profissionais de saude, sobretudo fora dos grandes centros",
+      "Setor de TIC aquecido e com acesso facilitado pelo Cartao Azul da UE, que dispensa teste de mercado de trabalho",
+      "Demanda sazonal expressiva no verao para hotelaria, restauracao, transporte e servicos nas regioes litoraneas",
+      "Polo industrial de Plovdiv (Sul-Central) com empresas estrangeiras e carencia de perfis tecnicos e de saude",
+      "Cerca de 262 mil trabalhadores e especialistas projetados como demanda em 12 meses, mais de 87% para reposicao (fonte: EURES)"
     ],
     "jobBoards": [
       {
-        "label": "Agencia Nacional de Emprego (National Employment Agency)",
-        "url": "https://www.az.government.bg/en/",
+        "label": "EURES Bulgaria (Agencia de Emprego) - portal oficial de vagas e CVs, gratuito",
+        "url": "https://eures.bg",
         "official": true
       },
       {
-        "label": "EURES - Portal Europeu da Mobilidade Profissional",
-        "url": "https://eures.europa.eu/index_en",
+        "label": "Agencia de Emprego da Bulgaria (Agentsia po zaetostta) - servico publico de emprego",
+        "url": "https://www.az.government.bg",
         "official": true
       },
       {
-        "label": "Point of Single Contact - profissoes regulamentadas",
-        "url": "https://psc.egov.bg/en/market-regulated-professions",
+        "label": "Portal EURES da UE - vagas em toda a Europa",
+        "url": "https://europa.eu/eures/portal/jv-se/home?lang=en",
+        "official": true
+      },
+      {
+        "label": "Portal de Imigracao da UE - Cartao Azul Bulgaria",
+        "url": "https://immigration-portal.ec.europa.eu/eu-blue-card/bulgaria_en",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "NSI - Main Labour Force Survey Results, 2025 Annual data",
-        "url": "https://www.nsi.bg/en/press-release/main-labour-force-survey-results-2025-annual-data-8966",
-        "official": true
-      },
-      {
-        "label": "NSI - Employees and average wages and salaries, Q3 2025",
-        "url": "https://www.nsi.bg/en/press-release/employees-and-average-wages-and-salaries-third-quarter-of-2025-8846",
-        "official": true
-      },
-      {
-        "label": "NSI - Main Labour Force Survey Results, Q4 2025",
+        "label": "NSI - Principais resultados da Pesquisa de Forca de Trabalho, 4o trimestre de 2025",
         "url": "https://www.nsi.bg/en/press-release/main-labour-force-survey-results-fourth-quarter-of-2025-8939",
         "official": true
       },
       {
-        "label": "EURES - Labour Market Information: Bulgaria",
+        "label": "NSI - Empregados e salarios medios, 3o trimestre de 2025",
+        "url": "https://www.nsi.bg/en/press-release/employees-and-average-wages-and-salaries-third-quarter-of-2025-8846",
+        "official": true
+      },
+      {
+        "label": "EURES - Informacao de Mercado de Trabalho: Bulgaria",
         "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-bulgaria_en",
         "official": true
       },
       {
-        "label": "ELA/EURES - Report on labour shortages and surpluses 2024",
-        "url": "https://www.ela.europa.eu/sites/default/files/2025-06/EURES_Report_on_labour_shortages_and_surpluses_2024.pdf",
-        "official": true
-      },
-      {
-        "label": "Comissao Europeia - EU Blue Card Bulgaria",
+        "label": "Comissao Europeia - Cartao Azul da UE: Bulgaria",
         "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/eu-blue-card/eu-blue-card-bulgaria_en",
         "official": true
       },
       {
-        "label": "NACID - Reconhecimento de qualificacoes estrangeiras",
-        "url": "https://nacid.bg/en/foreign_qualifications_in_bulgaria_b_m/info/",
+        "label": "ELA/EURES - Relatorio sobre escassez e excesso de mao de obra 2024",
+        "url": "https://www.ela.europa.eu/sites/default/files/2025-06/EURES_Report_on_labour_shortages_and_surpluses_2024.pdf",
         "official": true
       },
       {
-        "label": "Intellias - Outsourcing to Bulgaria",
-        "url": "https://intellias.com/outsourcing-bulgaria/",
-        "official": false
-      },
-      {
-        "label": "NextJob - Hiring statistics Bulgaria",
-        "url": "https://www.nextjob.bg/hiring-statistics-bulgaria/",
-        "official": false
-      },
-      {
-        "label": "Innovires - Work Permit / EU Blue Card Bulgaria",
-        "url": "https://www.innovires.com/en/blog/work-permit-bulgaria.html",
-        "official": false
+        "label": "BTA - Salario minimo sobe para 620,20 EUR (governo bulgaro)",
+        "url": "https://www.bta.bg/en/news/bulgaria/1036420-minimum-wage-rises-to-eur-620-20-poverty-line-up",
+        "official": true
       }
     ]
   },
   "cy": {
-    "updatedAt": "2026-06-22",
-    "overview": "Chipre chega a 2025 com um dos mercados de trabalho mais aquecidos da União Europeia. O desemprego recuou para cerca de 4,1% no terceiro trimestre de 2025 segundo o Serviço de Estatística (CYSTAT), e a estimativa harmonizada do Eurostat aponta 4,4% em setembro, bem abaixo da média da zona do euro. A taxa de emprego, de 75,2%, supera em quase cinco pontos a média do bloco. O salário bruto médio mensal subiu para cerca de 2.509 euros no primeiro trimestre de 2025, alta de 5,4% em um ano. O país tem forte presença estrangeira na força de trabalho, com cerca de 21,7% vinda de fora da UE e mais 10,6% de outros Estados-membros, proporção bem acima da média europeia, o que torna o mercado relativamente aberto a quem chega de fora.\n\nA economia cipriota é dominada por serviços. Comércio, turismo e hospitalidade, serviços profissionais e construção concentram a maior parte dos empregos, mas o motor do crescimento recente é a tecnologia. Chipre se firmou como polo de empresas de FOREX, iGaming, fintech e suporte de TI, que disputam talento com empregadores internacionais e puxam os salários para cima. Em paralelo, a expansão do sistema nacional de saúde (GESY) desde 2019 elevou a demanda por profissionais de saúde, e setores como energia renovável e shipping seguem aquecidos. O lado fraco fica na agricultura tradicional, em parte da indústria e no varejo de menor qualificação, além de um excedente persistente em funções administrativas e de escritório.",
+    "updatedAt": "2026-07-06",
+    "overview": "O mercado de trabalho cipriota segue em expansao e no menor patamar de desemprego em mais de uma decada. Segundo o Inquerito as Forcas de Trabalho do Servico de Estatistica (CyStat), a taxa de desemprego caiu para 4,0% no primeiro trimestre de 2026, ante 5,0% no mesmo periodo de 2025, com 21.246 desempregados e 510.265 pessoas ocupadas. A taxa de emprego subiu para 62,1% da populacao. O ponto de atencao e o desemprego juvenil (15 a 24 anos), que subiu para 13,1% no 1o trimestre de 2026. A economia e puxada por turismo, tecnologia da informacao, servicos financeiros e construcao, e o pais registrou 63 profissoes em falta em 2024 segundo o relatorio EURES.",
     "hotSectors": [
-      "Tecnologia da informacao e comunicacao (TIC), desenvolvimento de software e suporte de TI",
-      "FOREX, iGaming e fintech (servicos financeiros online)",
-      "Turismo, hospitalidade e servicos de alimentacao",
-      "Saude e cuidados (impulsionado pela expansao do GESY)",
-      "Construcao e oficios de construcao",
-      "Shipping e servicos maritimos",
-      "Energia renovavel",
-      "Servicos profissionais, cientificos e tecnicos (auditoria, contabilidade, juridico)"
+      "Tecnologia da informacao e comunicacao (TIC/ICT)",
+      "Turismo e hotelaria/alimentacao",
+      "Saude e farmaceutica",
+      "Servicos financeiros, contabilidade e forex",
+      "Construcao civil e oficios da construcao",
+      "Energias renovaveis",
+      "Shipping/setor maritimo"
     ],
     "coolingSectors": [
       "Agricultura tradicional",
-      "Parte da industria de transformacao",
-      "Varejo de baixa qualificacao",
-      "Funcoes administrativas e de negocios (excedente de oferta)",
-      "Escriturarios gerais e de digitacao (excedente)",
-      "Profissionais de ensino (excedente segundo o EURES)"
+      "Industria/manufatura",
+      "Comercio varejista",
+      "Profissoes administrativas e de escritorio (em excedente)",
+      "Docencia/professores (em excedente)"
     ],
     "inDemandRoles": [
       {
-        "role": "Profissionais de TIC (desenvolvedores de software, engenheiros de sistemas, dados, ciberseguranca)",
-        "note": "Grupo ocupacional com maior incidencia de escassez segundo o relatorio EURES/ELA 2024; setor que mais cresce junto com suporte de TI."
+        "role": "Enfermeiros e parteiras",
+        "note": "Escassez severa no setor de saude (relatorio EURES 2024)."
       },
       {
-        "role": "Trabalhadores da construcao e oficios relacionados (exceto eletricistas)",
-        "note": "Apontados como escassez no relatorio EURES/ELA 2024."
+        "role": "Desenvolvedores de software e aplicativos",
+        "note": "Alta demanda em TIC; escassez severa."
       },
       {
-        "role": "Faxineiros, auxiliares e pessoal de limpeza",
-        "note": "Escassez registrada no relatorio EURES/ELA 2024, ligada a turismo e hospitalidade."
+        "role": "Analistas de sistemas",
+        "note": "TIC; escassez severa."
       },
       {
-        "role": "Profissionais de FOREX e iGaming (dealers, compliance, suporte ao cliente, risco)",
-        "note": "Setor de crescimento mais rapido; competicao com empregadores internacionais eleva salarios."
+        "role": "Desenvolvedores web e multimidia",
+        "note": "TIC; escassez severa."
       },
       {
-        "role": "Profissionais de saude (enfermeiros, medicos, tecnicos)",
-        "note": "Demanda crescente desde a expansao do GESY em 2019."
+        "role": "Profissionais de vendas de TIC",
+        "note": "Escassez severa."
       },
       {
-        "role": "Contadores qualificados, auditores e analistas financeiros",
-        "note": "Sustentados pelo polo de servicos profissionais e empresas de interesse estrangeiro."
+        "role": "Tecnicos de imagem medica",
+        "note": "Saude; escassez severa."
       },
       {
-        "role": "Especialistas em marketing digital, dados e seguranca da informacao",
-        "note": "EURES aponta lacuna de habilidades digitais em varios setores."
+        "role": "Garcons",
+        "note": "Turismo/hotelaria; escassez severa."
+      },
+      {
+        "role": "Motoristas de onibus",
+        "note": "Escassez severa."
+      },
+      {
+        "role": "Cozinheiros e chefs",
+        "note": "Hotelaria; escassez media."
+      },
+      {
+        "role": "Eletricistas, encanadores e carpinteiros",
+        "note": "Oficios da construcao; escassez baixa a media."
+      },
+      {
+        "role": "Recepcionistas de hotel",
+        "note": "Turismo; escassez baixa."
+      },
+      {
+        "role": "Motoristas de veiculos pesados (HGV)",
+        "note": "Escassez media."
+      },
+      {
+        "role": "Auxiliares de limpeza e helpers",
+        "note": "Um dos grupos com maior ocorrencia de escassez."
+      },
+      {
+        "role": "Engenheiros de varias especialidades",
+        "note": "Escassez baixa."
+      },
+      {
+        "role": "Medicos clinicos gerais e especialistas",
+        "note": "Escassez baixa."
       }
     ],
     "byQualification": [
       {
-        "area": "Tecnologia da informacao e dados (graduacao ou experiencia em TI)",
-        "advice": "Melhor porta de entrada para estrangeiro qualificado. TIC e o grupo de maior escassez e um dos tres setores com vagas ilimitadas no EU Blue Card. Salarios de mid a senior vao de cerca de 2.800 a 6.500 euros por mes. Direcionar candidaturas a empresas de FOREX, iGaming, fintech e suporte de TI, que recrutam internacionalmente e costumam patrocinar permissao de trabalho."
+        "area": "Tecnologia da Informacao (TIC)",
+        "advice": "Setor mais aquecido e prioritario. Desenvolvedores, analistas de sistemas, web e vendas de TIC estao entre as escassez mais severas, e ha vagas ilimitadas de EU Blue Card no setor. Profissionais de fora da UE podem substituir diploma por 3 anos de experiencia relevante em TIC nos ultimos 7 anos."
       },
       {
-        "area": "Financas, contabilidade e auditoria (qualificacao profissional tipo ACCA/ACA)",
-        "advice": "Demanda solida no polo de servicos profissionais e nas empresas de interesse estrangeiro. Contador qualificado fica em torno de 2.400 a 3.750 euros por mes e cargos de CFO/diretor chegam a 5.000 a 10.000 euros. Qualificacao internacional reconhecida e ingles fluente abrem portas."
+        "area": "Saude e Enfermagem",
+        "advice": "Escassez severa de enfermeiros, parteiras e tecnicos de imagem medica; medicos generalistas e especialistas com escassez baixa mas continua. Saude e um dos setores elegiveis ao EU Blue Card. Reconhecimento de diploma e essencial."
       },
       {
-        "area": "Saude (diploma reconhecido, registro profissional)",
-        "advice": "GESY ampliou a demanda por enfermeiros, medicos e tecnicos. Sao profissoes regulamentadas, exigindo reconhecimento de diploma e registro no orgao competente antes de exercer. Bom caminho para quem ja tem credencial reconhecida na UE."
+        "area": "Hotelaria e Turismo",
+        "advice": "Demanda constante por garcons, cozinheiros/chefs, recepcionistas e auxiliares de cozinha, especialmente na temporada. Bom ponto de entrada, mas salarios proximos do piso legal."
       },
       {
-        "area": "Construcao e oficios tecnicos (qualificacao tecnica ou experiencia comprovada)",
-        "advice": "Escassez declarada de trabalhadores da construcao. Oportunidade real para quem tem experiencia pratica, ainda que os salarios sejam menores que em tecnologia e financas."
+        "area": "Engenharia e Construcao",
+        "advice": "Oficios como eletricistas, encanadores, carpinteiros e trabalhadores da construcao estao em falta. Engenheiros de varias especialidades tem escassez baixa mas persistente."
       },
       {
-        "area": "Hospitalidade e servicos (qualificacao basica a media)",
-        "advice": "Turismo aquece a demanda por pessoal de hotelaria, alimentacao e limpeza. Entrada mais facil, salarios proximos do minimo legal; util como primeiro passo, mas com teto de remuneracao baixo."
+        "area": "Financas, Contabilidade e Direito Empresarial",
+        "advice": "Contabilidade, economia e financas sao setores elegiveis ao EU Blue Card e sustentados por forex e servicos empresariais. Atencao: profissionais de administracao e escritorio estao em EXCEDENTE, concorrencia maior."
       },
       {
-        "area": "Administracao, ensino e funcoes de escritorio (qualquer nivel)",
-        "advice": "Areas em excedente de oferta segundo o EURES. Concorrencia alta e poucas vagas; evitar contar com elas como plano principal de imigracao e priorizar requalificacao para areas digitais."
+        "area": "Educacao",
+        "advice": "Professores estao em excedente segundo o relatorio EURES, com mais oferta que demanda. Requer diferenciacao (idiomas, areas STEM) para se destacar."
       },
       {
-        "area": "Empreendedores e investidores (terceiros paises)",
-        "advice": "Caminho via Foreign Interest Company pela Business Facilitation Unit, com investimento minimo de 200.000 euros vindo do exterior e escritorio fisico proprio. Permite contratar a si mesmo e a estrangeiros (salario minimo de 2.500 euros/mes para empregados de paises terceiros) e abre via de residencia."
+        "area": "Shipping e Maritimo",
+        "advice": "Setor elegivel ao EU Blue Card (exceto tripulacao de embarcacao), com posicoes disponiveis para estrangeiros altamente qualificados."
       }
     ],
     "salaries": [
       {
-        "role": "Salario bruto medio mensal (toda a economia)",
-        "range": "~2.509 euros/mes (1o trimestre de 2025; +5,4% em um ano)",
+        "role": "Media geral (todos os empregados)",
+        "range": "EUR 2.605/mes (bruto, media anual 2025)",
         "source": {
-          "label": "CYSTAT via Cyprus Mail / koronapay",
-          "url": "https://www.cystat.gov.cy/en/SubthemeStatistics?id=43",
+          "label": "CyStat / Gov.cy - Average Monthly Earnings 2025 (preliminar)",
+          "url": "https://www.gov.cy/en/economy-and-finance/average-monthly-earnings-of-employees-4th-quarter-2025-and-annual-data-2025-preliminary/",
           "official": true
         }
       },
       {
-        "role": "Salario minimo nacional",
-        "range": "1.000 euros/mes brutos em 2025 (900 nos 6 primeiros meses); sobe a 1.088 euros (979 nos 6 primeiros meses) em jan/2026",
+        "role": "Mediana geral (todos os empregados)",
+        "range": "EUR 1.968/mes (bruto, 2025)",
         "source": {
-          "label": "Eurofound / Ministerio do Trabalho (MLSI)",
-          "url": "https://www.eurofound.europa.eu/en/countries/cyprus/minimum-wage",
+          "label": "CyStat / Gov.cy - Average Monthly Earnings 2025",
+          "url": "https://www.gov.cy/en/economy-and-finance/average-monthly-earnings-of-employees-4th-quarter-2025-and-annual-data-2025-preliminary/",
           "official": true
         }
       },
       {
-        "role": "Desenvolvedor de software junior",
-        "range": "1.800 a 2.500 euros/mes",
+        "role": "Homens (4o trimestre 2025)",
+        "range": "EUR 3.102/mes (bruto)",
         "source": {
-          "label": "Cyprus salary guides (camada de mercado, nao oficial)",
-          "url": "https://careerfinders.com.cy/salary-guide/",
+          "label": "CyStat / Gov.cy - Average Monthly Earnings Q4 2025",
+          "url": "https://www.gov.cy/en/economy-and-finance/average-monthly-earnings-of-employees-4th-quarter-2025-and-annual-data-2025-preliminary/",
           "official": true
         }
       },
       {
-        "role": "Desenvolvedor de software mid (3-5 anos)",
-        "range": "2.800 a 4.200 euros/mes",
+        "role": "Mulheres (4o trimestre 2025)",
+        "range": "EUR 2.718/mes (bruto)",
         "source": {
-          "label": "Cyprus salary guides (camada de mercado, nao oficial)",
-          "url": "https://careerfinders.com.cy/salary-guide/",
+          "label": "CyStat / Gov.cy - Average Monthly Earnings Q4 2025",
+          "url": "https://www.gov.cy/en/economy-and-finance/average-monthly-earnings-of-employees-4th-quarter-2025-and-annual-data-2025-preliminary/",
           "official": true
         }
       },
       {
-        "role": "Desenvolvedor de software senior",
-        "range": "4.000 a 6.500 euros/mes",
+        "role": "Salario minimo nacional (2026)",
+        "range": "EUR 1.088/mes (bruto); EUR 900/mes nos 6 primeiros meses do novo contrato",
         "source": {
-          "label": "Cyprus salary guides (camada de mercado, nao oficial)",
-          "url": "https://careerfinders.com.cy/salary-guide/",
+          "label": "Republica de Chipre - Decreto do Salario Minimo (Ministerio do Trabalho e Seguranca Social)",
+          "url": "https://www.mlsi.gov.cy/",
           "official": true
         }
       },
       {
-        "role": "Contador qualificado",
-        "range": "2.400 a 3.750 euros/mes",
+        "role": "Limiar salarial EU Blue Card (altamente qualificados, nao-UE)",
+        "range": "EUR 43.632/ano (bruto minimo)",
         "source": {
-          "label": "CareerFinders Salary Guide (camada de mercado, nao oficial)",
-          "url": "https://careerfinders.com.cy/salary-guide/",
-          "official": true
-        }
-      },
-      {
-        "role": "CFO / Diretor financeiro",
-        "range": "5.000 a 10.000 euros/mes",
-        "source": {
-          "label": "CareerFinders Salary Guide (camada de mercado, nao oficial)",
-          "url": "https://careerfinders.com.cy/salary-guide/",
-          "official": true
-        }
-      },
-      {
-        "role": "FOREX/iGaming - compliance e dealer",
-        "range": "2.000 a 5.000 euros/mes",
-        "source": {
-          "label": "CareerFinders Salary Guide (camada de mercado, nao oficial)",
-          "url": "https://careerfinders.com.cy/salary-guide/",
-          "official": true
-        }
-      },
-      {
-        "role": "Engenheiro civil",
-        "range": "1.800 a 4.000 euros/mes",
-        "source": {
-          "label": "CareerFinders Salary Guide (camada de mercado, nao oficial)",
-          "url": "https://careerfinders.com.cy/salary-guide/",
-          "official": true
-        }
-      },
-      {
-        "role": "Limiar salarial EU Blue Card (qualificados, paises terceiros)",
-        "range": "minimo 43.632 euros/ano brutos",
-        "source": {
-          "label": "Comissao Europeia / Migration Department",
-          "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/eu-blue-card/eu-blue-card-cyprus_en",
-          "official": true
-        }
-      },
-      {
-        "role": "Salario minimo para empregado de pais terceiro em Foreign Interest Company",
-        "range": "minimo 2.500 euros/mes brutos",
-        "source": {
-          "label": "Business Facilitation Unit (regra de empresa de interesse estrangeiro)",
-          "url": "https://www.businessincyprus.gov.cy/doing-business-in-cyprus/start-your-business/",
+          "label": "Departamento de Migracao / legislacao EU Blue Card (Diretiva 2021/1883)",
+          "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-cyprus_en",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE/EEE e suicos trabalham e se estabelecem livremente em Chipre, bastando registro local. Para nacionais de paises terceiros (incluindo brasileiros), e necessaria permissao de residencia e trabalho, em geral patrocinada pelo empregador. O regime mais relevante para qualificados e o EU Blue Card, que Chipre passou a aceitar em 7 de julho de 2025: exige contrato de pelo menos seis meses, diploma superior ou tres anos de experiencia relevante nos ultimos sete anos, seguro-saude e salario bruto minimo de 43.632 euros por ano. Tem vagas ilimitadas em tres setores (TIC, pesquisa farmaceutica e maritimo, exceto capitaes e tripulacao), analise em ate tres meses, reagrupamento familiar imediato, mobilidade na UE apos um ano e via acelerada a residencia permanente em 33 meses. No fluxo geral, o empregador submete a permissao de entrada M70; apos aprovacao, o trabalhador viaja com a permissao e passaporte e formaliza o pedido pessoalmente no Civil Registry and Migration Department em ate sete dias da chegada. Profissoes regulamentadas (saude, direito, engenharia, contabilidade/auditoria) exigem reconhecimento de diploma e registro no orgao profissional competente antes do exercicio. Para empreender, nao ha restricao a propriedade estrangeira (100% permitido); o caminho estruturado para nao europeus e a Foreign Interest Company via Business Facilitation Unit, com investimento minimo de 200.000 euros transferido do exterior, escritorio proprio e salario minimo de 2.500 euros/mes para empregados de paises terceiros. O autonomo nao europeu precisa antes da permissao de residencia/trabalho adequada e registra-se no Tax Department via portal Tax For All. Salario minimo nacional: 1.000 euros brutos/mes em 2025 (900 nos primeiros seis meses), subindo para 1.088 euros (979 nos primeiros seis meses) a partir de 1 de janeiro de 2026.",
+    "foreignerRules": "Cidadaos da UE/EEE tem livre circulacao e podem trabalhar em Chipre sem autorizacao previa. Para nacionais de paises terceiros (nao-UE), o emprego exige autorizacao de trabalho e, em geral, oferta previa de emprego. Desde 1o de agosto de 2024 entrou em vigor o novo marco legal do EU Blue Card, harmonizado com a Diretiva europeia 2021/1883, e o Departamento de Migracao passou a receber pedidos a partir de 7 de julho de 2025. O EU Blue Card permite residir e trabalhar em setores especificos: TIC, ciencia/pesquisa/inovacao, economia/contabilidade/financas, saude e farmaceutica, e shipping (exceto tripulacao). Exige qualificacao profissional alta comprovada por diploma de ensino superior (minimo 3 anos) ou, no setor de TIC, 3 anos de experiencia relevante nos ultimos 7 anos como alternativa ao diploma, alem de salario bruto minimo de EUR 43.632/ano. Reconhecimento de diplomas estrangeiros e requerido para profissoes regulamentadas (ex.: saude). Regras oficiais no Departamento de Trabalho e no Departamento de Migracao. Fonte oficial: mlsi.gov.cy e Departamento de Migracao.",
     "opportunityWindows": [
-      "EU Blue Card em vigor desde julho de 2025, com vagas ilimitadas em TIC, pesquisa farmaceutica e maritimo, analise em ate 3 meses e via rapida a residencia permanente em 33 meses",
-      "Escassez declarada de profissionais de TIC, principal grupo em falta segundo o EURES/ELA 2024",
-      "Boom de FOREX, iGaming e fintech, que recrutam internacionalmente e costumam patrocinar permissao de trabalho",
-      "Expansao do sistema de saude GESY mantendo a demanda alta por enfermeiros, medicos e tecnicos",
-      "Escassez em construcao e em limpeza/auxiliares, com entrada mais acessivel para perfis tecnicos e operacionais",
-      "Regime de Foreign Interest Company (investimento de 200.000 euros) como porta de entrada estruturada para empreendedores e investidores nao europeus",
-      "Salario minimo em alta (1.088 euros a partir de jan/2026), reduzindo a base de remuneracao em funcoes de entrada"
+      "63 profissoes em falta em 2024 (relatorio EURES), concentradas em TIC, saude e turismo, sinalizando forte demanda por mao de obra qualificada e semiqualificada.",
+      "EU Blue Card com vagas ILIMITADAS nos setores de TIC, pesquisa farmaceutica e industria maritima (exceto tripulacao) para profissionais altamente qualificados de fora da UE.",
+      "No setor de TIC, 3 anos de experiencia relevante (nos ultimos 7 anos) substituem o diploma para fins do EU Blue Card.",
+      "Aproximacao da entrada de Chipre no espaco Schengen amplia a atratividade para talentos internacionais.",
+      "Temporada turistica cria janelas sazonais para hotelaria, alimentacao e recepcao."
     ],
     "jobBoards": [
       {
-        "label": "PES Cyprus - Sistema online do Servico Publico de Emprego (Department of Labour)",
-        "url": "https://www.pescps.dl.mlsi.gov.cy",
+        "label": "Public Employment Services (PES) - Servico Publico de Emprego de Chipre",
+        "url": "https://www.pescps.dl.mlsi.gov.cy/",
         "official": true
       },
       {
-        "label": "EURES Cyprus (Department of Labour)",
-        "url": "https://www.eures.gov.cy",
+        "label": "EURES Cyprus (portal europeu de mobilidade laboral)",
+        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-cyprus_en",
         "official": true
       },
       {
-        "label": "Gov.cy - Busca de vagas / plataforma de candidatos a emprego",
-        "url": "https://www.gov.cy/en/service/job-search/",
-        "official": true
+        "label": "Ergodotisi.com",
+        "url": "https://www.ergodotisi.com/",
+        "official": false
       },
       {
-        "label": "Portal EURES (rede europeia, vagas em Chipre)",
-        "url": "https://eures.europa.eu",
-        "official": true
+        "label": "Carierista.com",
+        "url": "https://www.carierista.com/",
+        "official": false
       },
       {
-        "label": "Department of Labour / Ministerio do Trabalho (MLSI)",
-        "url": "https://www.mlsi.gov.cy/mlsi/dl/dl.nsf/index_en/index_en?OpenDocument=",
-        "official": true
+        "label": "CyprusJobs.com",
+        "url": "https://www.cyprusjobs.com/",
+        "official": false
+      },
+      {
+        "label": "Kariera.com.cy",
+        "url": "https://www.kariera.com.cy/",
+        "official": false
       }
     ],
     "sources": [
+      {
+        "label": "CyStat / Gov.cy - Labour Force Survey 1o trimestre 2026",
+        "url": "https://www.gov.cy/en/economy-and-finance/labour-force-survey-lfs-1st-quarter-2026/",
+        "official": true
+      },
+      {
+        "label": "CyStat - Estatisticas do Mercado de Trabalho",
+        "url": "https://www.cystat.gov.cy/en/SubthemeStatistics?id=43",
+        "official": true
+      },
+      {
+        "label": "CyStat / Gov.cy - Average Monthly Earnings of Employees, 4o trimestre e anual 2025 (preliminar)",
+        "url": "https://www.gov.cy/en/economy-and-finance/average-monthly-earnings-of-employees-4th-quarter-2025-and-annual-data-2025-preliminary/",
+        "official": true
+      },
       {
         "label": "EURES - Labour Market Information: Cyprus",
         "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-cyprus_en",
         "official": true
       },
       {
-        "label": "ELA/EURES - Report on labour shortages and surpluses 2024",
+        "label": "EURES/ELA - Report on Labour Shortages and Surpluses 2024",
         "url": "https://www.ela.europa.eu/sites/default/files/2025-06/EURES_Report_on_labour_shortages_and_surpluses_2024.pdf",
         "official": true
       },
       {
-        "label": "CYSTAT - Labour Market Statistics",
-        "url": "https://www.cystat.gov.cy/en/SubthemeStatistics?id=43",
+        "label": "Ministerio do Trabalho e Seguranca Social de Chipre (mlsi.gov.cy)",
+        "url": "https://www.mlsi.gov.cy/",
         "official": true
-      },
-      {
-        "label": "Eurostat - Cyprus in the EU (apresentacao 2025)",
-        "url": "https://ec.europa.eu/eurostat/documents/4187653/22762673/2025.12553+ESTAT_CY_Presidency_EN_03.pdf/2a657211-4a50-a2d1-6256-8dab88d03f60?t=1766140138406",
-        "official": true
-      },
-      {
-        "label": "Comissao Europeia - EU Blue Card Cyprus",
-        "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/eu-blue-card/eu-blue-card-cyprus_en",
-        "official": true
-      },
-      {
-        "label": "Eurofound - Minimum wage in Cyprus",
-        "url": "https://www.eurofound.europa.eu/en/countries/cyprus/minimum-wage",
-        "official": true
-      },
-      {
-        "label": "Business in Cyprus - Start your business (Ministerio de Energia, Comercio e Industria)",
-        "url": "https://www.businessincyprus.gov.cy/doing-business-in-cyprus/start-your-business/",
-        "official": true
-      },
-      {
-        "label": "EURES Cyprus - Finding a job in Cyprus (Department of Labour)",
-        "url": "https://www.eures.gov.cy/mlsi/dl/eures/eures.nsf/page21_en/page21_en?OpenDocument=",
-        "official": true
-      },
-      {
-        "label": "Cyprus Mail - Cobertura do mercado de trabalho e salario minimo 2025/2026",
-        "url": "https://cyprus-mail.com/2025/12/23/labour-minister-announces-increase-of-monthly-minimum-wage-to-1088-euro",
-        "official": false
-      },
-      {
-        "label": "CareerFinders - Cyprus Salary Guide (benchmarks de mercado)",
-        "url": "https://careerfinders.com.cy/salary-guide/",
-        "official": false
-      },
-      {
-        "label": "KPMG Cyprus - EU Blue Card implementation",
-        "url": "https://kpmg.com/cy/en/home/insights/2025/07/european-union-eu-blue-card-implementation.html",
-        "official": false
       }
     ]
   },
   "hr": {
-    "updatedAt": "2026-06-22",
-    "overview": "A Croacia entrou em 2025 com um dos mercados de trabalho mais aquecidos da sua historia recente. O desemprego caiu para cerca de 4,8% no fim de 2025 segundo o Eurostat, abaixo da media da Uniao Europeia, e a propria EURES classifica o pais como tendo um mercado relativamente equilibrado em relacao a outras economias europeias. O motor desse aperto e a combinacao de turismo forte, que responde por cerca de um quarto do PIB, construcao civil e uma industria de tecnologia em expansao acelerada, somada ao envelhecimento da populacao e a emigracao de croatas para outros paises da UE. O resultado e uma escassez estrutural de mao de obra que abriu as portas para trabalhadores estrangeiros, especialmente de Nepal, Filipinas e India, com mais de cem mil pessoas chegando ao pais ao longo de 2025. Os salarios subiram com forca: o salario medio bruto mensal alcancou cerca de 2.093 euros e o liquido cerca de 1.498 euros em novembro de 2025, alta nominal proxima de 10% em doze meses, segundo o Instituto Nacional de Estatistica da Croacia. Ainda assim, os valores seguem muito abaixo da media europeia e ha forte disparidade entre setores e regioes, com Zagreb e o litoral adriatico concentrando emprego e salarios mais altos enquanto a Croacia panonica registra o maior desemprego. Para 2026 entraram em vigor regras mais rigidas para a contratacao de estrangeiros, incluindo teste obrigatorio de lingua croata para renovacao de autorizacoes e limites territoriais para profissoes em falta, o que muda o calculo de quem planeja trabalhar ou empreender no pais.",
+    "updatedAt": "2026-07-06",
+    "overview": "O mercado de trabalho croata segue aquecido e com desemprego historicamente baixo. No quarto trimestre de 2025, a taxa de desemprego pela metodologia OIT ficou em 5,0% na faixa de 15 a 64 anos, com 89 mil desempregados, enquanto o numero de ocupados chegou a 1,701 milhao de pessoas, alta de 1,8% em relacao ao mesmo periodo de 2024 (fonte: DZS, Inquerito por Amostragem da Forca de Trabalho). A taxa de emprego subiu para 68,7% e a taxa de atividade atingiu 72,3%. O pais convive com escassez estrutural de mao de obra em construcao, turismo, industria e saude, o que abriu espaco para forte entrada de trabalhadores estrangeiros. Os salarios seguem em trajetoria de alta, com o ganho liquido medio de dezembro de 2025 crescendo 9,8% em termos nominais na comparacao anual (fonte: DZS).",
     "hotSectors": [
-      "Turismo e hotelaria, que movimenta cerca de 25% do PIB",
-      "Construcao civil e obras de infraestrutura",
-      "Tecnologia da informacao e comunicacao (ICT), projetada para chegar a 15% do PIB ate 2030",
-      "Industria de transformacao (manufatura), o maior empregador do pais",
-      "Transporte e logistica",
-      "Saude e assistencia social, setor com a maior taxa de vagas em aberto"
+      "Construcao civil (pedreiros, carpinteiros, armadores, soldadores)",
+      "Turismo e hotelaria (temporada adriatica de maio a outubro)",
+      "Industria transformadora e construcao naval",
+      "Tecnologia da informacao e comunicacao (TIC)",
+      "Transporte rodoviario de carga",
+      "Saude e assistencia social"
     ],
     "coolingSectors": [
-      "Construcao ligada a reconstrucao pos-terremoto de Zagreb, com autorizacoes de trabalho na construcao caindo quase 28% nos primeiros nove meses de 2025",
-      "Industria de vestuario e confeccao, o setor de menor remuneracao do pais",
-      "Funcoes administrativas e de escritorio, classificadas como excedentarias pela EURES",
-      "Comercio varejista de balcao, com vendedores e atendentes em excesso",
-      "Ocupacoes excedentarias citadas pela EURES: economista, recepcionista de hotel, fotografo e cabeleireiro"
+      "Funcoes administrativas (economistas, secretarias, auxiliares administrativos)",
+      "Ocupacoes de nivel superior em humanidades (jornalistas, cientistas politicos, filosofos)",
+      "Cabeleireiros e fotografos",
+      "Representantes comerciais de vendas"
     ],
     "inDemandRoles": [
       {
-        "role": "Pedreiro, carpinteiro, soldador e armador de ferro",
-        "note": "Nucleo da escassez nacional na construcao, presente em Zagreb e no norte da Croacia"
+        "role": "Pedreiro, carpinteiro de formas e armador",
+        "note": "Setor de construcao lidera a escassez em todas as regioes"
       },
       {
-        "role": "Eletricista, encanador e instalador de aquecimento e ar-condicionado",
-        "note": "Oficios da construcao em falta em varias regioes"
+        "role": "Soldador e montador (construcao naval e metalurgia)"
       },
       {
-        "role": "Operador de guindaste e de maquinas de construcao",
-        "note": "Profissao deficiente listada pela HZZ e EURES"
+        "role": "Cozinheiro, garcom e recepcionista de hotel",
+        "note": "Demanda sazonal forte no litoral adriatico"
       },
       {
-        "role": "Cozinheiro, garcom, padeiro, confeiteiro e acougueiro",
-        "note": "Forte demanda sazonal no turismo do litoral adriatico"
+        "role": "Motorista de caminhao pesado"
       },
       {
-        "role": "Motorista de caminhao, inclusive com reboque",
-        "note": "Escassez nacional confirmada pela HZZ no transporte"
+        "role": "Profissionais de TIC (desenvolvedores de software, administradores de sistemas, especialistas em banco de dados)",
+        "note": "Demanda cresce mais rapido que o numero de formados"
       },
       {
-        "role": "Mecanico de automoveis",
-        "note": "Profissao em falta nos servicos automotivos"
+        "role": "Engenheiro mecanico"
       },
       {
-        "role": "Programador e desenvolvedor de software",
-        "note": "ICT em expansao; novas regras permitem reconhecer profissionais de TI sem diploma formal por experiencia"
+        "role": "Medico e tecnico de enfermagem"
       },
       {
-        "role": "Administrador de sistemas e designer de interface (UI)",
-        "note": "Funcoes de TI em demanda segundo a EURES"
+        "role": "Professor de matematica do ensino secundario"
       },
       {
-        "role": "Profissionais de saude e assistencia social",
-        "note": "Setor com a maior taxa de vagas em aberto, cerca de 3,2%"
+        "role": "Operador de producao e de maquinas na industria"
       }
     ],
     "byQualification": [
       {
-        "area": "Ensino superior e alta qualificacao (TI, engenharia, ciencias)",
-        "advice": "O EU Blue Card e a porta principal. Exige diploma superior ou experiencia profissional reconhecida e contrato de no minimo 1 ano com salario acima do limiar nacional, cerca de 1,5x o salario bruto medio anual. Desde 2025 a validade subiu de 24 para 48 meses e profissionais de TI sem diploma formal podem qualificar por experiencia. Salarios de TI e engenharia estao entre os mais altos do pais."
+        "area": "Engenharia e TIC",
+        "advice": "Sao das areas mais valorizadas e com maior escassez. Desenvolvedores de software, administradores de sistemas e engenheiros mecanicos encontram vagas com facilidade, inclusive por via da EU Blue Card, que dispensa parecer previo do Servico Croata de Emprego."
       },
       {
-        "area": "Tecnico e profissional de oficio (construcao, transporte, manutencao)",
-        "advice": "Maior volume de vagas e o caminho mais aberto, via autorizacao unica de residencia e trabalho com teste de mercado da HZZ. Atencao: a partir de 2026 muitas profissoes em falta passam a ter limite territorial e e exigido teste de croata nivel A1.1 para renovar a permissao apos um ano."
+        "area": "Construcao civil e oficios manuais",
+        "advice": "Pedreiros, carpinteiros, armadores e soldadores estao entre as ocupacoes deficitarias listadas pelo HZZ, o que abre acesso facilitado ao emprego de estrangeiros sem teste de mercado de trabalho."
       },
       {
-        "area": "Hotelaria e turismo (cozinha, atendimento, hospedagem)",
-        "advice": "Demanda alta e sazonal no litoral adriatico, com permissoes sazonais agora de ate 9 meses. Dominio de ingles e alemao e diferencial nas regioes turisticas. Bom ponto de entrada, mas com salarios medianos e forte concorrencia de trabalhadores asiaticos."
+        "area": "Turismo e hotelaria",
+        "advice": "Cozinheiros, garcons e recepcionistas tem alta procura, especialmente para a temporada de maio a outubro. Trabalho sazonal em hotelaria e turismo dispensa teste de mercado de trabalho ate 90 dias por ano."
       },
       {
-        "area": "Empreendedor e investidor",
-        "advice": "E possivel obter residencia abrindo empresa (d.o.o. ou obrt) com participacao de pelo menos 51% e capital inicial em torno de 26.500 euros, ou pela autorizacao de autoemprego que exige renda de cerca de 1,5x o salario medio. Ha limiares minimos de faturamento: cerca de 10.000 euros por mes para pessoa juridica e 15.000 euros em 6 meses para autonomo."
+        "area": "Saude",
+        "advice": "Medicos e tecnicos de enfermagem estao em falta. E preciso reconhecimento do diploma junto as autoridades croatas antes de exercer."
       },
       {
-        "area": "Profissional remoto e nomade digital",
-        "advice": "O visto de nomade digital foi ampliado em 2025 para estadas de ate 18 meses. Voltado a quem trabalha para empregadores ou clientes fora da Croacia, sem competir no mercado local. Renda comprovada e exigida."
+        "area": "Administracao e humanidades",
+        "advice": "Sao areas com excesso de oferta em relacao a demanda. Economistas, auxiliares administrativos, jornalistas e cientistas politicos enfrentam maior dificuldade de transicao para o emprego."
       }
     ],
     "salaries": [
       {
-        "role": "Salario bruto medio mensal (todos os setores)",
-        "range": "cerca de 2.093 euros por mes (nov. 2025)",
+        "role": "Ganho liquido medio mensal (legal entities)",
+        "range": "1.494 EUR (dezembro/2025)",
         "source": {
-          "label": "Instituto Nacional de Estatistica da Croacia, via Croatia Week",
-          "url": "https://www.croatiaweek.com/croatia-average-salary-november-2025/",
+          "label": "DZS, Ganhos Medios Mensais Liquidos e Brutos",
+          "url": "https://dzs.gov.hr/news/the-average-monthly-net-earnings-for-december-2025-amounted-to-1-494-euro/2472",
           "official": true
         }
       },
       {
-        "role": "Salario liquido medio mensal (todos os setores)",
-        "range": "cerca de 1.498 euros por mes (nov. 2025)",
+        "role": "Ganho bruto medio mensal (legal entities)",
+        "range": "2.087 EUR (dezembro/2025)",
         "source": {
-          "label": "Instituto Nacional de Estatistica da Croacia, via Croatia Week",
-          "url": "https://www.croatiaweek.com/croatia-average-salary-november-2025/",
+          "label": "DZS, Ganhos Medios Mensais Liquidos e Brutos",
+          "url": "https://dzs.gov.hr/news/the-average-monthly-net-earnings-for-december-2025-amounted-to-1-494-euro/2472",
           "official": true
         }
       },
       {
-        "role": "Transporte aereo, setor mais bem pago",
-        "range": "cerca de 3.370 euros bruto e 2.315 euros liquido por mes",
+        "role": "Salario minimo mensal (bruto)",
+        "range": "1.050 EUR (a partir de 01/01/2026)",
         "source": {
-          "label": "Instituto Nacional de Estatistica da Croacia, via Croatia Week",
-          "url": "https://www.croatiaweek.com/croatia-average-salary-november-2025/",
-          "official": true
-        }
-      },
-      {
-        "role": "Industria de vestuario, setor pior pago",
-        "range": "cerca de 1.277 euros bruto e 967 euros liquido por mes",
-        "source": {
-          "label": "Instituto Nacional de Estatistica da Croacia, via Croatia Week",
-          "url": "https://www.croatiaweek.com/croatia-average-salary-november-2025/",
-          "official": true
-        }
-      },
-      {
-        "role": "Salario minimo legal",
-        "range": "840 euros por mes (referencia jan. 2024)",
-        "source": {
-          "label": "EURES, Informacao de Mercado de Trabalho Croacia",
-          "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-croatia_en",
-          "official": true
-        }
-      },
-      {
-        "role": "Limiar salarial do EU Blue Card",
-        "range": "cerca de 1,5x o salario bruto medio anual; referencia de 24.845 euros por ano (2.070 euros por mes) usada em 2023, com aumento de cerca de 17% para 2025",
-        "source": {
-          "label": "Comissao Europeia, EU Blue Card Croacia",
-          "url": "https://immigration-portal.ec.europa.eu/eu-blue-card/croatia_en",
+          "label": "Eurofound, Salario minimo na Croacia",
+          "url": "https://www.eurofound.europa.eu/en/countries/croatia/minimum-wage",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE, EEE e Suica trabalham livremente na Croacia. Para nacionais de terceiros paises, incluindo brasileiros, o caminho padrao e a autorizacao unica de residencia e trabalho, em regra precedida de teste de mercado de trabalho feito pela HZZ (Servico Croata de Emprego), que verifica se ha candidatos locais disponiveis; nao havendo, o empregador pode pedir a permissao em ate 90 dias. As regras endureceram em 2025 e 2026: o empregador precisa ter pelo menos 10% a 16% do quadro de trabalhadores croatas, da UE, EEE ou Suica em relacao aos de terceiros paises, limiar reduzido para 8% em profissoes em falta, alem de limiares minimos de faturamento, cerca de 10.000 euros por mes para pessoa juridica e 15.000 euros em 6 meses para autonomo. Passou a ser obrigatorio teste de lingua croata nivel A1.1 para renovar a autorizacao apos um ano de residencia, e as permissoes para profissoes em falta ganharam limite territorial, restringindo o trabalhador as regioes onde a ocupacao e deficiente. Em compensacao, as permissoes ganharam prazos maiores, ate 3 anos para vagas com teste de mercado, 2 anos para isentas e sazonais ate 9 meses, o trabalhador pode ficar ate 60 dias desempregado durante a validade e trocar de empregador na mesma ocupacao por procedimento simplificado apos um ano. Profissionais altamente qualificados usam o EU Blue Card, que exige diploma superior ou experiencia reconhecida, contrato de ao menos 1 ano e salario acima do limiar, agora valido por 48 meses e com reconhecimento por experiencia para alguns cargos de TI. Profissoes regulamentadas, como saude, direito, engenharia e ensino, exigem reconhecimento de qualificacao junto a autoridade competente croata antes do exercicio. Para empreender, o estrangeiro pode abrir d.o.o. (sociedade limitada) ou obrt (empresa individual), normalmente com participacao de pelo menos 51% e capital inicial em torno de 26.500 euros, e obter a autorizacao de residencia e trabalho por autoemprego, com renda exigida de cerca de 1,5x o salario medio. Nomades digitais tem visto especifico, ampliado para ate 18 meses, voltado a quem atende clientes fora da Croacia.",
+    "foreignerRules": "Nacionais de paises terceiros trabalham na Croacia por meio de uma autorizacao unica de residencia e trabalho (stay and work permit) ou de um certificado de registro de trabalho (ate 90 ou 30 dias por ano). Ha tres regimes: (1) com teste de mercado de trabalho mais parecer do Servico Croata de Emprego (HZZ), padrao para a maioria das vagas; (2) sem teste de mercado, mas com parecer do HZZ, para profissoes designadas como de alta demanda pelo Conselho de Administracao do HZZ (as ocupacoes deficitarias); (3) sem teste nem parecer, para extensoes de autorizacao, trabalho sazonal (agricultura, silvicultura, hotelaria e turismo, ate 90 dias por ano) e categorias do Artigo 110 (pessoal-chave, socios com 51% ou mais, titulares de EU Blue Card, transferencias intra-empresa, voluntarios, estagiarios e tripulantes). A EU Blue Card e destinada a profissionais altamente qualificados de paises terceiros, e emitida por ate 48 meses e dispensa o parecer previo do HZZ. Taxas administrativas: autorizacao de residencia e trabalho 74,32 EUR e certificado biometrico de residencia 31,85 EUR. Profissoes regulamentadas exigem reconhecimento de diploma junto as autoridades croatas. Fonte: Ministerio do Interior (MUP).",
     "opportunityWindows": [
-      "Escassez estrutural na construcao e nos oficios tecnicos (pedreiros, soldadores, eletricistas, encanadores) abre vagas continuas em Zagreb e no norte do pais",
-      "Temporada turistica no litoral adriatico cria pico sazonal de contratacoes em hotelaria e gastronomia, com permissoes sazonais de ate 9 meses",
-      "Setor de TI em expansao rapida, com nova regra que reconhece profissionais sem diploma formal por experiencia, ampliando a porta de entrada via EU Blue Card",
-      "Transporte e logistica com demanda firme por motoristas de caminhao em todo o pais",
-      "EU Blue Card mais atraente desde 2025: validade dobrada para 48 meses e possibilidade de atividade secundaria por conta propria",
-      "Visto de nomade digital ampliado para ate 18 meses, ideal para quem mantem renda no exterior enquanto vive na Croacia"
+      "Ocupacoes deficitarias designadas pelo HZZ dao acesso facilitado ao emprego de estrangeiros sem teste de mercado de trabalho (construcao, construcao naval, hotelaria, industria)",
+      "Trabalho sazonal em hotelaria e turismo dispensa teste de mercado ate 90 dias por ano, alinhado a temporada adriatica de maio a outubro",
+      "EU Blue Card ampliada pelas emendas de 2025 a Lei de Estrangeiros: validade de ate 48 meses, reconhecimento de qualificacao por experiencia para certos cargos de TIC e dispensa de parecer previo do HZZ",
+      "Escassez estrutural em TIC e engenharia, onde a demanda cresce mais rapido que o numero de formados"
     ],
     "jobBoards": [
       {
-        "label": "HZZ, Burza rada (Servico Croata de Emprego, portal oficial de vagas)",
-        "url": "https://burzarada.hzz.hr/Posloprimac_RadnaMjesta.aspx",
+        "label": "Burza rada (portal oficial do HZZ, Servico Croata de Emprego)",
+        "url": "https://burzarada.hzz.hr/",
         "official": true
       },
       {
-        "label": "EURES, portal de mobilidade de emprego da UE",
+        "label": "HZZ, Servico Croata de Emprego (site institucional)",
+        "url": "https://www.hzz.hr/en/",
+        "official": true
+      },
+      {
+        "label": "EURES, portal europeu de emprego",
         "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "EURES Croacia (HZZ), servicos para quem busca emprego",
-        "url": "https://eures.hzz.hr/en/eures-services/jobseekers/",
-        "official": true
+        "label": "MojPosao",
+        "url": "https://www.mojposao.hr/",
+        "official": false
       },
       {
-        "label": "Ministerio do Trabalho da Croacia, como procurar emprego no pais",
-        "url": "https://mrosp.gov.hr/highlights-7158/your-europe/labour-market-and-employment/looking-for-a-job-in-the-republic-of-croatia/12082",
-        "official": true
-      },
-      {
-        "label": "MojPosao, maior portal privado de vagas da Croacia",
-        "url": "https://mojposao.hr/en/",
+        "label": "Posao.hr",
+        "url": "https://www.posao.hr/",
         "official": false
       }
     ],
     "sources": [
       {
-        "label": "EURES, Informacao de Mercado de Trabalho: Croacia",
+        "label": "DZS, Forca de Trabalho na Republica da Croacia, 4o trimestre de 2025",
+        "url": "https://podaci.dzs.hr/2025/en/96920",
+        "official": true
+      },
+      {
+        "label": "DZS, ganho liquido medio de dezembro de 2025 (1.494 EUR)",
+        "url": "https://dzs.gov.hr/news/the-average-monthly-net-earnings-for-december-2025-amounted-to-1-494-euro/2472",
+        "official": true
+      },
+      {
+        "label": "Eurofound, salario minimo na Croacia",
+        "url": "https://www.eurofound.europa.eu/en/countries/croatia/minimum-wage",
+        "official": true
+      },
+      {
+        "label": "MUP, Trabalho de nacionais de paises terceiros",
+        "url": "https://mup.gov.hr/aliens-281621/stay-and-work/work-of-third-country-nationals/281663",
+        "official": true
+      },
+      {
+        "label": "MUP, EU Blue Card e trabalhadores altamente qualificados",
+        "url": "https://mup.gov.hr/aliens-281621/stay-and-work/stay-and-work-of-highly-qualified-third-country-nationals/281692",
+        "official": true
+      },
+      {
+        "label": "EURES, informacao do mercado de trabalho da Croacia",
         "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-croatia_en",
         "official": true
       },
       {
-        "label": "EURES e ELA, Relatorio de escassez e excedente de mao de obra 2024",
-        "url": "https://www.ela.europa.eu/sites/default/files/2025-06/EURES_Report_on_labour_shortages_and_surpluses_2024.pdf",
+        "label": "Cedefop, ocupacoes prioritarias de desajuste (Croacia)",
+        "url": "https://www.cedefop.europa.eu/en/data-insights/croatia-mismatch-priority-occupations",
         "official": true
-      },
-      {
-        "label": "Eurostat, Estatisticas de desemprego (via Trading Economics)",
-        "url": "https://tradingeconomics.com/croatia/unemployment-rate-eurostat-data.html",
-        "official": false
-      },
-      {
-        "label": "Comissao Europeia, Previsao economica para a Croacia",
-        "url": "https://economy-finance.ec.europa.eu/economic-surveillance-eu-member-states/country-pages/croatia/economic-forecast-croatia_en",
-        "official": true
-      },
-      {
-        "label": "Comissao Europeia, EU Blue Card Croacia",
-        "url": "https://immigration-portal.ec.europa.eu/eu-blue-card/croatia_en",
-        "official": true
-      },
-      {
-        "label": "Comissao Europeia, Trabalhador autonomo na Croacia",
-        "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/self-employed-worker-croatia_en",
-        "official": true
-      },
-      {
-        "label": "Ministerio do Trabalho da Croacia, procurar emprego",
-        "url": "https://mrosp.gov.hr/highlights-7158/your-europe/labour-market-and-employment/looking-for-a-job-in-the-republic-of-croatia/12082",
-        "official": true
-      },
-      {
-        "label": "OECD, Reviews of Labour Market and Social Policies: Croatia 2025",
-        "url": "https://www.oecd.org/en/publications/oecd-reviews-of-labour-market-and-social-policies-croatia-2025_90b78cc3-en/full-report/the-labour-market-and-social-situation-in-croatia_b415075e.html",
-        "official": true
-      },
-      {
-        "label": "Croatia Week, Salario medio da Croacia em novembro de 2025 (dados do Instituto Nacional de Estatistica)",
-        "url": "https://www.croatiaweek.com/croatia-average-salary-november-2025/",
-        "official": false
-      },
-      {
-        "label": "Expat in Croatia, Mudancas na Lei dos Estrangeiros 2025",
-        "url": "https://www.expatincroatia.com/croatian-law-on-foreigners-2025/",
-        "official": false
-      },
-      {
-        "label": "Croatia Week, Teste obrigatorio de croata para trabalhadores estrangeiros",
-        "url": "https://www.croatiaweek.com/croatia-mandatory-croatian-language-test-foreign-workers-law/",
-        "official": false
-      },
-      {
-        "label": "Erickson Immigration Group, Croacia muda regras de imigracao",
-        "url": "https://eiglaw.com/croatia-introduces-major-changes-to-immigration-rules/",
-        "official": false
-      },
-      {
-        "label": "ETIAS, Queda nas autorizacoes de trabalho de estrangeiros na Croacia",
-        "url": "https://etias.com/articles/croatia-sees-drop-in-foreign-work-permits",
-        "official": false
-      },
-      {
-        "label": "Expat in Croatia, Residencia abrindo empresa na Croacia",
-        "url": "https://www.expatincroatia.com/how-to-residency-opening-business-croatia/",
-        "official": false
-      },
-      {
-        "label": "Total Croatia News, Mais de 100 mil trabalhadores estrangeiros chegaram em 2025",
-        "url": "https://total-croatia-news.com/news/foreign-workers-croatia-2025/",
-        "official": false
       }
     ]
   },
   "sk": {
-    "updatedAt": "2026-06-22",
-    "overview": "A Eslováquia entra em 2026 com um mercado de trabalho apertado e demograficamente pressionado. A taxa de desemprego fechou 2025 em 5,4 por cento, cerca de 150 mil desempregados, abaixo da média da União Europeia de 6,0 por cento, segundo o Eurostat e o Instituto Nacional de Estatística eslovaco. O salário médio mensal bruto da economia chegou a 1.620 euros em 2025, alta nominal de 6,3 por cento no ano, e atingiu 1.739 euros no quarto trimestre. O quadro é de escassez estrutural de mão de obra: o relatório EURES de escassez e excedentes aponta operadores de máquinas e plantas industriais, trabalhadores da construção exceto eletricistas e motoristas como os grupos com maior carência, ao lado de saúde, indústria automotiva, engenharia e tecnologia. Para quem quer trabalhar ou empreender, o país combina demanda real por técnicos e profissionais qualificados com custo de vida mais baixo que o do oeste europeu. A distribuição geográfica é muito desigual e define a estratégia de quem chega de fora. Bratislava e o oeste do país, Trnava, Trenčín e Nitra, concentram empregos com desemprego baixíssimo, em torno de 2,3 por cento na capital, forte presença de automotiva, ICT, química e maquinário, além de mais de 70 profissões em escassez de longa duração só na capital. Já o leste, Prešov e Košice, e o centro-sul, Banská Bystrica, sofrem com desemprego acima de 9 a 10 por cento e êxodo de trabalhadores para outras regiões e para o exterior. Em paralelo, a Eslováquia endureceu as regras de imigração laboral: desde 15 de julho de 2025 passou a exigir do candidato ao Single Permit comprovação de eslovaco no nível A2, dentro de um pacote que também passou a permitir começar a trabalhar enquanto o pedido tramita. Estrangeiros já são cerca de 5 por cento da população, com os ucranianos como maior grupo.",
+    "updatedAt": "2026-07-06",
+    "overview": "A Eslovaquia entrou em 2026 com o mercado de trabalho ainda aquecido do lado dos salarios, mas com sinais de esfriamento no emprego. O salario minimo saltou para o maior patamar da historia do pais, fixado por mecanismo automatico em 60% do salario medio de 2024. Ao mesmo tempo, o desemprego voltou a subir no primeiro trimestre de 2026, aproximando-se do limite de 6%, com forte divergencia regional, o leste e o centro do pais concentram as maiores taxas, enquanto o oeste industrial (Bratislava, Trnava, Zilina) opera perto do pleno emprego. A industria automotiva segue como motor central, reforcada pela chegada da fabrica de veiculos eletricos da Volvo perto de Kosice, e o setor de servicos (TI, saude, educacao, financas) puxa a maior parte das novas vagas. A dependencia de mao de obra estrangeira, sobretudo de fora da UE, cresce para tapar a escassez cronica em oficios tecnicos, saude e transporte.",
     "hotSectors": [
-      "Indústria automotiva e de autopeças (Volkswagen, KIA, Stellantis e a nova fábrica da Volvo)",
-      "Tecnologia da informação e serviços digitais (desenvolvimento de software, ICT)",
-      "Saúde (enfermagem, medicina, cuidadores e auxiliares)",
-      "Engenharia e manufatura de precisão (soldadores, operadores CNC)",
-      "Transporte, logística e armazenagem (motoristas de caminhão e ônibus)",
-      "Construção civil e ofícios técnicos (eletricistas, encanadores, carpinteiros)",
-      "Serviços financeiros e de seguros"
+      "Industria automotiva e eletromobilidade (nova fabrica da Volvo perto de Kosice)",
+      "Tecnologia da informacao e servicos digitais",
+      "Saude e cuidados (enfermagem, cuidadores, tecnicos de laboratorio)",
+      "Servicos financeiros",
+      "Educacao",
+      "Logistica e transporte",
+      "Oficios tecnicos da construcao e industria (soldadores, eletricistas, operadores de maquinas)"
     ],
     "coolingSectors": [
-      "Serviços de comunicação (emprego projetado em queda pelo EURES)",
-      "Trabalhadores de serviços pessoais (excedente de oferta)",
-      "Profissionais associados de administração e negócios (excedente)",
-      "Processamento de alimentos, marcenaria, confecção e ofícios artesanais correlatos (excedente)"
+      "Servicos de comunicacao (previsao de queda no emprego)",
+      "Suporte ao cliente e suporte tecnico de TI de nivel basico (pressao de automacao e IA)",
+      "Administracao publica (queda do salario real em 2025)",
+      "Servicos administrativos e imobiliario (queda do salario real em 2025)"
     ],
     "inDemandRoles": [
       {
-        "role": "Operadores de máquinas e plantas industriais estacionárias",
-        "note": "Grupo com maior incidência de escassez no país, segundo o relatório EURES de escassez e excedentes."
+        "role": "Enfermeiros e cuidadores",
+        "note": "Escassez cronica de pessoal qualificado em todas as regioes, pressionando o sistema de saude."
       },
       {
-        "role": "Soldadores e operadores de máquinas CNC",
-        "note": "Demanda puxada pela indústria automotiva e de engenharia."
+        "role": "Medicos e tecnicos de laboratorio",
+        "note": "Demanda ampla no setor de saude, alem de socorristas e paramedicos."
       },
       {
-        "role": "Motoristas de caminhão e ônibus e operadores de veículos",
-        "note": "Um dos grupos de maior carência; setor de transporte e armazenagem aquecido."
+        "role": "Soldadores, eletricistas e carpinteiros",
+        "note": "Oficios da construcao e industria com subutilizacao cronica de oferta em varias regioes."
       },
       {
-        "role": "Trabalhadores da construção exceto eletricistas",
-        "note": "Pedreiros, carpinteiros e ofícios correlatos com alta escassez."
+        "role": "Operadores de maquinas e de plantas industriais fixas",
+        "note": "Entre as ocupacoes de maior demanda segundo o EURES."
       },
       {
-        "role": "Eletricistas, encanadores e técnicos de instalação",
-        "note": "Ofícios técnicos qualificados em demanda persistente."
+        "role": "Motoristas e operadores de equipamento movel",
+        "note": "Alta procura, inclusive motoristas de caminhao."
       },
       {
-        "role": "Enfermeiros, médicos e auxiliares de saúde",
-        "note": "Falta de pessoal qualificado pressiona o sistema de saúde."
+        "role": "Engenheiros",
+        "note": "Demanda sustentada pela industria e pela expansao automotiva."
       },
       {
-        "role": "Desenvolvedores de software e especialistas em TI",
-        "note": "Setor mais bem pago; demanda por habilidades técnicas e digitais."
+        "role": "Desenvolvedores de software e profissionais de TI",
+        "note": "Crescimento puxado pela digitalizacao, apesar do encolhimento de vagas de suporte basico."
       },
       {
-        "role": "Trabalhadores de armazenagem e logística",
-        "note": "Vagas concentradas em transporte, logística e centros de distribuição."
+        "role": "Profissionais de hotelaria e alimentacao",
+        "note": "Procura recorrente por trabalhadores qualificados e semiqualificados."
+      },
+      {
+        "role": "Trabalhadores de armazem e logistica",
+        "note": "Sustentados pela expansao industrial e de transporte."
       }
     ],
     "byQualification": [
       {
-        "area": "Ensino superior em TI e engenharia de software",
-        "advice": "Maior potencial salarial do país, setor de TI com média de cerca de 3.150 euros por mês. Caminho recomendado é o EU Blue Card, que exige diploma superior, contrato de pelo menos um ano e salário acima do limiar legal. Bratislava e Košice concentram as vagas de ICT."
+        "area": "Saude",
+        "advice": "Enfermeiros, cuidadores, medicos, tecnicos de laboratorio e socorristas estao entre os mais procurados, com falta em todas as regioes. Diplomas exigem reconhecimento oficial na Eslovaquia."
       },
       {
-        "area": "Saúde, medicina e enfermagem",
-        "advice": "Demanda alta e estrutural por escassez de pessoal. São profissões regulamentadas; é obrigatório o reconhecimento do diploma estrangeiro e, em geral, comprovação de eslovaco. A exigência de eslovaco A2 para o Single Permit, desde julho de 2025, soma-se aos requisitos linguísticos clínicos."
+        "area": "Engenharia e industria",
+        "advice": "Engenheiros, soldadores, eletricistas, carpinteiros e operadores de maquinas tem demanda sustentada pela industria automotiva e pela expansao da eletromobilidade, sobretudo no leste (Kosice)."
       },
       {
-        "area": "Engenharia, mecatrônica e manufatura",
-        "advice": "Forte absorção pela automotiva, KIA, VW, Stellantis e Volvo, e pela cadeia de autopeças no oeste e centro do país. Diploma técnico ou superior abre portas tanto via Single Permit quanto via Blue Card para cargos altamente qualificados."
+        "area": "Tecnologia da informacao",
+        "advice": "Desenvolvedores de software e perfis com competencias digitais avancadas seguem valorizados, mas vagas de suporte tecnico basico e atendimento estao sob pressao de automacao e IA."
       },
       {
-        "area": "Ensino técnico e profissionalizante, soldagem, CNC e ofícios da construção",
-        "advice": "Profissões frequentemente nas listas de escassez por distrito, o que dispensa o teste de mercado de trabalho e acelera o Single Permit. Certificações reconhecidas e experiência comprovada pesam mais que diploma acadêmico."
+        "area": "Transporte e logistica",
+        "advice": "Motoristas de caminhao, operadores de equipamento movel e trabalhadores de armazem tem procura recorrente."
       },
       {
-        "area": "Carteira de motorista profissional C e D e logística",
-        "advice": "Setor com carência relevante de motoristas e operadores. Exige reconhecimento e validação da habilitação profissional e, conforme a função, formação específica de transporte."
-      },
-      {
-        "area": "Sem qualificação formal, serviços pessoais e administrativos",
-        "advice": "Áreas com excedente de oferta segundo o EURES; concorrência maior e salários mais baixos. Recomenda-se evitar essas funções como porta de entrada e buscar qualificação técnica que esteja nas listas de escassez."
-      },
-      {
-        "area": "Empreendedores e autônomos",
-        "advice": "Estrangeiros de fora da UE precisam de residência temporária para fins de negócio, atividade empresarial, distinta do Single Permit de emprego. Vale concentrar o negócio em Bratislava e no oeste, onde a economia é mais dinâmica, e contar com assessoria para o registro da živnosť, autônomo, ou s.r.o., empresa."
+        "area": "Hotelaria e alimentacao",
+        "advice": "Demanda constante por profissionais qualificados e semiqualificados, incluindo perfis estrangeiros."
       }
     ],
     "salaries": [
       {
-        "role": "Média da economia, bruto mensal, 2025",
-        "range": "1.620 euros por mês, média anual; 1.739 euros por mês no 4º trimestre de 2025",
+        "role": "Salario minimo (mensal, 2026)",
+        "range": "915 EUR/mes (5,259 EUR/hora)",
         "source": {
-          "label": "Instituto Nacional de Estatística da Eslováquia (Statistical Office of the SR)",
-          "url": "https://slovak.statistics.sk/wps/portal/ext/products/informationmessages/inf_sprava_detail/e85f8bdc-faf2-4aed-8684-44ed4a839ad2/",
+          "label": "Slov-Lex, Zbierka zakonov, Oznamenie MPSVR SR c. 245/2025 Z. z. o sume minimalnej mzdy na rok 2026",
+          "url": "https://www.slov-lex.sk/ezbierky/pravne-predpisy/SK/ZZ/2025/245/20250926",
           "official": true
         }
       },
       {
-        "role": "Salário mínimo, bruto mensal",
-        "range": "750 euros por mês, referência de janeiro de 2024",
+        "role": "Salario medio (mensal, ano de 2025)",
+        "range": "1.620 EUR/mes (bruto)",
         "source": {
-          "label": "EURES - Labour Market Information: Slovakia",
-          "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-slovakia_en",
+          "label": "Statisticky urad SR, Priemerna mesacna mzda v hospodarstve vo 4. stvrtroku a v roku 2025",
+          "url": "https://slovak.statistics.sk/wps/portal/ext/products/informationmessages?1dmy=&urile=wcm%3Apath%3A%2FObsah-SK-INF-AKT%2Finformativne-spravy%2Fvsetky%2Fe85f8bdc-faf2-4aed-8684-44ed4a839ad2",
           "official": true
         }
       },
       {
-        "role": "Indústria, bruto mensal, 2025",
-        "range": "1.743 euros por mês",
+        "role": "Salario medio (mensal, 4o trimestre de 2025)",
+        "range": "1.739 EUR/mes (bruto)",
         "source": {
-          "label": "Instituto Nacional de Estatística da Eslováquia",
-          "url": "https://slovak.statistics.sk/wps/portal/ext/products/informationmessages/inf_sprava_detail/e85f8bdc-faf2-4aed-8684-44ed4a839ad2/",
+          "label": "Statisticky urad SR, Priemerna mesacna mzda v hospodarstve vo 4. stvrtroku a v roku 2025",
+          "url": "https://slovak.statistics.sk/wps/portal/ext/products/informationmessages?1dmy=&urile=wcm%3Apath%3A%2FObsah-SK-INF-AKT%2Finformativne-spravy%2Fvsetky%2Fe85f8bdc-faf2-4aed-8684-44ed4a839ad2",
           "official": true
         }
       },
       {
-        "role": "Comércio, bruto mensal, 2025",
-        "range": "1.518 euros por mês",
+        "role": "Salario medio na industria (4o trimestre de 2025)",
+        "range": "1.884 EUR/mes (bruto)",
         "source": {
-          "label": "Instituto Nacional de Estatística da Eslováquia",
-          "url": "https://slovak.statistics.sk/wps/portal/ext/products/informationmessages/inf_sprava_detail/e85f8bdc-faf2-4aed-8684-44ed4a839ad2/",
+          "label": "Statisticky urad SR, Priemerna mesacna mzda v hospodarstve vo 4. stvrtroku a v roku 2025",
+          "url": "https://slovak.statistics.sk/wps/portal/ext/products/informationmessages?1dmy=&urile=wcm%3Apath%3A%2FObsah-SK-INF-AKT%2Finformativne-spravy%2Fvsetky%2Fe85f8bdc-faf2-4aed-8684-44ed4a839ad2",
           "official": true
         }
       },
       {
-        "role": "Serviços financeiros e de seguros, bruto mensal, 2025",
-        "range": "acima de 2.600 euros por mês, setor mais bem pago",
+        "role": "Salario medio no comercio (4o trimestre de 2025)",
+        "range": "1.597 EUR/mes (bruto)",
         "source": {
-          "label": "Instituto Nacional de Estatística da Eslováquia",
-          "url": "https://slovak.statistics.sk/wps/portal/ext/products/informationmessages/inf_sprava_detail/e85f8bdc-faf2-4aed-8684-44ed4a839ad2/",
-          "official": true
-        }
-      },
-      {
-        "role": "Alojamento e alimentação, bruto mensal, 2025",
-        "range": "969 euros por mês, único setor abaixo de 1.000 euros",
-        "source": {
-          "label": "Instituto Nacional de Estatística da Eslováquia",
-          "url": "https://slovak.statistics.sk/wps/portal/ext/products/informationmessages/inf_sprava_detail/e85f8bdc-faf2-4aed-8684-44ed4a839ad2/",
-          "official": true
-        }
-      },
-      {
-        "role": "Programador e desenvolvedor de software, bruto mensal",
-        "range": "1.447 a 6.673 euros; 80 por cento entre 1.656 e 4.146 euros; setor de TI com média de cerca de 3.150 euros",
-        "source": {
-          "label": "Platy.sk, pesquisa salarial, corroboração de comunidade, não oficial",
-          "url": "https://www.platy.sk/en/salaryinfo/information-technology/programmer",
+          "label": "Statisticky urad SR, Priemerna mesacna mzda v hospodarstve vo 4. stvrtroku a v roku 2025",
+          "url": "https://slovak.statistics.sk/wps/portal/ext/products/informationmessages?1dmy=&urile=wcm%3Apath%3A%2FObsah-SK-INF-AKT%2Finformativne-spravy%2Fvsetky%2Fe85f8bdc-faf2-4aed-8684-44ed4a839ad2",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadãos da UE, EEE e Suíça não precisam de autorização de trabalho na Eslováquia. Para nacionais de terceiros países, incluindo brasileiros, o regime padrão é o Single Permit, autorização única de residência para fins de emprego: o pedido é entregue no Departamento de Polícia, que solicita ao Escritório de Trabalho ÚPSVR a confirmação de que a vaga pode ser preenchida. Mudanças em vigor desde 15 de julho de 2025 exigem do candidato comprovação de eslovaco no nível A2 e passaram a permitir começar a trabalhar enquanto o pedido é analisado; o prazo de processamento ficou em torno de 30 a 60 dias e o Single Permit vale até dois anos, renovável. Teste de mercado e profissões em escassez: em regra, o empregador precisa anunciar a vaga e aguardar cerca de 20 dias, notificação de vaga, para testar o mercado local antes da contratação de estrangeiro. Há exceção importante: para ocupações constantes das listas oficiais de escassez, publicadas por distrito onde o desemprego médio fica abaixo de 5 por cento, o Escritório de Trabalho emite a confirmação sem o teste de mercado de 20 dias, acelerando o processo. Vale verificar a lista vigente antes de planejar a vinda. EU Blue Card, trabalho altamente qualificado: destinada a quem tem diploma de ensino superior. Exige contrato de trabalho, com duração mínima a partir de 6 meses no momento do pedido e em regra de pelo menos um ano para a qualificação plena, e salário de pelo menos 1,2 vez o salário médio mensal da economia eslovaca, referência de 1.430 euros em 2023, valor atualizado anualmente. A validade padrão é de até 5 anos, ou a duração do contrato mais 90 dias quando o contrato for mais curto. É preciso comprovar o reconhecimento do diploma. Profissões regulamentadas: saúde, médicos e enfermeiros, ensino, direito e engenharias regulamentadas exigem reconhecimento formal do diploma estrangeiro e, frequentemente, comprovação de proficiência em eslovaco, somando-se ao requisito A2 do Single Permit. Não há direito automático ao work permit: a lei eslovaca prevê que a autorização de trabalho pode ser concedida pelo Escritório de Trabalho, mas não há direito subjetivo a obtê-la.",
+    "foreignerRules": "Cidadaos da UE, do Espaco Economico Europeu e da Suica tem livre acesso ao mercado de trabalho eslovaco, sem necessidade de autorizacao. Cidadaos de paises terceiros (fora da UE) precisam, na maioria dos casos, de uma autorizacao unica (single permit), solicitada junto ao Departamento de Policia, que combina residencia e trabalho e vale por ate 2 anos. A concessao depende de confirmacao do escritorio de trabalho (UPSVaR) sobre a possibilidade de preencher a vaga. Quando a ocupacao consta da lista oficial de profissoes em falta (shortage occupations), publicada pelo UPSVaR para as regioes com desemprego medio registrado abaixo de 5%, essa confirmacao e emitida sem teste de mercado de trabalho e sem exigencia de anuncio previo da vaga. O numero de estrangeiros empregados por uma mesma empresa deve ser inferior a 30% do total de funcionarios. Ha ainda a via do Cartao Azul da UE para emprego altamente qualificado, condicionada a um salario mensal de pelo menos 1,5 vez o salario medio mensal na Eslovaquia. Nao existe direito legal automatico a obtencao de autorizacao de trabalho.",
     "opportunityWindows": [
-      "Listas oficiais de profissões em escassez por distrito, onde o desemprego médio fica abaixo de 5 por cento, dispensam o teste de mercado de 20 dias e aceleram o Single Permit; alvo principal para técnicos e ofícios.",
-      "Novo investimento da Volvo, carros elétricos, na região de Košice e leste, criando milhares de vagas em automotiva e engenharia em uma área historicamente de alto desemprego.",
-      "Pacote de imigração de 15 de julho de 2025 permite começar a trabalhar enquanto o Single Permit é processado, encurtando o tempo até o primeiro salário.",
-      "Pressão demográfica e envelhecimento da força de trabalho, projeção de queda de até 250 mil pessoas até 2050, sustentam demanda de longo prazo por imigrantes qualificados.",
-      "Bratislava com mais de 70 profissões em escassez de longa duração e desemprego em torno de 2,3 por cento, concentrando vagas em TI, saúde, construção, serviços e comércio."
+      "Expansao da eletromobilidade no leste do pais com a nova fabrica de veiculos eletricos da Volvo perto de Kosice, que deve gerar milhares de vagas ate 2027",
+      "Regioes do oeste (Bratislava, Trnava, Zilina) operam perto do pleno emprego, com desemprego entre 2,6% e 3,3% no 1o trimestre de 2026, sinalizando forte demanda por trabalhadores",
+      "Profissoes na lista oficial de ocupacoes em falta dispensam teste de mercado de trabalho para contratacao de estrangeiros de fora da UE, agilizando a entrada",
+      "Escassez estrutural em saude e oficios tecnicos abre espaco continuo para mao de obra qualificada e semiqualificada estrangeira"
     ],
     "jobBoards": [
       {
-        "label": "Sluzbyzamestnanosti.gov.sk e ÚPSVR, portal oficial do Escritório Central de Trabalho",
-        "url": "https://www.upsvr.gov.sk/sluzby-zamestnanosti/foreign-citizens.html?lang=en",
+        "label": "Sluzby zamestnanosti (portal oficial do Ministerio do Trabalho)",
+        "url": "https://www.sluzbyzamestnanosti.gov.sk",
         "official": true
       },
       {
-        "label": "EURES Eslováquia, rede europeia de emprego operada pelos Escritórios de Trabalho",
-        "url": "https://www.eures.sk/en/",
+        "label": "UPSVaR, Ustredie prace, socialnych veci a rodiny (escritorio central de trabalho)",
+        "url": "https://www.upsvr.gov.sk",
         "official": true
       },
       {
-        "label": "EURES Portal, Comissão Europeia",
+        "label": "EURES Eslovaquia (portal europeu de empregos)",
         "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "Profesia.sk, maior portal privado de empregos da Eslováquia",
-        "url": "https://www.profesia.sk/en/",
-        "official": false
+        "label": "ISTP, Internetovy sprievodca trhom prace (vagas, cooperacao com o UPSVaR)",
+        "url": "https://www.istp.sk/volne-pracovne-miesta",
+        "official": true
       },
       {
-        "label": "Kariera.sk, portal privado de empregos",
-        "url": "https://www.kariera.sk/",
+        "label": "Profesia.sk (maior portal privado de vagas da Eslovaquia)",
+        "url": "https://www.profesia.sk",
         "official": false
       }
     ],
     "sources": [
       {
-        "label": "Eurostat - EU unemployment rate 2025, notícia oficial",
-        "url": "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260610-3",
+        "label": "Slov-Lex, Zbierka zakonov, Oznamenie MPSVR SR c. 245/2025 Z. z. o sume minimalnej mzdy na rok 2026 (salario minimo 915 EUR/mes, 5,259 EUR/hora)",
+        "url": "https://www.slov-lex.sk/ezbierky/pravne-predpisy/SK/ZZ/2025/245/20250926",
         "official": true
       },
       {
-        "label": "Instituto Nacional de Estatística da Eslováquia - desemprego 4º trimestre e ano de 2025",
-        "url": "https://slovak.statistics.sk/wps/portal/ext/home/",
+        "label": "MPSVR SR (Ministerio do Trabalho), comunicado sobre o salario minimo de 2026",
+        "url": "https://www.employment.gov.sk/sk/uvodna-stranka/informacie-media/aktuality/historicky-narast-minimalnej-mzdy-je-realitou-roku-2026-je-minimalna-mzda-vo-vyske-915-eur.html",
         "official": true
       },
       {
-        "label": "Instituto Nacional de Estatística da Eslováquia - salário médio mensal 4º trimestre e ano de 2025",
-        "url": "https://slovak.statistics.sk/wps/portal/ext/products/informationmessages/inf_sprava_detail/e85f8bdc-faf2-4aed-8684-44ed4a839ad2/",
+        "label": "Statisticky urad SR (Escritorio de Estatistica), salario medio 4o trimestre e ano de 2025 e por setor",
+        "url": "https://slovak.statistics.sk/wps/portal/ext/products/informationmessages?1dmy=&urile=wcm%3Apath%3A%2FObsah-SK-INF-AKT%2Finformativne-spravy%2Fvsetky%2Fe85f8bdc-faf2-4aed-8684-44ed4a839ad2",
         "official": true
       },
       {
-        "label": "EURES - Labour Market Information: Slovakia",
+        "label": "Statisticky urad SR, desemprego no 1o trimestre de 2026 (5,9%) e taxas regionais",
+        "url": "https://slovak.statistics.sk/wps/portal/ext/home/!ut/p/z0/04_Sj9CPykssy0xPLMnMz0vMAfIjo8ziA809LZycDB0NLPyCXA08QxwD3IO8TAwNTEz1g1Pz9AuyHRUBtph-Sw!!",
+        "official": true
+      },
+      {
+        "label": "EURES, informacoes do mercado de trabalho da Eslovaquia (setores, ocupacoes em falta, desemprego)",
         "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-slovakia_en",
         "official": true
       },
       {
-        "label": "EURES e ELA - Report on labour shortages and surpluses 2024",
-        "url": "https://www.ela.europa.eu/sites/default/files/2025-06/EURES_Report_on_labour_shortages_and_surpluses_2024.pdf",
-        "official": true
-      },
-      {
-        "label": "Ministério do Trabalho da Eslováquia, employment.gov.sk - emprego de nacional de terceiro país",
+        "label": "MPSVR SR, emprego de nacional de pais terceiro (autorizacao unica, Cartao Azul, teste de mercado)",
         "url": "https://www.employment.gov.sk/en/information-foreigners/employment/employment-third-country-national.html",
         "official": true
       },
       {
-        "label": "ÚPSVR - Foreign citizens, Escritório Central de Trabalho",
-        "url": "https://www.upsvr.gov.sk/sluzby-zamestnanosti/foreign-citizens.html?lang=en",
+        "label": "UPSVaR, lista de ocupacoes em falta e reporte de vagas para nacionais de paises terceiros",
+        "url": "https://www.upsvr.gov.sk",
         "official": true
-      },
-      {
-        "label": "Comissão Europeia - EU Blue Card Slovakia, requisitos e validade",
-        "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/eu-blue-card/eu-blue-card-slovakia_en",
-        "official": true
-      },
-      {
-        "label": "Newland Chase - Slovakia Shortage Occupations Lists e processamento de Single Permit, análise de imigração",
-        "url": "https://newlandchase.com/slovakia-shortage-occupations-lists-are-published-and-processing-of-single-permits-is-delayed/",
-        "official": false
-      },
-      {
-        "label": "Platy.sk - pesquisa salarial de programadores, corroboração de comunidade",
-        "url": "https://www.platy.sk/en/salaryinfo/information-technology/programmer",
-        "official": false
       }
     ]
   },
   "si": {
-    "updatedAt": "2026-06-22",
-    "overview": "A Eslovenia vive em 2026 um dos mercados de trabalho mais apertados da Uniao Europeia, com desemprego entre os mais baixos do bloco (3,7% em 2023 pela EURES, projetado em torno de 3,8% para 2026 pela Comissao Europeia) e taxa de emprego de 72,5%, acima da media dos 27 da UE. O pais cresceu economicamente apoiado em manufatura, construcao e turismo, mas esbarra num gargalo demografico severo: a populacao envelhece, a forca de trabalho local encolhe e quase metade das empresas aponta a falta de mao de obra qualificada como o principal limitador de negocios, segundo levantamentos citados pelo EURES e pela camara britanico-eslovena. Para suprir o deficit, o governo manteve em vigor, ate 31 de outubro de 2026, o decreto que acelera a contratacao de estrangeiros e ampliou a lista oficial de profissoes deficitarias para mais de 100 ocupacoes, nas quais o teste de mercado de trabalho deixa de ser exigido.\n\nEsse cenario abre uma janela concreta para imigrantes, sobretudo nas profissoes tecnicas, de saude, construcao, hotelaria e tecnologia. Os trabalhadores estrangeiros ja representam cerca de 11,7% da forca de trabalho ativa (a maioria de paises de fora da UE), concentrados em construcao, manufatura e transporte. Os salarios eslovenos sao mais comprimidos que a media da Europa Ocidental (salario bruto medio em torno de 2.678 euros em marco de 2026 pela SURS), mas o custo de vida tambem e menor, e a forte cobertura de acordos coletivos (cerca de 80% dos trabalhadores) costuma elevar os pisos setoriais acima do minimo legal. Empreender e viavel: estrangeiros podem deter 100% de uma d.o.o. sem socio local, ainda que o caminho do trabalhador autonomo exija normalmente um ano de residencia previa.",
+    "updatedAt": "2026-07-06",
+    "overview": "A Eslovenia entra em 2026 com um mercado de trabalho apertado e desemprego em minimos historicos. Pela Pesquisa de Forca de Trabalho da UE reportada no EURES, a taxa de desemprego estava em 3,7% em 2023, bem abaixo da media da UE27, com taxa de emprego de 72,5%. O quadro de 2026 mantem essa tensao: o Poklicni barometer 2026 do ZRSZ, servico publico de emprego, avaliou 171 ocupacoes e projetou falta de mao de obra em 98 delas contra apenas 18 em excesso, sinal de escassez generalizada. A pressao concentra-se em saude, educacao e construcao, e a demanda por trabalhadores estrangeiros cresce, ja que cerca de 15,8% dos ocupados residentes eram estrangeiros em agosto de 2024, a maioria de paises terceiros.",
     "hotSectors": [
-      "Saude e cuidados sociais (medicos, enfermagem, cuidadores), pressionados pelo envelhecimento",
-      "Construcao civil e trades (pedreiros, carpinteiros, eletricistas, encanadores)",
-      "Manufatura e engenharia (automotivo, mecanica, ferramentaria, soldagem)",
-      "Tecnologia da informacao e desenvolvimento de software",
-      "Farmaceutica e ciencias da vida",
-      "Turismo, hotelaria e alimentacao (cozinheiros, garcons, padeiros)",
-      "Transporte e logistica (motoristas)"
+      "Saude e assistencia social",
+      "Educacao",
+      "Construcao civil e engenharia",
+      "Industria transformadora e metalmecanica",
+      "Transporte e logistica",
+      "Hotelaria e restauracao"
     ],
     "coolingSectors": [
-      "Profissoes juridicas, sociais e culturais (excedente segundo a ESS)",
-      "Tecnicos de negocios e administracao",
-      "Atendentes e auxiliares de servico ao cliente / secretariado",
-      "Design grafico e multimidia, jornalismo, fotografia, arquitetura (grupos com excedente reportado pela EURES)"
+      "Design grafico e multimidia",
+      "Jornalismo e midia",
+      "Areas artisticas e fotografia",
+      "Servicos administrativos de secretariado e telefonia"
     ],
     "inDemandRoles": [
       {
-        "role": "Enfermeiros e tecnicos de enfermagem",
-        "note": "Demanda estrutural pelo envelhecimento; profissao regulamentada (exige reconhecimento e nivel de esloveno)."
+        "role": "Medicos e especialistas de enfermagem",
+        "note": "Falta estrutural no setor de saude segundo o Poklicni barometer 2026 do ZRSZ."
       },
       {
-        "role": "Medicos e profissionais de saude",
-        "note": "Escassez cronica; profissao regulamentada com registro na camara medica e idioma."
+        "role": "Professores de ensino basico e medio e educadores de infancia",
+        "note": "Escassez em varios grupos docentes, incluindo assistentes de educador."
       },
       {
-        "role": "Eletricistas",
-        "note": "Na lista de profissoes deficitarias 2025-2026 (teste de mercado dispensado)."
+        "role": "Engenheiros civis, mecanicos e eletricos",
+        "note": "Demanda alta ligada a construcao e industria."
       },
       {
-        "role": "Soldadores",
-        "note": "Trade tecnico em alta demanda na manufatura e construcao."
+        "role": "Fisioterapeutas, assistentes pessoais e trabalhadores de cuidado social",
+        "note": "Escassez no cuidado a pessoas."
       },
       {
-        "role": "Pedreiros, carpinteiros e trabalhadores da construcao",
-        "note": "Setor com maior reclamacao de falta de mao de obra."
+        "role": "Pedreiros, betoneiros, carpinteiros e telhadores",
+        "note": "Falta de mao de obra na construcao."
       },
       {
-        "role": "Encanadores e instaladores de aquecimento/refrigeracao",
-        "note": "Profissao deficitaria listada."
+        "role": "Cozinheiros e garcons",
+        "note": "Escassez na hotelaria e restauracao."
       },
       {
-        "role": "Ferramenteiros, serralheiros e mecanicos",
-        "note": "Industria metalurgica e automotiva."
+        "role": "Motoristas de caminhao pesado e de onibus",
+        "note": "Falta de mao de obra no transporte."
       },
       {
-        "role": "Motoristas profissionais (caminhao/onibus)",
-        "note": "Transporte e logistica com escassez."
+        "role": "Especialistas em logistica, recursos humanos, contabilidade e auditoria",
+        "note": "Demanda por perfis tecnicos e de gestao."
       },
       {
-        "role": "Cozinheiros, padeiros, confeiteiros e garcons",
-        "note": "Turismo e hotelaria; profissoes deficitarias listadas."
+        "role": "Mecanicos e tecnicos de manutencao, torneiros e marceneiros",
+        "note": "Escassez ligada a lacuna de competencias."
       },
       {
-        "role": "Desenvolvedores de software e profissionais de TI",
-        "note": "Tier salarial mais alto junto com farma; demanda por talento senior."
-      },
-      {
-        "role": "Engenheiros (mecanica, eletrica, manufatura)",
-        "note": "Demanda excede a oferta no polo industrial esloveno."
+        "role": "Veterinarios",
+        "note": "Listado entre as ocupacoes em falta em 2026."
       }
     ],
     "byQualification": [
       {
-        "area": "Saude (enfermagem e medicina)",
-        "advice": "Maior janela de demanda do pais, mas profissoes regulamentadas. Planeje o reconhecimento do diploma, registro na camara profissional e prova de esloveno (em geral B1-B2 ou superior para contato com pacientes). O EU Blue Card facilita a entrada de profissionais qualificados com contrato e salario acima do limiar."
+        "area": "Saude",
+        "advice": "Setor com a maior escassez do pais. Medicos, enfermeiros especialistas, dentistas, fisioterapeutas e trabalhadores de cuidado social tem forte demanda. O reconhecimento de qualificacao profissional junto as autoridades eslovenas e, em geral, o registro no conselho profissional correspondente sao passos necessarios antes de exercer."
       },
       {
-        "area": "Trades tecnicos e construcao (sem diploma superior)",
-        "advice": "Caminho mais rapido para nao europeus: muitas dessas funcoes estao na lista de profissoes deficitarias, dispensando o teste de mercado de trabalho e acelerando o Single Permit. Certificados de qualificacao profissional e experiencia comprovada pesam mais que diploma universitario."
+        "area": "Educacao",
+        "advice": "Escassez em varios grupos de professores do ensino basico e medio, educadores de infancia e assistentes. O dominio do esloveno costuma ser exigido para funcoes docentes na rede publica."
       },
       {
-        "area": "Engenharia e manufatura",
-        "advice": "Polo industrial forte (automotivo, mecanica, farma) com demanda acima da oferta. Diploma de engenharia mais ingles tecnico abrem portas; esloveno ajuda na progressao. Elegivel a EU Blue Card."
+        "area": "Engenharia e Construcao",
+        "advice": "Engenheiros civis, mecanicos, eletricos e eletronicos estao entre os mais procurados, assim como profissionais de obra qualificados. Boa janela para quem tem diploma tecnico reconhecido."
       },
       {
-        "area": "TI e desenvolvimento de software",
-        "advice": "Setor que paga no topo da tabela e aceita ingles no dia a dia em muitas empresas e startups. Rota natural para EU Blue Card; portfolio e stack contam mais que credencial formal."
+        "area": "Transporte e Logistica",
+        "advice": "Motoristas profissionais de caminhao pesado e onibus e especialistas em logistica tem demanda. Habilitacoes e certificacoes de conducao precisam ser validadas na Eslovenia."
       },
       {
-        "area": "Hotelaria, turismo e alimentacao",
-        "advice": "Alta rotatividade e escassez sazonal, varias funcoes na lista deficitaria. Bom ponto de entrada para quem busca primeiro emprego no pais; esloveno basico e diferencial no atendimento."
+        "area": "Hotelaria e Restauracao",
+        "advice": "Cozinheiros e garcons faltam, sobretudo nas regioes turisticas e no litoral de Koper. Boa porta de entrada, muitas vezes com contratos sazonais."
       },
       {
-        "area": "Areas administrativas, juridicas e criativas",
-        "advice": "Mercado mais saturado (grupos com excedente). Exige dominio de esloveno e diferenciacao clara; considere nichos ligados a exportacao, idiomas raros ou tecnologia."
+        "area": "Design, Midia e Artes",
+        "advice": "Areas com excesso de oferta segundo o ZRSZ: designers graficos e multimidia, jornalistas, artistas e fotografos enfrentam mercado mais disputado. Vale diversificar competencias ou mirar nichos tecnicos."
       }
     ],
     "salaries": [
       {
-        "role": "Salario bruto medio nacional",
-        "range": "cerca de 2.678 euros/mes (bruto, marco 2026)",
+        "role": "Salario medio bruto (todos os setores)",
+        "range": "2.678,28 EUR/mes (bruto), 1.678,81 EUR/mes (liquido)",
         "source": {
-          "label": "SURS (Instituto de Estatistica da Eslovenia)",
+          "label": "SURS, dados de marco de 2026",
           "url": "https://www.stat.si/statweb/en/Field/Index/15/74",
           "official": true
         }
       },
       {
-        "role": "Salario bruto medio nacional (base oficial 2023)",
-        "range": "2.222 euros bruto / 1.462 euros liquido por mes",
+        "role": "Salario minimo nacional",
+        "range": "1.481,88 EUR/mes (bruto), vigente desde 1 de janeiro de 2026",
         "source": {
-          "label": "EURES (dados oficiais 2023)",
-          "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-slovenia_en",
-          "official": true
-        }
-      },
-      {
-        "role": "Salario minimo",
-        "range": "1.481,88 euros/mes (bruto, a partir de 1 jan 2026)",
-        "source": {
-          "label": "Imprensa especializada (a confirmar no Diario Oficial)",
-          "url": "https://employsome.com/hire/slovenia/average-salary-slovenia/",
-          "official": true
-        }
-      },
-      {
-        "role": "Desenvolvedor de software / TI",
-        "range": "junior 1.800-2.500; pleno 3.000-4.500; senior 4.500-6.500; arquiteto 7.000-9.000 euros/mes (bruto)",
-        "source": {
-          "label": "Employsome (estimativa de mercado, nao oficial)",
-          "url": "https://employsome.com/hire/slovenia/average-salary-slovenia/",
-          "official": true
-        }
-      },
-      {
-        "role": "Medico",
-        "range": "cerca de 4.825 euros/mes em media (faixa ~2.170 a 7.690)",
-        "source": {
-          "label": "WorldSalaries (estimativa de mercado, nao oficial)",
-          "url": "https://worldsalaries.com/average-doctor-salary-in-slovenia/",
-          "official": true
-        }
-      },
-      {
-        "role": "Enfermeiro",
-        "range": "cerca de 1.327 euros/mes em media (faixa ~537 a 2.460)",
-        "source": {
-          "label": "WorldSalaries (estimativa de mercado, nao oficial)",
-          "url": "https://worldsalaries.com/average-staff-nurse-salary-in-slovenia/",
-          "official": true
-        }
-      },
-      {
-        "role": "Trabalhador da construcao",
-        "range": "iniciante ~1.580; com experiencia sobe substancialmente",
-        "source": {
-          "label": "WorldSalaries (estimativa de mercado, nao oficial)",
-          "url": "https://worldsalaries.com/average-construction-worker-salary-in-slovenia/",
+          "label": "SURS / legislacao eslovena",
+          "url": "https://www.stat.si/statweb/en",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE/EEE e Suica tem livre acesso ao mercado de trabalho esloveno. Nacionais de paises terceiros precisam de um Single Permit (autorizacao unica de residencia e trabalho), pedido num unico processo conduzido pela unidade administrativa, com consentimento do Servico de Emprego (ZRSZ). Sem o Single Permit, o contrato de trabalho e nulo e sujeito a multa da inspecao do trabalho. O primeiro permit vale pelo prazo do contrato, no maximo 2 anos; a primeira renovacao vai ate 3 anos. Para mais de 100 profissoes deficitarias (eletricistas, soldadores, cozinheiros, pedreiros, carpinteiros, encanadores, etc.) o teste de mercado de trabalho e dispensado, acelerando a aprovacao; o decreto de contratacao acelerada de estrangeiros foi prorrogado ate 31 de outubro de 2026. Profissionais altamente qualificados podem optar pelo EU Blue Card, que exige diploma de ensino superior, contrato de trabalho de pelo menos 1 ano e salario de no minimo 1,5 vez o salario bruto anual medio do pais; o cartao vale ate 2 anos, com decisao em ate 30 dias (60 em casos complexos) e taxas de 70 a 102 euros. Profissoes regulamentadas, como saude e direito, exigem reconhecimento do diploma, registro na camara profissional e prova de esloveno. Para empreender, estrangeiros podem deter 100% de uma d.o.o. (capital minimo de 7.500 euros, sem necessidade de socio local); o dono majoritario (>=51%) de uma d.o.o. obtem permit de emprego sem teste de mercado, e o representante estrangeiro que dirige a empresa precisa de investimento minimo de 30.000 euros se a empresa tem menos de 6 meses. O trabalhador autonomo (s.p.) em geral exige permit pessoal de trabalho e ao menos 1 ano de residencia legal ininterrupta, alem de comprovar cerca de 10.000 euros em recursos. Desde 21 de novembro de 2025 ha tambem um Visto de Nomade Digital para remotos de fora da UE (renda exigida de cerca de 3.200-3.300 euros/mes), que nao permite vender servicos a clientes locais eslovenos.",
+    "foreignerRules": "Cidadaos da UE, do EEE e da Suica tem livre acesso ao mercado de trabalho esloveno. Nacionais de paises terceiros precisam, na regra geral, do permesso unico (single permit), que combina residencia e trabalho: e emitido pela unidade administrativa (upravna enota) com consentimento previo obrigatorio do ZRSZ, o servico publico de emprego, que avalia as condicoes legais. O primeiro permesso vale ate 2 anos, ligado ao contrato, e a renovacao pode chegar a 3 anos. Sem permesso valido, o contrato de trabalho e nulo e sujeito a penalidades. Para trabalhadores altamente qualificados existe o EU Blue Card, destinado a quem tem formacao universitaria, contrato de pelo menos 1 ano e salario de no minimo 1,5 vez o salario bruto anual medio da Eslovenia; a validade padrao e de ate 2 anos. A autoridade decide sobre o pedido em ate 30 dias apos recebido o processo completo. Diplomas obtidos no exterior podem exigir reconhecimento junto as autoridades eslovenas, sobretudo em profissoes regulamentadas como saude e educacao. Fontes oficiais: ZRSZ (ess.gov.si) e portal do governo (gov.si).",
     "opportunityWindows": [
-      "Decreto de contratacao acelerada de estrangeiros em vigor ate 31 de outubro de 2026 (verificar prorrogacao apos essa data)",
-      "Lista de profissoes deficitarias com mais de 100 ocupacoes em 2025-2026 dispensa o teste de mercado de trabalho",
-      "Escassez recorde: cerca de 48% das empresas apontam falta de mao de obra qualificada como principal limitador",
-      "Saude e cuidados a idosos com demanda estrutural crescente pelo envelhecimento populacional",
-      "Reforma salarial do setor publico e aumento do salario minimo elevando os ganhos em 2026",
-      "Novo Visto de Nomade Digital (desde nov/2025) abre porta para profissionais remotos de fora da UE",
-      "100% de propriedade estrangeira permitida em d.o.o. sem socio local, registro gratuito via SPOT"
+      "Poklicni barometer 2026 do ZRSZ (publicado em setembro de 2025) lista 98 ocupacoes em falta, das quais saude, educacao e construcao concentram a maior demanda, funcionando como guia oficial de onde ha vagas.",
+      "As regioes de Ljubljana e Koper concentram mais de 100 grupos ocupacionais em escassez cada uma, sendo os polos com mais oportunidades.",
+      "EU Blue Card acelera a entrada de profissionais altamente qualificados com salario a partir de 1,5 vez o salario medio anual bruto, com decisao em ate 30 dias.",
+      "Contratos sazonais em hotelaria e agricultura oferecem porta de entrada mais rapida ao mercado."
     ],
     "jobBoards": [
       {
-        "label": "ZRSZ - Servico de Emprego da Republica da Eslovenia (Zavod RS za zaposlovanje)",
+        "label": "ZRSZ - Servico Publico de Emprego da Eslovenia (ess.gov.si)",
         "url": "https://www.ess.gov.si/en/jobseekers",
         "official": true
       },
       {
-        "label": "EURES - Portal Europeu de Mobilidade Profissional (Eslovenia)",
+        "label": "EURES Eslovenia - Portal Europeu de Mobilidade Profissional",
         "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "SPOT - Slovenian Business Point (abertura de empresa)",
-        "url": "https://spot.gov.si/en/",
+        "label": "GOV.SI - Entrada, residencia e trabalho na Eslovenia",
+        "url": "https://www.gov.si/en/topics/entry-and-residence/",
+        "official": true
+      },
+      {
+        "label": "ZRSZ - Emprego de trabalhadores nao-UE (single permit)",
+        "url": "https://www.ess.gov.si/en/jobseekers/employment-of-non-eu-migrant-workers/work-in-slovenia/single-permit",
         "official": true
       }
     ],
@@ -5303,12 +5104,17 @@ export const LABOR_MARKET: LaborMarketMap = {
         "official": true
       },
       {
-        "label": "ZRSZ - Slovenian labour market (Servico de Emprego)",
-        "url": "https://www.ess.gov.si/en/employers/recruit-in-europe-eures/slovenian-labour-market",
+        "label": "ZRSZ - Poklicni barometer (barometro de profissoes)",
+        "url": "https://www.ess.gov.si/partnerji/trg-dela/poklicni-barometer/",
         "official": true
       },
       {
-        "label": "ZRSZ - Single Permit (autorizacao unica)",
+        "label": "SURS - Earnings and Labour Cost (stat.si)",
+        "url": "https://www.stat.si/statweb/en/Field/Index/15/74",
+        "official": true
+      },
+      {
+        "label": "ZRSZ - Single permit (permesso unico) para nacionais de paises terceiros",
         "url": "https://www.ess.gov.si/en/jobseekers/employment-of-non-eu-migrant-workers/work-in-slovenia/single-permit",
         "official": true
       },
@@ -5318,322 +5124,219 @@ export const LABOR_MARKET: LaborMarketMap = {
         "official": true
       },
       {
-        "label": "SPOT - Como nao europeus podem abrir empresa na Eslovenia",
-        "url": "https://spot.gov.si/en/info/how-can-non-eu-nationals-start-a-business-in-slovenia",
+        "label": "GOV.SI - Entry and residence",
+        "url": "https://www.gov.si/en/topics/entry-and-residence/",
         "official": true
-      },
-      {
-        "label": "SURS - Earnings and Labour Cost (Instituto de Estatistica)",
-        "url": "https://www.stat.si/statweb/en/Field/Index/15",
-        "official": true
-      },
-      {
-        "label": "Comissao Europeia - Economic forecast for Slovenia",
-        "url": "https://economy-finance.ec.europa.eu/economic-surveillance-eu-member-states/country-pages/slovenia/economic-forecast-slovenia_en",
-        "official": true
-      },
-      {
-        "label": "ELA/EURES - Labour shortages and surpluses in Europe 2025",
-        "url": "https://www.ela.europa.eu/en/publications/labour-shortages-and-surpluses-europe-2025",
-        "official": true
-      },
-      {
-        "label": "CEDEFOP - Slovenia: Mismatch priority occupations",
-        "url": "https://www.cedefop.europa.eu/en/data-insights/slovenia-mismatch-priority-occupations",
-        "official": true
-      },
-      {
-        "label": "Sibiz - Slovenia Expands List of Shortage Occupations for 2025",
-        "url": "https://sibiz.eu/slovenia-expands-list-of-shortage-occupations-for-2025/",
-        "official": false
-      },
-      {
-        "label": "Employsome - Average Salary in Slovenia 2026",
-        "url": "https://employsome.com/hire/slovenia/average-salary-slovenia/",
-        "official": false
-      },
-      {
-        "label": "WorldSalaries - Slovenia salary data",
-        "url": "https://worldsalaries.com/average-doctor-salary-in-slovenia/",
-        "official": false
       }
     ]
   },
   "ee": {
-    "updatedAt": "2026-06-22",
-    "overview": "A Estonia entra em 2026 com um mercado de trabalho de dois ritmos. A taxa de desemprego ficou em 7,1% no primeiro trimestre de 2026, com taxa de emprego de 68%, segundo os dados acompanhados pela rede EURES e pela previsao do Banco da Estonia, que projeta queda gradual do desemprego para 6,8% em 2027. O salario medio bruto mensal subiu para 2.135 euros no primeiro trimestre de 2026, alta de 6,2% em doze meses, enquanto o salario mediano alcancou 1.753 euros, conforme a Statistics Estonia. O crescimento nominal dos salarios vem esfriando e deve permanecer pouco abaixo de 5% ao ano em 2026 e 2027, sinal de uma economia que ainda aquece, mas com menos pressao do que nos anos do pico inflacionario.\n\nO retrato setorial mostra a tecnica do pais: a economia digital puxa os salarios mais altos (tecnologia da informacao e comunicacao paga em media 3.821 euros, financas 3.608 euros e energia 3.132 euros), enquanto hospedagem e alimentacao seguem na base, com 1.337 euros. A industria transformadora ainda e o maior empregador, com cerca de 21% dos postos, seguida por comercio e construcao. Para o estrangeiro qualificado, a Estonia combina um sistema 100% digital de abertura de empresa, o programa e-Residency e o Startup Visa, com forte demanda por profissionais de TI, engenharia, saude e educacao. O ponto de atencao e a cota de imigracao para nao europeus, restrita a 1.292 vagas em 2026, da qual o setor de TI e as profissoes top sao isentos.",
+    "updatedAt": "2026-07-06",
+    "overview": "O mercado de trabalho da Estonia entrou em 2026 em recuperacao gradual apos um periodo de arrefecimento economico. Segundo o Statistics Estonia, no primeiro trimestre de 2026 a taxa de desemprego ficou em 7,1%, com 52.200 desempregados e 686.300 pessoas empregadas, enquanto a taxa de emprego atingiu 68% e a de participacao na forca de trabalho 73,2%. Na comparacao anual, o desemprego recuou 1,5 ponto percentual frente ao mesmo trimestre de 2025. O quadro combina forte economia digital e escassez estrutural de mao de obra qualificada com uma taxa de desemprego juvenil elevada, de 22,8% na faixa de 15 a 24 anos. A escassez de talento se concentra em TI, engenharia, saude, educacao e industria, enquanto ocupacoes administrativas apresentam excedente.",
     "hotSectors": [
-      "Tecnologia da informacao e comunicacao (TI/ICT)",
-      "Engenharia (mecatronica, automacao, industrial)",
-      "Servicos financeiros e fintech",
-      "Saude (enfermagem, medicina, fonoaudiologia)",
-      "Educacao e pesquisa",
-      "Energia (eletricidade, gas, energia limpa)",
-      "Industria transformadora qualificada (metalurgia, soldagem, operacao de maquinas)",
-      "Logistica e transporte rodoviario"
+      "Tecnologia da informacao e comunicacao (ICT)",
+      "Engenharia (mecanica e eletrica)",
+      "Industria e manufatura (metalmecanica)",
+      "Saude",
+      "Educacao",
+      "Logistica e transporte",
+      "Construcao"
     ],
     "coolingSectors": [
-      "Servicos administrativos e contabeis (automacao e IA reduzindo demanda)",
+      "Funcoes administrativas e de escritorio",
+      "Contabilidade e escrituracao (reduzidas pela digitalizacao)",
       "Jornalismo e relacoes publicas",
-      "Vendas no varejo e comercio de rua",
-      "Trabalho braçal nao qualificado na construcao e mineracao",
-      "Operacoes de armazenagem e transporte de carga manual",
-      "Servicos de limpeza, lavanderia e similares"
+      "Construcao nao qualificada"
     ],
     "inDemandRoles": [
       {
-        "role": "Desenvolvedores e programadores de software",
-        "note": "Setor de TI isento da cota de imigracao; deficit de arquitetos de sistemas e desenvolvedores"
+        "role": "Programadores e desenvolvedores de software",
+        "note": "Apontados pelo Fundo de Seguro-Desemprego (Tootukassa) entre as ocupacoes de maior demanda nos proximos anos"
       },
       {
-        "role": "Engenheiros de mecatronica e operadores de maquinas",
-        "note": "Falta cronica na industria; inclui operadores de colheitadeiras e processamento de madeira"
-      },
-      {
-        "role": "Enfermeiros e cuidadores",
-        "note": "Estonia tem deficit estimado em mais de 4 mil enfermeiros; cerca de 200 emigram por ano"
-      },
-      {
-        "role": "Medicos e especialistas de saude",
-        "note": "Profissao regulamentada, exige reconhecimento de diploma"
-      },
-      {
-        "role": "Professores e especialistas de apoio educacional",
-        "note": "Mediana etaria alta; falta de professores do ensino tecnico/vocacional"
-      },
-      {
-        "role": "Fonoaudiologos, psicologos e educadores de necessidades especiais",
-        "note": "Deficit muito grande apontado pela Töötukassa"
-      },
-      {
-        "role": "Soldadores, eletricistas, mecanicos e encanadores",
-        "note": "Trabalhadores tecnicos qualificados em falta constante"
-      },
-      {
-        "role": "Motoristas de caminhao e veiculos pesados",
-        "note": "Entre as ocupacoes de maior demanda projetada"
+        "role": "Especialistas ICT altamente qualificados",
+        "note": "Em deficit segundo EURES e OSKA; setor mais bem pago do pais"
       },
       {
         "role": "Cozinheiros",
-        "note": "Citado pela EUIF entre os de maior demanda nos proximos anos"
+        "note": "Citados pelo Tootukassa entre as ocupacoes de maior demanda"
       },
       {
-        "role": "Gestores com conhecimento setorial",
-        "note": "Gestores com experiencia previa em TI e industria sao muito valorizados"
+        "role": "Motoristas de caminhao",
+        "note": "Citados pelo Tootukassa entre as ocupacoes de maior demanda"
+      },
+      {
+        "role": "Soldadores, mecanicos, operadores de maquinas e eletricistas",
+        "note": "Escassez persistente em trabalhadores de metalmecanica (grupo com maior incidencia de falta em 2024)"
+      },
+      {
+        "role": "Medicos",
+        "note": "Escassez muito grande no setor de saude"
+      },
+      {
+        "role": "Professores e educadores para criancas com necessidades especiais",
+        "note": "Grupo de profissionais de ensino entre os de maior escassez"
+      },
+      {
+        "role": "Fonoaudiologos, psicologos e enfermeiros",
+        "note": "Deficit acentuado em saude e educacao"
+      },
+      {
+        "role": "Engenheiros mecanicos e eletricos",
+        "note": "Demanda sustentada na industria e engenharia"
       }
     ],
     "byQualification": [
       {
-        "area": "Tecnologia da informacao (TI/ICT)",
-        "advice": "Melhor porta de entrada do pais. O setor de TI e isento da cota de imigracao para nao europeus e paga o maior salario medio (3.821 euros/mes). Vale tambem o caminho do Startup Visa para fundadores de empresas tecnologicas escalaveis. Ingles costuma bastar no ambiente de trabalho."
+        "area": "Tecnologia da Informacao (TI/ICT)",
+        "advice": "Area de maior aquecimento e melhor remuneracao do pais, com salario medio no ICT frequentemente acima de 3.400 euros mensais (EURES). Desenvolvimento de software, ciberseguranca e dados sao caminhos com deficit estrutural. Perfil ICT tem via de isencao de quota de imigracao para nao europeus."
       },
       {
-        "area": "Engenharia e tecnicos industriais",
-        "advice": "Forte demanda por mecatronica, automacao, operacao de maquinas e processos. Diplomas tecnicos sao bem aceitos; experiencia pratica comprovada pesa mais que o titulo formal. Salarios na industria cresceram cerca de 7,4% no ultimo ano."
+        "area": "Engenharia",
+        "advice": "Engenheiros mecanicos e eletricos tem demanda sustentada na industria e manufatura. A metalmecanica foi o grupo com maior incidencia de ocupacoes em falta em 2024."
       },
       {
-        "area": "Saude (medicina e enfermagem)",
-        "advice": "Demanda altissima, porem sao profissoes regulamentadas. E obrigatorio o reconhecimento do diploma estrangeiro e, na pratica, dominio do idioma estoniano para atendimento. Enfermeiros, medicos e fonoaudiologos tem deficit estrutural."
+        "area": "Saude e Medicina",
+        "advice": "Escassez muito grande de medicos, enfermeiros, fonoaudiologos e psicologos. Reconhecimento de diploma e proficiencia em estoniano tendem a ser exigidos para exercicio; consultar as autoridades competentes."
       },
       {
-        "area": "Educacao e pesquisa",
-        "advice": "Falta de professores, especialmente no ensino tecnico e em apoio a necessidades especiais. Para sala de aula em escolas publicas, o estoniano e praticamente indispensavel; em universidades e centros de pesquisa, o ingles abre portas."
+        "area": "Educacao",
+        "advice": "Deficit acentuado de professores e educadores para criancas com necessidades especiais. Profissionais de ensino estao entre os grupos de maior falta segundo o Tootukassa."
       },
       {
-        "area": "Financas e negocios",
-        "advice": "Setor que paga o segundo maior salario medio (3.608 euros). Procura por gestores com conhecimento setorial e experiencia previa. Bom para quem tem formacao superior e ingles fluente."
+        "area": "Industria e Oficios Tecnicos",
+        "advice": "Soldadores, mecanicos, operadores de maquinas e eletricistas seguem em falta. Boa porta de entrada via registro de emprego de curto prazo ou permissao de residencia para trabalho."
       },
       {
-        "area": "Oficios manuais qualificados",
-        "advice": "Soldadores, eletricistas, encanadores e mecanicos tem vagas abertas. Caminho viavel via registro de emprego de curta duracao ou permissao de residencia para trabalho, desde que o empregador pague ao menos o salario medio exigido."
+        "area": "Logistica e Transporte",
+        "advice": "Motoristas de caminhao entre as ocupacoes de maior demanda. Setor foi identificado pelo governo como prioritario na proposta de facilitacao de contratacao de estrangeiros."
       },
       {
-        "area": "Empreendedor / fundador de startup",
-        "advice": "Use o e-Residency para abrir e gerir uma OU (sociedade limitada) de forma remota e digital. Para morar e operar do pais, o Startup Visa exige empresa tecnologica escalavel com MVP, aval do comite Startup Estonia e renda minima de 800 euros/mes por fundador."
-      },
-      {
-        "area": "Baixa qualificacao / sem especializacao",
-        "advice": "Mercado mais apertado. Vendas no varejo, limpeza e trabalho braçal na construcao estao em excesso de oferta e com salarios na base da tabela. A cota de imigracao limitada (1.292 vagas em 2026) torna o ingresso de nao europeus nessas funcoes mais dificil."
+        "area": "Administracao, Contabilidade e Comunicacao",
+        "advice": "Areas com excedente de mao de obra e demanda em queda, pressionadas pela digitalizacao e automacao. Diferenciacao tecnica ou reconversao para dados e TI amplia empregabilidade."
       }
     ],
     "salaries": [
       {
-        "role": "Media nacional (todos os setores)",
-        "range": "2.135 EUR/mes bruto (mediana 1.753 EUR)",
+        "role": "Salario medio bruto mensal (todos os setores)",
+        "range": "2.135 euros/mes (1o trimestre de 2026)",
         "source": {
-          "label": "Statistics Estonia (via ERR), Q1 2026",
-          "url": "https://news.err.ee/1610044036/average-monthly-wage-rose-to-2-135-in-q1-2026",
+          "label": "Statistics Estonia (stat.ee)",
+          "url": "https://stat.ee/en/find-statistics/statistics-theme/work-life/wages-and-salaries-and-labour-costs/average-monthly-gross-wages-and-salaries",
           "official": true
         }
       },
       {
-        "role": "Tecnologia da informacao e comunicacao (TI)",
-        "range": "3.821 EUR/mes bruto",
+        "role": "Salario medio bruto mensal (media anual 2025)",
+        "range": "2.092 euros/mes (+5,6% vs 2024)",
         "source": {
-          "label": "Statistics Estonia (via ERR), Q1 2026",
-          "url": "https://news.err.ee/1610044036/average-monthly-wage-rose-to-2-135-in-q1-2026",
+          "label": "Statistics Estonia (stat.ee)",
+          "url": "https://stat.ee/en/news/average-wages-increased-56-last-year",
           "official": true
         }
       },
       {
-        "role": "Servicos financeiros e de seguros",
-        "range": "3.608 EUR/mes bruto",
+        "role": "Setor de TI/ICT",
+        "range": "frequentemente acima de 3.400 euros/mes",
         "source": {
-          "label": "Statistics Estonia (via ERR), Q1 2026",
-          "url": "https://news.err.ee/1610044036/average-monthly-wage-rose-to-2-135-in-q1-2026",
+          "label": "EURES (Comissao Europeia)",
+          "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-estonia_en",
           "official": true
         }
       },
       {
-        "role": "Energia (eletricidade, gas, vapor)",
-        "range": "3.132 EUR/mes bruto",
+        "role": "Piso salarial para top specialist (isencao de quota)",
+        "range": "a partir de 2.528 euros/mes bruto",
         "source": {
-          "label": "Statistics Estonia (via ERR), Q1 2026",
-          "url": "https://news.err.ee/1610044036/average-monthly-wage-rose-to-2-135-in-q1-2026",
+          "label": "Work in Estonia (oficial)",
+          "url": "https://workinestonia.com/12-months-non-eu/",
           "official": true
         }
       },
       {
-        "role": "Hospedagem e alimentacao (setor mais baixo)",
-        "range": "1.337 EUR/mes bruto",
+        "role": "Coeficiente 1,0 do salario medio (base para permissao de trabalho, periodo 2024-2025)",
+        "range": "1.832 euros/mes bruto",
         "source": {
-          "label": "Statistics Estonia (via ERR), Q1 2026",
-          "url": "https://news.err.ee/1610044036/average-monthly-wage-rose-to-2-135-in-q1-2026",
-          "official": true
-        }
-      },
-      {
-        "role": "Outros servicos (segundo mais baixo)",
-        "range": "1.389 EUR/mes bruto",
-        "source": {
-          "label": "Statistics Estonia (via ERR), Q1 2026",
-          "url": "https://news.err.ee/1610044036/average-monthly-wage-rose-to-2-135-in-q1-2026",
-          "official": true
-        }
-      },
-      {
-        "role": "Tallinn (capital, media regional)",
-        "range": "2.538 EUR/mes bruto",
-        "source": {
-          "label": "Statistics Estonia (via ERR), Q1 2026",
-          "url": "https://news.err.ee/1610044036/average-monthly-wage-rose-to-2-135-in-q1-2026",
-          "official": true
-        }
-      },
-      {
-        "role": "Condado de Harju (regiao de Tallinn)",
-        "range": "2.405 EUR/mes bruto",
-        "source": {
-          "label": "Statistics Estonia (via ERR), Q1 2026",
-          "url": "https://news.err.ee/1610044036/average-monthly-wage-rose-to-2-135-in-q1-2026",
-          "official": true
-        }
-      },
-      {
-        "role": "Salario minimo para permissao de residencia para trabalho (coef. 1,0x)",
-        "range": "2.092 EUR/mes bruto (0,8x = 1.674 para startups)",
-        "source": {
-          "label": "Police and Border Guard Board (politsei.ee), mar/2026 a mar/2027",
+          "label": "Policia e Guarda de Fronteira (politsei.ee)",
           "url": "https://www.politsei.ee/en/instructions/residence-permit-for-employment",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE/EEE e da Suica trabalham livremente, bastando registrar residencia. Para nao europeus ha tres caminhos principais. 1) Emprego de curta duracao: para trabalho de ate 365 dias dentro de um periodo de 455 dias, o empregador registra o emprego na Policia e Guarda de Fronteira (PPA) antes do inicio; a decisao sai em ate 15 dias uteis. 2) Permissao de residencia temporaria para trabalho: o empregador deve pagar salario igual ou superior ao salario medio bruto da Estonia. A tabela oficial da PPA para o periodo de 5 de marco de 2026 a marco de 2027 fixa o coeficiente 1,0x em 2.092 euros/mes (0,8x = 1.674 euros, aplicado a startups; 1,24x = 2.594; 1,5x = 3.138). 3) Empreender: via e-Residency (identidade digital para abrir e gerir empresa, sem direito de morar no pais) ou Startup Visa (direito de viver e trabalhar do pais, exige empresa tecnologica escalavel com MVP e aval do comite Startup Estonia, renda minima de 800 euros/mes por fundador, seguro saude Schengen de pelo menos 30.000 euros). A cota anual de imigracao para nao europeus em trabalho e negocios e de 1.292 vagas em 2026, mas o setor de TI e as profissoes top (top specialists) sao isentos dessa cota e nao se sujeitam mais ao criterio de salario dobrado. Profissoes regulamentadas (medicina, enfermagem, direito, docencia em escolas, entre outras) exigem reconhecimento de diploma e, em geral, conhecimento do idioma estoniano. Empresa patrocinadora deve estar no Registro Comercial estoniano e comprovar atividade economica real.",
+    "foreignerRules": "Cidadaos da UE/EEE/Suica trabalham sem permissao especial. Para nao europeus, ha duas vias principais (Policia e Guarda de Fronteira, PPA, e Work in Estonia): (1) registro de emprego de curto prazo, feito pelo empregador antes do inicio do trabalho, cobrindo ate 365 dias em periodo de 455 dias, sem permissao de residencia; e (2) permissao de residencia temporaria para trabalho, para contratos acima de 12 meses, valida por ate 5 anos e renovavel. O empregador deve pagar ao menos o salario medio bruto da Estonia (requisito geral, com excecoes por coeficiente: 1,0 = 1.832 euros no periodo 2024-2025). A imigracao para trabalho e negocios esta sujeita a quota anual limitada a 0,1% da populacao permanente (1.292 vagas em 2026), mas ha isencoes de quota para: emprego em startup, status de especialista ICT e top specialist com salario a partir de 2.528 euros/mes. O EU Blue Card e uma das bases de emprego reconhecidas. A partir de 2026, o empregador precisa comprovar ao menos seis meses de atividade economica real na Estonia para patrocinar nao europeus. Para permissao permanente, exige-se estoniano nivel A2 e programa de acolhimento.",
     "opportunityWindows": [
-      "Setor de TI isento da cota de imigracao para nao europeus, o que torna o ingresso de desenvolvedores e arquitetos de sistemas muito mais rapido que em outras carreiras",
-      "Profissoes top (top specialists) tambem fora da cota e sem o antigo criterio de salario dobrado, facilitando contratacao de especialistas",
-      "Startup Visa com exigencia financeira baixa (800 euros/mes por fundador) e analise do comite em cerca de 10 dias uteis",
-      "e-Residency permite abrir e operar uma OU 100% online antes mesmo de imigrar, util para testar o mercado",
-      "Deficit estrutural e envelhecimento da forca de trabalho em saude, educacao e transporte garantem demanda de medio prazo",
-      "Salarios em alta acelerada na energia (+15,4%), agricultura (+11,2%) e industria (+7,4%) no ultimo ano, sinal de aperto de mao de obra nesses ramos"
+      "Isencao de quota de imigracao para especialistas ICT, empregados de startups e top specialists (salario a partir de 2.528 euros/mes), abrindo caminho mais rapido para profissionais qualificados nao europeus",
+      "Proposta em tramitacao no Parlamento em 2026 para facilitar a contratacao de estrangeiros qualificados em setores com escassez, com foco inicial em manufatura e transporte/armazenagem (Aliens Act)",
+      "Deficit estrutural projetado pela OSKA de cerca de 1.400 top specialists por ano ate 2035, com maiores lacunas em TI, educacao, saude e industria",
+      "Registro de emprego de curto prazo (ate 365 dias) como porta de entrada rapida, processado pelo proprio empregador sem necessidade de permissao de residencia",
+      "Graduados de instituicoes de ensino superior estonianas tem base propria de emprego, favorecendo quem estuda no pais"
     ],
     "jobBoards": [
       {
-        "label": "Töötukassa - Ofertas de emprego (Fundo de Seguro-Desemprego, servico publico)",
+        "label": "Work in Estonia (guia oficial de empregos do governo)",
+        "url": "https://workinestonia.com/",
+        "official": true
+      },
+      {
+        "label": "Tootukassa (Fundo de Seguro-Desemprego) - ofertas de emprego",
         "url": "https://www.tootukassa.ee/en/joboffers",
         "official": true
       },
       {
-        "label": "EURES Estonia (rede europeia de empregos, parte da Töötukassa)",
-        "url": "https://www.eures.ee/en/toootsijale/ee",
+        "label": "EURES Estonia (Servicos Europeus de Emprego)",
+        "url": "https://www.eures.ee/en/eures",
         "official": true
       },
       {
-        "label": "EURES Portal (Comissao Europeia)",
+        "label": "EURES - portal europeu de empregos",
         "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "Minukarjäär (servico de carreira da Töötukassa)",
-        "url": "https://minukarjaar.ee/en",
-        "official": true
-      },
-      {
-        "label": "Work in Estonia (portal oficial de talentos do governo)",
-        "url": "https://www.workinestonia.com/",
-        "official": true
-      },
-      {
-        "label": "CV Keskus (cvkeskus.ee, maior portal privado)",
+        "label": "CV Keskus (maior portal privado de empregos da Estonia)",
         "url": "https://www.cvkeskus.ee/",
-        "official": false
-      },
-      {
-        "label": "CV-Online (cv.ee, principal portal privado)",
-        "url": "https://www.cv.ee/",
         "official": false
       }
     ],
     "sources": [
       {
-        "label": "Statistics Estonia - Salario medio bruto mensal Q1 2026 (via ERR)",
-        "url": "https://news.err.ee/1610044036/average-monthly-wage-rose-to-2-135-in-q1-2026",
+        "label": "Statistics Estonia - taxa de desemprego 1o trimestre de 2026",
+        "url": "https://stat.ee/en/news/unemployment-rate-was-71-first-quarter",
         "official": true
       },
       {
-        "label": "Statistics Estonia - Salario mediano Q1 2026 (via Estonian World)",
-        "url": "https://estonianworld.com/business/estonias-median-salary-e1753-a-month-in-q1-2026/",
-        "official": false
-      },
-      {
-        "label": "Statistics Estonia - Wages and salaries (portal oficial)",
+        "label": "Statistics Estonia - salarios medios mensais brutos",
         "url": "https://stat.ee/en/find-statistics/statistics-theme/work-life/wages-and-salaries-and-labour-costs/average-monthly-gross-wages-and-salaries",
         "official": true
       },
       {
-        "label": "EURES - Labour Market Information: Estonia (Comissao Europeia)",
-        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-estonia_en",
+        "label": "Statistics Estonia - salarios subiram 5,6% em 2025",
+        "url": "https://stat.ee/en/news/average-wages-increased-56-last-year",
         "official": true
       },
       {
-        "label": "Police and Border Guard Board - Residence permit for employment (tabela salarial oficial)",
+        "label": "Work in Estonia - trabalho para nao europeus por mais de 12 meses",
+        "url": "https://workinestonia.com/12-months-non-eu/",
+        "official": true
+      },
+      {
+        "label": "Policia e Guarda de Fronteira da Estonia (PPA) - permissao de residencia para trabalho",
         "url": "https://www.politsei.ee/en/instructions/residence-permit-for-employment",
         "official": true
       },
       {
-        "label": "EU Immigration Portal - Highly-qualified worker in Estonia",
-        "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/highly-qualified-worker-estonia_en",
+        "label": "EURES - informacao de mercado de trabalho da Estonia",
+        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-estonia_en",
         "official": true
       },
       {
-        "label": "e-Residency - Programa oficial do governo da Estonia",
-        "url": "https://www.e-resident.gov.ee/e-residency-for-startups/",
+        "label": "OSKA (Kutsekoda) - previsao geral do mercado de trabalho 2022-2031",
+        "url": "https://oska.kutsekoda.ee/en/estonian-labour-market/oska-general-forecast-2022-2031/",
         "official": true
       },
       {
-        "label": "CEDEFOP - Estonia: Mismatch priority occupations (agencia da UE)",
-        "url": "https://www.cedefop.europa.eu/en/data-insights/estonia-mismatch-priority-occupations",
-        "official": true
-      },
-      {
-        "label": "European Commission - Economic forecast for Estonia",
-        "url": "https://economy-finance.ec.europa.eu/economic-surveillance-eu-member-states/country-pages/estonia/economic-forecast-estonia_en",
-        "official": true
-      },
-      {
-        "label": "Töötukassa - Registration as unemployed/jobseeker",
-        "url": "https://www.tootukassa.ee/en/job-seekers/registration-unemployed",
+        "label": "Tootukassa (Fundo de Seguro-Desemprego) - ofertas de emprego",
+        "url": "https://www.tootukassa.ee/en/joboffers",
         "official": true
       }
     ]
@@ -6465,262 +6168,181 @@ export const LABOR_MARKET: LaborMarketMap = {
     ]
   },
   "lv": {
-    "updatedAt": "2026-06-22",
-    "overview": "A Letonia entra em 2026 com um mercado de trabalho apertado e marcado por escassez estrutural de mao de obra. O desemprego ficou estavel em torno de 6,9% em 2025 e recuou para cerca de 6,7% no quarto trimestre, enquanto a taxa de emprego ronda os 71%, praticamente em linha com a media da Uniao Europeia. O salario medio bruto subiu para aproximadamente 1.831 euros por mes no primeiro trimestre de 2026, alta de 4,2% sobre o ano anterior, segundo o Instituto Central de Estatistica. O motor do desequilibrio e demografico: o envelhecimento da populacao e a queda da natalidade encolhem a forca de trabalho ativa e abrem vagas que o pais nao consegue preencher apenas com letoes. Em 2023, trabalhadores de paises terceiros ja respondiam por 7,8% da forca de trabalho, sinal de uma abertura crescente a estrangeiros.\n\nA demanda concentra-se em construcao, industria, saude e tecnologia da informacao. O setor de TIC emprega cerca de 40 mil pessoas e mantem contratacao continua ha anos, com Riga consolidando um ecossistema de startups que cresce acima do esperado para o tamanho do pais. Em contrapartida, o desemprego juvenil e elevado, na faixa de 13,5% a 14,8% em 2025, o que mostra que a porta esta mais aberta para perfis qualificados e tecnicos do que para quem entra sem experiencia. A Letonia tambem se destacou ao emitir mais Cartoes Azuis da UE do que paises maiores, reforcando que o caminho mais rapido para profissionais altamente qualificados passa por esse instrumento.",
+    "updatedAt": "2026-07-06",
+    "overview": "O mercado de trabalho da Letonia segue estavel, porem pressionado pelo encolhimento e envelhecimento da populacao. Segundo o Portal Oficial de Estatistica (CSB), a taxa de desemprego ficou em 6,9% na media de 2025 e passou a 7,1% no primeiro trimestre de 2026, com a taxa de emprego da populacao de 15 a 74 anos em torno de 63,8% a 64,5%. A forca de trabalho ativa supera 1 milhao de pessoas num pais de cerca de 1,9 milhao de habitantes. O Ministerio da Economia projeta criacao de quase 25 mil novos postos ate 2027, concentrados em servicos profissionais, cientificos e tecnicos, construcao, tecnologia da informacao e industria, enquanto varejo e transporte e armazenagem lideram as reducoes de emprego. A escassez estrutural de mao de obra qualificada, agravada pela aposentadoria de trabalhadores mais velhos, e o principal vetor do mercado.",
     "hotSectors": [
-      "Tecnologia da informacao e comunicacao (TIC), incluindo programacao e servicos de TI",
-      "Construcao civil e oficios relacionados",
-      "Industria e manufatura (metalurgia, maquinas, operadores)",
-      "Saude (profissionais medicos e de enfermagem)",
-      "Setor financeiro e de seguros",
-      "Servicos profissionais, cientificos e tecnicos (engenharia, consultoria)",
-      "Transporte e logistica",
-      "Energia (eletricidade, gas)"
+      "Tecnologia da informacao e comunicacao (TIC)",
+      "Servicos profissionais, cientificos e tecnicos",
+      "Construcao e oficios relacionados",
+      "Industria de transformacao (manufatura)",
+      "Saude e assistencia social",
+      "Transporte e logistica (hub de transito do Baltico)"
     ],
     "coolingSectors": [
-      "Profissionais associados de negocios e administracao (excesso de oferta)",
-      "Profissionais associados de ciencia e engenharia (nivel tecnico)",
-      "Processamento de alimentos, marcenaria, vestuario e artesanato",
-      "Funcoes administrativas de nivel inicial sem especializacao"
+      "Comercio varejista",
+      "Transporte e armazenagem (reducao de postos apesar da demanda por motoristas)",
+      "Ocupacoes de associados de administracao e negocios (excedente)",
+      "Processamento de alimentos e confeccao de vestuario (excedente)"
     ],
     "inDemandRoles": [
       {
-        "role": "Trabalhadores da construcao e oficios relacionados (exceto eletricistas)",
-        "note": "Grupo com maior incidencia de escassez segundo EURES 2024"
+        "role": "Desenvolvedores de software",
+        "note": "Setor de TIC em rapido crescimento, escassez documentada"
       },
       {
-        "role": "Trabalhadores de metalurgia, maquinas e oficios relacionados",
-        "note": "Forte escassez na industria"
+        "role": "Especialistas em ciberseguranca",
+        "note": "Demanda em alta no setor de TIC"
       },
       {
-        "role": "Profissionais de saude (medicos, enfermeiros)",
-        "note": "Escassez agravada pelo envelhecimento da populacao"
+        "role": "Analistas de dados",
+        "note": "Perfil digital STEM em demanda"
       },
       {
-        "role": "Desenvolvedores de software e programadores",
-        "note": "Setor de TIC com cerca de 40 mil empregados e contratacao continua"
+        "role": "Administradores de sistemas de TI",
+        "note": "Escassez no setor de tecnologia"
       },
       {
-        "role": "Especialistas em analise de dados e competencias digitais",
-        "note": "Empregadores buscam ativamente competencias digitais"
+        "role": "Eletricistas",
+        "note": "Oficio de construcao em demanda em todas as regioes"
       },
       {
-        "role": "Engenheiros e profissionais STEM",
-        "note": "Demanda alta em TI, telecomunicacoes e manufatura"
+        "role": "Encanadores",
+        "note": "Oficio de construcao com escassez consistente"
       },
       {
-        "role": "Motoristas e profissionais de transporte e logistica",
-        "note": "Setor com alta taxa de vagas"
+        "role": "Soldadores",
+        "note": "Trabalhadores de metal e maquinario, grupo de escassez aguda"
       },
       {
-        "role": "Profissionais de servicos administrativos e de apoio",
-        "note": "Setor com a maior taxa de vagas (4,0% em 2023)"
+        "role": "Pedreiros e carpinteiros",
+        "note": "Construcao entre os grupos de escassez mais aguda"
+      },
+      {
+        "role": "Operadores de maquinas CNC e tecnicos de manutencao",
+        "note": "Trabalhadores de metal e maquinario"
+      },
+      {
+        "role": "Motoristas de caminhao",
+        "note": "Entre os profissionais mais urgentemente necessarios pela posicao de transito do pais"
+      },
+      {
+        "role": "Enfermeiros e cuidadores",
+        "note": "Escassez persistente em saude e assistencia social"
+      },
+      {
+        "role": "Medicos e fisioterapeutas",
+        "note": "Profissionais de saude, grupo de escassez aguda"
+      },
+      {
+        "role": "Professores",
+        "note": "Educacao entre os setores com altas taxas de vagas"
       }
     ],
     "byQualification": [
       {
-        "area": "Alta qualificacao (diploma superior de 3+ anos)",
-        "advice": "O caminho mais vantajoso e o Cartao Azul da UE, com limiar salarial de cerca de 24.720 euros por ano (reduzido para 19.776 euros em profissoes de escassez listadas pelo Conselho de Ministros). A Letonia nao aplica teste de mercado de trabalho ao Cartao Azul, o que acelera a contratacao. Profissoes reguladas (saude, direito, engenharia) exigem comprovacao de que os requisitos legais nacionais foram cumpridos, ou seja, reconhecimento de diploma."
+        "area": "Tecnologia da Informacao",
+        "advice": "Area de maior aquecimento na Letonia. Desenvolvimento de software, ciberseguranca, analise de dados e administracao de sistemas figuram na escassez oficial. O EU Blue Card, voltado a profissionais qualificados, e um caminho vantajoso para quem tem diploma superior e salario elevado na area."
       },
       {
-        "area": "Tecnologia e dados",
-        "advice": "Setor mais aquecido e mais bem pago do pais (TIC com media de cerca de 3.240 euros por mes). Riga concentra o ecossistema de startups. Vale priorizar empresas que ja patrocinam vistos e usar o Cartao Azul quando o salario qualificar."
-      },
-      {
-        "area": "Oficios tecnicos e construcao",
-        "advice": "Construcao e metalurgia sao as maiores areas de escassez. Profissionais com certificacao tecnica e experiencia comprovada tem boa absorcao, mas costumam entrar por permissao de residencia para emprego comum, que exige registro previo da vaga na NVA por pelo menos 10 dias uteis."
+        "area": "Engenharia e Construcao",
+        "advice": "Trabalhadores de construcao e oficios relacionados formam o grupo de escassez mais aguda no pais, com demanda em todas as regioes para eletricistas, encanadores, soldadores, pedreiros e carpinteiros. Certificacao profissional e reconhecimento de qualificacao facilitam a insercao rapida."
       },
       {
         "area": "Saude",
-        "advice": "Escassez estrutural de medicos e enfermeiros, mas sao profissoes reguladas. E preciso reconhecimento da qualificacao e, em geral, conhecimento do idioma letao para atendimento. Planejar o reconhecimento de diploma antes de migrar."
+        "advice": "Saude e assistencia social registram deficit de vagas persistente, com falta de enfermeiros, cuidadores, medicos e fisioterapeutas. Profissoes reguladas exigem reconhecimento de diploma; o processo deve ser iniciado com antecedencia."
       },
       {
-        "area": "Empreendedor / fundador de startup",
-        "advice": "A via de startup, gerida pela LIAA com comite mensal, foca na inovacao e escalabilidade da ideia, com subsistencia exigida de apenas 500 euros por mes, bem menor que a do autonomo comum (cerca de 2.554 euros por mes). Decisao em ate 60 dias e necessidade de se registrar como membro do conselho de uma empresa em ate 3 meses."
+        "area": "Industria e Metalurgia",
+        "advice": "Trabalhadores de metal, maquinario e oficios relacionados estao entre os mais demandados. Operadores CNC, tecnicos de manutencao e metalurgicos encontram vagas abertas na manufatura, setor apontado como gerador de novos postos ate 2027."
       },
       {
-        "area": "Baixa qualificacao / jovens sem experiencia",
-        "advice": "Mercado mais dificil: desemprego juvenil entre 13,5% e 14,8% e excedente em funcoes administrativas e de artesanato. Recomenda-se buscar setores de escassez (construcao, industria) com alguma qualificacao tecnica antes de tentar a migracao."
+        "area": "Transporte e Logistica",
+        "advice": "A posicao da Letonia como hub de transito do Baltico central gera demanda estrutural por motoristas profissionais e operadores logisticos. Habilitacao europeia (CE) e o Certificado de Aptidao Profissional sao pre-requisitos comuns."
+      },
+      {
+        "area": "Administracao e Negocios",
+        "advice": "Ha excedente relativo de associados de administracao e negocios, o que torna a insercao mais competitiva. Diferenciais como dominio de ferramentas digitais, ingles e russo, e experiencia em setores aquecidos ampliam as chances."
       }
     ],
     "salaries": [
       {
-        "role": "Salario medio bruto nacional (todos os setores)",
-        "range": "cerca de 1.831 EUR/mes (1o trimestre de 2026)",
+        "role": "Salario medio bruto (todos os setores)",
+        "range": "1.831 EUR/mes (bruto, 1o tri 2026); liquido aprox. 1.364 EUR/mes",
         "source": {
-          "label": "Instituto Central de Estatistica da Letonia (stat.gov.lv)",
+          "label": "CSB - Portal Oficial de Estatistica (stat.gov.lv)",
           "url": "https://stat.gov.lv/en/statistics-themes/labour-market/wages-and-salaries",
           "official": true
         }
       },
       {
-        "role": "Salario minimo nacional",
-        "range": "700 EUR/mes (bruto, desde jan/2024)",
+        "role": "Salario minimo mensal",
+        "range": "780 EUR/mes (a partir de 1 jan 2026)",
         "source": {
-          "label": "EURES - Labour Market Information Latvia",
-          "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-latvia_en",
-          "official": true
-        }
-      },
-      {
-        "role": "TIC / telecomunicacoes, programacao e servicos de TI",
-        "range": "cerca de 3.240 EUR/mes (bruto, 1o tri 2026)",
-        "source": {
-          "label": "Instituto Central de Estatistica (via LSM)",
-          "url": "https://stat.gov.lv/en/statistics-themes/labour-market/wages-and-salaries",
-          "official": true
-        }
-      },
-      {
-        "role": "Atividades financeiras e de seguros",
-        "range": "cerca de 3.400 EUR/mes (bruto, 1o tri 2026)",
-        "source": {
-          "label": "Instituto Central de Estatistica (via LSM)",
-          "url": "https://stat.gov.lv/en/statistics-themes/labour-market/wages-and-salaries",
-          "official": true
-        }
-      },
-      {
-        "role": "Atividades profissionais, cientificas e tecnicas",
-        "range": "cerca de 2.356 EUR/mes (bruto, 1o tri 2026)",
-        "source": {
-          "label": "Instituto Central de Estatistica (via LSM)",
-          "url": "https://stat.gov.lv/en/statistics-themes/labour-market/wages-and-salaries",
-          "official": true
-        }
-      },
-      {
-        "role": "Energia (eletricidade, gas, vapor)",
-        "range": "cerca de 2.567 EUR/mes (bruto, 1o tri 2026)",
-        "source": {
-          "label": "Instituto Central de Estatistica (via LSM)",
-          "url": "https://stat.gov.lv/en/statistics-themes/labour-market/wages-and-salaries",
-          "official": true
-        }
-      },
-      {
-        "role": "Saude e assistencia social",
-        "range": "cerca de 1.841 EUR/mes (bruto, 2025)",
-        "source": {
-          "label": "Instituto Central de Estatistica (via LSM)",
-          "url": "https://stat.gov.lv/en/statistics-themes/labour-market/wages-and-salaries",
-          "official": true
-        }
-      },
-      {
-        "role": "Administracao publica e defesa",
-        "range": "cerca de 2.052 EUR/mes (bruto, 1o tri 2026)",
-        "source": {
-          "label": "Instituto Central de Estatistica (via LSM)",
-          "url": "https://stat.gov.lv/en/statistics-themes/labour-market/wages-and-salaries",
-          "official": true
-        }
-      },
-      {
-        "role": "Salario liquido medio nacional",
-        "range": "cerca de 1.127 EUR/mes (2023)",
-        "source": {
-          "label": "EURES - Labour Market Information Latvia",
-          "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-latvia_en",
+          "label": "Ministerio do Bem-Estar (lm.gov.lv)",
+          "url": "https://www.lm.gov.lv/en/minimum-monthly-wage",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE/EEE/Suica nao precisam de autorizacao e podem comecar a trabalhar logo apos assinar o contrato. Para nacionais de paises terceiros, a Letonia opera um sistema de permissao unica que combina residencia e direito ao trabalho, sem documento separado de work permit; o direito ao emprego e endossado dentro do visto ou da permissao de residencia, emitido pelo OCMA/PMLP (Oficina de Cidadania e Assuntos de Migracao). Regra-chave do teste de mercado: a vaga deve ficar registrada e aberta na NVA (Agencia Estatal de Emprego) por pelo menos 10 dias uteis antes de o estrangeiro poder ser contratado, salvo isencoes. O fluxo de emprego de longo prazo e: empregador registra a vaga na NVA, submete patrocinio ao OCMA com contrato e documentos de educacao, o estrangeiro pede a residencia em missao diplomatica, o OCMA emite a residencia com direito a trabalho e o trabalhador se registra na Receita (VID). Para profissionais altamente qualificados existe o Cartao Azul da UE, que NAO exige teste de mercado e nao prioriza cidadaos da UE; requer diploma superior de 3 anos ou mais (ou requisitos legais cumpridos em profissoes reguladas), contrato de pelo menos 1 ano, seguro saude e salario bruto de pelo menos 24.720 euros/ano (1,5x a media), reduzido para 19.776 euros/ano (1,2x) em profissoes de escassez do Regulamento do Gabinete. O Cartao Azul vale ate 5 anos ou o periodo do contrato; prazo de analise de ate 10 dias uteis; taxas de cerca de 100 euros (analise em 10 dias) ou 200 euros (5 dias), mais 15 euros pela producao do cartao (30 euros acelerado). Profissoes reguladas (saude, direito, engenharia, etc.) exigem reconhecimento da qualificacao. Para autonomos, a subsistencia exigida em 2026 e de cerca de 2.554 euros/mes mais plano de negocios e comprovantes; a partir de 2026 ha exigencias documentais mais rigorosas (extrato do registro comercial, declaracao fiscal, extrato bancario dos ultimos 6 meses e comprovante de moradia). A via de startup inovador exige subsistencia de apenas 500 euros/mes e e avaliada pela LIAA.",
+    "foreignerRules": "Cidadaos da UE/EEE e Suica trabalham na Letonia sem autorizacao de trabalho. Nacionais de paises terceiros (nao UE) precisam de autorizacao de residencia temporaria com direito a emprego, emitida pelo Departamento de Cidadania e Assuntos Migratorios (OCMA/PMLP), sob a Lei de Imigracao. A regra central: a vaga deve ser registrada oficialmente no portal de CVs e vagas da Agencia Estatal de Emprego (NVA) e permanecer aberta por pelo menos 10 dias uteis antes de contratar o estrangeiro (teste de mercado). O empregador submete o pedido de patrocinio a OCMA; em seguida o estrangeiro solicita a autorizacao de residencia com direito a trabalho na missao diplomatica da Letonia no exterior, e a OCMA emite o documento. Ha exigencia de salario minimo para o visto de trabalho (patamar vinculado ao salario medio do pais) e o EU Blue Card, para profissionais altamente qualificados, exige salario de cerca de 1,5x o salario medio bruto nacional. O empregador responde pelos custos ligados ao emprego e a saida do trabalhador. Fonte oficial: PMLP/OCMA.",
     "opportunityWindows": [
-      "Cartao Azul da UE sem teste de mercado de trabalho: contratacao mais rapida para profissionais altamente qualificados, com a Letonia emitindo mais Cartoes Azuis que paises maiores",
-      "Limiar salarial reduzido (1,2x a media, cerca de 19.776 EUR/ano) para profissoes de escassez listadas no Regulamento do Gabinete",
-      "Setor de TIC em contratacao continua, com salarios entre os mais altos do pais e ecossistema de startups em Riga",
-      "Escassez estrutural em construcao, industria e saude pelo envelhecimento da populacao, abrindo vagas dificeis de preencher com mao de obra local",
-      "Via de startup inovador da LIAA com subsistencia baixa (500 EUR/mes) e decisao em ate 60 dias, atrativa para fundadores",
-      "Procedimento acelerado de analise (5 dias uteis) disponivel mediante taxa adicional"
+      "Programa de criacao de quase 25 mil novos postos ate 2027 (Ministerio da Economia), concentrado em servicos profissionais/cientificos/tecnicos, construcao, TIC e industria",
+      "Setor de TIC apontado oficialmente como um dos de crescimento mais rapido, com escassez documentada de desenvolvedores, ciberseguranca e analistas de dados",
+      "Construcao e oficios relacionados como grupo de escassez mais aguda, com demanda em todas as regioes do pais",
+      "Saude e assistencia social com deficit de vagas persistente (enfermeiros, cuidadores, medicos, fisioterapeutas)",
+      "EU Blue Card disponivel para profissionais qualificados de paises terceiros com diploma superior e salario a partir de ~1,5x a media nacional"
     ],
     "jobBoards": [
       {
-        "label": "NVA - Portal de CV e Vagas da Agencia Estatal de Emprego (maior base oficial de vagas)",
+        "label": "NVA - Agencia Estatal de Emprego (portal de vagas)",
         "url": "https://www.nva.gov.lv/en/vacancies",
         "official": true
       },
       {
-        "label": "NVA - Registro de vagas e selecao de pessoal (para empregadores)",
-        "url": "https://www.nva.gov.lv/en/registration-vacancies-and-personnel-selection",
-        "official": true
-      },
-      {
-        "label": "EURES - Portal oficial de empregos da UE (Letonia)",
+        "label": "EURES - Portal Europeu da Mobilidade Profissional (Letonia)",
         "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "LIAA - Vagas e apoio a investidores e startups",
-        "url": "https://www.liaa.gov.lv/en/vacancies",
+        "label": "PMLP/OCMA - Emprego de estrangeiros (regras de residencia e trabalho)",
+        "url": "https://www.pmlp.gov.lv/en/employment-foreigners",
         "official": true
-      },
-      {
-        "label": "CV.lv / CV-Online (portal privado dos paises balticos)",
-        "url": "https://cv.lv/en",
-        "official": false
-      },
-      {
-        "label": "VisiDarbi.lv (agregador de vagas privado)",
-        "url": "https://www.visidarbi.lv/en",
-        "official": false
-      },
-      {
-        "label": "Prakse.lv (base principal de estagios)",
-        "url": "https://www.prakse.lv",
-        "official": false
       }
     ],
     "sources": [
       {
-        "label": "EURES - Labour Market Information: Latvia (Comissao Europeia)",
-        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-latvia_en",
+        "label": "CSB - Portal Oficial de Estatistica da Letonia (desemprego)",
+        "url": "https://stat.gov.lv/en/statistics-themes/labour-market/unemployment",
         "official": true
       },
       {
-        "label": "NVA - Nodarbinatibas valsts agentura (Agencia Estatal de Emprego)",
-        "url": "https://www.nva.gov.lv/en",
-        "official": true
-      },
-      {
-        "label": "Instituto Central de Estatistica da Letonia (stat.gov.lv)",
+        "label": "CSB - Salarios e ordenados",
         "url": "https://stat.gov.lv/en/statistics-themes/labour-market/wages-and-salaries",
         "official": true
       },
       {
-        "label": "EU Immigration Portal - EU Blue Card Latvia (Comissao Europeia)",
-        "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/eu-blue-card/eu-blue-card-latvia_en",
+        "label": "NVA - Agencia Estatal de Emprego (vagas)",
+        "url": "https://www.nva.gov.lv/en/vacancies",
         "official": true
       },
       {
-        "label": "PMLP / OCMA - Employment of foreigners",
+        "label": "EURES - Informacao do Mercado de Trabalho: Letonia",
+        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-latvia_en",
+        "official": true
+      },
+      {
+        "label": "PMLP/OCMA - Emprego de estrangeiros",
         "url": "https://www.pmlp.gov.lv/en/employment-foreigners",
         "official": true
       },
       {
-        "label": "PMLP / OCMA - Self-employed person",
-        "url": "https://www.pmlp.gov.lv/en/self-employed-person-0",
+        "label": "Ministerio da Economia - Previsoes do mercado de trabalho ate 2040",
+        "url": "https://www.em.gov.lv/en/article/labour-market-forecasts-latvia-until-2040-have-been-prepared",
         "official": true
       },
       {
-        "label": "PMLP / OCMA - Innovative product creation (start-up activities)",
-        "url": "https://www.pmlp.gov.lv/en/innovative-product-creation-or-development-start-activities-0",
-        "official": true
-      },
-      {
-        "label": "LIAA - Investment and Development Agency of Latvia",
-        "url": "https://www.liaa.gov.lv/en",
-        "official": true
-      },
-      {
-        "label": "ELA / EURES - Labour shortages and surpluses in Europe 2025",
-        "url": "https://www.ela.europa.eu/en/publications/labour-shortages-and-surpluses-europe-2025",
-        "official": true
-      },
-      {
-        "label": "LSM (radio e TV publica da Letonia) - dados de salario e Cartao Azul",
-        "url": "https://eng.lsm.lv/article/economy/employment/",
+        "label": "Ministerio do Bem-Estar - Salario minimo mensal",
+        "url": "https://www.lm.gov.lv/en/minimum-monthly-wage",
         "official": true
       }
     ]
