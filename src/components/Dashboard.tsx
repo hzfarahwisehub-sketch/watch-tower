@@ -24,6 +24,7 @@ import { InfoCenters, FinanceCenters, CryptoCenters } from "./InfoCenters";
 import { useSettings } from "./SettingsProvider";
 import { SettingsPanel } from "./SettingsPanel";
 import { useLocale } from "./LocaleProvider";
+import { AGENDA_DENY_EMAILS } from "@/lib/agenda-access";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -239,6 +240,15 @@ export function Dashboard() {
   const { t } = useLocale();
   const { data: session } = useSession();
   const isLoggedIn = !!session?.user?.email;
+  // Bloqueio da AGENDA por e-mail (regra do Hammis): a Agenda é da equipe, MENOS
+  // o Igor, que acessa o sistema mas NÃO enxerga agenda de ninguém. Lógica à
+  // prova de trauma: esconde APENAS quando o e-mail logado é EXATAMENTE um da
+  // deny-list. Default = MOSTRA (inclusive durante o load da sessão e pro
+  // anônimo). Assim é IMPOSSÍVEL a Agenda sumir de um sócio — o único gatilho de
+  // esconder é o e-mail ser o do Igor. Os dados já são cortados no servidor
+  // (403 em /api/agenda e /api/calendar/*); isto aqui só tira a caixa da vista.
+  const sessionEmail = session?.user?.email?.toLowerCase();
+  const hideAgenda = !!sessionEmail && AGENDA_DENY_EMAILS.has(sessionEmail);
   // mapSelected: país em foco. Alimenta o Benchmark (a "área completa" do país,
   // com tudo do local) e o voo do globo. Clicar em qualquer lugar (mapa,
   // alertas, sidebar, feed) aponta todo mundo pro mesmo país, SEM modal cobrindo.
@@ -552,16 +562,20 @@ export function Dashboard() {
               <DailyGrid only="inbox" />
             </GridCell>
           </div>
-          {/* Agenda: SEMPRE renderiza. A trava por sessão (canSeeAgenda) escondia
-              a Agenda de TODOS — inclusive dos sócios/Hammis — porque a sessão do
-              cliente não vinha com o papel esperado. Removida 2026-07-05 pra
-              devolver a Agenda. O bloqueio do Igor será refeito depois de forma
-              robusta (server-side), sem risco de sumir com a Agenda de novo. */}
-          <div key="agenda">
-            <GridCell panelId="agenda" locked={locked}>
-              <DailyGrid only="agenda" />
-            </GridCell>
-          </div>
+          {/* Agenda: visível pra todos os sócios (grande, no tamanho do DEFAULT
+              v12), escondida SÓ do Igor (hideAgenda = e-mail na deny-list). A
+              antiga trava (canSeeAgenda por "role === admin") escondia de todos
+              quando a sessão vinha sem o papel esperado — por isso agora o
+              gatilho é o inverso: mostra por padrão, esconde só o e-mail do Igor.
+              A proteção de verdade dos dados é no servidor (403 em /api/agenda e
+              /api/calendar/*); aqui é só pra ele não ver nem a caixa vazia. */}
+          {!hideAgenda && (
+            <div key="agenda">
+              <GridCell panelId="agenda" locked={locked}>
+                <DailyGrid only="agenda" />
+              </GridCell>
+            </div>
+          )}
           <div key="tasks">
             <GridCell panelId="tasks" locked={locked}>
               <DailyGrid only="tasks" />
