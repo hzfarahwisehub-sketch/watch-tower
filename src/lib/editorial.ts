@@ -473,6 +473,26 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   ca: {
     community: [
       {
+        title: "Províncias aceleram os convites em julho",
+        body:
+          "As províncias canadenses entraram julho de 2026 em ritmo forte de seleção. Alberta, pelo AAIP, emitiu mais de mil convites em seis sorteios recentes, com prioridade declarada pra saúde, aviação e tecnologia. Manitoba convidou 77 candidatos no Skilled Worker Stream, e a Colúmbia Britânica realizou um sorteio voltado a empreendedores.\n\nCada nomeação provincial soma 600 pontos no Express Entry, o que praticamente garante o convite federal. O detalhe é que as janelas provinciais abrem e fecham rápido, e cada programa tem lista própria de ocupações.",
+        cta: "Tem perfil de saúde, tech ou empreendedor? Deixe o perfil pronto e acompanhe a província certa, porque os sorteios não avisam com antecedência.",
+        sources: [
+          { label: "Alberta · AAIP (oficial)", url: "https://www.alberta.ca/alberta-advantage-immigration-program" },
+          { label: "Manitoba · MPNP (oficial)", url: "https://immigratemanitoba.com/" },
+          { label: "British Columbia · BC PNP (oficial)", url: "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program" },
+        ],
+      },
+      {
+        title: "🍁 Cidadania por descendência: o Bill C-3 derruba o limite de 1ª geração",
+        body:
+          "O Canadá sancionou em 15 de dezembro de 2025 o Bill C-3, que altera o limite de primeira geração da cidadania por descendência. Antes, quem nascia fora do país só transmitia a cidadania à primeira geração nascida no exterior. Com a mudança, o vínculo pode alcançar netos e bisnetos de canadenses, desde que atendidos os critérios legais.\n\nNa prática, muita gente que se julgava sem direito pode, na verdade, já ser cidadã ou ter caminho pra reconhecimento. O primeiro passo é checar a elegibilidade na ferramenta oficial da IRCC antes de qualquer pedido.",
+        cta: "Tem avós ou bisavós canadenses? Verifique a elegibilidade no site oficial da IRCC, a regra mudou e pode te alcançar.",
+        sources: [
+          { label: "IRCC · Mudança nas regras de cidadania em 2025 (Bill C-3, oficial)", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/act-changes/rules-2025.html" },
+        ],
+      },
+      {
         title: "Express Entry 2026: o corte subiu pra 481 pontos",
         body:
           "O Canadá começou 2026 com o Express Entry mais disputado da década. No último corte registrado, a nota mínima (CRS) ficou em 481 pontos, doze a mais que no trimestre anterior.\n\nNa prática, quem está na faixa dos 470 precisa somar pontos rápido. Os caminhos mais diretos são melhorar a nota de idioma, conseguir uma oferta de trabalho válida ou garantir uma nomeação provincial.",
@@ -510,6 +530,26 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     countryTab: [
       {
+        headline: "Províncias puxam a imigração canadense e a cidadania por descendência se amplia",
+        standfirst:
+          "Julho de 2026 começou com sorteios provinciais intensos em Alberta, Manitoba e Colúmbia Britânica, enquanto o Bill C-3 reabre a cidadania por descendência a netos e bisnetos.",
+        body:
+          "A imigração canadense entrou em julho de 2026 movida pelas províncias. A Alberta, por meio do AAIP, emitiu mais de mil convites em seis sorteios recentes, com foco explícito em saúde, aviação e tecnologia. Manitoba selecionou 77 candidatos no seu Skilled Worker Stream, e a Colúmbia Britânica abriu uma rodada voltada a empreendedores em duas trilhas de residência permanente.\n\nO recado é claro: as trilhas provinciais viraram a via mais concreta pra quem quer o Canadá neste momento. Uma nomeação de província soma 600 pontos no Express Entry, o suficiente pra transformar um perfil mediano em convite quase certo. Como cada programa tem lista própria de ocupações e janelas curtas, sair na frente exige perfil pronto e monitoramento constante.\n\nNo campo da cidadania, a novidade é estrutural. O Bill C-3, sancionado em 15 de dezembro de 2025, alterou o limite de primeira geração da cidadania por descendência. Descendentes que antes ficavam de fora, como netos e bisnetos de canadenses nascidos no exterior, passam a ter caminho pra reconhecimento, desde que cumpram os critérios legais.\n\nPra comunidade WiseHub, o momento pede duas frentes de atenção. Quem tem qualificação em saúde, tecnologia ou empreende deve mirar a trilha provincial certa. E quem tem raízes canadenses na família vale checar a nova regra de cidadania, porque a porta que parecia fechada pode ter sido reaberta.",
+        keyFacts: [
+          "Alberta (AAIP): mais de mil convites em seis sorteios recentes, foco em saúde, aviação e tecnologia",
+          "Manitoba (MPNP): 77 convites no Skilled Worker Stream",
+          "Colúmbia Britânica (BC PNP): rodada voltada a empreendedores em duas trilhas de PR",
+          "Nomeação provincial soma 600 pontos no Express Entry",
+          "Bill C-3 (15/12/2025): cidadania por descendência alcança além da 1ª geração",
+        ],
+        sources: [
+          { label: "Alberta · AAIP (oficial)", url: "https://www.alberta.ca/alberta-advantage-immigration-program" },
+          { label: "Manitoba · MPNP (oficial)", url: "https://immigratemanitoba.com/" },
+          { label: "British Columbia · BC PNP (oficial)", url: "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program" },
+          { label: "IRCC · Mudança nas regras de cidadania em 2025 (oficial)", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/act-changes/rules-2025.html" },
+        ],
+      },
+      {
         headline: "Canadá aperta o funil e escolhe quem quer: tecnologia e saúde na frente",
         standfirst:
           "O Express Entry de 2026 ficou mais seletivo, com corte em 481 pontos e prioridade clara pra tecnologia e saúde. Veja o que mudou e como se posicionar.",
@@ -540,6 +580,18 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       },
     ],
     blog: [
+      {
+        headline: "O Canadá que se abre pelas províncias e pela linhagem",
+        standfirst:
+          "Enquanto o corte federal segue duro, as províncias e uma nova lei de cidadania criam caminhos que muita gente ainda não percebeu.",
+        body:
+          "Quando se fala em imigrar pro Canadá, a imagem que vem à cabeça é a do Express Entry federal e da corrida por pontos. Mas o começo de julho de 2026 mostrou que boa parte da ação real está acontecendo em outro lugar, nas províncias.\n\nAlberta, Manitoba e Colúmbia Britânica abriram sorteios em sequência, e o padrão é revelador. A Alberta despejou mais de mil convites em seis rodadas curtas, mirando saúde, aviação e tecnologia. Manitoba chamou trabalhadores qualificados pelo seu programa próprio, e a Colúmbia Britânica foi atrás de empreendedores. São vias que somam 600 pontos de uma vez e, por isso, resolvem o jogo de quem está travado no corte federal.\n\nParalelo a isso, uma mudança silenciosa mexe com a base de quem pode se dizer canadense. O Bill C-3, em vigor desde o fim de 2025, derrubou o limite que travava a cidadania por descendência na primeira geração nascida fora do país. De repente, netos e bisnetos de canadenses que se davam por excluídos ganharam um caminho pra reconhecimento.\n\nA lição pra comunidade WiseHub é não olhar o Canadá por uma porta só. A federal é a mais famosa, mas as provinciais costumam ser mais rápidas pra perfis específicos, e a via da cidadania por descendência pode transformar uma pesquisa de família num passaporte. Em 2026, quem estuda o mapa inteiro sai na frente de quem fica preso à fila federal.",
+        tags: ["Canadá", "Provincial Nominee", "Cidadania", "Bill C-3"],
+        sources: [
+          { label: "Alberta · AAIP (oficial)", url: "https://www.alberta.ca/alberta-advantage-immigration-program" },
+          { label: "IRCC · Mudança nas regras de cidadania em 2025 (oficial)", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/act-changes/rules-2025.html" },
+        ],
+      },
       {
         headline: "Por que o Canadá virou o jogo da imigração qualificada em 2026",
         standfirst:
@@ -706,6 +758,16 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   uk: {
     community: [
       {
+        title: "Novo projeto de lei de imigração começa a tramitar no Parlamento",
+        body:
+          "O Reino Unido publicou o Immigration and Asylum Bill, o projeto de lei de imigração e asilo anunciado no Discurso do Rei em 13 de maio de 2026. O texto já foi apresentado à Câmara dos Comuns e iniciou sua tramitação na sessão parlamentar de 2026 e 2027.\n\nComo todo projeto ainda em análise, as regras atuais seguem valendo até que ele seja aprovado e sancionado. Pra quem planeja o país, o momento é de acompanhar as etapas oficiais sem antecipar mudanças que ainda não entraram em vigor.",
+        cta: "Vai pro Reino Unido? Acompanhe a tramitação do projeto pelo Parlamento e confirme sempre a regra vigente antes de agir.",
+        sources: [
+          { label: "UK Parliament · Immigration and Asylum Bill (oficial)", url: "https://bills.parliament.uk/bills/4254" },
+          { label: "GOV.UK · UK Visas and Immigration", url: "https://www.gov.uk/government/organisations/uk-visas-and-immigration" },
+        ],
+      },
+      {
         title: "Reino Unido mantém o Graduate Visa de 2 anos",
         body:
           "Depois de forte pressão das universidades, o Reino Unido decidiu manter o Graduate Visa, que permite ficar e trabalhar por dois anos após concluir um curso no país.\n\nPra quem pensa em estudar no Reino Unido, é uma segurança importante: o diploma continua vindo com uma janela real pra ganhar experiência local e buscar um patrocínio de trabalho.",
@@ -743,6 +805,23 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     countryTab: [
       {
+        headline: "Reino Unido põe em marcha um novo projeto de lei de imigração e asilo",
+        standfirst:
+          "Anunciado no Discurso do Rei em maio, o Immigration and Asylum Bill foi publicado e começou a tramitar na Câmara dos Comuns. Até virar lei, as regras atuais continuam em vigor.",
+        body:
+          "O governo britânico deu início ao trâmite do Immigration and Asylum Bill, o novo projeto de lei de imigração e asilo. Anunciado no Discurso do Rei em 13 de maio de 2026, o texto foi publicado e apresentado à Câmara dos Comuns, abrindo sua passagem pela sessão parlamentar de 2026 e 2027.\n\nProjetos dessa natureza percorrem várias etapas nas duas Casas do Parlamento antes de serem aprovados, o que significa que nada muda de imediato. As vias já existentes, como o Skilled Worker e o Graduate Visa, seguem valendo enquanto o projeto é debatido.\n\nPra quem tem planos com o Reino Unido, o recado é de atenção sem alarme. Vale acompanhar o andamento do projeto pelos canais oficiais do Parlamento e do serviço de vistos, e evitar decisões baseadas em versões preliminares ou em resumos de terceiros, já que o texto ainda pode mudar ao longo da tramitação.\n\nA leitura de fundo é que a imigração continua no centro do debate político britânico. Seja qual for o desenho final da lei, o país sinaliza que pretende seguir ajustando suas regras, e quem planeja migrar precisa manter o olho na fonte oficial.",
+        keyFacts: [
+          "Immigration and Asylum Bill anunciado no Discurso do Rei em 13/05/2026",
+          "Publicado e apresentado à Câmara dos Comuns, sessão 2026 e 2027",
+          "Ainda em tramitação: regras atuais seguem em vigor até aprovação",
+          "Vias como Skilled Worker e Graduate Visa continuam valendo por ora",
+        ],
+        sources: [
+          { label: "UK Parliament · Immigration and Asylum Bill (oficial)", url: "https://bills.parliament.uk/bills/4254" },
+          { label: "GOV.UK · UK Visas and Immigration", url: "https://www.gov.uk/government/organisations/uk-visas-and-immigration" },
+        ],
+      },
+      {
         headline: "Reino Unido equilibra aperto e atração: diploma ainda abre porta",
         standfirst:
           "O país manteve o Graduate Visa sob pressão das universidades, mas ajusta o piso salarial do Skilled Worker. Entenda o cenário pós-Brexit.",
@@ -758,6 +837,17 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       },
     ],
     blog: [
+      {
+        headline: "Reino Unido: por que um novo projeto de lei não é motivo pra pânico",
+        standfirst:
+          "O Immigration and Asylum Bill começou a tramitar, e a reação certa não é correr nem congelar planos, é entender como uma lei nasce por lá.",
+        body:
+          "Toda vez que o Reino Unido anuncia um novo projeto de lei de imigração, o efeito imediato costuma ser o mesmo, uma onda de ansiedade em quem planeja o país. Com o Immigration and Asylum Bill, apresentado à Câmara dos Comuns após o Discurso do Rei de maio, não é diferente. Mas vale separar o barulho do que de fato importa.\n\nNo sistema britânico, um projeto de lei não muda nada sozinho. Ele precisa passar por leituras, comissões e votações nas duas Casas do Parlamento antes de receber a sanção real e virar lei. Esse percurso leva tempo e, com frequência, o texto sai diferente de como entrou. Ou seja, o que circula hoje como resumo do projeto não é a regra que estará valendo amanhã.\n\nPra quem tem plano concreto, isso tem uma consequência prática libertadora. As vias atuais, do Skilled Worker ao Graduate Visa, continuam funcionando normalmente enquanto o debate acontece. Congelar decisões por medo de uma mudança que ainda não existe costuma custar mais caro do que seguir com o planejamento e ajustar a rota se e quando a lei mudar.\n\nA recomendação pra comunidade WiseHub é de disciplina informativa. Acompanhe o projeto pela página oficial do Parlamento, não por manchetes soltas, e trate cada etapa como o que ela é. Em imigração britânica, quem lê a fonte primária e mantém a calma quase sempre decide melhor do que quem reage ao primeiro título alarmante.",
+        tags: ["Reino Unido", "Immigration and Asylum Bill", "Parlamento", "Planejamento"],
+        sources: [
+          { label: "UK Parliament · Immigration and Asylum Bill (oficial)", url: "https://bills.parliament.uk/bills/4254" },
+        ],
+      },
       {
         headline: "Reino Unido: o diploma virou a porta mais segura",
         standfirst:
