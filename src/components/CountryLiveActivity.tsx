@@ -118,9 +118,16 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
 
   useEffect(() => {
     const center = INFO_CENTERS.find((ic) => ic.countryCode === countryCode);
-    const feeds = (center?.sources ?? [])
-      .filter((s) => s.rss && (s.category === "news" || s.category === "legal"))
-      .slice(0, 3);
+    // Alarga a fonte da seção "ao vivo": além de imigração/leis (baixa cadência,
+    // gov publica pouco), inclui notícia geral e finanças — que são DIÁRIAS e
+    // mantêm o card sempre com material fresco. Prioriza news/legal, depois
+    // finance, e pega até 6 feeds. Sem isso, as mesmas 3 manchetes de gov ficavam
+    // paradas por dias ("acabou / tudo velho").
+    const withRss = (center?.sources ?? []).filter((s) => s.rss);
+    const feeds = [
+      ...withRss.filter((s) => s.category === "news" || s.category === "legal"),
+      ...withRss.filter((s) => s.category === "finance"),
+    ].slice(0, 6);
 
     if (feeds.length === 0) {
       setState({ status: "empty" });
@@ -142,7 +149,7 @@ export function CountryLiveActivity({ countryCode }: { countryCode: string }) {
           const tb = b.pubDate ? new Date(b.pubDate).getTime() : 0;
           return tb - ta;
         })
-        .slice(0, 3);
+        .slice(0, 6);
       if (merged.length === 0) {
         setState({ status: "error" });
       } else {

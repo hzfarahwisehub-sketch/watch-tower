@@ -27,9 +27,9 @@ type RssItem = { title: string; link: string; pubDate?: string; desc?: string; t
 type CacheEntry = { fetchedAt: number; items: RssItem[] };
 
 const CACHE_TTL_MS = 15 * 60 * 1000; // 15min
-const CACHE_VERSION = "v7"; // v7: traducao opcional (lang+src) de titulo+desc no idioma do app
+const CACHE_VERSION = "v8"; // v8: ordena por data (mais nova primeiro) + teto 8 itens
 const FETCH_TIMEOUT_MS = 25_000;
-const MAX_ITEMS = 5;
+const MAX_ITEMS = 8;
 
 // Cache global ao processo Node — reset em cada cold start do serverless
 const cache = new Map<string, CacheEntry>();
@@ -162,7 +162,7 @@ export async function GET(req: NextRequest) {
       );
     }
     const xml = decodeXml(await res.arrayBuffer());
-    let items = parseFeed(xml).slice(0, MAX_ITEMS);
+    let items = sortByRecency(parseFeed(xml)).slice(0, MAX_ITEMS);
     if (lang) {
       const tgtPair = lang === "en" ? "en-gb" : "pt-br";
       const src = srcCode(rawSrc);
@@ -245,6 +245,23 @@ function parseFeed(xml: string): RssItem[] {
   if (rssItems.length > 0) return rssItems;
   // Fallback pra Atom (<entry>)
   return parseAtomEntries(xml);
+}
+
+// Timestamp do item (ms). Sem data (ou data inválida) => 0, pra afundar abaixo
+// dos itens datados. A maioria dos feeds já vem do mais novo pro mais velho, mas
+// alguns (ex.: moj.go.jp, derstandard) trazem itens fora de ordem ou fixam um
+// item antigo no topo — sem ordenar, o app mostrava manchete velha tendo notícia
+// nova mais abaixo no mesmo feed.
+function itemTime(it: RssItem): number {
+  if (!it.pubDate) return 0;
+  const t = Date.parse(it.pubDate);
+  return Number.isNaN(t) ? 0 : t;
+}
+
+// Ordena do mais novo pro mais velho. Estável (Array.sort do V8 é estável), então
+// feeds SEM nenhuma data mantêm a ordem original do feed como desempate.
+function sortByRecency(items: RssItem[]): RssItem[] {
+  return [...items].sort((a, b) => itemTime(b) - itemTime(a));
 }
 
 function parseRssItems(xml: string): RssItem[] {
