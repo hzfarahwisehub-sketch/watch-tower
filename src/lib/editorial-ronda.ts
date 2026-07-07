@@ -427,4 +427,26 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
       sources: [{ label: "Expats.cz (não oficial, a confirmar)", url: "https://www.expats.cz/czech-news/article/czech-mixed-families-could-face-separation-under-new-immigration-bill" }],
     }],
   },
+
+  pl: {
+    community: [{
+      publishedAt: D,
+      title: "Polônia tem 1,12 milhão de estrangeiros trabalhando, alta de 7,1% em um ano",
+      body: `O escritório oficial de estatísticas da Polônia, o GUS, divulgou que, no último dia de janeiro de 2026, havia 1.119,0 mil estrangeiros trabalhando no país. É um aumento de 7,1%, ou 74,1 mil pessoas, na comparação com o fim de janeiro de 2025, sinal de que o mercado de trabalho polonês segue absorvendo mão de obra vinda de fora.\n\nOs dados reforçam uma tendência que também aparece nas grandes cidades. Segundo levantamento recente, os estrangeiros já respondem por cerca de 15% da população de Varsóvia, e em Wrocław a proporção chega a 19,5%. Para quem pensa em morar e trabalhar na Polônia, o cenário aponta demanda contínua, mas confirme as regras atualizadas de autorização de trabalho e residência diretamente nas fontes oficiais antes de decidir.`,
+      cta: "Confira os números oficiais no portal do GUS antes de planejar sua mudança para a Polônia.",
+      sources: [{ label: "GUS · Statistics Poland", url: "https://stat.gov.pl/en/experimental-statistics/human-capital/foreigners-performing-work-in-poland-in-january-2026,12,39.html" }],
+    }],
+    countryTab: [{
+      publishedAt: D,
+      headline: "Estrangeiros trabalhando na Polônia sobem para 1,12 milhão em janeiro de 2026",
+      standfirst: "Escritório oficial de estatísticas registra alta de 7,1% em um ano no número de estrangeiros com trabalho no país.",
+      body: `O GUS, escritório central de estatísticas da Polônia, informou que no último dia de janeiro de 2026 havia 1.119,0 mil estrangeiros realizando trabalho no país. O total representa um crescimento de 7,1%, equivalente a 74,1 mil pessoas, em relação ao fim de janeiro de 2025. O próprio órgão observa, porém, que houve leve recuo frente a 31 de dezembro de 2025, o que sugere alguma variação sazonal dentro da tendência de alta anual.\n\nO dado dialoga com a presença crescente de estrangeiros nos centros urbanos. Reportagem do Notes from Poland aponta que estrangeiros já somam cerca de 15% da população de Varsóvia, e que Wrocław lidera entre as grandes cidades, com 19,5% de residentes estrangeiros. Juntas, as informações indicam um país que vem incorporando trabalhadores de fora tanto no mercado de trabalho quanto na composição das cidades.\n\nPara quem planeja imigrar, esses números ajudam a entender a demanda, mas não substituem a checagem das regras. Requisitos de autorização de trabalho, cartão de residência e prazos podem mudar, e devem ser confirmados nas fontes oficiais polonesas antes de qualquer decisão. Este material remete integralmente à publicação do GUS como referência.`,
+      keyFacts: [
+        "1.119,0 mil estrangeiros trabalhando na Polônia no fim de janeiro de 2026 (fonte: GUS).",
+        "Alta de 7,1% (74,1 mil pessoas) frente a janeiro de 2025, com leve recuo ante dezembro de 2025.",
+        "Estrangeiros já são cerca de 15% da população de Varsóvia e 19,5% em Wrocław (Notes from Poland).",
+      ],
+      sources: [{ label: "GUS · Statistics Poland", url: "https://stat.gov.pl/en/experimental-statistics/human-capital/foreigners-performing-work-in-poland-in-january-2026,12,39.html" }],
+    }],
+  },
 };
