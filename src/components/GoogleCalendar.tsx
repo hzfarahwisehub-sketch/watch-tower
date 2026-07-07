@@ -14,6 +14,7 @@ interface GEvent {
   allDay: boolean;
   location: string | null;
   htmlLink: string | null;
+  calendar?: string | null;
 }
 interface EventsResponse {
   connected?: boolean;
@@ -169,6 +170,11 @@ export function GoogleCalendar() {
               <span className="block text-[11px] font-semibold truncate" style={{ color: "var(--text)" }}>
                 {ev.summary}
               </span>
+              {ev.calendar && (
+                <span className="block text-[9px] truncate" style={{ color: "#4285F4", opacity: 0.85 }}>
+                  🗂 {ev.calendar}
+                </span>
+              )}
               {ev.location && (
                 <span className="block text-[9px] truncate" style={{ color: "var(--text-3)" }}>
                   📍 {ev.location}

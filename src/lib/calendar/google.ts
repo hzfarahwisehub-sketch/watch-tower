@@ -7,8 +7,11 @@ import crypto from "node:crypto";
 
 const AUTH_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
 const TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token";
-const EVENTS_ENDPOINT =
-  "https://www.googleapis.com/calendar/v3/calendars/primary/events";
+const CALENDAR_LIST_ENDPOINT =
+  "https://www.googleapis.com/calendar/v3/users/me/calendarList";
+function eventsEndpointFor(calendarId: string): string {
+  return `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events`;
+}
 export const GOOGLE_SCOPE = "https://www.googleapis.com/auth/calendar.readonly";
 
 export function clientId(): string {
@@ -148,40 +151,129 @@ export interface GoogleEvent {
   allDay: boolean;
   location: string | null;
   htmlLink: string | null;
+  calendar?: string | null; // nome da agenda de origem (quando não é a principal)
 }
 
-/** Próximos eventos da agenda principal (só-leitura). */
-export async function fetchUpcomingEvents(
-  accessToken: string,
-  maxResults = 15,
-): Promise<GoogleEvent[]> {
-  const now = new Date().toISOString();
-  const p = new URLSearchParams({
-    timeMin: now,
-    maxResults: String(Math.min(50, Math.max(1, maxResults))),
-    singleEvents: "true",
-    orderBy: "startTime",
-  });
-  const res = await fetch(`${EVENTS_ENDPOINT}?${p.toString()}`, {
+interface CalendarRef {
+  id: string;
+  summary: string;
+  primary: boolean;
+}
+
+/** Lista as agendas que o usuário enxerga (a principal + as que ele mantém
+ *  visíveis). Precisa disso porque muita gente cria eventos em agendas
+ *  separadas, não só na `primary`. */
+async function fetchCalendarList(accessToken: string): Promise<CalendarRef[]> {
+  const p = new URLSearchParams({ minAccessRole: "reader", maxResults: "250" });
+  const res = await fetch(`${CALENDAR_LIST_ENDPOINT}?${p.toString()}`, {
     headers: { Authorization: `Bearer ${accessToken}` },
     signal: AbortSignal.timeout(15_000),
   });
   if (res.status === 401) throw new Error("google_unauthorized");
-  if (!res.ok) throw new Error(`google_events_${res.status}`);
+  if (!res.ok) throw new Error(`google_callist_${res.status}`);
   const data = (await res.json()) as { items?: Array<Record<string, unknown>> };
   const items = data.items ?? [];
-  return items.map((ev) => {
-    const start = ev.start as { dateTime?: string; date?: string } | undefined;
-    const end = ev.end as { dateTime?: string; date?: string } | undefined;
-    const allDay = !!start?.date && !start?.dateTime;
-    return {
-      id: String(ev.id ?? ""),
-      summary: typeof ev.summary === "string" ? ev.summary : "(sem título)",
-      start: start?.dateTime ?? (start?.date ? `${start.date}T00:00:00` : null),
-      end: end?.dateTime ?? (end?.date ? `${end.date}T00:00:00` : null),
-      allDay,
-      location: typeof ev.location === "string" ? ev.location : null,
-      htmlLink: typeof ev.htmlLink === "string" ? ev.htmlLink : null,
-    };
+  return items
+    // mantém as agendas visíveis na UI do Google do usuário (selected != false)
+    // + sempre a principal. Esconde as que ele deixou desmarcadas.
+    .filter((c) => c.selected !== false || c.primary === true)
+    .map((c) => ({
+      id: String(c.id ?? ""),
+      summary: typeof c.summary === "string" ? c.summary : "",
+      primary: c.primary === true,
+    }))
+    .filter((c) => c.id);
+}
+
+function mapRawEvent(ev: Record<string, unknown>, calendarName: string | null): GoogleEvent {
+  const start = ev.start as { dateTime?: string; date?: string } | undefined;
+  const end = ev.end as { dateTime?: string; date?: string } | undefined;
+  const allDay = !!start?.date && !start?.dateTime;
+  return {
+    id: String(ev.id ?? ""),
+    summary: typeof ev.summary === "string" ? ev.summary : "(sem título)",
+    start: start?.dateTime ?? (start?.date ? `${start.date}T00:00:00` : null),
+    end: end?.dateTime ?? (end?.date ? `${end.date}T00:00:00` : null),
+    allDay,
+    location: typeof ev.location === "string" ? ev.location : null,
+    htmlLink: typeof ev.htmlLink === "string" ? ev.htmlLink : null,
+    calendar: calendarName,
+  };
+}
+
+/** Próximos eventos de UMA agenda (só-leitura). Uma agenda que falha não
+ *  derruba as outras (retorna vazio). */
+async function fetchEventsFromCalendar(
+  accessToken: string,
+  cal: CalendarRef,
+  timeMin: string,
+  perCalendar: number,
+): Promise<GoogleEvent[]> {
+  const p = new URLSearchParams({
+    timeMin,
+    maxResults: String(Math.min(50, Math.max(1, perCalendar))),
+    singleEvents: "true",
+    orderBy: "startTime",
   });
+  const res = await fetch(`${eventsEndpointFor(cal.id)}?${p.toString()}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+    signal: AbortSignal.timeout(15_000),
+  });
+  if (res.status === 401) throw new Error("google_unauthorized");
+  if (!res.ok) return []; // 404/403 numa agenda específica: ignora, segue nas outras
+  const data = (await res.json()) as { items?: Array<Record<string, unknown>> };
+  const label = cal.primary ? null : cal.summary || null;
+  return (data.items ?? []).map((ev) => mapRawEvent(ev, label));
+}
+
+/** Próximos eventos de TODAS as agendas visíveis do usuário (só-leitura),
+ *  mescladas e ordenadas por horário. */
+export async function fetchUpcomingEvents(
+  accessToken: string,
+  maxResults = 15,
+): Promise<GoogleEvent[]> {
+  const timeMin = new Date().toISOString();
+
+  // Descobre as agendas. Se a listagem falhar por qualquer motivo, cai no
+  // comportamento antigo (só a principal), pra nunca ficar pior que antes.
+  let calendars: CalendarRef[];
+  try {
+    calendars = await fetchCalendarList(accessToken);
+  } catch (e) {
+    if (/unauthorized/i.test(String((e as Error)?.message ?? ""))) throw e;
+    calendars = [];
+  }
+  if (calendars.length === 0) {
+    calendars = [{ id: "primary", summary: "", primary: true }];
+  }
+
+  // Cap de agendas pra não explodir em chamadas; puxa um pouco a mais por
+  // agenda porque depois a gente mescla e corta o total.
+  const capped = calendars.slice(0, 25);
+  const perCalendar = Math.min(50, Math.max(5, maxResults));
+
+  const perCalResults = await Promise.all(
+    capped.map((cal) =>
+      fetchEventsFromCalendar(accessToken, cal, timeMin, perCalendar).catch((e) => {
+        // propaga só o 401 (token inválido) — os demais erros por agenda viram vazio
+        if (/unauthorized/i.test(String((e as Error)?.message ?? ""))) throw e;
+        return [] as GoogleEvent[];
+      }),
+    ),
+  );
+
+  // Mescla, remove duplicados (evento em agenda compartilhada aparece 2x) e
+  // ordena pelo horário de início. Corta no total pedido.
+  const seen = new Set<string>();
+  const merged = perCalResults
+    .flat()
+    .filter((ev) => {
+      const key = `${ev.id}|${ev.start ?? ""}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .sort((a, b) => (a.start ?? "").localeCompare(b.start ?? ""));
+
+  return merged.slice(0, maxResults);
 }
