@@ -335,4 +335,96 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
       sources: [{ label: "The Bulletin (Bruxelas)", url: "https://www.thebulletin.be/pastry-chef-roofer-100-jobs-brussels-has-difficulty-filling" }],
     }],
   },
+
+  fi: {
+    community: [{
+      publishedAt: D,
+      title: "Finlândia terá teste de cidadania a partir de 2027",
+      body: `O Parlamento da Finlândia aprovou mudanças na Lei da Cidadania que endurecem as exigências para se tornar cidadão finlandês. Segundo o Serviço de Imigração da Finlândia (Migri), as novas regras entram em vigor em 1 de janeiro de 2027 e passam a valer para pedidos apresentados a partir de 1 de março de 2027, com um período de transição em janeiro e fevereiro para dar tempo aos candidatos de se prepararem.\n\nA principal novidade é a criação de um teste de cidadania, que servirá para comprovar conhecimento suficiente sobre a sociedade finlandesa. A exigência vale para candidatos de 18 a 64 anos, com possíveis isenções por motivo de saúde, deficiência ou outras razões muito graves. O teste poderá ser feito em finlandês ou sueco, e o Migri informa que o material de estudo será publicado no site oficial com antecedência para que todos se preparem com as mesmas fontes.`,
+      cta: "Se a Finlândia é seu destino, comece já a acompanhar as fontes oficiais e a planejar o preparo para o novo teste de cidadania.",
+      sources: [{ label: "Migri · Serviço de Imigração da Finlândia", url: "https://migri.fi/en/-/finland-to-introduce-citizenship-test-as-changes-to-citizenship-act-take-effect-on-1-january-2027" }],
+    }],
+    countryTab: [{
+      publishedAt: D,
+      headline: "Finlândia cria teste de cidadania com entrada em vigor em 2027",
+      standfirst: "Nova Lei da Cidadania exige conhecimento sobre a sociedade finlandesa e vale para pedidos feitos a partir de 1 de março de 2027.",
+      body: `O Parlamento finlandês aprovou uma reforma da Lei da Cidadania que torna mais rígidos os requisitos para a naturalização. De acordo com o Serviço de Imigração da Finlândia (Migri), as novas regras entram em vigor em 1 de janeiro de 2027 e se aplicam aos pedidos protocolados a partir de 1 de março de 2027. Entre janeiro e fevereiro de 2027 haverá um período de transição, pensado para dar tempo aos candidatos de estudar e realizar o exame antes de pedir a cidadania.\n\nA mudança central é a introdução de um teste de cidadania como forma de demonstrar conhecimento suficiente sobre a sociedade finlandesa. Segundo o Migri, o exame poderá abordar temas como legislação básica que rege a vida no país, direitos fundamentais e humanos, história e cultura da Finlândia e questões de igualdade. O material de estudo será divulgado publicamente e de forma antecipada no site do órgão, para que todos os candidatos tenham acesso às mesmas fontes.\n\nA exigência de conhecimento sobre a sociedade finlandesa vale para candidatos entre 18 e 64 anos, com possibilidade de isenção em casos de saúde, deficiência ou outras razões muito graves. Além do teste, o Migri indica que o requisito também pode ser cumprido por quem concluir o exame de matrícula em finlandês ou sueco, ou obtiver um diploma de ensino superior nesses idiomas na Finlândia. Pedidos enviados antes de 1 de março de 2027 seguem as regras da lei atual. Recomenda-se confirmar todos os detalhes diretamente na fonte oficial.`,
+      keyFacts: [
+        "Nova Lei da Cidadania entra em vigor em 1 de janeiro de 2027; regras valem para pedidos feitos a partir de 1 de março de 2027.",
+        "Teste de cidadania passa a ser exigido para comprovar conhecimento sobre a sociedade finlandesa; aplicável a candidatos de 18 a 64 anos.",
+        "O exame pode ser feito em finlandês ou sueco e o material de estudo será publicado no site do Migri com antecedência.",
+        "Alternativas ao teste: exame de matrícula em finlandês/sueco ou diploma de ensino superior nesses idiomas na Finlândia; isenções possíveis por saúde ou outras razões graves.",
+      ],
+      sources: [{ label: "Migri · Serviço de Imigração da Finlândia", url: "https://migri.fi/en/-/finland-to-introduce-citizenship-test-as-changes-to-citizenship-act-take-effect-on-1-january-2027" }],
+    }],
+  },
+
+  lv: {
+    community: [{
+      publishedAt: D,
+      title: "Letônia planeja dar número de identificação a estrangeiros com visto de trabalho",
+      body: `O governo da Letônia deu um passo que pode facilitar a vida de quem pretende trabalhar no país. Em 30 de junho de 2026, o Conselho de Ministros apoiou o avanço de um projeto de lei que altera a Lei do Registro de Pessoas Naturais e prevê a atribuição de um número de identificação pessoal, o personas kods, aos estrangeiros que solicitam vistos com direito a emprego na Letônia, segundo o Ministério do Interior (Iekšlietu ministrija).\n\nNa prática, o personas kods é a chave que abre portas no dia a dia letão, de serviços públicos a contratos e questões bancárias. Estender esse código já na fase do visto de trabalho tende a reduzir a burocracia de quem chega para atuar no país. Atenção: por enquanto é um projeto de lei que ainda precisa passar pelo Parlamento, a Saeima, então as regras podem mudar até a versão final.`,
+      cta: "Acompanhe com a WiseHub cada etapa dessa mudança para chegar à Letônia com o pé direito.",
+      sources: [{ label: "Ministério do Interior da Letônia (Iekšlietu ministrija)", url: "https://www.iem.gov.lv/lv/jaunums/planots-pieskirt-personas-kodu-arzemniekiem-kuri-pieprasa-vizas-ar-tiesibam-uz-nodarbinatibu-latvija" }],
+    }],
+    countryTab: [{
+      publishedAt: D,
+      headline: "Letônia avança projeto que dá número de identificação a estrangeiros com visto de trabalho",
+      standfirst: "Conselho de Ministros apoiou, em 30 de junho, mudança na lei de registro que beneficia quem vai trabalhar no país.",
+      body: `O Ministério do Interior da Letônia informou que, em 30 de junho de 2026, o Conselho de Ministros apoiou o encaminhamento ao Parlamento, a Saeima, de um projeto de lei que altera a Lei do Registro de Pessoas Naturais. O texto prevê a atribuição de um número de identificação pessoal, o chamado personas kods, aos estrangeiros que solicitam vistos com direito a emprego na Letônia.\n\nO personas kods é um identificador central no país, usado em serviços públicos, contratos e diversas rotinas administrativas. Estendê-lo à etapa do visto de trabalho sinaliza a intenção de organizar melhor o cadastro de trabalhadores estrangeiros e, potencialmente, simplificar procedimentos para quem chega para atuar no mercado letão.\n\nÉ importante frisar que se trata de um projeto de lei em tramitação, ainda sujeito à discussão e aprovação da Saeima. Os detalhes, prazos e a forma exata de aplicação só ficarão definidos com o texto final. Quem planeja imigrar deve confirmar as regras vigentes junto à fonte oficial antes de tomar decisões.`,
+      keyFacts: [
+        "Decisão do Conselho de Ministros em 30 de junho de 2026.",
+        "Medida: atribuir número de identificação pessoal (personas kods) a estrangeiros que pedem visto com direito a trabalho.",
+        "Status: projeto de lei encaminhado ao Parlamento (Saeima), ainda não aprovado.",
+        "Fonte oficial: Ministério do Interior da Letônia (Iekšlietu ministrija).",
+      ],
+      sources: [{ label: "Ministério do Interior da Letônia (Iekšlietu ministrija)", url: "https://www.iem.gov.lv/lv/jaunums/planots-pieskirt-personas-kodu-arzemniekiem-kuri-pieprasa-vizas-ar-tiesibam-uz-nodarbinatibu-latvija" }],
+    }],
+  },
+
+  lt: {
+    community: [{
+      publishedAt: D,
+      title: "Lituânia começa a emitir certificado digital de registro de estrangeiro",
+      body: `O Departamento de Migração da Lituânia informou que, a partir de 23 de junho de 2026, passou a emitir certificados digitais de registro de estrangeiro para os casos previstos na Lei sobre o Estatuto Jurídico dos Estrangeiros. A medida está ligada a uma alteração da lei em vigor desde 22 de maio, que trata da situação de quem já apresentou pedido ao Departamento de Migração para trocar sua autorização de residência temporária.\n\nNa prática, esse certificado serve para comprovar a situação regular do estrangeiro enquanto o novo documento de residência ainda está sendo processado, o que costuma ser um dos momentos mais sensíveis para quem mora e trabalha no país. Como as condições e o passo a passo exatos são definidos pelo próprio órgão, quem estiver em processo de renovação ou troca de autorização deve confirmar cada detalhe diretamente na fonte oficial.`,
+      cta: "Confira os detalhes no comunicado oficial do Departamento de Migração da Lituânia antes de qualquer pedido.",
+      sources: [{ label: "Migracijos departamentas (Departamento de Migração da Lituânia)", url: "https://migracija.lrv.lt/lt/naujienos/pradedami-isdavineti-skaitmeniniai-uzsieniecio-registracijos-pazymejimai-tfa/" }],
+    }],
+    countryTab: [{
+      publishedAt: D,
+      headline: "Lituânia adota certificado digital de registro para estrangeiros",
+      standfirst: "Novo documento passou a ser emitido a partir de 23 de junho de 2026, ligado a mudança recente na lei de estrangeiros.",
+      body: `O Departamento de Migração da Lituânia, vinculado ao Ministério do Interior, anunciou o início da emissão de certificados digitais de registro de estrangeiro a partir de 23 de junho de 2026. O documento se aplica aos casos indicados na Lei sobre o Estatuto Jurídico dos Estrangeiros do país.\n\nSegundo o órgão, a novidade está associada a uma das alterações mais recentes dessa lei, em vigor desde 22 de maio de 2026, voltada ao estrangeiro que já apresentou pedido para alterar sua autorização de residência temporária. O certificado tende a funcionar como comprovação da situação do estrangeiro durante esse período de transição de documentos.\n\nPara quem planeja imigrar, renovar ou trocar a autorização de residência na Lituânia, vale acompanhar de perto as orientações do Departamento de Migração, já que as regras de emissão e o alcance do certificado são definidos pelo próprio órgão. As informações completas e atualizadas devem ser confirmadas na fonte oficial.`,
+      keyFacts: [
+        "Emissão do certificado digital de registro de estrangeiro começou em 23 de junho de 2026.",
+        "Medida está ligada a alteração da Lei sobre o Estatuto Jurídico dos Estrangeiros, em vigor desde 22 de maio de 2026.",
+        "Documento se destina a estrangeiros que pediram alteração da autorização de residência temporária, servindo de comprovação durante a transição.",
+        "Fonte oficial: Departamento de Migração da Lituânia (Migracijos departamentas).",
+      ],
+      sources: [{ label: "Migracijos departamentas (Departamento de Migração da Lituânia)", url: "https://migracija.lrv.lt/lt/naujienos/pradedami-isdavineti-skaitmeniniai-uzsieniecio-registracijos-pazymejimai-tfa/" }],
+    }],
+  },
+
+  cz: {
+    community: [{
+      publishedAt: D,
+      title: "Tchéquia estuda regra que pode obrigar familiares de tchecos a esperar residência fora do país",
+      body: `Um novo projeto de lei em discussão na Tchéquia pode mudar o caminho de quem pede residência como familiar de um cidadão tcheco. Pela regra atual, um estrangeiro de fora da União Europeia casado com tcheco ou com filho tcheco pode apresentar o pedido de residência por reunião familiar de dentro do país, mesmo que outra autorização, como o cartão de funcionário, expire nesse meio-tempo.\n\nSegundo o portal Expats.cz, o projeto retiraria essa possibilidade para muitos solicitantes, que passariam a ter de deixar a Tchéquia e aguardar a decisão no exterior, um processo que pode levar de três a seis meses. A proposta ainda é um projeto de lei e não está em vigor, então vale acompanhar a tramitação antes de tomar qualquer decisão sobre mudança ou renovação de status.`,
+      cta: "Se você planeja pedir residência na Tchéquia por vínculo familiar, acompanhe a tramitação desse projeto pela fonte oficial antes de agir.",
+      sources: [{ label: "Expats.cz (não oficial, a confirmar)", url: "https://www.expats.cz/czech-news/article/czech-mixed-families-could-face-separation-under-new-immigration-bill" }],
+    }],
+    countryTab: [{
+      publishedAt: D,
+      headline: "Projeto de lei na Tchéquia pode exigir que familiares de tchecos aguardem residência no exterior",
+      standfirst: "Mudança em estudo mira estrangeiros de fora da UE que pedem residência como membros da família de cidadãos tchecos.",
+      body: `A Tchéquia estuda uma alteração na sua lei de imigração que afeta diretamente quem busca residência por vínculo familiar. O alvo são estrangeiros de fora da União Europeia que pedem autorização de residência por serem cônjuges de tchecos ou por terem filho tcheco.\n\nPela regra em vigor hoje, esse familiar pode protocolar o pedido de dentro do território, mesmo que outra autorização, como o cartão de funcionário (zaměstnanecká karta), expire durante o processo. De acordo com o portal Expats.cz, o novo projeto removeria essa opção para muitos solicitantes, que teriam de deixar o país e esperar a decisão fora, algo que pode levar de três a seis meses.\n\nÉ importante frisar que se trata de um projeto de lei ainda em tramitação, não de uma norma já aprovada. Os detalhes finais podem mudar até a votação. Quem tem planos de imigração por reunião familiar na Tchéquia deve acompanhar o andamento pela fonte oficial e evitar decisões precipitadas sobre saída do país ou renovação de status enquanto a regra não estiver definida.`,
+      keyFacts: [
+        "Alvo: estrangeiros de fora da UE que pedem residência como cônjuge de tcheco ou por terem filho tcheco.",
+        "Regra atual permite protocolar o pedido de dentro do país mesmo que outra autorização (ex.: cartão de funcionário) expire no meio do processo.",
+        "O projeto exigiria que muitos solicitantes deixassem a Tchéquia e aguardassem a decisão no exterior, de três a seis meses.",
+        "Ainda é um projeto de lei em tramitação, não uma norma em vigor; detalhes podem mudar até a votação.",
+      ],
+      sources: [{ label: "Expats.cz (não oficial, a confirmar)", url: "https://www.expats.cz/czech-news/article/czech-mixed-families-could-face-separation-under-new-immigration-bill" }],
+    }],
+  },
 };
