@@ -13,6 +13,9 @@ function eventsEndpointFor(calendarId: string): string {
   return `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events`;
 }
 export const GOOGLE_SCOPE = "https://www.googleapis.com/auth/calendar.readonly";
+// openid+email: pra capturar QUAL conta Google foi conectada (id_token traz o
+// e-mail), e assim mostrar na tela e evitar conectar a conta errada sem perceber.
+const GOOGLE_SCOPES_FULL = `openid email ${GOOGLE_SCOPE}`;
 
 export function clientId(): string {
   return process.env.GOOGLE_CLIENT_ID || "";
@@ -73,9 +76,9 @@ export function buildAuthUrl(state: string): string {
     client_id: clientId(),
     redirect_uri: redirectUri(),
     response_type: "code",
-    scope: GOOGLE_SCOPE,
+    scope: GOOGLE_SCOPES_FULL,
     access_type: "offline", // pede refresh token
-    prompt: "consent", // garante refresh token mesmo em re-autorização
+    prompt: "consent select_account", // re-consentimento + deixa ESCOLHER a conta
     include_granted_scopes: "true",
     state,
   });
@@ -192,15 +195,16 @@ async function fetchCalendarList(accessToken: string): Promise<CalendarRef[]> {
   const data = (await res.json()) as { items?: Array<Record<string, unknown>> };
   const items = data.items ?? [];
   return items
-    // mantém as agendas visíveis na UI do Google do usuário (selected != false)
-    // + sempre a principal. Esconde as que ele deixou desmarcadas.
-    .filter((c) => c.selected !== false || c.primary === true)
+    // Lê TODAS as agendas com acesso de leitura (não filtra por "marcada"): o
+    // evento pode estar numa agenda compartilhada que o dono deixou desmarcada.
     .map((c) => ({
       id: String(c.id ?? ""),
       summary: typeof c.summary === "string" ? c.summary : "",
       primary: c.primary === true,
     }))
-    .filter((c) => c.id);
+    .filter((c) => c.id)
+    // principal primeiro, pra ela nunca ser cortada pelo cap de agendas.
+    .sort((a, b) => (a.primary === b.primary ? 0 : a.primary ? -1 : 1));
 }
 
 function mapRawEvent(ev: Record<string, unknown>, calendarName: string | null): GoogleEvent {

@@ -123,6 +123,11 @@ export function GoogleCalendar() {
           <span className="ml-1.5 normal-case tracking-normal font-semibold" style={{ color: "var(--text-3)", opacity: 0.7 }}>
             · {t("daily.gcal.readonly")}
           </span>
+          {state === "connected" && gmail && (
+            <span className="ml-1.5 normal-case tracking-normal font-semibold" style={{ color: "#4285F4" }}>
+              · {gmail}
+            </span>
+          )}
         </span>
         {state === "connected" && (
           <button
