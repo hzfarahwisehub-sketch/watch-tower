@@ -6,7 +6,7 @@
 import { NextResponse } from "next/server";
 import { requireSession } from "@/lib/api-helpers";
 import { isFounder } from "@/lib/mail/config";
-import { googleConfigured, refreshAccessToken, fetchUpcomingEvents, type GoogleEvent } from "@/lib/calendar/google";
+import { googleConfigured, refreshAccessToken, fetchUpcomingEventsDetailed, type GoogleEvent } from "@/lib/calendar/google";
 import { getRefreshToken, getConnection, deleteConnection } from "@/lib/calendar/google-store";
 import { rateAllow } from "@/lib/mail/ratelimit";
 
@@ -52,9 +52,19 @@ export async function GET() {
 
   try {
     const access = await refreshAccessToken(refresh);
-    const events = await fetchUpcomingEvents(access, 15);
-    cache.set(key, { at: Date.now(), events, googleEmail: conn.googleEmail });
-    return NextResponse.json({ connected: true, configured: true, googleEmail: conn.googleEmail, events });
+    const { events, diag } = await fetchUpcomingEventsDetailed(access, 15);
+    // Só cacheia quando veio ALGO — evita prender um vazio (transitório) por 5 min.
+    if (events.length > 0) {
+      cache.set(key, { at: Date.now(), events, googleEmail: conn.googleEmail });
+    }
+    return NextResponse.json({
+      connected: true,
+      configured: true,
+      googleEmail: conn.googleEmail,
+      events,
+      // diagnóstico só quando vazio (fundadores-only), pra entender o porquê
+      ...(events.length === 0 ? { diag } : {}),
+    });
   } catch (e) {
     const m = String((e as Error)?.message ?? e);
     // refresh token revogado/expirado (ex.: modo Teste 7 dias) → desconecta

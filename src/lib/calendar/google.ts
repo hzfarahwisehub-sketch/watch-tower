@@ -160,6 +160,24 @@ interface CalendarRef {
   primary: boolean;
 }
 
+/** Extrai o motivo do erro da resposta de erro do Google (ex.: 403:SERVICE_DISABLED,
+ *  403:accessNotConfigured, 401:...). Ajuda a diagnosticar sem chutar. */
+async function googleErrDetail(res: Response): Promise<string> {
+  let reason = "";
+  try {
+    const j = (await res.json()) as {
+      error?: { status?: string; message?: string; errors?: Array<{ reason?: string }> };
+    };
+    reason =
+      j?.error?.status ||
+      j?.error?.errors?.[0]?.reason ||
+      (j?.error?.message ? j.error.message.slice(0, 80) : "");
+  } catch {
+    /* corpo não-JSON */
+  }
+  return `${res.status}${reason ? ":" + reason : ""}`;
+}
+
 /** Lista as agendas que o usuário enxerga (a principal + as que ele mantém
  *  visíveis). Precisa disso porque muita gente cria eventos em agendas
  *  separadas, não só na `primary`. */
@@ -170,7 +188,7 @@ async function fetchCalendarList(accessToken: string): Promise<CalendarRef[]> {
     signal: AbortSignal.timeout(15_000),
   });
   if (res.status === 401) throw new Error("google_unauthorized");
-  if (!res.ok) throw new Error(`google_callist_${res.status}`);
+  if (!res.ok) throw new Error(`callist_${await googleErrDetail(res)}`);
   const data = (await res.json()) as { items?: Array<Record<string, unknown>> };
   const items = data.items ?? [];
   return items
@@ -220,18 +238,27 @@ async function fetchEventsFromCalendar(
     signal: AbortSignal.timeout(15_000),
   });
   if (res.status === 401) throw new Error("google_unauthorized");
-  if (!res.ok) return []; // 404/403 numa agenda específica: ignora, segue nas outras
+  if (res.status === 404) return []; // agenda apagada: ignora, segue nas outras
+  if (!res.ok) throw new Error(`events_${await googleErrDetail(res)}`);
   const data = (await res.json()) as { items?: Array<Record<string, unknown>> };
   const label = cal.primary ? null : cal.summary || null;
   return (data.items ?? []).map((ev) => mapRawEvent(ev, label));
 }
 
+/** Diagnóstico da busca (por que veio vazio?). Só-fundadores no endpoint. */
+export interface GcalDiag {
+  calendarsFound: number;
+  scanned: string[];
+  errors: string[];
+}
+
 /** Próximos eventos de TODAS as agendas visíveis do usuário (só-leitura),
- *  mescladas e ordenadas por horário. */
-export async function fetchUpcomingEvents(
+ *  mescladas e ordenadas por horário, + diagnóstico do porquê de vir vazio. */
+export async function fetchUpcomingEventsDetailed(
   accessToken: string,
   maxResults = 15,
-): Promise<GoogleEvent[]> {
+): Promise<{ events: GoogleEvent[]; diag: GcalDiag }> {
+  const diag: GcalDiag = { calendarsFound: 0, scanned: [], errors: [] };
   const timeMin = new Date().toISOString();
 
   // Descobre as agendas. Se a listagem falhar por qualquer motivo, cai no
@@ -239,8 +266,11 @@ export async function fetchUpcomingEvents(
   let calendars: CalendarRef[];
   try {
     calendars = await fetchCalendarList(accessToken);
+    diag.calendarsFound = calendars.length;
   } catch (e) {
-    if (/unauthorized/i.test(String((e as Error)?.message ?? ""))) throw e;
+    const m = String((e as Error)?.message ?? e);
+    if (/unauthorized/i.test(m)) throw e;
+    diag.errors.push(m);
     calendars = [];
   }
   if (calendars.length === 0) {
@@ -250,13 +280,16 @@ export async function fetchUpcomingEvents(
   // Cap de agendas pra não explodir em chamadas; puxa um pouco a mais por
   // agenda porque depois a gente mescla e corta o total.
   const capped = calendars.slice(0, 25);
+  diag.scanned = capped.map((c) => (c.primary ? "primary" : c.summary || c.id));
   const perCalendar = Math.min(50, Math.max(5, maxResults));
 
   const perCalResults = await Promise.all(
     capped.map((cal) =>
       fetchEventsFromCalendar(accessToken, cal, timeMin, perCalendar).catch((e) => {
         // propaga só o 401 (token inválido) — os demais erros por agenda viram vazio
-        if (/unauthorized/i.test(String((e as Error)?.message ?? ""))) throw e;
+        const m = String((e as Error)?.message ?? e);
+        if (/unauthorized/i.test(m)) throw e;
+        diag.errors.push(`${cal.primary ? "primary" : cal.summary}: ${m}`);
         return [] as GoogleEvent[];
       }),
     ),
@@ -275,5 +308,13 @@ export async function fetchUpcomingEvents(
     })
     .sort((a, b) => (a.start ?? "").localeCompare(b.start ?? ""));
 
-  return merged.slice(0, maxResults);
+  return { events: merged.slice(0, maxResults), diag };
+}
+
+/** Só os eventos (compat). */
+export async function fetchUpcomingEvents(
+  accessToken: string,
+  maxResults = 15,
+): Promise<GoogleEvent[]> {
+  return (await fetchUpcomingEventsDetailed(accessToken, maxResults)).events;
 }
