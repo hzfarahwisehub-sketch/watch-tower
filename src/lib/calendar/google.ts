@@ -196,16 +196,30 @@ async function fetchCalendarList(accessToken: string): Promise<CalendarRef[]> {
   const data = (await res.json()) as { items?: Array<Record<string, unknown>> };
   const items = data.items ?? [];
   return items
-    // Lê TODAS as agendas com acesso de leitura (não filtra por "marcada"): o
-    // evento pode estar numa agenda compartilhada que o dono deixou desmarcada.
+    // Lê as agendas com acesso de leitura (não filtra por "marcada"): o evento
+    // pode estar numa agenda compartilhada que o dono deixou desmarcada.
     .map((c) => ({
       id: String(c.id ?? ""),
       summary: typeof c.summary === "string" ? c.summary : "",
       primary: c.primary === true,
     }))
     .filter((c) => c.id)
+    // Exclui as AGENDAS DE SISTEMA do Google (feriados, aniversários, nº da
+    // semana): são só ruído (all-day) e entopem a lista escondendo as reuniões.
+    .filter((c) => !isNoiseCalendar(c.id))
     // principal primeiro, pra ela nunca ser cortada pelo cap de agendas.
     .sort((a, b) => (a.primary === b.primary ? 0 : a.primary ? -1 : 1));
+}
+
+/** Agendas de sistema do Google que só geram ruído (feriados/aniversários/semana). */
+function isNoiseCalendar(id: string): boolean {
+  const s = id.toLowerCase();
+  return (
+    s.includes("#holiday@group.v.calendar.google.com") ||
+    s.includes("#contacts@group.v.calendar.google.com") ||
+    s.includes("#weeknum@group.v.calendar.google.com") ||
+    s.endsWith("#holiday@group.v.calendar.google.com")
+  );
 }
 
 function mapRawEvent(ev: Record<string, unknown>, calendarName: string | null): GoogleEvent {

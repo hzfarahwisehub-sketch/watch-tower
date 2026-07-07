@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 import { requireSession } from "@/lib/api-helpers";
 import { isFounder } from "@/lib/mail/config";
 import { googleConfigured, refreshAccessToken, fetchUpcomingEventsDetailed, type GoogleEvent, type GcalDiag } from "@/lib/calendar/google";
-import { getAccountsWithTokens, removeAccount } from "@/lib/calendar/google-store";
+import { getAccountsWithTokens } from "@/lib/calendar/google-store";
 import { rateAllow } from "@/lib/mail/ratelimit";
 
 export const runtime = "nodejs";
@@ -67,11 +67,11 @@ export async function GET() {
         return { email, ok: true, events: tagged, diag };
       } catch (e) {
         const m = String((e as Error)?.message ?? e);
-        // token revogado/expirado dessa conta → remove SÓ ela (não mexe nas outras)
-        if (EXPIRED_RE.test(m) && acc.googleEmail) {
-          await removeAccount(session.email, acc.googleEmail).catch(() => {});
-        }
-        return { email, ok: false, events: [] as GoogleEvent[], diag: undefined as GcalDiag | undefined };
+        // Token com problema (expirado/revogado/transitório): NÃO remove a conta
+        // sozinho — marca ok:false pra aparecer como "expirou" e o Hammis decidir
+        // (reconectar ou remover no ×). Remover sozinho fazia a conta "sumir".
+        const expired = EXPIRED_RE.test(m);
+        return { email, ok: false, expired, events: [] as GoogleEvent[], diag: undefined as GcalDiag | undefined };
       }
     }),
   );
