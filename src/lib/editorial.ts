@@ -20,8 +20,17 @@ import { EDITORIAL_EN } from "./editorial-en";
 
 export type EditorialSource = { label: string; url: string };
 
+/** Metadados de recência comuns a toda peça editorial. Preenchidos pela Ronda
+ *  Diária. Ausentes = peça legada (renderiza sem selo, nunca vai pro arquivo). */
+export type RecencyMeta = {
+  /** Data ISO (YYYY-MM-DD) de quando a Friday redigiu a peça. */
+  publishedAt?: string;
+  /** Data ISO de quando foi marcada como já postada/utilizada. */
+  usedAt?: string;
+};
+
 /** Post curto pra Comunidade: objetivo, claro, explicativo. */
-export type CommunityPost = {
+export type CommunityPost = RecencyMeta & {
   title: string;
   /** 1 a 2 parágrafos curtos. Parágrafos separados por linha em branco. */
   body: string;
@@ -31,7 +40,7 @@ export type CommunityPost = {
 };
 
 /** Notícia completa pra aba do país: formato jornalístico. */
-export type CountryArticle = {
+export type CountryArticle = RecencyMeta & {
   headline: string;
   /** linha-fina (subtítulo que resume a matéria). */
   standfirst: string;
@@ -43,7 +52,7 @@ export type CountryArticle = {
 };
 
 /** Matéria pro Blog WiseHub News: mais longa e analítica. */
-export type BlogPost = {
+export type BlogPost = RecencyMeta & {
   headline: string;
   standfirst: string;
   body: string;
@@ -52,7 +61,7 @@ export type BlogPost = {
 };
 
 /** Roteiro de vídeo pro YouTube da WiseHub: gancho de abertura + blocos. */
-export type YouTubeScript = {
+export type YouTubeScript = RecencyMeta & {
   title: string;
   /** gancho dos primeiros segundos, que prende o espectador. */
   hook?: string;
@@ -63,7 +72,7 @@ export type YouTubeScript = {
 };
 
 /** Post pro Instagram da WiseHub: legenda/carrossel + hashtags. */
-export type InstagramPost = {
+export type InstagramPost = RecencyMeta & {
   title: string;
   /** legenda do post ou roteiro do carrossel. Parágrafos separados por linha em branco. */
   body: string;
@@ -1180,4 +1189,37 @@ export function pieceDimension(titleOrHeadline: string): Exclude<DimensionKey, "
   if (t.startsWith("🏥")) return "health";
   if (t.startsWith("💰")) return "economy";
   return "core"; // sem prefixo = vistos/imigração/trabalho (conteúdo original)
+}
+
+/* ============== Recência (semana ISO, segunda a domingo) ============== */
+
+/** Chave comparável da semana ISO: "YYYY-Www". Estável e sem depender de fuso. */
+export function isoWeekKey(d: Date): string {
+  const date = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+  const day = date.getUTCDay() || 7; // domingo=7 (ISO começa na segunda)
+  date.setUTCDate(date.getUTCDate() + 4 - day); // desloca pra quinta da semana ISO
+  const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+  const week = Math.ceil((((date.getTime() - yearStart.getTime()) / 86_400_000) + 1) / 7);
+  return `${date.getUTCFullYear()}-W${String(week).padStart(2, "0")}`;
+}
+
+export type RecencyBucket = "atual" | "semana-passada" | "arquivo";
+
+/**
+ * Classifica a peça pela semana ISO de `publishedAt` vs. agora:
+ *  - "atual"          → mesma semana ISO de hoje (ou datada à frente)
+ *  - "semana-passada" → semana ISO imediatamente anterior
+ *  - "arquivo"        → mais velha que isso (sai do REPAVET e da aba)
+ * Sem data (peça legada) → null: renderiza normal, sem selo, nunca arquiva.
+ */
+export function recencyBucket(publishedAt: string | undefined, now: Date = new Date()): RecencyBucket | null {
+  if (!publishedAt) return null;
+  const d = new Date(publishedAt + "T12:00:00Z");
+  if (Number.isNaN(d.getTime())) return null;
+  const wk = isoWeekKey(d);
+  if (wk === isoWeekKey(now)) return "atual";
+  if (d.getTime() > now.getTime()) return "atual"; // datada à frente não some
+  const prevWeek = new Date(now.getTime() - 7 * 86_400_000);
+  if (wk === isoWeekKey(prevWeek)) return "semana-passada";
+  return "arquivo";
 }
