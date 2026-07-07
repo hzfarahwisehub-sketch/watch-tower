@@ -106,8 +106,11 @@ export function CountryDetailSections({ country }: { country: Country }) {
         </div>
       )}
 
-      {/* Mercado de Trabalho (curado pela equipe, links oficiais) */}
-      <CountryLaborMarket countryCode={country.code} />
+      {/* Mercado de Trabalho (curado pela equipe, links oficiais). É dimensão
+          "core" (Vistos & Trabalho), então respeita o filtro de abas: aparece
+          em "Tudo" e "Vistos & Trabalho", some nas outras. Antes era renderizado
+          fixo aqui e ficava "travado" independente da aba clicada. */}
+      {(dim === "all" || dim === "core") && <CountryLaborMarket countryCode={country.code} />}
 
       {/* Dicas práticas */}
       {tips.length > 0 && (
