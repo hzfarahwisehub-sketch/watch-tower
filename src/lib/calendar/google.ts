@@ -155,6 +155,7 @@ export interface GoogleEvent {
   location: string | null;
   htmlLink: string | null;
   calendar?: string | null; // nome da agenda de origem (quando não é a principal)
+  account?: string | null; // conta Google de origem (multi-conta)
 }
 
 interface CalendarRef {

@@ -1,7 +1,8 @@
 "use client";
 // Seção "Google Agenda" dentro do card de Agenda (importação Google → Watch
-// Tower, só-leitura). Mostra os próximos eventos do Google do usuário, ou um
-// botão pra conectar. Só aparece se o Google estiver configurado no servidor.
+// Tower, só-leitura, MULTI-CONTA). Mostra os próximos eventos de TODAS as contas
+// Google conectadas pelo login, com etiqueta de qual conta, + botão pra adicionar
+// mais uma conta. Só aparece se o Google estiver configurado no servidor.
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocale } from "./LocaleProvider";
 import { useToast } from "./ToastProvider";
@@ -15,13 +16,18 @@ interface GEvent {
   location: string | null;
   htmlLink: string | null;
   calendar?: string | null;
+  account?: string | null;
+}
+interface AccountView {
+  email: string;
+  ok: boolean;
 }
 interface EventsResponse {
   connected?: boolean;
   configured?: boolean;
   expired?: boolean;
-  googleEmail?: string | null;
   events?: GEvent[];
+  accounts?: AccountView[];
 }
 
 export function GoogleCalendar() {
@@ -29,8 +35,7 @@ export function GoogleCalendar() {
   const toast = useToast();
   const [state, setState] = useState<"loading" | "hidden" | "disconnected" | "connected">("loading");
   const [events, setEvents] = useState<GEvent[]>([]);
-  const [gmail, setGmail] = useState<string | null>(null);
-  const toastedRef = useRef(false);
+  const [accounts, setAccounts] = useState<AccountView[]>([]);
 
   const load = useCallback(async () => {
     try {
@@ -44,21 +49,19 @@ export function GoogleCalendar() {
         setState("hidden"); // Google não configurado no servidor → não mostra nada
         return;
       }
-      if (data.expired && !toastedRef.current) {
-        toastedRef.current = true;
-        toast(t("daily.gcal.expired"));
-      }
       if (data.connected) {
         setEvents(data.events ?? []);
-        setGmail(data.googleEmail ?? null);
+        setAccounts(data.accounts ?? []);
         setState("connected");
       } else {
+        setAccounts([]);
+        setEvents([]);
         setState("disconnected");
       }
     } catch {
       setState("hidden");
     }
-  }, [t, toast]);
+  }, []);
 
   // Carrega uma vez no mount (via ref, pra o efeito NÃO depender da identidade
   // de `load` — evita qualquer risco de re-execução em cadeia).
@@ -87,22 +90,28 @@ export function GoogleCalendar() {
     params.delete("gcal");
     const qs = params.toString();
     window.history.replaceState({}, "", window.location.pathname + (qs ? `?${qs}` : ""));
-    if (g === "connected") load();
+    if (g === "connected") loadRef.current();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const disconnect = useCallback(async () => {
-    try {
-      const res = await fetch("/api/calendar/google/disconnect", { method: "POST" });
-      if (res.ok) {
-        toast(t("daily.gcal.disconnected"));
-        setEvents([]);
-        setState("disconnected");
+  const removeAccount = useCallback(
+    async (email: string) => {
+      try {
+        const res = await fetch("/api/calendar/google/disconnect", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
+        if (res.ok) {
+          toast(t("daily.gcal.disconnected"));
+          loadRef.current();
+        }
+      } catch {
+        /* silencioso */
       }
-    } catch {
-      /* silencioso */
-    }
-  }, [t, toast]);
+    },
+    [t, toast],
+  );
 
   if (state === "loading" || state === "hidden") return null;
 
@@ -114,6 +123,7 @@ export function GoogleCalendar() {
     }
     return d.toLocaleString(intl, { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
   };
+  const shortAccount = (email?: string | null) => (email ? email.split("@")[0] : "");
 
   return (
     <div className="mb-2" style={{ borderBottom: "1px solid var(--border)", paddingBottom: 6 }}>
@@ -123,24 +133,51 @@ export function GoogleCalendar() {
           <span className="ml-1.5 normal-case tracking-normal font-semibold" style={{ color: "var(--text-3)", opacity: 0.7 }}>
             · {t("daily.gcal.readonly")}
           </span>
-          {state === "connected" && gmail && (
-            <span className="ml-1.5 normal-case tracking-normal font-semibold" style={{ color: "#4285F4" }}>
-              · {gmail}
-            </span>
-          )}
         </span>
-        {state === "connected" && (
-          <button
-            type="button"
-            onClick={disconnect}
-            className="text-[9px] font-bold uppercase tracking-wide cursor-pointer"
-            style={{ color: "var(--text-3)" }}
-            title={gmail || undefined}
-          >
-            {t("daily.gcal.disconnect")}
-          </button>
-        )}
+        {/* Adicionar conta: sempre disponível (conecta a 1ª ou mais uma) */}
+        <a
+          href="/api/calendar/google/auth"
+          className="text-[9px] font-bold uppercase tracking-wide cursor-pointer"
+          style={{ color: "var(--color-wh-blue-light)" }}
+          title="Conectar outra conta Google"
+        >
+          + conta
+        </a>
       </div>
+
+      {/* Chips das contas conectadas (cada uma com × pra remover) */}
+      {state === "connected" && accounts.length > 0 && (
+        <div className="flex flex-wrap gap-1 px-1 pb-1">
+          {accounts.map((a) => {
+            const label = a.email || "(conta Google)";
+            return (
+            <span
+              key={a.email || "__empty__"}
+              className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9.5px] font-semibold"
+              style={{
+                background: a.ok ? "rgba(66,133,244,0.10)" : "rgba(255,138,31,.10)",
+                color: a.ok ? "#4285F4" : "var(--color-status-warning)",
+                border: `1px solid ${a.ok ? "rgba(66,133,244,0.25)" : "rgba(255,138,31,.3)"}`,
+              }}
+              title={a.ok ? label : `${label} · expirou, reconecte em "+ conta"`}
+            >
+              📆 {label}
+              {!a.ok && " · expirou"}
+              <button
+                type="button"
+                onClick={() => removeAccount(a.email)}
+                className="cursor-pointer font-bold leading-none"
+                style={{ color: "inherit", opacity: 0.7 }}
+                title={t("daily.gcal.disconnect")}
+                aria-label={`${t("daily.gcal.disconnect")} ${a.email}`}
+              >
+                ✕
+              </button>
+            </span>
+            );
+          })}
+        </div>
+      )}
 
       {state === "disconnected" && (
         <a
@@ -161,7 +198,7 @@ export function GoogleCalendar() {
       {state === "connected" &&
         events.map((ev) => (
           <a
-            key={ev.id}
+            key={`${ev.account ?? ""}|${ev.id}`}
             href={ev.htmlLink || undefined}
             target="_blank"
             rel="noopener noreferrer"
@@ -175,11 +212,11 @@ export function GoogleCalendar() {
               <span className="block text-[11px] font-semibold truncate" style={{ color: "var(--text)" }}>
                 {ev.summary}
               </span>
-              {ev.calendar && (
-                <span className="block text-[9px] truncate" style={{ color: "#4285F4", opacity: 0.85 }}>
-                  🗂 {ev.calendar}
-                </span>
-              )}
+              <span className="flex flex-wrap gap-x-2 text-[9px]" style={{ color: "#4285F4", opacity: 0.85 }}>
+                {/* qual conta (só se houver mais de uma conectada) */}
+                {ev.account && accounts.length > 1 && <span className="truncate">📆 {shortAccount(ev.account)}</span>}
+                {ev.calendar && <span className="truncate">🗂 {ev.calendar}</span>}
+              </span>
               {ev.location && (
                 <span className="block text-[9px] truncate" style={{ color: "var(--text-3)" }}>
                   📍 {ev.location}

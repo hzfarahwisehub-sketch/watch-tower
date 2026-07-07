@@ -8,7 +8,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { requireSession } from "@/lib/api-helpers";
 import { isFounder } from "@/lib/mail/config";
 import { googleConfigured, verifyState, exchangeCode } from "@/lib/calendar/google";
-import { saveRefreshToken, cryptoReady } from "@/lib/calendar/google-store";
+import { saveAccount, cryptoReady } from "@/lib/calendar/google-store";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
       // sem refresh token (re-autorização sem prompt=consent, ou já concedido)
       return back("no_refresh");
     }
-    await saveRefreshToken(gate.session.email, tok.refreshToken, tok.email);
+    await saveAccount(gate.session.email, tok.email, tok.refreshToken);
     return back("connected");
   } catch {
     return back("exchange_failed");
