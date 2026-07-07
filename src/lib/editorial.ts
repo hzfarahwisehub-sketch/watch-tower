@@ -17,6 +17,7 @@
 
 import type { Locale } from "./i18n/config";
 import { EDITORIAL_EN } from "./editorial-en";
+import { RONDA_PIECES } from "./editorial-ronda";
 
 export type EditorialSource = { label: string; url: string };
 
@@ -1027,7 +1028,18 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
  *  EN cai no PT quando ainda não há versão EN (a rotina diária preenche). */
 export function getEditorial(code: string, lang: Locale = "pt-BR"): CountryEditorial | undefined {
   if (lang === "en") return EDITORIAL_EN[code] ?? EDITORIAL[code];
-  return EDITORIAL[code];
+  const base = EDITORIAL[code];
+  // Mescla o conteúdo FRESCO da Ronda Diária (PT, redigido pela Friday) POR CIMA
+  // do base: as peças novas (com publishedAt) aparecem primeiro. Ver editorial-ronda.ts.
+  const ronda = RONDA_PIECES[code];
+  if (!ronda) return base;
+  return {
+    community: [...(ronda.community ?? []), ...(base?.community ?? [])],
+    countryTab: [...(ronda.countryTab ?? []), ...(base?.countryTab ?? [])],
+    blog: base?.blog ?? [],
+    youtube: base?.youtube,
+    instagram: base?.instagram,
+  };
 }
 
 /** Total de peças editoriais já curadas (pra estatística do relatório). */
