@@ -1,14 +1,19 @@
 /**
  * GET /api/calendar/google/callback — Google redireciona aqui com ?code&state.
- * Verifica o state (anti-CSRF), troca o code por tokens, guarda o refresh token
- * criptografado, e volta pro dashboard. Redirect URI a registrar no Google Cloud:
+ * A identidade do usuário vem do `state` ASSINADO (verificado por HMAC), NÃO do
+ * cookie de sessão — assim o callback sobrevive à volta do Google mesmo quando o
+ * cookie não vem (SameSite / contexto de PWA / expiração de 24h dos não-admin),
+ * que era o que dava {"error":"unauthenticated"} na cara do usuário. O state foi
+ * assinado no /auth, quando a sessão e o isFounder já tinham sido checados, então
+ * um state válido já prova identidade + permissão. Troca o code por tokens e
+ * guarda o refresh token criptografado. Redirect URI a registrar no Google Cloud:
  * https://watchtower.wisehubnow.online/api/calendar/google/callback
  */
 import { NextRequest, NextResponse } from "next/server";
-import { requireSession } from "@/lib/api-helpers";
 import { isFounder } from "@/lib/mail/config";
-import { googleConfigured, verifyState, exchangeCode } from "@/lib/calendar/google";
+import { googleConfigured, exchangeCode } from "@/lib/calendar/google";
 import { saveAccount, cryptoReady } from "@/lib/calendar/google-store";
+import { readVerifiedState } from "@/lib/calendar/oauth-state";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -19,9 +24,6 @@ function back(reason: string): NextResponse {
 }
 
 export async function GET(req: NextRequest) {
-  const gate = await requireSession();
-  if (!gate.ok) return gate.response;
-  if (!isFounder(gate.session.email)) return back("forbidden");
   if (!googleConfigured() || !cryptoReady()) return back("not_configured");
 
   const url = new URL(req.url);
@@ -30,7 +32,11 @@ export async function GET(req: NextRequest) {
 
   const code = url.searchParams.get("code") || "";
   const state = url.searchParams.get("state") || "";
-  if (!code || !verifyState(state, gate.session.email)) return back("bad_state");
+  // Identidade a partir do state assinado (não da sessão). Se o state não bate,
+  // volta pro painel com aviso — nunca mostra JSON cru de "unauthenticated".
+  const email = readVerifiedState(state);
+  if (!code || !email) return back("bad_state");
+  if (!isFounder(email)) return back("forbidden");
 
   try {
     const tok = await exchangeCode(code);
@@ -38,7 +44,7 @@ export async function GET(req: NextRequest) {
       // sem refresh token (re-autorização sem prompt=consent, ou já concedido)
       return back("no_refresh");
     }
-    await saveAccount(gate.session.email, tok.email, tok.refreshToken);
+    await saveAccount(email, tok.email, tok.refreshToken);
     return back("connected");
   } catch {
     return back("exchange_failed");
