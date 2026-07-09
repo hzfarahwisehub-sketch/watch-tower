@@ -32,6 +32,8 @@ export interface Task {
 
 export interface AgendaItem {
   id: number;
+  /** Data local do compromisso, "YYYY-MM-DD". Vazio = hoje (compat legado). */
+  date: string;
   time: string;
   title: string;
   where: string;

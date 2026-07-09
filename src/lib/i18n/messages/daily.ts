@@ -42,6 +42,11 @@ const dict = {
     "daily.gcal.readonly": "só leitura",
     "daily.gcal.allday": "dia inteiro",
     "daily.gcal.loading": "Carregando eventos do Google…",
+    "daily.gcal.sync": "Sincronizar agora",
+    "daily.gcal.syncing": "Sincronizando…",
+    "daily.gcal.synced": "Agenda sincronizada com o Google ✓",
+    "daily.gcal.syncFail": "Não deu pra sincronizar agora",
+    "daily.gcal.twowayHint": "Os compromissos da Agenda vão pra uma agenda \"Watch Tower\" no seu Google e voltam de lá.",
 
     // ---- Ações Programadas ----
     "daily.scheduled.title": "⚡ Ações Programadas",
@@ -53,17 +58,19 @@ const dict = {
     "daily.scheduled.add.confirm": "Deseja confirmar esta ação programada?",
 
     // ---- Agenda ----
-    "daily.agenda.title": "📅 Agenda · Amanhã",
+    "daily.agenda.title": "📅 Agenda",
     "daily.agenda.total": "{n} compromissos",
     "daily.agenda.action": "+ Evento",
-    "daily.agenda.dragReorder": "Arrastar para reordenar",
-    "daily.agenda.drag": "Arrastar",
     "daily.agenda.remove": "Remover compromisso",
     "daily.agenda.removeNamed": "Remover {title}",
-    "daily.agenda.add.titlePrompt": "Novo compromisso (título):",
-    "daily.agenda.add.timePrompt": "Horário (HH:MM):",
-    "daily.agenda.add.confirm": "Deseja confirmar este compromisso?",
     "daily.agenda.delete.confirm": "Deseja eliminar este compromisso?",
+    "daily.agenda.form.title": "Assunto do compromisso",
+    "daily.agenda.form.date": "Data",
+    "daily.agenda.form.time": "Hora",
+    "daily.agenda.form.where": "Local (opcional)",
+    "daily.agenda.form.save": "Adicionar",
+    "daily.agenda.form.cancel": "Cancelar",
+    "daily.agenda.form.needTitle": "Dê um assunto ao compromisso.",
 
     // ---- Tarefas ----
     "daily.tasks.title": "✅ Tarefas do Dia",
@@ -128,6 +135,11 @@ const dict = {
     "daily.gcal.readonly": "read-only",
     "daily.gcal.allday": "all day",
     "daily.gcal.loading": "Loading Google events…",
+    "daily.gcal.sync": "Sync now",
+    "daily.gcal.syncing": "Syncing…",
+    "daily.gcal.synced": "Agenda synced with Google ✓",
+    "daily.gcal.syncFail": "Couldn't sync right now",
+    "daily.gcal.twowayHint": "Agenda items go to a \"Watch Tower\" calendar in your Google and come back from it.",
 
     // ---- Ações Programadas ----
     "daily.scheduled.title": "⚡ Scheduled Actions",
@@ -139,17 +151,19 @@ const dict = {
     "daily.scheduled.add.confirm": "Confirm this scheduled action?",
 
     // ---- Agenda ----
-    "daily.agenda.title": "📅 Agenda · Tomorrow",
+    "daily.agenda.title": "📅 Agenda",
     "daily.agenda.total": "{n} events",
     "daily.agenda.action": "+ Event",
-    "daily.agenda.dragReorder": "Drag to reorder",
-    "daily.agenda.drag": "Drag",
     "daily.agenda.remove": "Remove event",
     "daily.agenda.removeNamed": "Remove {title}",
-    "daily.agenda.add.titlePrompt": "New event (title):",
-    "daily.agenda.add.timePrompt": "Time (HH:MM):",
-    "daily.agenda.add.confirm": "Confirm this event?",
     "daily.agenda.delete.confirm": "Delete this event?",
+    "daily.agenda.form.title": "Event subject",
+    "daily.agenda.form.date": "Date",
+    "daily.agenda.form.time": "Time",
+    "daily.agenda.form.where": "Location (optional)",
+    "daily.agenda.form.save": "Add",
+    "daily.agenda.form.cancel": "Cancel",
+    "daily.agenda.form.needTitle": "Give the event a subject.",
 
     // ---- Tarefas ----
     "daily.tasks.title": "✅ Today's Tasks",

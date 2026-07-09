@@ -14,6 +14,9 @@ export function cryptoReady(): boolean {
 export interface StoredAccount {
   googleEmail: string; // "" se conta antiga sem e-mail capturado
   refreshToken: string;
+  /** id da agenda secundária "Watch Tower" criada nessa conta (cache, sem
+   *  migração de schema). Descoberto/gravado no 1º sync. */
+  wtCalendarId?: string;
 }
 
 type Row = { googleEmail: string | null; encRefresh: string; createdAt: Date };
@@ -32,7 +35,11 @@ function parseAccounts(row: { googleEmail: string | null; encRefresh: string }):
     if (Array.isArray(arr)) {
       return arr
         .filter((a) => a && typeof a.refreshToken === "string" && a.refreshToken)
-        .map((a) => ({ googleEmail: typeof a.googleEmail === "string" ? a.googleEmail : "", refreshToken: a.refreshToken }));
+        .map((a) => ({
+          googleEmail: typeof a.googleEmail === "string" ? a.googleEmail : "",
+          refreshToken: a.refreshToken,
+          ...(typeof a.wtCalendarId === "string" && a.wtCalendarId ? { wtCalendarId: a.wtCalendarId } : {}),
+        }));
     }
   } catch {
     /* não é JSON → formato antigo (token cru) */
@@ -73,12 +80,21 @@ export async function saveAccount(
   const row = await loadRow(userEmail);
   const current = row ? parseAccounts(row) : [];
   const gid = (googleEmail ?? "").toLowerCase();
+  // Preserva o id da agenda "Watch Tower" já descoberta pra essa conta, pra
+  // reconectar (troca de token) não perder o cache e recriar agenda duplicada.
+  const prevSame = current.find((a) =>
+    gid ? a.googleEmail.toLowerCase() === gid : a.googleEmail === "",
+  );
   // remove a mesma conta (por e-mail) se já existir; se o e-mail vier vazio,
   // substitui qualquer conta-sem-email pra não acumular "desconhecidas".
   const kept = current.filter((a) =>
     gid ? a.googleEmail.toLowerCase() !== gid : a.googleEmail !== "",
   );
-  kept.push({ googleEmail: googleEmail ?? "", refreshToken });
+  kept.push({
+    googleEmail: googleEmail ?? "",
+    refreshToken,
+    ...(prevSame?.wtCalendarId ? { wtCalendarId: prevSame.wtCalendarId } : {}),
+  });
   const enc = encryptSecret(JSON.stringify(kept));
   await prisma.googleCalendarAccount.upsert({
     where: { userEmail },
@@ -107,4 +123,31 @@ export async function removeAccount(userEmail: string, googleEmail: string): Pro
 /** Remove TODAS as contas do usuário. */
 export async function removeAllAccounts(userEmail: string): Promise<void> {
   await prisma.googleCalendarAccount.deleteMany({ where: { userEmail } });
+}
+
+/** Grava o id da agenda "Watch Tower" descoberta/criada pra uma conta (cache). */
+export async function setWtCalendarId(
+  userEmail: string,
+  googleEmail: string,
+  calId: string,
+): Promise<void> {
+  const row = await loadRow(userEmail);
+  if (!row) return;
+  const accounts = parseAccounts(row);
+  const gid = (googleEmail || "").toLowerCase();
+  let changed = false;
+  const next = accounts.map((a) => {
+    const same = gid ? a.googleEmail.toLowerCase() === gid : a.googleEmail === "";
+    if (same && a.wtCalendarId !== calId) {
+      changed = true;
+      return { ...a, wtCalendarId: calId };
+    }
+    return a;
+  });
+  if (!changed) return;
+  const enc = encryptSecret(JSON.stringify(next));
+  await prisma.googleCalendarAccount.update({
+    where: { userEmail },
+    data: { encRefresh: enc, googleEmail: summaryOf(next) },
+  });
 }

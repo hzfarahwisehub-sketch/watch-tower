@@ -221,12 +221,31 @@ export function useDualStorage<
     setItems(next);
   }, []);
 
+  /** Recarrega da API (logado). Usado depois de mudanças feitas por fora do
+   *  hook, ex.: itens importados do Google pelo sync do calendário. */
+  const reload = useCallback(async (): Promise<void> => {
+    if (!isLoggedIn) return;
+    try {
+      const res = await fetch(`${config.apiPath}?scope=${config.scope ?? "personal"}`, { cache: "no-store" });
+      if (!res.ok) return;
+      const data = await res.json();
+      const dbItems: TDb[] = data[config.apiArrayKey] ?? [];
+      // NÃO reseta o idMap: itens já vistos mantêm o mesmo id local (register é
+      // idempotente por dbId). Isso preserva as chaves React (sem remontar linha
+      // nem perder foco em edição) e os ids guardados pelo undo/redo.
+      setItems(dbItems.map((d) => config.fromDb(d, idMapRef.current)));
+    } catch {
+      /* mantém o estado atual em caso de falha */
+    }
+  }, [isLoggedIn, config]);
+
   return {
     items,
     setAll,
     add,
     update,
     remove,
+    reload,
     hydrated,
     isLoggedIn,
   };

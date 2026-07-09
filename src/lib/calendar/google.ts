@@ -12,10 +12,20 @@ const CALENDAR_LIST_ENDPOINT =
 function eventsEndpointFor(calendarId: string): string {
   return `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events`;
 }
-export const GOOGLE_SCOPE = "https://www.googleapis.com/auth/calendar.readonly";
+// Leitura de TODAS as agendas do usuário (pra EXIBIR os eventos do Google no
+// painel, sem escrever nelas).
+export const GOOGLE_SCOPE_READ = "https://www.googleapis.com/auth/calendar.readonly";
+// Escrita LIMITADA: o escopo `calendar.app.created` só deixa o app criar uma
+// agenda secundária e mexer nos eventos DELA. Nunca toca no calendário pessoal
+// do usuário. É o que permite a mão dupla WT↔Google pela agenda "Watch Tower".
+export const GOOGLE_SCOPE_WRITE = "https://www.googleapis.com/auth/calendar.app.created";
+// Compat com quem ainda importa GOOGLE_SCOPE.
+export const GOOGLE_SCOPE = GOOGLE_SCOPE_READ;
+// Nome da agenda dedicada que o app cria/gerencia em cada conta Google.
+export const WT_CALENDAR_SUMMARY = "Watch Tower";
 // openid+email: pra capturar QUAL conta Google foi conectada (id_token traz o
 // e-mail), e assim mostrar na tela e evitar conectar a conta errada sem perceber.
-const GOOGLE_SCOPES_FULL = `openid email ${GOOGLE_SCOPE}`;
+const GOOGLE_SCOPES_FULL = `openid email ${GOOGLE_SCOPE_READ} ${GOOGLE_SCOPE_WRITE}`;
 
 export function clientId(): string {
   return process.env.GOOGLE_CLIENT_ID || "";
@@ -207,6 +217,9 @@ async function fetchCalendarList(accessToken: string): Promise<CalendarRef[]> {
     // Exclui as AGENDAS DE SISTEMA do Google (feriados, aniversários, nº da
     // semana): são só ruído (all-day) e entopem a lista escondendo as reuniões.
     .filter((c) => !isNoiseCalendar(c.id))
+    // Exclui a agenda dedicada "Watch Tower" (mão dupla): os eventos dela já
+    // aparecem como compromissos nativos da Agenda, mostrá-los aqui duplicaria.
+    .filter((c) => c.summary.trim().toLowerCase() !== WT_CALENDAR_SUMMARY.toLowerCase())
     // principal primeiro, pra ela nunca ser cortada pelo cap de agendas.
     .sort((a, b) => (a.primary === b.primary ? 0 : a.primary ? -1 : 1));
 }

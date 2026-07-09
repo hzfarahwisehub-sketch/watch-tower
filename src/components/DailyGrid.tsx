@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef, useState, DragEvent } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Task, AgendaItem, Reminder, ScheduledAction } from "@/lib/types";
 import { useDualStorage } from "@/lib/dual-storage";
 import {
@@ -69,8 +69,16 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
   const hydrated =
     tasksHook.hydrated && agendaHook.hydrated && remindersHook.hydrated && scheduledHook.hydrated;
 
-  const [draggingId, setDraggingId] = useState<number | null>(null);
   const toast = useToast();
+
+  // ---- Agenda: formulário multi-dia + sync com o Google ----
+  const todayStr = () => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  };
+  const [agendaFormOpen, setAgendaFormOpen] = useState(false);
+  const [agForm, setAgForm] = useState({ date: "", time: "09:00", title: "", where: "" });
+  const [syncing, setSyncing] = useState(false);
 
   // Undo/redo de "apagar" (só escopo Pessoal — itens de Equipe/Friday ficam de
   // fora, alterá-los passa pelo aviso ao Hammis). Refs garantem o hook atual.
@@ -116,60 +124,131 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
     tasksHook.add({ text, done: false });
   };
 
-  // ===== agenda ops + drag =====
-  const editAgenda = (id: number, field: "title" | "where" | "time", value: string) =>
-    agendaHook.update(id, { [field]: value } as Partial<AgendaItem>);
-  const addAgenda = () => {
-    const title = window.prompt(t("daily.agenda.add.titlePrompt"))?.trim();
-    if (!title) return;
-    const time = (window.prompt(t("daily.agenda.add.timePrompt"), "00:00") || "00:00").trim();
-    if (!window.confirm(`${t("daily.agenda.add.confirm")}\n\n${time} · ${title}`)) return;
-    agendaHook.add({ time, title, where: "" });
+  // ===== agenda ops (multi-dia) + sync Google =====
+  // Reconcilia com a agenda "Watch Tower" do Google (best-effort). reloadAfter
+  // recarrega a Agenda depois, pra refletir o que foi importado do Google.
+  const doGcalSync = async (reloadAfter: boolean) => {
+    if (!agendaHook.isLoggedIn) return;
+    try {
+      const res = await fetch("/api/calendar/google/sync", { method: "POST" });
+      if (reloadAfter && res.ok) await agendaHookRef.current.reload();
+    } catch {
+      /* silencioso: o Google é secundário, a Agenda do WT é a fonte da verdade */
+    }
   };
+
+  // Debounce do sync disparado por EDIÇÕES (blur de campo): uma rajada de edições
+  // vira uma só passada ~4s após a última, pra não estourar o rate-limit e não
+  // roubar a janela do sync importante (do submit/delete).
+  const syncTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const scheduleSync = () => {
+    if (syncTimerRef.current) clearTimeout(syncTimerRef.current);
+    syncTimerRef.current = setTimeout(() => {
+      syncTimerRef.current = null;
+      void doGcalSync(false);
+    }, 4000);
+  };
+
+  const manualSync = async () => {
+    if (syncing) return;
+    setSyncing(true);
+    try {
+      const res = await fetch("/api/calendar/google/sync", { method: "POST" });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; reason?: string };
+      if (res.ok && data?.ok) {
+        await agendaHookRef.current.reload();
+        toast(t("daily.gcal.synced"));
+      } else if (data?.reason === "no_accounts") {
+        /* sem conta conectada: a seção Google já mostra o "+ conta" */
+      } else {
+        toast(t("daily.gcal.syncFail"));
+      }
+    } catch {
+      toast(t("daily.gcal.syncFail"));
+    } finally {
+      setSyncing(false);
+    }
+  };
+
+  // Sync uma vez ao montar (logado): puxa o que foi criado no Google e empurra
+  // o que está no WT.
+  const didSyncRef = useRef(false);
+  useEffect(() => {
+    if (didSyncRef.current) return;
+    if (!agendaHook.isLoggedIn || !agendaHook.hydrated) return;
+    didSyncRef.current = true;
+    doGcalSync(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [agendaHook.isLoggedIn, agendaHook.hydrated]);
+
+  // Ordena por data+hora (cronológico) — substitui o antigo arrastar-p/-reordenar.
+  // Comparação direta de strings 'YYYY-MM-DDTHH:MM' (locale-independente, rápida).
+  const sortedAgenda = useMemo(() => {
+    const key = (a: AgendaItem) => `${a.date || todayStr()}T${a.time || "00:00"}`;
+    return [...agenda].sort((a, b) => {
+      const ka = key(a);
+      const kb = key(b);
+      return ka < kb ? -1 : ka > kb ? 1 : 0;
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [agenda]);
+
+  const editAgenda = (id: number, field: "title" | "where" | "date" | "time", value: string) => {
+    const item = agenda.find((a) => a.id === id);
+    if (!item) return;
+    // Título não pode ficar vazio (mantém o anterior, igual a tarefas/lembretes).
+    if (field === "title" && !value.trim()) return;
+    let patch: Partial<AgendaItem>;
+    if (field === "date" || field === "time") {
+      // manda date + time juntos pra reconstruir o scheduledAt sem perder metade
+      const date = field === "date" ? value || todayStr() : item.date || todayStr();
+      const time = field === "time" ? value || "00:00" : item.time || "00:00";
+      patch = { date, time };
+    } else {
+      patch = { [field]: value } as Partial<AgendaItem>;
+    }
+    agendaHook.update(id, patch);
+    scheduleSync();
+  };
+
+  const submitAgendaForm = async () => {
+    const title = agForm.title.trim();
+    if (!title) {
+      toast(t("daily.agenda.form.needTitle"));
+      return;
+    }
+    await agendaHook.add({
+      date: agForm.date || todayStr(),
+      time: agForm.time || "09:00",
+      title,
+      where: agForm.where.trim(),
+    });
+    setAgForm({ date: "", time: "09:00", title: "", where: "" });
+    setAgendaFormOpen(false);
+    doGcalSync(true);
+  };
+
   const deleteAgenda = (id: number) => {
     const item = agenda.find((a) => a.id === id);
-    if (!window.confirm(`${t("daily.agenda.delete.confirm")}${item ? `\n\n${item.time} · ${item.title}` : ""}`)) return;
+    if (!window.confirm(`${t("daily.agenda.delete.confirm")}${item ? `\n\n${item.date || ""} ${item.time} · ${item.title}` : ""}`)) return;
     agendaHook.remove(id);
+    scheduleSync();
     if (item && scope === "personal" && undoCtx) {
       let curId = id;
       undoCtx.push({
         label: t("daily.undo.deleteAgenda"),
         undo: async () => {
-          const nid = await agendaHookRef.current.add({ time: item.time, title: item.title, where: item.where });
+          const nid = await agendaHookRef.current.add({ date: item.date, time: item.time, title: item.title, where: item.where });
           if (nid) curId = nid;
+          doGcalSync(false);
         },
         redo: async () => {
           await agendaHookRef.current.remove(curId);
+          doGcalSync(false);
         },
       });
     }
   };
-  const reorderAgenda = (sourceId: number, targetId: number) => {
-    if (sourceId === targetId) return;
-    const src = agenda.findIndex((a) => a.id === sourceId);
-    const tgt = agenda.findIndex((a) => a.id === targetId);
-    if (src === -1 || tgt === -1) return;
-    const next = [...agenda];
-    const [moved] = next.splice(src, 1);
-    next.splice(tgt, 0, moved);
-    agendaHook.setAll(next);
-  };
-  const onDragStart = (id: number) => (e: DragEvent<HTMLDivElement>) => {
-    setDraggingId(id);
-    e.dataTransfer.setData("text/plain", String(id));
-    e.dataTransfer.effectAllowed = "move";
-  };
-  const onDragOver = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.dataTransfer.dropEffect = "move";
-  };
-  const onDrop = (targetId: number) => (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const sourceId = Number(e.dataTransfer.getData("text/plain"));
-    if (!Number.isNaN(sourceId)) reorderAgenda(sourceId, targetId);
-    setDraggingId(null);
-  };
-  const onDragEnd = () => setDraggingId(null);
 
   // ===== reminder ops =====
   const editReminder = (id: number, text: string) => {
@@ -300,58 +379,118 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
         title={t("daily.agenda.title")}
         total={t("daily.agenda.total", { n: agenda.length })}
         action={t("daily.agenda.action")}
-        onAction={addAgenda}
+        onAction={() => setAgendaFormOpen((v) => !v)}
         bodyMaxHeight={560}
         scope={scope}
         onScopeChange={setScope}
       >
-        {/* Seção Google Agenda (importação Google → WT). Protegida por
-            SafeBoundary: se falhar por qualquer motivo, some sozinha e a
-            Agenda continua intacta. Nunca derruba o card. */}
+        {/* Seção Google Agenda (leitura das outras agendas Google). Protegida
+            por SafeBoundary: se falhar, some sozinha e a Agenda segue intacta. */}
         <SafeBoundary>
           <GoogleCalendar />
         </SafeBoundary>
-        {agenda.map((a) => (
+
+        {/* Sincronizar agora (mão dupla com a agenda "Watch Tower" do Google) */}
+        {agendaHook.isLoggedIn && (
+          <div className="flex justify-end px-1 mb-1">
+            <button
+              type="button"
+              onClick={manualSync}
+              disabled={syncing}
+              title={t("daily.gcal.twowayHint")}
+              className="text-[9px] font-bold uppercase tracking-wide cursor-pointer disabled:opacity-50"
+              style={{ color: "var(--color-wh-blue-light)" }}
+            >
+              🔄 {syncing ? t("daily.gcal.syncing") : t("daily.gcal.sync")}
+            </button>
+          </div>
+        )}
+
+        {/* Formulário de novo compromisso: data + hora + assunto + local */}
+        {agendaFormOpen && (
+          <div className="mb-2 p-2.5 rounded-lg" style={{ background: "rgba(31,85,255,.07)", border: "1px solid var(--border-hi)" }}>
+            <input
+              type="text"
+              autoFocus
+              placeholder={t("daily.agenda.form.title")}
+              value={agForm.title}
+              onChange={(e) => setAgForm((f) => ({ ...f, title: e.target.value }))}
+              onKeyDown={(e) => { if (e.key === "Enter") submitAgendaForm(); }}
+              className="w-full bg-transparent text-[12px] font-semibold outline-none mb-2 px-1.5 py-1 rounded"
+              style={{ color: "var(--text)", border: "1px solid var(--border)" }}
+            />
+            <div className="flex gap-2 mb-2">
+              <input
+                type="date"
+                value={agForm.date || todayStr()}
+                onChange={(e) => setAgForm((f) => ({ ...f, date: e.target.value }))}
+                className="flex-1 bg-transparent text-[11px] font-bold outline-none px-1.5 py-1 rounded"
+                style={{ color: "var(--color-wh-blue-light)", border: "1px solid var(--border)" }}
+              />
+              <input
+                type="time"
+                value={agForm.time}
+                onChange={(e) => setAgForm((f) => ({ ...f, time: e.target.value }))}
+                className="w-[96px] bg-transparent text-[11px] font-bold outline-none px-1.5 py-1 rounded"
+                style={{ color: "var(--color-wh-blue-light)", border: "1px solid var(--border)" }}
+              />
+            </div>
+            <input
+              type="text"
+              placeholder={t("daily.agenda.form.where")}
+              value={agForm.where}
+              onChange={(e) => setAgForm((f) => ({ ...f, where: e.target.value }))}
+              onKeyDown={(e) => { if (e.key === "Enter") submitAgendaForm(); }}
+              className="w-full bg-transparent text-[11px] outline-none mb-2 px-1.5 py-1 rounded"
+              style={{ color: "var(--text-2)", border: "1px solid var(--border)" }}
+            />
+            <div className="flex gap-2 justify-end">
+              <button
+                type="button"
+                onClick={() => { setAgendaFormOpen(false); setAgForm({ date: "", time: "09:00", title: "", where: "" }); }}
+                className="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wide cursor-pointer"
+                style={{ color: "var(--text-3)", background: "rgba(255,255,255,.05)" }}
+              >
+                {t("daily.agenda.form.cancel")}
+              </button>
+              <button
+                type="button"
+                onClick={submitAgendaForm}
+                className="px-3 py-1 rounded text-[10px] font-bold uppercase tracking-wide cursor-pointer"
+                style={{ color: "#fff", background: "var(--color-wh-blue)" }}
+              >
+                {t("daily.agenda.form.save")}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {sortedAgenda.map((a) => (
           <div
             key={a.id}
-            draggable
-            onDragStart={onDragStart(a.id)}
-            onDragOver={onDragOver}
-            onDrop={onDrop(a.id)}
-            onDragEnd={onDragEnd}
-            className="grid grid-cols-[16px_46px_1fr_22px] gap-2.5 px-4 py-3 rounded-lg my-1 items-start transition-opacity group"
-            style={{
-              borderLeft: "3px solid var(--color-wh-blue)",
-              background: "rgba(31,85,255,.05)",
-              opacity: draggingId === a.id ? 0.4 : 1,
-              cursor: "default",
-            }}
+            className="grid grid-cols-[auto_auto_1fr_22px] gap-2 px-3 py-2.5 rounded-lg my-1 items-center group"
+            style={{ borderLeft: "3px solid var(--color-wh-blue)", background: "rgba(31,85,255,.05)" }}
           >
-            <div
-              className="flex flex-col items-center justify-center text-[12px] leading-none select-none cursor-grab active:cursor-grabbing mt-px"
-              style={{ color: "var(--text-3)" }}
-              title={t("daily.agenda.dragReorder")}
-              aria-label={t("daily.agenda.drag")}
-            >
-              ⋮⋮
-            </div>
-            <div
-              className="text-[11.5px] font-extrabold leading-tight tracking-wide outline-none whitespace-nowrap mt-px"
+            <input
+              type="date"
+              value={a.date || todayStr()}
+              onChange={(e) => editAgenda(a.id, "date", e.target.value)}
+              title={t("daily.agenda.form.date")}
+              className="bg-transparent text-[10px] font-bold outline-none cursor-pointer w-[112px]"
               style={{ color: "var(--color-wh-blue-light)" }}
-              contentEditable
-              suppressContentEditableWarning
-              onBlur={(e) => editAgenda(a.id, "time", e.currentTarget.textContent || "")}
-            >
-              {a.time}
-            </div>
+            />
+            <input
+              type="time"
+              value={a.time || "00:00"}
+              onChange={(e) => editAgenda(a.id, "time", e.target.value)}
+              title={t("daily.agenda.form.time")}
+              className="bg-transparent text-[11px] font-extrabold outline-none cursor-pointer w-[74px]"
+              style={{ color: "var(--color-wh-blue-light)" }}
+            />
             <div className="min-w-0">
               <div
-                className="text-[11.5px] font-semibold leading-snug mb-1 outline-none"
-                style={{
-                  color: "var(--text)",
-                  overflowWrap: "anywhere",
-                  wordBreak: "break-word",
-                }}
+                className="text-[11.5px] font-semibold leading-snug outline-none"
+                style={{ color: "var(--text)", overflowWrap: "anywhere", wordBreak: "break-word" }}
                 contentEditable
                 suppressContentEditableWarning
                 onBlur={(e) => editAgenda(a.id, "title", e.currentTarget.textContent || "")}
@@ -360,11 +499,7 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
               </div>
               <div
                 className="text-[9.5px] outline-none leading-tight uppercase tracking-wide font-semibold"
-                style={{
-                  color: "var(--text-3)",
-                  overflowWrap: "anywhere",
-                  wordBreak: "break-word",
-                }}
+                style={{ color: "var(--text-3)", overflowWrap: "anywhere", wordBreak: "break-word" }}
                 contentEditable
                 suppressContentEditableWarning
                 onBlur={(e) => editAgenda(a.id, "where", e.currentTarget.textContent || "")}
@@ -382,7 +517,7 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
               onClick={() => deleteAgenda(a.id)}
               title={t("daily.agenda.remove")}
               aria-label={t("daily.agenda.removeNamed", { title: a.title })}
-              className="w-[22px] h-[22px] flex items-center justify-center rounded-md opacity-0 group-hover:opacity-100 transition-all cursor-pointer text-[12px] font-bold leading-none flex-shrink-0 mt-px hover:scale-110"
+              className="w-[22px] h-[22px] flex items-center justify-center rounded-md opacity-0 group-hover:opacity-100 transition-all cursor-pointer text-[12px] font-bold leading-none flex-shrink-0 hover:scale-110"
               style={{
                 color: "var(--color-status-critical)",
                 background: "rgba(255,59,92,.08)",

@@ -70,18 +70,34 @@ export const tasksConfig: DualStorageConfig<Task, DbTask> = {
 };
 
 // =============== AGENDA ===============
-// 'time' local é "HH:MM" sem data. Pra DB precisa ISO completo — usamos
-// HOJE como base. Quando lemos do DB, exibimos apenas HH:MM (formatted).
-function timeStrToIso(timeStr: string): string {
-  const [h, m] = timeStr.split(":").map(Number);
-  const d = new Date();
-  d.setHours(h || 0, m || 0, 0, 0);
-  return d.toISOString();
+// 'date' local é "YYYY-MM-DD" e 'time' é "HH:MM" (horário do browser). Pra DB
+// precisa de ISO completo — combinamos os dois. Data vazia = HOJE (compat com
+// itens legados que só tinham hora). Ao ler do DB, separamos de volta em
+// date + time locais.
+function dateTimeToIso(dateStr: string, timeStr: string): string {
+  const [h, m] = (timeStr || "00:00").split(":").map(Number);
+  const parts = (dateStr || "").split("-").map(Number);
+  let y: number, mo: number, d: number;
+  if (parts.length === 3 && parts.every((n) => !Number.isNaN(n))) {
+    [y, mo, d] = parts;
+  } else {
+    const now = new Date();
+    y = now.getFullYear();
+    mo = now.getMonth() + 1;
+    d = now.getDate();
+  }
+  const dt = new Date(y, (mo || 1) - 1, d || 1, h || 0, m || 0, 0, 0);
+  return dt.toISOString();
 }
 function isoToTimeStr(iso: string): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return "00:00";
   return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+}
+function isoToDateStr(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
 export const agendaConfig: DualStorageConfig<AgendaItem, DbAgenda> = {
@@ -91,6 +107,7 @@ export const agendaConfig: DualStorageConfig<AgendaItem, DbAgenda> = {
   apiArrayKey: "items",
   fromDb: (db, idMap) => ({
     id: idMap.register(db.id),
+    date: isoToDateStr(db.scheduledAt),
     time: isoToTimeStr(db.scheduledAt),
     title: db.title,
     where: db.location ?? "",
@@ -98,15 +115,19 @@ export const agendaConfig: DualStorageConfig<AgendaItem, DbAgenda> = {
   }),
   toCreatePayload: (item) => ({
     title: item.title,
-    scheduledAt: timeStrToIso(item.time),
+    scheduledAt: dateTimeToIso(item.date, item.time),
     location: item.where || null,
     durationMin: 30,
   }),
+  // A UI sempre manda date + time juntos quando mexe no horário, pra reconstruir
+  // o scheduledAt sem perder a outra metade.
   toPatchPayload: (patch) => {
     const out: Record<string, unknown> = {};
     if (patch.title !== undefined) out.title = patch.title;
-    if (patch.time !== undefined) out.scheduledAt = timeStrToIso(patch.time);
     if (patch.where !== undefined) out.location = patch.where || null;
+    if (patch.date !== undefined && patch.time !== undefined) {
+      out.scheduledAt = dateTimeToIso(patch.date, patch.time);
+    }
     return out;
   },
 };

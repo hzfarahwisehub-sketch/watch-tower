@@ -173,11 +173,11 @@ export const DEFAULT_TASKS: Task[] = [
 ];
 
 export const DEFAULT_AGENDA: AgendaItem[] = [
-  {id:1, time:"09:00", title:"Call equipe WiseHub — semanal", where:"Google Meet"},
-  {id:2, time:"10:30", title:"Análise sprint C — Stripe webhook", where:"Solo"},
-  {id:3, time:"14:00", title:"Review imigração — pendências D7", where:"WiseHub Watch Tower"},
-  {id:4, time:"16:30", title:"1:1 com Fabiano — design system", where:"Zoom"},
-  {id:5, time:"18:00", title:"Encerramento semana", where:"Wrap-up"}
+  {id:1, date:"", time:"09:00", title:"Call equipe WiseHub — semanal", where:"Google Meet"},
+  {id:2, date:"", time:"10:30", title:"Análise sprint C — Stripe webhook", where:"Solo"},
+  {id:3, date:"", time:"14:00", title:"Review imigração — pendências D7", where:"WiseHub Watch Tower"},
+  {id:4, date:"", time:"16:30", title:"1:1 com Fabiano — design system", where:"Zoom"},
+  {id:5, date:"", time:"18:00", title:"Encerramento semana", where:"Wrap-up"}
 ];
 
 export const DEFAULT_REMINDERS: Reminder[] = [
