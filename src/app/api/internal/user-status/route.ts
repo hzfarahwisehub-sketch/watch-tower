@@ -33,6 +33,7 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({
     email,
     exists: true,
+    id: user.id,
     name: user.name,
     role: user.role,
     allowlisted: !!allowed,
