@@ -17,10 +17,17 @@ import type { CommunityPost, CountryArticle } from "./editorial";
 export type RondaPiece = { community?: CommunityPost[]; countryTab?: CountryArticle[] };
 
 const D = "2026-07-07"; // data desta ronda
+const D2 = "2026-07-10"; // ronda extra: notícias reais de 09/07 (CA, UK) + PT (AIMA)
 
 export const RONDA_PIECES: Record<string, RondaPiece> = {
   ca: {
     community: [{
+      publishedAt: D2,
+      title: "Canadá faz o maior sorteio em francês desde março: 5.000 convites e corte CRS 420",
+      body: `O IRCC realizou em 9 de julho de 2026 um sorteio do Express Entry voltado à categoria de proficiência em língua francesa. Foram emitidos 5.000 convites para candidatura, com nota de corte CRS de 420 pontos, segundo a página oficial de rodadas do IRCC. Foi o maior sorteio da categoria de francês desde março, e o corte de 420 está entre os mais acessíveis do ano.\n\nPara quem fala francês e já tem perfil no Express Entry, é uma janela relevante, porque as rodadas por categoria costumam ter cortes bem menores que os sorteios gerais. Vale conferir sua pontuação, manter a documentação em dia e acompanhar as próximas rodadas na fonte oficial antes de qualquer decisão.`,
+      cta: "Fala francês e tem perfil no Express Entry? Confira sua pontuação e prepare a documentação antes da próxima rodada.",
+      sources: [{ label: "IRCC · Express Entry: Rounds of invitations", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations.html" }],
+    }, {
       publishedAt: D,
       title: "Express Entry abre julho com o menor corte de PNP do ano",
       body: `O IRCC realizou no dia 6 de julho o primeiro sorteio do Express Entry deste mês, voltado ao Programa de Nomeação Provincial (PNP). Foram emitidos 534 convites para candidatura, com nota de corte CRS em 708 pontos, a menor pontuação de corte registrada para sorteios de PNP em 2026.\n\nPara quem busca residência permanente pela via provincial, o dado é importante. Uma nota de corte mais baixa pode ampliar as chances de candidatos que já possuem uma nomeação provincial, já que esse aval agrega 600 pontos ao perfil no Express Entry. Vale acompanhar as próximas rodadas e confirmar os números na fonte oficial antes de tomar qualquer decisão.`,
@@ -28,6 +35,18 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
       sources: [{ label: "CIC News", url: "https://www.cicnews.com/2026/07/first-express-entry-draw-of-july-sees-lowest-pnp-cut-off-score-this-year-0777251.html" }],
     }],
     countryTab: [{
+      publishedAt: D2,
+      headline: "Canadá convida 5.000 candidatos francófonos no Express Entry, com corte CRS de 420",
+      standfirst: "Sorteio de 9 de julho, o maior da categoria de língua francesa desde março, teve corte mais acessível que as rodadas gerais.",
+      body: `O Immigration, Refugees and Citizenship Canada, o IRCC, realizou em 9 de julho de 2026 um sorteio do Express Entry voltado à categoria de proficiência em língua francesa. Segundo a página oficial de rodadas de convites do IRCC, foram emitidos 5.000 convites para candidatura, os ITAs, com nota de corte no sistema CRS de 420 pontos.\n\nO número chama a atenção por dois motivos. Foi o maior sorteio da categoria de francês desde março de 2026, e a nota de corte de 420 está entre as mais acessíveis do ano, bem abaixo dos cortes típicos das rodadas gerais. Isso abre uma janela concreta para candidatos francófonos que já estão no pool do Express Entry.\n\nPara quem planeja imigrar pela via da língua francesa, o recado prático é manter o perfil atualizado, a comprovação de idioma válida e a documentação organizada, de olho nas próximas rodadas. Confirme sempre os números diretamente na fonte oficial do IRCC antes de tomar qualquer decisão.`,
+      keyFacts: [
+        "Sorteio realizado em 9 de julho de 2026, na categoria de proficiência em língua francesa.",
+        "5.000 convites para candidatura (ITA) emitidos, segundo a página oficial de rodadas do IRCC.",
+        "Nota de corte CRS de 420 pontos, entre as mais acessíveis do ano.",
+        "Foi o maior sorteio da categoria de francês desde março de 2026; rodadas por categoria costumam ter cortes menores que as gerais.",
+      ],
+      sources: [{ label: "IRCC · Express Entry: Rounds of invitations", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations.html" }],
+    }, {
       publishedAt: D,
       headline: "Canadá abre julho com sorteio de PNP e corte CRS de 708, o menor do ano",
       standfirst: "IRCC emitiu 534 convites no primeiro sorteio do Express Entry de julho, com a menor pontuação de corte para o Programa de Nomeação Provincial em 2026.",
@@ -66,6 +85,12 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
 
   uk: {
     community: [{
+      publishedAt: D2,
+      title: "Reino Unido publica novo pacote de mudanças nas regras de imigração (HC 259)",
+      body: `Em 9 de julho de 2026, o governo do Reino Unido publicou um novo Statement of Changes to the Immigration Rules, o documento HC 259, com ajustes que passam a valer em 30 de julho e 3 de agosto de 2026. As mudanças atingem vários caminhos, entre eles a rota de graduados (Graduate route), o reagrupamento familiar (Appendix FM), as regras de residência para filhos e o processo de entrevista de asilo.\n\nSão, na maioria, ajustes técnicos e de procedimento, não uma reforma radical. Ainda assim, quem tem processo em andamento ou pretende aplicar por uma dessas rotas deve revisar os requisitos atualizados antes de enviar o pedido. Um ponto para evitar confusão: o aumento muito comentado do prazo de assentamento permanente, o ILR, de 5 para 10 anos, ainda é proposta em discussão e não entrou nessas regras.`,
+      cta: "Tem processo por uma rota afetada? Revise os requisitos atualizados no GOV.UK antes de aplicar.",
+      sources: [{ label: "GOV.UK · Immigration Rules: statement of changes", url: "https://www.gov.uk/government/collections/immigration-rules-statement-of-changes" }],
+    }, {
       publishedAt: D,
       title: "Reino Unido publica o Projeto de Lei de Imigração e Asilo 2026",
       body: `O governo britânico apresentou ao Parlamento, em 30 de junho de 2026, o texto do Projeto de Lei de Imigração e Asilo 2026, anunciado antes no Discurso do Rei em 13 de maio. Segundo o Free Movement, é a quinta lei ligada à imigração em cinco sessões parlamentares, sinal de quanto o tema segue em movimento no Reino Unido.\n\nO projeto agora inicia sua tramitação, que costuma ser longa, então nada muda de imediato. Para quem planeja morar, trabalhar ou estudar no Reino Unido, o momento é de acompanhar o texto de perto, porque as regras podem ser ajustadas ao longo do debate no Parlamento.`,
@@ -73,6 +98,18 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
       sources: [{ label: "Free Movement", url: "https://freemovement.org.uk/whats-in-the-immigration-and-asylum-bill-2026/" }],
     }],
     countryTab: [{
+      publishedAt: D2,
+      headline: "Reino Unido publica o Statement of Changes HC 259, com efeitos a partir de 30 de julho",
+      standfirst: "Pacote publicado em 9 de julho ajusta Graduate route, reagrupamento familiar e entrevista de asilo, com vigência em 30 de julho e 3 de agosto.",
+      body: `O Reino Unido publicou, em 9 de julho de 2026, um novo Statement of Changes to the Immigration Rules, identificado como HC 259. O documento reúne ajustes nas regras de imigração com vigência escalonada em 30 de julho e 3 de agosto de 2026, e atinge várias rotas ao mesmo tempo.\n\nEntre os pontos afetados estão a Graduate route, voltada a recém-formados, o Appendix FM, que trata do reagrupamento familiar, as regras de residência aplicáveis a filhos e o processo de entrevista de asilo. Na avaliação geral, trata-se de um conjunto de mudanças majoritariamente técnicas e de procedimento, e não de uma reforma ampla das regras.\n\nUm alerta importante para evitar desinformação: o aumento, muito comentado, do prazo para o assentamento permanente, o Indefinite Leave to Remain, de 5 para 10 anos, ainda é uma proposta em discussão e não faz parte do HC 259. Quem pretende aplicar por uma das rotas afetadas deve revisar os requisitos atualizados na fonte oficial antes de enviar o pedido, porque pequenos detalhes de elegibilidade mudaram.`,
+      keyFacts: [
+        "Statement of Changes HC 259 publicado em 9 de julho de 2026, com vigência em 30 de julho e 3 de agosto de 2026.",
+        "Atinge a Graduate route, o Appendix FM (reagrupamento familiar), regras de residência de filhos e a entrevista de asilo.",
+        "São majoritariamente ajustes técnicos e de procedimento, não uma reforma radical.",
+        "O aumento do prazo de assentamento (ILR) de 5 para 10 anos ainda é proposta e não entrou no HC 259.",
+      ],
+      sources: [{ label: "GOV.UK · Immigration Rules: statement of changes", url: "https://www.gov.uk/government/collections/immigration-rules-statement-of-changes" }],
+    }, {
       publishedAt: D,
       headline: "Projeto de Lei de Imigração e Asilo 2026 chega ao Parlamento britânico",
       standfirst: "O texto que reorganiza regras de imigração e asilo no Reino Unido foi apresentado em 30 de junho e começa agora sua tramitação.",
@@ -447,6 +484,35 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
         "Estrangeiros já são cerca de 15% da população de Varsóvia e 19,5% em Wrocław (Notes from Poland).",
       ],
       sources: [{ label: "GUS · Statistics Poland", url: "https://stat.gov.pl/en/experimental-statistics/human-capital/foreigners-performing-work-in-poland-in-january-2026,12,39.html" }],
+    }],
+  },
+
+  pt: {
+    community: [{
+      publishedAt: D2,
+      title: "Portugal: AIMA começa a chamar quem pediu reagrupamento familiar pelo regime de transição",
+      body: `A AIMA, a agência de imigração de Portugal, começou a convocar as pessoas que apresentaram pedido de reagrupamento familiar pelo chamado regime de transição. O processo oficial, descrito no site da AIMA, funciona assim: a pessoa é contactada por e-mail para efetuar o pagamento das taxas e, depois da confirmação, agenda o atendimento presencial num dos locais da estrutura de missão, a EMAIMA, pelo portal services.aima.gov.pt. Segundo noticiado em 7 de julho de 2026, cerca de 9 mil famílias entram nesta fase.\n\nSe esse é o seu caso, fique de olho na caixa de entrada, inclusive no spam, e confirme sempre pelos canais oficiais da AIMA antes de pagar qualquer taxa, para não cair em golpe. O pagamento e o agendamento verdadeiros passam pelo portal oficial, nunca por links ou contas de terceiros.`,
+      cta: "Pediu reagrupamento familiar no regime de transição? Acompanhe o seu e-mail e confirme cada passo apenas em aima.gov.pt.",
+      sources: [
+        { label: "AIMA · Regime Transitório (site oficial)", url: "https://aima.gov.pt/pt/noticias/aima-lanca-novo-servico-para-o-regime-transitorio" },
+        { label: "DN Brasil (imprensa, referente à comunicação da AIMA)", url: "https://dnbrasil.dn.pt/aima-convoca-inscritos-no-regime-de-transio-do-reagrupamento-familiar" },
+      ],
+    }],
+    countryTab: [{
+      publishedAt: D2,
+      headline: "AIMA inicia a convocação do reagrupamento familiar pelo regime de transição em Portugal",
+      standfirst: "Agência portuguesa contacta por e-mail quem aderiu ao regime de transição para pagamento de taxas e agendamento presencial; a imprensa fala em cerca de 9 mil famílias.",
+      body: `A Agência para a Integração, Migrações e Asilo de Portugal, a AIMA, começou a convocar quem apresentou pedido de reagrupamento familiar pelo chamado regime de transição. A informação foi noticiada em 7 de julho de 2026 por veículos de imprensa que acompanham a comunidade imigrante, com base em comunicação da própria agência.\n\nO caminho oficial do procedimento está descrito no site da AIMA. Depois de registar o pedido na plataforma services.aima.gov.pt, a pessoa é contactada por e-mail para pagar as taxas e, após a confirmação do pagamento, é marcado o atendimento presencial num dos locais da estrutura de missão responsável, a EMAIMA. A imprensa aponta que cerca de 9 mil famílias estão sendo convocadas nesta fase, número que não conseguimos confirmar diretamente numa página oficial da AIMA.\n\nO ponto de atenção é a segurança. Como a convocação chega por e-mail e envolve pagamento de taxa, é terreno fértil para golpes. Confirme sempre a autenticidade da mensagem e faça o pagamento e o agendamento apenas pelos canais oficiais da AIMA, nunca por links recebidos de terceiros. Em caso de dúvida sobre o seu processo, a fonte de referência é o próprio site aima.gov.pt.`,
+      keyFacts: [
+        "A AIMA começou a convocar quem pediu reagrupamento familiar pelo regime de transição, segundo noticiado em 7 de julho de 2026.",
+        "Processo oficial: contacto por e-mail para pagamento de taxas e, após confirmação, agendamento presencial num local da EMAIMA (services.aima.gov.pt).",
+        "A imprensa fala em cerca de 9 mil famílias nesta fase; o número não foi confirmado por nós em página oficial da AIMA.",
+        "Alerta antigolpe: confirme sempre em aima.gov.pt e nunca pague por links ou contas de terceiros.",
+      ],
+      sources: [
+        { label: "AIMA · Regime Transitório (site oficial)", url: "https://aima.gov.pt/pt/noticias/aima-lanca-novo-servico-para-o-regime-transitorio" },
+        { label: "DN Brasil (imprensa, referente à comunicação da AIMA)", url: "https://dnbrasil.dn.pt/aima-convoca-inscritos-no-regime-de-transio-do-reagrupamento-familiar" },
+      ],
     }],
   },
 };
