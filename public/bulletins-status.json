@@ -1,12 +1,12 @@
 {
-  "lastRun": "2026-07-10T17:51:14.384Z",
+  "lastRun": "2026-07-10T19:39:24.083Z",
   "bulletins": [
     {
       "key": "us",
       "url": "https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html",
       "hash": "f9f5d75adab85b47910480c45efde5009d4b566cc8cc4ad83af45f51494d4e02",
       "lastChangedAt": "2026-07-01T12:38:40.226Z",
-      "lastCheckedAt": "2026-07-10T17:49:58.404Z",
+      "lastCheckedAt": "2026-07-10T19:38:04.507Z",
       "lastStatus": "unchanged"
     },
     {
@@ -15,7 +15,7 @@
       "monitorUrl": "https://api.io.canada.ca/io-server/gc/news/en/v2?dept=departmentofcitizenshipandimmigration&sort=publishedDate&orderBy=desc&pick=50&format=atom",
       "hash": "2ae3f3fbefe2361ff2e9683ecb3bb8024a3065b8f86b79556b0bfa10af6bf31b",
       "lastChangedAt": "2026-07-08T14:23:18.526Z",
-      "lastCheckedAt": "2026-07-10T17:49:59.997Z",
+      "lastCheckedAt": "2026-07-10T19:38:05.812Z",
       "lastStatus": "unchanged"
     },
     {
@@ -24,7 +24,7 @@
       "geoProxy": true,
       "hash": "a71b2c23d2190a4b0cf734719d56dff99a96cac58fa637892847e5fa72b57e4b",
       "lastChangedAt": "2026-07-10T11:07:36.763Z",
-      "lastCheckedAt": "2026-07-10T17:50:00.946Z",
+      "lastCheckedAt": "2026-07-10T19:38:06.821Z",
       "lastStatus": "unchanged"
     },
     {
@@ -34,7 +34,7 @@
       "geoProxy": true,
       "hash": "2ead1729783d59d1aa7bf95162041b24c3177399de883699fc7036b56b0aafd1",
       "lastChangedAt": "2026-06-23T11:21:29.962Z",
-      "lastCheckedAt": "2026-07-10T17:50:02.517Z",
+      "lastCheckedAt": "2026-07-10T19:38:08.546Z",
       "lastStatus": "unchanged"
     },
     {
@@ -42,16 +42,16 @@
       "url": "https://www.migration.gv.at/en/",
       "hash": "2f8a5fe9466f630ce3155e5babbb1c5236fa8d1b7282de08cf3e550abe5944a6",
       "lastChangedAt": "2026-07-08T14:23:23.446Z",
-      "lastCheckedAt": "2026-07-10T17:50:03.854Z",
+      "lastCheckedAt": "2026-07-10T19:38:09.958Z",
       "lastStatus": "unchanged"
     },
     {
       "key": "be",
       "url": "https://www.ibz.be",
-      "hash": "938258f9a32182f6cd75d25f290e77f378fd9c179c8b484a8007caefe1cd264b",
-      "lastChangedAt": "2026-07-10T14:36:09.948Z",
-      "lastCheckedAt": "2026-07-10T17:50:05.859Z",
-      "lastStatus": "unchanged"
+      "hash": "627b52e6b0111adcb705d5983993218486e8443159e65afbfa0f0cde72ac5c4f",
+      "lastChangedAt": "2026-07-10T19:38:12.205Z",
+      "lastCheckedAt": "2026-07-10T19:38:12.205Z",
+      "lastStatus": "changed"
     },
     {
       "key": "bg",
@@ -59,15 +59,15 @@
       "geoProxy": true,
       "hash": "c219e67df944a77c6b208b70aa7bc2d7972f58d04f4bee928b6bad1129190ae6",
       "lastChangedAt": "2026-07-10T17:50:07.665Z",
-      "lastCheckedAt": "2026-07-10T17:50:07.665Z",
-      "lastStatus": "changed"
+      "lastCheckedAt": "2026-07-10T19:38:14.047Z",
+      "lastStatus": "unchanged"
     },
     {
       "key": "cy",
       "url": "https://www.moi.gov.cy/",
       "hash": "af33235aa4d5709b6576759e07f972ce178498cd2efe01f1bbea4a1ee9cb5721",
       "lastChangedAt": "2026-07-09T17:59:35.532Z",
-      "lastCheckedAt": "2026-07-10T17:50:10.583Z",
+      "lastCheckedAt": "2026-07-10T19:38:15.982Z",
       "lastStatus": "unchanged"
     },
     {
@@ -75,15 +75,15 @@
       "url": "https://mup.gov.hr/",
       "hash": "59bb7bea94c285a2ee9dcbb8b61dfcf3af21d15bc514b52ffcd12c0fedb5c6dd",
       "lastChangedAt": "2026-07-10T17:50:13.552Z",
-      "lastCheckedAt": "2026-07-10T17:50:13.552Z",
-      "lastStatus": "changed"
+      "lastCheckedAt": "2026-07-10T19:38:19.476Z",
+      "lastStatus": "unchanged"
     },
     {
       "key": "dk",
       "url": "https://www.nyidanmark.dk/en-GB",
       "hash": "8143205586c09ea8ee90455742b0d04ec11feb382ba16d17c5bea18160204b7d",
       "lastChangedAt": "2026-07-08T17:41:04.850Z",
-      "lastCheckedAt": "2026-07-10T17:50:14.817Z",
+      "lastCheckedAt": "2026-07-10T19:38:20.942Z",
       "lastStatus": "unchanged"
     },
     {
@@ -91,7 +91,7 @@
       "url": "https://www.minv.sk/",
       "hash": "382315a970f09b40d7c6e8052fb7e2e7bd9fd476ae00d26fc9c4f6ccad407347",
       "lastChangedAt": "2026-07-10T14:36:56.166Z",
-      "lastCheckedAt": "2026-07-10T17:50:16.354Z",
+      "lastCheckedAt": "2026-07-10T19:38:22.971Z",
       "lastStatus": "unchanged"
     },
     {
@@ -99,7 +99,7 @@
       "url": "https://www.gov.si/en/",
       "hash": "65742ef29b5a9a3ac48ce7d2dafdc83a933e655bd0ab28d73f4b4ed4f6177edd",
       "lastChangedAt": "2026-07-02T14:11:28.439Z",
-      "lastCheckedAt": "2026-07-10T17:50:17.806Z",
+      "lastCheckedAt": "2026-07-10T19:38:24.546Z",
       "lastStatus": "unchanged"
     },
     {
@@ -109,7 +109,7 @@
       "geoProxy": true,
       "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "lastChangedAt": "2026-05-27T08:18:28.063Z",
-      "lastCheckedAt": "2026-07-10T17:50:19.931Z",
+      "lastCheckedAt": "2026-07-10T19:38:27.133Z",
       "lastStatus": "unchanged"
     },
     {
@@ -119,15 +119,15 @@
       "geoProxy": true,
       "hash": "f2e641de3afb1e67a693a6ccc8a0045b0f5311dbdf034f42f7a7a1ec847910ef",
       "lastChangedAt": "2026-06-17T11:05:00.730Z",
-      "lastCheckedAt": "2026-07-10T17:50:21.164Z",
+      "lastCheckedAt": "2026-07-10T19:38:28.359Z",
       "lastStatus": "unchanged"
     },
     {
       "key": "fi",
       "url": "https://migri.fi/en/home",
-      "hash": "ad915ce5bb742c6905f89cd7db54ba9d39803c7c048eda099b1a87ba0793cd39",
-      "lastChangedAt": "2026-07-10T17:50:22.390Z",
-      "lastCheckedAt": "2026-07-10T17:50:22.390Z",
+      "hash": "88a5bc1fc225a7517d341ad7ac98586bb04f0a6fdde4b88804b39b401c829817",
+      "lastChangedAt": "2026-07-10T19:38:29.687Z",
+      "lastCheckedAt": "2026-07-10T19:38:29.687Z",
       "lastStatus": "changed"
     },
     {
@@ -137,7 +137,7 @@
       "geoProxy": true,
       "hash": "66286b932b30c185e21b551b02fe0f7be9af95fdf104363d9f0dfd6cb6849b9b",
       "lastChangedAt": "2026-05-21T03:49:31.743Z",
-      "lastCheckedAt": "2026-07-10T17:50:25.333Z",
+      "lastCheckedAt": "2026-07-10T19:38:31.962Z",
       "lastStatus": "unchanged"
     },
     {
@@ -145,31 +145,31 @@
       "url": "https://migration.gov.gr/en/",
       "hash": "93bc5febcf2d7f96f09d6b5309c71ca100f12f374750cdd49a3b4a5a43e2199b",
       "lastChangedAt": "2026-07-10T17:50:26.675Z",
-      "lastCheckedAt": "2026-07-10T17:50:26.675Z",
-      "lastStatus": "changed"
+      "lastCheckedAt": "2026-07-10T19:38:33.219Z",
+      "lastStatus": "unchanged"
     },
     {
       "key": "nl",
       "url": "https://ind.nl/en",
-      "hash": "bcb618fc7d516cf373ed1257ea5aee91eba0c1d4a148c55dba43a257a495f79f",
-      "lastChangedAt": "2026-07-10T14:37:09.036Z",
-      "lastCheckedAt": "2026-07-10T17:50:28.337Z",
-      "lastStatus": "unchanged"
+      "hash": "88ec18ace2d40874e8ce786048e6154b30c7942474ec8d7019eb40baec6e0ca4",
+      "lastChangedAt": "2026-07-10T19:38:34.780Z",
+      "lastCheckedAt": "2026-07-10T19:38:34.780Z",
+      "lastStatus": "changed"
     },
     {
       "key": "hu",
       "url": "https://oif.gov.hu/",
-      "hash": "a05acc7ede8f990af647f7a9584aec493ae55af618569fc32e9eb0b35ec4a0b1",
-      "lastChangedAt": "2026-07-10T17:50:29.434Z",
-      "lastCheckedAt": "2026-07-10T17:50:29.434Z",
+      "hash": "16a7fc36259ab803aab63b5547fed157fce0e8fd90c8c20db307d31332aa3a53",
+      "lastChangedAt": "2026-07-10T19:38:35.908Z",
+      "lastCheckedAt": "2026-07-10T19:38:35.908Z",
       "lastStatus": "changed"
     },
     {
       "key": "is",
       "url": "https://utl.is/index.php/en/",
-      "hash": "f990a9aaccd2a266b549adc0277cffbc539a51bc049788e81b5bb7e838c26b56",
-      "lastChangedAt": "2026-07-10T17:50:32.292Z",
-      "lastCheckedAt": "2026-07-10T17:50:32.292Z",
+      "hash": "f5ed091ad825b4d13976a354862d34234b16e2572f8756277beba69c28bbbdba",
+      "lastChangedAt": "2026-07-10T19:38:38.456Z",
+      "lastCheckedAt": "2026-07-10T19:38:38.456Z",
       "lastStatus": "changed"
     },
     {
@@ -177,7 +177,7 @@
       "url": "https://www.udi.no/en/",
       "hash": "69b42a074c60bc8553aa6ffeb1c3e54e5c6716bbae07be83d8811747a205df76",
       "lastChangedAt": "2026-07-03T14:16:42.025Z",
-      "lastCheckedAt": "2026-07-10T17:50:34.352Z",
+      "lastCheckedAt": "2026-07-10T19:38:40.866Z",
       "lastStatus": "unchanged"
     },
     {
@@ -185,15 +185,15 @@
       "url": "https://www.kdmid.ru/",
       "hash": "273b8c82c0c1a168877f91508ea4e1213e4c87eefdae48cd3fd609d84a4b090d",
       "lastChangedAt": "2026-07-02T10:45:12.675Z",
-      "lastCheckedAt": "2026-07-10T17:50:35.816Z",
+      "lastCheckedAt": "2026-07-10T19:38:42.606Z",
       "lastStatus": "unchanged"
     },
     {
       "key": "nz",
       "url": "https://www.immigration.govt.nz/",
-      "hash": "a00ea85bb530c5be774c7f775c49cf86d6fbaaf03720a387354e8c0da61a5321",
-      "lastChangedAt": "2026-07-10T17:50:37.370Z",
-      "lastCheckedAt": "2026-07-10T17:50:37.370Z",
+      "hash": "e3891a774e639a1372f3013a3d90fa3661b30bc46fd1292eddfeef8ac1d8d6ce",
+      "lastChangedAt": "2026-07-10T19:38:44.687Z",
+      "lastCheckedAt": "2026-07-10T19:38:44.687Z",
       "lastStatus": "changed"
     },
     {
@@ -201,7 +201,7 @@
       "url": "https://www.irishimmigration.ie/",
       "hash": "700ece00839a8b6fa0a52dad199e76300367272b760743f6683287c1751955ec",
       "lastChangedAt": "2026-07-10T11:08:53.509Z",
-      "lastCheckedAt": "2026-07-10T17:50:40.290Z",
+      "lastCheckedAt": "2026-07-10T19:38:47.285Z",
       "lastStatus": "unchanged"
     },
     {
@@ -209,15 +209,15 @@
       "url": "https://questure.poliziadistato.it/stranieri/",
       "hash": "45a9df3a5cc3d12d287bc5cc863cece1189100a74c33fbb4db073c2a5c902334",
       "lastChangedAt": "2026-06-26T12:15:36.438Z",
-      "lastCheckedAt": "2026-07-10T17:50:41.451Z",
+      "lastCheckedAt": "2026-07-10T19:38:48.387Z",
       "lastStatus": "unchanged"
     },
     {
       "key": "lv",
       "url": "https://www.pmlp.gov.lv/en",
-      "hash": "33d03e02b695772204b26f7da740da8afb56f1245f72f960dbde64949c094bcb",
-      "lastChangedAt": "2026-07-10T17:50:42.756Z",
-      "lastCheckedAt": "2026-07-10T17:50:42.756Z",
+      "hash": "46fdee9582a7021dc8a74ba86248ab71c79d21d40fe2dcb9c1beaab5292b6ee8",
+      "lastChangedAt": "2026-07-10T19:38:49.650Z",
+      "lastCheckedAt": "2026-07-10T19:38:49.650Z",
       "lastStatus": "changed"
     },
     {
@@ -225,15 +225,15 @@
       "url": "https://migracija.lt/en/",
       "hash": "1e7e0a7f80d9380ce4010738ec718116150f8082f2c724444704ff18ba3a8f60",
       "lastChangedAt": "2026-06-22T18:15:02.550Z",
-      "lastCheckedAt": "2026-07-10T17:50:44.294Z",
+      "lastCheckedAt": "2026-07-10T19:38:51.270Z",
       "lastStatus": "unchanged"
     },
     {
       "key": "lu",
       "url": "https://guichet.public.lu/en/citoyens/immigration.html",
-      "hash": "747a635830b76192e412d89e72fc2a06ae3a486034386fb5f6d69393ac91d5f5",
-      "lastChangedAt": "2026-07-10T17:50:46.239Z",
-      "lastCheckedAt": "2026-07-10T17:50:46.239Z",
+      "hash": "120c66a5c9e03b54ac02de73d86b21a863489205caf5ae099427025ed923ec42",
+      "lastChangedAt": "2026-07-10T19:38:53.480Z",
+      "lastCheckedAt": "2026-07-10T19:38:53.480Z",
       "lastStatus": "changed"
     },
     {
@@ -241,7 +241,7 @@
       "url": "https://www.identita.gov.mt/",
       "hash": "d374d0eaecfe7d89af414fbcda8d9613341c96de902332f90e63d12ae406bef7",
       "lastChangedAt": "2026-07-08T14:24:19.368Z",
-      "lastCheckedAt": "2026-07-10T17:50:47.675Z",
+      "lastCheckedAt": "2026-07-10T19:38:55.378Z",
       "lastStatus": "unchanged"
     },
     {
@@ -249,7 +249,7 @@
       "url": "https://www.gov.pl/web/udsc-en",
       "hash": "a887c3101d6f774785a52f58082f31a0c7dee981f1411e41900f91a14df92760",
       "lastChangedAt": "2026-06-15T18:46:22.619Z",
-      "lastCheckedAt": "2026-07-10T17:50:51.547Z",
+      "lastCheckedAt": "2026-07-10T19:38:59.995Z",
       "lastStatus": "unchanged"
     },
     {
@@ -259,48 +259,48 @@
       "geoProxy": true,
       "hash": "fbbf82525bd1c6b7faaf7b38f847543f2b590f9bfab5efd909ce7f52db294924",
       "lastChangedAt": "2026-05-27T08:19:05.704Z",
-      "lastCheckedAt": "2026-07-10T17:50:53.127Z",
+      "lastCheckedAt": "2026-07-10T19:39:01.919Z",
       "lastStatus": "unchanged"
     },
     {
       "key": "uk",
       "url": "https://www.gov.uk/government/collections/migration-statistics",
-      "hash": "3f9add282f4c2c47bac1d1a2d4e79191a4cbc42b40ad8cbf83390478bfc4ddd1",
-      "lastChangedAt": "2026-07-10T17:50:54.299Z",
-      "lastCheckedAt": "2026-07-10T17:50:54.299Z",
+      "hash": "5e6e5255384e429f9e1fd6d03d020c8fb59030e4e285ed1f5cf9a0929b7a92cb",
+      "lastChangedAt": "2026-07-10T19:39:03.117Z",
+      "lastCheckedAt": "2026-07-10T19:39:03.117Z",
       "lastStatus": "changed"
     },
     {
       "key": "cz",
       "url": "https://www.mvcr.cz/mvcren/",
-      "hash": "2daccd5143476bf928882cbe5c3a7d2d5cf52697200af0bc990c79abd96f474a",
-      "lastChangedAt": "2026-07-10T17:50:56.178Z",
-      "lastCheckedAt": "2026-07-10T17:50:56.178Z",
+      "hash": "be36d8560187e0a7416279e4a954423baa16574564df93436651e557fa7c7db2",
+      "lastChangedAt": "2026-07-10T19:39:05.083Z",
+      "lastCheckedAt": "2026-07-10T19:39:05.083Z",
       "lastStatus": "changed"
     },
     {
       "key": "ro",
       "url": "https://igi.mai.gov.ro/en",
       "geoProxy": true,
-      "hash": "ce4af51b85eb5370e8afff4b3d2715c3919ac82dcbbf4a04f37f0263e06f5812",
-      "lastChangedAt": "2026-07-10T17:50:58.124Z",
-      "lastCheckedAt": "2026-07-10T17:50:58.124Z",
+      "hash": "6cbaec7ad15cd28f7e3e47978be0907d57b1b648fe4f3eaf15246d9ad13cbe34",
+      "lastChangedAt": "2026-07-10T19:39:07.315Z",
+      "lastCheckedAt": "2026-07-10T19:39:07.315Z",
       "lastStatus": "changed"
     },
     {
       "key": "se",
       "url": "https://www.migrationsverket.se/English.html",
-      "hash": "cb9dbf10e9ad7fa888dbef16666aa16c085c5e1b4b1fa55dea42b44f3d565876",
-      "lastChangedAt": "2026-07-10T17:51:00.618Z",
-      "lastCheckedAt": "2026-07-10T17:51:00.618Z",
+      "hash": "602140ca029548edd60e263685848c58cc222dbc772d2ef9359986361000f003",
+      "lastChangedAt": "2026-07-10T19:39:09.879Z",
+      "lastCheckedAt": "2026-07-10T19:39:09.879Z",
       "lastStatus": "changed"
     },
     {
       "key": "ch",
       "url": "https://www.sem.admin.ch/sem/en/home.html",
-      "hash": "fb6e40e5599367b80edbe25f57c6fa199d401ad8b7bd5235b107e49de02f8b5d",
-      "lastChangedAt": "2026-07-10T17:51:02.636Z",
-      "lastCheckedAt": "2026-07-10T17:51:02.636Z",
+      "hash": "3d58ada297a8227737db4abdc25a999ca03f4a283dc66b7a3c4a77e962a37b1d",
+      "lastChangedAt": "2026-07-10T19:39:11.838Z",
+      "lastCheckedAt": "2026-07-10T19:39:11.838Z",
       "lastStatus": "changed"
     },
     {
@@ -308,15 +308,15 @@
       "url": "https://icp.gov.ae/en/",
       "hash": "0477f9b341bb98c934e776daa0f78e225473fae131e301fffb08bf2dd84b0ec4",
       "lastChangedAt": "2026-07-10T17:51:05.580Z",
-      "lastCheckedAt": "2026-07-10T17:51:05.580Z",
-      "lastStatus": "changed"
+      "lastCheckedAt": "2026-07-10T19:39:13.952Z",
+      "lastStatus": "unchanged"
     },
     {
       "key": "au",
       "url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/invitation-rounds",
-      "hash": "fd872eb7ddbbae7981386a73013d2acbca059829258d4772d4f5dc178ee1cffc",
-      "lastChangedAt": "2026-07-10T17:51:09.390Z",
-      "lastCheckedAt": "2026-07-10T17:51:09.390Z",
+      "hash": "724f6f23832d313b25abb489c1c673a1c2a5f46d71e6323c8d995e912fa7d270",
+      "lastChangedAt": "2026-07-10T19:39:18.432Z",
+      "lastCheckedAt": "2026-07-10T19:39:18.432Z",
       "lastStatus": "changed"
     },
     {
@@ -324,7 +324,7 @@
       "url": "https://en.nia.gov.cn/",
       "hash": "5d76334c1f6930a022469366ec9ef28dde4a9413989b387c924c4784e202c10f",
       "lastChangedAt": "2026-07-10T11:09:29.487Z",
-      "lastCheckedAt": "2026-07-10T17:51:10.511Z",
+      "lastCheckedAt": "2026-07-10T19:39:20.009Z",
       "lastStatus": "unchanged"
     },
     {
@@ -332,7 +332,7 @@
       "url": "https://www.moj.go.jp/isa/index.html",
       "hash": "c79a6c6e33fae45f5688cb401ae60fc3f7a0d33aaa8ef4e56db29f5dc241c602",
       "lastChangedAt": "2026-07-10T07:41:38.685Z",
-      "lastCheckedAt": "2026-07-10T17:51:13.209Z",
+      "lastCheckedAt": "2026-07-10T19:39:22.909Z",
       "lastStatus": "unchanged"
     }
   ]
