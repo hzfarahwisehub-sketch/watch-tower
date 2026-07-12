@@ -83,7 +83,7 @@ function PanelSlot({
           {popped ? "↩" : "⧉"}
         </button>
       )}
-      <div className="flex-1 min-h-0 overflow-hidden">
+      <div className="flex-1 min-h-0 wt-slot-scroll">
         {popped ? (
           <div className="wt-card h-full w-full flex flex-col items-center justify-center gap-2.5 text-center px-4">
             <span className="text-[26px]">🪟</span>

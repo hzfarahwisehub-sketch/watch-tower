@@ -285,18 +285,24 @@ html[data-navigating] .wt-watermark {
   padding-top: 14px;
   height: calc(100vh - 186px);
   min-height: 440px;
+  overflow: hidden;
+}
+/* Cada caixa (slot) rola por dentro; o mapa preenche sem rolar. */
+.wt-slot-scroll {
   overflow-y: auto;
-  overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: rgba(74,122,255,.32) transparent;
 }
-.wt-tabbody::-webkit-scrollbar { width: 9px; }
-.wt-tabbody::-webkit-scrollbar-thumb {
+.wt-slot-scroll::-webkit-scrollbar { width: 8px; }
+.wt-slot-scroll::-webkit-scrollbar-thumb {
   background: rgba(74,122,255,.32);
   border-radius: 6px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
+.wt-slot-scroll > * { min-height: 100%; }
+.wt-cell-map .wt-slot-scroll { overflow: hidden; }
+.wt-cell-map .wt-slot-scroll > * { height: 100%; min-height: 0; }
 /* Barra ÚNICA fina de status (6 KPIs condensados, horizontal). */
 .wt-statbar {
   display: flex;
@@ -355,20 +361,20 @@ html[data-navigating] .wt-watermark {
 .wt-lo-save:hover { background: rgba(31,85,255,.12); }
 @media (max-width: 720px) { .wt-lo-name { display: none; } }
 
-.wt-tab-mapa { min-height: 100%; }
+.wt-tab-mapa { height: 100%; min-height: 0; }
 .wt-maprow {
   display: grid;
   grid-template-columns: minmax(0,1.05fr) minmax(0,.82fr) minmax(0,1.35fr);
   gap: 12px;
-  min-height: 60vh;
+  flex: 1;
+  min-height: 0;
 }
-.wt-cell-map { min-height: 340px; }
-.wt-tabgrid { display: grid; gap: 12px; align-content: start; }
+.wt-cell-map { min-height: 0; }
+.wt-tabgrid { display: grid; gap: 12px; height: 100%; grid-auto-rows: minmax(0, 1fr); }
 .wt-grid-1 { grid-template-columns: 1fr; }
 .wt-grid-2 { grid-template-columns: 1fr 1fr; }
 .wt-grid-3 { grid-template-columns: repeat(3, 1fr); }
-.wt-maprow > *, .wt-tabgrid > * { min-height: 280px; }
-.wt-maprow > * > .flex-1, .wt-tabgrid > * > .flex-1 { display: flex; }
+.wt-maprow > *, .wt-tabgrid > * { min-height: 0; }
 .wt-maprow > * > .flex-1 > *, .wt-tabgrid > * > .flex-1 > * { width: 100%; }
 
 @media (max-width: 1100px) {
@@ -376,12 +382,21 @@ html[data-navigating] .wt-watermark {
   .wt-cell-benchmark { grid-column: 1 / -1; }
   .wt-grid-3 { grid-template-columns: 1fr 1fr; }
 }
+/* Mobile: a tela deixa de ser delimitada — a pagina rola e cada caixa
+   ganha altura propria, com o scroll interno virando scroll de pagina. */
 @media (max-width: 720px) {
-  .wt-maprow { grid-template-columns: 1fr; min-height: 0; }
+  .wt-maprow { grid-template-columns: 1fr; }
   .wt-grid-2, .wt-grid-3 { grid-template-columns: 1fr; }
   .wt-tab-txt { display: none; }
   .wt-tab { padding: 9px 12px; }
   .wt-tabbody { height: auto; min-height: 0; overflow: visible; }
+  .wt-tab-mapa, .wt-tabgrid { height: auto; }
+  .wt-tabgrid { grid-auto-rows: auto; }
+  .wt-maprow > *, .wt-tabgrid > * { min-height: 340px; }
+  .wt-slot-scroll { overflow: visible; }
+  .wt-slot-scroll > * { min-height: 0; }
+  .wt-cell-map { min-height: 360px; }
+  .wt-cell-map .wt-slot-scroll > * { height: 360px; }
 }
 
 .wt-flag {
