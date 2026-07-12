@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BULLETINS, type StatusFile } from "./OfficialBulletins";
 import { useLocale } from "./LocaleProvider";
 
 type TFn = (key: string, params?: Record<string, string | number>) => string;
 type Metric = { icon: string; label: string; value: string; color?: string };
+type Alert = { code: string; flag: string; country: string; level: "crit" | "warn"; ageMs: number };
 
 function fmtRelative(iso: string | null, t: TFn): string {
   if (!iso) return t("common.dash");
@@ -21,14 +22,15 @@ function fmtRelative(iso: string | null, t: TFn): string {
 }
 
 /**
- * StatusBar — versão CONDENSADA dos 6 KPIs numa barra horizontal fina
- * (substitui os cards grandes/empilhados). Mesma fonte de dados do KpiRow:
- * /bulletins-status.json, refresh a cada 5min. Números ressaltados, rótulo
- * miúdo, divisórias finas. Rola na horizontal quando falta largura (mobile).
+ * StatusBar — barra ÚNICA fina: 6 KPIs condensados (esquerda) + Alertas
+ * Recentes em carrossel (direita), fundidos numa faixa só. Mesma fonte de
+ * dados do KpiRow/AlertsBanner: /bulletins-status.json, refresh a cada 5min.
  */
-export function StatusBar() {
+export function StatusBar({ onSelect }: { onSelect?: (code: string) => void } = {}) {
   const { t } = useLocale();
   const [metrics, setMetrics] = useState<Metric[]>([]);
+  const [alerts, setAlerts] = useState<Alert[]>([]);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -42,18 +44,10 @@ export function StatusBar() {
         const now = Date.now();
         const day = 86_400_000;
         const total = data.bulletins.length;
-        const changed7d = data.bulletins.filter(
-          (b) => b.lastChangedAt && now - new Date(b.lastChangedAt).getTime() < 7 * day,
-        ).length;
-        const changed24h = data.bulletins.filter(
-          (b) => b.lastChangedAt && now - new Date(b.lastChangedAt).getTime() < day,
-        ).length;
-        const changed48h = data.bulletins.filter(
-          (b) => b.lastChangedAt && now - new Date(b.lastChangedAt).getTime() < 2 * day,
-        ).length;
-        const errors = data.bulletins.filter(
-          (b) => b.lastStatus && b.lastStatus.startsWith("error"),
-        ).length;
+        const changed7d = data.bulletins.filter((b) => b.lastChangedAt && now - new Date(b.lastChangedAt).getTime() < 7 * day).length;
+        const changed24h = data.bulletins.filter((b) => b.lastChangedAt && now - new Date(b.lastChangedAt).getTime() < day).length;
+        const changed48h = data.bulletins.filter((b) => b.lastChangedAt && now - new Date(b.lastChangedAt).getTime() < 2 * day).length;
+        const errors = data.bulletins.filter((b) => b.lastStatus && b.lastStatus.startsWith("error")).length;
 
         setMetrics([
           { icon: "🌎", label: t("kpi.countries.label"), value: String(total) },
@@ -63,6 +57,20 @@ export function StatusBar() {
           { icon: "⏱", label: t("kpi.updated.label"), value: fmtRelative(data.lastRun, t) },
           { icon: "📡", label: t("kpi.sources.label"), value: String(total - errors) },
         ]);
+
+        const alertList: Alert[] = data.bulletins
+          .filter((b) => b.lastChangedAt && b.lastStatus === "changed")
+          .map((b) => {
+            const meta = BULLETINS.find((bm) => bm.key === b.key);
+            if (!meta || !b.lastChangedAt) return null;
+            const ageMs = now - new Date(b.lastChangedAt).getTime();
+            if (ageMs > 2 * day) return null;
+            return { code: b.key, flag: b.key, country: meta.country, level: ageMs < day ? "crit" : "warn", ageMs } as Alert;
+          })
+          .filter((x): x is Alert => x !== null)
+          .sort((a, b) => a.ageMs - b.ageMs)
+          .slice(0, 8);
+        setAlerts(alertList);
       } catch {
         // silencioso
       }
@@ -76,21 +84,52 @@ export function StatusBar() {
     };
   }, [t]);
 
-  // Mantém o comprimento estável antes de carregar (usa BULLETINS pra placeholder)
   const shown: Metric[] = metrics.length > 0 ? metrics : Array.from({ length: 6 }, (): Metric => ({ icon: "·", label: t("common.loading"), value: "—" }));
-  void BULLETINS;
+  const scrollTrack = (dir: number) => trackRef.current?.scrollBy({ left: dir * 220, behavior: "smooth" });
 
   return (
-    <div className="wt-statbar wt-card" role="status" aria-label="Indicadores globais">
-      {shown.map((m, i) => (
-        <div className="wt-stat" key={i}>
-          <span className="wt-stat-ic" aria-hidden>{m.icon}</span>
-          <div className="wt-stat-col">
-            <span className="wt-stat-num" style={m.color ? { color: m.color } : undefined}>{m.value}</span>
-            <span className="wt-stat-lab">{m.label}</span>
+    <div className="wt-statbar wt-card" role="status" aria-label="Indicadores globais e alertas">
+      <div className="wt-statbar-metrics">
+        {shown.map((m, i) => (
+          <div className="wt-stat" key={i}>
+            <span className="wt-stat-ic" aria-hidden>{m.icon}</span>
+            <div className="wt-stat-col">
+              <span className="wt-stat-num" style={m.color ? { color: m.color } : undefined}>{m.value}</span>
+              <span className="wt-stat-lab">{m.label}</span>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+
+      {alerts.length > 0 && (
+        <>
+          <div className="wt-vsep" aria-hidden />
+          <div className="wt-statbar-alerts">
+            <span className="wt-al-lbl">⚠ {t("alerts.recent")}</span>
+            {alerts.length > 3 && (
+              <button type="button" className="wt-al-arrow" onClick={() => scrollTrack(-1)} aria-label="Anterior">‹</button>
+            )}
+            <div className="wt-al-track" ref={trackRef}>
+              {alerts.map((a) => (
+                <button
+                  key={a.code}
+                  type="button"
+                  onClick={() => onSelect?.(a.code)}
+                  className="wt-al-pill"
+                  style={a.level === "crit" ? { borderColor: "rgba(255,59,92,.5)" } : { borderColor: "rgba(255,138,31,.5)" }}
+                  title={t("alerts.bulletinUpdated", { country: a.country })}
+                >
+                  <span className={`wt-flag sm ${a.flag}`} style={{ width: 18, height: 13 }} />
+                  {t("alerts.bulletinUpdated", { country: a.country })}
+                </button>
+              ))}
+            </div>
+            {alerts.length > 3 && (
+              <button type="button" className="wt-al-arrow" onClick={() => scrollTrack(1)} aria-label="Próximo">›</button>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

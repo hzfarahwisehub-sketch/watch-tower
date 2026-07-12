@@ -6,7 +6,6 @@ import { agendaAllowed } from "@/lib/agenda-access";
 import { Header } from "./Header";
 import { StatusBar } from "./StatusBar";
 import { TopControls } from "./TopControls";
-import { AlertsBanner } from "./AlertsBanner";
 import { ExportButton } from "./ExportButton";
 import { SettingsPanel } from "./SettingsPanel";
 import { useLocale } from "./LocaleProvider";
@@ -120,8 +119,7 @@ function TabContent({
   if (tab.id === "mapa") {
     return (
       <div className="flex flex-col gap-3 wt-tab-mapa">
-        <StatusBar />
-        <AlertsBanner onSelect={onSelect} />
+        <StatusBar onSelect={onSelect} />
         <div className="wt-maprow">
           <PanelSlot id="map" selected={selected} onSelect={onSelect} className="wt-cell-map" />
           <PanelSlot id="countries" selected={selected} onSelect={onSelect} className="wt-cell-countries" />

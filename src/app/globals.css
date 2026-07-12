@@ -303,24 +303,29 @@ html[data-navigating] .wt-watermark {
 .wt-slot-scroll > * { min-height: 100%; }
 .wt-cell-map .wt-slot-scroll { overflow: hidden; }
 .wt-cell-map .wt-slot-scroll > * { height: 100%; min-height: 0; }
-/* Barra ÚNICA fina de status (6 KPIs condensados, horizontal). */
+/* Barra ÚNICA fina: 6 KPIs condensados (esq) + Alertas em carrossel (dir). */
 .wt-statbar {
   display: flex;
   align-items: stretch;
   min-height: 46px;
-  overflow-x: auto;
-  scrollbar-width: none;
   padding: 0;
 }
-.wt-statbar::-webkit-scrollbar { display: none; }
+.wt-statbar-metrics {
+  display: flex;
+  align-items: stretch;
+  flex: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.wt-statbar-metrics::-webkit-scrollbar { display: none; }
 .wt-stat {
-  flex: 1;
+  flex: none;
   display: flex;
   align-items: center;
   gap: 9px;
   padding: 7px 14px;
   position: relative;
-  min-width: 118px;
+  min-width: 108px;
 }
 .wt-stat + .wt-stat::before {
   content: "";
@@ -340,6 +345,42 @@ html[data-navigating] .wt-watermark {
   color: var(--text-3);
   margin-top: 3px;
   white-space: nowrap;
+}
+/* alertas fundidos na mesma barra */
+.wt-vsep { width: 1px; background: var(--border-hi); margin: 7px 0; flex: none; }
+.wt-statbar-alerts {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  min-width: 0;
+  background: linear-gradient(90deg, rgba(255,59,92,.07), transparent 32%);
+}
+.wt-al-lbl {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 8.5px; letter-spacing: .8px; text-transform: uppercase; font-weight: 800;
+  color: var(--color-status-critical); flex: none;
+}
+.wt-al-track { display: flex; gap: 7px; overflow: hidden; flex: 1; min-width: 0; scroll-behavior: smooth; }
+.wt-al-pill {
+  flex: none; display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 10px; border-radius: 9px; background: var(--bg2);
+  border: 1px solid var(--border); font-size: 10.5px; font-weight: 700;
+  color: var(--text-2); white-space: nowrap; cursor: pointer;
+}
+.wt-al-pill:hover { border-color: var(--border-hi); }
+.wt-al-arrow {
+  flex: none; width: 22px; height: 22px; border-radius: 7px;
+  border: 1px solid var(--border); background: var(--bg2); color: var(--text-2);
+  display: grid; place-items: center; cursor: pointer; font-size: 13px; font-weight: 800;
+}
+.wt-al-arrow:hover { border-color: var(--border-hi); color: var(--text); }
+@media (max-width: 900px) {
+  .wt-statbar { flex-wrap: wrap; }
+  .wt-statbar-metrics { flex: 1 1 100%; justify-content: space-between; }
+  .wt-vsep { display: none; }
+  .wt-statbar-alerts { flex: 1 1 100%; border-top: 1px solid var(--border); }
 }
 
 /* Controles do topo: Bordas (acento) + Seletor de Layouts */
