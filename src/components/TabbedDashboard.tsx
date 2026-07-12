@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { COUNTRIES } from "@/lib/data";
 import { agendaAllowed } from "@/lib/agenda-access";
 import { Header } from "./Header";
-import { KpiRow } from "./KpiRow";
+import { StatusBar } from "./StatusBar";
 import { AlertsBanner } from "./AlertsBanner";
 import { ExportButton } from "./ExportButton";
 import { SettingsPanel } from "./SettingsPanel";
@@ -119,7 +119,7 @@ function TabContent({
   if (tab.id === "mapa") {
     return (
       <div className="flex flex-col gap-3 wt-tab-mapa">
-        <KpiRow />
+        <StatusBar />
         <AlertsBanner onSelect={onSelect} />
         <div className="wt-maprow">
           <PanelSlot id="map" selected={selected} onSelect={onSelect} className="wt-cell-map" />

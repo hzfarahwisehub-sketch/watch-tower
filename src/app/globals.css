@@ -283,7 +283,7 @@ html[data-navigating] .wt-watermark {
 .wt-tabbody {
   border-top: 1px solid var(--border);
   padding-top: 14px;
-  height: calc(100vh - 208px);
+  height: calc(100vh - 186px);
   min-height: 440px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -297,6 +297,45 @@ html[data-navigating] .wt-watermark {
   border: 2px solid transparent;
   background-clip: padding-box;
 }
+/* Barra ÚNICA fina de status (6 KPIs condensados, horizontal). */
+.wt-statbar {
+  display: flex;
+  align-items: stretch;
+  min-height: 46px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0;
+}
+.wt-statbar::-webkit-scrollbar { display: none; }
+.wt-stat {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 14px;
+  position: relative;
+  min-width: 118px;
+}
+.wt-stat + .wt-stat::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 24%; bottom: 24%;
+  width: 1px;
+  background: var(--border);
+}
+.wt-stat-ic { font-size: 14px; opacity: .9; flex: none; }
+.wt-stat-col { display: flex; flex-direction: column; line-height: 1; min-width: 0; }
+.wt-stat-num { font-size: 19px; font-weight: 800; letter-spacing: -.5px; }
+.wt-stat-lab {
+  font-size: 8px;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--text-3);
+  margin-top: 3px;
+  white-space: nowrap;
+}
+
 .wt-tab-mapa { min-height: 100%; }
 .wt-maprow {
   display: grid;
