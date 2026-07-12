@@ -5,6 +5,7 @@ import { COUNTRIES } from "@/lib/data";
 import { agendaAllowed } from "@/lib/agenda-access";
 import { Header } from "./Header";
 import { StatusBar } from "./StatusBar";
+import { TopControls } from "./TopControls";
 import { AlertsBanner } from "./AlertsBanner";
 import { ExportButton } from "./ExportButton";
 import { SettingsPanel } from "./SettingsPanel";
@@ -207,6 +208,7 @@ export function TabbedDashboard() {
               })}
             </div>
             <div className="wt-tabs-actions">
+              <TopControls />
               <WindowsMenu />
               {isLoggedIn && <ExportButton label="REPAVET" title={t("dash.repavet.title")} />}
             </div>
