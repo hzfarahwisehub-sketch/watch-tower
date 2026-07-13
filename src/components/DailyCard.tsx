@@ -3,7 +3,7 @@
 // Extraído do DailyGrid pra ser reusado pelo InboxCard sem import circular.
 
 export type TFn = (key: string, params?: Record<string, string | number>) => string;
-export type BoardScope = "personal" | "team";
+export type BoardScope = "personal" | "team" | "all";
 
 export function DailyCard({
   t,
@@ -16,6 +16,7 @@ export function DailyCard({
   children,
   scope,
   onScopeChange,
+  scopes,
 }: {
   t: TFn;
   cardKey: string;
@@ -28,7 +29,17 @@ export function DailyCard({
   bodyMaxHeight?: number;
   scope?: BoardScope;
   onScopeChange?: (s: BoardScope) => void;
+  /** Escopos exibidos no toggle. Default ["team","personal"]; a agenda usa
+   *  ["all","team","personal"] pra ter o botão "Todos". */
+  scopes?: BoardScope[];
 }) {
+  const scopeLabel = (s: BoardScope): string => {
+    if (s === "team") return t("daily.scope.team");
+    if (s === "personal") return t("daily.scope.personal");
+    const a = t("daily.scope.all");
+    return a === "daily.scope.all" ? "Todos" : a;
+  };
+  const scopeList: BoardScope[] = scopes ?? ["team", "personal"];
   // O tamanho do card é controlado SÓ pelo grid (react-grid-layout) — uma única
   // forma de esticar/encolher, pelo ⤡ do canto. O corpo preenche a célula e rola
   // por dentro quando o conteúdo passa do espaço. Sem resize interno: acabou a
@@ -65,7 +76,7 @@ export function DailyCard({
               style={{ background: "var(--bg2)", border: "1px solid var(--border)" }}
               title={t("daily.scope.toggleTitle")}
             >
-              {(["team", "personal"] as const).map((s) => (
+              {scopeList.map((s) => (
                 <button
                   key={s}
                   type="button"
@@ -76,7 +87,7 @@ export function DailyCard({
                     color: scope === s ? "#fff" : "var(--text-3)",
                   }}
                 >
-                  {s === "team" ? t("daily.scope.team") : t("daily.scope.personal")}
+                  {scopeLabel(s)}
                 </button>
               ))}
             </div>

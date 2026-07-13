@@ -5,7 +5,6 @@ import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { useSession } from "next-auth/react";
 import { COUNTRIES } from "@/lib/data";
-import { agendaAllowed } from "@/lib/agenda-access";
 import { Header } from "./Header";
 import { StatusBar } from "./StatusBar";
 import { TopControls } from "./TopControls";
@@ -24,7 +23,7 @@ type TabDef = { id: string; fallback: string; emoji: string; panels: PanelId[]; 
 const TABS: TabDef[] = [
   { id: "mapa", fallback: "Mapa", emoji: "🗺", panels: ["map", "countries", "benchmark"] },
   { id: "oper", fallback: "Operações", emoji: "📥", panels: ["inbox", "scheduled", "requests", "reminders", "tasks"] },
-  { id: "agenda", fallback: "Agendas", emoji: "📅", panels: ["agenda"], requiresAgenda: true },
+  { id: "agenda", fallback: "Agenda", emoji: "📅", panels: ["agenda"] },
   { id: "feed", fallback: "Feed", emoji: "📡", panels: ["feed"] },
   { id: "info", fallback: "Centro de Informações", emoji: "🧭", panels: ["info"] },
   { id: "bull", fallback: "Boletins Oficiais", emoji: "📜", panels: ["bulletins"] },
@@ -131,7 +130,6 @@ export function TabbedDashboard() {
   const { locked } = useSettings();
   const toast = useToast();
   const isLoggedIn = !!session?.user?.email;
-  const canSeeAgenda = agendaAllowed((session?.user as { role?: string })?.role, session?.user?.email);
 
   const [mapSelected, setMapSelected] = useState<string | null>(null);
   const [active, setActive] = useState("mapa");
@@ -194,7 +192,7 @@ export function TabbedDashboard() {
     }
   };
 
-  const visibleTabs = TABS.filter((tb) => !tb.requiresAgenda || canSeeAgenda);
+  const visibleTabs = TABS;
   const activeTab = visibleTabs.find((tb) => tb.id === active) ?? visibleTabs[0];
 
   return (
