@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { LocaleProvider } from "@/components/LocaleProvider";
 import { ToastProvider } from "@/components/ToastProvider";
 import { SettingsProvider } from "@/components/SettingsProvider";
+import { LayoutModeProvider } from "@/components/LayoutMode";
 import { UndoProvider } from "@/components/UndoProvider";
 import { NavPerf } from "@/components/NavPerf";
 import { AuthSessionProvider } from "@/components/AuthSessionProvider";
@@ -54,10 +55,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <SettingsProvider>
                 <ToastProvider>
                   <UndoProvider>
-                    {children}
-                    <NavPerf />
-                    <PwaBootstrap />
-                    <VdsStatusBadge />
+                    <LayoutModeProvider>
+                      {children}
+                      <NavPerf />
+                      <PwaBootstrap />
+                      <VdsStatusBadge />
+                    </LayoutModeProvider>
                   </UndoProvider>
                 </ToastProvider>
               </SettingsProvider>

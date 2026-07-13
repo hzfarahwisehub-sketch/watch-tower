@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useTheme } from "./ThemeProvider";
+import { useLayoutMode } from "./LayoutMode";
 import { useLocale } from "./LocaleProvider";
 import { LOCALE_SHORT } from "@/lib/i18n/config";
 import { useToast } from "./ToastProvider";
@@ -15,6 +16,7 @@ import { playChime } from "@/lib/chime";
 
 export function Header() {
   const { theme, toggle } = useTheme();
+  const { mode, setMode } = useLayoutMode();
   const { locale, toggle: toggleLocale, t } = useLocale();
   const { locked, toggleLock, openPanel, alarmVolume, setAlarmVolume } = useSettings();
   const { data: session, status: sessionStatus } = useSession();
@@ -252,6 +254,28 @@ export function Header() {
             </>
           )}
         </div>
+
+        {/* Alterna entre os dois layouts: Abas (novo) e Clássico (grade livre) */}
+        <IconBtn
+          title={mode === "tabs" ? "Layout: Abas · clique para Clássico" : "Layout: Clássico · clique para Abas"}
+          onClick={() => setMode(mode === "tabs" ? "classic" : "tabs")}
+          active={mode === "tabs"}
+          activeColor="#4A78FF"
+        >
+          {mode === "tabs" ? (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="4" width="18" height="16" rx="2" />
+              <path d="M3 9h18M9 9v11" />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1" />
+              <rect x="14" y="3" width="7" height="7" rx="1" />
+              <rect x="3" y="14" width="7" height="7" rx="1" />
+              <rect x="14" y="14" width="7" height="7" rx="1" />
+            </svg>
+          )}
+        </IconBtn>
 
         <IconBtn title={t("header.settings.title")} onClick={openPanel}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
