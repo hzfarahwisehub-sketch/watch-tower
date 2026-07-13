@@ -1,4 +1,4 @@
-// GERADO pela equipe de agentes (rodada semanal do Mercado de Trabalho) · ultima geracao 2026-07-06.
+// GERADO pela equipe de agentes (rodada semanal do Mercado de Trabalho) · ultima geracao 2026-07-13.
 // NAO editar a mao: regenerado a cada rodada de pesquisa (_gen-labor.mjs).
 import type { LaborMarketMap } from "./labor-market";
 
@@ -6348,558 +6348,355 @@ export const LABOR_MARKET: LaborMarketMap = {
     ]
   },
   "lt": {
-    "updatedAt": "2026-06-22",
-    "overview": "A Lituania vive um mercado de trabalho apertado pela demografia, com escassez estrutural de mao de obra que pressiona salarios pra cima e abre portas para estrangeiros qualificados. O desemprego ronda 6,7% a 6,8% (Eurostat/EURES, dado de 2023-2025) e a taxa de emprego subiu para cerca de 74% em 2025, acima da media da Uniao Europeia. O salario bruto medio mensal alcancou 2.427,6 euros no terceiro trimestre de 2025 e 2.526,8 euros no quarto trimestre, segundo o State Data Agency (portal oficial osp.stat.gov.lt), com crescimento anual de 8,5%. A expansao da forca de trabalho registrada entre 2022 e 2024, puxada pela chegada de refugiados ucranianos, parou em 2025 e deve reverter em 2026 e 2027 conforme o declinio populacional natural retorna, o que mantem a escassez de trabalhadores como tracо permanente.\n\nOs setores de tecnologia, fintech e servicos financeiros sao os mais aquecidos e mais bem pagos, enquanto a industria, a construcao e os transportes concentram a maior carencia de mao de obra tecnica e operacional. Para o estrangeiro, a janela esta nos cargos da lista de profissoes em falta e nos perfis altamente qualificados, que ganharam isencao da cota anual. Vilnius, Kaunas e Klaipeda formam o eixo economico, com Vilnius liderando em TI, biotecnologia e fintech. Empreender e viavel pela Startup Visa, gerida pela Startup Lithuania junto a Invest Lithuania, voltada a negocios inovadores.",
+    "updatedAt": "2026-07-13",
+    "overview": "O mercado de trabalho lituano segue aquecido e com desemprego relativamente baixo. Segundo o Portal de Estatisticas Oficiais (Statistics Lithuania), a taxa de desemprego ficou em torno de 6,8% no inicio de 2026, com oscilacao para cerca de 8% nos meses seguintes, patamar proximo da media da Uniao Europeia. O salario medio bruto mensal na economia como um todo alcancou aproximadamente 2.554 euros no primeiro trimestre de 2026, em alta frente aos 2.526,8 euros do quarto trimestre de 2025. A forca de trabalho, que cresceu entre 2022 e 2024 com o fluxo de refugiados ucranianos, parou de se expandir em 2025 e tende a recuar levemente em 2026, o que mantem a pressao por mao de obra em varios setores.",
     "hotSectors": [
-      "Tecnologia da informacao e comunicacao (TI/ICT), com emprego que dobrou desde 2018",
-      "Fintech e servicos financeiros e de seguros (setor mais bem pago do pais)",
+      "Tecnologia da informacao e comunicacao (TIC)",
+      "Servicos financeiros e de seguros",
       "Atividades profissionais, cientificas e tecnicas",
-      "Industria de transformacao (moveis, alimentos, plasticos, metais, eletronicos)",
-      "Construcao e trabalhos especializados de obra",
-      "Transporte e logistica (motoristas de caminhao pesado)",
-      "Energia renovavel e manufatura avancada (novos cargos abertos para 2026)",
-      "Servicos administrativos e de apoio"
-    ],
-    "coolingSectors": [
-      "Agricultura (emprego caiu cerca de um quarto)",
-      "Cargos administrativos e de associados de negocios (excedente de oferta)",
-      "Trabalho braçal nao qualificado em mineracao, construcao, manufatura e transporte (excedente)",
-      "Profissionais associados das areas juridica, social e cultural (excedente)",
-      "Motoristas de carro e funcionarios gerais sem qualificacao (excedente)"
+      "Construcao civil",
+      "Industria e manufatura avancada",
+      "Transporte rodoviario e logistica",
+      "Saude",
+      "Energia renovavel"
     ],
     "inDemandRoles": [
       {
-        "role": "Desenvolvedor de software / engenheiro de software",
-        "note": "Demanda alta com crescimento anual estimado em 15%; salario medio do setor TI chegou a 4.259 euros brutos no 1o semestre de 2025"
+        "role": "Desenvolvedores de software e de aplicativos",
+        "note": "Emprego em TIC dobrou desde 2018, segundo o EURES."
       },
       {
-        "role": "Cientista de dados",
-        "note": "Perfil de alta demanda no setor TI/AI"
+        "role": "Administradores de sistemas e especialistas em ciberseguranca"
       },
       {
-        "role": "Especialista em ciberseguranca",
-        "note": "Alta demanda no ecossistema digital e fintech"
+        "role": "Engenheiros",
+        "note": "Demanda em manufatura avancada e construcao."
       },
       {
-        "role": "Engenheiro de IA",
-        "note": "Setor emergente, cargos abertos para 2026"
+        "role": "Motoristas de caminhao pesado e de carga",
+        "note": "Uma das carencias mais agudas, ligada ao transporte internacional de frete."
       },
       {
-        "role": "Eletricista",
-        "note": "Profissao tecnica em falta (lista de escassez)"
+        "role": "Eletricistas, encanadores e instaladores de tubulacao"
       },
       {
-        "role": "Soldador",
-        "note": "Profissao tecnica em falta"
+        "role": "Soldadores e ferramenteiros"
       },
       {
-        "role": "Motorista de caminhao pesado",
-        "note": "Forte carencia no setor de transporte e logistica"
+        "role": "Operadores de maquinas (metalurgia, plasticos, processamento de alimentos)"
       },
       {
-        "role": "Operador de maquinas (metal, madeira, plastico, processamento de alimentos)",
-        "note": "Grupo ocupacional com maior incidencia de escassez"
+        "role": "Pedreiros, concreteiros e trabalhadores da construcao"
       },
       {
-        "role": "Encanador",
-        "note": "Profissao de obra em falta"
+        "role": "Gerentes e supervisores de obra"
       },
       {
-        "role": "Trabalhador especializado de construcao / assentador de concreto",
-        "note": "Construcao entre os setores mais pressionados"
+        "role": "Medicos, enfermeiros e farmaceuticos",
+        "note": "Enfermagem esta entre as vagas mais dificeis de preencher."
       },
       {
-        "role": "Profissional de fintech e servicos financeiros",
-        "note": "Setor mais bem remunerado, ~4.500 euros brutos de media"
+        "role": "Cozinheiros e padeiros"
       }
     ],
     "byQualification": [
       {
-        "area": "Tecnologia da Informacao (desenvolvimento, dados, IA, ciberseguranca)",
-        "advice": "Melhor janela para estrangeiro qualificado. Mire o EU Blue Card ou o estatuto de profissional altamente qualificado, que isenta da cota anual. Vilnius concentra as vagas e paga acima da media nacional (medias de setor entre 3.232 e 4.700 euros brutos). Tenha portfolio e ingles fluente; lituano nao costuma ser exigido em empresas globais."
+        "area": "Tecnologia da informacao",
+        "advice": "Perfis de desenvolvimento de software, dados, ciberseguranca e fintech tem alta demanda e acesso facilitado ao Cartao Azul da UE, com exigencia de apenas tres anos de experiencia para especialistas de TI."
       },
       {
-        "area": "Engenharia e manufatura avancada",
-        "advice": "Procure cargos na lista de profissoes em falta para entrar pelo limiar salarial reduzido (1,2x a media). Industria de moveis, alimentos, metais e eletronicos contrata em Kaunas e Klaipeda. Diploma reconhecido e experiencia tecnica abrem caminho rapido."
+        "area": "Construcao e industria",
+        "advice": "Eletricistas, encanadores, soldadores, operadores de maquinas e trabalhadores de obra estao entre as carencias mais agudas e costumam constar da lista de ocupacoes em falta, que dispensa permissao de trabalho."
       },
       {
-        "area": "Oficios tecnicos (eletricista, soldador, encanador, operador de maquinas)",
-        "advice": "Demanda forte e constante. Certificacoes profissionais e comprovacao de experiencia valem mais que diploma universitario. Setores de construcao e industria sao porta de entrada via permissao de trabalho e cota."
+        "area": "Transporte",
+        "advice": "Motoristas de caminhao pesado para frete internacional tem demanda persistente; verifique enquadramento na lista de ocupacoes em falta."
       },
       {
-        "area": "Transporte e logistica (motoristas)",
-        "advice": "Carencia aguda de motoristas de caminhao pesado. Exige CNH categoria correspondente, codigo CPC e, em muitos casos, processo via cota de trabalhadores de terceiros paises. Confirme reconhecimento da habilitacao."
-      },
-      {
-        "area": "Financas e fintech",
-        "advice": "Setor mais bem pago do pais. Para nao europeus, o limiar salarial do Blue Card e atingido com folga. Qualificacao em contabilidade, compliance, risco e produto financeiro e valorizada; ingles essencial."
-      },
-      {
-        "area": "Empreendedores e fundadores",
-        "advice": "A Startup Visa e o caminho para nao europeus com negocio inovador. Exige prototipo ou MVP, aprovacao da Startup Lithuania e prova de subsistencia acima de 12.000 euros no primeiro ano. Residencia inicial de 2 anos, extensivel ate 5."
-      },
-      {
-        "area": "Baixa qualificacao / trabalho braçal",
-        "advice": "Mercado em excedente para perfis sem qualificacao e cota de terceiros paises reduzida para 24.830 em 2025. Chance menor; priorize requalificacao em um oficio tecnico em falta antes de migrar."
+        "area": "Saude",
+        "advice": "Enfermeiros, medicos e farmaceuticos sao dificeis de preencher; requer reconhecimento de qualificacao profissional junto as autoridades lituanas."
       }
     ],
     "salaries": [
       {
-        "role": "Media nacional (bruto mensal)",
-        "range": "2.427,6 euros (3o tri 2025); 2.526,8 euros (4o tri 2025)",
+        "role": "Salario medio bruto mensal (economia como um todo)",
+        "range": "aprox. 2.554 EUR por mes (bruto, 1o trimestre de 2026)",
         "source": {
-          "label": "State Data Agency / Statistics Lithuania",
+          "label": "Statistics Lithuania (Portal de Estatisticas Oficiais)",
           "url": "https://osp.stat.gov.lt/en_GB/darbo-uzmokestis-ir-darbo-sanaudos",
+          "official": true
+        }
+      },
+      {
+        "role": "Salario minimo mensal",
+        "range": "1.038 EUR por mes (bruto, vigente desde janeiro de 2025)",
+        "source": {
+          "label": "Statistics Lithuania / EURES",
+          "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-lithuania_en",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da Uniao Europeia e do Espaco Economico Europeu trabalham livremente, sem permissao. Para nacionais de terceiros paises o caminho usual e a Single Permit (permissao de residencia temporaria com direito a trabalho), em geral precedida de permissao de trabalho emitida pela Public Employment Service (Uzimtumo tarnyba) e residencia pela Migration Department (Migracijos departamentas). Em 2025 a cota geral de trabalhadores de terceiros paises foi reduzida para 24.830 (ante 36.663 usados em 2024) e deixou de ser dividida por setor economico. Profissoes da lista de escassez tem tramite facilitado. Mudanca de empregador so e permitida apos seis meses com o empregador inicial. Penalidades por trabalho ilegal subiram (2.772 a 11.088 euros para pessoas juridicas).\n\nProfissionais altamente qualificados e o EU Blue Card sao a rota premium e ficam isentos da cota anual. O limiar salarial e de 1,5 vez o salario bruto medio nacional (cerca de 3.020 a 3.334 euros/mes, conforme a media vigente), caindo para 1,2 vez (cerca de 2.416 euros/mes) quando a ocupacao consta na lista de profissoes de alto valor agregado em falta. Exige contrato ou oferta vinculante de no minimo 6 meses e qualificacao superior reconhecida. O Blue Card vale 36 meses ou a duracao do contrato mais 3 meses. Decisoes saem em 1 mes no procedimento padrao ou 15 dias no acelerado. Profissoes regulamentadas (saude, direito, engenharia em alguns ramos, ensino) exigem reconhecimento formal do diploma e, quando aplicavel, registro profissional. Para empreender, a Startup Visa concede residencia temporaria de 2 anos, extensivel ate 5, mediante negocio inovador aprovado pela Startup Lithuania, prototipo ou MVP e prova de subsistencia acima de 12.000 euros no primeiro ano (ate quatro fundadores por startup). Sempre confirmar valores atualizados na Migration Department e no Ministerio da Seguranca Social e do Trabalho.",
+    "foreignerRules": "Cidadaos da Uniao Europeia, do Espaco Economico Europeu e da Suica trabalham na Lituania livremente, sem necessidade de permissao. Para nacionais de paises terceiros ha dois caminhos principais geridos pelo Departamento de Migracao (Migracijos departamentas) e pela Servico de Emprego (Uzimtumo tarnyba). O visto nacional D permite entrada e permanencia por ate um ano, com custo de 140 euros e prazo de cerca de 15 dias, sendo mais indicado para trabalhadores sazonais, destacados ou tripulantes. Para permanencias mais longas usa-se a autorizacao de residencia temporaria, valida por ate dois anos e renovavel, vinculada a um empregador e a uma funcao especificos. O empregador precisa submeter uma carta de mediacao pelo sistema MIGRIS antes do pedido. Profissoes incluidas na lista oficial de ocupacoes em falta dispensam a permissao de trabalho. Para 2026 ha uma cota de 24.706 vagas para trabalhadores de paises terceiros; acima da cota, o pedido ainda pode ser aprovado se o salario atingir cerca de 1,2 vez o salario medio bruto nacional, ou o salario medio combinado com uma profissao da lista de alto valor agregado. Profissionais altamente qualificados podem usar o Cartao Azul da UE, que exige diploma de ensino superior ou cinco anos de experiencia (tres anos para especialistas de TI) e salario de 1,5 vez a media nacional, reduzido a 1,2 vez nas ocupacoes em falta.",
     "opportunityWindows": [
-      "Profissionais de TI, dados, IA e ciberseguranca: setor em expansao continua, isencao de cota via Blue Card e salarios bem acima da media nacional",
-      "Ocupacoes da lista de escassez (eletricista, soldador, motorista de caminhao pesado, operadores de maquina, encanador): limiar salarial reduzido de 1,2x e tramite facilitado",
-      "Energia renovavel e manufatura avancada: cerca de 100 novos cargos em falta abertos para 2026, ampliando o leque de vistos",
-      "Fintech e servicos financeiros: setor mais bem pago, atinge o limiar do Blue Card com folga",
-      "Empreendedores de tecnologia: Startup Visa com apoio de Startup Lithuania e Invest Lithuania e subsistencia exigida de apenas 12.000 euros no 1o ano",
-      "Pressao demografica: forca de trabalho deve encolher em 2026 e 2027, mantendo a escassez e o crescimento salarial projetado (7,1% em 2026)"
+      "Lista de ocupacoes em falta para 2026 com cerca de 110 profissoes; estar na lista dispensa a permissao de trabalho para o estrangeiro.",
+      "Cerca de 100 novas ocupacoes foram acrescentadas na lista de 2026, ampliando espaco em energia renovavel, manufatura avancada e inovacao digital.",
+      "Cota de 24.706 vagas para trabalhadores de paises terceiros em 2026.",
+      "Lista de ocupacoes de alto valor agregado permite entrada com limiar salarial reduzido e prioridade para qualificados."
     ],
     "jobBoards": [
       {
-        "label": "Uzimtumo tarnyba (Public Employment Service) - base nacional oficial de vagas",
+        "label": "Uzimtumo tarnyba (Servico Publico de Emprego)",
         "url": "https://uzt.lt/en",
         "official": true
       },
       {
-        "label": "EURES Lituania (rede oficial de empregos da UE, operada pela Uzimtumo tarnyba)",
-        "url": "https://eures.uzt.lt/en/living-and-working-in-lithuania1",
+        "label": "EURES Lituania (portal do Servico de Emprego)",
+        "url": "https://eures.uzt.lt/en",
         "official": true
       },
       {
-        "label": "Work in Lithuania (iniciativa oficial para profissionais internacionais)",
-        "url": "https://workinlithuania.com",
-        "official": true
-      },
-      {
-        "label": "EURES - Portal Europeu da Mobilidade Profissional",
+        "label": "EURES (portal europeu de empregos)",
         "url": "https://eures.europa.eu",
         "official": true
       },
       {
-        "label": "EURAXESS Lithuania (vagas para pesquisadores e academicos)",
-        "url": "https://www.euraxess.lt/lithuania/information-assistance/job-opportunities",
+        "label": "Work in Lithuania (iniciativa oficial de atracao de talentos)",
+        "url": "https://workinlithuania.com",
         "official": true
       },
       {
-        "label": "CVbankas.lt (maior portal privado de empregos do pais)",
-        "url": "https://en.cvbankas.lt",
-        "official": false
+        "label": "Centro de Informacao ao Migrante (MIcenter)",
+        "url": "https://micenter.lt/en/job-search",
+        "official": true
       }
     ],
     "sources": [
       {
-        "label": "EURES - Informacao do mercado de trabalho: Lituania",
-        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-lithuania_en",
-        "official": true
-      },
-      {
-        "label": "State Data Agency / Statistics Lithuania - salarios e custos do trabalho",
-        "url": "https://osp.stat.gov.lt/en_GB/darbo-uzmokestis-ir-darbo-sanaudos",
-        "official": true
-      },
-      {
-        "label": "Statistics Lithuania - emprego e desemprego",
+        "label": "Statistics Lithuania (Portal de Estatisticas Oficiais) - emprego e desemprego",
         "url": "https://osp.stat.gov.lt/en/gyventoju-uzimtumo-tyrimo-duomenys",
         "official": true
       },
       {
-        "label": "Migration Department (Migracijos departamentas) - trabalhador altamente qualificado",
-        "url": "https://www.migracija.lt/en/as-esu-aukstos-kvalifikacijos-darbuotojas",
+        "label": "Statistics Lithuania - salarios e custos do trabalho",
+        "url": "https://osp.stat.gov.lt/en_GB/darbo-uzmokestis-ir-darbo-sanaudos",
         "official": true
       },
       {
-        "label": "Comissao Europeia - EU Blue Card na Lituania",
-        "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/eu-blue-card/eu-blue-card-lithuania_en",
+        "label": "EURES - informacao do mercado de trabalho da Lituania",
+        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-lithuania_en",
         "official": true
       },
       {
-        "label": "Comissao Europeia - Previsao economica para a Lituania",
-        "url": "https://economy-finance.ec.europa.eu/economic-surveillance-eu-member-states/country-pages/lithuania/economic-forecast-lithuania_en",
+        "label": "Uzimtumo tarnyba (Servico Publico de Emprego)",
+        "url": "https://uzt.lt/en",
         "official": true
       },
       {
-        "label": "Cedefop - Previsao de competencias Lituania 2025",
-        "url": "https://www.cedefop.europa.eu/files/skills_forecast_-_lithuania_2025.pdf",
+        "label": "Centro de Informacao ao Migrante (MIcenter) - permissao de trabalho",
+        "url": "https://micenter.lt/en/work-permit",
         "official": true
       },
       {
-        "label": "OECD - Economic Surveys: Lithuania 2025",
-        "url": "https://www.oecd.org/en/publications/oecd-economic-surveys-lithuania-2025_4abf1ea5-en.html",
+        "label": "Work in Lithuania - guia de permissao de trabalho 2026",
+        "url": "https://workinlithuania.com/blog/lithuania-work-permit-guide-2026-requirements-process",
         "official": true
-      },
-      {
-        "label": "European Labour Authority - Relatorio de escassez e excedente de mao de obra 2024",
-        "url": "https://www.ela.europa.eu/sites/default/files/2025-06/EURES_Report_on_labour_shortages_and_surpluses_2024.pdf",
-        "official": true
-      },
-      {
-        "label": "Startup Lithuania - Startup Visa",
-        "url": "https://startupvisalithuania.com",
-        "official": true
-      },
-      {
-        "label": "Newland Chase - Mudancas na imigracao da Lituania 2025",
-        "url": "https://newlandchase.com/lithuania-immigration-changes-for-2025/",
-        "official": false
-      },
-      {
-        "label": "Deloitte Lituania - mudanca no salario bruto medio e regulacao do emprego de estrangeiros",
-        "url": "https://www.deloitte.com/lt/en/services/legal/perspectives/changes-in-the-regulation-of-the-employment-of-foreigners.html",
-        "official": false
-      },
-      {
-        "label": "Work in Lithuania - salario medio 2025",
-        "url": "https://workinlithuania.com/blog/lithuania-average-salary/",
-        "official": false
-      },
-      {
-        "label": "LRT - salario medio sobe (dados Sodra)",
-        "url": "https://www.lrt.lt/en/news-in-english/19/2849256/average-monthly-wage-in-lithuania-rises-to-eur1-514-sodra",
-        "official": false
-      },
-      {
-        "label": "Glassdoor - salario de desenvolvedor de software em Vilnius",
-        "url": "https://www.glassdoor.com/Salaries/vilnius-software-developer-salary-SRCH_IL.0,7_IM1551_KO8,26.htm",
-        "official": false
-      },
-      {
-        "label": "levels.fyi - salario de engenheiro de software em Vilnius",
-        "url": "https://www.levels.fyi/t/software-engineer/locations/vilnius-ltu",
-        "official": false
       }
     ]
   },
   "lu": {
-    "updatedAt": "2026-06-22",
-    "overview": "Luxemburgo entrou em 2026 com um mercado de trabalho que combina salários entre os mais altos da Europa com uma taxa de desemprego em alta moderada. Segundo a ADEM e o portal de estatísticas do governo, o desemprego ajustado ficou estável em 6,3% no início de 2026, com cerca de 20.140 candidatos a emprego residentes registrados no fim de abril, alta de 8,3% em doze meses. O aumento concentrou-se de forma notável entre os perfis altamente qualificados, cujo número subiu 17,8% no ano, sinal de que mesmo o mercado de colarinho branco esfriou na margem. Ainda assim, o estoque de vagas disponíveis na ADEM cresceu 3,4% e seguia em 7.448 no fim de abril de 2026, mostrando demanda persistente em nichos específicos.\n\nO país é estruturalmente dependente de mão de obra estrangeira: trabalhadores transfronteiriços, vindos sobretudo de França, Bélgica e Alemanha, respondem por cerca de 47% do emprego assalariado, e mais de 60% da força de trabalho não é de nacionalidade luxemburguesa. O motor econômico continua sendo o setor financeiro, seguido por serviços profissionais, tecnologia, saúde e instituições europeias. Para o imigrante de terceiros países, a porta de entrada mais rápida é a lista oficial de profissões em penúria da ADEM, que dá procedimento acelerado de autorização de trabalho. O salário médio bruto anual em tempo integral gira em torno de 75.919 euros segundo a STATEC, com mediana bem menor, perto de 58.126 euros, o que revela forte dispersão entre setores altamente remunerados, como finanças, e setores de base, como hotelaria.",
+    "updatedAt": "2026-07-13",
+    "overview": "O mercado de trabalho de Luxemburgo segue estavel e proximo do pleno emprego em 2026. A taxa de desemprego calculada pela STATEC, ajustada sazonalmente, ficou em 6,2% em maio de 2026, com leve queda ante o mes anterior, depois de marcar 6,3% em janeiro e abril. No fim de abril de 2026 a agencia de emprego ADEM contava 20.140 candidatos residentes disponiveis, cerca de 1.544 a mais que um ano antes. O aumento recente concentra-se nos perfis mais qualificados, e as vagas registradas voltaram a subir, sinal de demanda persistente por mao de obra especializada.",
     "hotSectors": [
-      "Finanças e banca (gestão de risco de crédito, front office de mercados, análise e engenharia financeira)",
-      "Auditoria, contabilidade e controle financeiro",
-      "Jurídico e compliance (consultoria jurídica e defesa)",
-      "Tecnologia da informação (administração de sistemas, suporte e expertise técnica, desenvolvimento de software)",
-      "Saúde e trabalho social (enfermagem, cuidados ao paciente, intervenção socioeducativa, educação infantil)",
-      "Indústria, manutenção e engenharia (manutenção mecânica industrial, equipamentos operacionais, qualidade industrial)",
-      "Construção (instalação e restauração de telhados)",
-      "Pesquisa e desenvolvimento industrial",
-      "Serviços às empresas e trabalho temporário",
-      "Setor público e instituições europeias"
+      "Servicos financeiros e juridicos",
+      "Saude e trabalho social",
+      "Tecnologia da informacao (TI)",
+      "Construcao, industria e manutencao",
+      "Pesquisa e desenvolvimento (P&D)"
     ],
     "coolingSectors": [
-      "Construção civil (queda no número de empregados segundo a STATEC, apesar de telhadistas em penúria)",
-      "Indústria manufatureira (retração no emprego no fim de 2025)",
-      "Hotelaria e restauração (salários mais baixos do país, alta rotatividade)",
-      "Funções administrativas e secretariado (entre as ocupações com mais candidatos disponíveis e maior alta de desemprego)",
-      "Motoristas e operadores de máquinas móveis (listados pela EURES como ocupações em excesso de oferta)",
-      "Atendentes e auxiliares administrativos gerais (excesso de candidatos)"
+      "Mecanica de aeronaves (removida da lista de escassez em 2026)",
+      "Controle de trafego ferroviario (removido da lista de escassez em 2026)",
+      "Contabilidade, controle de gestao e consultoria de organizacao empresarial (removidos da lista de escassez em 2026, embora contabilidade permaneca em outras rubricas)"
     ],
     "inDemandRoles": [
       {
-        "role": "Analista de risco de crédito e bancário",
-        "note": "Setor financeiro e jurídico; consta na lista oficial de penúria da ADEM 2026"
+        "role": "Enfermagem geral",
+        "note": "Setor de saude; profissao na lista oficial de escassez 2026 da ADEM."
       },
       {
-        "role": "Gestor de clientes bancários",
-        "note": "Lista de penúria ADEM; banca privada e corporativa"
+        "role": "Cuidados de higiene e conforto ao paciente",
+        "note": "Setor de saude; lista de escassez 2026 da ADEM."
+      },
+      {
+        "role": "Trabalho social e intervencao socioeducativa",
+        "note": "Trabalho social; lista de escassez 2026 da ADEM."
+      },
+      {
+        "role": "Educacao infantil (primeira infancia)",
+        "note": "Trabalho social; lista de escassez 2026 da ADEM."
+      },
+      {
+        "role": "Administracao de sistemas de TI",
+        "note": "TI; lista de escassez 2026 da ADEM."
+      },
+      {
+        "role": "Suporte e expertise tecnica em sistemas de informacao",
+        "note": "TI; lista de escassez 2026 da ADEM."
+      },
+      {
+        "role": "Estudos e desenvolvimento de software",
+        "note": "TI; lista de escassez 2026 da ADEM."
+      },
+      {
+        "role": "Analise de risco de credito e bancario",
+        "note": "Servicos financeiros; lista de escassez 2026 da ADEM."
+      },
+      {
+        "role": "Gestao de clientes bancarios",
+        "note": "Servicos financeiros; lista de escassez 2026 da ADEM."
       },
       {
         "role": "Front office de mercados financeiros",
-        "note": "Lista de penúria ADEM; perfis com escassez crônica de candidatos"
+        "note": "Servicos financeiros; lista de escassez 2026 da ADEM."
       },
       {
-        "role": "Auditor e controlador financeiro / contador",
-        "note": "Lista de penúria ADEM; Big Four e fundos de investimento"
+        "role": "Analise e engenharia financeira",
+        "note": "Servicos financeiros; lista de escassez 2026 da ADEM."
       },
       {
-        "role": "Consultor jurídico e advogado de defesa",
-        "note": "Lista de penúria ADEM; profissão regulamentada (exige homologação)"
+        "role": "Contabilidade, auditoria e controle financeiro",
+        "note": "Servicos financeiros; lista de escassez 2026 da ADEM."
       },
       {
-        "role": "Administrador de sistemas de TI",
-        "note": "Lista de penúria ADEM; ocupações de TI lideram a alta de demanda na ADEM"
+        "role": "Defesa e assessoria juridica",
+        "note": "Servicos juridicos; lista de escassez 2026 da ADEM."
       },
       {
-        "role": "Especialista em suporte e expertise técnica de sistemas",
-        "note": "Lista de penúria ADEM"
+        "role": "Gestao e engenharia de qualidade industrial",
+        "note": "Industria; novidade na lista de escassez 2026 da ADEM."
       },
       {
-        "role": "Desenvolvedor de software / estudos em TI",
-        "note": "Lista de penúria ADEM; perfis especializados chegam a 180 mil euros/ano"
+        "role": "Instalacao e manutencao de equipamentos industriais e operacionais",
+        "note": "Manutencao; novidade na lista de escassez 2026 da ADEM."
       },
       {
-        "role": "Enfermeiro generalista",
-        "note": "Lista de penúria ADEM; profissão de saúde regulamentada (exige licença)"
+        "role": "Manutencao mecanica industrial",
+        "note": "Manutencao; lista de escassez 2026 da ADEM."
       },
       {
-        "role": "Profissional de cuidados de higiene e conforto ao paciente",
-        "note": "Lista de penúria ADEM; saúde regulamentada"
+        "role": "Instalacao e restauracao de coberturas (telhados)",
+        "note": "Construcao; novidade na lista de escassez 2026 da ADEM."
       },
       {
-        "role": "Assistente social e educador infantil",
-        "note": "Lista de penúria ADEM; intervenção socioeducativa"
+        "role": "Reparacao de carrocaria de veiculos",
+        "note": "Manutencao; lista de escassez 2026 da ADEM."
       },
       {
-        "role": "Técnico de manutenção mecânica industrial",
-        "note": "Lista de penúria ADEM; novo na lista em 2025"
-      },
-      {
-        "role": "Técnico de instalação e manutenção de equipamentos industriais e operacionais",
-        "note": "Lista de penúria ADEM 2026"
-      },
-      {
-        "role": "Gestor e engenheiro de qualidade industrial",
-        "note": "Lista de penúria ADEM"
-      },
-      {
-        "role": "Reparador de carroceria de veículos",
-        "note": "Lista de penúria ADEM; novo na lista em 2025"
-      },
-      {
-        "role": "Telhadista (instalação e restauração de telhados)",
-        "note": "Lista de penúria ADEM; construção"
-      },
-      {
-        "role": "Pesquisador e engenheiro de P&D industrial",
-        "note": "Lista de penúria ADEM"
+        "role": "Estudos, gestao e engenharia de P&D industrial",
+        "note": "Pesquisa e desenvolvimento; lista de escassez 2026 da ADEM."
       }
     ],
     "byQualification": [
       {
-        "area": "Finanças, banca e contabilidade",
-        "advice": "É o caminho mais valorizado de Luxemburgo. Diplomas em finanças, economia, contabilidade ou direito tributário, somados a certificações internacionais (ACCA, CFA) e inglês fluente, abrem vagas em bancos, fundos e nas Big Four. Várias funções estão na lista de penúria da ADEM, o que garante autorização de trabalho acelerada para estrangeiros. O setor paga a maior média do país, cerca de 113 mil euros brutos anuais."
+        "area": "Saude e trabalho social",
+        "advice": "Profissoes de enfermagem, cuidados ao paciente, educacao infantil e trabalho social estao na lista oficial de escassez, com contratacao facilitada; atencao a regras de reconhecimento de diploma e profissoes regulamentadas."
       },
       {
-        "area": "Tecnologia da informação",
-        "advice": "Administração de sistemas, suporte técnico e desenvolvimento de software constam na lista de penúria e lideram a alta de demanda na ADEM. Vale investir em cloud, cibersegurança e fintech, áreas onde perfis sêniores ultrapassam 120 mil euros e especialistas chegam a 180 mil. Não é profissão regulamentada, então a recognição de diploma costuma ser dispensada."
+        "area": "Tecnologia da informacao",
+        "advice": "Administracao de sistemas, suporte tecnico e desenvolvimento de software seguem em falta; perfis com diploma superior ou 5 anos de experiencia podem mirar o Cartao Azul da UE."
       },
       {
-        "area": "Saúde (enfermagem e cuidados)",
-        "advice": "Há penúria estrutural de enfermeiros e cuidadores. A demanda é alta, mas a profissão é regulamentada: é obrigatório obter a licença de exercício do Ministério da Saúde e, se o diploma foi obtido fora, passar pelo reconhecimento de qualificações. O francês e o luxemburguês contam muito no atendimento. Enfermeiros qualificados ganham em torno de 70 mil euros anuais."
+        "area": "Financeiro e juridico",
+        "advice": "Setor central da economia luxemburguesa: analise de risco, gestao de clientes bancarios, front office, engenharia financeira e auditoria constam da lista de escassez 2026."
       },
       {
-        "area": "Jurídico e compliance",
-        "advice": "Consultoria jurídica está na lista de penúria, mas a profissão de advogado é regulamentada e exige homologação do diploma de direito mais cursos complementares de direito luxemburguês. Para compliance e legal em fundos e bancos, o requisito de homologação é menor e o multilinguismo (francês, inglês, alemão) é decisivo."
-      },
-      {
-        "area": "Engenharia, indústria e manutenção",
-        "advice": "Manutenção mecânica industrial, qualidade industrial, equipamentos operacionais e reparo de carroceria entraram na lista de penúria. Perfis técnicos com formação em mecânica, eletrotécnica ou engenharia industrial e experiência prática têm boa colocação, com gestores de obra sêniores chegando a faixas de 110 a 180 mil euros."
-      },
-      {
-        "area": "Sem qualificação superior ou diploma reconhecido",
-        "advice": "Construção, logística, limpeza, hotelaria e restauração empregam, mas pagam perto do salário mínimo social (cerca de 2.771 euros brutos mensais para não qualificados em junho de 2026) e estão entre os setores em esfriamento. Sem profissão em penúria, o teste de mercado de trabalho da ADEM se aplica e o empregador precisa provar que não achou candidato local ou europeu, o que dificulta o patrocínio de terceiros países."
-      },
-      {
-        "area": "Empreendedores e autônomos",
-        "advice": "Quem quer abrir negócio precisa submeter, ao mesmo tempo, o pedido de autorização de residência de longa duração e a autorização de estabelecimento (business permit) junto ao Ministério da Economia, em geral antes de entrar no país. Atividades comerciais, artesanais e algumas liberais exigem comprovar qualificação e idoneidade. O ecossistema fintech, fundos e espaços de coworking favorece consultores e freelancers qualificados."
+        "area": "Construcao, industria e manutencao",
+        "advice": "Coberturas/telhados, qualidade e engenharia industrial, manutencao mecanica e de equipamentos e reparo de carrocaria entraram ou seguem na lista de escassez, com recrutamento acelerado de nao europeus."
       }
     ],
     "salaries": [
       {
-        "role": "Salário mínimo social não qualificado (jun/2026)",
-        "range": "2.771,33 euros brutos/mês",
+        "role": "Salario social minimo (trabalhador nao qualificado, 18+)",
+        "range": "2.771,33 EUR brutos por mes (vigente desde 1 de junho de 2026)",
         "source": {
-          "label": "Guichet.lu / STATEC (indexação 2026)",
-          "url": "https://guichet.public.lu/en/entreprises/ressources-humaines/remuneration/paiement-remunerations/salaire.html",
+          "label": "ITM - Inspecao do Trabalho e das Minas",
+          "url": "https://itm.public.lu/en/questions-reponses/droit-travail/remuneration/a/a3.html",
           "official": true
         }
       },
       {
-        "role": "Salário mínimo social qualificado (jun/2026)",
-        "range": "3.325,59 euros brutos/mês",
+        "role": "Salario social minimo (trabalhador qualificado, 18+)",
+        "range": "3.325,59 EUR brutos por mes (vigente desde 1 de junho de 2026)",
         "source": {
-          "label": "Guichet.lu / STATEC (indexação 2026)",
-          "url": "https://guichet.public.lu/en/entreprises/ressources-humaines/remuneration/paiement-remunerations/salaire.html",
+          "label": "ITM - Inspecao do Trabalho e das Minas",
+          "url": "https://itm.public.lu/en/questions-reponses/droit-travail/remuneration/a/a3.html",
           "official": true
         }
       },
       {
-        "role": "Salário médio bruto anual (tempo integral, todos os setores)",
-        "range": "75.919 euros/ano (mediana 58.126 euros)",
+        "role": "Piso salarial do Cartao Azul da UE (altamente qualificado)",
+        "range": "65.652 EUR brutos por ano (minimo, vigente desde 3 de marco de 2026)",
         "source": {
-          "label": "STATEC - Regards 09/24",
-          "url": "https://statistiques.public.lu/en/publications/series/regards/2024/regards-09-24.html",
-          "official": true
-        }
-      },
-      {
-        "role": "Setor financeiro e seguros (média)",
-        "range": "~113.018 euros brutos/ano",
-        "source": {
-          "label": "STATEC (via Paperjam)",
-          "url": "https://en.paperjam.lu/article/the-average-salary-in-luxembou",
-          "official": true
-        }
-      },
-      {
-        "role": "Educação (média do setor)",
-        "range": "~111.362 euros brutos/ano",
-        "source": {
-          "label": "STATEC (via Paperjam)",
-          "url": "https://en.paperjam.lu/article/the-average-salary-in-luxembou",
-          "official": true
-        }
-      },
-      {
-        "role": "Hotelaria e restauração (média do setor)",
-        "range": "~40.461 euros brutos/ano",
-        "source": {
-          "label": "STATEC (via Paperjam)",
-          "url": "https://en.paperjam.lu/article/the-average-salary-in-luxembou",
-          "official": true
-        }
-      },
-      {
-        "role": "Enfermeiro qualificado",
-        "range": "~70.000 euros brutos/ano (conforme senioridade)",
-        "source": {
-          "label": "Robert Half / Luxtoday (referência de mercado)",
-          "url": "https://luxtoday.lu/en/knowledge/salaries-in-luxembourg",
-          "official": true
-        }
-      },
-      {
-        "role": "Desenvolvedor / engenheiro de TI sênior",
-        "range": "90.000 a 120.000+ euros/ano (especialistas até 180.000)",
-        "source": {
-          "label": "Robert Half / Hays (guias salariais de mercado)",
-          "url": "https://www.roberthalf.com/lu/en/insights/salary-guide",
-          "official": true
-        }
-      },
-      {
-        "role": "Diretor financeiro (3 a 5 anos de experiência)",
-        "range": "96.000 a 113.000 euros/ano",
-        "source": {
-          "label": "Hays Luxembourg (guia salarial de mercado)",
-          "url": "https://www.hays.lu/en/blogs/the-twelve-highest-paid-jobs-in-luxembourg",
-          "official": true
-        }
-      },
-      {
-        "role": "Salário anual mínimo para Cartão Azul da UE",
-        "range": "65.652 euros brutos/ano",
-        "source": {
-          "label": "Guichet.lu (regulamento grão-ducal)",
+          "label": "Guichet.lu - Cartao Azul da UE",
           "url": "https://guichet.public.lu/en/citoyens/immigration/plus-3-mois/ressortissant-tiers/hautement-qualifie/salarie-hautement-qualifie.html",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadãos da UE, do EEE e da Suíça trabalham livremente, sem autorização. Para nacionais de terceiros países (caso de brasileiros), a regra geral é: o empregador primeiro declara a vaga à ADEM, que avalia o mercado local; depois o trabalhador obtém o certificado da ADEM autorizando a contratação e, antes de entrar, solicita a autorização de residência à Direção da Imigração do Ministério dos Assuntos Internos, com visto tipo D quando exigido. Após a chegada, faz a declaração de chegada e o pedido de cartão de residência dentro de 3 meses. Atalho importante: se a vaga corresponder a uma das profissões da lista oficial de penúria da ADEM (20 ocupações em 2026, em finanças/jurídico, saúde/social, TI, construção/indústria e P&D), o teste de mercado de trabalho é dispensado e a ADEM emite o certificado em até 5 dias úteis. Perfis altamente qualificados podem usar o Cartão Azul da UE, que exige contrato de no mínimo 6 meses, qualificação superior comprovada e salário anual bruto mínimo de 65.652 euros, com cartão válido por até 4 anos. Profissões regulamentadas (saúde, direito, várias liberais) exigem, antes de exercer, o reconhecimento das qualificações obtidas no exterior (custo de 75 euros, prazo de 2 a 10 semanas) e a licença ou autorização do ministério competente; advogados precisam de homologação do diploma de direito mais cursos complementares de direito luxemburguês. Autônomos e empreendedores submetem em paralelo a autorização de residência e a autorização de estabelecimento junto ao Ministério da Economia, normalmente antes da entrada no país.",
+    "foreignerRules": "Cidadaos da UE, do Espaco Economico Europeu e da Suica trabalham em Luxemburgo sem necessidade de permissao de trabalho. Para nacionais de paises terceiros (fora da UE), o caminho padrao e a autorizacao de estadia como trabalhador assalariado. Antes de contratar, o empregador deve declarar a vaga a ADEM; se nao encontrar candidato adequado no mercado local e europeu em cerca de tres semanas, a ADEM emite um certificado autorizando a contratacao de estrangeiro. Com esse certificado, o trabalhador solicita, ainda no exterior e antes de entrar, a autorizacao de estadia temporaria ao Departamento de Imigracao (passaporte, antecedentes criminais, curriculo, diplomas e contrato de trabalho assinado). Concedida a autorizacao (valida por 90 dias), quem precisa de visto pede o visto tipo D no pais de origem. Ja em Luxemburgo, faz a declaracao de chegada na comuna em ate 3 dias, passa por exame medico e solicita o titulo de residencia em ate 3 meses. O primeiro titulo vale no maximo 1 ano e fica restrito a uma profissao e a um setor; apos a primeira renovacao pode valer ate 3 anos com acesso a qualquer setor. Vagas que correspondem a uma profissao da lista oficial de escassez tem procedimento acelerado, sem teste de mercado de trabalho, e o certificado da ADEM sai em ate 5 dias uteis. Para perfis altamente qualificados existe o Cartao Azul da UE, que exige diploma de ensino superior ou 5 anos de experiencia especializada, contrato de pelo menos 6 meses e salario anual bruto minimo de 65.652 euros (valor vigente desde 3 de marco de 2026).",
     "opportunityWindows": [
-      "Profissões na lista oficial de penúria da ADEM 2026 (20 ocupações) têm teste de mercado dispensado e certificado emitido em até 5 dias úteis, o caminho mais rápido para o estrangeiro de terceiros países",
-      "TI segue como a ocupação com maior alta de demanda registrada pela ADEM, mesmo com o mercado geral esfriando",
-      "Saúde tem penúria estrutural de enfermeiros e cuidadores, com reajustes salariais puxados pela escassez de pessoal",
-      "Cartão Azul da UE para altamente qualificados com salário a partir de 65.652 euros/ano dá residência de até 4 anos e mobilidade europeia",
-      "Setor financeiro, de fundos e fintech mantém demanda por risco, compliance, auditoria e front office, funções que constam na lista de penúria",
-      "Multilinguismo (francês, inglês, alemão e luxemburguês) é diferencial competitivo forte, sobretudo em saúde, jurídico e atendimento",
-      "Mercado de trabalho transfronteiriço favorece quem aceita modelos híbridos e remotos, em expansão no país"
+      "Lista oficial de profissoes em escassez 2026 da ADEM, vigente desde 7 de abril de 2026, com 20 ocupacoes em cinco setores (financeiro/juridico, saude/social, TI, construcao/industria/manutencao e P&D); vagas nesses cargos dispensam o teste de mercado de trabalho e o certificado da ADEM sai em ate 5 dias uteis.",
+      "Cartao Azul da UE para altamente qualificados, com procedimento proprio e salario anual bruto minimo de 65.652 euros desde 3 de marco de 2026.",
+      "Novas entradas na lista de escassez 2026 reforcam oportunidades em construcao (coberturas/telhados), qualidade e engenharia industrial e manutencao de equipamentos industriais."
     ],
     "jobBoards": [
       {
-        "label": "JobBoard da ADEM (Agência Nacional de Emprego)",
-        "url": "https://adem.public.lu/en/marche-emploi-luxembourg/jobboard.html",
+        "label": "ADEM - Agencia de emprego de Luxemburgo (JobBoard oficial)",
+        "url": "https://adem.public.lu/en/employeurs/jobboard.html",
         "official": true
       },
       {
-        "label": "EURES - portal europeu de empregos (Luxemburgo)",
+        "label": "EURES - Portal europeu da mobilidade profissional",
         "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "Guichet.lu - portal oficial de procedimentos (imigração e trabalho)",
+        "label": "Guichet.lu - Portal oficial (emprego e imigracao)",
         "url": "https://guichet.public.lu/en/citoyens/immigration.html",
-        "official": true
-      },
-      {
-        "label": "Work in Luxembourg (iniciativa pública de atração de talentos)",
-        "url": "https://workinluxembourg.com/",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "ADEM - Nova lista de profissões em penúria 2025 (oficial)",
-        "url": "https://adem.public.lu/en/actualites/adem/2025/03/metiers-penurie.html",
-        "official": true
-      },
-      {
-        "label": "ADEM - Estatísticas e números-chave do mercado de trabalho",
-        "url": "https://adem.public.lu/en/marche-emploi-luxembourg/statistiques/chiffres-cles-adem.html",
-        "official": true
-      },
-      {
-        "label": "Portal de Estatísticas (STATEC/ADEM) - desemprego início de 2026: 6,3%",
+        "label": "STATEC / Portal de Estatisticas - taxa de desemprego (inicio de 2026: 6,3%)",
         "url": "https://statistiques.public.lu/en/actualites/2026/adem-01-26.html",
         "official": true
       },
       {
-        "label": "STATEC - Regards 09/24: salário médio bruto de 75.919 euros/ano",
-        "url": "https://statistiques.public.lu/en/publications/series/regards/2024/regards-09-24.html",
+        "label": "ADEM - estatisticas e numeros-chave do mercado de emprego",
+        "url": "https://adem.public.lu/en/marche-emploi-luxembourg/statistiques/chiffres-cles-adem.html",
         "official": true
       },
       {
-        "label": "EURES - Informação do mercado de trabalho de Luxemburgo",
-        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-luxembourg_en",
+        "label": "ADEM - nova lista de profissoes em escassez (metiers en penurie)",
+        "url": "https://adem.public.lu/en/actualites/adem/2025/03/metiers-penurie.html",
         "official": true
       },
       {
-        "label": "Guichet.lu - Residência para trabalhador assalariado de terceiros países",
+        "label": "Guichet.lu - condicoes de residencia para trabalhador assalariado de pais terceiro",
         "url": "https://guichet.public.lu/en/citoyens/immigration/plus-3-mois/ressortissant-tiers/salarie/salarie-pays-tiers.html",
         "official": true
       },
       {
-        "label": "Guichet.lu - Cartão Azul da UE (altamente qualificados)",
+        "label": "Guichet.lu - trabalhador altamente qualificado (Cartao Azul da UE)",
         "url": "https://guichet.public.lu/en/citoyens/immigration/plus-3-mois/ressortissant-tiers/hautement-qualifie/salarie-hautement-qualifie.html",
         "official": true
       },
       {
-        "label": "Guichet.lu - Residência para trabalhador autônomo de terceiros países",
-        "url": "https://guichet.public.lu/en/citoyens/immigration/plus-3-mois/ressortissant-tiers/travailleur-independant/independant.html",
+        "label": "ITM - Inspecao do Trabalho e das Minas: salario social minimo",
+        "url": "https://itm.public.lu/en/questions-reponses/droit-travail/remuneration/a/a3.html",
         "official": true
-      },
-      {
-        "label": "Guichet.lu - Reconhecimento de qualificações para profissões regulamentadas",
-        "url": "https://guichet.public.lu/en/citoyens/famille-education/etudes-superieures/reconnaissance-diplomes/reconnaissance-titres-formation-etranger-profession-reglementee.html",
-        "official": true
-      },
-      {
-        "label": "Guichet.lu - Salário social mínimo e indexação 2026",
-        "url": "https://guichet.public.lu/en/entreprises/ressources-humaines/remuneration/paiement-remunerations/salaire.html",
-        "official": true
-      },
-      {
-        "label": "Work in Luxembourg - Lista 2026 de profissões em penúria",
-        "url": "https://workinluxembourg.com/news/luxembourg-publishes-its-2026-list-of-shortage-occupations",
-        "official": true
-      },
-      {
-        "label": "Paperjam - Salário médio em Luxemburgo (cita STATEC)",
-        "url": "https://en.paperjam.lu/article/the-average-salary-in-luxembou",
-        "official": false
-      },
-      {
-        "label": "Robert Half - Guia salarial Luxemburgo 2026 (mercado)",
-        "url": "https://www.roberthalf.com/lu/en/insights/salary-guide",
-        "official": false
-      },
-      {
-        "label": "Hays Luxembourg - Empregos mais bem pagos (mercado)",
-        "url": "https://www.hays.lu/en/blogs/the-twelve-highest-paid-jobs-in-luxembourg",
-        "official": false
-      },
-      {
-        "label": "Luxtoday - Salários em Luxemburgo (comunidade)",
-        "url": "https://luxtoday.lu/en/knowledge/salaries-in-luxembourg",
-        "official": false
       }
     ]
   },
@@ -7508,945 +7305,634 @@ export const LABOR_MARKET: LaborMarketMap = {
     ]
   },
   "mt": {
-    "updatedAt": "2026-06-22",
-    "overview": "Malta opera num mercado de trabalho estruturalmente apertado e dependente de mao de obra estrangeira. No terceiro trimestre de 2025 o emprego total chegou a 337.234 pessoas, 4,8% acima do ano anterior (NSO), e a taxa de desemprego permaneceu entre as mais baixas da Uniao Europeia, em torno de 2,7% a 3,4% ao longo de 2025. As vagas em aberto somavam 9.158 no segundo trimestre de 2025, alta de 13,2% sobre o mesmo periodo de 2024 (NSO Job Vacancy Survey). A escassez de candidatos com as competencias exigidas e o gargalo central, o que leva empregadores malteses a recorrerem amplamente a trabalhadores de paises terceiros. A economia e dominada por servicos, com forte presenca de iGaming, servicos financeiros, turismo e comercio. A partir de 2025 e 2026, porem, o governo aperta as regras de emprego de nacionais de paises terceiros, introduzindo verificacao de adequacao pelo Jobsplus, curso pre-partida obrigatorio para novos requerentes e programas de integracao para ocupacoes de baixa qualificacao, sinalizando um regime mais seletivo e voltado a perfis qualificados.",
+    "updatedAt": "2026-07-13",
+    "overview": "O mercado de trabalho de Malta segue aquecido e com desemprego historicamente baixo. Segundo o National Statistics Office (NSO), a taxa de desemprego de fevereiro de 2026 foi de 3,5 por cento, com 3,3 por cento entre homens e 3,8 por cento entre mulheres; o desemprego juvenil (15 a 24 anos) ficou em 12,4 por cento e a faixa de 25 a 74 anos em 2,7 por cento. Em janeiro de 2026 a taxa havia sido de 3,4 por cento, confirmando estabilidade em patamar baixo, abaixo da media da UE. A forca de trabalho e cada vez mais internacional, com parcela relevante de trabalhadores de outros paises da UE e de fora da UE preenchendo a demanda que o mercado local nao consegue suprir.",
     "hotSectors": [
-      "iGaming e apostas online (cerca de 8.000 empregados diretos e mais 3 a 4 mil em industrias associadas)",
-      "Servicos financeiros, seguros e fintech (setor de maior remuneracao no pais)",
-      "Servicos profissionais, cientificos e tecnicos (maior crescimento de vagas em 2025)",
-      "Saude e assistencia social",
-      "Tecnologia da informacao e desenvolvimento de software",
+      "Tecnologia da informacao e comunicacao (TIC)",
       "Turismo, hotelaria e alimentacao",
-      "Comercio atacadista e varejista (maior empregador do pais)",
-      "Administracao publica, defesa e educacao (forte alta de vagas em 2025)"
-    ],
-    "coolingSectors": [
-      "Profissionais associados de ciencia e engenharia (grupo com excedente de oferta de mao de obra, segundo EURES)",
-      "Trabalhadores de construcao e oficios relacionados, exceto eletricistas (excedente de oferta)",
-      "Auxiliares de atendimento ao cliente / customer services clerks (excedente de oferta)",
-      "Ocupacoes elementares de baixa qualificacao, alvo de aperto regulatorio para nacionais de paises terceiros a partir de 2026"
+      "Servicos financeiros e de seguros",
+      "Servicos profissionais, cientificos e tecnicos",
+      "Saude e assistencia",
+      "Construcao civil"
     ],
     "inDemandRoles": [
       {
-        "role": "Profissionais associados de negocios e administracao",
-        "note": "Grupo ocupacional com maior incidencia de escassez em Malta, segundo EURES e Jobsplus"
+        "role": "Profissionais de saude (medicos, enfermeiros, tecnicos de saude)",
+        "note": "Classificados como ocupacao de escassez pelo Cedefop e destacados pela EURES entre os grupos com maior falta de mao de obra."
       },
       {
-        "role": "Profissionais juridicos, sociais e culturais",
-        "note": "Apontado como escassez pelo EURES"
+        "role": "Profissionais de TIC",
+        "note": "Escassez elevada segundo Cedefop; setor de informacao e comunicacao com uma das maiores taxas de vagas em aberto (EURES)."
       },
       {
-        "role": "Trabalhadores de servicos pessoais",
-        "note": "Escassez estrutural identificada pelo EURES"
+        "role": "Tecnicos de TIC",
+        "note": "Listado como ocupacao prioritaria de escassez pelo Cedefop."
       },
       {
-        "role": "Oficiais de compliance e analistas de risco e fraude",
-        "note": "Demanda alta em iGaming, servicos financeiros e fintech"
+        "role": "Tecnicos eletricos e mecanicos",
+        "note": "Ocupacao de escassez segundo o Cedefop."
       },
       {
-        "role": "Desenvolvedores de software e especialistas em TI",
-        "note": "Demanda por Python, JavaScript, SQL, AWS, Kubernetes e Linux"
+        "role": "Eletricistas, encanadores, rebocadores e canteiros (trabalhadores de oficios da construcao)",
+        "note": "Grupo de oficios qualificados apontado como escassez pelo Cedefop."
       },
       {
-        "role": "Profissionais de saude (enfermeiros, medicos, cuidadores)",
-        "note": "Escassez persistente; profissoes regulamentadas exigem warrant"
+        "role": "Profissionais de contabilidade, financas e seguros",
+        "note": "Escassez indicada pelo Cedefop; setor financeiro entre os de maior salario medio."
       },
       {
-        "role": "Analistas financeiros, auditoria e contabilidade",
-        "note": "Setor financeiro e iGaming finance"
+        "role": "Designers graficos e multimidia",
+        "note": "Listado como ocupacao de escassez pelo Cedefop."
       },
       {
-        "role": "Agentes de atendimento ao cliente multilingues",
-        "note": "Forte em iGaming e suporte tecnico"
-      },
-      {
-        "role": "Especialistas em cibersseguranca, blockchain e analise de dados",
-        "note": "Ligados a expansao fintech"
-      }
-    ],
-    "byQualification": [
-      {
-        "area": "Tecnologia da Informacao e Engenharia de Software",
-        "advice": "Setor em expansao com escassez real. Caminhos recomendados: EU Blue Card (qualificacao ISCED nivel 6 ou superior e salario a partir de cerca de 37.134 euros em 2025), Key Employee Initiative para cargos tecnicos seniores (45.000 euros a partir de agosto de 2025) ou Specialist Employee Initiative (MQF nivel 6 e 30.000 euros). Vagas concentradas em iGaming, fintech e servicos profissionais."
-      },
-      {
-        "area": "Financas, Contabilidade, Auditoria e Compliance",
-        "advice": "Setor de maior remuneracao do pais e com demanda constante por compliance e risco, sobretudo em iGaming e servicos financeiros. Qualificacao profissional reconhecida pelo MQRIC ajuda. Rotas KEI/SEI e Blue Card para perfis qualificados."
-      },
-      {
-        "area": "Saude (enfermagem, medicina, fisioterapia)",
-        "advice": "Profissoes regulamentadas: alem do reconhecimento academico pelo MQRIC, e obrigatorio obter o warrant junto ao conselho profissional competente (ex.: Medical Council, Council for Nurses and Midwives) antes de exercer. Demanda elevada, mas exige validacao previa do diploma."
-      },
-      {
-        "area": "Direito, Ciencias Sociais e Cultura",
-        "advice": "Grupo com escassez segundo o EURES. Para advocacia, e profissao regulamentada com warrant exigido; estrangeiros geralmente atuam em consultoria, compliance e servicos corporativos em vez de litigio."
-      },
-      {
-        "area": "Hotelaria, Turismo e Servicos Pessoais",
-        "advice": "Alta absorcao de mao de obra, inclusive estrangeira, mas e a area mais afetada pelo aperto de 2026 para ocupacoes de baixa qualificacao (curso pre-partida e programa de integracao obrigatorios). Bom ponto de entrada, salarios proximos ao minimo nacional."
-      },
-      {
-        "area": "Engenharia civil e construcao",
-        "advice": "EURES sinaliza excedente de oferta em varios oficios de construcao, exceto eletricistas. Mercado mais competitivo; avaliar nicho especifico antes de migrar para essa area."
-      },
-      {
-        "area": "Empreendedores e fundadores de startups",
-        "advice": "Para nao europeus, o Malta Startup Residence Programme exige startup inovadora com ate 7 anos, capital social minimo de 25.000 euros (mais 10.000 por co-fundador acima de quatro) e foco em setores como tecnologia, gaming e saude. Concede residencia de tres anos renovavel por mais cinco."
+        "role": "Trabalhadores de metalurgia e maquinas",
+        "note": "Ocupacao de escassez segundo o Cedefop."
       }
     ],
     "salaries": [
       {
-        "role": "Salario medio bruto (todos os setores)",
-        "range": "cerca de 2.146 euros por mes no 4o trimestre de 2025 (aprox. 25.750 euros por ano)",
+        "role": "Salario base medio mensal (todas as ocupacoes, Q4 2025)",
+        "range": "EUR 2.146 por mes (bruto)",
         "source": {
-          "label": "NSO Malta / Trading Economics",
-          "url": "https://nso.gov.mt/labour_market/",
+          "label": "NSO Malta - Labour Force Survey Q4/2025",
+          "url": "https://nso.gov.mt/labour-force-survey-q4-2025/",
           "official": true
         }
       },
       {
-        "role": "Salario basico mediano",
-        "range": "cerca de 1.417 euros por mes",
+        "role": "Gerentes (managers)",
+        "range": "EUR 3.462 por mes (bruto, base media)",
         "source": {
-          "label": "NSO Malta",
-          "url": "https://nso.gov.mt/selected_indicators/111178/",
+          "label": "NSO Malta - Labour Force Survey Q4/2025",
+          "url": "https://nso.gov.mt/labour-force-survey-q4-2025/",
           "official": true
         }
       },
       {
-        "role": "Gestores / cargos gerenciais",
-        "range": "media em torno de 3.217 euros por mes; financas e seguros acima de 3.159 euros por mes",
+        "role": "Ocupacoes elementares",
+        "range": "EUR 1.353 por mes (bruto, base media)",
         "source": {
-          "label": "NSO Labour Force Survey",
-          "url": "https://nso.gov.mt/labour_market/",
+          "label": "NSO Malta - Labour Force Survey Q4/2025",
+          "url": "https://nso.gov.mt/labour-force-survey-q4-2025/",
           "official": true
         }
       },
       {
-        "role": "Ocupacoes elementares (baixa qualificacao)",
-        "range": "media em torno de 1.293 euros por mes",
+        "role": "Setor de atividades financeiras e de seguros (maior media)",
+        "range": "EUR 2.941 por mes (bruto, base media)",
         "source": {
-          "label": "NSO Labour Force Survey",
-          "url": "https://nso.gov.mt/labour_market/",
+          "label": "NSO Malta - Labour Force Survey Q4/2025",
+          "url": "https://nso.gov.mt/labour-force-survey-q4-2025/",
           "official": true
         }
       },
       {
-        "role": "Salario minimo nacional (18 anos ou mais)",
-        "range": "229,44 euros por semana a partir de 1 de janeiro de 2026 (5,74 euros por hora)",
+        "role": "Salario minimo nacional (18 anos ou mais, 2026)",
+        "range": "EUR 229,44 por semana (bruto)",
         "source": {
-          "label": "DIER - Department for Industrial and Employment Relations",
+          "label": "DIER - National Minimum Wage",
           "url": "https://dier.gov.mt/en/services/employment-conditions/wages/national-minimum-wage/",
-          "official": true
-        }
-      },
-      {
-        "role": "Limiar EU Blue Card (alta qualificacao)",
-        "range": "cerca de 37.134 euros por ano em 2025 e cerca de 38.628 euros em 2026 (1,5x o salario medio bruto)",
-        "source": {
-          "label": "Comissao Europeia / Identita",
-          "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/eu-blue-card/eu-blue-card-malta_en",
-          "official": true
-        }
-      },
-      {
-        "role": "Limiar Key Employee Initiative (KEI)",
-        "range": "a partir de 45.000 euros por ano (desde 1 de agosto de 2025)",
-        "source": {
-          "label": "Identita - Expatriates Unit",
-          "url": "https://identita.gov.mt/expatriates-unit-main-page/noneu-nationals/employment-related-permits/highly-qualified-individuals/key-employee-initiative/who-is-eligible/",
-          "official": true
-        }
-      },
-      {
-        "role": "Limiar Specialist Employee Initiative (SEI)",
-        "range": "a partir de 30.000 euros por ano (desde agosto de 2025), MQF nivel 6 ou experiencia equivalente",
-        "source": {
-          "label": "Identita / fontes juridicas oficiais",
-          "url": "https://identita.gov.mt/expatriates-unit-main-page/noneu-nationals/employment-related-permits/highly-qualified-individuals/",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE, EEE e Suica trabalham livremente em Malta, precisando apenas registrar a residencia. Para nacionais de paises terceiros, o documento principal e o Single Permit, que combina autorizacao de residencia e licenca de trabalho num unico processo para empregos com duracao superior a seis meses. O trabalhador nao pode aplicar diretamente: o empregador, registrado no Jobsplus, submete o pedido pelo Expatriates Portal da Identita. O processamento pode levar ate quatro meses, e o trabalho so e autorizado apos a biometria e a emissao da autorizacao temporaria. O empregador deve realizar teste de mercado de trabalho, anunciando a vaga para verificar a indisponibilidade de candidatos locais ou da UE/EEE. Para perfis qualificados existem rotas mais rapidas: EU Blue Card (qualificacao ISCED 6 ou superior, salario de cerca de 37.134 euros em 2025, anuncio de pelo menos duas semanas e seguro saude de no minimo 100.000 euros), Key Employee Initiative (cargos gerenciais ou altamente tecnicos, 45.000 euros por ano desde agosto de 2025, processamento rapido) e Specialist Employee Initiative (ISCO grupos 1, 2 ou 3, MQF nivel 6 ou 3 anos de experiencia, 30.000 euros por ano). Profissoes regulamentadas (medicina, enfermagem, direito, arquitetura, entre outras) exigem, alem do reconhecimento academico pelo MQRIC, a obtencao de um warrant ou licenca junto ao conselho profissional competente antes de exercer. A partir de 2025 e 2026 Malta aperta as regras para paises terceiros, introduzindo verificacao de adequacao (Suitability Check) pelo Jobsplus, curso pre-partida obrigatorio para todos os novos requerentes e programa de integracao para ocupacoes de baixa qualificacao, com foco em coibir intermediarios ilegais e ofertas de emprego ficticias. Empreendedores nao europeus podem usar o Malta Startup Residence Programme, que exige startup inovadora com ate sete anos, capital social minimo de 25.000 euros e concede residencia de tres anos renovavel por mais cinco. Nacionais de Afeganistao, Coreia do Norte, Ira, Republica Democratica do Congo, Somalia, Sudao do Sul, Sudao, Siria, Iemen e Venezuela sao inelegiveis a esse programa.",
+    "foreignerRules": "Cidadaos da UE, do Espaco Economico Europeu e da Suica podem trabalhar em Malta sem permissao de trabalho, bastando registrar a residencia. Para nacionais de fora da UE (third-country nationals), o principal instrumento e o Single Permit (permissao unica), regulado pela Subsidiary Legislation 217.17 e emitido pela agencia Identita. Trata-se de uma permissao temporaria que autoriza residir e trabalhar legalmente em Malta por periodo superior a seis meses, renovavel, combinando licenca de emprego e permissao de residencia num unico processo. E preciso ter oferta de emprego confirmada de um empregador maltes, e a permissao vale apenas para aquele empregador e atividade especifica (nao permite trabalho para terceiros nem funcoes fora do territorio maltes). A aplicacao pode ser feita com o candidato ainda fora do Espaco Schengen ou ja em situacao legal em Malta ou noutro Estado Schengen. Requisito novo de 2026: candidatos de primeira viagem precisam apresentar o certificado de conclusao do curso pre-partida do Skills Pass, tornado obrigatorio pela Identita para novas aplicacoes de Single Permit. Confirme sempre os detalhes, prazos e taxas vigentes diretamente no site oficial da Identita e do Jobsplus antes de aplicar.",
     "opportunityWindows": [
-      "Verificacao de adequacao pelo Jobsplus e curso pre-partida obrigatorio para novos requerentes de paises terceiros entram em vigor em 2026, favorecendo quem chega com qualificacao reconhecida e proposta de emprego solida",
-      "Limiares salariais de KEI (45.000 euros) e SEI (30.000 euros) atualizados em agosto de 2025 direcionam o mercado a perfis qualificados com processamento mais rapido (SEI em cerca de 15 dias uteis)",
-      "Expansao de fintech, cibersseguranca, blockchain e inteligencia artificial cria janela para profissionais de TI e dados nos proximos anos",
-      "Compliance e gestao de risco em iGaming e servicos financeiros seguem com escassez sustentada",
-      "Reajuste do salario minimo em janeiro de 2026 e ajustes COLA elevam o piso de renda em ocupacoes de entrada",
-      "Malta Startup Residence Programme aberto a fundadores nao europeus em setores inovadores, com capital de entrada relativamente baixo (25.000 euros)"
+      "Lista de ocupacoes de escassez do Cedefop (Mismatch Priority Occupations) concentra vagas prioritarias em saude, TIC, engenharia/tecnica e oficios da construcao, areas onde o mercado local nao supre a demanda.",
+      "Setor de informacao e comunicacao com uma das maiores taxas de vagas em aberto segundo a EURES, sinalizando abertura para profissionais qualificados de fora."
     ],
     "jobBoards": [
       {
-        "label": "Jobsplus - servico publico de emprego de Malta (vagas e licencas)",
+        "label": "Jobsplus (agencia publica de emprego de Malta)",
         "url": "https://jobsplus.gov.mt/",
         "official": true
       },
       {
-        "label": "Jobsplus - pagina de vagas",
-        "url": "https://jobsplus.gov.mt/vacancy",
+        "label": "Working in Malta (portal oficial do governo)",
+        "url": "https://www.workinginmalta.com/",
         "official": true
       },
       {
-        "label": "EURES - portal europeu de empregos (mercado de Malta)",
-        "url": "https://eures.europa.eu/index_en",
-        "official": true
-      },
-      {
-        "label": "Identita - Expatriates Unit (permissoes de trabalho para nao europeus)",
-        "url": "https://identita.gov.mt/expatriates-unit-main-page/",
-        "official": true
-      },
-      {
-        "label": "Residency Malta - Startup Residence Programme (empreendedores)",
-        "url": "https://startup.residencymalta.gov.mt/",
+        "label": "EURES - Portal Europeu da Mobilidade Profissional",
+        "url": "https://eures.europa.eu/",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "NSO Malta - Labour Market (estatisticas oficiais de emprego e salarios)",
+        "label": "NSO Malta - Taxa de desemprego fevereiro de 2026",
+        "url": "https://nso.gov.mt/unemployment-rate-february-2026/",
+        "official": true
+      },
+      {
+        "label": "NSO Malta - Labour Market / Labour Force Survey",
         "url": "https://nso.gov.mt/labour_market/",
         "official": true
       },
       {
-        "label": "NSO Malta - Job Vacancy Survey Q2/2025",
-        "url": "https://nso.gov.mt/labour-market/job-vacancy-survey-q2-2025/",
-        "official": true
-      },
-      {
-        "label": "NSO Malta - Labour Force Survey Q3/2025",
-        "url": "https://nso.gov.mt/labour-market/labour-force-survey-q3-2025/",
-        "official": true
-      },
-      {
-        "label": "NSO Malta - Median annual basic salary indicator",
-        "url": "https://nso.gov.mt/selected_indicators/111178/",
-        "official": true
-      },
-      {
-        "label": "EURES - Labour Market Information Malta (escassez e excedente de ocupacoes)",
+        "label": "EURES - Labour Market Information: Malta",
         "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-malta_en",
         "official": true
       },
       {
-        "label": "Jobsplus - Empregar nacionais de paises terceiros (TCNs)",
-        "url": "https://jobsplus.gov.mt/find-candidates/non-eu-nationals-tcns",
+        "label": "Cedefop - Malta: Mismatch priority occupations",
+        "url": "https://www.cedefop.europa.eu/en/data-insights/malta-mismatch-priority-occupations",
         "official": true
       },
       {
-        "label": "Jobsplus - Malta Labour Migration Policy (julho 2025)",
-        "url": "https://jobsplus.gov.mt/media/0c3ppzjb/malta-labour-migration-policy-implementation-doc-jul-2025.pdf",
-        "official": true
-      },
-      {
-        "label": "Identita - Single Permit (elegibilidade e processo)",
+        "label": "Identita - Single Permit (nacionais de fora da UE)",
         "url": "https://identita.gov.mt/expatriates-unit-main-page/noneu-nationals/employment-related-permits/single-permit/",
         "official": true
       },
       {
-        "label": "Identita - Key Employee Initiative (elegibilidade)",
-        "url": "https://identita.gov.mt/expatriates-unit-main-page/noneu-nationals/employment-related-permits/highly-qualified-individuals/key-employee-initiative/who-is-eligible/",
-        "official": true
-      },
-      {
-        "label": "Comissao Europeia - EU Blue Card Malta",
-        "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/eu-blue-card/eu-blue-card-malta_en",
-        "official": true
-      },
-      {
-        "label": "MFHEA / MQRIC - reconhecimento de qualificacoes academicas e profissionais",
-        "url": "https://mfhea.mt/academic-qualifications/",
-        "official": true
-      },
-      {
-        "label": "DIER - National Minimum Wage (salario minimo nacional)",
+        "label": "DIER - National Minimum Wage",
         "url": "https://dier.gov.mt/en/services/employment-conditions/wages/national-minimum-wage/",
-        "official": true
-      },
-      {
-        "label": "Residency Malta - Startup Residence Programme (requisitos, agosto 2025)",
-        "url": "https://startup.residencymalta.gov.mt/wp-content/uploads/2025/08/Malta-Startup-Residence-Programme-Eligbility-and-Requirements-V4.2-August-2025.pdf",
         "official": true
       }
     ]
   },
   "cn": {
-    "updatedAt": "2026-06-22",
-    "overview": "China remains one of the largest labor markets in the world, but for foreigners it is a selective market built around scarce, high-value talent rather than mass employment. Legal work requires a Z visa plus a Foreigner's Work Permit sponsored by a licensed Chinese employer, administered by the Ministry of Human Resources and Social Security (MOHRSS) through the State Administration of Foreign Experts Affairs (SAFEA). Foreign workers are sorted into three tiers: Category A (high-end talent, fast-tracked), Category B (professional talent, controlled) and Category C (ordinary or short-term, restricted). The domestic backdrop in 2026 is mixed: official statistics show solid wage growth in non-private urban units (average annual wage of 129,441 yuan in 2025, up 4.3 percent), led by information technology, finance and scientific research, while youth unemployment for those aged 16 to 24 stayed elevated at roughly 16 to 17 percent through late 2025 and early 2026, pressured by a prolonged property slump. The clearest signal of intent toward foreigners is the new K visa, effective October 1, 2025, which lets young science and technology graduates enter without an employer invitation, a notable opening aimed at the global STEM pool. Business setup is more open than the labor market: foreigners can hold 100 percent of a company (WFOE) in any sector outside the foreign-investment Negative List, and the nationwide minimum registered capital requirement has been abolished, though capital must be fully paid within five years under the Company Law effective July 2024.",
+    "updatedAt": "2026-07-13",
+    "overview": "O mercado de trabalho urbano da China permaneceu geralmente estavel na primeira metade de 2026. Segundo o National Bureau of Statistics, a taxa de desemprego urbano pesquisada ficou em media de 5,3 por cento no primeiro trimestre e recuou para 5,1 por cento em maio de 2026, dentro da meta oficial de cerca de 5,5 por cento fixada pelo governo para o ano. Foram criados 2,99 milhoes de novos empregos urbanos no primeiro trimestre, rumo a meta anual de mais de 12 milhoes de vagas. O desemprego entre jovens de 16 a 24 anos, excluindo estudantes, caiu para 15,6 por cento em maio, ainda um ponto de pressao estrutural diante da entrada de mais de dez milhoes de novos formados no verao.",
     "hotSectors": [
-      "Artificial intelligence and machine learning",
-      "Semiconductors and chip design",
-      "New energy: EV, photovoltaic, wind, energy storage",
-      "Autonomous driving and intelligent cockpit",
-      "Cloud computing and big data",
-      "Cybersecurity",
-      "FinTech",
-      "Game development for global markets",
-      "Biotechnology and pharmaceuticals",
-      "High-end manufacturing and industrial automation"
-    ],
-    "coolingSectors": [
-      "Real estate and property development",
-      "Construction tied to the property cycle",
-      "Traditional after-school tutoring (curbed since the 2021 reforms)",
-      "Low-end manufacturing and assembly",
-      "Public-sector hiring constrained by local-government fiscal strain"
+      "Inteligencia artificial",
+      "Veiculos de nova energia (NEV)",
+      "Economia de baixa altitude (drones e aviacao leve)",
+      "Servicos de cuidado a idosos",
+      "Industrias digitais e verdes",
+      "Servicos de tecnologia da informacao",
+      "Financas",
+      "Pesquisa cientifica e servicos tecnicos",
+      "Manufatura avancada e trabalho tecnico qualificado"
     ],
     "inDemandRoles": [
       {
-        "role": "AI / machine learning engineer",
-        "note": "Demand reported to outstrip supply by roughly three to one per Zhaopin recruitment data; strong fit for Category A or the new K visa."
+        "role": "Trabalhadores tecnicos qualificados da manufatura",
+        "note": "Categoria historicamente mais deficitaria nos rankings trimestrais do MOHRSS; maioria das ocupacoes com maior escassez de mao de obra sao ligadas a producao e manufatura."
       },
       {
-        "role": "Semiconductor design and process engineer",
-        "note": "Talent critically scarce across design, fabrication, packaging and equipment as China pushes chip self-sufficiency."
+        "role": "Tecnicos e tecnicos senior (skilled/senior technicians)",
+        "note": "Escassez de trabalhadores de nivel medio e senior persiste apesar da pressao geral de emprego, segundo o MOHRSS."
       },
       {
-        "role": "New energy vehicle and battery engineer",
-        "note": "Explosive growth in EV, autonomous driving and intelligent cockpit roles; favors experienced technical leads."
+        "role": "Especialistas em inteligencia artificial",
+        "note": "Area prioritaria para treinamento em larga escala definida pelo governo."
       },
       {
-        "role": "Data scientist / analyst",
-        "note": "Cross-sector demand in tech, finance and manufacturing."
+        "role": "Profissionais de veiculos de nova energia",
+        "note": "Setor prioritario para capacitacao e criacao de empregos."
       },
       {
-        "role": "Software developer",
-        "note": "Consistent demand, especially for global-market and cloud products."
+        "role": "Cuidadores de idosos (elderly care)",
+        "note": "Prioridade oficial de treinamento diante do envelhecimento populacional."
       },
       {
-        "role": "English teacher (native speaker)",
-        "note": "One of the most accessible roles; international schools, universities and training centers. Requires a bachelor's degree plus TEFL/TESOL/CELTA."
-      },
-      {
-        "role": "Finance and FinTech professional",
-        "note": "Concentrated in Shanghai, Beijing and Shenzhen; high pay band."
-      },
-      {
-        "role": "Healthcare and medical specialist",
-        "note": "Regulated; requires recognized medical license and approvals."
-      },
-      {
-        "role": "Automation / robotics engineer",
-        "note": "Tied to high-end manufacturing upgrade."
-      }
-    ],
-    "byQualification": [
-      {
-        "area": "STEM graduates (computer science, AI, electronics, materials, energy)",
-        "advice": "The strongest position in the market. Target AI, semiconductor and new energy employers, and consider the new K visa (effective October 2025), which lets young STEM graduates from recognized universities enter without an employer invitation. A bachelor's qualifies; a master's or PhD plus experience pushes toward Category A and the fast 5-day permit track."
-      },
-      {
-        "area": "Engineering and manufacturing",
-        "advice": "Focus on EV, battery, automation and high-end manufacturing hubs. Two or more years of relevant experience plus a bachelor's typically meets Category B; specialized or scarce skills can reach Category A."
-      },
-      {
-        "area": "Finance, economics and business",
-        "advice": "Aim at Shanghai, Beijing and Shenzhen where finance pay leads the non-private sector. Category B is realistic with a bachelor's and 2+ years of experience; a salary at or above four times the local average wage helps qualify."
-      },
-      {
-        "area": "Education and humanities",
-        "advice": "Native-language teaching is the clearest entry route. A bachelor's degree (any field for English) plus a 120-hour accredited TEFL/TESOL/CELTA and ideally 2 years of experience meets the foreign-teacher rules; university and international-school posts pay better than training centers."
-      },
-      {
-        "area": "Healthcare, law and other regulated fields",
-        "advice": "Expect licensing barriers. Medicine requires a recognized doctor's license and practice approvals; foreign lawyers face a limited scope of practice versus domestic lawyers. Secure professional recognition before relying on these as a work-permit basis."
-      },
-      {
-        "area": "Entrepreneurs and investors",
-        "advice": "Setting up a WFOE is often more accessible than employment. 100 percent foreign ownership is allowed outside the Negative List in consulting, services, trading, manufacturing, R&D, tech, e-commerce and design; no minimum registered capital, but full contribution is due within five years."
+        "role": "Profissionais de industrias digitais e verdes",
+        "note": "MOHRSS planeja acelerar a criacao de empregos nessas frentes."
       }
     ],
     "salaries": [
       {
-        "role": "Information technology / software (urban non-private units, all employees average)",
-        "range": "248,752 yuan/year",
+        "role": "Media nacional, unidades urbanas nao privadas (2025)",
+        "range": "129.441 CNY/ano (media anual)",
         "source": {
-          "label": "National Bureau of Statistics of China, 2025 average annual wages",
+          "label": "National Bureau of Statistics of China",
           "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
           "official": true
         }
       },
       {
-        "role": "Finance (urban non-private units average)",
-        "range": "211,164 yuan/year",
+        "role": "Media nacional, unidades urbanas privadas (2025)",
+        "range": "71.590 CNY/ano (media anual)",
         "source": {
-          "label": "National Bureau of Statistics of China, 2025",
+          "label": "National Bureau of Statistics of China",
           "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
           "official": true
         }
       },
       {
-        "role": "Scientific research and technical services (urban non-private units average)",
-        "range": "182,064 yuan/year",
+        "role": "Servicos de tecnologia da informacao (setor mais bem pago, nao privadas, 2025)",
+        "range": "248.752 CNY/ano (media anual)",
         "source": {
-          "label": "National Bureau of Statistics of China, 2025",
+          "label": "National Bureau of Statistics of China",
           "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
           "official": true
         }
       },
       {
-        "role": "Professional / technical staff (enterprises above designated size)",
-        "range": "155,491 yuan/year",
+        "role": "Financas (nao privadas, 2025)",
+        "range": "211.164 CNY/ano (media anual)",
         "source": {
-          "label": "National Bureau of Statistics of China, 2025",
+          "label": "National Bureau of Statistics of China",
           "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
           "official": true
         }
       },
       {
-        "role": "Management positions (enterprises above designated size)",
-        "range": "210,016 yuan/year",
+        "role": "Pesquisa cientifica e servicos tecnicos (nao privadas, 2025)",
+        "range": "182.064 CNY/ano (media anual)",
         "source": {
-          "label": "National Bureau of Statistics of China, 2025",
+          "label": "National Bureau of Statistics of China",
           "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
           "official": true
         }
       },
       {
-        "role": "Education (urban non-private units average)",
-        "range": "133,539 yuan/year",
+        "role": "Gestao de nivel medio e senior (empresas acima do porte designado, 2025)",
+        "range": "210.016 CNY/ano (media anual)",
         "source": {
-          "label": "National Bureau of Statistics of China, 2025",
+          "label": "National Bureau of Statistics of China",
           "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
           "official": true
         }
       },
       {
-        "role": "All employees, urban non-private units (national average)",
-        "range": "129,441 yuan/year",
+        "role": "Pessoal profissional e tecnico (empresas acima do porte designado, 2025)",
+        "range": "155.491 CNY/ano (media anual)",
         "source": {
-          "label": "National Bureau of Statistics of China, 2025",
-          "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
-          "official": true
-        }
-      },
-      {
-        "role": "All employees, urban private units (national average)",
-        "range": "71,590 yuan/year",
-        "source": {
-          "label": "National Bureau of Statistics of China, 2025",
+          "label": "National Bureau of Statistics of China",
           "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Foreigners must hold a Z visa plus a Foreigner's Work Permit sponsored by a licensed Chinese employer, then convert to a residence permit after arrival; the permit application is filed online through the SAFEA system (fwp.safea.gov.cn) and overseen by MOHRSS and its provincial Human Resources and Social Security bureaus. Applicants are classified into three tiers. Category A (high-end talent) includes scientists, tech leaders, international entrepreneurs and urgently needed specialists, with a green-channel and a permit decision in about five working days. Category B (professional talent) typically requires a bachelor's degree plus 2+ years of relevant experience and applicants under 60, or recognized skilled-trade certificates, native-language teachers, a salary of at least four times the local average wage, or a points score above 60. Category C (ordinary or short-term) covers quota positions, internships and work under 90 days. In 2026 Beijing and Shanghai resumed enforcing salary-based thresholds (Category A around six times the local average social wage, Category B around four times), and the system requires a gapless chronological work and education history. The new K visa, effective October 1, 2025, is a separate route for young science and technology talent that does NOT require an employer invitation and allows education, research, entrepreneurial and business activities, with consular practice applying an informal age guidance of roughly 18 to 45. Regulated professions carry extra barriers: foreign-language teachers must teach their native language with a bachelor's degree and 2 years of experience (waivable with an accredited TEFL/TESOL/CELTA or education degree); medicine requires a recognized doctor's license and practice approvals; foreign lawyers have a restricted scope versus domestic lawyers; and industries with pre-approval requirements need clearance from the relevant authority before a foreigner can be hired. Since late 2024 the physical work permit card has been integrated with the social security card. For entrepreneurs, 100 percent foreign ownership (WFOE) is permitted outside the foreign-investment Negative List; restricted areas (civil aviation, marine shipping, most value-added telecom, oil and gas exploration, large-scale fuel retail, tertiary education and certain agricultural breeding) still require a Chinese joint-venture partner.",
+    "foreignerRules": "Para trabalhar legalmente na China, o estrangeiro precisa de um Foreigner's Work Permit e de um visto de trabalho, sob regras do sistema unificado do Ministerio de Recursos Humanos e Seguranca Social. O candidato deve ter no minimo 18 anos, nao ter antecedentes criminais, possuir a qualificacao ou expertise exigida e ser contratado por um empregador chines legalmente constituido, para funcao alinhada as necessidades do desenvolvimento economico do pais e sem trabalhador domestico qualificado disponivel. Os estrangeiros sao classificados em tres categorias por sistema de pontos e catalogo oficial. Categoria A (talentos de alto nivel, como cientistas, empreendedores e especialistas), com canal rapido, sem limite de idade, escolaridade ou cota, aprovacao em cerca de 5 dias uteis e permissao de ate 5 anos. Categoria B (profissionais especializados), tipicamente diploma de bacharel mais 2 anos de experiencia relevante e idade abaixo de 60 anos, ou trabalhador qualificado, ou professor de idioma; sujeita a demanda de mercado. Categoria C (demais estrangeiros, trabalho de curta duracao de ate 90 dias, estudantes e pessoal sob cota). O processo para vinculos acima de 90 dias segue a ordem: o empregador solicita online e recebe o Notice (notificacao) do Work Permit; com o Notice o estrangeiro pede o visto Z (trabalho) no consulado; apos entrar na China, o empregador registra o Work Permit oficial em ate 15 dias; e o estrangeiro obtem a autorizacao de residencia de trabalho junto a seguranca publica em ate 30 dias da entrada.",
     "opportunityWindows": [
-      "New K visa (effective Oct 1, 2025) opens entry for young STEM talent without an employer sponsor, a rare easing in an otherwise sponsor-gated system.",
-      "Severe AI engineer shortage, with demand reported at roughly three times supply.",
-      "Semiconductor self-sufficiency drive creating scarce-talent roles across the whole chip supply chain.",
-      "New energy and EV boom (photovoltaic, wind, storage, autonomous driving, intelligent cockpit) generating high-quality technical jobs.",
-      "100 percent foreign ownership of WFOEs outside the Negative List, with no minimum registered capital.",
-      "Steady, structural demand for native-speaker English teachers at universities and international schools."
+      "Governo prioriza treinamento em larga escala e criacao de empregos em inteligencia artificial, veiculos de nova energia, economia de baixa altitude e cuidado a idosos, sinalizando demanda dirigida por politica publica.",
+      "Cerca de 59 mil feiras de emprego realizadas em nivel nacional no primeiro trimestre de 2026, ofertando aproximadamente 36 milhoes de vagas.",
+      "Talentos estrangeiros de alto nivel enquadrados na Categoria A tem canal rapido de aprovacao (cerca de 5 dias uteis) e permissao de trabalho de ate 5 anos."
     ],
     "jobBoards": [
       {
-        "label": "SAFEA / MOHRSS Foreigner Work Permit Service System (fwp.safea.gov.cn)",
-        "url": "http://fwp.safea.gov.cn/",
+        "label": "China Public Recruitment Network (MOHRSS)",
+        "url": "http://job.mohrss.gov.cn/",
         "official": true
       },
       {
-        "label": "Working in Beijing - Beijing Municipal Government (employment services for foreigners)",
-        "url": "https://english.beijing.gov.cn/workinginbeijing/",
+        "label": "Ministerio de Recursos Humanos e Seguranca Social (MOHRSS)",
+        "url": "http://www.mohrss.gov.cn/",
         "official": true
       },
       {
-        "label": "Shenzhen Government Online - Foreigner's Work Permit and employment services",
-        "url": "https://www.sz.gov.cn/en_szgov/services/personal/employment/",
-        "official": true
-      },
-      {
-        "label": "Nanjing Government - Foreigner services: employment and work permit",
-        "url": "https://english.nanjing.gov.cn/IWantto/Work/",
-        "official": true
-      },
-      {
-        "label": "China State Council - latest policy releases (visa and talent policy)",
-        "url": "https://english.www.gov.cn/policies/latestreleases/",
+        "label": "Servico Oficial do Foreigner's Work Permit na China (SAFEA/portal de servicos)",
+        "url": "https://fwp.safea.gov.cn/",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "National Bureau of Statistics of China - Average Annual Wages of Employees in Urban Units in 2025",
+        "label": "China's job market stable in Q1, 2.99 million urban jobs added (gov.cn)",
+        "url": "https://english.www.gov.cn/archive/statistics/202604/28/content_WS69f07cdbc6d00ca5f9a0aacc.html",
+        "official": true
+      },
+      {
+        "label": "Average Annual Wages of Employees in Urban Units in 2025 (National Bureau of Statistics of China)",
         "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
         "official": true
       },
       {
-        "label": "State Council of China - China to launch new K visa for young science and technology professionals",
-        "url": "https://english.www.gov.cn/policies/latestreleases/202508/14/content_WS689dd0d3c6d0868f4e8f4d1e.html",
+        "label": "China's surveyed urban unemployment rate at 5.2% (April 2026) (gov.cn)",
+        "url": "https://english.www.gov.cn/archive/statistics/202605/18/content_WS6a0ab34ec6d00ca5f9a0b08d.html",
         "official": true
       },
       {
-        "label": "Beijing Municipal Government - Foreign Professionals (Category B) employment guide",
-        "url": "https://english.beijing.gov.cn/workinginbeijing/quickguideonemploymentservices/foreignprofessionals/",
+        "label": "Classification Standard for Foreigners Working in China (People's Government of Pingshan District)",
+        "url": "https://www.szpsq.gov.cn/english/Life/Career/content/post_12161356.html",
         "official": true
       },
       {
-        "label": "Beijing Municipal Government - Notification Letter of Foreigner's Work Permit (talents outside China)",
-        "url": "https://english.beijing.gov.cn/mostrequested/workpermit/noncreditbasedtalentsoutsideofchina/",
-        "official": true
-      },
-      {
-        "label": "Hunan Provincial Government - FAQs for Foreigner's Work Permit in China",
+        "label": "FAQs for Foreigner's Work Permit in China (Hunan Provincial Government)",
         "url": "http://enghunan.gov.cn/hneng/Services/Work/WorkPermit/202411/t20241113_33499160.html",
         "official": true
       },
       {
-        "label": "Shenzhen Government Online - Foreigner's Work Permit",
-        "url": "https://www.sz.gov.cn/en_szgov/services/personal/employment/content/post_11701108.html",
+        "label": "Foreign Professionals (Category B) employment services (Beijing Municipal Government)",
+        "url": "https://english.beijing.gov.cn/workinginbeijing/quickguideonemploymentservices/foreignprofessionals/",
         "official": true
-      },
-      {
-        "label": "SAFEA - Foreigner's Work Permit in China (official portal info)",
-        "url": "http://en.safea.gov.cn/Foreignerwrc.html",
-        "official": true
-      },
-      {
-        "label": "China Law Translate - Measures for the Hiring and Management of Foreign Teachers (official draft text)",
-        "url": "https://www.chinalawtranslate.com/en/foreign-teacher-rules-draft/",
-        "official": false
-      },
-      {
-        "label": "China Briefing - China Work Permits: A, B, or C Tier Talent classification",
-        "url": "https://www.china-briefing.com/news/china-work-permits-are-you-a-b-c-tier-talent/",
-        "official": false
-      },
-      {
-        "label": "CNBC - China youth flocking to government jobs amid economic slowdown (youth unemployment data)",
-        "url": "https://www.cnbc.com/2025/12/17/china-youth-unemployment-civil-service-jobs-economy-slowdown.html",
-        "official": false
-      },
-      {
-        "label": "Trading Economics - China Youth Unemployment Rate (NBS-sourced series)",
-        "url": "https://tradingeconomics.com/china/youth-unemployment-rate",
-        "official": false
-      },
-      {
-        "label": "HiredChina - Global talent opportunities and in-demand roles 2026",
-        "url": "https://www.hiredchina.com/articles/global-talent-china-careers/",
-        "official": false
-      },
-      {
-        "label": "CIProcess - China Negative List and foreign investment 2026",
-        "url": "https://www.ciprocess.com/The-negative-list-for-Foreign-Investments-in-China-by-sector-of-activity.htm",
-        "official": false
       }
     ]
   },
   "sg": {
-    "updatedAt": "2026-06-22",
-    "overview": "Singapura entra em 2026 com um mercado de trabalho estável, porém mais cauteloso. Segundo o relatório do primeiro trimestre do Ministry of Manpower (MOM), o emprego total cresceu pelo 18º trimestre consecutivo, com aumento de 9.400 postos no 1T 2026, e a taxa de desemprego geral permaneceu baixa, em 2,0% (2,9% entre residentes e 3,1% entre cidadãos em março de 2026). Ainda havia mais vagas abertas do que desempregados, com 73,3 mil vagas em março e proporção de 1,46 vaga por desempregado, embora a demanda por mão de obra venha esfriando (eram 77,7 mil vagas em dezembro de 2025). O recado para o estrangeiro é duplo. Por um lado, a cidade-Estado continua atraindo talento qualificado e mantém uma Lista de Ocupações em Escassez (Shortage Occupation List) que dá pontos extras a profissionais de tecnologia, saúde, finanças e economia verde. Por outro, as exigências de salário e pontuação para os vistos de trabalho subiram em 1 de janeiro de 2026 e voltam a subir em 2027, num movimento contínuo do governo para priorizar o emprego local e elevar o nível do estrangeiro admitido. As demissões subiram levemente (3.830 no 1T 2026, ante 3.690 no trimestre anterior), concentradas em manufatura, serviços financeiros e serviços profissionais, e a intenção de contratar das empresas caiu de forma expressiva entre fevereiro e março, sinal de prudência diante da incerteza econômica global. Para quem quer trabalhar ou empreender em Singapura, o caminho é claramente regido por mérito e salário: quanto mais alto o cargo e a remuneração, mais simples a entrada via Employment Pass, ONE Pass ou EntrePass.",
+    "updatedAt": "2026-07-13",
+    "overview": "O mercado de trabalho de Singapura seguia aquecido e estavel no fim de 2025, segundo o Ministry of Manpower (MOM). A taxa de desemprego geral ficou em 2,0% em dezembro de 2025 (residentes 2,9% e cidadaos 3,0%), niveis considerados baixos. O emprego total cresceu 55.500 postos no ano de 2025, o 17o trimestre consecutivo de expansao desde o 4o trimestre de 2021. As vagas em aberto subiram de 69.600 em setembro para 77.700 em dezembro de 2025, elevando a relacao vagas por desempregado para 1,58, sinal de demanda por mao de obra maior que a oferta. As dispensas se mantiveram dentro de padroes nao recessivos, com 3.690 no trimestre e 14.490 no ano. O MOM destaca que uma em cada duas vagas em 2025 correspondia a funcoes recem criadas, puxadas por expansao de negocios.",
     "hotSectors": [
-      "Tecnologia da informação e inteligência artificial (AI engineers, cientistas de dados, desenvolvedores de software, especialistas em nuvem)",
-      "Cibersegurança (arquitetos de segurança, perícia digital, testes de intrusão)",
-      "Saúde e cuidados (enfermagem, fisioterapia, terapia ocupacional, radiografia)",
-      "Semicondutores e engenharia avançada",
-      "Serviços financeiros e gestão de patrimônio (family offices, ultra high net worth)",
-      "Economia verde e mercado de carbono",
-      "Transporte e armazenagem (logística)",
-      "Serviços administrativos e de apoio"
-    ],
-    "coolingSectors": [
-      "Manufatura tradicional (concentrou demissões no 1T 2026)",
-      "Serviços financeiros em funções genéricas (demissões pontuais apesar do setor seguir aquecido no topo)",
-      "Serviços profissionais (consultoria e correlatos com demissões em alta)"
+      "Servicos Financeiros",
+      "Saude e Servicos Sociais",
+      "Tecnologia da Informacao e Comunicacao (Infocomm)",
+      "Semicondutores",
+      "Construcao",
+      "Economia Verde (mercado de carbono)",
+      "Maritimo",
+      "Agritech (tecnologia de alimentos)"
     ],
     "inDemandRoles": [
       {
-        "role": "AI Engineer / AI Researcher / Cientista de dados",
-        "note": "Constam na Shortage Occupation List 2026 (Infocomm Technology); dão até 20 pontos extras no COMPASS e podem habilitar EP de 5 anos."
+        "role": "Cientista/engenheiro de Inteligencia Artificial",
+        "note": "Setor Infocomm; consta na Shortage Occupation List (SOL) do MOM, que concentra quase metade das vagas em TI."
       },
       {
-        "role": "Desenvolvedor de software e aplicações web/mobile",
-        "note": "Na SOL 2026; alta demanda persistente em tecnologia."
+        "role": "Cientista de dados",
+        "note": "Setor Infocomm; ocupacao na SOL do MOM."
       },
       {
-        "role": "Especialista em cibersegurança (arquiteto, perícia digital, pentester)",
-        "note": "Quatro funções de cibersegurança entraram na SOL 2026 por escassez aguda de talento local."
+        "role": "Especialista em nuvem (cloud)",
+        "note": "Setor Infocomm; ocupacao na SOL do MOM."
       },
       {
-        "role": "Especialista em nuvem (Cloud specialist)",
-        "note": "Na SOL 2026 (Infocomm Technology)."
+        "role": "Arquiteto de ciberseguranca",
+        "note": "Setor Infocomm; ocupacao na SOL do MOM."
       },
       {
-        "role": "Engenheiro de semicondutores, de processo e de instrumentação",
-        "note": "Na SOL 2026 (setor de semicondutores)."
+        "role": "Desenvolvedor de software e de aplicacoes web/mobile",
+        "note": "Setor Infocomm; ocupacao na SOL do MOM."
       },
       {
-        "role": "Enfermeiro registrado, fisioterapeuta, terapeuta ocupacional, radiografista diagnóstico, podólogo, psicólogo clínico, assistente social médico",
-        "note": "Saúde domina a SOL 2026 com sete funções."
+        "role": "Especialista em teste de intrusao (penetration testing)",
+        "note": "Setor Infocomm; ocupacao na SOL do MOM."
       },
       {
-        "role": "Relationship manager / investment advisor / wealth planner para ultra high net worth e family offices",
-        "note": "Na SOL 2026 (serviços financeiros)."
+        "role": "Engenheiro de semicondutores",
+        "note": "Setor de semicondutores; ocupacao nova na SOL, ao lado de engenheiro de instrumentacao e engenheiro de processo."
       },
       {
-        "role": "Carbon trader, gestor e auditor de projetos de carbono",
-        "note": "Economia verde, na SOL 2026."
+        "role": "Enfermeiro registrado",
+        "note": "Setor de saude; ocupacao na SOL do MOM."
       },
       {
-        "role": "Marine superintendent e marine technical superintendent",
-        "note": "Setor marítimo, na SOL 2026."
+        "role": "Fisioterapeuta, terapeuta ocupacional e radiografo de diagnostico",
+        "note": "Setor de saude; ocupacoes na SOL do MOM."
       },
       {
-        "role": "Cientista de alimentos de proteína alternativa / biotecnologista de novos alimentos",
-        "note": "Agritech, na SOL 2026."
+        "role": "Psicologo clinico e assistente social medico",
+        "note": "Setor de saude; ocupacoes na SOL do MOM."
+      },
+      {
+        "role": "Gestor de relacionamento e planejador de patrimonio (family office / grandes fortunas)",
+        "note": "Setor de servicos financeiros; ocupacoes na SOL do MOM."
+      },
+      {
+        "role": "Trader de carbono e gestor de projetos de carbono",
+        "note": "Setor de economia verde; ocupacoes na SOL do MOM."
+      },
+      {
+        "role": "Superintendente maritimo e superintendente tecnico maritimo",
+        "note": "Setor maritimo; ocupacoes na SOL do MOM."
       }
     ],
     "byQualification": [
       {
-        "area": "Tecnologia da informação, ciência da computação e engenharia de software",
-        "advice": "Maior porta de entrada do país. Funções como AI engineer, cientista de dados, desenvolvedor e especialista em nuvem estão na Shortage Occupation List 2026, somando até 20 pontos no COMPASS e podendo habilitar Employment Pass de 5 anos. Mire empregadores estabelecidos e use o MyCareersFuture."
+        "area": "Tecnologia da Informacao (Infocomm)",
+        "advice": "Concentra quase metade das ocupacoes carentes da SOL. Funcoes de IA, dados, nuvem, ciberseguranca e desenvolvimento de software tem alta demanda e algumas qualificam para Employment Pass de 5 anos."
       },
       {
-        "area": "Cibersegurança",
-        "advice": "Quatro funções entraram na SOL 2026 por falta aguda de talento local. Certificações reconhecidas e experiência em perícia digital, testes de intrusão e engenharia de segurança elevam muito a empregabilidade e a pontuação no EP."
+        "area": "Saude",
+        "advice": "Setor citado pelo MOM como motor de crescimento do emprego residente. Enfermagem, fisioterapia, terapia ocupacional, radiografia e psicologia clinica constam na SOL, com demanda sustentada."
       },
       {
-        "area": "Saúde (enfermagem, fisioterapia, terapia ocupacional, radiografia, psicologia clínica)",
-        "advice": "Setor com sete funções na SOL 2026. São profissões regulamentadas: além do visto, exige-se registro junto aos conselhos profissionais (ex.: Singapore Nursing Board, Allied Health Professions Council) antes de exercer."
+        "area": "Semicondutores e engenharia",
+        "advice": "Novas ocupacoes na SOL a partir de 2026 (engenheiro de semicondutores, de instrumentacao e de processo), refletindo investimento industrial e escassez de talento tecnico."
       },
       {
-        "area": "Engenharia de semicondutores, processos e instrumentação",
-        "advice": "Demanda estrutural ligada à indústria de chips. Funções na SOL 2026; bom potencial para EP com pontuação reforçada."
+        "area": "Servicos financeiros",
+        "advice": "Motor de crescimento do emprego residente segundo o MOM. Funcoes ligadas a gestao de patrimonio e family office estao na SOL, mas os limites salariais de passe sao mais altos que a media."
       },
       {
-        "area": "Finanças e gestão de patrimônio",
-        "advice": "O topo (family offices, ultra high net worth) está na SOL 2026 e segue contratando, mas funções genéricas viram demissões. O salário mínimo do EP é mais alto no setor financeiro (S$6.200/mês na base em 2026, subindo para S$6.600 em 2027)."
-      },
-      {
-        "area": "Economia verde e mercado de carbono",
-        "advice": "Nicho em ascensão com várias funções de carbono na SOL 2026. Bom para quem tem experiência internacional em ESG, créditos de carbono e verificação."
-      },
-      {
-        "area": "Empreendedores e fundadores",
-        "advice": "O caminho é o EntrePass (startup inovadora ou venture-backed, 30% de participação, empresa com até 6 meses de constituição) ou, para perfis de altíssima renda, o ONE Pass. SMEs tradicionais não se qualificam ao EntrePass; o foco é tecnologia proprietária e escalabilidade regional."
-      },
-      {
-        "area": "Logística, transporte, armazenagem e serviços administrativos",
-        "advice": "Foram os setores que mais geraram empregos para residentes no 1T 2026, mas muitas funções operacionais caem em faixas de S Pass/Work Permit, com cotas e salários mínimos próprios (S Pass base de S$3.300/mês em 2026)."
+        "area": "Economia verde e maritimo",
+        "advice": "Nichos emergentes na SOL (mercado de carbono, superintendencia maritima) com poucas vagas porem alta especializacao exigida."
       }
     ],
     "salaries": [
       {
-        "role": "Renda mediana mensal bruta (residentes em tempo integral, todas as ocupações)",
-        "range": "S$5.775/mês (2025)",
+        "role": "Renda mensal bruta mediana do trabalhador residente em tempo integral (referencia de mercado)",
+        "range": "SGD 5.775 por mes (mediana, meados de 2025, inclui contribuicao patronal ao CPF)",
         "source": {
-          "label": "MOM/SingStat - Summary Table: Income",
-          "url": "https://stats.mom.gov.sg/pages/income-summary-table.aspx",
+          "label": "Ministry of Manpower / Department of Statistics Singapore",
+          "url": "https://stats.mom.gov.sg/Pages/Income-Summary-Table.aspx",
           "official": true
         }
       },
       {
-        "role": "Salário mínimo qualificador do Employment Pass (geral, base por idade)",
-        "range": "S$5.600/mês (23 anos ou menos) a S$10.700/mês (45+) em 2026",
+        "role": "Salario minimo qualificante para Employment Pass (setores gerais)",
+        "range": "a partir de SGD 5.600 por mes (piso sobe com a idade ate cerca de SGD 10.700)",
         "source": {
-          "label": "MOM - Eligibility for Employment Pass",
+          "label": "Ministry of Manpower - elegibilidade do Employment Pass",
           "url": "https://www.mom.gov.sg/passes-and-permits/employment-pass/eligibility",
           "official": true
         }
       },
       {
-        "role": "Salário mínimo qualificador do Employment Pass (serviços financeiros)",
-        "range": "S$6.200/mês (23 anos ou menos) a S$11.800/mês (45+) em 2026",
+        "role": "Salario minimo qualificante para Employment Pass (servicos financeiros)",
+        "range": "a partir de SGD 6.200 por mes (piso sobe com a idade ate cerca de SGD 11.800)",
         "source": {
-          "label": "MOM - Eligibility for Employment Pass",
+          "label": "Ministry of Manpower / Singapore EDB",
           "url": "https://www.mom.gov.sg/passes-and-permits/employment-pass/eligibility",
           "official": true
         }
       },
       {
-        "role": "Salário mínimo qualificador do S Pass (base, setor geral)",
-        "range": "S$3.300/mês em 2026 (S$3.800 em serviços financeiros); sobe para S$3.600 em 2027",
+        "role": "Salario minimo qualificante para S Pass (setores gerais)",
+        "range": "a partir de SGD 3.300 por mes (desde setembro de 2025; piso maior por idade)",
         "source": {
-          "label": "MOM - Factsheet Foreign Workforce Policy (COS 2026)",
-          "url": "https://www.mom.gov.sg/-/media/mom/documents/press-releases/2026/factsheet-on-foreign-workforce-policies-03032026.pdf",
-          "official": true
-        }
-      },
-      {
-        "role": "Salário mínimo fixo do ONE Pass (Overseas Networks & Expertise Pass)",
-        "range": "S$30.000/mês",
-        "source": {
-          "label": "MOM - Eligibility for Overseas Networks & Expertise Pass",
-          "url": "https://www.mom.gov.sg/passes-and-permits/overseas-networks-expertise-pass/eligibility",
+          "label": "Ministry of Manpower - elegibilidade do S Pass",
+          "url": "https://www.mom.gov.sg/passes-and-permits/s-pass/eligibility",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Estrangeiro não pode trabalhar em Singapura sem um visto de trabalho emitido pelo MOM, e o tipo de visto depende do salário e da qualificação. Employment Pass (EP): para profissionais, gerentes e executivos; exige salário mínimo qualificador (S$5.600/mês na base em 2026, mais alto conforme a idade, e S$6.200/mês no setor financeiro) e aprovação no COMPASS, sistema de pontos que requer no mínimo 40 de 100 pontos, avaliando salário, qualificação, diversidade da empresa e apoio ao emprego local. A partir de 1 de janeiro de 2026 valem listas atualizadas de qualificações e a nova Shortage Occupation List, que concede até 20 pontos extras a quem preenche funções em escassez (tecnologia, saúde, finanças de topo, economia verde, semicondutores, marítimo, agritech) e pode habilitar EP de 5 anos para certos cargos de tecnologia. As exigências sobem novamente em 1 de janeiro de 2027 (base do EP para S$6.000/mês; financeiro para S$6.600/mês). S Pass: para técnicos de qualificação intermediária, com salário mínimo de S$3.300/mês em 2026 (S$3.800 no financeiro), sujeito a cota por empresa (até 10% da força de trabalho local em serviços; 15% em construção, processo, marinha e manufatura) e a levy mensal de S$650 por trabalhador. Work Permit: para trabalhadores de setores como construção, manufatura, marinha e processo, com cotas e levies próprios. O Local Qualifying Salary, piso que define quais funcionários locais contam para as cotas, sobe de S$1.600 para S$1.800/mês em 1 de julho de 2026. ONE Pass: para talentos de altíssimo nível com salário fixo de S$30.000/mês ou trajetória de destaque em ciência, artes, esportes ou pesquisa; válido por 5 anos e permite trabalhar para mais de um empregador. EntrePass: para empreendedores que fundam empresa inovadora ou venture-backed em Singapura, com pelo menos 30% de participação e empresa constituída há no máximo 6 meses; foco em tecnologia proprietária e startups escaláveis, não em SMEs tradicionais. Profissões regulamentadas exigem registro adicional junto ao conselho profissional competente antes do exercício, caso de enfermeiros (Singapore Nursing Board), profissionais de saúde aliados (Allied Health Professions Council), médicos, advogados, contadores e engenheiros, entre outros, independentemente do visto.",
+    "foreignerRules": "Estrangeiro precisa de um passe de trabalho emitido pelo MOM, sempre patrocinado por um empregador em Singapura; nao existe visto de trabalho autonomo comum. Os principais sao: Employment Pass (EP), para profissionais, gerentes e executivos, que exige salario minimo qualificante de SGD 5.600 por mes nos setores gerais e SGD 6.200 nos servicos financeiros (a partir de 2025), com o piso subindo conforme a idade ate cerca de SGD 10.700 (geral) e SGD 11.800 (financeiro) na faixa dos 40 e poucos anos; alem do salario, o candidato passa pelo sistema de pontos COMPASS, que avalia salario, qualificacao, diversidade da empresa e contribuicao local, com bonus para ocupacoes da Shortage Occupation List. O S Pass, para tecnicos e profissionais de nivel medio, exige salario minimo de SGD 3.300 por mes (a partir de setembro de 2025) nos setores gerais e SGD 3.800 nos servicos financeiros, com piso maior por idade e cotas e taxas pagas pelo empregador. Ha ainda o Work Permit para trabalhadores de setores como construcao e manufatura. Somente o salario fixo mensal conta para atingir os limites; componentes variaveis nao entram.",
     "opportunityWindows": [
-      "Janela antes de 1 de janeiro de 2027: os salários mínimos do EP e do S Pass sobem novamente nessa data, então candidatar-se em 2026 ainda pega pisos mais baixos.",
-      "Funções da Shortage Occupation List 2026 dão até 20 pontos extras no COMPASS e, em alguns cargos de tecnologia, EP de validade de 5 anos, facilitando muito a aprovação.",
-      "Setores de transporte/armazenagem e serviços administrativos lideraram a geração de empregos para residentes no 1T 2026.",
-      "Mercado ainda com mais vagas do que desempregados (1,46 vaga por desempregado em março de 2026), apesar do esfriamento.",
-      "Empreendedores de tecnologia com captação (a partir de ~S$100 mil em rodada) ou apoio de aceleradora têm caminho via EntrePass com foco governamental contínuo em startups inovadoras."
+      "Shortage Occupation List (SOL) do MOM: 30 ocupacoes em 7 setores (Agritech, Servicos Financeiros, Economia Verde, Saude, Infocomm, Maritimo e Semicondutores). Profissionais estrangeiros que ocupam essas funcoes ganham pontos no bonus C5. Skills do sistema COMPASS, facilitando a aprovacao do Employment Pass.",
+      "Setor Infocomm concentra quase metade das vagas da SOL e algumas dessas funcoes qualificam para Employment Pass de duracao de 5 anos.",
+      "Lista SOL revisada divulgada em novembro de 2025 e em vigor desde 1 de janeiro de 2026, com novas ocupacoes em semicondutores (engenheiro de semicondutores, de instrumentacao e de processo) e reforco em saude."
     ],
     "jobBoards": [
       {
-        "label": "MyCareersFuture (portal oficial de empregos do governo, Workforce Singapore)",
+        "label": "MyCareersFuture (portal oficial do governo, Workforce Singapore)",
         "url": "https://www.mycareersfuture.gov.sg",
         "official": true
       },
       {
-        "label": "Ministry of Manpower (MOM) - vistos e regras de trabalho",
-        "url": "https://www.mom.gov.sg",
-        "official": true
-      },
-      {
-        "label": "Workforce Singapore (WSG) - programas de carreira e capacitação",
-        "url": "https://www.wsg.gov.sg",
+        "label": "Ministry of Manpower (MOM) - passes e permissoes de trabalho",
+        "url": "https://www.mom.gov.sg/passes-and-permits",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "MOM - Report: Labour Market First Quarter 2026 (PDF)",
-        "url": "https://stats.mom.gov.sg/iMAS_PdfLibrary/mrsd-Labour-Market-Report-1Q-2026.pdf",
+        "label": "Ministry of Manpower - Labour Market Report 4Q 2025 (comunicado oficial)",
+        "url": "https://www.mom.gov.sg/newsroom/press-releases/2026/0320-labour-market-4q-2025",
         "official": true
       },
       {
-        "label": "MOM - Press release: Labour Market Report 1Q 2026",
-        "url": "https://www.mom.gov.sg/newsroom/press-releases/2026/0615-lmr-1q-2026",
-        "official": true
-      },
-      {
-        "label": "MOM - Eligibility for Employment Pass (salário e COMPASS)",
-        "url": "https://www.mom.gov.sg/passes-and-permits/employment-pass/eligibility",
-        "official": true
-      },
-      {
-        "label": "MOM - COMPASS C5 Skills Bonus / Shortage Occupation List (SOL)",
+        "label": "Ministry of Manpower - COMPASS C5 Skills bonus e Shortage Occupation List (SOL)",
         "url": "https://www.mom.gov.sg/passes-and-permits/employment-pass/eligibility/compass-c5-skills-bonus-shortage-occupation-list-sol",
         "official": true
       },
       {
-        "label": "MOM - Shortage Occupation List Employer Guide (PDF)",
-        "url": "https://www.mom.gov.sg/-/media/mom/documents/work-passes-and-permits/compass/sol-guidebook.pdf",
+        "label": "Ministry of Manpower / Department of Statistics - Income Summary Table (renda mediana)",
+        "url": "https://stats.mom.gov.sg/Pages/Income-Summary-Table.aspx",
         "official": true
       },
       {
-        "label": "MOM - Factsheet: Foreign Workforce Policy Announcements at COS 2026 (PDF)",
-        "url": "https://www.mom.gov.sg/-/media/mom/documents/press-releases/2026/factsheet-on-foreign-workforce-policies-03032026.pdf",
+        "label": "Ministry of Manpower - elegibilidade do Employment Pass",
+        "url": "https://www.mom.gov.sg/passes-and-permits/employment-pass/eligibility",
         "official": true
       },
       {
-        "label": "MOM - EntrePass",
-        "url": "https://www.mom.gov.sg/passes-and-permits/entrepass",
+        "label": "Ministry of Manpower - elegibilidade do S Pass",
+        "url": "https://www.mom.gov.sg/passes-and-permits/s-pass/eligibility",
         "official": true
       },
       {
-        "label": "MOM - Eligibility for Overseas Networks & Expertise Pass (ONE Pass)",
-        "url": "https://www.mom.gov.sg/passes-and-permits/overseas-networks-expertise-pass/eligibility",
-        "official": true
-      },
-      {
-        "label": "MOM/SingStat - Summary Table: Income (renda mediana 2025)",
-        "url": "https://stats.mom.gov.sg/pages/income-summary-table.aspx",
-        "official": true
-      },
-      {
-        "label": "SingStat - Labour, Employment, Wages and Productivity",
-        "url": "https://www.singstat.gov.sg/find-data/explore-data-themes/economy-prices/labour-employment-wages-and-productivity/latest-news-data",
+        "label": "Singapore Economic Development Board (EDB) - limite salarial do Employment Pass",
+        "url": "https://www.edb.gov.sg/en/business-insights/insights/salary-threshold-for-new-employment-pass-applicants-to-be-raised-to-5600-from-2025.html",
         "official": true
       }
     ]
   },
   "nz": {
-    "updatedAt": "2026-06-22",
-    "overview": "A Nova Zelandia entrou em 2026 com um mercado de trabalho em desaceleracao apos a recessao tecnica de 2024 a 2025, mas ainda estrutural e cronicamente carente de mao de obra qualificada em saude, construcao, engenharia e tecnologia. Os dados oficiais da Stats NZ para o trimestre de marco de 2026 mostram taxa de desemprego de 5,3 por cento (queda ante os 5,4 por cento do trimestre de dezembro de 2025), com 163 mil desempregados, taxa de emprego de 66,7 por cento, participacao da forca de trabalho em torno de 70,4 por cento e subutilizacao de 12,9 por cento (406 mil pessoas), indicador que aponta folga no mercado. O ganho medio por hora subiu para 44,12 dolares neozelandeses (alta de 3,1 por cento no ano), enquanto o indice de custo do trabalho cresceu 2,0 por cento, sinalizando que a inflacao salarial arrefeceu. O desemprego juvenil segue elevado, em 24,9 por cento na faixa de 15 a 19 anos e 12,2 por cento entre 20 e 24 anos. Para o imigrante, a leitura e dupla: o mercado generalista esfriou e a concorrencia por vagas de baixa qualificacao aumentou, mas o governo mantem a Green List como via prioritaria de residencia para profissoes em escassez, e o salario mediano usado pela imigracao subiu para 35,00 dolares por hora a partir de 9 de marco de 2026. Quem chega com qualificacao reconhecida em saude, engenharia, construcao ou TI encontra demanda real e caminho rapido para residencia; quem chega sem qualificacao alinhada enfrenta um mercado competitivo e morno.",
+    "updatedAt": "2026-07-13",
+    "overview": "A taxa de desemprego da Nova Zelandia ficou em 5,3 por cento no trimestre de marco de 2026, com leve recuo ante os 5,4 por cento do trimestre de dezembro de 2025, segundo dados sazonalmente ajustados do Stats NZ. Havia 163 mil pessoas desempregadas, e a taxa de emprego alcancou 66,7 por cento. A taxa de subutilizacao, medida mais ampla de capacidade ociosa no mercado, manteve-se em 12,9 por cento, equivalente a 406 mil pessoas. A inflacao anual de salarios foi de 2,0 por cento e a media dos ganhos por hora em tempo normal ficou em 44,12 dolares neozelandeses. O desemprego jovem segue elevado, com a taxa NEET (jovens de 15 a 24 anos fora do emprego, educacao ou treinamento) em 14,4 por cento.",
     "hotSectors": [
-      "Saude e assistencia social (enfermagem, medicina, fisioterapia, parteiras, psicologia)",
-      "Construcao e infraestrutura (gerentes de projeto, engenheiros civis, eletricistas, encanadores)",
-      "Engenharia (civil, mecanica, eletrica, estrutural, ambiental)",
-      "Tecnologia da informacao e software (engenheiros de software, seguranca de TI, administradores de sistemas e banco de dados)",
-      "Educacao (professores de educacao infantil e educacao especial, em escassez na Green List)",
-      "Trades qualificados (soldadores, mecanicos, montadores, serralheiros)",
-      "Agropecuaria (gestores de fazenda leiteira e pecuaristas de leite)"
-    ],
-    "coolingSectors": [
-      "Administracao publica e seguranca (crescimento fraco no horizonte de medio prazo do MBIE)",
-      "Setores primarios de baixa qualificacao (agricultura, silvicultura e pesca com crescimento minimo)",
-      "Vagas generalistas e de baixa qualificacao, pressionadas pela subutilizacao de 12,9 por cento e pela alta concorrencia local",
-      "Mercado de trabalho juvenil, com desemprego de 24,9 por cento na faixa de 15 a 19 anos"
+      "Saude e cuidado (enfermagem, medicina, terapias)",
+      "Construcao e infraestrutura",
+      "Engenharia (civil, estrutural, mecanica, eletrica)",
+      "Tecnologia da informacao e comunicacao (TIC)",
+      "Educacao e ensino",
+      "Agricultura, horticultura e producao primaria"
     ],
     "inDemandRoles": [
       {
         "role": "Enfermeiro(a) registrado(a) (Registered Nurse)",
-        "note": "Tier 1 da Green List, residencia direta. Escassez nacional cronica, agravada desde a pandemia. Exige registro no Nursing Council of New Zealand."
+        "note": "Green List Tier 1, caminho direto para residencia; exige registro no Nursing Council."
       },
       {
-        "role": "Medico(a) clinico geral e especialistas",
-        "note": "Tier 1 da Green List. Exige registro no Medical Council of New Zealand."
+        "role": "Clinico geral / medico (General Practitioner)",
+        "note": "Green List Tier 1; escassez critica na saude."
       },
       {
-        "role": "Engenheiro(a) civil, mecanico, eletrico e estrutural",
-        "note": "Tier 1 da Green List, residencia direta. Construcao e infraestrutura entre os setores de maior crescimento projetado."
+        "role": "Engenheiro civil e estrutural",
+        "note": "Green List Tier 1; demanda ligada a projetos de infraestrutura."
       },
       {
-        "role": "Engenheiro(a) de software e especialista em seguranca de TI",
-        "note": "Tier 1 da Green List. TI e gestao lideram a demanda por ocupacoes altamente qualificadas segundo o MBIE."
+        "role": "Gerente de projeto de construcao (Construction Project Manager)",
+        "note": "Green List; setor de construcao aquecido."
       },
       {
-        "role": "Gerente de projeto de construcao e quantity surveyor",
-        "note": "Tier 1 da Green List. Setor de construcao e utilities deve adicionar cerca de 4.800 vagas por ano."
+        "role": "Orcamentista de obras (Quantity Surveyor)",
+        "note": "Green List Tier 1."
       },
       {
-        "role": "Eletricista e encanador",
-        "note": "Tier 2 da Green List, via Work to Residence (2 anos). Trades qualificados em alta demanda; eletricistas exigem registro (Electrical Workers Registration Board)."
+        "role": "Professor(a) do ensino secundario (Secondary School Teacher)",
+        "note": "Green List Tier 1; escassez em educacao."
       },
       {
-        "role": "Professor(a) de educacao infantil e educacao especial",
-        "note": "Tier 2 da Green List. Exige registro na Teaching Council of Aotearoa New Zealand."
+        "role": "Fisioterapeuta (Physiotherapist)",
+        "note": "Green List; profissao da saude com registro obrigatorio."
       },
       {
-        "role": "Fisioterapeuta, parteira, paramedico, farmaceutico e psicologo",
-        "note": "Tier 1 da Green List, profissoes de saude regulamentadas com registro obrigatorio no conselho respectivo."
+        "role": "Especialista em seguranca de TIC (ICT Security Specialist)",
+        "note": "Green List; area de tecnologia em alta."
       },
       {
-        "role": "Gestor de fazenda leiteira e pecuarista de leite",
-        "note": "Tier 2 da Green List. Demanda regional concentrada fora dos grandes centros urbanos."
+        "role": "Engenheiro / desenvolvedor de software",
+        "note": "Forte demanda em TIC; presente na Green List."
+      },
+      {
+        "role": "Eletricista e tecnicos de trades qualificados",
+        "note": "Escassez em construcao e infraestrutura."
       }
     ],
     "byQualification": [
       {
-        "area": "Saude (enfermagem, medicina, fisioterapia, odontologia, farmacia, psicologia)",
-        "advice": "Caminho mais forte do pais. A maioria das profissoes de saude esta no Tier 1 da Green List, com residencia direta. O passo critico e obter o registro profissional junto ao conselho da area (Nursing Council, Medical Council, Physiotherapy Board, Dental Council, entre outros) antes ou logo apos a chegada, alem da comprovacao de ingles. Vale iniciar o processo de avaliacao de credenciais ainda no pais de origem."
+        "area": "Saude e enfermagem",
+        "advice": "Enfermeiros e medicos estao na Green List Tier 1, com caminho direto para residencia. Necessario registro no orgao profissional (Nursing Council ou Medical Council) e, em geral, comprovacao de ingles. Vagas concentradas no Health New Zealand (Te Whatu Ora)."
       },
       {
-        "area": "Engenharia (civil, mecanica, eletrica, estrutural, ambiental)",
-        "advice": "Forte demanda e Tier 1 na Green List para varias especialidades. Recomenda-se buscar a avaliacao de qualificacao e, quando aplicavel, o reconhecimento como Chartered Professional Engineer pela Engineering New Zealand para acelerar a empregabilidade e atingir as faixas salariais mais altas."
+        "area": "Engenharia e construcao",
+        "advice": "Engenheiros civis e estruturais, gerentes de projeto de construcao e orcamentistas de obras tem forte demanda e presenca na Green List. Registro na Engineering New Zealand agrega valor ao curriculo."
       },
       {
-        "area": "Tecnologia da informacao e software",
-        "advice": "TI e gestao lideram a demanda por ocupacoes altamente qualificadas no horizonte do MBIE. Engenheiros de software e especialistas em seguranca estao no Tier 1. A area nao exige registro obrigatorio, o que facilita a entrada; o diferencial e portfolio, experiencia comprovada (2 anos ou mais) ou qualificacao de nivel 4 ou superior no quadro neozelandes."
-      },
-      {
-        "area": "Construcao e trades (eletricista, encanador, soldador, gerente de obra)",
-        "advice": "Gerentes de projeto e quantity surveyors entram no Tier 1; trades como eletricista e encanador ficam no Tier 2 (Work to Residence apos 2 anos). Eletricistas e encanadores precisam de licenca/registro neozelandes para exercer. E um dos setores com maior crescimento projetado."
+        "area": "Tecnologia da informacao",
+        "advice": "Desenvolvedores de software e especialistas em seguranca de TIC seguem procurados; parte das funcoes esta na Green List. A porta de entrada usual e o AEWV com empregador acreditado."
       },
       {
         "area": "Educacao",
-        "advice": "Professores de educacao infantil e educacao especial estao na Green List (Tier 2). Exige registro na Teaching Council of Aotearoa New Zealand e comprovacao de ingles. Demanda real, especialmente em educacao infantil."
+        "advice": "Professores do ensino secundario constam na Green List Tier 1. E necessario registro junto a Teaching Council of Aotearoa New Zealand."
       },
       {
-        "area": "Empreendedor e investidor",
-        "advice": "Para quem quer abrir ou comprar negocio, o Business Investor Work Visa (aberto desde 24 de novembro de 2025) exige investimento minimo de 1 milhao de dolares neozelandeses em negocio estabelecido mais 500 mil de fundos de subsistencia. Para grandes investidores, o Active Investor Plus Visa parte de 5 milhoes (categoria Growth, 3 anos) ou 10 milhoes (categoria Balanced, 5 anos)."
-      },
-      {
-        "area": "Sem qualificacao alinhada / baixa qualificacao",
-        "advice": "Mercado morno e competitivo, com subutilizacao de 12,9 por cento e desemprego juvenil elevado. O caminho mais viavel costuma ser o Accredited Employer Work Visa com oferta de emprego de empregador credenciado, ou vistos de working holiday para trabalho sazonal. Recomenda-se requalificar para uma area da Green List antes de migrar com objetivo de residencia."
+        "area": "Trades e construcao qualificada",
+        "advice": "Eletricistas e tecnicos qualificados tem escassez ligada aos projetos de infraestrutura. Algumas ocupacoes exigem licenca ou registro local para exercer."
       }
     ],
     "salaries": [
       {
-        "role": "Ganho medio por hora (todos os setores, economia)",
-        "range": "NZD 44,12/hora (alta de 3,1% no ano)",
+        "role": "Enfermeiro(a) registrado(a) (Registered Nurse)",
+        "range": "NZD 75.000 a 106.000 por ano (base, setor publico sob acordo coletivo); recem-formado em servico de saude comeca em torno de NZD 52.460 por ano",
         "source": {
-          "label": "Stats NZ - Labour market statistics: March 2026 quarter",
-          "url": "https://www.stats.govt.nz/information-releases/labour-market-statistics-march-2026-quarter/",
+          "label": "Careers at Health New Zealand (Te Whatu Ora)",
+          "url": "https://careers.tewhatuora.govt.nz/careers-in-health/nursing/",
           "official": true
         }
-      },
-      {
-        "role": "Salario semanal medio (equivalente a tempo integral, com horas extras)",
-        "range": "NZD 1.716/semana (alta de 3,0% no ano)",
-        "source": {
-          "label": "Stats NZ - Labour market statistics: March 2026 quarter",
-          "url": "https://www.stats.govt.nz/information-releases/labour-market-statistics-march-2026-quarter/",
-          "official": true
-        }
-      },
-      {
-        "role": "Salario mediano usado pela imigracao",
-        "range": "NZD 35,00/hora (a partir de 9 de marco de 2026)",
-        "source": {
-          "label": "Immigration New Zealand - Wage rate requirements for work visas",
-          "url": "https://www.immigration.govt.nz/work/requirements-for-work-visas/wage-rates-for-work-visas/",
-          "official": true
-        }
-      },
-      {
-        "role": "Enfermeiro(a) registrado(a)",
-        "range": "NZD 75.000 a 106.000+/ano (estimativa de mercado, da entrada a nivel senior)"
-      },
-      {
-        "role": "Engenheiro(a) de software",
-        "range": "NZD 100.000 a 163.000/ano (estimativa de mercado)"
-      },
-      {
-        "role": "Eletricista (senior, projetos comerciais)",
-        "range": "NZD 90.000 a 110.000/ano (estimativa de mercado)"
       }
     ],
-    "foreignerRules": "Para trabalhar legalmente, o estrangeiro precisa de visto de trabalho. A principal porta de entrada e o Accredited Employer Work Visa (AEWV): exige oferta de emprego de pelo menos 30 horas semanais de um empregador credenciado pela Immigration NZ, salario no minimo igual a taxa de mercado do cargo (market rate) e acima do salario minimo adulto, mais 2 anos ou mais de experiencia relevante OU qualificacao de nivel 4 ou superior no quadro neozelandes. O requisito de salario mediano foi removido do AEWV em 10 de marco de 2025. A estadia continua maxima e de 5 anos para ocupacoes de niveis de habilidade 1 a 3 e de 3 anos para niveis 4 ou 5. A residencia por habilidades ocorre principalmente pela Green List: ocupacoes Tier 1 dao direito ao Straight to Residence Visa (residencia imediata) e ocupacoes Tier 2 ao Work to Residence Visa (apos 2 anos de trabalho qualificado). O salario mediano de referencia para residencia subiu para 35,00 dolares por hora em 9 de marco de 2026, e o requerente deve ter 55 anos ou menos na data do pedido de residencia. Para incluir parceiro/dependentes via AEWV, o cargo de nivel 1 a 3 exige pagamento de pelo menos 28,00 dolares por hora e o de nivel 4 ou 5 exige 52,50 dolares por hora (a partir de 9 de marco de 2026). PROFISSOES REGULAMENTADAS: varias ocupacoes exigem registro/licenca neozelandes obrigatorio antes de exercer, entre elas enfermeiros (Nursing Council of New Zealand), medicos (Medical Council of New Zealand), professores (Teaching Council of Aotearoa New Zealand), eletricistas e encanadores (conselhos de registro de trade) e engenheiros que buscam status Chartered (Engineering New Zealand). A Immigration NZ orienta verificar se a profissao exige registro ocupacional e validar as qualificacoes antes de migrar. EMPREENDER: o Business Investor Work Visa (aberto desde 24 de novembro de 2025) pede investimento minimo de 1 milhao de dolares neozelandeses em negocio estabelecido (via de 3 anos para residencia) ou 2 milhoes (via rapida apos 12 meses), mais 500 mil de fundos de subsistencia, idade de 55 anos ou menos, ingles, saude e idoneidade; para residencia, e preciso manter ao menos 5 empregos equivalentes a tempo integral e criar pelo menos 1 vaga nova. Grandes investidores usam o Active Investor Plus Visa, a partir de 5 milhoes (categoria Growth, 3 anos) ou 10 milhoes (categoria Balanced, 5 anos).",
+    "foreignerRules": "O principal caminho para estrangeiro trabalhar na Nova Zelandia e o Accredited Employer Work Visa (AEWV). Exige oferta de emprego em tempo integral (minimo de 30 horas por semana) de um empregador acreditado pela Immigration New Zealand, um Job Check aprovado para a vaga e o envio de um job token pelo empregador. O salario deve estar na taxa de mercado da funcao e no minimo no piso salarial vigente. O requisito de salario mediano foi retirado do pagamento geral do AEWV em 10 de marco de 2025, mas o salario mediano de imigracao segue como referencia para varios limites: desde 9 de marco de 2026 ele e de 35,00 dolares neozelandeses por hora. Para trazer parceiro, funcoes de nivel de habilidade 1 a 3 exigem pagamento de ao menos 28,00 dolares por hora e funcoes de nivel 4 a 5 exigem 52,50 dolares por hora. Para residencia, existe a Green List: ocupacoes Tier 1 permitem pedir residencia direta (Straight to Residence) e ocupacoes Tier 2 dao residencia apos 2 anos de trabalho no pais (Work to Residence), sempre que a pessoa tenha a qualificacao, o registro ou a experiencia exigidos. Ha ainda a Skilled Migrant Category, sistema de pontos para residencia qualificada.",
     "opportunityWindows": [
-      "Salario mediano da imigracao fixado em NZD 35,00/hora desde 9 de marco de 2026, definindo o patamar para residencia qualificada e vistos de dependentes",
-      "Business Investor Work Visa aberto desde 24 de novembro de 2025, criando nova rota de residencia para quem compra ou expande negocio estabelecido a partir de NZD 1 milhao",
-      "A partir de 1 de junho de 2026, requerentes da categoria Growth do Active Investor Plus podem alocar ate 20 por cento do investimento em contribuicoes filantropicas",
-      "Escassez cronica e estrutural de enfermeiros e profissionais de saude mantida como prioridade de governo, com a maioria das vagas no Tier 1 (residencia direta)",
-      "Construcao e infraestrutura projetadas pelo MBIE como setor de forte crescimento de emprego no medio prazo",
-      "Inflacao salarial em desaceleracao (indice de custo do trabalho a 2,0 por cento) pode reduzir a barreira de market rate para empregadores contratarem estrangeiros"
+      "Green List Tier 1 (Straight to Residence): ocupacoes que permitem pedir residencia imediatamente, incluindo enfermeiros registrados, clinicos gerais, engenheiros civis e estruturais, orcamentistas de obras, professores do ensino secundario e especialistas em seguranca de TIC.",
+      "Green List Tier 2 (Work to Residence): ocupacoes que dao residencia apos 2 anos de trabalho no pais.",
+      "Accredited Employer Work Visa (AEWV): via principal de entrada com oferta de empregador acreditado, aberto a diversas funcoes desde que paguem taxa de mercado."
     ],
     "jobBoards": [
       {
-        "label": "NZ Government Jobs (jobs.govt.nz) - vagas no servico publico",
-        "url": "https://jobs.govt.nz/",
-        "official": true
-      },
-      {
-        "label": "Kimi Mahi Mai / Find a Job - Work and Income (MSD)",
-        "url": "https://findajob.msd.govt.nz/",
-        "official": true
-      },
-      {
-        "label": "Immigration New Zealand - Finding work in New Zealand (alertas de vagas por profissao)",
+        "label": "Immigration New Zealand (buscar trabalho e vistos)",
         "url": "https://www.immigration.govt.nz/work/finding-work-in-new-zealand/",
         "official": true
       },
       {
-        "label": "Jobs at MBIE (Ministry of Business, Innovation and Employment)",
-        "url": "https://jobs.mbie.govt.nz/",
+        "label": "Tahatu Career Navigator (Careers NZ)",
+        "url": "https://tahatu.govt.nz/",
         "official": true
       },
       {
-        "label": "SEEK New Zealand (principal portal privado de empregos)",
-        "url": "https://nz.seek.com/",
+        "label": "New Zealand Government Jobs (setor publico)",
+        "url": "https://jobs.govt.nz/",
+        "official": true
+      },
+      {
+        "label": "Careers at Health New Zealand (Te Whatu Ora)",
+        "url": "https://careers.tewhatuora.govt.nz/",
+        "official": true
+      },
+      {
+        "label": "Seek New Zealand",
+        "url": "https://www.seek.co.nz/",
         "official": false
       },
       {
-        "label": "Trade Me Jobs (portal privado amplamente usado)",
+        "label": "Trade Me Jobs",
         "url": "https://www.trademe.co.nz/a/jobs",
         "official": false
       }
     ],
     "sources": [
       {
-        "label": "Stats NZ - Labour market statistics: March 2026 quarter",
-        "url": "https://www.stats.govt.nz/information-releases/labour-market-statistics-march-2026-quarter/",
-        "official": true
-      },
-      {
         "label": "Stats NZ - Unemployment rate at 5.3 percent in the March 2026 quarter",
         "url": "https://www.stats.govt.nz/news/unemployment-rate-at-5-3-percent-in-the-march-2026-quarter/",
         "official": true
       },
       {
-        "label": "Immigration New Zealand - Green List roles, jobs we need people for",
+        "label": "Immigration New Zealand - Green List roles",
         "url": "https://www.immigration.govt.nz/work/requirements-for-work-visas/green-list-occupations-qualifications-and-skills/green-list-roles-jobs-we-need-people-for-in-new-zealand/",
         "official": true
       },
       {
-        "label": "Immigration New Zealand - Green List pathway to residence",
-        "url": "https://www.immigration.govt.nz/live/resident-visas-to-live-in-new-zealand/skilled-residence-pathways-in-new-zealand/green-list-pathway-to-residence/",
+        "label": "Immigration New Zealand - Changes to the AEWV and median wage",
+        "url": "https://www.immigration.govt.nz/about-us/news-centre/changes-to-the-accredited-employer-work-visa-aewv-and-median-wage/",
         "official": true
       },
       {
-        "label": "Immigration New Zealand - Wage rate requirements for work visas",
-        "url": "https://www.immigration.govt.nz/work/requirements-for-work-visas/wage-rates-for-work-visas/",
+        "label": "Immigration New Zealand - Main job sectors in New Zealand",
+        "url": "https://www.immigration.govt.nz/work/finding-work-in-new-zealand/main-job-sectors-in-new-zealand/",
         "official": true
       },
       {
@@ -8455,244 +7941,123 @@ export const LABOR_MARKET: LaborMarketMap = {
         "official": true
       },
       {
-        "label": "Immigration New Zealand - New Business Investor Work Visa is now open",
-        "url": "https://www.immigration.govt.nz/about-us/news-centre/new-business-investor-work-visa-is-now-open/",
+        "label": "Careers at Health New Zealand (Te Whatu Ora) - Nursing",
+        "url": "https://careers.tewhatuora.govt.nz/careers-in-health/nursing/",
         "official": true
       },
       {
-        "label": "Immigration New Zealand - Active Investor Plus Visa overview",
-        "url": "https://www.immigration.govt.nz/about-us/news-centre/investor-category/",
-        "official": true
-      },
-      {
-        "label": "Immigration New Zealand - Finding work in New Zealand",
-        "url": "https://www.immigration.govt.nz/work/finding-work-in-new-zealand/",
-        "official": true
-      },
-      {
-        "label": "MBIE - Medium to long-term employment outlook: Looking ahead to 2028",
-        "url": "https://www.mbie.govt.nz/business-and-employment/employment-and-skills/labour-market-reports-data-and-analysis/archives/labour-market-forecasting/medium-to-long-term-employment-outlook-looking-ahead-to-2028",
+        "label": "Tahatu Career Navigator (Careers New Zealand)",
+        "url": "https://tahatu.govt.nz/",
         "official": true
       }
     ]
   },
   "jp": {
-    "updatedAt": "2026-06-22",
-    "overview": "O Japao vive uma escassez estrutural de mao de obra movida pelo envelhecimento e pela queda populacional, o que abriu as portas como nunca para trabalhadores estrangeiros. A taxa de desemprego ficou em torno de 2,5% ao longo de 2025 e inicio de 2026, e o numero de empregados atingiu recorde de 68,28 milhoes em 2025, o quinto ano consecutivo de alta. A razao de vagas por candidato (yukyu kyujin bairitsu), indicador central do Ministerio da Saude, Trabalho e Bem-Estar (MHLW), girou perto de 1,2 vaga por candidato no fim de 2025, mas mascara contrastes severos: setores tecnicos como construcao chegam a mais de 6 vagas por candidato e cuidados a idosos a 3,5, enquanto funcoes administrativas e de escritorio seguem com excesso de candidatos (razao abaixo de 0,5). Para o estrangeiro, o pais oferece tres grandes portas: o visto Especialista em Engenharia/Humanas/Servicos Internacionais para profissionais de colarinho branco com diploma, o programa Specified Skilled Worker (SSW) para 19 setores com falta aguda de mao de obra, e o visto Highly Skilled Professional com pontuacao que acelera a residencia permanente. Quem quer empreender enfrenta uma barreira recem-elevada: desde outubro de 2025 o visto Business Manager exige capital de 30 milhoes de ienes (antes 5 milhoes). O dominio do japones, ainda que nem sempre obrigatorio por lei, e na pratica o principal divisor de aguas entre uma vaga acessivel e uma carreira de fato.",
+    "updatedAt": "2026-07-13",
+    "overview": "O mercado de trabalho japones opera em pleno emprego e com escassez estrutural de mao de obra. A taxa de desemprego ficou em torno de 2,5% em maio de 2026, um dos niveis mais baixos em quase uma decada, segundo a Pesquisa da Forca de Trabalho do Statistics Bureau of Japan. O numero de ocupados atingiu recorde historico, acima de 68 milhoes de pessoas. A relacao de vagas por candidato calculada pelo Ministry of Health, Labour and Welfare (MHLW) permaneceu superior a 1, em cerca de 1,19 a 1,22, o que indica mais vagas abertas do que trabalhadores disponiveis. O envelhecimento populacional e a queda da forca de trabalho nativa sustentam a demanda por profissionais, inclusive estrangeiros, embora haja forte descompasso entre setores.",
     "hotSectors": [
-      "Cuidados a idosos e enfermagem assistencial (kaigo), com escassez critica e razao de cerca de 3,5 vagas por candidato",
-      "Construcao civil e engenharia de obras, o setor mais aquecido, com mais de 6 vagas por candidato segundo o MHLW",
-      "Tecnologia da informacao e desenvolvimento de software, com demanda persistente e salarios entre os mais altos",
-      "Manufatura industrial e fabricacao de alimentos e bebidas",
-      "Hotelaria e servicos de alimentacao, impulsionados pela retomada do turismo",
-      "Transporte rodoviario de cargas e passageiros (motoristas), logistica e armazenagem",
-      "Agricultura, pesca, silvicultura e processamento de madeira",
-      "Manutencao e reparo de automoveis, construcao naval e industria aeronautica"
-    ],
-    "coolingSectors": [
-      "Funcoes administrativas e de escritorio em geral (jimu), com excesso de candidatos e razao abaixo de 0,5 vaga por candidato",
-      "Trabalho clerical e de apoio corporativo de baixa especializacao, onde a concorrencia entre candidatos e alta"
+      "Cuidados de enfermagem e assistencia a idosos (nursing care)",
+      "Construcao civil",
+      "Manufatura de produtos industriais",
+      "Servicos de alimentacao e hotelaria",
+      "Agricultura, pesca e aquicultura",
+      "Transporte rodoviario e logistica",
+      "Construcao e reparo naval",
+      "Manutencao automotiva"
     ],
     "inDemandRoles": [
       {
-        "role": "Cuidador de idosos / auxiliar de enfermagem (kaigo)",
-        "note": "Uma das maiores filas de vagas; acessivel via SSW com exame de habilidade e teste de japones; progressao possivel ao SSW tipo ii em alguns casos"
+        "role": "Cuidador de idosos e auxiliar de enfermagem",
+        "note": "Campo de nursing care do programa Specified Skilled Worker, com forte demanda ligada ao envelhecimento."
       },
       {
-        "role": "Engenheiro de software / desenvolvedor / engenheiro de TI",
-        "note": "Visto Especialista em Engenharia; diploma na area ou 10 anos de experiencia, ou aprovacao em exame de TI reconhecido pode substituir o diploma"
+        "role": "Trabalhador da construcao civil",
+        "note": "Setor com uma das maiores relacoes de vagas por candidato apurada pelo MHLW."
       },
       {
-        "role": "Trabalhador e tecnico de construcao civil",
-        "note": "Setor com a maior razao de vagas por candidato; aberto via SSW com via para o tipo ii (sem limite de permanencia)"
+        "role": "Operador de manufatura industrial",
+        "note": "Um dos campos designados do programa Specified Skilled Worker."
       },
       {
-        "role": "Operador de manufatura industrial e de alimentos e bebidas",
-        "note": "Campos SSW com alta demanda e progressao ao tipo ii na manufatura industrial e em alimentos"
+        "role": "Profissional de servicos de alimentacao e hotelaria",
+        "note": "Alta demanda com recuperacao do turismo; ISA sinalizou limite de cota no campo de food service em 2026."
       },
       {
-        "role": "Profissional de hotelaria e de servicos de alimentacao",
-        "note": "Campo SSW; atencao: novos Certificados de Elegibilidade tipo i no setor de food service foram pausados por volta de abril de 2026 ao atingir o teto de intake"
+        "role": "Trabalhador agricola, de pesca e aquicultura",
+        "note": "Campo elegivel ao Specified Skilled Worker."
       },
       {
-        "role": "Motorista profissional (caminhao, taxi, onibus) e operador de logistica",
-        "note": "Transporte rodoviario e armazenagem entraram recentemente na lista SSW para suprir o deficit de motoristas"
+        "role": "Motorista e trabalhador de transporte rodoviario",
+        "note": "Incorporado aos campos do Specified Skilled Worker apos ampliacao do programa."
       },
       {
-        "role": "Tradutor, interprete e profissional de servicos internacionais",
-        "note": "Visto Especialista em Humanas/Servicos Internacionais; valoriza o idioma materno e habilidades interculturais"
-      },
-      {
-        "role": "Pesquisador, professor universitario e executivo",
-        "note": "Elegiveis ao Highly Skilled Professional e, no topo, ao J-Skip para acelerar a residencia permanente"
-      }
-    ],
-    "byQualification": [
-      {
-        "area": "Tecnologia da Informacao e Engenharia de Software",
-        "advice": "Caminho mais direto e o visto Especialista em Engenharia/Humanas/Servicos Internacionais. Diploma superior na area abre a porta, mas 10 anos de experiencia ou a aprovacao em exame de TI oficialmente designado podem substituir o diploma. Salarios estao entre os mais altos do pais. Quem tem renda e qualificacao elevadas deve mirar o Highly Skilled Professional para acelerar a residencia permanente."
-      },
-      {
-        "area": "Saude (medicos, enfermeiros, farmaceuticos)",
-        "advice": "Profissoes regulamentadas e de alta barreira. Exigem diploma reconhecido como equivalente ao japones e aprovacao no exame nacional de licenca, prestado em japones, com proficiencia avancada. As taxas de aprovacao para estrangeiros sao historicamente baixas. Avalie com cautela e planeje anos de preparacao linguistica."
-      },
-      {
-        "area": "Cuidados a idosos (kaigo)",
-        "advice": "Porta de entrada acessivel mesmo sem diploma superior, via SSW (exame de habilidade + teste de japones) ou via formacao no Japao para a licenca de Kaigo Fukushishi. Demanda altissima e crescente. O japones funcional e indispensavel pelo contato direto com pacientes."
-      },
-      {
-        "area": "Engenharia, manufatura e oficios tecnicos",
-        "advice": "Para diplomados, o visto Especialista em Engenharia cobre funcoes tecnicas. Para tecnicos sem diploma, os campos SSW de manufatura industrial, construcao, naval, automotivo e aeronautico oferecem entrada com exame de habilidade e progressao ao tipo ii em varios desses campos."
-      },
-      {
-        "area": "Administracao, negocios e empreendedorismo",
-        "advice": "Profissionais de colarinho branco usam o visto de Servicos Internacionais ou o Highly Skilled Professional. Quem quer abrir empresa precisa do Business Manager, que desde outubro de 2025 exige 30 milhoes de ienes de capital e ao menos um empregado em tempo integral residente no Japao, alem de diploma de mestrado em area de gestao ou 3 anos de experiencia gerencial. O Startup Visa (ate 2 anos de preparacao) e o J-Find sao alternativas para quem ainda esta estruturando o negocio."
-      },
-      {
-        "area": "Setores de baixa qualificacao e funcoes administrativas",
-        "advice": "Funcoes clericais e administrativas tem excesso de candidatos e concorrencia alta, alem de raramente patrocinarem visto. Quem busca esses postos deve redirecionar para os 19 campos SSW, que sao a via legal e demandada para trabalho operacional no Japao."
+        "role": "Engenheiro e especialista tecnico",
+        "note": "Elegivel ao visto Engineer/Specialist in Humanities/International Services, exige diploma superior na area."
       }
     ],
     "salaries": [
       {
-        "role": "Salario medio anual nacional (todos os setores)",
-        "range": "Cerca de 4,78 milhoes de ienes/ano (pesquisa salarial do setor privado da Agencia Nacional Tributaria, set/2025)",
-        "source": {
-          "label": "National Tax Agency (NTA) - Private-Sector Salary Survey",
-          "url": "https://www.nta.go.jp/",
-          "official": true
-        }
-      },
-      {
-        "role": "Trabalhador em tempo integral (media)",
-        "range": "Cerca de 5,0 a 5,4 milhoes de ienes/ano; salario mensal bruto em torno de 311.800 a 336.000 ienes, mais bonus anuais de 1,0 a 1,4 milhao",
+        "role": "Media geral de trabalhador em tempo integral (salario mensal contratual, sem bonus)",
+        "range": "cerca de 330.000 ienes por mes (bruto)",
         "source": {
           "label": "MHLW - Basic Survey on Wage Structure",
-          "url": "https://www.mhlw.go.jp/english/database/db-l/index.html",
-          "official": true
-        }
-      },
-      {
-        "role": "Engenheiro de software senior (grandes empresas de tecnologia)",
-        "range": "Cerca de 10 a 15 milhoes de ienes/ano"
-      },
-      {
-        "role": "Medico (media ocupacional)",
-        "range": "Cerca de 10,6 milhoes de ienes/ano"
-      },
-      {
-        "role": "Setor mais bem pago (eletricidade, gas e agua)",
-        "range": "Cerca de 8,32 milhoes de ienes/ano",
-        "source": {
-          "label": "National Tax Agency (NTA) - Private-Sector Salary Survey",
-          "url": "https://www.nta.go.jp/",
-          "official": true
-        }
-      },
-      {
-        "role": "Setor de menor remuneracao (hotelaria e alimentacao)",
-        "range": "Cerca de 2,79 milhoes de ienes/ano",
-        "source": {
-          "label": "National Tax Agency (NTA) - Private-Sector Salary Survey",
-          "url": "https://www.nta.go.jp/",
-          "official": true
-        }
-      },
-      {
-        "role": "Specified Skilled Worker (SSW)",
-        "range": "Por lei, salario igual ao de trabalhadores japoneses na mesma funcao; varia por setor e regiao",
-        "source": {
-          "label": "Immigration Services Agency - SSW Program",
-          "url": "https://www.ssw.go.jp/en/about/visa/",
+          "url": "https://www.mhlw.go.jp/english/database/db-l/wage-structure.html",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Trabalhar no Japao exige um status de residencia (visto) compativel com a atividade. As principais vias sao: (1) Especialista em Engenharia/Humanas/Servicos Internacionais, o visto de colarinho branco mais comum, que exige diploma na area correspondente, conclusao de curso tecnico no Japao, ou 10 anos de experiencia relevante; para alguns empregadores de categoria menor, a partir de 15 de abril de 2026 passa a ser exigido JLPT N2 em funcoes de atendimento ao publico. (2) Specified Skilled Worker (SSW), para 19 setores com escassez aguda; o tipo i permite ate 5 anos sem familia e o tipo ii (disponivel em 11 setores, voltado a cargos de gestao) nao tem limite de permanencia e permite trazer familia; ambos exigem exame de habilidade e teste de japones. Atencao: o intake de novos Certificados de Elegibilidade tipo i no setor de food service foi pausado por volta de abril de 2026. (3) Highly Skilled Professional, com sistema de pontos: 70+ pontos por 3 anos permitem residencia permanente em 3 anos, e 80+ por 1 ano em apenas 1 ano; renda anual abaixo de 3 milhoes de ienes desqualifica nas categorias de empresa/gestao. (4) J-Skip (renda de 20 milhoes de ienes/ano com mestrado ou 10 anos de experiencia; 40 milhoes para gestores) e J-Find (graduados das 100 melhores universidades dos rankings QS/THE/Shanghai, ate 2 anos para buscar emprego ou empreender). Profissoes regulamentadas exigem licenca nacional japonesa: medico, enfermeiro, farmaceutico e advogado precisam de diploma reconhecido e aprovacao em exame nacional prestado em japones. Advogados estrangeiros podem atuar como Foreign Law Business Attorney (gaikokuho jimu bengoshi) mediante registro, sem advogar lei japonesa. Empreender exige o Business Manager: desde 16 de outubro de 2025 o capital minimo subiu de 5 para 30 milhoes de ienes, com pelo menos um empregado em tempo integral residente no Japao e diploma de mestrado em gestao ou 3 anos de experiencia gerencial; ha periodo de transicao de 3 anos (ate out/2028) para quem ja tinha o status.",
+    "foreignerRules": "Para trabalhar no Japao, o estrangeiro precisa de um status de residencia (visto) compativel com a atividade, emitido apos Certificate of Eligibility (CoE) aprovado pela Immigration Services Agency (ISA). As duas principais rotas de trabalho sao: 1) Specified Skilled Worker (SSW), voltado a setores com escassez de mao de obra e dividido em Tipo 1, com permanencia maxima de cinco anos, sem direito a trazer familia, exigindo aprovacao em exame de competencia do setor e em teste de lingua japonesa (em geral JLPT N4 ou o Japan Foundation Test for Basic Japanese), e Tipo 2, que exige qualificacao mais avancada, permite renovacoes sucessivas, permite trazer familia e abre caminho para residencia permanente; 2) Engineer/Specialist in Humanities/International Services, destinado a cargos qualificados de escritorio, tecnologia, engenharia, traducao e negocios, que exige diploma de nivel superior relacionado a funcao ou experiencia profissional equivalente, oferta formal de emprego e salario equiparado ao de um trabalhador japones na mesma funcao. Em ambos os casos o empregador japones e peca central do processo, e o salario deve ser igual ao pago a nacionais. A partir de 15 de abril de 2026 passaram a valer exigencias adicionais de lingua japonesa (nivel CEFR B2, equivalente a JLPT N2) para certas funcoes de atendimento em empresas menores no visto Engineer/Specialist in Humanities/International Services.",
     "opportunityWindows": [
-      "Escassez estrutural permanente: 51,6% das empresas relatam falta de empregados regulares por quatro anos consecutivos, e falencias por falta de mao de obra batem recordes, pressionando por mais contratacao de estrangeiros",
-      "Expansao recente do SSW para 19 setores, incluindo transporte rodoviario, ferrovias, logistica/armazenagem e silvicultura, abrindo novas funcoes operacionais",
-      "Relaxamento de 2025 no sistema de pontos do Highly Skilled Professional, facilitando atingir 70 pontos e a residencia permanente acelerada",
-      "Programas J-Skip e J-Find (desde 2023) e expansao nacional do Startup Visa para talentos de alto nivel e graduados de universidades de elite",
-      "Janela de transicao do Business Manager: quem ja tinha o status antes de out/2025 tem ate out/2028 para se adequar ao novo capital de 30 milhoes de ienes",
-      "Retomada do turismo aquecendo hotelaria e alimentacao, embora o intake SSW de food service tenha sido pausado em abr/2026 por atingir o teto"
+      "Programa Specified Skilled Worker (SSW) com campos designados de escassez, incluindo nursing care, construcao, manufatura industrial, hotelaria, agricultura, pesca, alimentacao e transporte rodoviario.",
+      "Rota de qualificacao via aprovacao em exame de competencia do setor mais teste de lingua japonesa para ingressar no SSW Tipo 1.",
+      "Caminho do SSW Tipo 2, com renovacoes sucessivas, direito a familia e possibilidade de residencia permanente para quem avanca em qualificacao."
     ],
     "jobBoards": [
       {
-        "label": "Hello Work - Servico publico de emprego do MHLW (centros para estrangeiros em Toquio, Shinjuku e outras cidades)",
+        "label": "Hello Work (servico publico de emprego do MHLW)",
         "url": "https://www.hellowork.mhlw.go.jp/",
         "official": true
       },
       {
-        "label": "Support Website for the Specified Skilled Worker Program - Immigration Services Agency (job-matching SSW)",
+        "label": "Support Website for the Specified Skilled Worker Program (ISA)",
         "url": "https://www.ssw.go.jp/en/",
         "official": true
       },
       {
-        "label": "JP-MIRAI Portal - plataforma de apoio a trabalhadores estrangeiros (info de trabalho e direitos)",
-        "url": "https://portal.jp-mirai.org/en",
-        "official": true
-      },
-      {
-        "label": "MHLW - Japao busca Specified Skilled Workers (via Ministerio das Relacoes Exteriores)",
-        "url": "https://www.mofa.go.jp/mofaj/ca/fna/ssw/us/",
+        "label": "Study in Japan Official Website (trabalho e status de residencia)",
+        "url": "https://www.studyinjapan.go.jp/en/work-in-japan/employment/status.html",
         "official": true
       }
     ],
     "sources": [
       {
-        "label": "Immigration Services Agency of Japan - Support Website for the Specified Skilled Worker Program",
-        "url": "https://www.ssw.go.jp/en/about/visa/",
-        "official": true
-      },
-      {
-        "label": "Ministry of Foreign Affairs of Japan - Japan is looking for Specified Skilled Workers",
-        "url": "https://www.mofa.go.jp/mofaj/ca/fna/ssw/us/",
-        "official": true
-      },
-      {
-        "label": "MHLW - Labour Statistics database (Basic Survey on Wage Structure, employment situation)",
-        "url": "https://www.mhlw.go.jp/english/database/db-l/index.html",
-        "official": true
-      },
-      {
-        "label": "Statistics Bureau of Japan - Labour Force Survey (taxa de desemprego, empregados)",
+        "label": "Statistics Bureau of Japan - Labour Force Survey",
         "url": "https://www.stat.go.jp/english/data/roudou/index.html",
         "official": true
       },
       {
-        "label": "MHLW - Job openings-to-applicants ratio (via JILPT)",
-        "url": "https://www.jil.go.jp/english/estatis/eshuyo/e0208.html",
+        "label": "MHLW - Basic Survey on Wage Structure",
+        "url": "https://www.mhlw.go.jp/english/database/db-l/wage-structure.html",
         "official": true
       },
       {
-        "label": "Ministry of Foreign Affairs of Japan - Highly Skilled Professional visa",
-        "url": "https://www.mofa.go.jp/j_info/visit/visa/long/visa16.html",
+        "label": "MHLW - Labour Statistics (Monthly Labour Survey e indicadores)",
+        "url": "https://www.mhlw.go.jp/english/database/db-l/index.html",
         "official": true
       },
       {
-        "label": "Consulate-General of Japan - J-Skip e J-Find (Immigration Services Agency)",
-        "url": "https://www.denver.us.emb-japan.go.jp/itpr_en/jskip-jfind.html",
+        "label": "Immigration Services Agency - Specified Skilled Worker (status de residencia)",
+        "url": "https://www.ssw.go.jp/en/about/visa/",
         "official": true
       },
       {
-        "label": "Ministry of Justice / Immigration Services Agency - Initiatives to Accept Foreign Nationals",
-        "url": "https://www.moj.go.jp/isa/content/930004452.pdf",
+        "label": "Ministry of Foreign Affairs - Specified Skilled Workers (visao geral)",
+        "url": "https://www.mofa.go.jp/mofaj/ca/fna/ssw/us/overview/",
         "official": true
       },
       {
-        "label": "Hello Work (MHLW) - servico publico de emprego",
-        "url": "https://www.hellowork.mhlw.go.jp/",
-        "official": true
-      },
-      {
-        "label": "Morgan Lewis - analise da revisao do Business Manager visa 2025 (capital 30 milhoes de ienes)",
-        "url": "https://www.morganlewis.com/pubs/2025/09/japanese-government-to-tighten-requirements-for-business-manager-work-permit",
-        "official": false
-      },
-      {
-        "label": "JP-MIRAI Portal - informacoes para trabalhadores estrangeiros",
-        "url": "https://portal.jp-mirai.org/en",
+        "label": "Study in Japan - Status of Residence (Cap. 5)",
+        "url": "https://www.studyinjapan.go.jp/en/work-in-japan/employment/status.html",
         "official": true
       }
     ]
