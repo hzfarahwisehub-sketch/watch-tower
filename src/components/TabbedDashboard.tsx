@@ -41,24 +41,24 @@ type LItem = { i: string; x: number; y: number; w: number; h: number };
 // em 2026-07-13). Cada um pode remexer por cima; isto é só o ponto de partida.
 const LG: Record<string, LItem[]> = {
   mapa: [
-    { i: "map", x: 0, y: 0, w: 9, h: 26 },
-    { i: "countries", x: 9, y: 0, w: 6, h: 26 },
-    { i: "benchmark", x: 15, y: 0, w: 9, h: 26 },
+    { i: "map", x: 0, y: 0, w: 9, h: 17 },
+    { i: "countries", x: 9, y: 0, w: 6, h: 17 },
+    { i: "benchmark", x: 15, y: 0, w: 9, h: 17 },
   ],
   oper: [
-    { i: "inbox", x: 0, y: 0, w: 8, h: 18 },
-    { i: "scheduled", x: 16, y: 0, w: 8, h: 14 },
-    { i: "requests", x: 8, y: 0, w: 8, h: 27 },
-    { i: "reminders", x: 0, y: 18, w: 8, h: 9 },
-    { i: "tasks", x: 16, y: 14, w: 8, h: 13 },
+    { i: "inbox", x: 0, y: 0, w: 8, h: 12 },
+    { i: "scheduled", x: 16, y: 0, w: 8, h: 9 },
+    { i: "requests", x: 8, y: 0, w: 8, h: 18 },
+    { i: "reminders", x: 0, y: 12, w: 8, h: 6 },
+    { i: "tasks", x: 16, y: 9, w: 8, h: 9 },
   ],
-  agenda: [{ i: "agenda", x: 0, y: 0, w: 24, h: 27 }],
-  feed: [{ i: "feed", x: 0, y: 0, w: 24, h: 27 }],
-  info: [{ i: "info", x: 0, y: 0, w: 24, h: 27 }],
-  bull: [{ i: "bulletins", x: 0, y: 0, w: 24, h: 27 }],
+  agenda: [{ i: "agenda", x: 0, y: 0, w: 24, h: 18 }],
+  feed: [{ i: "feed", x: 0, y: 0, w: 24, h: 18 }],
+  info: [{ i: "info", x: 0, y: 0, w: 24, h: 18 }],
+  bull: [{ i: "bulletins", x: 0, y: 0, w: 24, h: 18 }],
   fin: [
-    { i: "finance", x: 0, y: 0, w: 16, h: 27 },
-    { i: "crypto", x: 16, y: 0, w: 8, h: 27 },
+    { i: "finance", x: 0, y: 0, w: 16, h: 18 },
+    { i: "crypto", x: 16, y: 0, w: 8, h: 18 },
   ],
 };
 function stacked(items: LItem[], cols: number): LItem[] {
@@ -79,9 +79,10 @@ function defaultLayouts(tabId: string): ResponsiveLayouts {
     xxs: stacked(base, 4),
   } as ResponsiveLayouts;
 }
-// v2: bump a pedido do Hammis — todo mundo recebe o arranjo-padrão dele acima,
-// mesmo quem já tinha um layout salvo na v1 (que fica órfão de propósito).
-const STORE = (id: string) => `wt-tabgrid-v2-${id}`;
+// v3: bump — arranjo final do Hammis (menos esticado). Vale pra TODOS (sócios e
+// Igor); versões antigas (v1/v2) ficam órfãs de propósito. Assim até a PWA (que
+// guarda storage isolado) abre no padrão baked. Cada um pode remexer por cima.
+const STORE = (id: string) => `wt-tabgrid-v3-${id}`;
 
 // ── Célula: alça de arrastar + destacar em janela + conteúdo com scroll ──────
 function GridCell({ id, selected, onSelect, locked, isMap }: {
