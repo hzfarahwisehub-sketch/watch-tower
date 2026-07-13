@@ -531,6 +531,27 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   ca: {
     community: [
       {
+        publishedAt: "2026-07-13",
+        title: "Canadá reabre o LMIA de baixa remuneração em oito regiões",
+        body:
+          "O Canadá voltou a processar pedidos de LMIA, a avaliação de impacto no mercado de trabalho, para vagas de baixa remuneração em oito regiões metropolitanas, entre elas Halifax, Winnipeg e Regina. A restrição vinha barrando esses pedidos em áreas com desemprego mais alto.\n\nO LMIA é a peça que autoriza um empregador canadense a contratar um trabalhador estrangeiro, e sustenta boa parte dos vistos de trabalho temporário. Com a reabertura, empregadores dessas regiões voltam a poder patrocinar vagas que estavam travadas.",
+        cta: "Tem oferta de trabalho numa dessas regiões? Confirme com o empregador se a vaga já pode seguir com o LMIA.",
+        sources: [
+          { label: "Canadá · Programa de Trabalhadores Estrangeiros Temporários (ESDC, oficial)", url: "https://www.canada.ca/en/employment-social-development/services/foreign-workers.html" },
+        ],
+      },
+      {
+        publishedAt: "2026-07-13",
+        title: "Express Entry chama gerentes seniores e a Colúmbia Britânica prioriza saúde e construção",
+        body:
+          "O Canadá realizou o segundo sorteio do Express Entry voltado a gerentes seniores com experiência de trabalho no próprio país, dentro da seleção por categorias que a IRCC vem usando pra chamar perfis específicos. Na mesma semana, a Colúmbia Britânica emitiu convites pelo seu programa provincial para ocupações prioritárias de saúde e construção.\n\nÉ o retrato do momento: em vez de um funil único, o país abre janelas segmentadas por profissão e por província. Quem se encaixa numa categoria priorizada tem hoje o caminho mais curto.",
+        cta: "Seu perfil é de gestão, saúde ou construção? Deixe o Express Entry pronto e acompanhe a categoria e a província certas.",
+        sources: [
+          SRC.ircc,
+          { label: "British Columbia · BC PNP (oficial)", url: "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program" },
+        ],
+      },
+      {
         title: "Províncias aceleram os convites em julho",
         body:
           "As províncias canadenses entraram julho de 2026 em ritmo forte de seleção. Alberta, pelo AAIP, emitiu mais de mil convites em seis sorteios recentes, com prioridade declarada pra saúde, aviação e tecnologia. Manitoba convidou 77 candidatos no Skilled Worker Stream, e a Colúmbia Britânica realizou um sorteio voltado a empreendedores.\n\nCada nomeação provincial soma 600 pontos no Express Entry, o que praticamente garante o convite federal. O detalhe é que as janelas provinciais abrem e fecham rápido, e cada programa tem lista própria de ocupações.",
@@ -588,6 +609,25 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     countryTab: [
       {
+        publishedAt: "2026-07-13",
+        headline: "Canadá abre julho com o trabalho no centro: LMIA reaberto e sorteios por categoria",
+        standfirst:
+          "A reabertura do LMIA de baixa remuneração em oito regiões, um novo sorteio do Express Entry para gerentes seniores e convites provinciais da Colúmbia Britânica marcaram a segunda semana de julho de 2026.",
+        body:
+          "A imigração canadense entrou na segunda semana de julho de 2026 com o mercado de trabalho no comando. A novidade de maior alcance foi a reabertura do processamento de LMIA para vagas de baixa remuneração em oito regiões metropolitanas, entre elas Halifax, Winnipeg e Regina. Essas áreas estavam com os pedidos suspensos, e a volta do LMIA destrava contratações que dependiam desse aval.\n\nNo âmbito federal, a IRCC realizou o segundo sorteio do Express Entry dirigido a gerentes seniores com experiência de trabalho no Canadá. É mais um exemplo da seleção por categorias, o modelo em que o país chama profissões específicas em vez de sortear todo mundo pela nota bruta. A lógica premia quem já tem vínculo e experiência local.\n\nAs províncias seguiram no mesmo compasso. A Colúmbia Britânica emitiu convites pelo seu programa provincial para ocupações prioritárias de saúde e construção, duas áreas de escassez declarada. Uma nomeação provincial continua somando 600 pontos no Express Entry, o que praticamente garante o convite federal.\n\nPara a comunidade WiseHub, o recado da semana é que o Canadá está contratando por recorte. Quem tem oferta numa das regiões do LMIA reaberto, perfil de gestão sênior ou profissão prioritária numa província sai na frente. O caminho mais curto hoje passa por encaixar o perfil na janela certa e reagir rápido quando ela abre.",
+        keyFacts: [
+          "LMIA de baixa remuneração reaberto em oito regiões, incluindo Halifax, Winnipeg e Regina",
+          "Express Entry: segundo sorteio por categoria para gerentes seniores com experiência canadense",
+          "Colúmbia Britânica: convites provinciais para saúde e construção",
+          "Nomeação provincial soma 600 pontos no Express Entry",
+        ],
+        sources: [
+          { label: "Canadá · Programa de Trabalhadores Estrangeiros Temporários (ESDC, oficial)", url: "https://www.canada.ca/en/employment-social-development/services/foreign-workers.html" },
+          SRC.ircc,
+          { label: "British Columbia · BC PNP (oficial)", url: "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program" },
+        ],
+      },
+      {
         headline: "Províncias puxam a imigração canadense e a cidadania por descendência se amplia",
         standfirst:
           "Julho de 2026 começou com sorteios provinciais intensos em Alberta, Manitoba e Colúmbia Britânica, enquanto o Bill C-3 reabre a cidadania por descendência a netos e bisnetos.",
@@ -638,6 +678,19 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       },
     ],
     blog: [
+      {
+        publishedAt: "2026-07-13",
+        headline: "O Canadá que contrata por recorte: a lógica das janelas segmentadas",
+        standfirst:
+          "Reabrir o LMIA em regiões escolhidas, sortear gerentes seniores por categoria e chamar saúde e construção nas províncias fazem parte da mesma estratégia: selecionar por necessidade, não por volume.",
+        body:
+          "Por muito tempo o Canadá foi lido como um país de porta larga, em que bastava somar pontos e esperar. A segunda semana de julho de 2026 mostrou, em três movimentos, que a régua virou outra. Cada decisão recente aponta para a mesma direção: contratar por recorte, endereçando escassez específica em vez de abrir tudo de uma vez.\n\nO primeiro movimento foi a reabertura do LMIA de baixa remuneração em oito regiões metropolitanas, como Halifax, Winnipeg e Regina. Em vez de uma regra nacional única, o país calibra por território, liberando onde falta mão de obra e segurando onde o mercado está saturado. É imigração ajustada ao mapa econômico.\n\nO segundo foi o novo sorteio do Express Entry para gerentes seniores com experiência canadense. A seleção por categorias substitui o sorteio genérico por convites dirigidos, e valoriza quem já provou vínculo com o país. O terceiro veio das províncias, com a Colúmbia Britânica chamando saúde e construção, exatamente as áreas de aperto.\n\nPara a comunidade WiseHub, entender essa lógica vale mais do que perseguir a nota de corte. O Canadá de 2026 recompensa o candidato que lê o próprio perfil como uma chave e procura a fechadura certa, seja uma região com LMIA aberto, uma categoria federal priorizada ou uma província com carência declarada. Quem enxerga o sistema como um conjunto de janelas, e não como uma fila única, encontra caminhos que a maioria não vê.",
+        tags: ["Canadá", "LMIA", "Express Entry", "Provincial Nominee"],
+        sources: [
+          { label: "Canadá · Programa de Trabalhadores Estrangeiros Temporários (ESDC, oficial)", url: "https://www.canada.ca/en/employment-social-development/services/foreign-workers.html" },
+          SRC.ircc,
+        ],
+      },
       {
         headline: "O Canadá que se abre pelas províncias e pela linhagem",
         standfirst:
@@ -816,6 +869,26 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   uk: {
     community: [
       {
+        publishedAt: "2026-07-13",
+        title: "Reino Unido publica o Statement of Changes HC 259 e ajusta regras de fixação de filhos",
+        body:
+          "O Home Office publicou o Statement of Changes HC 259, o documento oficial que atualiza as Regras de Imigração britânicas. Entre os pontos estão ajustes nas regras de fixação, o settlement, de crianças previstas na Parte 8 das Regras, além de uma exceção ligada à proibição de fiança migratória.\n\nOs Statements of Changes são a forma como o Reino Unido altera suas regras de visto na prática, e cada item costuma ter a própria data de entrada em vigor. Quem tem processo de família em andamento deve conferir no texto oficial qual versão da regra se aplica ao seu caso.",
+        cta: "Tem processo de fixação de filhos no Reino Unido? Confira no HC 259 a data de vigência de cada mudança.",
+        sources: [
+          { label: "Reino Unido · Statement of Changes to the Immigration Rules (gov.uk, oficial)", url: "https://www.gov.uk/government/collections/immigration-rules-statement-of-changes" },
+        ],
+      },
+      {
+        publishedAt: "2026-07-13",
+        title: "eGates do Reino Unido passam a aceitar crianças de 8 e 9 anos",
+        body:
+          "O Home Office ampliou o uso dos eGates, as cabines automáticas de controle de fronteira, para crianças a partir de 8 anos, que agora podem passar acompanhadas nos aeroportos habilitados. Antes o limite de idade era mais alto, e famílias com filhos menores precisavam da fila com atendente.\n\nNa prática, é um alívio para quem viaja em família e chega por aeroportos com eGates. A medida diz respeito à entrada no país, e as regras de visto e de permissão de viagem seguem valendo normalmente.",
+        cta: "Vai ao Reino Unido com crianças? Filhos de 8 e 9 anos já podem usar os eGates acompanhados.",
+        sources: [
+          { label: "Reino Unido · Home Office (gov.uk, oficial)", url: "https://www.gov.uk/government/organisations/home-office" },
+        ],
+      },
+      {
         title: "Novo projeto de lei de imigração começa a tramitar no Parlamento",
         body:
           "O Reino Unido publicou o Immigration and Asylum Bill, o projeto de lei de imigração e asilo anunciado no Discurso do Rei em 13 de maio de 2026. O texto já foi apresentado à Câmara dos Comuns e iniciou sua tramitação na sessão parlamentar de 2026 e 2027.\n\nComo todo projeto ainda em análise, as regras atuais seguem valendo até que ele seja aprovado e sancionado. Pra quem planeja o país, o momento é de acompanhar as etapas oficiais sem antecipar mudanças que ainda não entraram em vigor.",
@@ -863,6 +936,24 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     countryTab: [
       {
+        publishedAt: "2026-07-13",
+        headline: "Reino Unido mexe nas regras e na fronteira: HC 259 e eGates para crianças",
+        standfirst:
+          "Um novo Statement of Changes (HC 259) ajusta regras de fixação de filhos, enquanto o Home Office libera os eGates para crianças de 8 e 9 anos. Duas mudanças concretas na segunda semana de julho de 2026.",
+        body:
+          "O Reino Unido fechou a segunda semana de julho de 2026 com duas mudanças práticas, uma nas regras e outra na fronteira. A primeira veio pelo Statement of Changes HC 259, o instrumento oficial que atualiza as Regras de Imigração. Entre os ajustes estão mudanças nas regras de fixação, o settlement, de crianças previstas na Parte 8, além de uma exceção ligada à proibição de fiança migratória.\n\nEsse é o mecanismo típico britânico: em vez de uma grande lei, o país costuma alterar suas regras de visto por meio de Statements of Changes periódicos, cada um com datas de vigência próprias. Por isso, quem tem processo de família em curso precisa confirmar no texto oficial qual regra se aplica ao seu caso, sem se guiar por resumos de terceiros.\n\nA segunda mudança foi na experiência de entrada. O Home Office passou a permitir que crianças de 8 e 9 anos usem os eGates, as cabines automáticas dos aeroportos, quando acompanhadas. É um ganho de conveniência para famílias, sem alterar as exigências de visto ou de permissão de viagem.\n\nPara a comunidade WiseHub, o par de novidades reforça um hábito saudável: no Reino Unido, o que muda de verdade aparece nos documentos oficiais, dos Statements of Changes aos comunicados do Home Office. Acompanhar a fonte primária evita decisões baseadas em manchete e mantém o planejamento firme.",
+        keyFacts: [
+          "Statement of Changes HC 259 publicado, atualizando as Regras de Imigração",
+          "Ajustes nas regras de fixação (settlement) de crianças na Parte 8 das Regras",
+          "Exceção ligada à proibição de fiança migratória",
+          "eGates liberados para crianças de 8 e 9 anos acompanhadas",
+        ],
+        sources: [
+          { label: "Reino Unido · Statement of Changes to the Immigration Rules (gov.uk, oficial)", url: "https://www.gov.uk/government/collections/immigration-rules-statement-of-changes" },
+          { label: "Reino Unido · Home Office (gov.uk, oficial)", url: "https://www.gov.uk/government/organisations/home-office" },
+        ],
+      },
+      {
         headline: "Reino Unido põe em marcha um novo projeto de lei de imigração e asilo",
         standfirst:
           "Anunciado no Discurso do Rei em maio, o Immigration and Asylum Bill foi publicado e começou a tramitar na Câmara dos Comuns. Até virar lei, as regras atuais continuam em vigor.",
@@ -896,6 +987,18 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     blog: [
       {
+        publishedAt: "2026-07-13",
+        headline: "Reino Unido: as mudanças que importam vêm nos Statements of Changes",
+        standfirst:
+          "Enquanto o debate político rende manchetes, as regras que de fato valem mudam num documento técnico e discreto. O HC 259 é o lembrete mais recente.",
+        body:
+          "Quem acompanha a imigração britânica pelas manchetes costuma viver de sustos. Um discurso aqui, um projeto de lei ali, e a sensação é de que tudo pode virar do avesso a qualquer momento. Só que a mecânica real do sistema é bem menos dramática, e bem mais previsível, do que os títulos sugerem.\n\nNo Reino Unido, o grosso das regras de visto não muda por grandes leis, e sim por documentos chamados Statements of Changes to the Immigration Rules. São textos técnicos, publicados com regularidade, que ajustam pontos específicos das Regras de Imigração. O HC 259, publicado em julho de 2026, é o exemplo da vez: mexeu nas regras de fixação de crianças da Parte 8 e trouxe uma exceção sobre fiança migratória, cada mudança com sua data de vigência.\n\nA diferença de fonte muda a qualidade da decisão. Uma manchete diz que o Reino Unido endureceu ou afrouxou algo. O Statement of Changes diz exatamente o quê, para quem e a partir de quando. Para uma família com processo em andamento, essa precisão é a diferença entre agir na hora certa e agir no boato.\n\nPara a comunidade WiseHub, o conselho é de método. Guarde o link oficial dos Statements of Changes e trate cada novo documento como o que realmente move o jogo. No Reino Unido, quem lê a regra na fonte decide melhor do que quem reage ao primeiro título alarmante.",
+        tags: ["Reino Unido", "Statement of Changes", "HC 259", "Regras de Imigração"],
+        sources: [
+          { label: "Reino Unido · Statement of Changes to the Immigration Rules (gov.uk, oficial)", url: "https://www.gov.uk/government/collections/immigration-rules-statement-of-changes" },
+        ],
+      },
+      {
         headline: "Reino Unido: por que um novo projeto de lei não é motivo pra pânico",
         standfirst:
           "O Immigration and Asylum Bill começou a tramitar, e a reação certa não é correr nem congelar planos, é entender como uma lei nasce por lá.",
@@ -921,6 +1024,17 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   // ────────────────────────────── França ──────────────────────────────
   fr: {
     community: [
+      {
+        publishedAt: "2026-07-13",
+        title: "Novo controle de fronteira europeu (EES) começa a mexer com os aeroportos franceses",
+        body:
+          "A França está entre os países que começam a operar o EES, o novo sistema europeu de entrada e saída. Ele registra de forma biométrica os viajantes de fora da União Europeia a cada passagem de fronteira, substituindo o carimbo no passaporte por um registro digital. Aeroportos franceses já manifestaram preocupação com filas e tempo de processamento na fase inicial.\n\nO EES não é um visto, é um controle de fronteira. Para quem viaja com passaporte de fora do bloco, o efeito prático é reservar mais tempo no desembarque enquanto o sistema entra em ritmo. As regras de visto e de estadia seguem as mesmas.",
+        cta: "Vai entrar na França com passaporte de fora da UE? Reserve mais tempo na fronteira enquanto o EES se ajusta.",
+        sources: [
+          { label: "União Europeia · Sistema de Entrada/Saída (EES, oficial)", url: "https://travel-europe.europa.eu/ees_en" },
+          { label: "France Info · Immigration (Radio France)", url: "https://www.franceinfo.fr/societe/immigration.html" },
+        ],
+      },
       {
         title: "França simplifica o Passeport Talent num portal único",
         body:
@@ -952,6 +1066,24 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     countryTab: [
       {
+        publishedAt: "2026-07-13",
+        headline: "França na largada do EES: o novo controle de fronteira europeu chega aos aeroportos",
+        standfirst:
+          "O sistema europeu de entrada e saída (EES) começa a operar e registra viajantes de fora da UE de forma biométrica. Aeroportos franceses alertam para filas na fase inicial.",
+        body:
+          "A França entrou em julho de 2026 no grupo de países que começam a rodar o EES, o sistema europeu de entrada e saída. A mudança é de fundo: em vez do carimbo manual no passaporte, os viajantes de fora da União Europeia passam a ter entradas e saídas registradas de forma biométrica, com foto e impressões digitais, a cada travessia de fronteira externa do espaço Schengen.\n\nNa largada, o principal ruído veio dos aeroportos. Operadores franceses manifestaram preocupação com o tempo de processamento e o risco de filas mais longas enquanto passageiros e equipes se adaptam ao novo fluxo. É um desconforto típico de fase inicial, ligado à operação e não a uma restrição de entrada.\n\nVale separar o que o EES é do que ele não é. Ele não cria um novo visto nem muda quem pode ou não entrar na França. É um controle de fronteira modernizado, que digitaliza o registro de quem passa. As exigências de visto e as regras de estadia continuam as mesmas de antes.\n\nPara a comunidade WiseHub, o recado é de logística. Quem viaja para a França com passaporte de fora do bloco deve contar com mais tempo no desembarque nas primeiras semanas e chegar com a documentação organizada. Passada a curva de adaptação, o registro digital tende a tornar as passagens seguintes mais rápidas.",
+        keyFacts: [
+          "EES: sistema europeu de entrada e saída começa a operar, com registro biométrico",
+          "Vale para viajantes de fora da União Europeia nas fronteiras externas de Schengen",
+          "Aeroportos franceses alertam para filas e tempo de processamento na fase inicial",
+          "Não é um visto: as regras de entrada e estadia seguem as mesmas",
+        ],
+        sources: [
+          { label: "União Europeia · Sistema de Entrada/Saída (EES, oficial)", url: "https://travel-europe.europa.eu/ees_en" },
+          { label: "France Info · Immigration (Radio France)", url: "https://www.franceinfo.fr/societe/immigration.html" },
+        ],
+      },
+      {
         headline: "França aposta na previsibilidade pra atrair talento qualificado",
         standfirst:
           "Com o Passeport Talent unificado num portal e análise em torno de 60 dias, o país se posiciona como destino estável pra profissionais de alto valor.",
@@ -967,6 +1099,18 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       },
     ],
     blog: [
+      {
+        publishedAt: "2026-07-13",
+        headline: "EES: por que o novo controle de fronteira europeu importa mais do que parece",
+        standfirst:
+          "A troca do carimbo por um registro biométrico não muda quem entra na Europa, mas muda a experiência de entrar. E a França é uma das primeiras portas a sentir isso.",
+        body:
+          "À primeira vista, o EES parece um detalhe técnico: trocar o carimbo do passaporte por um registro digital. Mas mudanças de fronteira raramente são só técnicas. Elas alteram a experiência concreta de chegar, e é por isso que o sistema europeu de entrada e saída merece atenção de quem planeja a Europa pela França.\n\nO EES registra, de forma biométrica, cada entrada e saída de viajantes de fora da União Europeia nas fronteiras externas do espaço Schengen. O objetivo declarado é controlar melhor o tempo de permanência e reduzir fraudes de identidade. Para o viajante honesto, o efeito não é ser barrado, é passar por um processo novo, que na fase inicial custa tempo enquanto todos se adaptam.\n\nA França, com aeroportos de altíssimo volume, é um bom termômetro. Os alertas de filas que surgiram nos primeiros dias não são sinal de porta fechada, são a fricção normal de um sistema novo entrando em operação. A tendência, depois da adaptação, é que o registro digital agilize as travessias seguintes, já que os dados ficam guardados.\n\nPara a comunidade WiseHub, a leitura correta é não confundir mudança de processo com mudança de regra. O EES não mexe em visto nem em elegibilidade. O que ele pede é preparo prático: mais tempo de folga no primeiro desembarque e documentação em ordem. Entender essa diferença evita ansiedade desnecessária e ajuda a planejar a viagem com realismo.",
+        tags: ["França", "EES", "Fronteiras", "Europa"],
+        sources: [
+          { label: "União Europeia · Sistema de Entrada/Saída (EES, oficial)", url: "https://travel-europe.europa.eu/ees_en" },
+        ],
+      },
       {
         headline: "França: o destino que aposta no tédio, e por que isso é uma vantagem",
         standfirst:
