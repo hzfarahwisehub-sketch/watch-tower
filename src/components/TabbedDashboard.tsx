@@ -39,24 +39,24 @@ const MIN = { minW: 3, minH: 4 } as const;
 type LItem = { i: string; x: number; y: number; w: number; h: number };
 const LG: Record<string, LItem[]> = {
   mapa: [
-    { i: "map", x: 0, y: 0, w: 9, h: 15 },
-    { i: "countries", x: 9, y: 0, w: 6, h: 15 },
-    { i: "benchmark", x: 15, y: 0, w: 9, h: 15 },
+    { i: "map", x: 0, y: 0, w: 8, h: 20 },
+    { i: "countries", x: 8, y: 0, w: 6, h: 20 },
+    { i: "benchmark", x: 14, y: 0, w: 10, h: 20 },
   ],
   oper: [
-    { i: "inbox", x: 0, y: 0, w: 8, h: 10 },
-    { i: "scheduled", x: 8, y: 0, w: 8, h: 10 },
-    { i: "requests", x: 16, y: 0, w: 8, h: 10 },
-    { i: "reminders", x: 0, y: 10, w: 12, h: 9 },
-    { i: "tasks", x: 12, y: 10, w: 12, h: 9 },
+    { i: "inbox", x: 0, y: 0, w: 8, h: 11 },
+    { i: "scheduled", x: 8, y: 0, w: 8, h: 11 },
+    { i: "requests", x: 16, y: 0, w: 8, h: 11 },
+    { i: "reminders", x: 0, y: 11, w: 12, h: 12 },
+    { i: "tasks", x: 12, y: 11, w: 12, h: 12 },
   ],
-  agenda: [{ i: "agenda", x: 0, y: 0, w: 24, h: 18 }],
-  feed: [{ i: "feed", x: 0, y: 0, w: 24, h: 18 }],
-  info: [{ i: "info", x: 0, y: 0, w: 24, h: 18 }],
-  bull: [{ i: "bulletins", x: 0, y: 0, w: 24, h: 18 }],
+  agenda: [{ i: "agenda", x: 0, y: 0, w: 24, h: 22 }],
+  feed: [{ i: "feed", x: 0, y: 0, w: 24, h: 22 }],
+  info: [{ i: "info", x: 0, y: 0, w: 24, h: 22 }],
+  bull: [{ i: "bulletins", x: 0, y: 0, w: 24, h: 22 }],
   fin: [
-    { i: "finance", x: 0, y: 0, w: 16, h: 16 },
-    { i: "crypto", x: 16, y: 0, w: 8, h: 16 },
+    { i: "finance", x: 0, y: 0, w: 16, h: 22 },
+    { i: "crypto", x: 16, y: 0, w: 8, h: 22 },
   ],
 };
 function stacked(items: LItem[], cols: number): LItem[] {
@@ -216,11 +216,9 @@ export function TabbedDashboard() {
             </div>
             <div className="wt-tabs-actions">
               <TopControls />
-              {!locked && (
-                <button type="button" className="wt-export-btn" onClick={exportLayouts} title="Copiar o arranjo de todas as abas (pra Friday salvar como padrão)">
-                  ⤓ Arranjo
-                </button>
-              )}
+              <button type="button" className="wt-export-btn" onClick={exportLayouts} title="Copiar o arranjo de todas as abas (pra Friday salvar como padrão)">
+                ⤓ Arranjo
+              </button>
               <WindowsMenu />
               {isLoggedIn && <ExportButton label="REPAVET" title={t("dash.repavet.title")} />}
             </div>
