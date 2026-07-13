@@ -37,26 +37,28 @@ function tabLabel(t: (k: string) => string, def: TabDef): string {
 // ── Arranjos padrão por aba (lg = 24 colunas). O Hammis molda por cima. ──────
 const MIN = { minW: 3, minH: 4 } as const;
 type LItem = { i: string; x: number; y: number; w: number; h: number };
+// Arranjo PADRÃO = exatamente como o Hammis moldou (capturado do navegador dele
+// em 2026-07-13). Cada um pode remexer por cima; isto é só o ponto de partida.
 const LG: Record<string, LItem[]> = {
   mapa: [
-    { i: "map", x: 0, y: 0, w: 8, h: 20 },
-    { i: "countries", x: 8, y: 0, w: 6, h: 20 },
-    { i: "benchmark", x: 14, y: 0, w: 10, h: 20 },
+    { i: "map", x: 0, y: 0, w: 9, h: 26 },
+    { i: "countries", x: 9, y: 0, w: 6, h: 26 },
+    { i: "benchmark", x: 15, y: 0, w: 9, h: 26 },
   ],
   oper: [
-    { i: "inbox", x: 0, y: 0, w: 8, h: 11 },
-    { i: "scheduled", x: 8, y: 0, w: 8, h: 11 },
-    { i: "requests", x: 16, y: 0, w: 8, h: 11 },
-    { i: "reminders", x: 0, y: 11, w: 12, h: 12 },
-    { i: "tasks", x: 12, y: 11, w: 12, h: 12 },
+    { i: "inbox", x: 0, y: 0, w: 8, h: 18 },
+    { i: "scheduled", x: 16, y: 0, w: 8, h: 14 },
+    { i: "requests", x: 8, y: 0, w: 8, h: 27 },
+    { i: "reminders", x: 0, y: 18, w: 8, h: 9 },
+    { i: "tasks", x: 16, y: 14, w: 8, h: 13 },
   ],
-  agenda: [{ i: "agenda", x: 0, y: 0, w: 24, h: 22 }],
-  feed: [{ i: "feed", x: 0, y: 0, w: 24, h: 22 }],
-  info: [{ i: "info", x: 0, y: 0, w: 24, h: 22 }],
-  bull: [{ i: "bulletins", x: 0, y: 0, w: 24, h: 22 }],
+  agenda: [{ i: "agenda", x: 0, y: 0, w: 24, h: 27 }],
+  feed: [{ i: "feed", x: 0, y: 0, w: 24, h: 27 }],
+  info: [{ i: "info", x: 0, y: 0, w: 24, h: 27 }],
+  bull: [{ i: "bulletins", x: 0, y: 0, w: 24, h: 27 }],
   fin: [
-    { i: "finance", x: 0, y: 0, w: 16, h: 22 },
-    { i: "crypto", x: 16, y: 0, w: 8, h: 22 },
+    { i: "finance", x: 0, y: 0, w: 16, h: 27 },
+    { i: "crypto", x: 16, y: 0, w: 8, h: 27 },
   ],
 };
 function stacked(items: LItem[], cols: number): LItem[] {
@@ -77,7 +79,9 @@ function defaultLayouts(tabId: string): ResponsiveLayouts {
     xxs: stacked(base, 4),
   } as ResponsiveLayouts;
 }
-const STORE = (id: string) => `wt-tabgrid-v1-${id}`;
+// v2: bump a pedido do Hammis — todo mundo recebe o arranjo-padrão dele acima,
+// mesmo quem já tinha um layout salvo na v1 (que fica órfão de propósito).
+const STORE = (id: string) => `wt-tabgrid-v2-${id}`;
 
 // ── Célula: alça de arrastar + destacar em janela + conteúdo com scroll ──────
 function GridCell({ id, selected, onSelect, locked, isMap }: {
