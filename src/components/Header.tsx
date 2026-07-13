@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useTheme } from "./ThemeProvider";
+import { useLayoutMode } from "./LayoutMode";
 import { useLocale } from "./LocaleProvider";
 import { LOCALE_SHORT } from "@/lib/i18n/config";
 import { useToast } from "./ToastProvider";
@@ -15,6 +16,7 @@ import { playChime } from "@/lib/chime";
 
 export function Header() {
   const { theme, toggle } = useTheme();
+  const { mode, setMode } = useLayoutMode();
   const { locale, toggle: toggleLocale, t } = useLocale();
   const { locked, toggleLock, openPanel, alarmVolume, setAlarmVolume } = useSettings();
   const { data: session, status: sessionStatus } = useSession();
@@ -54,7 +56,7 @@ export function Header() {
 
   return (
     <header
-      className="flex items-center justify-between gap-4 mb-6 px-5 sm:px-6 lg:px-8 py-4 flex-wrap rounded-2xl"
+      className="flex items-center justify-between gap-3 mb-3 px-4 sm:px-5 lg:px-6 py-2 flex-wrap rounded-2xl"
       style={{
         background: "linear-gradient(180deg, var(--surface), var(--surface-hi))",
         border: "1px solid var(--border)",
@@ -75,7 +77,7 @@ export function Header() {
           width={48}
           height={48}
           priority
-          className="h-9 w-9 md:h-10 md:w-10 min-w-9 md:min-w-10 max-w-none rounded-[11px] flex-shrink-0"
+          className="h-8 w-8 md:h-8 md:w-8 min-w-8 max-w-none rounded-[10px] flex-shrink-0"
           style={{ boxShadow: "0 0 0 1px var(--border), 0 3px 12px rgba(31,85,255,.3)" }}
         />
         <div
@@ -83,11 +85,11 @@ export function Header() {
           style={{ background: "linear-gradient(180deg, transparent, var(--color-wh-blue), transparent)" }}
         />
         <div className="min-w-0">
-          <h1 className="text-[clamp(13px,1.8vw,20px)] font-extrabold tracking-[1.5px] md:tracking-[2px] uppercase leading-none truncate">
+          <h1 className="text-[clamp(12px,1.5vw,17px)] font-extrabold tracking-[1.5px] md:tracking-[2px] uppercase leading-none truncate">
             Watch <span style={{ color: "var(--color-wh-blue-light)" }}>Tower</span>
           </h1>
           <div
-            className="hidden sm:block text-[10px] tracking-[2.5px] uppercase mt-1.5 font-medium truncate"
+            className="hidden sm:block text-[9px] tracking-[2.5px] uppercase mt-1 font-medium truncate"
             style={{ color: "var(--text-3)" }}
           >
             {t("header.subtitle")}
@@ -97,7 +99,7 @@ export function Header() {
 
       <div className="flex items-center gap-2.5 flex-wrap flex-shrink-0">
         <div
-          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-bold tracking-[1px] uppercase"
+          className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-[11px] font-bold tracking-[1px] uppercase"
           style={{
             background: "rgba(16,224,160,.12)",
             border: "1px solid rgba(16,224,160,.4)",
@@ -117,13 +119,26 @@ export function Header() {
 
         <IconBtn title={t("header.theme.title")} onClick={toggle}>
           {theme === "dark" ? (
+            // Lua — tema Dark (azul do site)
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          ) : theme === "wise" ? (
+            // Fone + microfone (logo WiseHub) em dourado — tema Wise
+            <span style={{ color: "var(--color-wh-gold)", display: "inline-flex" }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 13v-1a8 8 0 0 1 16 0v1" />
+                <rect x="2.6" y="12.3" width="3.6" height="6.4" rx="1.5" fill="currentColor" stroke="none" />
+                <rect x="17.8" y="12.3" width="3.6" height="6.4" rx="1.5" fill="currentColor" stroke="none" />
+                <path d="M19.6 18.7v.8a2.5 2.5 0 0 1-2.5 2.5H13.2" />
+                <circle cx="12" cy="22" r="1.15" fill="currentColor" stroke="none" />
+              </svg>
+            </span>
+          ) : (
+            // Sol — tema Light
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="4" />
               <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-            </svg>
-          ) : (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
             </svg>
           )}
         </IconBtn>
@@ -240,6 +255,28 @@ export function Header() {
           )}
         </div>
 
+        {/* Alterna entre os dois layouts: Abas (novo) e Clássico (grade livre) */}
+        <IconBtn
+          title={mode === "tabs" ? "Layout: Abas · clique para Clássico" : "Layout: Clássico · clique para Abas"}
+          onClick={() => setMode(mode === "tabs" ? "classic" : "tabs")}
+          active={mode === "tabs"}
+          activeColor="#4A78FF"
+        >
+          {mode === "tabs" ? (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="4" width="18" height="16" rx="2" />
+              <path d="M3 9h18M9 9v11" />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1" />
+              <rect x="14" y="3" width="7" height="7" rx="1" />
+              <rect x="3" y="14" width="7" height="7" rx="1" />
+              <rect x="14" y="14" width="7" height="7" rx="1" />
+            </svg>
+          )}
+        </IconBtn>
+
         <IconBtn title={t("header.settings.title")} onClick={openPanel}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="3" />
@@ -259,7 +296,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => signIn()}
-            className="inline-flex items-center gap-2 px-3.5 py-[7px] rounded-full text-[11.5px] font-bold uppercase tracking-wider cursor-pointer transition-all hover:-translate-y-px"
+            className="inline-flex items-center gap-2 px-3.5 py-[5px] rounded-full text-[11.5px] font-bold uppercase tracking-wider cursor-pointer transition-all hover:-translate-y-px"
             style={{
               background: "linear-gradient(135deg, var(--color-wh-blue), var(--color-wh-blue-dark))",
               color: "#fff",
@@ -275,7 +312,7 @@ export function Header() {
               type="button"
               onClick={() => setUserMenuOpen((v) => !v)}
               title={session?.user?.email ?? ""}
-              className="w-[38px] h-[38px] rounded-full flex items-center justify-center cursor-pointer transition-all hover:-translate-y-px text-[14px] font-extrabold"
+              className="w-[34px] h-[34px] rounded-full flex items-center justify-center cursor-pointer transition-all hover:-translate-y-px text-[13px] font-extrabold"
               style={{
                 background: "linear-gradient(135deg, var(--color-wh-blue), var(--color-wh-blue-dark))",
                 color: "#fff",
@@ -366,7 +403,7 @@ function IconBtn({
       onClick={onClick}
       title={title}
       aria-pressed={active}
-      className="w-[38px] h-[38px] rounded-[10px] flex items-center justify-center cursor-pointer transition-all hover:-translate-y-px"
+      className="w-[34px] h-[34px] rounded-[9px] flex items-center justify-center cursor-pointer transition-all hover:-translate-y-px"
       style={{
         border: active && activeColor ? `1px solid ${activeColor}` : "1px solid var(--border)",
         background: active && activeColor ? `${activeColor}22` : "var(--surface)",

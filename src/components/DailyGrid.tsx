@@ -18,7 +18,7 @@ import { SafeBoundary } from "./SafeBoundary";
 
 export type DailyBlock = "inbox" | "scheduled" | "agenda" | "tasks" | "reminders";
 
-export type BoardScope = "personal" | "team";
+export type BoardScope = "personal" | "team" | "all";
 
 export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
   const { t } = useLocale();
@@ -33,7 +33,7 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
   useEffect(() => {
     try {
       const s = localStorage.getItem(scopeKey);
-      if (s === "personal" || s === "team") setScope(s);
+      if (s === "personal" || s === "team" || s === "all") setScope(s);
     } catch {}
     setScopeHydrated(true);
   }, [scopeKey]);
@@ -52,22 +52,33 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
     }
   }, [scope, scopeHydrated, scopeKey]);
 
-  const tCfg = useMemo(() => ({ ...tasksConfig, scope }), [scope]);
-  const aCfg = useMemo(() => ({ ...agendaConfig, scope }), [scope]);
-  const rCfg = useMemo(() => ({ ...remindersConfig, scope }), [scope]);
-  const sCfg = useMemo(() => ({ ...scheduledConfig, scope }), [scope]);
+  // "Todos" (all) só existe na Agenda. Pros demais blocos, "all" cai pra "team".
+  const nonAll: "team" | "personal" = scope === "all" ? "team" : scope;
+  const tCfg = useMemo(() => ({ ...tasksConfig, scope: nonAll }), [nonAll]);
+  const rCfg = useMemo(() => ({ ...remindersConfig, scope: nonAll }), [nonAll]);
+  const sCfg = useMemo(() => ({ ...scheduledConfig, scope: nonAll }), [nonAll]);
+  // Agenda: dois hooks (equipe + pessoal) pra permitir o modo "Todos" (mescla).
+  const aTeamCfg = useMemo(() => ({ ...agendaConfig, scope: "team" as const }), []);
+  const aPersCfg = useMemo(() => ({ ...agendaConfig, scope: "personal" as const }), []);
 
   const tasksHook = useDualStorage(tCfg);
-  const agendaHook = useDualStorage(aCfg);
+  const agendaTeamHook = useDualStorage(aTeamCfg);
+  const agendaPersHook = useDualStorage(aPersCfg);
   const remindersHook = useDualStorage(rCfg);
   const scheduledHook = useDualStorage(sCfg);
 
+  // Hook "ativo" da agenda p/ operações: equipe (team e all) ou pessoal.
+  const agendaHook = scope === "personal" ? agendaPersHook : agendaTeamHook;
+  // Roteia edição/exclusão pro hook certo: em "Todos", cada item vai pro seu.
+  const agendaHookFor = (id: number) =>
+    scope === "all" && agendaPersHook.items.some((x) => x.id === id) ? agendaPersHook : agendaHook;
+
   const tasks = tasksHook.items;
-  const agenda = agendaHook.items;
+  const agenda = scope === "all" ? [...agendaTeamHook.items, ...agendaPersHook.items] : agendaHook.items;
   const reminders = remindersHook.items;
   const scheduled = scheduledHook.items;
   const hydrated =
-    tasksHook.hydrated && agendaHook.hydrated && remindersHook.hydrated && scheduledHook.hydrated;
+    tasksHook.hydrated && agendaTeamHook.hydrated && agendaPersHook.hydrated && remindersHook.hydrated && scheduledHook.hydrated;
 
   const toast = useToast();
 
@@ -207,7 +218,7 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
     } else {
       patch = { [field]: value } as Partial<AgendaItem>;
     }
-    agendaHook.update(id, patch);
+    agendaHookFor(id).update(id, patch);
     scheduleSync();
   };
 
@@ -231,7 +242,7 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
   const deleteAgenda = (id: number) => {
     const item = agenda.find((a) => a.id === id);
     if (!window.confirm(`${t("daily.agenda.delete.confirm")}${item ? `\n\n${item.date || ""} ${item.time} · ${item.title}` : ""}`)) return;
-    agendaHook.remove(id);
+    agendaHookFor(id).remove(id);
     scheduleSync();
     if (item && scope === "personal" && undoCtx) {
       let curId = id;
@@ -383,6 +394,7 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
         bodyMaxHeight={560}
         scope={scope}
         onScopeChange={setScope}
+        scopes={["all", "team", "personal"]}
       >
         {/* Seção Google Agenda (leitura das outras agendas Google). Protegida
             por SafeBoundary: se falhar, some sozinha e a Agenda segue intacta. */}

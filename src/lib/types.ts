@@ -1,5 +1,5 @@
 export type Status = "crit" | "warn" | "stable";
-export type Theme = "dark" | "light";
+export type Theme = "dark" | "light" | "wise";
 
 export interface CountryEvent {
   title: string;

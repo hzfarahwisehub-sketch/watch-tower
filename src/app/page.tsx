@@ -1,10 +1,10 @@
-import { Dashboard } from "@/components/Dashboard";
+import { AppView } from "@/components/AppView";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export default function Home() {
   return (
     <ErrorBoundary>
-      <Dashboard />
+      <AppView />
     </ErrorBoundary>
   );
 }

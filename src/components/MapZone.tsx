@@ -180,11 +180,11 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
       try {
         map.setProjection({ type: "globe" });
         map.setSky?.({
-          "sky-color": "#15132A",
+          "sky-color": "#060B18",
           "sky-horizon-blend": 0.5,
-          "horizon-color": "#1F1D31",
+          "horizon-color": "#0A1124",
           "horizon-fog-blend": 0.3,
-          "fog-color": "#15132A",
+          "fog-color": "#060B18",
           "fog-ground-blend": 0.1,
         });
         if (firstLoadRef.current) {
