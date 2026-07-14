@@ -17,6 +17,41 @@ import type { ReportData } from "@/lib/report-data";
 const TRIGGER_TAG = "GERAR-CONTEUDO";
 const DEDUP_WINDOW_MS = 12 * 60 * 60 * 1000;
 
+// Gatilho DIÁRIO dos roteiros de vídeo dos fundadores (Lucas e Marcela), pra
+// Instagram + YouTube. Nasce junto com o ciclo da Watch Tower: o cron diário lê
+// as mudanças frescas dos países e abre UM pedido ⚡ pra Friday gerar o lote do
+// dia. A geração em si é da Friday (modelo curado, sem IA no servidor), com a
+// revisão adversarial embutida. Dedup ~20h garante 1 lote por dia.
+const TRIGGER_ROTEIROS_TAG = "GERAR-ROTEIROS";
+const ROTEIROS_DEDUP_MS = 20 * 60 * 60 * 1000;
+
+export async function acionarGeracaoRoteiros(mudancas: string[], userId: string): Promise<boolean> {
+  try {
+    const since = new Date(Date.now() - ROTEIROS_DEDUP_MS);
+    const existing = await prisma.suggestion.findFirst({
+      where: { status: "open", body: { contains: TRIGGER_ROTEIROS_TAG }, createdAt: { gt: since } },
+      select: { id: true },
+    });
+    if (existing) return false;
+
+    const fuel = mudancas.length
+      ? `Novidades do dia pra ancorar (use como gancho, sem inventar número): ${mudancas.slice(0, 12).join(" · ")}.`
+      : `Sem mudança oficial nova hoje. Puxe uma atualização ou tema relevante de imigração/empreendedorismo pra ancorar.`;
+
+    const body =
+      `${FRIDAY_MARKER} · ${TRIGGER_ROTEIROS_TAG} · Gerar o LOTE DIÁRIO de roteiros de vídeo da WiseHub (fundadores Lucas e Marcela, YouTube + Instagram/Reels). ` +
+      `Estrutura: Lucas = 2 longos + 2 curtos (mercado, empreendedorismo, investimento, o provedor, equilíbrio financeiro e mental); Marcela = 2 longos + 2 curtos (família, mulher, criança, acolhimento, a mãezona) e também mercado de trabalho. ` +
+      `Ângulos SEMPRE novos, nunca repetir nem copiar; personas separadas; voz WiseHub (fluida, acolhedora, sem travessão no meio da frase); sem clichê, sem escassez forçada, sem gancho de manual, sem comparação padronizada, sem dica de IA; ` +
+      `honestidade obrigatória (não promete visto, renda nem resultado; conteúdo educativo não substitui profissional habilitado); NUNCA citar programa interno ou ranking. ` +
+      `Ao puxar notícia ou informação com profundidade, usar o gancho pra WiseHub (estar conectado, acesso rápido e imediato, gente que vive isso). Rodar a revisão adversarial (voz/clichê, persona/repetição, marca/fatos) antes de entregar. ${fuel}`;
+
+    await prisma.suggestion.create({ data: { userId, body } });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export async function acionarGeracaoConteudo(data: ReportData, userId: string): Promise<void> {
   try {
     const pendentes: Array<{ pais: string; titulo: string }> = [];
