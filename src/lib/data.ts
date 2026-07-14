@@ -163,34 +163,13 @@ export const COUNTRIES: Country[] = [
 // INBOX_ACCOUNTS (mock) removido 2026-07-01 — Inbox Fase 3 é real:
 // contas compartilhadas em src/lib/mail/config.ts + pessoais no banco.
 
-export const DEFAULT_TASKS: Task[] = [
-  {id:1, text:"Revisar PR Watch Tower #007", done:false},
-  {id:2, text:"Confirmar webhook Stripe na Dashboard", done:false},
-  {id:3, text:"Responder support@wisehubnow.com — Ticket #4421", done:false},
-  {id:4, text:"Atualizar prompt da Mary com novo brand voice", done:true},
-  {id:5, text:"Briefing semanal — preparar slides", done:false},
-  {id:6, text:"Validar Stripe taxas com contador", done:false}
-];
+// Cold-start SEM dados = caixas vazias. Nada de mock/placeholder (removido o
+// resíduo antigo "época do Stripe" 2026-07-13). Dado real vem só do DB por
+// usuário autenticado; deslogado não vê nada (app é gated por login).
+export const DEFAULT_TASKS: Task[] = [];
 
-export const DEFAULT_AGENDA: AgendaItem[] = [
-  {id:1, date:"", time:"09:00", title:"Call equipe WiseHub — semanal", where:"Google Meet"},
-  {id:2, date:"", time:"10:30", title:"Análise sprint C — Stripe webhook", where:"Solo"},
-  {id:3, date:"", time:"14:00", title:"Review imigração — pendências D7", where:"WiseHub Watch Tower"},
-  {id:4, date:"", time:"16:30", title:"1:1 com Fabiano — design system", where:"Zoom"},
-  {id:5, date:"", time:"18:00", title:"Encerramento semana", where:"Wrap-up"}
-];
+export const DEFAULT_AGENDA: AgendaItem[] = [];
 
-export const DEFAULT_REMINDERS: Reminder[] = [
-  {id:1, text:"Stripe webhook signing secret ainda pendente", when:"Crítico", crit:true},
-  {id:2, text:"Atualização Cowork sai 14/mai — testar Live Artifacts", when:"Em 3 dias"},
-  {id:3, text:"Renovar API key Manus dia 5/jun", when:"Em 25 dias"},
-  {id:4, text:"Backup mensal WiseRank DB — última 03/mai", when:"Esta semana"}
-];
+export const DEFAULT_REMINDERS: Reminder[] = [];
 
-export const DEFAULT_SCHEDULED: ScheduledAction[] = [
-  {id:1, icon:"🌎", title:"Atualização diária do panorama de imigração", frequency:"Diário · 06:00", nextRun:"Amanhã 06:00", status:"active"},
-  {id:2, icon:"✍",  title:"Criação de notícias para postagem", frequency:"Diário · 09:00", nextRun:"Amanhã 09:00", status:"active"},
-  {id:3, icon:"⚖",  title:"Verificação de novas leis, regras ou eventos", frequency:"3× por dia · 08/14/20", nextRun:"Hoje 20:00", status:"active"},
-  {id:4, icon:"📊", title:"Snapshot semanal — relatório resumo", frequency:"Semanal · seg 07:00", nextRun:"Seg 07:00", status:"active"},
-  {id:5, icon:"🔍", title:"Scan de oportunidades — vistos abertos", frequency:"2× por semana", nextRun:"Qua 10:00", status:"active"}
-];
+export const DEFAULT_SCHEDULED: ScheduledAction[] = [];

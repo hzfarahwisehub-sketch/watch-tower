@@ -17,7 +17,14 @@ export default auth((req) => {
     pathname.startsWith("/api/scheduled") ||
     pathname.startsWith("/api/admin") ||
     pathname.startsWith("/api/export");
-  const isProtectedPage = pathname.startsWith("/admin");
+  // App é de acesso restrito: TODAS as páginas do app exigem login. Sem sessão,
+  // cai na tela de login e não renderiza nada (evita vazar resíduo gravado no
+  // navegador de quem já teve acesso antes). Só ficam públicas as telas /auth/*
+  // e os assets (excluídos pelo matcher abaixo).
+  const isProtectedPage =
+    pathname === "/" ||
+    pathname.startsWith("/janela") ||
+    pathname.startsWith("/admin");
 
   if (!isProtectedApi && !isProtectedPage) return NextResponse.next();
   if (isLoggedIn) return NextResponse.next();
