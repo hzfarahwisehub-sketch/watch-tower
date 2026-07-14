@@ -23,6 +23,7 @@ import {
   categoryName,
   type ReportImage,
   readPublicImage,
+  provenance,
 } from "@/lib/report-data";
 import {
   DESTINATIONS,
@@ -211,10 +212,24 @@ function bodyPdf(b: PdfBuilder, text: string) {
   }
 }
 
+/** Sufixo de procedência pra provar a fonte: site visível + selo (fonte oficial
+ *  quando for governo/órgão público, senão referência). Só texto ASCII-safe pro
+ *  pdfSafe não engolir. Ex.: " · canada.ca · [fonte oficial]". */
+function provSuffix(url: string | undefined | null): string {
+  const { site, official } = provenance(url);
+  const siteTxt = site ? ` · ${site}` : "";
+  const seal = official ? " · [fonte oficial]" : " · [referencia]";
+  return `${siteTxt}${seal}`;
+}
+
 function sourcesPdf(b: PdfBuilder, sources: EditorialSource[] | undefined, prefix: string) {
   if (!sources?.length) return;
   b.text(prefix, { size: 8.5, color: GREY, oblique: true, gapAfter: 0 });
-  for (const s of sources) b.text(`${s.label}: ${s.url}`, { size: 8, color: GREY, indent: 12, gapAfter: 1 });
+  for (const s of sources) {
+    const official = provenance(s.url).official;
+    b.text(`${s.label}${provSuffix(s.url)}`, { size: 8, color: official ? BLUE_LIGHT : GREY, indent: 12, gapAfter: 0 });
+    b.text(s.url, { size: 8, color: GREY, indent: 18, gapAfter: 1 });
+  }
   b.text("", { gapAfter: 2 });
 }
 
@@ -293,7 +308,7 @@ function technicalPdf(b: PdfBuilder, c: ReportCountry, img?: PDFImage) {
   if (c.bulletin) {
     const bl = c.bulletin;
     b.heading("Boletim oficial monitorado", H2);
-    b.bullet(`Fonte: ${bl.source}`, { size: 10 });
+    b.bullet(`Fonte: ${bl.source}${provSuffix(bl.url)}`, { size: 10 });
     b.bullet(`Frequência declarada: ${bl.frequency}`, { size: 10 });
     b.bullet(`URL pública: ${bl.url}`, { size: 10 });
     if (bl.lastStatus || bl.lastCheckedAt || bl.lastChangedAt || bl.hash) {
@@ -322,7 +337,15 @@ function technicalPdf(b: PdfBuilder, c: ReportCountry, img?: PDFImage) {
     sorted.slice(0, 12).forEach((hd) => {
       const when = hd.pubDate ? ` (${fmtDate(hd.pubDate, { full: true })})` : "";
       b.bullet(`${hd.source}: ${hd.title}${when}`, { size: 10, gapAfter: 0 });
-      b.text(hd.link, { size: 8, color: GREY, indent: 12, gapAfter: hd.community ? 0 : 2 });
+      b.text(`Fonte:${provSuffix(hd.link)}`, { size: 8, color: provenance(hd.link).official ? BLUE_LIGHT : GREY, indent: 12, gapAfter: 0 });
+      b.text(hd.link, { size: 8, color: GREY, indent: 12, gapAfter: 0 });
+      // Imagem original da notícia: se veio no feed ou via og:image, mostra a URL;
+      // senão deixa claro que a imagem daquela manchete não foi encontrada.
+      if (hd.image) {
+        b.text(`Imagem da noticia: ${hd.image}`, { size: 8, color: BLUE_LIGHT, indent: 12, gapAfter: hd.community ? 0 : 2 });
+      } else {
+        b.text("Imagem desta noticia nao encontrada.", { size: 8, color: GREY, oblique: true, indent: 12, gapAfter: hd.community ? 0 : 2 });
+      }
       if (hd.community && hd.checagem) {
         const ck = hd.checagem;
         b.text(`Fonte de comunidade (nao-oficial) - ${ck.rotulo}`, { size: 8.5, color: GREY, oblique: true, indent: 12, gapAfter: 0 });
@@ -351,7 +374,9 @@ function technicalPdf(b: PdfBuilder, c: ReportCountry, img?: PDFImage) {
       for (const src of srcs) {
         const rssFlag = src.rss ? " · RSS ao vivo" : "";
         const noteSuffix = src.note ? ` — ${src.note}` : "";
+        const official = provenance(src.url).official;
         b.bullet(`${src.name} (${src.language.toUpperCase()})${rssFlag}${noteSuffix}`, { size: 10, gapAfter: 0 });
+        b.text(`Site:${provSuffix(src.url)}`, { size: 8, color: official ? BLUE_LIGHT : GREY, indent: 12, gapAfter: 0 });
         b.text(src.url, { size: 8, color: GREY, indent: 12, gapAfter: 2 });
       }
     }
@@ -427,7 +452,8 @@ export async function renderPdf(data: ReportData): Promise<Uint8Array> {
     for (const grp of sourcesByCountry) {
       b.heading(grp.countryName, { size: 12.5, color: DARK, spaceBefore: 6, gapAfter: 2 });
       for (const s of grp.sources) {
-        b.bullet(s.label, { size: 10, gapAfter: 0 });
+        const official = provenance(s.url).official;
+        b.bullet(`${s.label}${provSuffix(s.url)}`, { size: 10, color: official ? BLUE_LIGHT : DARK, gapAfter: 0 });
         b.text(s.url, { size: 8, color: GREY, indent: 12, gapAfter: 1 });
       }
     }

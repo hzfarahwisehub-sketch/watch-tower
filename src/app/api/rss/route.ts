@@ -23,7 +23,7 @@ export const runtime = "nodejs"; // precisamos de fetch sem edge restrictions
 export const revalidate = 0;     // controle de cache feito manualmente
 export const preferredRegion = ["gru1"]; // Sao Paulo, fora do bloqueio US de varios sites gov (BR/DE/AE)
 
-type RssItem = { title: string; link: string; pubDate?: string; desc?: string; titleTr?: string; descTr?: string; isTr?: boolean };
+type RssItem = { title: string; link: string; pubDate?: string; desc?: string; image?: string; titleTr?: string; descTr?: string; isTr?: boolean };
 type CacheEntry = { fetchedAt: number; items: RssItem[] };
 
 const CACHE_TTL_MS = 15 * 60 * 1000; // 15min
@@ -264,6 +264,20 @@ function sortByRecency(items: RssItem[]): RssItem[] {
   return [...items].sort((a, b) => itemTime(b) - itemTime(a));
 }
 
+// Extrai a URL da imagem original da notícia do bloco do item (na ordem de
+// preferência: media:content/thumbnail > enclosure image > <img> no conteúdo).
+// Vazio quando o feed não traz imagem — os consumidores dizem "não encontrada".
+function extractImage(block: string): string {
+  let m =
+    block.match(/<media:(?:content|thumbnail)\b[^>]*\burl=["']([^"']+)["']/i) ||
+    block.match(/<enclosure\b[^>]*\burl=["']([^"']+)["'][^>]*\btype=["']image\//i) ||
+    block.match(/<enclosure\b[^>]*\btype=["']image\/[^"']*["'][^>]*\burl=["']([^"']+)["']/i) ||
+    block.match(/<img\b[^>]*\bsrc=["']([^"']+)["']/i);
+  const url = m?.[1]?.trim();
+  if (url && /^https?:\/\//i.test(url)) return decodeEntities(url);
+  return "";
+}
+
 function parseRssItems(xml: string): RssItem[] {
   const items: RssItem[] = [];
   const itemRegex = /<item\b[^>]*>([\s\S]*?)<\/item>/gi;
@@ -274,7 +288,8 @@ function parseRssItems(xml: string): RssItem[] {
     const link = extractTag(block, "link");
     const pubDate = extractTag(block, "pubDate") || extractTag(block, "dc:date");
     const desc = clip(extractTag(block, "description") || extractTag(block, "content:encoded"), 220);
-    if (title && link) items.push({ title, link, pubDate: pubDate || undefined, desc: desc || undefined });
+    const image = extractImage(block);
+    if (title && link) items.push({ title, link, pubDate: pubDate || undefined, desc: desc || undefined, image: image || undefined });
   }
   return items;
 }
@@ -293,7 +308,8 @@ function parseAtomEntries(xml: string): RssItem[] {
     const link = linkMatch ? linkMatch[1] : "";
     const pubDate = extractTag(block, "published") || extractTag(block, "updated");
     const desc = clip(extractTag(block, "summary") || extractTag(block, "content"), 220);
-    if (title && link) items.push({ title, link, pubDate: pubDate || undefined, desc: desc || undefined });
+    const image = extractImage(block);
+    if (title && link) items.push({ title, link, pubDate: pubDate || undefined, desc: desc || undefined, image: image || undefined });
   }
   return items;
 }
