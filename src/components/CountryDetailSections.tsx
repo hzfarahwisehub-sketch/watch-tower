@@ -12,6 +12,7 @@ import {
 import { INFO_CENTERS, type InfoSource } from "@/lib/infoCenters";
 import { useLocale } from "./LocaleProvider";
 import { CountryLaborMarket } from "./CountryLaborMarket";
+import { showSection, type SectionKey } from "@/lib/benchmark-sections";
 
 type TFn = (key: string, params?: Record<string, string | number>) => string;
 
@@ -70,13 +71,26 @@ function Title({ children, color }: { children: ReactNode; color?: string }) {
 
 /**
  * Seções de detalhe do país (editorial curado + dicas + fontes), exibidas
- * DENTRO do Benchmark. Tem filtro por DIMENSÃO (Tudo · Vistos & Trabalho ·
- * Educação · Saúde · Economia) — a dimensão é detectada pelo emoji do título.
+ * DENTRO do Benchmark.
+ *
+ * DOIS filtros ortogonais atuam aqui:
+ *  - `section` (vem do Benchmark): corta por ASSUNTO — mercado, dicas, notícia,
+ *    comunidade, blog, fontes. É o filtro dos botões do topo.
+ *  - `dim` (local, abaixo): corta por DIMENSÃO — Tudo · Vistos & Trabalho ·
+ *    Educação · Saúde · Economia, detectada pelo emoji do título.
+ * Ex.: dá pra ver só "Notícia completa" e, dentro dela, só "Educação".
  */
-export function CountryDetailSections({ country }: { country: Country }) {
+export function CountryDetailSections({
+  country,
+  section = "all",
+}: {
+  country: Country;
+  section?: SectionKey;
+}) {
   const { t, locale } = useLocale();
   const ed = getEditorial(country.code, locale);
   const [dim, setDim] = useState<DimensionKey>("all");
+  const show = (k: Exclude<SectionKey, "all">) => showSection(section, k);
 
   const center = INFO_CENTERS.find((ic) => ic.countryCode === country.code);
   const sources = center?.sources ?? [];
@@ -106,12 +120,17 @@ export function CountryDetailSections({ country }: { country: Country }) {
     byCategory.set(s.category, arr);
   }
 
-  const nothingInDim = ed && dim !== "all" && community.length === 0 && countryTab.length === 0 && blog.length === 0;
+  // O filtro de dimensão só faz sentido quando há editorial na tela. Com o
+  // Benchmark cortado em "Mercado de trabalho" ou "Fontes", os chips de
+  // dimensão não teriam o que filtrar.
+  const editorialVisible = show("tips") || show("story") || show("community") || show("blog");
+  const nothingInDim =
+    ed && editorialVisible && dim !== "all" && community.length === 0 && countryTab.length === 0 && blog.length === 0;
 
   return (
     <>
       {/* Filtro por dimensão (só aparece quando há mais de uma) */}
-      {ed && present.size > 1 && (
+      {ed && present.size > 1 && editorialVisible && (
         <div className="flex flex-wrap gap-1.5">
           {chips.map((f) => {
             const active = dim === f.key;
@@ -138,10 +157,14 @@ export function CountryDetailSections({ country }: { country: Country }) {
           "core" (Vistos & Trabalho), então respeita o filtro de abas: aparece
           em "Tudo" e "Vistos & Trabalho", some nas outras. Antes era renderizado
           fixo aqui e ficava "travado" independente da aba clicada. */}
-      {(dim === "all" || dim === "core") && <CountryLaborMarket countryCode={country.code} />}
+      {/* Quando o Hammis pede explicitamente a seção "Mercado de trabalho", ela
+          vem inteira: aí o corte por dimensão não se aplica (ele já escolheu). */}
+      {show("labor") && (section === "labor" || dim === "all" || dim === "core") && (
+        <CountryLaborMarket countryCode={country.code} />
+      )}
 
       {/* Dicas práticas */}
-      {tips.length > 0 && (
+      {show("tips") && tips.length > 0 && (
         <div>
           <Title color="#D8AF54">{t("detail.tips.title")}</Title>
           <ul className="flex flex-col gap-2">
@@ -159,7 +182,7 @@ export function CountryDetailSections({ country }: { country: Country }) {
       )}
 
       {/* Notícia completa (editorial · aba do país) */}
-      {countryTab.length > 0 && (
+      {show("story") && countryTab.length > 0 && (
         <div>
           <Title color={`#${TAB}`}>{t("detail.fullStory.title")}</Title>
           <div className="flex flex-col gap-3">
@@ -196,7 +219,7 @@ export function CountryDetailSections({ country }: { country: Country }) {
       )}
 
       {/* Posts da comunidade */}
-      {community.length > 0 && (
+      {show("community") && community.length > 0 && (
         <div>
           <Title color={`#${COMM}`}>{t("detail.community.title")}</Title>
           <div className="flex flex-col gap-2.5">
@@ -216,7 +239,7 @@ export function CountryDetailSections({ country }: { country: Country }) {
       )}
 
       {/* Matéria do Blog */}
-      {blog.length > 0 && (
+      {show("blog") && blog.length > 0 && (
         <div>
           <Title color={`#${BLOG}`}>{t("detail.blog.title")}</Title>
           <div className="flex flex-col gap-3">
@@ -243,7 +266,7 @@ export function CountryDetailSections({ country }: { country: Country }) {
       )}
 
       {/* Centros de Informação (fontes) */}
-      {sources.length > 0 && (
+      {show("sources") && sources.length > 0 && (
         <div>
           <Title>{t("detail.infoCenters.title", { n: sources.length })}</Title>
           <div className="flex flex-col gap-2.5">

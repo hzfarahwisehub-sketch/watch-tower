@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { COUNTRIES } from "@/lib/data";
 import type { Country, Status } from "@/lib/types";
 import { CountryLiveActivity } from "./CountryLiveActivity";
@@ -7,6 +7,7 @@ import { CountryDetailSections } from "./CountryDetailSections";
 import { ImageZoomViewer } from "./ImageZoomViewer";
 import { useCountryChanges } from "@/lib/useCountryChanges";
 import { useLocale } from "./LocaleProvider";
+import { SECTION_FILTERS, availableSections, showSection, type SectionKey } from "@/lib/benchmark-sections";
 
 type TFn = (key: string, params?: Record<string, string | number>) => string;
 
@@ -43,7 +44,7 @@ const STATUS_LABEL_KEY: Record<Status, string> = {
  * Quando outro componente seleciona país (mapa/sidebar/feed), refletimos.
  */
 export function CountryBenchmark({ selectedCode }: { selectedCode: string | null }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   // Default = primeiro país crítico, ou primeiro da lista
   const defaultCountry: Country =
     COUNTRIES.find((c) => c.status === "crit") ?? COUNTRIES[0]!;
@@ -53,10 +54,23 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
 
   const [imgFailed, setImgFailed] = useState(false);
   const [zoomOpen, setZoomOpen] = useState(false);
+  // Filtro por seção: "all" empilha tudo (comportamento antigo); qualquer outro
+  // deixa só o assunto escolhido na tela.
+  const [section, setSection] = useState<SectionKey>("all");
   useEffect(() => {
     setImgFailed(false);
     setZoomOpen(false);
   }, [country.code]);
+
+  const available = useMemo(() => availableSections(country, locale), [country, locale]);
+  // Trocar de país pode derrubar a seção escolhida (o novo país não tem aquilo).
+  // Sem isto, o Benchmark ficaria mudo, com um filtro ativo que não existe mais.
+  useEffect(() => {
+    setSection((cur) => (available.has(cur) ? cur : "all"));
+  }, [available]);
+
+  const chips = SECTION_FILTERS.filter((f) => available.has(f.key));
+  const show = (k: Exclude<SectionKey, "all">) => showSection(section, k);
 
   const accent = STATUS_COLOR[country.status];
   const changes = useCountryChanges(country.code);
@@ -117,8 +131,39 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
           caixa é maior que o conteúdo) fica embaixo — em vez de o grid esticar
           as linhas e abrir um vão entre a linha de stats e o Panorama. */}
       <div className="flex-1 overflow-auto p-5 wt-benchmark-body flex flex-col gap-5">
+        {/* Filtro por SEÇÃO — um botão por assunto presente no país, "Todos"
+            volta a empilhar tudo. Só aparece quando há assunto pra separar
+            (com 1 seção só, botão é enfeite). Envolve com flex-wrap pra
+            quebrar em linha na caixa estreita em vez de estourar a largura. */}
+        {chips.length > 2 && (
+          <div className="flex flex-wrap gap-1.5" role="tablist" aria-label={t("bench.sec.aria")}>
+            {chips.map((f) => {
+              const active = section === f.key;
+              return (
+                <button
+                  key={f.key}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setSection(f.key)}
+                  className="px-2.5 py-1 rounded-full text-[10.5px] font-bold tracking-wide transition-colors cursor-pointer whitespace-nowrap"
+                  style={{
+                    background: active ? "var(--color-wh-blue)" : "var(--bg2)",
+                    color: active ? "#fff" : "var(--text-3)",
+                    border: `1px solid ${active ? "var(--color-wh-blue)" : "var(--border)"}`,
+                  }}
+                >
+                  {f.emoji} {t(f.labelKey)}
+                </button>
+              );
+            })}
+          </div>
+        )}
+
         {/* ZONA SUPERIOR: imagem (estica em altura pra acompanhar o conteúdo do
-            lado) + STATUS à esquerda · Panorama + Atividade ao vivo à direita. */}
+            lado) + STATUS à esquerda · Panorama + Atividade ao vivo à direita.
+            A imagem, o status e o Panorama ficam SEMPRE visíveis: são a
+            identidade do país, não um dos assuntos filtráveis. */}
         <div className="grid grid-cols-1 @2xl:grid-cols-[minmax(220px,260px)_1fr] gap-5 items-stretch">
           {/* IMAGEM destacada (estica em altura) + stats */}
           <div className="flex flex-col gap-3">
@@ -249,7 +294,7 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
               </div>
             )}
 
-            <CountryLiveActivity countryCode={country.code} />
+            {show("live") && <CountryLiveActivity countryCode={country.code} />}
           </div>
         </div>
 
@@ -257,8 +302,9 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
             toda a extensão da caixa, abaixo da imagem — sem faixa vazia na esquerda. */}
         <div className="flex flex-col gap-4">
           {/* Editorial curado + dicas + fontes (tudo do local, aqui no benchmark) */}
-          <CountryDetailSections country={country} />
+          <CountryDetailSections country={country} section={section} />
 
+          {show("milestones") && country.events.length > 0 && (
           <div>
             <h4
               className="text-[10.5px] tracking-[2px] uppercase font-bold mb-1 flex items-center gap-2"
@@ -317,6 +363,7 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
                 ))}
               </ul>
             </div>
+          )}
           </div>
         </div>
     </section>

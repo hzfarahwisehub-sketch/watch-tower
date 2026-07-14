@@ -36,6 +36,18 @@ const dict = {
     // Panorama
     "bench.panorama": "Panorama",
 
+    // Filtro por seção (um botão por assunto · "Todos" empilha tudo)
+    "bench.sec.aria": "Filtrar o Benchmark por assunto",
+    "bench.sec.all": "Todos",
+    "bench.sec.live": "Ao vivo",
+    "bench.sec.labor": "Mercado de trabalho",
+    "bench.sec.tips": "Dicas práticas",
+    "bench.sec.story": "Notícia completa",
+    "bench.sec.community": "Comunidade",
+    "bench.sec.blog": "Blog",
+    "bench.sec.sources": "Fontes",
+    "bench.sec.milestones": "Marcos",
+
     // Marcos editoriais
     "bench.milestones": "Marcos editoriais ({n})",
     "bench.curated": "CURADO PELA EQUIPE",
@@ -76,6 +88,18 @@ const dict = {
 
     // Panorama
     "bench.panorama": "Overview",
+
+    // Section filter (one button per topic · "All" stacks everything)
+    "bench.sec.aria": "Filter the Benchmark by topic",
+    "bench.sec.all": "All",
+    "bench.sec.live": "Live",
+    "bench.sec.labor": "Labor market",
+    "bench.sec.tips": "Practical tips",
+    "bench.sec.story": "Full story",
+    "bench.sec.community": "Community",
+    "bench.sec.blog": "Blog",
+    "bench.sec.sources": "Sources",
+    "bench.sec.milestones": "Milestones",
 
     // Editorial milestones
     "bench.milestones": "Editorial milestones ({n})",
