@@ -72,6 +72,36 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
   const chips = SECTION_FILTERS.filter((f) => available.has(f.key));
   const show = (k: Exclude<SectionKey, "all">) => showSection(section, k);
 
+  // Filtro por SEÇÃO — um botão por assunto presente no país, "Todos" volta a
+  // empilhar tudo. Mora logo ABAIXO do Panorama (posição pedida pelo Hammis em
+  // 2026-07-14): o país se apresenta primeiro, e só então se escolhe o assunto.
+  // Só aparece quando há assunto pra separar (com 1 seção só, botão é enfeite).
+  // flex-wrap pra quebrar em linha na caixa estreita em vez de estourar.
+  const sectionBar = chips.length > 2 && (
+    <div className="flex flex-wrap gap-1.5" role="tablist" aria-label={t("bench.sec.aria")}>
+      {chips.map((f) => {
+        const active = section === f.key;
+        return (
+          <button
+            key={f.key}
+            type="button"
+            role="tab"
+            aria-selected={active}
+            onClick={() => setSection(f.key)}
+            className="px-2.5 py-1 rounded-full text-[10.5px] font-bold tracking-wide transition-colors cursor-pointer whitespace-nowrap"
+            style={{
+              background: active ? "var(--color-wh-blue)" : "var(--bg2)",
+              color: active ? "#fff" : "var(--text-3)",
+              border: `1px solid ${active ? "var(--color-wh-blue)" : "var(--border)"}`,
+            }}
+          >
+            {f.emoji} {t(f.labelKey)}
+          </button>
+        );
+      })}
+    </div>
+  );
+
   const accent = STATUS_COLOR[country.status];
   const changes = useCountryChanges(country.code);
 
@@ -131,35 +161,6 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
           caixa é maior que o conteúdo) fica embaixo — em vez de o grid esticar
           as linhas e abrir um vão entre a linha de stats e o Panorama. */}
       <div className="flex-1 overflow-auto p-5 wt-benchmark-body flex flex-col gap-5">
-        {/* Filtro por SEÇÃO — um botão por assunto presente no país, "Todos"
-            volta a empilhar tudo. Só aparece quando há assunto pra separar
-            (com 1 seção só, botão é enfeite). Envolve com flex-wrap pra
-            quebrar em linha na caixa estreita em vez de estourar a largura. */}
-        {chips.length > 2 && (
-          <div className="flex flex-wrap gap-1.5" role="tablist" aria-label={t("bench.sec.aria")}>
-            {chips.map((f) => {
-              const active = section === f.key;
-              return (
-                <button
-                  key={f.key}
-                  type="button"
-                  role="tab"
-                  aria-selected={active}
-                  onClick={() => setSection(f.key)}
-                  className="px-2.5 py-1 rounded-full text-[10.5px] font-bold tracking-wide transition-colors cursor-pointer whitespace-nowrap"
-                  style={{
-                    background: active ? "var(--color-wh-blue)" : "var(--bg2)",
-                    color: active ? "#fff" : "var(--text-3)",
-                    border: `1px solid ${active ? "var(--color-wh-blue)" : "var(--border)"}`,
-                  }}
-                >
-                  {f.emoji} {t(f.labelKey)}
-                </button>
-              );
-            })}
-          </div>
-        )}
-
         {/* ZONA SUPERIOR: imagem (estica em altura pra acompanhar o conteúdo do
             lado) + STATUS à esquerda · Panorama + Atividade ao vivo à direita.
             A imagem, o status e o Panorama ficam SEMPRE visíveis: são a
@@ -293,6 +294,8 @@ export function CountryBenchmark({ selectedCode }: { selectedCode: string | null
                 </p>
               </div>
             )}
+
+            {sectionBar}
 
             {show("live") && <CountryLiveActivity countryCode={country.code} />}
           </div>
