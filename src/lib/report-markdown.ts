@@ -25,6 +25,7 @@ import {
   categoryEmoji,
   categoryName,
   publicAssetUrl,
+  provenance,
 } from "@/lib/report-data";
 import {
   DESTINATIONS,
@@ -34,9 +35,26 @@ import {
   type PostablePiece,
 } from "@/lib/editorial";
 
+/**
+ * Selo de proveniência de uma fonte, pronto pra texto Markdown: mostra o SITE
+ * visível (ex.: "canada.ca") e, se for governo/órgão público, o selo
+ * "✓ fonte oficial"; senão marca como "referência". Prova que a notícia saiu
+ * de fonte conhecida e confirmada. Vazio se a URL for inválida.
+ */
+function provenanceTag(url?: string | null): string {
+  const { site, official } = provenance(url);
+  if (!site) return "";
+  return official ? `(${site} · ✓ fonte oficial)` : `(${site} · referência)`;
+}
+
 function sourcesInline(sources?: PostablePiece["sources"]): string {
   if (!sources?.length) return "";
-  return sources.map((s) => `[${s.label}](${s.url})`).join(" · ");
+  return sources
+    .map((s) => {
+      const tag = provenanceTag(s.url);
+      return `[${s.label}](${s.url})${tag ? ` ${tag}` : ""}`;
+    })
+    .join(" · ");
 }
 
 /** Uma peça pronta pra postar. */
@@ -117,7 +135,11 @@ function technicalMd(c: ReportCountry): string[] {
     if (L.salaries?.length) {
       lines.push(`**Faixas salariais:**`);
       lines.push(``);
-      L.salaries.forEach((s) => lines.push(`- ${s.role}: ${s.range}${s.source ? ` ([${s.source.label}](${s.source.url}))` : ""}`));
+      L.salaries.forEach((s) => {
+        const srcTag = s.source ? provenanceTag(s.source.url) : "";
+        const srcTxt = s.source ? ` ([${s.source.label}](${s.source.url})${srcTag ? ` ${srcTag}` : ""})` : "";
+        lines.push(`- ${s.role}: ${s.range}${srcTxt}`);
+      });
       lines.push(``);
     }
     if (L.foreignerRules) { lines.push(`**Regras pra estrangeiro:** ${L.foreignerRules}`); lines.push(``); }
@@ -137,9 +159,10 @@ function technicalMd(c: ReportCountry): string[] {
     const b = c.bulletin;
     lines.push(`### 📜 Boletim oficial monitorado`);
     lines.push(``);
-    lines.push(`- **Fonte:** ${b.source}`);
+    const bTag = provenanceTag(b.url);
+    lines.push(`- **Fonte:** ${b.source}${bTag ? ` ${bTag}` : ""}`);
     lines.push(`- **Frequência declarada:** ${b.frequency}`);
-    lines.push(`- **URL pública:** ${b.url}`);
+    lines.push(`- **URL pública:** [${b.url}](${b.url})`);
     if (b.lastStatus || b.lastCheckedAt || b.lastChangedAt || b.hash) {
       lines.push(`- **Status última varredura:** ${bulletinStatusLabel(b.lastStatus)}`);
       lines.push(`- **Última varredura:** ${fmtDate(b.lastCheckedAt, { full: true })} (${relativeAge(b.lastCheckedAt)})`);
@@ -172,7 +195,13 @@ function technicalMd(c: ReportCountry): string[] {
     lines.push(``);
     sorted.slice(0, 12).forEach((h) => {
       const when = h.pubDate ? ` _(${fmtDate(h.pubDate, { full: true })})_` : "";
-      lines.push(`- **${h.source}**${when}: [${h.title}](${h.link})`);
+      const hTag = provenanceTag(h.link);
+      lines.push(`- **${h.source}**${when}: [${h.title}](${h.link})${hTag ? ` ${hTag}` : ""}`);
+      if (h.image) {
+        lines.push(`  - 🖼 Imagem da notícia: [${h.image}](${h.image})`);
+      } else {
+        lines.push(`  - 🖼 _Imagem desta notícia não encontrada._`);
+      }
       if (h.community && h.checagem) {
         const ck = h.checagem;
         lines.push(`  - 🏘 _Fonte de comunidade (não-oficial)_ · ${ck.rotulo}`);
@@ -208,7 +237,8 @@ function technicalMd(c: ReportCountry): string[] {
       for (const src of srcs) {
         const rssFlag = src.rss ? " · 🟢 RSS ao vivo" : "";
         const noteSuffix = src.note ? ` — _${src.note}_` : "";
-        lines.push(`- [${src.name}](${src.url}) (${src.language.toUpperCase()})${rssFlag}${noteSuffix}`);
+        const srcTag = provenanceTag(src.url);
+        lines.push(`- [${src.name}](${src.url})${srcTag ? ` ${srcTag}` : ""} (${src.language.toUpperCase()})${rssFlag}${noteSuffix}`);
       }
       lines.push(``);
     }
@@ -303,7 +333,10 @@ export function renderMarkdown(data: ReportData): string {
     for (const grp of sourcesByCountry) {
       lines.push(`### ${flagEmoji(grp.countryCode)} ${grp.countryName}`);
       lines.push(``);
-      for (const s of grp.sources) lines.push(`- [${s.label}](${s.url})`);
+      for (const s of grp.sources) {
+        const tag = provenanceTag(s.url);
+        lines.push(`- [${s.label}](${s.url})${tag ? ` ${tag}` : ""}`);
+      }
       lines.push(``);
     }
   }

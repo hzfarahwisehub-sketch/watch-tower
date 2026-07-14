@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
-import { load, save } from "./storage";
+import { save } from "./storage";
 
 /**
  * useDualStorage — hook duplo localStorage ↔ API REST.
@@ -84,8 +84,11 @@ export function useDualStorage<
         try {
           const res = await fetch(`${config.apiPath}?scope=${config.scope ?? "personal"}`, { cache: "no-store" });
           if (res.status === 401) {
-            // Fallback pra local (provavelmente token expirou)
-            setItems(load(config.storageKey, config.defaults));
+            // Sessão inválida/expirada: NÃO cai em resíduo local. Vazio.
+            // (o middleware já redireciona a página pro /auth/signin; isto é
+            // defesa extra pra nunca renderizar dado de quem não está logado.)
+            try { localStorage.removeItem(config.storageKey); } catch {}
+            setItems([]);
             setHydrated(true);
             return;
           }
@@ -97,50 +100,21 @@ export function useDualStorage<
           setItems(local);
           setHydrated(true);
 
-          // Migration one-shot: se localStorage tem items E nao foi migrado ainda
-          const migrationFlag = `${config.storageKey}__migrated`;
-          const wasMigrated = load(migrationFlag, false);
-          // Quadro de equipe nunca importa o localStorage pessoal antigo.
-          if (!wasMigrated && config.scope !== "team") {
-            const localOnly = load(config.storageKey, config.defaults);
-            // Filtra defaults (heuristica simples: nao migra defaults sem alteracao)
-            const itemsToMigrate = localOnly.filter((local) => {
-              return !config.defaults.some(
-                (def) => JSON.stringify(stripId(def)) === JSON.stringify(stripId(local)),
-              );
-            });
-            if (itemsToMigrate.length > 0) {
-              for (const item of itemsToMigrate) {
-                try {
-                  await fetch(config.apiPath, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(config.toCreatePayload(stripId(item) as Omit<TLocal, "id">)),
-                  });
-                } catch {
-                  // silencia falhas individuais
-                }
-              }
-              // Recarrega pra refletir os migrados
-              const res2 = await fetch(config.apiPath, { cache: "no-store" });
-              if (res2.ok) {
-                const data2 = await res2.json();
-                const dbItems2: TDb[] = data2[config.apiArrayKey] ?? [];
-                idMapRef.current.reset();
-                const local2 = dbItems2.map((d) => config.fromDb(d, idMapRef.current));
-                if (!cancelled) setItems(local2);
-              }
-            }
-            save(migrationFlag, true);
-          }
+          // Migração legada localStorage→DB DESATIVADA (2026-07-13). O app agora
+          // é 100% DB por usuário autenticado. Qualquer resíduo local antigo é
+          // apenas LIMPO, nunca importado — evita puxar lixo pro DB de quem só
+          // usou a versão antiga (sem login).
+          try { localStorage.removeItem(config.storageKey); } catch {}
         } catch {
-          // fallback
-          setItems(load(config.storageKey, config.defaults));
+          // Falha de rede: não cai em dado local antigo. Vazio.
+          setItems([]);
           setHydrated(true);
         }
       } else {
-        // Sem sessao — localStorage
-        setItems(load(config.storageKey, config.defaults));
+        // Sem sessão: o app é gated por login. Não lê localStorage nem defaults —
+        // deslogado não vê nada (a página já é redirecionada pro /auth/signin).
+        try { localStorage.removeItem(config.storageKey); } catch {}
+        setItems([]);
         setHydrated(true);
       }
     }
@@ -249,10 +223,4 @@ export function useDualStorage<
     hydrated,
     isLoggedIn,
   };
-}
-
-function stripId<T extends { id: unknown }>(item: T): Omit<T, "id"> {
-  const copy = { ...item };
-  delete (copy as { id?: unknown }).id;
-  return copy;
 }

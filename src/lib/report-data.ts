@@ -28,6 +28,9 @@ export type ReportHeadline = {
   link: string;
   pubDate?: string;
   source: string;
+  /** URL da imagem ORIGINAL da notícia (do feed ou og:image do artigo).
+   *  Ausente = "imagem desta notícia não encontrada" no relatório. */
+  image?: string;
   /** Manchete vinda de fonte de comunidade (não-oficial), ex.: Italianismo. */
   community?: boolean;
   /** Veredito da checagem cruzada curada pela Friday (só em fontes community). */
@@ -102,12 +105,13 @@ async function fetchFeed(rssUrl: string, sourceName: string, maxItems = 5, commu
     clearTimeout(t);
     if (!res.ok) return [];
     const data = await res.json();
-    const items: Array<{ title?: string; link?: string; pubDate?: string }> = Array.isArray(data?.items) ? data.items : [];
+    const items: Array<{ title?: string; link?: string; pubDate?: string; image?: string }> = Array.isArray(data?.items) ? data.items : [];
     return items.slice(0, maxItems).map((it) => ({
       title: (it.title || "").trim(),
       link: it.link || "",
       pubDate: it.pubDate,
       source: sourceName,
+      image: it.image || undefined,
       community: community || undefined,
       sourceLang,
     }));
@@ -144,6 +148,34 @@ async function mmTranslate(text: string, src: string, tgt: string): Promise<stri
     return out;
   } catch {
     return null;
+  }
+}
+
+// Busca a imagem original da notícia no PRÓPRIO artigo (og:image / twitter:image)
+// quando o feed RSS não trouxe imagem. Best-effort, timeout curto; lê só o começo
+// do HTML (a meta fica no <head>). Vazio = sem imagem (relatório diz "não encontrada").
+const OG_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
+async function fetchOgImage(articleUrl: string): Promise<string> {
+  if (!/^https?:\/\//i.test(articleUrl)) return "";
+  try {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 4500);
+    const res = await fetch(articleUrl, {
+      signal: ctrl.signal,
+      redirect: "follow",
+      headers: { "User-Agent": OG_UA, Accept: "text/html,application/xhtml+xml", "Accept-Language": "pt,en;q=0.8" },
+    });
+    clearTimeout(t);
+    if (!res.ok) return "";
+    const html = (await res.text()).slice(0, 80_000);
+    const m =
+      html.match(/<meta[^>]+property=["']og:image(?::secure_url)?["'][^>]*content=["']([^"']+)["']/i) ||
+      html.match(/<meta[^>]+content=["']([^"']+)["'][^>]*property=["']og:image["']/i) ||
+      html.match(/<meta[^>]+name=["']twitter:image(?::src)?["'][^>]*content=["']([^"']+)["']/i);
+    const u = m?.[1]?.trim();
+    return u && /^https?:\/\//i.test(u) ? u : "";
+  } catch {
+    return "";
   }
 }
 
@@ -256,6 +288,28 @@ export async function gatherReportData(lang: "pt" | "en" = "pt"): Promise<Report
           if (!g) break;
           const out = await mmTranslate(g.title, g.src, targetPair);
           if (out) liveMap.set(normalizeTitle(g.title), out);
+        }
+      }),
+    );
+  }
+
+  // Imagem original da notícia: pra quem o feed NÃO trouxe imagem, busca o
+  // og:image no próprio artigo. Best-effort com orçamento (40 artigos, pool 10)
+  // pra não estourar o tempo de geração; quem sobrar fica "não encontrada".
+  {
+    const missing: ReportHeadline[] = [];
+    for (const arr of headlinesByCountry.values()) {
+      for (const h of arr) if (!h.image && h.link) missing.push(h);
+    }
+    missing.sort((a, b) => (b.pubDate ? new Date(b.pubDate).getTime() : 0) - (a.pubDate ? new Date(a.pubDate).getTime() : 0));
+    const queue = missing.slice(0, 40);
+    await Promise.all(
+      Array.from({ length: 10 }, async () => {
+        while (queue.length) {
+          const h = queue.shift();
+          if (!h) break;
+          const img = await fetchOgImage(h.link);
+          if (img) h.image = img;
         }
       }),
     );
@@ -486,4 +540,50 @@ export function fitDims(w: number, h: number, maxW: number, maxH: number): { wid
   if (w <= 0 || h <= 0) return { width: maxW, height: maxH };
   const s = Math.min(maxW / w, maxH / h);
   return { width: Math.round(w * s), height: Math.round(h * s) };
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// PROVENIÊNCIA DAS FONTES · usados pelos 3 renderizadores do REPAVET pra
+// mostrar, junto de cada notícia/post, o SITE usado e se é REFERÊNCIA OFICIAL
+// (governo/órgão público), provando que a notícia saiu de fonte confirmada.
+// ─────────────────────────────────────────────────────────────────────────
+
+/** Hostname amigável (sem www/porta) pra exibir o site da fonte. Vazio se inválido. */
+export function siteLabel(url: string | undefined | null): string {
+  if (!url) return "";
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return String(url).replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
+  }
+}
+
+/** Detecta se a URL é de FONTE OFICIAL (governo/órgão público) pra provar a
+ *  procedência da notícia. Heurística por domínio; cobre os países monitorados. */
+export function isOfficialUrl(url: string | undefined | null): boolean {
+  if (!url) return false;
+  let host = "";
+  try {
+    host = new URL(url).hostname.toLowerCase();
+  } catch {
+    host = String(url).toLowerCase();
+  }
+  return (
+    /(^|\.)gov(\.|$)/.test(host) ||          // .gov, gov.uk, gov.br, gov.pl, gov.sg...
+    /(^|\.)gob(\.|$)/.test(host) ||          // espanhol/latam (gob.es, gob.cl...)
+    /(^|\.)gouv(\.|$)/.test(host) ||         // francês (gouv.fr)
+    /(^|\.)gc\.ca$/.test(host) ||            // Canadá federal
+    host.endsWith("canada.ca") ||
+    host.endsWith("europa.eu") ||            // UE
+    host.endsWith("admin.ch") ||             // Suíça
+    host.endsWith("service-public.fr") ||
+    host.endsWith(".int") ||                 // organismos internacionais
+    /(^|\.)(bamf\.de|migrationsverket\.se|ind\.nl|udsc\.gov\.pl|nia\.gov\.cn|moj\.go\.jp|mom\.gov\.sg|u\.ae|gdrfad?\.gov\.ae|migration\.gv\.at|nyidanmark\.dk|migri\.fi|siri\.dk|oif\.gov\.hu|pmlp\.gov\.lv|igi\.mai\.gov\.ro|identita\.gov\.mt|federalregister\.gov)$/.test(host)
+  );
+}
+
+/** Rótulo de proveniência pronto pra texto: "site.com · fonte oficial" ou
+ *  "site.com". Usado por md/docx/pdf pra padronizar a citação da fonte. */
+export function provenance(url: string | undefined | null): { site: string; official: boolean } {
+  return { site: siteLabel(url), official: isOfficialUrl(url) };
 }

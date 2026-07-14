@@ -38,6 +38,8 @@ import {
   type ReportImage,
   readPublicImage,
   fitDims,
+  siteLabel,
+  isOfficialUrl,
 } from "@/lib/report-data";
 import {
   DESTINATIONS,
@@ -60,6 +62,28 @@ function link(label: string, url: string): ExternalHyperlink {
     link: url,
     children: [new TextRun({ text: label, style: "Hyperlink" })],
   });
+}
+
+const OFFICIAL_GREEN = "10A570";
+
+/**
+ * Runs de proveniência pra anexar logo depois do link/nome de uma fonte:
+ * o SITE visível (domínio amigável) + um selo dizendo se é FONTE OFICIAL
+ * (governo/órgão público) ou apenas referência. Prova que a notícia saiu de
+ * fonte conhecida e confirmada. Devolve [] quando não há URL utilizável, então
+ * é seguro dar spread em qualquer lista de children.
+ */
+function provenanceRuns(url: string | undefined | null, size = 18): TextRun[] {
+  const site = siteLabel(url);
+  if (!site) return [];
+  const official = isOfficialUrl(url);
+  return [
+    new TextRun({ text: ` (${site} · `, color: GREY, size }),
+    official
+      ? new TextRun({ text: "✓ fonte oficial", bold: true, color: OFFICIAL_GREEN, size })
+      : new TextRun({ text: "referência", color: GREY, size }),
+    new TextRun({ text: ")", color: GREY, size }),
+  ];
 }
 
 function bullet(children: (TextRun | ExternalHyperlink)[]): Paragraph {
@@ -155,6 +179,7 @@ function sourcesLine(sources: EditorialSource[] | undefined, prefix: string): Pa
   sources.forEach((s, i) => {
     if (i > 0) children.push(new TextRun({ text: " · ", color: GREY, size: 18 }));
     children.push(link(s.label, s.url));
+    children.push(...provenanceRuns(s.url, 18));
   });
   return new Paragraph({ spacing: { after: 160 }, children });
 }
@@ -298,7 +323,7 @@ function technicalDocx(c: ReportCountry, img?: ReportImage): (Paragraph | Table)
     out.push(h3("📜 Boletim oficial monitorado"));
     out.push(bullet([new TextRun({ text: "Fonte: ", bold: true }), new TextRun(b.source)]));
     out.push(bullet([new TextRun({ text: "Frequência declarada: ", bold: true }), new TextRun(b.frequency)]));
-    out.push(bullet([new TextRun({ text: "URL pública: ", bold: true }), link(b.url, b.url)]));
+    out.push(bullet([new TextRun({ text: "URL pública: ", bold: true }), link(b.url, b.url), ...provenanceRuns(b.url, 18)]));
     if (b.lastStatus || b.lastCheckedAt || b.lastChangedAt || b.hash) {
       out.push(bullet([new TextRun({ text: "Status última varredura: ", bold: true }), new TextRun(bulletinStatusLabel(b.lastStatus))]));
       out.push(bullet([new TextRun({ text: "Última varredura: ", bold: true }), new TextRun(`${fmtDate(b.lastCheckedAt, { full: true })} (${relativeAge(b.lastCheckedAt)})`)]));
@@ -324,7 +349,28 @@ function technicalDocx(c: ReportCountry, img?: ReportImage): (Paragraph | Table)
     out.push(h3(`📡 Atividade ao vivo · ${sorted.length} manchete${sorted.length !== 1 ? "s" : ""} via RSS`));
     sorted.slice(0, 12).forEach((hd) => {
       const when = hd.pubDate ? ` (${fmtDate(hd.pubDate, { full: true })})` : "";
-      out.push(bullet([new TextRun({ text: `${hd.source}: `, bold: true }), link(hd.title, hd.link), new TextRun({ text: when, color: GREY, italics: true })]));
+      out.push(bullet([new TextRun({ text: `${hd.source}: `, bold: true }), link(hd.title, hd.link), new TextRun({ text: when, color: GREY, italics: true }), ...provenanceRuns(hd.link, 18)]));
+      // Imagem original da notícia (do feed ou og:image do artigo), logo abaixo da manchete.
+      if (hd.image) {
+        out.push(
+          new Paragraph({
+            indent: { left: 460 },
+            spacing: { after: 20 },
+            children: [
+              new TextRun({ text: "🖼 Imagem da notícia: ", color: GREY, size: 17 }),
+              link(hd.image, hd.image),
+            ],
+          }),
+        );
+      } else {
+        out.push(
+          new Paragraph({
+            indent: { left: 460 },
+            spacing: { after: 20 },
+            children: [new TextRun({ text: "🖼 Imagem desta notícia não encontrada.", italics: true, color: GREY, size: 17 })],
+          }),
+        );
+      }
       if (hd.community && hd.checagem) {
         const ck = hd.checagem;
         out.push(new Paragraph({ indent: { left: 460 }, spacing: { after: 10 }, children: [new TextRun({ text: `🏘 Fonte de comunidade (não-oficial) · ${ck.rotulo}`, italics: true, color: GREY, size: 17 })] }));
@@ -335,6 +381,8 @@ function technicalDocx(c: ReportCountry, img?: ReportImage): (Paragraph | Table)
             if (i > 0) runs.push(new TextRun({ text: " · ", color: GREY, size: 16 }));
             const label = `${f.oficial ? "✓ " : ""}${f.nome}`;
             runs.push(f.url ? link(label, f.url) : new TextRun({ text: label, color: GREY, size: 16 }));
+            const fSite = siteLabel(f.url);
+            if (fSite) runs.push(new TextRun({ text: ` (${fSite})`, color: GREY, size: 16 }));
           });
           out.push(new Paragraph({ indent: { left: 460 }, spacing: { after: 40 }, children: runs }));
         }
@@ -356,7 +404,7 @@ function technicalDocx(c: ReportCountry, img?: ReportImage): (Paragraph | Table)
     for (const [cat, srcs] of byCategory) {
       out.push(new Paragraph({ spacing: { before: 80, after: 20 }, children: [new TextRun({ text: `${categoryEmoji(cat)} ${categoryName(cat)} (${srcs.length})`, bold: true, color: DARK })] }));
       for (const src of srcs) {
-        const runs: (TextRun | ExternalHyperlink)[] = [link(src.name, src.url), new TextRun({ text: ` (${src.language.toUpperCase()})`, color: GREY })];
+        const runs: (TextRun | ExternalHyperlink)[] = [link(src.name, src.url), ...provenanceRuns(src.url, 18), new TextRun({ text: ` (${src.language.toUpperCase()})`, color: GREY })];
         if (src.rss) runs.push(new TextRun({ text: " · RSS ao vivo", color: "10A570" }));
         if (src.note) runs.push(new TextRun({ text: ` — ${src.note}`, italics: true, color: GREY }));
         out.push(bullet(runs));
@@ -432,7 +480,7 @@ export async function renderDocx(data: ReportData): Promise<Buffer> {
   } else {
     for (const grp of sourcesByCountry) {
       children.push(h3(`${flagEmoji(grp.countryCode)} ${grp.countryName}`));
-      for (const s of grp.sources) children.push(bullet([link(s.label, s.url)]));
+      for (const s of grp.sources) children.push(bullet([link(s.label, s.url), ...provenanceRuns(s.url, 18)]));
     }
   }
 

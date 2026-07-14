@@ -34,7 +34,11 @@ export const authConfig: NextAuthConfig = {
         pathname.startsWith("/api/reminders") ||
         pathname.startsWith("/api/scheduled") ||
         pathname.startsWith("/api/admin");
-      const isProtectedPage = pathname.startsWith("/admin");
+      // Todas as páginas do app exigem login (só /auth/* e assets ficam públicos).
+      const isProtectedPage =
+        pathname === "/" ||
+        pathname.startsWith("/janela") ||
+        pathname.startsWith("/admin");
 
       if (!isProtectedApi && !isProtectedPage) return true;
       return isLoggedIn;
