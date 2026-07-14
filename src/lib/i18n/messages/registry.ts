@@ -1,4 +1,4 @@
-// Títulos dos 16 painéis (catálogo do PanelRegistry). Usados na célula do grid
+// Títulos dos 17 painéis (catálogo do PanelRegistry). Usados na célula do grid
 // (tooltip/aria + placeholder de janela destacada), no menu de janelas e no
 // título da aba da janela destacada. Chave = "registry." + PanelId.
 const dict = {
@@ -16,6 +16,7 @@ const dict = {
     "registry.scheduled": "Ações programadas",
     "registry.inbox": "Inbox",
     "registry.requests": "Caixa de solicitações",
+    "registry.content": "Pedidos de conteúdo",
     "registry.info": "Centros de Informação",
     "registry.finance": "Finanças & Mercados",
     "registry.crypto": "Cripto & Derivativos",
@@ -34,6 +35,7 @@ const dict = {
     "registry.scheduled": "Scheduled Actions",
     "registry.inbox": "Inbox",
     "registry.requests": "Requests Box",
+    "registry.content": "Content Requests",
     "registry.info": "Info Centers",
     "registry.finance": "Finance & Markets",
     "registry.crypto": "Crypto & Derivatives",

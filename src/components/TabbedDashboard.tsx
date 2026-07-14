@@ -18,11 +18,12 @@ import { renderPanel, panelTitleKey, type PanelId } from "./PanelRegistry";
 
 const RGL = WidthProvider(Responsive);
 
-// ── 7 abas (ordem aprovada) ────────────────────────────────────────────────
+// ── 8 abas (ordem aprovada) ────────────────────────────────────────────────
 type TabDef = { id: string; fallback: string; emoji: string; panels: PanelId[]; requiresAgenda?: boolean };
 const TABS: TabDef[] = [
   { id: "mapa", fallback: "Mapa", emoji: "🗺", panels: ["map", "countries", "benchmark"] },
   { id: "oper", fallback: "Operações", emoji: "📥", panels: ["inbox", "scheduled", "requests", "reminders", "tasks"] },
+  { id: "cont", fallback: "Conteúdo", emoji: "🎬", panels: ["content"] },
   { id: "agenda", fallback: "Agenda", emoji: "📅", panels: ["agenda"] },
   { id: "feed", fallback: "Feed", emoji: "📡", panels: ["feed"] },
   { id: "info", fallback: "Centro de Informações", emoji: "🧭", panels: ["info"] },
@@ -52,6 +53,7 @@ const LG: Record<string, LItem[]> = {
     { i: "reminders", x: 0, y: 12, w: 8, h: 6 },
     { i: "tasks", x: 16, y: 9, w: 8, h: 9 },
   ],
+  cont: [{ i: "content", x: 0, y: 0, w: 24, h: 18 }],
   agenda: [{ i: "agenda", x: 0, y: 0, w: 24, h: 18 }],
   feed: [{ i: "feed", x: 0, y: 0, w: 24, h: 18 }],
   info: [{ i: "info", x: 0, y: 0, w: 24, h: 18 }],
