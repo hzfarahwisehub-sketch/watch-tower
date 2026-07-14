@@ -10,6 +10,7 @@ import { Feed } from "./Feed";
 import { OfficialBulletins } from "./OfficialBulletins";
 import { CountryBenchmark } from "./CountryBenchmark";
 import { SuggestionBox } from "./SuggestionBox";
+import { ContentRequests } from "./ContentRequests";
 import { InfoCenters, FinanceCenters, CryptoCenters } from "./InfoCenters";
 
 const MapZone = dynamic(() => import("./MapZone"), { ssr: false });
@@ -17,7 +18,7 @@ const MapZone = dynamic(() => import("./MapZone"), { ssr: false });
 export type PanelId =
   | "map" | "benchmark" | "alerts" | "feed" | "bulletins" | "countries"
   | "kpis" | "tasks" | "agenda" | "reminders" | "scheduled" | "inbox"
-  | "requests" | "info" | "finance" | "crypto";
+  | "requests" | "content" | "info" | "finance" | "crypto";
 
 /** Catálogo dos painéis que podem virar janela própria (id = chave da célula). */
 export const PANELS: { id: PanelId; title: string; emoji: string }[] = [
@@ -34,6 +35,7 @@ export const PANELS: { id: PanelId; title: string; emoji: string }[] = [
   { id: "scheduled", title: "Ações programadas", emoji: "⚡" },
   { id: "inbox", title: "Inbox", emoji: "📧" },
   { id: "requests", title: "Caixa de solicitações", emoji: "💡" },
+  { id: "content", title: "Pedidos de conteúdo", emoji: "🎬" },
   { id: "info", title: "Centros de Informação", emoji: "🌐" },
   { id: "finance", title: "Finanças & Mercados", emoji: "💰" },
   { id: "crypto", title: "Cripto & Derivativos", emoji: "🪙" },
@@ -71,6 +73,7 @@ export function renderPanel(id: PanelId, onSelectCountry: (code: string) => void
     case "scheduled": return <DailyGrid only="scheduled" />;
     case "inbox": return <DailyGrid only="inbox" />;
     case "requests": return <SuggestionBox />;
+    case "content": return <ContentRequests />;
     case "info": return <InfoCenters />;
     case "finance": return <FinanceCenters />;
     case "crypto": return <CryptoCenters />;
