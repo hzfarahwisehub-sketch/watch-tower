@@ -43,7 +43,14 @@ export async function acionarGeracaoRoteiros(mudancas: string[], userId: string)
       `Estrutura: Lucas = 2 longos + 2 curtos (mercado, empreendedorismo, investimento, o provedor, equilíbrio financeiro e mental); Marcela = 2 longos + 2 curtos (família, mulher, criança, acolhimento, a mãezona) e também mercado de trabalho. ` +
       `Ângulos SEMPRE novos, nunca repetir nem copiar; personas separadas; voz WiseHub (fluida, acolhedora, sem travessão no meio da frase); sem clichê, sem escassez forçada, sem gancho de manual, sem comparação padronizada, sem dica de IA; ` +
       `honestidade obrigatória (não promete visto, renda nem resultado; conteúdo educativo não substitui profissional habilitado); NUNCA citar programa interno ou ranking. ` +
-      `Ao puxar notícia ou informação com profundidade, usar o gancho pra WiseHub (estar conectado, acesso rápido e imediato, gente que vive isso). Rodar a revisão adversarial (voz/clichê, persona/repetição, marca/fatos) antes de entregar. ${fuel}`;
+      `Ao puxar notícia ou informação com profundidade, usar o gancho pra WiseHub (estar conectado, acesso rápido e imediato, gente que vive isso). Rodar a revisão adversarial (voz/clichê, persona/repetição, marca/fatos) antes de entregar. ${fuel} ` +
+      // A ENTREGA faz parte do pedido. Sem estes 4 passos o lote morre no disco
+      // do Hammis e a aba 🎥 Conteúdo Digital congela no lote anterior — foi
+      // exatamente o que aconteceu com os lotes 01 e 02 (2026-07-13/14).
+      `ENTREGA (sem isto o lote não chega nos fundadores): 1) ler os lotes anteriores em "D:\\FRIDAY-BRAIN\\05 - Conteúdo\\Roteiros Fundadores" pra não repetir eixo; ` +
+      `2) salvar o lote novo lá como "<AAAA-MM-DD> - Lote <NN>.md" no mesmo formato (## n · Persona · Canal (longo|curto) + linha "Título:"); ` +
+      `3) rodar "python scripts/parse-lotes.py" no repo watch-tower (regenera src/lib/roteiros-data.ts); ` +
+      `4) commitar e dar push na main — o deploy sai do Git (REGRA 4) e é o que publica o lote na aba 🎥 Conteúdo Digital.`;
 
     await prisma.suggestion.create({ data: { userId, body } });
     return true;
