@@ -18,6 +18,7 @@ import bulletins from "./messages/bulletins";
 import daily from "./messages/daily";
 import suggest from "./messages/suggest";
 import content from "./messages/content";
+import studio from "./messages/studio";
 import exportbtn from "./messages/exportbtn";
 import alerts from "./messages/alerts";
 import detail from "./messages/detail";
@@ -168,6 +169,7 @@ export const MESSAGES: Record<Locale, Dict> = {
     daily.pt,
     suggest.pt,
     content.pt,
+    studio.pt,
     exportbtn.pt,
     alerts.pt,
     detail.pt,
@@ -201,6 +203,7 @@ export const MESSAGES: Record<Locale, Dict> = {
     daily.en,
     suggest.en,
     content.en,
+    studio.en,
     exportbtn.en,
     alerts.en,
     detail.en,
