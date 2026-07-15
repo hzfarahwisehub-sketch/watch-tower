@@ -32,9 +32,16 @@ export const maxDuration = 30;
 const VOCAB = ["open", "applied", "rejected"];
 const LEGACY = "closed";
 
-/** Espelha a nota que a rota deixava: só "Dispensada..." era um descarte. */
+/**
+ * A única pista do que aconteceu com um "closed" é a nota que a Friday deixou
+ * em `response`. O padrão da rota era "Dispensada pela Friday." (23 linhas), mas
+ * há nota escrita à mão que só diz "dispensado" no fim ("Lembrete obsoleto,
+ * dispensado") — por isso o radical é procurado em qualquer posição, e não só no
+ * começo. Tudo que não é descarte foi trabalho aceito ("Iniciada", "Concluída",
+ * "Feito", "Resolvido") → applied.
+ */
 function traduzir(response: string | null): "applied" | "rejected" {
-  return response?.trim().toLowerCase().startsWith("dispensada") ? "rejected" : "applied";
+  return /dispensad[ao]/i.test(response ?? "") ? "rejected" : "applied";
 }
 
 async function auditar() {
