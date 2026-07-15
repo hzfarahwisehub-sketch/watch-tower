@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ROTEIROS, type Roteiro } from "@/lib/roteiros-data";
 import { useLocale } from "./LocaleProvider";
 
@@ -13,34 +13,55 @@ import { useLocale } from "./LocaleProvider";
 // Não confundir com a aba 🎬 Conteúdo (ContentRequests), que mostra os PEDIDOS
 // ⚡ abertos pela máquina. Lá é a fila de trabalho; aqui é o material pronto.
 //
-// "Já usei" mora no localStorage (por navegador). Ver o aviso no rodapé: é
-// deliberado e provisório, até existir modelo no banco pra marcar em equipe.
-
-const USED_KEY = "wt-roteiros-usados-v1";
+// "Já usei" é fato de EQUIPE, não preferência de navegador: qualquer usuário
+// marca e TODOS enxergam, pra dois fundadores não gravarem o mesmo texto.
+// Estado no banco (RoteiroUsage) via /api/roteiros/usage.
 
 type PersonaFilter = "all" | string;
 type CanalFilter = "all" | string;
 
+type Usage = { roteiroId: string; usedBy: string; usedAt: string };
+
 function useUsed() {
-  const [used, setUsed] = useState<Set<string>>(new Set());
-  useEffect(() => {
+  const [usage, setUsage] = useState<Map<string, Usage>>(new Map());
+
+  const reload = useCallback(async () => {
     try {
-      const raw = localStorage.getItem(USED_KEY);
-      if (raw) setUsed(new Set(JSON.parse(raw) as string[]));
+      const r = await fetch("/api/roteiros/usage", { cache: "no-store" });
+      if (r.ok) {
+        const d = await r.json();
+        setUsage(new Map((d.usage ?? []).map((u: Usage) => [u.roteiroId, u])));
+      }
     } catch {}
   }, []);
-  const toggle = (id: string) => {
-    setUsed((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      try {
-        localStorage.setItem(USED_KEY, JSON.stringify([...next]));
-      } catch {}
+
+  useEffect(() => {
+    reload();
+    const id = setInterval(reload, 30000); // mesmo poll leve dos outros painéis
+    return () => clearInterval(id);
+  }, [reload]);
+
+  const toggle = async (id: string) => {
+    const willUse = !usage.has(id);
+    // Update otimista: o clique responde na hora; o reload no fim corrige se o
+    // servidor discordar (ex.: outro sócio marcou no mesmo segundo).
+    setUsage((prev) => {
+      const next = new Map(prev);
+      if (willUse) next.set(id, { roteiroId: id, usedBy: "…", usedAt: new Date().toISOString() });
+      else next.delete(id);
       return next;
     });
+    try {
+      await fetch("/api/roteiros/usage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ roteiroId: id, used: willUse }),
+      });
+    } catch {}
+    reload();
   };
-  return { used, toggle };
+
+  return { usage, toggle };
 }
 
 function canalEmoji(canal: string): string {
@@ -55,7 +76,8 @@ function personaColor(p: string): string {
 
 export function ContentStudio() {
   const { t } = useLocale();
-  const { used, toggle } = useUsed();
+  const { usage, toggle } = useUsed();
+  const used = usage;
 
   const [persona, setPersona] = useState<PersonaFilter>("all");
   const [canal, setCanal] = useState<CanalFilter>("all");
@@ -241,6 +263,13 @@ export function ContentStudio() {
                   </button>
                 </div>
               </div>
+
+              {/* Atribuição: quem do time já gravou este. Some quando desmarcado. */}
+              {usage.get(open.id) && (
+                <p className="text-[10px] font-bold uppercase tracking-wide mb-2" style={{ color: "var(--color-status-stable)" }}>
+                  {t("studio.usedBy", { name: usage.get(open.id)!.usedBy })}
+                </p>
+              )}
 
               <h3 className="text-[19px] font-extrabold leading-tight mb-3" style={{ color: "var(--text)", overflowWrap: "anywhere" }}>
                 {open.titulo}

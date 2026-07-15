@@ -62,20 +62,20 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  emailVerified DateTime?
-  image         String?
-  role          String    @default("editor") // "admin" | "editor"
-  allowlisted   Boolean   @default(false)
+  id                   String    @id @default(cuid())
+  name                 String?
+  email                String    @unique
+  emailVerified        DateTime?
+  image                String?
+  role                 String    @default("editor") // "admin" | "editor"
+  allowlisted          Boolean   @default(false)
   // Auth login+senha (substitui magic link). passwordHash null = ainda nao
   // definiu senha (primeiro acesso). Reset via token expirável por email.
   passwordHash         String?
   passwordResetToken   String?   @unique
   passwordResetExpires DateTime?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
 
   accounts          Account[]
   sessions          Session[]
@@ -85,6 +85,7 @@ model User {
   scheduledActions  ScheduledAction[]
   pushSubscriptions PushSubscription[]
   suggestions       Suggestion[]
+  roteiroUsages     RoteiroUsage[]
 }
 
 // ============================================================
@@ -95,8 +96,8 @@ model PushSubscription {
   id        String   @id @default(cuid())
   userId    String
   endpoint  String   @unique
-  p256dh    String   // chave pública do device (base64url)
-  auth      String   // segredo de autenticação (base64url)
+  p256dh    String // chave pública do device (base64url)
+  auth      String // segredo de autenticação (base64url)
   userAgent String?
   createdAt DateTime @default(now())
 
@@ -118,12 +119,12 @@ model VerificationToken {
 // ============================================================
 
 model AllowedEmail {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  role      String   @default("editor") // "admin" | "editor"
-  addedBy   String?  // email do admin que adicionou
-  addedAt   DateTime @default(now())
-  notes     String?
+  id      String   @id @default(cuid())
+  email   String   @unique
+  role    String   @default("editor") // "admin" | "editor"
+  addedBy String? // email do admin que adicionou
+  addedAt DateTime @default(now())
+  notes   String?
 }
 
 // ============================================================
@@ -131,16 +132,16 @@ model AllowedEmail {
 // ============================================================
 
 model Task {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   userId    String
-  scope     String   @default("personal") // "personal" | "team"
+  scope     String    @default("personal") // "personal" | "team"
   title     String
-  done      Boolean  @default(false)
-  priority  String   @default("normal") // "low" | "normal" | "high" | "critical"
+  done      Boolean   @default(false)
+  priority  String    @default("normal") // "low" | "normal" | "high" | "critical"
   dueDate   DateTime?
-  notes     String?  @db.Text
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  notes     String?   @db.Text
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -171,7 +172,7 @@ model Reminder {
   scope      String    @default("personal") // "personal" | "team"
   title      String
   triggerAt  DateTime
-  recurring  String?   // "daily" | "weekly" | "monthly" | null
+  recurring  String? // "daily" | "weekly" | "monthly" | null
   done       Boolean   @default(false)
   notifiedAt DateTime? // quando o push deste disparo foi enviado (idempotência do cron)
   createdAt  DateTime  @default(now())
@@ -185,17 +186,17 @@ model Reminder {
 }
 
 model ScheduledAction {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   userId    String
-  scope     String   @default("personal") // "personal" | "team"
+  scope     String    @default("personal") // "personal" | "team"
   name      String
-  cronExpr  String   // "0 8 * * *" formato cron
-  active    Boolean  @default(true)
+  cronExpr  String // "0 8 * * *" formato cron
+  active    Boolean   @default(true)
   lastRunAt DateTime?
   nextRunAt DateTime?
-  payload   Json?    // dados arbitrários da acao
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  payload   Json? // dados arbitrários da acao
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -212,11 +213,11 @@ model ScheduledAction {
 
 model MailAccount {
   id          String   @id @default(cuid())
-  ownerEmail  String   // e-mail de LOGIN do dono (allowlist)
-  address     String   // endereço da caixa conectada
+  ownerEmail  String // e-mail de LOGIN do dono (allowlist)
+  address     String // endereço da caixa conectada
   host        String
   port        Int      @default(993)
-  encPassword String   // iv:tag:cipher (base64) · AES-256-GCM
+  encPassword String // iv:tag:cipher (base64) · AES-256-GCM
   createdAt   DateTime @default(now())
 
   @@unique([ownerEmail, address])
@@ -230,12 +231,12 @@ model MailAccount {
 // ============================================================
 
 model GoogleCalendarAccount {
-  id           String   @id @default(cuid())
-  userEmail    String   @unique // login do dono (allowlist)
-  googleEmail  String? // e-mail da conta Google conectada (informativo)
-  encRefresh   String   // iv:tag:cipher (base64) · AES-256-GCM
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id          String   @id @default(cuid())
+  userEmail   String   @unique // login do dono (allowlist)
+  googleEmail String? // e-mail da conta Google conectada (informativo)
+  encRefresh  String // iv:tag:cipher (base64) · AES-256-GCM
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 // ============================================================
@@ -256,4 +257,27 @@ model Suggestion {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([status, createdAt])
+}
+
+// ============================================================
+// Roteiros · "já usei este" (aba 🎥 Conteúdo Digital)
+// ============================================================
+// Fato de EQUIPE, não preferência pessoal: quando qualquer usuário marca um
+// roteiro como usado, TODOS os usuários enxergam (evita dois fundadores
+// gravarem o mesmo texto). Por isso `roteiroId` é @unique — uma linha por
+// roteiro, e não uma por (roteiro, pessoa). O `userId` fica só pra atribuição
+// ("usado por Fulano").
+//
+// Desmarcar = apagar a linha. O ROTEIRO em si nunca mora aqui: ele vive em
+// src/lib/roteiros-data.ts (versionado no Git), então nada de conteúdo se perde
+// se esta tabela sumir.
+model RoteiroUsage {
+  id        String   @id @default(cuid())
+  roteiroId String   @unique // id de roteiros-data.ts, ex.: "2026-07-14-08"
+  userId    String // quem marcou
+  usedAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([usedAt])
 }

@@ -16,10 +16,11 @@ const dict = {
     "studio.copy": "📋 Copiar",
     "studio.copied": "✓ Copiado",
     "studio.copyFail": "Falhou, copie à mão",
-    "studio.usedYes": "✓ Já usei",
+    "studio.usedYes": "✓ Usado",
     "studio.usedNo": "Marcar como usado",
+    "studio.usedBy": "✓ Já gravado por {name}",
     "studio.usedNote":
-      "\"Já usei\" fica salvo neste navegador (ainda não é compartilhado entre os sócios). O roteiro nunca é apagado.",
+      "Marcar como usado vale pra todo mundo: qualquer usuário marca e todos veem, pra ninguém gravar o mesmo texto duas vezes. O roteiro nunca é apagado.",
   },
   en: {
     "studio.title": "🎥 Digital Content",
@@ -37,8 +38,9 @@ const dict = {
     "studio.copyFail": "Failed, copy by hand",
     "studio.usedYes": "✓ Used",
     "studio.usedNo": "Mark as used",
+    "studio.usedBy": "✓ Already recorded by {name}",
     "studio.usedNote":
-      "\"Used\" is saved in this browser only (not yet shared across partners). The script is never deleted.",
+      "Marking as used applies to everyone: any user marks it and all users see it, so nobody records the same script twice. The script is never deleted.",
   },
 } as const;
 export default dict;
