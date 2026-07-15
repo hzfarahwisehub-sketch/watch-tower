@@ -79,6 +79,18 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({ count: requests.length, requests });
 }
 
+// Vocabulário da PONTE (o que a Friday manda) × vocabulário do BANCO (o que a
+// caixa de solicitações entende). São coisas diferentes de propósito: pra Friday
+// faz sentido dizer "peguei" / "dispensei"; a tabela Suggestion só conhece
+// open | applied | rejected (schema.prisma), e é esse o valor que o selo da UI e
+// a ordenação do GET /api/suggestions leem. Até 2026-07-14 esta rota gravava
+// "closed", um quarto valor fora do vocabulário: o item sumia dos botões de
+// aplicar/rejeitar mas o selo continuava dizendo "Aberta".
+const STATUS_DB: Record<"started" | "dismissed", "applied" | "rejected"> = {
+  started: "applied",
+  dismissed: "rejected",
+};
+
 const Patch = z.object({
   id: z.string().min(1),
   status: z.enum(["started", "dismissed"]),
@@ -102,7 +114,7 @@ export async function PATCH(req: NextRequest) {
   try {
     const updated = await prisma.suggestion.update({
       where: { id: parsed.data.id },
-      data: { status: "closed", response: note },
+      data: { status: STATUS_DB[parsed.data.status], response: note },
     });
     return NextResponse.json({ ok: true, id: updated.id, status: updated.status });
   } catch {

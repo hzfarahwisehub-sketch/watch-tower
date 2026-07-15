@@ -249,6 +249,10 @@ model Suggestion {
   id        String   @id @default(cuid())
   userId    String // quem enviou
   body      String   @db.Text
+  // Vocabulário FECHADO em 3 valores. Quem escreve: /api/suggestions/[id] (Hammis
+  // na caixa) e /api/friday-requests (a Friday, que traduz o seu started/dismissed
+  // pra applied/rejected). Valor fora desta lista quebra o selo da UI e a ordenação
+  // do GET /api/suggestions, que ordena por status.
   status    String   @default("open") // "open" | "applied" | "rejected"
   response  String?  @db.Text // resposta da Friday/Hammis (motivo)
   createdAt DateTime @default(now())

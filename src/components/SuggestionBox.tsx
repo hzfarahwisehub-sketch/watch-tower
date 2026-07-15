@@ -145,7 +145,7 @@ export function SuggestionBox() {
           </p>
         ) : (
           visible.map((s) => {
-            const sm = STATUS_META[s.status] ?? STATUS_META.open; // default seguro p/ status fora do mapa (ex.: "closed")
+            const sm = STATUS_META[s.status] ?? STATUS_META.open; // `status` é String livre no banco: defesa contra valor fora do vocabulário
             return (
               <div
                 key={s.id}
