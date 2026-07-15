@@ -29,6 +29,160 @@ export type Roteiro = {
 
 export const ROTEIROS: Roteiro[] = [
   {
+    "id": "2026-07-15-08",
+    "date": "2026-07-15",
+    "lote": 3,
+    "n": 8,
+    "persona": "Marcela",
+    "canal": "Instagram",
+    "formato": "curto",
+    "titulo": "Um dia você chora no mercado",
+    "paras": [
+      "Ninguém te prepara pra isso, e acontece cedo ou tarde.",
+      "Você está no supermercado de um país novo, empurrando o carrinho, tudo bem. Aí você vê alguma coisa. Um pacote parecido com o que a sua mãe comprava. Ou o cheiro errado no corredor certo. E do nada os olhos enchem, no meio do arroz, sem aviso.",
+      "A saudade não chega nas datas grandes, onde a gente espera. Ela chega assim, numa quarta-feira qualquer, num detalhe minúsculo que só significa alguma coisa pra você.",
+      "Chorar ali é o que raiz faz quando encosta em alguma coisa conhecida.",
+      "Aqui dentro a gente fala disso também, com gente que já chorou no mercado e continuou. Se a saudade virar peso que não passa, isso é conversa pra profissional, não pra grupo. Pro resto, tem quem entenda por que era o arroz."
+    ],
+    "palavras": 139
+  },
+  {
+    "id": "2026-07-15-07",
+    "date": "2026-07-15",
+    "lote": 3,
+    "n": 7,
+    "persona": "Marcela",
+    "canal": "Reels",
+    "formato": "curto",
+    "titulo": "A foto da amiga que ficou",
+    "paras": [
+      "Você muda de país, e um dia abre o celular e vê a foto. O aniversário, a mesa cheia, todo mundo que você ama junto. E você não está.",
+      "Aí vem uma pergunta feia, dessas que a gente não fala em voz alta: será que valeu a pena?",
+      "Eu queria te dizer uma coisa sobre essa pergunta. Ela sempre chega num dia ruim, nunca num dia bom. Ela põe a sua terça-feira cansada contra a melhor noite da vida de outra pessoa, editada e escolhida. Chamar aquilo de comparação é generoso demais. Aquilo é uma emboscada.",
+      "A saudade é real e merece respeito. Só não deixe ela julgar a sua decisão inteira sozinha, num dia em que você estava no fim das forças.",
+      "Aqui dentro tem gente que já sentiu isso e continuou. Quando essa pergunta parar de ir embora, ela vira assunto de terapeuta, e a gente não faz esse papel. Enquanto ela só passa de vez em quando, você tem com quem dividir."
+    ],
+    "palavras": 165
+  },
+  {
+    "id": "2026-07-15-06",
+    "date": "2026-07-15",
+    "lote": 3,
+    "n": 6,
+    "persona": "Marcela",
+    "canal": "YouTube",
+    "formato": "longo",
+    "titulo": "Mudar com adolescente é outro processo",
+    "paras": [
+      "Toda mãe que muda de país com filho pequeno ouve a mesma frase: criança se adapta rápido. Muitas vezes é verdade. Mas e quando o filho tem quinze?",
+      "Aí é outra história, e eu queria que mais gente falasse dela. A criança pequena vai onde a família vai, porque o mundo dela é a família. O adolescente já tem mundo próprio. Ele tem grupo, tem apelido, tem uma reputação que levou anos construindo, tem uma pessoa de quem gosta e não te contou. Ele está deixando pra trás a versão dele que só existe naquele lugar, com aquelas pessoas. Quarto se remonta. Aquilo não.",
+      "Por isso a reação costuma ser mais dura, e mais parecida com raiva do que com tristeza. E a raiva dele tem lógica. Ele não escolheu, é velho o bastante pra entender o tamanho da perda, e novo o bastante pra não ter voto. Essa combinação é cruel, e quando a mãe interpreta aquilo como ingratidão, os dois se afastam bem na hora em que mais precisavam um do outro.",
+      "Uma coisa costuma ajudar, e ela custa: dar a ele alguma coisa real pra decidir. Não a decisão de ir, que não é dele. Mas o bairro, entre dois possíveis. A escola, entre duas. Como vai ser a rotina com os amigos daqui, com horário combinado e respeitado. Quando ele participa de escolhas de verdade, ele para de ser bagagem e vira parte. Isso não apaga a dor, mas muda a posição dele dentro dela.",
+      "E tem a parte concreta, que muda de país pra país e vale saber antes. Como funciona a escola na idade dele. Se existe apoio de língua pra quem chega mais velho. Em que ano letivo ele cai, e se aquele sistema tem prova que decide caminho, e com que idade. Adolescente que chega no meio de um ciclo escolar mal escolhido perde ano, e isso ninguém avisa na hora de escolher o destino.",
+      "Essas respostas são chatas de caçar sozinha, e é uma das coisas que a comunidade já tem mastigado: como a educação funciona em cada um dos nove países, na idade que interessa pra você. Você organiza o passo a passo com calma, pergunta na live pra quem entende do sistema de lá, e sobretudo escuta mãe que já atravessou isso com um adolescente batendo porta em casa.",
+      "E quando a dor dele passar do tamanho que a família dá conta, isso é hora de profissional, não de comunidade. Nada que a gente conversa aqui ocupa o lugar de um psicólogo, e ninguém aqui vai te dizer que a adaptação dele vai ser tranquila, porque a gente não sabe.",
+      "Se o seu filho está com raiva de você por causa dessa mudança, olha essa raiva de perto. Por baixo dela tem luto, e ele ainda não tem palavra pra isso. Segura a mão dele mesmo quando ela estiver fechada. E procura quem já segurou uma dessas."
+    ],
+    "palavras": 488
+  },
+  {
+    "id": "2026-07-15-05",
+    "date": "2026-07-15",
+    "lote": 3,
+    "n": 5,
+    "persona": "Marcela",
+    "canal": "YouTube",
+    "formato": "longo",
+    "titulo": "A palavra que o formulário usa pra te chamar",
+    "paras": [
+      "Tem uma palavra que aparece no processo de imigração e que machuca mais do que parece. Dependente.",
+      "É um termo técnico, frio, de formulário. O visto sai no nome de quem tem o contrato de trabalho, e quem vai junto entra como dependente. Cônjuge dependente. Filhos dependentes. Faz sentido burocrático, e ninguém escreveu aquilo pra ferir ninguém. Mas você lê e alguma coisa afunda. Porque você não depende de ninguém. Você é adulta, é competente, sustentou casa, tomou decisão difícil, e de repente está num papel que te chama de anexo.",
+      "E às vezes o papel contamina a vida. Ele chega antes de você, e vai te esperando lá. É a conta bancária que pede a assinatura dele. É o telefone da escola que liga primeiro pro nome que está no contrato. É a pergunta na roda, com toda a inocência do mundo: e você, o que faz? E você trava, porque a resposta honesta naquele mês é que você está montando uma casa num país que não conhece, com uma língua que ainda te cansa, e isso não tem nome de profissão.",
+      "Eu quero te dizer uma coisa com clareza. Aquele campo do formulário responde uma pergunta só: quem assinou o contrato de trabalho. É toda a informação que ele carrega. Quem você é, e quem você vai ser lá, fica fora do alcance daquela linha.",
+      "Agora, o lado prático de virar esse jogo começa antes de embarcar. A regra que diz se você pode trabalhar, e a partir de quando, está escrita de um jeito diferente em cada país. Muita mulher descobre isso tarde, quando já está lá. Junto com ela vem a pergunta da revalidação: se a sua profissão exige, quanto tempo leva, e o que dá pra adiantar daqui.",
+      "Essas duas respostas mudam o seu primeiro ano inteiro, e elas existem. Na WiseHub elas ficam à mão: o que o visto de acompanhante autoriza em cada um dos nove países, e o que o mercado de lá costuma pedir de quem vem de fora. Dá pra levantar isso com calma ainda daqui, perguntar numa live pra quem lida com esses processos todo dia, e chegar em parceiro verificado com condição especial se virar caso jurídico. Do lado, mulheres que já leram a própria palavra \"dependente\" num formulário e construíram vida própria depois dela.",
+      "Preciso ser exata numa coisa. Nenhum conteúdo aqui muda o que está escrito no seu visto, nem antecipa em um dia a data em que ele te libera pra trabalhar. Quem lê o seu caso e responde por ele é advogado. A comunidade te ajuda a saber o que perguntar, e caminha junto enquanto a resposta não chega.",
+      "Papel é papel. Do lado de cá tem mulher que já leu essa palavra no próprio formulário e construiu vida inteira depois dela. A sua vaga nessa conversa está aberta."
+    ],
+    "palavras": 475
+  },
+  {
+    "id": "2026-07-15-04",
+    "date": "2026-07-15",
+    "lote": 3,
+    "n": 4,
+    "persona": "Lucas",
+    "canal": "Instagram",
+    "formato": "curto",
+    "titulo": "O visto é a menor linha do projeto",
+    "paras": [
+      "Quando alguém decide viver fora, gasta noventa por cento da energia numa coisa só: o visto. Fórum, advogado, checklist, ansiedade.",
+      "Só que o visto é a autorização de entrar. Ele não diz onde você vai morar, quanto vai sobrar no fim do mês, se a sua profissão exige revalidação, quem vai te contratar, nem como a sua vida vai funcionar no ano dois.",
+      "No orçamento de um projeto de mudança, o visto costuma ser uma das linhas menores. E ele consome quase toda a atenção porque é a única parte com prazo e protocolo.",
+      "Na WiseHub a conversa é do projeto inteiro, com gente que já montou o dela. O carimbo quem trata é advogado, e a comunidade não faz esse papel. Ali dentro as outras linhas aparecem na sua frente antes de você tropeçar nelas.",
+      "O carimbo tem prazo e cobra. O ano dois não cobra nada de você, e é por isso que ele chega sem ninguém ter olhado pra ele."
+    ],
+    "palavras": 163
+  },
+  {
+    "id": "2026-07-15-03",
+    "date": "2026-07-15",
+    "lote": 3,
+    "n": 3,
+    "persona": "Lucas",
+    "canal": "Reels",
+    "formato": "curto",
+    "titulo": "O seu emprego de hoje pode ser o seu treino",
+    "paras": [
+      "Tem gente que trata o emprego atual como a corrente que prende. Eu enxergo diferente, e é uma diferença que rende.",
+      "Enquanto você está aqui, esse emprego pode ser treino pago. Dá pra pedir o projeto que exige inglês. Dá pra pegar o cliente de fora. Dá pra aprender a ferramenta que o mercado lá usa e o daqui ainda não. Dá pra construir portfólio que atravessa fronteira, no horário comercial, recebendo pra isso.",
+      "Se a preparação só começa depois da decisão, ela começa no mês mais caro: você já pediu demissão e o relógio corre. O tempo de dentro é o único que passa de graça.",
+      "Esse tipo de leitura circula na WiseHub, com gente que já fez o caminho. Ninguém aqui garante que isso vira vaga lá fora, e a troca é de experiência, sem assessoria de carreira nem parecer sobre o seu contrato. Dá pra começar amanhã, sem pedir demissão de nada."
+    ],
+    "palavras": 155
+  },
+  {
+    "id": "2026-07-15-02",
+    "date": "2026-07-15",
+    "lote": 3,
+    "n": 2,
+    "persona": "Lucas",
+    "canal": "YouTube",
+    "formato": "longo",
+    "titulo": "A moeda em que você pensa",
+    "paras": [
+      "A pessoa se muda, começa a ganhar em outra moeda, e continua convertendo tudo de volta pra que ela cresceu usando. Vê um café por quatro e converte. Vê um aluguel e converte. Vê o próprio salário e converte, pra sentir se é bom. Parece prudência. Na prática é uma régua velha medindo uma vida nova.",
+      "O estrago vem de dois lados. De um lado, ela acha tudo absurdamente caro e deixa de viver, porque na régua antiga aquele café é um assalto. De outro, e esse é mais perigoso, ela acha o salário fabuloso, porque na régua antiga o número é enorme. Só que ela não paga as contas na régua antiga. Ela paga naquele lugar, naquele custo de vida. O salário que parece uma fortuna convertido pode ser um salário apertado ali, e a pessoa descobre isso quando o mês fecha no vermelho pela terceira vez.",
+      "E tem um efeito que aparece mais tarde, quando a poeira baixa. A régua velha também estraga a decisão de poupar. Quem converte guarda pouco, porque qualquer valor parece muito quando vira a moeda antiga na cabeça. Aí a pessoa passa o ano inteiro achando que está bem e chega em dezembro sem reserva, num país onde ela ainda não tem rede pra cair. Régua errada não erra só o gasto, erra o quanto sobra.",
+      "Trocar de moeda mental é um trabalho consciente, e leva tempo. O jeito de encurtar é chegar já sabendo. Olhar o aluguel do bairro que você tem chance de morar, e não o do centro da foto. A cesta do mês. O que o imposto tira antes de o dinheiro chegar na sua conta. O transporte, que em uns lugares é detalhe e em outros come um pedaço sério do mês. Tudo isso medido lá, na vida de lá, sem passar pela calculadora.",
+      "E esse número muda. Só na janela das últimas 48 horas, doze países tiveram movimento nas frentes que a comunidade acompanha. Quem monta plano com um vídeo de dois anos atrás está usando preço de outro país, que por acaso tem o mesmo nome.",
+      "Régua nova ninguém te dá pronta, e a WiseHub não é exceção. O que existe ali é o número de lá, atualizado, de nove países, e gente que já morou naquela régua pra você conferir se o que entendeu bate com a vida real. Imposto e o quanto sobra de fato no seu caso é conversa pra contador. A comunidade te entrega o mapa antes, e mapa nenhum é garantia de nada.",
+      "Comece a treinar a régua nova antes de embarcar. Olhe o preço de lá e resista à conversão. Vai incomodar por uns meses, e depois para. No dia em que o número parar de virar reais sozinho na sua cabeça, você já chegou um pouco antes do avião."
+    ],
+    "palavras": 470
+  },
+  {
+    "id": "2026-07-15-01",
+    "date": "2026-07-15",
+    "lote": 3,
+    "n": 1,
+    "persona": "Lucas",
+    "canal": "YouTube",
+    "formato": "longo",
+    "titulo": "O custo de ficar também é um custo",
+    "paras": [
+      "Quando alguém pensa em viver fora, monta uma planilha só. A planilha de sair. Quanto custa o processo, a passagem, o depósito do aluguel, os meses de reserva até a renda engrenar. Some tudo, olha o número, e o número assusta. Aí a conclusão vem sozinha: é caro demais, fica pra depois.",
+      "Quero propor uma segunda planilha, a que fica de fora da conversa e muda a leitura da primeira. A planilha de ficar.",
+      "Em finanças a gente chama isso de custo de oportunidade: o que deixa de entrar por causa da escolha que você fez. Nenhum centavo sai do bolso, e mesmo assim custa. E ficar é uma escolha, mesmo quando parece só a ausência de uma. Cinco anos a mais numa moeda que perde poder de compra tem preço. Um filho que chega aos quinze sem a segunda língua tem preço. Uma carreira que amadurece num mercado saturado, enquanto a mesma habilidade é disputada em outro, tem preço. Nada disso aparece na planilha de sair, e é por isso que a planilha de sair sempre ganha a discussão.",
+      "Não estou dizendo que ficar é errado. Ficar pode ser a decisão mais inteligente da sua vida, e para muita gente é. O que eu estou dizendo é que ficar sem ter feito a conta ainda é adiamento, com o nome de escolha. E adiamento cobra juros.",
+      "A dificuldade real é que a planilha de ficar é difícil de montar sozinho. Ela exige saber o que existe do outro lado com alguma precisão. O que aquele mercado busca na sua área. Que caminhos legais se abriram e se fecharam. Quanto custa viver ali sem romantizar nem exagerar. Sem esses números, o custo de ficar vira um sentimento vago, e sentimento vago perde toda discussão contra uma planilha concreta.",
+      "Encher a segunda planilha é o tipo de coisa que fica mais rápida com companhia. Na WiseHub você acha os números do outro lado sem precisar caçar em vinte sites: nove países acompanhados de perto, o que muda na regra, o que o mercado pede, quanto se gasta pra viver ali. Você monta o seu passo a passo com isso na mão, leva a dúvida pra uma live com quem trabalha na área, e se o caso virar processo chega a parceiros verificados com condições especiais. Do lado, gente que fez as duas contas e escolheu de olho aberto, pros dois lados.",
+      "E olha, a planilha de ficar é sua, não minha. Ninguém aqui consegue te dar visto, renda ou retorno, e quem prometer qualquer um dos três está mentindo pra você. Isso aqui é conteúdo educativo: serve pra você enxergar as duas colunas. Na hora que o número virar decisão de dinheiro ou de processo, quem assina embaixo é contador e advogado, não comunidade.",
+      "Faça as duas contas. Se depois delas você escolher ficar, ótimo, agora virou decisão. Se escolher ir, você já vai com o número na mão. As duas respostas são boas. A que não presta é a que ninguém calculou."
+    ],
+    "palavras": 502
+  },
+  {
     "id": "2026-07-14-08",
     "date": "2026-07-14",
     "lote": 2,
