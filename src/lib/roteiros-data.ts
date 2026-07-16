@@ -29,6 +29,155 @@ export type Roteiro = {
 
 export const ROTEIROS: Roteiro[] = [
   {
+    "id": "2026-07-16-08",
+    "date": "2026-07-16",
+    "lote": 4,
+    "n": 8,
+    "persona": "Marcela",
+    "canal": "Instagram",
+    "formato": "curto",
+    "titulo": "A primeira vez que ela dirigiu sozinha",
+    "paras": [
+      "Tem um momento que não aparece em nenhuma lista de como foi se adaptar, e que muita mulher lembra com clareza: a primeira vez que ela dirigiu sozinha no país novo. Sem o marido no banco do carona indicando o caminho, sem aplicativo aberto o tempo todo. Só ela, o carro, e uma rua que já não era mais estranha.",
+      "Não parece muito, de fora. De dentro, é a primeira prova de que ela consegue se mover sozinha naquele lugar. Que aquele mapa que só existia na cabeça de outra pessoa já existe também na dela.",
+      "Adaptação não chega de uma vez, num anúncio grande. Ela chega em momentos pequenos como esse, que a gente quase deixa passar sem comemorar.",
+      "Na WiseHub, mulheres trocam esses momentos pequenos também, não só os grandes marcos. Às vezes é isso que mais ajuda: saber que a primeira vez sozinha ao volante já foi comemorada por outra, antes."
+    ],
+    "palavras": 154
+  },
+  {
+    "id": "2026-07-16-07",
+    "date": "2026-07-16",
+    "lote": 4,
+    "n": 7,
+    "persona": "Marcela",
+    "canal": "Reels",
+    "formato": "curto",
+    "titulo": "A gente volta?",
+    "paras": [
+      "Tem uma pergunta que criança pequena faz sem aviso, no meio do jantar, no banho, no carro. Mãe, a gente volta?",
+      "Ela não está pedindo uma data. Está testando se o chão embaixo dela é firme. Criança pequena não entende fronteira nem visto, entende se a rotina dela é previsível e se as pessoas que ama estão por perto.",
+      "Responder com uma data que você não tem certeza é pior do que não responder. O que acalma de verdade é o que se repete: a mesma hora de dormir, o mesmo boneco na cama, o mesmo colo depois de um dia ruim. É isso que vira chão pra ela, não o endereço.",
+      "Na WiseHub, mães trocam justamente isso: como responder essa pergunta sem prometer o que não sabem, e como construir previsibilidade num lugar novo. Ninguém aqui garante como o seu filho vai reagir. Cada criança processa mudança no próprio tempo, e isso, às vezes, também é hora de conversar com um profissional."
+    ],
+    "palavras": 163
+  },
+  {
+    "id": "2026-07-16-06",
+    "date": "2026-07-16",
+    "lote": 4,
+    "n": 6,
+    "persona": "Marcela",
+    "canal": "YouTube",
+    "formato": "longo",
+    "titulo": "Voltar a trabalhar depois de anos em casa, num país que não é o seu",
+    "paras": [
+      "Tem uma pergunta que aperta o peito de muita mulher depois que os filhos crescem um pouco e a rotina de casa afrouxa: e agora, como eu volto pro mercado, se nem sei mais como ele funciona, e ainda por cima nesse país que não é o meu?",
+      "O medo tem camada dupla. Uma é a pausa em si: anos fora do mercado formal mexem com a confiança de qualquer pessoa, em qualquer país. A outra é o lugar novo: além de voltar, ela precisa entender as regras de um mercado que nunca trabalhou, muitas vezes numa língua que ainda está treinando.",
+      "O erro mais comum nessa hora é achar que o currículo tem que explicar os anos de casa como se fossem um vazio a esconder. Não são. Administrar casa, rotina de filhos e mudança de país exige organização, resolução de problema sob pressão e gestão de múltiplas frentes ao mesmo tempo, competências que qualquer área valoriza, quando descritas do jeito certo.",
+      "O caminho de volta costuma passar por um degrau, não por um salto. Um curso curto que atualiza uma ferramenta específica. Um trabalho parcial ou voluntário que devolve rotina e referência recente. Uma conversa com quem já contrata na área dela, naquele país, pra entender o que pesa mais na hora da entrevista. Esse degrau é mais curto do que parece de longe, mas fica invisível pra quem está sozinha tentando enxergar o caminho inteiro de uma vez.",
+      "Na WiseHub tem mulheres que voltaram a trabalhar depois da pausa, em cada um dos nove países acompanhados, contando qual foi o primeiro passo real que deram, não o currículo perfeito que gostariam de ter tido. Dá pra perguntar numa live o que pesou na entrevista dela, o que ela faria diferente, por onde ela começaria se fosse hoje.",
+      "Nenhuma comunidade garante vaga nem entrevista. Currículo, direito trabalhista e revalidação de diploma, quando exigida, são conversa pra profissional da área. O que existe aqui é o mapa de quem já andou o caminho e sabe onde ele aperta.",
+      "Anos em casa não apagaram sua capacidade de trabalhar. Eles só mudaram o ponto de partida. E ponto de partida diferente não é o mesmo que não ter caminho."
+    ],
+    "palavras": 368
+  },
+  {
+    "id": "2026-07-16-05",
+    "date": "2026-07-16",
+    "lote": 4,
+    "n": 5,
+    "persona": "Marcela",
+    "canal": "YouTube",
+    "formato": "longo",
+    "titulo": "O trabalho que ninguém vê ela fazendo",
+    "paras": [
+      "Quando a família muda de país, alguém tem que descobrir a escola, marcar a consulta médica, entender o transporte, achar o mercado que vende o tempero certo, aprender o sistema de coleta de lixo, fazer amizade com a vizinha pra ter alguém a quem recorrer numa emergência. Na maioria das famílias, esse alguém é a mulher.",
+      "Esse trabalho não aparece em nenhuma conversa sobre como foi a mudança. Ele não tem linha no currículo, não gera contrato, não sai em post de conquista. E é ele que decide se a família cria raiz de verdade ou fica flutuando no país novo, sem chão.",
+      "Tem um nome pra isso: infraestrutura social. É o conjunto de pequenas coisas que fazem um lugar virar casa, e alguém precisa construir do zero, sozinha, ao mesmo tempo em que tenta lidar com a própria adaptação. Enquanto o marido entra no primeiro dia de trabalho, ela está montando o resto da vida, sem folga combinada com ninguém.",
+      "Quando essa mulher diz que está cansada, a resposta mais comum que ela escuta é que ela nem trabalha ainda. Essa frase erra o alvo inteiro. Ela está trabalhando, só que num trabalho que não tem contracheque nem reconhecimento, e que é, sem exagero, o que sustenta a adaptação de todo mundo em casa.",
+      "Esse peso fica mais leve quando divide de forma explícita, não perguntando se ela precisa de ajuda, pergunta que costuma virar não automático, mas combinando tarefa por tarefa antes da mudança acontecer. E fica mais leve também quando ela encontra outras mulheres que já fizeram exatamente essa lista, no mesmo país, e sabem quais atalhos existem.",
+      "Na WiseHub essa troca acontece entre mulheres que já resolveram escola, saúde e rotina em cada um dos nove países acompanhados, e contam o caminho mais curto que aprenderam na marra. Ninguém aqui resolve a burocracia da sua família à distância, isso depende de cada caso e muitas vezes de advogado, mas dá pra chegar sabendo o que perguntar, em vez de descobrir tudo sozinha, no susto.",
+      "Se você é essa mulher, o trabalho que você está fazendo tem nome, e ele sustenta a casa tanto quanto qualquer salário. Ele só ainda não tem o reconhecimento que merece."
+    ],
+    "palavras": 369
+  },
+  {
+    "id": "2026-07-16-04",
+    "date": "2026-07-16",
+    "lote": 4,
+    "n": 4,
+    "persona": "Lucas",
+    "canal": "Instagram",
+    "formato": "curto",
+    "titulo": "O corpo avisa antes da cabeça admitir",
+    "paras": [
+      "Antes de admitir que está no limite, o corpo já avisou várias vezes. O sono que não rende. A vontade de cancelar tudo num dia comum. A irritação com coisa pequena, que não é sobre a coisa pequena.",
+      "Empreender ou reconstruir carreira em outro país exige um tipo de energia que ninguém sustenta no vermelho por muito tempo. E o discurso do esforço sem limite ajuda a ignorar justamente os avisos que deveriam frear a tempo.",
+      "Cuidar da cabeça e do corpo nessa fase não é luxo, é manutenção do único equipamento que executa o plano inteiro. Se o cansaço já virou constante, isso é assunto pra profissional de saúde, não pra comunidade.",
+      "Na WiseHub a conversa também é sobre isso: como sustentar o ritmo sem quebrar no meio do caminho, com gente que já passou pelo próprio limite e aprendeu a reconhecer o aviso mais cedo."
+    ],
+    "palavras": 147
+  },
+  {
+    "id": "2026-07-16-03",
+    "date": "2026-07-16",
+    "lote": 4,
+    "n": 3,
+    "persona": "Lucas",
+    "canal": "Reels",
+    "formato": "curto",
+    "titulo": "A pressa de provar que valeu a pena",
+    "paras": [
+      "Tem uma pressa que pega quem se muda: a pressa de mostrar resultado rápido, pra família, pros amigos, pra própria cabeça. Como se o primeiro ano precisasse fechar no lucro pra justificar a decisão.",
+      "Não precisa. Nenhuma mudança séria de país ou de carreira se paga no primeiro ano. O que se constrói no primeiro ano é base: rede, entendimento do mercado, primeira experiência real lá dentro. O retorno maior costuma vir depois, quando a base já está pronta.",
+      "Quem cobra resultado rápido demais de si mesmo costuma tomar decisão ruim só pra mostrar serviço, e decisão ruim tomada com pressa custa mais caro do que esperar.",
+      "Na WiseHub tem gente contando o próprio primeiro ano, sem editar a parte difícil. Ninguém garante quando o seu retorno chega. O que dá pra fazer é entender, com quem já passou, o que é normal demorar."
+    ],
+    "palavras": 144
+  },
+  {
+    "id": "2026-07-16-02",
+    "date": "2026-07-16",
+    "lote": 4,
+    "n": 2,
+    "persona": "Lucas",
+    "canal": "YouTube",
+    "formato": "longo",
+    "titulo": "O primeiro cliente lá fora não é o maior",
+    "paras": [
+      "Quem empreende aqui e decide abrir uma frente lá fora costuma repetir o mesmo erro de expectativa: espera que o primeiro cliente internacional seja parecido com o melhor cliente que já teve em casa. Grande, fiel, fácil de atender. Aí o primeiro contrato chega pequeno, testando, desconfiado, e a pessoa lê isso como fracasso.",
+      "Não é. É o começo funcionando exatamente como começo funciona em qualquer mercado novo, inclusive nos que já deram certo pra ela antes. Ninguém contrata um fornecedor desconhecido, de outro país, com o mesmo orçamento que reserva pra quem já confia. O primeiro contrato é teste, dos dois lados. Ele serve pra provar entrega, não pra pagar as contas do mês.",
+      "O erro caro não é o cliente pequeno. É desistir depois dele, achando que ele é a prova de que o mercado não quer o que você oferece. O segundo cliente, quando vem, costuma vir maior, porque agora existe um histórico real pra mostrar, e não só uma promessa.",
+      "Essa semana, doze países registraram movimento nas frentes que a comunidade acompanha de perto: Eslováquia, Finlândia, Holanda, Hungria, Islândia, Nova Zelândia, Irlanda, Letônia, Luxemburgo, Reino Unido, Tchéquia e Romênia. Mercado se move o tempo todo, em regra e em oportunidade, e quem está tentando entrar de fora, sem gente que acompanha isso todo dia, decide sempre com informação velha.",
+      "Na WiseHub esse acompanhamento é diário, país por país, e a conversa entre quem já vendeu lá fora e quem está tentando o primeiro contrato acontece toda semana, ao vivo. Dá pra perguntar quanto tempo o outro levou até o segundo cliente, o que mudou na proposta entre o primeiro contrato e o quinto, o que o mercado local espera de quem vem de fora.",
+      "Nada disso garante venda nem contrato. Questão fiscal e jurídica de operar em outro país é conversa pra contador e advogado, não pra comunidade. O que existe aqui é gente que testou o primeiro contrato pequeno, não desistiu, e hoje conta como foi o segundo.",
+      "O primeiro cliente não precisa ser o maior. Ele só precisa existir, pra abrir espaço pro segundo."
+    ],
+    "palavras": 350
+  },
+  {
+    "id": "2026-07-16-01",
+    "date": "2026-07-16",
+    "lote": 4,
+    "n": 1,
+    "persona": "Lucas",
+    "canal": "YouTube",
+    "formato": "longo",
+    "titulo": "O currículo que fala uma língua que ninguém avisou",
+    "paras": [
+      "Um profissional decide se mudar levando o currículo mais forte que já teve. Anos de entrega, um cargo conquistado com esforço de verdade, referências que abririam qualquer porta na cidade onde ele estava. Do outro lado, silêncio. Entrevista que não vem, ou vem e para no meio, sem ninguém dizer com clareza por quê.",
+      "A explicação que mais circula é rasa: lá fora é mais concorrido. Às vezes é. Mas o problema mais comum é outro: o mercado de destino lê currículo de um jeito diferente, e ninguém contou isso pra essa pessoa antes de ela chegar com um documento pronto pra um leitor que não existe do outro lado.",
+      "Um cargo que aqui carrega peso de liderança pode não ter nome parecido lá. Um diploma pode precisar de equivalência formal antes de abrir qualquer porta, num prazo que varia de poucos meses a mais de um ano, dependendo do país e da profissão. Uma conquista óbvia por aqui, como segurar uma equipe inteira durante uma crise, pode estar descrita de um jeito que o recrutador de lá simplesmente não reconhece como conquista, porque o vocabulário do mercado dele é outro.",
+      "Isso não é o profissional sendo menos capaz. É o documento falando uma língua que o leitor não fala, mesmo quando as duas versões estão, tecnicamente, no mesmo idioma.",
+      "O ajuste tem nome e é possível fazer antes de embarcar: entender como aquele mercado específico nomeia a função equivalente à sua, o que ele exige de comprovação, e como reescrever a própria trajetória no vocabulário de quem vai ler. Isso muda a taxa de resposta antes mesmo da primeira entrevista.",
+      "Na WiseHub essa leitura acontece em comunidade: gente que já atravessou esse ajuste em cada um dos nove países acompanhados de perto conta como reescreveu a própria história pra ser entendida lá. Dá pra levar seu currículo pra uma live, ouvir de quem contrata ou já foi contratado no seu setor, e ajustar antes de gastar a primeira entrevista aprendendo isso na marra.",
+      "Nenhuma reescrita de currículo garante vaga, salário nem visto. Isso quem decide é o mercado, e quem cuida da parte legal do processo é advogado, não comunidade. O que a comunidade oferece é o espelho: mostrar como a sua história soa pra quem está do outro lado, antes de você descobrir isso sozinho, numa entrevista que não volta.",
+      "Seu currículo não está fraco. Ele só ainda está escrito na língua errada. Traduzir isso é trabalho, mas é trabalho que se faz daqui."
+    ],
+    "palavras": 416
+  },
+  {
     "id": "2026-07-15-08",
     "date": "2026-07-15",
     "lote": 3,
