@@ -3,6 +3,11 @@
 // Tower, só-leitura, MULTI-CONTA). Mostra os próximos eventos de TODAS as contas
 // Google conectadas pelo login, com etiqueta de qual conta, + botão pra adicionar
 // mais uma conta. Só aparece se o Google estiver configurado no servidor.
+//
+// Duas visualizações, escolhidas por um botão na própria seção (lembrado por
+// usuário no localStorage):
+//  - "telas": mês inteiro; clicar num dia com agendamento abre a tela do dia.
+//  - "duplo": grade do mês e lista "Programação" lado a lado (a versão anterior).
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocale } from "./LocaleProvider";
 import { useToast } from "./ToastProvider";
@@ -36,6 +41,8 @@ interface EventsResponse {
   windowEnd?: string;
 }
 
+type ViewMode = "telas" | "duplo";
+
 const pad2 = (n: number) => String(n).padStart(2, "0");
 /** Chave do dia LOCAL (o all-day vem como "YYYY-MM-DDT00:00:00", sem fuso, e o
  *  Date já o resolve na meia-noite local). */
@@ -67,6 +74,10 @@ export function GoogleCalendar() {
   });
   const [selected, setSelected] = useState<string | null>(null);
   const [windowEnd, setWindowEnd] = useState<Date | null>(null);
+  // Visualização escolhida (lembrada no localStorage) e, no modo "telas", qual
+  // dia está aberto (null = mostrando o mês inteiro).
+  const [view, setView] = useState<ViewMode>("telas");
+  const [dayOpen, setDayOpen] = useState<string | null>(null);
   // Um nó por grupo de dia, pra clicar na grade rolar até o dia na lista.
   const groupNodes = useRef(new Map<string, HTMLDivElement | null>());
 
@@ -104,6 +115,14 @@ export function GoogleCalendar() {
   loadRef.current = load;
   useEffect(() => {
     loadRef.current();
+  }, []);
+
+  // Preferência de visualização (uma vez, no cliente).
+  useEffect(() => {
+    try {
+      const v = localStorage.getItem("wt-gcal-view");
+      if (v === "telas" || v === "duplo") setView(v);
+    } catch {}
   }, []);
 
   // feedback do callback (?gcal=...) uma vez
@@ -148,6 +167,14 @@ export function GoogleCalendar() {
     [t, toast],
   );
 
+  const changeView = useCallback((v: ViewMode) => {
+    setView(v);
+    if (v === "duplo") setDayOpen(null); // a lista "duplo" não tem tela de dia
+    try {
+      localStorage.setItem("wt-gcal-view", v);
+    } catch {}
+  }, []);
+
   // Agrupa por DIA local, no formato da vista "Programação" do Google: a data
   // numa coluna à esquerda, os eventos daquele dia à direita. A lista corrida de
   // antes repetia a data em toda linha e, como só mostrava dia/mês, as
@@ -170,6 +197,10 @@ export function GoogleCalendar() {
 
   // Dias que têm evento: a bolinha embaixo do número na grade.
   const daysWithEvents = useMemo(() => new Set(groups.map((g) => g.key)), [groups]);
+  // Eventos por dia (pros mini-chips da grade cheia) e a lista ordenada de dias
+  // com evento (pras setas ‹ › da tela do dia pularem de um pro outro).
+  const eventsByDay = useMemo(() => new Map(groups.map((g) => [g.key, g.items] as const)), [groups]);
+  const eventDayKeys = useMemo(() => groups.map((g) => g.key), [groups]);
   const cells = useMemo(() => monthCells(cursor), [cursor]);
   // 1º/01/2023 caiu num DOMINGO: serve de âncora pra tirar os rótulos da semana
   // do próprio locale, em vez de cravar "d s t q q s s" em português aqui dentro.
@@ -211,24 +242,89 @@ export function GoogleCalendar() {
       ? t("daily.gcal.allday")
       : new Date(ev.start).toLocaleTimeString(intl, { hour: "2-digit", minute: "2-digit" });
 
+  // Linha de evento GRANDE, pra tela do dia (visualização "telas").
+  const rowLg = (ev: GEvent) => {
+    const bd = isBirthday(ev);
+    return (
+      <a
+        key={`${ev.account ?? ""}|${ev.id}|${ev.start ?? ""}`}
+        href={ev.htmlLink || undefined}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-start gap-3 px-3 py-2.5 rounded-lg my-1 transition-transform hover:translate-x-0.5"
+        style={{
+          background: bd ? "rgba(212,175,55,.06)" : "rgba(66,133,244,.06)",
+          border: "1px solid var(--border)",
+          borderLeft: `3px solid ${bd ? "#D4AF37" : "#4285F4"}`,
+          cursor: ev.htmlLink ? "pointer" : "default",
+        }}
+      >
+        <span
+          className="font-extrabold whitespace-nowrap flex-shrink-0 text-[13px] mt-px"
+          style={{ color: bd ? "#D4AF37" : "var(--color-wh-blue-light)" }}
+        >
+          {bd ? "🎂" : fmtTime(ev)}
+        </span>
+        <span className="flex-1 min-w-0">
+          <span className="block text-[13px] font-semibold leading-snug" style={{ color: "var(--text)" }}>
+            {titleOf(ev)}
+          </span>
+          <span className="flex flex-wrap gap-x-3 gap-y-0.5 text-[10px] mt-1" style={{ color: "var(--text-3)" }}>
+            {ev.account && accounts.length > 1 && <span className="truncate">📆 {shortAccount(ev.account)}</span>}
+            {ev.calendar && <span className="truncate">🗂 {ev.calendar}</span>}
+            {ev.location && <span className="truncate">📍 {ev.location}</span>}
+          </span>
+        </span>
+      </a>
+    );
+  };
+
   return (
     <div className="mb-2" style={{ borderBottom: "1px solid var(--border)", paddingBottom: 6 }}>
-      <div className="flex items-center justify-between px-1 py-1">
+      <div className="flex items-center justify-between gap-2 px-1 py-1 flex-wrap">
         <span className="text-[10px] uppercase tracking-[1.5px] font-extrabold" style={{ color: "var(--text-3)" }}>
           {t("daily.gcal.title")}
           <span className="ml-1.5 normal-case tracking-normal font-semibold" style={{ color: "var(--text-3)", opacity: 0.7 }}>
             · {t("daily.gcal.readonly")}
           </span>
         </span>
-        {/* Adicionar conta: sempre disponível (conecta a 1ª ou mais uma) */}
-        <a
-          href="/api/calendar/google/auth"
-          className="text-[9px] font-bold uppercase tracking-wide cursor-pointer"
-          style={{ color: "var(--color-wh-blue-light)" }}
-          title="Conectar outra conta Google"
-        >
-          + conta
-        </a>
+        <div className="flex items-center gap-2">
+          {/* Botão de alternar visualização (só quando há o que mostrar) */}
+          {state === "connected" && events.length > 0 && (
+            <div className="inline-flex rounded-md overflow-hidden" style={{ border: "1px solid var(--border-hi)" }}>
+              {(
+                [
+                  ["telas", t("daily.gcal.viewScreens"), t("daily.gcal.viewScreensHint")],
+                  ["duplo", t("daily.gcal.viewSplit"), t("daily.gcal.viewSplitHint")],
+                ] as const
+              ).map(([v, label, hint]) => {
+                const on = view === v;
+                return (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => changeView(v)}
+                    title={hint}
+                    aria-pressed={on}
+                    className="text-[9px] font-bold uppercase tracking-wide px-2 py-1 cursor-pointer transition-colors"
+                    style={{ background: on ? "var(--color-wh-blue)" : "transparent", color: on ? "#fff" : "var(--text-3)" }}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+          {/* Adicionar conta: sempre disponível (conecta a 1ª ou mais uma) */}
+          <a
+            href="/api/calendar/google/auth"
+            className="text-[9px] font-bold uppercase tracking-wide cursor-pointer"
+            style={{ color: "var(--color-wh-blue-light)" }}
+            title="Conectar outra conta Google"
+          >
+            + conta
+          </a>
+        </div>
       </div>
 
       {/* Chips das contas conectadas (cada uma com × pra remover) */}
@@ -281,10 +377,11 @@ export function GoogleCalendar() {
         </div>
       )}
 
-      {/* Grade do mês + Programação: lado a lado quando cabe, e a lista desce
-          sozinha embaixo da grade quando a caixa aperta (flex-wrap, sem media
-          query — a caixa é redimensionável, então quem manda é a largura dela). */}
-      {state === "connected" && (
+      {/* ===== Visualização "duplo": grade do mês + Programação lado a lado =====
+          Lado a lado quando cabe, e a lista desce sozinha embaixo da grade quando
+          a caixa aperta (flex-wrap, sem media query — a caixa é redimensionável,
+          então quem manda é a largura dela). */}
+      {state === "connected" && events.length > 0 && view === "duplo" && (
       <div className="flex flex-wrap gap-3 px-1">
       {/* "0 1 190px" e não "0 0 …": com shrink 0 o painel nunca cedia e vazava do
           corpo do card (que rola), botando barra horizontal e espremendo a lista
@@ -465,6 +562,227 @@ export function GoogleCalendar() {
       </div>
       </div>
       )}
+
+      {/* ===== Visualização "telas": mês inteiro ===== */}
+      {state === "connected" && events.length > 0 && view === "telas" && dayOpen === null && (
+        <div className="px-1">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-[15px] font-extrabold first-letter:uppercase" style={{ color: "var(--text)" }}>
+              {cursor.toLocaleDateString(intl, { month: "long", year: "numeric" })}
+            </span>
+            <div className="ml-auto flex items-center gap-1.5">
+              <button
+                type="button"
+                disabled={!canPrev}
+                onClick={() => setCursor((c) => new Date(c.getFullYear(), c.getMonth() - 1, 1))}
+                aria-label={t("daily.gcal.prevMonth")}
+                title={canPrev ? t("daily.gcal.prevMonth") : t("daily.gcal.outOfWindow")}
+                className="w-7 h-7 rounded-lg text-[15px] font-bold flex items-center justify-center transition-colors"
+                style={{ border: "1px solid var(--border-hi)", color: "var(--text-2)", opacity: canPrev ? 1 : 0.3, cursor: canPrev ? "pointer" : "default", background: "transparent" }}
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                disabled={!canNext}
+                onClick={() => setCursor((c) => new Date(c.getFullYear(), c.getMonth() + 1, 1))}
+                aria-label={t("daily.gcal.nextMonth")}
+                title={canNext ? t("daily.gcal.nextMonth") : t("daily.gcal.outOfWindow")}
+                className="w-7 h-7 rounded-lg text-[15px] font-bold flex items-center justify-center transition-colors"
+                style={{ border: "1px solid var(--border-hi)", color: "var(--text-2)", opacity: canNext ? 1 : 0.3, cursor: canNext ? "pointer" : "default", background: "transparent" }}
+              >
+                ›
+              </button>
+              <button
+                type="button"
+                onClick={() => setCursor(monthStart(new Date()))}
+                title={t("daily.gcal.today")}
+                className="px-2.5 h-7 rounded-lg text-[10px] font-bold uppercase tracking-wide"
+                style={{ border: "1px solid var(--border-hi)", color: "var(--color-wh-blue-light)", background: "transparent", cursor: "pointer" }}
+              >
+                {t("daily.gcal.today")}
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-7 gap-1">
+            {weekdayLabels.map((w, i) => (
+              <div key={i} className="text-[9px] text-center font-bold uppercase tracking-wide pb-1" style={{ color: "var(--text-3)", opacity: 0.7 }}>
+                {w}
+              </div>
+            ))}
+            {cells.map((d) => {
+              const k = dayKeyOf(d);
+              const inMonth = d.getMonth() === cursor.getMonth();
+              const isToday = k === dayKeyOf(new Date());
+              const evs = eventsByDay.get(k) ?? [];
+              const has = evs.length > 0;
+              return (
+                <button
+                  key={k}
+                  type="button"
+                  disabled={!has}
+                  onClick={() => setDayOpen(k)}
+                  title={has ? t("daily.gcal.goToDay") : undefined}
+                  className="rounded-lg p-1 flex flex-col min-w-0 min-h-[62px] transition-colors"
+                  style={{
+                    border: "1px solid",
+                    borderColor: has ? "rgba(74,120,255,.28)" : "var(--border)",
+                    background: has ? "rgba(31,85,255,.06)" : "transparent",
+                    opacity: inMonth || has || isToday ? 1 : 0.38,
+                    cursor: has ? "pointer" : "default",
+                  }}
+                >
+                  <span className="flex items-center justify-between">
+                    <span
+                      className="text-[11px] font-bold inline-flex items-center justify-center"
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: "50%",
+                        color: isToday ? "#fff" : inMonth ? "var(--text-2)" : "var(--text-3)",
+                        background: isToday ? "var(--color-wh-blue)" : "transparent",
+                      }}
+                    >
+                      {d.getDate()}
+                    </span>
+                    {has && <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#4A78FF" }} />}
+                  </span>
+                  <span className="mt-1 flex flex-col gap-0.5 min-w-0 text-left">
+                    {evs.slice(0, 2).map((ev) => {
+                      const bd = isBirthday(ev);
+                      return (
+                        <span
+                          key={`${ev.id}|${ev.start ?? ""}`}
+                          className="text-[9px] leading-tight truncate rounded px-1 py-px"
+                          style={{
+                            background: bd ? "rgba(212,175,55,.14)" : "rgba(66,133,244,.14)",
+                            color: bd ? "#C9A227" : "var(--text-2)",
+                            borderLeft: `2px solid ${bd ? "#D4AF37" : "#4285F4"}`,
+                          }}
+                        >
+                          {bd ? "🎂 " : null}
+                          {!ev.allDay && !bd ? <b style={{ color: "#79A6F5" }}>{fmtTime(ev)} </b> : null}
+                          {titleOf(ev)}
+                        </span>
+                      );
+                    })}
+                    {evs.length > 2 && (
+                      <span className="text-[8.5px] font-bold px-1" style={{ color: "var(--text-3)" }}>
+                        +{evs.length - 2}
+                      </span>
+                    )}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="text-center text-[10px] mt-2" style={{ color: "var(--text-3)" }}>
+            {t("daily.gcal.tapDayHint")}
+          </div>
+        </div>
+      )}
+
+      {/* ===== Visualização "telas": tela do dia clicado ===== */}
+      {state === "connected" && events.length > 0 && view === "telas" && dayOpen !== null && (() => {
+        const od = new Date(`${dayOpen}T00:00:00`);
+        const items = eventsByDay.get(dayOpen) ?? [];
+        const idx = eventDayKeys.indexOf(dayOpen);
+        const prevKey = idx > 0 ? eventDayKeys[idx - 1] : null;
+        const nextKey = idx >= 0 && idx < eventDayKeys.length - 1 ? eventDayKeys[idx + 1] : null;
+        const after = idx >= 0 ? groups.slice(idx + 1) : [];
+        return (
+          <div className="px-1">
+            <div className="flex items-center gap-2 mb-3">
+              <button
+                type="button"
+                onClick={() => setDayOpen(null)}
+                className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-lg"
+                style={{ border: "1px solid var(--border-hi)", color: "var(--text-2)", background: "transparent", cursor: "pointer" }}
+              >
+                ‹ {t("daily.gcal.backToMonth")}
+              </button>
+            </div>
+
+            <div className="flex items-end gap-3 pb-3 mb-2" style={{ borderBottom: "1px solid var(--border)" }}>
+              <div className="text-[42px] font-extrabold leading-none" style={{ color: "var(--color-wh-blue-light)" }}>
+                {od.getDate()}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[12px] font-bold uppercase tracking-wide first-letter:uppercase" style={{ color: "var(--color-wh-blue-light)" }}>
+                  {od.toLocaleDateString(intl, { weekday: "long" })}
+                </div>
+                <div className="text-[11px] first-letter:uppercase" style={{ color: "var(--text-3)" }}>
+                  {od.toLocaleDateString(intl, { month: "long", year: "numeric" })}
+                </div>
+              </div>
+              <div className="flex gap-1.5">
+                <button
+                  type="button"
+                  disabled={!prevKey}
+                  onClick={() => prevKey && setDayOpen(prevKey)}
+                  aria-label={t("daily.gcal.prevEventDay")}
+                  title={t("daily.gcal.prevEventDay")}
+                  className="w-7 h-7 rounded-lg text-[15px] font-bold flex items-center justify-center"
+                  style={{ border: "1px solid var(--border-hi)", color: "var(--text-2)", opacity: prevKey ? 1 : 0.3, cursor: prevKey ? "pointer" : "default", background: "transparent" }}
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  disabled={!nextKey}
+                  onClick={() => nextKey && setDayOpen(nextKey)}
+                  aria-label={t("daily.gcal.nextEventDay")}
+                  title={t("daily.gcal.nextEventDay")}
+                  className="w-7 h-7 rounded-lg text-[15px] font-bold flex items-center justify-center"
+                  style={{ border: "1px solid var(--border-hi)", color: "var(--text-2)", opacity: nextKey ? 1 : 0.3, cursor: nextKey ? "pointer" : "default", background: "transparent" }}
+                >
+                  ›
+                </button>
+              </div>
+            </div>
+
+            <div className="text-[10px] font-bold uppercase tracking-[1.4px] mb-1 px-1" style={{ color: "var(--text-3)" }}>
+              {t("daily.gcal.thisDay")}
+            </div>
+            {items.length ? (
+              items.map(rowLg)
+            ) : (
+              <div className="px-2 py-1.5 text-[11px]" style={{ color: "var(--text-3)" }}>
+                {t("daily.gcal.dayEmpty")}
+              </div>
+            )}
+
+            {after.length > 0 && (
+              <>
+                <div className="text-[10px] font-bold uppercase tracking-[1.4px] mt-4 mb-1 px-1" style={{ color: "var(--text-3)" }}>
+                  {t("daily.gcal.upNext")}
+                </div>
+                {after.map((g) => {
+                  const otherYear = g.date.getFullYear() !== new Date().getFullYear();
+                  return (
+                    <div key={g.key} className="mb-1">
+                      <button
+                        type="button"
+                        onClick={() => setDayOpen(g.key)}
+                        className="flex items-center gap-2 text-[11px] font-bold my-1 px-1 cursor-pointer capitalize"
+                        style={{ color: "var(--text-2)", background: "transparent" }}
+                      >
+                        <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#4A78FF" }} />
+                        {g.date
+                          .toLocaleDateString(intl, { weekday: "short", day: "2-digit", month: "short" })
+                          .replace(/\./g, "")}
+                        {otherYear && ` ${g.date.getFullYear()}`}
+                      </button>
+                      {g.items.map(rowLg)}
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </div>
+        );
+      })()}
     </div>
   );
 }
