@@ -307,24 +307,35 @@ export interface GcalDiag {
   errors: string[];
 }
 
-/** Janela de busca. Sem teto, `singleEvents=true` explode uma recorrência ANUAL
- *  em uma instância por ano até o fim dos tempos: um aniversário virava 13 linhas
- *  (2026…2038) que entupiam o painel e empurravam as reuniões de verdade pra fora. */
+/** Janela de busca, e o ÚNICO remédio necessário pro aniversário que virava 13
+ *  linhas (2026…2038): sem teto, `singleEvents=true` explode uma recorrência ANUAL
+ *  numa instância por ano até o fim dos tempos. Com 90 dias, uma série de 365 dias
+ *  de intervalo só pode acertar a janela 0 ou 1 vez — nunca 13.
+ *
+ *  NÃO colapsar série recorrente aqui. A primeira versão deste fix tinha um
+ *  collapseAllDaySeries() que guardava só a próxima ocorrência de toda série
+ *  all-day, e isso era redundante (o timeMax já resolvia o caso anual) e mentiroso
+ *  no resto: um all-day que repete toda sexta saía com UMA ocorrência, e a grade
+ *  do mês desenhava as outras sextas SEM bolinha, afirmando "esse dia está livre"
+ *  num dia ocupado. Com singleEvents=true a instância nem traz a RRULE, só o
+ *  recurringEventId, que o Google seta em recorrência anual e semanal igual — não
+ *  dá pra distinguir a frequência por aqui. */
 const WINDOW_DAYS = 90;
 
-/** Uma série recorrente de DIA INTEIRO (aniversário, data comemorativa, lembrete
- *  anual) só interessa na próxima ocorrência — as seguintes são a mesma coisa de
- *  novo. Reuniões com hora marcada NÃO entram aqui: cada ocorrência é um
- *  compromisso distinto e some cada uma no seu dia, igual ao Google. */
-function collapseAllDaySeries(events: GoogleEvent[]): GoogleEvent[] {
-  const seenSeries = new Set<string>();
-  return events.filter((ev) => {
-    if (!ev.allDay || !ev.recurringEventId) return true;
-    const key = `${ev.account ?? ""}|${ev.recurringEventId}`;
-    if (seenSeries.has(key)) return false;
-    seenSeries.add(key);
-    return true;
-  });
+/** Milissegundos do início do evento. Ordenar pela STRING quebra quando as agendas
+ *  respondem em fusos diferentes (o Google devolve cada uma no fuso dela, e a gente
+ *  não manda `timeZone`): "T09:00:00-04:00" (13:00Z) vinha antes de "T10:00:00+02:00"
+ *  (08:00Z) só porque "09" < "10". O all-day não tem offset e cai no início do dia. */
+function instantOf(ev: GoogleEvent): number {
+  if (!ev.start) return Number.POSITIVE_INFINITY;
+  const t = Date.parse(ev.start);
+  return Number.isNaN(t) ? Number.POSITIVE_INFINITY : t;
+}
+
+/** Fim da janela coberta, em ISO. A tela precisa saber até onde os dados vão pra
+ *  não deixar navegar pra um mês que ela desenharia vazio sem ter perguntado. */
+export function windowEndISO(): string {
+  return new Date(Date.now() + WINDOW_DAYS * 24 * 60 * 60 * 1000).toISOString();
 }
 
 /** Próximos eventos de TODAS as agendas visíveis do usuário (só-leitura),
@@ -372,8 +383,7 @@ export async function fetchUpcomingEventsDetailed(
   );
 
   // Mescla, remove duplicados (evento em agenda compartilhada aparece 2x) e
-  // ordena pelo horário de início. O collapse vem DEPOIS do sort, pra a
-  // ocorrência que sobrevive ser sempre a mais próxima. Corta no total pedido.
+  // ordena pelo INSTANTE de início. Corta no total pedido.
   const seen = new Set<string>();
   const merged = perCalResults
     .flat()
@@ -383,9 +393,9 @@ export async function fetchUpcomingEventsDetailed(
       seen.add(key);
       return true;
     })
-    .sort((a, b) => (a.start ?? "").localeCompare(b.start ?? ""));
+    .sort((a, b) => instantOf(a) - instantOf(b));
 
-  return { events: collapseAllDaySeries(merged).slice(0, maxResults), diag };
+  return { events: merged.slice(0, maxResults), diag };
 }
 
 /** Só os eventos (compat). */

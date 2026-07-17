@@ -31,6 +31,9 @@ interface EventsResponse {
   expired?: boolean;
   events?: GEvent[];
   accounts?: AccountView[];
+  /** Fim da janela que o servidor realmente buscou (ISO). Além disso a grade não
+   *  tem dado, e desenhar mês vazio lá seria afirmar "não tem nada" sem saber. */
+  windowEnd?: string;
 }
 
 const pad2 = (n: number) => String(n).padStart(2, "0");
@@ -38,12 +41,34 @@ const pad2 = (n: number) => String(n).padStart(2, "0");
  *  Date já o resolve na meia-noite local). */
 const dayKeyOf = (d: Date) => `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
 
+/** As células da grade do mês, do domingo que abre a 1ª semana até o sábado que
+ *  fecha a última. Só as linhas necessárias (5 ou 6), pra grade não ficar com uma
+ *  fileira vazia sobrando. `new Date(y, m, 1 - offset)` com dia <= 0 volta pro mês
+ *  anterior sozinho, que é o comportamento que a gente quer aqui. */
+function monthCells(cursor: Date): Date[] {
+  const y = cursor.getFullYear();
+  const m = cursor.getMonth();
+  const startOffset = new Date(y, m, 1).getDay(); // 0 = domingo
+  const daysInMonth = new Date(y, m + 1, 0).getDate();
+  const rows = Math.ceil((startOffset + daysInMonth) / 7);
+  return Array.from({ length: rows * 7 }, (_, i) => new Date(y, m, 1 - startOffset + i));
+}
+
 export function GoogleCalendar() {
   const { t, intl } = useLocale();
   const toast = useToast();
   const [state, setState] = useState<"loading" | "hidden" | "disconnected" | "connected">("loading");
   const [events, setEvents] = useState<GEvent[]>([]);
   const [accounts, setAccounts] = useState<AccountView[]>([]);
+  // Mês que a grade está mostrando (dia 1 às 00:00 local) e o dia clicado nela.
+  const [cursor, setCursor] = useState(() => {
+    const n = new Date();
+    return new Date(n.getFullYear(), n.getMonth(), 1);
+  });
+  const [selected, setSelected] = useState<string | null>(null);
+  const [windowEnd, setWindowEnd] = useState<Date | null>(null);
+  // Um nó por grupo de dia, pra clicar na grade rolar até o dia na lista.
+  const groupNodes = useRef(new Map<string, HTMLDivElement | null>());
 
   const load = useCallback(async () => {
     try {
@@ -60,6 +85,8 @@ export function GoogleCalendar() {
       if (data.connected) {
         setEvents(data.events ?? []);
         setAccounts(data.accounts ?? []);
+        const we = data.windowEnd ? new Date(data.windowEnd) : null;
+        setWindowEnd(we && !Number.isNaN(we.getTime()) ? we : null);
         setState("connected");
       } else {
         setAccounts([]);
@@ -140,6 +167,36 @@ export function GoogleCalendar() {
       .sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0))
       .map(([key, v]) => ({ key, ...v }));
   }, [events]);
+
+  // Dias que têm evento: a bolinha embaixo do número na grade.
+  const daysWithEvents = useMemo(() => new Set(groups.map((g) => g.key)), [groups]);
+  const cells = useMemo(() => monthCells(cursor), [cursor]);
+  // 1º/01/2023 caiu num DOMINGO: serve de âncora pra tirar os rótulos da semana
+  // do próprio locale, em vez de cravar "d s t q q s s" em português aqui dentro.
+  const weekdayLabels = useMemo(
+    () =>
+      Array.from({ length: 7 }, (_, i) =>
+        new Date(2023, 0, 1 + i).toLocaleDateString(intl, { weekday: "narrow" }),
+      ),
+    [intl],
+  );
+
+  // Clicar no dia rola a lista até ele. `block:"nearest"` mexe só no container
+  // que rola de verdade — sem isso ele arrasta a página inteira junto.
+  const pickDay = useCallback((key: string) => {
+    setSelected(key);
+    groupNodes.current.get(key)?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, []);
+
+  // Limites da navegação: a busca vai de AGORA até windowEnd, então mês passado
+  // nunca terá dado e mês depois da janela também não. Deixar ‹ › passarem disso
+  // desenharia um mês vazio, que é a grade AFIRMANDO "não tem nada" num mês que
+  // ela nunca perguntou ao Google.
+  const monthStart = (d: Date) => new Date(d.getFullYear(), d.getMonth(), 1);
+  const minMonth = monthStart(new Date());
+  const maxMonth = windowEnd ? monthStart(windowEnd) : minMonth;
+  const canPrev = cursor > minMonth;
+  const canNext = cursor < maxMonth;
 
   if (state === "loading" || state === "hidden") return null;
 
@@ -224,12 +281,114 @@ export function GoogleCalendar() {
         </div>
       )}
 
-      {state === "connected" &&
-        groups.map((g) => {
+      {/* Grade do mês + Programação: lado a lado quando cabe, e a lista desce
+          sozinha embaixo da grade quando a caixa aperta (flex-wrap, sem media
+          query — a caixa é redimensionável, então quem manda é a largura dela). */}
+      {state === "connected" && (
+      <div className="flex flex-wrap gap-3 px-1">
+      {/* "0 1 190px" e não "0 0 …": com shrink 0 o painel nunca cedia e vazava do
+          corpo do card (que rola), botando barra horizontal e espremendo a lista
+          quando a caixa era arrastada pra menos de ~204px. */}
+      <div style={{ flex: "0 1 190px", minWidth: 0 }}>
+        <div className="flex items-center gap-1.5 mb-1">
+          {/* first-letter, não `capitalize`: o locale devolve "julho de 2026" e o
+              capitalize do Tailwind subia TODA palavra ("Julho De 2026"). */}
+          <span className="text-[11px] font-bold first-letter:uppercase" style={{ color: "var(--text)" }}>
+            {cursor.toLocaleDateString(intl, { month: "long", year: "numeric" })}
+          </span>
+          <span className="ml-auto flex gap-1">
+            <button
+              type="button"
+              disabled={!canPrev}
+              onClick={() => setCursor((c) => new Date(c.getFullYear(), c.getMonth() - 1, 1))}
+              aria-label={t("daily.gcal.prevMonth")}
+              title={canPrev ? t("daily.gcal.prevMonth") : t("daily.gcal.outOfWindow")}
+              className="text-[11px] font-bold leading-none px-1 rounded"
+              style={{ color: "var(--text-3)", opacity: canPrev ? 1 : 0.25, cursor: canPrev ? "pointer" : "default" }}
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              disabled={!canNext}
+              onClick={() => setCursor((c) => new Date(c.getFullYear(), c.getMonth() + 1, 1))}
+              aria-label={t("daily.gcal.nextMonth")}
+              title={canNext ? t("daily.gcal.nextMonth") : t("daily.gcal.outOfWindow")}
+              className="text-[11px] font-bold leading-none px-1 rounded"
+              style={{ color: "var(--text-3)", opacity: canNext ? 1 : 0.25, cursor: canNext ? "pointer" : "default" }}
+            >
+              ›
+            </button>
+          </span>
+        </div>
+        <div className="grid grid-cols-7 gap-px">
+          {weekdayLabels.map((w, i) => (
+            <div key={i} className="text-[8px] text-center font-bold uppercase" style={{ color: "var(--text-3)", opacity: 0.7 }}>
+              {w}
+            </div>
+          ))}
+          {cells.map((d) => {
+            const k = dayKeyOf(d);
+            const inMonth = d.getMonth() === cursor.getMonth();
+            const isToday = k === dayKeyOf(new Date());
+            const has = daysWithEvents.has(k);
+            return (
+              <button
+                key={k}
+                type="button"
+                disabled={!has}
+                onClick={() => pickDay(k)}
+                title={has ? t("daily.gcal.goToDay") : undefined}
+                className="text-center py-px rounded"
+                style={{ cursor: has ? "pointer" : "default", background: selected === k ? "rgba(66,133,244,.14)" : "transparent" }}
+              >
+                <span
+                  className="text-[9.5px] font-bold inline-flex items-center justify-center"
+                  style={{
+                    // min(): o círculo acompanha a célula quando a caixa aperta,
+                    // senão 16px fixos colidiam com célula de ~12px.
+                    width: "min(16px, 100%)",
+                    height: 16,
+                    borderRadius: "50%",
+                    color: isToday ? "#fff" : inMonth ? "var(--text-2)" : "var(--text-3)",
+                    // Só apaga dia de outro mês que esteja VAZIO. Apagar um que tem
+                    // evento deixava a célula clicável a 1,6:1 de contraste.
+                    opacity: inMonth || has || isToday ? 1 : 0.4,
+                    background: isToday ? "var(--color-wh-blue)" : "transparent",
+                  }}
+                >
+                  {d.getDate()}
+                </span>
+                <span
+                  className="block mx-auto"
+                  style={{
+                    width: 3,
+                    height: 3,
+                    borderRadius: "50%",
+                    background: has ? "#4285F4" : "transparent",
+                  }}
+                />
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div style={{ flex: "1 1 220px", minWidth: 0 }}>
+        {groups.map((g) => {
           const today = dayKeyOf(new Date()) === g.key;
           const otherYear = g.date.getFullYear() !== new Date().getFullYear();
           return (
-            <div key={g.key} className="grid grid-cols-[38px_1fr] gap-2 px-1 py-1.5" style={{ borderTop: "1px solid var(--border)" }}>
+            <div
+              key={g.key}
+              ref={(n) => { groupNodes.current.set(g.key, n); }}
+              className="grid grid-cols-[38px_1fr] gap-2 px-1 py-1.5"
+              style={{
+                borderTop: "1px solid var(--border)",
+                background: selected === g.key ? "rgba(66,133,244,.07)" : "transparent",
+                borderRadius: selected === g.key ? 6 : 0,
+              }}
+            >
               {/* Coluna da data (dia da semana · número · mês), igual ao Google */}
               <div className="text-center pt-0.5">
                 <div className="text-[8.5px] uppercase tracking-wide font-bold leading-none" style={{ color: "var(--text-3)" }}>
@@ -303,6 +462,9 @@ export function GoogleCalendar() {
             </div>
           );
         })}
+      </div>
+      </div>
+      )}
     </div>
   );
 }

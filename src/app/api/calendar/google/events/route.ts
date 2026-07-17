@@ -6,7 +6,7 @@
 import { NextResponse } from "next/server";
 import { requireSession } from "@/lib/api-helpers";
 import { isFounder } from "@/lib/mail/config";
-import { googleConfigured, refreshAccessToken, fetchUpcomingEventsDetailed, type GoogleEvent, type GcalDiag } from "@/lib/calendar/google";
+import { googleConfigured, refreshAccessToken, fetchUpcomingEventsDetailed, windowEndISO, type GoogleEvent, type GcalDiag } from "@/lib/calendar/google";
 import { getAccountsWithTokens } from "@/lib/calendar/google-store";
 import { rateAllow } from "@/lib/mail/ratelimit";
 
@@ -52,7 +52,7 @@ export async function GET() {
   const key = session.email.toLowerCase();
   const hit = cache.get(key);
   if (hit && Date.now() - hit.at < TTL) {
-    return NextResponse.json({ connected: true, configured: true, events: hit.events, accounts: hit.accounts });
+    return NextResponse.json({ connected: true, configured: true, events: hit.events, accounts: hit.accounts, windowEnd: windowEndISO() });
   }
 
   // Busca cada conta em paralelo. Uma conta que falha NÃO derruba as outras.
@@ -91,7 +91,14 @@ export async function GET() {
       seen.add(k);
       return true;
     })
-    .sort((a, b) => (a.start ?? "").localeCompare(b.start ?? ""))
+    // Pelo INSTANTE, não pela string: cada agenda do Google responde no fuso dela,
+    // e ordenar o texto punha "T09:00:00-04:00" (13:00Z) antes de "T10:00:00+02:00"
+    // (08:00Z). Como o corte abaixo vem depois, isso também cortava o evento errado.
+    .sort((a, b) => {
+      const ta = a.start ? Date.parse(a.start) : Number.POSITIVE_INFINITY;
+      const tb = b.start ? Date.parse(b.start) : Number.POSITIVE_INFINITY;
+      return (Number.isNaN(ta) ? Number.POSITIVE_INFINITY : ta) - (Number.isNaN(tb) ? Number.POSITIVE_INFINITY : tb);
+    })
     .slice(0, 30);
 
   const accounts: AccountView[] = perAccount.map((r) => ({ email: r.email, ok: r.ok }));
@@ -111,6 +118,7 @@ export async function GET() {
     configured: true,
     events: merged,
     accounts,
+    windowEnd: windowEndISO(),
     ...(merged.length === 0 ? { diag: diags } : {}),
   });
 }
