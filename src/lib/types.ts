@@ -13,7 +13,6 @@ export interface Country {
   name: string;
   coords: [number, number];
   status: Status;
-  changes: number;
   authority: string;
   events: CountryEvent[];
   /** URL de imagem de destaque (landmark/cidade conhecida) — usada no CountryBenchmark */

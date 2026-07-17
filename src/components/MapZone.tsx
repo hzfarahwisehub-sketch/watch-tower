@@ -7,6 +7,7 @@ import maplibregl, {
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { Country, Status } from "@/lib/types";
+import { useCountryChangesMap } from "@/lib/useCountryChanges";
 import { useLocale } from "./LocaleProvider";
 
 interface Props {
@@ -131,6 +132,7 @@ const keepGlobe = (
  */
 export default function MapZone({ countries, selected, onSelect }: Props) {
   const { t } = useLocale();
+  const changesMap = useCountryChangesMap();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MLMap | null>(null);
   const markersRef = useRef<Record<string, Marker>>({});
@@ -316,8 +318,10 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     countries.forEach((c) => {
       const existing = markersRef.current[c.code];
       const [lat, lng] = c.coords;
+      const title = t("map.marker.title", { name: c.name, n: changesMap[c.code] ?? 0, authority: c.authority });
       if (existing) {
         existing.setLngLat([lng, lat]);
+        existing.getElement().title = title;
         return;
       }
       const el = document.createElement("button");
@@ -325,7 +329,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
       el.className = "wt-map-marker";
       el.setAttribute("data-status", c.status);
       el.setAttribute("aria-label", `${c.name} · ${c.status}`);
-      el.title = t("map.marker.title", { name: c.name, n: c.changes, authority: c.authority });
+      el.title = title;
       el.innerHTML = `
         <span class="wt-map-dot" style="background:${STATUS_COLOR[c.status]};box-shadow:0 0 12px ${STATUS_COLOR[c.status]}, 0 0 0 2px rgba(0,0,0,.5)"></span>
         <span class="wt-map-pulse" style="background:${STATUS_COLOR[c.status]}"></span>
@@ -339,7 +343,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
         .addTo(map);
       markersRef.current[c.code] = marker;
     });
-  }, [countries, onSelect, t]);
+  }, [countries, onSelect, t, changesMap]);
 
   // VOO suave para o país selecionado; ao deselecionar, revive o giro automático
   useEffect(() => {

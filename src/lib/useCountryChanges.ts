@@ -13,6 +13,7 @@ import type { StatusFile } from "@/lib/bulletins";
  */
 
 const CACHE_TTL_MS = 5 * 60 * 1000;
+const DEFAULT_WINDOW_DAYS = 7;
 let cache: { fetchedAt: number; data: StatusFile } | null = null;
 let inflight: Promise<StatusFile | null> | null = null;
 
@@ -70,7 +71,7 @@ export function useCountryChanges(countryCode: string): CountryChangesResult {
         ? Math.floor((Date.now() - new Date(lastChangedAt).getTime()) / 86_400_000)
         : null;
       const errored = !!(entry.lastStatus && entry.lastStatus.startsWith("error"));
-      const recentlyChanged = daysSinceChange !== null && daysSinceChange <= 7 && entry.lastStatus === "changed";
+      const recentlyChanged = daysSinceChange !== null && daysSinceChange <= DEFAULT_WINDOW_DAYS && entry.lastStatus === "changed";
       setResult({ lastChangedAt, daysSinceChange, errored, recentlyChanged });
     };
 
@@ -83,4 +84,52 @@ export function useCountryChanges(countryCode: string): CountryChangesResult {
   }, [countryCode]);
 
   return result;
+}
+
+/**
+ * computeChangesMap — pura, sem estado. Pra cada bulletin do StatusFile,
+ * retorna 1 se mudou (lastStatus "changed") dentro da janela (default 7 dias),
+ * senao 0. Chave = country code (bulletin.key already casa com Country.code
+ * pra quase todos os paises — ver src/lib/bulletins.ts).
+ */
+export function computeChangesMap(data: StatusFile, windowDays: number = DEFAULT_WINDOW_DAYS): Record<string, number> {
+  const map: Record<string, number> = {};
+  const now = Date.now();
+  for (const b of data.bulletins) {
+    const changed =
+      !!b.lastChangedAt &&
+      b.lastStatus === "changed" &&
+      now - new Date(b.lastChangedAt).getTime() <= windowDays * 86_400_000;
+    map[b.key] = changed ? 1 : 0;
+  }
+  return map;
+}
+
+/**
+ * useCountryChangesMap — versao "todos os paises de uma vez" do
+ * useCountryChanges, pra listas/mapas que precisam ordenar ou rotular N
+ * paises sem abrir N fetches (usa o mesmo cache/inflight compartilhado
+ * acima). Paises sem bulletin mapeado simplesmente nao aparecem no objeto —
+ * consumidores devem ler com fallback `?? 0`.
+ */
+export function useCountryChangesMap(windowDays: number = DEFAULT_WINDOW_DAYS): Record<string, number> {
+  const [map, setMap] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    let cancelled = false;
+    const tick = async () => {
+      const data = await loadStatus();
+      if (cancelled || !data) return;
+      setMap(computeChangesMap(data, windowDays));
+    };
+
+    tick();
+    const interval = setInterval(tick, CACHE_TTL_MS);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [windowDays]);
+
+  return map;
 }

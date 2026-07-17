@@ -1,6 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
 import type { Country, Status } from "@/lib/types";
+import { useCountryChangesMap } from "@/lib/useCountryChanges";
 import { useLocale } from "./LocaleProvider";
 
 type Filter = "all" | Status;
@@ -24,6 +25,7 @@ export function CountriesSidebar({
   onSelect: (code: string) => void;
 }) {
   const { t } = useLocale();
+  const changesMap = useCountryChangesMap();
   const [filter, setFilter] = useState<Filter>("all");
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState<SortBy>("active");
@@ -48,13 +50,13 @@ export function CountriesSidebar({
     // Ordenação
     return result.slice().sort((a, b) => {
       if (sortBy === "name") return a.name.localeCompare(b.name, "pt-BR");
-      if (sortBy === "changes") return b.changes - a.changes;
+      if (sortBy === "changes") return (changesMap[b.code] ?? 0) - (changesMap[a.code] ?? 0);
       // "active" — primeiro por status (crit > warn > stable), depois por changes desc
       const statusDiff = STATUS_ORDER[a.status] - STATUS_ORDER[b.status];
       if (statusDiff !== 0) return statusDiff;
-      return b.changes - a.changes;
+      return (changesMap[b.code] ?? 0) - (changesMap[a.code] ?? 0);
     });
-  }, [countries, filter, search, sortBy]);
+  }, [countries, filter, search, sortBy, changesMap]);
 
   return (
     <div className="wt-card flex flex-col h-full @container">
@@ -220,9 +222,9 @@ export function CountriesSidebar({
                   color: "var(--text-3)",
                   background: "rgba(255,255,255,.04)",
                 }}
-                title={t("sidebar.changes.title", { n: c.changes })}
+                title={t("sidebar.changes.title", { n: changesMap[c.code] ?? 0 })}
               >
-                {c.changes}
+                {changesMap[c.code] ?? 0}
               </span>
               <span className={`wt-status ${c.status} flex-shrink-0`} />
             </button>
