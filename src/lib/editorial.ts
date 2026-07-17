@@ -1247,7 +1247,7 @@ export function getEditorial(code: string, lang: Locale = "pt-BR"): CountryEdito
   return {
     community: [...(ronda.community ?? []), ...(base?.community ?? [])],
     countryTab: [...(ronda.countryTab ?? []), ...(base?.countryTab ?? [])],
-    blog: base?.blog ?? [],
+    blog: [...(ronda.blog ?? []), ...(base?.blog ?? [])],
     youtube: base?.youtube,
     instagram: base?.instagram,
   };

@@ -19,7 +19,7 @@ import { BULLETINS, type BulletinStatus, type StatusFile } from "@/lib/bulletins
 import { getEditorial, editorialStats, type CountryEditorial } from "@/lib/editorial";
 import { getLaborMarket, type LaborMarketCountry } from "@/lib/labor-market";
 import { normalizeTitle, type TransMap } from "@/lib/rss-translations";
-import { resolverChecagem, type ChecagemResultado } from "@/lib/italianismo-checagem";
+import { resolverChecagem, type ChecagemResultado } from "@/lib/checagem-comunidade";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 

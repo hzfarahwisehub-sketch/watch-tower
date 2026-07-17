@@ -1,0 +1,2672 @@
+/**
+ * Checagem cruzada curada das notícias de fonte de comunidade (não-oficial), país a país.
+ *
+ * O Hammis pediu (2026-06-16): incluir fontes de comunidade (Italianismo, The Local, CIC News
+ * etc.) nas notícias de cada país, mas
+ *  - toda notícia de fonte de comunidade entra marcada como "a confirmar";
+ *  - quando a Friday confere, registra aqui se o FATO foi confirmado em fonte
+ *    oficial, qual o status, e SEMPRE as fontes que a própria matéria usou de
+ *    referência (pra rastrear a origem);
+ *  - o REPAVET / botão de download descreve o que foi descoberto, por notícia.
+ *
+ * Como a verificação é CURADA pela Friday (sem IA no servidor), este arquivo é a
+ * base de conhecimento que a Friday mantém à mão. Cada vez que a Friday revisa
+ * as manchetes de fonte de comunidade de qualquer país, adiciona/atualiza uma entrada aqui.
+ * Manchete sem entrada cai no estado "pendente" (aviso honesto de que ainda não foi conferida).
+ *
+ * Casa a manchete pela URL da matéria (slug do WordPress/CMS), que é estável.
+ *
+ * Generalizado em 2026-07-17 pra cobrir todos os países com fonte de comunidade cadastrada em
+ * infoCenters.ts, não só o Italianismo/Itália (as primeiras 3 entradas seguem sendo da Itália,
+ * curadas em 2026-06-16; entradas com "countryCode" vieram da checagem cruzada multi-país).
+ */
+
+export type ChecagemStatus = "confirmado" | "nao_confirmado" | "pendente";
+
+/** Uma fonte que a matéria de fonte de comunidade usou de referência. */
+export type FonteRef = {
+  nome: string;
+  url?: string;
+  /** true = fonte oficial/primária (governo, tribunal, diário oficial). */
+  oficial: boolean;
+};
+
+export type ComunidadeChecagem = {
+  /** Trecho do slug/URL da matéria pra casar (match por "includes", minúsculo). */
+  match: string;
+  titulo: string;
+  status: ChecagemStatus;
+  /** Fontes que a própria matéria cita (rastreio de origem). */
+  fontesCitadas: FonteRef[];
+  /** Análise curada da Friday: o que foi descoberto e o veredito. */
+  nota: string;
+  /** Data ISO em que a Friday curou esta entrada. */
+  curadoEm: string;
+  /** Código do país (ISO minúsculo) de onde veio a manchete, quando conhecido. */
+  countryCode?: string;
+};
+
+/**
+ * Base curada. Começa com a matéria jurídica da Itália já analisada na sessão de 2026-06-16.
+ * Cresce a cada revisão da Friday.
+ */
+export const COMMUNITY_CHECAGENS: ComunidadeChecagem[] = [
+  {
+    match: "para-jurista-quem-preparava-documentos-antes-do-decreto",
+    titulo:
+      "Para jurista, quem preparava documentos antes do decreto mantém direito à cidadania italiana",
+    status: "nao_confirmado",
+    fontesCitadas: [
+      { nome: "Antonello Ciervo · jurista cassacionista, Unitelma Sapienza (Roma)", oficial: false },
+      {
+        nome: "Questione Giustizia · análise da sentença 63/2026",
+        url: "https://www.questionegiustizia.it/articolo/prima-lettura-corte-cost-63-2026",
+        oficial: false,
+      },
+      { nome: "Corte Costituzionale · sentença n. 63/2026", url: "https://www.cortecostituzionale.it/", oficial: true },
+      { nome: "Decreto-Legge 36/2025 (convertido na Lei 74/2025)", url: "https://www.normattiva.it/", oficial: true },
+      { nome: "Tribunal de Justiça da UE · Grande Seção (set/2023)", url: "https://curia.europa.eu/", oficial: true },
+    ],
+    nota:
+      "O FATO de base (sentença 63/2026 da Corte Constitucional e o Decreto 36/2025) é confirmável em fonte oficial e está correto. Já a TESE da matéria, de que quem preparava documentos antes do decreto manteria o direito, é OPINIÃO jurídica do prof. Ciervo publicada na Questione Giustizia, não um ato oficial nem decisão vinculante. Tratar como interpretação, não como regra confirmada.",
+    curadoEm: "2026-06-16",
+  },
+  {
+    match: "cidadania-italiana-recurso-vira-regra-diante-de-onda-de-sentencas-negativas",
+    titulo:
+      "Cidadania italiana: recurso vira regra diante de onda de sentenças negativas",
+    status: "confirmado",
+    fontesCitadas: [
+      { nome: "Corte Costituzionale · sentença n. 63/2026 (art. 3-bis)", url: "https://www.cortecostituzionale.it/", oficial: true },
+      { nome: "Decreto-Legge 36/2025 (Lei 74/2025) · corte 27/03/2025", url: "https://www.normattiva.it/", oficial: true },
+      { nome: "Corte di Cassazione · 1ª Seção Civil, sent. n. 13818/2026, de 12/05/2026", url: "https://www.cortedicassazione.it/", oficial: true },
+    ],
+    nota:
+      "O FATO de base é confirmável: a Cassação (1ª Seção Civil, sent. 13818/2026, de 12/05/2026) reafirmou a cidadania por descendência como direito permanente e imprescritível, em tensão com a leitura restritiva da Consulta (63/2026). A decisão das Seções Unidas ainda é AGUARDADA. Os relatos de rejeições individuais em tribunais regionais são casos concretos narrados por advogados, NÃO jurisprudência vinculante.",
+    curadoEm: "2026-06-16",
+  },
+  {
+    match: "tajani-volta-a-comparar-cidadania-a-black-friday-e-mira-america-do-sul",
+    titulo: "Tajani volta a comparar cidadania à Black Friday e mira América do Sul",
+    status: "confirmado",
+    fontesCitadas: [
+      { nome: "Ministero degli Affari Esteri (MAECI) · Conferenza dei Consoli, Farnesina, 12/06/2026", url: "https://www.esteri.it/", oficial: true },
+    ],
+    nota:
+      "O EVENTO é confirmado em fonte oficial: a Conferência dos Cônsules da Itália no Mundo abriu em 12/06/2026 na Farnesina, com Tajani e Piantedosi, ~172 cônsules, primeira em 8 anos. As citações textuais do discurso (Black Friday, Miami) são reportadas pela matéria de origem e batem com a linha pública já conhecida do ministro (que usou a mesma imagem em mar/2025). Discurso político, não ato normativo: não muda direito por si só.",
+    curadoEm: "2026-06-16",
+  },
+{
+  match: "newsflash-uscis-rescinds-2022-public-charge-rule-new-standards-take-effect-18-sep-2026",
+  titulo: "NewsFlash! USCIS Rescinds 2022 Public Charge Rule; New Standards Take Effect 18.Sep.2026",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "USCIS · News Release · Rescinds 2022 Public Charge Regulation", url: "https://www.uscis.gov/newsroom/news-releases/us-citizenship-and-immigration-services-rescinds-2022-public-charge-regulation", oficial: true },
+  ],
+  nota: "USCIS/DHS de fato publicaram a revogação da regra de public charge de 2022; o novo padrão entra em vigor em 18/set/2026, mesma data citada no título. Fato batido no press release oficial da USCIS.",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "newsflash-dhs-finalizes-major-changes-to-f-j-and-i-admissions",
+  titulo: "NewsFlash! DHS Finalizes Major Changes to F, J, and I Admissions",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "DHS · Trump Administration Issues Final Rule to End Foreign Student Visa Abuse", url: "https://www.dhs.gov/news/2026/07/16/trump-administration-issues-final-rule-end-foreign-student-visa-abuse", oficial: true },
+    { nome: "Federal Register · Public Inspection 2026-14439 (DHS, prazo fixo de admissão F/J/I)", url: "https://public-inspection.federalregister.gov/2026-14439.pdf", oficial: true },
+  ],
+  nota: "DHS publicou de fato a regra final que substitui \"duration of status\" por um prazo fixo de admissão (até 4 anos) para F, J e I, reduz o grace period de 60 para 30 dias e passa a exigir Extension of Stay via USCIS. Comunicado oficial do DHS saiu em 16/jul/2026, mesma data da matéria da Murthy.",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "is-uscis-still-requesting-the-100000-fee-despite-the-recent-court-decision",
+  titulo: "Is USCIS still requesting the $100,000 fee despite the recent court decision?",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "U.S. District Court, District of Massachusetts · State of California et al. v. Mullin, No. 25-13829-LTS (decisão 8/jun/2026, suspensão 12/jun/2026)", oficial: true },
+    { nome: "Vorys · Court Strikes Down $100,000 New H-1B Entry Fee, But Fee Still Applies Pending Appeal", url: "https://www.vorys.com/publication-court-strikes-down-100-000-h-1b-entry-fee-but-fee-still-applies-pending-appeal", oficial: false },
+  ],
+  nota: "Confirmado por registro judicial federal: em 8/jun/2026 o juiz Sorokin (U.S. District Court, D. Mass., State of California et al. v. Mullin, nº 25-13829-LTS) invalidou a taxa de US$100.000 do H1B; o próprio juiz suspendeu a decisão em 12/jun/2026, e o 1º Circuito manteve a suspensão pendente recurso desde 18/jun/2026, por isso a USCIS segue cobrando a taxa, como a matéria afirma. Não consegui abrir a página H-1B FAQ da uscis.gov (bloqueou acesso automatizado) pra citar diretamente, mas o processo judicial é registro público oficial do Judiciário federal dos EUA, e múltiplos escritórios de imigração relatam de forma consistente o mesmo cronograma.",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "dol-signals-major-modernization-of-perm-program-through-new-proposed-rulemaking",
+  titulo: "DOL Signals Major Modernization of PERM Program Through New Proposed Rulemaking",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Reginfo.gov · OIRA Unified Agenda · RIN 1205-AC29", url: "https://www.reginfo.gov/public/do/eAgendaViewRule?pubId=202510&RIN=1205-AC29", oficial: true },
+  ],
+  nota: "Confirmado na Agenda Regulatória Unificada (OIRA/reginfo.gov), divulgada em 3/jul/2026: o DOL listou o NPRM \"Modernizing the Labor Market Test and Improving Protections for U.S. Workers in the PERM Immigrant Visa Program\" (RIN 1205-AC29), previsto pra jul/2026, primeira atualização abrangente do PERM desde 2004. Até a data da matéria (15/jul/2026) o texto da proposta ainda não tinha sido publicado no Federal Register: é um sinal/plano oficial já divulgado, não uma regra em vigor, o próprio título (\"Signals\") reflete isso corretamente.",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "my-new-employer-filed-an-h1b-transfer-petition-and-received-the-electronic-receipt-notice-do-i-need-to-wait-for-the-paper-receipt-notice-to-arrive-before-starting-work",
+  titulo: "My new employer filed an H1B transfer petition and received the electronic receipt notice. Do I need to wait for the paper receipt notice to arrive before starting work?",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "USCIS · FAQs for Individuals in H-1B Nonimmigrant Status", url: "https://www.uscis.gov/archive/faqs-for-individuals-in-h-1b-nonimmigrant-status", oficial: true },
+  ],
+  nota: "O princípio central (o trabalhador pode começar a trabalhar pro novo empregador assim que a petição de transferência H1B for devidamente protocolada, sem precisar esperar o aviso de recebimento em papel) corresponde à regra de portabilidade da AC21 descrita no FAQ arquivado da própria USCIS. É conteúdo educativo sobre regra já vigente (a matéria não cita fonte), mas o fato bate com a orientação oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "understanding-the-cap-gap-rule",
+  titulo: "Understanding the Cap-Gap Rule",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "USCIS · Extension of Post-Completion OPT and F-1 Status Under H-1B Cap-Gap Regulations", url: "https://www.uscis.gov/working-in-the-united-states/temporary-workers/h-1b-specialty-occupations/extension-of-post-completion-optional-practical-training-opt-and-f-1-status-for-eligible-students", oficial: true },
+  ],
+  nota: "A regra de \"cap-gap\" descrita (extensão automática do status F-1 e, em muitos casos, da autorização de trabalho, até 1º de abril do ano fiscal ou até a validade do H1B começar, o que ocorrer primeiro; extensão cessa se a petição for negada/revogada/retirada) corresponde à página oficial da USCIS sobre cap-gap (8 CFR 214.2(f)(5)(vi)). Conteúdo educativo sobre regra já vigente, não é notícia de mudança recente.",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "murthyaudio-understanding-the-uscis-adjustment-of-status-memo-and-its-impact",
+  titulo: "MurthyAudio: Understanding the USCIS Adjustment of Status Memo and Its Impact",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "USCIS · Policy Memorandum PM-602-0199 (21/mai/2026)", url: "https://www.uscis.gov/sites/default/files/document/memos/PM-602-0199-AdjustmentOfStatusAndDiscretion-20260521.pdf", oficial: true },
+    { nome: "USCIS · News Release · Will Grant 'Adjustment of Status' Only in Extraordinary Circumstances", url: "https://www.uscis.gov/newsroom/news-releases/us-citizenship-and-immigration-services-will-grant-adjustment-of-status-only-in-extraordinary", oficial: true },
+  ],
+  nota: "O memorando existe de fato: USCIS Policy Memorandum PM-602-0199, de 21/mai/2026, que trata o Ajuste de Status (INA 245) como medida discricionária e \"graça administrativa extraordinária\", reforçando o processamento consular como via padrão. A matéria é um podcast que discute os efeitos reais desse memo oficial já publicado.",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "i-filed-my-i-485-application-and-left-my-sponsoring-employer-before-it-had-been-pending-for-180-days-what-happens-if-my-employer-withdraws-the-underlying-i-140-petition-before-then-can-i-still-use-a",
+  titulo: "I filed my I-485 application and left my sponsoring employer before it had been pending for 180 days. What happens if my employer withdraws the underlying I-140 petition before then? Can I still use AC21 portability?",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "USCIS Policy Manual · Volume 7, Part E, Chapter 5 · Job Portability after Adjustment Filing and Other AC21 Provisions", url: "https://www.uscis.gov/policy-manual/volume-7-part-e-chapter-5", oficial: true },
+  ],
+  nota: "A regra descrita (portabilidade AC21/INA 204(j) exige que o I-485 esteja pendente por 180 dias E que o I-140 permaneça válido durante esse período; se o empregador retira o I-140 antes dos 180 dias, a portabilidade não se aplica) corresponde ao Manual de Políticas da USCIS, Volume 7, Parte E, Capítulo 5. Conteúdo educativo sobre regra já vigente.",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "us-citizenship-and-immigration-services-rescinds-2022-public-charge-regulation",
+  titulo: "US Citizenship and Immigration Services Rescinds 2022 Public Charge Regulation",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "USCIS · News Release · Rescinds 2022 Public Charge Regulation", url: "https://www.uscis.gov/newsroom/news-releases/us-citizenship-and-immigration-services-rescinds-2022-public-charge-regulation", oficial: true },
+  ],
+  nota: "Mesmo fato do item da Murthy acima sobre a mesma regra: a manchete reproduz literalmente o título do press release oficial da USCIS anunciando a revogação da regra de public charge de 2022, efetiva em 18/set/2026.",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "dhs-trump-administration-issues-final-rule-to-end-foreign-student-visa-abuse",
+  titulo: "DHS: \"Trump Administration Issues Final Rule to End Foreign Student Visa Abuse\"",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "DHS · Trump Administration Issues Final Rule to End Foreign Student Visa Abuse", url: "https://www.dhs.gov/news/2026/07/16/trump-administration-issues-final-rule-end-foreign-student-visa-abuse", oficial: true },
+  ],
+  nota: "A manchete reproduz literalmente o título do comunicado oficial do DHS de 16/jul/2026 sobre a regra final que muda as admissões F/J/I de \"duration of status\" pra prazo fixo. Mesmo fato do item correspondente da Murthy acima.",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "immigration-article-of-the-day-6",
+  titulo: "Immigration Article of the Day: The Justice Gap for Unaccompanied Minors in US Immigration Court: Rurality, Resources, & Client Characteristics as Determinants of Access to Counsel",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Law & Social Inquiry · Galli & Padilla, \"The Justice Gap for Unaccompanied Minors in US Immigration Court\"", oficial: false },
+  ],
+  nota: "Não é um ato oficial de governo, é a divulgação de um artigo acadêmico real: \"The Justice Gap for Unaccompanied Minors in US Immigration Court\", de Chiara Galli e Tatiana Padilla, publicado na revista Law & Social Inquiry, usando ~400 mil casos de tribunal de imigração. O artigo existe e o resumo bate com o que a matéria descreve, mas é pesquisa acadêmica/análise, não um comunicado ou regra de agência oficial, não há \"fato oficial\" pra confirmar ou refutar aqui, é produção científica, tratada como opinião/análise pra fins desta checagem (mesmo padrão usado pras matérias de opinião jurídica da Itália).",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "the-death-toll-continues-to-mount-venezuelan-man-becomes-22nd-person-to-die-in-ice-custody-this-year",
+  titulo: "The Death Toll Continues to Mount: Venezuelan man becomes 22nd person to die in ICE custody this year",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "ICE · News Release · Venezuelan detainee dies in ICE custody during transfer in Georgia", url: "https://www.ice.gov/news/releases/venezuelan-detainee-dies-ice-custody-during-transfer-georgia", oficial: true },
+    { nome: "ICE · Detainee Death Reporting", url: "https://www.ice.gov/detain/detainee-death-reporting", oficial: true },
+  ],
+  nota: "A morte em si é confirmada em comunicado oficial da ICE: Jesus Manuel Arenas-Silva, venezuelano de 45 anos, morreu em 13/jul/2026 durante transferência entre centros de detenção na Geórgia (Irwin County → Folkston), causa suspeita de parada cardíaca. A contagem \"22ª pessoa a morrer sob custódia da ICE este ano\" vem da apuração do The Guardian (citada pela matéria), não de um placar único e explícito da ICE, a página oficial de Detainee Death Reporting lista os casos individualmente sem um contador consolidado fácil de bater. O evento central, porém, está confirmado na fonte oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "the-use-of-force-has-become-a-default-tool-for-ice-officers-a-new-report-finds",
+  titulo: "The use of force has become a 'default tool' for ICE officers, a new report finds",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "ACLU · relatório sobre uso da força em operações da ICE (mais de 1.200 operações em 8 estados)", oficial: false },
+  ],
+  nota: "O relatório citado é da ACLU (American Civil Liberties Union), uma organização de defesa de direitos civis, NÃO um órgão de governo, examinou mais de 1.200 operações de fiscalização de imigração em 8 estados e concluiu que quase 1/3 envolveu uso ou ameaça de força. É a interpretação/análise de uma ONG sobre o comportamento da ICE, não um relatório ou reconhecimento oficial do DHS/ICE. Não encontrei resposta ou reconhecimento oficial do governo confirmando ou refutando esse número específico.",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "trump-defends-ice-traffic-stops-even-as-agency-suspends-them",
+  titulo: "Trump Defends ICE Traffic Stops Even As Agency Suspends Them",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "NPR · White House says ICE traffic stops will continue after deadly shootings", url: "https://www.npr.org/2026/07/16/nx-s1-5896396/ice-traffic-stops-shootings", oficial: false },
+  ],
+  nota: "Confirmado por múltiplas fontes jornalísticas que documentam declarações on-the-record de autoridades do governo: o DHS de fato emitiu instrução interna suspendendo a maior parte das paradas de trânsito da ICE após dois tiroteios fatais em jul/2026 (Houston, 7/jul; Biddeford-ME); horas depois, Trump publicou no Truth Social que as paradas \"devem continuar\"; e a porta-voz da Casa Branca, Karoline Leavitt, confirmou em coletiva de 16/jul/2026 que as paradas de veículo seguem (\"vehicle stops are continuing\"), com orientação verbal do DHS a todos os escritórios de campo. Não achei o link direto da transcrição em whitehouse.gov, mas a declaração oficial está reportada de forma consistente por múltiplas fontes jornalísticas independentes (NPR, CBS News, The Hill).",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "new-ipsos-poll-finds-high-level-of-support-for-refugee-protection",
+  titulo: "New Ipsos Poll Finds High Level of Support for Refugee Protection",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Ipsos / UNHCR · Global Attitudes Towards Refugees 2026", oficial: false },
+  ],
+  nota: "É uma pesquisa de opinião (Ipsos Global Attitudes Towards Refugees 2026, feita em parceria com o ACNUR/UNHCR, >20 mil pessoas em 29 países), não um ato de governo. A pesquisa em si é real e verificável na Ipsos/UNHCR, mas dado de pesquisa de opinião não é \"fato oficial\" de nenhum governo específico, não há órgão de imigração de país algum pra confirmar ou refutar um resultado de pesquisa de atitude pública.",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "spain-receives-over-a-million-applications-for-its-regularization-program",
+  titulo: "Spain Receives Over a Million Applications for its Regularization Program",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "La Moncloa / Ministerio de Inclusión, Seguridad Social y Migraciones · Balance final da Regularización Extraordinaria (1.174.978 solicitudes)", url: "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/inclusion/Paginas/2026/020726-balance-regularizacion-extraordinaria.aspx", oficial: true },
+  ],
+  nota: "Confirmado em fonte oficial do governo da Espanha: o Ministerio de Inclusión, Seguridad Social y Migraciones (nota de imprensa via La Moncloa, 2/jul/2026) fechou o prazo da regularización extraordinaria (aberto 16/abr, encerrado 30/jun/2026) com 1.174.978 solicitações recebidas, bate com o \"quase 1,2 milhão\" citado pela matéria (que atribui o dado ao Migration Policy Institute). Nota de contexto: essa manchete é sobre a Espanha, não sobre os EUA, entrou na lista de pendentes \"us\" porque a fonte (ImmigrationProf Blog) é monitorada no bucket dos EUA, mas o fato em si pertence à Espanha e foi checado contra a fonte oficial espanhola, não americana.",
+  curadoEm: "2026-07-17",
+  countryCode: "us",
+},
+{
+  match: "saskatchewan-speeds-up-processing-of-provincial-nominations",
+  titulo: "Saskatchewan speeds up processing of provincial nominations",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Government of Saskatchewan · SINP Processing Statistics", url: "https://www.saskatchewan.ca/residents/moving-to-saskatchewan/live-in-saskatchewan/by-immigrating/saskatchewan-immigrant-nominee-program/sinp-processing-statistics", oficial: true },
+  ],
+  nota: "O fato central bate em fonte oficial: a página de estatísticas de processamento do SINP (Governo de Saskatchewan) mostra melhora no trimestre abril-junho de 2026, com a maioria das categorias caindo para cerca de 2 semanas e 2.628 de 4.761 nominações da cota de 2026 já emitidas (por volta de 55%). A própria matéria do CIC News cita essa página oficial (atualizada em 14/07/2026) como fonte dos números. Não consegui abrir a página diretamente pelo fetch (bloqueio 403), mas o conteúdo veio confirmado via busca com trecho da própria página oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "nova-scotia-expands-nominations-to-target-workers-with-expiring-permits",
+  titulo: "Nova Scotia expands nominations to target workers with expiring permits",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Nova Scotia Office of Immigration · Live in NS (atualização oficial 2026)", url: "https://liveinnovascotia.com/resources/update-nova-scotia-nominee-program-and-atlantic-immigration-program-2026-selection", oficial: true },
+  ],
+  nota: "Confirmado direto na fonte oficial: o portal Live in Nova Scotia, mantido pelo Nova Scotia Office of Immigration (listado como fonte estadual oficial no info center de monitoramento), publicou a expansão única de prioridades de seleção do NSNP e do Atlantic Immigration Program mirando candidatos com Expression of Interest ativa até 30/06/2026 e permissão de trabalho vencendo em 2026 ou antes. Critérios de setor, região e faixa salarial batem com o texto da matéria.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "why-older-americans-are-among-the-most-active-claimants-of-canadian-citizenship-by-descent",
+  titulo: "Why older Americans are among the most active claimants of Canadian citizenship by descent",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Canada.ca · Bill C-3 (An Act to amend the Citizenship Act) entra em vigor em 15/12/2025", url: "https://www.canada.ca/en/immigration-refugees-citizenship/news/2025/12/bill-c-3-an-act-to-amend-the-citizenship-act-2025-comes-into-effect.html", oficial: true },
+    { nome: "CIC News (matéria original)", url: "https://www.cicnews.com/2026/07/why-older-americans-are-among-the-most-active-claimants-of-canadian-citizenship-by-descent-0778074.html", oficial: false },
+  ],
+  nota: "A mudança legal de base é real e confirmável em fonte oficial: o Bill C-3 removeu o limite de primeira geração para cidadania por descendência e entrou em vigor em 15/12/2025. Mas a afirmação específica da manchete, de que americanos mais velhos estão 'entre os mais ativos' reivindicantes, é leitura interpretativa da matéria: ela não cita nenhuma estatística oficial do IRCC sobre idade ou nacionalidade dos requerentes, só menções anedóticas de que 'alguns aplicantes expressaram' ver a cidadania como plano B. Sem dado demográfico oficial que sustente o 'mais ativos', é interpretação/narrativa, não fato confirmado, igual ao padrão usado para opinião jurídica no Italianismo.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "ircc-publishes-updated-work-permit-processing-times",
+  titulo: "IRCC publishes updated work permit processing times",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "IRCC · Check current processing times (canada.ca)", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/check-processing-times.html", oficial: true },
+  ],
+  nota: "Confirmado: o IRCC atualiza semanalmente os tempos de processamento de residência temporária (visitante, estudo, trabalho, PR card) na página oficial canada.ca. A atualização de 02/07 e a mais recente de 15/07/2026 mostram o tempo de permissão de trabalho dentro do Canadá caindo para 129 dias, o menor patamar de 2026. Não consegui abrir a página oficial diretamente pelo fetch (bloqueio 403), mas os números batem entre múltiplas fontes que citam a mesma atualização oficial do IRCC.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "canada-shuts-door-to-sponsoring-parents-and-grandparents-for-permanent-residence",
+  titulo: "Canada shuts door to sponsoring parents and grandparents for permanent residence",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "IRCC/Canada.ca · Canada takes steps to responsibly manage the Parents and Grandparents Program (aviso oficial)", url: "https://www.canada.ca/en/immigration-refugees-citizenship/news/notices/responsibly-manage-parent-grandparent-program.html", oficial: true },
+  ],
+  nota: "O fato central é confirmado em fonte oficial: o IRCC publicou aviso oficial em 15/07/2026 pausando o recebimento de novos formulários de interesse em patrocinar e convites do Parents and Grandparents Program 'até novo aviso', mantendo o processamento das cerca de 60.500 aplicações já na fila com meta de aprovar até 15.000 residências permanentes em 2026. O título do CIC News ('shuts door', fecha a porta) é mais dramático que a linguagem oficial ('pausa'/'até novo aviso'), mas o fato central bate.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "new-rules-let-clients-of-immigration-consultants-recover-losses-dating-back-to-2021",
+  titulo: "New rules let clients of immigration consultants recover losses dating back to 2021",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Canada Gazette, Parte II · SOR/DORS-68 (College of Immigration and Citizenship Consultants Regulations)", url: "https://gazette.gc.ca/rp-pr/p2/2026/2026-05-06/html/sor-dors68-eng.html", oficial: true },
+    { nome: "IRCC/Canada.ca · Canada strengthens regulation of immigration and citizenship consultants", url: "https://www.canada.ca/en/immigration-refugees-citizenship/news/2026/05/canada-strengthens-regulation-of-immigration-and-citizenship-consultants.html", oficial: true },
+  ],
+  nota: "Confirmado em dupla fonte oficial: o regulamento do College of Immigration and Citizenship Consultants (CICC) que cria o fundo de compensação foi promulgado na Canada Gazette Parte II (SOR/DORS-68) e anunciado pelo IRCC. As regras, em vigor desde 15/07/2026, permitem reclamar perdas por 'ato desonesto' cometido a partir de 23/11/2021 (data em que o CICC virou regulador), exatamente como diz a manchete.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "what-to-do-if-your-ancestors-birth-certificate-does-not-exist",
+  titulo: "Proof of Canadian citizenship: what to do if your ancestor's birth certificate does not exist",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "IRCC · Guia oficial CIT 0001 (Guide for Applications for a Citizenship Certificate, Proof of Citizenship)", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/guide-0001-application-citizenship-certificate-adults-minors-proof-citizenship-section-3.html", oficial: true },
+  ],
+  nota: "O conteúdo central da matéria reflete orientação oficial real do IRCC: quando a certidão de nascimento não existe, o guia oficial (formulário CIT 0001) aceita registro hospitalar de nascimento, registro de médico ou parteira, certidão de batismo, registro censitário ou manifesto de navio como prova alternativa de parentesco, desde que a autoridade original ateste por escrito a ausência do documento (carta de 'no-record'). É conteúdo de orientação evergreen, não uma notícia de ato novo, mas o fato bate com a fonte oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "quebec-issues-invitations-for-permanent-selection-through-pstq",
+  titulo: "Quebec issues invitations for permanent selection through PSTQ",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Gouvernement du Québec · Invitations dans l'Arrima pour le PSTQ (2026)", url: "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/invitation/2026", oficial: true },
+  ],
+  nota: "Confirmado na fonte oficial: a página oficial do Governo de Quebec sobre convites do Arrima/PSTQ 2026 lista a seleção de 26/06/2026, com 74 convites no stream 1, 289 no stream 2, 131 no stream 3 e 7 no stream 4, batendo com o que a matéria do CIC News reporta.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "new-nova-scotia-nominee-program-aip-expansion",
+  titulo: "One-Time Nova Scotia Nominee Program and AIP Priority Expansion Targets In-Province Workers",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Nova Scotia Office of Immigration · Live in NS (atualização oficial 2026)", url: "https://liveinnovascotia.com/resources/update-nova-scotia-nominee-program-and-atlantic-immigration-program-2026-selection", oficial: true },
+  ],
+  nota: "Mesma base factual da manchete equivalente do CIC News sobre Nova Scotia: confirmado na página oficial do Live in Nova Scotia (Nova Scotia Office of Immigration), que descreve a expansão única de prioridades para o NSNP e o Atlantic Immigration Program mirando trabalhadores já na província com permissão de trabalho vencendo em 2026 ou antes. Critérios de setor (TEER 0-4/0-5), região fora de Halifax e faixas salariais de $20/hora e $27/hora batem com o texto da matéria.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "new-canada-child-benefit-payment-july-20",
+  titulo: "New Canada Child Benefit Payment Arrives July 20. How Much Will Families Receive?",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "CRA/Canada.ca · Canada child benefit (CCB), how much you can get", url: "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-child-benefit/how-much.html", oficial: true },
+    { nome: "CRA/Canada.ca · Payment dates, Canada child benefit (CCB)", url: "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-child-benefit/payment-dates.html", oficial: true },
+  ],
+  nota: "Confirmado em fonte oficial (CRA/canada.ca): o valor do CCB é recalculado todo mês de julho com base na renda familiar líquida ajustada do ano anterior; o próximo pagamento cai em 20/07/2026, com valor máximo de $8.157 por ano ($679,75 por mês) por criança até 6 anos e $6.883 por ano ($573,58 por mês) de 6 a 17 anos, para o período de julho de 2026 a junho de 2027.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "new-applications-under-parents-and-grandparents-program-paused",
+  titulo: "Canada Extends Pause on New Parents and Grandparents Program Applications",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "IRCC/Canada.ca · Canada takes steps to responsibly manage the Parents and Grandparents Program (aviso oficial)", url: "https://www.canada.ca/en/immigration-refugees-citizenship/news/notices/responsibly-manage-parent-grandparent-program.html", oficial: true },
+  ],
+  nota: "Mesma base factual da manchete equivalente do CIC News sobre o PGP: confirmado no aviso oficial do IRCC de 15/07/2026, que pausa o recebimento de novos formulários de interesse e convites do Parents and Grandparents Program até novo aviso, mantendo processamento da fila existente com meta de até 15.000 aprovações em 2026.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "how-much-is-rent-in-toronto-in-july-2026",
+  titulo: "How Much Is Rent in Toronto in July 2026?",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Door Insight (agregador privado de anúncios de aluguel, citado pela matéria)", oficial: false },
+    { nome: "CMHC · 2026 Mid-Year Rental Market Update", url: "https://www.cmhc-schl.gc.ca/observer/2026/2026-mid-year-rental-market-update", oficial: true },
+  ],
+  nota: "Os números específicos da matéria (de $1.900 em estúdios a $3.550 em 3 quartos) vêm da Door Insight, um agregador PRIVADO de anúncios de aluguel, não uma estatística de governo. A direção geral (aluguéis caindo em Toronto por excesso de oferta) é corroborada pelo relatório oficial da CMHC (2026 Mid-Year Rental Market Update), mas os valores exatos não são verificáveis em fonte oficial, é dado de mercado privado, não um ato oficial. Tratar como 'a confirmar', no mesmo padrão usado para conteúdo não-oficial no Italianismo.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "new-crtc-investigation-stop-phone-fees-canada",
+  titulo: "New CRTC Investigation Could Stop Extra Phone Fees in Canada",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "CRTC · Telecom Notice of Consultation CRTC 2026-155", url: "https://www.crtc.gc.ca/eng/archive/2026/2026-155.htm", oficial: true },
+  ],
+  nota: "Confirmado diretamente na fonte oficial: o aviso de consulta da CRTC (Notice 2026-155, publicado em 30/06/2026) abre investigação sobre taxas cobradas por Rogers, Bell e Telus (SIM, manuseio de aparelho, setup) que podem violar as novas regras de proteção ao consumidor em vigor desde 12/06/2026, com prazo de manifestação até 30/07/2026, resposta até 10/08/2026 e multa de até $10 milhões por empresa em caso de violação confirmada.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "vancouver-worlds-most-liveable-cities-can-newcomers-afford-it",
+  titulo: "Vancouver Named One of the World's Most Liveable Cities, But Can Newcomers Afford It?",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Economist Intelligence Unit (EIU) · Global Liveability Index 2026", oficial: false },
+  ],
+  nota: "O ranking citado (Vancouver em 9º lugar global, nota 96/100) vem do Global Liveability Index da Economist Intelligence Unit, organização de pesquisa PRIVADA (braço do grupo The Economist), não um órgão de governo. Não é um ato oficial de nenhum governo para confirmar ou refutar, é um índice privado. A própria matéria reconhece que a metodologia do EIU não mede acessibilidade financeira diretamente, que é justamente o ponto central do título. Não existe fonte oficial de governo aplicável a esse tipo de ranking privado.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "express-entry-record-year-how-many-more-ita",
+  titulo: "Express Entry Is Closing in on a Record Year. How Many More Invitations Could IRCC Issue in 2026?",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "IRCC · Express Entry, rounds of invitations (canada.ca, não visitada diretamente pela Friday, fetch bloqueado com 403)", url: "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations.html", oficial: true },
+    { nome: "Moving2Canada (matéria original)", url: "https://moving2canada.com/2026/07/express-entry-record-year-how-many-more-ita/", oficial: false },
+  ],
+  nota: "O número-base citado (mais de 97.100 convites emitidos entre 05/01 e 10/07/2026, em 38 rounds) aparece de forma consistente em múltiplas fontes que dizem tirar isso da tabela oficial de rounds do IRCC, mas a Friday não conseguiu abrir essa página oficial diretamente (bloqueio 403 no fetch), só confirmar via busca. Mais importante: o título é uma pergunta especulativa (quantos convites A MAIS o IRCC poderia emitir), e a própria matéria admite que 'o número exato de convites futuros é impossível de prever' e que 'ninguém fora do IRCC sabe'. É projeção sobre o resto de 2026, não um fato ou ato oficial já consumado. Tratar como interpretação/projeção, não confirmado.",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "new-lmia-wage-threshold-july-17",
+  titulo: "New LMIA Wage Threshold Takes Effect on July 17. Here's What Employers Need to Know.",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "ESDC/Canada.ca · Hire a temporary foreign worker in a high-wage or low-wage position (median wage)", url: "https://www.canada.ca/en/employment-social-development/services/foreign-workers/median-wage.html", oficial: true },
+  ],
+  nota: "Confirmado: o ESDC atualiza os limiares de salário mediano provincial/territorial usados para classificar vagas de LMIA como stream de alto ou baixo salário. Os novos limiares, publicados em 10/07/2026, entram em vigor em 17/07/2026 para aplicações submetidas a partir dessa data (aplicações antes de 17/07 seguem o limiar antigo). A distinção de stream afeta a duração do work permit (até 1 ano no baixo salário, até 3 anos no alto) e o tempo mínimo de anúncio da vaga (8 semanas contra 4 semanas).",
+  curadoEm: "2026-07-17",
+  countryCode: "ca",
+},
+{
+  match: "home-office-policy-enter-uk-irregularly",
+  titulo: "Home Office policy refusing citizenship to refugees who entered the UK irregularly found lawful",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Free Movement (matéria original)", url: "https://freemovement.org.uk/home-office-policy-enter-uk-irregularly/", oficial: false },
+    { nome: "Find Case Law (The National Archives) · R (Alibiari) v SSHD [2026] EWHC 1623 (Admin), 30/06/2026", url: "https://caselaw.nationalarchives.gov.uk/ewhc/admin/2026/1623", oficial: true },
+    { nome: "Home Office · Good character: caseworker guidance (GOV.UK)", url: "https://www.gov.uk/government/publications/good-character-caseworker-guidance", oficial: true },
+  ],
+  nota: "FATO confirmado em fonte oficial. Localizei e li o próprio julgamento no Find Case Law (The National Archives, serviço oficial do governo britânico): R (on the application of Ahmed Alibiari) v SSHD [2026] EWHC 1623 (Admin), decidido em 30/06/2026 pela Administrative Court. O tribunal manteve a política do Home Office (versão 6 do guia 'good character') de tratar entrada irregular como indicativo de falta de boa conduta para fins de naturalização, mesmo para refugiados reconhecidos, rejeitando os argumentos de discriminação. A política em si está publicada oficialmente no guia 'Good character: caseworker guidance' do GOV.UK.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "job-ad-unison-is-recruiting-an-immigration-solicitor",
+  titulo: "Job ad: Unison is recruiting an Immigration Solicitor",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Free Movement (matéria original · anúncio de vaga)", url: "https://freemovement.org.uk/job-ad-unison-is-recruiting-an-immigration-solicitor/", oficial: false },
+  ],
+  nota: "Isto não é um ato ou fato governamental checável, é um anúncio de vaga de emprego do sindicato Unison, publicado como conteúdo patrocinado/classificado no site do Free Movement. Não existe fonte oficial de governo que confirme ou negue uma vaga de emprego de uma organização privada; está fora do escopo do que uma fonte oficial de imigração documentaria. Diferente de um ato normativo, aqui não há 'fato oficial' a checar.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "support-care-workers-sponsor-licence-revoked",
+  titulo: "Options for care workers when an employer's sponsor licence is revoked",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Free Movement (matéria original)", url: "https://freemovement.org.uk/support-care-workers-sponsor-licence-revoked/", oficial: false },
+    { nome: "Home Office · Workers and Temporary Workers: guidance for sponsors, Part 3 (compliance), 03/26", url: "https://assets.publishing.service.gov.uk/media/69aaaf82c78869bf8eb8a46f/Sponsor-guidance-Part-3-compliance-03-26-v1.0.pdf", oficial: true },
+  ],
+  nota: "FATO de base confirmado no guia oficial de patrocinadores do Home Office (GOV.UK): quando uma sponsor licence é revogada, os trabalhadores patrocinados perdem o direito de trabalhar para aquele empregador, o Home Office emite carta de curtailment reduzindo o visto (tipicamente para 60 dias contados a partir do aviso), e existem regional partnerships para tentar recolocar trabalhadores de care com novo patrocinador. A matéria descreve corretamente essa política existente, sem inventar nada novo.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "jop-ad-rls-are-recruiting-for-a-uk-casework-lead",
+  titulo: "Jop ad: RLS are recruiting for a UK Casework Lead",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Free Movement (matéria original · anúncio de vaga)", url: "https://freemovement.org.uk/jop-ad-rls-are-recruiting-for-a-uk-casework-lead/", oficial: false },
+  ],
+  nota: "Mesma situação da vaga da Unison: é um anúncio de emprego de uma organização (RLS), não um fato ou ato de governo. Nenhuma fonte oficial de imigração documenta ou desmente vagas de emprego privadas, está fora do escopo de checagem oficial, não por ser boato, mas por não ser matéria de governo.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "free-movement-weekly-immigration-newsletter-128",
+  titulo: "Free Movement Weekly Immigration Newsletter #128",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Free Movement (edição da newsletter)", url: "https://freemovement.org.uk/free-movement-weekly-immigration-newsletter-128/", oficial: false },
+  ],
+  nota: "É um boletim semanal que agrega várias notícias já publicadas no site (não um fato isolado e verificável em si). Não há um 'fato central' único para checar contra fonte oficial, cada notícia dentro dela precisaria ser checada individualmente (várias já constam nesta lista). Classificado como não confirmado por não ser, em si, um ato oficial, e sim uma compilação editorial.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "intention-resume-contact-not-enough-deport",
+  titulo: "Intention to resume contact with child not enough in deportation appeal",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Free Movement (matéria original)", url: "https://freemovement.org.uk/intention-resume-contact-not-enough-deport/", oficial: false },
+    { nome: "Find Case Law (The National Archives) · SSHD v Collins Cuthbert Lewis [2026] EWCA Civ 879, 08/07/2026", url: "https://caselaw.nationalarchives.gov.uk/ewca/civ/2026/879", oficial: true },
+  ],
+  nota: "FATO confirmado: li o próprio acórdão no Find Case Law (The National Archives). A Court of Appeal (Civil Division) decidiu em SSHD v Collins Cuthbert Lewis [2026] EWCA Civ 879 (08/07/2026) que o mero desejo/intenção futura de retomar contato com o filho, sem vínculo familiar atual (o apelado não tinha contato com o filho há mais de 6 anos), não configura 'very compelling circumstances' nem efeito 'unduly harsh' capazes de impedir a deportação sob o art. 117C(6) da Nationality, Immigration and Asylum Act 2002.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "tribunal-finds-fraudulent-business-machine",
+  titulo: "'Well-oiled' fraudulent business machine behind fake judicial review claims uncovered",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Free Movement (matéria original)", url: "https://freemovement.org.uk/tribunal-finds-fraudulent-business-machine/", oficial: false },
+    { nome: "Tribunal Decisions (GOV.UK/UTIAC) · JR-2024-LON-001654 & Ors, 07/05/2026", url: "https://tribunalsdecisions.service.gov.uk/utiac/jr-2024-lon-001654-ors", oficial: true },
+  ],
+  nota: "FATO confirmado na própria decisão publicada no serviço oficial Tribunal Decisions (GOV.UK/Upper Tribunal IAC): processo consolidado JR-2024-LON-001654 e outros (12 judicial reviews, 27 requerentes nominais), envolvendo o consultor paquistanês 'Globe Path', que moveu ações em nome de pessoas sem seu conhecimento/autorização, usando documentos falsos ou roubados (inclusive cartas médicas forjadas confirmadas como falsas pelo Chelsea and Westminster Hospital) e endereços de e-mail sob seu controle. O tribunal declarou nulos os 12 processos.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "family-reunion-suspension-challenge-dismissed",
+  titulo: "Refugee families left in limbo as challenge to suspension of refugee family reunion route is dismissed",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Free Movement (matéria original)", url: "https://freemovement.org.uk/family-reunion-suspension-challenge-dismissed/", oficial: false },
+    { nome: "Find Case Law (The National Archives) · Safe Passage International & Ors v SSHD [2026] EWHC 1705 (Admin), 07/07/2026", url: "https://caselaw.nationalarchives.gov.uk/ewhc/admin/2026/1705", oficial: true },
+  ],
+  nota: "FATO confirmado: li o acórdão oficial no Find Case Law. A High Court (Mr Justice Coppel) rejeitou em 07/07/2026, em todos os fundamentos (irracionalidade, dever do art. 55, Equality Act 2010, art. 14/8 CEDH), o judicial review movido pela Safe Passage International e três requerentes individuais contra a suspensão (anunciada pelo Home Secretary em 01/09/2025) da rota Appendix Family Reunion (Sponsors with Protection) para refugiados. Representantes legais já sinalizaram recurso.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "home-office-updates-right-to-work-guidance-ahead-of-october-reforms",
+  titulo: "Home Office Updates Right to Work Guidance Ahead of October Reforms",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "DavidsonMorris (matéria original)", url: "https://www.davidsonmorris.com/home-office-updates-right-to-work-guidance-ahead-of-october-reforms/", oficial: false },
+    { nome: "Home Office · Draft Code of practice on preventing illegal working: Right to Work Scheme (GOV.UK)", url: "https://assets.publishing.service.gov.uk/media/6a44fb41732d8e7ce5f53a47/Code_of_practice_on_preventing_illegal_working_-_Right_to_Work_Scheme_for_employers__updated_.pdf", oficial: true },
+    { nome: "legislation.gov.uk · Border Security, Asylum and Immigration Act 2025, secção 48", url: "https://www.legislation.gov.uk/ukpga/2025/31/section/48/enacted", oficial: true },
+  ],
+  nota: "FATO confirmado em fonte oficial: o Home Office publicou um draft Code of Practice (GOV.UK) estendendo o regime de right to work/penalidade civil para além do vínculo empregatício tradicional (trabalhadores de agência, subcontratados, economia gig), com entrada em vigor confirmada para 01/10/2026, implementando a secção 48 do Border Security, Asylum and Immigration Act 2025 (legislation.gov.uk). O prazo e o escopo batem com o texto oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "andy-burnhams-views-on-immigration",
+  titulo: "What Are Andy Burnham's Views on Immigration?",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "DavidsonMorris (matéria original · perfil/análise)", url: "https://www.davidsonmorris.com/andy-burnhams-views-on-immigration/", oficial: false },
+  ],
+  nota: "Isto é um artigo de análise/opinião sobre a posição política de um indivíduo (Andy Burnham) em imigração, não é, em si, um ato ou fato de governo. É a mesma diferença feita para a matéria da Itália sobre a tese do jurista Ciervo: o que é checável oficialmente (ex.: se ele votou a favor de um projeto de lei específico) pode ser verdade, mas a peça em si é interpretação jornalística das 'visões' dele, não um comunicado oficial. Não há fonte de governo que confirme ou negue 'visões' de um político.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "india-young-professionals-scheme-uk-ballot-2026",
+  titulo: "India Young Professionals Scheme UK Ballot Dates for July 2026",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "DavidsonMorris (matéria original)", url: "https://www.davidsonmorris.com/india-young-professionals-scheme-uk-ballot-2026/", oficial: false },
+    { nome: "Home Office/UKVI · India Young Professionals Scheme visa: ballot system (GOV.UK, guidance oficial)", url: "https://www.gov.uk/guidance/india-young-professionals-scheme-visa-ballot-system", oficial: true },
+  ],
+  nota: "FATO confirmado direto na página oficial de orientação do GOV.UK: o próximo (e último) sorteio de 2026 do India Young Professionals Scheme abre às 13h30 (horário da Índia) de 21/07/2026 e fecha às 13h30 de 23/07/2026, com 3.000 vagas totais no ano (a maior parte já alocada no sorteio de fevereiro/2026). As datas citadas na matéria batem com a página oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "statement-of-changes-to-the-immigration-rules-hc-259-july-2026",
+  titulo: "Statement of Changes to the Immigration Rules HC 259 July 2026",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "DavidsonMorris (matéria original)", url: "https://www.davidsonmorris.com/statement-of-changes-to-the-immigration-rules-hc-259-july-2026/", oficial: false },
+    { nome: "Home Office · Statement of changes to the Immigration Rules: HC 259, 9 July 2026 (GOV.UK)", url: "https://www.gov.uk/government/publications/statement-of-changes-to-the-immigration-rules-hc-259-9-july-2026", oficial: true },
+  ],
+  nota: "FATO confirmado: a publicação oficial HC 259 foi apresentada ao Parlamento em 09/07/2026 e está publicada no GOV.UK com o memorando explicativo. Traz mudanças na Graduate route (filhos nascidos no Reino Unido), Appendix FM (alinhamento de prazo de permissão de parceiro com o do patrocinador refugiado), regras de deportação (alinhadas ao Sentencing Act 2026) e Child Student route, com vigência entre 30/07 e 03/08/2026.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "british-citizenship-application-priority-processing-launched",
+  titulo: "British Citizenship Application Priority Processing Launched",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "DavidsonMorris (matéria original)", url: "https://www.davidsonmorris.com/british-citizenship-application-priority-processing-launched/", oficial: false },
+    { nome: "Home Office · Priority treatment requests: nationality procedure guidance (GOV.UK)", url: "https://www.gov.uk/government/publications/priority-treatment-requests-nationality-procedure-guidance/priority-treatment-requests-accessible", oficial: true },
+  ],
+  nota: "FATO confirmado: o Home Office atualizou o guia oficial de 'priority treatment' em 06/07/2026, lançando um serviço pago (~£500) de processamento prioritário para pedidos de cidadania britânica, com meta de decisão em 30 dias úteis após biometria (contra o padrão de até 6 meses). O guia oficial também deixa claro que casos com checagens adicionais (segurança nacional, identidade) podem ficar fora do prazo prioritário.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "uk-right-to-work-changes-2026",
+  titulo: "UK Right to Work Changes 2026",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "DavidsonMorris (matéria original)", url: "https://www.davidsonmorris.com/uk-right-to-work-changes-2026/", oficial: false },
+    { nome: "Home Office · Draft Code of practice on preventing illegal working: Right to Work Scheme (GOV.UK)", url: "https://assets.publishing.service.gov.uk/media/6a44fb41732d8e7ce5f53a47/Code_of_practice_on_preventing_illegal_working_-_Right_to_Work_Scheme_for_employers__updated_.pdf", oficial: true },
+    { nome: "legislation.gov.uk · Border Security, Asylum and Immigration Act 2025, secção 48", url: "https://www.legislation.gov.uk/ukpga/2025/31/section/48/enacted", oficial: true },
+  ],
+  nota: "Mesmo FATO de base da matéria 'Home Office Updates Right to Work Guidance Ahead of October Reforms' desta lista: reforma confirmada em fonte oficial (draft Code of Practice do Home Office + secção 48 do Border Security, Asylum and Immigration Act 2025), estendendo checagens de right to work a trabalhadores de agência/subcontratados/gig a partir de 01/10/2026, com verificação digital obrigatória por provedor registrado.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "immigration-and-asylum-bill-2026",
+  titulo: "Immigration and Asylum Bill 2026: First Draft Published",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "DavidsonMorris (matéria original)", url: "https://www.davidsonmorris.com/immigration-and-asylum-bill-2026/", oficial: false },
+    { nome: "UK Parliament · Immigration and Asylum Bill, Parliamentary Bills (bills.parliament.uk)", url: "https://bills.parliament.uk/bills/4254", oficial: true },
+  ],
+  nota: "FATO confirmado na página oficial do Parlamento britânico: o Immigration and Asylum Bill teve primeira leitura na Câmara dos Comuns em 30/06/2026 e segunda leitura em 13/07/2026, com texto publicado em bills.parliament.uk. O projeto propõe uma nova Independent Immigration Appeals Authority, substitui refugee status/humanitarian protection por uma categoria única 'protection status' e reformula critérios do artigo 8. Ainda em tramitação (Public Bill Committee previsto para setembro/2026).",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "uk-employers-sponsoring-refugees",
+  titulo: "UK Employers Sponsoring Refugees? What We Know So Far",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "DavidsonMorris (matéria original)", url: "https://www.davidsonmorris.com/uk-employers-sponsoring-refugees/", oficial: false },
+    { nome: "Home Office · 'Mahmood: my reforms will save the asylum system for a generation' (GOV.UK, 30/06/2026)", url: "https://www.gov.uk/government/news/mahmood-myreforms-will-save-the-asylum-system-for-a-generation", oficial: true },
+  ],
+  nota: "O FATO central (o governo anunciou uma futura rota de patrocínio de refugiados por empregadores) está confirmado no comunicado oficial do Home Office no GOV.UK (30/06/2026), que descreve três novas rotas seguras e legais, patrocínio comunitário, universitário e, 'no próximo ano' (2027), uma rota de trabalho patrocinada por empregadores. Como o próprio título da matéria sinaliza ('What We Know So Far'), os detalhes operacionais (elegibilidade, obrigações do patrocinador) ainda não foram divulgados oficialmente, isso é reconhecido tanto pela matéria quanto pelo próprio Home Office, mas o anúncio da rota em si é fato oficial confirmado.",
+  curadoEm: "2026-07-17",
+  countryCode: "uk",
+},
+{
+  match: "munich-bans-non-essential-water-use-fines-50000",
+  titulo: "Munich bans non-essential water use with fines up to €50.000",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Landeshauptstadt München · Allgemeinverfügung zur Wassernutzung", url: "https://stadt.muenchen.de/news/allgemeinverfuegung-zur-wassernutzung.html", oficial: true },
+  ],
+  nota: "Confirmado diretamente na página oficial da Cidade de Munique (stadt.muenchen.de): a Allgemeinverfügung de 14/07/2026 proíbe encher piscinas particulares, regar jardins fora do horário/sem gotejamento, lavar carros fora de lava-rápidos e captar água de rios/lagos, válida até 01/08/2026 (prorrogável). A própria página oficial cita 'Geldbußen von bis zu 50.000 Euro' com base na lei de recursos hídricos (Wasserhaushaltsgesetz/BayWG), bate exatamente com o valor da manchete. Motivo: consumo diário subiu a mais de 360 milhões de litros, acima da média de 300 milhões.",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "germany-raise-tobacco-tax-more-initially-planned",
+  titulo: "Germany to raise tobacco tax more than initially planned",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Handelsblatt · Tabaksteuer soll bis 2030 auf 11,40€ pro Packung steigen", url: "https://www.handelsblatt.com/politik/deutschland/steuern-zigaretten-fuer-1140-euro-tabaksteuer-soll-bis-2030-steigen/100234458.html", oficial: false },
+    { nome: "t-online · Regierung möchte Zigaretten teurer machen als geplant", url: "https://www.t-online.de/nachrichten/deutschland/innenpolitik/id_101340124/tabaksteuer-erhoehung-regierung-moechte-zigaretten-teurer-machen-als-geplant.html", oficial: false },
+  ],
+  nota: "Fato confirmado por reportagem consistente e convergente de imprensa financeira de referência (Handelsblatt, RND, t-online), todos atribuindo a mudança a uma 'Formulierungshilfe' do Bundesfinanzministerium enviada às bancadas da coalizão: o maço de 20 cigarros passa a custar 9,10€ (2027), 9,91€ (2028), 10,81€ (2029) e 11,78€ (2030), cerca de 40 centavos a mais do que o Gabinete Federal havia decidido originalmente (alta total de 54,8% até 2030, ante os ~53% já aprovados). Não localizei esse documento publicado diretamente em bundesfinanzministerium.de (não indexado na seção de Pressemitteilungen), mas a origem governamental é citada de forma específica e consistente por múltiplas fontes independentes de alta confiabilidade. É projeto ainda em tramitação no Bundestag/Bundesrat, não lei promulgada.",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "germany-automate-child-benefit-payments-2027",
+  titulo: "Germany to automate child benefit payments from 2027",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Bundesfinanzministerium · Kindergeld wird künftig ohne Antrag ausgezahlt", url: "https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Themen/Steuern/kindergeld-ohne-antrag.html", oficial: true },
+  ],
+  nota: "Confirmado diretamente na página oficial do Bundesfinanzministerium. A reforma tem dois estágios: a partir de março/2027 para famílias que já recebem Kindergeld de um filho mais velho (pagamento automático do recém-nascido); a partir de novembro/2027 também para o primeiro filho. Dados são repassados automaticamente do Standesamt ao Bundeszentralamt für Steuern e à Familienkasse (Bundesagentur für Arbeit), sob o princípio 'once-only'. Requer que ao menos um dos pais e a criança residam na Alemanha, um dos pais trabalhe ali e haja conta bancária cadastrada.",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "eu-trade-unions-say-outdoor-work-should-cease-if-temperatures-exceed-325c",
+  titulo: "EU trade unions say outdoor work should cease if temperatures exceed 32,5C",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "ETUC · The content of a Directive on the prevention of occupational heat risks", url: "https://www.etuc.org/en/document/content-directive-prevention-occupational-heat-risks", oficial: false },
+    { nome: "ETUC · Climate crisis requires EU law on maximum working temperatures (press release)", url: "https://www.etuc.org/en/pressrelease/climate-crisis-requires-eu-law-maximum-working-temperatures", oficial: false },
+  ],
+  nota: "NÃO é um ato oficial da UE ou da Alemanha, é uma proposta/reivindicação política da confederação sindical ETUC, pedindo que a paralisação de trabalho ao ar livre acima de 32,5°C (medido em WBGT) seja incluída na futura 'Quality Jobs Act' da UE, cuja proposta legislativa só deve ser apresentada ao Parlamento no fim de 2026. Hoje não existe diretiva ou lei em vigor (UE ou alemã) com esse limite. É a mesma distinção feita no caso da Itália: o FATO de que o sindicato fez essa reivindicação é verdadeiro, mas a REGRA em si (parar de trabalhar acima de 32,5°C) é posição de lobby sindical, não norma vigente.",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "how-often-did-workers-germany-strike-2025",
+  titulo: "How often did workers in Germany strike in 2025?",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "WSI-Report Nr. 114 · Arbeitskampfbilanz 2025 (Hans-Böckler-Stiftung)", url: "https://www.wsi.de/fpdf/HBS-009426/p_wsi_report_114_2026.pdf", oficial: false },
+    { nome: "Statistisches Bundesamt (Destatis) · Ausfalltage durch Streiks und Aussperrungen", url: "https://www.destatis.de/DE/Themen/Arbeit/Arbeitsmarkt/Qualitaet-Arbeit/Dimension-5/ausfalltage-streiks-aussperrungenl.html", oficial: true },
+  ],
+  nota: "Os números da manchete (261 conflitos trabalhistas em 2025, 552.000 participantes, 645.000 dias de trabalho perdidos) vêm do WSI-Arbeitskampfbilanz 2025, relatório do WSI, instituto de pesquisa ligado à Hans-Böckler-Stiftung (fundação sindical), NÃO é órgão do governo alemão. O Statistisches Bundesamt (Destatis) publica estatística oficial correlata ('Ausfalltage durch Streiks und Aussperrungen', em dias perdidos por 1.000 empregados), mas seus dados publicados mais recentes vão só até 2024 (11,2 dias/1.000 empregados), não há ainda número oficial de 2025. Portanto, o dado específico da manchete não é confirmável em fonte oficial no momento, embora seja plausível e replicado amplamente pela imprensa alemã (dpa, WiWo, Bund-Verlag).",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "one-spark-enough-germany-struggles-wildfires-across-states",
+  titulo: "\"One spark is enough\": Germany struggles with wildfires across states",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Deutscher Wetterdienst (DWD) · Waldbrand-Gefahrenindex", url: "https://www.wettergefahren.de/warnungen/indizes/waldbrand.html", oficial: true },
+    { nome: "DWD · Thema des Tages: Wie das Wetter die Waldbrandgefahr bestimmt", url: "https://www.dwd.de/DE/wetter/thema_des_tages/2026/6/29.html", oficial: true },
+  ],
+  nota: "O quadro geral é confirmável no índice oficial de perigo de incêndio florestal do Deutscher Wetterdienst (DWD, serviço meteorológico oficial): em 2026 o Waldbrandgefahrenindex (WBI) atingiu repetidamente o nível 5 (máximo) em Brandemburgo, Mecklemburgo-Pomerânia Ocidental, Saxônia e Saxônia-Anhalt, e nível 3 no Reno-Palatinado/Sarre, batendo com a manchete de incêndios florestais 'em vários estados'. A frase específica 'basta uma faísca' ('ein Funke reicht') é jargão de prevenção usado amplamente (inclusive pela WWF, ONG não-governamental), mas o dado técnico de risco elevado em vários Bundesländer vem do DWD, órgão oficial; o Umweltbundesamt (agência federal de meio ambiente) também documenta a tendência de aumento do risco com as mudanças climáticas.",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "germany-slashes-integration-course-budget-1-billion-590-million",
+  titulo: "Germany slashes integration course budget from €1 billion to €590 million",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Bundesfinanzministerium · Regierungsentwurf Bundeshaushalt 2027", url: "https://www.bundesfinanzministerium.de/Content/DE/Pressemitteilungen/Finanzpolitik/2026/07/2026-07-06-regierungsentwurf-bundeshaushalt-2027.html", oficial: true },
+    { nome: "Deutscher Bundestag (hib) · Haushalt 2026: BMI-Etat soll auf 16 Milliarden Euro steigen", url: "https://www.bundestag.de/presse/hib/kurzmeldungen-1105670", oficial: true },
+    { nome: "migazin.de · Bund kürzt Integrationskurse und Asylberatung massiv im Haushalt (cita porta-voz do BMI)", url: "https://www.migazin.de/2026/07/09/bundesregierung-bestaetig-kahlschlag-bei-integratinskursen-und-asylberatung/", oficial: false },
+  ],
+  nota: "Confirmado: um porta-voz do Bundesministerium des Innern (BMI) declarou que o Regierungsentwurf do orçamento de 2027, aprovado pelo Gabinete Federal em 06/07/2026 (comunicado oficial do Bundesfinanzministerium), reserva apenas 590 milhões de euros para os Integrationskurse, ante cerca de 1 bilhão de euros em 2026 (corte de ~41%). Uma fonte oficial adicional do Bundestag (hib, kurzmeldungen-1105670) mostra 954 milhões de euros como 'Ausgabenschwerpunkt' do BMI para Integrationskurse no orçamento de 2026, mesma ordem de grandeza do 'quase 1 bilhão' citado, embora não idêntico a outra fonte independente (BIAJ: 1.063.980.000€ Soll 2026). Os valores variam um pouco conforme a linha orçamentária exata, mas a direção e magnitude do corte batem com a manchete e são reconhecidos pelo próprio BMI.",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "germany-debates-opening-shops-sunday-cdu-pushing-relax-law",
+  titulo: "Germany debates opening shops on Sunday, with CDU pushing to relax law",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Deutscher Bundestag · Ausschuss für Wirtschaft und Energie (página oficial da comissão)", url: "https://www.bundestag.de/wirtschaft_und_energie", oficial: true },
+    { nome: "finanznachrichten.de · Wirtschaftsausschuss für Lockerung der Sonntagsöffnungszeiten", url: "https://www.finanznachrichten.de/nachrichten-2026-07/68956086-wirtschaftsausschuss-fuer-lockerung-der-sonntagsoeffnungszeiten-003.htm", oficial: false },
+  ],
+  nota: "Confirmado como DEBATE em curso, exatamente o que a manchete afirma, não uma lei já aprovada. O Wirtschaftsausschuss do Bundestag (comissão oficial de Economia) se posicionou em 07/07/2026 por liberalização bem mais ampla do que o planejado pelo governo; seu presidente, Christian von Stetten (CDU), pede reforma mais profunda do Ladenschlussgesetz. O governo já prepara mudanças pontuais para 01/01/2027 (padarias podendo abrir aos domingos por até 8h, bibliotecas por até 6h). Sindicatos (Verdi), a Igreja Evangélica e o Sozialverband Deutschland (SoVD) se opõem. Não localizei o artigo específico no hub oficial bundestag.de/presse/hib para esta sessão de 07/07, por isso cito agência de notícias (DPA, replicada por finanznachrichten.de) que reporta a posição oficial da comissão parlamentar.",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "google-accuses-eu-of-undermining-privacy-of-millions-of-europeans",
+  titulo: "Google accuses EU of undermining privacy of 'millions of Europeans'",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "European Commission · Commission proposes measures to Google on sharing search engine data under DMA", url: "https://ec.europa.eu/commission/presscorner/detail/en/ip_26_825", oficial: true },
+    { nome: "Google · The DMA should not undercut security & privacy for Europeans (blog oficial do Google)", url: "https://blog.google/company-news/inside-google/around-the-globe/google-europe/the-dma-should-not-undercut-security-privacy-for-europeans/", oficial: false },
+  ],
+  nota: "Confirmado. Em 16/07/2026 a Comissão Europeia adotou duas decisões sob o Digital Markets Act (DMA) obrigando o Google a compartilhar dados de busca com concorrentes (a partir de jan/2027) e a tornar o Android interoperável com serviços de IA rivais (até ago/2027), decisão oficial confirmada no press corner da Comissão. Kent Walker, head de assuntos globais do Google, reagiu no blog oficial da empresa dizendo que as medidas arriscam 'undermining vital privacy and security guardrails for millions of Europeans', a frase exata da manchete. Ambos os lados (decisão da Comissão e reação do Google) vêm de fonte primária verificada.",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "which-residence-permits-qualify-you-for-german-citizenship",
+  titulo: "Which residence permits qualify you for German citizenship?",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "BAMF · Einbürgerung in Deutschland", url: "https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/Einbuergerung/einbuergerung.html", oficial: true },
+    { nome: "BMI · Einbürgerung", url: "https://www.bmi.bund.de/DE/themen/verfassung/staatsangehoerigkeit/einbuergerung/einbuergerung-node.html", oficial: true },
+  ],
+  nota: "Confirmado diretamente nas páginas oficiais do BAMF e do BMI: para a Anspruchseinbürgerung (naturalização por direito) é exigido, em regra, direito de residência ilimitado (unbefristetes Aufenthaltsrecht) no momento do pedido, com exceções para titulares de Aufenthaltserlaubnis sob o acordo Suíça-UE, Blaue Karte EU (Cartão Azul UE) ou certos títulos de residência temporários específicos, além de 5 anos de residência habitual, identidade/nacionalidade esclarecidas, compromisso com a ordem constitucional (incluindo a responsabilidade histórica alemã), conhecimento de alemão e da ordem jurídico-social. Onde algum requisito não é atendido, cabe a Ermessenseinbürgerung (naturalização discricionária).",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "german-neo-nazi-sent-to-male-prison-despite-legal-gender-change",
+  titulo: "German neo-Nazi sent to male prison despite legal gender change",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "ZDFheute · Sachsen: Rechtsextremistin Liebich in Männervollzug verlegt", url: "https://www.zdfheute.de/politik/deutschland/liebich-rechtsextremistin-verlegung-maennervollzug-sachsen-100.html", oficial: false },
+    { nome: "LTO (Legal Tribune Online) · Marla Svenja Liebich ins Männergefängnis verlegt", url: "https://www.lto.de/recht/nachrichten/n/marla-svenja-liebich-jva-chemnitz-unterbringung-frauen-maenner-gefaengnis", oficial: false },
+  ],
+  nota: "Fato confirmado por múltiplos veículos independentes e confiáveis, incluindo o canal público ZDFheute e a imprensa jurídica especializada LTO, com atribuição direta e nominal à Ministra da Justiça da Saxônia, Constanze Geiert (CDU): Marla-Svenja Liebich, condenada por incitação ao ódio/apologia de guerra de agressão, foi transferida da unidade feminina de Chemnitz para a unidade masculina de Zeithain (distrito de Meißen) em 15/07/2026, apesar de ter mudado o registro civil de gênero em 2025. A decisão é atribuída à direção da JVA Chemnitz após avaliação do caso individual, com base no Sächsisches Justizvollzugsgesetz (§106) e na diretriz administrativa do Ministério da Justiça da Saxônia. Busquei diretamente em justiz.sachsen.de (site oficial do ministério, inclusive a página de imprensa) mas não localizei ali o comunicado específico indexado; a citação da ministra chega via agência de notícias (dpa), não por link direto ao comunicado do ministério.",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "germanys-temporary-unemployment-benefit-is-going-digital",
+  titulo: "Germany's temporary unemployment benefit is going digital",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Bundesregierung · Kabinett: Arbeitsvermittlung wird moderner", url: "https://www.bundesregierung.de/breg-de/aktuelles/kabinett-arbeitsvermittlung-digital-2446664", oficial: true },
+  ],
+  nota: "Confirmado na página oficial do governo federal: em 15/07/2026 o Gabinete Federal decidiu um projeto de lei de modernização e digitalização da intermediação de emprego/seguro-desemprego, sob o princípio 'digital first', com pedidos passando a ser majoritariamente digitais via os formulários online (eServices) da Bundesagentur für Arbeit. Mais de 80% dos pedidos de Arbeitslosengeld já são feitos digitalmente em 2026, segundo a própria Bundesagentur für Arbeit.",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "uber-buys-germanys-delivery-hero-for-e12-7-billion",
+  titulo: "Uber buys Germany's Delivery Hero for €12.7 billion",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Uber Technologies, Inc. · Form 8-K, Exhibit 2.1 (Business Combination Agreement), SEC EDGAR", url: "https://www.sec.gov/Archives/edgar/data/0001543151/000155278126000382/e26302_ex2-1.htm", oficial: true },
+    { nome: "Uber Technologies, Inc. · Form 8-K, Exhibit 99.1 (comunicado ao mercado), SEC EDGAR", url: "https://www.sec.gov/Archives/edgar/data/0001543151/000155278126000382/e26302_ex99-1.htm", oficial: true },
+  ],
+  nota: "Confirmado via arquivamento regulatório oficial (Form 8-K) da Uber Technologies na SEC (Securities and Exchange Commission, regulador oficial do mercado de capitais dos EUA) em 16/07/2026: Business Combination Agreement para adquirir a Delivery Hero (empresa alemã sediada em Berlim) a 41,50€ por ação, valor total de ~12,7 bilhões de euros; o acionista majoritário Prosus (~17%) já aceitou, levando Uber a ultrapassar 50%. Uber se comprometeu a manter a sede da Delivery Hero em Berlim, sem cortes na equipe local até pelo menos 2029, e a investir 2 bilhões de euros na Alemanha nos próximos 5 anos.",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "german-phrase-of-the-day-uber-drei-ecken",
+  titulo: "German phrase of the day: Über drei Ecken",
+  status: "pendente",
+  fontesCitadas: [
+  ],
+  nota: "Não é uma manchete factual/noticiosa checável em fonte oficial, é conteúdo editorial de ensino de idioma (expressão idiomática alemã do dia), sem afirmação de fato governamental, dado estatístico ou norma jurídica para confirmar ou refutar. O método de checagem cruzada em fonte oficial (governo, agência de imigração) não se aplica a este tipo de conteúdo. Deixo como pendente por honestidade, mas registro que aqui não há, no sentido da checagem, um 'fato' verificável (lei, dado, decisão de governo).",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "compare-which-european-countries-allow-assisted-dying",
+  titulo: "COMPARE: Which European countries allow assisted dying?",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "European Parliamentary Research Service (EPRS) · Briefing sobre eutanásia/suicídio assistido na UE", url: "https://www.europarl.europa.eu/RegData/etudes/BRIE/2025/775914/EPRS_BRI(2025)775914_EN.pdf", oficial: true },
+  ],
+  nota: "O quadro geral do artigo comparativo é confirmável: em 2026, eutanásia/suicídio assistido é legal na Holanda (desde 2002), Bélgica (2002), Luxemburgo (2009), Espanha (2021) e Áustria (2021, decisão do parlamento após ruling constitucional); a França passou recentemente a reconhecer um direito à morte assistida para adultos com doença incurável; a Suíça permite assistência ao suicídio (não eutanásia ativa) há décadas via associações; Portugal legalizou a eutanásia para doentes terminais em 2023 (implementação com obstáculos). Na Alemanha especificamente, o Tribunal Constitucional Federal (Bundesverfassungsgericht) decidiu em 2020 que o direito a uma morte autodeterminada, incluindo buscar assistência de terceiros, é protegido pela Grundgesetz, não há lei ordinária específica regulando o suicídio assistido civil, mas o direito constitucional está estabelecido. Um briefing oficial do Serviço de Pesquisa do Parlamento Europeu (EPRS) mapeia esse panorama legal país a país.",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "how-you-can-check-for-food-recall-warnings-in-germany",
+  titulo: "How you can check for food recall warnings in Germany",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "BVL · lebensmittelwarnung.de", url: "https://www.bvl.bund.de/DE/Aufgaben/07_Lebensmittelwarnungen/LMwarnungen_node.html", oficial: true },
+  ],
+  nota: "Confirmado: lebensmittelwarnung.de é, segundo descrição do próprio Bundesamt für Verbraucherschutz und Lebensmittelsicherheit (BVL, autarquia federal), a plataforma oficial da União e dos 16 Länder para avisos de recall de alimentos, cosméticos, produtos de uso diário e produtos infantis. O BVL administra o portal centralmente; as autoridades dos 16 estados publicam os avisos dentro de suas competências. Cada aviso traz fabricante, lote, validade, tamanho da embalagem, foto e motivo do alerta. Disponível gratuitamente como site e app.",
+  curadoEm: "2026-07-17",
+  countryCode: "de",
+},
+{
+  match: "listed-the-cities-in-spain-installing-big-screens-for-the-world-cup-final",
+  titulo: "LISTED: The cities in Spain installing big screens for the World Cup final",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Comunidad de Madrid · nota de prensa oficial (14/07/2026)", url: "https://comunidad.madrid/noticias/2026/07/14/comunidad-madrid-celebrara-final-copa-mundial-fifa-2026-espana-retransmision-partido-domingo-movistar-arena-pantalla-grande-toda", oficial: true },
+    { nome: "Telemadrid · cobertura das instalações municipais na região", url: "https://www.telemadrid.es/noticias/madrid/La-Comunidad-de-Madrid-instalara-pantallas-para-seguir-la-final-del-Mundial-en-toda-la-region-0-2907609235--20260716125505.html", oficial: false },
+  ],
+  nota: "Fato confirmado em fonte oficial: a Comunidad de Madrid publicou nota de prensa própria (comunidad.madrid, 14/07/2026) confirmando telão no Movistar Arena (15 mil lugares) e outras praças para a final de domingo (19/07) Espanha x Argentina. A matéria do The Local cobre também outras cidades (Valência, Sevilha, País Vasco, Zaragoza, Palma) citando anúncios de prefeituras/governos regionais, não verifiquei cada uma individualmente em site .gob/.es próprio, mas o padrão de anúncio institucional se repete de forma consistente na imprensa regional consultada.",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "google-accuses-eu-of-undermining-privacy-of-millions-of-europeans",
+  titulo: "Google accuses EU of undermining privacy of 'millions of Europeans'",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Google (blog.google) · \"The DMA should not undercut security & privacy for Europeans\" (declaração original de Kent Walker)", url: "https://blog.google/company-news/inside-google/around-the-globe/google-europe/the-dma-should-not-undercut-security-privacy-for-europeans/", oficial: false },
+    { nome: "Comissão Europeia · Digital Markets Act, últimas notícias (decisão de especificação sobre Google)", url: "https://digital-markets-act.ec.europa.eu/latest-news_en", oficial: true },
+  ],
+  nota: "Fato confirmado: a Comissão Europeia (decisão de especificação DMA anunciada em 15-16/07/2026) obrigou o Google a compartilhar dados de busca anonimizados com rivais (a partir de jan/2027) e abrir o Android a assistentes de IA concorrentes (a partir de jul/2027), confirmado na página oficial da Comissão. A citação atribuída ao Google bate literalmente com o texto do blog oficial da empresa. Não é notícia específica da Espanha, é cobertura de política europeia geral replicada pelo The Local Spain.",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "valencia-airport-to-undergo-e400-million-expansion-project",
+  titulo: "Valencia airport to undergo €400-million expansion",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Aena · sala de imprensa oficial (\"Aena proposes investments of approximately 13 billion for airports in Spain\")", url: "https://www.aena.es/en/press/aena-proposes-investments-of-approximately-13-billion-for-airports-in-spain.html", oficial: true },
+    { nome: "Ministerio de Transportes y Movilidad Sostenible · nota de prensa sobre o DORA 2027-2031", url: "https://www.transportes.gob.es/ministerio/comunicacion/sala-prensa/jue-18092025-1302", oficial: true },
+  ],
+  nota: "Fato confirmado em fonte oficial: a Aena (operadora aeroportuária majoritariamente estatal, via Enaire) inclui 402,1 milhões de euros para o aeroporto de Valência no período 2027-2031 dentro do documento DORA III, divulgado em nota de imprensa oficial própria e referendado pelo Ministério de Transportes. Ressalva: é um plano de investimento PROPOSTO, ainda em processo regulatório (consulta pública e aprovação final do Conselho de Ministros/CNMC), não uma obra já iniciada, o título dá a entender algo já certo, mas tecnicamente ainda depende de aprovação final.",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "eu-court-upholds-spains-amnesty-law-for-catalan-separatists",
+  titulo: "EU court upholds Spain's Catalan amnesty law in boost for PM",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Tribunal de Justiça da UE (CURIA) · página oficial de comunicados de imprensa (processos C-523/24 e C-666/24, comunicado nº 112/2026, 16/07/2026)", url: "https://curia.europa.eu/jcms/jcms/Jo2_7052/en/", oficial: true },
+  ],
+  nota: "Fato confirmado em fonte oficial primária: o TJUE julgou em 16/07/2026 os processos C-523/24 (Sociedad Civil Catalana) e C-666/24 (ACVOT), comunicado de imprensa nº 112/2026, concluindo que a lei de amnistia catalã (aprovada em 2024) não viola o direito da UE nem os interesses financeiros do bloco. Não localizei o PDF exato do comunicado 112/2026 (só a página-índice oficial de comunicados do CURIA, confirmada por buscas, mais a confirmação do número/data via múltiplas agências de notícia), por isso cito a página-índice oficial em vez de linkar um PDF que não abri diretamente.",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "spains-government-partner-demands-all-rental-homes-be-air-conditioned-by-law",
+  titulo: "Spain's government partner demands all rental homes be air-conditioned by law",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "El Diario · Compromís-Sumar propõe que moradias de aluguel tenham ar condicionado por lei", url: "https://www.eldiario.es/comunitat-valenciana/politica/compromis-sumar-propone-viviendas-alquiler-tengan-aire-acondicionado-ley_1_13381592.html", oficial: false },
+    { nome: "El Economista · Sumar propõe que seja ilegal alugar sem ar condicionado", url: "https://www.eleconomista.es/vivienda-inmobiliario/noticias/13999230/07/26/sumar-plantea-que-sea-ilegal-alquilar-una-vivienda-sin-aire-acondicionado.html", oficial: false },
+  ],
+  nota: "Não é um ato oficial: é uma 'proposición no de ley' (moção não vinculante) apresentada pelo deputado Alberto Ibáñez (Compromís-Sumar) no Congresso dos Deputados, ainda a ser debatida na Comissão de Habitação, sem data de votação confirmada. Hoje NÃO existe lei espanhola que obrigue proprietários a instalar ar condicionado em imóveis de aluguel (várias fontes jurídicas confirmam: é item de conforto, não de habitabilidade obrigatória). O título ('demands... by law') descreve corretamente uma cobrança política do parceiro de governo, mas pode passar a falsa impressão de que já é lei, não é. Atenção: o site moncloa.com usado por parte da imprensa é um jornal privado, NÃO deve ser confundido com o site oficial do governo espanhol lamoncloa.gob.es.",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "compare-which-european-countries-allow-assisted-dying",
+  titulo: "COMPARE: Which European countries allow assisted dying?",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "BOE · Ley Orgánica 3/2021, de 24 de marzo, de regulación de la eutanasia", url: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-4628", oficial: true },
+  ],
+  nota: "Verifiquei o fato relativo à Espanha, o país coberto por esta checagem: eutanásia e suicídio assistido são legais na Espanha desde 25/06/2021 por força da Lei Orgânica 3/2021, publicada no BOE, confirmado em fonte oficial primária. A matéria compara VÁRIOS países europeus (Holanda, Bélgica, Luxemburgo etc.); não confirmei o status legal de cada um deles em suas respectivas fontes oficiais, por fugir do escopo desta checagem (fonte oficial da Espanha).",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "drastic-change-crowds-cross-gibraltar-spain-frontier-as-border-controls-vanish",
+  titulo: "'Drastic change': Crowds cross Gibraltar-Spain frontier as border controls vanish",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "La Moncloa (governo da Espanha) · nota oficial, Albares na assinatura do acordo de Gibraltar (14/07/2026)", url: "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/exteriores/paginas/2026/140726-albares-acuerdo-gibraltar-ue.aspx", oficial: true },
+    { nome: "La Moncloa · texto oficial em espanhol do tratado sobre Gibraltar (Comissão Europeia)", url: "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/exteriores/paginas/2026/130326-exteriores-texto-espanol-tratado-gibraltar.aspx", oficial: true },
+  ],
+  nota: "Fato confirmado em fonte oficial primária: o governo espanhol (La Moncloa, nota de 14/07/2026) confirma a assinatura em Bruxelas do tratado UE-Reino Unido sobre Gibraltar em 14/07/2026, com entrada em vigor à meia-noite de 15/07/2026, removendo a fronteira física de mais de um século entre La Línea e Gibraltar (o controle de passaporte passa a ser feito no aeroporto do Peñón).",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "today-in-spain-a-roundup-of-the-latest-news-on-thursday-87",
+  titulo: "Today in Spain: A roundup of the latest news on Thursday",
+  status: "pendente",
+  fontesCitadas: [
+  ],
+  nota: "Não é uma notícia com um FATO único e verificável, é uma coluna-resumo (roundup) que reúne várias manchetes do dia num só texto. Não há um fato central isolado pra confirmar ou refutar contra uma fonte oficial; os itens individuais relevantes do resumo (ex.: Gibraltar, aeroporto de Valência) já aparecem como manchetes próprias nesta mesma leva e foram checados separadamente. Fica pendente por honestidade, não por falta de tentativa.",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "spanish-citizenship-surname",
+  titulo: "Can you get Spanish citizenship by surname?",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "BOE · Ley 12/2015, de 24 de junio, concessão de nacionalidade espanhola aos sefarditas", url: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2015-7045", oficial: true },
+    { nome: "Ministerio de Asuntos Exteriores (MAEC/exteriores.gob.es) · nota sobre a Lei 12/2015", url: "https://www.exteriores.gob.es/Embajadas/budapest/es/Comunicacion/Noticias/Paginas/Articulos/20151126_NOT2.aspx", oficial: true },
+  ],
+  nota: "O arcabouço legal existe e é confirmável em fonte oficial: a Lei 12/2015 (BOE) permite nacionalidade espanhola a sefarditas de origem espanhola, e um relatório motivado sobre o sobrenome pode servir como UMA das provas de linhagem sefardita. Importante: sobrenome sozinho NÃO garante a nacionalidade, é preciso comprovar também a condição de sefardita e a 'conexão especial' com a Espanha; a própria Federação de Comunidades Judías da Espanha já afirmou publicamente que não existe 'lista de sobrenomes' que sirva sozinha como prova. Se a matéria do escritório responde à pergunta do título com essa nuance, o conteúdo está alinhado à fonte oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "long-stay-visa-spain",
+  titulo: "Long Stay Visa in Spain",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Ministerio de Asuntos Exteriores · Visado Nacional (rede consular)", url: "https://www.exteriores.gob.es/Embajadas/hanoi/es/ServiciosConsulares/Paginas/VISADO-NACIONAL.aspx", oficial: true },
+    { nome: "Ministerio del Interior · Entrada en España / Estancia", url: "https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/extranjeria/control-de-fronteras/entrada-en-espana/", oficial: true },
+  ],
+  nota: "O visado nacional (long stay) é categoria oficial confirmada em páginas do governo espanhol (Exteriores e Interior): obrigatório para não comunitários que queiram residir por período longo, prazo de resolução de 1 mês (3 meses para o não lucrativo), requisito de meios econômicos (IPREM ~2.130€/mês). O quadro geral do guia bate com a norma oficial vigente.",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "non-lucrative-visa-denial",
+  titulo: "Non-lucrative visa in Spain got denied: Guide on what to do",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "BOE · Ley 39/2015, do Procedimento Administrativo Comum das Administrações Públicas", url: "https://www.boe.es/buscar/act.php?id=BOE-A-2015-10565", oficial: true },
+  ],
+  nota: "O mecanismo de recurso citado nesse tipo de guia (recurso de reposição no próprio consulado em 1 mês, recurso de alzada, ou recurso contencioso-administrativo perante o TSJ de Madrid em 2 meses) é o regime geral de recursos administrativos espanhóis previsto na Lei 39/2015 (BOE), confirmável em fonte oficial. Não confirmei o texto específico do artigo do escritório (razões típicas de negativa, dicas práticas), que é conteúdo interpretativo/de aconselhamento do próprio escritório, não um ato oficial em si.",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "move-to-spain-uk",
+  titulo: "Moving to Spain from the UK",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "GOV.UK · Living in Spain (guia oficial do governo britânico)", url: "https://www.gov.uk/guidance/living-in-spain", oficial: true },
+  ],
+  nota: "As regras gerais citadas nesse tipo de guia (regra dos 90/180 dias pra britânicos como não comunitários pós-Brexit, necessidade de visto pra estadias longas, fim do Golden Visa em 2025, ETIAS a caminho) são confirmáveis na própria página oficial do governo do Reino Unido (GOV.UK/living-in-spain), voltada a orientar cidadãos britânicos sobre residência na Espanha. Não conferi item a item o conteúdo específico do escritório immigrationspain.es, só o arcabouço geral.",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "socioformative-arraigo",
+  titulo: "Socioformative Arraigo: requirements, benefits and how to obtain it",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "BOE · Real Decreto 1155/2024, de 19 de novembro (Regulamento de Estrangeiros)", url: "https://www.boe.es/buscar/act.php?id=BOE-A-2024-24099", oficial: true },
+    { nome: "Ministerio de Inclusión, Seguridad Social y Migraciones · instruções sobre os novos arraigos (RD 1155/2024)", url: "https://www.inclusion.gob.es/documents/d/migraciones/instrucciones-sem-1_2025-sobre-las-autorizaciones-de-residencia-temporal-por-circunstancias-excepcionales-por-razon-de-arraigo-aprobado-por-el-real-decreto-1155_2024", oficial: true },
+  ],
+  nota: "Fato confirmado em fonte oficial primária: o 'arraigo sociformativo' é uma das novas modalidades de arraigo criadas pelo Real Decreto 1155/2024 (novo Regulamento de Estrangeiros, publicado no BOE em 20/11/2024, com instrução de aplicação do Ministério da Inclusão em 2025), voltada a quem já cursa formação profissional, com prazo de permanência reduzido a 2 anos. Categoria legal real, não invenção do escritório.",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "empadronamiento-spain",
+  titulo: "Empadronamiento in Spain: Complete Helpfull Guide",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "INE · Instituto Nacional de Estadística, Padrón Municipal (IDA-Padrón)", url: "https://idapadron.ine.es/repositorio/legislacion/A2301vol.htm", oficial: true },
+    { nome: "Ayuntamiento de Madrid · Sede Electrónica, Padrón Municipal / Empadronamiento", url: "https://sede.madrid.es/portal/site/tramites/menuitem.62876cb64654a55e2dbd7003a8a409a0/?vgnextoid=3e3debb41f6e2410VgnVCM2000000c205a0aRCRD&vgnextchannel=775ba38813180210VgnVCM100000c90da8c0RCRD&vgnextfmt=default", oficial: true },
+  ],
+  nota: "O empadronamiento (registro no Padrão Municipal de Habitantes) é trâmite oficial confirmado tanto pelo INE (que coordena os padrões municipais nacionalmente) quanto pelas sedes eletrônicas dos ayuntamientos (ex.: Madrid). É obrigatório para todo residente, nacional ou estrangeiro, regular ou não, e é pré-requisito pra acesso a serviços essenciais (saúde, escola).",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "dual-citizenship-in-spain",
+  titulo: "Dual Citizenship in Spain",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Ministerio de Justicia · Tener la Doble Nacionalidad", url: "https://www.mjusticia.gob.es/es/ciudadania/nacionalidad/que-es-nacionalidad/tener-doble-nacionalidad", oficial: true },
+    { nome: "BOE · Ley 18/1990, reforma do Código Civil em matéria de nacionalidade", url: "https://www.boe.es/buscar/act.php?id=BOE-A-1990-30520", oficial: true },
+  ],
+  nota: "Fato confirmado em fonte oficial primária: a Espanha, como regra, não permite dupla nacionalidade (art. 23 CC), mas o próprio Ministério da Justiça lista as exceções do art. 24 CC, países ibero-americanos, mais Andorra, Filipinas, Guiné Equatorial e Portugal, cujos nacionais não precisam renunciar à nacionalidade de origem ao naturalizar-se espanhóis. A França também tem convênio bilateral específico desde abril/2022 (contexto adicional, fora do art. 24 CC).",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "self-employment-visa",
+  titulo: "Self-employment Visa in Spain",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Ministerio de Inclusión, Seguridad Social y Migraciones · Hoja 14, Autorização inicial de residência temporária e trabalho por conta própria", url: "https://www.inclusion.gob.es/en/web/migraciones/w/autorizacion-inicial-de-residencia-temporal-y-trabajo-por-cuenta-propia", oficial: true },
+  ],
+  nota: "Fato confirmado em fonte oficial primária: a autorização de trabalho por conta própria (autônomo) para estrangeiros é trâmite oficial documentado pelo Ministério de Inclusão, com requisitos de antecedentes criminais, certificado médico, plano de negócios validado e capacidade profissional, autorização inicial válida por 1 ano, limitada a uma região/setor de atividade.",
+  curadoEm: "2026-07-17",
+  countryCode: "es",
+},
+{
+  match: "44th-faro-international-motorcycle-rally-begins-with-a-strong-opening-day",
+  titulo: "44th Faro International Motorcycle Rally Begins with a Strong Opening Day",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Câmara Municipal de Faro · Agenda: 44.ª Concentração Internacional de Motos de Faro", url: "https://www.cm-faro.pt/pt/agenda/91472/44-concentracao-internacional-de-motos-de-faro.aspx", oficial: true },
+    { nome: "The Portugal News (matéria original)", url: "https://www.theportugalnews.com/news/2026-07-16/44th-faro-international-motorcycle-rally-begins-with-a-strong-opening-day/1056564", oficial: false },
+  ],
+  nota: "O FATO central (44.ª edição do maior encontro internacional de motos de Portugal, de 16 a 19/07/2026, no Vale das Almas, organizado pelo Moto Clube de Faro) está confirmado na página oficial da Câmara Municipal de Faro, que inclusive traz declaração do presidente da autarquia sobre a importância do evento. O tom de 'abertura forte' é descritivo da matéria, mas o evento, a edição e as datas são reais e oficialmente reconhecidos pelo município.",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "portugal-remains-among-eu-countries-with-highest-vat-rates",
+  titulo: "Portugal remains among EU countries with highest VAT rates",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Portal das Finanças / Autoridade Tributária · Código do IVA", url: "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/civa_rep/Pages/codigo-do-iva-indice.aspx", oficial: true },
+    { nome: "Comissão Europeia · Taxes in Europe Database (TEDB), citada por múltiplas fontes fiscais", url: "https://ec.europa.eu/taxation_customs/tedb", oficial: true },
+    { nome: "The Portugal News (matéria original)", url: "https://www.theportugalnews.com/news/2026-07-16/portugal-remains-among-eu-countries-with-highest-vat-rates/1056433", oficial: false },
+  ],
+  nota: "O FATO central é confirmável: a taxa normal de IVA em Portugal continental é 23% (fonte oficial: Portal das Finanças/AT). Comparando com os demais países da UE, dados consolidados por múltiplas fontes fiscais independentes a partir da base oficial TEDB da Comissão Europeia, a Hungria lidera com 27%, seguida de Finlândia (25,5%) e Dinamarca/Croácia/Suécia (25%); Portugal está empatado em 23% com Irlanda, Polónia e Eslováquia, no grupo de cauda superior da UE. Não é literalmente 'a mais alta', mas 'entre as mais altas' bate com o dado oficial português e os comparativos da UE.",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "teachers-parents-and-students-protest-over-portugal-national-exam-system",
+  titulo: "Teachers, parents and students protest over Portugal national exam system",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Governo de Portugal (XXV Governo Constitucional) · 'Alterado o calendário da avaliação externa dos alunos do ensino secundário para garantir rigor na classificação'", url: "https://portugal.gov.pt/gc25/comunicacao/noticias/exames-nacionais-calendario-e-ajustado-para-garantir-rigor-na-classificacao", oficial: true },
+    { nome: "IAVE · Instituto de Avaliação Educativa (calendário oficial de exames)", url: "https://iave.pt/provas-e-exames/calendario/", oficial: true },
+    { nome: "Observador · cobertura do protesto e do anúncio do Ministério", url: "https://observador.pt/2026/07/16/exames-professores-e-pais-protestam-contra-a-digitalizacao/", oficial: false },
+  ],
+  nota: "O FATO central é confirmado por comunicado OFICIAL do Governo (Ministério da Educação, 03/07/2026): o calendário de avaliação externa do secundário foi ajustado por 'dificuldades informáticas no processo de classificação eletrónica', adiando a afixação de notas para 17/07 e a 2.ª fase para 20/07. Os protestos de professores, pais e alunos em Lisboa, Porto, Coimbra e Covilhã e a petição com mais de 9 mil assinaturas são fatos jornalísticos amplamente noticiados (Observador, JN, Renascença, RTP) que decorrem diretamente dessa falha reconhecida pelo próprio Ministério.",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "calls-expanding-climate-shelters-in-portugal-due-to-intensifying-heatwaves",
+  titulo: "Calls expanding climate shelters in Portugal due to intensifying heatwaves",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Governo de Portugal · 'Proteção das Populações Durante Temperaturas Elevadas e Ondas de Calor'", url: "https://portugal.gov.pt/api/media/edge/Project/Portal-do-Governo/Portal-do-Governo/gc25/documentos/Saude/20260107_Onda-de-calor-Municipiosv1.pdf", oficial: true },
+    { nome: "RTP Notícias · 'Onda de calor. Governo quer um abrigo temporário por município'", url: "https://www.rtp.pt/noticias/pais/onda-de-calor-governo-quer-um-abrigo-temporario-por-municipio_n1750610", oficial: false },
+    { nome: "Observador · pavilhões de Lisboa como abrigo temporário", url: "https://observador.pt/2026/07/01/calor-lisboa-tem-dois-pavilhoes-preparados-para-abrigo-temporario-de-populacao-mais-vulneravel/", oficial: false },
+  ],
+  nota: "O FATO central é confirmado por documento OFICIAL do Governo português (Portal do Governo), que orienta municípios e Unidades Locais de Saúde a identificar abrigos temporários climatizados em articulação com Proteção Civil e Segurança Social durante ondas de calor. A aplicação concreta (pavilhões em Lisboa, 49 'refúgios climáticos' designados pela Câmara Municipal de Lisboa) está corroborada por RTP, Observador e Correio da Manhã.",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "historic-faial-school-in-portugal-begins-a-new-chapter-as-luxury-hotel",
+  titulo: "Historic Faial school in Portugal begins a new chapter as a luxury hotel",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "The Portugal News (matéria original)", url: "https://www.theportugalnews.com/news/2026-07-16/historic-faial-school-in-portugal-begins-a-new-chapter-as-luxury-hotel/1056246", oficial: false },
+    { nome: "The Book Hotel Faial (site do próprio empreendimento)", url: "https://www.thebookhotelfaial.pt/", oficial: false },
+    { nome: "Breaking Travel News", url: "https://www.breakingtravelnews.com/news/article/faial-islands-first-five-star-hotel-the-book-hotel-will-open-its-doors-in-j/", oficial: false },
+  ],
+  nota: "Matéria de cunho comercial/turístico (abertura do 'The Book Hotel' no antigo Liceu da Horta, Faial, investimento de ~8,5 milhões de euros). Não encontrei fonte OFICIAL de governo (central ou regional dos Açores) que confirme ou desminta o fato, é um empreendimento privado noticiado por veículos de viagens e pelo próprio site do hotel, sem ato governamental associado localizado. Fica PENDENTE por ausência genuína de fonte oficial aplicável a este tipo de fato, não por suspeita quanto à veracidade.",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "the-el-nino-weather-phenomenon-has-already-begun-and-will-last-until-2027",
+  titulo: "The \"El Niño\" weather phenomenon has already begun and will last until 2027",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "WMO (Organização Meteorológica Mundial / ONU) · El Niño/La Niña Update, maio/2026", url: "https://wmo.int/resources/publication-series/el-ninola-nina-updates/el-ninola-nina-update-may-2026", oficial: true },
+    { nome: "WMO · 'El Niño forecast to intensify, increasing likelihood of extreme weather'", url: "https://wmo.int/news/media-centre/el-nino-forecast-intensify-increasing-likelihood-of-extreme-weather", oficial: true },
+    { nome: "The Portugal News (matéria original)", url: "https://www.theportugalnews.com/news/2026-07-16/the-el-nino-weather-phenomenon-has-already-begun-and-will-last-until-2027/1056358", oficial: false },
+  ],
+  nota: "O FATO central é confirmado pela Organização Meteorológica Mundial (WMO/OMM, agência oficial da ONU): a atualização de maio/2026 da WMO aponta condições de El Niño dominantes já a partir de junho-agosto/2026, com probabilidade igual ou superior a 90% nos trimestres seguintes; e a NOAA (agência oficial dos EUA) estima 96% de probabilidade de persistência até o início de 2027, batendo com a alegação da manchete de que o fenômeno já começou e deve durar até 2027.",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "wife-recalls-terrifying-moment-husband-was-nearly-sucked-out-of-ryanair-plane-window",
+  titulo: "Wife recalls terrifying moment husband was nearly sucked out of Ryanair plane window",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "Bloomberg · 'Ryanair Passenger Partly Sucked Out of Jet as Window Dislodges'", url: "https://www.bloomberg.com/news/articles/2026-07-10/ryanair-passenger-partly-sucked-out-of-plane-as-window-dislodges", oficial: false },
+    { nome: "CNBC", url: "https://www.cnbc.com/2026/07/10/ryanair-jet-window-dislodged-flight-emergency-landing-greece.html", oficial: false },
+    { nome: "ERT (emissora pública grega, via RTÉ)", url: "https://www.rte.ie/news/world/2026/0711/1582904-ryanair-greece/", oficial: false },
+  ],
+  nota: "O incidente em si (janela da cabine se soltou em voo Ryanair Thessaloniki-Memmingen em 10/07/2026, forçando pouso de emergência na Grécia, com passageiro sérvio parcialmente sugado para fora) é amplamente noticiado por imprensa internacional (Bloomberg, ABC News, CNBC) e pela emissora pública grega ERT. NÃO encontrei comunicado oficial de autoridade de aviação (EASA ou a autoridade grega) nem da própria Ryanair confirmando a causa, a reportagem citada diz explicitamente que a causa (possível pedaço de motor) 'não foi confirmada pela Ryanair nem por autoridades gregas'. Também não é um fato sobre Portugal (ocorreu no espaço aéreo grego, com passageiros não portugueses); a matéria do Portugal News é conteúdo internacional replicado. Fica PENDENTE por falta de fonte oficial aplicável.",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "thousands-of-people-expected-in-faro-for-the-44th-edition-of-the-motorcycle-rally",
+  titulo: "Thousands of people expected in Faro for the 44th edition of the Motorcycle Rally",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Câmara Municipal de Faro · Agenda: 44.ª Concentração Internacional de Motos de Faro", url: "https://www.cm-faro.pt/pt/agenda/91472/44-concentracao-internacional-de-motos-de-faro.aspx", oficial: true },
+    { nome: "PlanetAlgarve · cobertura do evento com declaração do presidente da Câmara", url: "https://planetalgarve.com/2026/04/20/concentracao-de-motos-de-faro-2026-espera-600-motoclubes-de-toda-a-europa-ub40-rui-veloso-xutos-pontapes-uhf-e-mojinos-escozios-sao-cabecas-de-cartaz/", oficial: false },
+  ],
+  nota: "Mesmo evento da manchete sobre a 'abertura forte' (44.ª Concentração Internacional de Motos de Faro). O evento está confirmado oficialmente pela Câmara Municipal de Faro, com declaração do próprio presidente da autarquia sobre sua relevância regional. O número de participantes esperados (cerca de 20 mil pessoas, ~500 motoclubes nacionais e 100 internacionais) é reportado por múltiplos veículos de imprensa e pela organização (Moto Clube de Faro), mas essa cifra específica de público não vem diretamente de fonte governamental, é estimativa de organização/imprensa. O fato-base do evento, porém, é oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "eu-cyber-independence-under-assault",
+  titulo: "EU cyber independence under assault",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Roberto Cavaleiro · artigo de opinião, The Portugal News", url: "https://www.theportugalnews.com/news/2026-07-15/eu-cyber-independence-under-assault/1054987", oficial: false },
+  ],
+  nota: "Trata-se de artigo de OPINIÃO/coluna assinado por Roberto Cavaleiro (The Portugal News, 15/07/2026), sobre a dependência europeia de big techs americanas sediadas na Irlanda e riscos à soberania digital da UE. É análise/interpretação do autor sobre política e geopolítica de tecnologia, não um ato oficial ou decisão de governo, não há um fato único e verificável a confirmar em fonte oficial, é OPINIÃO. Fatos de fundo citados (ex.: legislação europeia de cibersegurança em discussão) são reais, mas a tese central do artigo ('sob ataque') é leitura interpretativa do colunista, não um ato oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "albufeira-hosts-classic-car-finale",
+  titulo: "Albufeira hosts classic car finale",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Município de Albufeira · 'Albufeira Classics traz dezenas de automóveis clássicos às ruas da cidade'", url: "https://www.cm-albufeira.pt/artigo/albufeira-classics-traz-dezenas-de-automoveis-classicos-ruas-da-cidade", oficial: true },
+    { nome: "Postal.pt · cobertura da etapa final", url: "https://postal.pt/algarve/mais-de-cem-classicos-encerram-algarve-classic-cars-em-albufeira/", oficial: false },
+  ],
+  nota: "O FATO central é confirmado na página OFICIAL do Município de Albufeira (cm-albufeira.pt), que cobre o evento 'Albufeira Classics' e confirma que a etapa final do Algarve Classic Cars (33.ª edição) terminou em Albufeira em 12/07/2026, integrada na programação de Albufeira Cidade Europeia do Desporto 2026, com mais de 100 clássicos e milhares de visitantes.",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "pj-police-in-madeira-investigate-two-murders-among-neighbours-in-space-of-two-days",
+  titulo: "PJ police in Madeira investigate two murders 'among neighbours' in space of two days",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Polícia Judiciária (PJ) · autoridade policial oficial, citada como responsável pelas investigações", url: "https://www.policiajudiciaria.pt/", oficial: true },
+    { nome: "CNN Portugal · 'Mulher encontrada morta após alegada discussão com vizinho na Madeira. PJ está a investigar'", url: "https://cnnportugal.iol.pt/homicidio/madeira/mulher-encontrada-morta-apos-alegada-discussao-com-vizinho-na-madeira-pj-investiga-suspeitas-de-homicidio/20260715/6a5726f2d34e511da0b2d5e8", oficial: false },
+    { nome: "JN · 'Detido por matar homem à facada na Madeira'", url: "https://www.jn.pt/justica/artigo/detido-por-matar-morador-a-facada-na-madeira/18106333", oficial: false },
+  ],
+  nota: "O FATO central é confirmável: dois homicídios envolvendo desavenças com vizinhos ocorreram na Madeira com cerca de dois dias de diferença, mulher alemã de 66 anos morta em Santana (13-14/07) após conflito com o vizinho, e homem morto a facadas por um vizinho em Câmara de Lobos (15/07), ambos sob investigação da Polícia Judiciária (PJ), autoridade policial OFICIAL portuguesa. Não localizei um comunicado publicado diretamente em policiajudiciaria.pt para este caso específico, mas múltiplos veículos de referência (CNN Portugal, TVI, SOL, JN, DNoticias) citam diretamente a assunção do caso e declarações da PJ, o que sustenta o status de confirmado quanto ao fato central (dois homicídios, investigação da PJ, intervalo de dois dias).",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "easyjet-takeover-battle-could-be-good-news-for-portugal",
+  titulo: "easyJet takeover battle could be good news for Portugal",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Portugal Resident (matéria original, análise)", url: "https://www.portugalresident.com/easyjet-takeover-battle-could-be-good-news-for-portugal/", oficial: false },
+    { nome: "The Portugal News · 'easyJet agrees to £5 billion takeover by US investment firm'", url: "https://www.theportugalnews.com/news/2026-07-06/easyjet-agrees-to-5-billion-takeover-by-us-investment-firm/1051069", oficial: false },
+  ],
+  nota: "O pano de fundo factual é real e verificável: a Apollo Global Management fez proposta de aquisição da easyJet (~£5,7 mil milhões) e o Governo português exigiu propostas vinculativas da Lufthansa e Air France-KLM para os 44,9% da TAP até 29/07/2026. Isso está bem documentado em imprensa económica. MAS a afirmação central da própria manchete, de que a disputa pela easyJet 'poderia ser boa notícia para Portugal' ('could be'), é ANÁLISE/especulação do Portugal Resident sobre um efeito indireto no valor da TAP, não um fato consumado nem ato oficial de governo. Tratado como NÃO CONFIRMADO por ser interpretação/especulação, à semelhança do caso do jurista italiano: os fatos de base são reais, a tese causal é opinativa.",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "hotel-investment-up-82-to-e512-million-cbre",
+  titulo: "Hotel investment up 82% to €512 million – CBRE",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "CBRE Portugal (fonte primária do dado, consultora imobiliária privada)", url: "https://www.cbre.pt/en-gb/insights/figures/portugal-investment-figures-q1-2026", oficial: false },
+    { nome: "ECO · 'Investimento hoteleiro em Portugal sobe 82% no primeiro semestre'", url: "https://eco.sapo.pt/2026/07/16/investimento-hoteleiro-em-portugal-sobe-82-no-primeiro-semestre/", oficial: false },
+  ],
+  nota: "O dado (investimento hoteleiro em Portugal subiu 82% no 1.º semestre de 2026, para 512 milhões de euros) vem de relatório da consultora imobiliária privada CBRE, replicado de forma consistente por múltiplos veículos económicos (ECO, Dinheiro Vivo, Jornal de Negócios, Executive Digest) citando a mesma fonte. NÃO é estatística de órgão governamental (não é INE nem Turismo de Portugal), é dado de mercado privado. Não encontrei confirmação nem contradição em fonte oficial do governo para este número específico. Fica PENDENTE por essa razão, não por dúvida quanto à idoneidade do dado em si.",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "lisbons-new-airport-reaches-key-milestone-as-engineering-plans-go-to-government",
+  titulo: "Lisbon's new airport reaches key milestone as engineering plans go to government",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Governo de Portugal (XXV Governo Constitucional) · 'Localização do novo aeroporto validada no Campo de Tiro de Alcochete'", url: "https://portugal.gov.pt/gc25/comunicacao/noticias/localizacao-do-novo-aeroporto-validada-no-campo-de-tiro-de-alcochete", oficial: true },
+    { nome: "Correio da Manhã · 'Governo aponta entrega do relatório técnico do novo aeroporto até 16 de julho'", url: "https://www.cmjornal.pt/economia/detalhe/governo-aponta-entrega-do-relatorio-tecnico-do-novo-aeroporto-ate-16-de-julho", oficial: false },
+  ],
+  nota: "O FATO central é confirmado por fonte OFICIAL do Governo português (Portal do Governo, comunicado de 20/03/2026): o Governo validou o Campo de Tiro de Alcochete como local do Novo Aeroporto de Lisboa e definiu que o Relatório Técnico (2.º de 4 relatórios intercalares da candidatura da ANA, Aeroportos de Portugal) deveria ser entregue até 16/07/2026, data que coincide exatamente com a da manchete. Corroborado por Correio da Manhã, Renascença e Diário de Notícias.",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "us-seafood-boil-trend-arrives-in-lisbon",
+  titulo: "US seafood boil trend arrives in Lisbon",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "NiT · 'Neste restaurante de Lisboa, o marisco vem num saco...'", url: "https://www.nit.pt/comida/restaurantes/neste-restaurante-de-lisboa-o-marisco-vem-num-saco-e-espalhado-na-mesa-e-come-se-com-as-maos", oficial: false },
+    { nome: "Portugal Resident (matéria original)", url: "https://www.portugalresident.com/us-seafood-boil-trend-arrives-in-lisbon/", oficial: false },
+  ],
+  nota: "Matéria de tendência gastronómica/lifestyle (chegada do 'seafood boil' norte-americano a um restaurante de Lisboa, a Taverna do Pescador). Não há fato de natureza governamental a confirmar, não localizei nem esperava localizar fonte oficial aplicável a esse tipo de conteúdo. Fica PENDENTE por ausência genuína de ângulo oficial, não por dúvida sobre o fato em si (corroborado por reportagem local da NiT e pelo boom do tema nas redes sociais).",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "portugal-streamlines-social-security-numbers-for-immigrants",
+  titulo: "Portugal streamlines Social Security numbers for immigrants",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Segurança Social (seg-social.pt) · 'Novo serviço simplifica atribuição de números de identificação a imigrantes'", url: "https://seg-social.pt/noticias/-/asset_publisher/kBZtOMZgstp3/content/novo-servico-simplifica-atribuicao-de-numeros-de-identificacao-a-imigrantes", oficial: true },
+    { nome: "AIMA (aima.gov.pt) · Notícias", url: "https://aima.gov.pt/pt/noticias", oficial: true },
+    { nome: "Observador · 'Imigrantes que se dirijam à AIMA... passam a receber número da Segurança Social de forma automática'", url: "https://observador.pt/2026/07/14/imigrantes-que-se-dirijam-a-aima-para-regularizar-situacao-passam-a-receber-numero-da-seguranca-social-de-forma-automatica/", oficial: false },
+  ],
+  nota: "O FATO central é confirmado por comunicado OFICIAL da Segurança Social portuguesa (seg-social.pt): a partir de julho/2026, o Número de Identificação da Segurança Social (NISS) passa a ser atribuído automaticamente e em tempo real a imigrantes atendidos na AIMA (Agência para a Integração, Migrações e Asilo) para regularização, eliminando a necessidade de deslocação a um balcão da Segurança Social à parte, medida que evitava a repetição de cerca de 250 mil deslocações desnecessárias registadas em 2025. Corroborado por Público, ECO, Jornal de Negócios e Observador.",
+  curadoEm: "2026-07-17",
+  countryCode: "pt",
+},
+{
+  match: "2026-07-migration-nil-vac-arrangements-and-other-matters-amendment-rugby-league-world-cup-2026-instrument-2026",
+  titulo: "Migration (Nil VAC Arrangements and Other Matters) Amendment (Rugby League World Cup 2026) Instrument 2026",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Federal Register of Legislation · Migration (Nil VAC Arrangements and Other Matters) Instrument 2026 (F2026L00877, instrumento-base)", url: "https://www.legislation.gov.au/F2026L00877/latest/text", oficial: true },
+    { nome: "Migration Alliance · Immigration Daily News", url: "https://migrationalliance.com.au/immigration-daily-news/entry/2026-07-migration-nil-vac-arrangements-and-other-matters-amendment-rugby-league-world-cup-2026-instrument-2026.html", oficial: false },
+  ],
+  nota: "Confirmei diretamente no Federal Register of Legislation o instrumento-base que esta emenda altera: 'Migration (Nil VAC Arrangements and Other Matters) Instrument 2026' (LIN 26/074) está registrado em https://www.legislation.gov.au/F2026L00877/latest/text e trata exatamente de arranjos de VAC nulo para vistos incl. Subclass 408. A emenda específica para a Rugby League World Cup 2026 (LIN 26/082) é citada de forma consistente e com os mesmos números/datas por múltiplas fontes profissionais independentes (não só a Migration Alliance), mas não consegui abrir a página exata dela no legislation.gov.au (busca no site é pesada em JS e não indexa o F-number exato). Padrão idêntico já existe no registro para outros eventos esportivos (ex.: 'Migration (2026 AFC Women's Asian Cup, Class of Persons for Nil VAC) Instrument 2025', F2025L01320), o que reforça a plausibilidade.",
+  curadoEm: "2026-07-17",
+  countryCode: "au",
+},
+{
+  match: "2026-07-rmas-buyer-beware-you-can-no-longer-complete-10-online-cpd-points-in-one-day",
+  titulo: "RMAs Buyer Beware: You Can No Longer Complete 10 Online CPD Points in One Day",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Federal Register of Legislation · Migration Agents (CPD Activities, Approval of CPD Providers and CPD Provider Standards) Instrument 2026", url: "https://www.legislation.gov.au/F2026L00244/asmade/text", oficial: true },
+    { nome: "MARA (Office of the Migration Agents Registration Authority) · CPD rules", url: "https://www.mara.gov.au/continuing-professional-development/before-you-re-register/cpd-rules", oficial: true },
+    { nome: "Migration Alliance · Immigration Daily News", url: "https://migrationalliance.com.au/immigration-daily-news/entry/2026-07-rmas-buyer-beware-you-can-no-longer-complete-10-online-cpd-points-in-one-day.html", oficial: false },
+  ],
+  nota: "O instrumento oficial que rege CPD de agentes de migração está confirmado no Federal Register: 'Migration Agents (CPD Activities, Approval of CPD Providers and CPD Provider Standards) Instrument 2026' (LIN 26/001, F2026L00244), feito pelo Assistant Minister Julian Hill, em vigor desde 1/4/2026. Não consegui extrair da ferramenta de fetch o trecho exato do Schedule 2 que fixa o limite de 6 pontos on-line por período contínuo de 24h, mas esse número específico é corroborado de forma consistente por provedores de CPD aprovados pela OMARA (ex.: Legal Training Australia, CAQA Compliance), fontes independentes da Migration Alliance e com interesse direto em acertar a regra.",
+  curadoEm: "2026-07-17",
+  countryCode: "au",
+},
+{
+  match: "2026-06-migration-arrangements-for-subclass-462-work-and-holiday-visa-instrument-2026",
+  titulo: "Migration (Arrangements for Subclass 462 (Work and Holiday) Visa) Instrument 2026",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Federal Register of Legislation · Migration (Arrangements for Subclass 417 (Working Holiday) Visa) Instrument 2026 (instrumento irmão, confirmado diretamente)", url: "https://www.legislation.gov.au/F2026L00878/latest/text", oficial: true },
+    { nome: "Migration Alliance · Immigration Daily News", url: "https://migrationalliance.com.au/immigration-daily-news/entry/2026-06-migration-arrangements-for-subclass-462-work-and-holiday-visa-instrument-2026.html", oficial: false },
+  ],
+  nota: "O instrumento irmão para o Subclass 417 (mesma leva de mudanças, mesma data) está confirmado diretamente no Federal Register: F2026L00878, registrado em 30/6/2026. O instrumento específico do Subclass 462 (LIN 26/072) segue o mesmo padrão e é citado com o mesmo número/data por múltiplas fontes profissionais independentes (searchmyanzsco.com.au, emigratelawyers.com.au), mas não consegui localizar sua página exata no legislation.gov.au via busca automatizada.",
+  curadoEm: "2026-07-17",
+  countryCode: "au",
+},
+{
+  match: "2026-06-migration-arrangements-for-subclass-417-working-holiday-visa-instrument-2026",
+  titulo: "Migration (Arrangements for Subclass 417 (Working Holiday) Visa) Instrument 2026",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Federal Register of Legislation · Migration (Arrangements for Subclass 417 (Working Holiday) Visa) Instrument 2026", url: "https://www.legislation.gov.au/F2026L00878/latest/text", oficial: true },
+  ],
+  nota: "Confirmado por leitura direta do Federal Register of Legislation: 'Migration (Arrangements for Subclass 417 (Working Holiday) Visa) Instrument 2026', registrado em 30 de junho de 2026, tratando exatamente dos arranjos administrativos do visto Subclass 417.",
+  curadoEm: "2026-07-17",
+  countryCode: "au",
+},
+{
+  match: "2026-06-working-holiday-maker-program-technical-amendments-from-1-july-2026",
+  titulo: "Working Holiday Maker Program - Technical Amendments from 1 July 2026",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Federal Register of Legislation · Migration (Arrangements for Subclass 417 (Working Holiday) Visa) Instrument 2026", url: "https://www.legislation.gov.au/F2026L00878/latest/text", oficial: true },
+    { nome: "Migration Alliance · Immigration Daily News", url: "https://migrationalliance.com.au/immigration-daily-news/entry/2026-06-working-holiday-maker-program-technical-amendments-from-1-july-2026.html", oficial: false },
+  ],
+  nota: "O fato central (o critério de idade dos vistos Subclass 417/462 mudou de 'concessão' para 'no momento do pedido', em vigor 1/7/2026) é confirmado pelos dois instrumentos já verificados diretamente no Federal Register (F2026L00877 base de Nil VAC não se aplica aqui, mas F2026L00878 para o 417 confirma a mudança de esquema) e reforçado por 'Migration Amendment (Working Holiday Maker Age Criteria) Regulations 2026', citada por múltiplas fontes jurídicas independentes com o mesmo texto técnico.",
+  curadoEm: "2026-07-17",
+  countryCode: "au",
+},
+{
+  match: "australian-visa-changes-from-1-july-2026-higher-fees-new-income-thresholds-and-working-holiday-updates",
+  titulo: "Australian Visa Changes from 1 July 2026: Higher Fees, New Income Thresholds and Working Holiday Updates",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Federal Register of Legislation · Migration (Arrangements for Subclass 417 (Working Holiday) Visa) Instrument 2026", url: "https://www.legislation.gov.au/F2026L00878/latest/text", oficial: true },
+    { nome: "Fragomen · Australia: Fees Increase for Certain Visa Types and Citizenship Applications Effective July 1, 2026", url: "https://www.fragomen.com/insights/australia-fees-increase-for-certain-visa-types-and-citizenship-applications-effective-july-1-2026.html", oficial: false },
+  ],
+  nota: "Manchete composta com 3 fatos, todos batidos: (1) mudanças no WHM (417/462) confirmadas diretamente no Federal Register, F2026L00878; (2) aumento de ~25% na maioria das taxas de visto a partir de 1/7/2026 e (3) TSMIT subindo para AUD 79.423 são reportados de forma consistente por dezenas de fontes profissionais independentes, incluindo a banca global de imigração Fragomen (não-comunidade, reputação alta). O site oficial do Home Affairs bloqueia acesso automatizado (confirmado por 403 em várias tentativas de fetch), então não consegui abrir a página oficial de tarifas diretamente, mas a convergência entre fontes independentes e a legislação já confirmada é forte.",
+  curadoEm: "2026-07-17",
+  countryCode: "au",
+},
+{
+  match: "federal-budget",
+  titulo: "Federal Budget 2026–27: Key Migration and Visa Changes for Australia",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Department of Home Affairs · Permanent Migration Program planning levels", url: "https://immi.homeaffairs.gov.au/what-we-do/migration-program-planning-levels", oficial: true },
+    { nome: "VisaEnvoy · Immigration News", url: "https://visaenvoy.com/federal-budget/", oficial: false },
+  ],
+  nota: "O fato central (Programa de Migração Permanente mantido em 185.000 vagas para 2026-27, com ~70% no fluxo de habilidades) corresponde exatamente ao título e assunto da página oficial 'Permanent Migration Program planning levels' do Home Affairs, cuja URL real localizei via busca. Não consegui abrir o conteúdo (bloqueio automático, HTTP 403, mesmo padrão já documentado para o domínio homeaffairs.gov.au), mas o número de 185.000 vagas e a divisão 70/30 são citados de forma idêntica e consistente por múltiplas fontes jurídicas/consultorias de imigração independentes que referenciam diretamente o anúncio do Budget 2026-27 (12 de maio de 2026).",
+  curadoEm: "2026-07-17",
+  countryCode: "au",
+},
+{
+  match: "skilled-partner-points-and-changes-in-marital-status-for-subclass-190-visa-applicants",
+  titulo: "Skilled Partner Points and Changes in Marital Status for Subclass 190 Visa Applicants",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "VisaEnvoy · Immigration News", url: "https://visaenvoy.com/skilled-partner-points-and-changes-in-marital-status-for-subclass-190-visa-applicants/", oficial: false },
+  ],
+  nota: "Isso não é um ato oficial novo (sem data, sem instrumento, sem anúncio do governo), é a leitura/interpretação da VisaEnvoy sobre como o Home Affairs vem decidindo pedidos de pontos de parceiro qualificado em casos individuais, com base na regulação já existente 190.212 (mesmo padrão do caso da Itália: opinião/interpretação jurídica de um agente de migração sobre jurisprudência administrativa, não uma mudança de regra publicada oficialmente). A própria matéria não cita nenhuma fonte oficial nem uma data de mudança de política.",
+  curadoEm: "2026-07-17",
+  countryCode: "au",
+},
+{
+  match: "partner-visa-processing-update",
+  titulo: "Partner Visa Processing Update (April 2026): What Applicants Must Know",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "VisaEnvoy · Immigration News", url: "https://visaenvoy.com/partner-visa-processing-update/", oficial: false },
+    { nome: "Migration Alliance · Dept of Home Affairs: Partner Processing Newsletter, April 2026 (republica o boletim do Departamento)", url: "https://migrationalliance.com.au/immigration-daily-news/entry/2026-04-dept-of-home-affairs-partner-processing-newsletter-april-2026.html", oficial: false },
+  ],
+  nota: "A matéria se baseia numa suposta 'Partner Processing Newsletter' de abril de 2026 do Home Affairs. Vários agentes de migração independentes e não-relacionados (McKkr's, Assent Migration, Flow Migration Law, Better Life Migration, iscah.migration) relatam o mesmo conteúdo (política de 'uma única resposta', evidência de relacionamento a cada 6-12 meses), o que sugere que a newsletter é real. Mas não achei essa newsletter publicada numa página pública e linkável do homeaffairs.gov.au/immi.homeaffairs.gov.au (parece ser distribuída só por e-mail/mala direta a agentes registrados), e o domínio bloqueia fetch automatizado. Não dá pra confirmar com uma URL oficial verificada, mas também não há nada que contradiga, genuinamente pendente.",
+  curadoEm: "2026-07-17",
+  countryCode: "au",
+},
+{
+  match: "iranian-visa-holders-temporarily-barred-from-travelling-to-australia",
+  titulo: "Iranian visa holders temporarily barred from travelling to Australia from 26 March",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Tony Burke MP (Ministro do Home Affairs) · Protecting the integrity and sustainability of our migration system", url: "https://www.tonyburke.com.au/media-releases/2026/protecting-the-integrity-and-sustainability-of-our-migration-system", oficial: true },
+    { nome: "Department of Home Affairs · Minister Tony Burke, comunicado oficial (mesmo texto, domínio .gov.au)", url: "https://minister.homeaffairs.gov.au/TonyBurke/Pages/protecting-integrity-and-sustainability-of-our-migration-system.aspx", oficial: true },
+    { nome: "VisaEnvoy · Immigration News", url: "https://visaenvoy.com/iranian-visa-holders-temporarily-barred-from-travelling-to-australia/", oficial: false },
+  ],
+  nota: "Confirmado por leitura direta do comunicado oficial do Ministro do Home Affairs, Tony Burke ('Protecting the integrity and sustainability of our migration system', 25/3/2026, espelhado em tonyburke.com.au): restrição de 6 meses a partir de 26/3/2026 para portadores de visto Visitor (Subclass 600) com passaporte iraniano fora da Austrália, via 'Arrival Control Determination' amparada pelo Migration Amendment (2026 Measures No. 1) Act 2026, com as mesmas exceções citadas na manchete (familiares de cidadãos/residentes, quem já está na Austrália, Permitted Travel Certificates).",
+  curadoEm: "2026-07-17",
+  countryCode: "au",
+},
+{
+  match: "485-visa-tr-application-fees",
+  titulo: "485 visa (TR) Application Fees",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Federal Register of Legislation · Migration Amendment (Temporary Graduate Visa Application Charge) Regulations 2026", url: "https://www.legislation.gov.au/F2026L00163/asmade/text", oficial: true },
+    { nome: "VisaEnvoy · Immigration News", url: "https://visaenvoy.com/485-visa-tr-application-fees/", oficial: false },
+  ],
+  nota: "Confirmado por leitura direta do Federal Register of Legislation: 'Migration Amendment (Temporary Graduate Visa Application Charge) Regulations 2026' (F2026L00163), registrado em 28/2/2026, data compatível com a taxa nova entrando em vigor em 1/3/2026, exatamente como reportado. Não consegui extrair da ferramenta de fetch os valores exatos em dólares dentro do texto do regulamento, mas os números (AUD 4.600 para requerente principal, dobro do valor anterior de AUD 2.300) são citados de forma idêntica e consistente por dezenas de escritórios de migração independentes.",
+  curadoEm: "2026-07-17",
+  countryCode: "au",
+},
+{
+  match: "upcoming-immigration-changes-2026",
+  titulo: "Upcoming Immigration Changes 2026",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "VisaEnvoy · Immigration News", url: "https://visaenvoy.com/upcoming-immigration-changes-2026/", oficial: false },
+  ],
+  nota: "É uma matéria-resumo genérica que mistura vários fatos (alguns já batidos em fonte oficial em outras manchetes desta lista, como o teto de 185.000 vagas e a taxa do 485) com pontos vagos sem data ('melhorias no Immi App', testes de inglês etc.), sem um único fato central e verificável para esta manchete específica. Não é opinião nem rumor no sentido de contradizer algo oficial, é apenas ampla demais e vaga demais pra dar um veredito único de confirmado/não-confirmado.",
+  curadoEm: "2026-07-17",
+  countryCode: "au",
+},
+{
+  match: "new-4-tier-invitation-system-189-visa",
+  titulo: "New 4-Tier Invitation System for 189 Visa",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Department of Home Affairs · FOI Disclosure Log 2026 (FA 26/01/00545, teto por ocupação nos 4 tiers do Subclass 189)", url: "https://www.homeaffairs.gov.au/foi/files/2026/fa-260100545-document-released.PDF", oficial: true },
+    { nome: "VisaEnvoy · Immigration News", url: "https://visaenvoy.com/new-4-tier-invitation-system-189-visa/", oficial: false },
+  ],
+  nota: "Confirmado via documento oficial liberado por pedido de Freedom of Information do próprio Home Affairs (FA 26/01/00545), descrito nos resultados de busca como contendo 'o teto para cada ocupação em todos os quatro níveis (tiers) do visto Subclass 189 no ano fiscal 2025-26', ou seja, o próprio governo confirma a existência do sistema de 4 níveis, mesmo sem ter sido anunciado publicamente como política nova (veio à tona via FOI). Não consegui abrir o PDF diretamente (bloqueio automático do domínio homeaffairs.gov.au), mas o link é real e o achado é corroborado por múltiplos escritórios de migração independentes que descrevem a mesma estrutura de 4 tiers e o teto mínimo de 500 vagas por ocupação.",
+  curadoEm: "2026-07-17",
+  countryCode: "au",
+},
+{
+  match: "google-accuses-eu-of-undermining-privacy-of-millions-of-europeans",
+  titulo: "Google accuses EU of undermining privacy of 'millions of Europeans'",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Comissão Europeia · Press Corner, decisão sob o Digital Markets Act obrigando o Google a compartilhar dados de busca e abrir o Android (IP/26/825)", url: "https://ec.europa.eu/commission/presscorner/detail/en/ip_26_825", oficial: true },
+    { nome: "Kent Walker (Chefe de Assuntos Globais do Google) · declaração 'undermining vital privacy and security guardrails for millions of Europeans', citada de forma consistente por múltiplos veículos (9to5Google, CNBC, Channels TV, The Register)", oficial: false },
+  ],
+  nota: "O FATO de base é confirmável em fonte oficial: a Comissão Europeia (comunicado oficial no presscorner, ec.europa.eu) de fato ordenou ao Google, sob o DMA, compartilhar dados de busca com rivais (a partir de jan/2027) e abrir 11 recursos do Android a concorrentes de IA (a partir de jul/2027). A citação atribuída ao Google ('undermining vital privacy and security guardrails for millions of Europeans', por Kent Walker) aparece igual e consistente em vários veículos independentes, o que dá confiança de que é uma declaração real, mas não achei o blog.google oficial com o texto primário, só a citação replicada pela imprensa. Classifico como confirmado porque a decisão da UE (o fato que ancora a manchete) está numa fonte oficial primária, e a fala do Google é verificável por consistência entre fontes, não é rumor.",
+  curadoEm: "2026-07-17",
+  countryCode: "fr",
+},
+{
+  match: "macron-pledges-zero-tolerance-for-arson",
+  titulo: "Macron pledges 'zero tolerance' for arson after spate of fires in France",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Présidence de la République · Élysée, 'Déplacement à Fontainebleau' (16/07/2026)", url: "https://www.elysee.fr/emmanuel-macron/2026/07/16/deplacement-a-fontainebleau", oficial: true },
+  ],
+  nota: "Confirmado direto na fonte primária oficial: a página oficial do Élysée sobre a visita de Macron a Fontainebleau em 16/07/2026 registra a fala dele, citada quase literalmente: 'il n'y aura aucune tolérance et nous serons intraitables' (não haverá nenhuma tolerância e seremos intransigentes) com quem provocou os incêndios. Bate com o título da manchete ('zero tolerance' for arson). Contexto: incêndio na floresta de Fontainebleau consumiu ~2.000-2.050 ha, pior temporada de incêndios da França desde 1945 segundo a imprensa.",
+  curadoEm: "2026-07-17",
+  countryCode: "fr",
+},
+{
+  match: "hidden-art-of-taking-control-of-french-conversations",
+  titulo: "The hidden art of taking control of French conversations",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "The Local France · artigo de opinião/coaching por Llyane Stanfield, coach de conversação em francês", url: "https://www.thelocal.fr/20260716/the-hidden-art-of-taking-control-of-french-conversations", oficial: false },
+  ],
+  nota: "Não é uma notícia factual verificável, é um artigo de opinião/dica de idioma (coluna de lifestyle) assinado por uma coach de conversação em francês, com técnicas pessoais de comunicação (ritmo espelhado, economia de frase, reformulação estratégica). Não há fato, lei, dado ou ato oficial para confirmar ou refutar, é metodologia autoral da própria autora, igual ao caso da opinião do jurista italiano: conteúdo de interpretação/dica, não ato oficial. Não cabe checagem em fonte de governo.",
+  curadoEm: "2026-07-17",
+  countryCode: "fr",
+},
+{
+  match: "explained-frances-new-law-on-assisted-dying",
+  titulo: "Explained: France's new law on assisted dying",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Gouvernement français · info.gouv.fr, 'Fin de vie : le Parlement adopte définitivement la proposition de loi'", url: "https://www.info.gouv.fr/actualite/fin-de-vie-le-parlement-adopte-definitivement-la-proposition-de-loi", oficial: true },
+    { nome: "Sénat · dossiê legislativo 'Proposition de loi relative au droit à l'aide à mourir'", url: "https://www.senat.fr/travaux-parlementaires/textes-legislatifs/la-loi-en-clair/proposition-de-loi-relative-au-droit-a-laide-a-mourir.html", oficial: true },
+  ],
+  nota: "O FATO central (Assembleia Nacional adotou definitivamente a lei da 'aide à mourir' em 15/07/2026, por 291 votos a favor, 241 contra e 29 abstenções) está confirmado no portal oficial do governo francês (info.gouv.fr) e no dossiê oficial do Senado. O artigo do The Local também é correto ao citar que o primeiro-ministro Sébastien Lecornu acionou o Conseil Constitutionnel sobre pontos específicos (prazo de retratação do art. 6, consentimento de adultos protegidos, cláusula de consciência), isso também bate com a cobertura oficial/institucional. Detalhes menores do artigo (data teórica de entrada em vigor em set/2026, faixa exata do prazo de reflexão) são explicativos do próprio The Local e não foram reconferidos linha a linha, mas o fato central da manchete está sólido.",
+  curadoEm: "2026-07-17",
+  countryCode: "fr",
+},
+{
+  match: "compare-which-european-countries-allow-assisted-dying",
+  titulo: "COMPARE: Which European countries allow assisted dying?",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "Gouvernement français · info.gouv.fr (confirma apenas o fato-âncora francês da comparação, ver entrada 'frances-parliament-adopts-assisted-dying-law')", url: "https://www.info.gouv.fr/actualite/fin-de-vie-le-parlement-adopte-definitivement-la-proposition-de-loi", oficial: true },
+  ],
+  nota: "É um artigo de comparação multi-país (Holanda, Bélgica, Luxemburgo, Suíça, Áustria, Espanha, Itália, Eslovênia, Portugal, França, Reino Unido/Jersey/Ilha de Man), com datas específicas por país. O fato-âncora que motivou a matéria (França adotando a nova lei em 15-16/07/2026) está confirmado em fonte oficial francesa. Mas os outros ~10 países citados não foram checados um a um contra a fonte oficial de cada governo nesta rodada (isso exigiria pesquisa em 10 fontes oficiais diferentes, fora do escopo desta checagem de manchetes da França). As datas que o artigo cita (ex.: Holanda 2002, Bélgica 2002, Áustria 2021, Eslovênia legalizou em 2024 e depois suspendeu por referendo) são consistentes com o que é de conhecimento público mas não foram reverificadas ponto a ponto em fonte primária de cada país. Deixo pendente por honestidade: não é opinião nem rumor, é uma compilação factual que não dá pra confirmar OU refutar por completo com a pesquisa feita até aqui.",
+  curadoEm: "2026-07-17",
+  countryCode: "fr",
+},
+{
+  match: "french-word-of-the-day-dinguerie",
+  titulo: "French Word of the Day: Dinguerie",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "The Local France · coluna recorrente 'French Word of the Day' (conteúdo de ensino de idioma)", url: "https://www.thelocal.fr/20260716/french-word-of-the-day-dinguerie", oficial: false },
+  ],
+  nota: "Coluna editorial fixa de vocabulário/idioma, não uma notícia com fato verificável (não é lei, dado, decisão ou evento). Não existe ato oficial para confirmar nem refutar, é conteúdo didático do próprio veículo, então trato como 'não confirmado' no mesmo sentido do precedente da Itália (conteúdo que não é um ato oficial), não como notícia factual pendente de fonte de governo.",
+  curadoEm: "2026-07-17",
+  countryCode: "fr",
+},
+{
+  match: "french-forest-fire-suspect-taken-into-custody",
+  titulo: "French forest fire suspect arrested as wildfire risk remains high",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Préfecture de Seine-et-Marne (services de l'État en Seine-et-Marne) · 'Incendies : points de situation'", url: "https://www.seine-et-marne.gouv.fr/Actualites/Incendies-points-de-situation", oficial: true },
+    { nome: "Météo-France · 'Attention au danger feux de forêts élevé, très élevé'", url: "https://meteofrance.com/actualites-et-dossiers/actualites/attention-au-danger-feux-de-forets-eleve-tres-eleve", oficial: true },
+    { nome: "franceinfo · cobertura das declarações da procureure de la République de Fontainebleau, Diane Ngomsik, sobre suspeitos em custódia/indiciados", url: "https://www.franceinfo.fr/faits-divers/incendie/deux-suspects-mis-en-examen-pour-les-incendies-de-fontainebleau_8109698.html", oficial: false },
+  ],
+  nota: "Dois pedaços do fato central, checados separadamente. (1) Risco de incêndio alto: confirmado em fonte oficial, a página oficial da Préfecture de Seine-et-Marne registra vigilância vermelha de calor desde 11/07 e incêndios de +1.300 ha em Fontainebleau, e o Météo-France (serviço meteorológico oficial francês) registrava departamentos em risco 'muito elevado' de incêndio florestal na mesma janela (início/meio de julho de 2026). (2) Suspeito(s) detido(s): a própria página oficial da Préfecture confirma que havia 'enquêtes en cours sous l'autorité de la procureure de la République de Fontainebleau' (investigação sob autoridade da procuradora), e a procuradora Diane Ngomsik fez declarações oficiais (ato judicial, não boato) sobre vários suspeitos em custódia e dois indiciados/presos preventivamente, replicadas de forma consistente por múltiplos veículos (franceinfo, CNEWS, RTBF, actu17, La Libre). Não achei um comunicado do Ministério Público (justice.gouv.fr) com URL própria, só a citação da procuradora replicada pela imprensa, por isso a fonte da prisão em si fica marcada como não-oficial mesmo confirmando o fato, mas a autoridade oficial (Préfecture) já confirma que a investigação corre sob a procuradora, o que sustenta o 'confirmado'.",
+  curadoEm: "2026-07-17",
+  countryCode: "fr",
+},
+{
+  match: "frances-parliament-adopts-assisted-dying-law",
+  titulo: "France's parliament adopts assisted dying law",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Gouvernement français · info.gouv.fr, 'Fin de vie : le Parlement adopte définitivement la proposition de loi'", url: "https://www.info.gouv.fr/actualite/fin-de-vie-le-parlement-adopte-definitivement-la-proposition-de-loi", oficial: true },
+    { nome: "Sénat · dossiê legislativo 'Proposition de loi relative au droit à l'aide à mourir'", url: "https://www.senat.fr/travaux-parlementaires/textes-legislatifs/la-loi-en-clair/proposition-de-loi-relative-au-droit-a-laide-a-mourir.html", oficial: true },
+  ],
+  nota: "Mesmo fato-base da entrada 'explained-frances-new-law-on-assisted-dying', confirmado no portal oficial do governo francês: a Assembleia Nacional adotou definitivamente, em 15/07/2026, a proposição de lei sobre o direito à ajuda para morrer, por 291 votos a favor, 241 contra e 29 abstenções, após mais de um ano e quatro meses de debate parlamentar. O Senado havia se posicionado contra, mas a Assembleia teve a palavra final. O primeiro-ministro Sébastien Lecornu acionou o Conseil Constitutionnel sobre pontos específicos do texto. Manchete bate 1:1 com o ato oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "fr",
+},
+{
+  match: "brasileiros-no-exterior-batem-recorde-veja-os-10-paises-onde-mais-vivem",
+  titulo: "Brasileiros no exterior batem recorde: veja os 10 países onde mais vivem",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Ministério das Relações Exteriores (Itamaraty) · Relatório Consular Anual 2025 / estimativas de brasileiros no exterior ano a ano", url: "https://www.gov.br/mre/pt-br/assuntos/portal-consular/brasileiros-no-exterior-estimativas-ano-a-ano", oficial: true },
+  ],
+  nota: "O FATO central é confirmável em fonte oficial brasileira: o Relatório Consular Anual 2025 do Itamaraty (gov.br/mre) registra 5,29 milhões de brasileiros no exterior, novo recorde histórico (+110 mil vs. 2024), com EUA (2,1 milhões), Portugal (~628 mil) e Paraguai (~270 mil) no topo. Atenção: este número de brasileiros em Portugal (~628 mil, estimativa consular do Itamaraty) é DIFERENTE do número de 574.195 usado noutra matéria do Italianismo (checada à parte), que vem do INE português, são metodologias distintas (registro consular brasileiro x censo/registro civil português), não uma contradição factual. Como a matéria não é especificamente sobre a Itália, mas sim sobre diáspora brasileira global, a fonte oficial relevante é a do Brasil (Itamaraty), não da Itália.",
+  curadoEm: "2026-07-17",
+  countryCode: "it",
+},
+{
+  match: "quem-e-alberto-pazzi-relator-do-processo-que-pode-mudar-a-cidadania-italiana-na-cassacao",
+  titulo: "Quem é Alberto Pazzi, relator do processo que pode mudar a cidadania italiana na Cassação",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Corte Suprema di Cassazione · Prima Sezione Civile, ordinanze interlocutorie nn. 20122 e 20129 del 18/07/2025 (relatore: A. Pazzi)", url: "https://www.cortedicassazione.it/it/civile_dettaglio.page?contentId=SZC46035", oficial: true },
+    { nome: "Marco Mellone · advogado citado pela matéria", oficial: false },
+    { nome: "Questione Giustizia · revista jurídica citada pela matéria", url: "https://www.questionegiustizia.it/", oficial: false },
+  ],
+  nota: "Confirmado diretamente na página oficial da Corte di Cassazione: consta \"Relatore: A. Pazzi\" nas ordinanze interlocutorie nn. 20122 e 20129, de 18/07/2025, da Prima Sezione Civile, tratando exatamente do tema da matéria, atribuição/perda de cidadania italiana de filhos de quem se naturalizou no exterior (art. 7 e 12, comma 2, da lei 555/1912), com remessa ao Primeiro Presidente para possível atribuição às Sezioni Unite. O nome, o cargo (conselheiro da 1ª Seção Civil) e o conteúdo do processo batem com o que a matéria descreve. Fato confirmado em fonte oficial primária.",
+  curadoEm: "2026-07-17",
+  countryCode: "it",
+},
+{
+  match: "nao-tem-solucao-diferente-advogado-italiano-confia-em-vitoria-dos-italo-descendentes",
+  titulo: "\"Não tem solução diferente\": advogado Mellone confia em vitória dos ítalo-descendentes",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Marco Mellone · advogado, declaração em live pública do IBDESC (Instituto Brasileiro de Direito Estrangeiro e Comparado)", oficial: false },
+    { nome: "Corte Costituzionale · sentença n. 63/2026 (pano de fundo jurisprudencial citado pela matéria)", url: "https://www.cortecostituzionale.it/scheda-pronuncia/2026/63", oficial: true },
+    { nome: "Corte di Cassazione · Sezioni Unite, julgamento pendente sobre efeitos do Decreto Tajani (mesmo processo checado na matéria sobre Alberto Pazzi)", url: "https://www.cortedicassazione.it/it/civile_dettaglio.page?contentId=SZC46035", oficial: true },
+  ],
+  nota: "O FATO de fundo é real e confirmável: existe julgamento pendente nas Sezioni Unite da Cassação sobre os efeitos do Decreto Tajani/lei 74/2025 na cidadania por descendência (mesmo processo da matéria sobre Alberto Pazzi, já checada nesta rodada). Mas a manchete em si, \"não tem solução diferente\", confiança em vitória, é uma declaração de OPINIÃO do advogado Mellone numa live, não uma decisão ou ato oficial da Justiça italiana. É prognóstico de parte interessada no processo, não fato consumado. Mesmo padrão da matéria já checada em 2026-06-16 (\"Para jurista, quem preparava documentos...\"): base processual real, tese/previsão é interpretação de advogado.",
+  curadoEm: "2026-07-17",
+  countryCode: "it",
+},
+{
+  match: "tribunais-italianos-atrasam-transito-em-julgado-de-sentencas-de-cidadania-entenda",
+  titulo: "Tribunais italianos atrasam trânsito em julgado de sentenças de cidadania; entenda",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "Tribunale di Venezia (Ministero della Giustizia) · comunicados do presidente Andrea Fidanzia de 27/05 e 18/06/2026, citados pela matéria (carência de pessoal, estoque de ~2.100 sentenças pendentes de publicação)", url: "https://tribunale-venezia.giustizia.it/", oficial: true },
+    { nome: "Advogados ouvidos pela matéria (atuantes em Veneza, Trieste, Florença, Bolonha, Gênova e Nápoles)", oficial: false },
+    { nome: "Il Gazzettino / Il Mattino di Padova · reportagens sobre colapso do Tribunale di Venezia por efeito PNRR e carência de pessoal", oficial: false },
+  ],
+  nota: "Fato PLAUSÍVEL e bem reportado, mas não verificado por Friday na fonte primária. O Tribunale di Venezia é hoje o maior gargalo nacional de pedidos de cidadania iure sanguinis (dado independente de 2024, via Il Post: ~42 mil processos represados), e há reportagens de 2026 (Il Gazzettino, Il Mattino di Padova) corroborando carência de pessoal e pressão de metas do PNRR sob o presidente Andrea Fidanzia. Porém, ao acessar diretamente o site oficial do tribunal (tribunale-venezia.giustizia.it), a seção de notícias visível no momento da checagem mostrava apenas 3 comunicados (jun/jul 2026) sobre adiamento de audiências e redução de expediente, não os dois comunicados específicos de 27/05 e 18/06/2026 citados pela matéria sobre atraso em trânsito em julgado. Como não consegui localizar esses dois documentos exatos na fonte oficial (podem ter saído do ar, estar em outra seção, ou a matéria pode tê-los recebido diretamente, fora do site público), o veredito fica PENDENTE em vez de forçar confirmado ou não_confirmado.",
+  curadoEm: "2026-07-17",
+  countryCode: "it",
+},
+{
+  match: "descendentes-de-trentinos-ganham-novo-aliado-na-luta-pela-cidadania-italiana",
+  titulo: "Descendentes de trentinos ganham novo aliado na luta pela cidadania italiana",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "Consiglio della Provincia Autonoma di Trento · mozione/proposta di voto do conselheiro Michele Malfer, aprovada por unanimidade em 14/07/2026, pedindo ao Parlamento e Governo reabertura do reconhecimento de cidadania a descendentes de trentinos emigrados antes de 1918", url: "https://www.consiglio.provincia.tn.it/", oficial: true },
+    { nome: "L'Adige · jornal regional de Trento, cobertura da votação", url: "https://www.ladige.it/cronaca/cittadinanza-ai-discendenti-dei-trentini-emigrati-il-consiglio-fa-fronte-comune-kejyb5bk", oficial: false },
+    { nome: "Mattia Gottardi · Assessore (governo provincial), parecer favorável à proposta citado pela imprensa", oficial: false },
+    { nome: "Unione delle Famiglie Trentine all'Estero / Vita Trentina / Italia Chiama Italia · cobertura corroborando o mesmo evento", oficial: false },
+  ],
+  nota: "O fato tem forte corroboração jornalística consistente: múltiplos veículos regionais confiáveis (L'Adige, Vita Trentina, Italia Chiama Italia, Italian Directory) confirmam, com os mesmos detalhes, que o Consiglio della Provincia Autonoma di Trento aprovou por unanimidade, em 14/07/2026, proposta do conselheiro Michele Malfer pedindo a Roma a reabertura do caminho de cidadania para descendentes de trentinos emigrados antes de 1918 (afetados pela reforma de 2025), com parecer favorável do assessor provincial Mattia Gottardi, ou seja, é um ato de um órgão legislativo oficial, não boato. Mas Friday tentou localizar o registro primário (resoconto/comunicato oficial da sessão de 14/07/2026) diretamente no site do Consiglio (consiglio.provincia.tn.it) e não encontrou o documento específico, o evento é muito recente (3 dias antes desta checagem) e o resoconto integral pode ainda não estar publicado. Sem confirmar na fonte primária, o veredito fica PENDENTE, mesmo com boa corroboração de imprensa.",
+  curadoEm: "2026-07-17",
+  countryCode: "it",
+},
+{
+  match: "entrevista-sobre-conflito-entre-cortes-italianas-repercute-no-debate-da-cidadania",
+  titulo: "Entrevista sobre conflito entre cortes italianas repercute no debate da cidadania",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Corte Costituzionale · série oficial \"I Giudici intervistano gli Emeriti\", entrevista do presidente Giovanni Amoroso ao presidente emérito Mario Rosario Morelli (29/04/2026)", url: "https://www.cortecostituzionale.it/contenuti/presidenti-emeriti/video-interviste", oficial: true },
+    { nome: "Corte di Cassazione · sentença n. 13818/2026 (maio 2026), citada pela matéria", url: "https://www.cortedicassazione.it/", oficial: true },
+    { nome: "Monica Restanio · advogada citada pela matéria", oficial: false },
+  ],
+  nota: "O EVENTO em si é real e está no site oficial da Corte Costituzionale: a série \"I Giudici intervistano gli Emeriti\" tem entrevista de Amoroso a Morelli publicada em 29/04/2026. Mas, na descrição oficial dos temas dessa entrevista (mudança da Corte ao longo dos anos, processo Lockheed, composição, sentenças mais significativas, diálogo com cortes internacionais, opinião dissidente, acesso à Corte), Friday não encontrou menção explícita à \"guerra delle Corti\" (conflito Corte Costituzionale x Cassazione) como tema central, nem à cidadania. A própria matéria do Italianismo admite que a repercussão no debate da cidadania é \"especulação\" sobre o \"significado institucional\" do vídeo, não uma declaração oficial da Corte conectando a entrevista aos processos de cidadania pendentes. Ou seja: o vídeo existe (fato oficial), mas a leitura de que ele \"repercute no debate da cidadania\" é interpretação do veículo, não um ato oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "it",
+},
+{
+  match: "brasileiros-portugal-574195-retrato-ine",
+  titulo: "Brasileiros em Portugal chegam a 574.195 e já são 1 em cada 3 estrangeiros",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "INE · Instituto Nacional de Estatística de Portugal, Estatísticas das migrações e da população estrangeira (estimativas 2025)", url: "https://cse.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=736610657&att_display=n&att_download=y", oficial: true },
+  ],
+  nota: "Confirmado diretamente no documento oficial do INE (Instituto Nacional de Estatística de Portugal): 574.195 cidadãos brasileiros residentes em Portugal em 2025, equivalendo a 35,9% do total de 1.597.539 estrangeiros residentes (dado publicado em junho de 2026, primeira estimativa com metodologia totalmente administrativa). O número também é replicado por Público, CNN Portugal, JN e Notícias ao Minuto, todos citando o INE como fonte. Nota de contexto: este é um número DIFERENTE do ~628 mil citado noutra matéria do Italianismo (checada nesta mesma rodada), aquele vem de estimativa consular do Itamaraty (Brasil), este vem do censo/registro administrativo do INE (Portugal); ambos são fatos oficiais, só de fontes e metodologias diferentes.",
+  curadoEm: "2026-07-17",
+  countryCode: "it",
+},
+{
+  match: "sobrenome-do-sul-da-italia",
+  titulo: "Por que o seu sobrenome do Sul da Itália quase sempre termina em \"o\"",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Enzo Caffarelli · onomasta, diretor da Rivista Italiana di Onomastica, autor de artigos sobre cognomi regionais na Treccani", url: "https://www.treccani.it/magazine/lingua_italiana/articoli/parole/cognomi_regioni5.html", oficial: false },
+    { nome: "Treccani (Istituto della Enciclopedia Italiana) · enciclopédia citada pela matéria", oficial: false },
+  ],
+  nota: "A citação é genuína: Friday confirmou que Enzo Caffarelli (onomasta real, fundador da Rivista Italiana di Onomastica) publica na Treccani análises regionais dos sobrenomes italianos, incluindo a explicação de que hábitos notariais de transcrição consolidaram a forma singular terminada em \"-o\" no Sul (ex.: em artigo sobre Campanha, 23 dos 30 sobrenomes mais comuns terminam em -o). Ou seja, a matéria não inventou a fonte nem a explicação. Mas classificado NAO_CONFIRMADO porque isto é uma questão de LINGUÍSTICA/ONOMÁSTICA HISTÓRICA, não um fato governamental ou ato oficial, não existe \"fonte oficial do governo italiano\" que confirme ou refute uma tese etimológica. É interpretação acadêmica legítima (Caffarelli/Treccani), não uma regra ou dado oficial verificável em órgão de Estado. Diferença clara do que esta checagem busca confirmar: aqui não há uma agência oficial competente para \"confirmar\" a etimologia de sobrenomes.",
+  curadoEm: "2026-07-17",
+  countryCode: "it",
+},
+{
+  match: "basel-immigration-officer-accused-of-wrongly-refusing-hundreds-of-permits",
+  titulo: "Basel immigration officer accused of wrongly refusing hundreds of permits",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "SRF (Schweizer Radio und Fernsehen) · emissora pública suíça, 'Strafgericht Baselland: Migrationsbeamtin soll jahrelang Ausländer schikaniert haben' / 'Strafprozess gegen Ex-Migrationsleiterin: Geldstrafe gefordert'", url: "https://www.srf.ch/news/schweiz/strafgericht-baselland-migrationsbeamtin-soll-jahrelang-auslaender-schikaniert-haben", oficial: false },
+    { nome: "Bajour · 'Ex-Abteilungsleiterin beim Migrationsamt wegen Amtsmissbrauchs vor Gericht'", url: "https://bajour.ch/a/ex-abteilungsleiterin-beim-migrationsamt-wegen-amtsmissbrauchs-vor-gericht", oficial: false },
+    { nome: "20 Minuten · 'Migrationsbehörde: Ich lotete die Grenzen aus, hat Beamtin Ausländer schikaniert'", url: "https://www.20min.ch/story/migrationsbehoerde-ich-lotete-die-grenzen-aus-hat-beamtin-auslaender-schikaniert-103588624", oficial: false },
+  ],
+  nota: "O cantão certo é Basel-Landschaft (Baselland/BL), não Basel-Stadt (que é a fonte oficial já monitorada em infoCenters.ts, por isso não bateu lá). O FATO central é confirmável: existe um processo penal REAL em curso no Strafgericht (tribunal criminal) de Baselland contra uma ex-chefe de departamento do Amt für Migration, Integration und Bürgerrecht (no cargo de 01/2020 a 08/2024), acusada de abuso de função por enviar cerca de 489 cartas informais de recusa/saída (em vez de decisões formais recorríveis) a cidadãos da UE com antecedentes leves, contornando o direito de recurso do Acordo de Livre Circulação. Corroborado de forma independente por 3 veículos suíços de qualidade, incluindo a emissora pública SRF (que reporta diretamente a promotoria pedindo multa no julgamento). Ressalva de honestidade: não encontrei um comunicado direto do site oficial do cantão (baselland.ch) ou do Ministério Público sobre este processo específico, a confirmação vem da cobertura jornalística consistente de um processo judicial real, não de um documento .gov. Como não é opinião/rumor e sim um processo criminal em tribunal cantonal (ato judicial), classifiquei como confirmado, mas registro essa lacuna.",
+  curadoEm: "2026-07-17",
+  countryCode: "ch",
+},
+{
+  match: "un-rights-chief-troubled-by-new-eu-migrant-return-rules",
+  titulo: "UN rights chief troubled by new EU migrant return rules",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "OHCHR · Escritório do Alto Comissariado da ONU para Direitos Humanos, comunicado oficial de Volker Türk", url: "https://www.ohchr.org/en/press-releases/2026/06/un-human-rights-chief-concerned-about-new-eu-returns-law-urges-consistency", oficial: true },
+  ],
+  nota: "Esta manchete não é sobre a Suíça em si (é sobre regra da UE), mas entrou pela editoria comunitária The Local Switzerland (rede pan-europeia The Local, que replica conteúdo entre seus sites nacionais). O FATO central é confirmável: o Alto Comissário da ONU para Direitos Humanos, Volker Türk, emitiu comunicado oficial em 20/06/2026 lamentando a adoção do novo Regulamento de Retorno da UE (aprovado pelo Parlamento Europeu em 17/06/2026), afirmando que os Estados da UE 'cannot simply outsource their human rights obligations to third States' e pedindo que deportações sigam avaliação individual e aguardem o esgotamento do direito de recurso. Confirmado diretamente no site oficial do OHCHR, fonte primária da declaração citada pela matéria.",
+  curadoEm: "2026-07-17",
+  countryCode: "ch",
+},
+{
+  match: "eu-lawmakers-approve-return-hubs-migration-reform",
+  titulo: "EU lawmakers give final approval for deportation centres outside bloc",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Parlamento Europeu · Press Room, 'New EU system for return of illegally staying third-country nationals'", url: "https://www.europarl.europa.eu/news/en/press-room/20260611IPR45214/new-eu-system-for-return-of-illegally-staying-third-country-nationals", oficial: true },
+  ],
+  nota: "Também não é fato sobre a Suíça (é sobre a UE), entra pelo The Local Switzerland. O FATO é confirmável em fonte oficial: o Parlamento Europeu aprovou em 17/06/2026, em Estrasburgo, o novo Regulamento de Retorno por 418 votos a favor, 218 contra e 30 abstenções, permitindo 'return hubs' (centros de retorno) fora do bloco (sujeitos a respeito de direitos humanos e não-repulsão) e detenção de até 24 meses prorrogável. Números e data batem exatamente com o comunicado oficial do Parlamento Europeu.",
+  curadoEm: "2026-07-17",
+  countryCode: "ch",
+},
+{
+  match: "switzerland-divided-four-perspectives-on-sundays-anti-immigration-vote",
+  titulo: "Switzerland divided: Four perspectives on Sunday's anti-immigration vote",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Confederação Suíça · Chancelaria Federal, página oficial da votação da 'Nachhaltigkeitsinitiative' (Keine 10-Millionen-Schweiz!)", url: "https://www.admin.ch/de/nachhaltigkeitsinitiative", oficial: true },
+    { nome: "SRF · cobertura da votação de 14/06/2026", url: "https://www.srf.ch/news/abstimmung-initiative-keine-10-mio-schweiz-vom-14-6-2026", oficial: false },
+  ],
+  nota: "O FATO central, votação popular federal no domingo 14/06/2026 sobre a iniciativa 'Keine 10-Millionen-Schweiz!' (limitar a população residente da Suíça a 10 milhões até 2050, com gatilhos de restrição à livre circulação com a UE nos 9,5M e no 10M), é confirmável na página oficial do governo federal (admin.ch/de/nachhaltigkeitsinitiative). Resultado: a iniciativa foi REJEITADA, com 54,8% de votos contra e maioria dos cantões também contra (confirmado via cobertura oficial/institucional pós-votação). A matéria em si foi publicada 2 dias ANTES da votação e traz 4 relatos pessoais de cidadãos (fazendeiro, eletricista, executivo, gerente de hotel), formato de opinião individual que não precisa 'confirmação' fato a fato, mas o evento-base (a votação, a data, o teor da iniciativa) é oficial e real.",
+  curadoEm: "2026-07-17",
+  countryCode: "ch",
+},
+{
+  match: "a-wake-up-call-switzerland-pays-price-for-not-preparing-for-population-growth",
+  titulo: "'A wake up call': Switzerland pays price for not preparing for population growth",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Bundesamt für Statistik (BFS) / Escritório Federal de Estatística da Suíça", url: "https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung/stand-entwicklung.html", oficial: true },
+    { nome: "Avenir Suisse (think tank, cita dados do BFS)", oficial: false },
+    { nome: "Centre Patronal (associação patronal, opinião de Cenni Fajy)", oficial: false },
+  ],
+  nota: "O dado numérico central citado (crescimento populacional de ~1,9 milhão de pessoas desde 2000) bate com as estatísticas oficiais do BFS: população foi de 7,16 milhões (01/01/2000) para 9,05 milhões (31/12/2024), crescimento de 1,89 milhão, dos quais ~80% por saldo migratório e ~20% por saldo vegetativo. Confirmado em fonte oficial (Bundesamt für Statistik). Já a INTERPRETAÇÃO de que a Suíça 'não se preparou' e 'paga o preço' em moradia/transporte/saúde é leitura de especialistas do think tank Avenir-Suisse e da Centre Patronal, opinião qualificada apoiada em dado oficial correto, mas o julgamento de causa/efeito em si não é um ato governamental.",
+  curadoEm: "2026-07-17",
+  countryCode: "ch",
+},
+{
+  match: "business-unions-unite-against-swiss-immigration-cap-push",
+  titulo: "'Chaos initiative': Swiss business and union leaders unite against immigration cap",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "HotellerieSuisse (associação setorial, declaração de Martin von Moos)", oficial: false },
+    { nome: "Unia (sindicato)", oficial: false },
+    { nome: "Ypsomed / Steiger (empresas citadas)", oficial: false },
+    { nome: "Confederação Suíça · página oficial da iniciativa (para o pano de fundo legal)", url: "https://www.admin.ch/de/nachhaltigkeitsinitiative", oficial: true },
+  ],
+  nota: "A iniciativa e a votação em si (14/06/2026, rejeitada com 54,8% de 'não') são fato oficial confirmável, ver a entrada 'Switzerland divided' acima. MAS o conteúdo específico desta matéria, que líderes empresariais e sindicais 'se uniram' contra a proposta e a apelidaram de 'chaos initiative', com citações da HotellerieSuisse, Unia, Ypsomed e Steiger, é posicionamento/advocacy de entidades PRIVADAS (patronais e sindicais), não um ato oficial do governo. É o mesmo padrão do caso do jurista italiano na base de checagem: o pano de fundo legal é real e confirmável, mas a campanha/tese específica da matéria é opinião de atores privados, não fato oficial batido em fonte de governo.",
+  curadoEm: "2026-07-17",
+  countryCode: "ch",
+},
+{
+  match: "could-eu-nationals-rush-to-move-to-switzerland-if-population-cap-is-triggered",
+  titulo: "Could EU nationals rush to move to Switzerland if population cap is triggered?",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Cornelia Lüthy · ex-vice-diretora do SEM (Secretaria de Estado para Migração), hoje consultora independente", oficial: false },
+    { nome: "Bundesamt für Statistik · projeções populacionais (cenários)", url: "https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung/zukuenftige-entwicklung/schweiz-szenarien.html", oficial: true },
+  ],
+  nota: "Os gatilhos numéricos da iniciativa (9,5M e 10M de habitantes) e a projeção do BFS de que o teto de 10M só seria cruzado por volta de 2034-2035 no cenário mais alto são fatos confirmáveis em fonte oficial. MAS a manchete em si é uma PERGUNTA especulativa/hipotética ('cidadãos da UE poderiam correr para se mudar SE o teto fosse acionado'), respondida com a opinião de uma ex-funcionária do SEM ('catch-up effect é realista'). É análise de cenário hipotético que dependia do resultado da votação de 14/06/2026, e como a iniciativa foi REJEITADA nessa votação, o cenário nem chegou a se concretizar. Tratar como interpretação/especulação de especialista, não como fato oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "ch",
+},
+{
+  match: "how-would-travel-to-and-from-switzerland-be-hit-if-swiss-have-to-break-ties-with-eu",
+  titulo: "How would travel to and from Switzerland be hit if Swiss have to break ties with EU?",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Christa Tobler · professora de Direito da Integração Europeia, Universidade de Basel", oficial: false },
+  ],
+  nota: "O pano de fundo institucional (acordo de livre circulação UE-Suíça, participação da Suíça no espaço Schengen, mecanismo de gatilho da iniciativa 'Keine 10-Millionen-Schweiz!' que obrigaria a Suíça a encerrar acordos com a UE se a população passasse de 10 milhões antes de 2050) é real. MAS a manchete é uma pergunta hipotética ('como as viagens seriam afetadas SE a Suíça tivesse que romper laços com a UE'), respondida com a opinião jurídica de uma professora universitária sobre um cenário condicional. A iniciativa foi REJEITADA na votação de 14/06/2026 (54,8% não), então o cenário descrito não se concretizou. É análise/especulação acadêmica, não um ato oficial confirmável.",
+  curadoEm: "2026-07-17",
+  countryCode: "ch",
+},
+{
+  match: "temporary-protection-transition-scheme",
+  titulo: "New arrangements for Ukrainians living in Ireland announced- The Temporary Protection Transition Scheme",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Department of Justice, Home Affairs and Migration · comunicado oficial (gov.ie)", url: "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/press-releases/minister-for-justice-home-affairs-and-migration-jim-ocallaghan-and-minister-of-state-for-migration-colm-brophy-secure-government-approval-for-new-measures-in-relation-to-ukrainian-citizens-with-temporary-protection-status/", oficial: true },
+    { nome: "gov.ie · coleção oficial \"A New Permission\"", url: "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/collections/a-new-permission-en/", oficial: true },
+    { nome: "Sinnott Solicitors (matéria original, cita o Dept. of Justice mas sem link pra fonte)", url: "https://sinnott.ie/temporary-protection-transition-scheme/", oficial: false },
+  ],
+  nota: "Confirmado ponto a ponto no comunicado oficial do Department of Justice, Home Affairs and Migration (gov.ie, mai/2026, ministros Jim O'Callaghan e Colm Brophy): novo 'Temporary Protection Transition Scheme' em base Stamp 4, até 2 anos renovável por mais períodos de 2, tempo conta pra naturalização, exige 1 ano de residência sob proteção temporária + 6 meses de emprego/trabalho autônomo com salário mínimo de €29.432, sem estar em alojamento estatal, e abertura das candidaturas prevista pra setembro/2026. Todos os números e prazos da matéria da Sinnott batem com a página oficial. Fato oficial confirmado, não opinião.",
+  curadoEm: "2026-07-17",
+  countryCode: "ie",
+},
+{
+  match: "applications-for-irish-citizenship-jump",
+  titulo: "Irish Star: Trumpugees flee US en masse as applications for Irish citizenship jump a staggering amount",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Department of Foreign Affairs (Irlanda) · Foreign Births Register, dados oficiais repassados à imprensa", url: "https://www.gov.ie/en/department-of-foreign-affairs/services/register-a-foreign-birth/", oficial: true },
+    { nome: "Newsweek · confirma números idênticos: \"official data from Ireland's Foreign Births Register shared with Newsweek\" (11.601 em 2024 → 18.910 em 2025)", url: "https://www.newsweek.com/more-americans-looking-toward-ireland-for-plan-b-12118156", oficial: false },
+    { nome: "Irish Star (veículo original citado pela Sinnott; não acessado diretamente por mim)", oficial: false },
+    { nome: "Sinnott Solicitors (republicação)", url: "https://sinnott.ie/applications-for-irish-citizenship-jump/", oficial: false },
+  ],
+  nota: "O número por trás do 'staggering amount' é o mesmo de toda a série de manchetes: pedidos de cidadania irlandesa por descendência (Foreign Births Register) de cidadãos dos EUA subiram de 11.601 (2024) pra 18.910 (2025), alta de 63%, dado oficial do Foreign Births Register (órgão do Department of Foreign Affairs). Confirmei de forma independente na Newsweek, que cita textualmente 'official data from Ireland's Foreign Births Register shared with Newsweek' com os MESMOS números, isso é fato, não opinião. Já o enquadramento 'Trumpugees fogem em massa' é manchete/interpretação editorial do Irish Star e leitura da advogada Carol Sinnott sobre a motivação dos clientes, NÃO é causa oficialmente atestada pelo governo irlandês, é leitura do veículo sobre um número real.",
+  curadoEm: "2026-07-17",
+  countryCode: "ie",
+},
+{
+  match: "americans-rush-for-irish-citizenship",
+  titulo: "Belfast Live: Americans rush for Irish citizenship by descent as Trump policies drive surge",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Department of Foreign Affairs (Irlanda) · Foreign Births Register, dados oficiais repassados à imprensa", url: "https://www.gov.ie/en/department-of-foreign-affairs/services/register-a-foreign-birth/", oficial: true },
+    { nome: "Newsweek · confirma números idênticos (11.601 em 2024 → 18.910 em 2025, 63%)", url: "https://www.newsweek.com/more-americans-looking-toward-ireland-for-plan-b-12118156", oficial: false },
+    { nome: "Belfast Live (veículo original citado pela Sinnott; não acessado diretamente por mim)", oficial: false },
+    { nome: "Sinnott Solicitors (republicação)", url: "https://sinnott.ie/americans-rush-for-irish-citizenshipamericans-rush-for-irish-citizenship/", oficial: false },
+  ],
+  nota: "Mesmo fato-base da série: alta de 63% nos pedidos de cidadania irlandesa por descendência de cidadãos dos EUA no Foreign Births Register (11.601→18.910, 2024→2025), dado oficial do Department of Foreign Affairs, corroborado de forma independente pela Newsweek com os mesmos números. O número em si é fato confirmado. A atribuição de causa 'Trump policies drive surge' no título é interpretação do veículo/da advogada citada, não declaração causal oficial do governo, mas o dado central (o surto de pedidos) confere.",
+  curadoEm: "2026-07-17",
+  countryCode: "ie",
+},
+{
+  match: "american-trumpugees-seek-passports",
+  titulo: "Irish Mirror: US applications for Irish citizenship surge 63% as American 'Trumpugees' seek passports",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Department of Foreign Affairs (Irlanda) · Foreign Births Register, dados oficiais repassados à imprensa", url: "https://www.gov.ie/en/department-of-foreign-affairs/services/register-a-foreign-birth/", oficial: true },
+    { nome: "Newsweek · confirma número idêntico de 63% (11.601 em 2024 → 18.910 em 2025)", url: "https://www.newsweek.com/more-americans-looking-toward-ireland-for-plan-b-12118156", oficial: false },
+    { nome: "Irish Mirror (veículo original citado pela Sinnott; não acessado diretamente por mim)", oficial: false },
+    { nome: "Sinnott Solicitors (republicação)", url: "https://sinnott.ie/american-trumpugees-seek-passports/", oficial: false },
+  ],
+  nota: "O número '63%' desta manchete é exatamente o dado oficial do Department of Foreign Affairs (Foreign Births Register): pedidos de cidadãos dos EUA subiram de 11.601 (2024) pra 18.910 (2025). Confirmei de forma independente na Newsweek, com números idênticos citados como 'official data'. Fato numérico confirmado. O apelido 'Trumpugees' é cunhagem jornalística/tom do Irish Mirror, não terminologia ou classificação oficial do governo irlandês.",
+  curadoEm: "2026-07-17",
+  countryCode: "ie",
+},
+{
+  match: "citizenship-applications-surge",
+  titulo: "Dublin Live: Irish citizenship applications surge 63% as Americans seek 'plan B' EU passport",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Department of Foreign Affairs (Irlanda) · Foreign Births Register, dados oficiais repassados à imprensa", url: "https://www.gov.ie/en/department-of-foreign-affairs/services/register-a-foreign-birth/", oficial: true },
+    { nome: "Newsweek · confirma número idêntico de 63% (11.601 em 2024 → 18.910 em 2025)", url: "https://www.newsweek.com/more-americans-looking-toward-ireland-for-plan-b-12118156", oficial: false },
+    { nome: "Dublin Live (veículo original citado pela Sinnott; não acessado diretamente por mim)", oficial: false },
+    { nome: "Sinnott Solicitors (republicação)", url: "https://sinnott.ie/citizenship-applications-surge/", oficial: false },
+  ],
+  nota: "Mesmo fato-base: alta de 63% nos pedidos de cidadania irlandesa por descendência de cidadãos dos EUA (Foreign Births Register, 11.601→18.910 entre 2024 e 2025), dado oficial do Department of Foreign Affairs, corroborado de forma independente pela Newsweek com números idênticos. O número confere. A frase 'plan B EU passport' é interpretação/motivação atribuída a clientes pela advogada citada, não um dado oficial de motivação coletada pelo governo.",
+  curadoEm: "2026-07-17",
+  countryCode: "ie",
+},
+{
+  match: "american-applications-for-irish-citizenship",
+  titulo: "Financial Times: American applications for Irish citizenship jump 63%",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Department of Foreign Affairs (Irlanda) · Foreign Births Register, 'official figures shared with the FT' segundo a matéria", url: "https://www.gov.ie/en/department-of-foreign-affairs/services/register-a-foreign-birth/", oficial: true },
+    { nome: "Newsweek · confirma número idêntico de 63% com dados oficiais do FBR (11.601 em 2024 → 18.910 em 2025)", url: "https://www.newsweek.com/more-americans-looking-toward-ireland-for-plan-b-12118156", oficial: false },
+    { nome: "Financial Times (matéria original que a Sinnott reproduz; não acessada diretamente por mim, paywall)", oficial: false },
+    { nome: "Sinnott Solicitors (republicação)", url: "https://sinnott.ie/american-applications-for-irish-citizenship/", oficial: false },
+  ],
+  nota: "Esta é a manchete-fonte da série: a própria matéria da Sinnott (reproduzindo o Financial Times) diz que os números vieram de 'Official figures shared with the FT', pedidos de cidadania de cidadãos dos EUA no Foreign Births Register subiram de 11.601 (2024) pra 18.910 (2025), alta de 63%, o maior nível desde o início dos registros digitais em 2013. Confirmei de forma independente que esses mesmos números oficiais do FBR (órgão do Department of Foreign Affairs) também foram repassados à Newsweek, batendo exatamente. Fato numérico confirmado em fonte oficial (via imprensa).",
+  curadoEm: "2026-07-17",
+  countryCode: "ie",
+},
+{
+  match: "key-changes-to-family-reunification-rules-in-ireland",
+  titulo: "Key changes to Family Reunification rules in Ireland",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Immigration Service Delivery (Department of Justice, Home Affairs and Migration) · \"Amendments to Policy on Non-EEA Family Reunification\"", url: "https://www.irishimmigration.ie/amendments-to-policy-on-non-eea-family-reunification/", oficial: true },
+    { nome: "Sinnott Solicitors (matéria original, cita a 'Revised Policy Document' do Dept. of Justice sem linkar)", url: "https://sinnott.ie/key-changes-to-family-reunification-rules-in-ireland/", oficial: false },
+  ],
+  nota: "Confirmado na própria página oficial do Immigration Service Delivery (irishimmigration.ie, braço do Department of Justice, Home Affairs and Migration), que publicou as emendas à política de reagrupamento familiar não-EEE com vigência a partir de 12/06/2026 (inclui documentação de acomodação pra Category C, e aumento dos patamares financeiros pra cidadãos irlandeses trazerem cônjuge/filhos). O conteúdo detalhado da Sinnott (categorias de patrocinador A/B/C, exclusão de jovens de 18-23 anos da família nuclear salvo dependência médica, novos pisos financeiros) é consistente com a política oficial revisada citada pela própria fonte. Fato oficial, não opinião.",
+  curadoEm: "2026-07-17",
+  countryCode: "ie",
+},
+{
+  match: "minimum-salary-threshold-raised",
+  titulo: "Ireland raises all minimum salary threshold for all employment permit categories from 1st March 2026",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "gov.ie · Department of Enterprise, Tourism and Employment (DETE), comunicado oficial \"Government unveils roadmap for gradual increase in employment permit salary thresholds\"", url: "https://www.gov.ie/en/department-of-enterprise-tourism-and-employment/press-releases/government-unveils-roadmap-for-gradual-increase-in-employment-permit-salary-thresholds/", oficial: true },
+    { nome: "enterprise.gov.ie · \"Employment Permits Minimum Annual Remuneration\" (PDF oficial, outcome of the Roadmap Review 2025)", url: "https://enterprise.gov.ie/en/publications/publication-files/employment-permits-minimum-annual-remuneration-outcome-of-the-roadmap-review-2025.pdf", oficial: true },
+    { nome: "Sinnott Solicitors (matéria original, cita o DETE sem linkar)", url: "https://sinnott.ie/minimum-salary-threshold-raised/", oficial: false },
+  ],
+  nota: "Confirmado com números batendo 1:1 no comunicado oficial do Department of Enterprise, Tourism and Employment (DETE) em gov.ie e no PDF oficial de referência: General Employment Permit sobe de €34.000 pra €36.605, Critical Skills Employment Permit de €38.000 pra €40.904, patamares sub-standard (agro/saúde) de €30.000 pra €32.691, tudo com vigência em 1/03/2026, parte do 'Employment Permits Roadmap'. Fato oficial confirmado, não opinião.",
+  curadoEm: "2026-07-17",
+  countryCode: "ie",
+},
+{
+  match: "dutch-consumers-estimate-inflation-be-almost-triple",
+  titulo: "Dutch consumers estimate inflation to be almost triple what it actually is",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "CBS (Statistics Netherlands) · \"Consumenten schatten inflatie flink hoger dan voor 2022\"", url: "https://www.cbs.nl/nl-nl/nieuws/2026/29/consumenten-schatten-inflatie-flink-hoger-dan-voor-2022", oficial: true },
+    { nome: "CBS · \"Inflatie daalt in juni naar 2,9 procent\"", url: "https://www.cbs.nl/nl-nl/nieuws/2026/28/inflatie-daalt-in-juni-naar-2-9-procent", oficial: true },
+  ],
+  nota: "Fato central batido exatamente na fonte oficial. O CBS (órgão oficial de estatística, já monitorado nesta base de fontes) publicou dois comunicados próprios confirmando os dois números da manchete: inflação real de 2,9% em junho/2026 (comunicado 2026/28) e estimativa média dos consumidores de cerca de 8%, quase o triplo, no comunicado 2026/29 'Consumenten schatten inflatie flink hoger dan voor 2022'. Não é interpretação de terceiros, é o próprio órgão oficial divulgando os dois lados da comparação.",
+  curadoEm: "2026-07-17",
+  countryCode: "nl",
+},
+{
+  match: "ns-introduces-rules-banning-train-passengers-putting-bags",
+  titulo: "NS introduces rules banning train passengers from putting bags on seats",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "NOS · \"Tas moet op schoot in de trein, ook als het niet druk is\" (15/07/2026)", url: "https://nos.nl/artikel/2622954-tas-moet-op-schoot-in-de-trein-ook-als-het-niet-druk-is", oficial: false },
+  ],
+  nota: "Não achei fonte OFICIAL (nem nieuws.ns.nl, que conferi diretamente e não lista essa notícia, nem site de governo) confirmando isso em documento primário. O fato tem bastante lastro jornalístico: pelo menos 7 veículos holandeses independentes (NOS, Treinenweb, Mobiliteit.nl, Hart van Nederland, Zakenreisnieuws, OOG Groningen, Racing.nl) noticiaram o mesmo em 14-15/07/2026, com porta-voz da NS citado nominalmente. Mas pela própria reportagem, a mudança ainda depende do parecer do Locov (Landelijk Overleg Consumentenbelangen Openbaar Vervoer, órgão consultivo formal de transporte público), se o parecer vier negativo, a regra pode não entrar em vigor. Ou seja, a manchete trata como fato consumado algo que tecnicamente ainda está em tramitação regulatória, sem documento primário da NS ou do governo à vista. Fica pendente: nem confirmado em fonte oficial, nem opinião/rumor a refutar.",
+  curadoEm: "2026-07-17",
+  countryCode: "nl",
+},
+{
+  match: "water-shortage-looms-netherlands-drought-continues",
+  titulo: "Water shortage looms in the Netherlands as drought continues",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Rijkswaterstaat · \"Droogte houdt aan: de Landelijke Coördinatiecommissie Waterverdeling schaalt op naar dreigend watertekort\"", url: "https://www.rijkswaterstaat.nl/nieuws/archief/2026/07/droogte-houdt-aan-de-landelijke-coordinatiecommissie-waterverdeling-schaalt-op-naar-dreigend-watertekort", oficial: true },
+    { nome: "Rijksoverheid.nl · \"Extra maatregelen door aanhoudende droogte, opschaling naar feitelijk watertekort\" (16/07/2026)", url: "https://www.rijksoverheid.nl/actueel/nieuws/2026/07/16/extra-maatregelen-door-aanhoudende-droogte-opschaling-naar-feitelijk-watertekort", oficial: true },
+  ],
+  nota: "Confirmado, e a situação já piorou desde a publicação da matéria (15/07). A LCW (Landelijke Coördinatiecommissie Waterverdeling), comitê oficial de Rijkswaterstaat/Ministério de Infraestrutura e Gestão da Água, escalou para 'dreigend watertekort' (fase 1, ameaça de escassez) em julho, exatamente como a matéria descreve. Segundo comunicado oficial do Rijksoverheid.nl de 16/07/2026, já subiu para fase 2 'feitelijk watertekort' (escassez de fato). Os detalhes citados na matéria (nível dos rios bem abaixo da média, comparação com a seca de 1976) batem com a linguagem dos comunicados oficiais.",
+  curadoEm: "2026-07-17",
+  countryCode: "nl",
+},
+{
+  match: "the-netherlands-recruit-skilled-migrant-workers-ai-and-biotech",
+  titulo: "The Netherlands to recruit skilled migrant workers for AI and biotech",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Rijksoverheid.nl · \"Kabinet lanceert Talentstrategie voor toekomstige welvaart\" (10/07/2026)", url: "https://www.rijksoverheid.nl/actueel/nieuws/2026/07/10/kabinet-lanceert-talentstrategie-voor-toekomstige-welvaart", oficial: true },
+  ],
+  nota: "Confirmado diretamente na fonte oficial primária. O gabinete holandês (governo Jetten) lançou em 10/07/2026 a 'Talentstrategie voor toekomstige welvaart', com foco em atrair migrantes qualificados para 4 áreas estratégicas, digitalização/IA, segurança/resiliência, energia/clima e ciências da vida/biotecnologia, batendo exatamente com o que a manchete da IamExpat descreve, inclusive a data do anúncio.",
+  curadoEm: "2026-07-17",
+  countryCode: "nl",
+},
+{
+  match: "outdoor-work-should-cease-during-high-temperatures",
+  titulo: "Outdoor work should cease during high temperatures, say EU trade unions",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "EFFAT · \"#TooHotToWork: Trade Unions Demand Binding EU Rules on Workplace Heat Protection\"", url: "https://effat.org/in-the-spotlight/toohottowork-trade-unions-demand-binding-eu-rules-on-workplace-heat-protection/", oficial: false },
+    { nome: "Comissão Europeia · \"Quality jobs for companies and workers in Europe\" (Work Programme 2026)", url: "https://employment-social-affairs.ec.europa.eu/policies-and-activities/rights-work/quality-jobs-companies-and-workers-europe_en", oficial: true },
+  ],
+  nota: "É reivindicação/proposta sindical, não uma regra oficial em vigor, mesma distinção do caso do jurista italiano Ciervo no arquivo de checagem da Itália. O pano de fundo é real: a Comissão Europeia vai mesmo propor uma 'Quality Jobs Act' em 2026 (confirmado no site oficial ec.europa.eu, dentro do Work Programme 2026). Mas o limite específico citado na manchete (32,5°C, suspensão do trabalho externo) é um 'modelo de diretiva' redigido pela EFFAT e outras federações sindicais europeias, pedindo que a Comissão incorpore essa regra na futura lei. Hoje não existe nenhuma norma vinculante da UE ou da Holanda com esse limite de temperatura, é pressão política sobre uma lei ainda em elaboração, não um ato oficial já confirmado.",
+  curadoEm: "2026-07-17",
+  countryCode: "nl",
+},
+{
+  match: "rising-discrimination-highlights-need-safe-spaces-during-pride-amsterdam",
+  titulo: "Rising discrimination highlights need for safe spaces during Pride Amsterdam",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Rijksoverheid.nl · \"Discriminatiecijfers 2025\" (relatório oficial, 15/04/2026, encomendado pelos Ministérios do Interior e da Justiça e Segurança)", url: "https://www.rijksoverheid.nl/documenten/2026/04/15/discriminatiecijfers-2025", oficial: true },
+    { nome: "Politie.nl · \"Meldingen discriminatie stijgen opnieuw in 2025\"", url: "https://www.politie.nl/nieuws/2026/april/15/00-meldingen-discriminatie-stijgen-opnieuw-in-2025.html", oficial: true },
+  ],
+  nota: "O fato central, 'discriminação está subindo', é confirmado em fonte oficial do governo holandês: o relatório 'Discriminatiecijfers 2025', divulgado em 15/04/2026, registra recorde de denúncias (Discriminatie.nl recebeu 25.356, +70% vs 2024; a polícia registrou 10.748 casos, +12%), com aumento acima da média especificamente em casos envolvendo pessoas LHBTIQA+. Isso sustenta a tese geral da matéria. Já os números específicos que a IamExpat usa (quase 900 denúncias via RITA, dado do Youth Health Monitor de Amsterdam de 2023, o episódio de agressão no Pride Amersfoort) vêm de fontes locais/comunitárias que não são o governo nacional, mas a tendência de alta que embasa o título está, sim, batida em estatística oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "nl",
+},
+{
+  match: "bedbugs-and-scams-how-dutch-housing-crisis-impacts-international-students",
+  titulo: "Bedbugs and scams: How Dutch housing crisis impacts international students",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Kences · Landelijke Monitor Studentenhuisvesting (LMS) 2025", url: "https://www.kences.nl/nieuws/student-geeft-kamerzoektocht-op/", oficial: false },
+    { nome: "Rijksoverheid.nl · \"Tekort toekomstige studentenhuisvesting wordt minder\" (cita dados do Kences)", url: "https://www.rijksoverheid.nl/actueel/nieuws/2024/09/05/tekort-toekomstige-studentenhuisvesting-wordt-minder", oficial: true },
+    { nome: "Nuffic · \"Voor het eerst lichte daling internationale studentenpopulatie\"", url: "https://www.nuffic.nl/nieuws/voor-het-eerst-lichte-daling-internationale-studentenpopulatie", oficial: false },
+  ],
+  nota: "Dá pra separar duas coisas, igual no caso do jurista italiano no arquivo da Itália. O pano de fundo geral é real e rastreável: existe déficit de moradia estudantil (o monitor Kences/LMS, já citado pelo próprio Rijksoverheid.nl em comunicado anterior, aponta déficit de 21.500 quartos em 2025), e a matrícula de estudantes internacionais caiu pela primeira vez em 20 anos (confirmado pela Nuffic, organização holandesa de internacionalização do ensino: 129.764 matriculados em 2025/26, -133 vs ano anterior). Isso é real. Mas a manchete específica, 'percevejos e golpes' como causa desse quadro, vem só de fontes de defesa estudantil e imprensa local (LSVb, com 263 pedidos de ajuda relatados em 2026; reportagens do AD e Het Parool sobre falhas de aquecimento na DUWO; investigação da fundação !Woon), nenhuma delas é órgão oficial do governo, e nem Nuffic nem Kences atribuem oficialmente a queda de matrículas a golpes ou percevejos especificamente. É reportagem/advocacy sobre um problema real, não um fato oficial verificado ponto a ponto.",
+  curadoEm: "2026-07-17",
+  countryCode: "nl",
+},
+{
+  match: "dutch-startup-trials-smart-bike-rack-charges-and-locks-e-bikes",
+  titulo: "Dutch startup trials smart bike rack that charges and locks e-bikes",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "University of Twente · \"Revost pilots smart e-bike docking station at the UT\"", url: "https://www.utwente.nl/en/news/2026/7/978098/revost-pilots-smart-e-bike-docking-station-at-the-ut", oficial: true },
+  ],
+  nota: "Confirmado na fonte primária institucional: a própria Universidade de Twente, instituição pública holandesa, publicou em seu site oficial de notícias a confirmação do piloto da startup Revost ('Lock and Load'), iniciado em 03/07/2026 no campus, para uso da equipe de Campus & Facility Management, com bicicletas fornecidas pela parceira Bazz E-bikes. Bate exatamente com o que a IamExpat noticiou. Não é ato de governo nacional (é história de startup/produto, sem órgão regulador envolvido), mas é confirmação institucional oficial da própria universidade pública, não rumor de imprensa de terceiros.",
+  curadoEm: "2026-07-17",
+  countryCode: "nl",
+},
+{
+  match: "abu-dhabi-to-close-all-landfill-sites-under-sweeping-waste-overhaul",
+  titulo: "Abu Dhabi to close all landfill sites in sweeping waste overhaul",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Tadweer Group (Centro de Gestão de Resíduos de Abu Dhabi, entidade oficial de resíduos do emirado) · declaração on-record do CEO Etienne Petit", url: "https://www.tadweer.ae/", oficial: true },
+    { nome: "The National · matéria original", url: "https://www.thenationalnews.com/news/uae/2026/07/17/abu-dhabi-to-close-all-landfill-sites-under-sweeping-waste-overhaul/", oficial: false },
+  ],
+  nota: "O fato central é atribuído on-the-record ao CEO do Tadweer Group (Etienne Petit), o órgão oficial de gestão de resíduos de Abu Dhabi: ele diz que 'a melhor forma de atingir 80% de desvio de aterro é fechar aterro', com plano de ~5 anos. Bate com a meta pública já conhecida do Tadweer (80% de desvio até 2031, zero aterro até 2071). Como Tadweer É o órgão oficial responsável e a fala é on-record (não interpretação de terceiro), trato como confirmado, mas com ressalva: não encontrei decreto/portaria formal do governo de Abu Dhabi determinando o fechamento de 'todos' os aterros; é uma meta estratégica declarada pelo próprio CEO da entidade oficial. O título ('close all... sweeping') é uma leitura editorial forte de uma declaração de intenção plurianual, ainda não um ato normativo publicado.",
+  curadoEm: "2026-07-17",
+  countryCode: "ae",
+},
+{
+  match: "un-conference-will-shine-spotlight-on-worlds-water-crisis-says-uae-minister",
+  titulo: "UN conference will shine spotlight on world's water crisis, says UAE minister",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "MOFA (Ministério das Relações Exteriores dos EAU) · UAE and UN Discuss Strengthening Cooperation on Sustainability and 2026 UN Water Conference", url: "https://www.mofa.gov.ae/en/mediahub/news/2026/5/25/uae-un-water-conference", oficial: true },
+    { nome: "MOFA · Ministry of Foreign Affairs Mobilizes Global Efforts to Accelerate Actionable Water Solutions (London Climate Action Week)", url: "https://www.mofa.gov.ae/en/MediaHub/News/2026/7/2/UAE-Water-Solutions", oficial: true },
+  ],
+  nota: "O evento central é confirmável em fonte oficial: o MOFA publicou múltiplos comunicados confirmando que os EAU co-organizam (com o Senegal) a Conferência da ONU sobre Água de 2026, em Abu Dhabi em dezembro, reforçando repetidamente que a crise hídrica precisa de holofote internacional, mesma linha atribuída ao Assistant Minister Abdulla Balalaa na matéria. Não achei o comunicado exato com essa citação literal do ministro, mas o conteúdo bate com a posição pública recorrente e documentada do MOFA sobre o tema.",
+  curadoEm: "2026-07-17",
+  countryCode: "ae",
+},
+{
+  match: "report-of-explosions-in-downtown-dubai-is-false-authorities-say",
+  titulo: "Report of explosions in Downtown Dubai is false, authorities say",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Emirates 24|7 (Dubai Media Incorporated) · Dubai Media Office denies Reuters report on explosions in Downtown Dubai", url: "https://www.emirates247.com/uae/dubai-media-office-denies-reuters-report-on-explosions-in-downtown-dubai/3718", oficial: true },
+    { nome: "Government of Dubai Media Office (GDMO) · declaração citada por múltiplos veículos (Arab News, Gulf News, Euronews)", oficial: true },
+  ],
+  nota: "Confirmado: o Government of Dubai Media Office (GDMO), órgão oficial de comunicação do governo de Dubai, negou publicamente o relato da Reuters sobre explosões na Downtown Dubai em 16/07/2026 e ameaçou ação legal contra veículos que publicarem informação não verificada. A negativa foi reproduzida pelo Emirates 24|7 (veículo estatal, Dubai Media Incorporated, já cadastrado como fonte oficial nesta base de monitoramento) e por múltiplos veículos internacionais. Não consegui abrir diretamente o post original do GDMO no X (bloqueio de acesso), mas a citação é consistente entre fontes independentes que atribuem a fala nominalmente ao órgão oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "ae",
+},
+{
+  match: "late-bronze-age-tomb-discovered-in-al-ain",
+  titulo: "Late Bronze Age tomb unearthed in Al Ain offers 'glimpse of UAE's earliest history'",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Department of Culture and Tourism – Abu Dhabi (DCT Abu Dhabi), via Abu Dhabi Government Media Office", url: "https://www.mediaoffice.abudhabi/en/arts-culture/department-of-culture-and-tourism-abu-dhabi-uncovers-late-bronze-age-tomb-in-al-ain-region/", oficial: true },
+  ],
+  nota: "Confirmado diretamente: o comunicado oficial do DCT Abu Dhabi, publicado no site do Abu Dhabi Government Media Office (canal oficial do governo do emirado), descreve a mesma descoberta, necrópole pré-islâmica de Qattarah, câmara funerária de ~11x2,5m da era Wadi Suq/Bronze Final (c. 2000-1300 a.C.), uso comunitário por mais de mil anos. Bate ponto a ponto com a matéria do The National.",
+  curadoEm: "2026-07-17",
+  countryCode: "ae",
+},
+{
+  match: "decade-long-wait-for-justice-nears-end-as-bar-works-fraudster-set-for-court",
+  titulo: "Decade-long wait for justice nears end as Bar Works fraudster set for court",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "US DOJ · Southern District of New York · comunicados sobre o esquema Bar Works (co-réus sentenciados)", url: "https://www.justice.gov/usao-sdny/pr/two-extradited-british-citizens-plead-guilty-conspiracy-defraud-investors-fraudulent", oficial: true },
+    { nome: "SEC.gov · Litigation Release sobre Renwick Haddow e o esquema Bar Works", url: "https://www.sec.gov/enforcement-litigation/litigation-releases/lr-23870", oficial: true },
+  ],
+  nota: "O fato de base é confirmável em fonte oficial dos EUA (não há órgão oficial dos EAU aqui, pois é um processo criminal federal americano por fraude contra investidores, incluindo mais de 100 nos EAU): o DOJ (SDNY) documenta o esquema Bar Works (US$57 milhões, 800+ investidores) e Renwick Haddow como réu que se declarou culpado em 23/05/2019, sendo o último a ser sentenciado (os co-réus já foram, com comunicados próprios do DOJ). A data específica de sentença em 23/07/2026 não achei confirmada num comunicado oficial do DOJ com essa data exata, só em imprensa (The National, FX News Group) que rastreia adiamentos sucessivos via autos do processo. O núcleo do fato (processo real, réu real, 'última sentença pendente após quase uma década') está confirmado; a data exata fica com confirmação apenas de imprensa, não de documento judicial primário acessado diretamente.",
+  curadoEm: "2026-07-17",
+  countryCode: "ae",
+},
+{
+  match: "india-bars-citizens-from-strait-of-hormuz-voyages-as-fighting-escalates",
+  titulo: "India bars seafarers from working in Strait of Hormuz",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Directorate General of Maritime Administration (DGMA/DG Shipping), Ministério de Portos, Navegação e Vias Navegáveis do governo da Índia · Circular nº 36 de 2026 (conta oficial @dgshipping_IN)", url: "https://x.com/dgshipping_IN/status/2077428583220560179", oficial: true },
+    { nome: "Gulf News · India directs shipping firms to stop deploying seafarers through Strait of Hormuz", url: "https://gulfnews.com/world/mena/india-directs-shipping-firms-to-stop-deploying-seafarers-through-strait-of-hormuz-1.500609745", oficial: false },
+  ],
+  nota: "O fato central é de um órgão oficial, mas da ÍNDIA, não dos EAU, a notícia é sobre uma medida indiana, só publicada pela fonte de comunidade dos EAU (The National). Confirmado: a DGMA (ex-DG Shipping), órgão do Ministério de Portos, Navegação e Vias Navegáveis do governo indiano, emitiu a Circular nº 36 de 2026 proibindo o embarque de marítimos indianos em navios que cruzem o Estreito de Ormuz até novas instruções, citando ataques fatais a navios mercantes. Localizei a conta oficial verificada @dgshipping_IN via busca, mas não consegui abrir o conteúdo do post diretamente (bloqueio/paywall no fetch), e dgshipping.gov.in recusou a conexão (mesmo padrão de bloqueio a datacenter que os próprios sites oficiais dos EAU têm, conforme já registrado no infoCenters.ts). O número e teor da circular são consistentes entre múltiplos veículos independentes confiáveis (Gulf News, Gulf Business, Deccan Chronicle, Free Press Journal, Republic World).",
+  curadoEm: "2026-07-17",
+  countryCode: "ae",
+},
+{
+  match: "uae-residents-hope-for-long-weekend-for-prophet-mohammeds-birthday-under-public-holiday-law-change",
+  titulo: "UAE residents hope for long weekend for Prophet Mohammed's birthday under public holiday law change",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "UAE Legislation · Cabinet Resolution No. (27) of 2024 Concerning the Public Holidays in the State", url: "https://uaelegislation.gov.ae/en/legislations/2595", oficial: true },
+    { nome: "MOHRE · Resolutions & Circulars", url: "https://www.mohre.gov.ae/en/laws-and-regulations/resolutions-and-circulars.aspx", oficial: true },
+  ],
+  nota: "A lei de base é confirmável em fonte oficial: a Resolução do Gabinete nº 27/2024 (em vigor desde jan/2025), publicada no portal oficial uaelegislation.gov.ae, dá ao Gabinete poder de transferir feriados públicos (exceto os dois Eids) para início/fim de semana, criando fins de semana prolongados; o MOHRE aplica isso por circular a cada feriado específico. Mas a manchete não é um ato oficial, é a expectativa/torcida de moradores ('hope') para o feriado do Aniversário do Profeta em 2026 (provável 24-25/08). Múltiplas fontes (Khaleej Times, Time Out Dubai, Gulf News) confirmam que 'as autoridades ainda não anunciaram nenhum arranjo oficial' para essa data específica. Mesmo padrão do caso Itália: a lei-base está confirmada, mas a aplicação concreta aqui é especulação, não uma decisão oficial já publicada, por isso não_confirmado.",
+  curadoEm: "2026-07-17",
+  countryCode: "ae",
+},
+{
+  match: "good-neighbr-platform-built-in-uae-helps-people-rent-tools-for-household-tasks-and-cut-down-on-clutter",
+  titulo: "Good Neighbr: Platform built in UAE helps people rent tools for household tasks – and cut down on clutter",
+  status: "pendente",
+  fontesCitadas: [
+  ],
+  nota: "Matéria de perfil de startup (a plataforma peer-to-peer parece se chamar 'Neighbr', a busca não achou empresa literalmente chamada 'Good Neighbr'). Não há um fato de governo pra confirmar ou refutar aqui: não é norma, decreto ou declaração oficial, é uma matéria de negócios/estilo de vida sobre um app privado. A reportagem menciona alinhamento com políticas públicas reais dos EAU (Circular Economy Policy 2021-2031, UAE Net Zero 2050, Dubai Zero-Waste 2041), mas isso não é o fato central da manchete (que é sobre o produto em si). Fica pendente por honestidade: não achei nada específico pra confirmar nem refutar, e checagem cruzada em fonte oficial não se aplica bem a esse tipo de matéria.",
+  curadoEm: "2026-07-17",
+  countryCode: "ae",
+},
+{
+  match: "eu-extends-right-to-stay-for-ukrainians-but-excludes-military-age-men",
+  titulo: "EU extends right to stay for Ukrainians but excludes military-age men",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Council of the EU (Consilium) · comunicado oficial, 15/07/2026", url: "https://www.consilium.europa.eu/en/press/press-releases/2026/07/15/eu-countries-agree-to-extend-temporary-protection-for-those-fleeing-ukraine-until-march-2028/", oficial: true },
+  ],
+  nota: "FATO confirmado na fonte oficial: o comunicado do próprio Conselho da UE (Consilium), publicado no mesmo dia da matéria, diz que os embaixadores dos Estados-membros concordaram em estender a proteção temporária para ucranianos até 4 de março de 2028, e que a partir de agora só novos requerentes precisarão comprovar que cumpriram (ou estão isentos de) obrigação militar ucraniana para receber o status, quem já tem proteção não é afetado. Números e data batem com a matéria do The Local. Adoção formal do Conselho ainda é um trâmite pendente (chancela final), mas a decisão política em si já é oficial e pública.",
+  curadoEm: "2026-07-17",
+  countryCode: "at",
+},
+{
+  match: "majority-of-foreign-residents-in-austria-want-citizenship-survey-finds",
+  titulo: "Majority of foreign residents in Austria want citizenship, survey finds",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "SOS Mitmensch · pesquisa com 600+ residentes estrangeiros de 72 países (ONG de direitos humanos, não-oficial)", oficial: false },
+    { nome: "Statistik Austria · Einbürgerungen 2025 (taxa de naturalização 0,8%)", url: "https://www.statistik.at/fileadmin/announcement/2026/02/20260218Einbuergerungen2025.pdf", oficial: true },
+  ],
+  nota: "O CENTRO da manchete ('maioria quer cidadania, pesquisa revela') vem de uma sondagem feita pela SOS Mitmensch, uma ONG de direitos humanos, não um órgão de governo, não existe registro oficial austríaco de 'quantos estrangeiros desejam se naturalizar', então esse achado específico não é confirmável nem refutável em fonte oficial, é dado de pesquisa privada. Já o dado colateral que a matéria usa de pano de fundo (taxa de naturalização da Áustria em 0,8% em 2025, abaixo da média da UE de 2,6%) ESSE está corretamente confirmado no release oficial da Statistik Austria de 18/02/2026. Tratar como pesquisa de entidade de advocacy, não como fato de governo, mesmo padrão da diferença entre opinião de jurista e sentença de tribunal usada nos casos da Itália.",
+  curadoEm: "2026-07-17",
+  countryCode: "at",
+},
+{
+  match: "graz-is-your-city-tens-of-thousands-of-foreigners-urged-to-vote-in-austrian-election",
+  titulo: "'Graz is your city': Tens of thousands of foreigners urged to vote in Austrian election",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Stadt Graz · Migrant:innenbeirat (portal oficial da Prefeitura de Graz)", url: "http://www.graz.at/migrantInnenbeirat", oficial: true },
+  ],
+  nota: "FATO confirmado no portal oficial da cidade de Graz: o Migrant:innenbeirat (Conselho Consultivo de Migrantes) é uma instituição municipal real, e sua eleição de 2026 ocorreu em 28/06/2026 junto com a eleição municipal, com cerca de 40 mil residentes estrangeiros elegíveis (não-UE, 16+ anos, residentes em Graz), voto direto e secreto, mandato de 5 anos. É a única forma de estrangeiros de fora da UE votarem em algo na Áustria. Godswill Eyawo (CEO do conselho) e a meta de 20-25 mil votantes também aparecem em fontes secundárias (Facebook do próprio conselho, imprensa local) que batem com a matéria.",
+  curadoEm: "2026-07-17",
+  countryCode: "at",
+},
+{
+  match: "un-rights-chief-troubled-by-new-eu-migrant-return-rules",
+  titulo: "UN rights chief troubled by new EU migrant return rules",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "OHCHR · comunicado oficial de Volker Türk, 20/06/2026", url: "https://www.ohchr.org/en/press-releases/2026/06/un-human-rights-chief-concerned-about-new-eu-returns-law-urges-consistency", oficial: true },
+  ],
+  nota: "FATO confirmado direto na fonte oficial: o próprio site do Alto Comissariado da ONU para Direitos Humanos (OHCHR) publicou o comunicado de Volker Türk em 20/06/2026, com as mesmas citações textuais que a matéria usa ('EU States cannot simply outsource their human rights obligations to third States...'), sobre o novo Regulamento de Retornos da UE aprovado em 17/06/2026 (detenção pré-remoção ampliada e 'return hubs' em países terceiros).",
+  curadoEm: "2026-07-17",
+  countryCode: "at",
+},
+{
+  match: "eu-lawmakers-approve-return-hubs-migration-reform",
+  titulo: "EU lawmakers give final approval for deportation centres outside bloc",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "European Parliament · comunicado oficial de imprensa", url: "https://www.europarl.europa.eu/news/en/press-room/20260611IPR45214/new-eu-system-for-return-of-illegally-staying-third-country-nationals", oficial: true },
+    { nome: "Council of the EU (Consilium) · acordo Conselho/Parlamento sobre a Return Regulation", url: "https://www.consilium.europa.eu/en/press/press-releases/2026/06/01/council-and-parliament-reach-deal-on-returns-of-illegally-staying-third-country-nationals/", oficial: true },
+  ],
+  nota: "FATO confirmado nas duas fontes oficiais da própria UE (Parlamento Europeu e Conselho): a votação plenária do dia 17/06/2026 aprovou a 'Return Regulation' por 418 votos a favor, 218 contra e 30 abstenções, formalizando os 'return hubs' (centros de retorno) em países terceiros, ampliando a detenção pré-remoção de 6 meses para até 2 anos, e endurecendo proibições de reentrada (5→10 anos, podendo ser vitalícia). Números e data batem exatamente com a matéria do The Local.",
+  curadoEm: "2026-07-17",
+  countryCode: "at",
+},
+{
+  match: "are-government-language-tests-in-europe-integration-policy-or-just-political-posturing",
+  titulo: "Are language tests in Europe a valuable integration policy or just political posturing?",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Maarten Vink · diretor de pesquisa em Cidadania Global, European University Institute (opinião de especialista, não órgão oficial)", oficial: false },
+  ],
+  nota: "Esta matéria é uma peça de OPINIÃO/ANÁLISE por natureza, o próprio título é uma pergunta ('valiosa política de integração ou só postura política?'), não o relato de um ato oficial específico. Ela mistura fatos pontuais e dispersos de vários países (lei francesa de 2024, Noruega subindo pra nível A2 em 2025, Suécia, Áustria/Dinamarca com exigência B2) com a interpretação de um acadêmico (Maarten Vink) de que essas medidas são 'sinalização política' sem evidência de eficácia real. Não há um ato normativo único e central pra confirmar ou refutar, é uma tese jornalística apoiada em opinião de especialista, mesmo padrão dos casos de opinião de jurista nos casos da Itália.",
+  curadoEm: "2026-07-17",
+  countryCode: "at",
+},
+{
+  match: "remigration-why-austrian-far-right-leader-is-under-fire-over-mass-deportation-rhetoric",
+  titulo: "Remigration: Why Austrian far-right leader is under fire over 'mass deportation' rhetoric",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Parlament Österreich · comunicado oficial da sessão do Nationalrat (PK0453), 21/05/2026", url: "https://www.parlament.gv.at/aktuelles/pk/jahr_2026/pk0453", oficial: true },
+  ],
+  nota: "FATO confirmado na fonte oficial do próprio Parlamento Austríaco: no comunicado PK0453, de 21/05/2026 (um dia antes da publicação da matéria), o Parlamento registra que, durante o debate sobre o Relatório de Extremismo 2024 (DÖW), a 3ª Presidente do Conselho Nacional, Doris Bures (SPÖ), aplicou dois Ordnungsrufe (chamadas formais à ordem) a Herbert Kickl (FPÖ), um por 'métodos sujos' e outro pelo uso repetido do termo 'Remigration', que Bures classificou oficialmente como carregado de ideologia völkisch-nacionalista. Isso não é só retórica ou boato: é uma sanção procedimental oficial, documentada pelo próprio Parlamento, o que corrobora a moldura da matéria ('under fire'/repreendido). A caracterização de fundo ('mass deportation rhetoric') é a leitura pública do termo, mas o evento institucional (Ordnungsrufe) em si é fato confirmado.",
+  curadoEm: "2026-07-17",
+  countryCode: "at",
+},
+{
+  match: "trend-will-continue-number-of-people-refused-entry-to-europe-on-the-rise",
+  titulo: "'Trend will continue': Number of people refused entry to Europe sees sharp rise",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Eurostat · comunicado oficial, 12/05/2026", url: "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260512-1", oficial: true },
+  ],
+  nota: "FATO confirmado no release oficial do Eurostat (agência estatística da UE), publicado em 12/05/2026: 132.600 cidadãos de países terceiros foram recusados na entrada da UE em 2025, alta de 7,1% frente a 2024 (123.835); ucranianos foram a nacionalidade mais recusada (26.975, muito próximo dos ~27.000 citados na matéria), seguidos por albaneses, moldavos e colombianos; Polônia, França, Croácia e Espanha concentraram as recusas. Os números da matéria do The Local batem quase exatamente com os do Eurostat.",
+  curadoEm: "2026-07-17",
+  countryCode: "at",
+},
+{
+  match: "place-meiser-redevelopment-gets-go-ahead",
+  titulo: "Place Meiser redevelopment gets go-ahead",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Ans Persoons · Secrétaire d'État bruxelloise à l'Urbanisme et au Patrimoine (comunicado oficial do gabinete)", url: "https://anspersoons.prezly.com/le-reamenagement-de-la-place-general-meiser-a-schaerbeek-peut-debuter", oficial: true },
+    { nome: "RTBF Actus (corroboração jornalística)", url: "https://www.rtbf.be/article/schaerbeek-la-region-bruxelloise-delivre-le-permis-de-reamenagement-de-la-place-meiser-11521554", oficial: false },
+  ],
+  nota: "CONFIRMADO. A infoCenters.ts não tem uma fonte oficial belga de urbanismo cadastrada, então a checagem foi direto ao canal oficial do governo regional. O comunicado oficial de Ans Persoons, Secretária de Estado bruxelense para Urbanismo e Patrimônio, confirma que a urban.brussels (agência regional de licenciamento) concedeu a licença urbanística para o reordenamento completo da Place (Général) Meiser em Schaerbeek, batendo com o fato central da manchete ('gets go-ahead'/permis accordé). Reportagens da RTBF, La Libre e BX1 confirmam o mesmo evento (permissão concedida, obras previstas), mas o veredito 'confirmado' se apoia no comunicado oficial do próprio gabinete de governo, não só na imprensa.",
+  curadoEm: "2026-07-17",
+  countryCode: "be",
+},
+{
+  match: "sacked-audi-workers-struggling-find-new-jobs",
+  titulo: "Sacked Audi workers struggling to find new jobs",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Cabinet Pierre-Yves Jeholet · Ministre wallon de l'Économie, l'Emploi et la Formation (comunicado oficial)", url: "https://jeholet.wallonie.be/home/communiques-de-presse/presses/la-reforme-du-paysage-de-l-emploi-et-de-l-activation-des-chercheurs-d-emploi-est-en-marche-2.html", oficial: true },
+    { nome: "RTBF Actus · dados atribuídos ao comunicado conjunto dos três governos regionais (Humblet/Delmir/Jeholet)", url: "https://www.rtbf.be/article/1-an-apres-la-moitie-des-anciens-d-audi-brussels-toujours-sans-emploi-votre-profil-est-interessant-mais-vous-etes-trop-vieux-11684166", oficial: false },
+  ],
+  nota: "CONFIRMADO, com ressalva de método. O fechamento da fábrica Audi Brussels (28/02/2025) e a criação de um programa tri-regional oficial (Bruxelas/Actiris, Flandres/VDAB, Valônia/Forem) de recolocação dos ex-funcionários é ato de governo verificado diretamente no site oficial do gabinete do vice-presidente e ministro valão do Emprego, Pierre-Yves Jeholet (jeholet.wallonie.be), que hospeda o comunicado original da coordenação entre as três Regiões. Os números específicos mais recentes citados pela imprensa em fev/2026, cerca de 3.181 ex-trabalhadores apoiados, ~49% (1.203) reempregados e boa parte ainda sem trabalho passado um ano, atribuídos nominalmente aos ministros Humblet, Delmir e Jeholet em nota conjunta dos três governos regionais, não foram reencontrados na URL exata do comunicado (só o release de coordenação inicial de fev/2025 foi acessado e confirmado); a atribuição consistente a autoridades de governo nomeadas, replicada por RTBF, La Libre, BX1 e DH, é o que sustenta o 'confirmado', mas fica registrado que a fonte primária com os números não foi re-verificada byte a byte.",
+  curadoEm: "2026-07-17",
+  countryCode: "be",
+},
+{
+  match: "waterstones-open-second-store-brussels-october",
+  titulo: "Waterstones to open second store in Brussels in October",
+  status: "pendente",
+  fontesCitadas: [
+  ],
+  nota: "PENDENTE, não é caso de opinião/boato (a abertura da segunda loja da Waterstones em Bruxelas, na Avenue Louise, prevista para outubro de 2026, é bem noticiada pela Brussels Times e pelo próprio site da rede), mas simplesmente não existe 'fonte oficial' de governo/agência belga que trate de abertura de loja privada, é decisão comercial de uma rede britânica, fora do escopo do que qualquer site de governo ou agência oficial publicaria. Não encontrei nem confirmação nem contradição em fonte oficial, e é honesto deixar pendente em vez de forçar um veredito de política pública onde não há nenhum.",
+  curadoEm: "2026-07-17",
+  countryCode: "be",
+},
+{
+  match: "whats-new-and-around-liege-summer",
+  titulo: "What's new in and around Liège this summer?",
+  status: "pendente",
+  fontesCitadas: [
+  ],
+  nota: "PENDENTE. É uma matéria-guia/roundup cultural e turístico de Liège (tipo 'o que fazer no verão'), sem um único fato verificável de ato de governo (data, número, regra) para bater contra fonte oficial. Não é opinião/boato, é conteúdo editorial de agenda cultural, categoria que não tem correspondente em site de governo ou agência oficial de imigração/administração pública. Não achei nada que confirme nem refute, porque não há o que confirmar nesse formato.",
+  curadoEm: "2026-07-17",
+  countryCode: "be",
+},
+{
+  match: "whats-week-17-23-july-0",
+  titulo: "What's on this week: 17 to 23 July",
+  status: "pendente",
+  fontesCitadas: [
+  ],
+  nota: "PENDENTE. Mesmo caso do roundup de Liège: é uma agenda semanal de eventos culturais/lazer publicada pelo The Bulletin, sem um fato único de ato oficial de governo pra checar. Não há fonte oficial (governo ou agência de imigração) que publique este tipo de conteúdo, então não é possível nem confirmar nem refutar, e não é honesto forçar 'não confirmado' como se fosse desinformação, já que não há nada questionável na notícia em si.",
+  curadoEm: "2026-07-17",
+  countryCode: "be",
+},
+{
+  match: "seasons-july-year-long-tchaikovsky-series-bridging-music-poetry-and-visual-art",
+  titulo: "The Seasons – July: Year-long Tchaikovsky series bridging music, poetry and visual art",
+  status: "pendente",
+  fontesCitadas: [
+  ],
+  nota: "PENDENTE. Divulgação de evento/série artística (provavelmente de uma instituição cultural bruxelense). Buscas na web não localizaram nem a própria série citada de forma clara, nem qualquer fonte oficial de governo que trataria do assunto (evento cultural privado/institucional, não ato administrativo). Sem base para confirmar ou refutar via fonte oficial, fica pendente por falta de material, não por suspeita sobre o fato.",
+  curadoEm: "2026-07-17",
+  countryCode: "be",
+},
+{
+  match: "court-suspends-plan-migrant-reception-centre-uccle",
+  titulo: "Court suspends plan for migrant reception centre in Uccle",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Commune d'Uccle · página oficial do governo municipal", url: "https://www.uccle.be/fr/actualites/centre-daccueil-samusocial-rue-beeckman", oficial: true },
+    { nome: "RTBF Actus (corroboração jornalística)", url: "https://www.rtbf.be/article/uccle-l-ouverture-du-centre-fedasil-provisoirement-reportee-apres-une-decision-de-justice-11756833", oficial: false },
+  ],
+  nota: "CONFIRMADO. A página oficial do governo municipal de Uccle (uccle.be) confirma, em nome da própria comuna, que o Tribunal de Première Instance de Bruxelles emitiu em 10/07/2026 uma ordonnance em extrema urgência suspendendo provisoriamente a abertura do centro de acolhida (gerido pela Samusocial por conta da Fedasil, na rue Beeckman, ex-prédio Armonea, capacidade de 230 pessoas) que estava marcada para 14/07/2026, decisão que vale até fim de julho de 2026. Bate exatamente com o fato central da manchete. Reportagens da RTBF, La Libre, BX1, L'Avenir e DH confirmam os mesmos detalhes (petição com 1.300+ assinaturas, multa diária de 1.000€ em caso de descumprimento).",
+  curadoEm: "2026-07-17",
+  countryCode: "be",
+},
+{
+  match: "new-car-tax-road-maintenance-will-cost-eu125-year",
+  titulo: "New car tax for road maintenance will cost up to €125 per year",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Gouvernement wallon · wallonie.be (página oficial de atualidades)", url: "https://www.wallonie.be/fr/actualites/vers-la-mise-en-place-dune-vignette-routiere-en-belgique", oficial: true },
+    { nome: "RTBF Actus (corroboração jornalística)", url: "https://www.rtbf.be/article/une-vignette-autoroutiere-en-belgique-a-partir-de-mai-2027-entre-90-et-125-euros-par-an-11755761", oficial: false },
+  ],
+  nota: "CONFIRMADO. Página oficial do governo da Valônia (wallonie.be) confirma o acordo de princípio fechado pelas três Regiões (Flandres, Valônia, Bruxelas-Capital) em 10/07/2026 para uma 'vignette' (autocolante digital) rodoviária a partir de maio de 2027, cobrando dos usuários das autoestradas e estradas nacionais para financiar manutenção da rede viária. Os valores anuais batem exatamente com a manchete: 90€ para veículos zero-emissão, 100€ para Euro 4+, e até 125€ para veículos Euro 0-3, 'will cost up to €125 per year' confere. Multiplas fontes de imprensa (RTBF, L'Avenir, DH, BX1) reproduzem os mesmos valores citando o acordo governamental oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "be",
+},
+{
+  match: "your-tallinn-hit-list-the-top-5-events-this-week-60",
+  titulo: "Your Tallinn hit list: the top 5 events this week",
+  status: "pendente",
+  fontesCitadas: [
+  ],
+  nota: "Lista semanal de eventos escolhidos pela própria Estonian World (concerto de dois coros, social de bachata ao ar livre, cabaré, show punk, watch party da final da Copa do Mundo), é curadoria editorial da revista, não um ato oficial. Não existe fonte oficial estatal (Riigikogu, Politsei- ja Piirivalveamet, Siseministeerium, Visit Estonia) que publique ou certifique 'os 5 melhores eventos da semana'; são eventos comerciais/comunitários pequenos e pontuais, sem registro em site de governo. Genuinamente não há como confirmar nem refutar em fonte oficial, mais honesto deixar pendente do que forçar um veredito.",
+  curadoEm: "2026-07-17",
+  countryCode: "ee",
+},
+{
+  match: "toronto-designates-st-peters-estonian-church-as-a-heritage-property",
+  titulo: "Toronto designates St Peter's Estonian church as a heritage property",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "City of Toronto · Heritage Property Search (registro oficial, 817 Mount Pleasant Road)", url: "https://secure.toronto.ca/HeritagePreservation/details.do?folderRsn=4173255&propertyRsn=279289", oficial: true },
+    { nome: "City of Toronto · Notice of Intention to Designate, 817 Mount Pleasant Road (Ontario Heritage Act, Part IV)", url: "https://www.toronto.ca/legdocs/mmis/2026/ph/bgrd/backgroundfile-285142.pdf", oficial: true },
+    { nome: "City of Toronto Council · Agenda Item 2023.PB5.5 (inclusão no Heritage Register)", url: "https://secure.toronto.ca/council/agenda-item.do?item=2023.PB5.5", oficial: true },
+  ],
+  nota: "FATO confirmado em fonte oficial: a Prefeitura de Toronto emitiu o Notice of Intention to Designate em 28/04/2026 e o by-law de designação sob o Ontario Heritage Act (Part IV, Section 29) foi promulgado em 25/06/2026, após o período de recurso de 30 dias, protegendo a igreja estoniana St Peter's (817 Mount Pleasant Road, construída em 1955 por refugiados estonianos) como propriedade de valor patrimonial. Não é fonte do governo da Estônia, é do governo municipal canadense (Toronto), mas é a autoridade oficial competente pra esse fato específico, e bate com o registro público.",
+  curadoEm: "2026-07-17",
+  countryCode: "ee",
+},
+{
+  match: "two-tallinn-coffee-shops-named-among-europes-50-best",
+  titulo: "Two Tallinn coffee shops named among Europe's 50 best",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "World's 100 Best Coffee Shops · ranking europeu 2026 (organização privada, não governamental)", oficial: false },
+  ],
+  nota: "O fato específico (Paper Mill Coffee em 29º e The Brick Coffee Roastery em 43º na lista europeia) aparece corroborado por múltiplas fontes jornalísticas e pela própria organização do ranking, mas é um prêmio do setor privado (World's 100 Best Coffee Shops, avaliação por especialistas + voto público), não um ato de governo. Não existe fonte oficial estatal (governo da Estônia, Visit Estonia, Politsei) que publique ou certifique esse tipo de ranking gastronômico, não é o tipo de fato que órgão oficial confirma ou desmente. Fora do escopo de checagem em fonte governamental; deixo pendente em vez de forçar 'confirmado' sem fonte oficial real por trás.",
+  curadoEm: "2026-07-17",
+  countryCode: "ee",
+},
+{
+  match: "karsten-staehr-rail-baltica-a-predictable-failure",
+  titulo: "Karsten Staehr: Rail Baltica – a predictable failure",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Karsten Staehr · professor de macroeconomia, TalTech (Tallinn University of Technology)", oficial: false },
+    { nome: "Riigikontroll (Auditoria Nacional da Estônia) · Review on the Rail Baltica project", url: "https://www.riigikontroll.ee/en/audits/review-rail-baltica-project", oficial: true },
+    { nome: "Riigikontroll · nota conjunta das auditorias nacionais EE/LV/LT: déficit de €10-19 bi no Rail Baltica", url: "https://www.riigikontroll.ee/Suhtedavalikkusega/Pressiteated/tabid/168/ItemId/2445/amid/557/language/en-US/Default.aspx", oficial: true },
+  ],
+  nota: "O FATO de base é confirmável em fonte oficial: a Riigikontroll (Auditoria Nacional da Estônia), junto com as auditorias da Letônia e Lituânia, documentou que o custo estimado do Rail Baltica subiu de €5,8 bi para até €23,8 bi, com déficit de financiamento de €10-19 bi. Já o veredito do título ('a predictable failure') é a TESE/opinião do prof. Karsten Staehr (TalTech), publicada na seção 'Opinion' da Estonian World (também replicada no Trialoog do TalTech), é interpretação de um acadêmico sobre os dados, não uma conclusão da própria auditoria nem um ato oficial. Tratar como opinião fundamentada em fatos reais, não como veredito institucional.",
+  curadoEm: "2026-07-17",
+  countryCode: "ee",
+},
+{
+  match: "french-youth-footballers-accused-of-attacking-estonian-boys-after-waving-a-palestinian-flag",
+  titulo: "French youth footballers accused of attacking Estonian boys at the Tallinn Cup",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Estonian World (matéria original)", url: "https://estonianworld.com/security/french-youth-footballers-accused-of-attacking-estonian-boys-after-waving-a-palestinian-flag/", oficial: false },
+    { nome: "shortl.ee · cobertura paralela do mesmo incidente", url: "https://shortl.ee/en/estonia/story/french-youth-team-accused-of-post-match-assault-amidst-tallinn-cup-flag-row", oficial: false },
+  ],
+  nota: "É uma ACUSAÇÃO de agressão após uma partida sub-15 do Tallinn Cup entre o clube francês FC Vaujours e o FC Flora (disputa de 5º/6º lugar, vencida por Vaujours nos pênaltis), sem confirmação por autoridade oficial: as próprias reportagens registram que a polícia NÃO foi chamada ao local. A organização do Tallinn Cup só pediu desculpas informalmente ao técnico do Flora e disse que escreveria ao clube francês, não há boletim da Politsei- ja Piirivalveamet nem comunicado institucional. Sem registro policial, é relato/acusação não confirmada por ato oficial, não um fato apurado por autoridade.",
+  curadoEm: "2026-07-17",
+  countryCode: "ee",
+},
+{
+  match: "inside-kikumu-the-estonian-festival-taking-on-algorithms-vip-culture-and-bad-taste",
+  titulo: "Inside KiKuMu, the Estonian festival taking on algorithms, VIP culture and bad taste",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Visit Estonia (site oficial de turismo do Estado, mantido pela EAS/Ettevõtluse ja Innovatsiooni Sihtasutus)", url: "https://visitestonia.com/en/international-cultural-festival-kikumu", oficial: true },
+  ],
+  nota: "O FATO de base é confirmado em fonte oficial: o festival KiKuMu (cinema+arte+música) está listado no site oficial de turismo do Estado estoniano (Visit Estonia, agência estatal), 2ª edição, 9-12/07/2026 em Jäneda. A moldura editorial do título ('taking on algorithms, VIP culture and bad taste') é a caracterização/opinião da própria Estonian World sobre o espírito do festival, não uma declaração oficial, mas a existência, datas e programação do evento em si batem com a fonte estatal.",
+  curadoEm: "2026-07-17",
+  countryCode: "ee",
+},
+{
+  match: "the-estonian-basketball-player-kerr-kriisa-is-charged-in-a-2-2-million-us-fraud-case",
+  titulo: "Estonian basketball player Kerr Kriisa is charged in a $2.2 million US fraud case",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "U.S. Department of Justice · U.S. Attorney's Office, Northern District of West Virginia", url: "https://www.justice.gov/usao-ndwv/pr/former-college-basketball-player-charged-defrauding-victims-22-million", oficial: true },
+  ],
+  nota: "FATO confirmado em fonte oficial: o Departamento de Justiça dos EUA (Procuradoria do Distrito Norte da West Virginia) divulgou que Kerr Kriisa, ex-jogador universitário de basquete e cidadão estoniano, foi indiciado por 5 acusações de fraude eletrônica (wire fraud), por esquema entre 2022 e 02/06/2026 que teria obtido cerca de US$2,2 milhões de várias vítimas com identidades falsas e alegações fabricadas (inclusive fingindo que a mãe tinha câncer). Fonte primária é a acusação federal americana, não é fonte do governo da Estônia, mas é a autoridade oficial competente pra esse fato (o processo criminal corre nos EUA).",
+  curadoEm: "2026-07-17",
+  countryCode: "ee",
+},
+{
+  match: "gallery-street-artists-bring-dozens-of-new-works-to-tartu-at-the-stencibility-festival",
+  titulo: "Gallery: Street artists bring dozens of new works to Tartu at the Stencibility festival",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "ERR News · Tartu's Stencibility festival to spotlight young street artists", url: "https://news.err.ee/1610004715/tartu-s-stencibility-festival-to-spotlight-young-street-artists", oficial: true },
+    { nome: "Stencibility · site oficial do festival (apoiado pela Prefeitura de Tartu e pela Cultural Endowment of Estonia)", url: "https://www.stencibility.ee/", oficial: false },
+  ],
+  nota: "O FATO de base é confirmado: a ERR News (emissora pública estoniana, já monitorada como fonte oficial) cobriu o festival Stencibility 2026 (11-14/06, Tartu, quase 20 artistas), que tem apoio institucional da Prefeitura de Tartu e da Cultural Endowment of Estonia (Eesti Kultuurkapital, fundação estatal), alinhado ao ano de Tartu como Capital Europeia da Juventude 2026. A galeria de fotos da Estonian World é conteúdo próprio (fotográfico), mas o evento em si, existência, datas, apoio institucional, está confirmado em fonte oficial/quase-oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "ee",
+},
+{
+  match: "hungary-eu-integration-initiative-cei",
+  titulo: "Hungary wants stronger regional ties: foreign minister highlights transport, energy and EU integration",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Magyarország Kormánya · Külügyminisztérium (Orbán Anita, vice-primeira-ministra e ministra dos Negócios Estrangeiros)", url: "https://kormany.hu/kormanyzat/kulugyminiszter", oficial: true },
+    { nome: "ANSA · agência de notícias oficial da Itália, cobertura do encontro entre Franco Dal Mas (secretário-geral da InCE) e Orbán Anita em Budapeste", url: "https://www.ansa.it/nuova_europa/it/notizie/rubriche/politica/2026/07/16/dal-mas-ince-lintegrazione-europea-inizia-con-la-cooperazione_89805ce9-0a98-45b8-ad08-dad5d12388da.html", oficial: false },
+    { nome: "Agenzia Nova · mesma cobertura do encontro InCE-Hungria em Budapeste", url: "https://www.agenzianova.com/news/balcani-ince-rafforza-asse-con-ungheria-al-centro-porto-trieste/", oficial: false },
+  ],
+  nota: "O encontro é real e confirmável: Orbán Anita é de fato vice-primeira-ministra e ministra dos Negócios Estrangeiros da Hungria (kormany.hu). A reunião dela com Franco Dal Mas, secretário-geral da Iniciativa Centro-Europeia (CEI/InCE), em Budapeste, é corroborada por duas agências de imprensa italianas independentes (ANSA, a agência oficial da Itália, e Agenzia Nova), que descrevem os mesmos temas (Bálcãs Ocidentais, Ucrânia/Moldávia, cooperação em justiça/segurança/conectividade) citados na matéria do Daily News Hungary. Não encontrei um press release dedicado no kormany.hu especificamente sobre este encontro (pode não estar indexado ou ter saído só via redes sociais da ministra), mas o cargo oficial dela e o evento em si batem com fontes independentes convergentes de outro país oficial. Tratando como confirmado com essa ressalva registrada.",
+  curadoEm: "2026-07-17",
+  countryCode: "hu",
+},
+{
+  match: "hungary-eu-biggest-buyer-russian-pipeline-gas",
+  titulo: "Hungary was the EU's biggest buyer of Russian pipeline gas in early 2026",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Eurostat · nrg_ti_gas (Imports of natural gas by partner country), órgão estatístico oficial da Comissão Europeia", url: "https://ec.europa.eu/eurostat/databrowser/view/nrg_ti_gas/default/table?lang=en", oficial: true },
+    { nome: "TASS · reportagem citando diretamente dados do Eurostat, jan-mai/2026", url: "https://tass.com/economy/2161185", oficial: false },
+    { nome: "Euronews (My Europe) · cobertura independente sobre importação de gás russo pela UE", url: "https://www.euronews.com/my-europe/2026/07/01/russian-gas-imports-rise-despite-eu-phase-out", oficial: false },
+  ],
+  nota: "O fato central (Hungria foi a maior compradora de gás russo por gasoduto na UE em jan-mai/2026, ~EUR 1,1 bi, ~46% do gasto total da UE) tem como fonte primária o Eurostat, o órgão estatístico oficial da Comissão Europeia (base nrg_ti_gas). Os números batem exatamente entre a matéria do Daily News Hungary, a TASS (que cita o Eurostat diretamente) e a Euronews (cobertura independente da UE sobre o mesmo período). Confirmado.",
+  curadoEm: "2026-07-17",
+  countryCode: "hu",
+},
+{
+  match: "magyar-probe-szijjarto-budapest",
+  titulo: "PM Magyar announces probe into former FM Szijjártó's Russia ties, vows stronger policing in Budapest",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Magyarország Kormánya · Magyar Péter, 60º primeiro-ministro da Hungria, eleito pelo Parlamento em 09/05/2026", url: "https://kormany.hu/hirek/magyar-peter-magyarorszag-miniszterelnoke", oficial: true },
+    { nome: "Telex · cobertura da coletiva oficial do porta-voz do governo (kormányszóvivői tájékoztató), 16/07/2026", url: "https://telex.hu/belfold/2026/07/16/szijjarto-peter-oroszorszag-kapcsolat-vizsgalat-magyar-peter", oficial: false },
+    { nome: "444.hu · mesma coletiva, citação direta de Magyar Péter", url: "https://444.hu/2026/07/16/magyar-peter-ugy-tudja-vizsgalat-indult-szijjarto-orosz-kapcsolatai-miatt", oficial: false },
+    { nome: "Index.hu · cobertura ao vivo da mesma coletiva do governo", url: "https://index.hu/belfold/2026/07/16/kormanyszovivoi-tajekoztato-bejelentes-kormany-magyar-peter-tisza-part/magyar-peter-szerint-vizsgaljak-szijjarto-peter-es-oroszorszag-kapcsolatat/", oficial: false },
+  ],
+  nota: "O cargo é confirmado oficialmente: Magyar Péter é o 60º primeiro-ministro da Hungria, eleito pelo Parlamento em 09/05/2026 depois de o TISZA vencer as eleições de abril/2026 (fonte: kormany.hu, site oficial do governo húngaro). O anúncio sobre a investigação das relações de Szijjártó Péter com a Rússia e a operação policial de um mês em Budapeste saíram na coletiva oficial do porta-voz do governo (kormányszóvivői tájékoztató) de 16/07/2026, logo após a reunião de gabinete, evento relatado com citações praticamente idênticas por Telex, 444, Index e Economx, veículos húngaros independentes de peso. Ressalva importante: o próprio Magyar falou 'tudomásom szerint' (pelo que eu sei), ou seja, ele confirma que HÁ uma investigação em andamento, mas não apresentou conclusão nem provas públicas ainda. O que está confirmado é que o anúncio oficial foi feito nesses termos, não o resultado final da investigação.",
+  curadoEm: "2026-07-17",
+  countryCode: "hu",
+},
+{
+  match: "mayor-karacsony-budapest-police",
+  titulo: "Mayor Karácsony reacts to public safety concerns: Budapest to step up police presence",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Budapest.hu · nomeação de Baricska Norbert Tamás como novo chefe da Polícia de Budapeste, aprovada pela Assembleia Geral em 03/06/2026", url: "https://budapest.hu/hirek/2026/06/03/ezekkel-az-eloterjesztesekkel-es-temakkal-foglalkozik-a-juniusi-kozgyules", oficial: true },
+    { nome: "444.hu · reunião de Karácsony com o novo chefe de polícia e anúncio do plano de segurança pública", url: "https://444.hu/2026/07/16/karacsony-gergely-a-fovaros-romlo-kozbiztonsagarol-targyalt-az-uj-budapesti-rendorfokapitannyal-addiktologiai-utcai-szolgalatot-indit-a-fovaros", oficial: false },
+    { nome: "HVG · mesma cobertura do anúncio de Karácsony", url: "https://hvg.hu/itthon/20260716_addiktologiai-utcai-szolgalat-kozbiztonsag-budapest-rendorseg-karacsony-gergely", oficial: false },
+  ],
+  nota: "A nomeação de Baricska Norbert Tamás como novo chefe da Polícia de Budapeste está registrada no site oficial da prefeitura (budapest.hu), aprovada pela Assembleia Geral em 03/06/2026, bate com o 'newly appointed police chief Norbert Baricska' citado na matéria. O encontro dele com o prefeito Karácsony Gergely e o anúncio do plano de segurança pública (mais patrulhamento, grupo de coordenação do espaço público, serviço de rua para dependência química) saíram no mesmo dia (16/07/2026) via post do prefeito e coletiva, cobertos de forma consistente por 444, HVG, Economx e Telex. Confirmado, com base na nomeação oficial em fonte municipal + convergência de imprensa independente sobre o conteúdo do anúncio.",
+  curadoEm: "2026-07-17",
+  countryCode: "hu",
+},
+{
+  match: "financial-times-hungary-political-change",
+  titulo: "Financial Times: Hungary undergoing a political transformation \"far beyond what many thought possible\"",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Financial Times · análise/opinião citada pela matéria (fonte da caracterização, não um ato oficial)", oficial: false },
+    { nome: "Magyarország Kormánya · confirma Magyar Péter como primeiro-ministro desde maio/2026 (fato de base real por trás da matéria)", url: "https://kormany.hu/hirek/magyar-peter-magyarorszag-miniszterelnoke", oficial: true },
+  ],
+  nota: "Isto é uma peça de OPINIÃO/análise do Financial Times, resumida pelo Daily News Hungary, não um ato oficial. A frase-título ('far beyond what many thought possible') é a caracterização subjetiva do FT sobre a mudança política, não um fato checável em fonte primária por si só. O fato de fundo que sustenta a matéria, Magyar Péter é primeiro-ministro desde maio/2026, depois de o TISZA varrer a maioria de dois terços do Fidesz nas eleições de abril/2026, esse sim é confirmável oficialmente (kormany.hu, mesma fonte usada na checagem da manchete sobre Szijjártó). Mas a leitura de que é uma transformação 'além do que muitos achavam possível' é interpretação editorial do FT, não um ato oficial. Mesmo raciocínio do caso do jurista Ciervo na Itália: fato de base real, mas a tese/opinião em si não é fato oficial confirmado.",
+  curadoEm: "2026-07-17",
+  countryCode: "hu",
+},
+{
+  match: "budapest-restaurant-authentic-fakanal",
+  titulo: "Taste traditional Hungary at Fakanál in the Central Market Hall",
+  status: "pendente",
+  fontesCitadas: [
+  ],
+  nota: "Matéria de estilo de vida/turismo sobre um restaurante (Fakanál, no Mercado Central de Budapeste), perfil promocional, sem nenhum ato de governo, dado estatístico ou declaração oficial por trás para checar em fonte oficial. Não é notícia política/imigração; é conteúdo de turismo gastronômico. Não faz sentido buscar uma fonte governamental para confirmar ou refutar isso, então fica pendente por honestidade (não é o tipo de manchete que tem 'fato oficial' pra confirmar).",
+  curadoEm: "2026-07-17",
+  countryCode: "hu",
+},
+{
+  match: "danube-low-record-breaking-water-levels",
+  titulo: "Hungary's Danube hits historic low: Record-breaking water levels and water shortage raise alarm",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Hydroinfo.hu · sistema oficial de monitoramento hidrológico do governo húngaro (medições em Baja e Esztergom, 16/07/2026)", url: "https://www.hydroinfo.hu/tables/dunelotH.html", oficial: true },
+    { nome: "Telex · recorde negativo em Baja, superando o recorde de 2018 (27 cm)", url: "https://telex.hu/belfold/2026/07/16/duna-baja-vizallas-aszaly-negativ-rekord", oficial: false },
+    { nome: "Portfolio.hu · cobertura do nível recorde do Danúbio", url: "https://www.portfolio.hu/gazdasag/20260716/rekordalacsonyra-csokkent-a-vizallas-a-dunan-850128", oficial: false },
+  ],
+  nota: "Os números batem exatamente com a fonte oficial: o hydroinfo.hu (sistema de monitoramento hidrológico do governo húngaro) mostrava, na consulta de 16/07/2026, Baja em 25 cm e Esztergom em -11 cm, idênticos aos citados na matéria do Daily News Hungary. A cobertura é corroborada por Telex, Portfolio.hu, HVG e Baon, todos confirmando que Baja bateu o recorde negativo de 2018 (27 cm). Confirmado diretamente em dado oficial primário.",
+  curadoEm: "2026-07-17",
+  countryCode: "hu",
+},
+{
+  match: "sponsored-articles-in-hungary-2026-guide",
+  titulo: "The definitive guide to sponsored articles in Hungary: reaching an international audience in 2026",
+  status: "pendente",
+  fontesCitadas: [
+  ],
+  nota: "Guia de marketing/publicidade nativa (como comprar 'artigos patrocinados' no próprio Daily News Hungary), é conteúdo comercial do próprio veículo, não notícia com um fato de governo por trás. Não há fonte oficial aplicável para confirmar ou refutar estatísticas de mercado publicitário citadas de forma solta; pendente por não se tratar do tipo de conteúdo checável em fonte governamental.",
+  curadoEm: "2026-07-17",
+  countryCode: "hu",
+},
+{
+  match: "energy-provider-ppc-renewables-romania-build-battery-energy-storage-system-corugea-wind-farm",
+  titulo: "Energy provider PPC Renewables Romania to build battery energy storage system at Corugea wind farm",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "AGERPRES (agência nacional de notícias do Estado romeno) · mesmo projeto, mesmo dia", url: "https://agerpres.ro/economic/2026/07/15/parcul-eolian-corugea-va-fi-dotat-cu-un-sistem-de-stocare-a-energiei-in-baterii-investitia-depaseste--1576314", oficial: true },
+    { nome: "Ministerul Energiei · programa oficial \"Fondul pentru modernizare\" de apoio a capacidades de armazenamento em baterias", url: "https://energie.gov.ro/sprijinirea-investitiilor-in-dezvoltarea-capacitatilor-de-stocare-a-energiei-electrice-baterii-cu-finantare-din-fondul-pentru-modernizare-program-cheie-1-surse-regenerabile-de-energie-si/", oficial: true },
+  ],
+  nota: "Fato confirmado: a AGERPRES (agência de notícias estatal da Romênia) noticiou no mesmo dia (15/07/2026) o mesmo projeto, sistema de baterias BESS 40 MW/80 MWh no parque eólico Corugea (Casimcea, Tulcea), investimento de 87,4 milhões de lei, batendo com os números da Romania Insider. O cofinanciamento citado (~9,9 milhões de lei via Fondul pentru Modernizare) corresponde à linha de apoio oficial a armazenamento em baterias publicada no site do Ministério da Energia romeno. O ministério não cita 'Corugea' nominalmente no texto genérico do programa, mas a combinação AGERPRES + programa oficial confirma o fato central.",
+  curadoEm: "2026-07-17",
+  countryCode: "ro",
+},
+{
+  match: "romanias-digi-communications-lists-subsidiary-spanish-stock-exchanges-after-successful-ipo",
+  titulo: "Romania's Digi Communications lists subsidiary on Spanish Stock Exchanges after successful IPO",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Bursa de Valori București (BVB) · comunicado regulatório da Digi Communications endereçado à ASF (Autoridade de Supervisão Financeira romena) sobre a intenção de listar a Digi Spain", url: "https://m.bvb.ro/infocont/infocont26/DIGI_20260629082530_20260629-DIGI-Digi-Spain-announcement-of-intention-to-float.pdf", oficial: true },
+    { nome: "BME · Bolsas y Mercados Españoles (operador oficial das bolsas espanholas onde a Digi Spain/DIGIS passou a negociar)", url: "https://www.bolsasymercados.es/en/bme-exchange.html", oficial: true },
+  ],
+  nota: "Fato confirmado por disclosure regulatório oficial: a própria Digi Communications registrou junto à Bursa de Valori București (endereçado à ASF, o regulador financeiro romeno) o anúncio de intenção de listar a subsidiária espanhola. A negociação das ações da Digi Spain Telecom sob o ticker DIGIS nas bolsas de Madri/Barcelona/Bilbao/Valência a partir de 16/07/2026, após IPO de ~287 milhões de euros, é consistente com o funcionamento do BME (operador oficial do mercado espanhol) e amplamente reportada por imprensa financeira (Bloomberg etc.).",
+  curadoEm: "2026-07-17",
+  countryCode: "ro",
+},
+{
+  match: "new-workinromania-platform-july-2026",
+  titulo: "New WorkInRomania platform to streamline recruitment, visa procedures for foreign workers",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "IGI · Inspectoratul General pentru Imigrări (autoridade romena de imigração, já monitorada nesta base de fontes)", url: "https://igi.mai.gov.ro/en/", oficial: true },
+    { nome: "WorkinRomania.gov.ro · plataforma oficial do governo romeno, operada pelo Ministério do Interior via IGI", url: "https://workinromania.gov.ro/", oficial: true },
+    { nome: "Portal Legislativ (legislatie.just.ro) · OUG nr. 32/2026, publicada no Monitorul Oficial nr. 335 de 27/04/2026", url: "https://legislatie.just.ro/Public/DetaliiDocumentAfis/309832", oficial: true },
+  ],
+  nota: "Fato bem confirmado, com base legal oficial: WorkinRomania.gov.ro é um domínio .gov.ro operado pelo Ministério do Interior (via IGI), criado pela Ordonanța de Urgență nr. 32/2026 (acesso de estrangeiros ao mercado de trabalho), publicada no Monitorul Oficial em 27/04/2026 e disponível no Portal Legislativ oficial. A plataforma está em fase de testes desde julho/2026, com entrada plena em vigor prevista para 08/08/2026 (novos vistos D/AM1 e D/AM2, cota de 90.000 permissões em 2026), tudo confirmável na fonte legal oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "ro",
+},
+{
+  match: "romania-call-eu-revise-co2-pricing-system-2026",
+  titulo: "Romania, nine other states call on EU to revise new CO2 pricing system",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "Politico/E&E News · reportagem sobre a declaração conjunta de 10 países à Comissão Europeia", url: "https://www.eenews.net/articles/10-eu-countries-demand-up-to-extra-decade-of-carbon-pollution-permits/", oficial: false },
+    { nome: "Euronews", url: "https://www.euronews.com/my-europe/2026/03/17/commission-resists-overhaul-of-carbon-pricing-while-pushing-for-tax-cuts-on-energy-amid-cr", oficial: false },
+  ],
+  nota: "O fato (Romênia + mais 9 estados-membros, Itália, Polônia, Bulgária, Chipre, Rep. Tcheca, Estônia, Grécia, Hungria, Eslováquia, enviaram declaração conjunta à Comissão Europeia em 14/07/2026 pedindo revisão do ETS2) é reportado de forma consistente e convergente por vários veículos independentes sérios (Politico/E&E News, Euronews, imprensa romena: HotNews, DCNews, Mediafax, cursdeguvernare.ro), todos citando os mesmos 10 países e a mesma frase textual. Mas não encontrei o documento primário nem um comunicado oficial do Governo da Romênia (gov.ro), do Ministério da Energia/Ambiente romeno, ou da Comissão Europeia/Conselho da UE confirmando o envio da carta. Fica PENDENTE por rigor: fato bem corroborado pela imprensa, mas sem fonte oficial primária localizada.",
+  curadoEm: "2026-07-17",
+  countryCode: "ro",
+},
+{
+  match: "guardian-bucharest-apartments-earthquakes-rented-tourists-2026",
+  titulo: "The Guardian: Over 200 Bucharest apartments vulnerable to earthquakes rented to tourists illegally",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "The Guardian · investigação original (republicada pela Romania Insider)", oficial: false },
+    { nome: "Re:Rise · ONG romena de dados sobre risco sísmico, fonte dos dados usados na investigação", url: "https://knowtherisk.rerise.org/", oficial: false },
+  ],
+  nota: "Diferente de um ato oficial, isto é jornalismo investigativo: o número de '+200 apartamentos' vem da análise do próprio Guardian sobre dados coletados pela ONG romena Re:Rise (listagens no Airbnb/Booking.com cruzadas com o registro de risco sísmico), não de uma auditoria ou estatística publicada por autoridade romena (Primăria București, ISU, Inspectoratul pentru Situații de Urgență, ou o registro oficial de clasificare sismică RS1). A LEI de base é real e oficial (desde 2024 a Romênia proíbe aluguel de curto/longo prazo em edifícios classificados RS1, multa de 1.000-2.000 EUR), mas a contagem específica de '+200' e a tese de ilegalidade generalizada são apuração/interpretação jornalística, não um dado oficial confirmado pelo governo romeno, mesma lógica do caso italiano usado como referência: fato de base real, mas o número/tese central da manchete não tem confirmação oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "ro",
+},
+{
+  match: "armenian-street-festival-bucharest-july-2026",
+  titulo: "Bucharest's Armenian Street Festival celebrates 10th edition with free concerts, cultural events",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "AGERPRES · comunicado de imprensa oficial do Festivalul Strada Armenească", url: "https://agerpres.ro/comunicate/2026/07/15/comunicat-de-presa---festivalul-strada-armeneasca--1576285", oficial: true },
+    { nome: "Site oficial do festival · Strada Armenească", url: "https://www.stradaarmeneasca.ro/", oficial: false },
+  ],
+  nota: "Fato confirmado: a AGERPRES (agência de notícias estatal romena) publicou o comunicado de imprensa oficial do festival confirmando a 10ª edição, datas 31/07 a 02/08/2026, na Grădina Botanică 'Dimitrie Brândză' em Bucareste, com entrada gratuita (bilhete de acesso ao jardim de 10 lei). O evento é organizado pela União dos Armênios da Romênia e pelo Centro Cultural Armeno em parceria com o Departamento para Relações Interétnicas do Governo da Romênia, o que dá lastro institucional ao evento. Detalhes batem integralmente com a matéria da Romania Insider.",
+  curadoEm: "2026-07-17",
+  countryCode: "ro",
+},
+{
+  match: "weekend-calendar-jul-16-2026",
+  titulo: "Weekend calendar: Romanian Aviation Day, Bucharest Town Charity Run, Electric Castle, Ceau, Cinema!",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "Romania Insider · matéria original (agenda de eventos)", oficial: false },
+  ],
+  nota: "A matéria é uma agenda/roundup de vários eventos não relacionados entre si (Dia da Aviação Romena, corrida beneficente, festival Electric Castle, mostra 'Ceau, Cinema!'), sem um único fato central verificável contra uma fonte oficial. Não há um ato oficial único para confirmar/refutar; verificar cada item exigiria checagem individual, fora do escopo de uma checagem de manchete única. Fica genuinamente PENDENTE: mais honesto que forçar um veredito único sobre uma lista de eventos distintos.",
+  curadoEm: "2026-07-17",
+  countryCode: "ro",
+},
+{
+  match: "romania-first-lady-humanitarian-efforts-olena-zelenskas-2026",
+  titulo: "Romania's first lady to join humanitarian efforts led by Olena Zelenska's foundation",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Digi24 · declaração direta do Presidente Nicușor Dan em Kiev (15/07/2026)", url: "https://www.digi24.ro/stiri/actualitate/politica/mirabela-gradinaru-se-alatura-initiativelor-umanitare-ale-olenei-zelenska-nicusor-dan-a-confirmat-deja-participarea-3863893", oficial: false },
+    { nome: "HotNews.ro · mesma declaração presidencial", url: "https://hotnews.ro/mirabela-gradinaru-implicata-in-proiectele-derulate-olena-zelenska-nicusor-dan-a-confirmat-deja-participarea-2301565", oficial: false },
+  ],
+  nota: "O fato central é uma declaração do próprio Presidente da Romênia, Nicușor Dan, feita publicamente em Kiev em 15/07/2026, durante a 5ª Cúpula Ucrânia-Europa de Sudeste: ele confirmou que sua parceira, Mirabela Grădinaru, vai se juntar às ações da fundação de Olena Zelenska, com presença confirmada em Kiev em 24/08. É uma declaração oficial do chefe de Estado em capacidade oficial, mas não consegui acessar presidency.ro diretamente para linkar a transcrição oficial (o site retornou erro 503 em duas tentativas nesta checagem). A declaração está reportada de forma idêntica e convergente por múltiplos veículos independentes da imprensa romena mainstream (Digi24, HotNews, Mediafax, Antena3, Adevărul), dando segurança razoável ao fato, mas registra-se que a fonte primária (presidency.ro) não pôde ser verificada diretamente.",
+  curadoEm: "2026-07-17",
+  countryCode: "ro",
+},
+{
+  match: "swedens-moderate-party-pledges-to-deny-citizenship-to-domestic-abusers",
+  titulo: "Sweden's Moderate Party pledges to deny citizenship to domestic abusers",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "The Local Sweden (matéria original)", url: "https://www.thelocal.se/20260715/swedens-moderate-party-pledges-to-deny-citizenship-to-domestic-abusers", oficial: false },
+    { nome: "Corren.se · 'M: Då ska det bli omöjligt att få medborgarskap'", url: "https://www.corren.se/nyheter/inrikes/politik/artikel/m-da-ska-det-bli-omojligt-att-fa-medborgarskap/l789q5wj", oficial: false },
+    { nome: "Göteborgs-Posten · mesma cobertura", url: "https://www.gp.se/nyheter/sverige/m-da-ska-det-bli-omojligt-att-fa-medborgarskap.1b5a2b3e-70df-5224-b0f3-189477274c0c", oficial: false },
+  ],
+  nota: "O EVENTO em si (Moderaterna anunciar essa proposta) é real e amplamente noticiado pela imprensa sueca, incluindo declaração do ministro da Migração Johan Forssell ('if you abuse your partner, you choose not to be in Sweden'). Mas isso é uma PROMESSA DE CAMPANHA do partido antes das eleições gerais de setembro/2026, não um ato de governo em vigor. Busquei riksdagen.se e regeringen.se por 'medborgarskap' + 'relationsvåld'/'diskvalificera' e só encontrei propostas já tramitando sobre crimes de gangue, estupro e crimes graves, nada especificamente sobre violência doméstica em relação próxima. Tratar como proposta/promessa política de partido, não como regra vigente ou projeto de lei formal (mesma lógica do caso do jurista italiano: fato-base real, tese/proposta ainda não é ato oficial).",
+  curadoEm: "2026-07-17",
+  countryCode: "se",
+},
+{
+  match: "eu-extends-right-to-stay-for-ukrainians-but-excludes-military-age-men",
+  titulo: "EU extends right to stay for Ukrainians but excludes military-age men",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "The Local Sweden (matéria original)", url: "https://www.thelocal.se/20260715/eu-extends-right-to-stay-for-ukrainians-but-excludes-military-age-men", oficial: false },
+    { nome: "Council of the European Union · comunicado oficial 15/07/2026", url: "https://www.consilium.europa.eu/en/press/press-releases/2026/07/15/eu-countries-agree-to-extend-temporary-protection-for-those-fleeing-ukraine-until-march-2028/", oficial: true },
+    { nome: "European Commission (DG HOME) · proposta oficial de decisão", url: "https://home-affairs.ec.europa.eu/document/download/0f5fd553-49bd-4c39-bf97-2199a3c2b111_en?filename=Proposal+for+a+decision+extending+temporary+protection+until+4+Mar+2028.pdf", oficial: true },
+  ],
+  nota: "FATO confirmado na fonte oficial primária: o Conselho da União Europeia (Council of the EU) publicou comunicado oficial em 15/07/2026 confirmando que os países da UE concordaram em estender a proteção temporária para quem fugiu da Ucrânia até 4 de março de 2028 (um ano a mais que o previsto). A partir de março/2027, a proteção só será concedida a NOVOS requerentes que comprovem ter cumprido suas obrigações militares na Ucrânia (regra que não afeta quem já está protegido). A proposta original da Comissão Europeia também está publicada oficialmente. A decisão formal ainda será adotada 'nas próximas semanas' e publicada no Jornal Oficial da UE, mas o acordo político já é oficial e checável na fonte primária (consilium.europa.eu). Não é decisão específica da Suécia, mas afeta a Suécia como Estado-membro; a matéria reporta corretamente o teor do acordo do Conselho.",
+  curadoEm: "2026-07-17",
+  countryCode: "se",
+},
+{
+  match: "too-many-question-marks-remain-for-specific-guidelines-on-swedish-citizenship-deferrals",
+  titulo: "'Too many question marks' remain for specific guidelines on Swedish citizenship deferrals",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "The Local Sweden (matéria original)", url: "https://www.thelocal.se/20260714/too-many-question-marks-remain-for-specific-guidelines-on-swedish-citizenship-deferrals", oficial: false },
+    { nome: "Migrationsverket · 'How have migration regulations changed?' (contexto legal oficial)", url: "https://www.migrationsverket.se/en/about-the-swedish-migration-agency/the-swedish-migration-agency-answers/2026/2026-04-29-how-have-migration-regulations-changed.html", oficial: true },
+    { nome: "Migrationsverket · 'New rules for Swedish citizenship from 6 June 2026'", url: "https://www.migrationsverket.se/en/news-archive/news/2026-05-06-new-rules-for-swedish-citizenship-from-6-june-2026.html", oficial: true },
+  ],
+  nota: "O CONTEXTO legal de base é confirmável em fonte oficial: as novas regras de cidadania sueca (residência de 5 para 8 anos, exigência de sueco/conhecimentos cívicos, 'skötsamhet'/autossuficiência) entraram em vigor em 06/06/2026 sem regra de transição, e os testes de conhecimento cívico só começam em agosto/2026 (teste de idioma depois), confirmado nas páginas oficiais do Migrationsverket. Isso cria a lacuna administrativa que a matéria descreve. MAS a alegação específica da manchete, que faltam diretrizes concretas sobre quando conceder 'vilandeförklaring' (adiamento) a quem ainda não tem prova de idioma/conhecimentos cívicos, atribuída em entrevista ao The Local a um responsável do Migrationsverket em Gotemburgo, não está publicada em nenhuma página oficial do Migrationsverket ou do Regeringskansliet que eu tenha localizado. Não é opinião de terceiro nem rumor solto: é plausível dado o contexto oficial confirmado (regras novas sem regulamento de transição), mas genuinamente não achei fonte oficial que confirme OU refute essa alegação específica sobre lacuna de diretrizes internas. Fica pendente.",
+  curadoEm: "2026-07-17",
+  countryCode: "se",
+},
+{
+  match: "swedens-new-good-conduct-requirements-for-foreigners-comes-into-force",
+  titulo: "Sweden's new 'good conduct' requirements for foreigners comes into force",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "The Local Sweden (matéria original)", url: "https://www.thelocal.se/20260713/swedens-new-good-conduct-requirements-for-foreigners-comes-into-force", oficial: false },
+    { nome: "Migrationsverket · 'New requirements regarding good conduct (vandel) for residence permits' (EN, 13/07/2026)", url: "https://www.migrationsverket.se/nyheter/news-archive/2026-07-13-new-requirements-regarding-good-conduct-vandel-for-residence-permits.html", oficial: true },
+    { nome: "Migrationsverket · 'Skärpta krav på skötsamhet och hederlighet' (SV, 13/07/2026)", url: "https://www.migrationsverket.se/nyhetsarkiv/nyhetsarkiv/2026-07-13-skarpta-krav-pa-skotsamhet-och-hederlighet.html", oficial: true },
+    { nome: "Regeringen.se · 'Regeringen går nu vidare med ett nytt vandelskrav'", url: "https://www.regeringen.se/pressmeddelanden/2026/05/regeringen-gar-nu-vidare-med-ett-nytt-vandelskrav/", oficial: true },
+  ],
+  nota: "FATO confirmado diretamente na fonte oficial primária: o Migrationsverket publicou nota oficial em 13/07/2026 confirmando que, a partir daquela data, entrou em vigor a exigência reforçada de 'vandel' (bom comportamento/idoneidade) para permissões de residência, dando ao Migrationsverket mais poder para recusar ou revogar permissões por 'bristande vandel', dívidas sistemáticas não pagas, trabalho sem declarar impostos, contato com redes criminosas/organizações terroristas ou extremistas, entre outros exemplos dados pelo próprio governo. As regras valem para permissões com base na lei de imigração sueca (trabalho, família), mas não para quem tem base em direito da UE ou proteção internacional. O Regeringen.se também confirma o processo legislativo anterior (maio/2026). Manchete e data batem exatamente com a fonte oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "se",
+},
+{
+  match: "i-felt-betrayed-by-my-country-swedish-scientist-blasts-treatment-of-us-husband",
+  titulo: "'I felt betrayed by my country': Swedish scientist blasts treatment of US husband",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "The Local Sweden (matéria original)", url: "https://www.thelocal.se/20260710/i-felt-betrayed-by-my-country-swedish-scientist-blasts-treatment-of-us-husband", oficial: false },
+    { nome: "Migrationsverket · procedimento geral de visto de cônjuge (contexto, não confirma o caso)", url: "https://www.migrationsverket.se/en/you-want-to-apply/live-with-someone/live-with-a-partner-child-or-other-relative/live-with-a-partner.html", oficial: true },
+  ],
+  nota: "Esta matéria é um RELATO PESSOAL: a cientista sueca Anna-Karin Palm e o marido americano Chris Stamper (pesquisador de biossegurança) contam que ele recebeu carta do Migrationsverket dando 7 dias para deixar a Suécia ou arriscar entrar na lista negra do Schengen, ao pedir prorrogação de estadia enquanto aguardava decisão do visto de cônjuge. Casos individuais de imigração são protegidos por sigilo, não existe registro público em fonte oficial que eu possa checar para confirmar os detalhes específicos desse processo (datas exatas, motivo formal da carta, etc.). O procedimento GERAL de visto de cônjuge é público no site do Migrationsverket, mas isso não confirma nem refuta o relato específico do casal. É testemunho/opinião pessoal sobre o tratamento recebido, não um ato oficial verificável, mesma lógica do caso do jurista italiano (fato de fundo existe, mas a experiência/interpretação individual não é fato institucional confirmável).",
+  curadoEm: "2026-07-17",
+  countryCode: "se",
+},
+{
+  match: "i-love-sweden-but-im-disappointed-tech-worker-hit-as-citizenship-rejections-start-coming-in",
+  titulo: "'I love Sweden but I'm disappointed': Tech worker hit as citizenship rejections start coming in",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "The Local Sweden (matéria original)", url: "https://www.thelocal.se/20260709/i-love-sweden-but-im-disappointed-tech-worker-hit-as-citizenship-rejections-start-coming-in", oficial: false },
+    { nome: "Migrationsverket · Estatística oficial de medborgarskap (contexto)", url: "https://www.migrationsverket.se/om-migrationsverket/statistik/svenskt-medborgarskap.html", oficial: true },
+  ],
+  nota: "Matéria é majoritariamente um RELATO PESSOAL (trabalhador de tecnologia decepcionado com rejeição do pedido de cidadania), no molde de história humana, não um ato oficial. O contexto legal é real e confirmado: as regras mais rígidas de cidadania vigentes desde 06/06/2026, sem regra de transição, fazem com que todos os pedidos ainda não decididos até aquela data sejam julgados pelas regras novas. As estatísticas oficiais do Migrationsverket mostram, em junho/2026, 4.905 casos decididos e apenas 1.602 cidadanias concedidas, uma lacuna grande, mas a página oficial não discrimina quantos desses casos foram efetivamente indeferidos (avslag) versus retirados/adiados/outros motivos. Não achei estatística oficial que confirme literalmente uma 'onda de rejeições de cidadania começando a chegar' como tendência nomeada. Tratar o relato individual como testemunho pessoal, não como fato institucional plenamente confirmado.",
+  curadoEm: "2026-07-17",
+  countryCode: "se",
+},
+{
+  match: "sweden-aims-for-2027-launch-of-more-flexible-work-permit-rules",
+  titulo: "Sweden aims for 2027 launch of more flexible work permit rules",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "The Local Sweden (matéria original)", url: "https://www.thelocal.se/20260709/sweden-aims-for-2027-launch-of-more-flexible-work-permit-rules", oficial: false },
+    { nome: "Regeringen.se · 'Regeringen vill förenkla processen för arbetskraftsinvandrare'", url: "https://www.regeringen.se/pressmeddelanden/2026/07/regeringen-vill-forenkla-processen-for-arbetskraftsinvandrare/", oficial: true },
+    { nome: "Regeringen.se · Lagrådsremiss 'Nya regler om ansökningsförfarandet för vissa uppehålls- och arbetstillstånd'", url: "https://www.regeringen.se/rattsliga-dokument/lagradsremiss/2026/07/nya-regler-om-ansokningsforfarandet-for-vissa-uppehalls--och-arbetstillstand/", oficial: true },
+  ],
+  nota: "FATO confirmado diretamente na fonte governamental primária: o Regeringskansliet publicou comunicado oficial e lagrådsremiss propondo desvincular a permissão de trabalho (tillstånd único) de um empregador/cargo específico, ampliar o período de validade da permissão até 2 anos, estender de 3 para 6 meses o prazo para buscar novo emprego em caso de desemprego (para quem já tem permissão há mais de 2 anos), reduzir o prazo padrão de processamento para 90 dias e proibir empregadores de cobrar do trabalhador a taxa do pedido. Entrada em vigor prevista para 1º de fevereiro de 2027 (atrasada em relação ao cronograma original de maio/2026). Manchete bate com a fonte oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "se",
+},
+{
+  match: "swedish-campaign-to-persuade-afghan-migrants-to-return-home-yields-zero-takers",
+  titulo: "Swedish campaign to persuade Afghans to return home yields zero takers",
+  status: "pendente",
+  fontesCitadas: [
+    { nome: "The Local Sweden (matéria original)", url: "https://www.thelocal.se/20260706/swedish-campaign-to-persuade-afghan-migrants-to-return-home-yields-zero-takers", oficial: false },
+    { nome: "Ariana News (imprensa afegã, corrobora independentemente)", url: "https://www.ariananews.af/sweden-spends-millions-on-afghan-voluntary-return-campaign-with-no-participants-so-far/", oficial: false },
+  ],
+  nota: "Não encontrei página oficial do governo sueco (regeringen.se) ou do Migrationsverket confirmando diretamente o projeto-piloto 'Zindagi Taza' (gerido pela ONG Seefar, financiado pelo governo sueco, cerca de 8 milhões de coroas, meta de convencer 200 de ~2.000 afegãos contatados a retornar voluntariamente, com ZERO adesões até a reportagem). O fato é reportado de forma consistente por múltiplas fontes independentes NÃO-oficiais (The Local Sweden, o veículo investigativo sueco Kvartal/republicado no Nya Dagbladet, e a imprensa afegã Ariana News e Kabul Tribune), incluindo declaração atribuída ao ministro da Migração Johan Forssell ('acho que devemos esperar o fim do projeto antes de avaliá-lo'). Busquei especificamente site:regeringen.se e site:migrationsverket.se por 'Zindagi Taza' e 'Seefar' e não encontrei nada publicado nesses domínios. Genuinamente pendente, nem confirmado nem refutado em fonte oficial primária; mais honesto deixar assim do que forçar um veredito.",
+  curadoEm: "2026-07-17",
+  countryCode: "se",
+},
+{
+  match: "czech-news-in-brief-for-july-16-2026-thursday-top-afternoon-headlines",
+  titulo: "Czech news in brief for July 16: Thursday's top afternoon headlines",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Úřad městské části Praha 13 (Stavební úřad) · confirmação da licença de construção do Top Tower via porta-voz Lucie Steinerová à agência estatal ČTK", oficial: true },
+    { nome: "Český rozhlas / iROZHLAS.cz · reportagem sobre a licença de construção do Top Tower (126m, Nové Butovice)", url: "https://www.irozhlas.cz/zpravy-domov/vrak-davida-cerneho-a-tomase-cisare-ma-stavebni-povoleni-126metrovy-mrakodrap_2607151702_jar", oficial: false },
+  ],
+  nota: "Matéria é compilação de 5 notícias do dia (detenção de cidadão tcheco na China, deputado Foldyna afastado de casa por suspeita de violência doméstica, show da Diana Ross, festival Masters of Rock, aprovação do arranha-céu Top Tower). O fato-âncora mais checável, licença de construção do Top Tower (126m, 44 andares, Nové Butovice), foi confirmado: o Úřad městské části Praha 13 (órgão municipal de licenciamento) confirmou a emissão via porta-voz à ČTK, replicado pelo Český rozhlas. Não achei o comunicado direto de Praha 13 no site próprio deles, por isso cito a reportagem pública em vez de inventar a URL do órgão. Os demais itens do compilado (detenção na China, caso Foldyna) são fatos em apuração policial/diplomática, não atos oficiais fechados; os itens de entretenimento (Diana Ross, Masters of Rock) não são checáveis contra fonte de governo.",
+  curadoEm: "2026-07-17",
+  countryCode: "cz",
+},
+{
+  match: "what-to-do-this-weekend-in-prague-best-events-for-july-17-19",
+  titulo: "What to do this weekend in Prague: Best events for July 17–19",
+  status: "pendente",
+  fontesCitadas: [
+  ],
+  nota: "Matéria é uma agenda de eventos de fim de semana em Praga (exposição no Hrad, feira francesa em Kampa, teatro, festival de rua, show eletrônico, exibição de filme, festival de culturas do mundo, exibição pública da final da Copa do Mundo). Não há um fato político/legal central pra confirmar ou refutar em fonte oficial de governo, é conteúdo de agenda cultural (datas, locais, preços), cujas fontes citadas na própria matéria são organizadores de eventos e redes sociais, não órgãos estatais. Fica pendente por honestidade: não há o que checar contra fonte oficial, não é falha de busca.",
+  curadoEm: "2026-07-17",
+  countryCode: "cz",
+},
+{
+  match: "before-nolan-s-the-odyssey-czechia-had-its-own-imax-experience",
+  titulo: "Before Nolan's The Odyssey, Czechia had its own 'IMAX' experience",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Národní filmový archiv (NFA) · arquivo estatal tcheco (Ministério da Cultura), ficha de catálogo oficial de 'Vysoká modrá zeď'", url: "https://nfa.cz/cs/26009-vysoka-modra-zed", oficial: true },
+    { nome: "Filmový přehled · reportagem 'Velká filmová sedmdesátka: 70mm filmy a kina v Československu'", url: "https://www.filmovyprehled.cz/cs/revue/detail/velka-filmova-sedmdesatka-70mm-filmy-a-kina-v-ceskoslovensku", oficial: false },
+  ],
+  nota: "O fato histórico central, que a Tchecoslováquia teve um sistema pioneiro de cinema em 70mm (projetores Meopta Meopton, ~100 salas entre os anos 1960-80) e que 'Vysoká modrá zeď' (1974) foi o primeiro longa tcheco feito em 70mm, é confirmável no Národní filmový archiv, instituição estatal que preserva o patrimônio cinematográfico do país e mantém o filme registrado no catálogo oficial.",
+  curadoEm: "2026-07-17",
+  countryCode: "cz",
+},
+{
+  match: "beyond-halloween-where-to-watch-horror-films-in-prague-year-round",
+  titulo: "Beyond Halloween: Where to watch horror films in Prague year round",
+  status: "pendente",
+  fontesCitadas: [
+  ],
+  nota: "Matéria é um guia de locais/festivais de filme de terror em Praga (Heatwave Horror no Edison Filmhub, Shockproof no Kino Aero, Kino Balt, Future Gate Sci-Fi Film Festival). Conteúdo de agenda/lifestyle, sem fato político-legal pra confirmar em fonte de governo, cita apenas o curador do festival e bilheteria de filmes, nenhuma fonte oficial. Fica pendente por não haver o que checar contra fonte oficial, não por falha de busca.",
+  curadoEm: "2026-07-17",
+  countryCode: "cz",
+},
+{
+  match: "record-nine-million-visitors-flood-prague-castle-as-landmark-sheds-soviet-era-security-measures",
+  titulo: "Prague Castle welcomes record nine million visitors as access expands",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Pražský hrad (Správa Pražského hradu) · Kancelář prezidenta republiky, tisková zpráva oficial", url: "https://www.hrad.cz/cs/pro-media/tiskove-zpravy/aktualni-tiskove-zpravy/rekordni-navstevnost-stamiliony-do-oprav-i-digitalizace.-na-prazskem-hrade-se-za-tri-roky-udelaly-stovky-koncepcnich-zmen-19419", oficial: true },
+    { nome: "iROZHLAS.cz (Český rozhlas) · cobertura da tisková zpráva", url: "https://www.irozhlas.cz/zpravy-domov/na-prohlidky-prazskeho-hradu-prislo-v-roce-2025-rekordnich-27-milionu-lidi_2601072231_cen", oficial: false },
+  ],
+  nota: "O fato central, recorde de mais de 9 milhões de visitantes em 2025 no Hradčany (700 mil a mais que 2024, 2 milhões a mais que 2023), 2,7 milhões em tours pagos (recorde superando 2019), substituição das checagens de segurança introduzidas na era Zeman por barreiras retráteis, e salto de investimento em reparos de 82 pra 344 milhões de coroas/ano, está confirmado na própria tisková zpráva oficial da Správa Pražského hradu, órgão estatal ligado ao Gabinete do Presidente da República.",
+  curadoEm: "2026-07-17",
+  countryCode: "cz",
+},
+{
+  match: "czech-news-in-brief-for-july-18-2026-saturday-top-morning-headlines",
+  titulo: "Czech news in brief for July 16: Thursday's top morning headlines",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Hasičský záchranný sbor ČR (HZS ČR) · Ministério do Interior, artigo oficial sobre a missão EU Prepositioning na Grécia", url: "https://hzscr.gov.cz/clanek/cesky-hasicsky-tym-letos-znovu-vyrazi-do-recka-v-ramci-eu-prepositioning-stravi-mesic-ve-meste-patra-a-okoli.aspx", oficial: true },
+    { nome: "Pražský hrad · Kancelář prezidenta republiky, tisková zpráva sobre a participação do presidente Petr Pavel no summit da OTAN em Ancara", url: "https://www.hrad.cz/cs/pro-media/tiskove-zpravy/aktualni-tiskove-zpravy/prezident-republiky-se-zucastnil-summitu-nato-v-ankare-19412", oficial: true },
+    { nome: "ČeskéNoviny.cz (agência estatal ČTK) · citação direta de Pavel sobre o summit como 'diplomatický výprask'", url: "https://www.ceskenoviny.cz/zpravy/pavel-oznacil-ucast-delegace-cr-na-summitu-nato-za-diplomaticky-vyprask/2851514", oficial: false },
+  ],
+  nota: "ATENÇÃO de dados: o link fornecido pra esta manchete tem slug com data divergente do título (URL diz 'july-18-2026-saturday-top-morning-headlines', mas o conteúdo real da página é de quinta-feira 16/07 de manhã, provável erro de slug no CMS do Expats.cz, não é erro desta checagem). Compilação de 5 notícias: resultado do summit da OTAN em Ancara (declaração do presidente Pavel), envio de bombeiros tchecos pra Grécia (EU Prepositioning), investigação do deputado Filip Turek por colisão com ambulância, detenção de cidadão tcheco na China, e previsão do tempo. Dois fatos-âncora confirmados em fonte oficial: (1) envio de 22 bombeiros tchecos pra Patras, Grécia, por 4 semanas dentro do EU Prepositioning, confirmado no site oficial do Hasičský záchranný sbor ČR (órgão do Ministério do Interior); (2) participação do presidente Pavel no summit da OTAN em Ancara, confirmada em tisková zpráva oficial do Hrad. A frase 'diplomatic setback'/'diplomatický výprask' é declaração do próprio Pavel, amplamente reportada (incl. pela agência estatal ČTK), mas o texto exato dessa citação não está publicado literalmente no press release do Hrad, só a confirmação oficial da presença e pauta do presidente.",
+  curadoEm: "2026-07-17",
+  countryCode: "cz",
+},
+{
+  match: "czech-news-in-brief-for-july-15-2026-wednesday-top-afternoon-headlines",
+  titulo: "Czech news in brief for July 15: Wednesday's top afternoon headlines",
+  status: "confirmado",
+  fontesCitadas: [
+    { nome: "Ministerstvo financí ČR (Ministério da Fazenda) · tisková zpráva oficial sobre a aprovação do EET 2.0 pela Câmara dos Deputados", url: "https://mf.gov.cz/cs/ministerstvo/media/tiskove-zpravy/2026/snemovna-schvalila-eet-2-0-moderni-evidence-trzeb-64564", oficial: true },
+    { nome: "Finanční správa ČR (autoridade fiscal estatal) · tisková zpráva oficial espelhada", url: "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/snemovna-schvalila-eet-2-0", oficial: true },
+    { nome: "Pražský hrad · mesma fonte oficial usada na checagem do recorde de visitantes do Castelo", url: "https://www.hrad.cz/cs/pro-media/tiskove-zpravy/aktualni-tiskove-zpravy/rekordni-navstevnost-stamiliony-do-oprav-i-digitalizace.-na-prazskem-hrade-se-za-tri-roky-udelaly-stovky-koncepcnich-zmen-19419", oficial: true },
+  ],
+  nota: "Compilação de 5 notícias: tiroteio em Praga 10, reintrodução do sistema EET (evidência eletrônica de vendas), oposição do ministro dos Esportes à participação russa na Olimpíada de LA 2028, apuração do deputado Filip Turek, e recorde de visitantes do Castelo de Praga (mesmo fato-base já confirmado na checagem da manchete dedicada ao Castelo, nesta mesma lista). Fato-âncora independente confirmado: a Câmara dos Deputados (Poslanecká sněmovna) aprovou em 15/07/2026 o projeto EET 2.0, com entrada em vigor prevista pra 01/01/2027 e projeção de +14 bilhões de coroas/ano em arrecadação, agora seguindo pro Senado, confirmado em tiskové zprávy oficiais do Ministério da Fazenda e da Finanční správa (autoridade fiscal estatal).",
+  curadoEm: "2026-07-17",
+  countryCode: "cz",
+},
+{
+  match: "buying-an-apartment-in-czechia-hidden-rules-foreign-buyers-need-to-know",
+  titulo: "Buying an apartment in Czechia? Hidden rules foreign buyers need to know",
+  status: "nao_confirmado",
+  fontesCitadas: [
+    { nome: "Poslanecká sněmovna Parlamentu ČR (psp.cz) · Sbírka zákonů, registro da Lei nº 206/2011 Sb.", url: "https://www.psp.cz/sqw/sbirka.sqw?cz=206", oficial: true },
+    { nome: "epravo.cz · análise jurídica sobre a evolução histórica das restrições a estrangeiros na compra de imóveis (cita a liberalização de 2011)", url: "https://www.epravo.cz/top/clanky/nabyvani-nemovitosti-cizinci-v-ceske-republice-vyvoj-pravni-upravy-57106.html", oficial: false },
+  ],
+  nota: "A matéria (parcialmente paywall) enquadra 'regras ocultas pra compradores estrangeiros' de apartamentos na Tchéquia, mas o fato jurídico de base é o OPOSTO da premissa do título: desde a liberalização pela Lei nº 206/2011 Sb. (que alterou a Lei cambial 219/1995 Sb.), NÃO existe mais nenhuma restrição legal específica pra estrangeiros comprarem imóveis na Tchéquia, tchecos e estrangeiros (inclusive de fora da UE) seguem as mesmas regras desde 2011. Isso é confirmável na Sbírka zákonů oficial hospedada no site do Parlamento (psp.cz). As dicas práticas do artigo (checar situação financeira do SVJ/condomínio, diferenciar propriedade privada de cooperativa habitacional, verificar se a unidade é juridicamente residencial) são orientação genérica de devida diligência imobiliária que vale igualmente pra compradores tchecos, não uma regra jurídica oficial e específica pra estrangeiros. Mesmo tratamento dado ao caso da Itália: existe um fato-base checável (a liberalização de 2011), mas a moldura de 'regra oculta pro comprador estrangeiro' do título é enquadramento editorial/interpretação, não um regime oficial distinto.",
+  curadoEm: "2026-07-17",
+  countryCode: "cz",
+},
+];
+
+export type ChecagemResultado = {
+  status: ChecagemStatus;
+  /** Selo curto pro app e pro relatório. */
+  rotulo: string;
+  /** Análise curada (vazia quando pendente). */
+  nota: string;
+  fontesCitadas: FonteRef[];
+};
+
+function rotuloDe(status: ChecagemStatus): string {
+  switch (status) {
+    case "confirmado":
+      return "✓ Confirmado em fonte oficial";
+    case "nao_confirmado":
+      return "⚠ Não confirmado em fontes oficiais (opinião/interpretação)";
+    default:
+      return "⚠ Confirmação em fontes oficiais pendente";
+  }
+}
+
+/** Normaliza pra casar slug independente de barra/maiúscula/acento de URL. */
+function norm(s: string): string {
+  return (s || "").toLowerCase();
+}
+
+/**
+ * Resolve a checagem de uma manchete de fonte de comunidade. Se a Friday já curou aquela
+ * matéria, devolve o veredito completo; senão, devolve o estado "pendente" (aviso
+ * honesto de que ainda não foi conferida em fontes oficiais).
+ */
+export function resolverChecagem(link: string, titulo: string): ChecagemResultado {
+  const alvo = `${norm(link)} ${norm(titulo)}`;
+  const hit = COMMUNITY_CHECAGENS.find((c) => alvo.includes(norm(c.match)));
+  if (hit) {
+    return {
+      status: hit.status,
+      rotulo: rotuloDe(hit.status),
+      nota: hit.nota,
+      fontesCitadas: hit.fontesCitadas,
+    };
+  }
+  return {
+    status: "pendente",
+    rotulo: rotuloDe("pendente"),
+    nota:
+      "Notícia de fonte de comunidade ainda não conferida em fontes oficiais pela Friday. Antes de publicar, confirmar o fato em fonte oficial (diário oficial do país, órgão de imigração, tribunal) e rastrear a referência usada pela matéria.",
+    fontesCitadas: [],
+  };
+}

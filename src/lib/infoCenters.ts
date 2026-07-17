@@ -30,7 +30,7 @@ export type InfoSource = {
   rss?: string;
   /** Fonte de COMUNIDADE (não-oficial): portais/blogs mantidos pela comunidade,
    *  não por governo. As manchetes entram marcadas como "a confirmar" e passam
-   *  pela checagem cruzada da Friday (ver italianismo-checagem.ts). */
+   *  pela checagem cruzada da Friday (ver checagem-comunidade.ts). */
   community?: boolean;
   /** Nível administrativo da fonte oficial. "state" = governo estadual/provincial
    *  (ex.: província do Canadá, estado dos EUA, Land alemão). Ausente/"national"
