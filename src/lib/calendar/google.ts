@@ -166,6 +166,14 @@ export interface GoogleEvent {
   htmlLink: string | null;
   calendar?: string | null; // nome da agenda de origem (quando não é a principal)
   account?: string | null; // conta Google de origem (multi-conta)
+  // Tipo do evento no Google ("default", "birthday", "outOfOffice"…). O
+  // aniversário do Google mora na agenda PRINCIPAL, não na "#contacts@" — o
+  // isNoiseCalendar() nunca o pega, então o tipo é a única forma de reconhecê-lo.
+  eventType?: string | null;
+  // Id da série quando o evento é uma instância de recorrência (singleEvents=true).
+  recurringEventId?: string | null;
+  // Nome do contato, quando o Google manda junto (aniversário vindo dos Contatos).
+  contactName?: string | null;
 }
 
 interface CalendarRef {
@@ -235,6 +243,16 @@ function isNoiseCalendar(id: string): boolean {
   );
 }
 
+/** Nome do contato num evento de aniversário. O Google manda o `summary` genérico
+ *  ("Happy birthday!") e guarda o nome de verdade no gadget dos Contatos — é ele
+ *  que a tela do Google Agenda mostra. Nem todo aniversário tem: o criado à mão
+ *  não tem gadget, e aí o `summary` já É o nome certo. */
+function contactNameOf(ev: Record<string, unknown>): string | null {
+  const gadget = ev.gadget as { preferences?: Record<string, unknown> } | undefined;
+  const full = gadget?.preferences?.["goo.contactsFullName"];
+  return typeof full === "string" && full.trim() ? full.trim() : null;
+}
+
 function mapRawEvent(ev: Record<string, unknown>, calendarName: string | null): GoogleEvent {
   const start = ev.start as { dateTime?: string; date?: string } | undefined;
   const end = ev.end as { dateTime?: string; date?: string } | undefined;
@@ -248,6 +266,9 @@ function mapRawEvent(ev: Record<string, unknown>, calendarName: string | null): 
     location: typeof ev.location === "string" ? ev.location : null,
     htmlLink: typeof ev.htmlLink === "string" ? ev.htmlLink : null,
     calendar: calendarName,
+    eventType: typeof ev.eventType === "string" ? ev.eventType : null,
+    recurringEventId: typeof ev.recurringEventId === "string" ? ev.recurringEventId : null,
+    contactName: contactNameOf(ev),
   };
 }
 
@@ -257,10 +278,12 @@ async function fetchEventsFromCalendar(
   accessToken: string,
   cal: CalendarRef,
   timeMin: string,
+  timeMax: string,
   perCalendar: number,
 ): Promise<GoogleEvent[]> {
   const p = new URLSearchParams({
     timeMin,
+    timeMax,
     maxResults: String(Math.min(50, Math.max(1, perCalendar))),
     singleEvents: "true",
     orderBy: "startTime",
@@ -284,6 +307,26 @@ export interface GcalDiag {
   errors: string[];
 }
 
+/** Janela de busca. Sem teto, `singleEvents=true` explode uma recorrência ANUAL
+ *  em uma instância por ano até o fim dos tempos: um aniversário virava 13 linhas
+ *  (2026…2038) que entupiam o painel e empurravam as reuniões de verdade pra fora. */
+const WINDOW_DAYS = 90;
+
+/** Uma série recorrente de DIA INTEIRO (aniversário, data comemorativa, lembrete
+ *  anual) só interessa na próxima ocorrência — as seguintes são a mesma coisa de
+ *  novo. Reuniões com hora marcada NÃO entram aqui: cada ocorrência é um
+ *  compromisso distinto e some cada uma no seu dia, igual ao Google. */
+function collapseAllDaySeries(events: GoogleEvent[]): GoogleEvent[] {
+  const seenSeries = new Set<string>();
+  return events.filter((ev) => {
+    if (!ev.allDay || !ev.recurringEventId) return true;
+    const key = `${ev.account ?? ""}|${ev.recurringEventId}`;
+    if (seenSeries.has(key)) return false;
+    seenSeries.add(key);
+    return true;
+  });
+}
+
 /** Próximos eventos de TODAS as agendas visíveis do usuário (só-leitura),
  *  mescladas e ordenadas por horário, + diagnóstico do porquê de vir vazio. */
 export async function fetchUpcomingEventsDetailed(
@@ -292,6 +335,7 @@ export async function fetchUpcomingEventsDetailed(
 ): Promise<{ events: GoogleEvent[]; diag: GcalDiag }> {
   const diag: GcalDiag = { calendarsFound: 0, scanned: [], errors: [] };
   const timeMin = new Date().toISOString();
+  const timeMax = new Date(Date.now() + WINDOW_DAYS * 24 * 60 * 60 * 1000).toISOString();
 
   // Descobre as agendas. Se a listagem falhar por qualquer motivo, cai no
   // comportamento antigo (só a principal), pra nunca ficar pior que antes.
@@ -317,7 +361,7 @@ export async function fetchUpcomingEventsDetailed(
 
   const perCalResults = await Promise.all(
     capped.map((cal) =>
-      fetchEventsFromCalendar(accessToken, cal, timeMin, perCalendar).catch((e) => {
+      fetchEventsFromCalendar(accessToken, cal, timeMin, timeMax, perCalendar).catch((e) => {
         // propaga só o 401 (token inválido) — os demais erros por agenda viram vazio
         const m = String((e as Error)?.message ?? e);
         if (/unauthorized/i.test(m)) throw e;
@@ -328,7 +372,8 @@ export async function fetchUpcomingEventsDetailed(
   );
 
   // Mescla, remove duplicados (evento em agenda compartilhada aparece 2x) e
-  // ordena pelo horário de início. Corta no total pedido.
+  // ordena pelo horário de início. O collapse vem DEPOIS do sort, pra a
+  // ocorrência que sobrevive ser sempre a mais próxima. Corta no total pedido.
   const seen = new Set<string>();
   const merged = perCalResults
     .flat()
@@ -340,7 +385,7 @@ export async function fetchUpcomingEventsDetailed(
     })
     .sort((a, b) => (a.start ?? "").localeCompare(b.start ?? ""));
 
-  return { events: merged.slice(0, maxResults), diag };
+  return { events: collapseAllDaySeries(merged).slice(0, maxResults), diag };
 }
 
 /** Só os eventos (compat). */

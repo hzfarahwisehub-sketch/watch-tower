@@ -3,7 +3,7 @@
 // Tower, só-leitura, MULTI-CONTA). Mostra os próximos eventos de TODAS as contas
 // Google conectadas pelo login, com etiqueta de qual conta, + botão pra adicionar
 // mais uma conta. Só aparece se o Google estiver configurado no servidor.
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocale } from "./LocaleProvider";
 import { useToast } from "./ToastProvider";
 
@@ -17,6 +17,9 @@ interface GEvent {
   htmlLink: string | null;
   calendar?: string | null;
   account?: string | null;
+  eventType?: string | null;
+  recurringEventId?: string | null;
+  contactName?: string | null;
 }
 interface AccountView {
   email: string;
@@ -29,6 +32,11 @@ interface EventsResponse {
   events?: GEvent[];
   accounts?: AccountView[];
 }
+
+const pad2 = (n: number) => String(n).padStart(2, "0");
+/** Chave do dia LOCAL (o all-day vem como "YYYY-MM-DDT00:00:00", sem fuso, e o
+ *  Date já o resolve na meia-noite local). */
+const dayKeyOf = (d: Date) => `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
 
 export function GoogleCalendar() {
   const { t, intl } = useLocale();
@@ -113,17 +121,38 @@ export function GoogleCalendar() {
     [t, toast],
   );
 
+  // Agrupa por DIA local, no formato da vista "Programação" do Google: a data
+  // numa coluna à esquerda, os eventos daquele dia à direita. A lista corrida de
+  // antes repetia a data em toda linha e, como só mostrava dia/mês, as
+  // ocorrências de anos diferentes da MESMA recorrência ficavam idênticas.
+  const groups = useMemo(() => {
+    const m = new Map<string, { date: Date; items: GEvent[] }>();
+    for (const ev of events) {
+      if (!ev.start) continue;
+      const d = new Date(ev.start);
+      if (Number.isNaN(d.getTime())) continue;
+      const k = dayKeyOf(d);
+      const g = m.get(k);
+      if (g) g.items.push(ev);
+      else m.set(k, { date: d, items: [ev] });
+    }
+    return [...m.entries()]
+      .sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0))
+      .map(([key, v]) => ({ key, ...v }));
+  }, [events]);
+
   if (state === "loading" || state === "hidden") return null;
 
-  const fmtWhen = (ev: GEvent) => {
-    if (!ev.start) return "";
-    const d = new Date(ev.start);
-    if (ev.allDay) {
-      return `${d.toLocaleDateString(intl, { day: "2-digit", month: "2-digit" })} · ${t("daily.gcal.allday")}`;
-    }
-    return d.toLocaleString(intl, { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
-  };
   const shortAccount = (email?: string | null) => (email ? email.split("@")[0] : "");
+  const isBirthday = (ev: GEvent) => ev.eventType === "birthday";
+  // O nome que o Google Agenda MOSTRA. Em aniversário vindo dos Contatos o
+  // `summary` da API é o genérico "Happy birthday!" e o nome de verdade vem no
+  // gadget; quando não vem, o `summary` já é o título que está lá no Google.
+  const titleOf = (ev: GEvent) => ev.contactName || ev.summary;
+  const fmtTime = (ev: GEvent) =>
+    ev.allDay || !ev.start
+      ? t("daily.gcal.allday")
+      : new Date(ev.start).toLocaleTimeString(intl, { hour: "2-digit", minute: "2-digit" });
 
   return (
     <div className="mb-2" style={{ borderBottom: "1px solid var(--border)", paddingBottom: 6 }}>
@@ -196,35 +225,84 @@ export function GoogleCalendar() {
       )}
 
       {state === "connected" &&
-        events.map((ev) => (
-          <a
-            key={`${ev.account ?? ""}|${ev.id}`}
-            href={ev.htmlLink || undefined}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-start gap-2 px-2 py-1.5 rounded-md my-0.5 transition-colors hover:bg-[rgba(66,133,244,0.08)]"
-            style={{ borderLeft: "3px solid #4285F4", cursor: ev.htmlLink ? "pointer" : "default" }}
-          >
-            <span className="text-[10px] font-extrabold whitespace-nowrap mt-px" style={{ color: "#4285F4" }}>
-              {fmtWhen(ev)}
-            </span>
-            <span className="flex-1 min-w-0">
-              <span className="block text-[11px] font-semibold truncate" style={{ color: "var(--text)" }}>
-                {ev.summary}
-              </span>
-              <span className="flex flex-wrap gap-x-2 text-[9px]" style={{ color: "#4285F4", opacity: 0.85 }}>
-                {/* qual conta (só se houver mais de uma conectada) */}
-                {ev.account && accounts.length > 1 && <span className="truncate">📆 {shortAccount(ev.account)}</span>}
-                {ev.calendar && <span className="truncate">🗂 {ev.calendar}</span>}
-              </span>
-              {ev.location && (
-                <span className="block text-[9px] truncate" style={{ color: "var(--text-3)" }}>
-                  📍 {ev.location}
-                </span>
-              )}
-            </span>
-          </a>
-        ))}
+        groups.map((g) => {
+          const today = dayKeyOf(new Date()) === g.key;
+          const otherYear = g.date.getFullYear() !== new Date().getFullYear();
+          return (
+            <div key={g.key} className="grid grid-cols-[38px_1fr] gap-2 px-1 py-1.5" style={{ borderTop: "1px solid var(--border)" }}>
+              {/* Coluna da data (dia da semana · número · mês), igual ao Google */}
+              <div className="text-center pt-0.5">
+                <div className="text-[8.5px] uppercase tracking-wide font-bold leading-none" style={{ color: "var(--text-3)" }}>
+                  {g.date.toLocaleDateString(intl, { weekday: "short" }).replace(".", "")}
+                </div>
+                <div
+                  className="text-[15px] font-extrabold leading-none mx-auto mt-1 flex items-center justify-center"
+                  style={{
+                    color: today ? "#fff" : "var(--text)",
+                    background: today ? "var(--color-wh-blue)" : "transparent",
+                    borderRadius: "50%",
+                    width: 24,
+                    height: 24,
+                  }}
+                >
+                  {g.date.getDate()}
+                </div>
+                {/* O ano só aparece quando NÃO é o ano corrente: é o que impedia
+                    de ver que "14/08" de 2027 não era o mesmo "14/08" de 2026. */}
+                <div className="text-[8px] uppercase font-bold leading-none mt-1" style={{ color: "var(--text-3)" }}>
+                  {g.date.toLocaleDateString(intl, { month: "short" }).replace(".", "")}
+                  {otherYear && ` ${g.date.getFullYear()}`}
+                </div>
+              </div>
+
+              {/* Eventos do dia */}
+              <div className="min-w-0">
+                {g.items.map((ev) => (
+                  <a
+                    key={`${ev.account ?? ""}|${ev.id}|${ev.start ?? ""}`}
+                    href={ev.htmlLink || undefined}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-1.5 px-1.5 py-1 rounded-md my-0.5 transition-colors hover:bg-[rgba(66,133,244,0.10)]"
+                    style={{ cursor: ev.htmlLink ? "pointer" : "default" }}
+                  >
+                    {isBirthday(ev) ? (
+                      <span className="text-[9px] leading-[14px] flex-shrink-0" aria-hidden>
+                        🎂
+                      </span>
+                    ) : (
+                      <span
+                        className="flex-shrink-0 mt-[4.5px]"
+                        style={{ width: 7, height: 7, borderRadius: "50%", background: "#4285F4" }}
+                        aria-hidden
+                      />
+                    )}
+                    <span
+                      className="text-[9.5px] font-bold whitespace-nowrap flex-shrink-0 mt-px"
+                      style={{ color: "var(--text-3)" }}
+                    >
+                      {fmtTime(ev)}
+                    </span>
+                    <span className="flex-1 min-w-0">
+                      <span className="block text-[11px] font-semibold truncate" style={{ color: "var(--text)" }}>
+                        {titleOf(ev)}
+                      </span>
+                      <span className="flex flex-wrap gap-x-2 text-[9px]" style={{ color: "#4285F4", opacity: 0.85 }}>
+                        {ev.account && accounts.length > 1 && <span className="truncate">📆 {shortAccount(ev.account)}</span>}
+                        {ev.calendar && <span className="truncate">🗂 {ev.calendar}</span>}
+                        {ev.location && (
+                          <span className="truncate" style={{ color: "var(--text-3)" }}>
+                            📍 {ev.location}
+                          </span>
+                        )}
+                      </span>
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          );
+        })}
     </div>
   );
 }

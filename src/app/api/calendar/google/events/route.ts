@@ -78,11 +78,15 @@ export async function GET() {
 
   // Mescla os eventos de todas as contas, dedupe (mesma reunião em 2 contas),
   // ordena por horário e corta o total.
+  //
+  // A chave NÃO leva a conta: o mesmo convite que cai na adm. e na hzfarah. tem
+  // o MESMO id do Google e é uma reunião só — com a conta na chave ele aparecia
+  // duas vezes na tela. Fica a 1ª conta da lista, que é quem vira a etiqueta.
   const seen = new Set<string>();
   const merged = perAccount
     .flatMap((r) => r.events)
     .filter((ev) => {
-      const k = `${ev.account ?? ""}|${ev.id}|${ev.start ?? ""}`;
+      const k = `${ev.id}|${ev.start ?? ""}`;
       if (seen.has(k)) return false;
       seen.add(k);
       return true;
