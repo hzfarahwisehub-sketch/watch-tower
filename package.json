@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "node --import tsx scripts/check-parity.ts && prisma generate && next build",
+    "check:parity": "node --import tsx scripts/check-parity.ts",
     "start": "next start",
     "postinstall": "prisma generate",
     "db:migrate": "prisma migrate dev",
