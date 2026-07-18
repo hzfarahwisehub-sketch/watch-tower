@@ -120,28 +120,34 @@ export function WorldClocks() {
       if (o === undefined) { o = offMin(tz, now); offCache.current.set(tz, o); }
       return o;
     };
-    let raf = 0;
-    const frame = () => {
+    // Um tick = atualiza todos os relógios montados a partir do relógio real.
+    const tick = () => {
       const root = rootRef.current;
-      if (root) {
-        const now = new Date();
-        root.querySelectorAll<HTMLElement>("[data-tz]").forEach((el) => {
-          const tz = el.dataset.tz!;
-          const d = new Date(now.getTime() + getOff(tz, now) * 60000);
-          const h = d.getUTCHours(), m = d.getUTCMinutes(), s = d.getUTCSeconds(), ms = d.getUTCMilliseconds();
-          const hh = el.querySelector(".hh"), mh = el.querySelector(".mh"), sh = el.querySelector(".sh");
-          if (hh) hh.setAttribute("transform", `rotate(${(((h % 12) + m / 60) * 30).toFixed(2)} 50 50)`);
-          if (mh) mh.setAttribute("transform", `rotate(${((m + s / 60) * 6).toFixed(2)} 50 50)`);
-          if (sh) sh.setAttribute("transform", `rotate(${((s + ms / 1000) * 6).toFixed(2)} 50 50)`);
-          const dig = el.querySelector(".wt-cl-dig");
-          if (dig) dig.textContent = el.dataset.short ? `${p2(h)}:${p2(m)}` : `${p2(h)}:${p2(m)}:${p2(s)}`;
-        });
-      }
-      raf = requestAnimationFrame(frame);
+      if (!root) return;
+      const now = new Date();
+      root.querySelectorAll<HTMLElement>("[data-tz]").forEach((el) => {
+        const tz = el.dataset.tz!;
+        const d = new Date(now.getTime() + getOff(tz, now) * 60000);
+        const h = d.getUTCHours(), m = d.getUTCMinutes(), s = d.getUTCSeconds(), ms = d.getUTCMilliseconds();
+        const hh = el.querySelector(".hh"), mh = el.querySelector(".mh"), sh = el.querySelector(".sh");
+        if (hh) hh.setAttribute("transform", `rotate(${(((h % 12) + m / 60) * 30).toFixed(2)} 50 50)`);
+        if (mh) mh.setAttribute("transform", `rotate(${((m + s / 60) * 6).toFixed(2)} 50 50)`);
+        if (sh) sh.setAttribute("transform", `rotate(${((s + ms / 1000) * 6).toFixed(2)} 50 50)`);
+        const dig = el.querySelector(".wt-cl-dig");
+        if (dig) dig.textContent = el.dataset.short ? `${p2(h)}:${p2(m)}` : `${p2(h)}:${p2(m)}:${p2(s)}`;
+      });
     };
-    raf = requestAnimationFrame(frame);
-    const iv = setInterval(() => offCache.current.clear(), 60000);
-    return () => { cancelAnimationFrame(raf); clearInterval(iv); };
+    let raf = 0;
+    const loop = () => { tick(); raf = requestAnimationFrame(loop); };
+    // rAF = varredura suave do ponteiro dos segundos quando a aba está visível.
+    raf = requestAnimationFrame(loop);
+    // tick imediato (sem esperar o 1º frame) + setInterval de RESERVA: o navegador
+    // PAUSA o rAF em aba de fundo, então o intervalo (throttled pra ~1s em bg) mantém
+    // o relógio certo mesmo oculto e evita ficar preso no "--:--:--".
+    tick();
+    const ivTick = setInterval(tick, 250);
+    const ivOff = setInterval(() => offCache.current.clear(), 60000);
+    return () => { cancelAnimationFrame(raf); clearInterval(ivTick); clearInterval(ivOff); };
   }, []);
 
   const th = THEMES[theme];
