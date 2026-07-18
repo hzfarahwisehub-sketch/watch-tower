@@ -390,6 +390,15 @@ export const BULLETINS: Bulletin[] = [
     freqColor: "ondemand",
   },
   {
+    key: "sg",
+    country: "Singapura",
+    flag: "🇸🇬",
+    source: "ICA · Immigration & Checkpoints Authority",
+    frequency: "Sob demanda",
+    url: "https://www.ica.gov.sg/",
+    freqColor: "ondemand",
+  },
+  {
     key: "nz",
     country: "Nova Zelândia",
     flag: "🇳🇿",
