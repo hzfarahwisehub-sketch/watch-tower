@@ -8,6 +8,8 @@
 // do Git em vez de sumir numa linha de tabela.
 
 export type RoteiroFormato = "longo" | "curto";
+/** Família do conteúdo (filtro da aba). */
+export type RoteiroTipo = "roteiro" | "dupla" | "custo";
 
 export type Roteiro = {
   /** `<data>-<n>` — estável, serve de chave de "já usei este". */
@@ -16,11 +18,13 @@ export type Roteiro = {
   date: string;
   lote: number;
   n: number;
-  /** "Lucas" | "Marcela" */
+  /** "Lucas" | "Marcela" | "Dupla" */
   persona: string;
   /** "YouTube" | "Reels" | "Instagram" */
   canal: string;
   formato: RoteiroFormato;
+  /** roteiro comum · dupla (casal) · custo (dica de custo do Lucas). */
+  tipo: RoteiroTipo;
   titulo: string;
   /** Corpo já quebrado em parágrafos, na ordem de leitura. */
   paras: string[];
@@ -29,6 +33,129 @@ export type Roteiro = {
 
 export const ROTEIROS: Roteiro[] = [
   {
+    "id": "2026-07-18-05",
+    "date": "2026-07-18",
+    "lote": 1,
+    "n": 5,
+    "persona": "Lucas",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "custo",
+    "titulo": "O carro é a linha que te engana na hora de mudar pra Europa",
+    "paras": [
+      "ABERTURA (o Lucas escolhe uma):\nOpção A: Pessoal, hoje eu não vim com achismo, vim com número.\nOpção B: Meus amigos, senta que esse aqui é papo de planilha.\nOpção C: Gente, essa é a conta que costuma ficar pela metade.",
+      "Quase todo mundo que planeja mudar calcula aluguel, comida, passagem. E deixa de fora uma linha que na Europa costuma doer: o carro.",
+      "Vou te explicar por que o mesmo carro que já é caro aqui fica ainda mais caro em muito lugar da Europa, e Portugal é o exemplo campeão. Além do preço do veículo, existe um imposto chamado ISV, o Imposto Sobre Veículos. Ele é pago uma vez, na hora de registrar o carro, e é calculado por dois fatores: a cilindrada do motor e a emissão de CO2. Quanto maior o motor e mais o carro polui, mais pesado o imposto. Isso empurra o preço final do carro novo pra bem acima do que a gente está acostumado.",
+      "E não para no carro. A gasolina acompanha. Enquanto no Brasil o litro roda perto de um euro, em Portugal ele fica perto de um euro e oitenta. Todo mês, essa diferença aparece no seu bolso.",
+      "Agora o outro lado, porque eu não vim aqui só assustar. Em muitas cidades europeias, o transporte público é bom o bastante pra você viver sem carro no começo, o que na maioria das cidades brasileiras é bem mais difícil. Então, antes de perguntar quanto custa o carro lá, pergunta se você precisa mesmo de carro no primeiro ano, ou se o metrô resolve enquanto você se estabelece.",
+      "Pra quem vai de Canadá ou Austrália, o cenário do carro é mais parecido com o do Brasil, sem esse imposto pesado de registro, mas com distâncias maiores, onde o carro deixa de ser luxo e vira necessidade mais cedo.",
+      "O ponto é esse: o carro é uma das linhas que mais varia de país pra país, e uma das que mais somem da conta de quem planeja. Colocar ele na mesa antes de embarcar evita um susto grande logo na largada.",
+      "É esse tipo de detalhe que a gente destrincha na WiseHub, com dado atual e gente que já paga essas contas lá fora. Um aviso que eu sempre dou: imposto e preço de carro mudam com o modelo, o ano e a cidade, e nada aqui substitui uma pesquisa no seu caso concreto. O que eu te entrego é a linha que você ia esquecer.",
+      "FECHAMENTO (o Lucas escolhe uma):\nOpção 1: É isso, pessoal. Número na mesa, e a decisão fica com você.\nOpção 2: Pesquisa o seu caso, roda a sua conta, e me conta aqui embaixo o que achou.\nOpção 3: Cabeça fria e planilha aberta. Te espero no próximo."
+    ],
+    "palavras": 461
+  },
+  {
+    "id": "2026-07-18-04",
+    "date": "2026-07-18",
+    "lote": 1,
+    "n": 4,
+    "persona": "Lucas",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "custo",
+    "titulo": "\"Portugal ficou caro?\" Depende da conta que você faz",
+    "paras": [
+      "ABERTURA (o Lucas escolhe uma):\nOpção A: Pessoal, hoje eu não vim com achismo, vim com número.\nOpção B: Meus amigos, senta que esse aqui é papo de planilha.\nOpção C: Gente, essa é a conta que costuma ficar pela metade.",
+      "Toda semana chega a mesma mensagem: \"Lucas, Portugal ficou caríssimo, não vale mais a pena.\" E eu entendo de onde vem, porque olhando só o preço, assusta mesmo. Mas preço sozinho conta metade da história.",
+      "Vou te dar os números reais, e depois a leitura que muda tudo. Alugar um apartamento de um quarto no centro sai, em média, por uns 337 euros no Brasil e uns 917 em Portugal. É quase o triplo. A comida acompanha: a dúzia de ovos, o quilo de frango, a gasolina, tudo pesa mais no bolso português. Até aqui, a frase \"é caro demais\" parece fechada.",
+      "Agora a outra metade, a que costuma ficar de fora da mesma tela. O salário líquido médio no Brasil gira em torno de 460 euros por mês. Em Portugal, em torno de 1.150. Também quase o triplo.",
+      "E é aí que a conta vira. O que mede o peso de uma coisa é uma divisão simples: o preço, dividido pelo que você ganha naquele país. Um aluguel que custa o triplo, pago com um salário que também é o triplo, ocupa quase a mesma fatia do seu mês. A mesma cidade pode ser cara ou tranquila dependendo do lado da conta que você olha.",
+      "Isso não quer dizer que Portugal seja barato, e eu não vou te vender isso. Tem item que pesa mais de verdade, sem salário que compense. O carro é o exemplo. Além do preço, existe o ISV, um imposto pesado que se paga uma vez, no registro, calculado pela cilindrada e pela emissão de CO2. Isso faz o mesmo carro custar bem mais lá, e não tem salário local que equilibre isso no primeiro ano.",
+      "O ponto é esse: \"caro\" e \"barato\" são palavras preguiçosas pra uma decisão desse tamanho. O número que decide é a proporção. Quanto cada coisa custa do salário que você vai ganhar lá, e não do seu de hoje convertido.",
+      "É esse tipo de conta que a gente destrincha na WiseHub. A proporção real, país por país, custo de vida e salário lado a lado, com dado atual e gente que já paga essas contas todo mês. Um aviso que eu sempre dou: índice de custo de vida é indicativo, muda com a cidade e com o câmbio, e nada aqui substitui um contador pro seu caso. O que eu te entrego é a pergunta certa pra fazer.",
+      "FECHAMENTO (o Lucas escolhe uma):\nOpção 1: É isso, pessoal. Número na mesa, e a decisão fica com você.\nOpção 2: Pesquisa o seu caso, roda a sua conta, e me conta aqui embaixo o que achou.\nOpção 3: Cabeça fria e planilha aberta. Te espero no próximo."
+    ],
+    "palavras": 488
+  },
+  {
+    "id": "2026-07-18-03",
+    "date": "2026-07-18",
+    "lote": 1,
+    "n": 3,
+    "persona": "Dupla",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "dupla",
+    "titulo": "A Espanha encurtou o caminho da regularização, e mudou a conta do tempo",
+    "paras": [
+      "**[Marcela]** Oi meus amores, meu nome é Marcela Nogueira, e eu estou muito feliz de ter você aqui comigo. Se você sonha com a Espanha, presta atenção nessa.",
+      "**[Lucas]** Pessoal, hoje eu não vim com achismo, vim com lei na mão. E a Espanha acabou de encurtar um caminho que era longo demais.",
+      "**[Marcela]** Muita gente vai pra Espanha e vive anos ali, trabalhando, construindo vida, esperando poder se regularizar. E esse tempo de espera acabou de diminuir.",
+      "**[Lucas]** O fato: o novo Regulamento de Estrangeiros, o Real Decreto 1155/2024, entrou em vigor em maio de 2025. Ele mexeu no arraigo, que é o caminho de quem já está lá pra conseguir a residência.",
+      "**[Marcela]** A mudança que mais toca: o tempo mínimo de permanência no país caiu de três anos pra dois. Um ano a menos de espera pra quem está construindo raiz lá.",
+      "**[Lucas]** E o contrato de trabalho que serve pra isso ficou mais realista. Aceita contrato de qualquer tipo, com no mínimo 90 dias e pelo menos o salário mínimo, jornada a partir de 20 horas por semana, e dá pra somar mais de um contrato. O prazo pra resposta do pedido é de três meses.",
+      "**[Marcela]** Pra quem está planejando de longe, isso muda a conta do tempo. O que parecia distante ficou um degrau mais perto.",
+      "**[Lucas]** E onde a WiseHub entra? A gente acompanha essa regra de perto, do jeito que ela está hoje, e não do jeito que estava num vídeo de dois anos atrás. Com jurídico verificado quando o seu caso pede.",
+      "**[Marcela]** Sempre com honestidade: a gente não regulariza ninguém, não fala pelo governo espanhol, e nada aqui substitui um advogado de imigração. O que a gente faz é te mostrar o caminho certo e andar junto.",
+      "**[Lucas]** Se a Espanha está no seu radar, começa contando o seu tempo de vínculo com o país. É a peça central. É isso, pessoal. Número na mesa, e a decisão fica com você.",
+      "**[Marcela]** A WiseHub está esperando por você. E não se esqueça: os seus sonhos merecem ser realizados."
+    ],
+    "palavras": 348
+  },
+  {
+    "id": "2026-07-18-02",
+    "date": "2026-07-18",
+    "lote": 1,
+    "n": 2,
+    "persona": "Dupla",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "dupla",
+    "titulo": "O Canadá acabou de devolver a cidadania pra quem tinha perdido",
+    "paras": [
+      "**[Marcela]** Oi meus amores, meu nome é Marcela Nogueira, e eu estou muito feliz de ter você aqui comigo. Essa aqui é uma notícia boa, dessas de arrepiar.",
+      "**[Lucas]** Pessoal, hoje eu não vim com achismo, vim com lei na mão. E dessa vez a lei abriu porta, em vez de fechar.",
+      "**[Marcela]** O Canadá acabou de devolver a cidadania pra um monte de gente que tinha perdido por um detalhe da lei antiga. São os que chamam lá de canadenses perdidos.",
+      "**[Lucas]** Os fatos. Em 15 de dezembro de 2025 entrou em vigor o Bill C-3, que mexeu na Lei da Cidadania. Ele derrubou o chamado limite de primeira geração, uma regra de 2009 que cortava a cidadania de quem nascia fora a partir da segunda geração.",
+      "**[Marcela]** Traduzindo: se você tem pai, avô, às vezes bisavô canadense, e ficou de fora só por causa daquela regra, a sua cidadania pode voltar. E o mais bonito, pra quem nasceu antes de 15 de dezembro de 2025, ela volta de forma automática e retroativa, sem você ter que provar o tempo que o seu pai morou lá.",
+      "**[Lucas]** Agora, atenção no detalhe que muda o jogo pra quem vem depois. Pra quem nasce a partir de 15 de dezembro de 2025, filho de canadense que também nasceu fora, a regra pede prova: o pai ou a mãe precisa ter somado pelo menos 1.095 dias, três anos, de presença física no Canadá antes do nascimento.",
+      "**[Marcela]** Então a mensagem é dupla. Se você já devia ser canadense e foi cortado, corre atrás, o caminho reabriu. E se você está planejando o futuro dos seus filhos, esse número de três anos entra na conta desde já.",
+      "**[Lucas]** E é aqui que a WiseHub faz diferença. A gente separa o boato de internet da lei que está em vigor, com a data certa e o jurídico verificado quando o seu caso pede.",
+      "**[Marcela]** Com a honestidade de sempre: a gente não emite passaporte, não decide o seu processo, e nada aqui substitui um advogado. O que a gente entrega é a informação certa e a mão na sua.",
+      "**[Lucas]** Confere a sua linha de descendência e a data do seu nascimento. É por aí que começa. É isso, pessoal. Número na mesa, e a decisão fica com você.",
+      "**[Marcela]** A WiseHub está esperando por você. E não se esqueça: os seus sonhos merecem ser realizados."
+    ],
+    "palavras": 402
+  },
+  {
+    "id": "2026-07-18-01",
+    "date": "2026-07-18",
+    "lote": 1,
+    "n": 1,
+    "persona": "Dupla",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "dupla",
+    "titulo": "A cidadania italiana mudou em 2025, e muita família ainda planeja pela regra velha",
+    "paras": [
+      "**[Marcela]** Oi meus amores, meu nome é Marcela Nogueira, e eu estou muito feliz de ter você aqui comigo. E hoje eu não vim sozinha.",
+      "**[Lucas]** Pessoal, hoje eu não vim com achismo, vim com lei na mão. E o assunto é sério pra quem tem sangue italiano na família.",
+      "**[Marcela]** A Itália mudou a regra da cidadania por descendência em 2025. Isso mexe com o sonho de muita gente que tem uma bisavó, um bisavô que veio de lá.",
+      "**[Lucas]** Vamos aos fatos, sem drama. Em 28 de março de 2025 saiu o decreto que virou a Lei 74 de 2025, confirmada em maio. Ela colocou um limite de gerações que antes não existia.",
+      "**[Marcela]** Traduzindo pro coração: agora a cidadania automática vale, em regra, até a segunda geração. Quem tem pai ou avô italiano. O bisneto, que antes conseguia, saiu do caminho automático a partir de 27 de março de 2025.",
+      "**[Lucas]** E tem um detalhe que vale ouro pra quem já estava no processo. Quem já tinha dado entrada, ou agendamento confirmado antes das 23h59 de Roma do dia 27 de março, continua na regra antiga. Aquela data virou uma linha divisória.",
+      "**[Marcela]** Então se você é neto de italiano, respira, o caminho continua aberto. Se é bisneto, o automático fechou, e a conversa vira sobre outras portas, como casamento ou residência, que pedem mais tempo.",
+      "**[Lucas]** E teve novidade fresca: em março de 2026 a Corte Constitucional da Itália manteve o limite de duas gerações. É regra firme, ninguém deve contar que vá voltar atrás.",
+      "**[Marcela]** A gente conta isso com cuidado porque não tem coisa pior do que uma família planejar dois anos em cima de uma regra que já mudou.",
+      "**[Lucas]** E é isso que a gente faz na WiseHub. A regra atualizada, país por país, com quem acompanha todo dia, e jurídico verificado quando o caso pede.",
+      "**[Marcela]** Com honestidade: a gente não emite cidadania, não acelera consulado, e nada aqui substitui um advogado. O que a gente entrega é o mapa certo e a companhia.",
+      "**[Lucas]** Antes de gastar sola de sapato, confere em qual geração você está. É a primeira conta. É isso, pessoal. Número na mesa, e a decisão fica com você.",
+      "**[Marcela]** A WiseHub está esperando por você. E não se esqueça: os seus sonhos merecem ser realizados."
+    ],
+    "palavras": 389
+  },
+  {
     "id": "2026-07-16-08",
     "date": "2026-07-16",
     "lote": 4,
@@ -36,6 +163,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "Instagram",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "A primeira vez que ela dirigiu sozinha",
     "paras": [
       "Tem um momento que não aparece em nenhuma lista de como foi se adaptar, e que muita mulher lembra com clareza: a primeira vez que ela dirigiu sozinha no país novo. Sem o marido no banco do carona indicando o caminho, sem aplicativo aberto o tempo todo. Só ela, o carro, e uma rua que já não era mais estranha.",
@@ -53,6 +181,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "Reels",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "A gente volta?",
     "paras": [
       "Tem uma pergunta que criança pequena faz sem aviso, no meio do jantar, no banho, no carro. Mãe, a gente volta?",
@@ -70,6 +199,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "Voltar a trabalhar depois de anos em casa, num país que não é o seu",
     "paras": [
       "Tem uma pergunta que aperta o peito de muita mulher depois que os filhos crescem um pouco e a rotina de casa afrouxa: e agora, como eu volto pro mercado, se nem sei mais como ele funciona, e ainda por cima nesse país que não é o meu?",
@@ -90,6 +220,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "O trabalho que ninguém vê ela fazendo",
     "paras": [
       "Quando a família muda de país, alguém tem que descobrir a escola, marcar a consulta médica, entender o transporte, achar o mercado que vende o tempero certo, aprender o sistema de coleta de lixo, fazer amizade com a vizinha pra ter alguém a quem recorrer numa emergência. Na maioria das famílias, esse alguém é a mulher.",
@@ -110,6 +241,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "Instagram",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "O corpo avisa antes da cabeça admitir",
     "paras": [
       "Antes de admitir que está no limite, o corpo já avisou várias vezes. O sono que não rende. A vontade de cancelar tudo num dia comum. A irritação com coisa pequena, que não é sobre a coisa pequena.",
@@ -127,6 +259,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "Reels",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "A pressa de provar que valeu a pena",
     "paras": [
       "Tem uma pressa que pega quem se muda: a pressa de mostrar resultado rápido, pra família, pros amigos, pra própria cabeça. Como se o primeiro ano precisasse fechar no lucro pra justificar a decisão.",
@@ -144,6 +277,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "O primeiro cliente lá fora não é o maior",
     "paras": [
       "Quem empreende aqui e decide abrir uma frente lá fora costuma repetir o mesmo erro de expectativa: espera que o primeiro cliente internacional seja parecido com o melhor cliente que já teve em casa. Grande, fiel, fácil de atender. Aí o primeiro contrato chega pequeno, testando, desconfiado, e a pessoa lê isso como fracasso.",
@@ -164,6 +298,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "O currículo que fala uma língua que ninguém avisou",
     "paras": [
       "Um profissional decide se mudar levando o currículo mais forte que já teve. Anos de entrega, um cargo conquistado com esforço de verdade, referências que abririam qualquer porta na cidade onde ele estava. Do outro lado, silêncio. Entrevista que não vem, ou vem e para no meio, sem ninguém dizer com clareza por quê.",
@@ -185,6 +320,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "Instagram",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "Um dia você chora no mercado",
     "paras": [
       "Ninguém te prepara pra isso, e acontece cedo ou tarde.",
@@ -203,6 +339,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "Reels",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "A foto da amiga que ficou",
     "paras": [
       "Você muda de país, e um dia abre o celular e vê a foto. O aniversário, a mesa cheia, todo mundo que você ama junto. E você não está.",
@@ -221,6 +358,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "Mudar com adolescente é outro processo",
     "paras": [
       "Toda mãe que muda de país com filho pequeno ouve a mesma frase: criança se adapta rápido. Muitas vezes é verdade. Mas e quando o filho tem quinze?",
@@ -242,6 +380,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "A palavra que o formulário usa pra te chamar",
     "paras": [
       "Tem uma palavra que aparece no processo de imigração e que machuca mais do que parece. Dependente.",
@@ -263,6 +402,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "Instagram",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "O visto é a menor linha do projeto",
     "paras": [
       "Quando alguém decide viver fora, gasta noventa por cento da energia numa coisa só: o visto. Fórum, advogado, checklist, ansiedade.",
@@ -281,6 +421,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "Reels",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "O seu emprego de hoje pode ser o seu treino",
     "paras": [
       "Tem gente que trata o emprego atual como a corrente que prende. Eu enxergo diferente, e é uma diferença que rende.",
@@ -298,6 +439,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "A moeda em que você pensa",
     "paras": [
       "A pessoa se muda, começa a ganhar em outra moeda, e continua convertendo tudo de volta pra que ela cresceu usando. Vê um café por quatro e converte. Vê um aluguel e converte. Vê o próprio salário e converte, pra sentir se é bom. Parece prudência. Na prática é uma régua velha medindo uma vida nova.",
@@ -318,6 +460,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "O custo de ficar também é um custo",
     "paras": [
       "Quando alguém pensa em viver fora, monta uma planilha só. A planilha de sair. Quanto custa o processo, a passagem, o depósito do aluguel, os meses de reserva até a renda engrenar. Some tudo, olha o número, e o número assusta. Aí a conclusão vem sozinha: é caro demais, fica pra depois.",
@@ -339,6 +482,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "Instagram",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "Antes do visto, a conversa que trava dentro de casa",
     "paras": [
       "Tem um casal em que um quer muito ir e o outro sorri e muda de assunto. Os dois acham que estão sendo generosos. Um não quer pressionar, o outro não quer ser o motivo de o sonho não acontecer. E a conversa que decide a vida dos dois vai ficando para depois.",
@@ -356,6 +500,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "Reels",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "A sua mãe vai aprender a te ver por uma tela",
     "paras": [
       "Quando a gente fala em mudar de país, fala da coragem de quem vai. E quem fica?",
@@ -373,6 +518,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "O tempo da criança é diferente do tempo do adulto, e isso muda tudo na adaptação",
     "paras": [
       "Toda mãe que pensa em mudar o país da família chega numa pergunta que aperta o peito. Como vai ser para o meu filho. E tem uma parte da resposta que eu demorei a entender, e que muda o jeito de olhar tudo. O tempo da criança é diferente do seu.",
@@ -394,6 +540,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "A carreira que você construiu não cabe na mala",
     "paras": [
       "Quero conversar com a mulher que está no meio de uma decisão de mudança e que carrega uma pergunta que raramente encontra espaço na mesa de casa. E eu, como fico nessa história.",
@@ -415,6 +562,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "Instagram",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "No primeiro dia lá fora, a sua rede é zero",
     "paras": [
       "Rede lá fora funciona como estrutura básica. É ela que aponta o bairro que faz sentido, o contador que entende o seu caso, a empresa que contrata gente com o seu perfil, e o que fazer quando um processo trava.",
@@ -432,6 +580,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "Reels",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "O provedor que decide tudo sozinho e não conta pra ninguém",
     "paras": [
       "Ele pesquisa de madrugada. Faz e refaz a conta. Some no celular no fim de semana. E quando perguntam, responde que está tudo bem. É o homem que carrega a decisão de mudar o país da família inteira e não divide isso com ninguém.",
@@ -449,6 +598,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "A ordem certa é renda primeiro, mudança depois",
     "paras": [
       "Em decisão séria, a ordem dos passos costuma importar mais do que a qualidade de cada passo isolado. E existe uma inversão de ordem, muito comum em quem planeja viver fora, que deixa um plano bom bem mais frágil do que ele precisava ser.",
@@ -470,6 +620,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "O que o mercado lá fora lê quando o seu currículo chega",
     "paras": [
       "Existe um erro de leitura que costuma custar caro justamente para quem é bom no que faz. A pessoa olha o próprio currículo, vê quinze anos de estrada, resultado entregue, reputação construída, e conclui que tudo isso viaja junto com ela. Que basta traduzir o documento e o mercado do outro país vai enxergar o mesmo valor que o mercado daqui enxerga. A prática costuma ser outra, e entender por quê vale mais do que muita coisa que se faz na preparação.",
@@ -491,6 +642,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "Instagram",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "Existe um lugar onde a saudade encontra gente que entende — Short",
     "paras": [
       "Tem uma solidão específica em querer uma vida em outro país. É a solidão de olhar em volta e sentir que ninguém perto de você entende bem o que se passa aí dentro. A mistura de esperança, medo e saudade antecipada de um lugar que você ainda nem deixou.",
@@ -507,6 +659,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "Reels",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "Você não precisa ser forte o tempo todo — Short",
     "paras": [
       "Para a mulher que está segurando a decisão de mudar o país da família inteira nos ombros, eu queria dizer uma coisa. Você não precisa ser forte o tempo todo, e não precisa saber de tudo sozinha.",
@@ -523,6 +676,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "A boa notícia que muitas famílias ainda não descobriram, e por que informação a tempo muda tudo",
     "paras": [
       "Nem toda mudança nas regras de imigração é uma má notícia. Às vezes, é o contrário. Às vezes, um país reescreve os seus caminhos e abre uma porta que estava fechada, e muitas famílias que se encaixam nessa porta seguem a vida inteira sem descobrir que ela abriu.",
@@ -543,6 +697,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Marcela",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "Quando a mudança é com a família inteira, o medo tem outro tamanho",
     "paras": [
       "Quero conversar com quem não está pensando em mudar de país só por si, mas com a família inteira junto. Porque, quando é assim, o peso é outro, e o medo tem outro tamanho.",
@@ -563,6 +718,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "Instagram",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "O mundo virou um mapa de oportunidades, e quase ninguém sabe ler esse mapa — Short",
     "paras": [
       "Nunca foi tão possível construir renda, negócio e vida em mais de um país ao mesmo tempo. E, ao mesmo tempo, nunca foi tão fácil se perder tentando, porque oportunidade sem direção vira só ansiedade.",
@@ -579,6 +735,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "Reels",
     "formato": "curto",
+    "tipo": "roteiro",
     "titulo": "Vou conseguir sustentar minha família lá fora? — Short",
     "paras": [
       "A pergunta que tira o sono de quem provê uma família não é se a vida fora vai ser bonita. É se ela vai ser sustentável. Vou dar conta, no país novo, na moeda nova, com o custo novo. Essa pergunta é séria, e ela merece uma resposta séria, não uma frase motivacional.",
@@ -595,6 +752,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "O erro mais caro de quem planeja mudar de país é planejar sobre uma regra que já mudou",
     "paras": [
       "Quero te propor um raciocínio de gestão de risco, do tipo que a gente aplica em qualquer decisão financeira séria, mas que quase ninguém aplica na hora de mudar de país. E deveria, porque é aqui que se perde mais dinheiro e mais tempo.",
@@ -615,6 +773,7 @@ export const ROTEIROS: Roteiro[] = [
     "persona": "Lucas",
     "canal": "YouTube",
     "formato": "longo",
+    "tipo": "roteiro",
     "titulo": "Antes de ser um sonho, mudar de país é uma decisão financeira",
     "paras": [
       "Existe uma parte da conversa sobre viver fora que quase ninguém quer ter, e é justamente a mais importante. A parte dos números. A gente romantiza a mudança, imagina a paisagem nova, a vida diferente, e adia a pergunta que sustenta tudo isso. Quanto custa, de verdade, construir essa vida, e como eu me sustento enquanto ela ainda está sendo construída.",

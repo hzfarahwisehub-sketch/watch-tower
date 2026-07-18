@@ -7,6 +7,7 @@ const dict = {
     "studio.subtitle":
       "Roteiros prontos pros fundadores gravarem. Texto completo, copia e usa. O que não for usado hoje continua aqui.",
     "studio.f.all": "todos",
+    "studio.f.tipo": "Tipo",
     "studio.f.persona": "Fundador",
     "studio.f.canal": "Canal",
     "studio.f.date": "Lote",
@@ -27,6 +28,7 @@ const dict = {
     "studio.subtitle":
       "Scripts ready for the founders to record. Full text, copy and use. Whatever goes unused today stays here.",
     "studio.f.all": "all",
+    "studio.f.tipo": "Type",
     "studio.f.persona": "Founder",
     "studio.f.canal": "Channel",
     "studio.f.date": "Batch",

@@ -71,14 +71,24 @@ function canalEmoji(canal: string): string {
 }
 
 function personaColor(p: string): string {
-  return p === "Lucas" ? "#4A7AFF" : "#D8AF54";
+  if (p === "Lucas") return "#4A7AFF";
+  if (p === "Dupla") return "#10A570"; // casal Lucas+Marcela (verde WiseHub)
+  return "#D8AF54"; // Marcela
 }
+
+// Rótulo amigável da família do conteúdo (o campo `tipo` do dado é técnico).
+const TIPO_LABEL: Record<string, string> = {
+  roteiro: "Roteiros",
+  dupla: "Dupla (casal)",
+  custo: "Dicas de custo",
+};
 
 export function ContentStudio() {
   const { t } = useLocale();
   const { usage, toggle } = useUsed();
   const used = usage;
 
+  const [tipo, setTipo] = useState<string>("all");
   const [persona, setPersona] = useState<PersonaFilter>("all");
   const [canal, setCanal] = useState<CanalFilter>("all");
   const [date, setDate] = useState<string>("all");
@@ -86,6 +96,11 @@ export function ContentStudio() {
   const [openId, setOpenId] = useState<string | null>(ROTEIROS[0]?.id ?? null);
   const [copied, setCopied] = useState<string | null>(null);
 
+  // Ordem fixa pros tipos (Roteiros, Dupla, Dicas de custo), não a de aparição.
+  const tipos = useMemo(
+    () => ["roteiro", "dupla", "custo"].filter((tp) => ROTEIROS.some((r) => r.tipo === tp)),
+    [],
+  );
   const personas = useMemo(() => [...new Set(ROTEIROS.map((r) => r.persona))], []);
   const canais = useMemo(() => [...new Set(ROTEIROS.map((r) => r.canal))], []);
   const dates = useMemo(() => [...new Set(ROTEIROS.map((r) => r.date))].sort().reverse(), []);
@@ -94,12 +109,13 @@ export function ContentStudio() {
     () =>
       ROTEIROS.filter(
         (r) =>
+          (tipo === "all" || r.tipo === tipo) &&
           (persona === "all" || r.persona === persona) &&
           (canal === "all" || r.canal === canal) &&
           (date === "all" || r.date === date) &&
           (!onlyUnused || !used.has(r.id)),
       ),
-    [persona, canal, date, onlyUnused, used],
+    [tipo, persona, canal, date, onlyUnused, used],
   );
 
   // O filtro pode ter escondido o roteiro aberto: cai no primeiro da lista em
@@ -157,6 +173,10 @@ export function ContentStudio() {
 
       {/* Filtros */}
       <div className="flex flex-wrap items-center gap-1.5 px-4 py-2 flex-shrink-0" style={{ borderBottom: "1px solid var(--border)" }}>
+        <Select label={t("studio.f.tipo")} value={tipo} onChange={setTipo}>
+          <option value="all">{t("studio.f.tipo")}: {t("studio.f.all")}</option>
+          {tipos.map((tp) => <option key={tp} value={tp}>{TIPO_LABEL[tp] ?? tp}</option>)}
+        </Select>
         <Select label={t("studio.f.persona")} value={persona} onChange={setPersona}>
           <option value="all">{t("studio.f.persona")}: {t("studio.f.all")}</option>
           {personas.map((p) => <option key={p} value={p}>{p}</option>)}

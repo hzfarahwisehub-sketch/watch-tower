@@ -23,7 +23,10 @@ HEAD = re.compile(r"^##\s+(\d+)\s+·\s+(\w+)\s+·\s+([^(]+)\(([^)]+)\)\s*$")
 
 def parse_file(path):
     name = os.path.basename(path)
-    m = re.match(r"(\d{4}-\d{2}-\d{2})\s+-\s+Lote\s+(\d+)\.md", name)
+    # Aceita o lote dos fundadores ("AAAA-MM-DD - Lote NN.md") E os formatos novos
+    # ("AAAA-MM-DD - Dupla e Custo - Lote NN.md"). O que vem entre a data e "Lote"
+    # e livre. Arquivos sem esse padrao (ex.: _EXEMPLARES...) sao pulados.
+    m = re.match(r"(\d{4}-\d{2}-\d{2})\s+-\s+.*?Lote\s+(\d+)\.md$", name)
     if not m:
         print("  ! nome fora do padrao, pulando:", name)
         return None
@@ -44,9 +47,28 @@ def parse_file(path):
         titulo = tm.group(1).strip() if tm else "(sem título)"
         body = re.sub(r"^Título:.*$", "", body, flags=re.M)
         body = re.sub(r"^-{3,}\s*$", "", body, flags=re.M)
+        # Linhas ">" sao provenancia interna (fonte); nao entram no texto copiavel.
+        body = re.sub(r"^>.*$", "", body, flags=re.M)
         paras = [p.strip() for p in re.split(r"\n\s*\n", body) if p.strip()]
         if not paras:
             continue
+        # tipo = familia do conteudo, pro filtro da aba:
+        #   "dupla"   -> peca do casal (persona "Dupla")
+        #   "custo"   -> dica de custo do Lucas (rotulo "(dica de custo)")
+        #   "roteiro" -> roteiro comum dos fundadores
+        low_tipo = tipo.lower()
+        if persona.lower() == "dupla":
+            familia = "dupla"
+        elif "custo" in low_tipo:
+            familia = "custo"
+        else:
+            familia = "roteiro"
+        if tipo.startswith("longo"):
+            formato = "longo"
+        elif tipo.startswith("curto"):
+            formato = "curto"
+        else:
+            formato = "longo"  # dupla/custo sao peças longas
         scripts.append({
             "id": f"{date}-{int(idx):02d}",
             "date": date,
@@ -54,7 +76,8 @@ def parse_file(path):
             "n": int(idx),
             "persona": persona,
             "canal": canal,
-            "formato": "longo" if tipo.startswith("longo") else "curto",
+            "formato": formato,
+            "tipo": familia,
             "titulo": titulo,
             "paras": paras,
             "palavras": sum(len(p.split()) for p in paras),
@@ -89,6 +112,8 @@ def main():
 // do Git em vez de sumir numa linha de tabela.
 
 export type RoteiroFormato = "longo" | "curto";
+/** Família do conteúdo (filtro da aba). */
+export type RoteiroTipo = "roteiro" | "dupla" | "custo";
 
 export type Roteiro = {{
   /** `<data>-<n>` — estável, serve de chave de "já usei este". */
@@ -97,11 +122,13 @@ export type Roteiro = {{
   date: string;
   lote: number;
   n: number;
-  /** "Lucas" | "Marcela" */
+  /** "Lucas" | "Marcela" | "Dupla" */
   persona: string;
   /** "YouTube" | "Reels" | "Instagram" */
   canal: string;
   formato: RoteiroFormato;
+  /** roteiro comum · dupla (casal) · custo (dica de custo do Lucas). */
+  tipo: RoteiroTipo;
   titulo: string;
   /** Corpo já quebrado em parágrafos, na ordem de leitura. */
   paras: string[];
