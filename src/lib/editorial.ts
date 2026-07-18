@@ -1233,6 +1233,402 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     blog: [],
   },
+
+"is": {
+  "community": [
+    {
+      "title": "Islândia: pedido de autorização de trabalho agora entra numa porta só",
+      "body": "Desde 8 de julho de 2026, a Islândia passou a processar as autorizações de trabalho pela Útlendingastofnun (Directorate of Immigration), a mesma autoridade que já cuida da residência. Antes, o pedido de trabalho ficava na Directorate of Labour. A mudança veio das alterações no Act on Foreign Nationals e no Foreign Nationals' Right to Work Act, aprovadas pelo Parlamento islandês em 18 de junho. Os pedidos que ainda não tinham sido decididos pela Directorate of Labour passaram para a nova autoridade. Para quem vem de fora do EEE/EFTA com oferta de emprego, é uma etapa a menos de balcão.",
+      "cta": "Confira a regra na página oficial da Directorate of Immigration antes de montar seu pedido.",
+      "sources": [
+        {
+          "label": "Directorate of Immigration (island.is) - New residence and work permit rules take effect",
+          "url": "https://island.is/en/o/directorate-of-immigration/news/new-residence-and-work-permit-rules-take-effect"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    },
+    {
+      "title": "Estudante na Islândia não precisa mais de autorização de trabalho separada",
+      "body": "Pelas novas regras em vigor desde 8 de julho de 2026, quem tem residência de estudante na Islândia pode trabalhar sem uma autorização de trabalho à parte. O limite é de até 60% da jornada integral durante o período de aulas, somando todos os empregadores, e jornada integral nos intervalos entre os semestres, incluindo férias de verão e de fim de ano. Em troca, a renovação da residência passa a exigir progresso acadêmico satisfatório, definido como concluir pelo menos 75% da carga de um ano letivo integral. Quem administra a regra é a Útlendingastofnun.",
+      "cta": "Leia os detalhes na fonte oficial da Directorate of Immigration.",
+      "sources": [
+        {
+          "label": "Directorate of Immigration (island.is) - New residence and work permit rules take effect",
+          "url": "https://island.is/en/o/directorate-of-immigration/news/new-residence-and-work-permit-rules-take-effect"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    },
+    {
+      "title": "Islândia reajustou a renda mínima de subsistência para residência",
+      "body": "Desde 18 de maio de 2026, a Islândia usa novos valores de renda mínima de subsistência nos pedidos de residência. Para maiores de 18 anos, o valor de referência subiu de 247.572 para 259.951 ISK por mês. Para casais, subiu de 396.115 para 415.922 ISK por mês. Os números são de renda antes de impostos e valem para pedidos recebidos a partir de 18 de maio. Os valores acompanham o critério de apoio financeiro da cidade de Reykjavík e são administrados pela Útlendingastofnun.",
+      "cta": "Veja os valores atualizados direto na Directorate of Immigration.",
+      "sources": [
+        {
+          "label": "Directorate of Immigration (island.is) - Higher amount required as means of support",
+          "url": "https://island.is/en/o/directorate-of-immigration/news/higher-amount-as-means-of-support"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    }
+  ],
+  "countryTab": [
+    {
+      "headline": "Islândia unifica residência e trabalho na Útlendingastofnun e muda as regras para estudantes",
+      "standfirst": "Reforma em vigor desde 8 de julho de 2026 move o processamento das autorizações de trabalho para a Directorate of Immigration e libera estudantes da autorização separada.",
+      "body": "A Islândia colocou em vigor, em 8 de julho de 2026, um pacote de alterações no Act on Foreign Nationals e no Foreign Nationals' Right to Work Act. As mudanças foram aprovadas pelo Parlamento islandês (Alþingi) em 18 de junho e reorganizam tanto a máquina administrativa quanto algumas regras de residência.\n\nA mudança estrutural é a transferência do processamento das autorizações de trabalho da Directorate of Labour para a Útlendingastofnun (Directorate of Immigration), a mesma autoridade que já decide os pedidos de residência. Segundo a Directorate of Immigration, os pedidos de autorização de trabalho que ainda não tinham sido decididos pela Directorate of Labour antes da entrada em vigor passaram a ser tratados pela nova autoridade. As páginas oficiais de residência baseada em trabalho e de pedido de autorização de trabalho seguem, por ora, como referência para candidatos e empregadores.\n\nPara estudantes, a reforma acaba com a exigência de uma autorização de trabalho separada. Quem tem residência de estudante pode trabalhar como empregado em até 60% da jornada integral durante o período de aulas, somando todos os empregadores, e em jornada integral nos intervalos entre os semestres. A renovação da residência de estudante passa a exigir progresso acadêmico satisfatório, definido como concluir pelo menos 75% da carga de um ano letivo integral.\n\nDepois da formatura, quem concluiu um diploma universitário na Islândia pode renovar a residência de estudante por até 18 meses para buscar emprego compatível com a qualificação, prazo que antes era de três anos. Para quem tem doutorado, existe a possibilidade de renovar uma residência de especialista por até 12 meses para procurar trabalho sem autorização de trabalho.\n\nA reforma também estreitou o reagrupamento familiar, que passou a valer apenas para estudos universitários em tempo integral voltados a diploma de bacharel, mestrado ou doutorado, e criou uma categoria de residência de curto prazo para estadas de mais de 90 dias e de até 180 dias, voltada a visitas familiares ou a artistas, cientistas e atletas.",
+      "keyFacts": [
+        "Entrada em vigor em 8 de julho de 2026, com base em alterações aprovadas pelo Parlamento islandês em 18 de junho de 2026.",
+        "Processamento das autorizações de trabalho transferido da Directorate of Labour para a Útlendingastofnun (Directorate of Immigration).",
+        "Estudantes com residência de estudante deixam de precisar de autorização de trabalho separada e podem trabalhar em até 60% da jornada integral durante as aulas.",
+        "Renovação da residência de estudante exige progresso acadêmico de pelo menos 75% da carga de um ano letivo integral.",
+        "Após a formatura, a residência de estudante pode ser renovada por até 18 meses para busca de emprego, ante três anos antes.",
+        "Doutores podem renovar residência de especialista por até 12 meses para procurar trabalho sem autorização de trabalho.",
+        "Nova residência de curto prazo cobre estadas de mais de 90 e até 180 dias para visitas familiares ou artistas, cientistas e atletas."
+      ],
+      "sources": [
+        {
+          "label": "Directorate of Immigration (island.is) - New residence and work permit rules take effect",
+          "url": "https://island.is/en/o/directorate-of-immigration/news/new-residence-and-work-permit-rules-take-effect"
+        },
+        {
+          "label": "Directorate of Immigration (island.is) - página oficial da autoridade",
+          "url": "https://island.is/en/o/directorate-of-immigration"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    },
+    {
+      "headline": "Islândia eleva a renda mínima de subsistência exigida para residência",
+      "standfirst": "Novos valores de referência valem para pedidos recebidos a partir de 18 de maio de 2026 e afetam residência e cidadania.",
+      "body": "A Útlendingastofnun (Directorate of Immigration) reajustou os valores de renda mínima de subsistência que os candidatos precisam comprovar em pedidos de residência e de cidadania na Islândia. Os novos valores de referência passaram a valer para pedidos recebidos a partir de 18 de maio de 2026.\n\nPara uma pessoa maior de 18 anos, o valor de referência subiu de 247.572 para 259.951 ISK por mês. Para casais, o valor subiu de 396.115 para 415.922 ISK por mês. A autoridade esclarece que os números correspondem a renda antes de impostos.\n\nOs valores acompanham o critério de apoio financeiro da cidade de Reykjavík. O reajuste afeta candidatos que precisam demonstrar meios financeiros suficientes de sustento próprio ao pedir residência ou cidadania. Como os valores são revisados periodicamente, a orientação é conferir o número vigente direto na fonte oficial no momento do pedido.",
+      "keyFacts": [
+        "Novos valores de renda mínima de subsistência valem para pedidos recebidos a partir de 18 de maio de 2026.",
+        "Maiores de 18 anos: valor de referência subiu de 247.572 para 259.951 ISK por mês.",
+        "Casais: valor de referência subiu de 396.115 para 415.922 ISK por mês.",
+        "Os valores são de renda antes de impostos e acompanham o critério de apoio financeiro da cidade de Reykjavík.",
+        "A regra é administrada pela Útlendingastofnun (Directorate of Immigration) e vale para residência e cidadania."
+      ],
+      "sources": [
+        {
+          "label": "Directorate of Immigration (island.is) - Higher amount required as means of support",
+          "url": "https://island.is/en/o/directorate-of-immigration/news/higher-amount-as-means-of-support"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    }
+  ],
+  "blog": [
+    {
+      "headline": "Islândia em 2026: as vias de residência por trabalho depois da reforma de julho",
+      "standfirst": "O país é EEE/EFTA e, para quem vem de fora do bloco, o caminho é a residência baseada em trabalho. Veja como ficam as quatro trilhas e o que mudou com as regras em vigor desde 8 de julho.",
+      "body": "A Islândia faz parte do Espaço Econômico Europeu (EEE) e da EFTA, o que significa que cidadãos do EEE e da EFTA podem morar e trabalhar no país sem autorização de trabalho. Para quem vem de fora do bloco, com oferta de emprego, o caminho é a residência baseada em trabalho, concedida por uma de quatro trilhas: conhecimento especializado, escassez de mão de obra, atletas e trabalho com base em contrato de colaboração ou de prestação de serviços.\n\nNa trilha de conhecimento especializado, voltada a profissionais qualificados, exige-se, em regra, formação de nível universitário ou treinamento reconhecido. A trilha de escassez de mão de obra pode ser usada quando não se encontram trabalhadores no mercado islandês nem dentro do EEE/EFTA. A trilha de atletas depende de vínculo com um clube filiado à associação nacional olímpica e esportiva da Islândia. A quarta trilha cobre empregados especializados em circunstâncias específicas, com base em acordo de colaboração ou de prestação de serviços. Em regra, a autorização fica ligada a um empregador determinado e é renovável mediante comprovação de emprego contínuo.\n\nA reforma que entrou em vigor em 8 de julho de 2026, com base em alterações aprovadas pelo Parlamento islandês (Alþingi) em 18 de junho, reorganizou a máquina administrativa. O processamento das autorizações de trabalho saiu da Directorate of Labour e passou para a Útlendingastofnun (Directorate of Immigration), a mesma autoridade que já decide os pedidos de residência. Os pedidos de autorização de trabalho que ainda não tinham sido decididos pela Directorate of Labour antes da entrada em vigor passaram a ser tratados pela nova autoridade. A reforma também deu à Directorate of Immigration base mais clara para priorizar pedidos, permitindo que pedidos completos baseados em emprego sejam processados à frente de outros.\n\nPara estudantes, a mudança acaba com a exigência de uma autorização de trabalho separada. Quem tem residência de estudante pode trabalhar como empregado em até 60% da jornada integral durante o período de aulas, com o limite somando todos os empregadores, e em jornada integral nos intervalos entre os semestres, incluindo férias de verão e de fim de ano. A renovação da residência de estudante passou a exigir progresso acadêmico satisfatório em cada renovação, definido como concluir pelo menos 75% da carga de um ano letivo integral. Depois da formatura, quem concluiu um diploma universitário na Islândia pode renovar a residência de estudante por até 18 meses para buscar emprego compatível com a qualificação, prazo que antes era de três anos. Quem tem doutorado pode renovar uma residência de especialista por até 12 meses para procurar trabalho sem autorização de trabalho.\n\nA reforma estreitou o reagrupamento familiar na residência de estudante, que passou a valer apenas para estudos universitários em tempo integral voltados a diploma de bacharel, mestrado ou doutorado, deixando de fora os cursos de diploma e o reagrupamento com pais. Também foi criada uma categoria de residência de curto prazo para estadas de mais de 90 e até 180 dias, voltada a visitas a familiar próximo ou a artistas, cientistas e atletas.\n\nAs regras e os valores exigidos são revisados periodicamente e administrados pela Útlendingastofnun. Antes de montar um pedido, a orientação é conferir os requisitos e prazos vigentes direto nas páginas oficiais da Directorate of Immigration.",
+      "tags": [
+        "Islândia",
+        "imigração",
+        "residência por trabalho",
+        "reforma migratória 2026",
+        "estudantes internacionais",
+        "Útlendingastofnun"
+      ],
+      "sources": [
+        {
+          "label": "Directorate of Immigration (island.is) - New residence and work permit rules take effect",
+          "url": "https://island.is/en/o/directorate-of-immigration/news/new-residence-and-work-permit-rules-take-effect"
+        },
+        {
+          "label": "Ísland.is - Residence permit based on work (requirements)",
+          "url": "https://island.is/en/permit-based-on-work/requirements"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    }
+  ]
+},
+"no": {
+  "community": [
+    {
+      "title": "Noruega: os pisos salariais que a UDI usa na via de qualificados",
+      "body": "Na via de skilled worker da Noruega, o salário não pode ficar abaixo do piso considerado normal para a função. Quando não há acordo coletivo (tarifa) aplicável, a UDI publica dois valores de referência: NOK 545.400 por ano para cargos que exigem bacharelado e NOK 624.700 por ano para cargos que exigem mestrado, ambos em vigor desde 1 de maio de 2026, quando a UDI reajustou os pisos usados para pedidos sem acordo coletivo. São mínimos, e o número real depende da função e do local de trabalho. Vale conferir os valores oficiais antes de discutir proposta.",
+      "cta": "Confira os pisos atuais na página da UDI antes de negociar salário.",
+      "sources": [
+        {
+          "label": "UDI — Pay and working conditions in Norway",
+          "url": "https://www.udi.no/en/word-definitions/pay-and-working-conditions-in-norway/"
+        },
+        {
+          "label": "Relocation.no — Skilled worker salary requirements increased from 1 May 2026",
+          "url": "https://relocation.no/news-from-the-norwegian-directorate-of-immigration-udi-skilled-worker-salary-requirements-in-norway-increased-from-1-may-2026/"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    },
+    {
+      "title": "Mudança de fevereiro de 2026: o empregador confirma antes de você aplicar",
+      "body": "A UDI publicou em 19 de fevereiro de 2026 uma medida que altera a ordem do processo. Se você aplica sozinho, a partir do exterior, o empregador precisa primeiro confirmar a oferta de trabalho à UDI e enviar a você um código, que deve ser digitado em um campo próprio do formulário. O sistema checa o código na hora, e sem o código correto não é possível enviar a aplicação. Segundo a UDI, o objetivo é reduzir ofertas de trabalho fraudulentas. A regra vale para quem aplica por conta própria do exterior, e não muda quando o empregador aplica em nome do candidato.",
+      "cta": "Peça o código ao empregador antes de iniciar sua aplicação.",
+      "sources": [
+        {
+          "label": "UDI — Confirmation of a job or assignment offer",
+          "url": "https://www.udi.no/en/important-messages/confirmation-of-a-job-offer/"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    },
+    {
+      "title": "Os três pilares da via de qualificados na Noruega",
+      "body": "A via principal para profissionais qualificados na Noruega, descrita pela UDI como skilled worker, se apoia em três elementos que precisam existir juntos: formação ou qualificação concluída, uma oferta concreta de um empregador na Noruega, e uma remuneração que não fique abaixo do que é normal na Noruega para a função. Se um deles falta, o pedido não se sustenta. Entender esses três pontos antes de qualquer passo ajuda a organizar documentos e expectativas com base no que a autoridade realmente pede.",
+      "cta": "Veja os requisitos completos da via de qualificados no site da UDI.",
+      "sources": [
+        {
+          "label": "UDI — Skilled workers",
+          "url": "https://www.udi.no/en/want-to-apply/work-immigration/skilled-workers/"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    }
+  ],
+  "countryTab": [
+    {
+      "headline": "Noruega passa a exigir confirmação do empregador antes da aplicação do exterior",
+      "standfirst": "Desde 19 de fevereiro de 2026, quem aplica por conta própria a partir do exterior só consegue enviar o formulário depois que o empregador confirma a oferta à UDI e repassa um código de verificação.",
+      "body": "A Utlendingsdirektoratet (UDI), autoridade de imigração da Noruega, publicou em 19 de fevereiro de 2026 uma mudança no fluxo de pedidos de residência para trabalho. Pela nova medida, o candidato que aplica sozinho e a partir do exterior precisa que o empregador ou contratante confirme antes a oferta de trabalho junto à UDI.\n\nApós essa confirmação, o empregador envia ao candidato um código, que deve ser inserido em um campo específico do formulário de aplicação. O sistema verifica automaticamente se o código está correto, e a aplicação não pode ser enviada com um código inválido.\n\nSegundo a própria UDI, a finalidade da medida é reduzir ofertas de trabalho fraudulentas. A exigência se aplica a quem submete o pedido por conta própria de fora da Noruega, e alcança categorias como trabalho sazonal e skilled worker com empregador no país, além de casos de funcionários enviados em missão para uma filial norueguesa. Não há mudança quando o próprio empregador faz a aplicação em nome do candidato.\n\nNa prática, isso desloca uma etapa importante para o início do processo. Antes de abrir o formulário, o candidato precisa alinhar com o empregador a confirmação e o envio do código, o que torna a comunicação com a empresa uma parte formal do procedimento, e não apenas um combinado prévio.",
+      "keyFacts": [
+        "Autoridade: UDI (Utlendingsdirektoratet), udi.no",
+        "Publicada em 19 de fevereiro de 2026",
+        "O empregador confirma a oferta à UDI e envia um código ao candidato",
+        "O código é digitado em campo próprio do formulário e verificado pelo sistema",
+        "Sem o código correto, a aplicação não pode ser enviada",
+        "Aplica-se a quem aplica por conta própria a partir do exterior; não muda quando o empregador aplica pelo candidato",
+        "Objetivo declarado pela UDI: reduzir ofertas de trabalho fraudulentas"
+      ],
+      "sources": [
+        {
+          "label": "UDI — Confirmation of a job or assignment offer",
+          "url": "https://www.udi.no/en/important-messages/confirmation-of-a-job-offer/"
+        },
+        {
+          "label": "UDI — Skilled workers",
+          "url": "https://www.udi.no/en/want-to-apply/work-immigration/skilled-workers/"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    },
+    {
+      "headline": "Noruega eleva pisos salariais da UDI para qualificados sem acordo coletivo",
+      "standfirst": "Para funções sem tarifa aplicável, a UDI passou a usar como referência NOK 545.400 por ano para cargos de bacharelado e NOK 624.700 por ano para cargos de mestrado, valores em vigor desde 1 de maio de 2026.",
+      "body": "Um dos requisitos centrais da via de skilled worker na Noruega é o salário, que não pode ficar abaixo do piso considerado normal para a função. Quando não existe acordo coletivo (tarifa) que estabeleça o valor, a UDI publica referências próprias de remuneração mínima.\n\nNesses casos, a autoridade indica NOK 545.400 por ano, antes de impostos, para cargos que exigem formação de nível bacharelado, e NOK 624.700 por ano, antes de impostos, para cargos que exigem nível de mestrado. Esses valores passaram a valer em 1 de maio de 2026, quando a UDI reajustou os pisos usados para pedidos sem acordo coletivo.\n\nA UDI observa que uma remuneração menor pode ser aceita se o candidato conseguir documentar que aquele patamar é o normal para a ocupação no local onde vai trabalhar, o que exige comprovação substancial. Os valores funcionam, portanto, como referência mínima, e não como o salário final de qualquer posição.\n\nO piso salarial se soma aos outros elementos da via de qualificados: formação concluída e uma oferta concreta de um empregador na Noruega. É esse conjunto, e não um item isolado, que a UDI avalia no pedido de residência para trabalho.",
+      "keyFacts": [
+        "Autoridade: UDI (Utlendingsdirektoratet), udi.no",
+        "Bacharelado: NOK 545.400 por ano, antes de impostos (sem acordo coletivo)",
+        "Mestrado: NOK 624.700 por ano, antes de impostos (sem acordo coletivo)",
+        "Valores em vigor desde 1 de maio de 2026, após reajuste da UDI",
+        "São mínimos de referência; salário menor exige documentar que é o normal da ocupação e do local",
+        "O salário integra a via de skilled worker junto com formação concluída e oferta concreta"
+      ],
+      "sources": [
+        {
+          "label": "UDI — Pay and working conditions in Norway",
+          "url": "https://www.udi.no/en/word-definitions/pay-and-working-conditions-in-norway/"
+        },
+        {
+          "label": "UDI — Skilled workers",
+          "url": "https://www.udi.no/en/want-to-apply/work-immigration/skilled-workers/"
+        },
+        {
+          "label": "Relocation.no — Skilled worker salary requirements increased from 1 May 2026",
+          "url": "https://relocation.no/news-from-the-norwegian-directorate-of-immigration-udi-skilled-worker-salary-requirements-in-norway-increased-from-1-may-2026/"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    }
+  ],
+  "blog": [
+    {
+      "headline": "Noruega para qualificados: como a via de skilled worker da UDI funciona em 2026",
+      "standfirst": "A Noruega mantém uma porta clara para profissionais formados. Duas informações da UDI mudam a forma de se preparar em 2026: os pisos salariais reajustados em maio de 2026 e a confirmação obrigatória do empregador, em vigor desde fevereiro de 2026.",
+      "body": "A autoridade de imigração da Noruega é a Utlendingsdirektoratet, a UDI, e é nela que se ancora qualquer leitura séria sobre trabalhar no país. Para quem tem formação e uma proposta de emprego, a via mais direta descrita pela UDI é a de skilled worker, o trabalhador qualificado. Este texto reúne o que essa via pede e destaca dois pontos recentes que alteram a preparação em 2026.\n\nA via principal e seus três requisitos\n\nA via de qualificados se apoia em três elementos que precisam existir ao mesmo tempo. O primeiro é a formação ou qualificação concluída, ou seja, o diploma de nível superior ou a formação profissional já obtida. O segundo é uma oferta concreta de trabalho de um empregador na Noruega, e não uma simples possibilidade de emprego. O terceiro é que a remuneração e as condições de trabalho não fiquem abaixo do que é normal na Noruega para a função. Faltando qualquer um dos três, o pedido perde sustentação. Por isso vale organizar os documentos pensando nesse conjunto, e não em um item isolado.\n\nOs pisos salariais de referência em 2026\n\nO salário costuma ser o ponto que gera mais dúvida, porque depende de haver ou não um acordo coletivo (tarifa) para a função. Quando existe tarifa, é ela que define o valor. Quando não existe, a UDI publica suas próprias referências. Para funções sem acordo coletivo, a UDI indica NOK 545.400 por ano, antes de impostos, para cargos que exigem nível de bacharelado, e NOK 624.700 por ano, antes de impostos, para cargos que exigem nível de mestrado. Esses valores passaram a valer em 1 de maio de 2026, quando a UDI reajustou os pisos. A própria UDI observa que uma remuneração menor pode ser aceita se o candidato documentar que aquele patamar é o normal para a ocupação no local de trabalho, o que exige comprovação substancial. Ou seja, são referências mínimas, e não o salário final de qualquer posição.\n\nA confirmação do empregador, em vigor desde fevereiro de 2026\n\nO segundo ponto recente muda a ordem do processo. Em 19 de fevereiro de 2026, a UDI publicou uma medida pela qual o candidato que aplica sozinho, a partir do exterior, precisa que o empregador confirme antes a oferta de trabalho junto à UDI. Depois dessa confirmação, o empregador envia ao candidato um código, que deve ser inserido em um campo próprio do formulário. O sistema verifica o código na hora, e a aplicação não pode ser enviada com um código inválido. Segundo a UDI, o objetivo é reduzir ofertas de trabalho fraudulentas. A exigência vale para quem submete o pedido por conta própria de fora da Noruega e não muda quando o próprio empregador faz a aplicação em nome do candidato.\n\nComo se preparar\n\nNa prática, os dois pontos apontam para o mesmo lugar: a relação com o empregador na Noruega é o centro do processo. É o empregador que confirma a oferta e libera o código, e é a oferta dele que precisa cumprir o piso salarial de referência para a função. Antes de abrir o formulário, vale alinhar com a empresa a confirmação, o envio do código e o valor da proposta, e conferir os números atuais direto na UDI, já que os pisos são reajustados periodicamente. Assim, a documentação chega organizada ao que a autoridade realmente pede.\n\nEste conteúdo é informativo e não substitui a orientação oficial da UDI nem aconselhamento jurídico. Confirme sempre os requisitos e valores vigentes nas páginas oficiais.",
+      "tags": [
+        "Noruega",
+        "UDI",
+        "skilled worker",
+        "imigração de trabalho",
+        "salário de referência"
+      ],
+      "sources": [
+        {
+          "label": "UDI — Skilled workers",
+          "url": "https://www.udi.no/en/want-to-apply/work-immigration/skilled-workers/"
+        },
+        {
+          "label": "UDI — Pay and working conditions in Norway",
+          "url": "https://www.udi.no/en/word-definitions/pay-and-working-conditions-in-norway/"
+        },
+        {
+          "label": "UDI — Confirmation of a job or assignment offer",
+          "url": "https://www.udi.no/en/important-messages/confirmation-of-a-job-offer/"
+        },
+        {
+          "label": "Relocation.no — Skilled worker salary requirements increased from 1 May 2026",
+          "url": "https://relocation.no/news-from-the-norwegian-directorate-of-immigration-udi-skilled-worker-salary-requirements-in-norway-increased-from-1-may-2026/"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    }
+  ]
+},
+"ru": {
+  "community": [
+    {
+      "title": "Rússia: RVP fora de cota e sem exames para nacionais dos EUA e da UE",
+      "body": "Desde 1 de setembro de 2024, o Decreto Presidencial nº 702 (assinado em 19 de agosto de 2024) mantém uma via simplificada de RVP, a autorização de residência temporária, para estrangeiros que declarem compartilhar os valores tradicionais russos. Essa via dispensa a cota anual e os exames de língua, história e legislação. Ela se dirige a nacionais de uma lista aprovada pelo governo que inclui os Estados Unidos e os Estados-membros da União Europeia. Quem precisa de visto obtém primeiro um visto de três meses no Departamento Consular do MID e, já na Rússia, solicita o RVP à direção de migração do Ministério do Interior (ГУВМ МВД). Requisitos e formulários mudam, então vale confirmar na fonte oficial antes de agir.",
+      "cta": "Leia a análise completa na aba da Rússia.",
+      "sources": [
+        {
+          "label": "Указ Президента РФ № 702, 19.08.2024 (kremlin.ru)",
+          "url": "http://www.kremlin.ru/acts/bank/51035"
+        },
+        {
+          "label": "Departamento Consular do MID (kdmid.ru)",
+          "url": "https://kdmid.ru"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    },
+    {
+      "title": "O que mudou na migração russa desde 5 de fevereiro de 2025",
+      "body": "A Lei Federal nº 260-ФЗ, em vigor desde 5 de fevereiro de 2025, criou o regime de expulsão e o Registro de Pessoas Controladas. Estrangeiros sem base legal para permanecer no país passam a constar nesse registro do Ministério do Interior (MVD), o que ativa restrições previstas em lei enquanto durar a situação, entre elas limites para registrar casamento, comprar imóvel, dirigir e sair da região sem autorização. O próprio interessado pode verificar seu status no site oficial do MVD, que atualiza os dados periodicamente. A saída do registro depende de regularizar a permanência, deixar o país ou obter a revogação da decisão. É um endurecimento do controle, descrito aqui apenas em seus termos legais.",
+      "cta": "Entenda o regime na aba da Rússia.",
+      "sources": [
+        {
+          "label": "Федеральный закон № 260-ФЗ, 08.08.2024 (kremlin.ru)",
+          "url": "http://www.kremlin.ru/acts/bank/51023"
+        },
+        {
+          "label": "МВД России, Реестр контролируемых лиц",
+          "url": "https://мвд.рф/rkl"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    },
+    {
+      "title": "Especialista Altamente Qualificado: novo piso salarial mensal previsto para 2027",
+      "body": "A via do Especialista Altamente Qualificado (ВКС) segue como principal canal de trabalho para profissionais estrangeiros na Rússia, vinculada a um piso salarial. Em 8 de julho de 2026, a Duma Estatal aprovou em terceira leitura um projeto que fixa, a partir de 1 de março de 2027, um piso mensal de 717 mil rublos para a maioria dos ВКС, deslocando o cálculo do formato trimestral para o mensal. Como o texto ainda percorre as etapas finais do processo legislativo, o número deve ser confirmado na fonte oficial antes de qualquer planejamento de contratação.",
+      "cta": "Veja os detalhes na matéria de blog.",
+      "sources": [
+        {
+          "label": "Государственная Дума (duma.gov.ru), notícias legislativas",
+          "url": "http://duma.gov.ru/news/"
+        },
+        {
+          "label": "Schneider Group, análise das novas faixas salariais de ВКС",
+          "url": "https://schneider-group.com/en/news/countries/changes-to-the-hqs-program-in-russia-new-salary-thresholds-and-legal-requirements/"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    }
+  ],
+  "countryTab": [
+    {
+      "headline": "Rússia mantém via de RVP fora de cota e sem exames para nacionais dos EUA e da UE",
+      "standfirst": "O Decreto Presidencial nº 702, em vigor desde setembro de 2024, permite residência temporária a estrangeiros que declarem compartilhar valores tradicionais russos, incluindo cidadãos de países da lista oficial.",
+      "body": "Desde 1 de setembro de 2024, a Rússia mantém em vigor uma via simplificada de autorização de residência temporária (RVP), criada pelo Decreto Presidencial nº 702, assinado em 19 de agosto de 2024. A norma se dirige a estrangeiros que declarem compartilhar os valores espirituais e morais tradicionais russos e rejeitar políticas que o governo russo descreve como destrutivas.\n\nNa prática, a via traz duas facilidades em relação ao procedimento comum: dispensa a cota anual de RVP e não exige os exames de língua russa, história e fundamentos da legislação. A elegibilidade está vinculada a uma lista de países aprovada pelo governo por meio da Diretriz nº 2560-r, de 17 de setembro de 2024, que inclui os Estados Unidos e os Estados-membros da União Europeia.\n\nO percurso envolve duas autoridades. No exterior, os vistos são competência do Departamento Consular do Ministério das Relações Exteriores (MID), com serviços centralizados no portal kdmid.ru. Nacionais de países que precisam de visto obtêm primeiro um visto de três meses, emitido com base numa declaração escrita, e entram na Rússia com esse documento. Já em território russo, o pedido de RVP é processado pela Direção-Geral de Assuntos de Migração do Ministério do Interior (ГУВМ МВД). Os requisitos e formulários podem mudar e devem ser confirmados nas fontes oficiais antes de qualquer solicitação.",
+      "keyFacts": [
+        "Decreto Presidencial nº 702, assinado em 19 de agosto de 2024, com efeitos desde 1 de setembro de 2024.",
+        "A RVP por valores compartilhados é concedida fora da cota anual e sem exames de língua, história e legislação.",
+        "A lista de países elegíveis foi aprovada pela Diretriz do Governo nº 2560-r, de 17 de setembro de 2024, e inclui os Estados Unidos e os países da União Europeia.",
+        "Vistos são competência do Departamento Consular do MID (kdmid.ru); a RVP é processada pela ГУВМ МВД, no Ministério do Interior."
+      ],
+      "sources": [
+        {
+          "label": "Указ Президента РФ № 702, 19.08.2024 (kremlin.ru)",
+          "url": "http://www.kremlin.ru/acts/bank/51035"
+        },
+        {
+          "label": "Departamento Consular do MID (kdmid.ru)",
+          "url": "https://kdmid.ru"
+        },
+        {
+          "label": "ГУВМ МВД России (мвд.рф)",
+          "url": "https://мвд.рф"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    },
+    {
+      "headline": "Rússia endurece o controle migratório com regime de expulsão e Registro de Pessoas Controladas",
+      "standfirst": "Em vigor desde 5 de fevereiro de 2025, a Lei Federal nº 260-ФЗ instituiu o Registro de Pessoas Controladas e um regime de expulsão para estrangeiros sem base legal de permanência.",
+      "body": "A Rússia intensificou o controle sobre a permanência irregular de estrangeiros. A Lei Federal nº 260-ФЗ, de 8 de agosto de 2024, entrou em vigor em 5 de fevereiro de 2025 e criou dois instrumentos conectados: o regime de expulsão e o Registro de Pessoas Controladas, mantido pelo Ministério do Interior (MVD).\n\nPela lei, o regime de expulsão passa a ser aplicado a um estrangeiro a partir do dia em que seus dados são inscritos no registro. Enquanto durar essa inscrição, incidem restrições previstas em lei, entre elas limites para registrar casamento, adquirir imóvel, conduzir veículo, movimentar recursos e mudar de local de residência ou sair da região sem autorização das autoridades migratórias. Os dados saem do registro quando o estrangeiro deixa o país, regulariza sua base legal de permanência, ou quando a decisão que originou o regime é revogada ou considerada ilegal por via judicial.\n\nO MVD disponibiliza a verificação de status no seu site oficial, com atualização periódica das informações. Em paralelo ao endurecimento, o país preserva canais regulados para perfis específicos, como o do Especialista Altamente Qualificado (ВКС), cuja régua salarial deve subir em 2027, conforme projeto aprovado pela Duma Estatal em terceira leitura em 8 de julho de 2026. Este texto descreve o arcabouço apenas em seus termos legais, sem juízo político.",
+      "keyFacts": [
+        "Lei Federal nº 260-ФЗ, de 8 de agosto de 2024, em vigor desde 5 de fevereiro de 2025.",
+        "Instituiu o regime de expulsão e o Registro de Pessoas Controladas, operado pelo MVD.",
+        "Durante o regime, há restrições legais como limites para casar, comprar imóvel, dirigir e sair da região sem autorização.",
+        "A inscrição é retirada com a saída do país, a regularização da permanência ou a revogação/anulação judicial da decisão.",
+        "A via do Especialista Altamente Qualificado (ВКС) prevê piso mensal de 717 mil rublos para a maioria dos casos a partir de 1 de março de 2027, aprovado em terceira leitura pela Duma em 8 de julho de 2026."
+      ],
+      "sources": [
+        {
+          "label": "Федеральный закон № 260-ФЗ, 08.08.2024 (kremlin.ru)",
+          "url": "http://www.kremlin.ru/acts/bank/51023"
+        },
+        {
+          "label": "КонсультантПлюс, ФЗ № 115-ФЗ, Статья 31.1 «Меры... в рамках режима высылки»",
+          "url": "https://www.consultant.ru/document/cons_doc_LAW_37868/9fd31330c216a11f7173795046a63b06e8fb5fcc/"
+        },
+        {
+          "label": "МВД России, Реестр контролируемых лиц",
+          "url": "https://мвд.рф/rkl"
+        },
+        {
+          "label": "Государственная Дума (duma.gov.ru)",
+          "url": "http://duma.gov.ru/news/"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    }
+  ],
+  "blog": [
+    {
+      "headline": "Rússia em 2026: um sistema migratório de duas velocidades",
+      "standfirst": "Enquanto a Lei 260-ФЗ endurece o controle sobre a permanência irregular desde fevereiro de 2025, o Decreto 702 e o regime de Especialista Altamente Qualificado mantêm vias específicas de residência e trabalho. Um mapa factual das regras e das autoridades responsáveis.",
+      "body": "A Rússia opera hoje, em 2026, o que pode ser descrito como um sistema migratório de duas velocidades. De um lado, um controle mais rígido sobre quem permanece no país sem base legal. De outro, canais específicos que seguem abertos para perfis definidos, como estrangeiros que declaram compartilhar valores tradicionais russos e profissionais altamente qualificados.\n\nO endurecimento tem data e norma. A Lei Federal nº 260-ФЗ, assinada em 8 de agosto de 2024, entrou em vigor em 5 de fevereiro de 2025 e criou dois instrumentos conectados: o regime de expulsão (режим высылки) e o Registro de Pessoas Controladas (реестр контролируемых лиц), mantido pelo Ministério do Interior (MVD). O regime passa a ser aplicado ao estrangeiro a partir do dia em que seus dados entram no registro e vale para quem não tem base legal de permanência.\n\nEnquanto durar a inscrição, incidem restrições previstas em lei. Entre elas, a norma lista limites para registrar casamento, adquirir imóveis e veículos, conduzir veículo, abrir contas e movimentar recursos em bancos, além de restrições para mudar de local de residência ou sair da região sem autorização das autoridades migratórias. O próprio estrangeiro pode consultar seu status no site oficial do MVD. A saída do registro ocorre quando a pessoa deixa o país, regulariza sua permanência, ou quando a decisão que originou o regime é revogada ou anulada por via judicial. A mesma lei também reduziu, para quem entra sem visto, o teto de permanência a 90 dias por ano.\n\nNa outra velocidade estão as vias de entrada reguladas. O Decreto Presidencial nº 702, assinado em 19 de agosto de 2024 e com efeitos desde 1 de setembro de 2024, mantém uma via simplificada de autorização de residência temporária (RVP) para estrangeiros que declarem compartilhar os valores espirituais e morais tradicionais russos e rejeitar políticas que o governo russo descreve como destrutivas. Essa via dispensa a cota anual de RVP e não exige os exames de língua russa, história e fundamentos da legislação. A elegibilidade está vinculada a uma lista de países aprovada pela Diretriz do Governo nº 2560-r, de 17 de setembro de 2024, que reúne dezenas de Estados, entre eles os Estados Unidos e os países da União Europeia.\n\nO percurso envolve duas autoridades. No exterior, os vistos são competência do Departamento Consular do Ministério das Relações Exteriores (MID), com serviços centralizados no portal kdmid.ru. Quem precisa de visto obtém primeiro um visto privado de três meses, emitido com base numa declaração escrita, e entra na Rússia com esse documento. Já em território russo, o pedido de RVP é processado pela Direção-Geral de Assuntos de Migração do Ministério do Interior (ГУВМ МВД).\n\nPara o trabalho qualificado, o canal principal segue sendo o do Especialista Altamente Qualificado (ВКС), vinculado a um piso salarial. Em 8 de julho de 2026, a Duma Estatal aprovou em terceira leitura um projeto que fixa, a partir de 1 de março de 2027, um piso mensal de 717 mil rublos para a maioria dos ВКС, com um patamar reduzido, da ordem de 358 mil rublos mensais, para categorias específicas como cientistas, profissionais de saúde e professores. O texto também desloca o cálculo do formato trimestral para o mensal e prevê indexação anual do piso. Como o projeto ainda percorre as etapas finais do processo legislativo, os valores devem ser confirmados na fonte oficial antes de qualquer planejamento de contratação.\n\nEste panorama descreve o arcabouço apenas em seus termos legais, sem juízo político. Requisitos, formulários e prazos podem mudar, e cada passo deve ser confirmado nas fontes oficiais russas antes de qualquer decisão.",
+      "tags": [
+        "Rússia",
+        "imigração",
+        "RVP",
+        "ВКС",
+        "Lei 260-ФЗ",
+        "Decreto 702",
+        "controle migratório",
+        "residência temporária"
+      ],
+      "sources": [
+        {
+          "label": "Указ Президента РФ № 702, 19.08.2024 (kremlin.ru)",
+          "url": "http://www.kremlin.ru/acts/bank/51035"
+        },
+        {
+          "label": "Распоряжение Правительства РФ № 2560-р, 17.09.2024 (government.ru)",
+          "url": "http://government.ru/docs/all/155324/"
+        },
+        {
+          "label": "Федеральный закон № 260-ФЗ, 08.08.2024 (kremlin.ru)",
+          "url": "http://www.kremlin.ru/acts/bank/51023"
+        },
+        {
+          "label": "Schneider Group, novas faixas salariais de ВКС",
+          "url": "https://schneider-group.com/en/news/countries/changes-to-the-hqs-program-in-russia-new-salary-thresholds-and-legal-requirements/"
+        },
+        {
+          "label": "Государственная Дума (duma.gov.ru)",
+          "url": "http://duma.gov.ru/news/"
+        }
+      ],
+      "publishedAt": "2026-07-18"
+    }
+  ]
+}
 };
 
 /** Retorna o conteúdo editorial curado de um país, se houver, no idioma do app.

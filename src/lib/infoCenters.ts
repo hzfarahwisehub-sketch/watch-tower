@@ -788,6 +788,298 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
       { name: "iDNES.cz · Zprávy (noticiario geral)", url: "https://servis.idnes.cz/", category: "news", language: "cs", note: "Maior portal de noticias tcheco (MAFRA). Feed de zpravodajstvi (domestico+mundo), atualizacao continua (ttl 2", rss: "https://servis.idnes.cz/rss.aspx?c=zpravodaj" },
     ],
   },
+
+{
+  "countryCode": "is",
+  "countryName": "Islândia",
+  "flag": "🇮🇸",
+  "sources": [
+    {
+      "name": "Útlendingastofnun — Directorate of Immigration (Notícias)",
+      "url": "https://island.is/en/o/directorate-of-immigration/news",
+      "category": "legal",
+      "language": "en",
+      "note": "Autoridade oficial de imigração da Islândia, que opera sob o Ministério da Justiça. Desde 8 de julho de 2026 também processa work permits, função transferida da Directorate of Labour pela reforma do Act on Foreign Nationals e do Foreign Nationals' Right to Work Act. Publica os avisos oficiais sobre residência, work permits, requisitos de renda mínima de subsistência (reajustados para pedidos recebidos a partir de 18 de maio de 2026) e a dispensa de work permit separado para quem tem residência de estudante. O domínio clássico utl.is passou a apontar para o portal island.is.",
+      "rss": "",
+      "community": false
+    },
+    {
+      "name": "Government of Iceland — Foreign Nationals (Ministry of Justice)",
+      "url": "https://www.government.is/topics/foreign-nationals/",
+      "category": "legal",
+      "language": "en",
+      "note": "Portal do governo islandês (government.is / stjornarradid.is). O Ministério da Justiça (Dómsmálaráðuneytið) responde pelas questões legais de imigração e supervisiona a Útlendingastofnun. Concentra legislação de referência e comunicados de política sobre estrangeiros, residência e trabalho.",
+      "rss": "",
+      "community": false
+    },
+    {
+      "name": "Alþingi — Lagasafn (Coletânea Consolidada de Leis)",
+      "url": "https://www.althingi.is/lagasafn/",
+      "category": "legal",
+      "language": "is",
+      "note": "Portal oficial de legislação do parlamento islandês (Althingi). Reúne os textos consolidados das leis, incluindo o Act on Foreign Nationals e o Foreign Nationals' Right to Work Act, base legal das vias de residência por emprego para não-EEE (conhecimento especializado, escassez de mão de obra, atletas e contrato de serviço). Textos majoritariamente em islandês; traduções pontuais ficam nos sites dos ministérios.",
+      "rss": "",
+      "community": false
+    },
+    {
+      "name": "RÚV — Ríkisútvarpið (Emissora Pública Nacional)",
+      "url": "https://www.ruv.is/english",
+      "category": "news",
+      "language": "is",
+      "note": "Emissora pública nacional da Islândia. O feed principal de notícias é em islandês; a casa também mantém a RÚV English com cobertura em inglês. Fonte neutra para acompanhar a repercussão local das mudanças migratórias.",
+      "rss": "https://www.ruv.is/rss/frettir",
+      "community": false
+    },
+    {
+      "name": "Iceland Review",
+      "url": "https://www.icelandreview.com/",
+      "category": "news",
+      "language": "en",
+      "note": "Publicação em inglês sobre a Islândia, no ar desde 1963, voltada a leitores estrangeiros e expatriados. Cobre política, sociedade e economia local, com feed ativo e atualizado ao longo do dia.",
+      "rss": "https://www.icelandreview.com/feed/",
+      "community": false
+    },
+    {
+      "name": "The Reykjavík Grapevine",
+      "url": "https://grapevine.is/news/",
+      "category": "news",
+      "language": "en",
+      "note": "Publicação em inglês da Islândia, com público formado por imigrantes, estudantes internacionais e estrangeiros. Boa para contexto cotidiano e para cobertura de temas de imigração e vida prática no país. Cobre a Islândia, ao contrário do The Local, que não tem edição islandesa.",
+      "rss": "https://grapevine.is/feed/",
+      "community": false
+    },
+    {
+      "name": "Reuters — Europe",
+      "url": "https://www.reuters.com/world/europe/",
+      "category": "news",
+      "language": "en",
+      "note": "Cobertura internacional da Europa pela Reuters, útil como referência regional (EEE/EFTA e economia nórdica) e para checagem cruzada de fatos que afetam a Islândia. A Reuters descontinuou os feeds RSS públicos, então não há URL de RSS.",
+      "rss": "",
+      "community": false
+    },
+    {
+      "name": "Central Bank of Iceland (Seðlabanki Íslands)",
+      "url": "https://cb.is/",
+      "category": "finance",
+      "language": "en",
+      "note": "Banco central da Islândia. Publica decisões de política monetária, inflação e câmbio da coroa islandesa (ISK), dados que dão contexto aos valores de renda mínima de subsistência exigidos na imigração. Feed de notícias em inglês ativo e atualizado.",
+      "rss": "https://cb.is/api/documents/views/articles/RSS-feed-english/rss",
+      "community": false
+    },
+    {
+      "name": "Eres Legal — Immigration Updates",
+      "url": "https://www.ereslegalservices.com/",
+      "category": "legal",
+      "language": "en",
+      "note": "Escritório de imigração europeu com boletins semanais que resumem mudanças migratórias na Islândia e no restante da Europa. Fonte de comunidade e prática, não oficial, boa para leitura rápida das alterações antes de checar no texto oficial. Feed ativo.",
+      "rss": "https://www.ereslegalservices.com/feed/",
+      "community": true
+    },
+    {
+      "name": "Erickson Immigration Group — Iceland Alerts",
+      "url": "https://eiglaw.com/stay-in-the-loop/news-and-alerts/",
+      "category": "legal",
+      "language": "en",
+      "note": "Firma global de imigração corporativa com alertas frequentes e detalhados sobre a Islândia, incluindo a transferência de work permits para a Útlendingastofnun, o reajuste da renda mínima e a dispensa de work permit para estudantes. Fonte de comunidade e prática, não oficial, sem feed RSS verificado.",
+      "rss": "",
+      "community": true
+    }
+  ]
+},
+{
+  "countryCode": "no",
+  "countryName": "Noruega",
+  "flag": "🇳🇴",
+  "sources": [
+    {
+      "name": "UDI - Utlendingsdirektoratet (Diretoria de Imigracao da Noruega)",
+      "url": "https://www.udi.no/en",
+      "category": "legal",
+      "language": "en",
+      "note": "Autoridade oficial de imigracao da Noruega. Processa vistos, permissoes de trabalho e residencia, incluindo a via skilled worker. Site em ingles em udi.no/en, com pagina dedicada ao trabalhador qualificado.",
+      "rss": "",
+      "community": false
+    },
+    {
+      "name": "UDI - Sala de Imprensa e Avisos Oficiais",
+      "url": "https://www.udi.no/en/press/",
+      "category": "legal",
+      "language": "en",
+      "note": "Area de imprensa e mensagens importantes da UDI, onde saem mudancas de regra e avisos de procedimento para candidatos. Fonte primaria para atualizacoes de politica e situacao (ex.: mensagens sobre paises e protecao coletiva).",
+      "rss": "",
+      "community": false
+    },
+    {
+      "name": "Ministerio da Justica e Seguranca Publica (Justis- og beredskapsdepartementet)",
+      "url": "https://www.regjeringen.no/en/dep/jd/id463/",
+      "category": "legal",
+      "language": "en",
+      "note": "Ministerio responsavel pela politica e legislacao de imigracao e pela gestao da UDI. Publica comunicados e mudancas de politica em regjeringen.no. O portal oferece RSS gerado sob medida (por tema e ministerio), sem uma URL de feed fixa unica.",
+      "rss": "",
+      "community": false
+    },
+    {
+      "name": "Lovdata - Lei de Imigracao (Utlendingsloven)",
+      "url": "https://lovdata.no/dokument/NLE/lov/2008-05-15-35",
+      "category": "legal",
+      "language": "en",
+      "note": "Portal juridico oficial da Noruega. Traducao em ingles da Lei de Imigracao (LOV-2008-05-15-35, em vigor desde 2010). A versao norueguesa e a juridicamente autentica; a traducao e apenas informativa.",
+      "rss": "",
+      "community": false
+    },
+    {
+      "name": "NRK (Norsk rikskringkasting)",
+      "url": "https://www.nrk.no",
+      "category": "news",
+      "language": "no",
+      "note": "Emissora publica nacional da Noruega. Cobertura ampla de noticias nacionais em noruegues. Feed RSS de ultimas noticias ativo e verificado.",
+      "rss": "https://www.nrk.no/toppsaker.rss",
+      "community": false
+    },
+    {
+      "name": "The Local Norway",
+      "url": "https://www.thelocal.no",
+      "category": "news",
+      "language": "en",
+      "note": "Portal de noticias em ingles voltado a expatriados, com guias praticos sobre trabalho, residencia, impostos e vida na Noruega. Feed RSS ativo e verificado.",
+      "rss": "https://feeds.thelocal.com/rss/no",
+      "community": false
+    },
+    {
+      "name": "Reuters Europe",
+      "url": "https://www.reuters.com/world/europe/",
+      "category": "news",
+      "language": "en",
+      "note": "Cobertura europeia da Reuters, util para contexto macroeconomico e politico que afeta imigracao, mercado de trabalho e economia. A Reuters descontinuou os feeds RSS publicos.",
+      "rss": "",
+      "community": false
+    },
+    {
+      "name": "E24",
+      "url": "https://e24.no",
+      "category": "finance",
+      "language": "no",
+      "note": "Maior portal de economia e negocios da Noruega. Acompanha bolsa, cambio da coroa (NOK) e indicadores relevantes para custo de vida e pisos salariais. Feed RSS ativo e verificado.",
+      "rss": "https://e24.no/rss",
+      "community": false
+    },
+    {
+      "name": "Life in Norway",
+      "url": "https://www.lifeinnorway.net",
+      "category": "news",
+      "language": "en",
+      "note": "Publicacao de comunidade em ingles sobre a vida na Noruega, com foco em relocacao, emprego, aprender noruegues e integracao. Fonte nao-oficial. Feed RSS ativo e verificado.",
+      "rss": "https://www.lifeinnorway.net/feed/",
+      "community": true
+    },
+    {
+      "name": "Sterk Law Firm (Advokatfirmaet Sterk AS)",
+      "url": "https://www.lawyernorway.no",
+      "category": "legal",
+      "language": "en",
+      "note": "Escritorio de advocacia noruegues (membro da Ordem dos Advogados da Noruega) com material em ingles sobre imigracao de trabalho, permissoes de residencia e emprego. Fonte nao-oficial que interpreta as regras da UDI para o publico estrangeiro.",
+      "rss": "",
+      "community": true
+    }
+  ]
+},
+{
+  "countryCode": "ru",
+  "countryName": "Rússia",
+  "flag": "🇷🇺",
+  "sources": [
+    {
+      "name": "МВД России (Ministério do Interior)",
+      "url": "https://мвд.рф/",
+      "category": "legal",
+      "language": "ru",
+      "note": "Ministério do Interior da Rússia, órgão responsável pela política migratória. Desde abril de 2025 (Decreto Presidencial 205, de 2 de abril de 2025), as funções migratórias foram transferidas ao novo Serviço de Cidadania e Registro de Estrangeiros, criado sobre a base da antiga ГУВМ.",
+      "rss": "",
+      "community": false
+    },
+    {
+      "name": "ГУВМ МВД (portal de serviços migratórios)",
+      "url": "https://гувм.мвд.рф/",
+      "category": "legal",
+      "language": "ru",
+      "note": "Portal oficial de serviços migratórios do MVD, com formulários e regras de RVP, residência permanente (ВНЖ), status de Especialista Altamente Qualificado (ВКС/HQS) e registro de estrangeiros. Opera sob a estrutura reorganizada em 2025.",
+      "rss": "",
+      "community": false
+    },
+    {
+      "name": "Consular Department MID (kdmid.ru)",
+      "url": "https://www.kdmid.ru/",
+      "category": "legal",
+      "language": "ru",
+      "note": "Departamento Consular do MID (Ministério das Relações Exteriores), responsável por vistos e e-visa emitidos no exterior. Reúne o formulário eletrônico de visto e o portal oficial de e-visa (electronic-visa.kdmid.ru).",
+      "rss": "",
+      "community": false
+    },
+    {
+      "name": "Портал правовой информации (pravo.gov.ru)",
+      "url": "http://pravo.gov.ru/",
+      "category": "legal",
+      "language": "ru",
+      "note": "Portal oficial de informação jurídica da Rússia, mantido pela FSO, onde leis e decretos federais são publicados oficialmente, incluindo a Lei Federal 260-ФЗ e o Decreto Presidencial 702. Fonte primária para o texto oficial da legislação.",
+      "rss": "",
+      "community": false
+    },
+    {
+      "name": "TASS (ТАСС)",
+      "url": "https://tass.com/",
+      "category": "news",
+      "language": "en",
+      "note": "Agência estatal de notícias da Rússia e principal fio noticioso nacional. A edição em inglês mantém feed RSS ativo, útil para monitorar comunicados oficiais e política interna.",
+      "rss": "https://tass.com/rss/v2.xml",
+      "community": false
+    },
+    {
+      "name": "The Moscow Times",
+      "url": "https://www.themoscowtimes.com/",
+      "category": "news",
+      "language": "en",
+      "note": "Publicação independente em inglês voltada a estrangeiros e leitores internacionais, com cobertura de política, economia e sociedade russa. Hoje sediada fora da Rússia, mantém feed RSS ativo.",
+      "rss": "https://www.themoscowtimes.com/rss/news",
+      "community": false
+    },
+    {
+      "name": "Reuters Europe",
+      "url": "https://www.reuters.com/world/europe/",
+      "category": "news",
+      "language": "en",
+      "note": "Cobertura internacional da Reuters sobre Europa e Rússia, referência em inglês para checagem cruzada. A Reuters descontinuou seus feeds RSS públicos, por isso o campo permanece vazio.",
+      "rss": "",
+      "community": false
+    },
+    {
+      "name": "РБК (RBC)",
+      "url": "https://www.rbc.ru/",
+      "category": "finance",
+      "language": "ru",
+      "note": "Um dos principais veículos de economia, finanças e negócios da Rússia, com feed RSS ativo de notícias gerais e econômicas. Base para acompanhar câmbio, mercado e medidas econômicas.",
+      "rss": "https://rssexport.rbc.ru/rbcnews/news/30/full.rss",
+      "community": false
+    },
+    {
+      "name": "VISTA Immigration",
+      "url": "https://vista-immigration.ru/",
+      "category": "legal",
+      "language": "en",
+      "note": "Escritório de imigração em Moscou com atendimento em inglês, russo e alemão, especializado em RVP, residência permanente (ВНЖ) e status de Especialista Altamente Qualificado (ВКС/HQS). Fonte de comunidade para procedimentos práticos.",
+      "rss": "",
+      "community": true
+    },
+    {
+      "name": "Confidence Group",
+      "url": "https://eng.confidencegroup.ru/",
+      "category": "legal",
+      "language": "en",
+      "note": "Consultoria de relocation e imigração ativa desde 2007, com material em inglês sobre reformas recentes, incluindo o Decreto 702 e a criação do novo Serviço de Cidadania e Registro de Estrangeiros. Fonte de comunidade para leitura das mudanças.",
+      "rss": "",
+      "community": true
+    }
+  ]
+}
 ];
 
 /** Fontes globais de cripto/derivativos — agregadas separadamente (não-por-país) */

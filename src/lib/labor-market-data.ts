@@ -8062,4 +8062,507 @@ export const LABOR_MARKET: LaborMarketMap = {
       }
     ]
   }
+,
+"is": {
+  "updatedAt": "2026-07-18",
+  "overview": "O mercado de trabalho islandês esfriou em 2026 depois de anos de forte aperto. Pela Pesquisa de Força de Trabalho da Hagstofa Íslands (Statistics Iceland), o desemprego ajustado sazonalmente foi de 5,6% em maio de 2026; na medição sem ajuste sazonal ficou em 8,3%, alta de cerca de 3,8 pontos percentuais frente a maio de 2025. O desemprego registrado da Vinnumálastofnun (Directorate of Labour) foi de 4,2% no mesmo mês. Mesmo com essa acomodação, a Islândia mantém escassez estrutural de mão de obra em saúde, construção, TI e turismo, setores em que empregadores seguem recrutando profissionais estrangeiros. O salário mediano de quem trabalha em tempo integral girou em torno de 826 mil ISK por mês em 2025 (ganhos regulares, antes de impostos), num país sem salário mínimo legal, onde os pisos saem de acordos coletivos entre sindicatos e empregadores.\n\nPara o estrangeiro qualificado, 2026 trouxe uma mudança grande de processo. Desde 8 de julho, com as emendas ao Act on Foreign Nationals e ao Foreign Nationals' Right to Work Act, a emissão de work permits passou da Directorate of Labour para a Útlendingastofnun (Directorate of Immigration), unificando residência e autorização de trabalho num só órgão, com possibilidade de priorizar pedidos completos baseados em emprego. Cidadãos do EEE/EFTA não precisam de work permit; já os não-EEE dependem de uma residência baseada em emprego por uma de quatro vias (conhecimento especializado, escassez de mão de obra, atletas ou contrato de serviço/colaboração), sempre com o empregador dando entrada no pedido e obtendo o permit antes de o trabalho começar.",
+  "hotSectors": [
+    "Saúde e assistência social (setor com a maior taxa de vagas do país)",
+    "Construção civil e infraestrutura (região da grande Reykjavík)",
+    "Tecnologia da informação (software, cibersegurança, dados)",
+    "Turismo e hospitalidade",
+    "Pesca e processamento de pescado (alta presença de trabalhadores imigrantes)"
+  ],
+  "coolingSectors": [],
+  "inDemandRoles": [
+    {
+      "role": "Enfermeiros e médicos (especialistas e clínicos gerais)",
+      "note": "Saúde é a escassez mais persistente da Islândia; exige licença do Embætti landlæknis (Directorate of Health) e reconhecimento de qualificação."
+    },
+    {
+      "role": "Eletricistas, encanadores, carpinteiros e soldadores",
+      "note": "Construção puxada por demanda habitacional e infraestrutura; costuma entrar pela via de escassez de mão de obra."
+    },
+    {
+      "role": "Desenvolvedores de software, especialistas em cibersegurança e cientistas de dados",
+      "note": "TI em escassez documentada; via mais comum é a de conhecimento especializado (expert), que exige diploma superior reconhecido."
+    },
+    {
+      "role": "Chefs e equipe de hospitalidade",
+      "note": "Turismo gera demanda constante, com pico sazonal no verão (junho a agosto)."
+    },
+    {
+      "role": "Trabalhadores de processamento de pescado",
+      "note": "Pesca paga acima da média por bônus atrelados à captura; imigrantes são parcela desproporcional da força de trabalho no processamento."
+    }
+  ],
+  "foreignerRules": "Cidadãos do EEE/EFTA e das Ilhas Faroe podem trabalhar sem work permit (basta registrar a residência em estadas longas). Não-EEE precisam de uma residência baseada em emprego, concedida por quatro vias: (1) conhecimento especializado (expert), que exige formação superior ou treinamento industrial/artístico/técnico reconhecido na Islândia; (2) escassez de mão de obra, quando não se encontra candidato no mercado islandês nem no EEE/EFTA (com verificação de mercado de trabalho); (3) atletas contratados por clube filiado à federação olímpica e esportiva da Islândia; e (4) trabalho por contrato de serviço/colaboração, respeitando os acordos coletivos de piso, jornada e benefícios. O empregador dá entrada no pedido e precisa ter o permit ANTES de o trabalhador começar. Mudança de 8/jul/2026: a emissão de work permits saiu da Directorate of Labour e passou para a Útlendingastofnun (Directorate of Immigration), e pedidos completos baseados em emprego podem ser priorizados. Estudante com residência de estudante não precisa mais de work permit separado e pode trabalhar até 60% da jornada durante os estudos; concluído o diploma, pode renovar a residência de estudante por até 18 meses para buscar emprego (doutores, até 12 meses via residência de especialista). Renda mínima de subsistência reajustada em 18/mai/2026: ISK 259.951/mês para adulto e ISK 415.922/mês para casal (valores antes de impostos). Profissões regulamentadas (saúde, entre outras) exigem licença específica: na saúde, a licença sai do Embætti landlæknis (Directorate of Health), com reconhecimento de qualificação e regras distintas para EEE/Suíça e para terceiros países.",
+  "jobBoards": [
+    {
+      "label": "Vinnumálastofnun / Directorate of Labour — vagas (Ísland.is)",
+      "url": "https://island.is/en/o/directorate-of-labour/jobs",
+      "official": true
+    },
+    {
+      "label": "Work in Iceland (Vinnumálastofnun) — busca de emprego",
+      "url": "https://work.iceland.is/working/job-hunting/",
+      "official": true
+    },
+    {
+      "label": "EURES — Portal Europeu de Empregos (vagas do EEE, incluindo Islândia)",
+      "url": "https://eures.europa.eu",
+      "official": true
+    },
+    {
+      "label": "Alfreð (alfred.is) — plataforma privada de vagas do país",
+      "url": "https://alfred.is",
+      "official": false
+    }
+  ],
+  "salaries": [
+    {
+      "role": "Mediana nacional (tempo integral, ganhos regulares, 2025)",
+      "range": "≈ 826 mil ISK/mês (antes de impostos)",
+      "source": {
+        "label": "Hagstofa Íslands (Statistics Iceland) — Wage distributions 2025",
+        "url": "https://www.statice.is/publications/news-archive/wages-and-income/wage-distributions-in-the-icelandic-labour-market-2025/",
+        "official": true
+      }
+    },
+    {
+      "role": "Média nacional (tempo integral, ganhos regulares, 2025)",
+      "range": "≈ 913 mil ISK/mês",
+      "source": {
+        "label": "Hagstofa Íslands (Statistics Iceland) — Wage distributions 2025",
+        "url": "https://www.statice.is/publications/news-archive/wages-and-income/wage-distributions-in-the-icelandic-labour-market-2025/",
+        "official": true
+      }
+    },
+    {
+      "role": "Ganhos totais médios (tempo integral, 2025)",
+      "range": "≈ 1.058 mil ISK/mês",
+      "source": {
+        "label": "Hagstofa Íslands (Statistics Iceland) — Wage distributions 2025",
+        "url": "https://www.statice.is/publications/news-archive/wages-and-income/wage-distributions-in-the-icelandic-labour-market-2025/",
+        "official": true
+      }
+    },
+    {
+      "role": "Médicos e juízes",
+      "range": "acima de 1,7 milhão ISK/mês (ganhos totais médios, 2025)",
+      "source": {
+        "label": "Hagstofa Íslands (Statistics Iceland) — Wage distributions 2025",
+        "url": "https://www.statice.is/publications/news-archive/wages-and-income/wage-distributions-in-the-icelandic-labour-market-2025/",
+        "official": true
+      }
+    },
+    {
+      "role": "Diretores e executivos-chefe (CEOs)",
+      "range": "acima de 2,5 milhões ISK/mês (2025)",
+      "source": {
+        "label": "Hagstofa Íslands (Statistics Iceland) — Wage distributions 2025",
+        "url": "https://www.statice.is/publications/news-archive/wages-and-income/wage-distributions-in-the-icelandic-labour-market-2025/",
+        "official": true
+      }
+    },
+    {
+      "role": "Ocupações elementares (grupo)",
+      "range": "≈ 766 mil ISK/mês (ganhos totais, 2025)",
+      "source": {
+        "label": "Hagstofa Íslands (Statistics Iceland) — Wage distributions 2025",
+        "url": "https://www.statice.is/publications/news-archive/wages-and-income/wage-distributions-in-the-icelandic-labour-market-2025/",
+        "official": true
+      }
+    }
+  ],
+  "opportunityWindows": [
+    "Janela de transferência de atletas: clubes filiados à federação olímpica e esportiva da Islândia contratam nos períodos oficiais de transferência, quando entram os pedidos de residência de atleta.",
+    "Início do ano acadêmico (agosto/setembro): concentra o maior volume de novos pedidos de residência de estudante, antes do começo das aulas.",
+    "Temporada turística de verão (junho a agosto): pico de contratações sazonais em hospitalidade e serviços."
+  ],
+  "byQualification": [
+    {
+      "area": "Saúde",
+      "advice": "Profissão regulamentada: é obrigatória a licença do Embætti landlæknis (Directorate of Health), com reconhecimento do diploma. EEE/Suíça têm via de reconhecimento mais rápida; terceiros países seguem regras próprias (Regulamento 483/2023). Setor com a maior taxa de vagas do país."
+    },
+    {
+      "area": "TI e engenharia",
+      "advice": "Via mais comum é a de conhecimento especializado (expert): exige diploma superior ou treinamento técnico reconhecido na Islândia, e o empregador precisa demonstrar que não achou candidato local ou no EEE/EFTA."
+    },
+    {
+      "area": "Construção e ofícios (eletricista, encanador, soldador)",
+      "advice": "Costuma entrar pela via de escassez de mão de obra, com verificação de mercado de trabalho antes do recrutamento internacional. Demanda concentrada na região da grande Reykjavík."
+    },
+    {
+      "area": "Estudantes, pesquisadores e recém-formados",
+      "advice": "Residência de estudante já permite trabalhar até 60% da jornada, sem work permit separado. Após o diploma, renovação por até 18 meses para buscar emprego; doutores por até 12 meses via residência de especialista."
+    },
+    {
+      "area": "Atletas",
+      "advice": "Permit temporário para atletas contratados por clube filiado à federação olímpica e esportiva da Islândia; o pedido é dado pelo clube empregador antes de o trabalho começar."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Útlendingastofnun (Directorate of Immigration) — New residence and work permit rules take effect (8/jul/2026)",
+      "url": "https://island.is/en/o/directorate-of-immigration/news/new-residence-and-work-permit-rules-take-effect",
+      "official": true
+    },
+    {
+      "label": "Hagstofa Íslands (Statistics Iceland) — Labour market in May 2026",
+      "url": "https://www.statice.is/publications/news-archive/labour-market/labour-market-in-may-2026/",
+      "official": true
+    },
+    {
+      "label": "Hagstofa Íslands (Statistics Iceland) — Wage distributions in the Icelandic labour market 2025",
+      "url": "https://www.statice.is/publications/news-archive/wages-and-income/wage-distributions-in-the-icelandic-labour-market-2025/",
+      "official": true
+    },
+    {
+      "label": "Útlendingastofnun (Directorate of Immigration) — Higher amount required as means of support (18/mai/2026)",
+      "url": "https://island.is/en/o/directorate-of-immigration/news/higher-amount-as-means-of-support",
+      "official": true
+    },
+    {
+      "label": "Work in Iceland (Vinnumálastofnun) — Job hunting",
+      "url": "https://work.iceland.is/working/job-hunting/",
+      "official": true
+    }
+  ]
+},
+"no": {
+  "updatedAt": "2026-07-18",
+  "overview": "O mercado de trabalho norueguês em 2026 combina desemprego baixo com contratação mais seletiva. A NAV, a administração pública de trabalho e bem-estar, projeta a taxa de desemprego em torno de 2,0% ao longo de 2026 (cerca de 60 mil pessoas registradas como totalmente desempregadas), enquanto o número de vagas publicadas caiu cerca de 12% frente a 2024, com mais candidatos disputando cada posição. Na pesquisa de empresas mais recente (Bedriftsundersøkelsen 2026 da NAV, publicada em maio de 2026), as companhias estimaram falta de cerca de 34 mil trabalhadores, concentrada em saúde e cuidados e em ocupações que exigem certificado profissional (fagbrev), como mecânicos industriais, instaladores de energia e soldadores.\n\nPara o profissional estrangeiro qualificado, a porta principal é a autorização de skilled worker da UDI, que exige formação concluída, oferta concreta de um empregador norueguês e salário não inferior ao normal do país. Quando não há acordo coletivo aplicável, a UDI usa pisos de referência que foram atualizados em 1º de maio de 2026 para NOK 545.400 por ano para funções de nível bacharelado e NOK 624.700 por ano para nível mestrado. Além disso, desde fevereiro de 2026 há um passo novo no processo: quem aplica sozinho do exterior precisa que o empregador confirme a oferta antes, recebendo um código para inserir no formulário.",
+  "hotSectors": [
+    "Saúde, cuidados e serviços sociais (a maior escassez do país)",
+    "Ofícios com certificado profissional (fagbrev): mecânica industrial, soldagem e instalações de energia",
+    "Construção civil e engenharia de infraestrutura",
+    "Educação e ensino",
+    "Indústria e manufatura"
+  ],
+  "coolingSectors": [
+    "Marketing e publicidade (a maior queda de vagas publicadas em 2026)",
+    "Petróleo e gás",
+    "Finanças e contabilidade",
+    "Energia e setor elétrico (queda de vagas publicadas)",
+    "TI/ICT (mais candidatos disponíveis e contratação mais seletiva)"
+  ],
+  "inDemandRoles": [
+    {
+      "role": "Helsefagarbeider (auxiliar/técnico de saúde)",
+      "note": "Entre as ocupações com maior falta segundo a NAV; demanda em todos os níveis de formação em saúde e cuidados."
+    },
+    {
+      "role": "Enfermeiro(a) (sykepleier)",
+      "note": "Escassez estrutural em saúde; profissão regulamentada que exige autorização do Helsedirektoratet antes de exercer."
+    },
+    {
+      "role": "Soldador e mecânico industrial (fagbrev)",
+      "note": "Citados pela NAV entre as maiores faltas de mão de obra com certificado profissional na pesquisa 2026."
+    },
+    {
+      "role": "Instalador de energia e eletricista",
+      "note": "Alta demanda em ofícios de energia e instalações; eletricista é profissão regulamentada."
+    },
+    {
+      "role": "Engenheiro (civil e mecânico)",
+      "note": "Demanda persistente em infraestrutura e indústria, apesar de desaceleração pontual em alguns projetos."
+    },
+    {
+      "role": "Professor e educador",
+      "note": "Falta relatada sobretudo fora dos grandes centros, com regiões como Troms puxando a necessidade."
+    }
+  ],
+  "foreignerRules": "A via principal para profissionais qualificados de fora do EU/EEE é a autorização de skilled worker da UDI (Utlendingsdirektoratet, udi.no). Exige uma destas qualificações: formação profissional concluída de pelo menos três anos no nível secundário, diploma de universidade ou faculdade, ou competências especiais comprovadas por no mínimo seis anos de experiência documentada. É preciso oferta concreta de emprego de um empregador norueguês, em regime de tempo integral (mínimo de 80%), com salário e condições não inferiores ao normal na Noruega. Onde há acordo coletivo aplicável, vale o salário do acordo; onde não há, a UDI usa pisos de referência (atualizados em 1º de maio de 2026 para NOK 545.400 por ano para nível bacharelado e NOK 624.700 por ano para nível mestrado). Desde fevereiro de 2026, quem aplica sozinho do exterior precisa que o empregador confirme a oferta antes de enviar o formulário, recebendo um código de confirmação validado pelo sistema; não há mudança quando o próprio empregador faz o pedido. Cidadãos do EU/EEE não precisam de autorização prévia para trabalhar, apenas de registro após a chegada. Profissões regulamentadas (por exemplo, saúde como enfermagem e medicina, além de eletricista) exigem reconhecimento ou autorização da autoridade setorial competente, como o Helsedirektoratet na área de saúde, antes do exercício.",
+  "jobBoards": [
+    {
+      "label": "Arbeidsplassen (NAV, serviço público de emprego)",
+      "url": "https://arbeidsplassen.nav.no",
+      "official": true
+    },
+    {
+      "label": "Work in Norway (portal oficial interinstitucional para trabalhadores estrangeiros)",
+      "url": "https://www.workinnorway.no",
+      "official": true
+    },
+    {
+      "label": "EURES (portal europeu de mobilidade profissional)",
+      "url": "https://eures.europa.eu",
+      "official": true
+    },
+    {
+      "label": "Jobbnorge (vagas do setor acadêmico e público)",
+      "url": "https://www.jobbnorge.no",
+      "official": false
+    },
+    {
+      "label": "Finn.no (maior portal privado de vagas)",
+      "url": "https://www.finn.no/job",
+      "official": false
+    }
+  ],
+  "salaries": [
+    {
+      "role": "Média nacional (todos os setores, mensal bruto por equivalente a tempo integral)",
+      "range": "NOK ~62.070/mês (2025)",
+      "source": {
+        "label": "SSB (Statistics Norway), estatística de salários",
+        "url": "https://www.ssb.no/en/arbeid-og-lonn/lonn-og-arbeidskraftkostnader/statistikk/lonn",
+        "official": true
+      }
+    },
+    {
+      "role": "Mediana nacional (mensal bruto por equivalente a tempo integral)",
+      "range": "NOK ~55.800/mês (2025)",
+      "source": {
+        "label": "SSB (Statistics Norway), estatística de salários",
+        "url": "https://www.ssb.no/en/arbeid-og-lonn/lonn-og-arbeidskraftkostnader/statistikk/lonn",
+        "official": true
+      }
+    },
+    {
+      "role": "Piso de referência UDI, nível bacharelado",
+      "range": "NOK 545.400/ano (desde 1º/mai/2026)",
+      "source": {
+        "label": "UDI, skilled workers",
+        "url": "https://www.udi.no/en/want-to-apply/work-immigration/skilled-workers/",
+        "official": true
+      }
+    },
+    {
+      "role": "Piso de referência UDI, nível mestrado",
+      "range": "NOK 624.700/ano (desde 1º/mai/2026)",
+      "source": {
+        "label": "UDI, skilled workers",
+        "url": "https://www.udi.no/en/want-to-apply/work-immigration/skilled-workers/",
+        "official": true
+      }
+    }
+  ],
+  "opportunityWindows": [
+    "Escassez persistente em saúde e cuidados abre espaço para profissionais qualificados e regulamentados, com reconhecimento pelo Helsedirektoratet.",
+    "Ofícios com fagbrev (soldagem, mecânica industrial, energia) estão entre as maiores faltas, favorecendo quem tem certificação técnica reconhecida.",
+    "Regiões fora de Oslo, como Vestland, Rogaland e Nordland, concentram a maior necessidade de mão de obra segundo a NAV 2026.",
+    "A confirmação de oferta pelo empregador (código UDI, desde fev/2026) foi introduzida para reduzir ofertas fraudulentas e dar mais segurança ao candidato."
+  ],
+  "byQualification": [
+    {
+      "area": "Saúde (enfermagem, medicina, técnicos)",
+      "advice": "Profissão regulamentada: buscar reconhecimento e autorização junto ao Helsedirektoratet antes de exercer; a demanda é a maior do país."
+    },
+    {
+      "area": "Ofícios técnicos (fagbrev)",
+      "advice": "Certificação profissional reconhecida abre as maiores faltas atuais (mecânica industrial, soldagem, energia); documente a equivalência da formação."
+    },
+    {
+      "area": "TI e engenharia",
+      "advice": "A demanda existe, mas o mercado ficou mais seletivo em 2026; oferta concreta e salário acima do piso UDI fortalecem o caso."
+    },
+    {
+      "area": "EU/EEE versus fora do bloco",
+      "advice": "Cidadãos do EU/EEE apenas se registram após a chegada; fora do bloco, a rota é a skilled worker da UDI com oferta e piso salarial."
+    }
+  ],
+  "sources": [
+    {
+      "label": "UDI, Want to apply: Skilled workers",
+      "url": "https://www.udi.no/en/want-to-apply/work-immigration/skilled-workers/",
+      "official": true
+    },
+    {
+      "label": "UDI, Confirmation of a job or assignment offer (fev/2026)",
+      "url": "https://www.udi.no/en/important-messages/confirmation-of-a-job-offer/",
+      "official": true
+    },
+    {
+      "label": "NAV, Bedriftsundersøkelsen 2026 (falta de 34 mil trabalhadores)",
+      "url": "https://www.nav.no/no/nav-og-samfunn/kunnskap/analyser-fra-nav/nyheter/bedriftsundersokelsen-2026-norske-virksomheter-mangler-34-000-personer",
+      "official": true
+    },
+    {
+      "label": "NAV, Arbeidsmarkedsprognose 2026-1 (desemprego em torno de 2,0%)",
+      "url": "https://www.nav.no/no/nav-og-samfunn/kunnskap/analyser-fra-nav/arbeid-og-velferd/arbeid-og-velferd/arbeid-og-velferd-nr.1-2026/utviklingen-pa-arbeidsmarkedet.navs-arbeidsmarkedsprognose-2026-1",
+      "official": true
+    },
+    {
+      "label": "SSB (Statistics Norway), estatística de salários",
+      "url": "https://www.ssb.no/en/arbeid-og-lonn/lonn-og-arbeidskraftkostnader/statistikk/lonn",
+      "official": true
+    },
+    {
+      "label": "The Local Norway, panorama do mercado de trabalho 2026",
+      "url": "https://www.thelocal.no/20260112/fewer-jobs-more-applicants-what-job-hunters-in-norway-should-expect-in-2026/",
+      "official": false
+    }
+  ]
+},
+"ru": {
+  "updatedAt": "2026-07-18",
+  "overview": "O mercado de trabalho russo opera sob pleno emprego estatístico. O desemprego ficou em torno de 2,1% a 2,2% em 2025 e 2026, entre os níveis mais baixos já registrados, segundo o Rosstat. A raiz não é vigor da economia e sim escassez estrutural de mão de obra, alimentada por mobilização militar e emigração. Projeções oficiais citadas pela imprensa falam em déficit perto de 3,1 milhões de trabalhadores até 2030. Com a demanda maior que a oferta, os salários nominais sobem acima da inflação: a média nacional foi de cerca de 98 mil rublos por mês em novembro de 2025 a cerca de 113 mil em março de 2026 (dados do Rosstat).\n\nPara o estrangeiro qualificado, o cenário é de portas seletivamente abertas dentro de um regime migratório que endureceu. Desde 5 de fevereiro de 2025 vigora o regime de expulsão e o Registro de Pessoas Controladas (Lei Federal 260-ФЗ), que impõe restrições fortes a quem perde base legal de permanência. Ao mesmo tempo, o país mantém a via do Especialista Altamente Qualificado (ВКС/HQS), fora de quota e concedida por salário, e o Decreto Presidencial 702 (em vigor desde 1 de setembro de 2024) criou um RVP (residência temporária) simplificado, sem quota e sem exames, para nacionais de uma lista de 47 países que inclui os EUA e Estados da UE. A autoridade de residência e trabalho é o ГУВМ do МВД; vistos no exterior passam pelo Departamento Consular do MID (kdmid.ru).",
+  "hotSectors": [
+    "Varejo e serviços de massa",
+    "Saúde e farmacêutico",
+    "Construção civil",
+    "Indústria e manufatura (incluindo soldagem e linhas de produção)",
+    "Logística e entregas",
+    "TI e inteligência artificial"
+  ],
+  "coolingSectors": [
+    "Ritmo de novas vagas estabilizou ou recuou em parte dos setores no início de 2025",
+    "Desaceleração da corrida salarial, com o crescimento dos salários perdendo força (dados hh.ru)"
+  ],
+  "inDemandRoles": [
+    {
+      "role": "Vendedores e caixas",
+      "note": "Maior volume de vagas do país (mais de 650 mil vagas em 2025, dados hh.ru)"
+    },
+    {
+      "role": "Médicos e profissionais de saúde",
+      "note": "Entre as ocupações mais deficitárias; saúde e farmacêutico com falta aguda"
+    },
+    {
+      "role": "Soldadores (сварщики)",
+      "note": "No topo da mediana salarial entre as profissões mais buscadas (~164 mil rublos por mês no fim de 2025)"
+    },
+    {
+      "role": "Entregadores e motoristas",
+      "note": "Forte demanda; mediana de courier ~146 mil rublos por mês, alta de 27% no ano"
+    },
+    {
+      "role": "Cozinheiros, padeiros e operadores de linha de produção",
+      "note": "Entre as ocupações mais deficitárias em 2025"
+    },
+    {
+      "role": "Especialistas de TI e inteligência artificial",
+      "note": "Demanda crescente; competências de IA cada vez mais valorizadas pelos empregadores"
+    }
+  ],
+  "foreignerRules": "Duas autoridades comandam o processo. O ГУВМ do МВД (direção de migração do Ministério do Interior) cuida de residência e trabalho dentro da Rússia; o Departamento Consular do MID (kdmid.ru) emite vistos no exterior. Os caminhos principais para trabalhar são três: (1) разрешение на работу (work permit) padrão, com patrocínio do empregador e sujeito a quota anual, para nacionais de países que exigem visto; (2) patente mensal, para nacionais de países isentos de visto (maioria da CEI), que exige exame de russo, história e legislação; (3) Especialista Altamente Qualificado (ВКС/HQS), fora de quota e concedido por salário. O piso salarial do ВКС hoje gira em torno de 750 mil rublos por trimestre (cerca de 250 mil por mês) e, pela lei aprovada em 2026, passa a exigir, a partir de 1 de março de 2027, no mínimo 717 mil rublos por mês para a maioria e 358 mil rublos por mês para cientistas, médicos e professores, com indexação anual. Fora do trabalho direto, o Decreto Presidencial 702 (desde 1 de setembro de 2024) abriu um RVP (residência temporária) fora de quota e sem exames de russo, história ou direito para quem declara compartilhar os valores tradicionais russos, restrito à lista de 47 países da Diretriz 2560-r (inclui EUA e Estados da UE); o visto correspondente é solicitado em missão consular russa. Endurecimento em vigor: desde 5 de fevereiro de 2025 a Lei Federal 260-ФЗ instituiu o regime de expulsão e o Registro de Pessoas Controladas (реестр контролируемых лиц), que impõe restrições fortes (proibição de atividade empresarial, de registrar propriedade, de casar, entre outras) a quem perde base legal de permanência; a estada de isentos de visto passou a ter teto de 90 dias por ano civil (regra em vigor desde 1 de janeiro de 2025). Profissões regulamentadas, como a medicina, exigem reconhecimento do diploma e licenciamento antes do exercício. Não há garantia de visto, emprego ou renda: prazos e aprovações dependem de cada caso e do órgão competente.",
+  "jobBoards": [
+    {
+      "label": "Работа России (trudvsem.ru), portal estatal do serviço de emprego",
+      "url": "https://trudvsem.ru/",
+      "official": true
+    },
+    {
+      "label": "HeadHunter (hh.ru), maior portal comercial",
+      "url": "https://hh.ru/",
+      "official": false
+    },
+    {
+      "label": "SuperJob",
+      "url": "https://www.superjob.ru/",
+      "official": false
+    },
+    {
+      "label": "Rabota.ru",
+      "url": "https://www.rabota.ru/",
+      "official": false
+    }
+  ],
+  "salaries": [
+    {
+      "role": "Salário médio nominal (nacional)",
+      "range": "~98 mil a 113 mil rublos/mês (nov/2025 a mar/2026)",
+      "source": {
+        "label": "Rosstat via Trading Economics",
+        "url": "https://tradingeconomics.com/russia/wages",
+        "official": false
+      }
+    },
+    {
+      "role": "Soldador (сварщик)",
+      "range": "~164 mil rublos/mês (topo entre as mais buscadas, fim de 2025)",
+      "source": {
+        "label": "hh.ru (итоги рынка труда 2025) via CNews",
+        "url": "https://www.cnews.ru/news/line/2025-12-22_itogi_rossijskogo_rynka",
+        "official": false
+      }
+    },
+    {
+      "role": "Entregador/courier",
+      "range": "~146 mil rublos/mês (mediana 2025, +27% no ano)",
+      "source": {
+        "label": "hh.ru (итоги рынка труда 2025) via CNews",
+        "url": "https://www.cnews.ru/news/line/2025-12-22_itogi_rossijskogo_rynka",
+        "official": false
+      }
+    },
+    {
+      "role": "Especialista Altamente Qualificado (ВКС/HQS), piso legal mínimo",
+      "range": "a partir de 1/mar/2027: 717 mil rublos/mês (maioria); 358 mil rublos/mês (cientistas, médicos, professores)",
+      "source": {
+        "label": "Forte Tax & Law",
+        "url": "https://fortetaxandlaw.com/en/new-minimum-salary-requirements-for-highly-qualified-specialists-effective-1-march-2027-practical-solutions-for-employers/",
+        "official": false
+      }
+    }
+  ],
+  "opportunityWindows": [
+    "Escassez estrutural de mão de obra projetada até cerca de 2030 (déficit citado perto de 3,1 milhões de trabalhadores)",
+    "Via ВКС/HQS: fora de quota e sem exame, voltada a faixas salariais altas",
+    "Decreto 702: RVP simplificado (sem quota, sem exame) para nacionais de países da lista, incluindo EUA e UE",
+    "Salários nominais em alta acima da inflação, puxados pela falta de trabalhadores"
+  ],
+  "byQualification": [
+    {
+      "area": "Saúde e farmacêutico",
+      "advice": "Alta demanda por médicos e farmacêuticos, mas é profissão regulamentada: exige reconhecimento do diploma e licenciamento, além de domínio do russo, antes de exercer."
+    },
+    {
+      "area": "TI e inteligência artificial",
+      "advice": "Demanda crescente; empregadores valorizam competências de IA. A via ВКС/HQS é viável para quem alcança as faixas salariais exigidas."
+    },
+    {
+      "area": "Ofícios industriais (soldador, operador de linha, motorista)",
+      "advice": "Entre as vagas mais numerosas e mais bem pagas do país; soldadores lideram a mediana entre as profissões mais buscadas."
+    },
+    {
+      "area": "Idioma russo",
+      "advice": "A patente exige exame de russo, história e legislação. As vias ВКС e Decreto 702 dispensam exames, mas o russo segue decisivo no dia a dia e em profissões reguladas."
+    }
+  ],
+  "sources": [
+    {
+      "label": "ГУВМ МВД (direção de migração, MVD)",
+      "url": "https://гувм.мвд.рф/",
+      "official": true
+    },
+    {
+      "label": "Departamento Consular do MID (kdmid.ru)",
+      "url": "https://kdmid.ru/",
+      "official": true
+    },
+    {
+      "label": "Работа России / Роструд (portal estatal de emprego)",
+      "url": "https://trudvsem.ru/",
+      "official": true
+    },
+    {
+      "label": "Rosstat via Trading Economics (salários e desemprego)",
+      "url": "https://tradingeconomics.com/russia/wages",
+      "official": false
+    },
+    {
+      "label": "The Moscow Times (escassez de mão de obra)",
+      "url": "https://www.themoscowtimes.com/2025/07/31/russias-labor-shortage-persists-despite-central-bank-optimism-a90044",
+      "official": false
+    },
+    {
+      "label": "hh.ru (итоги рынка труда 2025) via CNews (salários de soldador e courier, vagas de varejo)",
+      "url": "https://www.cnews.ru/news/line/2025-12-22_itogi_rossijskogo_rynka",
+      "official": false
+    },
+    {
+      "label": "Forte Tax & Law (limiar salarial ВКС a partir de 1/mar/2027)",
+      "url": "https://fortetaxandlaw.com/en/new-minimum-salary-requirements-for-highly-qualified-specialists-effective-1-march-2027-practical-solutions-for-employers/",
+      "official": false
+    },
+    {
+      "label": "Forte Tax & Law (endurecimento migratório, Lei 260-ФЗ)",
+      "url": "https://fortetaxandlaw.com/en/russian-migration-laws-tightened/",
+      "official": false
+    }
+  ]
+}
 };
