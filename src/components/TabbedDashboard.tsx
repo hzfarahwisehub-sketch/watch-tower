@@ -22,6 +22,7 @@ const RGL = WidthProvider(Responsive);
 type TabDef = { id: string; fallback: string; emoji: string; panels: PanelId[]; requiresAgenda?: boolean };
 const TABS: TabDef[] = [
   { id: "mapa", fallback: "Mapa", emoji: "🗺", panels: ["map", "countries", "benchmark"] },
+  { id: "relogios", fallback: "Relógios", emoji: "🕐", panels: ["clocks"] },
   { id: "oper", fallback: "Operações", emoji: "📥", panels: ["inbox", "scheduled", "requests", "reminders", "tasks"] },
   { id: "cont", fallback: "Conteúdo", emoji: "🎬", panels: ["content"] },
   { id: "studio", fallback: "Conteúdo Digital", emoji: "🎥", panels: ["studio"] },
@@ -47,6 +48,7 @@ const LG: Record<string, LItem[]> = {
     { i: "countries", x: 9, y: 0, w: 6, h: 17 },
     { i: "benchmark", x: 15, y: 0, w: 9, h: 17 },
   ],
+  relogios: [{ i: "clocks", x: 0, y: 0, w: 24, h: 20 }],
   oper: [
     { i: "inbox", x: 0, y: 0, w: 8, h: 12 },
     { i: "scheduled", x: 16, y: 0, w: 8, h: 9 },

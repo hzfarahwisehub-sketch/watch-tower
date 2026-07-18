@@ -4,6 +4,7 @@
 const dict = {
   pt: {
     "registry.map": "Mapa Global 3D",
+    "registry.clocks": "Relógios do Mundo",
     "registry.benchmark": "Benchmark do País",
     "registry.alerts": "Alertas críticos",
     "registry.feed": "Feed de mudanças",
@@ -24,6 +25,7 @@ const dict = {
   },
   en: {
     "registry.map": "Global 3D Map",
+    "registry.clocks": "World Clocks",
     "registry.benchmark": "Country Benchmark",
     "registry.alerts": "Critical Alerts",
     "registry.feed": "Changes Feed",

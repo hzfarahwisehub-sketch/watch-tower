@@ -13,17 +13,19 @@ import { SuggestionBox } from "./SuggestionBox";
 import { ContentRequests } from "./ContentRequests";
 import { ContentStudio } from "./ContentStudio";
 import { InfoCenters, FinanceCenters, CryptoCenters } from "./InfoCenters";
+import { WorldClocks } from "./WorldClocks";
 
 const MapZone = dynamic(() => import("./MapZone"), { ssr: false });
 
 export type PanelId =
   | "map" | "benchmark" | "alerts" | "feed" | "bulletins" | "countries"
   | "kpis" | "tasks" | "agenda" | "reminders" | "scheduled" | "inbox"
-  | "requests" | "content" | "studio" | "info" | "finance" | "crypto";
+  | "requests" | "content" | "studio" | "info" | "finance" | "crypto" | "clocks";
 
 /** Catálogo dos painéis que podem virar janela própria (id = chave da célula). */
 export const PANELS: { id: PanelId; title: string; emoji: string }[] = [
   { id: "map", title: "Mapa Global 3D", emoji: "🗺" },
+  { id: "clocks", title: "Relógios do Mundo", emoji: "🕐" },
   { id: "benchmark", title: "Benchmark do País", emoji: "🎯" },
   { id: "alerts", title: "Alertas críticos", emoji: "🚨" },
   { id: "feed", title: "Feed de mudanças", emoji: "📰" },
@@ -63,6 +65,7 @@ export function isPanelId(id: string): id is PanelId {
 export function renderPanel(id: PanelId, onSelectCountry: (code: string) => void, selected: string | null = null): ReactNode {
   switch (id) {
     case "map": return <MapZone countries={COUNTRIES} selected={selected} onSelect={onSelectCountry} />;
+    case "clocks": return <WorldClocks />;
     case "benchmark": return <CountryBenchmark selectedCode={selected} />;
     case "alerts": return <AlertsBanner onSelect={onSelectCountry} />;
     case "feed": return <Feed countries={COUNTRIES} onSelect={onSelectCountry} />;
