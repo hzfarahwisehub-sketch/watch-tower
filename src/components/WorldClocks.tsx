@@ -124,6 +124,10 @@ export function WorldClocks() {
     return () => { alive = false; };
   }, []);
 
+  // Ao abrir/fechar a tela do país, sobe o corpo pro topo pra o relógio grande e o
+  // botão de voltar aparecerem (senão fica na rolagem de onde o clique aconteceu).
+  useEffect(() => { rootRef.current?.scrollTo({ top: 0 }); }, [open]);
+
   // Loop dos ponteiros: manipula o DOM direto (sem re-render do React), lendo o
   // fuso de cada card em data-tz. Offsets em cache, renovados a cada 60s (DST).
   useEffect(() => {
@@ -187,6 +191,11 @@ export function WorldClocks() {
           <div className="wt-cl-sub">41 países monitorados · hora local ao vivo</div>
         </div>
         <div className="wt-cl-sel">
+          {open && (
+            <button type="button" className="wt-cl-hdback" onClick={() => setOpen(null)} title="Voltar pra tela dos relógios">
+              ‹ Voltar aos relógios
+            </button>
+          )}
           <span className="wt-cl-sellbl">Mostrador</span>
           {(Object.keys(THEMES) as ThemeKey[]).map((k) => (
             <button key={k} type="button" className={`wt-cl-thbtn ${theme === k ? "on" : ""}`} onClick={() => changeTheme(k)}>
@@ -286,6 +295,8 @@ const CLOCK_CSS = `
 .wt-cl-thbtn{font-family:'Chakra Petch',sans-serif;font-size:10px;font-weight:600;letter-spacing:.5px;padding:5px 10px;border-radius:9px;cursor:pointer;color:#aebcdc;background:linear-gradient(180deg,rgba(30,42,74,.5),rgba(12,18,34,.7));border:1px solid rgba(120,150,255,.2);transition:.15s}
 .wt-cl-thbtn:hover{border-color:rgba(120,160,255,.5);color:#fff}
 .wt-cl-thbtn.on{color:#0a1020;background:linear-gradient(180deg,#e7ecff,#b9c8ee);border-color:#cdd8f5}
+.wt-cl-hdback{font-family:'Chakra Petch',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:6px 13px;border-radius:9px;cursor:pointer;color:#0a1020;background:linear-gradient(180deg,#8fd4ff,#4a9fe6);border:1px solid #9fd6ff;box-shadow:0 3px 12px rgba(74,159,230,.35);transition:.15s;margin-right:4px}
+.wt-cl-hdback:hover{filter:brightness(1.07);transform:translateY(-1px)}
 .wt-cl-live{display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;color:#5fe6ff}
 .wt-cl-p{width:8px;height:8px;border-radius:50%;background:#5fe6ff;box-shadow:0 0 10px #5fe6ff;animation:wtclpl 1.7s ease-in-out infinite}
 @keyframes wtclpl{0%,100%{opacity:1}50%{opacity:.3}}
