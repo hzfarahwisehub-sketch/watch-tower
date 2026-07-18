@@ -35,6 +35,13 @@ const CLOCKS = COUNTRIES.filter((c) => WORLD_CLOCKS[c.code]).map((c) => ({ code:
 
 const p2 = (n: number) => (n < 10 ? "0" : "") + n;
 function flagCode(cc: string) { return (cc === "uk" ? "gb" : cc).toUpperCase(); }
+/** Digital: 24h (HH:MM[:SS]) ou 12h com AM/PM (h:MM[:SS] AM). `short` = sem segundos. */
+function fmtDigital(h: number, m: number, s: number, short: boolean, h24: boolean): string {
+  if (h24) return short ? `${p2(h)}:${p2(m)}` : `${p2(h)}:${p2(m)}:${p2(s)}`;
+  const ap = h < 12 ? "AM" : "PM";
+  const hh = h % 12 === 0 ? 12 : h % 12;
+  return short ? `${hh}:${p2(m)} ${ap}` : `${hh}:${p2(m)}:${p2(s)} ${ap}`;
+}
 function offMin(tz: string, d: Date): number {
   const f = new Intl.DateTimeFormat("en-US", { timeZone: tz, hour12: false, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" });
   const p: Record<string, string> = {};
@@ -96,15 +103,20 @@ const MON = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out
 
 export function WorldClocks() {
   const [theme, setTheme] = useState<ThemeKey>("perola");
+  const [hour24, setHour24] = useState(true);
   const [open, setOpen] = useState<string | null>(null);
   const [weather, setWeather] = useState<Record<string, { temp: number; code: number }>>({});
   const rootRef = useRef<HTMLDivElement>(null);
   const offCache = useRef(new Map<string, number>());
+  // O tick roda num closure com [] — lê o formato por ref pra não recriar o loop.
+  const h24Ref = useRef(true);
 
   useEffect(() => {
     try { const v = localStorage.getItem("wt-clocks-theme"); if (v === "perola" || v === "onix" || v === "ouro" || v === "azul") setTheme(v); } catch {}
+    try { if (localStorage.getItem("wt-clocks-24h") === "0") { setHour24(false); h24Ref.current = false; } } catch {}
   }, []);
   const changeTheme = (k: ThemeKey) => { setTheme(k); try { localStorage.setItem("wt-clocks-theme", k); } catch {} };
+  const changeFormat = (v: boolean) => { setHour24(v); h24Ref.current = v; try { localStorage.setItem("wt-clocks-24h", v ? "1" : "0"); } catch {} };
 
   useEffect(() => {
     let alive = true;
@@ -134,7 +146,7 @@ export function WorldClocks() {
         if (mh) mh.setAttribute("transform", `rotate(${((m + s / 60) * 6).toFixed(2)} 50 50)`);
         if (sh) sh.setAttribute("transform", `rotate(${((s + ms / 1000) * 6).toFixed(2)} 50 50)`);
         const dig = el.querySelector(".wt-cl-dig");
-        if (dig) dig.textContent = el.dataset.short ? `${p2(h)}:${p2(m)}` : `${p2(h)}:${p2(m)}:${p2(s)}`;
+        if (dig) dig.textContent = fmtDigital(h, m, s, !!el.dataset.short, h24Ref.current);
       });
     };
     let raf = 0;
@@ -181,6 +193,9 @@ export function WorldClocks() {
               {THEMES[k].label}
             </button>
           ))}
+          <span className="wt-cl-sellbl" style={{ marginLeft: 8 }}>Formato</span>
+          <button type="button" className={`wt-cl-thbtn ${hour24 ? "on" : ""}`} onClick={() => changeFormat(true)} title="24 horas">24h</button>
+          <button type="button" className={`wt-cl-thbtn ${!hour24 ? "on" : ""}`} onClick={() => changeFormat(false)} title="12 horas com AM/PM">12h</button>
           <span className="wt-cl-live"><span className="wt-cl-p" />AO VIVO</span>
         </div>
       </div>
