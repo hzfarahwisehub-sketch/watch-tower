@@ -24,6 +24,10 @@ interface Props {
   // Desenha arcos (grandes círculos) dourados/azuis entre os países — o look de
   // "rotas" da referência do Hammis. Usado no modo Atlas.
   showArcs?: boolean;
+  // Abre o mapa ENQUADRANDO todos os países (fitBounds) em vez do equador/zoom
+  // fixo — assim cada marcador cai em cima do seu país no painel largo e baixo
+  // do modo cinematográfico (sem isso, metade projeta fora da faixa visível).
+  fitCountries?: boolean;
 }
 
 const STATUS_COLOR: Record<Status, string> = {
@@ -147,14 +151,8 @@ function resolveStyle(key: StyleKey): string | StyleSpecification {
   }
 }
 
-// Injeta a projeção globe no style que está CHEGANDO, antes de aplicá-lo. É o
-// transformStyle oficial do maplibre e cobre o caso do dark, que é URL externa
-// (CARTO) e chega SEM projeção. Sem isso, ao trocar de estilo o mapa cai em
-// mercator e o "giro" vira um deslize lateral plano (o "duro" pós-troca).
-const keepGlobe = (
-  _prev: StyleSpecification | undefined,
-  next: StyleSpecification,
-): StyleSpecification => ({ ...next, projection: { type: "globe" } });
+// (a projeção é injetada por instância no setStyle — ver transformStyle no efeito
+// de troca de estilo; "globe" fixo aqui já causou o bug do mapa plano esférico)
 
 // ── Arcos de rota (grandes círculos) ──────────────────────────────────────
 // Interpolação esférica (slerp) entre dois pontos lng/lat → curva que acompanha
@@ -210,6 +208,25 @@ function removeArcs(map: MLMap) {
   if (map.getSource("wt-arcs")) map.removeSource("wt-arcs");
 }
 
+// Enquadra todos os países no viewport (o painel cinematográfico é largo e baixo;
+// fitBounds resolve o zoom/center pra caber a faixa de latitudes com marcadores).
+function fitToCountries(map: MLMap, countries: Country[]) {
+  if (!countries.length) return;
+  let minLat = 90, maxLat = -90, minLng = 180, maxLng = -180;
+  countries.forEach((c) => {
+    const [lat, lng] = c.coords;
+    if (lat < minLat) minLat = lat;
+    if (lat > maxLat) maxLat = lat;
+    if (lng < minLng) minLng = lng;
+    if (lng > maxLng) maxLng = lng;
+  });
+  map.fitBounds([[minLng, minLat], [maxLng, maxLat]], {
+    padding: { top: 20, bottom: 26, left: 30, right: 30 },
+    duration: 0,
+    maxZoom: 3,
+  });
+}
+
 /**
  * MapZone 3D — MapLibre GL JS com projeção globe.
  *
@@ -217,7 +234,7 @@ function removeArcs(map: MLMap) {
  * - Botão de estilo (gradiente + menu): Google · Satélite HD · Relevo · Escuro
  * - Markers por país (cor = status), click seleciona · voo suave ao selecionar
  */
-export default function MapZone({ countries, selected, onSelect, immersive = false, projection = "globe", stylePreset, hideChrome = false, viewport, onViewportChange, markerVariant = "default", showArcs = false }: Props) {
+export default function MapZone({ countries, selected, onSelect, immersive = false, projection = "globe", stylePreset, hideChrome = false, viewport, onViewportChange, markerVariant = "default", showArcs = false, fitCountries = false }: Props) {
   const { t } = useLocale();
   const changesMap = useCountryChangesMap();
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -237,6 +254,8 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
   showArcsRef.current = showArcs;
   const countriesRef = useRef(countries);
   countriesRef.current = countries;
+  const fitCountriesRef = useRef(fitCountries);
+  fitCountriesRef.current = fitCountries;
   const [styleKey, setStyleKey] = useState<StyleKey>(stylePreset ?? "dark");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -245,12 +264,20 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
     if (!containerRef.current || mapRef.current) return;
     const initialKey = stylePreset ?? readSavedStyle();
     setStyleKey(initialKey);
+    const initialStyle = resolveStyle(initialKey);
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: resolveStyle(initialKey),
+      // Os estilos-objeto têm projection globe EMBUTIDO — num mapa plano (mercator)
+      // isso fazia o painel renderizar como esfera e os marcadores das bordas
+      // projetarem FORA (o bug das bolinhas soltas). Força a projeção da instância.
+      style: typeof initialStyle === "string" ? initialStyle : { ...initialStyle, projection: { type: projection } },
       center: [0, 0],
       zoom: immersive ? 1.35 : 0.6,
-      minZoom: 0.4,
+      minZoom: fitCountries ? 0.15 : 0.4,
+      // Painel enquadrado: mundo ÚNICO. Com cópias, o smartWrap do maplibre põe
+      // metade dos marcadores europeus na cópia da direita depois do fitBounds
+      // (estouram o painel). Sem cópias, cada marcador tem UMA posição possível.
+      renderWorldCopies: !fitCountries,
       maxZoom: 8,
       pitch: 0,
       bearing: 0,
@@ -285,8 +312,20 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
           "fog-ground-blend": 0.1,
         });
         if (firstLoadRef.current) {
-          map.jumpTo({ center: [0, 0], zoom: immersive ? 1.35 : 0.6, pitch: 0, bearing: 0 });
+          if (fitCountriesRef.current) fitToCountries(map, countriesRef.current);
+          else map.jumpTo({ center: [0, 0], zoom: immersive ? 1.35 : 0.6, pitch: 0, bearing: 0 });
           firstLoadRef.current = false;
+        }
+        // Cura do smartWrap: marcadores criados antes do fit guardam a posição na
+        // cópia errada do mundo (x cresce com o índice do array, Islândia cai na
+        // direita). Re-fixar o lngLat força o recálculo no transform atual.
+        if (fitCountriesRef.current) {
+          requestAnimationFrame(() => {
+            Object.entries(markersRef.current).forEach(([code, mk]) => {
+              const c = countriesRef.current.find((x) => x.code === code);
+              if (c) mk.setLngLat([c.coords[1], c.coords[0]]);
+            });
+          });
         }
       } catch {}
       // Style novo assentou: libera o giro (estava pausado durante a troca via
@@ -305,6 +344,12 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
       if (!m || !el) return;
       try {
         m.resize();
+        // Painel enquadrado: se a caixa muda de tamanho e nenhum país está focado,
+        // re-enquadra os países (mantém as bolinhas em cima dos países certos).
+        if (fitCountriesRef.current) {
+          if (!selectedRef.current) fitToCountries(m, countriesRef.current);
+          return;
+        }
         // Globo responsivo + sempre centralizado: ao mudar o tamanho da caixa,
         // ajusta o zoom na proporção da menor dimensão (cada vez que ela dobra,
         // o globo dobra). Preserva o center e a rotação do usuário, então o
@@ -415,7 +460,11 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
     const map = mapRef.current;
     if (!map) return;
     styleLoadingRef.current = true;
-    map.setStyle(resolveStyle(styleKey), { transformStyle: keepGlobe });
+    // Injeta a projeção DESTA instância no style que chega (não "globe" fixo — o
+    // mapa plano de baixo precisa continuar mercator ao trocar de estilo).
+    map.setStyle(resolveStyle(styleKey), {
+      transformStyle: (_prev, next) => ({ ...next, projection: { type: projectionRef.current } }),
+    });
     try {
       if (!stylePreset) localStorage.setItem(STYLE_STORAGE_KEY, styleKey);
     } catch {}
@@ -467,7 +516,13 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
         existing.setLngLat([lng, lat]);
         const existingElement = existing.getElement();
         existingElement.title = title;
-        existingElement.className = `wt-map-marker wt-marker-${markerVariant}${c.code === selected ? " is-selected" : ""}`;
+        // NUNCA sobrescrever className inteiro: apagava a classe `maplibregl-marker`
+        // (que carrega o position:absolute) e os marcadores caíam no FLUXO do
+        // documento, enfileirados por índice em vez de ancorados no país — era o
+        // bug das "bolinhas flutuando fora dos países" do Hammis.
+        existingElement.classList.remove("wt-marker-default", "wt-marker-holographic", "wt-marker-satellite");
+        existingElement.classList.add("wt-map-marker", `wt-marker-${markerVariant}`);
+        existingElement.classList.toggle("is-selected", c.code === selected);
         return;
       }
       const el = document.createElement("button");

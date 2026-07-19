@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { COUNTRIES } from "@/lib/data";
@@ -40,7 +40,30 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [countryQuery, setCountryQuery] = useState("");
   const [geoMode, setGeoMode] = useState<"cinematic" | "satellite" | "live" | "atlas">("cinematic");
-  const [sharedViewport, setSharedViewport] = useState<{ lng: number; lat: number; zoom: number } | null>(null);
+  // NÃO sincronizar viewport globo→mapa continuamente: o globo gira sozinho e o
+  // easeTo re-disparado a cada frame deixava o mapa de baixo em animação eterna,
+  // com marcadores defasados "flutuando" fora dos países (bug reportado pelo
+  // Hammis). A seleção de país já foca os dois mapas via prop `selected`.
+  // ENCAIXE NA TELA (site e app): o CSS usava 100vh-40px, mas o app tem ~200px de
+  // cabeçalho ACIMA do painel → estourava a tela 16:9 (globo cortado em cima, mapa
+  // vazando embaixo). Aqui medimos a posição REAL do painel e fixamos a altura pra
+  // caber exata no viewport, onde quer que ele esteja montado.
+  const rootRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    const fit = () => {
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      const h = Math.max(560, window.innerHeight - top - 10);
+      el.style.height = `${h}px`;
+      el.style.minHeight = "560px";
+    };
+    fit();
+    window.addEventListener("resize", fit);
+    // re-mede depois do primeiro paint (fonts/header assentando)
+    const t = setTimeout(fit, 350);
+    return () => { window.removeEventListener("resize", fit); clearTimeout(t); };
+  }, []);
   const availableEyes = eyeModes.filter(item => isOwner || !item.ownerOnly);
   const currentEye = availableEyes.find(item => item.id === eyeStyle) ?? availableEyes[0];
   const summary = useMemo(() => ({
@@ -84,7 +107,7 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
   if (!isOwner && !PARTNER_ACCESS_ENABLED) return <section className="wb-locked" aria-label="Wise Brain bloqueado"><div className="wb-locked-seal"><span>⌾</span><i>🔒</i></div><small>WISEHUB · WATCH TOWER</small><h2>Wise Brain</h2><p>Ambiente de inteligência em preparação. O acesso será liberado após validação do proprietário.</p><div><b>ACESSO PROTEGIDO</b><span>Somente Hammis pode alterar esta permissão.</span></div></section>;
 
   return (
-    <section className={`wise-brain wb-visual-${visual} wb-eye-${eyeStyle} ${drawerOpen ? "drawer-open" : "drawer-closed"}`} aria-label={isOwner ? "Friday Brain" : "Wise Brain"}>
+    <section ref={rootRef} className={`wise-brain wb-visual-${visual} wb-eye-${eyeStyle} ${drawerOpen ? "drawer-open" : "drawer-closed"}`} aria-label={isOwner ? "Friday Brain" : "Wise Brain"}>
       <header className="wise-brain-topbar">
         <div className="wb-brand"><b>{isOwner ? "Friday Brain" : "Wise Brain"}</b><span>WISEHUB · WATCH TOWER</span></div>
         <div className="wb-studio"><small>Studio de presença 🔒</small><b>Somente Hammis</b></div>
@@ -136,8 +159,8 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
           </div>
           <div className="wb-geo-mode" role="group" aria-label="Visualização geográfica"><button className={geoMode === "cinematic" ? "active" : ""} onClick={() => setGeoMode("cinematic")}>Cinemático</button><button className={geoMode === "satellite" ? "active" : ""} onClick={() => setGeoMode("satellite")}>Satélite</button><button className={geoMode === "live" ? "active" : ""} onClick={() => setGeoMode("live")}>Mapa vivo</button><button className={geoMode === "atlas" ? "active" : ""} onClick={() => setGeoMode("atlas")}>Atlas</button></div>
           {geoMode !== "live" ? <>
-            <div className={`wb-cinematic-globe ${geo.cls} ${activeCountry ? "focused" : ""}`} style={focusStyle}><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} onViewportChange={setSharedViewport} markerVariant={geo.marker} immersive projection="globe" stylePreset={geo.globe} showArcs={geo.arcs} hideChrome/><span className="wb-holo-scan" aria-hidden/><span className="wb-globe telemetry" aria-hidden><b>ORBITAL</b><small>LIVE · 3D</small></span><i/><i/></div>
-            <div className={`wb-cinematic-map ${geo.cls} ${activeCountry ? "focused" : ""}`} style={focusStyle}><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} viewport={sharedViewport} markerVariant={geo.marker} immersive projection="mercator" stylePreset={geo.map} showArcs={geo.arcs} hideChrome/><div className="wb-cine-links" aria-hidden>{Array.from({length:7}).map((_,i)=><i key={i}/>)}</div><span className="wb-holo-depth" aria-hidden/><div className="wb-map-legend" aria-label="Legenda dos países"><span className="crit">CRÍTICO</span><span className="warn">ATENÇÃO</span><span className="stable">ESTÁVEL</span></div></div>
+            <div className={`wb-cinematic-globe ${geo.cls} ${activeCountry ? "focused" : ""}`} style={focusStyle}><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} markerVariant={geo.marker} immersive projection="globe" stylePreset={geo.globe} showArcs={geo.arcs} hideChrome/><span className="wb-holo-scan" aria-hidden/><span className="wb-globe telemetry" aria-hidden><b>ORBITAL</b><small>LIVE · 3D</small></span><i/><i/></div>
+            <div className={`wb-cinematic-map ${geo.cls} ${activeCountry ? "focused" : ""}`} style={focusStyle}><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} markerVariant={geo.marker} immersive projection="mercator" stylePreset={geo.map} showArcs={geo.arcs} fitCountries hideChrome/><div className="wb-cine-links" aria-hidden>{Array.from({length:7}).map((_,i)=><i key={i}/>)}</div><span className="wb-holo-depth" aria-hidden/><div className="wb-map-legend" aria-label="Legenda dos países"><span className="crit">CRÍTICO</span><span className="warn">ATENÇÃO</span><span className="stable">ESTÁVEL</span></div></div>
           </> : <>
             <div className="wb-live-globe"><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} immersive projection="globe" stylePreset="dark" /></div>
             <div className="wb-live-map"><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} immersive projection="mercator" stylePreset="dark" /></div>
