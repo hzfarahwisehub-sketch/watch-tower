@@ -32,7 +32,7 @@
 @media(prefers-reduced-motion:reduce){.wb-holo-scan,.wb-holo-depth{animation:none!important}}
 
 /* Controles geográficos premium — clicáveis tanto no globo quanto no mapa. */
-.wb-cinematic-globe .wt-marker-holographic,.wb-cinematic-map .wt-marker-holographic{width:34px;height:34px;overflow:visible;isolation:isolate;filter:drop-shadow(0 0 7px #5ad7ff)}
+.wb-cinematic-globe .wt-marker-holographic,.wb-cinematic-map .wt-marker-holographic{width:34px;height:34px;overflow:visible;isolation:isolate}
 .wt-marker-holographic .wt-map-marker-ring{position:absolute;inset:3px;border:1px solid #a9eeffb8;border-radius:50%;background:radial-gradient(circle,#80e7ff2c 0 36%,#061725d9 40% 62%,transparent 64%);box-shadow:inset 0 0 8px #5bd9ff77,0 0 9px #23b7ff66;animation:wb-marker-orbit 5s linear infinite}
 .wt-marker-holographic .wt-map-marker-ring:after{content:"";position:absolute;inset:-5px;border:1px dashed #7ddeff80;border-radius:50%;animation:wb-marker-orbit 7s linear infinite reverse}
 .wt-marker-holographic .wt-map-dot{inset:12px;border:1px solid #fff;z-index:2}
@@ -47,8 +47,10 @@
 @media(prefers-reduced-motion:reduce){.wt-marker-holographic .wt-map-marker-ring,.wt-marker-holographic .wt-map-marker-ring:after{animation:none!important}}
 
 /* Cinemático RGB — pontos menores, luz espectral e atmosfera em múltiplas camadas. */
-.wb-cinematic-globe .wt-marker-holographic,.wb-cinematic-map .wt-marker-holographic{width:22px;height:22px;filter:drop-shadow(0 0 4px #45eaff)}
-.wt-marker-holographic .wt-map-marker-ring{inset:2px;background:radial-gradient(circle,#9af8ff40 0 27%,#061725e8 31% 58%,transparent 61%);box-shadow:inset 0 0 5px #65eeff99,0 0 7px #18d9ff99}
+.wb-cinematic-globe .wt-marker-holographic,.wb-cinematic-map .wt-marker-holographic{width:22px;height:22px}
+/* Anel neutro e sutil: sem halo ciano. O brilho colorido vem do ponto (box-shadow
+   na cor do status, igual ao Mapa vivo) — pedido do Hammis: brilho na cor do botão. */
+.wt-marker-holographic .wt-map-marker-ring{inset:2px;border-color:#c3e2f24d;background:radial-gradient(circle,#ffffff12 0 27%,#04121ecc 31% 58%,transparent 61%);box-shadow:inset 0 0 4px #ffffff1f}
 .wt-marker-holographic .wt-map-marker-ring:after{inset:-3px}.wt-marker-holographic .wt-map-dot{inset:8px;border-width:1px}.wt-marker-holographic .wt-map-pulse{inset:3px}.wt-marker-holographic .wt-map-marker-code{left:18px;top:4px;min-width:20px;padding:2px 4px;font-size:6px}.wt-marker-holographic:hover,.wt-marker-holographic:focus-visible,.wt-marker-holographic.is-selected{transform:scale(1.15)}
 .wb-holographic>.wt-map-chromeless{filter:saturate(1.72) contrast(1.2) brightness(.86)}
 .wb-cinematic-globe.wb-holographic{border:1px solid transparent;background:linear-gradient(#020914,#020914) padding-box,conic-gradient(from var(--rgb-angle,0deg),#00eaff,#1565ff,#d52cff,#ffb52e,#00ffbd,#00eaff) border-box;box-shadow:0 0 18px #00eaffaa,0 0 46px #185cff77,0 0 82px #cf27ff42,0 30px 60px #000e;animation:wb-globe-float 4.5s ease-in-out infinite alternate,wb-rgb-cycle 8s linear infinite}
