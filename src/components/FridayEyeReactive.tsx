@@ -37,6 +37,12 @@ export function FridayEyeReactive({ eyeStyle, text }: { eyeStyle: string; text: 
   const speechDataRef = useRef<Uint8Array<ArrayBuffer> | null>(null);
   const blobUrlRef = useRef<string | null>(null);
   const usingBrowserVoiceRef = useRef(false);
+  const [voiceMuted, setVoiceMuted] = useState(false);
+  const [micMuted, setMicMuted] = useState(false);
+  const micMutedRef = useRef(false);
+  micMutedRef.current = micMuted;
+  const meterFillRef = useRef<HTMLSpanElement>(null);
+  const meterDbRef = useRef<HTMLElement>(null);
   const videoSrc = VIDEO_EYES[eyeStyle];
 
   // Loop mestre: energia = max(mic, fala). A fala vem da amplitude REAL do áudio TTS.
@@ -57,6 +63,11 @@ export function FridayEyeReactive({ eyeStyle, text }: { eyeStyle: string; text: 
       rootRef.current?.style.setProperty("--wb-eye-energy", e.toFixed(3));
       const v = videoRef.current;
       if (v) v.playbackRate = 0.85 + e * 0.7;
+      // SENSOR DE ÁUDIO (medidor real): barra de nível + dB, alimentado pela energia.
+      const fill = meterFillRef.current;
+      if (fill) fill.style.width = `${Math.round(e * 100)}%`;
+      const dbEl = meterDbRef.current;
+      if (dbEl) dbEl.textContent = e > 0.004 ? `${Math.round(20 * Math.log10(e))} dB` : "−∞ dB";
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
@@ -85,7 +96,7 @@ export function FridayEyeReactive({ eyeStyle, text }: { eyeStyle: string; text: 
         an.getByteTimeDomainData(data);
         let sum = 0;
         for (let i = 0; i < data.length; i++) { const x = (data[i] - 128) / 128; sum += x * x; }
-        micEnergy.current = Math.min(1, Math.sqrt(sum / data.length) * 5.5);
+        micEnergy.current = micMutedRef.current ? 0 : Math.min(1, Math.sqrt(sum / data.length) * 5.5);
         raf = requestAnimationFrame(read);
       };
       read();
@@ -196,6 +207,11 @@ export function FridayEyeReactive({ eyeStyle, text }: { eyeStyle: string; text: 
     return () => audio.removeEventListener("ended", onEnd);
   }, []);
 
+  // MUTE da voz da marca: silencia a saída sem parar (o olho segue reagindo).
+  useEffect(() => {
+    if (audioRef.current) audioRef.current.muted = voiceMuted;
+  }, [voiceMuted]);
+
   useEffect(() => () => {
     if (typeof window !== "undefined") window.speechSynthesis?.cancel();
     revokeBlob();
@@ -219,14 +235,23 @@ export function FridayEyeReactive({ eyeStyle, text }: { eyeStyle: string; text: 
         <span className="wb-eye-ring" aria-hidden />
       </div>
       <div className="wb-wave wb-wave-reactive" aria-hidden>{Array.from({ length: 23 }).map((_, i) => <i key={i} />)}</div>
+      {/* SENSOR DE ÁUDIO: nível ao vivo (barra) + dB, alimentado pela voz da marca e pelo microfone */}
+      <div className="wb-eye-meter" aria-label="Sensor de áudio">
+        <span className="wb-eye-meter-track"><span ref={meterFillRef} className="wb-eye-meter-fill" /></span>
+        <b ref={meterDbRef} className="wb-eye-meter-db">−∞ dB</b>
+      </div>
       <div className="wb-eye-controls">
         <select className="wb-voice-select" value={voiceId} onChange={(e) => { setVoiceId(e.target.value); stopSpeak(); }} aria-label="Voz">
           {VOICES.map((v) => <option key={v.id} value={v.id}>{v.label} · {v.tag}</option>)}
         </select>
         <div className="wb-eye-audio">
-          <button type="button" className={speakState === "speaking" || speakState === "paused" ? "on" : ""} onClick={onSpeakBtn} disabled={speakState === "loading"} title="Falar o briefing · pausar · retomar de onde parou">{speakLabel}</button>
+          <button type="button" className={speakState === "speaking" || speakState === "paused" ? "on" : ""} onClick={onSpeakBtn} disabled={speakState === "loading"} title="Falar · pausar · retomar de onde parou">{speakLabel}</button>
           {(speakState === "speaking" || speakState === "paused") && <button type="button" className="wb-audio-stop" onClick={stopSpeak} title="Parar">◼</button>}
+          <button type="button" className={voiceMuted ? "on wb-audio-mute" : ""} onClick={() => setVoiceMuted((v) => !v)} title="Mudo da voz (Friday/Wise)">{voiceMuted ? "🔇 Voz" : "🔊 Voz"}</button>
+        </div>
+        <div className="wb-eye-audio">
           <button type="button" className={micOn ? "on" : ""} onClick={() => setMicOn((v) => !v)} title="Ouvir o microfone (o olho reage à sua voz)">{micOn ? "● Ouvindo" : "🎙 Ouvir"}</button>
+          <button type="button" className={micMuted ? "on wb-audio-mute" : ""} onClick={() => setMicMuted((v) => !v)} disabled={!micOn} title="Mudo do seu microfone">{micMuted ? "🚫 Mic" : "🎙 Mic"}</button>
         </div>
       </div>
       <audio ref={audioRef} hidden preload="none" />
