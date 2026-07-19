@@ -85,7 +85,28 @@ const STYLE_RELIEF: StyleSpecification = {
   ],
 };
 
-type StyleKey = "google" | "satellite" | "relief" | "dark";
+// Terra NOTURNA real (NASA GIBS · VIIRS Earth at Night 2012, grátis, sem chave):
+// continentes escuros com as luzes REAIS das cidades — a base fotorrealista do modo
+// Atlas (a referência que o Hammis pediu). Fundo espaço bem escuro por baixo.
+const STYLE_NIGHT: StyleSpecification = {
+  version: 8,
+  projection: { type: "globe" },
+  sources: {
+    night: {
+      type: "raster",
+      tiles: ["https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_CityLights_2012/default/GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpg"],
+      tileSize: 256,
+      maxzoom: 8,
+      attribution: "NASA GIBS · Earth at Night",
+    },
+  },
+  layers: [
+    { id: "space", type: "background", paint: { "background-color": "#01030a" } },
+    { id: "night", type: "raster", source: "night" },
+  ],
+};
+
+type StyleKey = "google" | "satellite" | "relief" | "dark" | "night";
 
 // Apenas key + emoji no nível de módulo. Os rótulos/descrições traduzíveis são
 // resolvidos dentro do componente via t("map.style.<key>.label") (helpers de
@@ -116,6 +137,8 @@ function resolveStyle(key: StyleKey): string | StyleSpecification {
       return STYLE_SATELLITE;
     case "relief":
       return STYLE_RELIEF;
+    case "night":
+      return STYLE_NIGHT;
     default:
       return STYLE_DARK;
   }

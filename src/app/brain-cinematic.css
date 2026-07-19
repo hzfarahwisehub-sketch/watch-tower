@@ -57,3 +57,13 @@
 .wb-holographic .wb-cinematic-clouds{inset:0;opacity:.52;background:radial-gradient(ellipse 44% 15% at 20% 34%,transparent 0 34%,#f5fbff9c 42%,#ccefff4a 54%,transparent 70%),radial-gradient(ellipse 38% 13% at 66% 25%,transparent 0 30%,#ffffffa0 43%,#bde9ff45 58%,transparent 72%),radial-gradient(ellipse 50% 16% at 57% 70%,transparent 0 35%,#f0fbffa0 46%,#b9e8ff3b 62%,transparent 76%),radial-gradient(ellipse 31% 11% at 25% 76%,transparent 0 28%,#ffffff8c 44%,transparent 72%);background-size:135% 105%,128% 112%,142% 108%,120% 118%;filter:blur(3px) drop-shadow(0 0 5px #dff8ff);animation:wb-real-clouds 28s linear infinite}.wb-holographic .wb-cinematic-clouds:after{content:"";position:absolute;inset:4%;border-radius:50%;background:repeating-radial-gradient(ellipse at 42% 58%,transparent 0 17px,#e8f8ff12 20px,#ffffff2b 24px,transparent 30px);filter:blur(4px);animation:wb-real-clouds 39s linear infinite reverse}
 @property --rgb-angle{syntax:"<angle>";initial-value:0deg;inherits:false}@keyframes wb-rgb-cycle{to{--rgb-angle:360deg}}@keyframes wb-rgb-sweep{0%,100%{background-position:120% 0}50%{background-position:-40% 0}}@keyframes wb-real-clouds{to{transform:rotate(360deg) scale(1.02)}}
 @media(prefers-reduced-motion:reduce){.wb-cinematic-globe.wb-holographic,.wb-cinematic-map.wb-holographic:after,.wb-holographic .wb-cinematic-clouds,.wb-holographic .wb-cinematic-clouds:after{animation:none!important}}
+/* --- Modo ATLAS: Terra noturna real (NASA Earth at Night, via stylePreset="night")
+   + atmosfera azul limpa, SEM as nuvens falsas nem scan holográfico. Espelha a
+   referência do Hammis: continentes escuros com luzes de cidade, halo azul e o mapa
+   refletido embaixo. Herda anéis orbitais + atmosfera animada do globo base. --- */
+.wb-cinematic-globe.wb-atlas{background:#01030a;box-shadow:0 0 0 1px #6fb8ff55,0 0 30px #2f7dffaa,0 0 78px #1a52cc55,0 30px 60px #000e}
+.wb-cinematic-globe.wb-atlas:before{background:radial-gradient(circle at 30% 24%,#bfe0ff33 0 4%,transparent 26%),linear-gradient(105deg,transparent 58%,#00030baa 88%);box-shadow:inset 0 0 22px #1d4e9955;mix-blend-mode:screen}
+.wb-cinematic-globe.wb-atlas:after{border-color:#5aa8ff55;box-shadow:0 0 26px #2f80ff66,0 0 60px #1c56cc33}
+.wb-cinematic-globe.wb-atlas>i{border-color:#6fb2ff33}
+.wb-cinematic-map.wb-atlas{background:#01030a;border-color:#3f7fc9aa;box-shadow:0 0 40px #1f66dd55,inset 0 0 50px #123a8822,0 30px 55px #000c}
+.wb-cinematic-map.wb-atlas:after{box-shadow:inset 0 0 46px #2f7dff44;background:linear-gradient(105deg,transparent 30%,#8ec3ff14 46%,transparent 62%)}
