@@ -10,6 +10,7 @@
 @import "./brain-live-geo.css";
 @import "./brain-cinematic.css";
 @import "./brain-vitality.css";
+@import "./brain-typography.css";
 
 @theme {
   --color-wh-blue: #1F55FF;

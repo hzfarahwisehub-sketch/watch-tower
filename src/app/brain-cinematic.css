@@ -71,6 +71,8 @@
    do palco (não pela largura) → em tela 16:9 nunca é cortado, e sobra margem pro
    scale(1.13) do foco. Só desktop (o mobile tem layout próprio na media query). --- */
 @media(min-width:761px){
-  .wb-cinematic-globe{width:auto;height:min(36%,330px);aspect-ratio:1;top:5%}
+  /* top 9% = respiro acima do globo (o Hammis achou colado na borda com 5%);
+     34% de altura mantém a folga pro scale(1.13) do foco antes do mapa (48%). */
+  .wb-cinematic-globe{width:auto;height:min(34%,320px);aspect-ratio:1;top:9%}
   .wb-cinematic-map{height:48%;bottom:4%}
 }

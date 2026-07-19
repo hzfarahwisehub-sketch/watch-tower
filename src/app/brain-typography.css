@@ -1,0 +1,61 @@
+/* Escala tipográfica do Wise/Friday Brain — pedido do Hammis (2026-07-19): as letras
+   estavam pequenas demais pro layout ("não estou conseguindo enxergar direito").
+   Hierarquia definida por ele: TEXTOS ≈ tamanho do rótulo "ATIVO" de antes; RÓTULOS
+   (tipo "BENCHMARK ATIVO") um pouco maiores; ABAS/BOTÕES maiores ainda. Sem exagero
+   pra nada sair das caixas e sem mexer no layout (só fonte). Carrega DEPOIS de todos
+   os css do brain (override com !important porque as bases são minificadas). */
+
+/* ── Nível 1 · ABAS e BOTÕES (o maior) ─────────────────────────────────── */
+.wise-brain .wb-modes button{font-size:13px!important}
+.wise-brain .wb-reading-wheel button{font-size:12px!important}
+.wise-brain .wb-visual-picker button{font-size:11px!important}
+.wise-brain .wb-geo-mode button{font-size:10px!important}
+.wise-brain .wb-rail small{font-size:10px!important}
+.wise-brain .wb-briefing{font-size:10px!important}
+.wise-brain .wb-eye-audio button{font-size:10.5px!important}
+.wise-brain .wb-voice-select{font-size:10.5px!important}
+.wise-brain .wb-country-command>div>button{font-size:10px!important}
+.wise-brain .wb-verdict button{font-size:10px!important}
+.wise-brain .wb-modules button{font-size:11.5px!important}
+.wise-brain .wb-country-results button{font-size:11px!important}
+
+/* ── Nível 2 · RÓTULOS/títulos de seção (tipo "BENCHMARK ATIVO") ───────── */
+.wise-brain .wb-verdict h3{font-size:16px!important}
+.wise-brain .wb-verdict h4{font-size:11px!important}
+.wise-brain .wb-response-box b{font-size:11px!important}
+.wise-brain .wb-section-title b{font-size:13px!important}
+.wise-brain .wb-friday>small,.wise-brain .wb-modules>small{font-size:10px!important}
+.wise-brain .wb-modules h3{font-size:15px!important}
+.wise-brain .wb-country-command label{font-size:9.5px!important}
+.wise-brain .wb-eye-library-trigger b{font-size:12px!important}
+.wise-brain .wb-eye-options b{font-size:11px!important}
+.wise-brain .wb-eye-shelf-head span{font-size:10px!important}
+.wise-brain .wb-brain-benchmark h3,.wise-brain .wb-brain-benchmark h2{font-size:16px!important}
+.wise-brain .wb-brain-benchmark b{font-size:12px!important}
+.wise-brain .wb-meridian{font-size:13px!important}
+.wise-brain .wb-stage-metrics b{font-size:16px!important}
+.wise-brain .wb-timeline>b,.wise-brain .wb-timeline strong{font-size:10.5px!important}
+
+/* ── Nível 3 · TEXTOS corridos (≈ o "ATIVO" de antes) ──────────────────── */
+.wise-brain .wb-verdict p{font-size:11px!important;line-height:1.65!important}
+.wise-brain .wb-verdict>small{font-size:10px!important}
+.wise-brain .wb-response-box p{font-size:11px!important;line-height:1.6!important}
+.wise-brain .wb-brain-benchmark p{font-size:11px!important;line-height:1.6!important}
+.wise-brain .wb-brain-benchmark small{font-size:10px!important}
+.wise-brain .wb-benchmark-copy{font-size:11px!important}
+.wise-brain .wb-benchmark-copy small{font-size:10px!important}
+.wise-brain .wb-timeline span{font-size:10px!important}
+.wise-brain .wb-stage-metrics span{font-size:10.5px!important}
+.wise-brain .wb-country-command input{font-size:12px!important}
+.wise-brain .wb-eye-options small{font-size:9.5px!important}
+.wise-brain .wb-eye-library-trigger small{font-size:9px!important}
+.wise-brain .wb-eye-shelf-head small{font-size:9px!important}
+.wise-brain .wb-lock{font-size:10px!important}
+.wise-brain .wb-map-legend span{font-size:10px!important}
+.wise-brain .wb-friday p{font-size:12px!important}
+.wise-brain .wb-globe.telemetry b{font-size:11px!important}
+.wise-brain .wb-globe.telemetry small{font-size:9px!important}
+
+/* Tela de cadeado dos sócios acompanha a escala */
+.wb-locked h2{font-size:20px!important}
+.wb-locked p{font-size:12px!important}
