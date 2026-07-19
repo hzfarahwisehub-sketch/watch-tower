@@ -62,7 +62,7 @@
    referência do Hammis: continentes escuros com luzes de cidade, halo azul e o mapa
    refletido embaixo. Herda anéis orbitais + atmosfera animada do globo base. --- */
 .wb-cinematic-globe.wb-atlas{background:#01030a;box-shadow:0 0 0 1px #6fb8ff55,0 0 30px #2f7dffaa,0 0 78px #1a52cc55,0 30px 60px #000e}
-.wb-cinematic-globe.wb-atlas:before{background:radial-gradient(circle at 30% 24%,#bfe0ff33 0 4%,transparent 26%),linear-gradient(105deg,transparent 58%,#00030baa 88%);box-shadow:inset 0 0 22px #1d4e9955;mix-blend-mode:screen}
+.wb-cinematic-globe.wb-atlas:before{background:radial-gradient(circle at 32% 26%,#cfe8ff33 0 5%,transparent 30%),linear-gradient(115deg,transparent 72%,#01030955 94%);box-shadow:inset 0 0 20px #2a5aa044;mix-blend-mode:screen}
 .wb-cinematic-globe.wb-atlas:after{border-color:#5aa8ff55;box-shadow:0 0 26px #2f80ff66,0 0 60px #1c56cc33}
 .wb-cinematic-globe.wb-atlas>i{border-color:#6fb2ff33}
 .wb-cinematic-map.wb-atlas{background:#01030a;border-color:#3f7fc9aa;box-shadow:0 0 40px #1f66dd55,inset 0 0 50px #123a8822,0 30px 55px #000c}
