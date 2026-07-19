@@ -1,7 +1,8 @@
 "use client";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { ROTEIROS, type Roteiro } from "@/lib/roteiros-data";
 import { useLocale } from "./LocaleProvider";
+import { useVisiblePoll } from "@/lib/useVisiblePoll";
 
 // Aba 🎥 Conteúdo Digital — o lugar onde os fundadores LEEM e COPIAM os roteiros.
 //
@@ -35,11 +36,9 @@ function useUsed() {
     } catch {}
   }, []);
 
-  useEffect(() => {
-    reload();
-    const id = setInterval(reload, 30000); // mesmo poll leve dos outros painéis
-    return () => clearInterval(id);
-  }, [reload]);
+  // 5min + pausa com aba oculta (era 30s direto — principal custo Vercel de jul/2026);
+  // o clique "já usei" continua instantâneo (update otimista + reload pós-PATCH).
+  useVisiblePoll(reload, 300_000);
 
   const toggle = async (id: string) => {
     const willUse = !usage.has(id);

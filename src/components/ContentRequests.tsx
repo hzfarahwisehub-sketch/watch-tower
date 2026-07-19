@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useLocale } from "./LocaleProvider";
+import { useVisiblePoll } from "@/lib/useVisiblePoll";
 
 // Painel da aba 🎬 Conteúdo. Mostra os pedidos ⚡ EXECUTAR de conteúdo que a
 // Watch Tower abre sozinha (cron diário dos roteiros + gatilho do REPAVET).
@@ -74,14 +75,10 @@ export function ContentRequests() {
   }, []);
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      setLoaded(true);
-      return;
-    }
-    reload();
-    const id = setInterval(reload, 30000); // mesmo poll leve da Caixa de solicitações
-    return () => clearInterval(id);
-  }, [isLoggedIn, reload]);
+    if (!isLoggedIn) setLoaded(true);
+  }, [isLoggedIn]);
+  // 3min + pausa com aba oculta (era 30s direto — principal custo Vercel de jul/2026)
+  useVisiblePoll(reload, 180_000, isLoggedIn);
 
   const setStatus = async (id: string, status: Suggestion["status"]) => {
     try {

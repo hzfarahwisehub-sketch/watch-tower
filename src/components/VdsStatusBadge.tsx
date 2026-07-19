@@ -1,38 +1,32 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
+import { useVisiblePoll } from "@/lib/useVisiblePoll";
 
 type S = "checking" | "online" | "offline";
 
 /**
  * Selo fixo no canto: luz VERDE = VDS online, VERMELHA = VDS offline.
  * Consulta /api/vds-status (que faz um SELECT 1 real no banco da VDS) a cada
- * 30s. Confiavel: se ficar vermelho, o servidor caiu de verdade.
+ * 2min com a aba visível (era 30s direto — principal custo Vercel de jul/2026).
+ * Confiavel: se ficar vermelho, o servidor caiu de verdade.
  */
 export function VdsStatusBadge() {
   const [state, setState] = useState<S>("checking");
   const [latency, setLatency] = useState<number | null>(null);
 
-  useEffect(() => {
-    let alive = true;
-    const check = async () => {
-      try {
-        const r = await fetch("/api/vds-status", { cache: "no-store" });
-        const d = (await r.json()) as { online?: boolean; latencyMs?: number };
-        if (!alive) return;
-        setState(d.online ? "online" : "offline");
-        setLatency(typeof d.latencyMs === "number" ? d.latencyMs : null);
-      } catch {
-        if (alive) setState("offline");
-      }
-    };
-    check();
-    const id = setInterval(check, 30_000);
-    return () => {
-      alive = false;
-      clearInterval(id);
-    };
+  const check = useCallback(async () => {
+    try {
+      const r = await fetch("/api/vds-status", { cache: "no-store" });
+      const d = (await r.json()) as { online?: boolean; latencyMs?: number };
+      setState(d.online ? "online" : "offline");
+      setLatency(typeof d.latencyMs === "number" ? d.latencyMs : null);
+    } catch {
+      setState("offline");
+    }
   }, []);
+
+  useVisiblePoll(check, 120_000);
 
   const color = state === "online" ? "#22c55e" : state === "offline" ? "#ef4444" : "#9ca3af";
   const label = state === "online" ? "VDS online" : state === "offline" ? "VDS offline" : "VDS…";

@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useSettings } from "./SettingsProvider";
 import { useLocale } from "./LocaleProvider";
 import { playChime } from "@/lib/chime";
+import { useVisiblePoll } from "@/lib/useVisiblePoll";
 
 type Suggestion = {
   id: string;
@@ -57,14 +58,11 @@ export function SuggestionBox() {
   }, [alarmVolume]);
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      setLoaded(true);
-      return;
-    }
-    reload();
-    const id = setInterval(reload, 30000); // poll leve a cada 30s
-    return () => clearInterval(id);
-  }, [isLoggedIn, reload]);
+    if (!isLoggedIn) setLoaded(true);
+  }, [isLoggedIn]);
+  // 3min + pausa com aba oculta (era 30s direto — principal custo Vercel de jul/2026).
+  // O sino de solicitação nova pode demorar até 3min; decisão consciente de custo.
+  useVisiblePoll(reload, 180_000, isLoggedIn);
 
   const send = async () => {
     const body = draft.trim();
