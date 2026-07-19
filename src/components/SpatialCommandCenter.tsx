@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { COUNTRIES } from "@/lib/data";
+import { FridayEyeReactive } from "./FridayEyeReactive";
 
 const MapZone = dynamic(() => import("./MapZone"), { ssr: false });
 
@@ -25,6 +26,7 @@ const eyeModes = [
   { id: "friday", label: "Friday", variant: "Phoenix", ownerOnly: true },
   { id: "friday-ember", label: "Friday", variant: "Ember Sentinel", ownerOnly: true },
   { id: "friday-sentient", label: "Friday", variant: "Sentient · Oficial", ownerOnly: true },
+  { id: "friday-flux", label: "Friday", variant: "Flux · Reativa · Voz", ownerOnly: true },
 ] as const;
 
 export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: boolean }) {
@@ -49,6 +51,9 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
     events: COUNTRIES.reduce((n, c) => n + c.events.length, 0),
   }), []);
   const activeCountry = selectedCountry ? COUNTRIES.find(item => item.code === selectedCountry) ?? null : null;
+  const responseText = activeCountry
+    ? `Analisando ${activeCountry.name}. ${activeCountry.summary ?? `${activeCountry.events.length} registros disponíveis.`}`
+    : "Bom dia, Hammis. Selecione ou solicite um país para abrir o panorama geográfico e o benchmark correspondente.";
   const activeCoords = activeCountry?.coords ?? [0, 0];
   const focusStyle = { "--focus-x": `${((activeCoords[1] + 180) / 360) * 100}%`, "--focus-y": `${((90 - activeCoords[0]) / 180) * 100}%` } as CSSProperties;
   const countryMatches = countryQuery.trim().length > 1 ? COUNTRIES.filter(item => item.name.toLocaleLowerCase("pt-BR").includes(countryQuery.toLocaleLowerCase("pt-BR"))).slice(0, 6) : [];
@@ -104,14 +109,20 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
                 </div>
               </div>
             </div>
-            <div className="wb-eye"><i /><span className="wb-eye-scan" /></div>
-            <div className="wb-wave" aria-hidden>{Array.from({length: 23}).map((_,i)=><i key={i} />)}</div>
+            {eyeStyle === "friday-flux" ? (
+              <FridayEyeReactive text={responseText} />
+            ) : (
+              <>
+                <div className="wb-eye"><i /><span className="wb-eye-scan" /></div>
+                <div className="wb-wave" aria-hidden>{Array.from({length: 23}).map((_,i)=><i key={i} />)}</div>
+              </>
+            )}
           </div>
           <div className="wb-modules">
             <h3>WISE</h3><small>MÓDULOS OPERACIONAIS</small>
             {modules.map((item,i)=><button key={item}><span>{["◎","▣","△","⚙","▤","▱","□","⚙"][i]}</span><b>{item}</b><em>›</em></button>)}
           </div>
-          <div className="wb-response-box"><div><span className="wb-response-live"/><b>{currentEye.label} · resposta</b><button className="wb-briefing" onClick={() => setBriefing(v => !v)}>{briefing ? "Pausar" : "Ouvir"}</button></div><p>{activeCountry ? `Analisando ${activeCountry.name}. ${activeCountry.summary ?? `${activeCountry.events.length} registros disponíveis.`}` : "Bom dia, Hammis. Selecione ou solicite um país para abrir o panorama geográfico e o benchmark correspondente."}</p></div>
+          <div className="wb-response-box"><div><span className="wb-response-live"/><b>{currentEye.label} · resposta</b><button className="wb-briefing" onClick={() => setBriefing(v => !v)}>{briefing ? "Pausar" : "Ouvir"}</button></div><p>{responseText}</p></div>
           {isOwner && <div className="wb-lock">🔒 Personalização visível apenas para o proprietário.</div>}
         </aside>
 
