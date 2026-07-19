@@ -12,12 +12,6 @@ const OWNER_EMAIL = "hzfarah.wisehub@gmail.com";
 const PARTNER_ACCESS_ENABLED = process.env.NEXT_PUBLIC_WT_BRAIN_PARTNERS === "1";
 const modules = ["Panorama global", "Inteligência", "Riscos", "Operações", "Comunicações", "Ativos", "Arquivos", "Configurações"];
 const modes = ["WISE", "FRIDAY", "DUAL"] as const;
-const readings = ["PAÍS", "FONTES", "PARECER"] as const;
-const visualModes = [
-  { id: "meridian", label: "Meridian" },
-  { id: "phoenix", label: "Fênix" },
-  { id: "orbital", label: "Orbital" },
-] as const;
 const eyeModes = [
   { id: "eye", label: "Wise Eye", variant: "Metallic Azure", ownerOnly: false },
   { id: "eye-cobalt", label: "Wise Eye", variant: "Cobalt Lens", ownerOnly: false },
@@ -31,10 +25,9 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
   const { data: session } = useSession();
   const isOwner = session?.user?.email?.toLowerCase() === OWNER_EMAIL || previewOwner;
   const [mode, setMode] = useState<(typeof modes)[number]>(isOwner ? "DUAL" : "WISE");
-  const [reading, setReading] = useState<(typeof readings)[number]>("PARECER");
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [briefing, setBriefing] = useState(false);
-  const [visual, setVisual] = useState<(typeof visualModes)[number]["id"]>("meridian");
+  const visual = "meridian";
   const [eyeStyle, setEyeStyle] = useState<(typeof eyeModes)[number]["id"]>("eye");
   const [eyeShelfOpen, setEyeShelfOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
@@ -115,7 +108,6 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
           {modes.map(item => <button key={item} disabled={!isOwner && item !== "WISE"} className={mode === item ? "active" : ""} onClick={() => setMode(item)}>{item}</button>)}
         </div>
         <div className="wb-live"><span /> LEITURAS REAIS · {COUNTRIES.length} PAÍSES</div>
-        {isOwner && <div className="wb-visual-picker" role="group" aria-label="Alternativas visuais">{visualModes.map(item => <button key={item.id} className={visual === item.id ? "active" : ""} onClick={() => setVisual(item.id)}>{item.label}</button>)}</div>}
       </header>
 
       <div className="wise-brain-body">
@@ -172,17 +164,6 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
         </main>
 
         <aside className="wb-insights">
-          <div className="wb-phoenix-panel" aria-label="Olho Friday Fênix"><div className="wb-phoenix-eye"/><span>FRIDAY SENTINEL</span><small>VIGILÂNCIA SISTÊMICA ATIVA</small></div>
-          <div className="wb-reading-wheel">
-            {readings.map(item => <button key={item} className={reading === item ? "active" : ""} onClick={() => setReading(item)}><span>{item === "PAÍS" ? "◎" : item === "FONTES" ? "◉" : "▤"}</span>{item}</button>)}
-          </div>
-          <article className="wb-verdict">
-            <h3>{reading}</h3><small>{reading === "PARECER" ? "Síntese e recomendação" : "Leitura conectada"}</small>
-            <h4>SITUAÇÃO</h4><p>{summary.warning + summary.critical} países exigem atenção na base atual do Watch Tower.</p>
-            <h4>ANÁLISE</h4><p>Os indicadores refletem exclusivamente os registros carregados no sistema; nenhuma leitura simulada foi adicionada.</p>
-            <h4>RECOMENDAÇÃO</h4><p>Abra o país ou a fonte correspondente antes de registrar uma decisão operacional.</p>
-            <button>VER DETALHES COMPLETOS ›</button>
-          </article>
           <article className="wb-brain-benchmark">
             {activeCountry ? <>
               <div className="wb-benchmark-image" style={activeCountry.imageUrl ? { backgroundImage: `linear-gradient(0deg,rgba(2,8,14,.92),transparent 60%),url(${activeCountry.imageUrl})` } : undefined}><span>{activeCountry.code.toUpperCase()}</span><b>{activeCountry.name}</b></div>

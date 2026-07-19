@@ -71,8 +71,10 @@
    do palco (não pela largura) → em tela 16:9 nunca é cortado, e sobra margem pro
    scale(1.13) do foco. Só desktop (o mobile tem layout próprio na media query). --- */
 @media(min-width:761px){
-  /* top 9% = respiro acima do globo (o Hammis achou colado na borda com 5%);
-     34% de altura mantém a folga pro scale(1.13) do foco antes do mapa (48%). */
-  .wb-cinematic-globe{width:auto;height:min(34%,320px);aspect-ratio:1;top:9%}
-  .wb-cinematic-map{height:48%;bottom:4%}
+  /* Respiro pedido pelo Hammis: globo menor (31%) e mais baixo do topo (11%) — não
+     encosta mais na borda de cima nem estrangula a emenda com o mapa; mapa 46% e 5%
+     do fundo. Legenda sobe pra 14% e entra 20px: sai do canto curvo que a cortava. */
+  .wb-cinematic-globe{width:auto;height:min(31%,300px);aspect-ratio:1;top:11%}
+  .wb-cinematic-map{height:46%;bottom:5%}
+  .wb-map-legend{left:20px;bottom:14%}
 }
