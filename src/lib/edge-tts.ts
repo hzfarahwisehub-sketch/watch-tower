@@ -75,8 +75,12 @@ export function synthesize(
         `X-Timestamp:${ts}\r\nContent-Type:application/json; charset=utf-8\r\nPath:speech.config\r\n\r\n` +
           `{"context":{"synthesis":{"audio":{"metadataoptions":{"sentenceBoundaryEnabled":"false","wordBoundaryEnabled":"true"},"outputFormat":"audio-24khz-48kbitrate-mono-mp3"}}}}`,
       );
+      // xml:lang tem que CASAR a locale da voz (pt-BR), não o en-US que o msedge-tts fixa:
+      // nas vozes dedicadas é cosmético, mas na Thalita (multilíngue) o en-US puxa entonação
+      // inglesa e faz ler sigla com nome de letra em inglês. Derivado do id (pt-BR-…).
+      const lang = /^([a-z]{2}-[A-Z]{2})/.exec(voice)?.[1] ?? "pt-BR";
       const ssml =
-        `<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='en-US'>` +
+        `<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='${lang}'>` +
         `<voice name='${voice}'><prosody pitch='${pitch}' rate='${rate}' volume='${volume}'>${esc(text)}</prosody></voice></speak>`;
       ws.send(`X-RequestId:${noDash()}\r\nContent-Type:application/ssml+xml\r\nX-Timestamp:${ts}Z\r\nPath:ssml\r\n\r\n${ssml}`);
     });

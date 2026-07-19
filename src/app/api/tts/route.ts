@@ -8,6 +8,7 @@
  */
 import { NextResponse } from "next/server";
 import { synthesize, isEdgeVoice, EDGE_VOICES } from "@/lib/edge-tts";
+import { normalizeForSpeech } from "@/lib/speech-normalize";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -30,7 +31,8 @@ export async function POST(req: Request) {
   if (!isEdgeVoice(voice)) return NextResponse.json({ error: "voz não permitida" }, { status: 400 });
 
   try {
-    const mp3 = await synthesize(voice, text);
+    // Reescreve siglas/nomes/números pra voz pt-BR não "comer" nem soletrar errado.
+    const mp3 = await synthesize(voice, normalizeForSpeech(text));
     return new NextResponse(new Uint8Array(mp3), {
       status: 200,
       headers: {

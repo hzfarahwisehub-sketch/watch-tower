@@ -6,6 +6,7 @@
 // A energia (0..1) só dá VIDA ao olho atual (brilho/escala/glow/velocidade), sem
 // redesenhar imagem nem efeitos.
 import { useEffect, useRef, useState } from "react";
+import { normalizeForSpeech } from "@/lib/speech-normalize";
 
 // Olhos que são VÍDEO (o resto usa a imagem/CSS pintada pela classe do root).
 const VIDEO_EYES: Record<string, string> = {
@@ -139,7 +140,8 @@ export function FridayEyeReactive({ eyeStyle, text }: { eyeStyle: string; text: 
     if (!ss) { setSpeakState("idle"); return; }
     usingBrowserVoiceRef.current = true;
     ss.cancel();
-    const u = new SpeechSynthesisUtterance(text);
+    // Mesma reescrita de pronúncia do /api/tts (a voz genérica também come sigla/nome).
+    const u = new SpeechSynthesisUtterance(normalizeForSpeech(text));
     u.lang = "pt-BR"; u.rate = 1; u.pitch = 1.02;
     u.onstart = () => setSpeakState("speaking");
     u.onboundary = () => { speakEnergy.current = 0.55 + Math.random() * 0.4; };
