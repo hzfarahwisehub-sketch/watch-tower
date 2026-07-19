@@ -88,9 +88,9 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
 
       <div className="wise-brain-body">
         <nav className="wb-rail" aria-label="Wise Brain">
-          <button className={mode === "DUAL" ? "active" : ""} onClick={() => isOwner && setMode("DUAL")}><b>◉</b><small>DUAL</small></button>
-          <button className={mode === "WISE" ? "active" : ""} onClick={() => setMode("WISE")}><b>W</b><small>WISE</small></button>
-          {isOwner && <button className={mode === "FRIDAY" ? "active" : ""} onClick={() => setMode("FRIDAY")}><b>◉</b><small>FRIDAY</small></button>}
+          <button className={mode === "DUAL" ? "active" : ""} onClick={() => isOwner && setMode("DUAL")}><b className="wb-rail-dual"><span className="wb-rail-w">W</span><img src="/wise-brain/friday-helmet.png" alt="" className="wb-rail-ico mini" /></b><small>DUAL</small></button>
+          <button className={mode === "WISE" ? "active" : ""} onClick={() => setMode("WISE")}><b className="wb-rail-w">W</b><small>WISE</small></button>
+          {isOwner && <button className={mode === "FRIDAY" ? "active" : ""} onClick={() => setMode("FRIDAY")}><b><img src="/wise-brain/friday-helmet.png" alt="" className="wb-rail-ico" /></b><small>FRIDAY</small></button>}
           <button className="wb-collapse" onClick={() => setDrawerOpen(v => !v)} aria-label={drawerOpen ? "Recolher painel" : "Abrir painel"}>{drawerOpen ? "‹" : "›"}</button>
         </nav>
 
