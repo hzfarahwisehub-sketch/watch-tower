@@ -1,4 +1,15 @@
 @import "tailwindcss";
+@import "./wise-brain.css";
+@import "./wise-brain-stage.css";
+@import "./wise-brain-motion.css";
+@import "./wise-brain-fixes.css";
+@import "./navigation-clocks.css";
+@import "./eye-library.css";
+@import "./responsive-layout.css";
+@import "./clocks-2026.css";
+@import "./brain-live-geo.css";
+@import "./brain-cinematic.css";
+@import "./brain-vitality.css";
 
 @theme {
   --color-wh-blue: #1F55FF;
@@ -832,3 +843,66 @@ html[data-navigating] .wt-watermark {
   z-index: 100;
   opacity: .94;
 }
+/* ── Comando Vivo · quatro arquiteturas espaciais ─────────────────────── */
+.wt-tone-selector{display:inline-flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--border);border-radius:10px;background:var(--surface);white-space:nowrap}
+.wt-tone-selector>span{padding:0 5px;font-size:8px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-3)}
+.wt-tone-selector button{border:0;background:transparent;color:var(--text-3);padding:5px 7px;border-radius:7px;font-size:9px;font-weight:800;cursor:pointer;transition:background .2s,color .2s,box-shadow .2s}
+.wt-tone-selector button.active{background:rgba(74,122,255,.18);color:var(--text);box-shadow:inset 0 0 0 1px var(--border-hi)}
+.wt-spatial{height:100%;min-height:650px;overflow:hidden;border:1px solid var(--border-hi);border-radius:18px;background:radial-gradient(circle at 54% 44%,rgba(31,85,255,.16),transparent 38%),linear-gradient(145deg,var(--bg),var(--bg2));box-shadow:0 24px 80px rgba(0,0,0,.35);color:var(--text);position:relative}
+.wt-spatial:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.32;background-image:linear-gradient(rgba(74,122,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(74,122,255,.08) 1px,transparent 1px);background-size:42px 42px;mask-image:radial-gradient(circle at center,#000,transparent 78%)}
+.wt-spatial-head{height:64px;display:grid;grid-template-columns:minmax(170px,1fr) auto minmax(300px,1.4fr);align-items:center;gap:16px;padding:10px 16px;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--surface) 88%,transparent);position:relative;z-index:5;backdrop-filter:blur(18px)}
+.wt-spatial-kicker{display:block;color:var(--text-3);font-size:8px;letter-spacing:1.8px;text-transform:uppercase;font-weight:800}
+.wt-spatial-head h2{font-size:17px;letter-spacing:.8px;margin:2px 0 0;text-transform:uppercase}
+.wt-spatial-live,.wt-spatial-access{font-size:9px;text-transform:uppercase;letter-spacing:1.1px;color:var(--text-2);font-weight:800}
+.wt-spatial-live span,.wt-reading-source span{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--color-status-stable);box-shadow:0 0 10px var(--color-status-stable);margin-right:6px}
+.wt-spatial-layouts{display:flex;justify-content:flex-end;gap:5px}
+.wt-spatial-layouts button{padding:7px 10px;border-radius:9px;border:1px solid var(--border);background:var(--surface);color:var(--text-3);font-size:9px;font-weight:800;cursor:pointer;transition:.2s}
+.wt-spatial-layouts button:hover,.wt-spatial-layouts button.active{color:var(--text);border-color:var(--border-hi);background:rgba(74,122,255,.17);box-shadow:0 0 22px rgba(31,85,255,.16)}
+.wt-spatial-stage{height:calc(100% - 64px);min-height:586px;display:grid;grid-template-columns:310px minmax(420px,1fr) 250px;transition:grid-template-columns .35s cubic-bezier(.2,.8,.2,1);position:relative;z-index:2}
+.wt-spatial-stage.drawer-closed{grid-template-columns:62px minmax(420px,1fr) 250px}
+.wt-spatial-drawer{position:relative;border-right:1px solid var(--border);background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 92%,transparent),color-mix(in srgb,var(--bg2) 88%,transparent));overflow:visible;backdrop-filter:blur(20px)}
+.wt-spatial-collapse{position:absolute;right:-17px;top:44%;z-index:8;width:34px;height:68px;border-radius:9px;border:1px solid var(--border-hi);background:var(--surface-hi);color:var(--color-wh-blue-light);font-size:30px;cursor:pointer;box-shadow:0 0 28px rgba(31,85,255,.3)}
+.wt-spatial-rail{position:absolute;inset:0 auto 0 0;width:62px;display:flex;flex-direction:column;align-items:center;gap:25px;padding-top:25px;border-right:1px solid var(--border);opacity:0;transition:opacity .2s}
+.drawer-closed .wt-spatial-rail{opacity:1}.drawer-closed .wt-spatial-drawer-content{opacity:0;pointer-events:none}
+.wt-spatial-eye-mini,.wt-spatial-eye{display:inline-block;border-radius:50%;background:radial-gradient(circle,#dff7ff 0 5%,#4a7aff 8%,#102855 24%,#02060d 52%,#4a7aff 54%,transparent 58%);box-shadow:0 0 22px rgba(74,122,255,.6)}
+.wt-spatial-eye-mini{width:30px;height:30px}.wt-spatial-eye{width:42px;height:42px;flex:0 0 auto}
+.wt-spatial-drawer-content{height:100%;padding:20px 20px 14px;display:flex;flex-direction:column;gap:18px;transition:opacity .18s;overflow:auto}
+.wt-presence{padding-bottom:18px;border-bottom:1px solid var(--border)}
+.wt-presence-title{display:flex;align-items:center;gap:11px;font-size:15px;font-weight:900;letter-spacing:.9px;text-transform:uppercase}.wt-presence-title small{display:block;margin-left:auto;font-size:7px;color:var(--text-3);letter-spacing:1px}
+.wt-presence p{font-size:11px;line-height:1.55;color:var(--text-2);margin:12px 0 8px}
+.wt-wave{height:34px;display:flex;align-items:center;gap:3px;margin:12px 0}.wt-wave i{width:2px;height:8px;background:var(--color-wh-blue-light);box-shadow:0 0 7px var(--color-wh-blue);animation:wt-wave 1.3s ease-in-out infinite}.wt-wave i:nth-child(2n){animation-delay:-.4s}.wt-wave i:nth-child(3n){animation-delay:-.8s}
+@keyframes wt-wave{50%{height:28px;opacity:1}0%,100%{height:6px;opacity:.45}}
+.wt-source-state{font-size:8px;text-transform:uppercase;letter-spacing:1px;color:var(--color-wh-gold);border:1px solid color-mix(in srgb,var(--color-wh-gold) 35%,transparent);padding:4px 7px;border-radius:99px}
+.wt-wise-mark{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(145deg,var(--color-wh-blue),var(--color-wh-blue-dark));color:#fff;box-shadow:0 0 20px rgba(31,85,255,.3)}
+.wt-wise-modules{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:14px}.wt-wise-modules button{min-height:52px;text-align:left;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);padding:9px;font-size:10px;font-weight:800;cursor:pointer}.wt-wise-modules small{display:block;color:var(--text-3);font-size:8px;font-weight:600;margin-top:3px}
+.wt-owner-lock{margin-top:auto;padding:9px;border:1px solid color-mix(in srgb,var(--color-wh-gold) 28%,transparent);border-radius:9px;color:var(--text-3);font-size:8px;text-align:center}
+.wt-spatial-map{position:relative;min-width:0;overflow:hidden;padding:12px;background:radial-gradient(circle at center,rgba(74,122,255,.12),transparent 62%)}
+.wt-spatial-map-inner{height:100%;transition:transform .6s cubic-bezier(.2,.8,.2,1),filter .35s;transform-origin:center}
+.wt-spatial-map-inner>.wt-card{height:100%;border-radius:50%/10%;border-color:rgba(74,122,255,.3);box-shadow:0 0 55px rgba(31,85,255,.18);background:#020610}
+.wt-mapform-curved .wt-spatial-map-inner{transform:perspective(1100px) rotateX(3deg) scaleX(1.06);filter:saturate(1.08)}
+.wt-mapform-curved .wt-spatial-map-inner>.wt-card{border-radius:8%/45%}
+.wt-mapform-flat .wt-spatial-map-inner{transform:scale(.98)}.wt-mapform-flat .wt-spatial-map-inner>.wt-card{border-radius:12px}
+.wt-map-form{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;padding:4px;border:1px solid var(--border-hi);border-radius:99px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);z-index:7;box-shadow:0 10px 28px rgba(0,0,0,.38)}
+.wt-map-form button{border:0;background:transparent;color:var(--text-3);padding:7px 13px;border-radius:99px;font-size:9px;text-transform:uppercase;font-weight:800;cursor:pointer}.wt-map-form button.active{background:rgba(74,122,255,.2);color:var(--text);box-shadow:inset 0 0 0 1px var(--border-hi)}
+.wt-spatial-orbit i{position:absolute;inset:15% 10%;border:1px solid rgba(74,122,255,.12);border-radius:50%;pointer-events:none;animation:wt-orbit 20s linear infinite}.wt-spatial-orbit i:nth-child(2){inset:26% 4%;animation-direction:reverse;animation-duration:28s}.wt-spatial-orbit i:nth-child(3){inset:8% 22%;animation-duration:34s}@keyframes wt-orbit{to{transform:rotate(360deg)}}
+.wt-spatial-readings{border-left:1px solid var(--border);padding:18px 16px;background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(18px);overflow:auto}
+.wt-reading-head{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1.3px;padding-bottom:12px;border-bottom:1px solid var(--border)}.wt-reading-head span{float:right;color:var(--color-status-stable);font-size:8px}
+.wt-reading-metrics{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:13px 0}.wt-reading-metrics article{padding:10px 8px;border:1px solid var(--border);border-radius:9px;background:var(--surface)}.wt-reading-metrics b{display:block;font-size:20px}.wt-reading-metrics span{display:block;color:var(--text-3);font-size:8px;margin-top:2px}.wt-reading-metrics .critical{color:var(--color-status-critical)}.wt-reading-metrics .warning{color:var(--color-status-warning)}.wt-reading-metrics .stable{color:var(--color-status-stable)}
+.wt-selected-reading{padding:14px;border:1px solid var(--border-hi);border-radius:12px;background:linear-gradient(145deg,rgba(31,85,255,.1),var(--surface));min-height:205px}.wt-selected-reading>small{font-size:8px;text-transform:uppercase;letter-spacing:1px;color:var(--text-3)}.wt-selected-reading h3{font-size:18px;margin:5px 0}.wt-selected-reading p{font-size:10px;line-height:1.5;color:var(--text-2)}.wt-selected-reading dl{display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:9px}.wt-selected-reading dt{color:var(--text-3)}.wt-selected-reading dd{text-align:right;margin:0;color:var(--text)}
+.wt-country-status{display:inline-block;padding:4px 7px;border-radius:99px;font-size:8px;font-weight:900;text-transform:uppercase}.wt-country-status.crit{color:var(--color-status-critical);background:rgba(255,59,92,.12)}.wt-country-status.warn{color:var(--color-status-warning);background:rgba(255,138,31,.12)}.wt-country-status.stable{color:var(--color-status-stable);background:rgba(16,224,160,.12)}
+.wt-reading-source{margin-top:12px;color:var(--text-3);font-size:8px}
+.wt-spatial-atlas .wt-spatial-stage{grid-template-columns:260px minmax(480px,1fr) 220px}.wt-spatial-atlas .wt-spatial-map-inner{transform:perspective(1000px) rotateX(4deg) scaleX(1.08)}.wt-spatial-atlas .wt-spatial-map-inner>.wt-card{border-radius:7%/45%}
+.wt-spatial-mission .wt-spatial-map:after{content:"MAPA VIVO";position:absolute;right:9px;top:33%;writing-mode:vertical-rl;padding:13px 8px;border:1px solid var(--border-hi);border-radius:8px;background:var(--surface);font-size:8px;letter-spacing:2px;color:var(--color-wh-blue-light)}
+.wt-spatial-meridian .wt-spatial-map-inner{transform:perspective(900px) rotateX(7deg) scaleY(.86)}.wt-spatial-meridian .wt-spatial-map-inner>.wt-card{border-radius:50%/14%}
+
+/* Relógios: acabamento coerente com o Comando Vivo, preservando dados e controles. */
+.wt-clocks{background:radial-gradient(circle at 50% 10%,rgba(74,122,255,.13),transparent 42%),linear-gradient(145deg,var(--bg),var(--bg2))!important}
+.wt-clocks .wt-cl-head{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)!important}
+.wt-clocks .wt-cl-card{border-color:var(--border)!important;background:linear-gradient(145deg,color-mix(in srgb,var(--surface) 94%,transparent),color-mix(in srgb,var(--bg2) 88%,transparent))!important;box-shadow:0 12px 32px rgba(0,0,0,.2)!important;transition:transform .22s,border-color .22s,box-shadow .22s}
+.wt-clocks .wt-cl-card:hover{transform:translateY(-3px);border-color:var(--border-hi)!important;box-shadow:0 16px 40px rgba(31,85,255,.17)!important}
+.wt-clocks .wt-cl-face{box-shadow:inset 0 0 35px rgba(31,85,255,.12),0 0 28px rgba(31,85,255,.12)!important}
+
+@media(max-width:1100px){.wt-spatial-head{grid-template-columns:1fr auto}.wt-spatial-live{display:none}.wt-spatial-layouts{grid-column:1/-1;justify-content:flex-start;overflow:auto}.wt-spatial-head{height:auto}.wt-spatial-stage{height:calc(100% - 94px);grid-template-columns:250px minmax(400px,1fr)}.wt-spatial-readings{display:none}}
+@media(max-width:760px){.wt-tone-selector>span,.wt-tone-selector button:not(.active){display:none}.wt-spatial{min-height:780px}.wt-spatial-stage,.wt-spatial-atlas .wt-spatial-stage{grid-template-columns:62px 1fr}.wt-spatial-stage.drawer-open{grid-template-columns:min(82vw,300px) minmax(320px,1fr)}.wt-spatial-head{padding:9px}.wt-spatial-layouts button{padding:6px 8px}.wt-spatial-map{padding:6px}.wt-map-form{bottom:12px}.wt-spatial-orbit{display:none}}
+
+@media(prefers-reduced-motion:reduce){.wt-wave i,.wt-spatial-orbit i{animation:none!important}.wt-spatial-map-inner,.wt-spatial-stage{transition:none!important}}

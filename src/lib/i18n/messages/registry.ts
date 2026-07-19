@@ -3,6 +3,7 @@
 // título da aba da janela destacada. Chave = "registry." + PanelId.
 const dict = {
   pt: {
+    "registry.spatial": "Wise Brain",
     "registry.map": "Mapa Global 3D",
     "registry.clocks": "Relógios do Mundo",
     "registry.benchmark": "Benchmark do País",
@@ -24,6 +25,7 @@ const dict = {
     "registry.crypto": "Cripto & Derivativos",
   },
   en: {
+    "registry.spatial": "Wise Brain",
     "registry.map": "Global 3D Map",
     "registry.clocks": "World Clocks",
     "registry.benchmark": "Country Benchmark",

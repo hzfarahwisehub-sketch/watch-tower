@@ -22,6 +22,7 @@ const RGL = WidthProvider(Responsive);
 type TabDef = { id: string; fallback: string; emoji: string; panels: PanelId[]; requiresAgenda?: boolean };
 const TABS: TabDef[] = [
   { id: "mapa", fallback: "Mapa", emoji: "🗺", panels: ["map", "countries", "benchmark"] },
+  { id: "brain", fallback: "Wise Brain", emoji: "◉", panels: ["spatial"] },
   { id: "relogios", fallback: "Relógios", emoji: "🕐", panels: ["clocks"] },
   { id: "oper", fallback: "Operações", emoji: "📥", panels: ["inbox", "scheduled", "requests", "reminders", "tasks"] },
   { id: "cont", fallback: "Conteúdo", emoji: "🎬", panels: ["content"] },
@@ -43,6 +44,7 @@ type LItem = { i: string; x: number; y: number; w: number; h: number };
 // Arranjo PADRÃO = exatamente como o Hammis moldou (capturado do navegador dele
 // em 2026-07-13). Cada um pode remexer por cima; isto é só o ponto de partida.
 const LG: Record<string, LItem[]> = {
+  brain: [{ i: "spatial", x: 0, y: 0, w: 24, h: 25 }],
   mapa: [
     { i: "map", x: 0, y: 0, w: 9, h: 17 },
     { i: "countries", x: 9, y: 0, w: 6, h: 17 },
@@ -141,9 +143,11 @@ export function TabbedDashboard() {
   const { locked } = useSettings();
   const toast = useToast();
   const isLoggedIn = !!session?.user?.email;
+  const isFridayOwner = session?.user?.email?.toLowerCase() === "hzfarah.wisehub@gmail.com";
 
   const [mapSelected, setMapSelected] = useState<string | null>(null);
   const [active, setActive] = useState("mapa");
+  const [menuOpen, setMenuOpen] = useState(false);
   const [layouts, setLayouts] = useState<Record<string, ResponsiveLayouts>>({});
   const [mounted, setMounted] = useState(false);
 
@@ -205,27 +209,37 @@ export function TabbedDashboard() {
 
   const visibleTabs = TABS;
   const activeTab = visibleTabs.find((tb) => tb.id === active) ?? visibleTabs[0];
+  const displayTabLabel = (tb: TabDef) => tb.id === "brain" ? (isFridayOwner ? "Friday Brain" : "Wise Brain 🔒") : tabLabel(t, tb);
 
   return (
     <>
       <div className="wt-watermark" aria-hidden />
       <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-10 wt-app-shell">
         <WindowManagerProvider onSelectCountry={selectCountry} selectedCountry={mapSelected}>
-          <Header />
-
-          <nav className="wt-tabs" role="tablist" aria-label="Seções do Watch Tower">
-            <div className="wt-tabs-scroll">
+          <div className="wt-navigation-stack">
+            <Header />
+            <div className="wt-menu-dock">
+            <button type="button" className={`wt-menu-trigger ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(value => !value)} aria-expanded={menuOpen} aria-controls="wt-side-menu">
+              <span className="wt-menu-bars" aria-hidden><i/><i/><i/></span><b>Menu</b><span className="wt-menu-current">{displayTabLabel(activeTab)}</span><span aria-hidden>{menuOpen ? "‹" : "›"}</span>
+            </button>
+            </div>
+          </div>
+          {menuOpen && <button type="button" className="wt-menu-scrim" aria-label="Fechar menu" onClick={() => setMenuOpen(false)} />}
+          <nav id="wt-side-menu" className={`wt-side-menu ${menuOpen ? "open" : ""}`} role="tablist" aria-label="Seções do Watch Tower">
+            <div className="wt-side-menu-head"><div><small>WATCH TOWER</small><b>Navegação</b></div><button type="button" onClick={() => setMenuOpen(false)} aria-label="Fechar menu">×</button></div>
+            <div className="wt-side-tabs">
               {visibleTabs.map((tb) => {
                 const on = tb.id === activeTab?.id;
                 return (
-                  <button key={tb.id} type="button" role="tab" aria-selected={on} onClick={() => setActive(tb.id)} className={`wt-tab ${on ? "wt-tab-on" : ""}`}>
-                    <span aria-hidden>{tb.emoji}</span>
-                    <span className="wt-tab-txt">{tabLabel(t, tb)}</span>
+                  <button key={tb.id} type="button" role="tab" aria-selected={on} onClick={() => { setActive(tb.id); setMenuOpen(false); }} className={`wt-side-tab ${on ? "active" : ""}`}>
+                    <span className="wt-side-icon" aria-hidden>{tb.emoji}</span>
+                    <span><b>{displayTabLabel(tb)}</b><small>{tb.panels.length} {tb.panels.length === 1 ? "módulo" : "módulos"}</small></span>
+                    <em aria-hidden>›</em>
                   </button>
                 );
               })}
             </div>
-            <div className="wt-tabs-actions">
+            <div className="wt-side-actions">
               <TopControls />
               <button type="button" className="wt-export-btn" onClick={exportLayouts} title="Copiar o arranjo de todas as abas (pra Friday salvar como padrão)">
                 ⤓ Arranjo

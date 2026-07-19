@@ -14,6 +14,13 @@ interface Props {
   countries: Country[];
   selected: string | null;
   onSelect: (code: string) => void;
+  immersive?: boolean;
+  projection?: "globe" | "mercator";
+  stylePreset?: StyleKey;
+  hideChrome?: boolean;
+  viewport?: { lng: number; lat: number; zoom: number } | null;
+  onViewportChange?: (viewport: { lng: number; lat: number; zoom: number }) => void;
+  markerVariant?: "default" | "holographic" | "satellite";
 }
 
 const STATUS_COLOR: Record<Status, string> = {
@@ -130,7 +137,7 @@ const keepGlobe = (
  * - Botão de estilo (gradiente + menu): Google · Satélite HD · Relevo · Escuro
  * - Markers por país (cor = status), click seleciona · voo suave ao selecionar
  */
-export default function MapZone({ countries, selected, onSelect }: Props) {
+export default function MapZone({ countries, selected, onSelect, immersive = false, projection = "globe", stylePreset, hideChrome = false, viewport, onViewportChange, markerVariant = "default" }: Props) {
   const { t } = useLocale();
   const changesMap = useCountryChangesMap();
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -142,19 +149,23 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
   const styleLoadingRef = useRef(false);
   const selectedRef = useRef<string | null>(selected);
   selectedRef.current = selected;
-  const [styleKey, setStyleKey] = useState<StyleKey>("dark");
+  const projectionRef = useRef<"globe" | "mercator">(projection);
+  projectionRef.current = projection;
+  const onViewportChangeRef = useRef(onViewportChange);
+  onViewportChangeRef.current = onViewportChange;
+  const [styleKey, setStyleKey] = useState<StyleKey>(stylePreset ?? "dark");
   const [menuOpen, setMenuOpen] = useState(false);
 
   // INIT — só uma vez
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
-    const initialKey = readSavedStyle();
+    const initialKey = stylePreset ?? readSavedStyle();
     setStyleKey(initialKey);
     const map = new maplibregl.Map({
       container: containerRef.current,
       style: resolveStyle(initialKey),
       center: [0, 0],
-      zoom: 0.6,
+      zoom: immersive ? 1.35 : 0.6,
       minZoom: 0.4,
       maxZoom: 8,
       pitch: 0,
@@ -180,7 +191,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
 
     map.on("style.load", () => {
       try {
-        map.setProjection({ type: "globe" });
+        map.setProjection({ type: projectionRef.current });
         map.setSky?.({
           "sky-color": "#060B18",
           "sky-horizon-blend": 0.5,
@@ -190,7 +201,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
           "fog-ground-blend": 0.1,
         });
         if (firstLoadRef.current) {
-          map.jumpTo({ center: [0, 0], zoom: 0.6, pitch: 0, bearing: 0 });
+          map.jumpTo({ center: [0, 0], zoom: immersive ? 1.35 : 0.6, pitch: 0, bearing: 0 });
           firstLoadRef.current = false;
         }
       } catch {}
@@ -240,10 +251,11 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     const MAX_SPIN_ZOOM = 4.5;
     const SLOW_SPIN_ZOOM = 3;
     let userInteracting = false;
+    let userMovedViewport = false;
     let spinQueued = false;
     const spinGlobe = () => {
       const m = mapRef.current;
-      if (!m || userInteracting || selectedRef.current || styleLoadingRef.current) return;
+      if (!m || projectionRef.current !== "globe" || userInteracting || selectedRef.current || styleLoadingRef.current) return;
       if (m.isMoving()) return; // deixa a inércia / animação atual terminar antes
       const zoom = m.getZoom();
       if (zoom >= MAX_SPIN_ZOOM) return;
@@ -268,7 +280,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
       requestAnimationFrame(() => { spinQueued = false; spinGlobe(); });
     };
     spinGlobeRef.current = queueSpin;
-    const startInteract = () => { userInteracting = true; };
+    const startInteract = () => { userInteracting = true; userMovedViewport = true; };
     const endInteract = () => { userInteracting = false; queueSpin(); };
     map.on("mousedown", startInteract);
     map.on("touchstart", startInteract);
@@ -280,7 +292,14 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     map.on("zoomend", endInteract);
     map.on("pitchend", endInteract);
     map.on("rotateend", endInteract);
-    map.on("moveend", queueSpin);
+    map.on("moveend", () => {
+      if (userMovedViewport) {
+        const center = map.getCenter();
+        onViewportChangeRef.current?.({ lng: center.lng, lat: center.lat, zoom: map.getZoom() });
+        userMovedViewport = false;
+      }
+      queueSpin();
+    });
 
     return () => {
       resizeObserver.disconnect();
@@ -301,9 +320,27 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
     styleLoadingRef.current = true;
     map.setStyle(resolveStyle(styleKey), { transformStyle: keepGlobe });
     try {
-      localStorage.setItem(STYLE_STORAGE_KEY, styleKey);
+      if (!stylePreset) localStorage.setItem(STYLE_STORAGE_KEY, styleKey);
     } catch {}
-  }, [styleKey]);
+  }, [styleKey, stylePreset]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    try {
+      map.setProjection({ type: projection });
+      map.resize();
+      if (projection === "globe") spinGlobeRef.current?.();
+    } catch {}
+  }, [projection]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !viewport) return;
+    const current = map.getCenter();
+    if (Math.abs(current.lng - viewport.lng) < .02 && Math.abs(current.lat - viewport.lat) < .02 && Math.abs(map.getZoom() - viewport.zoom) < .02) return;
+    map.easeTo({ center: [viewport.lng, viewport.lat], zoom: viewport.zoom, duration: 650, essential: true });
+  }, [viewport]);
 
   // ATUALIZA MARKERS (persistem entre trocas de estilo)
   useEffect(() => {
@@ -321,18 +358,22 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
       const title = t("map.marker.title", { name: c.name, n: changesMap[c.code] ?? 0, authority: c.authority });
       if (existing) {
         existing.setLngLat([lng, lat]);
-        existing.getElement().title = title;
+        const existingElement = existing.getElement();
+        existingElement.title = title;
+        existingElement.className = `wt-map-marker wt-marker-${markerVariant}${c.code === selected ? " is-selected" : ""}`;
         return;
       }
       const el = document.createElement("button");
       el.type = "button";
-      el.className = "wt-map-marker";
+      el.className = `wt-map-marker wt-marker-${markerVariant}`;
       el.setAttribute("data-status", c.status);
       el.setAttribute("aria-label", `${c.name} · ${c.status}`);
       el.title = title;
       el.innerHTML = `
+        <span class="wt-map-marker-ring"></span>
         <span class="wt-map-dot" style="background:${STATUS_COLOR[c.status]};box-shadow:0 0 12px ${STATUS_COLOR[c.status]}, 0 0 0 2px rgba(0,0,0,.5)"></span>
         <span class="wt-map-pulse" style="background:${STATUS_COLOR[c.status]}"></span>
+        <span class="wt-map-marker-code">${c.code.toUpperCase()}</span>
       `;
       el.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -343,12 +384,13 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
         .addTo(map);
       markersRef.current[c.code] = marker;
     });
-  }, [countries, onSelect, t, changesMap]);
+  }, [countries, onSelect, t, changesMap, markerVariant]);
 
   // VOO suave para o país selecionado; ao deselecionar, revive o giro automático
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
+    Object.entries(markersRef.current).forEach(([code, marker]) => marker.getElement().classList.toggle("is-selected", code === selected));
     if (!selected) {
       // o loop do giro tinha morrido com o país em foco; reativa
       spinGlobeRef.current?.();
@@ -364,8 +406,8 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
   const currentLabel = t(`map.style.${current.key}.label`);
 
   return (
-    <div className="wt-card flex flex-col h-full overflow-hidden" style={{ minHeight: 300 }}>
-      <div
+    <div className={`wt-card flex flex-col h-full overflow-hidden ${hideChrome ? "wt-map-chromeless" : ""}`} style={{ minHeight: 300 }}>
+      {!hideChrome && <div
         className="flex items-center justify-between gap-x-2 gap-y-0.5 pl-4 sm:pl-5 pr-[64px] py-3 flex-wrap"
         style={{ borderBottom: "1px solid var(--border)", position: "relative", zIndex: 20 }}
       >
@@ -435,7 +477,7 @@ export default function MapZone({ countries, selected, onSelect }: Props) {
             </>
           )}
         </div>
-      </div>
+      </div>}
       <div
         ref={containerRef}
         className="flex-1 wt-map-canvas"

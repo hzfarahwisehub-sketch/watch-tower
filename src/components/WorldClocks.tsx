@@ -181,7 +181,7 @@ export function WorldClocks() {
   const idx = openCountry ? CLOCKS.findIndex((c) => c.code === open) : -1;
 
   return (
-    <section className="wt-card h-full flex flex-col overflow-hidden">
+    <section className={`wt-card wt-clocks wt-clocks-${theme} h-full flex flex-col overflow-hidden`}>
       <style>{CLOCK_CSS}</style>
       <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden dangerouslySetInnerHTML={{ __html: DEFS }} />
 

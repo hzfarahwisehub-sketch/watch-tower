@@ -13,6 +13,7 @@ import { ExportButton } from "./ExportButton";
 import { PushToggle } from "./PushToggle";
 import { CalendarConnect } from "./CalendarConnect";
 import { playChime } from "@/lib/chime";
+import { ToneSelector } from "./ToneSelector";
 
 export function Header() {
   const { theme, toggle } = useTheme();
@@ -115,6 +116,8 @@ export function Header() {
         <IconBtn title={t("header.lang.title")} onClick={toggleLocale}>
           <span className="text-[12px] font-extrabold tracking-wide">{LOCALE_SHORT[locale]}</span>
         </IconBtn>
+
+        <ToneSelector />
 
         <IconBtn title={t("header.theme.title")} onClick={toggle}>
           {theme === "dark" ? (

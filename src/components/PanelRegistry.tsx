@@ -14,16 +14,18 @@ import { ContentRequests } from "./ContentRequests";
 import { ContentStudio } from "./ContentStudio";
 import { InfoCenters, FinanceCenters, CryptoCenters } from "./InfoCenters";
 import { WorldClocks } from "./WorldClocks";
+import { SpatialCommandCenter } from "./SpatialCommandCenter";
 
 const MapZone = dynamic(() => import("./MapZone"), { ssr: false });
 
 export type PanelId =
   | "map" | "benchmark" | "alerts" | "feed" | "bulletins" | "countries"
   | "kpis" | "tasks" | "agenda" | "reminders" | "scheduled" | "inbox"
-  | "requests" | "content" | "studio" | "info" | "finance" | "crypto" | "clocks";
+  | "requests" | "content" | "studio" | "info" | "finance" | "crypto" | "clocks" | "spatial";
 
 /** Catálogo dos painéis que podem virar janela própria (id = chave da célula). */
 export const PANELS: { id: PanelId; title: string; emoji: string }[] = [
+  { id: "spatial", title: "Wise Brain", emoji: "◉" },
   { id: "map", title: "Mapa Global 3D", emoji: "🗺" },
   { id: "clocks", title: "Relógios do Mundo", emoji: "🕐" },
   { id: "benchmark", title: "Benchmark do País", emoji: "🎯" },
@@ -64,6 +66,7 @@ export function isPanelId(id: string): id is PanelId {
 /** Renderiza o conteúdo de um painel (usado na célula do grid e na janela). */
 export function renderPanel(id: PanelId, onSelectCountry: (code: string) => void, selected: string | null = null): ReactNode {
   switch (id) {
+    case "spatial": return <SpatialCommandCenter />;
     case "map": return <MapZone countries={COUNTRIES} selected={selected} onSelect={onSelectCountry} />;
     case "clocks": return <WorldClocks />;
     case "benchmark": return <CountryBenchmark selectedCode={selected} />;
