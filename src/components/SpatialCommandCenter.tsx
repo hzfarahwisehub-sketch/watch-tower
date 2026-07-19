@@ -30,6 +30,9 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
   const visual = "meridian";
   const [eyeStyle, setEyeStyle] = useState<(typeof eyeModes)[number]["id"]>("eye");
   const [eyeShelfOpen, setEyeShelfOpen] = useState(false);
+  // Embed do app REAL (conversa+voz+IA de wise.wisehubnow.online) dentro do painel.
+  // Abre nele por padrão (é o que o Hammis quer); alterna com o olho decorativo.
+  const [embedOn, setEmbedOn] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [countryQuery, setCountryQuery] = useState("");
   const [geoMode, setGeoMode] = useState<"cinematic" | "satellite" | "live" | "atlas">("cinematic");
@@ -121,17 +124,27 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
         <aside className="wb-assistant">
           <div className="wb-friday">
             <div className="wb-section-title"><b>{currentEye.label}</b><span>● online</span></div>
-            <small>BRIEFING DE VOZ · AGORA</small>
-            <div className="wb-eye-library">
-              <button type="button" className="wb-eye-library-trigger" onClick={() => setEyeShelfOpen(value => !value)} aria-expanded={eyeShelfOpen} aria-controls="wb-eye-shelf"><span className={`wb-eye-thumb wb-thumb-${eyeStyle}`} /><span><b>{currentEye.label}</b><small>{currentEye.variant}</small></span><em>{eyeShelfOpen ? "‹" : "›"}</em></button>
-              <div id="wb-eye-shelf" className={`wb-eye-shelf ${eyeShelfOpen ? "open" : ""}`} aria-label="Biblioteca de olhos">
-                <div className="wb-eye-shelf-head"><span>Biblioteca de olhos</span><small>{availableEyes.length} opções</small></div>
-                <div className="wb-eye-options">
-                  {availableEyes.map(item => <button type="button" key={item.id} className={eyeStyle === item.id ? "active" : ""} onClick={() => { setEyeStyle(item.id); setEyeShelfOpen(false); }}><span className={`wb-eye-thumb wb-thumb-${item.id}`} /><span><b>{item.label}</b><small>{item.variant}</small></span><em>›</em></button>)}
-                </div>
-              </div>
+            <small>{embedOn ? "CONVERSA AO VIVO · VOZ + IA" : "BRIEFING DE VOZ · AGORA"}</small>
+            <div className="wb-brain-embed-toggle" role="group" aria-label="Modo da Friday">
+              <button type="button" className={embedOn ? "active" : ""} onClick={() => setEmbedOn(true)}>💬 Conversar</button>
+              <button type="button" className={!embedOn ? "active" : ""} onClick={() => setEmbedOn(false)}>👁 Olho</button>
             </div>
-            <FridayEyeReactive eyeStyle={eyeStyle} text={responseText} />
+            {embedOn ? (
+              <iframe className="wb-brain-embed" src="https://wise.wisehubnow.online/" title={isOwner ? "Friday" : "Wise"} allow="microphone; autoplay; clipboard-write; camera" />
+            ) : (
+              <>
+                <div className="wb-eye-library">
+                  <button type="button" className="wb-eye-library-trigger" onClick={() => setEyeShelfOpen(value => !value)} aria-expanded={eyeShelfOpen} aria-controls="wb-eye-shelf"><span className={`wb-eye-thumb wb-thumb-${eyeStyle}`} /><span><b>{currentEye.label}</b><small>{currentEye.variant}</small></span><em>{eyeShelfOpen ? "‹" : "›"}</em></button>
+                  <div id="wb-eye-shelf" className={`wb-eye-shelf ${eyeShelfOpen ? "open" : ""}`} aria-label="Biblioteca de olhos">
+                    <div className="wb-eye-shelf-head"><span>Biblioteca de olhos</span><small>{availableEyes.length} opções</small></div>
+                    <div className="wb-eye-options">
+                      {availableEyes.map(item => <button type="button" key={item.id} className={eyeStyle === item.id ? "active" : ""} onClick={() => { setEyeStyle(item.id); setEyeShelfOpen(false); }}><span className={`wb-eye-thumb wb-thumb-${item.id}`} /><span><b>{item.label}</b><small>{item.variant}</small></span><em>›</em></button>)}
+                    </div>
+                  </div>
+                </div>
+                <FridayEyeReactive eyeStyle={eyeStyle} text={responseText} />
+              </>
+            )}
           </div>
           <div className="wb-modules">
             <h3>WISE</h3><small>MÓDULOS OPERACIONAIS</small>
