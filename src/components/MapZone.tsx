@@ -311,6 +311,17 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // stylePreset é prop CONTROLADA. Os modos geográficos (cinematic/satellite/live)
+  // reusam a MESMA instância do MapZone (dois <div> sem key na mesma posição do
+  // ternário → o React reconcilia em vez de remontar), então o INIT roda só uma
+  // vez. Sem sincronizar, o mapa herdava o estilo do modo anterior — era o bug do
+  // "Mapa vivo virou satélite". Ao trocar o preset, refletimos no styleKey. Como
+  // depende só de [stylePreset], a escolha manual pelo menu (que muda styleKey, não
+  // o preset) continua valendo dentro do modo.
+  useEffect(() => {
+    if (stylePreset) setStyleKey(stylePreset);
+  }, [stylePreset]);
+
   // TROCA DE ESTILO escolhido no botão. Pausa o giro durante a troca
   // (styleLoadingRef) e injeta globe no style novo (transformStyle keepGlobe),
   // pra a projeção nunca cair em mercator e o giro religar limpo no style.load.
