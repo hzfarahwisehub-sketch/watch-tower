@@ -13,3 +13,18 @@
 .wb-eye-audio button.on{background:linear-gradient(180deg,#1a5c8a,#0a2a44);border-color:#54c1ff;color:#fff;box-shadow:0 0 10px #3aa0ff66}
 .wb-thumb-friday-flux{background-image:radial-gradient(circle at 50% 50%,#ffe1a0 0 7%,#ff8a1e 15%,#c23a00 27%,#0a1830 42%),conic-gradient(from 0deg,#2b9dff55,#ff8a2a55,#2b9dff55,#ff8a2a55,#2b9dff55);box-shadow:0 0 14px #ff8a2a88,inset 0 0 0 1px #ffd08a55}
 @media(prefers-reduced-motion:reduce){.wb-eye-flux{transition:none;transform:none}}
+/* --- Reatividade UNIVERSAL: dá VIDA a QUALQUER olho sem redesenhar a imagem nem
+   trocar os filtros. Um anel de brilho (elemento próprio, filho do olho, herda a
+   energia --wb-eye-energy 0..1) acende com o som que a Friday fala/ouve. O olho de
+   imagem NÃO tem transform/filter mexido (a animação idle wb-breathe fica intacta). --- */
+.wb-eye-ring{position:absolute;inset:-8px;border-radius:50%;pointer-events:none}
+.wb-eye-reactive:not(.wb-eye-flux){overflow:visible}
+.wb-eye-reactive:not(.wb-eye-flux) .wb-eye-ring{box-shadow:0 0 calc(5px + var(--wb-eye-energy,0)*34px) rgba(95,185,255,calc(.10 + var(--wb-eye-energy,0)*.62))}
+.wb-eye-friday .wb-eye-reactive .wb-eye-ring,.wb-eye-friday-ember .wb-eye-reactive .wb-eye-ring,.wb-eye-friday-sentient .wb-eye-reactive .wb-eye-ring{box-shadow:0 0 calc(5px + var(--wb-eye-energy,0)*36px) rgba(255,150,55,calc(.12 + var(--wb-eye-energy,0)*.6))}
+.wb-eye-reactive.listening:not(.wb-eye-flux) .wb-eye-ring{box-shadow:0 0 calc(7px + var(--wb-eye-energy,0)*38px) rgba(120,235,255,calc(.2 + var(--wb-eye-energy,0)*.6))}
+/* Painel de controles de voz: dropdown de voz + Falar/Pausar/Retomar + Ouvir */
+.wb-eye-controls{margin:9px 8px 3px;display:flex;flex-direction:column;gap:6px}
+.wb-eye-controls .wb-eye-audio{margin:0}
+.wb-voice-select{width:100%;padding:5px 7px;border:1px solid #2a5a73;border-radius:6px;background:#071b2d;color:#a9d9ff;font-size:8px;letter-spacing:.3px;cursor:pointer;-webkit-appearance:none;appearance:none}
+.wb-voice-select:focus{outline:none;border-color:#54c1ff;box-shadow:0 0 8px #3aa0ff44}
+.wb-eye-audio .wb-audio-stop{flex:0 0 34px;min-width:0}

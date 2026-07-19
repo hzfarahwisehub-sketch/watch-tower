@@ -1,57 +1,79 @@
 "use client";
-// Olho Friday REATIVO — o vídeo (imagem/efeitos originais, sem alterar) reage ao
-// som: à voz da Friday quando ela FALA (Web Speech / speechSynthesis) e ao que ela
-// OUVE pelo microfone (Web Audio / AnalyserNode). A energia do áudio (0..1) modula
-// só o brilho/escala/velocidade do próprio vídeo, sem redesenhar nada.
+// Olho + controles de voz do Wise/Friday Brain. UNIVERSAL: vale pra TODOS os
+// olhos (só o VISUAL muda por eyeStyle). Reage ao som que a Friday FALA
+// (speechSynthesis, com troca de voz + pausar/retomar) e ao que ela OUVE
+// (microfone via Web Audio). A energia (0..1) só dá VIDA ao olho atual
+// (brilho/escala/glow/velocidade), sem redesenhar imagem nem efeitos.
 import { useEffect, useRef, useState } from "react";
 
-export function FridayEyeReactive({ text }: { text: string }) {
+// Olhos que são VÍDEO (o resto usa a imagem/CSS pintada pela classe do root).
+const VIDEO_EYES: Record<string, string> = {
+  "friday-flux": "/wise-brain/friday-eye-reactive-v1.mp4",
+};
+
+export function FridayEyeReactive({ eyeStyle, text }: { eyeStyle: string; text: string }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [micOn, setMicOn] = useState(false);
-  const [speaking, setSpeaking] = useState(false);
-  // Energia por fonte (0..1); o olho reage ao MAIOR dos dois.
+  const [speakState, setSpeakState] = useState<"idle" | "speaking" | "paused">("idle");
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [voiceURI, setVoiceURI] = useState<string>("");
   const micEnergy = useRef(0);
   const speakEnergy = useRef(0);
+  const videoSrc = VIDEO_EYES[eyeStyle];
 
-  // Loop mestre: energia = max(mic, fala) → variável CSS + velocidade do vídeo.
+  // Vozes disponíveis (chegam async; prefere pt-BR).
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    const load = () => {
+      const vs = window.speechSynthesis.getVoices();
+      if (vs.length) setVoices(vs);
+      setVoiceURI((cur) => cur || vs.find((v) => /pt.?BR/i.test(v.lang))?.voiceURI || vs.find((v) => /^pt/i.test(v.lang))?.voiceURI || vs[0]?.voiceURI || "");
+    };
+    load();
+    window.speechSynthesis.onvoiceschanged = load;
+    return () => { if (window.speechSynthesis) window.speechSynthesis.onvoiceschanged = null; };
+  }, []);
+
+  // Loop mestre: energia = max(fala, mic) → variável CSS + velocidade do vídeo.
   useEffect(() => {
     let raf = 0;
     const loop = () => {
-      speakEnergy.current *= 0.9; // decai o envelope da fala entre as sílabas
+      speakEnergy.current *= 0.9;
       const e = Math.max(micEnergy.current, speakEnergy.current);
-      const root = rootRef.current;
-      if (root) root.style.setProperty("--wb-eye-energy", e.toFixed(3));
+      rootRef.current?.style.setProperty("--wb-eye-energy", e.toFixed(3));
       const v = videoRef.current;
-      if (v) v.playbackRate = 0.85 + e * 0.7; // acelera o fogo quando reage
+      if (v) v.playbackRate = 0.85 + e * 0.7;
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  // OUVE: microfone → amplitude RMS → micEnergy (só enquanto ligado).
+  // OUVE: microfone → amplitude RMS. Conserto: RESUME do AudioContext (o navegador
+  // cria suspenso quando o create acontece depois do gesto por causa do getUserMedia).
   useEffect(() => {
     if (!micOn) { micEnergy.current = 0; return; }
     let ctx: AudioContext | null = null;
     let stream: MediaStream | null = null;
     let raf = 0;
     let cancelled = false;
-    const AC = (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext);
-    navigator.mediaDevices?.getUserMedia({ audio: true }).then((s) => {
+    const AC = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    navigator.mediaDevices?.getUserMedia({ audio: true }).then(async (s) => {
       if (cancelled) { s.getTracks().forEach((t) => t.stop()); return; }
       stream = s;
       ctx = new AC();
+      try { await ctx.resume(); } catch { /* ignora */ }
       const src = ctx.createMediaStreamSource(s);
-      const analyser = ctx.createAnalyser();
-      analyser.fftSize = 256;
-      src.connect(analyser);
-      const data = new Uint8Array(analyser.frequencyBinCount);
+      const an = ctx.createAnalyser();
+      an.fftSize = 256;
+      src.connect(an);
+      const data = new Uint8Array(an.frequencyBinCount);
       const read = () => {
-        analyser.getByteTimeDomainData(data);
+        an.getByteTimeDomainData(data);
         let sum = 0;
         for (let i = 0; i < data.length; i++) { const x = (data[i] - 128) / 128; sum += x * x; }
-        micEnergy.current = Math.min(1, Math.sqrt(sum / data.length) * 4.5);
+        micEnergy.current = Math.min(1, Math.sqrt(sum / data.length) * 5.5);
         raf = requestAnimationFrame(read);
       };
       read();
@@ -65,43 +87,61 @@ export function FridayEyeReactive({ text }: { text: string }) {
     };
   }, [micOn]);
 
-  // FALA: speechSynthesis lê o briefing; cada sílaba (boundary) dá um pulso na energia.
-  const toggleSpeak = () => {
-    if (typeof window === "undefined" || !window.speechSynthesis) return;
-    if (speaking) {
-      window.speechSynthesis.cancel();
-      setSpeaking(false);
-      speakEnergy.current = 0;
-      return;
-    }
+  const startSpeak = () => {
+    const ss = window.speechSynthesis;
+    if (!ss) return;
+    ss.cancel();
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = "pt-BR";
+    const v = voices.find((x) => x.voiceURI === voiceURI);
+    if (v) u.voice = v;
+    u.lang = v?.lang || "pt-BR";
     u.rate = 1;
     u.pitch = 1.02;
-    u.onstart = () => setSpeaking(true);
-    u.onend = () => { setSpeaking(false); speakEnergy.current = 0; };
-    u.onerror = () => { setSpeaking(false); speakEnergy.current = 0; };
+    u.onstart = () => setSpeakState("speaking");
+    u.onend = () => { setSpeakState("idle"); speakEnergy.current = 0; };
+    u.onerror = () => { setSpeakState("idle"); speakEnergy.current = 0; };
     u.onboundary = () => { speakEnergy.current = 0.55 + Math.random() * 0.4; };
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(u);
+    ss.speak(u);
   };
+  // FALA: um botão só — Falar → Pausar → Retomar (retoma de onde parou).
+  const onSpeakBtn = () => {
+    const ss = window.speechSynthesis;
+    if (!ss) return;
+    if (speakState === "idle") startSpeak();
+    else if (speakState === "speaking") { ss.pause(); setSpeakState("paused"); }
+    else { ss.resume(); setSpeakState("speaking"); }
+  };
+  const stopSpeak = () => { window.speechSynthesis?.cancel(); setSpeakState("idle"); speakEnergy.current = 0; };
 
-  // Ao desmontar, corta a fala.
   useEffect(() => () => { if (typeof window !== "undefined") window.speechSynthesis?.cancel(); }, []);
+
+  const speakLabel = speakState === "idle" ? "🔊 Falar" : speakState === "speaking" ? "⏸ Pausar" : "▶ Retomar";
 
   return (
     <>
-      <div ref={rootRef} className={`wb-eye wb-eye-flux ${speaking ? "speaking" : ""} ${micOn ? "listening" : ""}`}>
-        <video ref={videoRef} className="wb-eye-video" src="/wise-brain/friday-eye-reactive-v1.mp4" autoPlay loop muted playsInline aria-hidden />
+      <div ref={rootRef} className={`wb-eye wb-eye-reactive ${videoSrc ? "wb-eye-flux" : ""} ${speakState !== "idle" ? "speaking" : ""} ${micOn ? "listening" : ""}`}>
+        {videoSrc ? (
+          <video ref={videoRef} className="wb-eye-video" src={videoSrc} autoPlay loop muted playsInline aria-hidden />
+        ) : (
+          <>
+            <i />
+            <span className="wb-eye-scan" />
+          </>
+        )}
         <span className="wb-eye-ring" aria-hidden />
       </div>
-      <div className="wb-eye-audio">
-        <button type="button" className={speaking ? "on" : ""} onClick={toggleSpeak} title="Friday fala o briefing (o olho reage à voz dela)">
-          {speaking ? "◼ Parar" : "🔊 Falar"}
-        </button>
-        <button type="button" className={micOn ? "on" : ""} onClick={() => setMicOn((v) => !v)} title="Friday ouve o microfone (o olho reage à sua voz)">
-          {micOn ? "● Ouvindo" : "🎙 Ouvir"}
-        </button>
+      <div className="wb-wave wb-wave-reactive" aria-hidden>{Array.from({ length: 23 }).map((_, i) => <i key={i} />)}</div>
+      <div className="wb-eye-controls">
+        {voices.length > 0 && (
+          <select className="wb-voice-select" value={voiceURI} onChange={(e) => setVoiceURI(e.target.value)} aria-label="Voz">
+            {voices.map((v) => <option key={v.voiceURI} value={v.voiceURI}>{v.name} · {v.lang}</option>)}
+          </select>
+        )}
+        <div className="wb-eye-audio">
+          <button type="button" className={speakState !== "idle" ? "on" : ""} onClick={onSpeakBtn} title="Falar o briefing · pausar · retomar de onde parou">{speakLabel}</button>
+          {speakState !== "idle" && <button type="button" className="wb-audio-stop" onClick={stopSpeak} title="Parar">◼</button>}
+          <button type="button" className={micOn ? "on" : ""} onClick={() => setMicOn((v) => !v)} title="Ouvir o microfone (o olho reage à sua voz)">{micOn ? "● Ouvindo" : "🎙 Ouvir"}</button>
+        </div>
       </div>
     </>
   );

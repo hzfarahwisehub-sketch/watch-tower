@@ -19,13 +19,11 @@ const visualModes = [
   { id: "orbital", label: "Orbital" },
 ] as const;
 const eyeModes = [
-  { id: "eye", label: "Eye", variant: "Metallic Azure", ownerOnly: false },
-  { id: "eye-cobalt", label: "Eye", variant: "Cobalt Lens", ownerOnly: false },
-  { id: "wise", label: "Wise", variant: "Core", ownerOnly: false },
-  { id: "wise-halo", label: "Wise", variant: "Halo", ownerOnly: false },
+  { id: "eye", label: "Wise Eye", variant: "Metallic Azure", ownerOnly: false },
+  { id: "eye-cobalt", label: "Wise Eye", variant: "Cobalt Lens", ownerOnly: false },
   { id: "friday", label: "Friday", variant: "Phoenix", ownerOnly: true },
   { id: "friday-ember", label: "Friday", variant: "Ember Sentinel", ownerOnly: true },
-  { id: "friday-sentient", label: "Friday", variant: "Sentient · Oficial", ownerOnly: true },
+  { id: "friday-sentient", label: "Friday Sentient", variant: "Original", ownerOnly: true },
   { id: "friday-flux", label: "Friday", variant: "Flux · Reativa · Voz", ownerOnly: true },
 ] as const;
 
@@ -109,14 +107,7 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
                 </div>
               </div>
             </div>
-            {eyeStyle === "friday-flux" ? (
-              <FridayEyeReactive text={responseText} />
-            ) : (
-              <>
-                <div className="wb-eye"><i /><span className="wb-eye-scan" /></div>
-                <div className="wb-wave" aria-hidden>{Array.from({length: 23}).map((_,i)=><i key={i} />)}</div>
-              </>
-            )}
+            <FridayEyeReactive eyeStyle={eyeStyle} text={responseText} />
           </div>
           <div className="wb-modules">
             <h3>WISE</h3><small>MÓDULOS OPERACIONAIS</small>
