@@ -376,8 +376,10 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
     // setCenter-quadro-a-quadro. Cada passo gira um tanto em 1s; ao terminar
     // dispara "moveend", que chama de novo = giro contínuo e suave. Pausa
     // enquanto você arrasta/zooma e retoma ao soltar. A inércia do arrasto
-    // desliza primeiro (isMoving) e o giro assume na sequência. Não gira com
-    // país em foco nem com zoom alto.
+    // desliza primeiro (isMoving) e o giro assume na sequência. GIRA SEMPRE,
+    // inclusive com país selecionado (pedido do Hammis: "girando constantemente
+    // sempre" — o Dashboard restaura o último país do localStorage, então havia
+    // SEMPRE um selecionado e o globo nunca girava). Só pausa em zoom fundo.
     const SECONDS_PER_REVOLUTION = 63; // ~5.7°/s = 0.1 rad/s, igual o WiseHub
     const MAX_SPIN_ZOOM = 4.5;
     const SLOW_SPIN_ZOOM = 3;
@@ -386,7 +388,7 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
     let spinQueued = false;
     const spinGlobe = () => {
       const m = mapRef.current;
-      if (!m || projectionRef.current !== "globe" || userInteracting || selectedRef.current || styleLoadingRef.current) return;
+      if (!m || projectionRef.current !== "globe" || userInteracting || styleLoadingRef.current) return;
       if (m.isMoving()) return; // deixa a inércia / animação atual terminar antes
       const zoom = m.getZoom();
       if (zoom >= MAX_SPIN_ZOOM) return;
