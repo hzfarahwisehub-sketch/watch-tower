@@ -28,6 +28,10 @@ interface Props {
   // fixo — assim cada marcador cai em cima do seu país no painel largo e baixo
   // do modo cinematográfico (sem isso, metade projeta fora da faixa visível).
   fitCountries?: boolean;
+  // Pausa o giro automático enquanto um país está selecionado (Friday Brain: o
+  // globo voa até o país e FICA nele). A aba Mapa não usa — lá o Hammis quer o
+  // giro constante mesmo com seleção (que aliás é restaurada do localStorage).
+  spinPausesOnSelect?: boolean;
 }
 
 const STATUS_COLOR: Record<Status, string> = {
@@ -234,7 +238,7 @@ function fitToCountries(map: MLMap, countries: Country[]) {
  * - Botão de estilo (gradiente + menu): Google · Satélite HD · Relevo · Escuro
  * - Markers por país (cor = status), click seleciona · voo suave ao selecionar
  */
-export default function MapZone({ countries, selected, onSelect, immersive = false, projection = "globe", stylePreset, hideChrome = false, viewport, onViewportChange, markerVariant = "default", showArcs = false, fitCountries = false }: Props) {
+export default function MapZone({ countries, selected, onSelect, immersive = false, projection = "globe", stylePreset, hideChrome = false, viewport, onViewportChange, markerVariant = "default", showArcs = false, fitCountries = false, spinPausesOnSelect = false }: Props) {
   const { t } = useLocale();
   const changesMap = useCountryChangesMap();
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -256,6 +260,8 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
   countriesRef.current = countries;
   const fitCountriesRef = useRef(fitCountries);
   fitCountriesRef.current = fitCountries;
+  const spinPausesOnSelectRef = useRef(spinPausesOnSelect);
+  spinPausesOnSelectRef.current = spinPausesOnSelect;
   const [styleKey, setStyleKey] = useState<StyleKey>(stylePreset ?? "dark");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -389,6 +395,9 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
     const spinGlobe = () => {
       const m = mapRef.current;
       if (!m || projectionRef.current !== "globe" || userInteracting || styleLoadingRef.current) return;
+      // Brain: com país selecionado o globo FICA no país (o giro pós-voo levava
+      // os marcadores pro lado escuro — as "luzes espalhadas" do Hammis).
+      if (spinPausesOnSelectRef.current && selectedRef.current) return;
       if (m.isMoving()) return; // deixa a inércia / animação atual terminar antes
       const zoom = m.getZoom();
       if (zoom >= MAX_SPIN_ZOOM) return;
