@@ -16,7 +16,12 @@ export default auth((req) => {
     pathname.startsWith("/api/reminders") ||
     pathname.startsWith("/api/scheduled") ||
     pathname.startsWith("/api/admin") ||
-    pathname.startsWith("/api/export");
+    pathname.startsWith("/api/export") ||
+    // TTS proxeia pro edge-tts da Microsoft; público viraria TTS grátis pra
+    // qualquer um (e abuso pode fazer a Microsoft bloquear o IP da Vercel,
+    // matando a voz do painel). Só founders logados. A verificação de saúde do
+    // edge-tts fica em /api/internal/tts-check (gated por CRON_SECRET).
+    pathname.startsWith("/api/tts");
   // App é de acesso restrito: TODAS as páginas do app exigem login. Sem sessão,
   // cai na tela de login e não renderiza nada (evita vazar resíduo gravado no
   // navegador de quem já teve acesso antes). Só ficam públicas as telas /auth/*
