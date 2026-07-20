@@ -11,7 +11,12 @@ const MapZone = dynamic(() => import("./MapZone"), { ssr: false });
 const OWNER_EMAIL = "hzfarah.wisehub@gmail.com";
 const PARTNER_ACCESS_ENABLED = process.env.NEXT_PUBLIC_WT_BRAIN_PARTNERS === "1";
 const modules = ["Panorama global", "Inteligência", "Riscos", "Operações", "Comunicações", "Ativos", "Arquivos", "Configurações"];
-const modes = ["WISE", "FRIDAY", "DUAL"] as const;
+// Dois apps, dois perfis (regra do Hammis, 2026-07-20): a FRIDAY é dele e o WISE é
+// dos sócios. Ele entra SEMPRE como Friday; o botão WISE existe pra ele entrar na
+// PELE DO SÓCIO e testar a usabilidade que eles têm (qual tela veem, que problema
+// sentem). O DUAL foi removido: não fazia nada e ele não quer botão morto.
+const modes = ["FRIDAY", "WISE"] as const;
+const APP_URL = "https://wise.wisehubnow.online/";
 const eyeModes = [
   { id: "eye", label: "Wise Eye", variant: "Metallic Azure", ownerOnly: false },
   { id: "eye-cobalt", label: "Wise Eye", variant: "Cobalt Lens", ownerOnly: false },
@@ -24,7 +29,7 @@ const eyeModes = [
 export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: boolean }) {
   const { data: session } = useSession();
   const isOwner = session?.user?.email?.toLowerCase() === OWNER_EMAIL || previewOwner;
-  const [mode, setMode] = useState<(typeof modes)[number]>(isOwner ? "DUAL" : "WISE");
+  const [mode, setMode] = useState<(typeof modes)[number]>(isOwner ? "FRIDAY" : "WISE");
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [briefing, setBriefing] = useState(false);
   const visual = "meridian";
@@ -115,22 +120,23 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
 
       <div className="wise-brain-body">
         <nav className="wb-rail" aria-label="Wise Brain">
-          <button className={mode === "DUAL" ? "active" : ""} onClick={() => isOwner && setMode("DUAL")}><b className="wb-rail-dual"><img src="/wise-brain/logo-wise-w.png" alt="" className="wb-rail-ico mini" /><img src="/wise-brain/friday-helmet.png" alt="" className="wb-rail-ico mini" /></b><small>DUAL</small></button>
-          <button className={mode === "WISE" ? "active" : ""} onClick={() => setMode("WISE")}><b><img src="/wise-brain/logo-wise-w.png" alt="" className="wb-rail-ico" /></b><small>WISE</small></button>
-          {isOwner && <button className={mode === "FRIDAY" ? "active" : ""} onClick={() => setMode("FRIDAY")}><b><img src="/wise-brain/friday-helmet.png" alt="" className="wb-rail-ico" /></b><small>FRIDAY</small></button>}
+          {isOwner && <button className={mode === "FRIDAY" ? "active" : ""} onClick={() => setMode("FRIDAY")} title="Sua Friday completa"><b><img src="/wise-brain/friday-helmet.png" alt="" className="wb-rail-ico" /></b><small>FRIDAY</small></button>}
+          <button className={mode === "WISE" ? "active" : ""} onClick={() => setMode("WISE")} title={isOwner ? "Ver como sócio: a mesma tela que eles usam" : "Wise"}><b><img src="/wise-brain/logo-wise-w.png" alt="" className="wb-rail-ico" /></b><small>WISE</small></button>
           <button className="wb-collapse" onClick={() => setDrawerOpen(v => !v)} aria-label={drawerOpen ? "Recolher painel" : "Abrir painel"}>{drawerOpen ? "‹" : "›"}</button>
         </nav>
 
         <aside className="wb-assistant">
           <div className="wb-friday">
             <div className="wb-section-title"><b>{currentEye.label}</b><span>● online</span></div>
-            <small>{embedOn ? "CONVERSA AO VIVO · VOZ + IA" : "BRIEFING DE VOZ · AGORA"}</small>
+            <small>{!embedOn ? "BRIEFING DE VOZ · AGORA" : isOwner && mode === "WISE" ? "🧪 VENDO COMO SÓCIO · TESTE DE USABILIDADE" : "CONVERSA AO VIVO · VOZ + IA"}</small>
             <div className="wb-brain-embed-toggle" role="group" aria-label="Modo da Friday">
               <button type="button" className={embedOn ? "active" : ""} onClick={() => setEmbedOn(true)}>💬 Conversar</button>
               <button type="button" className={!embedOn ? "active" : ""} onClick={() => setEmbedOn(false)}>👁 Olho</button>
             </div>
             {embedOn ? (
-              <iframe className="wb-brain-embed" src="https://wise.wisehubnow.online/" title={isOwner ? "Friday" : "Wise"} allow="microphone; autoplay; clipboard-write; camera" />
+              // key={mode} força o iframe a remontar na troca de perfil: só mudar o
+              // src deixaria estado velho do app anterior vivo lá dentro.
+              <iframe key={mode} className="wb-brain-embed" src={`${APP_URL}?perfil=${mode === "WISE" ? "wise" : "friday"}`} title={mode === "WISE" ? "Wise (visão do sócio)" : "Friday"} allow="microphone; autoplay; clipboard-write; camera" />
             ) : (
               <>
                 <div className="wb-eye-library">
