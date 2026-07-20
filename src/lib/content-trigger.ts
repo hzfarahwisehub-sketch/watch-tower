@@ -34,12 +34,15 @@ export async function acionarGeracaoRoteiros(mudancas: string[], userId: string)
     });
     if (existing) return false;
 
-    // `mudancas` já chega filtrada pelo cron: boletim OFICIAL com lastStatus
-    // "changed" nas últimas 48h. Isso é, por definição, o critério de urgência
-    // do Hammis (2026-07-20): ato oficial publicado + janela de 48h. Então ter
-    // item aqui = tem notícia que corre hoje, e o pedido precisa GRITAR isso —
-    // senão a Friday gera o lote no tom perene de sempre e o fundador não tem
-    // como saber o que precisa ser gravado antes de perder validade.
+    // `mudancas` já chega filtrada pelo cron, por DOIS caminhos que satisfazem o
+    // critério de urgência do Hammis (2026-07-20): (1) boletim OFICIAL com
+    // lastStatus "changed" nas últimas 48h = ato oficial publicado + janela de
+    // 48h; (2) peça editorial curada como `urgency: "urgent"` nas últimas 48h
+    // pela rotina diária, que cobre a mudança que chega por imprensa oficial sem
+    // mexer em boletim monitorado. Então ter item aqui = tem notícia que corre
+    // hoje, e o pedido precisa GRITAR isso — senão a Friday gera o lote no tom
+    // perene de sempre e o fundador não tem como saber o que precisa ser gravado
+    // antes de perder validade.
     const urgente = mudancas.length > 0;
 
     const fuel = mudancas.length

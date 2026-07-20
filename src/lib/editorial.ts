@@ -921,17 +921,10 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   // ──────────────────────────── Reino Unido ────────────────────────────
   uk: {
     community: [
-      {
-        publishedAt: "2026-07-13",
-        urgency: "urgent",
-        title: "Reino Unido publica o Statement of Changes HC 259 e ajusta regras de fixação de filhos",
-        body:
-          "O Home Office publicou o Statement of Changes HC 259, o documento oficial que atualiza as Regras de Imigração britânicas. Entre os pontos estão ajustes nas regras de fixação, o settlement, de crianças previstas na Parte 8 das Regras, além de uma exceção ligada à proibição de fiança migratória.\n\nOs Statements of Changes são a forma como o Reino Unido altera suas regras de visto na prática, e cada item costuma ter a própria data de entrada em vigor. Quem tem processo de família em andamento deve conferir no texto oficial qual versão da regra se aplica ao seu caso.",
-        cta: "Tem processo de fixação de filhos no Reino Unido? Confira no HC 259 a data de vigência de cada mudança.",
-        sources: [
-          { label: "Reino Unido · Statement of Changes to the Immigration Rules (gov.uk, oficial)", url: "https://www.gov.uk/government/collections/immigration-rules-statement-of-changes" },
-        ],
-      },
+      // NOTA: a peça de 13/07 sobre o Statement of Changes HC 259 foi removida daqui
+      // por duplicar a peça de community de RONDA_PIECES.uk (editorial-ronda.ts, D2),
+      // que cobre o mesmo documento com mais precisão (data de publicação, as duas
+      // datas de vigência e o desmentido do ILR 5→10 anos). Ver editorial-ronda.ts.
       {
         publishedAt: "2026-07-13",
         title: "eGates do Reino Unido passam a aceitar crianças de 8 e 9 anos",
@@ -990,21 +983,24 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     countryTab: [
       {
+        // NOTA: esta peça era um combo (HC 259 + eGates) e a metade do HC 259 repetia
+        // a peça de countryTab de RONDA_PIECES.uk (editorial-ronda.ts, D2). O recorte
+        // aqui passou a ser SÓ a mudança de fronteira (eGates), com o HC 259 reduzido a
+        // remissão. As duas peças agora cobrem assuntos distintos e podem ser publicadas
+        // juntas sem repetir notícia.
         publishedAt: "2026-07-13",
-        urgency: "urgent",
-        headline: "Reino Unido mexe nas regras e na fronteira: HC 259 e eGates para crianças",
+        headline: "eGates do Reino Unido passam a aceitar crianças de 8 e 9 anos acompanhadas",
         standfirst:
-          "Um novo Statement of Changes (HC 259) ajusta regras de fixação de filhos, enquanto o Home Office libera os eGates para crianças de 8 e 9 anos. Duas mudanças concretas na segunda semana de julho de 2026.",
+          "A mudança é de fronteira, não de visto: o Home Office baixou a idade mínima das cabines automáticas dos aeroportos, e famílias deixam de precisar da fila com atendente por causa dos filhos mais novos.",
         body:
-          "O Reino Unido fechou a segunda semana de julho de 2026 com duas mudanças práticas, uma nas regras e outra na fronteira. A primeira veio pelo Statement of Changes HC 259, o instrumento oficial que atualiza as Regras de Imigração. Entre os ajustes estão mudanças nas regras de fixação, o settlement, de crianças previstas na Parte 8, além de uma exceção ligada à proibição de fiança migratória.\n\nEsse é o mecanismo típico britânico: em vez de uma grande lei, o país costuma alterar suas regras de visto por meio de Statements of Changes periódicos, cada um com datas de vigência próprias. Por isso, quem tem processo de família em curso precisa confirmar no texto oficial qual regra se aplica ao seu caso, sem se guiar por resumos de terceiros.\n\nA segunda mudança foi na experiência de entrada. O Home Office passou a permitir que crianças de 8 e 9 anos usem os eGates, as cabines automáticas dos aeroportos, quando acompanhadas. É um ganho de conveniência para famílias, sem alterar as exigências de visto ou de permissão de viagem.\n\nPara a comunidade WiseHub, o par de novidades reforça um hábito saudável: no Reino Unido, o que muda de verdade aparece nos documentos oficiais, dos Statements of Changes aos comunicados do Home Office. Acompanhar a fonte primária evita decisões baseadas em manchete e mantém o planejamento firme.",
+          "O Home Office ampliou o uso dos eGates, as cabines automáticas de controle de fronteira dos aeroportos britânicos, para crianças a partir de 8 anos, que agora podem passar acompanhadas de um adulto. Antes o limite de idade era mais alto, e uma família com filho de 8 ou 9 anos era empurrada para a fila com atendente mesmo quando todos os adultos do grupo podiam usar a cabine.\n\nO alcance da medida é preciso e vale delimitá-lo, porque mudanças de fronteira costumam ser lidas como mudanças de regra. Isto é conveniência na chegada, não flexibilização de exigência. As regras de visto, de permissão de viagem e a documentação que cada membro da família precisa carregar seguem exatamente como estavam, e a criança continua tendo de portar o próprio documento de viagem válido.\n\nNa prática, o ganho é de tempo e de previsibilidade em aeroporto cheio, e ele aparece justamente para o perfil que mais sofria com a fila, a família viajando com criança pequena depois de um voo longo. Convém confirmar antes da viagem se o aeroporto de chegada tem eGates habilitados, porque a disponibilidade varia por terminal.\n\nEsta é a mudança de fronteira da segunda semana de julho de 2026. A mudança de regras do mesmo período veio por outro caminho, o Statement of Changes HC 259, tratado em peça própria nesta seção, e não tem relação com os eGates.",
         keyFacts: [
-          "Statement of Changes HC 259 publicado, atualizando as Regras de Imigração",
-          "Ajustes nas regras de fixação (settlement) de crianças na Parte 8 das Regras",
-          "Exceção ligada à proibição de fiança migratória",
-          "eGates liberados para crianças de 8 e 9 anos acompanhadas",
+          "eGates liberados para crianças de 8 e 9 anos, desde que acompanhadas",
+          "Antes o limite de idade era mais alto e a família ia para a fila com atendente",
+          "Não altera exigência de visto, de permissão de viagem nem de documentação",
+          "A disponibilidade de eGates varia por aeroporto, confirmar antes de viajar",
         ],
         sources: [
-          { label: "Reino Unido · Statement of Changes to the Immigration Rules (gov.uk, oficial)", url: "https://www.gov.uk/government/collections/immigration-rules-statement-of-changes" },
           { label: "Reino Unido · Home Office (gov.uk, oficial)", url: "https://www.gov.uk/government/organisations/home-office" },
         ],
       },
@@ -1047,9 +1043,14 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
         standfirst:
           "No Reino Unido de 2026, o maior perigo para um visto de trabalho não é o candidato ser recusado. É o empregador perder a licença depois que ele já se mudou.",
         body:
-          "Quem planeja uma mudança para o Reino Unido normalmente monta a conta em cima de si mesmo. Salário mínimo exigido, nível de inglês, custo do Immigration Health Surcharge, tempo até o assentamento. É uma conta correta e incompleta, porque deixa de fora a variável que mais tem derrubado projetos: a saúde regulatória de quem patrocina.\n\nA atualização da orientação de verificação do direito ao trabalho, publicada agora como preparação para as reformas de outubro, deixa isso explícito. O Estado britânico terceirizou boa parte da fiscalização migratória para o empregador, e cobra caro quando a delegação falha. Licenças de patrocínio vêm sendo revogadas em volume recorde, e a consequência não recai apenas sobre a empresa. O trabalhador patrocinado perde a base do seu visto e passa a contar um prazo curto para encontrar outro patrocinador ou deixar o país.\n\nO efeito é perverso porque é assimétrico. O profissional cumpriu tudo, atravessou o oceano, matriculou filho em escola, assinou contrato de aluguel, e o chão pode ser puxado por uma falha administrativa de terceiro. Setores com uso intensivo de mão de obra estrangeira e margens apertadas, como cuidado a idosos e hospitalidade, concentram a maior parte dos casos.\n\nHá também um contramovimento útil de registrar. A abertura de processamento prioritário para pedidos de cidadania mostra que o sistema quer resolver mais rápido o caso de quem já está integrado e cumpriu os requisitos. Quem chega ao ponto de naturalizar sai definitivamente dessa exposição, porque deixa de depender de patrocínio, de status e de renovação.\n\nA recomendação prática, portanto, é tratar a escolha do empregador como parte da devida diligência migratória, e não apenas como decisão de carreira. Vale checar há quanto tempo a empresa consta na lista oficial de patrocinadores licenciados, se já houve suspensão anterior, qual o tamanho da operação e quantos estrangeiros ela patrocina. E vale, desde o primeiro dia, construir o relógio do assentamento com disciplina, porque o objetivo final não é o visto. É deixar de precisar dele.",
+          "Quem planeja uma mudança para o Reino Unido normalmente monta a conta em cima de si mesmo. Salário mínimo exigido, nível de inglês, custo do Immigration Health Surcharge, tempo até o assentamento. É uma conta correta e incompleta, porque deixa de fora a variável que não depende do candidato: a saúde regulatória de quem patrocina.\n\nA atualização da orientação de verificação do direito ao trabalho, publicada agora como preparação para as reformas de outubro, deixa o desenho explícito. O Estado britânico delegou boa parte da fiscalização migratória ao empregador, e cobra caro quando a delegação falha. Em setembro de 2025, o próprio Home Office anunciou número recorde de revogações de licenças de patrocínio: foram 1.948 licenças revogadas entre julho de 2024 e junho de 2025, mais que o dobro das 937 dos doze meses anteriores, e num patamar muito distante das 261 de 2021/22 e das 247 de 2022/23. Os números seguem sendo atualizados a cada trimestre nos dados de transparência migratória, e é ali que se confere o estágio mais recente.\n\nA consequência não recai apenas sobre a empresa, e aqui a regra oficial é objetiva. Quando a licença cai, o certificado de patrocínio do trabalhador é cancelado e a permissão de permanência passa a ser limitada a 60 dias, ou ao tempo que ainda restar no visto, se for menor que isso. Dentro dessa janela é preciso encontrar um novo patrocinador e apresentar um novo pedido, ou deixar o país. Há uma exceção mais severa prevista: se o próprio trabalhador tiver participado do que causou a perda da licença, o visto é cancelado sem esse prazo.\n\nO efeito é perverso porque é assimétrico. O profissional cumpriu tudo, atravessou o oceano, matriculou filho em escola, assinou contrato de aluguel, e o chão pode ser puxado por uma falha administrativa de terceiro. Ao divulgar os números, o Home Office apontou cuidado a idosos, hospitalidade, varejo e construção como os setores em que identificou os maiores níveis de abuso. Vale registrar também o que o dado público não autoriza a afirmar: não há estatística oficial que coloque um único setor como responsável pela maior parte das revogações. Um levantamento independente do Work Rights Centre, feito com dados obtidos do Home Office por pedido de acesso à informação, aponta no sentido contrário e calcula que a área de saúde e assistência social respondeu por cerca de um terço dos casos entre 2022 e 2025, com os outros dois terços espalhados por setores diversos. A leitura útil é que se trata de um risco distribuído, e não de um problema restrito a um nicho.\n\nHá também um contramovimento útil de registrar. A abertura de processamento prioritário para pedidos de cidadania mostra que o sistema quer resolver mais rápido o caso de quem já está integrado e cumpriu os requisitos. Quem chega ao ponto de naturalizar sai dessa exposição específica, porque deixa de depender de patrocínio, de status e de renovação.\n\nA recomendação prática, portanto, é tratar a escolha do empregador como parte da devida diligência migratória, e não apenas como decisão de carreira. O Home Office publica e atualiza o registro oficial de patrocinadores licenciados, e é nele que dá para conferir se a empresa consta na lista, em qual rota ela está autorizada a patrocinar e qual a sua classificação. Vale observar também há quanto tempo ela aparece no registro, o tamanho da operação e o volume de estrangeiros que patrocina. E vale, desde o primeiro dia, construir o relógio do assentamento com disciplina, porque o objetivo final não é o visto. É deixar de precisar dele.\n\nEste conteúdo é informativo e não substitui a orientação oficial do Home Office nem o aconselhamento de um profissional habilitado em imigração britânica. Nenhum resultado é garantido, e regras, prazos e números são revisados periodicamente. Confirme sempre nas páginas oficiais listadas abaixo.",
         tags: ["Reino Unido", "Skilled Worker", "Patrocínio", "Cidadania britânica", "Compliance"],
         sources: [
+          { label: "Reino Unido · Home Office: número recorde de licenças de patrocínio revogadas, 11/09/2025 (gov.uk, oficial)", url: "https://www.gov.uk/government/news/record-numbers-of-visa-sponsor-licences-revoked-for-rule-breaking" },
+          { label: "Reino Unido · O que acontece com o trabalhador quando o patrocinador perde a licença (gov.uk, oficial)", url: "https://www.gov.uk/employee-lose-sponsor-licence" },
+          { label: "Reino Unido · Registro oficial de patrocinadores licenciados (gov.uk, oficial)", url: "https://www.gov.uk/government/publications/register-of-licensed-sponsors-workers" },
+          { label: "Reino Unido · Dados de transparência migratória, incluindo ações contra patrocinadores (gov.uk, oficial)", url: "https://www.gov.uk/government/statistical-data-sets/migration-transparency-data" },
+          { label: "Work Rights Centre · Análise independente do perfil setorial das revogações, com dados obtidos por acesso à informação", url: "https://www.workrightscentre.org/publications/2026/home-office-enforcement-against-exploitative-sponsors-hits-all-time-high-but-fails-to-protect-victims/" },
           { label: "Reino Unido · Verificação do direito ao trabalho (gov.uk)", url: "https://www.gov.uk/check-job-applicant-right-to-work" },
           { label: "Reino Unido · Naturalização britânica (gov.uk)", url: "https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain" },
           SRC.ukSkilled,
@@ -1104,17 +1105,6 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
         ],
       },
       {
-        publishedAt: "2026-07-13",
-        title: "Novo controle de fronteira europeu (EES) começa a mexer com os aeroportos franceses",
-        body:
-          "A França está entre os países que começam a operar o EES, o novo sistema europeu de entrada e saída. Ele registra de forma biométrica os viajantes de fora da União Europeia a cada passagem de fronteira, substituindo o carimbo no passaporte por um registro digital. Aeroportos franceses já manifestaram preocupação com filas e tempo de processamento na fase inicial.\n\nO EES não é um visto, é um controle de fronteira. Para quem viaja com passaporte de fora do bloco, o efeito prático é reservar mais tempo no desembarque enquanto o sistema entra em ritmo. As regras de visto e de estadia seguem as mesmas.",
-        cta: "Vai entrar na França com passaporte de fora da UE? Reserve mais tempo na fronteira enquanto o EES se ajusta.",
-        sources: [
-          { label: "União Europeia · Sistema de Entrada/Saída (EES, oficial)", url: "https://travel-europe.europa.eu/ees_en" },
-          { label: "France Info · Immigration (Radio France)", url: "https://www.franceinfo.fr/societe/immigration.html" },
-        ],
-      },
-      {
         title: "França simplifica o Passeport Talent num portal único",
         body:
           "A França reorganizou o Passeport Talent, o visto pra profissionais qualificados, pesquisadores e empreendedores, num portal único online. O tempo médio de análise caiu pra cerca de 60 dias.\n\nÉ um dos caminhos mais previsíveis da Europa pra quem tem alto valor profissional e quer estabilidade num país do bloco do euro.",
@@ -1144,25 +1134,6 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       },
     ],
     countryTab: [
-      {
-        headline: "França entre a fila biométrica e a disputa política sobre vistos",
-        publishedAt: "2026-07-20",
-        standfirst:
-          "O novo sistema europeu de entrada e saída pressiona os aeroportos enquanto a possível ampliação de vistos a argelinos reabre o embate parlamentar sobre imigração.",
-        body:
-          "A França viveu em julho duas discussões que parecem distantes e não são. Na fronteira, o sistema europeu de entrada e saída começou a mostrar seu custo operacional, com aeroportos reclamando de filas e alertando para perda de competitividade turística. Na política, a hipótese de ampliar a concessão de vistos a cidadãos argelinos provocou reação imediata da direita e da extrema direita.\n\nO que une os dois assuntos é a mesma tensão de fundo. A França precisa de mobilidade para sustentar turismo, universidade e mercado de trabalho qualificado, e ao mesmo tempo opera num ambiente político em que qualquer flexibilização migratória vira munição eleitoral.\n\nPara quem planeja se mudar, o efeito imediato é logístico e não jurídico. O registro biométrico afeta o tempo de travessia, sobretudo na primeira entrada, e não altera critério de concessão de visto. Já o debate sobre vistos argelinos é bilateral, sem impacto direto sobre pedidos brasileiros.\n\nO ponto de atenção real é indireto. Ciclos políticos tensos costumam produzir instruções administrativas mais literais nas prefeituras e nos consulados, o que aparece na prática como exigência documental mais rígida em renovações de carte de séjour e em pedidos de naturalização. A recomendação editorial é preparar dossiê com margem, não no limite.",
-        keyFacts: [
-          "Sistema europeu de entrada e saída registra biometria de viajantes de fora do bloco",
-          "Aeroportos franceses relatam filas e alertam para impacto no turismo",
-          "Ampliação de vistos a argelinos provoca reação política intensa",
-          "Nenhuma mudança de critério anunciada para pedidos brasileiros",
-        ],
-        sources: [
-          { label: "União Europeia · Sistema de Entrada e Saída (oficial)", url: "https://travel-europe.europa.eu/ees_en" },
-          { label: "France-Visas · Portal oficial de vistos", url: "https://france-visas.gouv.fr/" },
-          SRC.frTalent,
-        ],
-      },
       {
         publishedAt: "2026-07-13",
         headline: "França na largada do EES: o novo controle de fronteira europeu chega aos aeroportos",
@@ -1208,18 +1179,6 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
         sources: [
           { label: "União Europeia · Sistema de Entrada e Saída (oficial)", url: "https://travel-europe.europa.eu/ees_en" },
           { label: "France-Visas · Portal oficial de vistos", url: "https://france-visas.gouv.fr/" },
-        ],
-      },
-      {
-        publishedAt: "2026-07-13",
-        headline: "EES: por que o novo controle de fronteira europeu importa mais do que parece",
-        standfirst:
-          "A troca do carimbo por um registro biométrico não muda quem entra na Europa, mas muda a experiência de entrar. E a França é uma das primeiras portas a sentir isso.",
-        body:
-          "À primeira vista, o EES parece um detalhe técnico: trocar o carimbo do passaporte por um registro digital. Mas mudanças de fronteira raramente são só técnicas. Elas alteram a experiência concreta de chegar, e é por isso que o sistema europeu de entrada e saída merece atenção de quem planeja a Europa pela França.\n\nO EES registra, de forma biométrica, cada entrada e saída de viajantes de fora da União Europeia nas fronteiras externas do espaço Schengen. O objetivo declarado é controlar melhor o tempo de permanência e reduzir fraudes de identidade. Para o viajante honesto, o efeito não é ser barrado, é passar por um processo novo, que na fase inicial custa tempo enquanto todos se adaptam.\n\nA França, com aeroportos de altíssimo volume, é um bom termômetro. Os alertas de filas que surgiram nos primeiros dias não são sinal de porta fechada, são a fricção normal de um sistema novo entrando em operação. A tendência, depois da adaptação, é que o registro digital agilize as travessias seguintes, já que os dados ficam guardados.\n\nPara a comunidade WiseHub, a leitura correta é não confundir mudança de processo com mudança de regra. O EES não mexe em visto nem em elegibilidade. O que ele pede é preparo prático: mais tempo de folga no primeiro desembarque e documentação em ordem. Entender essa diferença evita ansiedade desnecessária e ajuda a planejar a viagem com realismo.",
-        tags: ["França", "EES", "Fronteiras", "Europa"],
-        sources: [
-          { label: "União Europeia · Sistema de Entrada/Saída (EES, oficial)", url: "https://travel-europe.europa.eu/ees_en" },
         ],
       },
       {
