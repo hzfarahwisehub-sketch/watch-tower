@@ -554,6 +554,27 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   ca: {
     community: [
       {
+        title: "Canadá reajusta o piso salarial dos vistos de trabalho temporário",
+        publishedAt: "2026-07-20",
+        body:
+          "O governo federal elevou os limiares salariais que separam as faixas alta e baixa do Programa de Trabalhadores Estrangeiros Temporários. Na prática, é o número que define qual conjunto de regras se aplica ao seu contrato, do prazo do LMIA às obrigações do empregador.\n\nQuem está negociando uma oferta agora precisa conferir o salário mediano da província e da ocupação antes de assinar. Uma proposta que estava confortavelmente na faixa alta pode ter mudado de lado com o novo cálculo, e isso altera o caminho do visto.",
+        cta: "Está com uma oferta canadense em mãos? Confira o novo limiar da sua província antes de fechar o contrato, porque a faixa salarial define o rito do LMIA.",
+        sources: [
+          { label: "Canadá · Trabalhadores estrangeiros temporários (oficial)", url: "https://www.canada.ca/en/employment-social-development/services/foreign-workers.html" },
+        ],
+      },
+      {
+        title: "Julho fecha com as províncias em ritmo pesado de convites",
+        publishedAt: "2026-07-20",
+        body:
+          "Alberta convidou mais de 1.100 candidatos numa única rodada do AAIP, e a Colúmbia Britânica realizou a maior seleção provincial do ano. Saskatchewan anunciou aceleração no processamento das nomeações, e a Nova Escócia ampliou o alcance do programa para alcançar trabalhadores com permissões prestes a vencer.\n\nO recado combinado é claro. As províncias estão usando a nomeação como instrumento de retenção de quem já está no país, e não apenas de captação de quem está fora. Cada nomeação soma 600 pontos no Express Entry, o que praticamente assegura o convite federal.",
+        cta: "Tem permissão de trabalho vencendo nos próximos meses? Cheque o programa provincial onde você mora, porque vários passaram a priorizar exatamente esse perfil.",
+        sources: [
+          { label: "Alberta · AAIP (oficial)", url: "https://www.alberta.ca/alberta-advantage-immigration-program" },
+          { label: "British Columbia · BC PNP (oficial)", url: "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program" },
+        ],
+      },
+      {
         publishedAt: "2026-07-13",
         title: "Canadá reabre o LMIA de baixa remuneração em oito regiões",
         body:
@@ -632,6 +653,27 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     countryTab: [
       {
+        headline: "Canadá aperta o salário e as províncias correm para reter quem já está lá",
+        publishedAt: "2026-07-20",
+        standfirst:
+          "Novos limiares do programa de trabalho temporário mudam o rito do LMIA na mesma semana em que Alberta, Colúmbia Britânica, Saskatchewan e Nova Escócia aceleram nomeações.",
+        body:
+          "A semana consolidou dois movimentos que, juntos, redesenham o cálculo de quem planeja o Canadá. No plano federal, o governo reajustou os limiares salariais que dividem o Programa de Trabalhadores Estrangeiros Temporários entre faixa alta e faixa baixa. Esse número não é detalhe burocrático: ele determina a validade do LMIA, o volume de obrigações do empregador e a previsibilidade do processo.\n\nNo plano provincial, o ritmo foi de aceleração. Alberta emitiu mais de 1.100 convites numa rodada do AAIP. A Colúmbia Britânica realizou a maior seleção provincial do ano. Saskatchewan comunicou redução no tempo de processamento das nomeações, e a Nova Escócia ampliou os critérios para atingir trabalhadores estrangeiros com permissões próximas do vencimento.\n\nA leitura editorial é que o Canadá está deslocando o eixo. Com metas de residência permanente mais contidas, a nomeação provincial vira o mecanismo preferencial para converter quem já mora e trabalha no país em residente permanente, antes que essa gente perca status e precise sair.\n\nPara o candidato de fora, isso significa que a oferta de trabalho continua sendo a alavanca principal, mas o valor dela passou a ser lido com uma régua nova. Para quem já está no Canadá com permissão temporária, a janela de oportunidade está aberta agora e tende a ser disputada.",
+        keyFacts: [
+          "Limiares salariais do TFWP reajustados: definem faixa alta ou baixa e o rito do LMIA",
+          "Alberta: mais de 1.100 convites numa rodada do AAIP",
+          "Colúmbia Britânica: maior seleção provincial do ano",
+          "Nova Escócia amplia nomeações para trabalhadores com permissão vencendo",
+          "Cada nomeação provincial soma 600 pontos no Express Entry",
+        ],
+        sources: [
+          { label: "Canadá · Trabalhadores estrangeiros temporários (oficial)", url: "https://www.canada.ca/en/employment-social-development/services/foreign-workers.html" },
+          { label: "Alberta · AAIP (oficial)", url: "https://www.alberta.ca/alberta-advantage-immigration-program" },
+          { label: "British Columbia · BC PNP (oficial)", url: "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program" },
+          SRC.ircc,
+        ],
+      },
+      {
         publishedAt: "2026-07-13",
         headline: "Canadá abre julho com o trabalho no centro: LMIA reaberto e sorteios por categoria",
         standfirst:
@@ -701,6 +743,19 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       },
     ],
     blog: [
+      {
+        headline: "A nova aritmética canadense: menos vagas, mais valor em quem já está dentro",
+        publishedAt: "2026-07-20",
+        standfirst:
+          "Com o piso salarial reajustado e as províncias correndo atrás de trabalhadores com permissão vencendo, o Canadá deixa de premiar volume e passa a premiar posição.",
+        body:
+          "Durante quase uma década, a promessa canadense foi de escala. Metas ambiciosas de residência permanente, sorteios frequentes e a sensação de que bastava somar pontos e esperar. Essa fase acabou, e o que aconteceu em julho de 2026 ajuda a entender o que veio no lugar.\n\nO primeiro sinal é federal. Ao reajustar os limiares salariais do Programa de Trabalhadores Estrangeiros Temporários, o governo mexeu na régua que separa contratos de faixa alta dos de faixa baixa. É uma mudança silenciosa e de efeito grande, porque essa classificação determina prazo de validade do LMIA, exigências do empregador e, no fim, a viabilidade prática da contratação. Ofertas que pareciam sólidas podem ter atravessado a linha para o lado mais burocrático.\n\nO segundo sinal é provincial e vai na direção oposta, o que só parece contraditório. Alberta convidando mais de mil candidatos, a Colúmbia Britânica fazendo a maior rodada do ano e a Nova Escócia mirando explicitamente trabalhadores com permissão prestes a expirar não é sinal de abertura generalizada. É sinal de triagem. As províncias estão selecionando dentro do estoque que já existe no país, gente que fala o idioma local do mercado, já trabalha e não precisaria recomeçar a integração do zero.\n\nA consequência estratégica é direta. O Canadá está pagando um prêmio por posição, não por potencial. Quem já está lá dentro, mesmo em situação temporária, vale mais para o sistema do que um perfil equivalente esperando do lado de fora. Para o brasileiro que planeja a mudança, isso reordena o roteiro: a prioridade deixa de ser acumular pontos e passa a ser conquistar uma entrada legítima, ainda que temporária, com trabalho ou estudo, e depois converter.\n\nHá um risco embutido nesse desenho, e vale nomear. Um sistema que privilegia quem já está dentro cria pressão sobre quem tem permissão vencendo e depende de uma nomeação que pode não vir. Por isso a recomendação prática é a mesma para os dois lados da fronteira: não deixe o status chegar perto do vencimento sem um plano B mapeado, e trate cada rodada provincial como uma janela real, porque elas abrem e fecham sem aviso prévio.",
+        tags: ["Canadá", "Express Entry", "Nomeação provincial", "LMIA", "Mercado de trabalho"],
+        sources: [
+          { label: "Canadá · Trabalhadores estrangeiros temporários (oficial)", url: "https://www.canada.ca/en/employment-social-development/services/foreign-workers.html" },
+          SRC.ircc,
+        ],
+      },
       {
         publishedAt: "2026-07-13",
         headline: "O Canadá que contrata por recorte: a lógica das janelas segmentadas",
@@ -892,6 +947,27 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   uk: {
     community: [
       {
+        title: "Reino Unido publica novas regras e prepara a virada de outubro",
+        publishedAt: "2026-07-20",
+        body:
+          "O Home Office atualizou a orientação de verificação do direito ao trabalho antes do pacote de reformas previsto para outubro, e o novo Statement of Changes das regras de imigração já está publicado. São dois documentos que empregadores e patrocinados precisam ler juntos, porque um define a obrigação e o outro define o requisito.\n\nPara quem depende de patrocínio, o ponto de atenção é o mesmo de sempre. Falha de conformidade do empregador respinga no visto do trabalhador, e a fiscalização britânica vem sendo agressiva na revogação de licenças de patrocínio.",
+        cta: "Trabalha com visto patrocinado? Peça ao seu empregador a confirmação de que a checagem de direito ao trabalho está sendo feita no formato novo.",
+        sources: [
+          { label: "Reino Unido · Statement of Changes às regras de imigração (gov.uk)", url: "https://www.gov.uk/government/collections/immigration-rules-statement-of-changes" },
+          { label: "Reino Unido · Verificação do direito ao trabalho (gov.uk)", url: "https://www.gov.uk/check-job-applicant-right-to-work" },
+        ],
+      },
+      {
+        title: "Cidadania britânica ganha via de processamento prioritário",
+        publishedAt: "2026-07-20",
+        body:
+          "O Reino Unido passou a oferecer processamento prioritário para pedidos de naturalização, um serviço pago que encurta a espera de quem já cumpriu os requisitos de residência e de conhecimento do país.\n\nO serviço acelera a fila, não os critérios. Continua valendo o tempo mínimo de residência, o teste Life in the UK e a comprovação de idioma. Quem tem pendência de ausências do país fora do limite permitido não resolve nada pagando mais.",
+        cta: "Já cumpriu o tempo de residência? Vale comparar o custo da via prioritária com o tempo que você ganharia, mas confirme antes se não há ausências acima do limite.",
+        sources: [
+          { label: "Reino Unido · Naturalização britânica (gov.uk)", url: "https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain" },
+        ],
+      },
+      {
         publishedAt: "2026-07-13",
         title: "Reino Unido publica o Statement of Changes HC 259 e ajusta regras de fixação de filhos",
         body:
@@ -959,6 +1035,25 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     countryTab: [
       {
+        headline: "Reino Unido acerta a régua da conformidade antes das reformas de outubro",
+        publishedAt: "2026-07-20",
+        standfirst:
+          "Orientação atualizada de direito ao trabalho, novo Statement of Changes e prioridade paga na cidadania compõem um mesmo movimento: mais rigor na entrada, mais fluidez na saída.",
+        body:
+          "O Reino Unido chega ao fim de julho com três peças que só fazem sentido lidas em conjunto. A primeira é a atualização da orientação sobre verificação do direito ao trabalho, publicada como preparação para o pacote de reformas que entra em vigor em outubro. A segunda é o novo Statement of Changes às regras de imigração. A terceira é a abertura de uma via de processamento prioritário para pedidos de cidadania britânica.\n\nO padrão que emerge é de um sistema que aperta a porta de entrada e, ao mesmo tempo, desafoga a fila de quem já está integrado. A fiscalização sobre patrocinadores segue sendo o instrumento central: o Home Office tem revogado licenças de patrocínio em volume recorde, e cada revogação atinge diretamente trabalhadores que não cometeram falta alguma.\n\nNo mesmo período, os tribunais confirmaram a legalidade da política que recusa cidadania a refugiados que entraram no país de forma irregular, o que reforça a leitura de que a linha dura sobre entrada não é retórica de campanha e sim orientação consolidada.\n\nPara a comunidade que planeja o Reino Unido, a consequência prática é priorizar rotas com lastro institucional. Estudo com instituição licenciada e emprego com patrocinador de reputação verificável continuam sendo os caminhos que menos dependem de sorte regulatória.",
+        keyFacts: [
+          "Orientação de direito ao trabalho atualizada antes das reformas de outubro",
+          "Novo Statement of Changes às regras de imigração publicado em julho de 2026",
+          "Processamento prioritário disponível para pedidos de naturalização",
+          "Revogação de licenças de patrocínio segue em nível alto e atinge o visto do trabalhador",
+        ],
+        sources: [
+          { label: "Reino Unido · Statement of Changes às regras de imigração (gov.uk)", url: "https://www.gov.uk/government/collections/immigration-rules-statement-of-changes" },
+          { label: "Reino Unido · Verificação do direito ao trabalho (gov.uk)", url: "https://www.gov.uk/check-job-applicant-right-to-work" },
+          SRC.ukSkilled,
+        ],
+      },
+      {
         publishedAt: "2026-07-13",
         headline: "Reino Unido mexe nas regras e na fronteira: HC 259 e eGates para crianças",
         standfirst:
@@ -1010,6 +1105,20 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     blog: [
       {
+        headline: "O risco britânico que ninguém coloca na planilha: o seu patrocinador",
+        publishedAt: "2026-07-20",
+        standfirst:
+          "No Reino Unido de 2026, o maior perigo para um visto de trabalho não é o candidato ser recusado. É o empregador perder a licença depois que ele já se mudou.",
+        body:
+          "Quem planeja uma mudança para o Reino Unido normalmente monta a conta em cima de si mesmo. Salário mínimo exigido, nível de inglês, custo do Immigration Health Surcharge, tempo até o assentamento. É uma conta correta e incompleta, porque deixa de fora a variável que mais tem derrubado projetos: a saúde regulatória de quem patrocina.\n\nA atualização da orientação de verificação do direito ao trabalho, publicada agora como preparação para as reformas de outubro, deixa isso explícito. O Estado britânico terceirizou boa parte da fiscalização migratória para o empregador, e cobra caro quando a delegação falha. Licenças de patrocínio vêm sendo revogadas em volume recorde, e a consequência não recai apenas sobre a empresa. O trabalhador patrocinado perde a base do seu visto e passa a contar um prazo curto para encontrar outro patrocinador ou deixar o país.\n\nO efeito é perverso porque é assimétrico. O profissional cumpriu tudo, atravessou o oceano, matriculou filho em escola, assinou contrato de aluguel, e o chão pode ser puxado por uma falha administrativa de terceiro. Setores com uso intensivo de mão de obra estrangeira e margens apertadas, como cuidado a idosos e hospitalidade, concentram a maior parte dos casos.\n\nHá também um contramovimento útil de registrar. A abertura de processamento prioritário para pedidos de cidadania mostra que o sistema quer resolver mais rápido o caso de quem já está integrado e cumpriu os requisitos. Quem chega ao ponto de naturalizar sai definitivamente dessa exposição, porque deixa de depender de patrocínio, de status e de renovação.\n\nA recomendação prática, portanto, é tratar a escolha do empregador como parte da devida diligência migratória, e não apenas como decisão de carreira. Vale checar há quanto tempo a empresa consta na lista oficial de patrocinadores licenciados, se já houve suspensão anterior, qual o tamanho da operação e quantos estrangeiros ela patrocina. E vale, desde o primeiro dia, construir o relógio do assentamento com disciplina, porque o objetivo final não é o visto. É deixar de precisar dele.",
+        tags: ["Reino Unido", "Skilled Worker", "Patrocínio", "Cidadania britânica", "Compliance"],
+        sources: [
+          { label: "Reino Unido · Verificação do direito ao trabalho (gov.uk)", url: "https://www.gov.uk/check-job-applicant-right-to-work" },
+          { label: "Reino Unido · Naturalização britânica (gov.uk)", url: "https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain" },
+          SRC.ukSkilled,
+        ],
+      },
+      {
         publishedAt: "2026-07-13",
         headline: "Reino Unido: as mudanças que importam vêm nos Statements of Changes",
         standfirst:
@@ -1047,6 +1156,27 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   // ────────────────────────────── França ──────────────────────────────
   fr: {
     community: [
+      {
+        title: "Novo controle de fronteira europeu já incomoda os aeroportos franceses",
+        publishedAt: "2026-07-20",
+        body:
+          "Aeroportos franceses vêm relatando atrito com o sistema de entrada e saída da União Europeia, que registra biometria de viajantes de fora do bloco a cada travessia. A queixa do setor é de tempo de fila, e a preocupação declarada é perder turista para outros destinos.\n\nPara quem viaja com passaporte brasileiro, o efeito prático é planejar mais folga na conexão, principalmente no primeiro registro. A coleta inicial de digitais e foto é a etapa mais demorada, e só precisa ser feita uma vez dentro do período de validade do registro.",
+        cta: "Vai entrar na Europa pela França nos próximos meses? Chegue mais cedo no primeiro voo do trajeto, porque é nele que a biometria é coletada.",
+        sources: [
+          { label: "União Europeia · Sistema de Entrada e Saída (oficial)", url: "https://travel-europe.europa.eu/ees_en" },
+          { label: "France-Visas · Portal oficial de vistos", url: "https://france-visas.gouv.fr/" },
+        ],
+      },
+      {
+        title: "Política de vistos volta ao centro do debate francês",
+        publishedAt: "2026-07-20",
+        body:
+          "A possibilidade de ampliar a concessão de vistos a cidadãos argelinos reacendeu a disputa política sobre imigração na França, com forte reação da direita e da extrema direita. O tema é bilateral e específico, mas o efeito transborda: quando a imigração vira pauta eleitoral, o rito administrativo tende a ficar mais conservador.\n\nNada muda de imediato para quem está com processo em andamento. O sinal a observar é o tom das instruções consulares nos próximos meses, especialmente em renovações e pedidos de naturalização.",
+        cta: "Tem pedido em curso na França? Mantenha a documentação de residência e renda impecável, porque em ciclo político tenso a análise costuma ficar mais literal.",
+        sources: [
+          { label: "France-Visas · Portal oficial de vistos", url: "https://france-visas.gouv.fr/" },
+        ],
+      },
       {
         publishedAt: "2026-07-13",
         title: "Novo controle de fronteira europeu (EES) começa a mexer com os aeroportos franceses",
@@ -1089,6 +1219,25 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     countryTab: [
       {
+        headline: "França entre a fila biométrica e a disputa política sobre vistos",
+        publishedAt: "2026-07-20",
+        standfirst:
+          "O novo sistema europeu de entrada e saída pressiona os aeroportos enquanto a possível ampliação de vistos a argelinos reabre o embate parlamentar sobre imigração.",
+        body:
+          "A França viveu em julho duas discussões que parecem distantes e não são. Na fronteira, o sistema europeu de entrada e saída começou a mostrar seu custo operacional, com aeroportos reclamando de filas e alertando para perda de competitividade turística. Na política, a hipótese de ampliar a concessão de vistos a cidadãos argelinos provocou reação imediata da direita e da extrema direita.\n\nO que une os dois assuntos é a mesma tensão de fundo. A França precisa de mobilidade para sustentar turismo, universidade e mercado de trabalho qualificado, e ao mesmo tempo opera num ambiente político em que qualquer flexibilização migratória vira munição eleitoral.\n\nPara quem planeja se mudar, o efeito imediato é logístico e não jurídico. O registro biométrico afeta o tempo de travessia, sobretudo na primeira entrada, e não altera critério de concessão de visto. Já o debate sobre vistos argelinos é bilateral, sem impacto direto sobre pedidos brasileiros.\n\nO ponto de atenção real é indireto. Ciclos políticos tensos costumam produzir instruções administrativas mais literais nas prefeituras e nos consulados, o que aparece na prática como exigência documental mais rígida em renovações de carte de séjour e em pedidos de naturalização. A recomendação editorial é preparar dossiê com margem, não no limite.",
+        keyFacts: [
+          "Sistema europeu de entrada e saída registra biometria de viajantes de fora do bloco",
+          "Aeroportos franceses relatam filas e alertam para impacto no turismo",
+          "Ampliação de vistos a argelinos provoca reação política intensa",
+          "Nenhuma mudança de critério anunciada para pedidos brasileiros",
+        ],
+        sources: [
+          { label: "União Europeia · Sistema de Entrada e Saída (oficial)", url: "https://travel-europe.europa.eu/ees_en" },
+          { label: "France-Visas · Portal oficial de vistos", url: "https://france-visas.gouv.fr/" },
+          SRC.frTalent,
+        ],
+      },
+      {
         publishedAt: "2026-07-13",
         headline: "França na largada do EES: o novo controle de fronteira europeu chega aos aeroportos",
         standfirst:
@@ -1123,6 +1272,19 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     blog: [
       {
+        headline: "A fronteira europeia virou banco de dados, e isso muda o seu planejamento",
+        publishedAt: "2026-07-20",
+        standfirst:
+          "O sistema de entrada e saída da União Europeia substitui o carimbo por registro biométrico. O incômodo é de fila hoje, mas o efeito real é de contagem de dias.",
+        body:
+          "Durante décadas, a regra dos 90 dias em cada período de 180 na área Schengen foi, na prática, uma regra semiautomática. Existia no papel, dependia de carimbos manuais em passaportes e de fiscalização desigual entre fronteiras. Muita gente viveu anos numa zona cinzenta sem saber exatamente quantos dias havia acumulado.\n\nEssa zona cinzenta está fechando. Com o sistema europeu de entrada e saída, cada travessia de viajante de fora do bloco passa a ser registrada com biometria e vinculada a um cadastro central. O carimbo some, e no lugar dele entra uma contagem precisa, automática e compartilhada entre países.\n\nO ruído de julho na França foi sobre o sintoma. Aeroportos reclamaram de tempo de processamento e alertaram para o risco de o turista escolher outro continente. É uma preocupação legítima e provavelmente transitória, porque o gargalo se concentra na primeira coleta de digitais e foto, feita uma única vez dentro da validade do registro.\n\nO que merece atenção de quem planeja mudança é a consequência estrutural, não a fila. A partir do momento em que a contagem é exata, o excedente de dias deixa de ser risco teórico e passa a ser evento detectável em qualquer fronteira do bloco. Isso importa muito para três perfis comuns na comunidade: o nômade digital que circula entre países europeus sem residência formal, o investidor que passa temporadas longas antes de decidir onde fixar base, e a família que faz visitas prolongadas enquanto aguarda um processo de residência.\n\nA recomendação prática é simples e vale começar agora. Mantenha o seu próprio registro de entradas e saídas, com datas exatas, e trate a regra dos 90 em 180 como cálculo contínuo, não como estimativa. Se o seu projeto envolve permanência longa, pare de contar com tolerância de fronteira e busque a via de residência correspondente, seja estudo, trabalho qualificado ou rendimento próprio. A Europa não ficou mais fechada nesta mudança. Ela ficou mais exata, e exatidão é péssima para quem improvisa.",
+        tags: ["França", "Schengen", "Fronteiras", "Nômade digital", "Planejamento"],
+        sources: [
+          { label: "União Europeia · Sistema de Entrada e Saída (oficial)", url: "https://travel-europe.europa.eu/ees_en" },
+          { label: "France-Visas · Portal oficial de vistos", url: "https://france-visas.gouv.fr/" },
+        ],
+      },
+      {
         publishedAt: "2026-07-13",
         headline: "EES: por que o novo controle de fronteira europeu importa mais do que parece",
         standfirst:
@@ -1149,6 +1311,26 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   // ──────────────────────────── Estados Unidos ────────────────────────────
   us: {
     community: [
+      {
+        title: "EUA revogam a regra de encargo público de 2022, com novo padrão em setembro",
+        publishedAt: "2026-07-20",
+        body:
+          "O USCIS anunciou a revogação da regulamentação de encargo público editada em 2022, e o novo padrão de análise passa a valer em 18 de setembro de 2026. Encargo público é o critério que avalia se o solicitante pode se tornar dependente de assistência do governo, e ele pesa em pedidos de residência permanente.\n\nNa prática, quem tem processo em andamento precisa acompanhar qual padrão se aplica à sua data de decisão. Comprovação de renda, patrocínio financeiro e histórico de uso de benefícios voltam ao centro da preparação do dossiê.",
+        cta: "Tem pedido de green card em curso? Reforce agora a documentação de renda e de patrocínio financeiro, porque o padrão de análise muda em setembro.",
+        sources: [
+          { label: "USCIS · Revogação da regra de encargo público de 2022 (oficial)", url: "https://www.uscis.gov/newsroom/news-releases/us-citizenship-and-immigration-services-rescinds-2022-public-charge-regulation" },
+        ],
+      },
+      {
+        title: "Estudante e intercambista perdem a admissão por prazo indeterminado",
+        publishedAt: "2026-07-20",
+        body:
+          "O Departamento de Segurança Interna finalizou a regra que encerra a chamada duração de status para os vistos F, J e I. Até aqui, estudantes e intercambistas eram admitidos pelo tempo do programa, sem data fixa de término no documento de entrada. Com a mudança, a admissão passa a ter prazo determinado, e a extensão vira pedido formal.\n\nÉ uma alteração de rotina administrativa com efeito real. Perder o prazo deixa de ser uma zona cinzenta e passa a gerar permanência fora de status, com todas as consequências que isso traz para vistos futuros.",
+        cta: "Está nos EUA com visto de estudante ou intercâmbio? Anote a data de término da sua admissão e programe o pedido de extensão com folga.",
+        sources: [
+          { label: "EUA · Estudantes internacionais (Study in the States, oficial)", url: "https://studyinthestates.dhs.gov/" },
+        ],
+      },
       {
         publishedAt: "2026-07-07",
         title: "EUA abrem escritório de asilo em Atlanta a partir de 8 de julho",
@@ -1187,6 +1369,26 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       },
     ],
     countryTab: [
+      {
+        headline: "EUA fecham julho com três mudanças que atingem estudante, patrocinado e investidor",
+        publishedAt: "2026-07-20",
+        standfirst:
+          "Revogação da regra de encargo público, fim da admissão por duração de status para F, J e I e teto do H-1B atingido sem segunda loteria compõem o novo mapa.",
+        body:
+          "A semana concentrou decisões que mudam o cálculo de quem planeja os Estados Unidos. O USCIS revogou a regulamentação de encargo público de 2022 e fixou 18 de setembro de 2026 como início do novo padrão de análise. É um critério que avalia a probabilidade de o solicitante depender de assistência governamental, e ele incide diretamente sobre pedidos de residência permanente.\n\nNa mesma janela, o Departamento de Segurança Interna finalizou a regra que encerra a admissão por duração de status para os vistos F, de estudante, J, de intercâmbio, e I, de imprensa estrangeira. A lógica antiga admitia a pessoa pelo tempo do programa. A nova fixa data de término e transforma a continuidade em pedido formal de extensão.\n\nNo capítulo do trabalho qualificado, o teto do H-1B para o ano fiscal de 2027 foi atingido, sem expectativa de segunda loteria. Quem não foi selecionado precisa olhar para alternativas como O-1, L-1 ou o caminho acadêmico com instituições isentas de teto.\n\nHá ainda um movimento em fase inicial que merece registro: o Departamento do Trabalho sinalizou proposta de modernização do PERM, o processo de certificação laboral que antecede boa parte dos pedidos de residência por emprego. Nada está em vigor, mas o assunto entra no radar de planejamento de médio prazo.",
+        keyFacts: [
+          "Regra de encargo público de 2022 revogada; novo padrão vale a partir de 18 de setembro de 2026",
+          "Vistos F, J e I deixam de ter admissão por duração de status e passam a ter prazo determinado",
+          "Teto do H-1B para o ano fiscal de 2027 atingido, sem segunda loteria prevista",
+          "Departamento do Trabalho sinaliza proposta de modernização do PERM",
+        ],
+        sources: [
+          { label: "USCIS · Revogação da regra de encargo público de 2022 (oficial)", url: "https://www.uscis.gov/newsroom/news-releases/us-citizenship-and-immigration-services-rescinds-2022-public-charge-regulation" },
+          { label: "EUA · Estudantes internacionais (Study in the States, oficial)", url: "https://studyinthestates.dhs.gov/" },
+          SRC.usH1b,
+          { label: "Federal Register · Certificação laboral (Employment and Training Administration)", url: "https://www.federalregister.gov/agencies/employment-and-training-administration" },
+        ],
+      },
       {
         publishedAt: "2026-07-07",
         headline: "USCIS abre escritório de asilo em Atlanta e amplia atendimento no sudeste dos EUA",
@@ -1231,7 +1433,22 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
         sources: [SRC.usHealthcare],
       },
     ],
-    blog: [],
+    blog: [
+      {
+        headline: "Nos EUA, o prazo virou o novo critério de seleção",
+        publishedAt: "2026-07-20",
+        standfirst:
+          "Fim da admissão por duração de status, encargo público reescrito e H-1B esgotado apontam para a mesma direção: menos margem administrativa, mais dependência de calendário.",
+        body:
+          "Existe uma forma tradicional de ler mudanças migratórias americanas, que é medir se ficou mais fácil ou mais difícil entrar. Ela é insuficiente para explicar o que aconteceu em julho de 2026, porque as três decisões relevantes do período não mexeram principalmente em quem pode entrar. Mexeram em quanto tempo a pessoa tem, e em quem controla esse relógio.\n\nComece pelo fim da duração de status para vistos F, J e I. Por décadas, estudante e intercambista eram admitidos pela extensão do programa acadêmico. Se o curso atrasava, se a pesquisa se estendia, o vínculo com a instituição sustentava a permanência. Com a admissão por prazo determinado, esse elástico acaba. A continuidade passa a exigir pedido formal, análise e decisão, o que introduz risco de indeferimento onde antes havia automatismo. Nada disso torna o estudo nos Estados Unidos inviável, mas encarece o descuido.\n\nA segunda peça é a revogação da regra de encargo público de 2022, com padrão novo valendo a partir de 18 de setembro. Aqui o efeito é de calendário puro. Processos decididos antes e depois dessa data podem ser avaliados por réguas diferentes, e o solicitante não controla a fila. A resposta racional é preparar o dossiê para o critério mais exigente possível, com renda comprovada, patrocínio financeiro sólido e histórico limpo de dependência de benefícios.\n\nA terceira é o esgotamento do teto do H-1B para o ano fiscal de 2027, sem segunda loteria. É a confirmação anual de que a principal via de trabalho qualificado americana continua sendo sorteio, não mérito. Para o profissional brasileiro de tecnologia, a lição repetida é que apostar exclusivamente no H-1B é apostar em loteria, e vias como O-1, L-1 e emprego em instituição acadêmica isenta de teto deixaram de ser plano B para virar planejamento primário.\n\nO fio que costura tudo é a redução de margem administrativa. O sistema americano está trocando discricionariedade e elasticidade por datas rígidas e ritos formais. Isso favorece um perfil específico de candidato: o que planeja com antecedência, documenta tudo e não depende de tolerância. E penaliza duramente quem opera no improviso, mesmo estando de boa-fé.\n\nA recomendação prática que sai daí é pouco glamourosa e muito eficaz. Monte um calendário migratório próprio, com data de término de admissão, data limite para pedido de extensão, validade de documentos e marcos de fila. Nos Estados Unidos de 2026, perder uma data passou a custar mais caro do que não ter o perfil ideal.",
+        tags: ["Estados Unidos", "H-1B", "Visto de estudante", "Green card", "Planejamento"],
+        sources: [
+          { label: "USCIS · Revogação da regra de encargo público de 2022 (oficial)", url: "https://www.uscis.gov/newsroom/news-releases/us-citizenship-and-immigration-services-rescinds-2022-public-charge-regulation" },
+          { label: "EUA · Estudantes internacionais (Study in the States, oficial)", url: "https://studyinthestates.dhs.gov/" },
+          SRC.usH1b,
+        ],
+      },
+    ],
   },
 
 "is": {
