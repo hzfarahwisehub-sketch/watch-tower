@@ -1960,7 +1960,26 @@ export type PostablePiece = {
   keyFacts?: string[];
   tags?: string[];
   sources?: EditorialSource[];
+  /** Data ISO (YYYY-MM-DD) em que a peça foi redigida. Ausente = peça legada:
+   *  o relatório renderiza sem carimbo de data e sem selo, nunca quebra. */
+  publishedAt?: string;
+  /** Data ISO em que a peça foi marcada como já postada/utilizada. */
+  usedAt?: string;
 };
+
+/**
+ * Ordem de leitura das peças: mais NOVA primeiro, peça sem data por último.
+ * Usada como sort estável, então peças empatadas (mesma data, ou ambas sem
+ * data) mantêm a ordem de país em que foram achatadas.
+ */
+function byPublishedDesc(a: PostablePiece, b: PostablePiece): number {
+  const da = a.publishedAt ?? "";
+  const db = b.publishedAt ?? "";
+  if (da === db) return 0;
+  if (!da) return 1;
+  if (!db) return -1;
+  return db < da ? -1 : 1;
+}
 
 type EdCountryLike = { code: string; name: string; editorial?: CountryEditorial };
 
@@ -1979,23 +1998,42 @@ export function buildPostables(
       if (!ed) continue;
       if (dest.key === "community") {
         for (const p of ed.community)
-          pieces.push({ destination: "community", countryCode: c.code, countryName: c.name, title: p.title, body: p.body, cta: p.cta, sources: p.sources });
+          pieces.push({ destination: "community", countryCode: c.code, countryName: c.name, title: p.title, body: p.body, cta: p.cta, sources: p.sources, publishedAt: p.publishedAt, usedAt: p.usedAt });
       } else if (dest.key === "countryTab") {
         for (const a of ed.countryTab)
-          pieces.push({ destination: "countryTab", countryCode: c.code, countryName: c.name, title: a.headline, standfirst: a.standfirst, body: a.body, keyFacts: a.keyFacts, sources: a.sources });
+          pieces.push({ destination: "countryTab", countryCode: c.code, countryName: c.name, title: a.headline, standfirst: a.standfirst, body: a.body, keyFacts: a.keyFacts, sources: a.sources, publishedAt: a.publishedAt, usedAt: a.usedAt });
       } else if (dest.key === "blog") {
         for (const p of ed.blog)
-          pieces.push({ destination: "blog", countryCode: c.code, countryName: c.name, title: p.headline, standfirst: p.standfirst, body: p.body, tags: p.tags, sources: p.sources });
+          pieces.push({ destination: "blog", countryCode: c.code, countryName: c.name, title: p.headline, standfirst: p.standfirst, body: p.body, tags: p.tags, sources: p.sources, publishedAt: p.publishedAt, usedAt: p.usedAt });
       } else if (dest.key === "youtube") {
         for (const p of ed.youtube ?? [])
-          pieces.push({ destination: "youtube", countryCode: c.code, countryName: c.name, title: p.title, standfirst: p.hook, body: p.body, cta: p.cta, sources: p.sources });
+          pieces.push({ destination: "youtube", countryCode: c.code, countryName: c.name, title: p.title, standfirst: p.hook, body: p.body, cta: p.cta, sources: p.sources, publishedAt: p.publishedAt, usedAt: p.usedAt });
       } else if (dest.key === "instagram") {
         for (const p of ed.instagram ?? [])
-          pieces.push({ destination: "instagram", countryCode: c.code, countryName: c.name, title: p.title, body: p.body, cta: p.cta, tags: p.hashtags, sources: p.sources });
+          pieces.push({ destination: "instagram", countryCode: c.code, countryName: c.name, title: p.title, body: p.body, cta: p.cta, tags: p.hashtags, sources: p.sources, publishedAt: p.publishedAt, usedAt: p.usedAt });
       }
     }
+    // Mais NOVA primeiro dentro do destino, pra peça fresca não ficar enterrada
+    // sob o acervo do primeiro país. Sort estável: empates preservam a ordem
+    // de país acima.
+    pieces.sort(byPublishedDesc);
     return { dest, pieces };
   });
+}
+
+/**
+ * Quantas peças prontas pra postar são NOVAS (publishedAt >= cutoffISO).
+ * O corte vem do renderizador, que o calcula a partir da data de geração do
+ * relatório. Peça sem data nunca conta como nova.
+ */
+export function countFreshPostables(
+  countries: ReadonlyArray<EdCountryLike>,
+  cutoffISO: string,
+): number {
+  return buildPostables(countries).reduce(
+    (sum, g) => sum + g.pieces.filter((p) => (p.publishedAt ?? "").slice(0, 10) >= cutoffISO).length,
+    0,
+  );
 }
 
 /** Fontes/materiais consolidados por país (deduplicados por URL). */

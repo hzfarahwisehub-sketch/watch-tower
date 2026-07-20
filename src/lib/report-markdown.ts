@@ -26,12 +26,17 @@ import {
   categoryName,
   publicAssetUrl,
   provenance,
+  fmtPieceDate,
+  isFreshPiece,
+  freshCutoffISO,
+  FRESH_WINDOW_DAYS,
 } from "@/lib/report-data";
 import {
   DESTINATIONS,
   buildPostables,
   consolidatedSources,
   totalPostables,
+  countFreshPostables,
   type PostablePiece,
 } from "@/lib/editorial";
 
@@ -58,11 +63,14 @@ function sourcesInline(sources?: PostablePiece["sources"]): string {
 }
 
 /** Uma peça pronta pra postar. */
-function pieceMd(p: PostablePiece, dot: string, tag: string): string[] {
+function pieceMd(p: PostablePiece, dot: string, tag: string, cutoffISO: string): string[] {
   const lines: string[] = [];
-  lines.push(`### ${dot} ${flagEmoji(p.countryCode)} ${p.countryName} · ${p.title}`);
+  const when = fmtPieceDate(p.publishedAt);
+  const novo = isFreshPiece(p.publishedAt, cutoffISO) ? `🆕 **NOVO** · ` : ``;
+  lines.push(`### ${novo}${dot} ${flagEmoji(p.countryCode)} ${p.countryName} · ${p.title}`);
   lines.push(``);
-  lines.push(`**[${tag}]**`);
+  // Peça legada sem publishedAt sai sem carimbo, sem quebrar a linha da etiqueta.
+  lines.push(`**[${tag}]**${when ? ` · 📅 ${when}` : ``}`);
   lines.push(``);
   if (p.standfirst) {
     lines.push(`_${p.standfirst}_`);
@@ -254,6 +262,8 @@ export function renderMarkdown(data: ReportData): string {
   const lines: string[] = [];
   const postables = buildPostables(countries);
   const postCount = totalPostables(countries);
+  const cutoffISO = freshCutoffISO(data.generatedAt);
+  const freshCount = countFreshPostables(countries, cutoffISO);
   const sourcesByCountry = consolidatedSources(countries);
 
   lines.push(`# WiseHub · Relatório Completo`);
@@ -269,6 +279,7 @@ export function renderMarkdown(data: ReportData): string {
   lines.push(`| Métrica | Valor |`);
   lines.push(`|---|---|`);
   lines.push(`| 📝 Peças prontas pra postar | **${postCount}** |`);
+  lines.push(`| 🆕 Peças novas (últimos ${FRESH_WINDOW_DAYS} dias) | **${freshCount}** |`);
   lines.push(`| ✍️ Países com conteúdo editorial | **${stats.editorialCountries}** |`);
   lines.push(`| 🌎 Países monitorados | **${stats.totalCountries}** |`);
   lines.push(`| 📜 Boletins oficiais via cron | **${stats.totalBulletins}** |`);
@@ -316,7 +327,7 @@ export function renderMarkdown(data: ReportData): string {
       lines.push(``);
       continue;
     }
-    pieces.forEach((p) => lines.push(...pieceMd(p, dest.dot, dest.tag)));
+    pieces.forEach((p) => lines.push(...pieceMd(p, dest.dot, dest.tag, cutoffISO)));
   }
   lines.push(`---`);
   lines.push(``);

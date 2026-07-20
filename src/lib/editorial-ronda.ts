@@ -24,6 +24,44 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
   us: {
     blog: [
       {
+        "publishedAt": "2026-07-20",
+        "headline": "Do anúncio ao texto: as regras americanas que saíram do comunicado e ganharam data no diário oficial",
+        "standfirst": "Em poucos dias, a revogação do public charge e o fim do duration of status deixaram de ser comunicados de imprensa e viraram regra publicada, com data de vigência, prazo definido, formulário novo e, num dos casos, uma ressalva do Congresso. É nesse detalhe escrito que o efeito prático de cada mudança finalmente aparece.",
+        "body": "Existe uma distância importante entre um órgão anunciar que vai mudar uma regra e essa regra aparecer publicada, por escrito, no Federal Register, o diário oficial federal americano. O anúncio dá o rumo. O texto publicado dá a data, o alcance, as exceções e a regra de transição, que é justamente o que permite a alguém saber se o próprio processo cai no critério velho ou no novo. Entre 16 e 20 de julho de 2026, duas mudanças que vinham sendo tratadas como anúncio completaram esse percurso, e uma terceira notícia fechou o ciclo anual de um dos vistos de trabalho mais procurados do país.\n\nO caso mais ilustrativo é o do public charge, o encargo público, o critério que avalia a probabilidade de alguém se tornar dependente de assistência governamental e que pesa em pedidos de visto e de residência permanente. Quando a USCIS anunciou a revogação da regra de 2022, o texto detalhado ainda não existia publicamente, e a leitura mais comum foi de afrouxamento. O texto saiu em 20 de julho de 2026 e mostra um quadro diferente do que essa leitura sugeria.\n\nO documento remove do regulamento os dispositivos 8 CFR 212.20 a 212.23, que traziam a cláusula de aplicabilidade, as definições fechadas, o método de análise e a lista de isenções, e não coloca nada no lugar. Em vez disso, o DHS afirma que se afasta de um critério de linha rígida de dependência primária e retoma a avaliação de totalidade das circunstâncias, feita caso a caso, com margem maior de decisão para o oficial que analisa o pedido. Os elementos que esse oficial poderá pesar estão listados: os fatores obrigatórios da seção 212(a)(4)(B) da Immigration and Nationality Act, o recebimento de benefícios públicos sujeitos a teste de renda, outros fatores individualizados do caso e dados empíricos sobre autossuficiência.\n\nA diferença conceitual é decisiva para quem planeja um processo. Sair de um regulamento detalhado para uma análise discricionária não significa necessariamente critério mais fácil, significa critério menos previsível, porque a régua deixa de estar escrita no regulamento e passa a depender da leitura de quem examina o caso. Reforça essa leitura o fato de que o DHS registrou 8.846 comentários públicos sobre a proposta, a maioria deles contrária, e mesmo assim publicou a regra final nos termos originais. A USCIS informou que editará uma orientação infralegal, sem força de lei, para guiar os oficiais, com vigência na mesma data e integrada ao USCIS Policy Manual.\n\nO texto também traz a resposta prática que faltava sobre quem já recebeu benefícios. A regra vale para pedidos de admissão feitos a partir de 18 de setembro de 2026 e para pedidos de ajuste de status postados ou enviados eletronicamente a partir dessa data. Benefícios recebidos antes desse marco continuam sendo avaliados de forma consistente com a regra de 2022. É uma linha divisória objetiva, e ela só existe porque o texto foi publicado.\n\nJunto com a data vem uma exigência burocrática que merece atenção justamente por parecer pequena. A USCIS publicará uma edição revisada do Form I-485, e edições anteriores postadas ou enviadas eletronicamente a partir de 18 de setembro de 2026 não serão aceitas. É o tipo de detalhe que não muda o mérito de nenhum pedido e ainda assim pode devolver um processo inteiro por causa do cabeçalho do formulário.\n\nO segundo caso é o da regra que encerra o duration of status para os vistos F, J e I e institui um prazo fixo de admissão. Publicada no Federal Register em 17 de julho de 2026, ela ganhou vigência definida em 15 de setembro de 2026 e, mais importante, ganhou número. Para o estudante F, a admissão passa a corresponder à duração do programa informada no Form I-20, limitada a quatro anos, somada a 30 dias para a chegada e 30 dias para a saída. Para o J o limite também é de até quatro anos, e para o I, de mídia estrangeira, é de 240 dias. Quem precisar de mais tempo terá de pedir Extension of Stay à USCIS, procedimento que hoje não faz parte da rotina de quem está em duration of status.\n\nSó que o próprio documento adverte que a regra foi classificada como major rule, sujeita à revisão do Congresso, e que, se essa data mudar ao fim da revisão, o DHS publicará novo documento para fixar a data efetiva ou para encerrar a regra. Quem depende desse calendário precisa tratar 15 de setembro como a data vigente hoje, não como um ponto fixo definitivo.\n\nO mesmo texto traz uma transição que passou despercebida no anúncio e que é mais generosa do que se noticiou de início. Durante 244 dias contados da publicação, prazo que hoje se encerra em 18 de março de 2027, estudantes F-1 em duration of status com Form I-765 pendente na entrada em vigor da regra, ou que protocolarem o I-765 a tempo dentro desse período, em geral ficam dispensados de apresentar o Form I-539 apenas para estender a permanência durante o OPT ou o STEM OPT pedido. Também está confirmada a redução de 60 para 30 dias do prazo para preparar a saída do país após a conclusão do curso ou da prática autorizada. São detalhes operacionais que mudam a rotina concreta de estudantes internacionais e que nenhum comunicado de imprensa havia especificado.\n\nA terceira notícia da semana não é regra, é contagem. Em 17 de julho de 2026, a USCIS informou ter recebido petições suficientes para atingir o teto de 65 mil vistos H-1B da cota regular e as 20 mil vagas da isenção para diploma de pós-graduação obtido nos Estados Unidos, referentes ao ano fiscal de 2027, e declarou que não conduzirá rodadas adicionais de seleção. O ciclo sujeito a cota está fechado, e quem não foi selecionado depende do próximo período de inscrição ou de caminhos isentos do teto anual. Foi também o primeiro ciclo sob a seleção ponderada por faixa salarial, em vigor desde fevereiro de 2026, em que cada registro recebe de uma a quatro entradas no sorteio conforme o salário oferecido, o que muda o cálculo de quem vai tentar de novo.\n\nO fio que costura as três é o calendário. Quem acompanha imigração americana costuma reagir a manchete de anúncio e depois perder de vista a publicação do texto, que é onde as datas nascem. Neste momento, há dois marcos escritos e verificáveis, 15 e 18 de setembro de 2026, um prazo de transição que vai até março de 2027 e um ciclo anual encerrado. Nenhum deles é motivo de pânico nem de comemoração isolada, mas todos pedem a mesma atitude: conferir a fonte oficial, identificar em qual lado da data de transição o seu caso cai e discutir os próximos passos com um profissional habilitado antes de qualquer decisão. Conteúdo informativo ajuda a entender o cenário, mas não substitui a análise individual de um advogado de imigração.",
+        "tags": [
+          "EUA",
+          "USCIS",
+          "DHS",
+          "Public Charge",
+          "Vistos de Estudante",
+          "H-1B",
+          "Federal Register",
+          "Green Card"
+        ],
+        "sources": [
+          {
+            "label": "Federal Register · Public Charge Ground of Inadmissibility (regra final, 20/jul/2026)",
+            "url": "https://www.federalregister.gov/documents/2026/07/20/2026-14539/public-charge-ground-of-inadmissibility"
+          },
+          {
+            "label": "Federal Register · Establishing a Fixed Time Period of Admission and an Extension of Stay Procedure for Nonimmigrant Academic Students, Exchange Visitors, and Representatives of Foreign Information Media (17/jul/2026)",
+            "url": "https://www.federalregister.gov/documents/2026/07/17/2026-14439/establishing-a-fixed-time-period-of-admission-and-an-extension-of-stay-procedure-for-nonimmigrant"
+          },
+          {
+            "label": "USCIS · USCIS Reaches Fiscal Year 2027 H-1B Cap (17/jul/2026)",
+            "url": "https://www.uscis.gov/newsroom/alerts/uscis-reaches-fiscal-year-2027-h-1b-cap"
+          },
+          {
+            "label": "USCIS · News Release: Rescinds 2022 Public Charge Regulation",
+            "url": "https://www.uscis.gov/newsroom/news-releases/us-citizenship-and-immigration-services-rescinds-2022-public-charge-regulation"
+          },
+          {
+            "label": "DHS · Study in the States: Final Rule Quick Facts",
+            "url": "https://studyinthestates.dhs.gov/elimination-of-duration-of-status-quick-facts"
+          }
+        ]
+      },
+      {
       publishedAt: "2026-07-17",
       headline: "Cinco sinais de que a imigração legal nos EUA está mudando de forma em 2026",
       standfirst: "Entre a revogação de uma regra, um prazo fixo novo para visto de estudante, um memorando que trata o green card interno como exceção e uma taxa de US$100 mil em disputa na Justiça, o desenho da imigração legal americana ganhou contornos novos nas últimas semanas.",
@@ -41,6 +79,42 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
     },
     ],
     community: [
+      {
+        "publishedAt": "2026-07-20",
+        "title": "USCIS atinge o teto de H-1B do ano fiscal de 2027 e descarta nova rodada de seleção",
+        "body": "A USCIS informou em 17 de julho de 2026 que recebeu petições suficientes para atingir o teto de 65 mil vistos H-1B da cota regular e as 20 mil vagas adicionais da isenção destinada a quem tem diploma de pós-graduação obtido nos Estados Unidos, conhecida como master's cap, referentes ao ano fiscal de 2027. A janela para protocolar as petições dos registros selecionados foi de 1º de abril a 30 de junho de 2026.\n\nO próprio comunicado da agência responde a pergunta que mais aparece nesse momento do ciclo. Como o teto foi atingido, a USCIS informou que não conduzirá rodadas adicionais de seleção de registros para o ano fiscal de 2027. Não se trata de leitura de escritório de advocacia nem de expectativa de mercado, e sim do que a própria agência declarou. Quem não teve o registro selecionado depende do próximo período de inscrição.\n\nEste foi o primeiro ciclo conduzido sob o novo processo de seleção ponderada por faixa salarial, em vigor desde 27 de fevereiro de 2026, em que cada registro recebe de uma a quatro entradas no sorteio conforme o salário oferecido se compare aos níveis de salário prevalecente definidos pelo Department of Labor. Na prática, quem for tentar o próximo ciclo precisa saber que a faixa salarial da oferta passou a influenciar diretamente a chance de seleção.\n\nVale lembrar que nem toda petição de H-1B passa pela cota. A USCIS segue aceitando e processando petições isentas do teto, incluindo extensões, emendas e mudança de empregador, além de mudanças de status protocoladas por empregadores isentos. É isso que o candidato precisa checar com quem cuida do seu caso antes de concluir que a porta fechou de vez.",
+        "cta": "Teve registro de H-1B não selecionado neste ciclo? Confirme com seu empregador ou com um advogado de imigração habilitado quais caminhos seguem disponíveis, incluindo petições isentas da cota, e como a faixa salarial da oferta pode pesar no próximo ciclo. Conteúdo informativo não substitui a análise de um profissional.",
+        "sources": [
+          {
+            "label": "USCIS · USCIS Reaches Fiscal Year 2027 H-1B Cap (17/jul/2026)",
+            "url": "https://www.uscis.gov/newsroom/alerts/uscis-reaches-fiscal-year-2027-h-1b-cap"
+          },
+          {
+            "label": "USCIS · H-1B Cap Season",
+            "url": "https://www.uscis.gov/working-in-the-united-states/temporary-workers/h-1b-specialty-occupations/h-1b-cap-season"
+          }
+        ]
+      },
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Fim do duration of status para F, J e I: prazo de até 4 anos, vigência em 15 de setembro e ressalva do Congresso",
+        "body": "A regra final que substitui o duration of status por um prazo fixo de admissão nos vistos F, de estudante, J, de intercâmbio, e I, de representantes de mídia estrangeira, foi publicada no Federal Register em 17 de julho de 2026 e trouxe a informação que faltava no anúncio inicial: a vigência foi fixada em 15 de setembro de 2026.\n\nO ponto central da mudança é o prazo, que até agora não tinha número. No caso do estudante F, a admissão passa a ser pelo tempo do programa informado no Form I-20, limitado a quatro anos, mais 30 dias para a chegada e 30 dias para a saída. Para os vistos J, o limite também é de até quatro anos. Para os vistos I, de mídia estrangeira, o prazo máximo é de 240 dias. Quem precisar de mais tempo para concluir o curso, começar um novo programa ou fazer prática autorizada terá de pedir Extension of Stay à USCIS, um passo que hoje simplesmente não existe.\n\nO próprio texto acrescenta uma ressalva relevante. A regra foi classificada como major rule, sujeita à revisão do Congresso. Se ao fim dessa revisão a data de vigência for alterada, o DHS publicará novo documento no Federal Register para estabelecer a data efetiva ou para encerrar a regra. Em outras palavras, 15 de setembro é a data que vale hoje, e não uma data blindada contra mudança.\n\nHá ainda uma transição que interessa diretamente a quem está em OPT, e ela é mais longa do que pareceu no primeiro momento. O documento prevê um período de alívio temporário de 244 dias contados da publicação da regra, o que hoje leva a 18 de março de 2027. Estudantes F-1 que estiverem em duration of status e tiverem um Form I-765 pendente quando a regra entrar em vigor, ou que protocolarem o I-765 a tempo durante esse período, em geral não precisarão apresentar um Form I-539 apenas para estender a permanência durante o OPT pedido. O texto confirma também a redução de 60 para 30 dias do prazo de preparação para deixar o país após a conclusão do curso ou do período de prática autorizada.",
+        "cta": "Está nos EUA com visto F, J ou I, ou pretende entrar por um deles nos próximos meses? Anote 15 de setembro de 2026, verifique quando termina o prazo fixo que passará a valer no seu caso e acompanhe as publicações do Federal Register, porque a data ainda pode ser revista. Converse com o escritório de estudantes internacionais da sua instituição ou com um advogado de imigração habilitado antes de decidir; conteúdo informativo não substitui essa análise.",
+        "sources": [
+          {
+            "label": "Federal Register · Establishing a Fixed Time Period of Admission and an Extension of Stay Procedure for Nonimmigrant Academic Students, Exchange Visitors, and Representatives of Foreign Information Media (17/jul/2026)",
+            "url": "https://www.federalregister.gov/documents/2026/07/17/2026-14439/establishing-a-fixed-time-period-of-admission-and-an-extension-of-stay-procedure-for-nonimmigrant"
+          },
+          {
+            "label": "DHS · Study in the States: Final Rule Quick Facts",
+            "url": "https://studyinthestates.dhs.gov/elimination-of-duration-of-status-quick-facts"
+          },
+          {
+            "label": "NAFSA · DHS Final Rule Ending Duration of Status",
+            "url": "https://www.nafsa.org/regulatory-information/dhs-final-rule-ending-duration-status"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       title: "USCIS revoga a regra de public charge de 2022; mudança vale a partir de 18 de setembro",
@@ -61,6 +135,31 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
     },
     ],
     countryTab: [
+      {
+        "publishedAt": "2026-07-20",
+        "headline": "Texto da regra de public charge é publicado e define o que vale a partir de 18 de setembro",
+        "standfirst": "A regra final saiu no Federal Register em 20 de julho e responde o que estava em aberto desde o anúncio: o DHS abandona o critério de dependência primária, devolve margem de decisão ao oficial que analisa o caso, exige nova edição do Form I-485 e estabelece que benefícios recebidos antes da data continuam avaliados pelo padrão de 2022.",
+        "body": "O Department of Homeland Security, o DHS, publicou em 20 de julho de 2026 no Federal Register a regra final que revoga a regulamentação de public charge, o encargo público, editada em 2022. O documento, registrado sob o número 2026-14539, é o texto completo que faltava quando a USCIS anunciou a revogação dias antes sem detalhar qual critério passaria a valer no lugar.\n\nA data de vigência está confirmada em 18 de setembro de 2026. A regra se aplica a pedidos de admissão feitos a partir dessa data e a pedidos de ajuste de status postados ou enviados eletronicamente a partir dela. O ponto mais concreto para quem já tem processo em andamento está na regra de transição escrita no próprio texto: o recebimento de benefícios públicos sujeitos a teste de renda antes de 18 de setembro de 2026 continuará sendo considerado de forma consistente com a regra de 2022.\n\nHá um detalhe operacional que pode custar o processo de quem não prestar atenção. A USCIS informou que publicará uma edição revisada do Form I-485, o pedido de ajuste de status, e que edições anteriores do formulário postadas ou enviadas eletronicamente a partir de 18 de setembro de 2026 não serão aceitas. Quem planeja protocolar perto dessa data precisa conferir qual edição do formulário está usando antes de enviar.\n\nNa parte substantiva, o texto remove do Código de Regulamentos Federais os dispositivos 8 CFR 212.20 a 212.23, que traziam a cláusula de aplicabilidade, as definições, o método de análise e a lista de isenções e waivers da regra de 2022, e não coloca nenhuma regulamentação no lugar. Com isso, segundo o próprio DHS, a agência se afasta do que chama de critério de linha rígida de dependência primária e volta a uma avaliação de totalidade das circunstâncias, feita caso a caso.\n\nO documento especifica o que os oficiais poderão considerar nessa avaliação: os fatores obrigatórios previstos na seção 212(a)(4)(B) da Immigration and Nationality Act, o recebimento de benefícios públicos sujeitos a teste de renda, quaisquer outros fatores individualizados e específicos do caso, e dados empíricos relevantes sobre a autossuficiência do solicitante. A regra alcança as partes 103 e 212 do Código de Regulamentos Federais e ajusta também dispositivos relativos a fianças de public charge.\n\nVale marcar uma diferença em relação à leitura que circulou logo após o anúncio inicial. Revogar a regra de 2022 não equivale automaticamente a um critério mais brando. O que o texto faz é trocar parâmetros escritos em regulamento por margem de decisão do oficial responsável pela análise, o que tende a produzir resultados mais variáveis de processo para processo, em vez de um padrão único e previsível.\n\nA USCIS informou que vai editar uma orientação infralegal, sem força de lei, com vigência na mesma data e destinada a integrar o USCIS Policy Manual, substituindo a orientação atual baseada na regra de 2022. O DHS registrou ter recebido 8.846 comentários públicos sobre a proposta, a maioria deles contrária, e ainda assim publicou a regra final nos termos em que havia sido proposta.\n\nQuem tem pedido de green card, ajuste de status ou visto em andamento e já recebeu algum benefício público deve tratar 18 de setembro de 2026 como marco de referência, conferir a edição do Form I-485 antes de protocolar e acompanhar a publicação da orientação da USCIS antes de tomar decisões sobre o próprio processo. Conteúdo informativo não substitui a análise de um advogado de imigração habilitado.",
+        "keyFacts": [
+          "Regra final publicada no Federal Register em 20 de julho de 2026, sob o número 2026-14539, revogando a regulamentação de public charge de 2022.",
+          "Vigência em 18 de setembro de 2026, aplicável a pedidos de admissão feitos a partir dessa data e a pedidos de ajuste de status postados ou enviados eletronicamente a partir dela.",
+          "Nova edição do Form I-485 será publicada, e edições anteriores postadas ou enviadas eletronicamente a partir de 18 de setembro de 2026 não serão aceitas.",
+          "Benefícios públicos sujeitos a teste de renda recebidos antes de 18 de setembro de 2026 seguem avaliados de forma consistente com a regra de 2022.",
+          "O texto remove os dispositivos 8 CFR 212.20 a 212.23, sem colocar regulamentação no lugar, e substitui o critério de dependência primária por análise de totalidade das circunstâncias, caso a caso.",
+          "O DHS recebeu 8.846 comentários públicos, a maioria contrária, e publicou a regra final nos termos propostos.",
+          "A USCIS vai editar orientação infralegal, sem força de lei, com vigência na mesma data e incorporada ao USCIS Policy Manual."
+        ],
+        "sources": [
+          {
+            "label": "Federal Register · Public Charge Ground of Inadmissibility (regra final, 20/jul/2026)",
+            "url": "https://www.federalregister.gov/documents/2026/07/20/2026-14539/public-charge-ground-of-inadmissibility"
+          },
+          {
+            "label": "USCIS · News Release: Rescinds 2022 Public Charge Regulation",
+            "url": "https://www.uscis.gov/newsroom/news-releases/us-citizenship-and-immigration-services-rescinds-2022-public-charge-regulation"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       headline: "DHS extingue o duration of status e fixa prazo de até 4 anos para vistos F, J e I",
@@ -382,6 +481,60 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
   ca: {
     blog: [
       {
+        "publishedAt": "2026-07-20",
+        "headline": "Julho concentrou recordes provinciais no Canadá, e a conta das cotas de 2026 mostra onde ainda sobra espaço",
+        "standfirst": "Recordes de convites na Colúmbia Britânica e na Ilha do Príncipe Eduardo, seis sorteios em Alberta e um sorteio federal que convidou exatamente todos os nomeados disponíveis no pool. Os números de meio de ano mostram quanto espaço ainda resta nas cotas de 2026 e, principalmente, que ele não está onde a intuição sugere.",
+        "body": "A segunda quinzena de julho de 2026 concentrou uma quantidade atípica de atividade na via provincial da imigração canadense. Em poucos dias, duas províncias bateram seus recordes do ano em número de convites, uma terceira acumulou seis sorteios em menos de duas semanas e o governo federal realizou uma rodada de Express Entry que esgotou o estoque de candidatos nomeados disponível no pool. Vistos em conjunto, esses movimentos se explicam melhor por aritmética de cota do que por acaso de calendário.\n\nComeça pela Colúmbia Britânica. Em 16 de julho, o BC PNP emitiu 569 convites na categoria Skills Immigration, a maior rodada da província no ano segundo a CIC News. A composição chama atenção tanto quanto o total, já que 346 convites saíram por pontuação de registro e 223 foram direcionados a ocupações TEER 0 a 3 com oferta salarial de pelo menos 58 dólares por hora. Foi a maior proporção de convites por pontuação de registro de qualquer rodada do BC PNP em 2026. A mesma cobertura aponta que a província já havia emitido ao menos 3.676 convites em 16 rodadas de seleção ao longo de 2026, com um pool de 8.683 perfis registrados em 7 de julho e uma concentração grande na faixa de 100 a 109 pontos, que sozinha reunia 1.728 perfis.\n\nNo mesmo 16 de julho, a Ilha do Príncipe Eduardo emitiu 195 convites nas vias Labour Impact e PEI Express Entry, também seu maior número do ano. A província vem mantendo uma rodada mensal, e a progressão de 2026 mostra tendência de alta com oscilações pelo caminho: 26 convites em janeiro, 109 em fevereiro, 101 em março, 127 em abril, 113 em maio, 182 em junho e 195 em julho, somando 853 no ano. Restam cinco rodadas no calendário publicado até dezembro, que a própria província trata como tentativas e sujeitas a mudança, o que significa que a maior parte do ciclo de seleção ainda está pela frente.\n\nAlberta oferece o retrato mais completo, porque publica a relação entre nominações emitidas e cota disponível. Entre 3 e 15 de julho, o AAIP realizou seis sorteios que somaram 1.167 convites, distribuídos entre a Alberta Opportunity Stream, as vias de saúde, a Accelerated Tech Pathway, a Rural Renewal Stream e a Law Enforcement Pathway. Até 15 de julho, segundo os dados do AAIP reportados pela CIC News, a província havia emitido 3.582 nominações contra uma alocação de 6.403 espaços para 2026. Ou seja, com pouco mais da metade do ano transcorrido, cerca de 56 por cento da cota já estava comprometida.\n\nA folga por via, porém, não é uniforme, e é aqui que a intuição comum erra. A via com mais espaço proporcional é a de saúde, com 232 das 500 vagas usadas, ou seja, mais da metade ainda disponível. A Accelerated Tech Pathway, apesar da fama de porta rápida, estava mais comprometida do que a corrente geral: 349 de 600 espaços usados, contra 1.872 de 3.425 na Alberta Opportunity Stream. E a Rural Renewal Stream, em 598 de 1.000, era a mais comprometida das quatro. Quem lê apenas a manchete de que existe folga nas vias setoriais pode direcionar o próprio plano para o lugar errado.\n\nDo lado federal, o sorteio de 20 de julho fechou o período com 511 convites a candidatos com nomeação provincial e corte CRS de 744 pontos. A análise do Moving2Canada observa que, em 19 de julho, havia exatamente 511 perfis acima de 601 pontos no pool. Como a nomeação provincial soma 600 pontos, essa faixa corresponde aos já nomeados, o que indica que a rodada alcançou todo o estoque disponível em vez de aplicar um filtro competitivo entre muitos nomeados.\n\nÉ desse encaixe que sai a conclusão mais útil. A nomeação provincial segue sendo o gargalo real do sistema, e não a etapa federal seguinte. Quando o Express Entry convida essencialmente todos os nomeados disponíveis, a disputa de fato já aconteceu antes, dentro de cada programa provincial, sob critérios próprios de pontuação, ocupação, região e salário. Isso ajuda a explicar por que o corte CRS dessas rodadas oscila tanto, de 708 pontos em 6 de julho para 744 em 20 de julho, sem que isso signifique endurecimento de política federal. O número reflete sobretudo quem estava no pool naquela semana, e os cortes de PNP em 2026 já variaram de 708 a 805 pontos.\n\nPara quem planeja, a leitura prática é sobre onde procurar espaço. As cotas provinciais de 2026 ainda não estão esgotadas, e em Alberta o espaço maior estava na via de saúde, não na tecnologia. Províncias menores como a Ilha do Príncipe Eduardo mantêm calendário regular com rodadas ainda por vir. Vale lembrar que esta é uma leitura de mercado baseada nos dados publicados, não uma declaração de política dos governos envolvidos, e que critérios de elegibilidade mudam sem aviso. Nada aqui garante convite, nomeação ou residência. Antes de qualquer decisão, confirme requisitos e prazos diretamente nas páginas oficiais de cada programa e considere apoio de um profissional habilitado.",
+        "tags": [
+          "Canadá",
+          "imigração provincial",
+          "PNP",
+          "Express Entry",
+          "BC PNP",
+          "AAIP",
+          "PEI",
+          "cotas 2026"
+        ],
+        "sources": [
+          {
+            "label": "Alberta.ca · AAIP Processing information (alocação 2026)",
+            "url": "https://www.alberta.ca/aaip-processing-information"
+          },
+          {
+            "label": "Alberta.ca · AAIP Updates (fonte oficial)",
+            "url": "https://www.alberta.ca/aaip-updates"
+          },
+          {
+            "label": "WelcomeBC · BC PNP Invitations to Apply (fonte oficial)",
+            "url": "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program/invitations-to-apply"
+          },
+          {
+            "label": "PEI Office of Immigration · Expression of Interest Draws (fonte oficial)",
+            "url": "https://www.princeedwardisland.ca/en/information/office-of-immigration/expression-of-interest-draws"
+          },
+          {
+            "label": "IRCC · Express Entry: Rounds of invitations (fonte oficial)",
+            "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations.html"
+          },
+          {
+            "label": "CIC News · British Columbia holds largest provincial immigration selection round this year",
+            "url": "https://www.cicnews.com/2026/07/british-columbia-holds-largest-provincial-immigration-selection-round-this-year-0778166.html"
+          },
+          {
+            "label": "CIC News · PEI holds largest provincial immigration draw this year",
+            "url": "https://www.cicnews.com/2026/07/pei-holds-largest-provincial-immigration-draw-this-year-0778177.html"
+          },
+          {
+            "label": "CIC News · Alberta invites over 1,100 candidates to apply for provincial nomination",
+            "url": "https://www.cicnews.com/2026/07/alberta-invites-over-1100-candidates-to-apply-for-provincial-nomination-0778126.html"
+          },
+          {
+            "label": "Moving2Canada · 511 PNP Candidates Invited in Express Entry Draw on July 20",
+            "url": "https://moving2canada.com/2026/07/new-511-ita-pnp-express-entry-draw/"
+          }
+        ]
+      },
+      {
       publishedAt: "2026-07-17",
       headline: "Canadá acelera vistos de trabalho e nominações provinciais, mas trava a porta da reunificação familiar",
       standfirst: "Dados oficiais divulgados em julho mostram dois movimentos opostos na imigração canadense: processamento mais rápido para trabalho e nomeações provinciais, e uma pausa na porta de entrada de pais e avós.",
@@ -397,6 +550,62 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
     },
     ],
     community: [
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Express Entry: sorteio de nomeação provincial sai com 511 convites e corte CRS 36 pontos mais alto",
+        "body": "O IRCC realizou em 20 de julho de 2026 um novo sorteio do Express Entry voltado a candidatos com nomeação provincial. Foram 511 convites para candidatura, com nota de corte no sistema CRS de 744 pontos e regra de desempate fixada em 26 de maio de 2026, às 18h11min36s no horário universal.\n\nO dado interessa a quem acompanhou o sorteio anterior da mesma categoria, realizado em 6 de julho, que teve 534 convites e corte de 708 pontos, o menor do ano para PNP. Em duas semanas, portanto, a nota de corte subiu 36 pontos, o que mostra que aquele patamar mais acessível de início de julho não se manteve.\n\nHá uma leitura sobre o tamanho da rodada que muda a interpretação desse salto. Segundo a análise do Moving2Canada, em 19 de julho havia exatamente 511 perfis acima de 601 pontos no pool, o mesmo número de convites emitidos no dia seguinte. Como uma nomeação provincial soma 600 pontos ao perfil, essa faixa corresponde justamente aos candidatos já nomeados. Ou seja, a rodada não filtrou os melhores entre muitos nomeados, ela alcançou todo o estoque de nomeados disponível naquele momento. O corte de 744 reflete quem estava no pool, e não um critério novo.\n\nO mesmo levantamento aponta que este foi o 14º sorteio PNP de 2026, com 6.450 convites acumulados no ano, e que os cortes da categoria variaram entre 708 e 805 pontos ao longo de 2026.\n\nOs números do sorteio devem ser confirmados na página oficial de rodadas de convites do IRCC antes de qualquer decisão sobre o seu processo. Este conteúdo é informativo e não substitui a orientação de um profissional habilitado.",
+        "cta": "Tem perfil no Express Entry aguardando nomeação provincial? Confirme os números da rodada na página oficial do IRCC e mantenha documentação e comprovação de idioma em dia para as próximas.",
+        "sources": [
+          {
+            "label": "IRCC · Express Entry: Rounds of invitations (fonte oficial)",
+            "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations.html"
+          },
+          {
+            "label": "CIC News · Canada issues invitations to apply to provincial nominees (20/jul/2026)",
+            "url": "https://www.cicnews.com/2026/07/canada-issues-invitations-to-apply-to-provincial-nominees-0777930.html"
+          },
+          {
+            "label": "CIC News · First Express Entry draw of July sees lowest PNP cut-off score this year (06/jul/2026)",
+            "url": "https://www.cicnews.com/2026/07/first-express-entry-draw-of-july-sees-lowest-pnp-cut-off-score-this-year-0777251.html"
+          },
+          {
+            "label": "Moving2Canada · 511 PNP Candidates Invited in Express Entry Draw on July 20",
+            "url": "https://moving2canada.com/2026/07/new-511-ita-pnp-express-entry-draw/"
+          }
+        ]
+      },
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Colúmbia Britânica e PEI fazem no mesmo dia as maiores rodadas provinciais do ano",
+        "body": "O meio de julho concentrou uma sequência incomum de convites provinciais no Canadá. Em 16 de julho de 2026, a Colúmbia Britânica e a Ilha do Príncipe Eduardo realizaram, cada uma, a maior rodada de seleção do ano em seus respectivos programas, segundo a cobertura da CIC News.\n\nNa Colúmbia Britânica, foram 569 convites na categoria Skills Immigration, divididos entre 346 emitidos por pontuação de registro, com mínimo de 132 pontos, e 223 direcionados a ocupações TEER 0 a 3 com oferta de emprego de pelo menos 58 dólares por hora, o equivalente a cerca de 115 mil dólares por ano. Foi a rodada com a maior proporção de convites por pontuação de registro entre todas as do BC PNP em 2026.\n\nNa Ilha do Príncipe Eduardo, foram 195 convites nas vias Labour Impact e PEI Express Entry, com prioridade para graduados internacionais de três instituições da província, a UPEI, o Holland College e o Collège de l'Île. Com essa rodada, a província chegou a 853 convites no ano, em sete rodadas.\n\nAlberta também esteve ativa no período, com 1.167 convites distribuídos em seis sorteios entre 3 e 15 de julho, concentrados em saúde, tecnologia, segurança pública e assentamento rural.\n\nSe você tem perfil registrado em algum desses programas, vale revisar pontuação, ocupação e informações de contato agora, já que as rodadas seguem calendário próprio e os critérios variam bastante entre províncias. Confirme sempre os números e as exigências nas páginas oficiais de cada programa. Este conteúdo é informativo e não substitui a orientação de um profissional habilitado.",
+        "cta": "Tem registro em programa provincial? Revise sua pontuação e seus dados nas páginas oficiais do BC PNP, do PEI Office of Immigration ou do AAIP antes da próxima rodada.",
+        "sources": [
+          {
+            "label": "WelcomeBC · BC PNP Invitations to Apply (fonte oficial)",
+            "url": "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program/invitations-to-apply"
+          },
+          {
+            "label": "PEI Office of Immigration · Expression of Interest Draws (fonte oficial)",
+            "url": "https://www.princeedwardisland.ca/en/information/office-of-immigration/expression-of-interest-draws"
+          },
+          {
+            "label": "Alberta.ca · AAIP Updates (fonte oficial)",
+            "url": "https://www.alberta.ca/aaip-updates"
+          },
+          {
+            "label": "CIC News · British Columbia holds largest provincial immigration selection round this year",
+            "url": "https://www.cicnews.com/2026/07/british-columbia-holds-largest-provincial-immigration-selection-round-this-year-0778166.html"
+          },
+          {
+            "label": "CIC News · PEI holds largest provincial immigration draw this year",
+            "url": "https://www.cicnews.com/2026/07/pei-holds-largest-provincial-immigration-draw-this-year-0778177.html"
+          },
+          {
+            "label": "CIC News · Alberta invites over 1,100 candidates to apply for provincial nomination",
+            "url": "https://www.cicnews.com/2026/07/alberta-invites-over-1100-candidates-to-apply-for-provincial-nomination-0778126.html"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       title: "Novo piso salarial do LMIA passa a valer nesta sexta-feira (17/07)",
@@ -429,6 +638,43 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
       sources: [{ label: "CIC News", url: "https://www.cicnews.com/2026/07/first-express-entry-draw-of-july-sees-lowest-pnp-cut-off-score-this-year-0777251.html" }],
     }],
     countryTab: [
+      {
+        "publishedAt": "2026-07-20",
+        "headline": "Canadá proíbe a entrada de estrangeiros que estiveram na RDC, e a suspensão de vistos que já valia desde maio segue até 28 de agosto",
+        "standfirst": "A proibição de entrada anunciada pela Agência de Saúde Pública em 19 de julho é a novidade desta semana e passa a valer às 23h59 de 20 de julho. Já a suspensão de vistos, permissões e eTAs de quem declarou RDC, Uganda ou Sudão do Sul como último país de residência não é nova: está em vigor desde 27 de maio. Em ambos os casos, o IRCC orienta não enviar o passaporte ao centro de solicitação.",
+        "body": "O governo do Canadá anunciou em 19 de julho de 2026 uma nova medida temporária de fronteira em resposta ao surto de doença por vírus Ebola na República Democrática do Congo. A partir de 20 de julho de 2026, às 23h59 no horário do leste, estrangeiros que estiveram na República Democrática do Congo nos 21 dias anteriores ficam proibidos de entrar no Canadá. Segundo a Agência de Saúde Pública do Canadá, a PHAC, as medidas de fronteira permanecem em vigor até 29 de agosto de 2026.\n\nPara dar efeito prático à proibição, o governo editou também uma Interim Order sob o Aeronautics Act, a lei federal de aeronáutica, obrigando transportadoras aéreas comerciais e privadas a não permitir o embarque desses passageiros em voos com destino ao Canadá. Ou seja, a barreira não fica apenas no controle de fronteira, ela começa no balcão de check-in.\n\nAqui vale uma distinção que a cobertura desta semana tende a embaralhar, e que muda a leitura de quem tem processo em andamento. A suspensão de documentos de imigração não faz parte do anúncio de 19 de julho. Ela já estava valendo. Desde 27 de maio de 2026, às 23h59min59s no horário do leste, o IRCC mantém temporariamente suspensos os documentos de imigração de estrangeiros que informaram a República Democrática do Congo, Uganda ou Sudão do Sul como último país de residência na aplicação. Na prática, essas pessoas não podem viajar ao Canadá mesmo que já tenham um visto de residente temporário, uma permissão, um visto de residente permanente ou uma autorização eletrônica de viagem, a eTA, previamente aprovados. Essa suspensão vale até 28 de agosto de 2026, às 23h59min59s no horário do leste.\n\nAs duas datas de encerramento são de fato diferentes, e não se trata de erro. A suspensão de documentos do IRCC termina em 28 de agosto e as medidas de fronteira da PHAC seguem até 29 de agosto, porque são instrumentos distintos, editados em momentos distintos.\n\nHá um detalhe de critério que costuma gerar confusão e merece atenção. A suspensão é aplicada com base no último país de residência declarado na aplicação, e não na nacionalidade do solicitante. Quem morava fora dos três países no momento em que pediu o visto, a permissão ou outro documento de imigração não é atingido por ela.\n\nO IRCC também esclarece que pedidos novos e em andamento continuam sendo processados, mas não são finalizados enquanto as medidas estiverem valendo. A orientação expressa do órgão é não enviar o passaporte a um centro de recepção de pedidos de visto, o VAC, até que as restrições terminem. Quem foi notificado de que está afetado pode pedir uma isenção ao IRCC, explicando e apresentando evidências do motivo, e cada pedido é analisado caso a caso.\n\nPara cidadãos canadenses, residentes permanentes e pessoas registradas sob o Indian Act não há mudança de regra de entrada. Quem esteve na República Democrática do Congo, em Uganda ou no Sudão do Sul nos 21 dias anteriores segue podendo viajar ao Canadá, passa por avaliação de saúde na chegada e cumpre quarentena de 21 dias, exigência que já vinha sendo aplicada desde 30 de maio de 2026.\n\nA própria PHAC classifica como baixo o risco à saúde dos canadenses e informa que não houve, até agora, casos relacionados a viagem registrados no país, descrevendo as medidas como uma precaução. A cobertura da imprensa canadense e internacional registrou ainda que a proibição de entrada vai na direção oposta da orientação da Organização Mundial da Saúde, que historicamente desaconselha restrições de viagem como resposta a surtos.\n\nPara quem tem viagem, mudança ou processo migratório planejado envolvendo a região, a recomendação prática é confirmar a situação específica do próprio caso diretamente nas páginas oficiais do IRCC e da PHAC antes de comprar passagem, enviar documento ou tomar qualquer decisão. Este conteúdo é informativo e não substitui a orientação de um profissional habilitado.",
+        "keyFacts": [
+          "NOVO em 19 de julho: estrangeiros que estiveram na República Democrática do Congo nos 21 dias anteriores ficam proibidos de entrar no Canadá a partir de 20 de julho de 2026, às 23h59 no horário do leste, com as medidas de fronteira valendo até 29 de agosto de 2026.",
+          "Uma Interim Order sob o Aeronautics Act obriga companhias aéreas comerciais e privadas a negar o embarque desses passageiros em voos para o Canadá.",
+          "NÃO é novo: a suspensão de documentos de imigração está em vigor desde 27 de maio de 2026 e vai até 28 de agosto de 2026, às 23h59min59s no horário do leste. Ela atinge quem declarou República Democrática do Congo, Uganda ou Sudão do Sul como último país de residência, mesmo com visto, permissão, visto de residente permanente ou eTA já aprovados.",
+          "O critério da suspensão é o último país de residência informado na aplicação, não a nacionalidade do solicitante.",
+          "Pedidos novos e em andamento seguem sendo processados, mas não são finalizados durante as medidas, e o IRCC orienta não enviar o passaporte ao VAC nesse período. Quem foi notificado pode pedir isenção, analisada caso a caso.",
+          "Cidadãos canadenses, residentes permanentes e pessoas registradas sob o Indian Act mantêm o direito de entrada, com avaliação de saúde na chegada e quarentena de 21 dias, exigência que vale desde 30 de maio de 2026.",
+          "A PHAC classifica o risco à saúde dos canadenses como baixo e não registrou casos relacionados a viagem no país até agora."
+        ],
+        "sources": [
+          {
+            "label": "Agência de Saúde Pública do Canadá · New Temporary Border Measures in Response to the Ebola Disease Outbreak (19/jul/2026)",
+            "url": "https://www.canada.ca/en/public-health/news/2026/07/new-temporary-border-measures-in-response-to-the-ebola-disease-outbreak.html"
+          },
+          {
+            "label": "Agência de Saúde Pública do Canadá · Government of Canada introduces temporary border measures in response to the Ebola disease outbreak (medidas originais de maio/2026)",
+            "url": "https://www.canada.ca/en/public-health/news/2026/05/government-of-canada-introduces-temporary-border-measures-in-response-to-the-ebola-disease-outbreak.html"
+          },
+          {
+            "label": "IRCC/Canada.ca · Ebola disease: Temporary measures (suspensão de documentos, 27/mai a 28/ago)",
+            "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/special-measures/ebola-2026.html"
+          },
+          {
+            "label": "Canada.ca · Ebola disease: Border measures for travellers entering Canada",
+            "url": "https://www.canada.ca/en/public-health/services/diseases/ebola/border-measures.html"
+          },
+          {
+            "label": "CBC News · Canada to temporarily bar entry by foreign nationals recently in Congo due to Ebola risk",
+            "url": "https://www.cbc.ca/news/canada/canada-congo-ebola-9.7275782"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       headline: "Canadá pausa novos pedidos de patrocínio de pais e avós até novo aviso",
@@ -474,6 +720,49 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
   au: {
     blog: [
       {
+        "publishedAt": "2026-07-20",
+        "headline": "Austrália fixa cota por organização e prioridades de idade, inglês e renda no visto humanitário 202",
+        "standfirst": "Dois instrumentos ministeriais reportados em 17 de julho completam a reforma do Community Support Program, em vigor desde 1º de julho. Um fixa a cota anual de cada organização proponente, o outro lista as prioridades que o governo quer ver no requerente principal, entre elas idade, inglês e capacidade de se sustentar em até 12 meses após a chegada. São prioridades a ponderar, não requisitos automáticos de elegibilidade.",
+        "body": "A reforma da via comunitária do visto humanitário australiano ganhou as duas peças que faltavam. O Migration Amendment (Realigning the Community Support Program) Regulations 2026 foi registrado em 16 de junho de 2026 e entrou em vigor em 1º de julho, aplicando-se aos pedidos apresentados a partir dessa data. Ele reorganizou o Community Support Program, a via comunitária de acesso ao visto Subclass 202, o Global Special Humanitarian. O regulamento criou os mecanismos, mas deixou os números e os critérios concretos para instrumentos ministeriais posteriores. Esses instrumentos foram reportados em 17 de julho de 2026 pela Migration Alliance, associação de agentes e advogados de migração do país.\n\nO primeiro é o Migration (Annual Applicant Limits for Subclass 202 (Global Special Humanitarian) Visas) Instrument 2026, identificado como LIN 26/035. Ele estabelece a alocação anual de requerentes de cada Approved Proposing Organisation, as chamadas APOs, para o ano fiscal iniciado em 1º de julho de 2026. Dois pontos práticos chamam atenção. Requerentes principais e secundários contam para o mesmo limite, ou seja, um grupo familiar consome várias vagas da mesma organização. E o pedido que ultrapassar a cota da APO é tratado como inválido, sem chegar a ser considerado, em vez de ser recusado depois de análise de mérito. A diferença importa, porque um pedido inválido não é avaliado.\n\nUma observação necessária sobre esse instrumento. A cobertura a que tivemos acesso descreve o mecanismo da cota, mas não divulga quantas vagas cada organização recebeu. Os números por APO não estão públicos nessa reportagem. Na prática, isso significa que a única forma confiável de saber se ainda há vaga é perguntar diretamente à organização proponente antes de protocolar.\n\nO segundo instrumento é o Migration (Specification of Commonwealth Priorities for Subclass 202 (Global Special Humanitarian) Visas) Instrument 2026, o LIN 26/036. Ele lista as prioridades que os decisores devem considerar ao avaliar se o assentamento permanente está alinhado aos objetivos do governo. São três, segundo a Migration Alliance. O requerente principal deve, em geral, ter entre 18 e 50 anos. Deve demonstrar inglês falado e escrito adequado para vida independente, segurança no trabalho e emprego. E deve ter capacidade de se tornar financeiramente autossuficiente em até 12 meses após a chegada, apoiada por oferta de emprego remunerado na Austrália ou por evidência de habilidades e experiência de trabalho relevantes.\n\nVale insistir num ponto que costuma se perder na tradução dessas mudanças. O instrumento usa a fórmula de que o requerente principal deve, em geral, atender a esses pontos. São prioridades que o decisor pondera, não barreiras automáticas de elegibilidade. Já circulam resumos tratando a faixa de 18 a 50 anos como requisito obrigatório no momento do protocolo, e não foi isso que o instrumento estabeleceu. Quem está fora da faixa não deve concluir sozinho que está eliminado, assim como quem está dentro dela não deve concluir que está aprovado.\n\nO que mudou desde 1º de julho é justamente o grau de concretude. Antes existia a moldura, o regulamento dizendo que haveria cota por organização e que haveria prioridades da Commonwealth definidas por instrumento ministerial. Agora existem critérios nomeados e cota atribuída por organização para o ano fiscal corrente. O propósito declarado da reforma, conforme o material que a acompanha, é reforçar o objetivo de apoiar o reassentamento de pessoas em idade de trabalho com chance de alcançar autossuficiência financeira nos primeiros 12 meses.\n\nHá também um ponto que joga a favor do requerente. O regulamento passou a permitir a troca de organização proponente depois da apresentação do pedido e antes da decisão, situação que antes era travada. Isso cobre casos em que a APO deixa o programa, tem o acordo suspenso ou simplesmente esgotou a própria cota anual.\n\nVale enquadrar o alcance dessa via. O Subclass 202 não é um caminho de migração aberto, ele depende de uma proposta feita por alguém elegível ou por uma organização aprovada, e atende pessoas que enfrentam discriminação substancial ou violação de direitos humanos no país onde vivem. Ainda assim, a leitura dos dois instrumentos mostra um desenho de seleção que se aproxima do vocabulário usado na migração qualificada, com faixa etária, idioma e perspectiva de emprego entrando explicitamente na conta.\n\nUma ressalva de método, feita por transparência. As páginas oficiais do Department of Home Affairs bloquearam nossas tentativas automatizadas de acesso, e a busca automatizada no Federal Register of Legislation não retornou o registro dos dois instrumentos até o fechamento desta edição. O regulamento base de junho está confirmado em várias fontes independentes, mas o detalhamento dos dois instrumentos de julho vem de uma única fonte profissional especializada e não governamental, a Migration Alliance. Antes de qualquer decisão, confirme cada critério e cada número na fonte oficial e com um agente de migração registrado junto ao MARA. Conteúdo educativo não substitui a orientação de profissional habilitado.",
+        "tags": [
+          "Austrália",
+          "Visto 202",
+          "Humanitário",
+          "Community Support Program",
+          "Migração"
+        ],
+        "sources": [
+          {
+            "label": "Migration Alliance · New Commonwealth Priorities for Subclass 202 (Global Special Humanitarian) Visas (17/07/2026)",
+            "url": "https://migrationalliance.com.au/immigration-daily-news/entry/2026-07-new-commonwealth-priorities-for-subclass-202-global-special-humanitarian-visas.html"
+          },
+          {
+            "label": "Migration Alliance · Migration (Annual Applicant Limits for Subclass 202 (Global Special Humanitarian) Visas) Instrument 2026 (17/07/2026)",
+            "url": "https://migrationalliance.com.au/immigration-daily-news/entry/2026-07-migration-annual-applicant-limits-for-subclass-202-global-special-humanitarian-visas-instrument-2026.html"
+          },
+          {
+            "label": "Migration Alliance · Migration Amendment (Realigning the Community Support Program) Regulations 2026",
+            "url": "https://migrationalliance.com.au/immigration-daily-news/entry/2026-06-migration-amendment-realigning-the-community-support-program-regulations-2026.html"
+          },
+          {
+            "label": "Migration Law Updates · Realigning the Community Support Program",
+            "url": "https://migrationlawupdates.com.au/realigning-the-community-support-program/"
+          },
+          {
+            "label": "Department of Home Affairs · Subclass 202 Global Special Humanitarian visa",
+            "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/global-special-humanitarian-202"
+          },
+          {
+            "label": "Department of Home Affairs · The Special Humanitarian Program",
+            "url": "https://immi.homeaffairs.gov.au/what-we-do/refugee-and-humanitarian-program/the-special-humanitarian-program"
+          },
+          {
+            "label": "Federal Register of Legislation (onde verificar o registro oficial dos instrumentos)",
+            "url": "https://www.legislation.gov.au/"
+          }
+        ]
+      },
+      {
       publishedAt: "2026-07-17",
       headline: "Austrália mantém 185 mil vagas na migração permanente e revela sistema de níveis no visto 189",
       standfirst: "Orçamento federal confirma o teto do Programa de Migração Permanente para 2026-27, enquanto um documento liberado por pedido de acesso à informação expõe como o governo distribui vagas do visto 189 por níveis de ocupação. Juntos, os sinais apontam para uma seleção mais estruturada da migração qualificada.",
@@ -489,6 +778,46 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
     },
     ],
     community: [
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Visto humanitário 202 da Austrália passa a ter cota anual por organização proponente",
+        "body": "A Migration Alliance, associação de agentes e advogados de migração da Austrália, reportou em 17 de julho de 2026 o Migration (Annual Applicant Limits for Subclass 202 (Global Special Humanitarian) Visas) Instrument 2026, o LIN 26/035, que fixa a alocação anual de requerentes de cada Approved Proposing Organisation (APO) no Community Support Program. O instrumento completa a reforma do programa, que entrou em vigor em 1º de julho.\n\nDois detalhes mudam a estratégia de quem depende dessa via. Requerentes principais e secundários contam para o mesmo limite, então um grupo familiar consome várias vagas da mesma organização. E o pedido apresentado acima da cota da APO é tratado como inválido, sem chegar a ser considerado, em vez de ser analisado e recusado. Por outro lado, a reforma passou a permitir trocar de organização proponente depois de protocolado o pedido e antes da decisão.\n\nUm alerta prático. A cobertura disponível descreve o mecanismo, mas não divulga quantas vagas cada organização recebeu. Esse número você só obtém com a própria APO.",
+        "cta": "Depende de uma organização proponente para o visto 202? Confirme com ela quantas vagas ainda restam na alocação anual antes de protocolar, e valide tudo com um agente de migração registrado junto ao MARA. Conteúdo educativo não substitui profissional habilitado.",
+        "sources": [
+          {
+            "label": "Migration Alliance · Migration (Annual Applicant Limits for Subclass 202 (Global Special Humanitarian) Visas) Instrument 2026 (17/07/2026)",
+            "url": "https://migrationalliance.com.au/immigration-daily-news/entry/2026-07-migration-annual-applicant-limits-for-subclass-202-global-special-humanitarian-visas-instrument-2026.html"
+          },
+          {
+            "label": "Migration Alliance · Migration Amendment (Realigning the Community Support Program) Regulations 2026",
+            "url": "https://migrationalliance.com.au/immigration-daily-news/entry/2026-06-migration-amendment-realigning-the-community-support-program-regulations-2026.html"
+          },
+          {
+            "label": "Department of Home Affairs · Subclass 202 Global Special Humanitarian visa",
+            "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/global-special-humanitarian-202"
+          }
+        ]
+      },
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Idade, inglês e autossuficiência entram nas prioridades do visto 202 australiano, mas não são requisitos automáticos",
+        "body": "Também em 17 de julho de 2026, a Migration Alliance reportou o Migration (Specification of Commonwealth Priorities for Subclass 202 (Global Special Humanitarian) Visas) Instrument 2026, o LIN 26/036. O instrumento nomeia as prioridades que os decisores devem considerar ao avaliar pedidos do visto humanitário 202 dentro do Community Support Program.\n\nSão três pontos. O requerente principal deve, em geral, ter entre 18 e 50 anos. Deve demonstrar inglês falado e escrito adequado para vida independente, segurança no trabalho e emprego. E deve ter capacidade de se tornar financeiramente autossuficiente em até 12 meses após a chegada, por oferta de emprego remunerado na Austrália ou por evidência de habilidades e experiência de trabalho relevantes.\n\nAtenção a uma confusão que já está circulando. O instrumento usa a fórmula de que o requerente deve, em geral, atender a esses pontos. São prioridades ponderadas pelo decisor, não barreiras automáticas de elegibilidade. Já vimos resumos tratando os 18 a 50 anos como requisito obrigatório no protocolo, o que o instrumento não diz. Não conseguimos abrir as páginas oficiais do Department of Home Affairs, que bloqueiam acesso automatizado, então confirme na fonte oficial.",
+        "cta": "Pretende usar a via do Community Support Program? Confira os critérios atualizados direto na fonte oficial e com um agente de migração registrado junto ao MARA antes de descartar ou assumir qualquer coisa sobre o seu caso. Conteúdo educativo não substitui profissional habilitado.",
+        "sources": [
+          {
+            "label": "Migration Alliance · New Commonwealth Priorities for Subclass 202 (Global Special Humanitarian) Visas (17/07/2026)",
+            "url": "https://migrationalliance.com.au/immigration-daily-news/entry/2026-07-new-commonwealth-priorities-for-subclass-202-global-special-humanitarian-visas.html"
+          },
+          {
+            "label": "Department of Home Affairs · The Special Humanitarian Program",
+            "url": "https://immi.homeaffairs.gov.au/what-we-do/refugee-and-humanitarian-program/the-special-humanitarian-program"
+          },
+          {
+            "label": "Federal Register of Legislation (onde verificar o registro oficial do instrumento)",
+            "url": "https://www.legislation.gov.au/"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       title: "Visto 485 (Temporary Graduate) tem taxa dobrada na Austrália",
@@ -517,6 +846,53 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
       sources: [{ label: "VisaEnvoy · Immigration News", url: "https://visaenvoy.com/australian-visa-changes-from-1-july-2026-higher-fees-new-income-thresholds-and-working-holiday-updates/" }],
     }],
     countryTab: [
+      {
+        "publishedAt": "2026-07-20",
+        "headline": "Austrália detalha cota anual e novas prioridades do visto humanitário 202",
+        "standfirst": "Dois instrumentos ministeriais reportados em 17 de julho fecham a reforma do Community Support Program, em vigor desde 1º de julho. Um define quantos requerentes cada organização proponente pode apresentar no ano fiscal, o outro lista idade, inglês e autossuficiência financeira em até 12 meses após a chegada entre as prioridades do governo.",
+        "body": "A reforma do Community Support Program da Austrália, a via comunitária de acesso ao visto Subclass 202 (Global Special Humanitarian), ganhou as duas peças que ainda faltavam. Segundo a Migration Alliance, associação de agentes e advogados de migração do país, foram reportados em 17 de julho de 2026 o Migration (Annual Applicant Limits for Subclass 202 (Global Special Humanitarian) Visas) Instrument 2026, o LIN 26/035, e o Migration (Specification of Commonwealth Priorities for Subclass 202 (Global Special Humanitarian) Visas) Instrument 2026, o LIN 26/036.\n\nOs dois instrumentos preenchem a moldura criada pelo Migration Amendment (Realigning the Community Support Program) Regulations 2026, registrado em 16 de junho de 2026, em vigor desde 1º de julho e aplicável aos pedidos apresentados a partir dessa data. Foi esse regulamento que previu tanto a cota anual por organização proponente quanto a existência de prioridades da Commonwealth a serem fixadas por instrumento ministerial.\n\nO LIN 26/035 estabelece a alocação anual de requerentes de cada Approved Proposing Organisation (APO) para o ano fiscal iniciado em 1º de julho de 2026. Requerentes principais e secundários contam para o mesmo limite, o que significa que um grupo familiar ocupa mais de uma vaga da organização. Pedidos apresentados acima da alocação são tratados como inválidos e não chegam a ser considerados, em vez de analisados e recusados. Como contrapartida, o regulamento passou a permitir a troca de organização proponente após a apresentação e antes da decisão, cobrindo casos em que a APO deixa o programa, tem o acordo suspenso ou esgota a própria cota. Registre-se que a cobertura disponível descreve o mecanismo sem divulgar quantas vagas cada organização recebeu, de modo que o número concreto só pode ser obtido com a própria APO.\n\nJá o LIN 26/036 nomeia as prioridades que os decisores devem levar em conta. São três, conforme descrito pela Migration Alliance. O requerente principal deve, em geral, ter entre 18 e 50 anos. Deve demonstrar inglês falado e escrito adequado para vida independente, segurança no trabalho e emprego. E deve ter capacidade de alcançar autossuficiência financeira em até 12 meses após a chegada, por oferta de emprego remunerado na Austrália ou por evidência de habilidades e experiência de trabalho relevantes. O objetivo declarado da reforma é reforçar a finalidade do programa de apoiar o reassentamento de pessoas em idade de trabalho com perspectiva de se sustentar nos primeiros 12 meses.\n\nUm ponto merece destaque porque tende a se perder nos resumos. O instrumento usa a fórmula de que o requerente principal deve, em geral, atender a esses pontos. São prioridades ponderadas na decisão, não requisitos automáticos de elegibilidade. Já circulam versões tratando a faixa de 18 a 50 anos como exigência obrigatória no momento do protocolo, e não foi isso que o instrumento estabeleceu.\n\nÉ importante situar o alcance dessa via. O Subclass 202 não é um caminho de migração aberto ao público geral. Ele exige proposta de um proponente elegível ou de organização aprovada e atende pessoas que enfrentam discriminação substancial ou violação de direitos humanos fora da Austrália. Para quem já tem um pedido em andamento ou pretende protocolar nos próximos meses, o passo prático é confirmar com a organização proponente se ainda há alocação disponível no ano fiscal e revisar o próprio enquadramento diante das prioridades agora nomeadas.\n\nPor transparência, registramos os limites desta apuração. As páginas oficiais do Department of Home Affairs bloquearam nossas tentativas automatizadas de acesso, e a consulta automatizada ao Federal Register of Legislation não retornou o registro dos dois instrumentos até o fechamento desta edição. O regulamento base de junho está confirmado em fontes independentes, mas o detalhamento dos dois instrumentos de julho vem de uma única fonte profissional especializada e não governamental. Confirme cada ponto na fonte oficial e com um agente de migração registrado junto ao MARA antes de tomar decisões. Conteúdo educativo não substitui profissional habilitado.",
+        "keyFacts": [
+          "Migration (Annual Applicant Limits for Subclass 202 (Global Special Humanitarian) Visas) Instrument 2026 (LIN 26/035) reportado em 17 de julho de 2026 pela Migration Alliance.",
+          "Migration (Specification of Commonwealth Priorities for Subclass 202 (Global Special Humanitarian) Visas) Instrument 2026 (LIN 26/036) reportado na mesma data.",
+          "Os dois instrumentos completam o Migration Amendment (Realigning the Community Support Program) Regulations 2026, registrado em 16 de junho de 2026, em vigor desde 1º de julho de 2026 e aplicável a pedidos apresentados a partir dessa data.",
+          "Cada Approved Proposing Organisation passa a ter alocação anual de requerentes; principais e secundários contam para o mesmo limite, e pedidos acima da cota são inválidos e não chegam a ser considerados.",
+          "Os números de alocação por organização não constam da cobertura disponível; só a própria APO pode informar quantas vagas restam.",
+          "Prioridades nomeadas para o requerente principal: idade em geral entre 18 e 50 anos, inglês falado e escrito adequado para vida independente, segurança no trabalho e emprego, e autossuficiência financeira em até 12 meses após a chegada, por oferta de emprego remunerado na Austrália ou por habilidades e experiência relevantes.",
+          "Esses três pontos são prioridades ponderadas pelo decisor, não requisitos automáticos de elegibilidade; a faixa etária não é uma barreira obrigatória no protocolo.",
+          "A reforma passou a permitir a troca de organização proponente após a apresentação do pedido e antes da decisão.",
+          "Não conseguimos confirmar os dois instrumentos de julho diretamente nas páginas do Department of Home Affairs nem no Federal Register of Legislation, porque o acesso automatizado foi bloqueado ou não retornou os registros."
+        ],
+        "sources": [
+          {
+            "label": "Migration Alliance · New Commonwealth Priorities for Subclass 202 (Global Special Humanitarian) Visas (17/07/2026)",
+            "url": "https://migrationalliance.com.au/immigration-daily-news/entry/2026-07-new-commonwealth-priorities-for-subclass-202-global-special-humanitarian-visas.html"
+          },
+          {
+            "label": "Migration Alliance · Migration (Annual Applicant Limits for Subclass 202 (Global Special Humanitarian) Visas) Instrument 2026 (17/07/2026)",
+            "url": "https://migrationalliance.com.au/immigration-daily-news/entry/2026-07-migration-annual-applicant-limits-for-subclass-202-global-special-humanitarian-visas-instrument-2026.html"
+          },
+          {
+            "label": "Migration Alliance · Migration Amendment (Realigning the Community Support Program) Regulations 2026",
+            "url": "https://migrationalliance.com.au/immigration-daily-news/entry/2026-06-migration-amendment-realigning-the-community-support-program-regulations-2026.html"
+          },
+          {
+            "label": "Migration Law Updates · Realigning the Community Support Program",
+            "url": "https://migrationlawupdates.com.au/realigning-the-community-support-program/"
+          },
+          {
+            "label": "Department of Home Affairs · Subclass 202 Global Special Humanitarian visa",
+            "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/global-special-humanitarian-202"
+          },
+          {
+            "label": "Department of Home Affairs · The Special Humanitarian Program",
+            "url": "https://immi.homeaffairs.gov.au/what-we-do/refugee-and-humanitarian-program/the-special-humanitarian-program"
+          },
+          {
+            "label": "Federal Register of Legislation (onde verificar o registro oficial dos instrumentos)",
+            "url": "https://www.legislation.gov.au/"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       headline: "Austrália oficializa novas regras do visto 417 e taxas sobem a partir de 1º de julho",
@@ -552,6 +928,46 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
   uk: {
     blog: [
       {
+        "publishedAt": "2026-07-20",
+        "headline": "1º de outubro de 2026: o dia em que trabalhar e alugar no Reino Unido passam pela mesma checagem",
+        "standfirst": "Um pacote de regras que amadureceu nas últimas semanas coloca trabalho e moradia sob o mesmo regime de verificação digital de status migratório. O manual do empregador publicado em 16 de julho fechou a peça que faltava, ainda que em rascunho.",
+        "body": "Há uma data que quem vive ou planeja viver no Reino Unido deveria acompanhar de perto: 1º de outubro de 2026. É quando entram em vigor, no mesmo dia, dois conjuntos de regras que tratam de coisas aparentemente distintas, o direito de trabalhar e o direito de alugar um imóvel, mas que passam a operar sob a mesma lógica, a da verificação sistemática e digital do status migratório de quem está no país.\n\nA peça mais recente desse quebra-cabeça chegou em 16 de julho de 2026, quando o Home Office atualizou a página oficial do guia de checagem de direito ao trabalho e anexou o Draft employer's guide to right to work checks: 16 July 2026, um rascunho de 72 páginas. Até então, o que existia era o desenho jurídico do regime ampliado, definido na versão revisada do código de prática sobre prevenção de trabalho ilegal, divulgada em 30 de junho de 2026, que implementa a secção 48 do Border Security, Asylum and Immigration Act 2025. O guia agora publicado traz o nível operacional, o que muda para as empresas na rotina de contratação e no acompanhamento de quem já está trabalhando. Convém registrar desde já que os dois documentos ainda são rascunho.\n\nO que se amplia no lado do trabalho não é a exigência em si, que já existia, mas o universo de quem precisa cumpri-la. O regime deixa de se limitar ao vínculo empregatício tradicional e passa a abranger contratos de trabalhador, subcontratação individual e serviços de intermediação on-line, o que na prática significa trabalhadores de agência, subcontratados e profissionais da economia gig, de entregas a transporte por aplicativo. Muitas plataformas trataram esse pessoal como autônomo e montaram processos de cadastro que simplesmente não incluíam checagem de direito ao trabalho. A partir de outubro isso deixa de ser sustentável. A penalidade civil por trabalho ilegal é de até £45.000 por trabalhador na primeira infração e até £60.000 em caso de reincidência, e escritórios que analisaram o texto, entre eles o Free Movement, avaliam que em arranjos contratuais específicos a responsabilidade pode alcançar empresas acima do empregador direto, por exemplo quando quem contratou diretamente não é identificado ou não faz a checagem.\n\nDo lado da moradia, o movimento é paralelo e veio um pouco antes. Em 30 de junho de 2026, o Home Office publicou as novas versões do código de prática do esquema de right to rent para proprietários e agentes imobiliários, com aplicação a partir de 1º de outubro de 2026, incluindo a versão dedicada a evitar discriminação ilegal nas checagens. Aqui o mecanismo é concreto e já tem nome: as empresas que fazem verificação digital para right to rent passam a ser chamadas de right to rent digital verification service providers e precisam estar registradas no Office for Digital Identities and Attributes, com anotação específica no registro autorizando esse tipo de checagem, sob o quadro criado pelo Data (Use and Access) Act 2025.\n\nÉ aí que os dois lados se encontram, e aqui vale desfazer uma confusão comum. Para a maioria dos estrangeiros, a checagem de direito ao trabalho já é feita pelo serviço on-line do Home Office, com o código de compartilhamento que o próprio trabalhador gera a partir do eVisa. A discussão sobre provedores certificados de identidade digital diz respeito sobretudo à verificação de titulares de passaporte britânico ou irlandês, e o guia hoje em vigor, na versão de 26 de junho de 2025, afirma que o uso desse tipo de provedor não é obrigatório para o empregador. A partir de outubro, quem escolher essa via precisará recorrer a provedor registrado para aquela finalidade específica. Em qualquer cenário, a responsabilidade pela penalidade civil continua sendo de quem contrata, e não do provedor de identidade que fez a verificação.\n\nPara o imigrante, o efeito prático é direto. Duas das decisões mais básicas de uma vida no exterior, conseguir trabalho e conseguir onde morar, passam a envolver checagem documental mais frequente, feita por mais atores e em mais pontos da cadeia. Quem trabalha por agência ou aplicativo, ou aluga de um pequeno proprietário que nunca lidou com verificação digital, tende a sentir o atrito primeiro.\n\nO preparo é simples e cabe em três providências. Conferir se o eVisa está com os dados corretos e vinculado ao passaporte em uso, testar a geração do código de compartilhamento no serviço View and Prove antes que alguém o peça, e verificar com antecedência se há pendência de renovação. Isso evita perder uma vaga ou um contrato de aluguel por questão burocrática. Como o guia do empregador ainda está em rascunho, detalhes de implementação podem mudar até a versão definitiva. Acompanhar a página oficial no GOV.UK e consultar profissional habilitado antes de qualquer decisão continua sendo o caminho mais seguro, porque nenhum conteúdo informativo substitui a análise do caso concreto.",
+        "tags": [
+          "Reino Unido",
+          "Right to Work",
+          "Right to Rent",
+          "Identidade Digital",
+          "Home Office",
+          "Mercado de Trabalho"
+        ],
+        "sources": [
+          {
+            "label": "GOV.UK · Right to work checks: an employer's guide (página atualizada em 16/07/2026)",
+            "url": "https://www.gov.uk/government/publications/right-to-work-checks-employers-guide"
+          },
+          {
+            "label": "GOV.UK · Employer's guide to right to work checks: 26 June 2025 (accessible)",
+            "url": "https://www.gov.uk/government/publications/right-to-work-checks-employers-guide/employers-guide-to-right-to-work-checks-26-june-2025-accessible"
+          },
+          {
+            "label": "GOV.UK · Code of practice for landlords and their agents: the right to rent scheme, 1 October 2026",
+            "url": "https://www.gov.uk/government/publications/right-to-rent-landlords-code-of-practice/code-of-practice-for-landlords-and-their-agents-the-right-to-rent-scheme-for-landlords-and-their-agents-1-october-2026"
+          },
+          {
+            "label": "GOV.UK · Code of practice for landlords: avoiding unlawful discrimination when conducting right to rent checks, 1 October 2026",
+            "url": "https://www.gov.uk/government/publications/right-to-rent-landlords-code-of-practice/code-of-practice-for-landlords-avoiding-unlawful-discrimination-when-conducting-right-to-rent-checks-in-the-private-rented-residential-sector-1-oc"
+          },
+          {
+            "label": "legislation.gov.uk · Border Security, Asylum and Immigration Act 2025, secção 48",
+            "url": "https://www.legislation.gov.uk/ukpga/2025/31/section/48/enacted"
+          },
+          {
+            "label": "Free Movement · Right to work checks are changing: what employers need to know before October 2026",
+            "url": "https://freemovement.org.uk/right-to-work-checks-october-2026/"
+          }
+        ]
+      },
+      {
       publishedAt: "2026-07-17",
       headline: "Tribunais britânicos reforçam linha dura da imigração em série de decisões neste verão",
       standfirst: "Três julgamentos recentes, da cidadania para refugiados à deportação e ao reagrupamento familiar, mostram as cortes do Reino Unido validando políticas restritivas do Home Office.",
@@ -568,6 +984,38 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
     },
     ],
     community: [
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Alta Corte britânica declara ilegal a retirada do pedido de reconsideração em decisões sobre tráfico de pessoas",
+        "body": "A High Court de Inglaterra e País de Gales decidiu, em julgamento de 10 de julho de 2026 no caso AYA & Ors, R (on the application of) v Secretary of State for the Home Department, com citação [2026] EWHC 1742 (Admin), que o Home Office agiu de forma ilegal ao suprimir a possibilidade de pedir reconsideração de decisões negativas em processos de identificação de vítimas de tráfico de pessoas. A restrição valia para quem estava sujeito a remoção para países signatários da Convenção do Conselho da Europa sobre tráfico de seres humanos e da Convenção Europeia de Direitos Humanos, e foi introduzida para viabilizar as remoções para a França sob o acordo conhecido como one in, one out. Os pedidos foram apresentados por pessoas que chegaram ao Reino Unido pela travessia do Canal da Mancha em pequenas embarcações.\n\nNa avaliação do juiz Sheldon, embora o Home Secretary tenha discricionariedade para definir os arranjos de identificação de vítimas de tráfico, a Modern Slavery Act exige de forma implícita que esse processo seja robusto e efetivo, ainda que não perfeito. Retirar o canal de reconsideração conflitava com essa obrigação.\n\nA decisão tem limites claros, e vale entendê-los antes de criar expectativa. O próprio julgamento registra que nem todas as pessoas cujo pedido não foi reconsiderado serão trazidas de volta da França, e que vítimas reconhecidas ainda podem ser removidas para lá. Quem tem processo em andamento nesse tipo de situação deve buscar orientação jurídica especializada. Este conteúdo é informativo e não substitui análise profissional do caso concreto.",
+        "cta": "Tem processo ligado a identificação de vítima de tráfico no Reino Unido? Procure orientação jurídica especializada para saber se a decisão da High Court afeta o seu caso.",
+        "sources": [
+          {
+            "label": "Courts and Tribunals Judiciary · AYA and others v Secretary of State for the Home Department",
+            "url": "https://www.judiciary.uk/judgments/aya-and-others-v-secretary-of-state-for-the-home-department/"
+          },
+          {
+            "label": "Free Movement · Home Office acted unlawfully by removing reconsiderations for trafficking decisions",
+            "url": "https://freemovement.org.uk/remove-reconsiderations-trafficking-decisions/"
+          },
+          {
+            "label": "Garden Court Chambers · Home Secretary unlawfully denied victims of trafficking the right to request reconsideration before removal to France",
+            "url": "https://gardencourtchambers.co.uk/home-secretary-unlawfully-denied-victims-of-trafficking-the-right-to-request-reconsideration-before-removal-to-france-under-one-in-one-out-policy/"
+          }
+        ]
+      },
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Border Force alerta para o recrutamento de jovens viajantes por quadrilhas de tráfico de drogas",
+        "body": "O Home Office e a Border Force publicaram em 17 de julho de 2026 um alerta oficial sobre o aumento do recrutamento de jovens viajantes por organizações criminosas para transportar cannabis em voos com destino ao Reino Unido. Segundo o comunicado, o número de pessoas flagradas trazendo cannabis por via aérea passou de 142 em 2023 para 976 em 2025, e nos primeiros seis meses de 2026 houve 600 prisões de passageiros usados como correio em aeroportos britânicos. As apreensões subiram de 2,1 toneladas em 2022 para mais de 28 toneladas em 2025, alta de 50% só no último ano.\n\nUm dado do comunicado merece atenção de quem viaja: o maior grupo entre os presos é de homens de 18 a 37 anos vindos da Tailândia. O texto descreve o modo de abordagem, ofertas de viagem e hospedagem de luxo, ou férias baratas oferecidas por conhecidos, em troca do transporte da bagagem, com alvo preferencial em quem está saindo da escola ou da universidade e em quem viaja pela primeira vez. A pena pode chegar a 14 anos de prisão. Kate Goldstone, Border Force Lead Officer for Safeguarding, afirma no comunicado que as quadrilhas exploram jovens para lucrar.\n\nPara quem não é cidadão britânico, o peso é ainda maior, porque condenação criminal e antecedentes entram na avaliação de pedidos de visto, de permanência e de naturalização no Reino Unido, além de gerarem restrição de viagem futura. Se alguém oferecer uma viagem paga em troca de levar bagagem de terceiros, o caminho é recusar e reportar.",
+        "cta": "Recebeu oferta de viagem paga para transportar bagagem de outra pessoa? Recuse e reporte. Uma condenação criminal pode encerrar qualquer plano migratório no Reino Unido.",
+        "sources": [
+          {
+            "label": "Home Office e Border Force (GOV.UK) · Border Force: don't let drug smugglers steal your future (17/07/2026)",
+            "url": "https://www.gov.uk/government/news/border-force-dont-let-drug-smugglers-steal-your-future"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       title: "Reino Unido lança processamento prioritário para pedidos de cidadania britânica",
@@ -600,6 +1048,43 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
       sources: [{ label: "Free Movement", url: "https://freemovement.org.uk/whats-in-the-immigration-and-asylum-bill-2026/" }],
     }],
     countryTab: [
+      {
+        "publishedAt": "2026-07-20",
+        "headline": "Home Office publica o manual do empregador da nova checagem de direito ao trabalho, ainda em rascunho, a dez semanas da entrada em vigor",
+        "standfirst": "Documento de 72 páginas divulgado em 16 de julho detalha a rotina prática do regime ampliado que começa em 1º de outubro e que passa a alcançar trabalhador de agência, subcontratado e profissional de aplicativo.",
+        "body": "O Home Office atualizou em 16 de julho de 2026 a página oficial do guia de checagem de direito ao trabalho no GOV.UK e anexou um novo documento, o Draft employer's guide to right to work checks: 16 July 2026, um rascunho de 72 páginas que funciona como manual operacional do regime ampliado de right to work.\n\nA diferença em relação ao que já se sabia é de natureza prática. Em 30 de junho de 2026 o governo havia divulgado a versão revisada, também em rascunho, do Code of Practice on preventing illegal working, que estabelece o desenho jurídico do novo regime e confirma a data de entrada em vigor, 1º de outubro de 2026, implementando a secção 48 do Border Security, Asylum and Immigration Act 2025. O guia agora publicado desce ao nível da rotina, quem precisa checar o quê, em que momento e com qual documentação. Os dois documentos ainda são rascunho e podem sofrer ajustes até a versão definitiva.\n\nO ponto mais sensível do novo desenho é a ampliação do universo de quem precisa cumprir a exigência. Até aqui, a obrigação de verificar o direito ao trabalho e a penalidade civil por trabalho ilegal recaíam sobre quem tinha o vínculo empregatício direto. A partir de outubro, o alcance passa a incluir contratos de trabalhador, subcontratação individual e serviços de intermediação on-line, o que abrange trabalhadores de agência, subcontratados e profissionais da economia gig, de entregas a transporte por aplicativo. A penalidade civil por trabalho ilegal segue em até £45.000 por trabalhador na primeira infração e até £60.000 por trabalhador em caso de reincidência. Escritórios que analisaram o texto, entre eles o Free Movement, avaliam que, em determinados arranjos contratuais, a responsabilidade pode alcançar empresas situadas acima do empregador direto na cadeia, por exemplo quando quem contratou diretamente não é identificado ou não faz a checagem. Esse é o entendimento dos analistas sobre como a regra tende a operar, e é justamente um dos pontos cuja aplicação prática só ficará clara com a versão final e com os primeiros casos.\n\nHá também mudança na verificação digital de identidade, e aqui vale uma distinção que costuma gerar confusão. Para a maioria dos estrangeiros, a checagem já é feita hoje pelo serviço on-line do Home Office, com o código de compartilhamento gerado pelo próprio trabalhador a partir do eVisa. A discussão sobre provedores certificados de identidade digital diz respeito sobretudo à verificação de titulares de passaporte britânico ou irlandês, e o guia em vigor, na versão de 26 de junho de 2025, afirma que o uso desse tipo de provedor não é obrigatório para o empregador. A partir de 1º de outubro de 2026, quem optar por essa via precisará usar provedor registrado especificamente para checagens de direito ao trabalho. Em qualquer cenário, a responsabilidade pela penalidade civil continua sendo de quem contrata, e não do provedor de identidade.\n\nPara quem é estrangeiro e trabalha no Reino Unido por agência, subcontratação ou plataforma de aplicativo, o efeito direto é que a checagem de status migratório passa a acontecer em mais pontos da cadeia e com mais frequência. A providência concreta é conferir se o eVisa está com os dados corretos e vinculado ao passaporte atual, e saber gerar o código de compartilhamento no serviço View and Prove antes que ele seja pedido, porque a exigência pode afetar a continuidade da contratação a partir de outubro. Como o documento ainda está em versão de rascunho, a orientação é acompanhar a página oficial no GOV.UK. Este conteúdo é informativo e não substitui a análise de profissional habilitado sobre o seu caso.",
+        "keyFacts": [
+          "A página oficial do guia de right to work no GOV.UK foi atualizada em 16 de julho de 2026, com a inclusão do Draft employer's guide to right to work checks: 16 July 2026, de 72 páginas.",
+          "O regime ampliado entra em vigor em 1º de outubro de 2026 e implementa a secção 48 do Border Security, Asylum and Immigration Act 2025.",
+          "Passa a abranger contratos de trabalhador, subcontratação individual e serviços de intermediação on-line, alcançando trabalhadores de agência, subcontratados e profissionais da economia gig.",
+          "A penalidade civil por trabalho ilegal é de até £45.000 por trabalhador na primeira infração e até £60.000 em caso de reincidência.",
+          "Analistas, entre eles o Free Movement, avaliam que em arranjos contratuais específicos a responsabilidade pode alcançar empresas acima do empregador direto. É leitura dos especialistas, não texto literal da lei.",
+          "Para a maioria dos estrangeiros, a checagem já corre pelo serviço on-line do Home Office com código de compartilhamento gerado a partir do eVisa.",
+          "Tanto o guia do empregador quanto o código de prática revisado ainda são rascunho e podem mudar até a versão final."
+        ],
+        "sources": [
+          {
+            "label": "GOV.UK · Right to work checks: an employer's guide (página atualizada em 16/07/2026, com o rascunho de 72 páginas)",
+            "url": "https://www.gov.uk/government/publications/right-to-work-checks-employers-guide"
+          },
+          {
+            "label": "GOV.UK · Employer's guide to right to work checks: 26 June 2025 (accessible)",
+            "url": "https://www.gov.uk/government/publications/right-to-work-checks-employers-guide/employers-guide-to-right-to-work-checks-26-june-2025-accessible"
+          },
+          {
+            "label": "legislation.gov.uk · Border Security, Asylum and Immigration Act 2025, secção 48",
+            "url": "https://www.legislation.gov.uk/ukpga/2025/31/section/48/enacted"
+          },
+          {
+            "label": "Free Movement · Right to work checks are changing: what employers need to know before October 2026",
+            "url": "https://freemovement.org.uk/right-to-work-checks-october-2026/"
+          },
+          {
+            "label": "Lewis Silkin · Preventing illegal working and right to work checks: what changes from 1 October 2026",
+            "url": "https://www.lewissilkin.com/insights/2026/07/02/preventing-illegal-working-and-right-to-work-checks-what-changes-from-1-october-2026"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       headline: "Reino Unido estende checagem de direito ao trabalho para além do vínculo empregatício tradicional a partir de outubro",
@@ -646,6 +1131,57 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
   ie: {
     blog: [
       {
+        "publishedAt": "2026-07-20",
+        "headline": "A Irlanda quer mais trabalhador estrangeiro do que consegue registrar",
+        "standfirst": "Em 2026 o país ampliou a lista de ocupações elegíveis a visto de trabalho e elevou os pisos salariais para atrair profissionais. No mesmo ano, a fila para renovar a autorização de residência de quem já está lá passou de 17 semanas e chegou à segunda rodada de medidas de emergência desde dezembro. As duas pontas não estão conversando.",
+        "body": "Vale olhar 2026 na Irlanda por duas janelas ao mesmo tempo. Pela primeira, o país aparece disputando talento estrangeiro com bastante método. Em 22 de maio de 2026 entrou em vigor uma revisão das listas de ocupações elegíveis a employment permit conduzida pelo Department of Enterprise, Tourism and Employment. Entraram na lista de Critical Skills funções como optometristas, profissionais de propriedade intelectual, agrimensores geoespaciais e riggers da indústria de games. Cinco ocupações saíram por completo da lista de inelegíveis e passaram a aceitar General Employment Permit sem cota, entre elas técnicos farmacêuticos, técnicos de prótese dentária e trabalhadores florestais. Duas ganharam cotas novas, sendo 50 vagas para fileteiros de peixe e 100 para operadores de pescado, e outras tiveram cotas renovadas, incluindo 1.000 mecânicos de automóveis, 1.495 cuidadores e 548 açougueiros e desossadores. Antes disso, em 1º de março de 2026, entraram em vigor os pisos salariais mais altos do Employment Permits Roadmap, com o General Employment Permit indo a €36.605 por ano e o Critical Skills a €40.904.\n\nPela segunda janela, o retrato é outro. Em 13 de julho, a Immigration Service Delivery informou que o escritório de registro de Burgh Quay, em Dublin, opera com tempo de processamento superior a 17 semanas em algumas categorias de renovação do Irish Residence Permit, mais duas semanas até a entrega física do cartão. A categoria mais castigada é a do Stamp 4, com atraso na faixa das 17 a 19 semanas.\n\nO detalhe que mais expõe o descompasso é uma regra do próprio sistema. A renovação online só pode ser protocolada até 12 semanas antes do vencimento da autorização, e pedidos enviados antes disso são recusados. Ou seja, quando a fila real de uma categoria supera esse prazo, nem o requerente mais organizado consegue receber o novo cartão antes de o antigo expirar. Não é negligência do imigrante, é uma limitação estrutural do desenho atual.\n\nFoi por isso que o governo emitiu duas medidas provisórias de uma vez. O aviso provisório a empregadores permite que o trabalhador com IRP vencido siga no país e no emprego sob as condições do cartão antigo até 31 de agosto de 2026, suspendendo temporariamente o teto de 12 semanas da regra permanente, desde que o pedido tenha sido enviado antes do vencimento e com toda a documentação, incluindo employment permit válido quando aplicável. E o Travel Confirmation Notice pede às companhias aéreas que aceitem o embarque com o cartão vencido, no mesmo intervalo, mediante apresentação do aviso impresso e da confirmação do pedido.\n\nAqui entra o dado que muda a interpretação de tudo. Nenhuma das duas medidas é inédita. Um Travel Confirmation Notice equivalente já havia funcionado de 8 de dezembro de 2025 a 28 de fevereiro de 2026, na temporada de festas, e foi em dezembro de 2025 que a Immigration Service Delivery ampliou de 8 para 12 semanas o prazo do Notice to Employers permanente. O atraso não é um susto de verão. É uma condição que se arrasta desde o fim de 2025 e que o Estado vem administrando com janelas temporárias sucessivas.\n\nMedida provisória, por definição, tem data para acabar. As duas expiram em 31 de agosto de 2026, e o texto oficial avisa que depois disso volta a valer o limite de 12 semanas. Se a fila não tiver encolhido abaixo desse patamar, o problema reaparece em setembro. O histórico sugere que uma nova janela possa ser aberta, como aconteceu no inverno, mas isso é discricionário e não está prometido em documento nenhum, então ninguém deveria montar plano de viagem ou de emprego contando com essa renovação. Ao ser procurado pela RTÉ, o Departamento afirmou estar explorando todas as vias disponíveis para aumentar a capacidade de processamento, sem anunciar contratação de pessoal, meta de redução de prazo ou revisão da janela de 12 semanas para protocolar. Até aqui, portanto, o que está documentado é tratamento do efeito, não da causa.\n\nPara quem avalia a Irlanda como destino, nada disso desqualifica o país. A demanda por profissionais qualificados é real e está registrada em ato oficial. O ponto é calibrar a expectativa sobre o que acontece depois da mudança. Conseguir o employment permit e o primeiro registro é uma etapa. Manter a documentação em dia ano após ano, num sistema que precisou de aviso ministerial em duas temporadas seguidas para que as pessoas pudessem viajar e trabalhar legalmente, é outra bem diferente.\n\nA orientação prática para quem já vive na Irlanda é acompanhar semanalmente a tabela de prazos por categoria de stamp no site oficial, protocolar a renovação no primeiro dia possível dentro da janela de 12 semanas, guardar o e-mail de confirmação do pedido, que serve como prova de registro, e verificar as datas de validade dos avisos provisórios antes de comprar qualquer passagem. Atenção redobrada a quem entrou com visto de entrada única, porque esse perfil precisa de re-entry visa para voltar mesmo dentro da janela autorizada. Situações específicas, sobretudo mudança de categoria de stamp ou permissão já vencida antes do pedido, merecem consulta a um profissional habilitado em imigração irlandesa.",
+        "tags": [
+          "Irlanda",
+          "IRP",
+          "Employment Permit",
+          "Residência",
+          "Immigration Service Delivery"
+        ],
+        "sources": [
+          {
+            "label": "Immigration Service Delivery · Minister Brophy announces interim Notice to Employers regarding renewal of registration (13/07/2026)",
+            "url": "https://www.irishimmigration.ie/minister-brophy-announces-interim-notice-to-employers-regarding-renewal-of-registration/"
+          },
+          {
+            "label": "Immigration Service Delivery · Minister Brophy announces initiative to facilitate customers travelling during the summer months (13/07/2026)",
+            "url": "https://www.irishimmigration.ie/minister-brophy-announces-initiative-to-facilitate-customers-travelling-during-the-summer-months/"
+          },
+          {
+            "label": "Immigration Service Delivery · ISD announce extension to Travel Confirmation Notice (aviso anterior, 08/12/2025 a 28/02/2026)",
+            "url": "https://www.irishimmigration.ie/isd-announce-extension-to-travel-confirmation-notice/"
+          },
+          {
+            "label": "Immigration Service Delivery · Renewing your registration permission if you live in the Republic of Ireland (tabela de prazos, atualizada semanalmente)",
+            "url": "https://www.irishimmigration.ie/registering-your-immigration-permission/how-to-renew-your-current-permission/renewing-your-registration-permission-if-you-live-in-the-republic-of-ireland/"
+          },
+          {
+            "label": "Immigration Service Delivery · Notice to Employers (regra permanente de 12 semanas)",
+            "url": "https://www.irishimmigration.ie/registering-your-immigration-permission/how-to-renew-your-current-permission/notice-to-employers/"
+          },
+          {
+            "label": "Lewis Silkin · Ireland's employment permit occupations lists: what's changed in May 2026 (detalhamento das alterações em vigor em 22/05/2026)",
+            "url": "https://www.lewissilkin.com/en-IE/insights/2026/05/27/irelands-employment-permit-occupations-lists-whats-changed-in-may-2026"
+          },
+          {
+            "label": "DETE · Employment Permits Minimum Annual Remuneration, Outcome of the Roadmap Review 2025 (pisos em vigor desde 01/03/2026)",
+            "url": "https://enterprise.gov.ie/en/publications/publication-files/employment-permits-minimum-annual-remuneration-outcome-of-the-roadmap-review-2025.pdf"
+          },
+          {
+            "label": "Fragomen · Ireland: Temporary Residence Permission Renewal Measures Extended Amid Processing Delays (14/07/2026)",
+            "url": "https://www.fragomen.com/insights/ireland-temporary-residence-permission-renewal-measures-extended-amid-processing-delays.html"
+          },
+          {
+            "label": "RTÉ News · Interim measure introduced for workers over permit delays (13/07/2026)",
+            "url": "https://www.rte.ie/news/2026/0713/1583184-irp-interim-measure/"
+          }
+        ]
+      },
+      {
       publishedAt: "2026-07-17",
       headline: "Pedidos de cidadania irlandesa por americanos sobem 63%: o que os números confirmam e o que é só manchete",
       standfirst: "Dados oficiais do Foreign Births Register mostram um salto real nos pedidos de cidadãos dos EUA. A onda de manchetes que fala em 'Trumpugees' fugindo em massa, porém, é leitura editorial, não uma causa atestada pelo governo irlandês.",
@@ -659,6 +1195,58 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
     },
     ],
     community: [
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Irlanda libera viagem internacional com o IRP vencido até 31 de agosto, e não é a primeira vez",
+        "body": "Quem mora na Irlanda com autorização de residência e está preso na fila de renovação ganhou uma saída oficial para viajar no verão europeu. O ministro de Estado para Migração, Colm Brophy, emitiu um Travel Confirmation Notice pedindo às companhias aéreas que aceitem o embarque de nacionais de fora do Espaço Econômico Europeu portando o Irish Residence Permit recentemente vencido, desde que o pedido de renovação tenha sido enviado antes da data de expiração do cartão.\n\nVale registrar que a medida não é inédita. Um aviso equivalente já havia funcionado de 8 de dezembro de 2025 a 28 de fevereiro de 2026, no período de festas. A versão de agora vale de 13 de julho a 31 de agosto de 2026 e exige cuidado prático. Segundo a Immigration Service Delivery, o passageiro deve baixar e imprimir o aviso e apresentá-lo junto com o cartão vencido e o e-mail de confirmação do pedido de renovação, que traz a data da solicitação. O órgão recomenda ainda avisar a companhia aérea com antecedência e, em caso de conexão em país terceiro, confirmar antes de comprar a passagem se aquela jurisdição aceita o documento.\n\nHá dois limites importantes. O primeiro é a data de retorno: quem planeja voltar à Irlanda depois de 31 de agosto de 2026 e é nacional de país que exige visto precisará solicitar um visto de entrada tipo D na embaixada ou consulado irlandês mais próximo do destino. O segundo passa despercebido com frequência: quem entrou na Irlanda com visto de entrada única e já tem carimbo de desembarque precisa de re-entry visa para voltar, mesmo viajando dentro da janela autorizada. O aviso não substitui esse visto.\n\nEste conteúdo é informativo e não substitui a orientação de um profissional habilitado em imigração irlandesa, sobretudo em casos de mudança de categoria de stamp ou permissão já vencida antes do pedido.",
+        "cta": "Vai viajar no verão com o IRP vencido? Confirme duas coisas antes de comprar a passagem: se você volta até 31 de agosto e se o seu visto original era de entrada única.",
+        "sources": [
+          {
+            "label": "Immigration Service Delivery · Minister Brophy announces initiative to facilitate customers travelling during the summer months (13/07/2026)",
+            "url": "https://www.irishimmigration.ie/minister-brophy-announces-initiative-to-facilitate-customers-travelling-during-the-summer-months/"
+          },
+          {
+            "label": "Immigration Service Delivery · ISD announce extension to Travel Confirmation Notice (aviso anterior, válido de 08/12/2025 a 28/02/2026)",
+            "url": "https://www.irishimmigration.ie/isd-announce-extension-to-travel-confirmation-notice/"
+          },
+          {
+            "label": "Immigration Service Delivery · Travel and Re-Entry Visas",
+            "url": "https://www.irishimmigration.ie/registering-your-immigration-permission/travel-and-re-entry-visas/"
+          },
+          {
+            "label": "Immigration Service Delivery · Renewing your registration permission if you live in the Republic of Ireland",
+            "url": "https://www.irishimmigration.ie/registering-your-immigration-permission/how-to-renew-your-current-permission/renewing-your-registration-permission-if-you-live-in-the-republic-of-ireland/"
+          }
+        ]
+      },
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Trabalhar na Irlanda com o IRP vencido: o que a medida provisória cobre e o que não cobre",
+        "body": "A Irlanda emitiu em 13 de julho de 2026 um aviso provisório a empregadores que muda, temporariamente, a regra de permanência de quem está esperando a renovação da autorização de residência. Pela nota oficial da Immigration Service Delivery, o empregado cujo IRP venceu pode continuar no país sob as condições do cartão antigo até 31 de agosto de 2026. Uma atualização publicada em 16 de julho deixou explícito que a cobertura vale independentemente de quantas semanas já tenham passado desde o vencimento, desde que exista pedido de renovação ativo.\n\nA cobertura, porém, tem condição rígida. É preciso comprovar que o pedido de renovação foi enviado antes de o cartão vencer, com todos os documentos exigidos anexados, incluindo employment permit válido quando aplicável. Quem deixou a permissão expirar antes de protocolar a renovação fica de fora do aviso e deve procurar a Immigration Service Delivery com urgência. Pedidos que envolvem mudança de categoria de stamp, como a passagem de Stamp 1 para Stamp 4, também estão cobertos, valendo a mesma exigência documental do restante.\n\nO documento é explícito quanto ao prazo. Depois de 31 de agosto de 2026, volta a valer o Notice to Employers permanente, que limita essa permanência a no máximo 12 semanas após o vencimento do cartão. Esse teto de 12 semanas, aliás, já é resultado de um ajuste anterior: em dezembro de 2025 a Immigration Service Delivery ampliou o prazo, que antes era de 8 semanas, justamente por causa das filas. Vale guardar o e-mail de confirmação do pedido, que a própria Immigration Service Delivery indica como prova de registro válida enquanto o novo cartão não chega pelo correio.\n\nEste conteúdo é informativo e não substitui a orientação de um profissional habilitado em imigração irlandesa. Situação de permissão vencida antes do pedido, ou dúvida sobre necessidade de employment permit no seu caso, merece análise individual.",
+        "cta": "Está com o IRP vencido e trabalhando na Irlanda? Separe agora o comprovante de que a renovação foi enviada antes do vencimento, porque é essa data que decide se você está coberto.",
+        "sources": [
+          {
+            "label": "Immigration Service Delivery · Minister Brophy announces interim Notice to Employers regarding renewal of registration (13/07/2026)",
+            "url": "https://www.irishimmigration.ie/minister-brophy-announces-interim-notice-to-employers-regarding-renewal-of-registration/"
+          },
+          {
+            "label": "MRCI · ISD announces update to interim Notice to Employers regarding expired IRP cards (16/07/2026)",
+            "url": "https://www.mrci.ie/2026/07/16/isd-announces-update-to-interim-notice-to-employers-regarding-expired-irp-cards/"
+          },
+          {
+            "label": "Immigration Service Delivery · Notice to Employers (regra permanente de 12 semanas)",
+            "url": "https://www.irishimmigration.ie/registering-your-immigration-permission/how-to-renew-your-current-permission/notice-to-employers/"
+          },
+          {
+            "label": "Fragomen · Ireland: Temporary Residence Permission Renewal Measures Extended Amid Processing Delays (14/07/2026, contexto da ampliação de 8 para 12 semanas em dezembro de 2025)",
+            "url": "https://www.fragomen.com/insights/ireland-temporary-residence-permission-renewal-measures-extended-amid-processing-delays.html"
+          },
+          {
+            "label": "RTÉ News · Interim measure introduced for workers over permit delays (13/07/2026)",
+            "url": "https://www.rte.ie/news/2026/0713/1583184-irp-interim-measure/"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       title: "Irlanda cria novo esquema de transição pra ucranianos com proteção temporária",
@@ -687,6 +1275,57 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
       sources: [{ label: "Irish Immigration Service", url: "https://www.irishimmigration.ie/information-on-online-renewal-timelines/" }],
     }],
     countryTab: [
+      {
+        "publishedAt": "2026-07-20",
+        "headline": "A fila de renovação de residência na Irlanda passou de 17 semanas, e o governo abriu mais uma trégua temporária até 31 de agosto",
+        "standfirst": "Em 13 de julho o Ministério da Justiça reconheceu processamento acima de 17 semanas em algumas categorias e anunciou duas medidas provisórias. Não é a primeira vez: uma janela equivalente para viagem já havia funcionado entre dezembro de 2025 e fevereiro de 2026, o que mostra um atraso crônico, não um susto de verão.",
+        "body": "Em 13 de julho de 2026 o quadro das filas de imigração na Irlanda ficou explícito. O Escritório de Registro de Burgh Quay, em Dublin, informou estar operando com volume muito grande de pedidos e tempo de processamento superior a 17 semanas em algumas categorias, com mais duas semanas até a entrega do novo cartão pelo correio.\n\nA categoria mais afetada é a do Stamp 4, com atraso na casa das 17 a 19 semanas. As demais categorias corriam prazos menores em julho, mas o próprio órgão mantém no site uma tabela de filas por tipo de stamp que é atualizada toda segunda-feira, então qualquer número específico envelhece em poucos dias. Antes de tomar decisão de viagem ou de emprego, consulte a tabela na data em que for agir, e não uma reportagem.\n\nDiante disso, o ministro de Estado para Migração, Colm Brophy, anunciou duas medidas provisórias que valem de 13 de julho a 31 de agosto de 2026. A primeira é um aviso provisório a empregadores, que permite ao trabalhador com IRP vencido permanecer no país sob as condições do cartão antigo, sem o teto de 12 semanas da regra permanente, desde que a renovação tenha sido protocolada antes do vencimento e com toda a documentação anexada, incluindo employment permit válido quando aplicável. Uma atualização de 16 de julho confirmou que a cobertura vale independentemente de quantas semanas já se passaram desde o vencimento. A segunda medida é um Travel Confirmation Notice, que pede às companhias aéreas que aceitem o embarque com o cartão vencido acompanhado da prova do pedido de renovação.\n\nO contexto importa para calibrar a expectativa. Nenhuma das duas medidas é inédita. Um Travel Confirmation Notice equivalente já havia funcionado de 8 de dezembro de 2025 a 28 de fevereiro de 2026, e foi em dezembro de 2025 que a Immigration Service Delivery ampliou de 8 para 12 semanas o prazo do Notice to Employers permanente. O atraso, portanto, se arrasta desde o fim de 2025 e vem sendo administrado por janelas temporárias sucessivas, não por uma correção estrutural.\n\nAs medidas têm dois pontos cegos. O primeiro é a data de retorno: quem viajar e voltar depois de 31 de agosto de 2026, sendo nacional de país que exige visto, precisará solicitar um visto de entrada tipo D no consulado ou embaixada irlandesa mais próxima do destino. O segundo é menos comentado e pega gente desprevenida: quem entrou com visto de entrada única e já tem carimbo de desembarque precisa de re-entry visa para retornar, mesmo dentro da janela autorizada.\n\nPara quem vive ou pretende viver na Irlanda, a leitura prática é direta. O sistema permite protocolar a renovação no máximo 12 semanas antes do vencimento, e pedidos enviados antes disso são recusados. Quando a fila de uma categoria supera esse prazo, nem o requerente mais organizado consegue o cartão novo a tempo. A recomendação do próprio órgão é acompanhar a tabela semanal de prazos, protocolar no primeiro dia possível da janela, guardar o e-mail de confirmação como prova de registro e reservar pedidos de processamento acelerado a emergências comprovadas com documentação de viagem.\n\nEste conteúdo é informativo e não substitui a orientação de um profissional habilitado em imigração irlandesa.",
+        "keyFacts": [
+          "Aviso oficial de 13 de julho de 2026 reconhece tempo de processamento superior a 17 semanas em algumas categorias no escritório de Burgh Quay, mais duas semanas até a entrega do cartão. O Stamp 4 é a categoria mais atrasada.",
+          "A tabela oficial de filas por categoria de stamp é atualizada toda segunda-feira no site da Immigration Service Delivery, e deve ser consultada na data da decisão.",
+          "Medida provisória permite permanecer e trabalhar com IRP vencido até 31 de agosto de 2026, sem o teto de 12 semanas, se a renovação foi protocolada antes do vencimento com todos os documentos, incluindo employment permit válido quando aplicável. Atualização de 16 de julho confirmou que vale independentemente das semanas decorridas.",
+          "Travel Confirmation Notice autoriza viagem internacional com o cartão vencido entre 13 de julho e 31 de agosto de 2026, mediante apresentação do aviso impresso e da confirmação do pedido. Não é inédito: um equivalente valeu de 08/12/2025 a 28/02/2026.",
+          "Quem retorna após 31 de agosto de 2026 e é nacional sujeito a visto precisará de visto de entrada tipo D. Quem entrou com visto de entrada única precisa de re-entry visa mesmo dentro da janela. Depois de 31 de agosto volta o limite permanente de 12 semanas, que já foi ampliado de 8 para 12 em dezembro de 2025."
+        ],
+        "sources": [
+          {
+            "label": "Immigration Service Delivery · Minister Brophy announces interim Notice to Employers regarding renewal of registration (13/07/2026)",
+            "url": "https://www.irishimmigration.ie/minister-brophy-announces-interim-notice-to-employers-regarding-renewal-of-registration/"
+          },
+          {
+            "label": "Immigration Service Delivery · Minister Brophy announces initiative to facilitate customers travelling during the summer months (13/07/2026)",
+            "url": "https://www.irishimmigration.ie/minister-brophy-announces-initiative-to-facilitate-customers-travelling-during-the-summer-months/"
+          },
+          {
+            "label": "Immigration Service Delivery · Renewing your registration permission if you live in the Republic of Ireland (tabela de prazos, atualizada semanalmente)",
+            "url": "https://www.irishimmigration.ie/registering-your-immigration-permission/how-to-renew-your-current-permission/renewing-your-registration-permission-if-you-live-in-the-republic-of-ireland/"
+          },
+          {
+            "label": "Immigration Service Delivery · ISD announce extension to Travel Confirmation Notice (aviso anterior, 08/12/2025 a 28/02/2026)",
+            "url": "https://www.irishimmigration.ie/isd-announce-extension-to-travel-confirmation-notice/"
+          },
+          {
+            "label": "Immigration Service Delivery · Notice to Employers (regra permanente de 12 semanas)",
+            "url": "https://www.irishimmigration.ie/registering-your-immigration-permission/how-to-renew-your-current-permission/notice-to-employers/"
+          },
+          {
+            "label": "Immigration Service Delivery · Travel and Re-Entry Visas",
+            "url": "https://www.irishimmigration.ie/registering-your-immigration-permission/travel-and-re-entry-visas/"
+          },
+          {
+            "label": "MRCI · ISD announces update to interim Notice to Employers regarding expired IRP cards (16/07/2026)",
+            "url": "https://www.mrci.ie/2026/07/16/isd-announces-update-to-interim-notice-to-employers-regarding-expired-irp-cards/"
+          },
+          {
+            "label": "Fragomen · Ireland: Temporary Residence Permission Renewal Measures Extended Amid Processing Delays (14/07/2026)",
+            "url": "https://www.fragomen.com/insights/ireland-temporary-residence-permission-renewal-measures-extended-amid-processing-delays.html"
+          },
+          {
+            "label": "RTÉ News · Interim measure introduced for workers over permit delays (13/07/2026)",
+            "url": "https://www.rte.ie/news/2026/0713/1583184-irp-interim-measure/"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       headline: "Irlanda lança esquema de transição pra ucranianos com proteção temporária, e candidaturas abrem em setembro",
@@ -799,6 +1438,47 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
   es: {
     blog: [
       {
+        "publishedAt": "2026-07-20",
+        "headline": "O novo controle de fronteira da Europa separou visitantes de residentes, e isso muda o cálculo de quem quer morar na Espanha",
+        "standfirst": "O sistema EES automatizou o registro de entradas e saídas de estrangeiros em estadas curtas e virou tema de disputa entre o setor aéreo e a Comissão Europeia neste verão. Para quem planeja a Espanha, o dado relevante não é a fila, é a linha que o sistema traçou entre quem visita e quem já tem documento para residir.",
+        "body": "O noticiário desta semana sobre o sistema europeu de entradas e saídas girou em torno das filas. Em reportagens de 19 e 20 de julho, o diretor de aviação do aeroporto de Fiumicino, em Roma, afirmou que a espera média de passageiros britânicos passou de cerca de sete para vinte minutos, e em Faro, em Portugal, filas de cerca de dez minutos passaram a superar trinta. Antes disso, em carta aberta de 1º de julho, as entidades Airlines for Europe, ACI EUROPE e IATA disseram à presidência da Comissão Europeia que as esperas chegaram a cinco horas em períodos de pico.\n\nConvém tratar esses números com pesos diferentes. Os dados de Fiumicino e Faro vieram de operadores dos próprios aeroportos e descrevem médias. As cinco horas são alegação de entidades do setor em um documento que pede mudança de regra, o que não invalida o relato, mas o coloca na categoria de argumento de negociação, e não de estatística oficial. A Comissão não divulgou tempos médios por país, e não há número medido publicado para aeroportos espanhóis.\n\nPara o viajante ocasional, isso é um transtorno de verão. Para quem constrói um projeto de mudança para a Espanha, o que importa é entender por que essas filas existem e quem, afinal, entra nelas.\n\nO EES foi criado para resolver um problema antigo do espaço Schengen. Até então, o controle da estada curta dependia de carimbos em passaporte, um método manual e falho. A página oficial da Comissão Europeia descreve o sistema como uma solução automatizada de registro de nacionais de países terceiros em viagens de estada curta, com os objetivos declarados de detectar automaticamente quem excede o prazo autorizado, prevenir migração irregular, reforçar a segurança e identificar documentos fraudulentos. A implantação gradual começou em 12 de outubro de 2025 e o sistema passou a operar plenamente em 10 de abril de 2026, cobrindo 29 países europeus. Desde então, mais de 45 milhões de cruzamentos de fronteira foram registrados.\n\nA consequência prática é que o limite de estada curta das regras Schengen, de 90 dias dentro de cada período de 180 dias, deixou de depender da leitura de um carimbo e passou a ser calculado por uma base de dados comum. Quem contava com a informalidade do controle manual perdeu essa margem. Quem sempre respeitou o prazo não muda nada além do tempo de fila.\n\nO ponto decisivo vem em seguida, e é onde a maioria das matérias sobre o assunto para cedo demais. O EES não se aplica a titulares de autorização de residência, de cartão de residência nem de visto nacional de longa duração, o visto tipo D. Ou seja, a isenção não começa quando você recebe a TIE, começa quando você entra no país com o visto de longa duração para se estabelecer. Quem está nessa condição deve usar o guichê manual de controle e apresentar o documento junto com o passaporte, em vez de seguir pelo fluxo automatizado, para não ser registrado por engano como visitante de estada curta e ter dias descontados de um limite que não se aplica ao seu caso.\n\nÉ uma diferença concreta, com efeito concreto na fronteira. Estar autorizado a visitar e estar autorizado a residir são situações distintas em documento, em tratamento no controle e em previsibilidade de planejamento, e o EES tornou essa distinção automática e rastreável.\n\nVale registrar também a fragilidade operacional revelada pela carta do setor aéreo. As três causas estruturais apontadas são a falta de pessoal nos postos de fronteira, os problemas de estabilidade da plataforma central e dos sistemas nacionais, e a implantação incompleta de quiosques de autoatendimento, portões automáticos e aplicativos de pré-registro nos Estados membros. As entidades pediram autorização para suspender procedimentos do EES quando o volume superar a capacidade do controle, ao menos em julho e agosto, e um mecanismo permanente de flexibilidade definido até setembro. As regras de operação, portanto, ainda estão em disputa e podem mudar nos próximos meses.\n\nO que fazer com isso na prática. Se o seu plano para a Espanha ainda está na fase de visitas exploratórias, conte com aeroportos mais lentos neste verão europeu e prefira conexões com folga generosa. Se o seu plano é residir, trate o visto de longa duração e o documento de residência como prioridade de cronograma, não como etapa final, porque é o que define o seu fluxo na fronteira desde a primeira chegada. E acompanhe a resposta da Comissão Europeia ao pedido do setor, porque o cenário de setembro pode não ser o de hoje.\n\nEste conteúdo é informativo e não substitui a orientação de um profissional habilitado. Antes de tomar decisões de mudança, confirme sempre requisitos e prazos nas fontes oficiais e junto ao consulado espanhol responsável pela sua região.",
+        "tags": [
+          "Espanha",
+          "EES",
+          "Fronteiras Schengen",
+          "Residência",
+          "Visto de longa duração",
+          "União Europeia",
+          "Viagem"
+        ],
+        "sources": [
+          {
+            "label": "Comissão Europeia · Entry/Exit System (página oficial)",
+            "url": "https://home-affairs.ec.europa.eu/policies/schengen/smart-borders/entry-exit-system_en"
+          },
+          {
+            "label": "Comissão Europeia · Travel to Europe, perguntas frequentes sobre o EES (isenções)",
+            "url": "https://travel-europe.europa.eu/en/ees/faq"
+          },
+          {
+            "label": "ACI EUROPE · Carta aberta à presidência da Comissão Europeia sobre o EES (1º de julho de 2026)",
+            "url": "https://www.aci-europe.org/media-room/610-open-letter-to-president-of-the-european-commission-on-the-schengen-entry-exit-system-ees.html"
+          },
+          {
+            "label": "Euronews · EES at a 'critical point': Europe's aviation sector urges EU to show more flexibility (1º de julho de 2026)",
+            "url": "https://www.euronews.com/travel/2026/07/01/ees-at-a-critical-point-europes-aviation-sector-urges-eu-to-show-more-flexibility"
+          },
+          {
+            "label": "The Local Spain · Airport bosses warn EU's new border checks triple waiting times for Brits (20 de julho de 2026)",
+            "url": "https://www.thelocal.es/20260720/airport-bosses-warn-eus-new-border-checks-triple-waiting-times-for-brits"
+          },
+          {
+            "label": "The Olive Press · Airlines warn of five-hour Spain border queues in letter to EU (3 de julho de 2026)",
+            "url": "https://www.theolivepress.es/spain-news/2026/07/03/airlines-warn-of-five-hour-spain-border-queues-in-letter-to-eu/"
+          }
+        ]
+      },
+      {
       publishedAt: "2026-07-17",
       headline: "Sobrenome sefardita não garante cidadania espanhola sozinho, mas pode ajudar a comprová-la",
       standfirst: "A Lei 12/2015 abriu caminho para descendentes de sefarditas se naturalizarem espanhóis, mas exige provar tanto a condição de sefardita quanto uma conexão especial com a Espanha, e um sobrenome isolado não substitui esse conjunto de provas.",
@@ -811,6 +1491,46 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
     },
     ],
     community: [
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Tem residência ou visto de longa duração na Espanha? Você está fora do novo registro biométrico de fronteira",
+        "body": "Com as filas do sistema europeu de entradas e saídas de volta ao noticiário nesta semana, vale separar duas situações que costumam ser confundidas. O EES entrou em operação plena em 10 de abril de 2026 e registra, em base de dados comum a 29 países europeus, cada entrada e saída de cidadãos de fora da União Europeia que viajam em estadas curtas.\n\nO sistema não se aplica a quem tem autorização de residência, cartão de residência ou visto nacional de longa duração, o visto tipo D. Esse último ponto costuma passar batido e é o que mais interessa a quem está se mudando: você não precisa já estar com a TIE na mão para estar isento. Quem entra na Espanha com o visto de longa duração para se estabelecer também fica fora do registro biométrico de estada curta.\n\nNa prática, a orientação para quem é isento é usar o guichê manual de controle e apresentar o documento de residência ou o visto junto com o passaporte, em vez de seguir pelo fluxo automatizado. Isso evita ser registrado por engano como visitante de estada curta. Se você ainda está em processo de residência, aguardando emissão de documento ou em situação de renovação, confirme com o consulado espanhol ou com a autoridade de estrangeiros qual é exatamente a sua condição antes de viajar, em vez de presumir. Este conteúdo é informativo e não substitui a orientação de um profissional habilitado.",
+        "cta": "Vai viajar à Espanha nas próximas semanas? Confirme se você viaja como visitante ou como residente, separe o documento certo para apresentar na fronteira e planeje a conexão com folga.",
+        "sources": [
+          {
+            "label": "Comissão Europeia · Entry/Exit System (página oficial)",
+            "url": "https://home-affairs.ec.europa.eu/policies/schengen/smart-borders/entry-exit-system_en"
+          },
+          {
+            "label": "Comissão Europeia · Travel to Europe, perguntas frequentes sobre o EES (isenções)",
+            "url": "https://travel-europe.europa.eu/en/ees/faq"
+          },
+          {
+            "label": "The Local Spain · Airport bosses warn EU's new border checks triple waiting times for Brits (20 de julho de 2026)",
+            "url": "https://www.thelocal.es/20260720/airport-bosses-warn-eus-new-border-checks-triple-waiting-times-for-brits"
+          }
+        ]
+      },
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Moradia na Espanha segue pressionada, e quem planeja a mudança precisa orçar com margem de reajuste",
+        "body": "O custo da moradia é um dos itens que mais pesa no orçamento de quem se muda de país, e duas divulgações deste mês ajudam a calibrar a conta para a Espanha.\n\nEm 13 de julho, a agência S&P Global Ratings projetou que a Espanha será o segundo país da Europa com maior alta no preço da moradia em 2026, com estimativa de 9,1%. A agência associa a pressão à combinação de emprego forte, salários em alta e chegada de imigrantes, de um lado, e oferta de novas moradias muito insuficiente, de outro. Entre os gargalos de oferta aparecem custo de material, falta de mão de obra e processos administrativos longos.\n\nEm 20 de julho, o Consejo General de Economistas divulgou seu panorama econômico, estimando crescimento de 2,4% para a economia espanhola em 2026 e apontando desequilíbrio persistente entre oferta e demanda na moradia, com preços e custo de financiamento acima da capacidade de um número crescente de compradores. O mesmo documento registra que a Espanha precisa incorporar entre 200 mil e 300 mil pessoas por ano para sustentar o crescimento, o que mantém a demanda residencial elevada, e que a disponibilidade de solo é um dos fatores mais relevantes do preço, podendo representar até 45% do valor final do imóvel.\n\nPara quem monta um plano de mudança, o recado é de planejamento, não de desânimo. Vale simular o orçamento de moradia com margem para reajustes anuais em vez de congelar o preço de hoje na conta, comparar cidades e regiões antes de fechar contrato, e consultar os indicadores oficiais do mercado imobiliário publicados pelo Banco de España para trabalhar com número atualizado. Decisões de compra ou de aluguel de longo prazo pedem pesquisa local e apoio profissional. Este conteúdo é informativo e não substitui a orientação de um profissional habilitado.",
+        "cta": "Está calculando o custo de morar na Espanha? Refaça a conta de moradia com margem de reajuste anual e compare pelo menos duas regiões antes de decidir.",
+        "sources": [
+          {
+            "label": "El Economista · España será el segundo país europeo donde más subirá el precio de la vivienda en 2026, con un incremento del 9,1% (S&P Global Ratings)",
+            "url": "https://www.eleconomista.es/vivienda-inmobiliario/noticias/13998593/07/26/espana-sera-el-segundo-pais-europeo-donde-mas-subira-el-precio-de-la-vivienda-en-2026-con-un-incremento-del-9.html"
+          },
+          {
+            "label": "El Español · Los economistas estiman que la economía española crecerá un 2,4% en 2026 (Consejo General de Economistas, 20 de julho de 2026)",
+            "url": "https://www.elespanol.com/invertia/economia/20260720/economistas-estiman-economia-espanola-crecera-pese-repunte-inflacion/1003744327938_0.html"
+          },
+          {
+            "label": "Banco de España · Indicadores del mercado inmobiliario (estatística oficial)",
+            "url": "https://www.bde.es/webbe/es/estadisticas/compartido/datos/pdf/si_1_5.pdf"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       title: "Espanha cria o arraigo sociformativo, caminho mais rápido pra quem já estuda uma formação profissional no país",
@@ -839,6 +1559,48 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
       sources: [{ label: "Immigration Lawyers Spain (fonte não oficial, a confirmar)", url: "https://www.immigrationspain.es/en/long-stay-visa-spain/" }],
     }],
     countryTab: [
+      {
+        "publishedAt": "2026-07-20",
+        "headline": "Setor aéreo relata esperas de até cinco horas no novo controle de fronteira europeu, e quem já tem residência na Espanha está fora do sistema",
+        "standfirst": "Companhias e aeroportos pediram flexibilidade à Comissão Europeia no sistema EES, em operação plena desde abril. A regra que mais importa a quem se muda: titulares de autorização de residência e de visto nacional de longa duração não passam pelo registro biométrico.",
+        "body": "O sistema europeu de registro de entradas e saídas, conhecido pela sigla EES, está em operação plena desde 10 de abril de 2026, depois de uma implantação gradual iniciada em 12 de outubro de 2025. As datas constam da página oficial da Comissão Europeia sobre fronteiras inteligentes. O sistema anota, em uma base de dados comum a 29 países europeus, cada entrada e saída de cidadãos de países de fora da União Europeia que viajam em estadas curtas, com registro de nome, dados do documento de viagem e dados biométricos (impressões digitais e imagem facial).\n\nTrês meses depois da operação plena, o setor aéreo levou o problema à mesa. Em carta aberta enviada à presidência da Comissão Europeia em 1º de julho de 2026, as entidades Airlines for Europe, ACI EUROPE e IATA afirmam que os tempos de espera no controle de fronteira passaram a chegar a cinco horas em períodos de pico. É importante situar o que é esse número: trata-se da alegação das entidades do setor em um documento de pressão política, e não de uma medição oficial divulgada pela Comissão ou pelos governos nacionais. A repercussão da carta na imprensa espanhola tratou justamente do risco de filas longas na fronteira do país no verão europeu.\n\nOs números medidos que vieram a público são mais modestos e vêm de aeroportos fora da Espanha. Em reportagens de 19 e 20 de julho, o diretor de aviação do aeroporto de Fiumicino, em Roma, afirmou que a espera média de passageiros britânicos passou de cerca de sete para vinte minutos. Em Faro, em Portugal, filas que levavam cerca de dez minutos passaram a superar trinta. A IATA cita atrasos e perda de conexões em Portugal, Espanha, Itália, Grécia e Bélgica, mas não foram divulgados tempos médios específicos de aeroportos espanhóis. Desde abril, mais de 45 milhões de cruzamentos de fronteira já foram registrados no sistema.\n\nA carta do setor aponta três causas estruturais. A primeira é a falta de pessoal nos postos de fronteira dos aeroportos. A segunda são problemas de estabilidade e confiabilidade da plataforma central do EES e dos sistemas nacionais. A terceira é a implantação incompleta de quiosques de autoatendimento, portões automáticos e aplicativos de pré-registro nos Estados membros. As entidades pediram que os países possam suspender procedimentos do EES quando o volume de passageiros superar a capacidade do controle, ao menos durante julho e agosto, e que um mecanismo permanente de flexibilidade seja definido até setembro.\n\nHá um ponto que muda a leitura para quem vive na Espanha ou está se mudando em definitivo. O EES não se aplica a titulares de autorização de residência, de cartão de residência nem de visto nacional de longa duração, o chamado visto tipo D. Na prática, isso significa que a isenção não vale só para quem já tem a TIE em mãos: quem chega ao país com o visto de longa duração para se estabelecer também entra fora do registro biométrico de estada curta. Orientações oficiais e do setor recomendam que essas pessoas usem o guichê manual de controle e apresentem o documento de residência ou o visto junto com o passaporte, para não serem registradas por engano como visitantes de estada curta.\n\nQuem tem viagem marcada para a Espanha nos próximos meses e ainda viaja na condição de visitante deve prever margem extra de tempo na chegada e nas conexões, sobretudo em agosto. E vale acompanhar a resposta da Comissão Europeia ao pedido do setor, porque as regras de operação podem mudar até setembro. Antes de embarcar, confira as orientações oficiais da Comissão Europeia e do consulado espanhol responsável pela sua região. Este conteúdo é informativo e não substitui a orientação de um profissional habilitado.",
+        "keyFacts": [
+          "O EES está em operação plena desde 10 de abril de 2026, após implantação gradual iniciada em 12 de outubro de 2025, segundo a Comissão Europeia.",
+          "O sistema cobre 29 países europeus e registra entradas e saídas de cidadãos de fora da UE em estadas curtas, com dados biométricos.",
+          "Titulares de autorização de residência, de cartão de residência e de visto nacional de longa duração (tipo D) estão isentos do EES.",
+          "Recomenda-se que isentos usem o guichê manual e apresentem o documento de residência ou o visto junto com o passaporte, para não serem registrados como visitantes de estada curta.",
+          "Em carta aberta de 1º de julho de 2026, Airlines for Europe, ACI EUROPE e IATA alegam esperas de até cinco horas em horários de pico. O número é alegação do setor, não medição oficial.",
+          "Números medidos divulgados em 19 e 20 de julho: Fiumicino (Roma) passou de cerca de 7 para 20 minutos de espera média de britânicos; Faro (Portugal), de cerca de 10 para mais de 30 minutos. Não há médias divulgadas para aeroportos espanhóis.",
+          "O setor pediu autorização para suspender o EES em picos de julho e agosto e um mecanismo permanente de flexibilidade definido até setembro de 2026.",
+          "Mais de 45 milhões de cruzamentos de fronteira foram registrados no sistema desde abril de 2026."
+        ],
+        "sources": [
+          {
+            "label": "Comissão Europeia · Entry/Exit System (página oficial)",
+            "url": "https://home-affairs.ec.europa.eu/policies/schengen/smart-borders/entry-exit-system_en"
+          },
+          {
+            "label": "Comissão Europeia · Travel to Europe, perguntas frequentes sobre o EES (isenções)",
+            "url": "https://travel-europe.europa.eu/en/ees/faq"
+          },
+          {
+            "label": "ACI EUROPE · Carta aberta à presidência da Comissão Europeia sobre o EES (1º de julho de 2026)",
+            "url": "https://www.aci-europe.org/media-room/610-open-letter-to-president-of-the-european-commission-on-the-schengen-entry-exit-system-ees.html"
+          },
+          {
+            "label": "Euronews · EES at a 'critical point': Europe's aviation sector urges EU to show more flexibility (1º de julho de 2026)",
+            "url": "https://www.euronews.com/travel/2026/07/01/ees-at-a-critical-point-europes-aviation-sector-urges-eu-to-show-more-flexibility"
+          },
+          {
+            "label": "The Olive Press · Airlines warn of five-hour Spain border queues in letter to EU (3 de julho de 2026)",
+            "url": "https://www.theolivepress.es/spain-news/2026/07/03/airlines-warn-of-five-hour-spain-border-queues-in-letter-to-eu/"
+          },
+          {
+            "label": "The Local Spain · Airport bosses warn EU's new border checks triple waiting times for Brits (20 de julho de 2026)",
+            "url": "https://www.thelocal.es/20260720/airport-bosses-warn-eus-new-border-checks-triple-waiting-times-for-brits"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       headline: "Fronteira física entre Espanha e Gibraltar deixa de existir depois de mais de um século",
@@ -872,6 +1634,55 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
   it: {
     blog: [
       {
+        "publishedAt": "2026-07-20",
+        "headline": "Por que os descendentes de trentinos são um caso à parte na cidadania italiana",
+        "standfirst": "O pedido aprovado em Trento reacende uma via paralela ao jure sanguinis, criada porque essas famílias emigraram como súditos austro-húngaros. Entender essa diferença explica por que a reforma de 2025 atinge com força justamente as comunidades históricas.",
+        "body": "A discussão sobre cidadania italiana costuma ser tratada como um bloco único, mas ela não é. Ao lado do jure sanguinis, o reconhecimento por descendência de cidadão italiano, existem vias criadas por leis especiais para famílias que a história deixou de fora do desenho padrão. O pedido aprovado em 14 de julho de 2026 pelo Conselho provincial de Trento, que solicita a Parlamento e Governo a reabertura do reconhecimento para descendentes de trentinos emigrados, trouxe uma dessas vias de volta ao centro do debate.\n\nA origem do problema é geopolítica. O Trentino não era território italiano no auge da emigração para a América. A região pertencia ao Império Austro-Húngaro e só foi incorporada à Itália depois de 1920. Isso significa que quem partiu de lá no fim do século 19 e no início do século 20 embarcou como súdito austro-húngaro, não como cidadão italiano. Como o jure sanguinis exige a transmissão a partir de um ascendente que fosse cidadão italiano, essas famílias ficaram estruturalmente fora da regra geral, ainda que falassem italiano, tivessem cultura italiana e viessem de um território que hoje é italiano.\n\nFoi para corrigir essa lacuna que o Parlamento italiano aprovou a lei 379, de 14 de dezembro de 2000, cujo título já descreve o alcance: disposições para o reconhecimento da cidadania italiana às pessoas nascidas e já residentes nos territórios pertencentes ao Império Austro-Húngaro e aos seus descendentes. O recorte é preciso. A norma alcança quem emigrou desses territórios, excluída a atual República da Áustria, antes de 16 de julho de 1920, e seus descendentes. As declarações apresentadas eram examinadas por comissão interministerial no Ministério do Interior, que emitia parecer sobre os requisitos.\n\nA lei não criou um direito permanente, e sim uma janela por tempo determinado para apresentar a declaração. Conforme as páginas oficiais dos consulados italianos no Brasil e do Ministério dos Negócios Estrangeiros, essa janela chegou a ser prorrogada por cinco anos e se encerrou em 2010, somando cerca de uma década, embora processos protocolados na época ainda tramitem.\n\nO argumento central de quem defende a reabertura é que o prazo se esgotou antes que a informação chegasse a boa parte das famílias interessadas, espalhadas sobretudo pelo Brasil e pela Argentina, e que a distância geográfica e documental tornava difícil reunir provas dentro do período disponível. Segundo o portal de comunidade Italianismo, uma associação de famílias trentinas no exterior procurou em 17 de julho parlamentares eleitos pela região para atuar em duas frentes, a apresentação de um projeto de lei específico e a pressão por uma intervenção direta do Governo. Essa informação, por vir de fonte não oficial, ainda depende de confirmação nos canais do Parlamento. Convém não confundir as entidades envolvidas: a imprensa trentina, ao noticiar a votação, cita a associação Trentini nel Mondo como a que saudou o resultado, e existe separadamente a Unione delle Famiglie Trentine all'Estero APS.\n\nHá, porém, um obstáculo de contexto que não pode ser ignorado. A tendência normativa recente na Itália é de restrição, não de abertura. O decreto-legge 36, de 28 de março de 2025, convertido na lei 74, de 23 de maio de 2025, inseriu o artigo 3-bis na lei 91/1992 e limitou o reconhecimento da cidadania para nascidos no exterior que já possuam outra nacionalidade. Provocada pelo Tribunal de Turim, a Corte Constitucional julgou a sentença 63/2026 em 30 de abril de 2026 e declarou não fundadas as questões suscitadas, limitadas a determinadas expressões e condições do dispositivo, sob o entendimento de que o legislador dispõe de ampla discricionariedade em matéria de cidadania. A decisão consolidou a mudança de paradigma iniciada em 2025, ainda que não encerre por si só todo o debate judicial sobre a reforma.\n\nEssa é justamente a razão pela qual o movimento partiu de um conselho provincial, e não de um tribunal. Uma proposta de voto aprovada em Trento não altera a lei nem reabre prazo. Ela sinaliza consenso local, cria pressão institucional e tenta pautar Roma. O caminho até uma norma efetiva passa por apresentação de projeto, tramitação parlamentar e aprovação, ou por uma decisão do Governo, e nenhuma dessas etapas tem desfecho previsível ou garantido.\n\nVale ainda antecipar uma dúvida que tende a aparecer. Uma reabertura da lei 379/2000 não significaria, automaticamente, imunidade em relação ao artigo 3-bis. Como as duas regras se articulariam dependeria inteiramente do texto que viesse a ser aprovado, e qualquer leitura hoje sobre esse ponto é especulação.\n\nPara as famílias, a leitura útil é de médio prazo. Não existe hoje janela aberta pela lei 379/2000, e ninguém pode prometer que existirá. O que faz sentido agora é organizar e preservar documentação de origem, registros paroquiais, certidões e comprovantes de emigração, com atenção especial a documentos que demonstrem a saída do território antes de 16 de julho de 1920, porque esse acervo é trabalhoso de reunir e será exigido em qualquer cenário futuro, e acompanhar as fontes oficiais italianas em vez de intermediários. Decisões concretas sobre cada caso pedem a avaliação de um profissional habilitado, já que o enquadramento depende de detalhes específicos da linha familiar.",
+        "tags": [
+          "cidadania italiana",
+          "Trentino",
+          "lei 379/2000",
+          "Império Austro-Húngaro",
+          "jure sanguinis",
+          "Itália",
+          "Corte Costituzionale"
+        ],
+        "sources": [
+          {
+            "label": "Vita Trentina · Approvata la proposta di voto per il diritto alla cittadinanza ai discendenti dei trentini emigrati all'estero",
+            "url": "https://www.vitatrentina.it/2026/07/15/approvata-la-proposta-di-voto-per-il-diritto-alla/"
+          },
+          {
+            "label": "l'Adige · Sì alla cittadinanza ai discendenti dei trentini emigrati: il Consiglio fa fronte comune",
+            "url": "https://www.ladige.it/cronaca/cittadinanza-ai-discendenti-dei-trentini-emigrati-il-consiglio-fa-fronte-comune-kejyb5bk"
+          },
+          {
+            "label": "MAECI · Riconoscimento della cittadinanza ai sensi delle leggi 379/2000 e 124/2006 (fonte oficial nacional)",
+            "url": "https://www.esteri.it/en/servizi-consolari-e-visti/italiani-all-estero/cittadinanza/riconoscimento-della-cittadinanza-ai-sensi-delle-leggi-379-2000-e-124-2006/"
+          },
+          {
+            "label": "Consolato Generale d'Italia a Curitiba (MAECI) · Legge 14 dicembre 2000, n. 379 (Trentini)",
+            "url": "https://conscuritiba.esteri.it/it/servizi-consolari-e-visti/servizi-per-il-cittadino-straniero/cittadinanza/legge-14-dicembre-2000-n-379-trentini/"
+          },
+          {
+            "label": "Consolato Generale d'Italia a San Paolo (MAECI) · Legge n. 379/2000",
+            "url": "https://conssanpaolo.esteri.it/it/servizi-consolari-e-visti/servizi-per-il-cittadino-straniero/cittadinanza/legge-no-379-2000/"
+          },
+          {
+            "label": "Corte Costituzionale · Sentenza n. 63/2026, 30 aprile 2026 (art. 3-bis della legge 91/1992, DL 36/2025 conv. legge 74/2025)",
+            "url": "https://www.cortecostituzionale.it/scheda-pronuncia/2026/63"
+          },
+          {
+            "label": "Italia Chiama Italia · Il voto unanime del Consiglio provinciale sulla cittadinanza ai discendenti dei trentini",
+            "url": "https://www.italiachiamaitalia.it/cittadinanza-italiana-ai-discendenti-dei-trentini-emigrati-la-trentini-nel-mondo-applaude-il-voto-unanime-del-consiglio-provinciale/"
+          },
+          {
+            "label": "Italianismo · Associação busca apoio no Parlamento para devolver cidadania a descendentes de trentinos (fonte de comunidade, a confirmar)",
+            "url": "https://italianismo.com.br/associacao-busca-apoio-no-parlamento-para-devolver-cidadania-a-descendentes-de-trentinos/"
+          }
+        ]
+      },
+      {
       publishedAt: "2026-07-17",
       headline: "O que está por trás do caso que pode levar a Cassação da Itália a revisar a cidadania por descendência",
       standfirst: "Duas decisões da Primeira Seção Civil pedem avaliação para enviar às Sezioni Unite um tema que atravessa boa parte dos processos judiciais de reconhecimento de cidadania italiana movidos por descendentes no exterior.",
@@ -884,6 +1695,62 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
     },
     ],
     community: [
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Descendentes de trentinos: pedido de reabertura da cidadania avança em Trento e chega a Roma",
+        "body": "Quem tem origem trentina e já esbarrou na lei italiana de cidadania acompanhou um movimento relevante nos últimos dias. Em 14 de julho de 2026, o Conselho provincial de Trento aprovou por unanimidade uma proposta de voto pedindo ao Parlamento e ao Governo italiano que reabram o caminho de reconhecimento da cidadania para descendentes de trentinos que emigraram quando a região ainda fazia parte do Império Austro-Húngaro. Em 17 de julho, o portal de comunidade Italianismo noticiou que uma associação de famílias trentinas no exterior havia procurado parlamentares eleitos pela região para propor um projeto de lei específico e pressionar por uma intervenção do Governo, informação que ainda não tem confirmação em canais oficiais.\n\nVale entender bem o que isso significa hoje. A proposta aprovada em Trento é um ato político que expressa uma posição e formula um pedido, e não uma mudança de lei. A via específica em questão, a lei 379/2000, criada para as famílias de territórios que pertenceram ao Império Austro-Húngaro, alcançava quem emigrou antes de 16 de julho de 1920 e seus descendentes. O prazo se encerrou em 2010 segundo as próprias páginas dos consulados italianos no Brasil e do Ministério dos Negócios Estrangeiros, e segue fechado enquanto não houver norma nova.\n\nHá também um detalhe que costuma gerar leitura errada. Mesmo uma reabertura desse prazo não afastaria por si só a restrição do artigo 3-bis, introduzida pela reforma de 2025, cuja constitucionalidade foi examinada pela Corte Constitucional em abril de 2026. Como as duas regras se combinariam dependeria do texto de uma eventual lei futura.\n\nSe a sua família tem raízes no Trentino, o momento é de organizar documentação e acompanhar as fontes oficiais, não de tomar decisões apressadas. Conteúdo informativo não substitui a orientação de um profissional habilitado.",
+        "cta": "Sua família emigrou do Trentino antes de 16 de julho de 1920? Acompanhe as fontes oficiais italianas e converse com um profissional habilitado antes de qualquer passo.",
+        "sources": [
+          {
+            "label": "Vita Trentina · Approvata la proposta di voto per il diritto alla cittadinanza ai discendenti dei trentini emigrati all'estero",
+            "url": "https://www.vitatrentina.it/2026/07/15/approvata-la-proposta-di-voto-per-il-diritto-alla/"
+          },
+          {
+            "label": "Italia Chiama Italia · Cittadinanza italiana ai discendenti dei trentini emigrati: il voto unanime del Consiglio provinciale",
+            "url": "https://www.italiachiamaitalia.it/cittadinanza-italiana-ai-discendenti-dei-trentini-emigrati-la-trentini-nel-mondo-applaude-il-voto-unanime-del-consiglio-provinciale/"
+          },
+          {
+            "label": "MAECI · Riconoscimento della cittadinanza ai sensi delle leggi 379/2000 e 124/2006 (fonte oficial nacional)",
+            "url": "https://www.esteri.it/en/servizi-consolari-e-visti/italiani-all-estero/cittadinanza/riconoscimento-della-cittadinanza-ai-sensi-delle-leggi-379-2000-e-124-2006/"
+          },
+          {
+            "label": "Italianismo · Associação busca apoio no Parlamento para devolver cidadania a descendentes de trentinos (fonte de comunidade, a confirmar)",
+            "url": "https://italianismo.com.br/associacao-busca-apoio-no-parlamento-para-devolver-cidadania-a-descendentes-de-trentinos/"
+          },
+          {
+            "label": "Consolato Generale d'Italia a San Paolo (MAECI) · Legge n. 379/2000",
+            "url": "https://conssanpaolo.esteri.it/it/servizi-consolari-e-visti/servizi-per-il-cittadino-straniero/cittadinanza/legge-no-379-2000/"
+          }
+        ]
+      },
+      {
+        "publishedAt": "2026-07-20",
+        "title": "A lei 379/2000 continua fechada: pedido de reabertura não é prazo aberto",
+        "body": "Sempre que um tema de cidadania italiana volta ao noticiário, aparecem ofertas prometendo destravar processos. Por isso vale registrar com clareza o que está e o que não está valendo agora. A lei 379, de dezembro de 2000, abriu uma via específica de reconhecimento da cidadania italiana para pessoas nascidas e já residentes em territórios que pertenceram ao Império Austro-Húngaro, como o Trentino, e para seus descendentes, alcançando quem emigrou antes de 16 de julho de 1920, excluída a atual República da Áustria. Segundo as páginas oficiais dos consulados italianos no Brasil e do Ministério dos Negócios Estrangeiros, essa janela chegou a ser prorrogada por cinco anos e se encerrou em 2010.\n\nO pedido de reabertura aprovado pelo Conselho provincial de Trento em 14 de julho de 2026 não reabre esse prazo. Um conselho provincial pode manifestar posição e endereçar solicitação ao Parlamento e ao Governo, mas a competência para mudar a lei de cidadania é nacional. Enquanto não houver aprovação parlamentar ou norma do Governo italiano publicada, não existe protocolo novo disponível com base na lei 379/2000.\n\nVale acrescentar que o ambiente normativo atual é de restrição, não de abertura. A reforma de 2025 inseriu o artigo 3-bis na lei 91/1992, e a Corte Constitucional, na sentença 63/2026, declarou não fundadas as questões que lhe foram submetidas pelo Tribunal de Turim. Quem prometer que uma decisão judicial recente destravou processos está descrevendo o oposto do que ocorreu.\n\nA orientação prática é simples: desconfie de quem prometer resultado, prazo ou acesso a uma janela que não está aberta, e confirme qualquer informação diretamente nos canais oficiais consulares italianos. Este conteúdo é informativo e não substitui a avaliação de um profissional habilitado sobre o seu caso.",
+        "cta": "Recebeu alguma oferta prometendo entrada imediata pela lei 379/2000? Confirme antes nos canais oficiais dos consulados italianos.",
+        "sources": [
+          {
+            "label": "Consolato Generale d'Italia a Curitiba (MAECI) · Legge 14 dicembre 2000, n. 379 (Trentini)",
+            "url": "https://conscuritiba.esteri.it/it/servizi-consolari-e-visti/servizi-per-il-cittadino-straniero/cittadinanza/legge-14-dicembre-2000-n-379-trentini/"
+          },
+          {
+            "label": "Consolato Generale d'Italia a San Paolo (MAECI) · Legge n. 379/2000",
+            "url": "https://conssanpaolo.esteri.it/it/servizi-consolari-e-visti/servizi-per-il-cittadino-straniero/cittadinanza/legge-no-379-2000/"
+          },
+          {
+            "label": "MAECI · Riconoscimento della cittadinanza ai sensi delle leggi 379/2000 e 124/2006 (fonte oficial nacional)",
+            "url": "https://www.esteri.it/en/servizi-consolari-e-visti/italiani-all-estero/cittadinanza/riconoscimento-della-cittadinanza-ai-sensi-delle-leggi-379-2000-e-124-2006/"
+          },
+          {
+            "label": "Corte Costituzionale · Sentenza n. 63/2026, 30 aprile 2026",
+            "url": "https://www.cortecostituzionale.it/scheda-pronuncia/2026/63"
+          },
+          {
+            "label": "Vita Trentina · Approvata la proposta di voto per il diritto alla cittadinanza ai discendenti dei trentini emigrati all'estero",
+            "url": "https://www.vitatrentina.it/2026/07/15/approvata-la-proposta-di-voto-per-il-diritto-alla/"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       title: "Brasileiros no exterior batem recorde: são 5,29 milhões, segundo o Itamaraty",
@@ -911,6 +1778,55 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
       sources: [{ label: "Italianismo · Cidadania (fonte de comunidade, a confirmar)", url: "https://italianismo.com.br/tribunal-de-brescia-reconhece-cidadania-por-linha-materna-apos-o-decreto-tajani/" }],
     }],
     countryTab: [
+      {
+        "publishedAt": "2026-07-20",
+        "headline": "Trento aprova por unanimidade pedido para reabrir a cidadania italiana a descendentes de trentinos",
+        "standfirst": "Proposta aprovada pelo Conselho provincial pede que Parlamento e Governo reabram o prazo da lei 379/2000, encerrado em 2010. Dias depois, cobertura de comunidade relatou tratativas com parlamentares em Roma, informação que ainda não tem confirmação oficial.",
+        "body": "O Conselho provincial de Trento aprovou, em 14 de julho de 2026, uma proposta de voto que pede ao Parlamento e ao Governo italiano a reabertura do caminho de reconhecimento da cidadania italiana para descendentes de trentinos que emigraram quando a região ainda pertencia ao Império Austro-Húngaro. A aprovação foi unânime, com o conselheiro Michele Malfer, do grupo Campobase, como primeiro signatário e adesão de conselheiros de maioria e de oposição, segundo a cobertura da imprensa local trentina.\n\nO pedido tem um alvo específico e é importante entender qual. Não se trata da cidadania por descendência comum, o jure sanguinis, mas de uma via paralela criada pela lei 379, de 14 de dezembro de 2000, formalmente intitulada Disposições para o reconhecimento da cidadania italiana às pessoas nascidas e já residentes nos territórios pertencentes ao Império Austro-Húngaro e aos seus descendentes. Como o Trentino só foi incorporado à Itália depois de 1920, quem saiu de lá antes disso emigrou como súdito austro-húngaro, e não como cidadão italiano, o que deixou essas famílias fora das regras gerais e exigiu uma legislação própria.\n\nA própria lei fixa um marco temporal que vale conhecer antes de qualquer outra coisa. Ela alcança quem emigrou dos territórios que pertenceram ao Império Austro-Húngaro, excluída a atual República da Áustria, antes de 16 de julho de 1920, e os descendentes dessas pessoas. As declarações apresentadas dentro do prazo eram examinadas por uma comissão interministerial instituída no Ministério do Interior, que emitia parecer sobre o cumprimento dos requisitos.\n\nEssa via, porém, está fechada. Conforme as páginas oficiais dos consulados italianos no Brasil e do Ministério dos Negócios Estrangeiros italiano, a lei 379/2000 abriu uma janela por tempo determinado para apresentar a declaração de reconhecimento, janela que chegou a ser prorrogada por cinco anos e se encerrou em 2010, somando cerca de dez anos no total. Desde então, não há prazo aberto para novos pedidos com base nessa norma, ainda que processos protocolados na época sigam em andamento. É exatamente essa reabertura que a proposta aprovada em Trento solicita.\n\nA demanda teria ganhado um passo novo em 17 de julho, quando o portal de comunidade Italianismo noticiou que uma associação de famílias trentinas no exterior havia procurado parlamentares eleitos pela região para atuar em duas frentes, a apresentação de um projeto de lei específico e a pressão junto ao Governo por uma intervenção direta que reabra o antigo prazo. Essa informação vem de fonte de comunidade e não encontra confirmação em canais oficiais do Parlamento italiano. Cabe registrar, para evitar confusão entre entidades, que a imprensa trentina ao cobrir a votação cita a associação Trentini nel Mondo como a que saudou o resultado, enquanto existe também a Unione delle Famiglie Trentine all'Estero APS, organização distinta. A atribuição precisa de quem está conduzindo as tratativas em Roma permanece a confirmar.\n\nO contexto jurídico ajuda a medir o tamanho do desafio. A reforma de 2025, introduzida pelo decreto-legge 36 de 28 de março de 2025 e convertida na lei 74 de 23 de maio de 2025, inseriu o artigo 3-bis na lei 91/1992 e restringiu o reconhecimento da cidadania para nascidos no exterior que já possuam outra nacionalidade. Em 30 de abril de 2026, a Corte Constitucional julgou a sentença 63/2026, provocada pelo Tribunal de Turim, e declarou não fundadas as questões levantadas, limitadas a determinadas expressões e condições do dispositivo, entendendo que o legislador dispõe de ampla discricionariedade em matéria de cidadania. O quadro restritivo saiu confirmado nesse julgamento, o que não significa que todo o contencioso sobre a reforma esteja encerrado, mas indica que uma mudança de rota tende a depender do terreno político e legislativo, não do judicial.\n\nHá ainda um ponto que costuma passar despercebido. Mesmo que o prazo da lei 379/2000 venha a ser reaberto, isso não afastaria automaticamente a restrição do artigo 3-bis, e o desenho de uma eventual norma nova determinaria como as duas regras conversam entre si. Não é possível antecipar esse resultado hoje.\n\nPara as famílias de origem trentina no Brasil e na Argentina, o recado prático é de atenção e cautela. Uma proposta de voto aprovada por um conselho provincial é um ato de natureza política, que manifesta uma posição e endereça um pedido, mas não altera a lei nem cria direito novo por si só. Enquanto não houver aprovação parlamentar ou norma do Governo reabrindo o prazo, a lei 379/2000 segue encerrada, e qualquer decisão sobre documentação ou processo deve ser tomada com orientação de profissional habilitado e confirmação nas fontes oficiais italianas.",
+        "keyFacts": [
+          "Em 14 de julho de 2026, o Conselho provincial de Trento aprovou por unanimidade uma proposta de voto pedindo a Parlamento e Governo a reabertura do reconhecimento de cidadania a descendentes de trentinos emigrados, tendo Michele Malfer (Campobase) como primeiro signatário.",
+          "A via em discussão é a lei 379/2000, criada porque o Trentino pertencia ao Império Austro-Húngaro e só foi incorporado à Itália depois de 1920, o que deixou essas famílias fora das regras gerais do jure sanguinis.",
+          "O critério legal alcança quem emigrou dos territórios então austro-húngaros, excluída a atual República da Áustria, antes de 16 de julho de 1920, e seus descendentes.",
+          "Segundo os consulados italianos no Brasil e o Ministério dos Negócios Estrangeiros, o prazo da lei 379/2000 foi prorrogado por cinco anos e se encerrou em 2010, totalizando cerca de dez anos; não há janela aberta hoje para novos pedidos com base nessa norma.",
+          "Uma associação de famílias trentinas no exterior teria procurado parlamentares da região para propor um projeto de lei e pressionar o Governo, conforme noticiou o portal Italianismo em 17 de julho (fonte de comunidade, sem confirmação oficial).",
+          "O pano de fundo é a reforma de 2025 (decreto-legge 36/2025, convertido na lei 74/2025), cujo artigo 3-bis teve as questões de constitucionalidade levantadas pelo Tribunal de Turim declaradas não fundadas pela sentença 63/2026 da Corte Constitucional, de 30 de abril de 2026.",
+          "Uma eventual reabertura do prazo da lei 379/2000 não afastaria automaticamente a restrição do artigo 3-bis; a articulação entre as duas regras dependeria do texto de uma norma futura."
+        ],
+        "sources": [
+          {
+            "label": "Vita Trentina · Approvata la proposta di voto per il diritto alla cittadinanza ai discendenti dei trentini emigrati all'estero",
+            "url": "https://www.vitatrentina.it/2026/07/15/approvata-la-proposta-di-voto-per-il-diritto-alla/"
+          },
+          {
+            "label": "l'Adige · Sì alla cittadinanza ai discendenti dei trentini emigrati: il Consiglio fa fronte comune",
+            "url": "https://www.ladige.it/cronaca/cittadinanza-ai-discendenti-dei-trentini-emigrati-il-consiglio-fa-fronte-comune-kejyb5bk"
+          },
+          {
+            "label": "MAECI · Riconoscimento della cittadinanza ai sensi delle leggi 379/2000 e 124/2006 (fonte oficial nacional)",
+            "url": "https://www.esteri.it/en/servizi-consolari-e-visti/italiani-all-estero/cittadinanza/riconoscimento-della-cittadinanza-ai-sensi-delle-leggi-379-2000-e-124-2006/"
+          },
+          {
+            "label": "Consolato Generale d'Italia a Curitiba (MAECI) · Legge 14 dicembre 2000, n. 379 (Trentini)",
+            "url": "https://conscuritiba.esteri.it/it/servizi-consolari-e-visti/servizi-per-il-cittadino-straniero/cittadinanza/legge-14-dicembre-2000-n-379-trentini/"
+          },
+          {
+            "label": "Consolato Generale d'Italia a San Paolo (MAECI) · Legge n. 379/2000",
+            "url": "https://conssanpaolo.esteri.it/it/servizi-consolari-e-visti/servizi-per-il-cittadino-straniero/cittadinanza/legge-no-379-2000/"
+          },
+          {
+            "label": "Corte Costituzionale · Sentenza n. 63/2026, 30 aprile 2026 (art. 3-bis della legge 91/1992, DL 36/2025 conv. legge 74/2025)",
+            "url": "https://www.cortecostituzionale.it/scheda-pronuncia/2026/63"
+          },
+          {
+            "label": "Italia Chiama Italia · Cittadinanza italiana ai discendenti dei trentini emigrati: il voto unanime del Consiglio provinciale",
+            "url": "https://www.italiachiamaitalia.it/cittadinanza-italiana-ai-discendenti-dei-trentini-emigrati-la-trentini-nel-mondo-applaude-il-voto-unanime-del-consiglio-provinciale/"
+          },
+          {
+            "label": "Italianismo · Associação busca apoio no Parlamento para devolver cidadania a descendentes de trentinos (fonte de comunidade, a confirmar)",
+            "url": "https://italianismo.com.br/associacao-busca-apoio-no-parlamento-para-devolver-cidadania-a-descendentes-de-trentinos/"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       headline: "Relator da Cassação da Itália pode levar à Corte plena caso sobre perda de cidadania de descendentes",
@@ -945,6 +1861,64 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
   de: {
     blog: [
       {
+        "publishedAt": "2026-07-20",
+        "headline": "Fronteiras internas da Alemanha: por que a pressão aumentou justamente agora",
+        "standfirst": "Bruxelas, os tribunais administrativos e os próprios números de migração empurram na mesma direção, mas o governo alemão mantém as checagens até pelo menos 15 de setembro. Entenda o impasse e o que ele significa para quem vive ou pretende viver no país.",
+        "body": "Quase dois anos depois de a Alemanha reintroduzir controles em todas as suas fronteiras terrestres, em 16 de setembro de 2024, a medida chegou a julho de 2026 sob três frentes de pressão que se reforçam. Nenhuma delas, isoladamente, muda a rotina de quem cruza a fronteira hoje. Somadas, porém, elas explicam por que a data de 15 de setembro de 2026 virou o ponto de decisão mais relevante do calendário migratório alemão neste semestre.\n\nA primeira frente é política e vem de Bruxelas. Em declaração divulgada em 16 de julho de 2026, o comissário europeu de Assuntos Internos e Migração, Magnus Brunner, pediu que a Alemanha comece a encerrar as checagens adicionais. O raciocínio dele parte da premissa de que o novo desenho europeu já resolve na fronteira externa aquilo que os controles internos tentam resolver por dentro. A reforma do sistema europeu comum de asilo, o GEAS, entrou em vigor de forma plena em 12 de junho de 2026 e criou um processo padronizado de triagem nas fronteiras externas do bloco. Na leitura do comissário, manter filtros internos depois disso duplica esforço sem ganho proporcional.\n\nA segunda frente é estatística, e é a que dá lastro ao argumento. Segundo dados preliminares divulgados pela Frontex em julho de 2026, a União Europeia registrou pouco mais de 49 mil travessias irregulares no primeiro semestre do ano, 37% menos que no mesmo período de 2025. Dentro da Alemanha, o movimento é semelhante. A estatística do BAMF aponta 39.646 pedidos de asilo iniciais entre janeiro e junho de 2026, contra 61.336 um ano antes, queda de 35,4%. Quando o número que motivou uma medida excepcional cai por dois anos seguidos, a justificativa dessa medida fica mais difícil de sustentar publicamente.\n\nA terceira frente é jurídica, e é a que mais gera mal-entendido. Em 1º de julho de 2026, o Tribunal Administrativo de Munique proferiu três sentenças declarando ilegais os controles na fronteira com a Áustria, apontando que checagens mantidas praticamente inalteradas por anos não se acomodam nem ao antigo nem ao novo Código de Fronteiras Schengen. Só que a mesma decisão negou o pedido de proibir checagens futuras: o tribunal entendeu que o cidadão precisa, em regra, suportar a medida no momento em que ela ocorre e questionar a legalidade depois, com tutela de urgência reservada a casos excepcionais de dano irreparável. Ou seja, ganhar na Justiça, nesse desenho, não significa passar pela fronteira sem ser parado. As sentenças são de primeira instância e cabe recurso ao Tribunal Administrativo Superior da Baviera. Em abril de 2026, diante de decisão semelhante do Tribunal Administrativo de Koblenz sobre a fronteira com Luxemburgo, o ministro do Interior classificou o julgado como decisão de caso individual de primeira instância e anunciou recurso.\n\nDo outro lado do impasse está a posição do governo. O ministro do Interior, Alexander Dobrindt, tem mantido as checagens mesmo diante das decisões judiciais e da cobrança de Bruxelas. A notificação registrada junto à Comissão Europeia cobre o período de 16 de março a 15 de setembro de 2026 e lista, como fundamento, a migração irregular, a atuação de redes de contrabando de pessoas, a pressão sobre o sistema de acolhimento de asilo e o quadro geral de segurança internacional. Ela vale para as fronteiras terrestres com França, Luxemburgo, Bélgica, Países Baixos, Dinamarca, Áustria, Suíça, República Tcheca e Polônia, ou seja, praticamente todo o entorno terrestre do país.\n\nPara quem vive ou pretende viver na Alemanha, o quadro tem duas leituras práticas. A primeira é que nada muda agora. Quem cruza fronteira a trabalho, estuda do outro lado ou planeja chegar de carro, ônibus ou trem continua sujeito à mesma abordagem de sempre, e vale carregar documento de identidade ou passaporte em qualquer deslocamento entre países vizinhos. A segunda é que setembro concentra uma decisão real. Se o governo optar por nova prorrogação, o embate com Bruxelas e com os tribunais tende a subir de tom. Se optar por reduzir as checagens, a expectativa de quem defende esse caminho é de um processo gradual, e não de um desligamento de um dia para o outro.\n\nHá ainda um efeito de soma que costuma passar despercebido. Enquanto o debate sobre as fronteiras internas segue aberto, o EES, o Sistema de Entrada e Saída da União Europeia, já acrescentou uma camada própria de espera na fronteira externa, com registros biométricos de todo viajante de fora do bloco. Medições divulgadas por dirigentes de aeroportos europeus em 20 de julho de 2026 mostram tempos médios que triplicaram em alguns pontos de entrada, como Roma e Faro. Quem chega à Alemanha vindo de fora do espaço Schengen passa pelo mesmo sistema em Frankfurt ou Munique. Para o viajante, os dois assuntos são distintos na origem, mas se encontram no mesmo lugar, o tempo gasto até estar efetivamente dentro do país.\n\nO recado prático é acompanhar duas coisas ao longo de agosto e setembro. Primeiro, se o governo alemão renova ou não a notificação que vence em 15 de setembro. Segundo, como os tribunais superiores respondem aos recursos do Ministério do Interior, já que uma decisão de instância superior tem peso muito maior do que as sentenças de primeiro grau já proferidas. Como em todo processo em curso, o cenário pode mudar, e cada passo deve ser confirmado em fonte oficial antes de qualquer decisão de viagem ou de mudança. Conteúdo informativo não substitui a orientação de um profissional habilitado para o seu caso concreto.",
+        "tags": [
+          "Alemanha",
+          "Fronteiras",
+          "Schengen",
+          "Comissão Europeia",
+          "Frontex",
+          "BAMF",
+          "EES",
+          "GEAS"
+        ],
+        "sources": [
+          {
+            "label": "Comissão Europeia · Temporary Reintroduction of Border Control",
+            "url": "https://home-affairs.ec.europa.eu/policies/schengen/schengen-area/temporary-reintroduction-border-control_en"
+          },
+          {
+            "label": "Frontex · Irregular border crossings into the EU down 37% in the first half of 2026",
+            "url": "https://www.frontex.europa.eu/media-centre/news/news-release/frontex-irregular-border-crossings-into-the-eu-down-37-in-the-first-half-of-2026-Z5YoLp"
+          },
+          {
+            "label": "BAMF · Asylzahlen Juni 2026",
+            "url": "https://www.bamf.de/SharedDocs/Meldungen/DE/2026/260703-asylzahlen-juni-2026.html"
+          },
+          {
+            "label": "LTO · VG München: Grenzkontrollen zu Österreich rechtswidrig",
+            "url": "https://www.lto.de/recht/nachrichten/n/vg-muenchen-m23k258366-m23k258376-grenzkontrolle-oesterreich-schengen-kodex-rechtswidrig"
+          },
+          {
+            "label": "beck-aktuell · VG München: Die Kontrollen sind rechtswidrig, aber weiter hinzunehmen",
+            "url": "https://www.beck-aktuell.de/heute-im-recht/rechtsprechung/vg-muenchen-gff-klage-eu-grenzkontrollen-racial-profiling-2026-07-02"
+          },
+          {
+            "label": "beck-aktuell · Nach neuem Urteil zu Grenzkontrollen: Dobrindt kündigt Berufung an",
+            "url": "https://www.beck-aktuell.de/heute-im-recht/rechtsgeschehen/dobrindt-berufung-vg-koblenz-urteil-einzelfallentscheidung-grenzkontrollen-2026-04-28"
+          },
+          {
+            "label": "LTO · Grenzkontrollen: Dobrindt kündigt Berufung gegen VG-Urteil an",
+            "url": "https://www.lto.de/recht/nachrichten/n/vg-koblenz-k65025ko-grenzkontrollen-dobrindt-berufung"
+          },
+          {
+            "label": "IamExpat in Germany · Germany must halt extra border checks, says EU Commissioner",
+            "url": "https://www.iamexpat.de/expat-info/germany-news/germany-must-halt-extra-border-checks-says-eu-commissioner"
+          },
+          {
+            "label": "migazin.de · Sommerferien: Im Stau wegen \"purer Symbolpolitik\"? (16/07/2026)",
+            "url": "https://www.migazin.de/2026/07/16/grenzkontrolle-dobrindt-immer-staerker-unter-druck/"
+          },
+          {
+            "label": "The Local Germany · Airport bosses warn EU's new border checks triple waiting times for Brits",
+            "url": "https://www.thelocal.de/20260720/airport-bosses-warn-eus-new-border-checks-triple-waiting-times-for-brits"
+          }
+        ]
+      },
+      {
       publishedAt: "2026-07-17",
       headline: "Enquanto automatiza benefícios, Alemanha aperta o orçamento da integração de imigrantes",
       standfirst: "O mesmo governo que corta quase 41% da verba dos cursos de integração para 2027 avança em pelo menos duas frentes de digitalização do estado social, do Kindergeld automático ao seguro-desemprego 'digital first'.",
@@ -959,6 +1933,50 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
     },
     ],
     community: [
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Os controles nas fronteiras terrestres da Alemanha seguem valendo, apesar da pressão de Bruxelas e dos tribunais",
+        "body": "O comissário europeu de Assuntos Internos e Migração, Magnus Brunner, pediu que a Alemanha comece a encerrar os controles adicionais nas suas fronteiras terrestres, em declaração divulgada em 16 de julho de 2026. O argumento dele é que as entradas irregulares caíram e que a reforma do sistema europeu comum de asilo, o GEAS, em vigor desde 12 de junho de 2026, concentrou a triagem nas fronteiras externas do bloco.\n\nNa prática, porém, nada muda por enquanto. A notificação que a Alemanha registrou junto à Comissão Europeia cobre o período de 16 de março a 15 de setembro de 2026 e alcança as fronteiras terrestres com França, Luxemburgo, Bélgica, Países Baixos, Dinamarca, Áustria, Suíça, República Tcheca e Polônia. Nem uma decisão judicial mudou isso: em 1º de julho de 2026, o Tribunal Administrativo de Munique considerou ilegais os controles na fronteira com a Áustria, mas negou o pedido de proibir checagens futuras, por entender que o cidadão deve suportar a medida no momento e discutir a legalidade depois. O Ministério do Interior mantém as checagens, e a próxima data a acompanhar é 15 de setembro, quando o governo alemão terá de decidir se prorroga de novo.",
+        "cta": "Vai entrar na Alemanha por via terrestre ou cruza fronteira com frequência a trabalho? Leve documento de identidade ou passaporte sempre e confira a situação atualizada em canais oficiais antes de viajar.",
+        "sources": [
+          {
+            "label": "Comissão Europeia · Temporary Reintroduction of Border Control",
+            "url": "https://home-affairs.ec.europa.eu/policies/schengen/schengen-area/temporary-reintroduction-border-control_en"
+          },
+          {
+            "label": "IamExpat in Germany · Germany must halt extra border checks, says EU Commissioner",
+            "url": "https://www.iamexpat.de/expat-info/germany-news/germany-must-halt-extra-border-checks-says-eu-commissioner"
+          },
+          {
+            "label": "migazin.de · Sommerferien: Im Stau wegen \"purer Symbolpolitik\"? (16/07/2026)",
+            "url": "https://www.migazin.de/2026/07/16/grenzkontrolle-dobrindt-immer-staerker-unter-druck/"
+          },
+          {
+            "label": "beck-aktuell · VG München: Die Kontrollen sind rechtswidrig, aber weiter hinzunehmen",
+            "url": "https://www.beck-aktuell.de/heute-im-recht/rechtsprechung/vg-muenchen-gff-klage-eu-grenzkontrollen-racial-profiling-2026-07-02"
+          }
+        ]
+      },
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Filas do EES: saíram os primeiros números concretos, e eles não são pequenos",
+        "body": "Reportagem publicada em 20 de julho de 2026 trouxe medições de dirigentes de aeroportos europeus sobre o impacto do EES, o Sistema de Entrada e Saída da União Europeia, no tempo de espera de viajantes de fora do bloco. No aeroporto de Fiumicino, em Roma, o responsável pela área de aviação, Ivan Bassato, afirma que o tempo médio de processamento de cidadãos britânicos subiu de cerca de 7 para 20 minutos, com picos ocasionais de uma a duas horas. Em Faro, em Portugal, o superintendente Pedro Oliveira relata que filas que levavam cerca de 10 minutos passaram a ultrapassar os 30 minutos com frequência.\n\nOs números dão contorno a uma queixa que o setor aéreo já vinha registrando. Em carta aberta de 1º de julho de 2026 à presidência da Comissão Europeia, as entidades A4E, ACI EUROPE e IATA afirmaram que as esperas no controle de fronteira chegaram a até 5 horas em períodos de pico desde a implementação plena do sistema, em abril, e pediram flexibilidade para suspender o EES quando o volume de passageiros superar a capacidade dos postos. Por que isso importa para quem vai à Alemanha: os aeroportos citados nas medições ficam na Itália, em Portugal, na Espanha, na Grécia e na Bélgica, mas o EES é o mesmo sistema em todo o espaço Schengen. Quem chega de fora do bloco e desembarca em Frankfurt ou Munique passa pelo mesmo registro biométrico de entrada, então esses tempos servem como referência de planejamento, não como número já medido na Alemanha.",
+        "cta": "Tem voo marcado para a Europa nas próximas semanas? Reserve folga extra de tempo na conexão e acompanhe as orientações oficiais do aeroporto de chegada antes de embarcar.",
+        "sources": [
+          {
+            "label": "The Local Germany · Airport bosses warn EU's new border checks triple waiting times for Brits",
+            "url": "https://www.thelocal.de/20260720/airport-bosses-warn-eus-new-border-checks-triple-waiting-times-for-brits"
+          },
+          {
+            "label": "ACI EUROPE · Open letter to the President of the European Commission on the Schengen Entry/Exit System (EES)",
+            "url": "https://www.aci-europe.org/media-room/610-open-letter-to-president-of-the-european-commission-on-the-schengen-entry-exit-system-ees.html"
+          },
+          {
+            "label": "Euronews · EES at a 'critical point': Europe's aviation sector urges EU to show more flexibility",
+            "url": "https://www.euronews.com/travel/2026/07/01/ees-at-a-critical-point-europes-aviation-sector-urges-eu-to-show-more-flexibility"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       title: "Alemanha corta orçamento dos cursos de integração em quase 41% para 2027",
@@ -987,6 +2005,50 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
       sources: [{ label: "IamExpat in Germany", url: "https://www.iamexpat.de/expat-info/germany-news/eu-must-take-stock-reality-and-suspend-ees-over-summer-say-airlines" }],
     }],
     countryTab: [
+      {
+        "publishedAt": "2026-07-20",
+        "headline": "Comissário europeu cobra que a Alemanha comece a desmontar os controles nas fronteiras internas",
+        "standfirst": "Magnus Brunner sustenta que a queda das entradas irregulares e o novo pacto europeu de asilo tornaram as checagens desnecessárias, mas o Ministério do Interior mantém as medidas notificadas até 15 de setembro.",
+        "body": "O comissário europeu de Assuntos Internos e Migração, Magnus Brunner, pediu publicamente que a Alemanha comece a encerrar os controles adicionais nas suas fronteiras terrestres. A declaração foi divulgada em 16 de julho de 2026 e repercutida pela imprensa em língua alemã e inglesa no país, retomando uma cobrança que Bruxelas vinha fazendo ao longo do ano.\n\nO argumento do comissário se apoia em dois pontos. O primeiro é a queda das entradas irregulares na Europa. Segundo dados preliminares divulgados pela Frontex em julho de 2026, a União Europeia registrou pouco mais de 49 mil travessias irregulares no primeiro semestre do ano, uma redução de 37% em relação ao mesmo período de 2025. O segundo é a entrada em vigor plena da reforma do sistema europeu comum de asilo, o GEAS, em 12 de junho de 2026, que passou a concentrar a triagem nas fronteiras externas do bloco.\n\nOs números internos alemães seguem a mesma direção. De acordo com a estatística de asilo do BAMF, o órgão federal de migração e refugiados, foram 39.646 pedidos de asilo iniciais no primeiro semestre de 2026, contra 61.336 no mesmo período do ano anterior, uma queda de 35,4%. Só em junho de 2026 foram 4.267 pedidos iniciais, 37,8% menos que em junho de 2025.\n\nMesmo com esse quadro, nada muda por enquanto na fronteira. Os controles em todas as fronteiras terrestres alemãs estão em vigor desde 16 de setembro de 2024 e já foram prorrogados três vezes. A notificação atualmente registrada junto à Comissão Europeia cobre o período de 16 de março a 15 de setembro de 2026 e justifica a medida por migração irregular, atuação de redes de contrabando de pessoas, pressão sobre o sistema de acolhimento de asilo e o contexto geral de segurança. Ela alcança as fronteiras terrestres com França, Luxemburgo, Bélgica, Países Baixos, Dinamarca, Áustria, Suíça, República Tcheca e Polônia.\n\nA pressão também vem dos tribunais, e aqui vale entender exatamente o que foi decidido. Em 1º de julho de 2026, o Tribunal Administrativo de Munique proferiu três sentenças considerando ilegais os controles na fronteira com a Áustria, por entender que checagens mantidas praticamente inalteradas por anos não se sustentam nem sob o antigo nem sob o novo Código de Fronteiras Schengen. O ponto que costuma se perder na manchete é que o mesmo tribunal negou o pedido de proibir checagens futuras, afirmando que o cidadão deve, em regra, suportar a medida no momento e discutir a legalidade depois. As sentenças são de primeira instância, cabe recurso ao Tribunal Administrativo Superior da Baviera, e o ministro Alexander Dobrindt mantém a posição de que as checagens continuam. Em caso anterior, envolvendo a fronteira com Luxemburgo, o Ministério do Interior já havia anunciado recurso contra decisão semelhante do Tribunal Administrativo de Koblenz.\n\nPara quem vive na Alemanha, trabalha em região de fronteira ou planeja entrar no país por via terrestre, o efeito prático imediato tanto da declaração do comissário quanto das decisões judiciais é nulo. As checagens seguem valendo como antes, e a próxima data concreta a acompanhar é 15 de setembro de 2026, quando a notificação atual vence e o governo alemão precisará decidir se prorroga novamente. Confirme sempre a situação atualizada em canais oficiais antes de viajar. Este conteúdo é informativo e não substitui a orientação de um profissional habilitado para o seu caso concreto.",
+        "keyFacts": [
+          "Comissário europeu de Assuntos Internos e Migração, Magnus Brunner, pediu em declaração divulgada em 16 de julho de 2026 que a Alemanha comece a encerrar os controles adicionais nas fronteiras internas.",
+          "Frontex registrou pouco mais de 49 mil travessias irregulares na União Europeia no primeiro semestre de 2026, queda de 37% sobre o mesmo período de 2025 (dados preliminares).",
+          "BAMF contabilizou 39.646 pedidos de asilo iniciais no primeiro semestre de 2026, contra 61.336 um ano antes, redução de 35,4%.",
+          "A notificação alemã registrada na Comissão Europeia cobre de 16 de março a 15 de setembro de 2026 e abrange as fronteiras terrestres com França, Luxemburgo, Bélgica, Países Baixos, Dinamarca, Áustria, Suíça, República Tcheca e Polônia.",
+          "Em 1º de julho de 2026, o Tribunal Administrativo de Munique declarou ilegais os controles na fronteira com a Áustria em três sentenças, mas negou o pedido de proibir checagens futuras. As decisões são de primeira instância e cabe recurso.",
+          "As checagens não param por causa das decisões judiciais: o ministro do Interior, Alexander Dobrindt, mantém a medida, e a próxima data de decisão é 15 de setembro de 2026."
+        ],
+        "sources": [
+          {
+            "label": "Comissão Europeia · Temporary Reintroduction of Border Control",
+            "url": "https://home-affairs.ec.europa.eu/policies/schengen/schengen-area/temporary-reintroduction-border-control_en"
+          },
+          {
+            "label": "Frontex · Irregular border crossings into the EU down 37% in the first half of 2026",
+            "url": "https://www.frontex.europa.eu/media-centre/news/news-release/frontex-irregular-border-crossings-into-the-eu-down-37-in-the-first-half-of-2026-Z5YoLp"
+          },
+          {
+            "label": "BAMF · Asylzahlen Juni 2026",
+            "url": "https://www.bamf.de/SharedDocs/Meldungen/DE/2026/260703-asylzahlen-juni-2026.html"
+          },
+          {
+            "label": "IamExpat in Germany · Germany must halt extra border checks, says EU Commissioner",
+            "url": "https://www.iamexpat.de/expat-info/germany-news/germany-must-halt-extra-border-checks-says-eu-commissioner"
+          },
+          {
+            "label": "migazin.de · Sommerferien: Im Stau wegen \"purer Symbolpolitik\"? (16/07/2026)",
+            "url": "https://www.migazin.de/2026/07/16/grenzkontrolle-dobrindt-immer-staerker-unter-druck/"
+          },
+          {
+            "label": "LTO · VG München: Grenzkontrollen zu Österreich rechtswidrig",
+            "url": "https://www.lto.de/recht/nachrichten/n/vg-muenchen-m23k258366-m23k258376-grenzkontrolle-oesterreich-schengen-kodex-rechtswidrig"
+          },
+          {
+            "label": "beck-aktuell · VG München: Die Kontrollen sind rechtswidrig, aber weiter hinzunehmen",
+            "url": "https://www.beck-aktuell.de/heute-im-recht/rechtsprechung/vg-muenchen-gff-klage-eu-grenzkontrollen-racial-profiling-2026-07-02"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       headline: "Alemanha reduz em quase 41% o orçamento dos cursos de integração para 2027",
@@ -1021,6 +2083,54 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
   fr: {
     blog: [
       {
+        "publishedAt": "2026-07-20",
+        "headline": "Entrar na França em 2026 ficou mais lento na fronteira e mais político no consulado",
+        "standfirst": "A semana juntou dois retratos do mesmo problema: filas que triplicaram com o novo sistema de fronteiras da UE e uma disputa política em Paris sobre quantos vistos a França deve conceder a argelinos. São camadas diferentes da mesma jornada.",
+        "body": "Quem planeja uma mudança para a França costuma pensar no processo como uma linha reta: pedir o visto, receber, embarcar, entrar. A semana entre 15 e 20 de julho de 2026 mostrou que essa linha tem pelo menos duas camadas independentes, e que cada uma delas está sob pressão por motivos distintos.\n\nA primeira camada é a fronteira física. Em 20 de julho, dirigentes de grandes aeroportos europeus vieram a público dizer que o Entry/Exit System, o sistema automatizado que registra entradas e saídas de não europeus, elevou de forma relevante o tempo de processamento. Em Roma Fiumicino, segundo o chief aviation officer Ivan Bassato, a espera média de britânicos passou de 7 para 20 minutos. O CEO dos aeroportos de Roma, Marco Troncone, colocou sua preocupação com o verão em oito ou nove numa escala de dez e descreveu o sistema como incompatível com os volumes de pico. Em Faro, no Algarve português, o responsável pelo controle de fronteira, Pedro Oliveira, relatou filas que passaram de 10 para mais de 30 minutos.\n\nO setor aéreo pediu freio de arrumação, e vale entender exatamente o que ele pediu. Em 1º de julho, ACI EUROPE, Airlines for Europe e IATA endereçaram uma carta aberta à presidente da Comissão Europeia, Ursula von der Leyen. O pedido não foi acabar com o sistema, e sim permitir que os Estados-membros suspendam o processamento do EES quando a demanda de passageiros superar a capacidade dos postos de fronteira, ao menos durante julho e agosto, com um mecanismo permanente de flexibilidade a partir de setembro. A resposta de Bruxelas foi negativa. A Comissão reconhece cerca de 20 pontos difíceis entre aproximadamente 1.500 passagens de fronteira do bloco, mas sustenta que uma suspensão não é necessária nem possível. O argumento de eficácia vem em números: mais de 110 milhões de entradas e saídas registradas desde outubro de 2025 e mais de 44 mil recusas de entrada notificadas, sendo mais de 1.100 ligadas a ameaças à segurança. A página oficial da Comissão confirma o calendário: lançamento progressivo em 12 de outubro de 2025 e substituição do carimbo no passaporte desde 10 de abril de 2026.\n\nA segunda camada é o consulado, e ali a pressão é de outra natureza. Em 15 de julho, o embaixador francês em Argel, Stéphane Romatet, afirmou que Paris gostaria de ver o volume de vistos a cidadãos argelinos voltar a subir, provavelmente ao patamar anterior à crise diplomática, algo perto de 250 mil por ano. A frase virou combustível político em 48 horas. A direita e o Rassemblement National acusaram o governo de capitulação. Jordan Bardella invocou a detenção do jornalista francês Christophe Gleizes, condenado a sete anos de prisão na Argélia, e Bruno Retailleau, presidente de Les Républicains e ex-ministro do Interior, sustentou que diplomacia não se confunde com apaziguamento e cobrou contrapartidas. Em 16 de julho, o Ministério das Relações Exteriores desmentiu qualquer compromisso numérico, afirmando que vistos não estavam entre os temas da retomada do diálogo e que nenhum objetivo numérico foi acertado.\n\nColocadas lado a lado, as duas camadas ensinam coisas diferentes. A camada da fronteira é operacional e previsível: ela custa tempo, não custa direito. Ninguém perde a autorização de entrada por causa de fila, mas quem tem conexão curta, chegada de madrugada ou compromisso marcado logo após o pouso precisa refazer a conta. O primeiro registro biométrico é o mais demorado, e o efeito tende a se concentrar em picos de temporada.\n\nA camada consular é política e imprevisível, e é justamente por isso que exige mais cuidado de leitura. Declaração de embaixador não é norma. Anúncio de partido não é norma. Meta de volume, mesmo quando existisse, não cria direito individual nem antecipa deferimento de um pedido específico. Os critérios de análise continuam os mesmos, os pedidos continuam sendo apresentados pelo portal oficial France-Visas e continuam sendo avaliados caso a caso pelos consulados, com base na documentação de cada requerente.\n\nO que muda de verdade, na prática, é o comportamento recomendável de quem está no meio do processo. Vale dar margem de tempo em conexões e chegadas, guardar comprovantes de entrada e saída para não depender apenas do carimbo, montar o dossiê consular com folga documental em vez de apostar em janelas favoráveis, e desconfiar de qualquer conteúdo que transforme discurso diplomático em promessa de aprovação. Nenhum dos fatos desta semana altera exigência legal alguma, e nenhum deles garante resultado.\n\nO pano de fundo é consistente com o que a Europa vem sinalizando há meses. O bloco investiu num controle de fronteira mais granular e não pretende recuar dele mesmo sob pressão do setor aéreo, e a política de vistos por nacionalidade se consolidou como instrumento de negociação diplomática, sujeito a oscilar conforme a temperatura bilateral. Para quem imigra, o efeito combinado é um processo que exige mais paciência e mais documentação, não menos.\n\nEste texto tem finalidade informativa e não substitui a orientação de um profissional habilitado. Antes de tomar decisões que envolvam prazos, mudança de país ou submissão de pedido, confirme cada ponto nos canais oficiais e consulte um advogado de imigração.",
+        "tags": [
+          "França",
+          "Vistos",
+          "Entry/Exit System",
+          "Fronteiras",
+          "União Europeia",
+          "Argélia"
+        ],
+        "sources": [
+          {
+            "label": "The Local France · Airport bosses warn EU's new border checks triple waiting times for Brits (20/07/2026)",
+            "url": "https://www.thelocal.fr/20260720/airport-bosses-warn-eus-new-border-checks-triple-waiting-times-for-brits"
+          },
+          {
+            "label": "Comissão Europeia · Entry/Exit System (página oficial, Migration and Home Affairs)",
+            "url": "https://home-affairs.ec.europa.eu/policies/schengen/smart-borders/entry-exit-system_en"
+          },
+          {
+            "label": "ACI EUROPE · Open letter to the President of the European Commission on the Schengen Entry/Exit System (01/07/2026)",
+            "url": "https://www.aci-europe.org/media-room/610-open-letter-to-president-of-the-european-commission-on-the-schengen-entry-exit-system-ees.html"
+          },
+          {
+            "label": "CAPA · ACI EUROPE, A4E and IATA call for immediate intervention on Schengen Entry Exit System",
+            "url": "https://centreforaviation.com/news/aci-europe-a4e-and-iata-call-for-immediate-intervention-on-schengen-entry-exit-system-1364630"
+          },
+          {
+            "label": "CNEWS · Qui est Stéphane Romatet, ambassadeur de France en Algérie, favorable au retour à 250.000 visas par an ? (18/07/2026)",
+            "url": "https://www.cnews.fr/france/2026-07-18/qui-est-stephane-romatet-ambassadeur-de-france-en-algerie-favorable-au-retour"
+          },
+          {
+            "label": "franceinfo · reações do RN e da direita à hausse de vistos para argelinos",
+            "url": "https://www.franceinfo.fr/monde/afrique/algerie/capitulation-aplaventrisme-le-rn-et-la-droite-s-insurgent-contre-la-hausse-des-visas-pour-les-algeriens-envisagee-par-paris_8111960.html"
+          },
+          {
+            "label": "RFI · Le Quai d'Orsay recadre après la polémique sur les visas accordés aux ressortissants algériens (19/07/2026)",
+            "url": "https://www.rfi.fr/fr/france/20260719-france-le-quai-d-orsay-recadre-apr%C3%A8s-la-pol%C3%A9mique-sur-les-visas-accord%C3%A9s-aux-ressortissants-alg%C3%A9riens"
+          },
+          {
+            "label": "France-Visas · portal oficial único de pedidos de visto para a França",
+            "url": "https://france-visas.gouv.fr/"
+          }
+        ]
+      },
+      {
       publishedAt: "2026-07-17",
       headline: "O verão dos incêndios: por que 2026 já é a pior temporada de fogo na França desde 1945",
       standfirst: "Entre vigilância vermelha de calor, milhares de hectares queimados em Fontainebleau e a promessa de tolerância zero de Macron, a crise dos incêndios florestais expôs o quanto o risco subiu na França neste verão.",
@@ -1035,6 +2145,42 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
     },
     ],
     community: [
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Fronteiras da UE: chefes de aeroportos dizem que a espera triplicou, e Bruxelas recusa flexibilizar o novo sistema",
+        "body": "Dirigentes de aeroportos europeus alertaram em 20 de julho de 2026 que o Entry/Exit System, o sistema automatizado de registro de entradas e saídas de não europeus, triplicou o tempo de espera em alguns pontos. Em Roma Fiumicino, o chief aviation officer Ivan Bassato relatou que a espera média de cidadãos britânicos passou de 7 para 20 minutos, e o CEO dos aeroportos de Roma, Marco Troncone, classificou sua preocupação com o pico do verão em oito ou nove numa escala de dez, dizendo que o sistema é incompatível com os volumes de pico. Em Faro, em Portugal, o responsável pelo controle de fronteira, Pedro Oliveira, descreveu filas que saltaram de 10 para mais de 30 minutos.\n\nA Comissão Europeia recusou o pedido do setor aéreo. Em carta aberta de 1º de julho, ACI EUROPE, Airlines for Europe e IATA não pediram o fim do sistema, e sim autorização para que os Estados-membros suspendam o processamento do EES quando a demanda de passageiros superar a capacidade dos postos de fronteira, ao menos em julho e agosto, além de um mecanismo permanente de flexibilidade a partir de setembro. Bruxelas reconhece cerca de 20 pontos problemáticos entre aproximadamente 1.500 passagens de fronteira do bloco, mas sustenta que suspender o sistema não é necessário nem possível. Pelos números citados pela Comissão, mais de 110 milhões de entradas e saídas já foram registradas desde outubro de 2025 e mais de 44 mil recusas de entrada foram notificadas, sendo mais de 1.100 delas ligadas a ameaças à segurança. Segundo a página oficial da Comissão, o sistema começou o lançamento progressivo em 12 de outubro de 2025 e substitui o carimbo no passaporte desde 10 de abril de 2026.",
+        "cta": "Vai entrar na França ou em qualquer país do espaço Schengen neste verão europeu? Conte com tempo extra na fronteira, principalmente se for seu primeiro registro biométrico, e confira as regras na página oficial da Comissão Europeia antes de viajar. Este conteúdo é informativo e não substitui a orientação de um profissional habilitado.",
+        "sources": [
+          {
+            "label": "The Local France · Airport bosses warn EU's new border checks triple waiting times for Brits (20/07/2026)",
+            "url": "https://www.thelocal.fr/20260720/airport-bosses-warn-eus-new-border-checks-triple-waiting-times-for-brits"
+          },
+          {
+            "label": "ACI EUROPE · Open letter to the President of the European Commission on the Schengen Entry/Exit System (01/07/2026)",
+            "url": "https://www.aci-europe.org/media-room/610-open-letter-to-president-of-the-european-commission-on-the-schengen-entry-exit-system-ees.html"
+          },
+          {
+            "label": "Comissão Europeia · Entry/Exit System (página oficial, Migration and Home Affairs)",
+            "url": "https://home-affairs.ec.europa.eu/policies/schengen/smart-borders/entry-exit-system_en"
+          }
+        ]
+      },
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Paris adota a alíquota máxima da taxa sobre imóveis vagos para forçar a volta de apartamentos ao aluguel",
+        "body": "O Conselho de Paris aprovou em 18 de julho de 2026 as alíquotas máximas permitidas por lei para a taxa sobre habitações vagas. Pelo texto votado, a alíquota do primeiro ano de vacância vai a 30% do valor locativo, contra os 17% de referência anteriores, e a partir do segundo ano vai a 60%, contra 34%. A mudança começa a valer em 1º de janeiro de 2027. No exemplo apresentado na cobertura, um apartamento de 30 metros quadrados no 17º arrondissement sairia de cerca de 790 euros anuais para aproximadamente 1.400 euros em 2027 e 2.800 euros a partir de 2028.\n\nSegundo dados do INSEE citados pela prefeitura, 139.075 moradias em Paris estão classificadas como vagas, excluídas as residências secundárias, o que representa perto de 10% do estoque habitacional da cidade. O objetivo declarado é devolver ao mercado de aluguel em torno de 20 mil imóveis parados há muito tempo. O adjunto do prefeito Jacques Baudrier chamou a votação de uma grande vitória depois de dez anos de luta, apontando que há gente que quer morar em Paris e já não consegue pagar. Para quem planeja se mudar para a capital francesa, é uma medida que mexe com a oferta de aluguel, embora o efeito real só possa ser medido depois da entrada em vigor.",
+        "cta": "Está pesquisando aluguel em Paris? Vale acompanhar como o mercado reage a partir de 2027 e confirmar sempre valores e condições de contrato com fonte local confiável antes de fechar qualquer negócio. Este conteúdo é informativo e não substitui a orientação de um profissional habilitado.",
+        "sources": [
+          {
+            "label": "The Local France · Paris doubles tax on vacant homes to bring properties back onto rental market (20/07/2026)",
+            "url": "https://www.thelocal.fr/20260720/paris-doubles-tax-on-vacant-homes-to-bring-properties-back-onto-rental-market"
+          },
+          {
+            "label": "franceinfo · La Ville de Paris a voté le doublement de la taxe sur les logements vacants",
+            "url": "https://www.franceinfo.fr/economie/immobilier/logements-vacants/la-ville-de-paris-a-vote-le-doublement-de-la-taxe-sur-les-logements-vacants-pour-inciter-les-proprietaires-a-les-remettre-sur-le-marche_8112893.html"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       title: "Incêndios na França: Macron promete \"nenhuma tolerância\" após pior temporada desde 1945",
@@ -1064,6 +2210,50 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
       sources: [{ label: "Le Monde · Immigration et diversité", url: "https://www.lemonde.fr/societe/article/2026/06/25/l-interdiction-des-mariages-d-etrangers-sans-papiers-de-retour-a-l-assemblee-nationale-avec-le-soutien-du-gouvernement_6713343_3224.html" }],
     }],
     countryTab: [
+      {
+        "publishedAt": "2026-07-20",
+        "headline": "França desmente meta de 250 mil vistos a argelinos após fala do embaixador em Argel",
+        "standfirst": "Declaração de Stéphane Romatet em 15 de julho reacendeu a disputa política sobre vistos, e o Ministério das Relações Exteriores negou que exista qualquer objetivo numérico acertado entre os dois países.",
+        "body": "A relação entre França e Argélia voltou ao centro do debate migratório francês depois que o embaixador francês em Argel, Stéphane Romatet, afirmou em entrevista no dia 15 de julho de 2026 que Paris gostaria de ver o volume de vistos concedidos a cidadãos argelinos voltar a crescer, provavelmente até o patamar anterior à crise diplomática entre os dois países, algo em torno de 250 mil vistos por ano. A fala foi repercutida por veículos franceses como CNEWS, Europe 1 e France24.\n\nA reação política foi imediata. Segundo a franceinfo, a direita e o Rassemblement National acusaram o governo de capitulação. Em 17 de julho, o líder do RN, Jordan Bardella, falou em capitulação do macronismo diante do regime argelino, citando as provocações do regime e a detenção do jornalista francês Christophe Gleizes, condenado a sete anos de prisão na Argélia e preso há mais de um ano. Seu aliado Éric Ciotti falou em capitulação, humilhação e traição. Bruno Retailleau, presidente de Les Républicains e ex-ministro do Interior, sustentou que diplomacia não se confunde com apaziguamento e defendeu que a França exija contrapartidas antes de qualquer aumento.\n\nDiante da repercussão, o Ministério da Europa e dos Negócios Estrangeiros, o Quai d'Orsay, veio a público desmentir a existência de qualquer compromisso numérico. A manifestação ocorreu em 16 de julho e sustentou que a concessão de vistos a nacionais argelinos não figurava entre os assuntos tratados no âmbito da retomada do diálogo bilateral e que nenhum objetivo numérico foi fixado entre os dois países. A RFI voltou ao tema em 19 de julho, registrando que o Quai d'Orsay recolocou a discussão nos trilhos oficiais. Vale a ressalva de método: não localizamos, até o fechamento deste texto, um comunicado com URL própria no site do ministério detalhando a negativa, embora o conteúdo apareça de forma consistente em veículos distintos.\n\nPara quem tem planos ligados à França, o recado prático é separar debate político de regra em vigor. Nada mudou nos critérios de análise dos pedidos, e não existe cota anunciada oficialmente. Os pedidos continuam a ser apresentados pelo portal oficial France-Visas e analisados caso a caso pelos consulados, com base na documentação apresentada. Discurso de embaixador, declaração de partido e projeção de volume não criam direito nem garantem deferimento.\n\nO episódio é útil como termômetro. Ele mostra que o volume de vistos concedidos a determinadas nacionalidades virou moeda de negociação diplomática e tema de disputa eleitoral na França, o que tende a produzir oscilação de prazos e de rigor documental ao longo do tempo. Acompanhar os canais oficiais e buscar orientação de profissional habilitado antes de tomar decisões continua sendo o caminho mais seguro.",
+        "keyFacts": [
+          "Em 15 de julho de 2026, o embaixador da França na Argélia, Stéphane Romatet, disse em entrevista que o volume de vistos a cidadãos argelinos deveria voltar a subir, provavelmente ao nível anterior à crise, em torno de 250 mil por ano.",
+          "Em 17 de julho, a direita e o Rassemblement National reagiram com acusações de capitulação, segundo a franceinfo. Jordan Bardella falou em capitulação do macronismo e citou a detenção do jornalista francês Christophe Gleizes, condenado a sete anos de prisão na Argélia.",
+          "Bruno Retailleau, presidente de Les Républicains e ex-ministro do Interior, afirmou que diplomacia não se confunde com apaziguamento e defendeu que a França exija contrapartidas antes de qualquer aumento.",
+          "Em 16 de julho, o Quai d'Orsay desmentiu compromisso numérico, afirmando que a concessão de vistos a argelinos não estava entre os assuntos discutidos na retomada do diálogo e que nenhum objetivo numérico foi fixado.",
+          "Não localizamos comunicado com URL própria no site do ministério francês detalhando a negativa, e por isso o ponto fica registrado com ressalva.",
+          "Nenhuma regra de concessão de visto foi alterada: os pedidos seguem pelo portal oficial France-Visas e são analisados caso a caso pelos consulados."
+        ],
+        "sources": [
+          {
+            "label": "CNEWS · Qui est Stéphane Romatet, ambassadeur de France en Algérie, favorable au retour à 250.000 visas par an ? (18/07/2026)",
+            "url": "https://www.cnews.fr/france/2026-07-18/qui-est-stephane-romatet-ambassadeur-de-france-en-algerie-favorable-au-retour"
+          },
+          {
+            "label": "franceinfo · RN e direita reagem à hausse de vistos para argelinos considerada por Paris",
+            "url": "https://www.franceinfo.fr/monde/afrique/algerie/capitulation-aplaventrisme-le-rn-et-la-droite-s-insurgent-contre-la-hausse-des-visas-pour-les-algeriens-envisagee-par-paris_8111960.html"
+          },
+          {
+            "label": "France24 · RN et LR s'insurgent contre la hausse des visas pour les Algériens envisagée par Paris (17/07/2026)",
+            "url": "https://www.france24.com/fr/info-en-continu/20260717-rn-et-lr-s-insurgent-contre-la-hausse-des-visas-pour-les-alg%C3%A9riens-envisag%C3%A9e-par-paris"
+          },
+          {
+            "label": "RFI · Le Quai d'Orsay recadre après la polémique sur les visas accordés aux ressortissants algériens (19/07/2026)",
+            "url": "https://www.rfi.fr/fr/france/20260719-france-le-quai-d-orsay-recadre-apr%C3%A8s-la-pol%C3%A9mique-sur-les-visas-accord%C3%A9s-aux-ressortissants-alg%C3%A9riens"
+          },
+          {
+            "label": "Europe 1 · La droite et le RN vent debout après l'annonce d'accorder 250.000 visas à des ressortissants algériens",
+            "url": "https://www.europe1.fr/politique/la-droite-et-le-rn-vent-debout-apres-lannonce-daccorder-250000-visas-a-des-ressortissants-algeriens-977532"
+          },
+          {
+            "label": "Ministère de l'Europe et des Affaires étrangères · Déclarations officielles et points de presse",
+            "url": "https://www.diplomatie.gouv.fr/fr/photos-videos-publications-infographies/bases-documentaires/declarations-officielles-et-points-de-presse/"
+          },
+          {
+            "label": "France-Visas · portal oficial único de pedidos de visto para a França",
+            "url": "https://france-visas.gouv.fr/"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       headline: "França adota lei da \"ajuda para morrer\" após mais de um ano de debate no Parlamento",
@@ -1544,6 +2734,51 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
   pt: {
     blog: [
       {
+        "publishedAt": "2026-07-20",
+        "headline": "Portugal correu para apertar a nacionalidade e ficou para trás nos direitos que vinham de Bruxelas",
+        "standfirst": "A lei que elevou para sete e dez anos o tempo de residência exigido para a naturalização entrou em vigor em maio dentro do prazo. Já a diretiva europeia que fixa em 90 dias a decisão da autorização única e obriga a permitir a mudança de empregador venceu em 21 de maio e continua por transpor, o que levou a Comissão Europeia a notificar o país em 15 de julho.",
+        "body": "A política de imigração portuguesa está a andar por dois relógios diferentes, e eles não marcam o mesmo ritmo. Um deles restringe o acesso à nacionalidade e cumpriu o calendário. O outro vem de Bruxelas, amplia direitos de quem chega para trabalhar, e está atrasado. A notificação enviada pela Comissão Europeia em julho tornou essa diferença de velocidade impossível de ignorar.\n\nO primeiro relógio é o da nacionalidade. A Lei Orgânica n.º 1/2026, publicada no Diário da República em 18 de maio de 2026, entrou em vigor no dia seguinte e alterou a Lei da Nacionalidade, a Lei n.º 37/81, de 3 de outubro. A mudança mais visível está no tempo de residência legal exigido para pedir a naturalização, que passou a ser de sete anos para nacionais de países de língua portuguesa e de Estados-membros da União Europeia, e de dez anos para nacionais dos demais países. Antes, o critério geral era de cinco anos. Os pedidos apresentados até 18 de maio de 2026, ou seja, antes da entrada em vigor, continuam sujeitos ao regime anterior, uma salvaguarda que faz diferença enorme para quem entregou o processo a tempo.\n\nHá ainda uma peça que falta e que convém acompanhar. O próprio diploma determina que o Governo altere o Regulamento da Nacionalidade Portuguesa, aprovado pelo Decreto-Lei n.º 237-A/2006, no prazo de 90 dias contados da publicação da lei, ou seja, até 16 de agosto de 2026. É desse regulamento que dependem detalhes operacionais nada menores, como a forma de fazer prova de integração e o conteúdo das provas de conhecimento da língua, da cultura, da organização política e dos direitos fundamentais, incluindo as situações em que possam ser dispensadas. Esse texto ainda não foi divulgado.\n\nO segundo relógio é o das regras europeias, e esse ficou parado. Em 15 de julho de 2026, no pacote de infrações de julho identificado como INF/26/1376, a Comissão Europeia enviou notificação formal a Portugal por não ter comunicado a transposição completa da Diretiva (UE) 2024/1233, a chamada diretiva da autorização única. O prazo terminou em 21 de maio de 2026, dois dias depois de a nova lei da nacionalidade começar a produzir efeitos. Portugal não está sozinho nessa lista, são 17 Estados-membros na mesma situação, entre eles Alemanha, França, Países Baixos e Suécia, mas isso não anula o efeito prático do atraso.\n\nO que essa diretiva contém ajuda a medir o que está em suspenso. A decisão sobre o pedido que reúne, num só procedimento, o direito de residir e de trabalhar passa a ter de ser tomada em 90 dias contados da apresentação de um pedido completo, contra os quatro meses da diretiva de 2011, com prolongamento possível de mais 30 dias em casos excecionais justificados pela complexidade. O pedido pode ser apresentado a partir de um país terceiro ou já de dentro da União Europeia, no caso de quem tem autorização de residência válida. E os Estados-membros passam a ser obrigados a permitir a mudança de empregador, o que ataca a dependência em relação ao empregador inicial, que é justamente onde nascem as situações de exploração mais graves.\n\nConvém ser preciso quanto ao alcance dessa mudança, porque é fácil vendê-la como mais do que é. A diretiva permite que os Estados exijam notificação da mudança às autoridades competentes, que façam verificação da situação do mercado de trabalho, quando já a fazem no pedido inicial, e que imponham um período mínimo de trabalho com o primeiro empregador, nunca superior a seis meses, com exceção para casos justificados de infração grave do empregador. Em caso de desemprego, o titular tem três meses de permanência para procurar nova colocação, prazo que sobe para seis meses para quem é titular da autorização única há mais de dois anos, e não para quem simplesmente reside há dois anos. Findo esse período, pode ser exigida prova de meios de subsistência. Para completar, a diretiva exige dos Estados mecanismos de monitorização, inspeções, canais de reclamação, vias de recurso judicial e sanções.\n\nNo mesmo pacote, Portugal foi notificado também por causa da Diretiva (UE) 2024/1346, relativa às condições de acolhimento de requerentes de proteção internacional, cujo prazo terminou em 12 de junho de 2026. Nesse caso, o país aparece entre 16 Estados-membros. Em ambos os processos, Portugal tem dois meses para responder, e convém repetir que a notificação formal é a primeira fase do procedimento, não uma condenação. Só se a resposta não satisfizer a Comissão é que vem o parecer fundamentado, e apenas depois o caso pode chegar ao Tribunal de Justiça da União Europeia.\n\nA leitura mais útil não é a de intenção deliberada, e sim a de capacidade e de prioridade. Transpor uma diretiva de migração laboral exige mexer no procedimento administrativo, nos prazos e na articulação entre a AIMA, a Segurança Social e a inspeção do trabalho, ou seja, exige exatamente o tipo de máquina que tem estado sob pressão. Não por acaso, o Sindicato dos Técnicos de Migração levou à Presidência da República, em 20 de julho, um pedido de reforço de meios para a AIMA, incluindo a denúncia de que lugares de oficiais de ligação da agência estão por ocupar nos consulados portugueses há cerca de dois anos. Já elevar prazos de residência na lei da nacionalidade é uma alteração legislativa de execução mais simples, que não depende de reconstruir processos operacionais.\n\nPara quem está a construir um projeto de vida em Portugal, ficam três consequências concretas. A primeira é que o calendário do seu processo de nacionalidade depende sobretudo da data em que o pedido foi apresentado, e o regulamento que falta pode ainda detalhar exigências, por isso vale acompanhar a publicação prevista para agosto. A segunda é que os direitos da diretiva da autorização única não valem hoje em Portugal só porque o prazo europeu expirou, e decisões como pedir demissão para trocar de empregador não devem ser tomadas com base neles enquanto a transposição não for publicada. A terceira é que o quadro legal português está em movimento em várias frentes ao mesmo tempo, o que torna a data de cada passo tão importante quanto a regra em si.\n\nEste conteúdo tem finalidade informativa e não substitui a orientação de um profissional habilitado. Antes de qualquer decisão sobre o seu processo, confirme a regra aplicável ao seu caso nos canais oficiais da AIMA, do portal de vistos do Ministério dos Negócios Estrangeiros e do Diário da República.",
+        "tags": [
+          "Portugal",
+          "AIMA",
+          "nacionalidade portuguesa",
+          "autorização única",
+          "Comissão Europeia",
+          "imigração",
+          "residência e trabalho"
+        ],
+        "sources": [
+          {
+            "label": "Diário da República · Lei Orgânica n.º 1/2026, de 18 de maio (Alteração à Lei da Nacionalidade)",
+            "url": "https://diariodarepublica.pt/dr/detalhe/lei-organica/1-2026-1123539996"
+          },
+          {
+            "label": "Diário da República · Lei Orgânica n.º 1/2026 (texto integral em PDF)",
+            "url": "https://files.diariodarepublica.pt/1s/2026/05/09500/0000200020.pdf"
+          },
+          {
+            "label": "Comissão Europeia · July infringements package: key decisions (INF/26/1376)",
+            "url": "https://ec.europa.eu/commission/presscorner/detail/en/inf_26_1376"
+          },
+          {
+            "label": "EUR-Lex · Diretiva (UE) 2024/1233 (autorização única)",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401233"
+          },
+          {
+            "label": "Observador · Bruxelas processa Portugal por falhas em regras sobre migrantes",
+            "url": "https://observador.pt/2026/07/15/bruxelas-processa-portugal-por-falhas-em-regras-sobre-migrantes/"
+          },
+          {
+            "label": "Observador · Sindicato dos Técnicos de Migração alerta Belém e pede reforço da AIMA nos consulados",
+            "url": "https://observador.pt/2026/07/20/sindicato-dos-tecnicos-de-migracao-alerta-belem-para-discurso-de-odio-contra-imigrantes-e-pede-reforco-da-aima-nos-consulados/"
+          },
+          {
+            "label": "The Portugal News · European Union sues Portugal, this time because of immigration rules",
+            "url": "https://www.theportugalnews.com/news/2026-07-15/european-union-sues-portugal-this-time-because-of-immigration-rules/1055607"
+          }
+        ]
+      },
+      {
       publishedAt: "2026-07-17",
       headline: "El Niño já começou: por que Portugal está correndo para preparar abrigos contra o calor",
       standfirst: "A Organização Meteorológica Mundial confirma que as condições de El Niño já dominam desde o meio deste ano e devem persistir até o início de 2027, um pano de fundo que ajuda a explicar por que o Governo português orientou municípios a criar refúgios climatizados antes do verão.",
@@ -1559,6 +2794,46 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
     },
     ],
     community: [
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Os 90 dias e a mudança de empregador ainda não valem em Portugal, e a Comissão Europeia acabou de notificar o país",
+        "body": "Muita gente começou a perguntar se já pode contar com o prazo de 90 dias para a decisão da autorização única de residência e trabalho, ou com o direito de mudar de empregador sem perder o processo. A resposta, por enquanto, é não. Esses direitos constam da Diretiva (UE) 2024/1233, uma regra europeia que cada país precisa transpor para a sua própria legislação, e Portugal ainda não concluiu esse passo.\n\nFoi exatamente por isso que a Comissão Europeia incluiu Portugal, em 15 de julho de 2026, no pacote de infrações de julho. O prazo para transpor a diretiva terminou em 21 de maio de 2026, e o país está entre 17 Estados-membros que receberam notificação formal. Portugal tem agora dois meses para responder.\n\nO que a diretiva prevê, quando entrar em vigor na lei portuguesa, é um conjunto relevante de mudanças. A decisão passa a ter de sair em 90 dias contados da apresentação de um pedido completo, em vez dos quatro meses da regra de 2011, com possibilidade de mais 30 dias em casos excecionais justificados pela complexidade. O pedido pode ser apresentado de fora do país ou já de dentro da União Europeia, para quem tem residência válida. E o titular passa a poder mudar de empregador.\n\nVale ler a letra pequena desse último ponto, porque é onde mais se cria expectativa errada. A mudança de empregador não é livre e sem condições: os Estados-membros podem exigir notificação às autoridades, podem fazer verificação da situação do mercado de trabalho, se já a fazem no pedido inicial, e podem impor um período mínimo com o primeiro empregador, até ao limite de seis meses. Em caso de infração grave do empregador, devidamente justificada, a mudança pode ocorrer antes disso. Já quem perde o emprego pode permanecer três meses para procurar nova colocação, prazo que sobe para seis meses para quem é titular da autorização única há mais de dois anos, e não simplesmente para quem reside há dois anos.\n\nAté lá, o seu processo continua a correr pelas regras nacionais que estão em vigor hoje. Não tome decisões, como pedir demissão para trocar de empregador, com base num direito que ainda não foi transposto. Este conteúdo é informativo e não substitui aconselhamento jurídico individual.",
+        "cta": "Tem pedido de residência e trabalho em curso em Portugal? Confirme na AIMA quais regras se aplicam hoje ao seu caso antes de mudar de emprego ou de empregador, e procure profissional habilitado se tiver dúvida.",
+        "sources": [
+          {
+            "label": "Comissão Europeia · July infringements package: key decisions (INF/26/1376)",
+            "url": "https://ec.europa.eu/commission/presscorner/detail/en/inf_26_1376"
+          },
+          {
+            "label": "EUR-Lex · Diretiva (UE) 2024/1233 (autorização única)",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401233"
+          },
+          {
+            "label": "Observador · Bruxelas processa Portugal por falhas em regras sobre migrantes",
+            "url": "https://observador.pt/2026/07/15/bruxelas-processa-portugal-por-falhas-em-regras-sobre-migrantes/"
+          }
+        ]
+      },
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Sindicato leva à Presidência da República o alerta de que há lugares da AIMA por ocupar nos consulados desde 2024",
+        "body": "O Sindicato dos Técnicos de Migração, o STM, reuniu nesta segunda-feira, 20 de julho de 2026, com assessoras da Presidência da República. Segundo declarações da presidente do sindicato, Manuela Niza, à agência Lusa, o encontro serviu para transmitir preocupação com o aumento do discurso de ódio contra a população imigrante em Portugal e para pedir reforço de meios à AIMA.\n\nO ponto de maior efeito prático para quem está a preparar a mudança para Portugal é o da rede consular. O sindicato afirma que há cerca de dois anos estão por ocupar lugares de oficiais de ligação da AIMA, também designados conselheiros de imigração, funções previstas na lei orgânica da agência. Esses profissionais são responsáveis pela gestão dos fluxos migratórios ainda no país de origem e pela articulação com as representações diplomáticas portuguesas, sobretudo nos países que mais enviam migrantes para Portugal. O STM defende que uma imigração regular, como o Governo afirma pretender, depende de ação junto dessas representações no estrangeiro.\n\nO sindicato pediu ainda a criação de uma carreira especial para os trabalhadores da AIMA e apresentou um projeto de cooperação com os países de língua portuguesa, com colocação de pessoal qualificado nesses países.\n\nVale registar que se trata de posição de um sindicato, e não de uma decisão do Governo ou de uma mudança de regra. Nada muda hoje no seu processo por causa desta reunião.",
+        "cta": "Vai iniciar um pedido de visto num consulado português? Conte com prazos que podem variar bastante conforme o posto e acompanhe a informação oficial em vistos.mne.gov.pt e aima.gov.pt.",
+        "sources": [
+          {
+            "label": "Observador · Sindicato dos Técnicos de Migração alerta Belém para discurso de ódio contra imigrantes e pede reforço da AIMA nos consulados",
+            "url": "https://observador.pt/2026/07/20/sindicato-dos-tecnicos-de-migracao-alerta-belem-para-discurso-de-odio-contra-imigrantes-e-pede-reforco-da-aima-nos-consulados/"
+          },
+          {
+            "label": "AIMA · Agência para a Integração, Migrações e Asilo",
+            "url": "https://aima.gov.pt/pt/noticias"
+          },
+          {
+            "label": "Vistos · Portal oficial do Ministério dos Negócios Estrangeiros",
+            "url": "https://vistos.mne.gov.pt/pt/"
+          }
+        ]
+      },
       {
       publishedAt: "2026-07-17",
       title: "Faro recebe a 44.ª Concentração Internacional de Motos até domingo",
@@ -1593,6 +2868,40 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
     }],
     countryTab: [
       {
+        "publishedAt": "2026-07-20",
+        "headline": "Bruxelas notifica Portugal por atraso na diretiva que reduz para 90 dias a decisão da autorização única de residência e trabalho",
+        "standfirst": "No pacote de infrações de julho, divulgado em 15 de julho, a Comissão Europeia enviou notificação formal a Portugal e a mais 16 Estados-membros por não terem transposto a diretiva da autorização única, cujo prazo terminou em 21 de maio. Um segundo processo trata das condições de acolhimento. Portugal tem dois meses para responder.",
+        "body": "A Comissão Europeia abriu dois processos de infração contra Portugal por causa de regras europeias ligadas à migração. A decisão consta do pacote de infrações de julho de 2026, identificado como INF/26/1376 e divulgado em 15 de julho pelo executivo comunitário. Portugal é atingido em duas frentes distintas, uma sobre residência e trabalho, outra sobre acolhimento de requerentes de proteção internacional.\n\nO processo com efeito mais direto sobre quem pretende trabalhar em Portugal diz respeito à Diretiva (UE) 2024/1233, conhecida como diretiva da autorização única. O país está entre os 17 Estados-membros que receberam notificação formal por não terem comunicado a transposição completa do texto para a legislação nacional. O prazo terminou em 21 de maio de 2026. Também constam da lista Bélgica, Bulgária, Alemanha, França, Chipre, Letónia, Lituânia, Luxemburgo, Hungria, Malta, Países Baixos, Áustria, Polónia, Eslovénia, Finlândia e Suécia.\n\nA diretiva reorganiza o procedimento pelo qual um cidadão de fora da União Europeia obtém, num único pedido, o direito de residir e de trabalhar num Estado-membro. A decisão passa a ter de ser tomada em 90 dias contados da apresentação de um pedido completo, em vez dos quatro meses previstos na diretiva de 2011, prazo que pode ser prolongado por mais 30 dias em circunstâncias excecionais e devidamente justificadas pela complexidade do pedido. O pedido passa também a poder ser apresentado a partir de um país terceiro ou já de dentro da União, no caso de quem tem autorização de residência válida.\n\nO ponto mais sensível para quem já está a trabalhar é a mudança de empregador. A diretiva obriga os Estados-membros a permitir que o titular da autorização única mude de empregador, mas admite condições nacionais: notificação às autoridades competentes, verificação da situação do mercado de trabalho, nos países que já a fazem no pedido inicial, e a exigência de um período mínimo junto do primeiro empregador, que não pode ultrapassar seis meses. Em casos devidamente justificados de infração grave por parte do empregador, a mudança pode ocorrer antes desse período.\n\nEm caso de desemprego, o titular pode permanecer no país três meses durante o período de validade da autorização, prazo que sobe para seis meses no caso de quem é titular da autorização única há mais de dois anos. Terminado esse período, os Estados-membros podem exigir prova de meios de subsistência suficientes.\n\nA diretiva também reforça a proteção contra a exploração laboral, ao exigir dos Estados-membros mecanismos de monitorização, inspeções, canais de reclamação, vias de recurso judicial e sanções aplicáveis a empregadores que desrespeitem as regras.\n\nO segundo processo tem por objeto a Diretiva (UE) 2024/1346, relativa às condições de acolhimento, cujo prazo de transposição terminou em 12 de junho de 2026. Nesse caso, Portugal aparece entre 16 Estados-membros notificados. O texto define padrões de condições de vida para requerentes de proteção internacional e procura reduzir as disparidades entre os sistemas nacionais.\n\nÉ importante situar em que fase o processo está. A notificação formal é a primeira etapa do procedimento de infração, e não uma condenação. Portugal tem agora dois meses para responder à Comissão e comunicar as medidas de transposição. Se a resposta não for considerada satisfatória, o passo seguinte é o parecer fundamentado, e só depois o caso pode seguir para o Tribunal de Justiça da União Europeia.\n\nPara quem planeia trabalhar em Portugal, o ponto de atenção é que os direitos previstos na diretiva não passam a valer automaticamente pelo simples facto de o prazo europeu ter expirado. Enquanto a transposição não for concluída e publicada, o procedimento continua a correr pelas regras nacionais em vigor. Quem tem processo em curso ou pretende iniciar um pedido deve confirmar as regras aplicáveis ao seu caso junto da AIMA e dos canais oficiais, e considerar o apoio de profissional habilitado, já que o quadro legal está em transição. Este conteúdo é informativo e não substitui aconselhamento jurídico individual.",
+        "keyFacts": [
+          "A Comissão Europeia divulgou em 15 de julho de 2026 o pacote de infrações de julho (INF/26/1376), que inclui dois processos contra Portugal em matéria de migração.",
+          "Diretiva (UE) 2024/1233, da autorização única: o prazo de transposição terminou em 21 de maio de 2026 e Portugal está entre 17 Estados-membros notificados.",
+          "A diretiva fixa em 90 dias, contados da apresentação de um pedido completo, o prazo de decisão sobre a autorização única, contra os quatro meses da diretiva de 2011. O prazo pode ser prolongado por mais 30 dias em casos excecionais justificados pela complexidade.",
+          "Obriga os Estados-membros a permitir a mudança de empregador, mas admite condições: notificação às autoridades, verificação do mercado de trabalho e período mínimo com o primeiro empregador até seis meses.",
+          "Em caso de desemprego, prevê três meses de permanência para procurar novo trabalho, prazo que sobe para seis meses para quem é titular da autorização única há mais de dois anos.",
+          "Diretiva (UE) 2024/1346, das condições de acolhimento: prazo terminou em 12 de junho de 2026, com Portugal entre 16 Estados-membros notificados.",
+          "Portugal tem dois meses para responder. A notificação formal é a primeira fase do processo, não uma condenação.",
+          "Enquanto a transposição não for publicada, continuam a valer as regras nacionais atualmente em vigor."
+        ],
+        "sources": [
+          {
+            "label": "Comissão Europeia · July infringements package: key decisions (INF/26/1376)",
+            "url": "https://ec.europa.eu/commission/presscorner/detail/en/inf_26_1376"
+          },
+          {
+            "label": "EUR-Lex · Diretiva (UE) 2024/1233 (autorização única)",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401233"
+          },
+          {
+            "label": "Observador · Bruxelas processa Portugal por falhas em regras sobre migrantes",
+            "url": "https://observador.pt/2026/07/15/bruxelas-processa-portugal-por-falhas-em-regras-sobre-migrantes/"
+          },
+          {
+            "label": "The Portugal News · European Union sues Portugal, this time because of immigration rules",
+            "url": "https://www.theportugalnews.com/news/2026-07-15/european-union-sues-portugal-this-time-because-of-immigration-rules/1055607"
+          }
+        ]
+      },
+      {
       publishedAt: "2026-07-17",
       headline: "Portugal simplifica a atribuição do número da Segurança Social para imigrantes",
       standfirst: "A partir de julho de 2026, o NISS passa a ser emitido automaticamente e em tempo real a quem procura a AIMA para regularização, eliminando a necessidade de um segundo atendimento presencial na Segurança Social.",
@@ -1625,5 +2934,113 @@ export const RONDA_PIECES: Record<string, RondaPiece> = {
         { label: "DN Brasil (imprensa, referente à comunicação da AIMA)", url: "https://dnbrasil.dn.pt/aima-convoca-inscritos-no-regime-de-transio-do-reagrupamento-familiar" },
       ],
     }],
+  },
+  nz: {
+    community: [
+      {
+        "publishedAt": "2026-07-20",
+        "title": "Nova Zelândia flexibiliza o Pathway Student Visa e amplia o curso de inglês para 30 semanas",
+        "body": "Entram em vigor nesta segunda-feira, 20 de julho de 2026, as mudanças no Pathway Student Visa, o visto de estudante neozelandês que cobre uma sequência de até três programas num único pedido, por até cinco anos. Segundo o comunicado oficial da Immigration New Zealand, parte dos estudantes que obtêm o visto pela primeira vez e vão avançar para os níveis 1 a 8 do New Zealand Qualifications and Credentials Framework passa a poder dedicar até 30 semanas ao estudo de língua inglesa antes da qualificação seguinte, contra o limite anterior de 20 semanas.\n\nA segunda alteração tem alcance mais estreito do que parece à primeira vista, e vale entender o recorte antes de fazer plano em cima dela. Ela atinge os estudantes de escola que vão migrar para o ensino superior. Para esse grupo, as condições do visto deixam de listar a área de estudo terciária e passam a registrar apenas o tipo de qualificação e a instituição, no formato \"Bachelor's degree at University of Auckland\". Na prática, quem está nessa situação pode trocar de área sem pedir um visto novo, desde que permaneça no mesmo tipo de qualificação e na mesma instituição. O visto também passa a cobrir trajetórias que levam aos níveis 1 a 4 da estrutura nacional de qualificações ou que transitam entre eles, faixa que inclui cursos de inglês, programas preparatórios e certificados vocacionais.\n\nEste conteúdo tem caráter informativo e não substitui a orientação de um profissional habilitado em imigração.",
+        "cta": "Vai estudar na Nova Zelândia ou já está lá com um Pathway Student Visa? Confira o texto exato das condições registradas no seu visto no site oficial da Immigration New Zealand antes de fechar qualquer matrícula, porque o que vale para cada pessoa depende do estágio do percurso de estudo.",
+        "sources": [
+          {
+            "label": "Immigration New Zealand · Improvements to the Pathway Student Visa to better support international students",
+            "url": "https://www.immigration.govt.nz/about-us/news-centre/improvements-to-the-pathway-student-visa/"
+          },
+          {
+            "label": "Immigration New Zealand · Pathway Student Visa information",
+            "url": "https://www.immigration.govt.nz/study/study-visas/pathway-student-visa-information/"
+          }
+        ]
+      },
+      {
+        "publishedAt": "2026-07-20",
+        "title": "A flexibilidade nova do visto de estudante neozelandês tem uma letra miúda: a lista de instituições está fechada",
+        "body": "As mudanças no Pathway Student Visa que passaram a valer em 20 de julho de 2026 ampliam a liberdade de quem já está dentro do programa, mas não ampliam a porta de entrada. A Immigration New Zealand informa no próprio site que não está aceitando novos provedores de ensino neste momento, e que não há data definida para a revisão do piloto ou para a inclusão de novas instituições. O visto só funciona com uma oferta de estudo emitida por uma instituição já credenciada, e a lista atual reúne 9 universidades, 6 politécnicos, 40 private training establishments e 118 escolas.\n\nVale marcar outro detalhe. A troca de área de estudo passou a ser possível sem novo pedido de visto para os estudantes de escola que migram para o ensino superior, mas ela vale dentro de um limite: o estudante precisa permanecer no mesmo tipo de qualificação e na mesma instituição, porque é isso que as condições do visto passam a registrar. O visto tem custo a partir de NZD 750, exige comprovação de recursos de NZD 20 mil para custos de vida a cada ano de estudo terciário, além de seguro médico e de viagem, e permite trabalhar até 25 horas semanais durante o período letivo. Nada disso garante aprovação, que segue sujeita aos requisitos de saúde, idoneidade e intenção genuína de estudo.\n\nEste conteúdo tem caráter informativo e não substitui a orientação de um profissional habilitado em imigração.",
+        "cta": "Antes de escolher o curso, confirme na Immigration New Zealand se a instituição está entre as credenciadas do programa, porque uma oferta fora dessa lista não sustenta o pedido.",
+        "sources": [
+          {
+            "label": "Immigration New Zealand · Pathway Student Visa information",
+            "url": "https://www.immigration.govt.nz/study/study-visas/pathway-student-visa-information/"
+          },
+          {
+            "label": "Immigration New Zealand · Pathway Student Visa (requisitos e custos)",
+            "url": "https://www.immigration.govt.nz/visas/pathway-student-visa/"
+          }
+        ]
+      },
+    ],
+    countryTab: [
+      {
+        "publishedAt": "2026-07-20",
+        "headline": "Nova Zelândia tira a área de estudo das condições do visto de estudante e amplia o curso de inglês para 30 semanas",
+        "standfirst": "Em vigor desde esta segunda-feira, a revisão do Pathway Student Visa retira a disciplina das condições do visto para quem sai da escola rumo ao ensino superior, estende o curso de inglês de 20 para 30 semanas e abre a trajetória para os níveis 1 a 4 da estrutura nacional de qualificações.",
+        "body": "A Immigration New Zealand colocou em vigor em 20 de julho de 2026 um conjunto de mudanças no Pathway Student Visa, o visto que permite ao estudante internacional cursar até três programas em sequência, por até cinco anos, sem precisar protocolar um pedido novo a cada etapa. O anúncio foi publicado no mesmo dia no centro de notícias do órgão, sob o título Improvements to the Pathway Student Visa to better support international students.\n\nA alteração de maior alcance prático está na forma como as condições do visto passam a ser escritas, e o recorte dela importa mais do que a manchete sugere. Ela vale para os estudantes de escola que pretendem migrar para o ensino superior. Até agora, o documento desse grupo registrava a qualificação e a área de estudo terciária, algo como \"Bachelor of Science at University of Auckland\", o que prendia o estudante àquela disciplina específica. A partir de agora, a condição menciona apenas o tipo de qualificação e a instituição, no formato \"Bachelor's degree at University of Auckland\".\n\nO efeito é direto: quem está nessa transição pode mudar de área depois de iniciar o curso sem precisar de um novo pedido de visto de estudante, desde que permaneça no mesmo tipo de qualificação e na mesma instituição de ensino. Esses alunos continuam obrigados a indicar área, nível e instituição no momento do pedido, mas o que fica gravado no visto é apenas a qualificação terciária e o provedor de ensino, o que reduz o atrito de quem muda de ideia entre a escola e a universidade. Quem já está matriculado no ensino superior não está no alcance dessa alteração específica e deve conferir as próprias condições.\n\nO segundo ponto trata do estudo de língua inglesa. Parte dos estudantes que obtêm o Pathway Student Visa pela primeira vez e vão avançar para qualificações entre os níveis 1 e 8 do New Zealand Qualifications and Credentials Framework, a estrutura nacional de qualificações do país, passa a poder dedicar até 30 semanas ao inglês antes de começar a etapa seguinte, contra o limite anterior de 20 semanas. O visto também passou a cobrir trajetórias que levam aos níveis 1 a 4 ou que transitam entre eles, faixa que abrange cursos de idioma, programas preparatórios e certificados vocacionais.\n\nO que não mudou merece atenção igual. O visto segue restrito a quem tem oferta de estudo de instituições já credenciadas no programa, e a Immigration New Zealand declara no próprio site que não está aceitando novos provedores de ensino, sem data definida para revisar o piloto. Permanecem valendo as exigências de saúde, idoneidade, comprovação de recursos e demonstração de intenção genuína de estudo, e o cumprimento desses requisitos não garante a concessão do visto.\n\nPara quem planeja estudar na Nova Zelândia, a leitura razoável é que o país reduziu o custo burocrático de mudar de rumo justamente no ponto em que a escolha é mais frágil, a passagem da escola para a universidade, quando se decide a área aos 17 ou 18 anos. Quem já está no país com esse visto deve conferir o texto exato das próprias condições, porque as regras aplicáveis dependem da data de concessão e do estágio do percurso de estudo. Este conteúdo tem caráter informativo e não substitui a orientação de um profissional habilitado em imigração.",
+        "keyFacts": [
+          "As mudanças no Pathway Student Visa entraram em vigor em 20 de julho de 2026, conforme comunicado da Immigration New Zealand publicado na mesma data.",
+          "Para estudantes de escola que migram para o ensino superior, as condições do visto passam a citar apenas o tipo de qualificação e a instituição, permitindo troca de área sem novo pedido de visto desde que mantidos o mesmo tipo de qualificação e a mesma instituição.",
+          "O limite de estudo de língua inglesa subiu de 20 para 30 semanas para parte dos estudantes que obtêm o visto pela primeira vez e avançam para os níveis 1 a 8 do NZQCF.",
+          "O visto passa a cobrir trajetórias que levam aos níveis 1 a 4 do NZQCF ou que transitam entre eles, incluindo cursos de idioma, programas preparatórios e certificados vocacionais.",
+          "O programa segue restrito a instituições já credenciadas, hoje 9 universidades, 6 politécnicos, 40 private training establishments e 118 escolas, e a Immigration New Zealand informa que não está aceitando novos provedores de ensino."
+        ],
+        "sources": [
+          {
+            "label": "Immigration New Zealand · Improvements to the Pathway Student Visa to better support international students",
+            "url": "https://www.immigration.govt.nz/about-us/news-centre/improvements-to-the-pathway-student-visa/"
+          },
+          {
+            "label": "Immigration New Zealand · Pathway Student Visa information",
+            "url": "https://www.immigration.govt.nz/study/study-visas/pathway-student-visa-information/"
+          },
+          {
+            "label": "Immigration New Zealand · Pathway Student Visa (requisitos e custos)",
+            "url": "https://www.immigration.govt.nz/visas/pathway-student-visa/"
+          }
+        ]
+      },
+    ],
+    blog: [
+      {
+        "publishedAt": "2026-07-20",
+        "headline": "A Nova Zelândia está montando um funil que começa no curso de inglês e aponta para a residência",
+        "standfirst": "A flexibilização do visto de estudante que entrou em vigor nesta segunda-feira não é um ajuste isolado. Somada às novas rotas de residência que começam a valer em 24 de agosto e à meta oficial de dobrar a receita da educação internacional até 2034, ela revela um projeto de país com etapas encadeadas.",
+        "body": "Vista sozinha, a mudança que a Immigration New Zealand colocou em vigor em 20 de julho de 2026 parece pequena. As condições do Pathway Student Visa deixam de registrar a área de estudo para os alunos que saem da escola rumo ao ensino superior, o limite de curso de inglês sobe de 20 para 30 semanas, e o visto passa a cobrir trajetórias entre os níveis 1 e 4 da estrutura nacional de qualificações. É um ajuste técnico, do tipo que costuma render meia dúzia de linhas no comunicado oficial.\n\nO significado aparece quando se olha o que veio antes e o que vem depois. Em 14 de julho de 2025, a ministra da Educação, Erica Stanford, anunciou pelo canal oficial do governo neozelandês um plano para dobrar a contribuição econômica da educação internacional, de 3,6 bilhões de dólares neozelandeses registrados em 2024 para 7,2 bilhões até 2034. O mesmo documento fixou metas de matrícula: sair de 83.400 estudantes internacionais em 2024 para 105 mil até 2027 e 119 mil até 2034. Não é uma aspiração vaga, é um número com prazo.\n\nA primeira peça desse encadeamento foi a jornada de trabalho. Em 3 de novembro de 2025, o limite de trabalho durante o período letivo subiu de 20 para 25 horas semanais para estudantes elegíveis do ensino médio e do ensino superior, e o direito foi estendido a todos os estudantes de programas de intercâmbio e Study Abroad, inclusive os de um único semestre. É a diferença entre um plano de estudo que se sustenta financeiramente e outro que não se sustenta.\n\nA peça seguinte é a que ainda não chegou. Em 24 de agosto de 2026 entram em vigor as mudanças na Skilled Migrant Category Resident Visa, a principal via de residência por qualificação profissional do país. O pacote cria duas rotas novas. A Skilled Work Experience Pathway é voltada a quem tem cinco anos ou mais de experiência diretamente relevante em ocupações de nível ANZSCO 1 a 3, incluindo dois anos na Nova Zelândia com remuneração de pelo menos 1,1 vez o salário mediano. A Trades and Technician Pathway foi desenhada para ofícios técnicos, com qualificação de nível 4 ou superior e quatro anos de experiência posterior à formação, sendo 18 meses no país com remuneração igual ou acima do salário mediano. O tempo de experiência local exigido na maioria dos casos caiu de no máximo três anos para no máximo dois.\n\nDentro desse mesmo pacote está o elo que fecha o circuito, e ele não depende de interpretação. Os pontos por bacharelado sobem de 3 para 4, o mesmo valendo para qualificações reconhecidas pelos acordos de Washington e Sydney. A Immigration New Zealand escreve que o aumento de pontos para qualificações neozelandesas de nível universitário torna mais fácil a transição de graduados para a residência, e que isso apoia o plano de crescimento da educação internacional ao reconhecer o valor das qualificações locais e incentivar estudantes internacionais a estudar no país. Ou seja, o governo declara o encadeamento em texto próprio.\n\nO desenho, portanto, tem uma lógica: entrar com um visto de estudante que tolera mudança de rumo na virada da escola para a universidade, financiar parte da estadia com 25 horas semanais de trabalho, concluir uma qualificação local que agora pontua mais, e desembocar numa rota de residência que exige menos tempo de experiência neozelandesa do que exigia. Cada etapa foi mexida separadamente, mas elas se encaixam.\n\nHá contrapesos que quem planeja a mudança precisa colocar na balança. O Pathway Student Visa continua restrito a instituições já credenciadas no programa, e a Immigration New Zealand informa que não aceita novos provedores de ensino no momento, sem data para rever isso, o que limita a escolha de escola e de curso. A troca de área, embora agora dispense novo visto para o grupo alcançado, só vale se o estudante permanecer no mesmo tipo de qualificação e na mesma instituição. E as novas rotas de residência trazem exigências duras de comprovação, entre elas a exclusão do trabalho por conta própria como prova de experiência diretamente relevante.\n\nNada disso configura garantia de residência, e a mudança de regras é uma constante nesse tipo de política. O que dá para afirmar com base nos documentos oficiais é que a Nova Zelândia parou de tratar estudante internacional como visitante de passagem e passou a tratá-lo como candidato potencial a residente, com incentivos alinhados em cada estágio. Para quem está decidindo entre destinos, essa coerência entre as etapas talvez pese mais do que qualquer um dos ajustes isolados. Este conteúdo tem finalidade informativa e não substitui a análise de um profissional habilitado em imigração.",
+        "tags": [
+          "Nova Zelândia",
+          "Pathway Student Visa",
+          "Immigration New Zealand",
+          "estudante internacional",
+          "Skilled Migrant Category",
+          "residência",
+          "NZQCF"
+        ],
+        "sources": [
+          {
+            "label": "Immigration New Zealand · Improvements to the Pathway Student Visa to better support international students",
+            "url": "https://www.immigration.govt.nz/about-us/news-centre/improvements-to-the-pathway-student-visa/"
+          },
+          {
+            "label": "Immigration New Zealand · Final details about changes to the Skilled Migrant Category Resident Visa and work to residence visas",
+            "url": "https://www.immigration.govt.nz/about-us/news-centre/final-details-about-changes-to-the-skilled-migrant-category-resident-visa-and-work-to-residence-visa/"
+          },
+          {
+            "label": "Immigration New Zealand · Changes to the Skilled Migrant Category Resident Visa announced",
+            "url": "https://www.immigration.govt.nz/about-us/news-centre/changes-to-the-skilled-migrant-category-resident-visa-announced/"
+          },
+          {
+            "label": "Immigration New Zealand · Upcoming changes to student visa work rights",
+            "url": "https://www.immigration.govt.nz/about-us/news-centre/upcoming-changes-to-student-visa-work-rights/"
+          },
+          {
+            "label": "Beehive.govt.nz · Making NZ top destination for international students (Hon Erica Stanford)",
+            "url": "https://www.beehive.govt.nz/release/making-nz-top-destination-international-students"
+          },
+          {
+            "label": "Immigration New Zealand · Pathway Student Visa information",
+            "url": "https://www.immigration.govt.nz/study/study-visas/pathway-student-visa-information/"
+          }
+        ]
+      },
+    ],
   },
 };

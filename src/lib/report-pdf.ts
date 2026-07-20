@@ -24,12 +24,17 @@ import {
   type ReportImage,
   readPublicImage,
   provenance,
+  fmtPieceDate,
+  isFreshPiece,
+  freshCutoffISO,
+  FRESH_WINDOW_DAYS,
 } from "@/lib/report-data";
 import {
   DESTINATIONS,
   buildPostables,
   consolidatedSources,
   totalPostables,
+  countFreshPostables,
   type PostablePiece,
   type DestinationMeta,
   type EditorialSource,
@@ -43,6 +48,9 @@ const BLUE_LIGHT = rgb(0.227, 0.42, 1.0);
 const DARK = rgb(0.1, 0.1, 0.18);
 const GREY = rgb(0.42, 0.45, 0.5);
 const RULE = rgb(0.82, 0.84, 0.9);
+/** Vermelho do selo NOVO. No PDF o emoji não sobrevive ao pdfSafe(), então o
+ *  selo é texto "[ NOVO ]" e é a COR que o faz saltar aos olhos. */
+const NEW_RED = rgb(0.851, 0.176, 0.125);
 
 function hexRgb(hex: string): RGB {
   const n = parseInt(hex, 16);
@@ -64,7 +72,7 @@ function pdfSafe(s: string): string {
     .trim();
 }
 
-type TextOpts = { size?: number; color?: RGB; oblique?: boolean; indent?: number; gapAfter?: number };
+type TextOpts = { size?: number; color?: RGB; oblique?: boolean; indent?: number; gapAfter?: number; spaceBefore?: number };
 type HeadingOpts = { size?: number; color?: RGB; spaceBefore?: number; gapAfter?: number };
 
 class PdfBuilder {
@@ -130,6 +138,7 @@ class PdfBuilder {
     const font = o.oblique ? this.obl : this.reg;
     const color = o.color ?? DARK;
     const indent = o.indent ?? 0;
+    if (o.spaceBefore) this.y -= o.spaceBefore;
     const lineGap = size * 1.38;
     const lines = this.wrap(pdfSafe(raw), font, size, this.maxW - indent);
     for (const ln of lines) {
@@ -234,10 +243,16 @@ function sourcesPdf(b: PdfBuilder, sources: EditorialSource[] | undefined, prefi
 }
 
 /** Uma peça pronta pra postar (título grande colorido + etiqueta + corpo + fontes). */
-function piecePdf(b: PdfBuilder, p: PostablePiece, dest: DestinationMeta) {
+function piecePdf(b: PdfBuilder, p: PostablePiece, dest: DestinationMeta, cutoffISO: string) {
   const color = hexRgb(dest.colorHex);
-  b.heading(`${p.countryName} - ${p.title}`, { size: 14, color, spaceBefore: 10, gapAfter: 2 });
-  b.text(`[ ${dest.tag} ]`, { size: 9, color, gapAfter: 2 });
+  const when = fmtPieceDate(p.publishedAt);
+  // O selo vai numa linha própria logo acima do título: herda o respiro que era
+  // do heading, pra não ficar solto entre as peças.
+  const fresh = isFreshPiece(p.publishedAt, cutoffISO);
+  if (fresh) b.text("[ NOVO ]", { size: 9.5, color: NEW_RED, spaceBefore: 10, gapAfter: 0 });
+  b.heading(`${p.countryName} - ${p.title}`, { size: 14, color, spaceBefore: fresh ? 0 : 10, gapAfter: 2 });
+  // Peça legada sem publishedAt sai só com a etiqueta do destino.
+  b.text(`[ ${dest.tag} ]${when ? `  ·  ${when}` : ""}`, { size: 9, color, gapAfter: 2 });
   if (p.standfirst) b.text(p.standfirst, { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
   bodyPdf(b, p.body);
   if (p.keyFacts?.length) {
@@ -391,6 +406,8 @@ export async function renderPdf(data: ReportData): Promise<Uint8Array> {
   await b.init();
   const postables = buildPostables(countries);
   const postCount = totalPostables(countries);
+  const cutoffISO = freshCutoffISO(data.generatedAt);
+  const freshCount = countFreshPostables(countries, cutoffISO);
   const sourcesByCountry = consolidatedSources(countries);
 
   // Cabeçalho
@@ -403,6 +420,7 @@ export async function renderPdf(data: ReportData): Promise<Uint8Array> {
   b.heading("Sumário executivo", { size: 15, color: BLUE, spaceBefore: 4 });
   const sm: Array<[string, string]> = [
     ["Peças prontas pra postar", String(postCount)],
+    [`Peças novas (últimos ${FRESH_WINDOW_DAYS} dias)`, String(freshCount)],
     ["Países com conteúdo editorial", String(stats.editorialCountries)],
     ["Países monitorados", String(stats.totalCountries)],
     ["Boletins oficiais via cron", String(stats.totalBulletins)],
@@ -439,7 +457,7 @@ export async function renderPdf(data: ReportData): Promise<Uint8Array> {
       b.text("Nada nesta seção ainda.", { size: 9.5, color: GREY, oblique: true, gapAfter: 2 });
       continue;
     }
-    for (const p of pieces) piecePdf(b, p, dest);
+    for (const p of pieces) piecePdf(b, p, dest, cutoffISO);
   }
   b.rule();
 

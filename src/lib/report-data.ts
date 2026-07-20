@@ -384,6 +384,50 @@ export function fmtDate(iso: string | null | undefined, opts: { full?: boolean }
   return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
 }
 
+// ── Carimbo de data + selo NOVO das peças editoriais ─────────────────────
+// A peça editorial carrega publishedAt (YYYY-MM-DD). Os três renderizadores
+// mostram esse carimbo junto ao título e marcam como NOVA toda peça dentro da
+// janela abaixo, SEMPRE contada a partir da data de geração do relatório
+// (nunca uma data fixa no código).
+
+/** Janela, em dias corridos, que define uma peça editorial como NOVA. */
+export const FRESH_WINDOW_DAYS = 3;
+
+/** Dia do relatório em ISO (YYYY-MM-DD), no fuso de Brasília (o do documento). */
+export function reportDayISO(when: Date = new Date()): string {
+  return when.toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" });
+}
+
+/**
+ * Data de corte do selo NOVO: peça com publishedAt >= este dia é nova.
+ * Derivada da data de geração recebida, então o relatório de amanhã já usa
+ * outra janela sozinho.
+ */
+export function freshCutoffISO(when: Date = new Date(), days = FRESH_WINDOW_DAYS): string {
+  const [y, m, d] = reportDayISO(when).split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d - days)).toISOString().slice(0, 10);
+}
+
+/**
+ * Formata o publishedAt de uma peça em PT-BR (ex.: "17/07/2026") sem escorregar
+ * de fuso (new Date("2026-07-17") é meia-noite UTC e viraria 16/07 no Brasil).
+ * Peça legada sem data devolve "" pro renderizador simplesmente omitir o
+ * carimbo, nunca quebrar.
+ */
+export function fmtPieceDate(iso: string | null | undefined): string {
+  if (!iso) return "";
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso.trim());
+  if (m) return `${m[3]}/${m[2]}/${m[1]}`;
+  const fallback = fmtDate(iso);
+  return fallback === "—" ? "" : fallback;
+}
+
+/** Peça é NOVA? Compara ISO com ISO (ordem lexicográfica = ordem cronológica). */
+export function isFreshPiece(publishedAt: string | null | undefined, cutoffISO: string): boolean {
+  if (!publishedAt) return false;
+  return publishedAt.slice(0, 10) >= cutoffISO;
+}
+
 export function relativeAge(iso: string | null | undefined): string {
   if (!iso) return "—";
   const ms = Date.now() - new Date(iso).getTime();

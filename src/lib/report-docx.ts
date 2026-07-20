@@ -40,12 +40,17 @@ import {
   fitDims,
   siteLabel,
   isOfficialUrl,
+  fmtPieceDate,
+  isFreshPiece,
+  freshCutoffISO,
+  FRESH_WINDOW_DAYS,
 } from "@/lib/report-data";
 import {
   DESTINATIONS,
   buildPostables,
   consolidatedSources,
   totalPostables,
+  countFreshPostables,
   type PostablePiece,
   type DestinationMeta,
   type EditorialSource,
@@ -56,6 +61,8 @@ const BLUE_LIGHT = "3A6BFF";
 const GREY = "6B7280";
 const DARK = "1A1A2E";
 const HEADER_BG = "EEF2FF";
+/** Vermelho do selo NOVO (peça dentro da janela de recência). */
+const NEW_RED = "D92D20";
 
 function link(label: string, url: string): ExternalHyperlink {
   return new ExternalHyperlink({
@@ -133,20 +140,28 @@ function destSectionTitle(text: string, colorHex: string): Paragraph {
   });
 }
 
-/** Título grande e colorido de uma peça pronta pra postar. */
-function pieceTitle(text: string, colorHex: string): Paragraph {
+/** Título grande e colorido de uma peça pronta pra postar. Peça dentro da
+ *  janela de recência ganha o selo NOVO em vermelho, antes do título. */
+function pieceTitle(text: string, colorHex: string, fresh = false): Paragraph {
   return new Paragraph({
     heading: HeadingLevel.HEADING_3,
     spacing: { before: 220, after: 30 },
-    children: [new TextRun({ text, bold: true, color: colorHex, size: 30 })],
+    children: [
+      ...(fresh ? [new TextRun({ text: "NOVO · ", bold: true, color: NEW_RED, size: 30 })] : []),
+      new TextRun({ text, bold: true, color: colorHex, size: 30 }),
+    ],
   });
 }
 
-/** Etiqueta colorida ([COMUNIDADE], [ABA DO PAÍS], [BLOG]). */
-function tagChip(tag: string, colorHex: string): Paragraph {
+/** Etiqueta colorida ([COMUNIDADE], [ABA DO PAÍS], [BLOG]) + carimbo de data
+ *  da peça. Peça legada sem data sai só com a etiqueta. */
+function tagChip(tag: string, colorHex: string, when = ""): Paragraph {
   return new Paragraph({
     spacing: { after: 60 },
-    children: [new TextRun({ text: `[ ${tag} ]`, bold: true, color: colorHex, size: 18 })],
+    children: [
+      new TextRun({ text: `[ ${tag} ]`, bold: true, color: colorHex, size: 18 }),
+      ...(when ? [new TextRun({ text: `  ·  ${when}`, color: GREY, size: 18 })] : []),
+    ],
   });
 }
 
@@ -185,10 +200,11 @@ function sourcesLine(sources: EditorialSource[] | undefined, prefix: string): Pa
 }
 
 /** Uma peça pronta pra postar (título grande colorido + etiqueta + corpo + fontes). */
-function pieceDocx(p: PostablePiece, dest: DestinationMeta): Paragraph[] {
+function pieceDocx(p: PostablePiece, dest: DestinationMeta, cutoffISO: string): Paragraph[] {
   const out: Paragraph[] = [];
-  out.push(pieceTitle(`${flagEmoji(p.countryCode)} ${p.countryName} · ${p.title}`, dest.colorHex));
-  out.push(tagChip(dest.tag, dest.colorHex));
+  const fresh = isFreshPiece(p.publishedAt, cutoffISO);
+  out.push(pieceTitle(`${flagEmoji(p.countryCode)} ${p.countryName} · ${p.title}`, dest.colorHex, fresh));
+  out.push(tagChip(dest.tag, dest.colorHex, fmtPieceDate(p.publishedAt)));
   if (p.standfirst) {
     out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: p.standfirst, italics: true, color: DARK })] }));
   }
@@ -208,10 +224,11 @@ function pieceDocx(p: PostablePiece, dest: DestinationMeta): Paragraph[] {
   return out;
 }
 
-function summaryTable(data: ReportData, postCount: number): Table {
+function summaryTable(data: ReportData, postCount: number, freshCount: number): Table {
   const { stats } = data;
   const rows: Array<[string, string]> = [
     ["📝 Peças prontas pra postar", String(postCount)],
+    [`🆕 Peças novas (últimos ${FRESH_WINDOW_DAYS} dias)`, String(freshCount)],
     ["✍️ Países com conteúdo editorial", String(stats.editorialCountries)],
     ["🌎 Países monitorados", String(stats.totalCountries)],
     ["📜 Boletins oficiais via cron", String(stats.totalBulletins)],
@@ -419,6 +436,8 @@ export async function renderDocx(data: ReportData): Promise<Buffer> {
   const children: (Paragraph | Table)[] = [];
   const postables = buildPostables(data.countries);
   const postCount = totalPostables(data.countries);
+  const cutoffISO = freshCutoffISO(data.generatedAt);
+  const freshCount = countFreshPostables(data.countries, cutoffISO);
   const sourcesByCountry = consolidatedSources(data.countries);
 
   // Capa
@@ -428,7 +447,7 @@ export async function renderDocx(data: ReportData): Promise<Buffer> {
 
   // Sumário
   children.push(h1("Sumário executivo"));
-  children.push(summaryTable(data, postCount));
+  children.push(summaryTable(data, postCount, freshCount));
 
   // Legenda
   const COLOR_NAME: Record<string, string> = { community: "Azul", countryTab: "Verde", blog: "Laranja" };
@@ -469,7 +488,7 @@ export async function renderDocx(data: ReportData): Promise<Buffer> {
       children.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: "Nada nesta seção ainda.", italics: true, color: GREY })] }));
       continue;
     }
-    for (const p of pieces) children.push(...pieceDocx(p, dest));
+    for (const p of pieces) children.push(...pieceDocx(p, dest, cutoffISO));
   }
 
   // ── PARTE 2 · FONTES E MATERIAIS ──
