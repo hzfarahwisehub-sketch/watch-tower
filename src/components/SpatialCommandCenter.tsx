@@ -85,6 +85,9 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
     cinematic: { globe: "night", map: "night", cls: "wb-atlas", marker: "holographic" },
     satellite: { globe: "satellite", map: "satellite", cls: "wb-satellite", marker: "satellite" },
     atlas: { globe: "google", map: "google", cls: "wb-satellite", marker: "satellite" },
+    // Mapa vivo: o preto CARTO que o Hammis curte. Entra na MESMA config dos outros
+    // (sem classe de tratamento visual) pra herdar geometria e comportamento iguais.
+    live: { globe: "dark", map: "dark", cls: "wb-live", marker: "default" },
   } as const;
   const geo = GEO_CFG[geoMode as keyof typeof GEO_CFG] ?? GEO_CFG.cinematic;
   const countryMatches = countryQuery.trim().length > 1 ? COUNTRIES.filter(item => item.name.toLocaleLowerCase("pt-BR").includes(countryQuery.toLocaleLowerCase("pt-BR"))).slice(0, 6) : [];
@@ -169,13 +172,13 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
             {countryMatches.length > 0 && countryQuery !== activeCountry?.name && <div className="wb-country-results">{countryMatches.map(item => <button type="button" key={item.code} onClick={() => { setSelectedCountry(item.code); setCountryQuery(item.name); }}><span>{item.code.toUpperCase()}</span>{item.name}<em>›</em></button>)}</div>}
           </div>
           <div className="wb-geo-mode" role="group" aria-label="Visualização geográfica"><button className={geoMode === "cinematic" ? "active" : ""} onClick={() => setGeoMode("cinematic")}>Cinemático</button><button className={geoMode === "satellite" ? "active" : ""} onClick={() => setGeoMode("satellite")}>Satélite</button><button className={geoMode === "live" ? "active" : ""} onClick={() => setGeoMode("live")}>Mapa vivo</button><button className={geoMode === "atlas" ? "active" : ""} onClick={() => setGeoMode("atlas")}>Atlas</button></div>
-          {geoMode !== "live" ? <>
-            <div className={`wb-cinematic-globe ${geo.cls} ${activeCountry ? "focused" : ""}`} style={focusStyle}><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} markerVariant={geo.marker} immersive projection="globe" stylePreset={geo.globe} spinPausesOnSelect hideChrome/><span className="wb-holo-scan" aria-hidden/><i/><i/></div>
-            <div className={`wb-cinematic-map ${geo.cls} ${activeCountry ? "focused" : ""}`} style={focusStyle}><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} markerVariant={geo.marker} immersive projection="mercator" stylePreset={geo.map} fitCountries hideChrome/><span className="wb-holo-depth" aria-hidden/><div className="wb-map-legend" aria-label="Legenda dos países"><span className="crit">CRÍTICO</span><span className="warn">ATENÇÃO</span><span className="stable">ESTÁVEL</span></div></div>
-          </> : <>
-            <div className="wb-live-globe"><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} immersive projection="globe" stylePreset="dark" spinPausesOnSelect /></div>
-            <div className="wb-live-map"><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} immersive projection="mercator" stylePreset="dark" /></div>
-          </>}
+          {/* UM caminho só pros QUATRO modos. O "Mapa vivo" tinha um ramo separado
+              (.wb-live-globe/.wb-live-map) que nem passava hideChrome/fitCountries/
+              markerVariant — por isso nascia com controles de zoom, enquadramento e
+              tamanho diferentes dos outros. Regra do Hammis (2026-07-20): "o layout
+              não muda nada, só o tipo do mapa e o tipo do globo". Agora é isso. */}
+          <div className={`wb-cinematic-globe ${geo.cls} ${activeCountry ? "focused" : ""}`} style={focusStyle}><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} markerVariant={geo.marker} immersive projection="globe" stylePreset={geo.globe} spinPausesOnSelect hideChrome/><span className="wb-holo-scan" aria-hidden/><i/><i/></div>
+          <div className={`wb-cinematic-map ${geo.cls} ${activeCountry ? "focused" : ""}`} style={focusStyle}><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} markerVariant={geo.marker} immersive projection="mercator" stylePreset={geo.map} fitCountries hideChrome/><span className="wb-holo-depth" aria-hidden/><div className="wb-map-legend" aria-label="Legenda dos países"><span className="crit">CRÍTICO</span><span className="warn">ATENÇÃO</span><span className="stable">ESTÁVEL</span></div></div>
           <button className="wb-meridian">{activeCountry?.name ?? "MERIDIAN"}</button>
           <div className="wb-stage-metrics">
             <span><b>{summary.critical}</b> críticos</span><span><b>{summary.warning}</b> atenção</span><span><b>{summary.events}</b> leituras</span>

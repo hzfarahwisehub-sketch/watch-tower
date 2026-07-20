@@ -80,3 +80,21 @@
   .wb-cinematic-map{height:46%;bottom:5%}
   .wb-map-legend{left:20px;bottom:14%}
 }
+
+/* ===== GEOMETRIA DO PALCO (desktop) — FONTE DA VERDADE, vale pros 4 modos =====
+   Queixa do Hammis (2026-07-20): o mapa estava COLADO no MERIDIAN, e o globo colado
+   nos painéis de cima (Cinemático/Satélite/... e Foco geográfico). Ele pediu: mapa um
+   pouco menor, e a MESMA folga entre mapa↔MERIDIAN e MERIDIAN↔globo, com o respiro
+   das laterais que ele já aprovou.
+   Ritmo (em % da altura do palco):
+     globo   12% → 39%   (topo 12% afasta dos painéis de cima; altura 27%)
+     MERIDIAN centrado em 47%  (≈44,6% a 49,4%)
+     mapa    55% → 95%   (altura 40%, 5% do fundo)
+   Folga de ~22px ACIMA e ABAIXO do MERIDIAN — igual dos dois lados, que foi o pedido.
+   !important porque brain-live-geo.css crava .wb-meridian{top:47%!important} e este
+   arquivo carrega depois dele (ver a ordem em globals.css). */
+@media(min-width:761px){
+  .wb-cinematic-globe{top:12%!important;bottom:auto!important;width:auto!important;height:min(27%,252px)!important;aspect-ratio:1}
+  .wb-cinematic-map{top:auto!important;bottom:5%!important;height:40%!important;left:5%!important;right:5%!important}
+  .wb-meridian{top:47%!important;bottom:auto!important;margin:0!important}
+}
