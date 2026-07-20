@@ -1,258 +1,315 @@
-// GERADO pela equipe de agentes (rodada semanal do Mercado de Trabalho) · ultima geracao 2026-07-13.
+// GERADO pela equipe de agentes (rodada semanal do Mercado de Trabalho) · ultima geracao 2026-07-20.
 // NAO editar a mao: regenerado a cada rodada de pesquisa (_gen-labor.mjs).
 import type { LaborMarketMap } from "./labor-market";
 
 export const LABOR_MARKET: LaborMarketMap = {
   "ca": {
-    "updatedAt": "2026-06-22",
-    "overview": "O mercado de trabalho canadense vive um momento de dois andares em 2026. De um lado, o pais ainda tinha centenas de milhares de vagas em aberto e enfrenta escassez cronica de mao de obra em saude, oficios qualificados (trades) e construcao, com a demanda por trabalhadores projetada para superar a oferta na proxima decada. De outro, a contratacao esfriou de forma generalizada: o numero de vagas caiu para 492.500 no terceiro trimestre de 2025 (menor patamar em anos), o desemprego subiu para cerca de 7,1% no segundo semestre de 2025, e o salario medio ofertado desacelerou para C$28,45/hora. O recado para o imigrante e claro: as portas estao escancaradas em saude, oficios, transporte e algumas areas de tecnologia de ponta, mas fechadas para vagas de entrada em escritorio (white-collar juniores) e para boa parte do setor de tech generalista.\n\nPara 2026 o Canada reorientou a propria imigracao economica em torno dessa realidade. O Express Entry passou a fazer sorteios por categoria de ocupacao (saude e servicos sociais, oficios, STEM, educacao, transporte, alem das novas categorias de medicos, pesquisadores e gestores senior com experiencia canadense) e o Programa de Indicacao Provincial (PNP) saltou 66%, de 55 mil para 91.500 vagas, dando as provincias muito mais poder de recrutar quem elas precisam. Quem tem profissao regulamentada em alta (enfermagem, medicina, eletricista, encanador) e disposicao de validar o diploma encontra o melhor terreno; quem busca emprego corporativo generico ou de tecnologia sem especializacao vai sentir o aperto.",
+    "updatedAt": "2026-07-20",
+    "overview": "O mercado de trabalho canadense chega ao meio de 2026 em ritmo de estabilização morna, sem euforia e sem colapso. Segundo a Pesquisa da Força de Trabalho da Statistics Canada referente a junho de 2026 (semana de referência de 14 a 20 de junho), a taxa de desemprego recuou 0,1 ponto percentual e fechou em 6,5%, com criação líquida modesta de 18 mil postos (+0,1%). A taxa de emprego subiu para 60,8% e a taxa de participação ficou estável em 65,0%. O salário médio por hora dos empregados avançou 3,3% em doze meses, chegando a 37,20 dólares canadenses.\n\nO detalhe mais relevante de junho está na composição do emprego. Os ganhos vieram dos jovens de 15 a 24 anos (+33 mil, com o desemprego juvenil caindo 0,7 ponto, para 12,7%) e da faixa central de 25 a 54 anos (+33 mil), enquanto o grupo de 55 anos ou mais perdeu 47 mil vagas. Por setor, alojamento e alimentação puxou a alta (+15 mil, +1,2%), ao passo que a indústria de transformação (-17 mil), a agricultura (-7,6 mil) e as utilidades públicas (-7,3 mil) recuaram. No recorte provincial, Quebec e Manitoba registraram os menores índices de desemprego (5,4% cada) e Terra Nova e Labrador (8,2%) e a Ilha do Príncipe Eduardo (7,6%) os maiores, o que importa muito para quem escolhe destino.\n\nDo lado da demanda por trabalhadores, houve um sinal de virada. A pesquisa de vagas em aberto da Statistics Canada mostrou que no primeiro trimestre de 2026 as vagas subiram 2,4%, para 506.700, primeira alta desde o segundo trimestre de 2022, com a taxa de vagas estável em 2,8% e salário médio ofertado de 29,55 dólares canadenses por hora. O crescimento veio de vendas e serviços (+8,4 mil, +5,8%), ofícios e transporte (+4,9 mil, +5,3%) e ciências naturais e aplicadas (+1,5 mil, +4,0%). Na contramão, as vagas em ocupações de saúde caíram 5,0% no trimestre e 16,0% em um ano, o menor patamar desde o primeiro trimestre de 2020, sinal de que a escassez estrutural de saúde convive agora com restrição orçamentária provincial na contratação.\n\nPara o estrangeiro, o ponto decisivo é que o Canadá mudou o eixo da política migratória. O Plano de Níveis de Imigração 2026-2028 estabiliza a admissão de residentes permanentes em 380 mil por ano, com a classe econômica em cerca de 63% em 2026 e 64% em 2027 e 2028, o maior percentual em mais de uma década. Ao mesmo tempo, o governo reduziu a entrada de trabalhadores temporários e endureceu o Programa de Trabalhador Estrangeiro Temporário. Na prática, o país continua aberto para quem tem qualificação alinhada às prioridades declaradas, e ficou visivelmente mais difícil para quem tenta entrar por vaga de baixa qualificação sem qualificação reconhecida.",
     "hotSectors": [
-      "Saude e servicos sociais (enfermeiros, medicos, cuidadores, terapeutas)",
-      "Oficios qualificados e construcao (eletricistas, encanadores, soldadores, gerentes de obra)",
-      "Transporte e logistica (caminhoneiros, operadores, coordenadores de supply chain)",
-      "Tecnologia de ponta especializada (IA, dados, engenharia de software senior via Global Talent Stream)",
-      "Educacao (professores, educacao infantil)",
-      "Energia limpa e mineracao (especialmente Alberta, Saskatchewan)",
-      "Agricultura e industrias sazonais (Atlantico, provincias do interior)"
+      "Ofícios especializados e construção, com alta de 5,3% nas vagas de ofícios, transporte e operação de equipamentos no primeiro trimestre de 2026",
+      "Vendas e serviços, que registrou a primeira expansão trimestral de vagas desde o fim de 2021",
+      "Alojamento e alimentação, principal gerador líquido de emprego em junho de 2026 (+15 mil postos)",
+      "Ciências naturais e aplicadas, incluindo tecnologia e engenharia, com alta de 4,0% nas vagas no primeiro trimestre",
+      "Transporte e logística, categoria reativada nas seleções por perfil da imigração econômica em 2026",
+      "Pesquisa científica e inovação acadêmica, agora com categoria própria na seleção do Express Entry"
     ],
     "coolingSectors": [
-      "Tecnologia generalista e startups (demissoes na Shopify, Hootsuite; politica AI-first reduzindo contratacao)",
-      "Empregos de entrada de escritorio / white-collar junior (recem-formados e primeiro emprego mais afetados)",
-      "Varejo (forte queda de vagas em 2025)",
-      "Manufatura, producao automotiva e processamento de aluminio (expostos a guerra comercial com os EUA)",
-      "Educacao, direito e servicos sociais (maior queda trimestral de vagas no 3o tri 2025)",
-      "Agricultura e agroalimentar como rota de imigracao (categoria removida do Express Entry em 2026)"
+      "Indústria de transformação, com perda de 17 mil postos em junho de 2026 (-0,9%)",
+      "Agricultura, com queda de 7,6 mil postos em junho de 2026 (-3,3%)",
+      "Utilidades públicas, com recuo de 7,3 mil postos em junho de 2026 (-4,3%)",
+      "Contratação em ocupações de saúde, cujas vagas em aberto caíram 16,0% em doze meses até o primeiro trimestre de 2026, apesar da carência estrutural de profissionais",
+      "Educação e serviços sociais, com queda de 12,6% nas vagas em aberto em base anual"
     ],
     "inDemandRoles": [
       {
-        "role": "Enfermeiro registrado (Registered Nurse)",
-        "note": "Escassez nacional cronica; categoria prioritaria de saude no Express Entry e em quase todos os PNPs. Profissao regulamentada (registro provincial obrigatorio)."
+        "role": "Médico",
+        "note": "O Canadá criou em 2026 uma categoria específica de seleção migratória para médicos com experiência de trabalho no país, resposta direta à falta de clínicos gerais e especialistas. Exige licença do órgão regulador da província, processo entre os mais longos do sistema canadense."
       },
       {
-        "role": "Medico / Physician",
-        "note": "Nova categoria dedicada no Express Entry desde 08/12/2025; primeiro sorteio teve o menor CRS de 2026 (169). Foco em medicos com experiencia previa no Canada."
+        "role": "Enfermeiro registrado",
+        "note": "Continua entre as ocupações prioritárias da categoria de saúde e serviços sociais na imigração econômica. Exige registro no órgão regulador provincial, exame nacional e comprovação de idioma. Vale observar que as vagas em aberto de enfermagem recuaram no início de 2026, então a busca tende a ser mais lenta que em 2022 e 2023."
       },
       {
         "role": "Eletricista",
-        "note": "Oficio certificado com escassez nacional e poucos candidatos por vaga. Categoria de trades no Express Entry; regulamentado (Red Seal / certificacao provincial)."
+        "note": "Ofício certificado com demanda nacional consistente e salário mediano acima da média dos ofícios. Exige certificação provincial (Certificate of Qualification) e, em várias províncias, exame Red Seal para mobilidade interprovincial."
       },
       {
-        "role": "Encanador / Plumber",
-        "note": "Demanda persistente em construcao residencial e comercial. Categoria de trades."
+        "role": "Soldador",
+        "note": "Ofício ligado à indústria pesada, energia e infraestrutura, com forte variação regional de remuneração (Alberta e Colúmbia Britânica pagam mais). Exige certificação de solda reconhecida pela província."
       },
       {
-        "role": "Soldador / Welder",
-        "note": "Alta em Alberta e BC; salario varia muito por provincia."
+        "role": "Encanador e outros ofícios da construção",
+        "note": "Listado entre as ocupações de ofícios elegíveis nas seleções por perfil da imigração econômica. A entrada costuma passar por avaliação de competências e aprendizado supervisionado antes da certificação plena."
       },
       {
-        "role": "Caminhoneiro / motorista de transporte",
-        "note": "Categoria de transporte revisada para 2026; estimativa de mais de 40.400 vagas em trucking/logistica ate 2030."
+        "role": "Desenvolvedor de software",
+        "note": "Integra a categoria de ciência, tecnologia, engenharia e matemática da seleção por perfil. Não é profissão regulamentada, o que reduz barreira de licenciamento, mas a concorrência é alta e a maioria das contratações exige experiência comprovada em ambiente de produção."
       },
       {
-        "role": "Engenheiro / desenvolvedor de software senior",
-        "note": "Via Global Talent Stream (processamento de 2 semanas) para perfis de IA, dados e engenharia. Ocupacao NAO regulamentada. Mercado tech junior, porem, esfriou."
+        "role": "Motorista de caminhão e ocupações de transporte",
+        "note": "As ocupações de transporte voltaram em 2026 à seleção por perfil após um ano de ausência, incluindo perfis como pilotos e mecânicos de aeronaves. Para motoristas, exige carteira comercial da província e, com frequência, treinamento obrigatório de entrada na profissão."
       },
       {
-        "role": "Gerente senior (NOC 00012-00015)",
-        "note": "Nova categoria 2026: financas, comunicacoes, saude, educacao, construcao, transporte. Exige experiencia canadense."
+        "role": "Educador de primeira infância e assistente",
+        "note": "Ocupação listada na categoria de educação da seleção por perfil, com demanda ligada à expansão de vagas de creche subsidiada. Exige certificação provincial e o salário mediano fica bem abaixo da média nacional."
       },
       {
-        "role": "Pesquisador / researcher",
-        "note": "Nova categoria 2026 focada em inovacao, ciencia e pesquisa avancada, com experiencia canadense."
+        "role": "Gerente sênior com experiência canadense",
+        "note": "Nova categoria criada em 2026 para facilitar a mobilidade de lideranças. Na prática, favorece quem já está no Canadá com permissão de trabalho e acumulou experiência local em cargo de direção."
       },
       {
-        "role": "Educador infantil (ECE) e professor",
-        "note": "Categoria de educacao no Express Entry e foco recorrente de PNPs (Ontario, BC)."
-      },
-      {
-        "role": "Analista financeiro / contador",
-        "note": "Demanda em Toronto e Calgary, segundo Job Bank."
+        "role": "Pesquisador com experiência canadense",
+        "note": "Categoria nova em 2026 voltada aos setores acadêmico, científico e de inovação. Exige vínculo prévio com instituição canadense, o que torna o caminho mais natural para quem chega primeiro como estudante ou bolsista."
       }
     ],
     "byQualification": [
       {
-        "area": "Enfermagem / Saude",
-        "advice": "Melhor cenario do pais. Escassez cronica e categoria prioritaria no Express Entry (saude e servicos sociais, 37 ocupacoes) e em praticamente todos os PNPs. ACAO CRITICA: enfermagem e profissao REGULAMENTADA. Antes de trabalhar voce precisa de registro no orgao provincial (ex.: College of Nurses of Ontario) e da avaliacao via NNAS (National Nursing Assessment Service). Comece o reconhecimento de credenciais o quanto antes, pois leva meses."
+        "area": "Saúde",
+        "advice": "É a área com maior prioridade declarada na política migratória e, ao mesmo tempo, a de maior barreira regulatória. Medicina, enfermagem, farmácia, fisioterapia, terapia ocupacional e tecnologia de laboratório médico são profissões regulamentadas por órgão provincial, e não federal, de modo que a licença obtida em Ontário não vale automaticamente em Alberta. O caminho típico envolve avaliação de credenciais, exames canadenses, educação complementar e prática supervisionada. O governo federal destinou 97 milhões de dólares canadenses ao longo de cinco anos, a partir de 2026-27, para acelerar o reconhecimento de credenciais com foco justamente em saúde e construção. Planeje o processo antes de embarcar, porque licença atrasada significa meses fora da profissão."
       },
       {
-        "area": "Medicina",
-        "advice": "Demanda altissima e categoria propria no Express Entry desde dez/2025, mas e a profissao mais regulamentada do Canada. Passa pelo Medical Council of Canada (exames MCCQE), licenciamento provincial e quase sempre residencia/experiencia canadense. O foco do programa e medico que ja praticou no Canada. Planeje rota longa; considere comecar por provincia com escassez extrema (rural/Atlantico)."
+        "area": "Tecnologia",
+        "advice": "Não é área regulamentada, o que elimina a etapa de licenciamento e torna a entrada mais rápida do que na saúde ou na engenharia. As vagas em ciências naturais e aplicadas voltaram a crescer no primeiro trimestre de 2026. A recomendação prática é mirar as categorias de ciência, tecnologia, engenharia e matemática da seleção por perfil e reforçar portfólio verificável, já que a triagem canadense valoriza experiência aplicada e referências locais."
       },
       {
-        "area": "Engenharia (civil, eletrica, mecanica)",
-        "advice": "Engenheiro e profissao regulamentada: precisa do titulo P.Eng junto a ordem provincial (ex.: Professional Engineers Ontario). Boa noticia para STEM no Express Entry. Atencao: engenharia de software/IA NAO e regulamentada, voce pode atuar assim que o work permit sair, sem exame de ordem."
+        "area": "Engenharia",
+        "advice": "O título de engenheiro é protegido e depende de registro na associação provincial. Sem esse registro é possível trabalhar em funções técnicas, mas não assinar projeto nem usar o título profissional. O reconhecimento costuma exigir avaliação acadêmica, exames de prática profissional e período de experiência supervisionada no Canadá. Quem vem de engenharia deve buscar desde o início a associação da província de destino e considerar entrada por função técnica enquanto o registro tramita."
       },
       {
-        "area": "Tecnologia / TI / dados / IA",
-        "advice": "Se for senior e especializado, mire o Global Talent Stream (LMIA e work permit em ~2 semanas, Categoria B com lista de ocupacoes tech). Ocupacao nao regulamentada, sem exame. POReM o mercado tech generalista e junior esfriou muito (demissoes, AI-first). Especializacao e portfolio fazem a diferenca; nao conte com vaga de entrada facil."
+        "area": "Construção e ofícios",
+        "advice": "É a área com melhor relação entre esforço de reconhecimento e retorno salarial. A certificação é provincial e, para muitos ofícios, o selo Red Seal permite mobilidade entre províncias. Os ofícios seguem como categoria própria na seleção por perfil da imigração econômica, e as vagas em aberto do grupo de ofícios e transporte cresceram 5,3% no primeiro trimestre de 2026. Vale checar se o ofício exige certificação obrigatória ou apenas voluntária na província escolhida, porque a regra muda de lugar para lugar."
       },
       {
-        "area": "Oficios qualificados (eletricista, encanador, soldador, HVAC)",
-        "advice": "Excelente. Categoria de trades no Express Entry e foco de PNPs (BC, Alberta, Saskatchewan, Atlantico). Maioria e regulamentada via certificacao provincial / Red Seal, e pode exigir exame de qualificacao e horas de aprendizado reconhecidas. Alberta e BC pagam mais; Atlantico paga menos mas tem escassez aguda."
+        "area": "Educação",
+        "advice": "Docência em rede pública exige certificação do órgão regulador provincial de professores, com avaliação de formação e, em geral, exigência de estágio ou curso complementar. A educação infantil tem demanda ligada à expansão de creches subsidiadas, embora as vagas em aberto do grupo de educação e serviços sociais tenham caído 12,6% em base anual. É área que segue na seleção por perfil, mas com remuneração de entrada modesta na primeira infância."
       },
       {
-        "area": "Educacao (professor, educador infantil)",
-        "advice": "Categoria de educacao no Express Entry e recrutamento ativo de ECE em Ontario e BC. Ensino e regulamentado: professores precisam de certificacao provincial (ex.: Ontario College of Teachers). Educacao infantil tem barreira menor e forte demanda."
+        "area": "Hotelaria e alimentação",
+        "advice": "Foi o setor que mais gerou emprego líquido em junho de 2026 e onde as vagas em vendas e serviços voltaram a crescer. É porta de entrada realista para quem já está no país com permissão de trabalho aberta, incluindo estudantes e cônjuges. Não é, porém, caminho fácil para imigração direta do exterior, porque o Programa de Trabalhador Estrangeiro Temporário foi restringido e o patrocínio para posições de baixo salário ficou mais difícil e mais fiscalizado."
       },
       {
-        "area": "Administracao / negocios / white-collar generico",
-        "advice": "Setor em desaceleracao, especialmente para juniores e recem-formados (AI reduzindo vagas de entrada). Sem experiencia canadense ou especializacao, a busca e dura. Caminho mais forte: chegar a nivel de gestao senior (nova categoria de senior managers exige experiencia canadense) ou migrar para uma area em alta."
+        "area": "Transporte e logística",
+        "advice": "As ocupações de transporte retornaram em 2026 à seleção por perfil, o que reabre uma porta que estivera fechada. Para condução profissional é obrigatória a carteira comercial emitida pela província, com testes práticos locais, e a conversão de habilitação estrangeira raramente é automática. Perfis de aviação, como piloto e mecânico de aeronaves, aparecem entre os alvos explícitos da categoria."
       },
       {
-        "area": "Empreendedor / fundador de startup",
-        "advice": "O Start-up Visa esta PAUSADO para novos pedidos desde 01/01/2026 (quem tem carta de apoio de 2025 aplica ate 30/06/2026). IRCC promete detalhes de um novo piloto de empreendedorismo em 2026. Por ora, rotas viaveis: PNPs de empreendedor/investidor provinciais, ou entrar via work permit e construir negocio. Acompanhe o anuncio do novo piloto federal."
+        "area": "Administração e gestão",
+        "advice": "A criação da categoria de gerentes seniores com experiência canadense sinaliza que o país quer reter liderança já testada localmente, não importar gestor direto do exterior. Para quem está fora, o percurso mais viável costuma ser entrar por transferência dentro da mesma empresa multinacional, via programas isentos de avaliação de impacto no mercado de trabalho, e depois converter a experiência canadense em residência permanente."
       }
     ],
     "salaries": [
       {
-        "role": "Enfermeiro registrado (Registered Nurse)",
-        "range": "C$30,00 (baixo) / C$43,27 (mediana) / C$54,37 (alto) por hora",
+        "role": "Enfermeiro registrado",
+        "range": "Entre CAD 30,00 e CAD 54,37 por hora, com mediana nacional de CAD 43,27 (período de referência 2023-2024, dados atualizados em 19 de novembro de 2025)",
         "source": {
-          "label": "Job Bank - Registered Nurse, atualizado 19/11/2025 (ref. 2023-2024)",
+          "label": "Job Bank (Governo do Canadá), salários por ocupação",
           "url": "https://www.jobbank.gc.ca/marketreport/wages-occupation/993/ca",
           "official": true
         }
       },
       {
         "role": "Desenvolvedor de software",
-        "range": "C$30,00 (baixo) / C$48,08 (mediana) / C$76,92 (alto) por hora",
+        "range": "Entre CAD 30,00 e CAD 76,92 por hora, com mediana nacional de CAD 48,08 (período de referência 2023-2024, dados atualizados em 19 de novembro de 2025)",
         "source": {
-          "label": "Job Bank - Software Developer, atualizado 19/11/2025 (ref. 2023-2024)",
+          "label": "Job Bank (Governo do Canadá), salários por ocupação",
           "url": "https://www.jobbank.gc.ca/marketreport/wages-occupation/22548/ca",
           "official": true
         }
       },
       {
         "role": "Eletricista",
-        "range": "C$20,00 (baixo) / C$35,00 (mediana) / C$48,00 (alto) por hora",
+        "range": "Entre CAD 20,00 e CAD 48,00 por hora, com mediana nacional de CAD 35,00 (período de referência 2023-2024, dados atualizados em 19 de novembro de 2025)",
         "source": {
-          "label": "Job Bank - Electrician, atualizado 19/11/2025 (ref. 2023-2024)",
+          "label": "Job Bank (Governo do Canadá), salários por ocupação",
           "url": "https://www.jobbank.gc.ca/marketreport/wages-occupation/20684/ca",
           "official": true
         }
       },
       {
-        "role": "Media geral de salario ofertado (todas as ocupacoes)",
-        "range": "C$28,45/hora (3o tri 2025; +3,3% no ano)",
+        "role": "Soldador",
+        "range": "Entre CAD 22,00 e CAD 47,00 por hora, com mediana nacional de CAD 30,00 (período de referência 2023-2024, dados atualizados em 19 de novembro de 2025)",
         "source": {
-          "label": "Statistics Canada - Vagas de emprego, 3o tri 2025",
-          "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/251216/dq251216a-eng.htm",
+          "label": "Job Bank (Governo do Canadá), salários por ocupação",
+          "url": "https://www.jobbank.gc.ca/marketreport/wages-occupation/23242/ca",
           "official": true
         }
       },
       {
-        "role": "Vaga que exige bacharelado vs. ensino medio",
-        "range": "C$44,00/hora (bacharelado) vs. C$21,85/hora (ensino medio)",
+        "role": "Motorista de caminhão de transporte",
+        "range": "Entre CAD 19,45 e CAD 37,00 por hora, com mediana nacional de CAD 26,42 (período de referência 2023-2024, dados atualizados em 19 de novembro de 2025)",
         "source": {
-          "label": "Statistics Canada - Vagas de emprego, 3o tri 2025",
-          "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/251216/dq251216a-eng.htm",
+          "label": "Job Bank (Governo do Canadá), salários por ocupação",
+          "url": "https://www.jobbank.gc.ca/marketreport/wages-occupation/296484/ca",
+          "official": true
+        }
+      },
+      {
+        "role": "Assistente de educador de primeira infância",
+        "range": "Entre CAD 16,95 e CAD 30,03 por hora, com mediana nacional de CAD 22,30 (período de referência 2023-2024, dados atualizados em 19 de novembro de 2025)",
+        "source": {
+          "label": "Job Bank (Governo do Canadá), relatório de salários",
+          "url": "https://www.jobbank.gc.ca/wagereport/occupation/5180",
+          "official": true
+        }
+      },
+      {
+        "role": "Média nacional de todos os empregados",
+        "range": "CAD 37,20 por hora em junho de 2026, alta de 3,3% em doze meses",
+        "source": {
+          "label": "Statistics Canada, Pesquisa da Força de Trabalho, junho de 2026",
+          "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/260710/dq260710a-eng.htm",
+          "official": true
+        }
+      },
+      {
+        "role": "Salário médio ofertado nas vagas em aberto",
+        "range": "CAD 29,55 por hora no primeiro trimestre de 2026, alta de 2,2% em doze meses",
+        "source": {
+          "label": "Statistics Canada, vagas em aberto, primeiro trimestre de 2026",
+          "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/260616/dq260616b-eng.htm",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Para trabalhar no Canada o estrangeiro geralmente precisa de uma work permit. Existem dois grandes universos: (1) permits que exigem LMIA (Labour Market Impact Assessment), em que o empregador prova que nao encontrou canadense para a vaga, dentro do Temporary Foreign Worker Program; e (2) o International Mobility Program, sem LMIA. Para perfis de tecnologia e pesquisa de alta qualificacao existe o Global Talent Stream / Global Skills Strategy, com meta de processamento de cerca de 2 semanas tanto para a LMIA (10-12 dias uteis) quanto para a work permit, contra 48-60 dias uteis no fluxo padrao. Para residencia permanente, o Express Entry passou a priorizar sorteios por categoria de ocupacao e o PNP cresceu 66% (91.500 vagas em 2026), dando as provincias mais poder de selecionar conforme a demanda local. Ponto-chave para 2026: todas as categorias do Express Entry agora exigem no minimo 12 meses de experiencia qualificada (era 6 meses), dentro dos ultimos 3 anos, nao necessariamente continua. PROFISSOES REGULAMENTADAS sao o maior gargalo: enfermagem, medicina, engenharia (P.Eng), ensino, direito e varios oficios exigem registro/licenca em orgao provincial e, muitas vezes, exames e avaliacao de credenciais (NNAS para enfermagem, Medical Council of Canada para medicos, ordem provincial de engenheiros). Ja IA, ciencia de dados e engenharia de software NAO sao regulamentadas: pode-se comecar a atuar assim que a permit sair, sem exame de ordem. Regra de ouro: confirme se sua profissao e regulamentada na provincia de destino e inicie o reconhecimento de diploma cedo, porque leva meses.",
+    "foreignerRules": "Trabalhar legalmente no Canadá exige, na quase totalidade dos casos, permissão de trabalho emitida pelo Immigration, Refugees and Citizenship Canada. Existem dois grandes caminhos. O primeiro é o Programa de Trabalhador Estrangeiro Temporário, em que o empregador precisa obter uma avaliação de impacto no mercado de trabalho (LMIA) junto ao Employment and Social Development Canada, provando que não encontrou canadense ou residente permanente para a vaga. O segundo é o Programa de Mobilidade Internacional, que dispensa essa avaliação em situações previstas em acordos internacionais, transferências dentro da mesma empresa, permissões pós-diploma e permissões abertas para cônjuges.\n\nO equilíbrio entre os dois mudou. O Plano de Níveis de Imigração 2026-2028 fixa a meta do Programa de Mobilidade Internacional em 170 mil admissões e reduz o Programa de Trabalhador Estrangeiro Temporário para 60 mil, ou seja, o país passa a emitir quase três permissões isentas de avaliação para cada permissão baseada em LMIA. Somada a isso veio a fiscalização mais dura: entre abril de 2025 e março de 2026 foram aplicados mais de 10,2 milhões de dólares canadenses em multas a empregadores não conformes, mais que o dobro do exercício anterior, com dezenas de empresas banidas do programa. As exigências de recrutamento prévio também ficaram mais rígidas para quem contrata via LMIA. Há flexibilização pontual para empregadores rurais fora das regiões metropolitanas, com teto ampliado de trabalhadores estrangeiros em posições de baixo salário durante o período de 1 de abril de 2026 a 31 de março de 2027.\n\nPara residência permanente, o principal sistema é o Express Entry, com seleção por perfil ocupacional. Em 2026 o governo confirmou as categorias de saúde e serviços sociais, ofícios especializados, educação, ciência e tecnologia, transporte e proficiência avançada em francês, e criou cinco categorias novas: médicos com experiência canadense, pesquisadores com experiência canadense, gerentes seniores com experiência canadense, ocupações de transporte e militares altamente qualificados recrutados pelas Forças Armadas Canadenses. A exigência mínima de experiência nas categorias renovadas subiu de seis meses para um ano, obtida nos três anos anteriores. Os programas provinciais de nomeação continuam sendo rota paralela relevante, com listas de ocupação próprias de cada província.\n\nDuas exigências práticas costumam decidir o caso. A primeira é o idioma: é obrigatório teste oficial de inglês ou francês, e para a permissão pós-diploma o pedido exige nível CLB ou NCLC 7 em todas as quatro habilidades para graduados de bacharelado, mestrado e doutorado, e CLB ou NCLC 5 para a maior parte dos graduados de programas não universitários, com resultado de teste com menos de dois anos. A segunda é o reconhecimento de diploma. Profissões regulamentadas como medicina, enfermagem, engenharia, farmácia, odontologia e direito são licenciadas por órgãos provinciais, não pelo governo federal, e cada província define seus próprios requisitos de exame, formação complementar e prática supervisionada. O governo federal destinou 97 milhões de dólares canadenses em cinco anos, a partir de 2026-27, para tornar esse reconhecimento mais rápido e mais uniforme, com prioridade para saúde e construção.",
     "opportunityWindows": [
-      "PNP cresceu 66% em 2026 (de 55.000 para 91.500 vagas): sorteios mais frequentes, elegibilidade ocupacional mais ampla e notas de corte mais baixas em varias provincias",
-      "Express Entry por categoria derruba o CRS: o menor corte de 2026 foi 169 (categoria de medicos, 19/02/2026); senior managers tiveram primeiro sorteio com corte 429",
-      "Categoria de medicos adicionada em 08/12/2025: janela direta para medicos com experiencia previa no Canada",
-      "Global Talent Stream: LMIA + work permit em ~2 semanas para tech/IA/pesquisa de alta qualificacao (Categoria B)",
-      "Sorteio de lingua francesa: 5.500 ITAs com corte de apenas 397; falar frances e um trunfo enorme",
-      "Escassez cronica e estrutural em saude, oficios e construcao, com demanda projetada superando a oferta pela proxima decada",
-      "Atlantico, Saskatchewan e Alberta com escassez aguda e recrutamento ativo em saude, oficios, agricultura e energia",
-      "Novo piloto federal de empreendedorismo prometido pelo IRCC para 2026 (ficar atento ao anuncio, ja que o Start-up Visa esta pausado)"
+      "Sorteios do Express Entry por categoria ocupacional ao longo de 2026, incluindo as cinco categorias novas anunciadas em 18 de fevereiro de 2026 (médicos, pesquisadores, gerentes seniores, ocupações de transporte e militares recrutados pelas Forças Armadas Canadenses)",
+      "Retorno das ocupações de transporte à seleção por categoria em 2026, depois de um ano fora da lista, reabrindo rota para perfis de aviação e logística",
+      "Categoria de proficiência avançada em francês, que segue como a via de corte mais baixo para candidatos com NCLC alto, inclusive fora do Quebec",
+      "Rural Community Immigration Pilot, piloto de cinco anos iniciado em 30 de janeiro de 2025, com 14 comunidades participantes que definem seus próprios setores prioritários e cotas anuais por empregador designado",
+      "Francophone Community Immigration Pilot, com 6 comunidades francófonas minoritárias e exigência de francês em nível intermediário ou superior",
+      "Medida temporária para empregadores rurais fora das regiões metropolitanas, válida de 1 de abril de 2026 a 31 de março de 2027, que eleva de 10% para 15% o teto de trabalhadores estrangeiros em posições de baixo salário",
+      "Transição de 33 mil titulares de permissão de trabalho para residência permanente prevista no Plano de Níveis 2026 e 2027",
+      "Congelamento da lista de áreas de estudo elegíveis à permissão pós-diploma confirmado em 15 de janeiro de 2026, sem inclusões nem exclusões pelo resto do ano, o que dá previsibilidade a quem planeja estudar no Canadá em 2026",
+      "Temporada de contratação em alojamento e alimentação, setor que liderou a geração de emprego em junho de 2026 e concentra picos sazonais de verão e de inverno nas regiões turísticas"
     ],
     "jobBoards": [
       {
-        "label": "Job Bank (Governo do Canada) - busca de vagas, salarios e outlook",
-        "url": "https://www.jobbank.gc.ca",
+        "label": "Job Bank, portal oficial de empregos do Governo do Canadá",
+        "url": "https://www.jobbank.gc.ca/home",
         "official": true
       },
       {
-        "label": "Job Bank - Explorar mercado / outlook ocupacional",
-        "url": "https://www.jobbank.gc.ca/trend-analysis",
-        "official": true
-      },
-      {
-        "label": "Job Bank - Buscar salarios por ocupacao e regiao",
+        "label": "Job Bank, busca de salários por ocupação e região",
         "url": "https://www.jobbank.gc.ca/trend-analysis/search-wages",
         "official": true
       },
       {
-        "label": "Express Entry - Sorteios por categoria de ocupacao (IRCC)",
-        "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations/category-based-selection.html",
+        "label": "Job Bank, relatórios de mercado de trabalho e projeções ocupacionais",
+        "url": "https://www.jobbank.gc.ca/trend-analysis/job-market-reports",
         "official": true
       },
       {
-        "label": "Global Skills Strategy - processamento rapido para trabalhadores (IRCC)",
-        "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/special-instructions/global-skills-strategy.html",
+        "label": "Job Bank, explorar ocupações e requisitos",
+        "url": "https://www.jobbank.gc.ca/occupation_search-eng.do",
         "official": true
       },
       {
-        "label": "WorkBC - vagas e outlook da Columbia Britanica",
-        "url": "https://www.workbc.ca/research-labour-market/bc-labour-market-outlook",
-        "official": true
+        "label": "Indeed Canadá",
+        "url": "https://ca.indeed.com/",
+        "official": false
+      },
+      {
+        "label": "LinkedIn Empregos Canadá",
+        "url": "https://www.linkedin.com/jobs/",
+        "official": false
+      },
+      {
+        "label": "Eluta, buscador de vagas publicadas diretamente por empregadores canadenses",
+        "url": "https://www.eluta.ca/",
+        "official": false
+      },
+      {
+        "label": "Jobboom, portal do mercado quebequense",
+        "url": "https://www.jobboom.com/",
+        "official": false
       }
     ],
     "sources": [
       {
-        "label": "Canada.ca - Canada prioriza talentos no Express Entry 2026 (anuncio oficial)",
-        "url": "https://www.canada.ca/en/immigration-refugees-citizenship/news/2026/02/canada-prioritizes-top-talent-in-2026-immigration-express-entry-categories.html",
+        "label": "Statistics Canada, The Daily, Pesquisa da Força de Trabalho, junho de 2026",
+        "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/260710/dq260710a-eng.htm",
         "official": true
       },
       {
-        "label": "IRCC - Express Entry: sorteios por categoria de ocupacao",
+        "label": "Statistics Canada, taxa de desemprego por província e território, junho de 2026",
+        "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/260710/mc-a001-eng.htm",
+        "official": true
+      },
+      {
+        "label": "Statistics Canada, The Daily, vagas em aberto, primeiro trimestre de 2026",
+        "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/260616/dq260616b-eng.htm",
+        "official": true
+      },
+      {
+        "label": "Statistics Canada, características da força de trabalho por província, série mensal",
+        "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1410028703",
+        "official": true
+      },
+      {
+        "label": "Job Bank (Governo do Canadá), relatórios de mercado de trabalho",
+        "url": "https://www.jobbank.gc.ca/trend-analysis/job-market-reports",
+        "official": true
+      },
+      {
+        "label": "Job Bank (Governo do Canadá), busca de salários por ocupação, dados da Pesquisa da Força de Trabalho com período de referência 2023-2024",
+        "url": "https://www.jobbank.gc.ca/trend-analysis/search-wages",
+        "official": true
+      },
+      {
+        "label": "IRCC, Express Entry, seleção por categoria",
         "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations/category-based-selection.html",
         "official": true
       },
       {
-        "label": "Statistics Canada - Vagas de emprego, 3o trimestre 2025",
-        "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/251216/dq251216a-eng.htm",
+        "label": "IRCC, comunicado de 18 de fevereiro de 2026 sobre as categorias do Express Entry para 2026",
+        "url": "https://www.canada.ca/en/immigration-refugees-citizenship/news/2026/02/canada-prioritizes-top-talent-in-2026-immigration-express-entry-categories.html",
         "official": true
       },
       {
-        "label": "Job Bank - Registered Nurse (salarios)",
-        "url": "https://www.jobbank.gc.ca/marketreport/wages-occupation/993/ca",
+        "label": "IRCC, informações complementares do Plano de Níveis de Imigração 2026-2028",
+        "url": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/corporate-initiatives/levels/supplementary-immigration-levels-2026-2028.html",
         "official": true
       },
       {
-        "label": "Job Bank - Software Developer (salarios)",
-        "url": "https://www.jobbank.gc.ca/marketreport/wages-occupation/22548/ca",
+        "label": "IRCC, elegibilidade para a permissão de trabalho pós-diploma",
+        "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/eligibility.html",
         "official": true
       },
       {
-        "label": "Job Bank - Electrician (salarios)",
-        "url": "https://www.jobbank.gc.ca/marketreport/wages-occupation/20684/ca",
+        "label": "IRCC, atualização sobre a exigência de área de estudo para a permissão pós-diploma",
+        "url": "https://www.canada.ca/en/immigration-refugees-citizenship/news/notices/update-requirement-post-graduation-work-permits.html",
         "official": true
       },
       {
-        "label": "ESDC - Requisitos do Global Talent Stream",
-        "url": "https://www.canada.ca/en/employment-social-development/services/foreign-workers/global-talent/requirements.html",
+        "label": "IRCC, Rural Community Immigration Pilot",
+        "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots/rural-immigration.html",
         "official": true
       },
       {
-        "label": "IRCC - Programa Start-up Visa (status e elegibilidade)",
-        "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/start-visa.html",
+        "label": "IRCC, Francophone Community Immigration Pilot",
+        "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots/franco-immigration.html",
         "official": true
       },
       {
-        "label": "CIC News - Tres novas categorias do Express Entry 2026",
-        "url": "https://www.cicnews.com/2026/02/three-new-express-entry-categories-0271729.html",
-        "official": false
+        "label": "ESDC, medidas temporárias do Programa de Trabalhador Estrangeiro Temporário",
+        "url": "https://www.canada.ca/en/employment-social-development/services/foreign-workers/temporary-measures.html",
+        "official": true
       },
       {
-        "label": "The Hub - Vagas no Canada caem para minima de 8 anos (tech e varejo)",
-        "url": "https://thehub.ca/2025/10/01/job-vacancies-canada-plummet-eight-year-low-tech-retail-hit-hard-unemployment/",
-        "official": false
+        "label": "ESDC, comunicado de julho de 2026 sobre o aumento das penalidades de conformidade no Programa de Trabalhador Estrangeiro Temporário",
+        "url": "https://www.canada.ca/en/employment-social-development/news/2026/07/the-government-of-canada-highlights-doubling-of-compliance-monetary-penalties-under-the-temporary-foreign-worker-program.html",
+        "official": true
       },
       {
-        "label": "Macleans - White-collar workers nao estao bem (desaceleracao de escritorio)",
-        "url": "https://macleans.ca/work/white-collar-workers-are-not-okay/",
-        "official": false
+        "label": "ESDC, Reconhecimento de Credenciais Estrangeiras",
+        "url": "https://www.canada.ca/en/employment-social-development/programs/foreign-credential-recognition.html",
+        "official": true
       },
       {
-        "label": "Can X Global - PNP Canada 2026: 91.500 vagas e expansao de 66%",
-        "url": "https://canxglobal.com/pnp-canada-2026-provincial-nominee-program/",
-        "official": false
+        "label": "IRCC, relatório ao Parlamento sobre a seleção por categoria no Express Entry, 2024-2025",
+        "url": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/report-parliament-cbs-2024-25.html",
+        "official": true
       }
     ]
   },
@@ -762,1920 +819,2208 @@ export const LABOR_MARKET: LaborMarketMap = {
     ]
   },
   "uk": {
-    "updatedAt": "2026-06-22",
-    "overview": "O mercado de trabalho britanico entrou em 2026 esfriando no agregado, mas com bolsoes de escassez estrutural que seguem abertos a estrangeiros. Os dados oficiais do ONS apontam ganho salarial medio anual de cerca de 4,4% (total) e 3,4% (regular) no trimestre fevereiro a abril de 2026, com salario medio semanal de 753 libras, enquanto o numero de vagas recuou para a faixa de 700 mil a 950 mil, bem abaixo do pico pos-pandemia. A leitura pratica e de um mercado mais seletivo: contratacoes caem em varejo, hotelaria e parte do setor publico administrativo, mas saude, engenharia e tecnologia continuam puxando demanda. Para quem chega de fora, o ponto central de 2026 e o aperto das regras de visto. Desde 22 de julho de 2025 o piso salarial geral do Skilled Worker subiu para 41.700 libras por ano (ou a going rate da ocupacao, o que for maior), e o nivel minimo de qualificacao voltou ao patamar de graduacao (RQF 6). Isso elevou a barra para empregadores patrocinarem estrangeiros e tornou o salario, mais que a vaga em si, o maior filtro.\n\nApesar do aperto, ha caminhos reais. O NHS continua sendo o maior empregador patrocinador, com mais de 110 mil vagas em aberto e rotas dedicadas via Health and Care Worker visa, com piso de 25.000 libras e going rate por ocupacao. Engenharia foi o unico grande setor com vagas em alta no inicio de 2026, impulsionada por defesa, infraestrutura e transicao energetica. Tecnologia mantem escassez cronica em ciberseguranca, software e dados. Para empreendedores, as rotas Innovator Founder (negocio inovavel e escalavel, com endosso) e Global Talent (talento reconhecido em tech, ciencia e artes, com liberdade total para autonomia e abrir empresa) sao as portas principais. O alerta permanente: profissoes regulamentadas (enfermagem, medicina, ensino, engenharia chartered, direito) exigem registro no orgao competente antes de exercer, e desde o Brexit o reconhecimento de diplomas da UE deixou de ser automatico.",
+    "updatedAt": "2026-07-20",
+    "overview": "O mercado de trabalho britânico atravessa uma fase de esfriamento gradual, sem ruptura. Segundo o Office for National Statistics (ONS), a taxa de desemprego entre pessoas de 16 anos ou mais foi estimada em 4,9% no trimestre de fevereiro a abril de 2026, alta de 0,3 ponto percentual em relação ao mesmo período do ano anterior, embora com queda de 0,3 ponto na comparação com o trimestre imediatamente anterior. A taxa de emprego na faixa de 16 a 64 anos ficou em 75,0%, praticamente estável no ano, e a inatividade econômica recuou para 21,0%. O número de empregados registrados na folha de pagamento (PAYE) caiu 138 mil, ou 0,5%, entre abril de 2025 e abril de 2026, com estimativa preliminar de 30,3 milhões em maio de 2026. O claimant count, que mede pedidos de benefício por desemprego, chegou a 1,712 milhão em maio de 2026, em alta no mês e no ano.\n\nA contratação perdeu fôlego de forma visível. As vagas em aberto somaram 707 mil no trimestre de março a maio de 2026, queda de 19 mil (2,6%) sobre o trimestre anterior e de 31 mil (4,2%) sobre igual período do ano passado, o menor patamar desde o trimestre de fevereiro a abril de 2021. O recuo foi generalizado, atingindo 10 dos 18 setores acompanhados pelo ONS. Na prática, o candidato encontra hoje um mercado mais seletivo, com processos mais longos e menos margem para negociação, especialmente em funções administrativas e de escritório.\n\nOs salários seguem subindo acima da inflação, mas com ritmo desigual entre setores. A remuneração regular cresceu 3,4% no ano até fevereiro a abril de 2026, e a remuneração total, incluindo bônus, avançou 4,4%. Descontada a inflação medida pelo CPIH, o ganho real foi de apenas 0,1% na remuneração regular. O contraste entre setores é grande: o setor público registrou alta de 5,1% na remuneração regular, contra 2,9% no setor privado. Pela Annual Survey of Hours and Earnings (ASHE), o rendimento bruto mediano anual de quem trabalha em tempo integral era de 39.039 libras em abril de 2025, com crescimento nominal de 5,3% no rendimento semanal mediano.\n\nPara o estrangeiro, a mudança mais relevante não está nos números do mercado, e sim nas regras de imigração. Desde 22 de julho de 2025, o patamar geral de qualificação do visto Skilled Worker subiu para o nível RQF 6, equivalente a formação de grau superior, e o salário mínimo padrão da rota passou a 41.700 libras anuais ou a going rate da ocupação, o que for maior. Ocupações de qualificação intermediária (RQF 3 a 5) só permanecem elegíveis se constarem da Immigration Salary List ou da Temporary Shortage List, ambas com validade até 31 de dezembro de 2026. A rota de cuidadores foi fechada para novos pedidos vindos do exterior na mesma data. O efeito combinado é um funil mais estreito, que privilegia profissionais com diploma, experiência comprovada e empregador patrocinador já estabelecido.",
     "hotSectors": [
-      "Saude e cuidado (NHS com mais de 110 mil vagas; enfermeiros, medicos, radiografistas, fisioterapeutas, farmaceuticos)",
-      "Engenharia (unico grande setor com vagas em alta no inicio de 2026: eletrica, mecanica, sistemas, soldadores de alta integridade, gestao de projetos)",
-      "Tecnologia e digital (ciberseguranca, engenharia de software, dados, IA)",
-      "Energia e net-zero (renovaveis, transicao energetica, projetos de infraestrutura)",
-      "Defesa e manufatura avancada (impulsionada por compromissos de gasto militar)",
-      "Ciencias da vida e biotecnologia (cientistas biologicos e biomedicos na lista de escassez)"
+      "Saúde e assistência social, o maior empregador do país em volume de postos, com demanda estrutural sustentada por envelhecimento populacional e reposição de quadros no NHS",
+      "Construção civil e ofícios especializados, com pedreiros, telhadistas, carpinteiros, soldadores, cantaria e retrofit energético listados oficialmente entre as ocupações em falta",
+      "Engenharia e manufatura avançada, priorizadas pela Estratégia Industrial e mapeadas pelo Migration Advisory Committee entre as 82 ocupações críticas em análise",
+      "Tecnologia da informação, com técnicos de TI e funções digitais incluídos no escopo de setores prioritários da Temporary Shortage List",
+      "Serviços financeiros e ciências da vida, também classificados como setores prioritários da Estratégia Industrial na revisão da lista de escassez",
+      "Setor público em geral, onde a remuneração regular cresceu 5,1% no ano até fevereiro a abril de 2026, contra 2,9% no setor privado"
     ],
     "coolingSectors": [
-      "Construcao residencial e geral (vagas em forte queda, na faixa de -30% ano contra ano)",
-      "Varejo (contratacoes em retracao)",
-      "Hotelaria e restaurantes (alto volume mas baixo poder de patrocinio de visto pos-RQF 6)",
-      "Administracao do setor publico (parte das funcoes ficando para tras na recuperacao)",
-      "Cuidado social de base / care workers (fechado a novos aplicantes estrangeiros desde julho 2025; ISL expira em dezembro 2026)"
+      "Atividades imobiliárias, com a maior queda percentual de vagas do país, de 28,1% no trimestre de março a maio de 2026 ante igual período de 2025",
+      "Artes, entretenimento e recreação, com a segunda maior queda percentual de vagas do país, de 25,2% na mesma comparação anual",
+      "Atividades profissionais, científicas e técnicas, que registraram a maior queda em volume absoluto no trimestre de março a maio de 2026, com 8 mil vagas a menos",
+      "Mercado de vagas em geral, com retração em 10 dos 18 setores acompanhados e o menor total de postos abertos desde o trimestre de fevereiro a abril de 2021"
     ],
     "inDemandRoles": [
       {
-        "role": "Enfermeiro(a) registrado(a) (Registered Nurse, SOC 2231)",
-        "note": "Patrocinio via Health and Care Worker visa; going rate em torno de 31.000 libras (NHS Band 5); exige registro NMC antes de exercer"
+        "role": "Gerente de serviços residenciais, diurnos e domiciliares de cuidado",
+        "note": "Consta oficialmente da Immigration Salary List, o que garante patamar salarial reduzido e taxa de visto menor. Exige experiência de gestão em serviços de cuidado e registro junto ao órgão regulador do país correspondente."
       },
       {
-        "role": "Medico(a) (todos os graus, de foundation a consultant)",
-        "note": "Patrocinio amplo no NHS; exige registro GMC, normalmente via PLAB para formados fora do Reino Unido"
+        "role": "Enfermeiro e profissional de saúde registrado",
+        "note": "Demanda sustentada no NHS e no setor privado. O registro no Nursing and Midwifery Council é obrigatório antes do início do exercício, e a comprovação de inglês pode ser feita pela avaliação do próprio conselho profissional, sem teste SELT separado."
       },
       {
-        "role": "Engenheiro(a) eletrico/mecanico/de sistemas e gestao de projetos",
-        "note": "Setor com vagas em alta; ~127 mil vagas, alta de 5,1% no inicio de 2026; chartered exige Engineering Council"
+        "role": "Soldador especializado",
+        "note": "Ocupação listada na Immigration Salary List. Exige certificação técnica reconhecida e experiência prática comprovada, sendo uma das poucas funções de ofício que preservaram acesso à rota patrocinada após o aperto de julho de 2025."
       },
       {
-        "role": "Engenheiro(a) de software / desenvolvedor(a) (SOC 2134)",
-        "note": "Going rate em torno de 49.400 libras/ano (~25,33/hora) em abril 2026, acima do piso geral"
+        "role": "Pedreiro, telhadista, ardosista e carpinteiro",
+        "note": "Ofícios da construção mantidos na lista oficial de ocupações em falta. Exigem qualificação técnica e, em muitos canteiros, o cartão CSCS, além de patrocinador licenciado pelo Home Office."
       },
       {
-        "role": "Especialista em ciberseguranca e dados",
-        "note": "Escassez cronica; 75% das empresas de tech relatam dificuldade de contratacao"
+        "role": "Retrofitter de construção",
+        "note": "Função ligada à agenda de eficiência energética das edificações, incluída na Immigration Salary List. Exige formação técnica em isolamento térmico, eficiência energética e normas de retrofit residencial."
       },
       {
-        "role": "Soldador(a) de alta integridade / pipe welder (SOC 5213)",
-        "note": "Na Immigration Salary List, com piso reduzido (34.900 padrao / 29.500 reduzido)"
+        "role": "Cantaria e restauro em pedra",
+        "note": "Ofício tradicional em escassez crônica, presente na lista oficial. Exige domínio artesanal comprovado, geralmente demonstrado por portfólio e experiência em obras de conservação."
       },
       {
-        "role": "Carpinteiro(a) e marceneiro(a) (SOC 5316)",
-        "note": "Na Immigration Salary List (33.400 padrao / 27.800 reduzido)"
+        "role": "Técnico de laboratório e técnico farmacêutico",
+        "note": "Ambos figuram na Immigration Salary List, refletindo a prioridade dada ao setor de ciências da vida. Exigem formação técnica específica e, no caso farmacêutico, registro profissional."
       },
       {
-        "role": "Cientista biologico/biomedico (SOC 2112)",
-        "note": "Na Immigration Salary List (40.300 padrao / 30.700 reduzido)"
+        "role": "Cientista biológico e cientista de humanidades com foco em arqueologia",
+        "note": "Funções de nível superior presentes na lista oficial de escassez. Exigem diploma na área e, em arqueologia, vinculação a projetos de infraestrutura sujeitos a avaliação patrimonial."
       },
       {
-        "role": "Auxiliar de enfermagem (SOC 6131)",
-        "note": "Na ISL a 25.000 libras; novas aplicacoes encerram em dezembro 2026 quando a ISL for retirada"
+        "role": "Técnico de tecnologia da informação",
+        "note": "Mapeado entre as ocupações de nível intermediário consideradas críticas para os setores digital e de tecnologia na revisão da lista temporária de escassez. Exige certificações técnicas e experiência prática."
       },
       {
-        "role": "Fisioterapeuta, terapeuta ocupacional, farmaceutico, paramedico, assistente social",
-        "note": "Elegiveis ao Health and Care Worker visa (piso 25.000 libras ou going rate)"
+        "role": "Designer gráfico e multimídia",
+        "note": "Presente na Immigration Salary List. Exige portfólio consistente e patrocínio de empregador licenciado, com atenção ao fato de que a listagem tem validade até o fim de 2026."
+      },
+      {
+        "role": "Profissional das indústrias criativas em artes cênicas e música",
+        "note": "Artistas, dançarinos, coreógrafos, músicos e diretores artísticos constam da lista oficial, apesar da forte queda de vagas no setor de artes e entretenimento, o que indica escassez de perfis muito específicos e não abundância de postos."
+      },
+      {
+        "role": "Profissional da pesca e tripulante de embarcação",
+        "note": "Ofícios da pesca e marinheiros de convés estão na lista oficial, com entradas adicionais específicas para a Escócia, incluindo mestres de embarcação pesqueira."
       }
     ],
     "byQualification": [
       {
-        "area": "Enfermagem",
-        "advice": "Caminho mais solido: Health and Care Worker visa (piso 25.000 libras, going rate ~31.000 no NHS Band 5). Obrigatorio registro no NMC antes de exercer, e pos-Brexit ate diplomas da UE passam por avaliacao completa (teste de competencias e ingles via IELTS/OET). Comece pelo NHS Jobs filtrando por visa sponsorship. NHS e o maior patrocinador do pais."
+        "area": "Saúde e enfermagem",
+        "advice": "Continua sendo a área com maior absorção estrutural, mas as regras mudaram de forma decisiva. A rota de cuidadores e cuidadores seniores foi fechada para novos pedidos vindos do exterior em 22 de julho de 2025, e quem já estava no Reino Unido pode estender ou trocar de rota internamente até 22 de julho de 2028. Para profissionais de nível superior, como médicos, dentistas, enfermeiros, parteiras e veterinários, o caminho segue aberto, com registro obrigatório no conselho profissional correspondente e dispensa do teste de inglês quando o próprio conselho avalia a proficiência."
       },
       {
-        "area": "Medicina",
-        "advice": "Demanda alta em todos os graus. Exige registro no GMC, em geral via exame PLAB para formados fora do Reino Unido (ou rota de qualificacoes pos-graduadas aceitas). Patrocinio via Health and Care Worker visa, piso 25.000 libras ou going rate. Confirme se sua qualificacao consta nas listas de qualificacoes aceitas do GMC antes de aplicar."
+        "area": "Tecnologia e dados",
+        "advice": "O grau superior passou a ser praticamente pré-requisito, já que o patamar geral da rota Skilled Worker subiu para o nível RQF 6. Funções de nível técnico só permanecem elegíveis enquanto constarem da Temporary Shortage List, que vale até 31 de dezembro de 2026. Vale observar que as atividades profissionais, científicas e técnicas tiveram a maior queda em volume de vagas no trimestre de março a maio de 2026, o que recomenda candidaturas mais direcionadas e menos dispersas."
       },
       {
         "area": "Engenharia",
-        "advice": "Melhor momento entre os grandes setores: e o unico com vagas em alta em 2026 (defesa, energia, infraestrutura). Eletrica, mecanica e de sistemas lideram. Para titulo de chartered engineer, registro no Engineering Council. Skilled Worker visa com piso de 41.700 libras ou going rate. Soldadores de alta integridade tem desconto via Immigration Salary List."
+        "advice": "A engenharia está no centro das prioridades da Estratégia Industrial, com manufatura avançada, ciências da vida e infraestrutura entre os setores mapeados pelo Migration Advisory Committee. Profissionais com diploma de engenharia enquadram-se no patamar de nível superior e não dependem de listas temporárias, o que torna a rota mais previsível. O passo prático é obter o Statement of Comparability do UK ENIC para posicionar o diploma no marco de qualificações britânico."
       },
       {
-        "area": "Tecnologia e TI",
-        "advice": "Duas portas: (1) Skilled Worker para software/dados/ciber (going rate de software ~49.400 libras costuma ser o teto a bater); (2) Global Talent visa via Tech Nation para perfis reconhecidos, que da liberdade total para trocar de empregador, fazer consultoria e abrir a propria empresa. Ciberseguranca e dados sao os mais dificeis de preencher."
+        "area": "Construção civil",
+        "advice": "É a área onde os ofícios de nível intermediário mais preservaram acesso ao visto patrocinado. Pedreiros, telhadistas, ardosistas, carpinteiros, marceneiros, cantoneiros e retrofitters constam da Immigration Salary List, com salário mínimo reduzido de 33.400 libras anuais. A ressalva é temporal, porque essa listagem expira em 31 de dezembro de 2026 e o regime seguinte depende das recomendações finais do Migration Advisory Committee, previstas para julho de 2026."
       },
       {
-        "area": "Ciencias da vida e pesquisa",
-        "advice": "Cientistas biologicos e biomedicos estao na Immigration Salary List, com piso reduzido. Pesquisadores academicos tem rota Global Talent endossada por Royal Society, Royal Academy of Engineering, British Academy ou UK Research and Innovation, com decisao de endosso em 5 a 8 semanas."
+        "area": "Educação e ensino",
+        "advice": "Professores com diploma se enquadram no patamar de nível superior da rota Skilled Worker, sem depender de listas de escassez. O ponto de atenção é o reconhecimento da habilitação docente estrangeira, que passa por avaliação específica e pode exigir comprovação adicional junto às autoridades educacionais de cada nação do Reino Unido. O Statement of Comparability do UK ENIC costuma ser exigido nos processos de candidatura."
       },
       {
-        "area": "Construcao e oficios",
-        "advice": "Setor em retracao no agregado, mas oficios especificos como carpinteiro/marceneiro e soldador estao na Immigration Salary List, com piso reduzido. A Temporary Shortage List (RQF 3 a 5) pode abrir mais ocupacoes de construcao apos a revisao do Stage 2 da MAC prevista para julho 2026. Atencao: ISL e TSL expiram em 31 de dezembro de 2026, salvo extensao."
+        "area": "Hotelaria, turismo e alimentação",
+        "advice": "É a área com maior perda de acesso à imigração de trabalho. Com o patamar geral elevado ao nível RQF 6 e a ausência da maioria das funções de hospitalidade nas listas de escassez vigentes, o patrocínio deixou de ser viável para a maior parte dos cargos operacionais. Quem já está legalmente no país com direito ao trabalho continua encontrando oportunidades, mas a entrada direta do exterior por essa via está praticamente fechada."
       },
       {
-        "area": "Artes e cultura",
-        "advice": "Global Talent visa via Arts Council England e parceiros (arquitetura, moda, cinema e TV, e design, novo desde marco 2026). Permite autonomia, direcao de empresa e troca livre de empregador. Musicos de orquestra constam na Immigration Salary List (SOC 3415)."
+        "area": "Artes e indústrias criativas",
+        "advice": "Há um paradoxo a considerar. Artistas, músicos, dançarinos, coreógrafos, produtores e diretores artísticos constam da Immigration Salary List, ao mesmo tempo em que o setor de artes, entretenimento e recreação registrou a segunda maior queda percentual de vagas do país, de 25,2% no trimestre de março a maio de 2026 ante igual período de 2025, atrás apenas de atividades imobiliárias, que recuaram 28,1%. A leitura correta é que existe escassez de perfis muito específicos, e não um mercado aquecido, o que exige currículo internacional forte e vínculo prévio com produtora ou instituição patrocinadora."
       },
       {
-        "area": "Empreendedor / quero abrir negocio",
-        "advice": "Innovator Founder visa para negocio novo, inovavel e escalavel, com endosso obrigatorio de um dos corpos endossantes (UK Endorsing Services, Innovator International, Envestors). Sem exigencia fixa de 200 mil libras como na antiga rota Tier 1; foco e inovacao e fundos realistas. ILR possivel em 3 anos. Quem ja tem talento reconhecido pode preferir a Global Talent, que tambem permite autonomia total."
+        "area": "Ciências da vida e laboratório",
+        "advice": "Setor prioritário da Estratégia Industrial, com técnicos de laboratório, técnicos farmacêuticos e cientistas biológicos na lista oficial de escassez. Para quem tem diploma na área, a rota de nível superior é a mais estável. Para nível técnico, é essencial verificar se o código de ocupação permanece listado antes de fechar contrato, dada a data de corte de 31 de dezembro de 2026."
+      },
+      {
+        "area": "Serviços financeiros",
+        "advice": "Classificado entre os setores prioritários da Estratégia Industrial na revisão da lista temporária de escassez, inclusive para funções técnicas de nível intermediário. Profissionais graduados em finanças, contabilidade e atuária tendem a superar com folga o piso salarial de 41.700 libras nos grandes centros, especialmente em Londres, o que simplifica o enquadramento na rota patrocinada."
+      },
+      {
+        "area": "Setor público e serviço civil",
+        "advice": "A remuneração regular do setor público subiu 5,1% no ano até fevereiro a abril de 2026, contra 2,9% no privado, o que torna a área relativamente mais atrativa em termos de recomposição salarial. A limitação é de elegibilidade, porque muitos cargos do serviço civil exigem nacionalidade britânica, de país da Commonwealth ou status específico, além de verificações de segurança que restringem candidatos recém-chegados."
       }
     ],
     "salaries": [
       {
-        "role": "Salario medio semanal (todos os setores, abril 2026)",
-        "range": "~753 libras/semana (total), ~697 libras/semana (regular)",
+        "role": "Mediana nacional, trabalhadores em tempo integral (todas as ocupações)",
+        "range": "39.039 libras por ano (abril de 2025)",
         "source": {
-          "label": "ONS - Average weekly earnings in Great Britain (junho 2026)",
-          "url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/averageweeklyearningsingreatbritain/june2026",
+          "label": "ONS, Employee earnings in the UK: 2025",
+          "url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/2025",
           "official": true
         }
       },
       {
-        "role": "Piso geral Skilled Worker visa (ou going rate, o que for maior)",
-        "range": "41.700 libras/ano (piso horario ~17,13 libras)",
+        "role": "Mediana semanal, trabalhadores em tempo integral",
+        "range": "766,60 libras por semana (abril de 2025), alta nominal de 5,3% no ano",
         "source": {
-          "label": "GOV.UK - Skilled Worker visa",
-          "url": "https://www.gov.uk/skilled-worker-visa",
+          "label": "ONS, Employee earnings in the UK: 2025",
+          "url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/2025",
           "official": true
         }
       },
       {
-        "role": "Piso ocupacoes na Immigration Salary List (80% do piso geral)",
-        "range": "a partir de ~33.400 libras/ano",
+        "role": "Piso salarial geral do visto Skilled Worker",
+        "range": "41.700 libras por ano, ou a going rate da ocupação, o que for maior",
         "source": {
-          "label": "GOV.UK - Immigration Salary List",
-          "url": "https://www.gov.uk/government/publications/skilled-worker-visa-immigration-salary-list/skilled-worker-visa-immigration-salary-list",
-          "official": true
-        }
-      },
-      {
-        "role": "Health and Care Worker visa (piso)",
-        "range": "a partir de 25.000 libras/ano ou going rate",
-        "source": {
-          "label": "GOV.UK - Health and Care Worker visa: your job",
-          "url": "https://www.gov.uk/health-care-worker-visa/your-job",
-          "official": true
-        }
-      },
-      {
-        "role": "Enfermeiro(a) registrado(a) (SOC 2231, NHS Band 5)",
-        "range": "going rate ~31.000 libras/ano",
-        "source": {
-          "label": "GOV.UK - Health and Care Worker visa",
-          "url": "https://www.gov.uk/health-care-worker-visa/your-job",
-          "official": true
-        }
-      },
-      {
-        "role": "Engenheiro(a) de software / desenvolvedor(a) (SOC 2134)",
-        "range": "going rate ~49.400 libras/ano (~25,33/hora)",
-        "source": {
-          "label": "GOV.UK - Skilled Worker visa (going rates por SOC)",
+          "label": "GOV.UK, Skilled Worker visa: Your job",
           "url": "https://www.gov.uk/skilled-worker-visa/your-job",
           "official": true
         }
       },
       {
-        "role": "Carpinteiro(a) e marceneiro(a) (SOC 5316, ISL)",
-        "range": "33.400 (padrao) / 27.800 (reduzido) libras/ano",
+        "role": "Piso reduzido para ocupações da Immigration Salary List e da Temporary Shortage List",
+        "range": "33.400 libras por ano, ou a going rate aplicável, o que for maior",
         "source": {
-          "label": "GOV.UK - Immigration Salary List",
-          "url": "https://www.gov.uk/government/publications/skilled-worker-visa-immigration-salary-list/skilled-worker-visa-immigration-salary-list",
+          "label": "GOV.UK, Skilled Worker visa: When you can be paid less",
+          "url": "https://www.gov.uk/skilled-worker-visa/when-you-can-be-paid-less",
           "official": true
         }
       },
       {
-        "role": "Soldador(a) de alta integridade (SOC 5213, ISL)",
-        "range": "34.900 (padrao) / 29.500 (reduzido) libras/ano",
+        "role": "Piso para agentes penitenciários (extensão ou troca de rota)",
+        "range": "31.300 libras por ano, ou a lower going rate da ocupação, o que for maior",
         "source": {
-          "label": "GOV.UK - Immigration Salary List",
-          "url": "https://www.gov.uk/government/publications/skilled-worker-visa-immigration-salary-list/skilled-worker-visa-immigration-salary-list",
-          "official": true
-        }
-      },
-      {
-        "role": "Cientista biologico/biomedico (SOC 2112, ISL)",
-        "range": "40.300 (padrao) / 30.700 (reduzido) libras/ano",
-        "source": {
-          "label": "GOV.UK - Immigration Salary List",
-          "url": "https://www.gov.uk/government/publications/skilled-worker-visa-immigration-salary-list/skilled-worker-visa-immigration-salary-list",
-          "official": true
-        }
-      },
-      {
-        "role": "Auxiliar de enfermagem (SOC 6131, ISL)",
-        "range": "25.000 libras/ano (novas aplicacoes ate dez/2026)",
-        "source": {
-          "label": "GOV.UK - Immigration Salary List",
-          "url": "https://www.gov.uk/government/publications/skilled-worker-visa-immigration-salary-list/skilled-worker-visa-immigration-salary-list",
+          "label": "GOV.UK, Skilled Worker visa: Your job",
+          "url": "https://www.gov.uk/skilled-worker-visa/your-job",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Para trabalhar no Reino Unido como estrangeiro voce quase sempre precisa de um visto com patrocinio de empregador licenciado (sponsor licence). A rota principal e o Skilled Worker visa: desde 22 de julho de 2025, exige salario de pelo menos 41.700 libras por ano OU a going rate da ocupacao (o que for maior), e qualificacao em nivel de graduacao (RQF 6). Ha descontos: ocupacoes na Immigration Salary List (ISL) podem pagar 80% do piso (a partir de ~33.400 libras), e new entrants (sub-26, recem-formados, em treinamento profissional) podem usar piso reduzido (~33.400 libras e 70% a 80% da going rate) por tempo limitado. Todos os calculos sao sobre semana de 37,5 horas, entao confirme pela taxa horaria. Saude e cuidado tem rota dedicada (Health and Care Worker visa) com piso de 25.000 libras ou going rate. Atencao critica: care workers e senior care workers estao fechados a novos aplicantes estrangeiros desde julho de 2025, e a ISL inteira expira em 31 de dezembro de 2026 (care workers SOC 6135/6136 marcados ate julho 2028). A Temporary Shortage List cobre ocupacoes de qualificacao media (RQF 3 a 5) ate dezembro 2026, sujeita a revisao da MAC em julho 2026. Profissoes regulamentadas exigem registro no orgao competente ANTES de exercer: enfermeiros no NMC, medicos no GMC (em geral via PLAB), engenheiros chartered no Engineering Council, professores e advogados em seus reguladores. Pos-Brexit, o reconhecimento automatico de diplomas da UE acabou: mesmo profissionais da UE passam por avaliacao completa. Para empreender, use Innovator Founder visa (negocio inovavel/escalavel com endosso; permite ser diretor e autonomo, ILR em 3 anos) ou Global Talent visa (talento reconhecido; permite emprego, autonomia, direcao de empresa e consultoria sem avisar o Home Office). Quase todas as rotas exigem comprovacao de ingles e pagamento do Immigration Health Surcharge (em geral ~1.035 libras por ano por pessoa).",
+    "foreignerRules": "O acesso legal ao trabalho no Reino Unido passa, na esmagadora maioria dos casos, pelo visto Skilled Worker, que é integralmente dependente de patrocínio. O candidato precisa de um Certificate of Sponsorship emitido por empregador previamente licenciado pelo Home Office, não sendo possível obter o visto primeiro e procurar emprego depois. O visto pode ser concedido por até cinco anos antes da necessidade de extensão, e após cinco anos de residência abre-se a possibilidade de pedir residência permanente.\n\nO aperto mais significativo ocorreu em 22 de julho de 2025, quando o patamar geral de qualificação subiu do nível RQF 3 para o nível RQF 6, equivalente a formação de grau superior. Desde então, as ocupações classificadas como higher skilled são automaticamente elegíveis, enquanto as de nível intermediário (medium skilled) só se qualificam se constarem da Immigration Salary List, da Temporary Shortage List, ou no caso específico de agentes penitenciários em extensão ou troca de rota. Quem obteve certificado de patrocínio antes de 22 de julho de 2025 preserva direitos de transição para extensões em nível intermediário.\n\nO piso salarial padrão é de 41.700 libras anuais ou a going rate da ocupação, o que for maior. As going rates são calculadas a partir de dados salariais do ONS e publicadas por código de ocupação (SOC) pelo governo. Existem reduções previstas: 33.400 libras anuais para ocupações da Immigration Salary List e da Temporary Shortage List, e a possibilidade de receber entre 70% e 90% da going rate padrão para candidatos menores de 26 anos, recém-graduados, portadores de doutorado relevante em áreas STEM ou pessoas em formação profissional regulamentada, sempre respeitando o piso de 33.400 libras.\n\nDuas listas de escassez estão em vigor e ambas expiram em 31 de dezembro de 2026. A Immigration Salary List reúne cerca de duas dezenas de ocupações válidas em todo o Reino Unido, mais entradas específicas da Escócia (mestres de embarcação pesqueira, cientistas químicos da indústria nuclear e construtores e reparadores navais). A Temporary Shortage List, criada em julho de 2025, cobre funções de nível RQF 3 a 5 consideradas críticas para a Estratégia Industrial e para infraestrutura, mas impõe uma restrição pesada: trabalhadores patrocinados em ocupação da lista temporária a partir de 22 de julho de 2025 não podem trazer cônjuge, parceiro ou filhos como dependentes. O Migration Advisory Committee analisou 82 ocupações na primeira etapa da revisão e deve entregar as recomendações finais em julho de 2026, definindo o regime que valerá a partir de 2027.\n\nA exigência de inglês subiu junto com o resto. O nível requerido passou a ser B2 do Quadro Comum Europeu de Referência, contra o B1 anterior, e quem estende visto obtido antes de 8 de janeiro de 2026 permanece sujeito ao nível B1. A comprovação pode ser feita por qualificação escolar britânica em inglês iniciada antes dos 18 anos, por diploma de universidade britânica ensinado em inglês, por diploma estrangeiro ensinado em inglês com verificação pelo Ecctis, ou por aprovação em um Secure English Language Test (SELT) de provedor aprovado. Nacionais de dezessete países de língua inglesa, entre eles Estados Unidos, Canadá, Austrália e Nova Zelândia, estão dispensados, assim como médicos, dentistas, enfermeiros, parteiras e veterinários cuja proficiência tenha sido avaliada pelo respectivo conselho profissional.\n\nO reconhecimento de diploma estrangeiro não é automático nem obrigatório para o visto em si, mas é decisivo na candidatura ao emprego. O órgão de referência é o UK ENIC, que emite o Statement of Comparability, documento que posiciona a qualificação estrangeira no marco educacional britânico. É importante saber que o Statement padrão não avalia notas, disciplinas específicas nem proficiência em inglês, e não foi desenhado para uso em pedidos de visto, residência ou cidadania. Profissões regulamentadas, como enfermagem, medicina, odontologia, direito e ensino, exigem além disso o registro junto ao conselho profissional competente, procedimento que corre em paralelo e costuma ser o gargalo real do cronograma.\n\nDo lado dos custos, além da taxa de solicitação do visto, o candidato paga o Immigration Health Surcharge por cada ano de permanência e precisa comprovar reserva financeira pessoal. Ocupações da Immigration Salary List têm direito a taxa de solicitação reduzida.",
     "opportunityWindows": [
-      "NHS com mais de 110 mil vagas em aberto e rota dedicada (Health and Care Worker visa), o maior empregador patrocinador do pais; enfermeiros e medicos com demanda continua",
-      "Engenharia e o unico grande setor com vagas em alta no inicio de 2026 (~127 mil vagas, +5,1%), puxado por defesa, energia e infraestrutura",
-      "Tecnologia com escassez cronica em ciberseguranca, software e dados; 75% das empresas de tech com dificuldade de contratacao",
-      "Temporary Shortage List em revisao: Stage 2 da MAC reporta em julho 2026 e pode abrir novas ocupacoes RQF 3-5 (construcao, manufatura, tech, saude de apoio, industrias criativas)",
-      "Janela de fechamento: Immigration Salary List expira em 31 de dezembro de 2026, entao quem se enquadra nos pisos reduzidos da ISL tem prazo para aproveitar",
-      "Mudanca de novembro 2025: estudantes que concluiram o curso podem trocar direto para o Innovator Founder visa sem sair do Reino Unido e iniciar autonomia com a aplicacao pendente",
-      "Global Talent agora inclui o campo de design (desde marco 2026), ampliando a rota para criativos",
-      "Innovator Founder com ILR em 3 anos, prazo mais rapido que os 5 a 10 anos de varias outras rotas"
+      "Janela até 31 de dezembro de 2026 para ocupações de nível intermediário. A Immigration Salary List e a Temporary Shortage List expiram nessa data, e o regime posterior depende das recomendações finais do Migration Advisory Committee. Quem trabalha em ofícios da construção, funções técnicas de TI ou cuidados tem um período definido para conseguir patrocínio antes de eventual perda de elegibilidade.",
+      "Recomendações finais da Temporary Shortage List previstas para julho de 2026. O Migration Advisory Committee levou 82 ocupações à segunda etapa da revisão, e o resultado definirá quais funções de nível RQF 3 a 5 seguem com acesso à rota patrocinada a partir de 2027.",
+      "Prazo de transição para cuidadores já no Reino Unido, aberto até 22 de julho de 2028. Quem entrou pela rota de cuidados antes do fechamento de julho de 2025 pode estender ou trocar de rota dentro do país, mas apenas dentro dessa janela.",
+      "Regra de transição do inglês para quem obteve visto antes de 8 de janeiro de 2026. Esses casos seguem sujeitos ao nível B1 em extensões, e não ao novo patamar B2, o que representa vantagem prática para renovações no período.",
+      "Direitos adquiridos para certificados de patrocínio emitidos antes de 22 de julho de 2025. Quem se enquadra nessa condição mantém acesso ao nível intermediário de qualificação em extensões, algo indisponível para novos entrantes.",
+      "Janela para agentes penitenciários, com certificados de patrocínio aceitos até 31 de dezembro de 2026 em casos de troca de rota e até 31 de dezembro de 2027 em extensões, sob piso salarial reduzido de 31.300 libras.",
+      "Setores prioritários da Estratégia Industrial concentram a contratação patrocinada. Manufatura avançada, digital e tecnologia, serviços financeiros, ciências da vida, serviços profissionais e construção formam o escopo mapeado oficialmente, e concentrar a busca nesses segmentos aumenta a chance de encontrar empregador licenciado."
     ],
     "jobBoards": [
       {
-        "label": "Find a job (servico oficial do DWP / governo)",
-        "url": "https://findajob.dwp.gov.uk/search",
-        "official": true
-      },
-      {
-        "label": "Find a job - pagina GOV.UK",
+        "label": "Find a job (serviço oficial do Department for Work and Pensions)",
         "url": "https://www.gov.uk/find-a-job",
         "official": true
       },
       {
-        "label": "NHS Jobs (vagas no NHS, filtro por visa sponsorship)",
-        "url": "https://www.jobs.nhs.uk/candidate/search/results?keyword=Visa+sponsorship",
+        "label": "NHS Jobs (portal oficial de vagas do sistema público de saúde)",
+        "url": "https://www.jobs.nhs.uk/",
         "official": true
       },
       {
-        "label": "GOV.UK - Finding a job (guia oficial de busca de emprego)",
-        "url": "https://www.gov.uk/browse/working/finding-job",
+        "label": "Civil Service Jobs (portal oficial do serviço civil britânico)",
+        "url": "https://www.civilservicejobs.service.gov.uk/",
         "official": true
       },
       {
-        "label": "GOV.UK - Register of licensed sponsors (para achar empregadores que patrocinam visto)",
+        "label": "Register of licensed sponsors (lista oficial de empregadores autorizados a patrocinar vistos)",
         "url": "https://www.gov.uk/government/publications/register-of-licensed-sponsors-workers",
         "official": true
+      },
+      {
+        "label": "Indeed Reino Unido",
+        "url": "https://uk.indeed.com/",
+        "official": false
+      },
+      {
+        "label": "Reed",
+        "url": "https://www.reed.co.uk/",
+        "official": false
+      },
+      {
+        "label": "Totaljobs",
+        "url": "https://www.totaljobs.com/",
+        "official": false
+      },
+      {
+        "label": "CV-Library",
+        "url": "https://www.cv-library.co.uk/",
+        "official": false
+      },
+      {
+        "label": "LinkedIn Vagas Reino Unido",
+        "url": "https://www.linkedin.com/jobs/",
+        "official": false
       }
     ],
     "sources": [
       {
-        "label": "GOV.UK - Skilled Worker visa: immigration salary list",
-        "url": "https://www.gov.uk/government/publications/skilled-worker-visa-immigration-salary-list/skilled-worker-visa-immigration-salary-list",
+        "label": "ONS, Labour market overview, UK: June 2026",
+        "url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/uklabourmarket/june2026",
         "official": true
       },
       {
-        "label": "GOV.UK - Skilled Worker visa (overview e salario)",
+        "label": "ONS, Vacancies and jobs in the UK: June 2026",
+        "url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/jobsandvacanciesintheuk/june2026",
+        "official": true
+      },
+      {
+        "label": "ONS, Employee earnings in the UK: 2025 (Annual Survey of Hours and Earnings)",
+        "url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/annualsurveyofhoursandearnings/2025",
+        "official": true
+      },
+      {
+        "label": "ONS, Unemployment rate (aged 16 and over, seasonally adjusted)",
+        "url": "https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork/unemployment/timeseries/mgsx/lms",
+        "official": true
+      },
+      {
+        "label": "GOV.UK, Skilled Worker visa (guia geral)",
         "url": "https://www.gov.uk/skilled-worker-visa",
         "official": true
       },
       {
-        "label": "GOV.UK - Health and Care Worker visa: your job",
-        "url": "https://www.gov.uk/health-care-worker-visa/your-job",
+        "label": "GOV.UK, Skilled Worker visa: Your job (patamares de qualificação e salário)",
+        "url": "https://www.gov.uk/skilled-worker-visa/your-job",
         "official": true
       },
       {
-        "label": "GOV.UK - Innovator Founder visa (overview)",
-        "url": "https://www.gov.uk/innovator-founder-visa",
+        "label": "GOV.UK, Skilled Worker visa: When you can be paid less",
+        "url": "https://www.gov.uk/skilled-worker-visa/when-you-can-be-paid-less",
         "official": true
       },
       {
-        "label": "GOV.UK - Global Talent visa (overview)",
-        "url": "https://www.gov.uk/global-talent",
+        "label": "GOV.UK, Skilled Worker visa: Knowledge of English",
+        "url": "https://www.gov.uk/skilled-worker-visa/knowledge-of-english",
         "official": true
       },
       {
-        "label": "GOV.UK - Global Talent (digital technology / Tech Nation)",
-        "url": "https://www.gov.uk/global-talent-digital-technology",
+        "label": "GOV.UK, Skilled Worker visa: immigration salary list",
+        "url": "https://www.gov.uk/government/publications/skilled-worker-visa-immigration-salary-list",
         "official": true
       },
       {
-        "label": "GOV.UK - Temporary Shortage List: Stage 1 report",
+        "label": "GOV.UK, Migration Advisory Committee, Temporary Shortage List: Stage 1 report",
         "url": "https://www.gov.uk/government/publications/temporary-shortage-list-stage-1-report/temporary-shortage-list-stage-1-report-accessible",
         "official": true
       },
       {
-        "label": "ONS - Average weekly earnings in Great Britain (junho 2026)",
-        "url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/averageweeklyearningsingreatbritain/june2026",
+        "label": "UK ENIC, Statement of Comparability (reconhecimento de qualificações estrangeiras)",
+        "url": "https://www.enic.org.uk/individuals/statement-of-comparability",
         "official": true
       },
       {
-        "label": "ONS - Earnings and working hours",
-        "url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours",
+        "label": "House of Commons Library, UK labour market statistics (briefing parlamentar)",
+        "url": "https://commonslibrary.parliament.uk/research-briefings/cbp-9366/",
         "official": true
-      },
-      {
-        "label": "NMC - Register as a nurse trained in the EU/EEA",
-        "url": "https://www.nmc.org.uk/registration/joining-the-register/register-nurse-midwife/trained-in-the-eu-or-eea/",
-        "official": true
-      },
-      {
-        "label": "GMC - Acceptable overseas qualifications for doctors",
-        "url": "https://www.gmc-uk.org/registration-and-licensing/join-our-registers/before-you-apply-guide-for-doctors/acceptable-overseas-qualifications",
-        "official": true
-      },
-      {
-        "label": "GOV.UK - Regulated Professions Register",
-        "url": "https://www.regulated-professions.service.gov.uk/professions/registered-nurse",
-        "official": true
-      },
-      {
-        "label": "NHS Employers - Health and Care Worker visa salary threshold",
-        "url": "https://www.nhsemployers.org/news/health-and-care-worker-visa-salary-threshold",
-        "official": true
-      },
-      {
-        "label": "Career Moves Group - British Job Market 2026 (analise de mercado)",
-        "url": "https://www.careermovesgroup.co.uk/blog/2026/01/british-job-market",
-        "official": false
-      },
-      {
-        "label": "CareerMetrics - UK sector vacancies 2026 (analise de vagas por setor)",
-        "url": "https://careermetrics.co.uk/blog/uk-sector-vacancies-march-2026-who-is-hiring/",
-        "official": false
-      },
-      {
-        "label": "AYJ Solicitors - Skilled Worker going rates 2026 (corroboracao de going rates)",
-        "url": "https://ayjsolicitors.com/skilled-worker-going-rates/",
-        "official": false
       }
     ]
   },
   "fr": {
-    "updatedAt": "2026-06-22",
-    "overview": "A Franca entra em 2026 com um mercado de trabalho de duas faces. De um lado, o desemprego voltou a subir. O INSEE registrou taxa de 8,1% no primeiro trimestre de 2026, alta de 0,2 ponto no trimestre e de 0,7 ponto em um ano, o equivalente a 2,6 milhoes de desempregados, com o desemprego dos jovens de 15 a 24 anos em 21,1%. A taxa de atividade, porem, bateu recorde historico de 75,6%, sinal de que mais gente esta no mercado mesmo com a economia desacelerando. Do outro lado, a escassez de mao de obra continua estrutural. A pesquisa Besoins en Main d Oeuvre (BMO) 2026 do France Travail aponta 2,28 milhoes de projetos de contratacao para o ano, com 43,8% deles considerados dificeis de preencher, uma melhora frente aos 50,1% de 2025, mas ainda alto. Na pratica, isso cria janelas claras para o imigrante qualificado ou disposto a entrar em profissoes de escassez. Saude, restauracao, agricultura sazonal, construcao tecnica, industria e digital concentram a demanda. O governo mantem a lista oficial de metiers en tension, fixada pelo arrete de 21 de maio de 2025, que permite contratar nao europeus sem teste de mercado de trabalho e abre caminho de regularizacao por trabalho ate 31/12/2026. Para perfis qualificados, o Passeport Talent oferece carta de 4 anos com regime familiar facilitado. O recado e direto. Para quem chega de fora, o caminho mais rapido passa por onde os franceses faltam, e quase sempre exige falar frances e, em profissoes regulamentadas, validar o diploma antes de exercer.",
+    "updatedAt": "2026-07-20",
+    "overview": "O mercado de trabalho francês entrou em 2026 em fase de esfriamento claro. Segundo o Insee, a taxa de desemprego (conceito BIT) chegou a 8,1% da população ativa no primeiro trimestre de 2026, alta de 0,2 ponto sobre o quarto trimestre de 2025 e de 0,7 ponto sobre o primeiro trimestre de 2025, o nível mais alto em cinco anos. São 2,6 milhões de desempregados, com aumento de 68 mil pessoas em um trimestre. O desemprego entre os jovens de 15 a 24 anos atingiu 21,1% no primeiro trimestre de 2026, o que representa alta de 2 pontos na comparação anual, ainda que com recuo de 0,4 ponto em relação ao trimestre anterior, enquanto a faixa de 25 a 49 anos ficou em 7,3% e a de 50 anos ou mais em 5,2%. A taxa de emprego das pessoas de 15 a 64 anos ficou em 69,5% e o chamado halo do desemprego (quem quer trabalhar mas não é contabilizado como desempregado) somava 1,817 milhão de pessoas, ou 4,3% da população de 15 a 64 anos.\n\nDo lado da demanda, a pesquisa Besoins en Main-d'Oeuvre 2026 do France Travail registrou 2,275 milhões de projetos de recrutamento para o ano, queda de 6,5% em relação a 2025. A retração é bem menos brutal que a do ano anterior, quando o recuo foi de 12,5%, o que sugere estabilização e não colapso. O dado mais relevante para quem procura emprego é outro: a proporção de vagas consideradas difíceis de preencher caiu para 43,8%, contra 50,1% em 2025. Ou seja, há menos vagas abertas, mas a concorrência por candidato voltou a ficar mais equilibrada e o empregador está menos desesperado do que em 2022 e 2023. Cerca de 41% dos projetos correspondem a contratos por tempo indeterminado (CDI) e dois em cada três recrutamentos vêm de pequenas e médias empresas, não de grandes grupos, que cortaram intenções de contratação em 12,8%.\n\nA distribuição setorial mostra onde o estrangeiro tem chance real. Saúde, ação social e serviços à pessoa lideram com 322 mil projetos e 54% de dificuldade de recrutamento, seguidos por hotelaria e restauração (319 mil projetos, 44% de dificuldade), comércio e distribuição (264 mil, 36%), indústria (211 mil, 48%) e agricultura (193 mil, 39%). Geograficamente, a Île-de-France concentra 388.806 projetos, à frente de Auvergne-Rhône-Alpes (255.407) e Nouvelle-Aquitaine (248.798). Vale notar que boa parte do volume agrícola é sazonal: mais de 95% dos recrutamentos em viticultura e arboricultura são de temporada.\n\nPara o candidato estrangeiro, o cenário de 2026 combina duas forças opostas. De um lado, a lista oficial de métiers en tension (atualizada pelo arrêté de 21 de maio de 2025) segue dispensando o empregador de comprovar que não achou candidato local, o que encurta muito o caminho da autorização de trabalho em profissões específicas por região. De outro, as exigências de integração ficaram mais duras: desde 1º de janeiro de 2026, a primeira carta de residência plurianual passou a exigir nível A2 de francês, aprovação no exame cívico e assinatura do contrato de compromisso republicano, regras derivadas da lei de 26 de janeiro de 2024 e detalhadas por decreto de 15 de julho de 2025. Na prática, quem tem qualificação técnica escassa e francês funcional encontra portas abertas; quem depende só de mão de obra genérica, sem idioma, enfrenta um mercado mais apertado do que há dois anos.",
     "hotSectors": [
-      "Saude e medico-social: enfermeiros, aides-soignants, medicos, cuidadores",
-      "Restauracao e hotelaria: cozinha, atendimento, polivalentes",
-      "Agricultura e agroalimentar: viticultores, arboricultores, sazonais",
-      "Digital e cibersseguranca: 84,2 mil projetos, cerca de 49,5% dificeis de preencher",
-      "Industria qualificada, nuclear e energia: industrias extrativas e energeticas com projetos +24,8% sobre 2025",
-      "Construcao tecnica e BTP: recrutamento cai em volume, mas escassez de qualificados persiste, com 65% dos postos dificeis",
-      "Logistica, manutencao e limpeza"
+      "Saúde, ação social e serviços à pessoa, o setor com maior volume de contratação do país (322 mil projetos em 2026) e o maior índice de dificuldade de recrutamento, 54%",
+      "Hotelaria e restauração, com 319 mil projetos de recrutamento e forte peso da temporada turística de verão e de inverno",
+      "Indústria e manufatura, que resistiu melhor que a média com recuo limitado e 211 mil intenções de contratação, mantendo 48% de vagas difíceis de preencher",
+      "Agricultura e viticultura, com 193 mil projetos concentrados em trabalho sazonal de colheita, poda e vindima",
+      "Construção civil e obras públicas, com demanda persistente por pedreiros, carpinteiros e eletricistas",
+      "Renovação energética de edifícios, nicho em expansão puxado pelas metas de eficiência térmica",
+      "Tecnologia da informação, especialmente cibersegurança, ciência de dados e perfis ligados a inteligência artificial, onde a demanda supera a capacidade de formação",
+      "Comércio e distribuição, com 264 mil projetos, ainda que com a menor taxa de dificuldade entre os grandes setores (36%)"
     ],
     "coolingSectors": [
-      "Construcao e BTP em volume bruto: queda de cerca de 16% nos projetos de contratacao em 2026, o maior recuo entre os grandes setores, apesar da falta de qualificados",
-      "Trabalho temporario e interim na construcao: menos 4% no primeiro trimestre de 2026",
-      "Mercado geral em desaceleracao: total de projetos de contratacao caiu 6,5% frente a 2025"
+      "Grandes grupos empresariais em geral, que reduziram intenções de contratação em 12,8% em 2026 segundo o France Travail, enquanto as PME sustentaram o volume",
+      "Administração pública e educação, apontadas pelo EURES entre as áreas em contração na França",
+      "Profissões jurídicas, sociais e culturais, identificadas pelo EURES como as de maior ocorrência de excedente de candidatos no país"
     ],
     "inDemandRoles": [
       {
-        "role": "Aide-soignant (auxiliar de enfermagem)",
-        "note": "62,1 mil projetos em 2026; FHF estima falta de cerca de 100 mil; profissao regulamentada, exige diploma reconhecido"
+        "role": "Auxiliar de enfermagem (aide-soignant)",
+        "note": "62.100 projetos de recrutamento em 2026. Exige o diploma francês de aide-soignant ou reconhecimento de formação equivalente, além de francês de trabalho para lidar com pacientes. Setor com 54% de vagas difíceis de preencher."
       },
       {
-        "role": "Infirmier (enfermeiro)",
-        "note": "FHF estima deficit de cerca de 60 mil; profissao regulamentada, autorizacao via ARS e ordem, e EVC para diploma fora da UE"
+        "role": "Auxiliar de vida e cuidador domiciliar (aide à domicile)",
+        "note": "69.500 projetos em 2026, alta de 13,3% sobre 2025, a maior variação positiva entre as grandes ocupações. Barreira de entrada baixa em qualificação formal, mas exige francês oral e costuma pedir carteira de motorista para deslocamento entre domicílios."
       },
       {
-        "role": "Aide de cuisine e empregado polivalente de restauracao",
-        "note": "97,1 mil projetos, o metier com mais vagas na BMO 2026"
+        "role": "Enfermeiro",
+        "note": "Profissão regulamentada e listada entre as carências críticas na França e em toda a União Europeia. Para diploma de fora da UE, é necessário procedimento de autorização de exercício e comprovação de idioma."
       },
       {
-        "role": "Garcom de cafe e restaurante (serveur)",
-        "note": "cerca de 93,8 mil projetos em 2026"
+        "role": "Ajudante de cozinha e pessoal de restaurante",
+        "note": "97.100 projetos, a ocupação com maior volume do país. Entrada acessível a estrangeiro sem diploma francês, mas forte componente sazonal e contratos frequentemente por prazo determinado."
       },
       {
-        "role": "Viticultor e arboricultor (agricola sazonal)",
-        "note": "cerca de 83,8 mil projetos; agricultura tem a maior taxa de dificuldade de recrutamento do pais"
+        "role": "Garçom e atendente de sala",
+        "note": "93.800 projetos em 2026. Exige francês conversacional, já que o contato direto com cliente é a função central. Concentração em zonas turísticas e nas temporadas de verão e esqui."
       },
       {
-        "role": "Empregado de loja e repositor (employe de libre-service)",
-        "note": "cerca de 59,9 mil projetos"
+        "role": "Cozinheiro",
+        "note": "51.600 projetos. Perfil valorizado quando há experiência comprovada, e figura entre as ocupações que costumam aparecer nas listas regionais de métiers en tension."
       },
       {
-        "role": "Pedreiro, telhadista, carpinteiro, eletricista, condutor de maquinas (BTP)",
-        "note": "muito procurados para renovacao energetica e infraestrutura; 65% dos postos do BTP dificeis"
+        "role": "Viticultor e arboricultor",
+        "note": "83.800 projetos, com mais de 95% de caráter sazonal. Porta de entrada clássica para trabalho de temporada, com contratos curtos ligados à vindima e à colheita de frutas."
       },
       {
-        "role": "Especialista em cibersseguranca",
-        "note": "segmento mais tensionado do digital; ANSSI cita cerca de 15 mil postos nao preenchidos"
+        "role": "Trabalhador agrícola",
+        "note": "82.000 projetos em 2026. Trabalho fisicamente exigente, geralmente sem exigência de diploma, e acessível pelo estatuto de trabalhador sazonal."
       },
       {
-        "role": "Desenvolvedor e engenheiro de software e DevOps",
-        "note": "digital com 84,2 mil projetos e cerca de 49,5% dificeis; Passeport Talent comum nesse perfil"
+        "role": "Pedreiro, carpinteiro e eletricista",
+        "note": "Ofícios de construção citados pelo France Travail entre os mais procurados e identificados pelo EURES como o grupo com maior incidência de escassez na França. Exigem qualificação técnica comprovável e, para eletricista, habilitação reconhecida."
       },
       {
-        "role": "Operadores e tecnicos industriais qualificados, incluindo nuclear e energia",
-        "note": "industria com a menor queda, menos 2,4%; previsao de cerca de 100 mil contratacoes no nuclear ate 2035"
+        "role": "Agente de limpeza",
+        "note": "80.900 projetos em 2026. Ocupação de acesso rápido, com muitos contratos de tempo parcial e horários fracionados."
       },
       {
-        "role": "Cuidador a domicilio (aide a domicile)",
-        "note": "entre os setores que mais recrutam estrangeiros segundo o Ministerio do Interior"
+        "role": "Repositor de supermercado",
+        "note": "59.900 projetos. Vaga de entrada no comércio, com exigência linguística moderada e forte rotatividade."
+      },
+      {
+        "role": "Especialista em cibersegurança e ciência de dados",
+        "note": "Perfis de TI destacados pelo France Travail entre os mais buscados. A demanda supera largamente a oferta de formação, e é o tipo de vaga que costuma atingir os patamares salariais da carta talent."
+      },
+      {
+        "role": "Técnicos e profissionais associados de ciência e engenharia",
+        "note": "Grupo ocupacional com maior ocorrência de escassez na França segundo o relatório do EURES, o que abre espaço tanto para cidadãos da UE quanto para candidatos qualificados de fora do bloco."
       }
     ],
     "byQualification": [
       {
-        "area": "Enfermagem (formacao em enfermagem)",
-        "advice": "Demanda altissima, FHF estima falta de cerca de 60 mil enfermeiros e 100 mil aides-soignants. E profissao REGULAMENTADA. Diploma da UE ou EEE: reconhecimento e autorizacao de exercicio pela ARS, com possivel estagio de adaptacao ou prova de aptidao. Diploma fora da UE: precisa passar pelas Epreuves de Verification des Connaissances (EVC) via Centre National de Gestion. Frances obrigatorio. Vale comecar como aide-soignant enquanto valida o diploma de infirmier."
+        "area": "Saúde e enfermagem",
+        "advice": "É o setor com maior volume de contratação e maior escassez do país, mas também o mais regulamentado. Diplomas obtidos fora da União Europeia não dão direito automático ao exercício. Médicos passam pelo circuito PADHUE, que envolve as épreuves de vérification des connaissances organizadas pelo Centre National de Gestion e, em alternativa, a autorização provisória de exercício solicitada junto às Agences Régionales de Santé, com janelas de depósito fixas ao longo do ano. Enfermeiros e auxiliares seguem procedimento próprio de autorização. Recomenda-se iniciar o reconhecimento antes de negociar contrato, porque o prazo é longo. Nível avançado de francês é condição prática, não formalidade."
       },
       {
-        "area": "Medicina e profissoes de saude (medico, dentista, parteira, farmaceutico)",
-        "advice": "Alta carencia, sobretudo no interior, nos chamados desertos medicos. Quem tem diploma fora da UE (PADHUE) precisa das EVC organizadas pelo Centre National de Gestion antes de exercer. Caminho longo, mas com demanda real e elegibilidade ao Passeport Talent salarie qualifie."
+        "area": "Tecnologia da informação",
+        "advice": "É a área onde o estrangeiro qualificado tem o caminho mais curto. Cibersegurança, dados e inteligência artificial concentram a demanda que a formação local não cobre. Salários de cadre costumam ultrapassar o limiar de 39.582 euros brutos anuais da carta talent-salarié qualifié, o que dispensa a autorização de trabalho e o imposto sobre emprego de estrangeiro. Inglês é aceito em parte das empresas de tecnologia, sobretudo em Paris, Toulouse e Lyon, mas o francês continua sendo diferencial de contratação e requisito para renovar o título de residência."
       },
       {
-        "area": "TI, engenharia de software e cibersseguranca",
-        "advice": "Setor digital com 84,2 mil projetos e quase metade dificeis de preencher; cibersseguranca e o mais carente, ANSSI cerca de 15 mil postos. Profissao NAO regulamentada, basta contrato e qualificacao. Salario costuma ultrapassar o limiar do Passeport Talent salarie qualifie, cerca de 39.582 EUR por ano em 2026, ou ate a Carte Bleue Europeenne, cerca de 59.373 EUR por ano."
+        "area": "Engenharia e indústria",
+        "advice": "A indústria resistiu melhor que a média em 2026, com 211 mil intenções de contratação e 48% de vagas difíceis de preencher. Técnicos e profissionais associados de ciência e engenharia formam o grupo com maior incidência de escassez segundo o EURES. Vale pedir a attestation de comparabilité do diploma ao centro ENIC-NARIC France para que o empregador entenda o nível da formação. Perfis de engenharia com salário na faixa de cadre acessam a carta talent, e os mais seniores podem alcançar o patamar da carte bleue européenne."
       },
       {
-        "area": "Engenharia e industria (mecanica, energia, nuclear)",
-        "advice": "Industria foi o setor mais resiliente, queda de so 2,4% nos projetos, e o nuclear preve cerca de 100 mil contratacoes ate 2035. Engenheiros e tecnicos qualificados com bom salario entram facil pelo Passeport Talent. Exercer engenharia nao e regulamentado, mas reconhecimento via ENIC-NARIC ajuda na contratacao."
+        "area": "Construção civil",
+        "advice": "Pedreiro, carpinteiro e eletricista aparecem entre os ofícios mais buscados e vários deles constam das listas regionais de métiers en tension, o que dispensa o empregador de publicar a vaga por três semanas antes de pedir a autorização de trabalho. É essencial conferir a lista da região específica onde se pretende trabalhar, porque a lista é regionalizada e não nacional. Habilitações de segurança e certificações técnicas pesam mais que diploma acadêmico."
       },
       {
-        "area": "Construcao civil e oficios tecnicos (BTP)",
-        "advice": "Pedreiro, telhadista, carpinteiro, eletricista e condutor de obras seguem em forte escassez, 65% dos postos dificeis, apesar da queda no volume geral. Muitos desses oficios estao na lista de metiers en tension, o que facilita autorizacao de trabalho e regularizacao. Bom para quem tem experiencia pratica mesmo sem diploma superior."
+        "area": "Hotelaria e restauração",
+        "advice": "Com 319 mil projetos, é a porta de entrada mais acessível em termos de qualificação formal, sobretudo em cozinha. Para funções de sala, o francês conversacional é requisito real. O setor é altamente sazonal, concentrado no litoral e nos Alpes, e boa parte dos contratos é por prazo determinado, o que direciona o candidato para a carta travailleur temporaire e não para a carta salarié."
       },
       {
-        "area": "Hotelaria, restauracao e turismo",
-        "advice": "Maior volume de vagas do pais, cozinha 97,1 mil e garcom 93,8 mil. Entrada mais acessivel para quem nao tem diploma superior; varios cargos estao em metiers en tension. Frances de atendimento e diferencial. Bom ponto de partida para construir trajetoria e depois migrar de titulo de residencia."
+        "area": "Agricultura e viticultura",
+        "advice": "Viticultores, arboricultores e trabalhadores agrícolas somam mais de 165 mil projetos, com mais de 95% de natureza sazonal. É o canal mais direto para uma primeira experiência legal na França, via estatuto de trabalhador sazonal, mas não constrói residência de longo prazo por si só. As campanhas de recrutamento se concentram nos meses que antecedem cada colheita, com a vindima acontecendo tipicamente entre agosto e outubro."
       },
       {
-        "area": "Agricultura e agroalimentar",
-        "advice": "Maior taxa de dificuldade de recrutamento do pais; viticultura e arboricultura com cerca de 83,8 mil projetos. Forte componente sazonal, com contratos sazonais via OFII. Tecnicos agroalimentares com bac+2 tambem em demanda. Caminho viavel para quem aceita trabalho fisico e regioes rurais."
+        "area": "Educação",
+        "advice": "O EURES aponta a educação entre as áreas em contração na França e as profissões sociais e culturais entre as de maior excedente de candidatos. O ensino público exige, em regra, aprovação em concurso e nacionalidade da União Europeia para a via de funcionário titular, o que restringe fortemente o acesso de estrangeiros de fora do bloco. Alternativas realistas passam por escolas internacionais, ensino de idiomas e contratos de vacataire, sem garantia de estabilidade."
       },
       {
-        "area": "Sem formacao superior ou requalificacao",
-        "advice": "Foco em metiers en tension acessiveis: restauracao, limpeza, aide a domicile, logistica, agricultura sazonal e ajudante de BTP. Esses setores recrutam muito estrangeiro e abrem caminho de regularizacao por trabalho ate 31/12/2026, com 12 meses de atividade num metier en tension nos ultimos 24 meses e 3 anos de residencia continua."
+        "area": "Serviços à pessoa e cuidado domiciliar",
+        "advice": "O aide à domicile foi a ocupação de maior crescimento em 2026, com alta de 13,3%. A qualificação formal exigida é baixa, o que torna a área atrativa para quem chega sem diploma reconhecido, mas o francês oral é indispensável e a carteira de motorista costuma ser exigida. Muitos contratos são de tempo parcial, então convém verificar a carga horária efetiva antes de contar com o salário para fins de título de residência."
+      },
+      {
+        "area": "Áreas jurídicas, sociais e culturais",
+        "advice": "O EURES identifica esses grupos como os de maior excedente de candidatos na França. Diplomas jurídicos estrangeiros praticamente não têm transferibilidade, já que o exercício da advocacia exige formação e habilitação francesas. Para quem vem dessas áreas, o caminho mais viável costuma ser a requalificação para funções administrativas, de conformidade ou de recursos humanos dentro de setores aquecidos."
       }
     ],
     "salaries": [
       {
-        "role": "Salario medio nacional, todas as profissoes",
-        "range": "cerca de 2.730 EUR liquidos por mes, 3.602 EUR brutos",
+        "role": "Salário mínimo legal (SMIC), bruto mensal para 35 horas semanais",
+        "range": "1.867,02 euros brutos por mês (12,31 euros por hora), equivalentes a cerca de 1.477,93 euros líquidos, valores em vigor desde 1º de junho de 2026 após reajuste de 2,41%",
         "source": {
-          "label": "INSEE, via sintese de imprensa",
-          "url": "https://www.insee.fr/fr/statistiques/4805248",
+          "label": "Service-Public.fr, Governo da França",
+          "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18916?lang=fr",
           "official": true
         }
       },
       {
-        "role": "Salario mediano nacional",
-        "range": "cerca de 2.190 EUR liquidos por mes",
+        "role": "Salário médio do setor privado (equivalente tempo integral)",
+        "range": "2.733 euros líquidos por mês em 2024",
         "source": {
-          "label": "INSEE, via sintese de imprensa",
-          "url": "https://www.insee.fr/fr/statistiques/4805248",
+          "label": "Insee, Les salaires dans le secteur privé en 2024",
+          "url": "https://www.insee.fr/fr/statistiques/8657156",
           "official": true
         }
       },
       {
-        "role": "SMIC, salario minimo, tempo integral 35h",
-        "range": "1.823,03 EUR brutos por mes, cerca de 1.443 EUR liquidos, a partir de 01/01/2026; 12,02 EUR por hora",
+        "role": "Salário mediano do setor privado (equivalente tempo integral)",
+        "range": "2.190 euros líquidos por mês em 2024, ou seja, metade dos assalariados recebe menos que isso",
         "source": {
-          "label": "Service-Public e Legifrance, SMIC 2026",
-          "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2300",
+          "label": "Insee, Les salaires dans le secteur privé en 2024",
+          "url": "https://www.insee.fr/fr/statistiques/8657156",
           "official": true
         }
       },
       {
-        "role": "Desenvolvedor de software, CDI cerca de 5 anos",
-        "range": "cerca de 3.100 EUR liquidos por mes, cerca de 48.000 EUR brutos por ano",
+        "role": "Cadres (quadros superiores e profissões intelectuais)",
+        "range": "4.629 euros líquidos por mês em 2024 (média, equivalente tempo integral)",
         "source": {
-          "label": "Sintese de mercado, corroboracao comunitaria nao oficial",
-          "url": "https://www.meteojob.com/blog-emploi/salaire-et-remuneration/salaire-moyen-en-france-en-2026-tous-les-chiffres-par-metier",
+          "label": "Insee, Les salaires dans le secteur privé en 2024",
+          "url": "https://www.insee.fr/fr/statistiques/8657156",
           "official": true
         }
       },
       {
-        "role": "Engenheiro de informatica",
-        "range": "cerca de 49.700 EUR brutos por ano; DevOps e ciber, entrada 45.000 a 55.000 EUR",
+        "role": "Profissões intermediárias (técnicos e supervisores)",
+        "range": "2.633 euros líquidos por mês em 2024 (média, equivalente tempo integral)",
         "source": {
-          "label": "Indeed e Michael Page, corroboracao comunitaria nao oficial",
-          "url": "https://fr.indeed.com/career/ingenieur-informatique/salaries",
+          "label": "Insee, Les salaires dans le secteur privé en 2024",
+          "url": "https://www.insee.fr/fr/statistiques/8657156",
           "official": true
         }
       },
       {
-        "role": "Enfermeiro, setor saude e social, mediana",
-        "range": "cerca de 2.300 EUR liquidos por mes, varia entre hospital publico e privado",
+        "role": "Operários",
+        "range": "2.051 euros líquidos por mês em 2024 (média, equivalente tempo integral), com alta real de 1,1% no ano",
         "source": {
-          "label": "Sintese de mercado, corroboracao comunitaria nao oficial",
-          "url": "https://www.meteojob.com/blog-emploi/salaire-et-remuneration/salaire-moyen-en-france-en-2026-tous-les-chiffres-par-metier",
+          "label": "Insee, Les salaires dans le secteur privé en 2024",
+          "url": "https://www.insee.fr/fr/statistiques/8657156",
           "official": true
         }
       },
       {
-        "role": "Limiar salarial Passeport Talent salarie qualifie, referencia",
-        "range": "cerca de 39.582 EUR brutos por ano em 2026",
+        "role": "Empregados (funções administrativas e de atendimento)",
+        "range": "1.941 euros líquidos por mês em 2024 (média, equivalente tempo integral)",
         "source": {
-          "label": "Legifrance, arrete de 21/08/2025",
+          "label": "Insee, Les salaires dans le secteur privé en 2024",
+          "url": "https://www.insee.fr/fr/statistiques/8657156",
+          "official": true
+        }
+      },
+      {
+        "role": "Faixa geral do setor privado (primeiro e nono decis)",
+        "range": "Os 10% menores salários ficam abaixo de 1.492 euros líquidos por mês e os 10% maiores acima de 4.334 euros líquidos por mês, em 2024 e em equivalente tempo integral",
+        "source": {
+          "label": "Insee, Les salaires dans le secteur privé en 2024",
+          "url": "https://www.insee.fr/fr/statistiques/8657156",
+          "official": true
+        }
+      },
+      {
+        "role": "Piso salarial exigido para a carta de residência talent-salarié qualifié",
+        "range": "39.582 euros brutos por ano, conforme arrêté de 21 de agosto de 2025",
+        "source": {
+          "label": "Légifrance, Arrêté do Journal Officiel",
           "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052158119",
           "official": true
         }
       },
       {
-        "role": "Limiar salarial Carte Bleue Europeenne",
-        "range": "cerca de 59.373 EUR brutos por ano em 2026",
+        "role": "Piso salarial exigido para a carte bleue européenne",
+        "range": "59.373 euros brutos por ano, equivalentes a 1,5 vez o salário bruto anual médio de referência",
         "source": {
-          "label": "Legifrance, arrete de 21/08/2025",
-          "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052158119",
+          "label": "Service-Public.fr, ficha sobre a carta talent",
+          "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16922",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadaos da UE, EEE e Suica trabalham e empreendem na Franca sem autorizacao especifica. Para nao europeus, a regra geral exige autorizacao de trabalho atrelada a um empregador. Metiers en tension: a lista oficial foi fixada pelo arrete de 21 de maio de 2025. Para profissoes e regioes dessa lista, o empregador pode contratar um nao europeu SEM precisar publicar a vaga antes, ou seja, com dispensa do teste de mercado de trabalho. Ate 31/12/2026 vigora ainda uma via de regularizacao por trabalho: o trabalhador em situacao irregular pode pedir titulo temporario de 1 ano se exerceu atividade assalariada num metier en tension por pelo menos 12 dos ultimos 24 meses, reside de forma ininterrupta ha pelo menos 3 anos e segue nesse metier ao pedir. Passeport Talent, carta plurianual de ate 4 anos com 10 categorias: para o perfil salarie qualifie exige em regra diploma equivalente a bac+3 ou 5 anos de experiencia reconhecida, contrato de pelo menos 1 ano e salario acima do limiar de referencia, cerca de 39.582 EUR brutos por ano em 2026, conforme arrete de 21 de agosto de 2025. A Carte Bleue Europeenne pede cerca de 59.373 EUR por ano. A categoria criador de empresa exige investimento minimo de 30.000 EUR e projeto viavel. O conjuge recebe titulo Passeport Talent famille e pode trabalhar sem restricao. Empreender: qualquer estrangeiro pode abrir micro-entreprise ou virar auto-entrepreneur desde que tenha titulo de residencia que autorize atividade por conta propria; europeus nao precisam. Para atividade comercial, artesanal ou liberal por mais de 3 meses existe a carte de sejour entrepreneur ou profession liberale, exigindo projeto economicamente viavel com renda ao menos igual ao SMIC. O custo do selo fiscal de primeira emissao subiu de 225 EUR para 350 EUR a partir de 01/05/2026. Profissoes regulamentadas: a Franca tem cerca de 230 profissoes regulamentadas, entre elas saude, direito e contabilidade. Quem vem de fora precisa de autorizacao da autoridade competente, como ordem, ministerio, ARS ou CNG, antes de exercer. Saude com diploma fora da UE passa pelas EVC do Centre National de Gestion; o ENIC-NARIC NAO trata diplomas de profissoes medicas e paramedicas regulamentadas, so faz comparabilidade academica geral.",
+    "foreignerRules": "Cidadãos da União Europeia, do Espaço Econômico Europeu e da Suíça trabalham na França sem qualquer autorização prévia e concorrem às vagas em igualdade com os franceses. Para nacionais de países terceiros, o princípio geral é que o emprego precede a residência: o empregador francês solicita a autorização de trabalho antes da chegada do candidato, exclusivamente pela plataforma ANEF-Immipro do Ministério do Interior, e o pedido é instruído pela DREETS regional.\n\nA instrução verifica três pontos principais. O primeiro é a chamada opposabilité de la situation de l'emploi, ou seja, se a vaga poderia ser preenchida por alguém já presente no mercado local. Se a profissão constar da lista de métiers en tension da região onde o trabalho será exercido, essa exigência cai e o empregador não precisa publicar a vaga previamente. Caso contrário, ele deve divulgá-la junto ao France Travail ou à APEC por três semanas e justificar por que nenhum candidato adequado se apresentou. O segundo ponto é a remuneração, que deve alcançar no mínimo o SMIC ou o piso da convenção coletiva aplicável. O terceiro é a idoneidade da empresa, que não pode ter condenações por trabalho ilegal ou infrações de segurança. A lista de referência é o arrêté de 21 de maio de 2025, publicado no Journal Officiel, e é organizada por região, não por país inteiro, o que torna indispensável conferir a lista da região exata do emprego pretendido.\n\nAprovada a autorização, o candidato solicita no consulado francês o visto de longa duração valendo como título de residência (VLS-TS). O contrato por tempo indeterminado leva à carta salarié, o contrato por prazo determinado leva à carta travailleur temporaire, e o trabalho de temporada leva à carta saisonnier. Existe ainda uma via paralela e mais rápida, a carta de residência plurianual talent, com validade de até quatro anos, que dispensa completamente a autorização de trabalho e o imposto sobre emprego de estrangeiro. Suas categorias incluem salarié qualifié (mediante diploma de nível mestrado ou equivalente e remuneração bruta anual igual ou superior a 39.582 euros), carte bleue européenne (a partir de 59.373 euros brutos anuais), profissões médicas e farmacêuticas, pesquisador, portador de projeto empresarial, dirigente de empresa, profissão artística e cultural e notoriedade nacional ou internacional.\n\nExiste também a admissão excepcional à residência pelo trabalho, prevista no artigo L. 435-4 do código de entrada e residência de estrangeiros, destinada a quem já trabalha na França em situação irregular numa profissão em tensão da sua região. O dispositivo exige comprovação de doze meses de trabalho ao longo dos vinte e quatro anteriores e tem prazo de encerramento fixado em 31 de dezembro de 2026.\n\nQuanto a diplomas, a França não pratica equivalência automática. O centro ENIC-NARIC France, ligado ao France Éducation International, emite a attestation de comparabilité, que situa o diploma estrangeiro no sistema francês de níveis de formação. O procedimento custa 20 euros na fase de admissibilidade e mais 100 euros na avaliação, com prazo oficial de até quatro meses após o pagamento e o recebimento do processo completo. O documento fortalece a candidatura, mas não tem valor jurídico de equivalência. Profissões regulamentadas, como saúde, direito e várias engenharias, seguem procedimentos próprios de autorização de exercício, independentes dessa atestação.\n\nSobre idioma, a regra endureceu. Desde 1º de janeiro de 2026, a obtenção da primeira carta de residência plurianual exige nível A2 de francês (oral e escrito), aprovação no exame cívico na menção correspondente e assinatura do contrato de compromisso republicano, conforme a lei de 26 de janeiro de 2024 e o decreto de 15 de julho de 2025. Os patamares sobem para a carta de residente e para a naturalização. Na prática, mesmo em setores onde o inglês é aceito no dia a dia da empresa, o francês deixou de ser opcional para quem pretende permanecer no país a médio prazo.",
     "opportunityWindows": [
-      "Lista de metiers en tension, arrete de 21/05/2025: contratacao de nao europeus sem teste de mercado de trabalho nas profissoes e regioes listadas",
-      "Regularizacao por trabalho ate 31/12/2026: titulo de 1 ano para quem trabalhou 12 dos ultimos 24 meses num metier en tension, com 3 anos de residencia continua",
-      "2,28 milhoes de projetos de contratacao na BMO 2026, com 43,8% dificeis de preencher, escassez ampla",
-      "Saude: deficit estimado de cerca de 60 mil enfermeiros e 100 mil aides-soignants segundo a FHF",
-      "Nuclear e energia: previsao de cerca de 100 mil contratacoes ate 2035; industria extrativa e energetica com projetos mais 24,8% em 2026",
-      "Cibersseguranca: cerca de 15 mil postos nao preenchidos segundo a ANSSI, e digital com cerca de 49,5% de projetos dificeis",
-      "Agricultura sazonal, viticultura e arboricultura: cerca de 83,8 mil projetos e maior taxa de dificuldade do pais, via contratos sazonais",
-      "Passeport Talent: carta de 4 anos para qualificados e criadores de empresa, investimento minimo de 30.000 EUR, com trabalho livre para o conjuge"
+      "Regularização pelo trabalho em profissão em tensão (artigo L. 435-4): o dispositivo permanece aberto para quem comprove doze meses de trabalho nos vinte e quatro anteriores em ocupação listada na sua região, e o prazo se encerra em 31 de dezembro de 2026.",
+      "Temporada agrícola e vindima: as campanhas de recrutamento se intensificam nos meses que antecedem cada colheita, e a vindima concentra as contratações tipicamente entre agosto e outubro em todas as bacias vitícolas. Mais de 95% dos recrutamentos em viticultura e arboricultura são sazonais, o que gera milhares de contratos curtos por ano.",
+      "Temporada turística de verão: hotelaria e restauração somam 319 mil projetos de recrutamento em 2026, com pico de contratação no litoral entre a primavera e o início do verão europeu.",
+      "Temporada de esqui nos Alpes e Pirineus: segundo pico anual da hotelaria e restauração, com recrutamento concentrado no outono para contratos de inverno.",
+      "Autorização provisória de exercício para médicos com diploma de fora da União Europeia (PADHUE): as janelas de depósito de candidatura para 2026 foram de 29 de setembro de 2025 a 28 de fevereiro de 2026 nas especialidades de gestão regional, e de 15 de janeiro a 30 de abril de 2026 nas de gestão nacional. As inscrições para as épreuves de vérification des connaissances de 2026 abrem a partir do segundo trimestre, junto ao Centre National de Gestion.",
+      "Atualização anual da lista de métiers en tension: como a lista é revista periodicamente por arrêté e organizada por região, vale acompanhar as publicações no Journal Officiel, já que a inclusão de uma profissão elimina a exigência de publicação prévia da vaga e encurta o processo de autorização de trabalho.",
+      "Recrutamento em pequenas e médias empresas: dois em cada três recrutamentos de 2026 vêm de PME e microempresas, enquanto os grandes grupos cortaram intenções em 12,8%. A janela real de oportunidade está no tecido empresarial local, não nas grandes marcas."
     ],
     "jobBoards": [
       {
-        "label": "France Travail (ex-Pole emploi), portal oficial de emprego",
-        "url": "https://www.francetravail.fr",
+        "label": "France Travail, serviço público de emprego da França",
+        "url": "https://www.francetravail.fr/",
         "official": true
       },
       {
-        "label": "France Travail, Mobilite internationale (recrutamento de estrangeiros)",
-        "url": "https://www.francetravail.fr/international/mobilite-internationale/accueil.html",
+        "label": "EURES, portal europeu da mobilidade profissional",
+        "url": "https://eures.europa.eu/",
         "official": true
       },
       {
-        "label": "EURES, portal europeu de emprego (rede oficial da UE)",
-        "url": "https://eures.europa.eu/index_pt",
+        "label": "ANEF-Immipro, plataforma oficial de pedido de autorização de trabalho",
+        "url": "https://administration-etrangers-en-france.interieur.gouv.fr/",
         "official": true
       },
       {
-        "label": "APEC, emprego para quadros e recem-formados",
-        "url": "https://www.apec.fr",
+        "label": "Welcome to France, portal de talentos internacionais da Business France",
+        "url": "https://welcome.businessfrance.fr/",
         "official": true
       },
       {
-        "label": "Welcome to France e Business France, talentos internacionais e vistos",
-        "url": "https://welcometofrance.com",
-        "official": true
+        "label": "APEC, associação para o emprego de quadros superiores",
+        "url": "https://www.apec.fr/",
+        "official": false
+      },
+      {
+        "label": "L'Agriculture Recrute, portal setorial de empregos agrícolas",
+        "url": "https://www.lagriculture-recrute.org/",
+        "official": false
+      },
+      {
+        "label": "HelloWork",
+        "url": "https://www.hellowork.com/",
+        "official": false
+      },
+      {
+        "label": "Indeed França",
+        "url": "https://fr.indeed.com/",
+        "official": false
+      },
+      {
+        "label": "Meteojob",
+        "url": "https://www.meteojob.com/",
+        "official": false
       }
     ],
     "sources": [
       {
-        "label": "INSEE, taxa de desemprego 1o trimestre 2026, 8,1%",
+        "label": "Insee, Informations rapides nº 113: taxa de desemprego do primeiro trimestre de 2026",
         "url": "https://www.insee.fr/fr/statistiques/8989990",
         "official": true
       },
       {
-        "label": "INSEE, L essentiel sur le chomage",
-        "url": "https://www.insee.fr/fr/statistiques/4805248",
+        "label": "Insee Première nº 2079, Les salaires dans le secteur privé en 2024",
+        "url": "https://www.insee.fr/fr/statistiques/8657156",
         "official": true
       },
       {
-        "label": "France Travail, Besoins en main d oeuvre 2026, BMO",
+        "label": "France Travail, Besoins en Main-d'Oeuvre 2026 (página do candidato)",
         "url": "https://www.francetravail.fr/candidat/decouvrir-le-marche-du-travail/besoins-en-main-doeuvre.html",
         "official": true
       },
       {
-        "label": "France Travail statistiques, Enquete BMO 2026",
-        "url": "https://www.francetravail.org/accueil/actualites/2026/enquete-bmo-2026-france-travail-deploie-sa-strategie-sectorielle-face-a-pres-de-2-3-millions-de-projets-de-recrutement.html",
+        "label": "France Travail, estratégia setorial diante de 2,3 milhões de projetos de recrutamento em 2026",
+        "url": "https://www.francetravail.org/accueil/actualites/2026/enquete-bmo-2026-france-travail-deploie-sa-strategie-sectorielle-face-a-pres-de-2-3-millions-de-projets-de-recrutement.html?type=article",
         "official": true
       },
       {
-        "label": "info.gouv.fr, lista de metiers en tension atualizada, arrete 21/05/2025",
-        "url": "https://www.info.gouv.fr/actualite/travailleurs-etrangers-la-liste-des-metiers-en-tension-actualisee",
-        "official": true
-      },
-      {
-        "label": "Ministere de l Interieur, DGEF, lista de metiers en tension para estrangeiros",
-        "url": "https://www.immigration.interieur.gouv.fr/Immigration/L-immigration-professionnelle/Liste-des-metiers-en-tension-pour-les-travailleurs-etrangers",
-        "official": true
-      },
-      {
-        "label": "Legifrance, arrete de 21/08/2025, limiares salariais Passeport Talent e Carte Bleue",
+        "label": "Légifrance, arrêté de 21 de agosto de 2025 sobre o salário bruto anual de referência das cartas talent",
         "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052158119",
         "official": true
       },
       {
-        "label": "Service-Public, Carte talent, Passeport Talent",
+        "label": "Service-Public.fr, carta de residência plurianual talent",
         "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16922",
         "official": true
       },
       {
-        "label": "Service-Public, carte entrepreneur ou profession liberale",
-        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35795",
+        "label": "Service-Public.fr, reajuste do SMIC em 1º de junho de 2026",
+        "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18916?lang=fr",
         "official": true
       },
       {
-        "label": "Service-Public, estrangeiro pode criar empresa na Franca, micro-entreprise",
-        "url": "https://entreprendre.service-public.gouv.fr/vosdroits/F22494",
+        "label": "Service-Public.fr, reconhecimento na França de diploma obtido no exterior",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F463",
         "official": true
       },
       {
-        "label": "Service-Public, profissoes paramedicas com diploma estrangeiro",
-        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3141",
+        "label": "Préfecture da Seine-Saint-Denis, procedimento de autorização de trabalho",
+        "url": "https://www.seine-saint-denis.gouv.fr/Demarches/Etrangers/Autorisation-de-travail",
         "official": true
       },
       {
-        "label": "EURES, condicoes de vida e trabalho na Franca",
-        "url": "https://eures.europa.eu/living-and-working/living-and-working-conditions-europe/living-and-working-conditions-france_en",
+        "label": "Ministério do Interior, exame cívico obrigatório a partir de 1º de janeiro de 2026",
+        "url": "https://www.interieur.gouv.fr/actualites/communiques-de-presse/a-partir-du-1er-janvier-2026-reussite-a-lexamen-civique-sera-necessaire-pour-obtenir-carte-de-sejour",
         "official": true
       },
       {
-        "label": "Observatoire des metiers du BTP, projetos de recrutamento na construcao 2026",
-        "url": "https://www.metiers-btp.fr/actualites/projets-recrutement-bmo-2026/",
-        "official": false
+        "label": "Direction générale des étrangers en France, imigração profissional e estudantil",
+        "url": "https://www.immigration.interieur.gouv.fr/limmigration-en-france/sejour-des-etrangers/limmigration-professionnelle-et-etudiante",
+        "official": true
       },
       {
-        "label": "Meteojob, salarios por profissao 2026, corroboracao comunitaria",
-        "url": "https://www.meteojob.com/blog-emploi/salaire-et-remuneration/salaire-moyen-en-france-en-2026-tous-les-chiffres-par-metier",
-        "official": false
+        "label": "EURES, informações sobre o mercado de trabalho na França",
+        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-france_en",
+        "official": true
       },
       {
-        "label": "Indeed, salario engenheiro de informatica, corroboracao comunitaria",
-        "url": "https://fr.indeed.com/career/ingenieur-informatique/salaries",
-        "official": false
+        "label": "Autoridade Europeia do Trabalho, relatório sobre escassez e excedente de mão de obra na Europa",
+        "url": "https://www.ela.europa.eu/en/publications/labour-shortages-and-surpluses-europe-2025",
+        "official": true
+      },
+      {
+        "label": "Dares, medição das tensões no mercado de trabalho",
+        "url": "https://dares.travail-emploi.gouv.fr/publication/les-tensions-sur-le-marche-du-travail-en-2024",
+        "official": true
+      },
+      {
+        "label": "Agence Régionale de Santé Grand Est, autorização provisória de exercício para praticantes com diploma de fora da União Europeia",
+        "url": "https://www.grand-est.ars.sante.fr/autorisation-dexercice-provisoire-aep-pour-les-praticiens-diplome-hors-union-europeenne-padhue-0",
+        "official": true
+      },
+      {
+        "label": "France Travail, dossiê de empregos sazonais e trabalhos agrícolas",
+        "url": "https://www.francetravail.fr/actualites/le-dossier/emplois-saisonniers/les-travaux-agricoles.html",
+        "official": true
       }
     ]
   },
   "us": {
-    "updatedAt": "2026-06-22",
-    "overview": "O mercado de trabalho dos Estados Unidos entrou em 2026 estável, mas em ritmo mais lento. O Bureau of Labor Statistics (BLS) registrou taxa de desemprego de 4,3% em maio de 2026, dentro da faixa de 4,3% a 4,5% que vigora desde julho de 2025, com a economia adicionando cerca de 172 mil vagas no mês, concentradas em lazer e hospitalidade, governo local e saude. O salario anual mediano de todas as ocupacoes ficou em US$ 49.500 (maio de 2024, OEWS). No horizonte de uma decada, o BLS projeta criacao de 5,2 milhoes de empregos entre 2024 e 2034, crescimento de 3,1%, bem abaixo dos 13% do periodo 2014 a 2024. O motor e duplo: o envelhecimento da populacao puxa a demanda por saude e cuidado, enquanto a tecnologia avancada e a IA aceleram as ocupacoes de computacao e matematica.\n\nPara o estrangeiro, o cenario combina oportunidade real com barreira de entrada elevada. As areas que mais contratam, saude e tecnologia, sao tambem as que mais usam vistos de trabalho, mas o acesso depende quase sempre de patrocinio do empregador e, em muitas profissoes reguladas, de licenca estadual e revalidacao de diploma. O ambiente regulatorio de imigracao esta em movimento: a tentativa do governo de cobrar uma taxa de US$ 100 mil por novas peticoes H-1B foi derrubada por um juiz federal em 8 de junho de 2026, decisao que o governo prometeu recorrer, mantendo incerteza para quem planeja a temporada de loteria de 2026.",
+    "updatedAt": "2026-07-20",
+    "overview": "O mercado de trabalho americano chegou ao meio de 2026 em ritmo de estabilidade morna, sem recessão e sem euforia. Segundo o Bureau of Labor Statistics, a taxa de desemprego ficou em 4,2% em junho de 2026, praticamente inalterada, com 7,1 milhões de desempregados. A folha de pagamento não agrícola cresceu apenas 57 mil postos no mês, número modesto para o tamanho da economia. A taxa de participação na força de trabalho recuou 0,3 ponto percentual, para 61,5%, e a relação emprego/população caiu para 59,0%.\n\nOs dados de rotatividade confirmam o diagnóstico de um mercado que esfriou sem quebrar. Em maio de 2026, havia 7,6 milhões de vagas em aberto (taxa de 4,6%), com 5,2 milhões de contratações no mês e 3,1 milhões de pedidos de demissão voluntária, uma taxa de 1,9% que indica trabalhadores menos confiantes em trocar de emprego. As demissões seguiram baixas, em 1,7 milhão (1,1%). Na prática, quem já está empregado tende a permanecer, e quem procura recolocação enfrenta processos mais longos e concorridos do que no ciclo aquecido de 2022 e 2023.\n\nA distribuição do crescimento é desigual e importa mais do que o número agregado. Em junho de 2026, o emprego continuou avançando em serviços profissionais e empresariais, assistência social e saúde, enquanto lazer e hospitalidade perderam postos. No horizonte mais longo, as projeções de emprego do BLS para 2024 a 2034 apontam a saúde e a assistência social como o setor de crescimento mais rápido (8,4%) e o que mais adiciona vagas em números absolutos (cerca de 2 milhões). As ocupações de computação e matemática devem crescer 10,1%, mais de três vezes a média da economia (3,1%), puxadas pelo desenvolvimento de soluções de inteligência artificial e pelo volume crescente de dados a analisar.\n\nPara o estrangeiro, o cenário mudou mais pelas regras do que pelos números. Desde 21 de setembro de 2025, novas petições de H-1B enquadradas na proclamação presidencial exigem pagamento adicional de US$ 100 mil, e desde 27 de fevereiro de 2026 vigora um processo de seleção ponderado que dá mais chances a salários mais altos, com registros de nível salarial IV entrando quatro vezes no sorteio e os de nível I apenas uma vez. O efeito prático é que o caminho tradicional do profissional júnior via H-1B ficou consideravelmente mais estreito, e a competitividade passou a depender do salário ofertado pelo empregador.",
     "hotSectors": [
-      "Saude e assistencia social (maior crescimento de empregos e setor que mais cresce, +8,4% projetado pelo BLS 2024-2034)",
-      "Servicos profissionais, cientificos e tecnicos",
-      "Tecnologia da informacao e ocupacoes de computacao e matematica (+10,1%, mais de 3x a media da economia)",
-      "Energia limpa (instaladores fotovoltaicos solares e tecnicos de turbina eolica sao as ocupacoes que mais crescem em percentual)",
-      "Cuidado domiciliar e cuidado pessoal a idosos",
-      "Lazer e hospitalidade",
-      "Governo local"
+      "Saúde e assistência social, setor de crescimento mais rápido e maior gerador de vagas nas projeções 2024 a 2034 do BLS",
+      "Serviços profissionais e empresariais, que seguiram em alta na folha de pagamento de junho de 2026",
+      "Tecnologia da informação e ocupações de computação e matemática, com crescimento projetado de 10,1% até 2034, puxado por inteligência artificial e análise de dados",
+      "Segurança da informação, a ocupação de computação com maior expansão projetada (28,5% entre 2024 e 2034)",
+      "Energia renovável, com técnicos de turbina eólica e instaladores de painéis solares nas duas primeiras posições de crescimento percentual até 2034",
+      "Cuidado domiciliar e serviços de apoio à saúde, sustentados pelo envelhecimento da população"
     ],
     "coolingSectors": [
-      "Varejo (maior perda de empregos de qualquer setor, pressionado por automacao, consolidacao e comercio eletronico)",
-      "Funcoes administrativas de escritorio (office clerks -7%; bookkeeping, accounting e auditing clerks -6%)",
-      "Caixas de loja (maior queda individual, cerca de 314 mil vagas a menos entre 2024 e 2034)",
-      "Ocupacoes de vendas em pontos fisicos de varejo",
-      "Funcoes clericais e de preparo de documentos sujeitas a automacao"
+      "Lazer e hospitalidade, que registrou perda de postos em junho de 2026",
+      "Mercado de recolocação em geral, com taxa de contratação em 3,3% e taxa de demissão voluntária em 1,9% em maio de 2026, sinais de menor mobilidade entre empregos"
     ],
     "inDemandRoles": [
       {
-        "role": "Auxiliares de saude domiciliar e cuidado pessoal (home health and personal care aides)",
-        "note": "Maior numero de novas vagas entre as 832 ocupacoes do BLS; cerca de 765.800 vagas/ano na decada; crescimento de 17%. Exige pouca formacao formal."
+        "role": "Enfermeiro registrado (registered nurse)",
+        "note": "Cerca de 189,1 mil vagas anuais projetadas em média na década de 2024 a 2034, com crescimento de 5%. Exige licença estadual, e o candidato formado fora dos Estados Unidos precisa do exame NCLEX e, na via de residência permanente, do certificado da CGFNS ou de licença plena no estado de destino."
       },
       {
-        "role": "Desenvolvedores de software (software developers)",
-        "note": "Cerca de 739.800 novas vagas projetadas; salario mediano US$ 133.080. Profissao de forte uso de visto H-1B."
+        "role": "Enfermeiro de prática avançada (nurse practitioner)",
+        "note": "A ocupação de saúde com crescimento mais rápido nas projeções do BLS, 40,1% entre 2024 e 2034, cerca de 128,4 mil novos postos. Exige mestrado ou doutorado em enfermagem e licença estadual avançada."
       },
       {
-        "role": "Enfermeiros registrados (registered nurses)",
-        "note": "Cerca de 164.000 novas vagas; salario mediano US$ 93.600 (OEWS maio/2024). Exige licenca estadual e, para estrangeiros, certificado CGFNS e NCLEX."
+        "role": "Analista de segurança da informação",
+        "note": "Crescimento projetado de 28,5% até 2034, aproximadamente 52,1 mil novos postos, a maior expansão entre as ocupações de computação. Costuma exigir graduação em área de TI e certificações reconhecidas pelo mercado."
       },
       {
-        "role": "Enfermeiros practitioners (nurse practitioners)",
-        "note": "Ocupacao de saude que mais cresce 2024-2034, puxada pelo envelhecimento da populacao."
+        "role": "Desenvolvedor de software",
+        "note": "Emprego projetado para crescer 15% de 2024 a 2034, com cerca de 129,2 mil vagas anuais no grupo que reúne desenvolvedores, analistas de qualidade e testadores. É a ocupação mais associada ao H-1B, e por isso a mais afetada pelas novas regras de custo e seleção ponderada."
       },
       {
-        "role": "Assistentes de fisioterapia e assistentes medicos (physician assistants, physical therapist assistants)",
-        "note": "Entre as ocupacoes de saude de crescimento mais rapido."
+        "role": "Assistente médico (physician assistant)",
+        "note": "Emprego projetado para crescer 20% entre 2024 e 2034, muito acima da média da economia, com cerca de 12 mil vagas anuais em média na década. Exige mestrado em programa acreditado nos Estados Unidos e licença estadual."
       },
       {
-        "role": "Analistas de seguranca da informacao (information security analysts)",
-        "note": "Salario mediano US$ 124.910; demanda alta em ciberseguranca."
+        "role": "Assistente de fisioterapeuta (physical therapist assistant)",
+        "note": "O grupo que reúne assistentes e auxiliares de fisioterapia tem crescimento projetado de 16% entre 2024 e 2034, com cerca de 26,4 mil vagas anuais em média na década. Exige formação acreditada nos Estados Unidos e licença estadual para atuar como assistente."
       },
       {
-        "role": "Instaladores fotovoltaicos solares e tecnicos de turbina eolica",
-        "note": "As ocupacoes que mais crescem em percentual, embora somem menos de 20 mil novas vagas no total."
+        "role": "Cuidador domiciliar e assistente de cuidados pessoais",
+        "note": "Demanda estrutural puxada pelo envelhecimento populacional, com barreira de entrada baixa em qualificação formal, porém com remuneração no piso do mercado e pouca via de visto de trabalho permanente."
       },
       {
-        "role": "Cientistas de dados e pesquisadores de computacao",
-        "note": "Computer and information research scientists com salario mediano US$ 140.910; grupo de computacao cresce 2x mais rapido que a media."
+        "role": "Técnico de manutenção de turbinas eólicas",
+        "note": "A ocupação de crescimento percentual mais rápido projetado para 2024 a 2034 (49,9%), embora com volume absoluto pequeno de novos postos. Exige formação técnica específica e disponibilidade para trabalho em campo e em altura."
+      },
+      {
+        "role": "Instalador de sistemas fotovoltaicos",
+        "note": "Segunda ocupação de crescimento mais rápido nas projeções do BLS. Junto com os técnicos de turbina eólica, adiciona menos de 20 mil postos na década, portanto é nicho e não porta de entrada em massa."
       }
     ],
     "byQualification": [
       {
-        "area": "Sem diploma superior / ensino medio ou menos",
-        "advice": "O maior volume de vagas esta em cuidado (auxiliar de saude domiciliar, cuidado pessoal), hospitalidade e servicos. Sao postos de salario mediano baixo (suporte de saude teve mediana de US$ 37.180 em maio/2024), mas com entrada rapida e treinamento no proprio emprego. Para o estrangeiro, porem, raramente ha patrocinio de visto nessas funcoes, o que torna o acesso dependente de ja ter autorizacao de trabalho (green card, EAD, status valido)."
+        "area": "Saúde e enfermagem",
+        "advice": "É a área com melhor combinação de demanda, salário e caminho migratório. Enfermeiros profissionais e fisioterapeutas estão no Schedule A do Departamento do Trabalho, o que dispensa o teste de mercado de trabalho na certificação permanente e encurta o processo de residência via emprego. O enfermeiro precisa ter passado no exame da CGFNS ou possuir licença plena e irrestrita no estado onde pretende atuar. O fisioterapeuta precisa reunir todas as qualificações exigidas para prestar o exame de licenciamento no estado de destino."
       },
       {
-        "area": "Formacao tecnica / pos-secundaria nao universitaria",
-        "advice": "Energia limpa (instalacao solar, turbinas eolicas), assistencia de saude (assistentes de fisioterapia, tecnicos) e oficios licenciados oferecem crescimento. Verifique no CareerOneStop License Finder se a ocupacao exige licenca estadual e se ha reciprocidade entre estados antes de planejar a mudanca."
+        "area": "Tecnologia e computação",
+        "advice": "A demanda existe e é das mais fortes da economia, mas a porta de entrada ficou cara. Com a seleção ponderada por nível salarial em vigor desde fevereiro de 2026 e o pagamento adicional de US$ 100 mil aplicável a parte das novas petições de H-1B, o candidato competitivo é o sênior com oferta salarial em nível III ou IV da tabela OEWS. Perfis júnior devem considerar rotas alternativas, como transferência interna em multinacional (L-1), talento extraordinário (O-1) ou vínculo acadêmico."
       },
       {
-        "area": "Bacharelado",
-        "advice": "Tecnologia da informacao, engenharia e enfermagem concentram as melhores combinacoes de salario e demanda. Para o estrangeiro, e a faixa classica do visto H-1B (exige oferta de emprego em ocupacao de especialidade e diploma na area). A nova regra de selecao ponderada por salario, vigente desde 27/02/2026, favorece quem recebe ofertas de salario mais alto, dando ate 4 entradas na loteria para nivel salarial IV."
+        "area": "Engenharia e ciências exatas",
+        "advice": "Perfis com pós-graduação têm vantagem tanto no sorteio de H-1B pela isenção de mestrado quanto na via de residência permanente por EB-2. Vale acompanhar a discussão do Departamento do Trabalho sobre ampliar o Schedule A para ocupações de STEM em falta, tema que foi objeto de consulta pública e ainda não resultou em lista nova."
       },
       {
-        "area": "Pos-graduacao / mestrado e doutorado",
-        "advice": "Abre o sub-teto de 20 mil vagas H-1B reservado a titulares de mestrado ou superior de instituicao americana, alem das categorias EB-2 (profissionais com diploma avancado ou habilidade excepcional) para residencia permanente. Profissoes de computacao e pesquisa pagam as maiores medianas (cientistas de pesquisa em computacao US$ 140.910)."
+        "area": "Construção civil",
+        "advice": "As ocupações de construção e extração pagam acima do piso da economia, com média anual de US$ 65.360 em maio de 2025, e concentram 1,1 milhão de trabalhadores só em serventes de obra. A via migratória prática é sazonal, pelo H-2B, e não permanente, o que torna a área boa para renda de temporada e ruim como plano de imigração definitiva."
       },
       {
-        "area": "Habilidade extraordinaria / executivos e empreendedores",
-        "advice": "Quem tem reconhecimento internacional na area pode buscar o visto O-1A (nao imigrante) ou o EB-1A (residencia permanente), sem necessidade de patrocinio de empregador no caso do EB-1A. Executivos e gerentes multinacionais usam L-1 (transferencia intracompanhia) ou EB-1C. Investidores e empreendedores tem E-2 (pais com tratado), EB-5 (investimento) e o International Entrepreneur Parole."
+        "area": "Agricultura",
+        "advice": "É o único programa de trabalho temporário sem teto numérico, o H-2A, o que na prática significa vaga disponível todos os anos para quem aceita trabalho sazonal de campo. O empregador é obrigado a pagar ao menos o Adverse Effect Wage Rate definido pelo Departamento do Trabalho, e o contrato é sempre vinculado a um empregador certificado."
+      },
+      {
+        "area": "Hotelaria e turismo",
+        "advice": "Setor em desaceleração, com perda de postos registrada em junho de 2026, o que reduz a atratividade no curto prazo. Ainda assim é o principal usuário do H-2B, com picos de contratação atrelados às temporadas de verão e inverno."
+      },
+      {
+        "area": "Educação",
+        "advice": "A docência em escolas públicas exige certificação estadual, que varia de estado para estado e costuma pedir equivalência de diploma, exames de habilitação e verificação de antecedentes. É uma das áreas em que o reconhecimento de credencial estrangeira consome mais tempo, portanto o planejamento deve começar antes da mudança."
+      },
+      {
+        "area": "Administração e finanças",
+        "advice": "Beneficia-se do avanço de serviços profissionais e empresariais, mas é a área de maior concorrência com o candidato local, o que enfraquece o argumento de escassez exigido nos processos de certificação de trabalho. Certificações americanas específicas, como CPA, pesam mais no currículo do que o diploma de origem."
       }
     ],
     "salaries": [
       {
-        "role": "Todas as ocupacoes (mediana nacional)",
-        "range": "US$ 49.500/ano (mediano, maio/2024)",
+        "role": "Média de todas as ocupações",
+        "range": "US$ 69.770 por ano (média anual, maio de 2025)",
         "source": {
-          "label": "BLS OEWS - Overview May 2024",
-          "url": "https://www.bls.gov/oes/2024/may/overview_2024.htm",
-          "official": true
-        }
-      },
-      {
-        "role": "Desenvolvedor de software",
-        "range": "US$ 133.080/ano (mediano, maio/2024)",
-        "source": {
-          "label": "BLS OOH - Software Developers",
-          "url": "https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm",
+          "label": "BLS, Occupational Employment and Wages Summary, maio de 2025",
+          "url": "https://www.bls.gov/news.release/ocwage.nr0.htm",
           "official": true
         }
       },
       {
         "role": "Enfermeiro registrado (registered nurse)",
-        "range": "US$ 93.600/ano (mediano, maio/2024)",
+        "range": "US$ 101.420 por ano em média, variando de cerca de US$ 77.000 no Alabama e na Dakota do Sul a US$ 150.280 na Califórnia (maio de 2025)",
         "source": {
-          "label": "BLS OOH - Registered Nurses",
+          "label": "BLS, Occupational Employment and Wages Summary, maio de 2025",
+          "url": "https://www.bls.gov/news.release/ocwage.nr0.htm",
+          "official": true
+        }
+      },
+      {
+        "role": "Ocupações de saúde de nível técnico e superior (conjunto)",
+        "range": "US$ 108.700 por ano em média (maio de 2025)",
+        "source": {
+          "label": "BLS, Occupational Employment and Wages Summary, maio de 2025",
+          "url": "https://www.bls.gov/news.release/ocwage.nr0.htm",
+          "official": true
+        }
+      },
+      {
+        "role": "Ocupações de construção e extração (conjunto)",
+        "range": "US$ 65.360 por ano em média (maio de 2025)",
+        "source": {
+          "label": "BLS, Occupational Employment and Wages Summary, maio de 2025",
+          "url": "https://www.bls.gov/news.release/ocwage.nr0.htm",
+          "official": true
+        }
+      },
+      {
+        "role": "Desenvolvedor de software",
+        "range": "US$ 133.080 por ano (mediana, maio de 2024), com os 10% menores abaixo de US$ 79.850 e os 10% maiores acima de US$ 211.450",
+        "source": {
+          "label": "BLS, Occupational Outlook Handbook, Software Developers",
+          "url": "https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm",
+          "official": true
+        }
+      },
+      {
+        "role": "Enfermeiro de prática avançada, anestesista ou obstetra",
+        "range": "US$ 132.050 por ano (mediana, maio de 2024)",
+        "source": {
+          "label": "BLS, Occupational Outlook Handbook, Nurse Anesthetists, Nurse Midwives, and Nurse Practitioners",
+          "url": "https://www.bls.gov/ooh/healthcare/nurse-anesthetists-nurse-midwives-and-nurse-practitioners.htm",
+          "official": true
+        }
+      },
+      {
+        "role": "Enfermeiro registrado (mediana nacional)",
+        "range": "US$ 93.600 por ano (mediana, maio de 2024), com os 10% menores abaixo de US$ 66.030 e os 10% maiores acima de US$ 135.320",
+        "source": {
+          "label": "BLS, Occupational Outlook Handbook, Registered Nurses",
           "url": "https://www.bls.gov/ooh/healthcare/registered-nurses.htm",
           "official": true
         }
       },
       {
-        "role": "Ocupacoes de TI/computacao (grupo)",
-        "range": "US$ 105.990/ano (mediano, maio/2024)",
+        "role": "Ocupações de apoio à saúde, incluindo cuidadores domiciliares",
+        "range": "US$ 37.180 por ano (mediana, maio de 2024)",
         "source": {
-          "label": "BLS OOH - Computer and Information Technology Occupations",
-          "url": "https://www.bls.gov/ooh/computer-and-information-technology/",
-          "official": true
-        }
-      },
-      {
-        "role": "Analista de seguranca da informacao",
-        "range": "US$ 124.910/ano (mediano, maio/2024)",
-        "source": {
-          "label": "BLS OOH - Information Security Analysts",
-          "url": "https://www.bls.gov/ooh/computer-and-information-technology/information-security-analysts.htm",
-          "official": true
-        }
-      },
-      {
-        "role": "Cientista de pesquisa em computacao e informacao",
-        "range": "US$ 140.910/ano (mediano, maio/2024)",
-        "source": {
-          "label": "BLS OOH - Computer and Information Research Scientists",
-          "url": "https://www.bls.gov/ooh/computer-and-information-technology/computer-and-information-research-scientists.htm",
-          "official": true
-        }
-      },
-      {
-        "role": "Ocupacoes de suporte de saude (grupo, ex. auxiliar de saude domiciliar)",
-        "range": "US$ 37.180/ano (mediano, maio/2024)",
-        "source": {
-          "label": "BLS OOH - Healthcare Occupations",
-          "url": "https://www.bls.gov/ooh/healthcare/",
-          "official": true
-        }
-      },
-      {
-        "role": "Ocupacoes de saude (praticantes e tecnicos, grupo)",
-        "range": "US$ 83.090/ano (mediano, maio/2024)",
-        "source": {
-          "label": "BLS OOH - Healthcare Occupations",
+          "label": "BLS, Occupational Outlook Handbook, Healthcare Occupations",
           "url": "https://www.bls.gov/ooh/healthcare/",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Trabalhar legalmente nos EUA exige autorizacao de trabalho: green card (residencia permanente, prova por si so o direito de trabalhar), Employment Authorization Document (Form I-766/EAD) ou um visto de trabalho com status valido. Estrangeiro sem essas condicoes nao pode ser contratado. Caminhos temporarios mais comuns: H-1B (ocupacao de especialidade, exige diploma e patrocinio do empregador; teto anual de 85.000, sendo 65.000 no teto regular e 20.000 reservados a mestres/doutores de instituicao americana; registro eletronico com taxa de US$ 215 por beneficiario; temporada FY2027 abre em 4 de marco e vai ate 19 de marco de 2026; nova regra de selecao ponderada por salario vigente desde 27/02/2026). Vistos baseados em emprego para residencia permanente: EB-1 (gerentes/executivos multinacionais e habilidade extraordinaria), EB-2 (diploma avancado ou habilidade excepcional, inclui o National Interest Waiver) e EB-3 (trabalhadores qualificados, profissionais e outros). EB-2 e EB-3 geralmente exigem a certificacao de trabalho permanente PERM, em que o Department of Labor (DOL) verifica que nao ha trabalhador americano qualificado disponivel e que a contratacao do estrangeiro nao prejudica salarios locais; antes do PERM, o empregador precisa obter a determinacao de salario prevalecente no National Prevailing Wage Center. Profissoes reguladas (enfermagem, medicina, direito, engenharia, ensino, oficios) exigem LICENCA ESTADUAL, concedida por orgaos estaduais e com requisitos que variam de estado para estado; pode haver reciprocidade entre estados, mas nao e automatica. Para enfermagem, o estrangeiro normalmente precisa do certificado CGFNS (avaliacao favoravel das credenciais, exame de habilidades e proficiencia em ingles via TOEFL ou similar) e aprovacao no NCLEX. Atualizacao critica: a taxa de US$ 100 mil por novas peticoes H-1B, criada por proclamacao presidencial em 19/09/2025, foi declarada ilegal por um juiz federal de Massachusetts em 08/06/2026 (alegacao de que so o Congresso pode instituir tal cobranca); o governo anunciou recurso, entao acompanhe a situacao antes de planejar custos. Confirme sempre cada regra nas fontes oficiais USCIS, DOL e travel.state.gov.",
+    "foreignerRules": "Trabalhar legalmente nos Estados Unidos exige, na esmagadora maioria dos casos, uma oferta de emprego de um empregador americano que patrocine o visto. Não existe visto de busca de trabalho e não existe lista nacional única de ocupações em falta que garanta entrada automática.\n\nA rota mais conhecida para profissões de nível superior é o H-1B, destinado a ocupações especializadas. O teto anual é de 65 mil vistos, mais 20 mil reservados a quem tem pós-graduação obtida nos Estados Unidos. O acesso passa por registro eletrônico prévio feito pelo empregador, com taxa de US$ 215 por registro. Duas mudanças recentes alteraram o jogo. Desde 27 de fevereiro de 2026 vigora um processo de seleção ponderado por nível salarial, no qual o registro classificado no nível IV da tabela OEWS entra quatro vezes no sorteio, o nível III três vezes, o nível II duas vezes e o nível I apenas uma vez. E desde 21 de setembro de 2025, pela proclamação presidencial sobre restrição de entrada de certos trabalhadores não imigrantes, novas petições enquadradas na medida precisam ser acompanhadas de pagamento adicional de US$ 100 mil, sob pena de indeferimento. As exceções são concedidas pelo Secretário de Segurança Interna apenas em circunstâncias descritas como extraordinariamente raras.\n\nPara trabalho temporário não agrícola existe o H-2B, com teto legal de 66 mil vistos por ano fiscal, divididos igualmente entre o primeiro semestre (1º de outubro a 31 de março) e o segundo (1º de abril a 30 de setembro). Para o ano fiscal de 2026, o Departamento de Segurança Interna e o Departamento do Trabalho autorizaram, em 30 de janeiro, até 64.716 vistos suplementares, distribuídos em três alocações com datas de início diferentes. O empregador precisa obter certificação temporária de trabalho junto ao Departamento do Trabalho, comprovando que não há trabalhadores americanos disponíveis e que a contratação não prejudica salários e condições locais.\n\nNa agricultura, o H-2A não tem teto numérico, o que o torna a via de entrada mais previsível para trabalho sazonal de campo. O empregador é obrigado a pagar no mínimo o Adverse Effect Wage Rate fixado pelo Departamento do Trabalho, que é atualizado periodicamente e varia por estado e por tipo de ocupação.\n\nPara residência permanente por emprego, o caminho padrão é a certificação de trabalho permanente (PERM), na qual o empregador precisa testar o mercado local antes de patrocinar o estrangeiro. Há uma exceção relevante: o Schedule A. O Grupo I do Schedule A reúne fisioterapeutas e enfermeiros profissionais, ocupações pré-reconhecidas como de escassez, o que dispensa o teste de mercado e encurta o processo. O Grupo II abrange pessoas com habilidade excepcional em ciências e artes. O Departamento do Trabalho abriu consulta pública para modernizar o Schedule A e eventualmente incluir ocupações de STEM e outras áreas em falta, mas essa ampliação ainda não foi concretizada.\n\nSobre credenciais, os Estados Unidos não têm reconhecimento federal de diploma estrangeiro. A validação é feita por entidade avaliadora privada e, nas profissões regulamentadas, por conselho estadual. Enfermagem exige aprovação no exame da CGFNS ou licença plena no estado de destino, além do NCLEX para exercer. Medicina, direito, engenharia com responsabilidade técnica e docência escolar têm exigências estaduais próprias. Não existe exame nacional de idioma obrigatório para o visto de trabalho, mas o inglês funcional é pré-requisito prático da contratação, e programas específicos de licenciamento profissional podem exigir comprovação de proficiência.",
     "opportunityWindows": [
-      "Temporada de registro da loteria H-1B FY2027 abre ao meio-dia (ET) de 4 de marco e fecha as 17h (ET) de 19 de marco de 2026; taxa de registro de US$ 215 por beneficiario",
-      "Nova regra de selecao ponderada por salario (vigente desde 27/02/2026) beneficia candidatos com ofertas de salario mais alto, dando ate 4 entradas na loteria para o nivel salarial IV",
-      "Estudantes internacionais em status F-1 com OPT e quem ja tem visto de trabalho podem mudar de status sem cair em taxas extras de peticao",
-      "Demanda estrutural e duradoura em saude e cuidado a idosos puxada pelo envelhecimento da populacao americana ao longo de toda a decada 2024-2034",
-      "Expansao de energia limpa (solar e eolica) abre as ocupacoes de crescimento percentual mais rapido",
-      "Incerteza juridica em torno da taxa de US$ 100 mil (derrubada em 08/06/2026, com recurso anunciado) recomenda agir e acompanhar a evolucao antes de definir custos de patrocinio"
+      "Registro do H-1B, que acontece uma vez por ano em março. No ciclo do ano fiscal de 2027, o período foi de 4 a 19 de março de 2026, e as petições dos selecionados puderam ser protocoladas a partir de 1º de abril de 2026. Quem pretende concorrer precisa ter empregador disposto a registrar antes da abertura, porque a inscrição é feita pela empresa, nunca pelo candidato.",
+      "Cota do H-1B do ano fiscal de 2027 já atingida, tanto os 65 mil da cota regular quanto os 20 mil da isenção de pós-graduação americana, o que joga a próxima oportunidade para a temporada seguinte.",
+      "Alocações suplementares do H-2B para o ano fiscal de 2026, com até 64.716 vistos adicionais anunciados em 30 de janeiro e distribuídos em três blocos com datas de início escalonadas. A cota da segunda metade do ano fiscal de 2026 já foi atingida, e as datas de protocolo das alocações suplementares foram divulgadas pelo USCIS.",
+      "Ciclo semestral fixo do H-2B, com uma metade da cota liberada para empregos que começam a partir de 1º de outubro e a outra para empregos que começam a partir de 1º de abril. As certificações de trabalho junto ao Departamento do Trabalho precisam estar em andamento meses antes dessas datas.",
+      "Temporadas agrícolas do H-2A, sem limite numérico e ancoradas nos calendários de plantio e colheita de cada região. O Adverse Effect Wage Rate para ocupações de pastoreio passou a US$ 2.132,41 por mês a partir de 3 de fevereiro de 2026.",
+      "Consulta pública do Departamento do Trabalho sobre a revisão da metodologia de salário prevalecente para H-1B, H-1B1, E-3 e PERM, proposta publicada em 27 de março de 2026 com prazo de comentários até 26 de maio de 2026. O desfecho define quanto o empregador precisará pagar para patrocinar estrangeiro, portanto vale acompanhar antes de negociar salário."
     ],
     "jobBoards": [
       {
-        "label": "USAJobs (vagas do governo federal dos EUA)",
-        "url": "https://www.usajobs.gov/",
-        "official": true
-      },
-      {
-        "label": "CareerOneStop - Job Search (Department of Labor)",
+        "label": "CareerOneStop, portal de carreiras do Departamento do Trabalho, com busca de vagas e informação ocupacional",
         "url": "https://www.careeronestop.org/JobSearch/job-search.aspx",
         "official": true
       },
       {
-        "label": "CareerOneStop License Finder (licencas por estado/profissao)",
-        "url": "https://www.careeronestop.org/Toolkit/Training/find-licenses.aspx",
+        "label": "USAJOBS, site oficial de vagas do governo federal americano",
+        "url": "https://www.usajobs.gov/",
         "official": true
       },
       {
-        "label": "O*NET OnLine (perfis ocupacionais oficiais)",
-        "url": "https://www.onetonline.org/",
+        "label": "American Job Center Finder, localizador dos cerca de 2.300 centros públicos de emprego com atendimento presencial gratuito",
+        "url": "https://www.careeronestop.org/LocalHelp/AmericanJobCenters/find-american-job-centers.aspx",
         "official": true
       },
       {
-        "label": "DOL FLAG - Foreign Labor Application Gateway (PERM, prevailing wage)",
-        "url": "https://flag.dol.gov/",
+        "label": "USAGov, guia oficial sobre como procurar emprego nos Estados Unidos",
+        "url": "https://www.usa.gov/job-help",
         "official": true
+      },
+      {
+        "label": "Occupational Outlook Handbook do BLS, para checar salário e perspectiva de cada profissão antes de se candidatar",
+        "url": "https://www.bls.gov/ooh/",
+        "official": true
+      },
+      {
+        "label": "Indeed, maior agregador privado de vagas do país",
+        "url": "https://www.indeed.com/",
+        "official": false
+      },
+      {
+        "label": "LinkedIn Jobs, principal canal para vagas de nível superior e contato direto com recrutadores",
+        "url": "https://www.linkedin.com/jobs/",
+        "official": false
       }
     ],
     "sources": [
       {
-        "label": "BLS - Employment Situation Summary (maio 2026)",
+        "label": "BLS, The Employment Situation, junho de 2026",
         "url": "https://www.bls.gov/news.release/empsit.nr0.htm",
         "official": true
       },
       {
-        "label": "BLS - Employment Projections 2024-2034 (release)",
+        "label": "BLS, Job Openings and Labor Turnover Survey, maio de 2026",
+        "url": "https://www.bls.gov/news.release/jolts.nr0.htm",
+        "official": true
+      },
+      {
+        "label": "BLS, Occupational Employment and Wages Summary, maio de 2025",
+        "url": "https://www.bls.gov/news.release/ocwage.nr0.htm",
+        "official": true
+      },
+      {
+        "label": "BLS, Employment Projections 2024 a 2034",
         "url": "https://www.bls.gov/news.release/ecopro.nr0.htm",
         "official": true
       },
       {
-        "label": "BLS - Industry and occupational projections overview 2024-34 (Monthly Labor Review)",
-        "url": "https://www.bls.gov/opub/mlr/2026/article/industry-and-occupational-employment-projections-overview.htm",
+        "label": "BLS, Fastest Growing Occupations 2024 a 2034",
+        "url": "https://www.bls.gov/emp/tables/fastest-growing-occupations.htm",
         "official": true
       },
       {
-        "label": "BLS - Fastest Growing Occupations (OOH)",
-        "url": "https://www.bls.gov/ooh/fastest-growing.htm",
+        "label": "BLS, Occupational Outlook Handbook",
+        "url": "https://www.bls.gov/ooh/",
         "official": true
       },
       {
-        "label": "BLS - Most New Jobs (OOH)",
-        "url": "https://www.bls.gov/ooh/most-new-jobs.htm",
+        "label": "BLS, Occupational Outlook Handbook, Physician Assistants",
+        "url": "https://www.bls.gov/ooh/healthcare/physician-assistants.htm",
         "official": true
       },
       {
-        "label": "BLS - Fastest declining occupations",
-        "url": "https://www.bls.gov/emp/tables/fastest-declining-occupations.htm",
+        "label": "BLS, Occupational Outlook Handbook, Physical Therapist Assistants and Aides",
+        "url": "https://www.bls.gov/ooh/healthcare/physical-therapist-assistants-and-aides.htm",
         "official": true
       },
       {
-        "label": "BLS OEWS - Overview May 2024 (mediana salarial)",
-        "url": "https://www.bls.gov/oes/2024/may/overview_2024.htm",
+        "label": "Federal Register, Weighted Selection Process for Registrants and Petitioners Seeking To File Cap-Subject H-1B Petitions",
+        "url": "https://www.federalregister.gov/documents/2025/12/29/2025-23853/weighted-selection-process-for-registrants-and-petitioners-seeking-to-file-cap-subject-h-1b",
         "official": true
       },
       {
-        "label": "USCIS - Permanent Workers (EB-1, EB-2, EB-3)",
-        "url": "https://www.uscis.gov/working-in-the-united-states/permanent-workers",
+        "label": "USCIS, Presidential Proclamation on Restriction on Entry of Certain Nonimmigrant Workers",
+        "url": "https://www.uscis.gov/newsroom/alerts/presidential-proclamation-on-restriction-on-entry-of-certain-nonimmigrant-workers",
         "official": true
       },
       {
-        "label": "USCIS - H-1B Cap Season",
+        "label": "USCIS, H-1B Cap Season",
         "url": "https://www.uscis.gov/working-in-the-united-states/temporary-workers/h-1b-specialty-occupations/h-1b-cap-season",
         "official": true
       },
       {
-        "label": "USCIS - Employment Authorization Document (EAD)",
-        "url": "https://www.uscis.gov/green-card/green-card-processes-and-procedures/employment-authorization-document",
+        "label": "USCIS, FY 2027 H-1B Cap Initial Registration Period Opens on March 4",
+        "url": "https://www.uscis.gov/newsroom/alerts/fy-2027-h-1b-cap-initial-registration-period-opens-on-march-4",
         "official": true
       },
       {
-        "label": "USCIS - Options for Alien Entrepreneurs (E-2, EB-5, L-1, O-1, parole)",
-        "url": "https://www.uscis.gov/working-in-the-united-states/options-for-alien-entrepreneurs-to-work-in-the-united-states",
+        "label": "USCIS, Temporary Increase in H-2B Nonimmigrant Visas for FY 2026",
+        "url": "https://www.uscis.gov/working-in-the-united-states/temporary-workers/h-2b-non-agricultural-workers/temporary-increase-in-h-2b-nonimmigrant-visas-for-fy-2026",
         "official": true
       },
       {
-        "label": "DOL - Permanent Labor Certification (PERM)",
+        "label": "USCIS, H-2A Temporary Agricultural Workers",
+        "url": "https://www.uscis.gov/working-in-the-united-states/temporary-workers/h-2a-temporary-agricultural-workers",
+        "official": true
+      },
+      {
+        "label": "Departamento do Trabalho, Permanent Labor Certification (PERM)",
         "url": "https://www.dol.gov/agencies/eta/foreign-labor/programs/permanent",
         "official": true
       },
       {
-        "label": "Travel.State.Gov - Employment-Based Immigrant Visas",
-        "url": "https://travel.state.gov/content/travel/en/us-visas/immigrate/employment-based-immigrant-visas.html",
+        "label": "Departamento do Trabalho, PERM Schedule A Request for Information",
+        "url": "https://www.dol.gov/agencies/eta/foreign-labor/perm-schedule-a-rfi",
         "official": true
       },
       {
-        "label": "CareerOneStop - Licensed Occupations",
-        "url": "https://www.careeronestop.org/ExploreCareers/Plan/licensed-occupations.aspx",
+        "label": "Departamento do Trabalho, H-2A Adverse Effect Wage Rates",
+        "url": "https://flag.dol.gov/wage-data/adverse-effect-wage-rates",
         "official": true
       },
       {
-        "label": "NPR - Federal judge strikes down $100,000 H-1B fee (jun/2026)",
-        "url": "https://www.npr.org/2026/06/09/nx-s1-5851474/federal-judge-fee-h1b-visa",
-        "official": false
-      },
-      {
-        "label": "USCIS - H-1B Electronic Registration Process (taxa US$ 215, temporada FY2027)",
-        "url": "https://www.uscis.gov/working-in-the-united-states/temporary-workers/h-1b-specialty-occupations/h-1b-electronic-registration-process",
+        "label": "Federal Register, Improving Wage Protections for the Temporary and Permanent Employment of Certain Foreign Nationals in the United States",
+        "url": "https://www.federalregister.gov/documents/2026/03/27/2026-06017/improving-wage-protections-for-the-temporary-and-permanent-employment-of-certain-foreign-nationals",
         "official": true
       }
     ]
   },
   "br": {
-    "updatedAt": "2026-06-22",
-    "overview": "O mercado de trabalho brasileiro chega a 2026 no melhor momento da série histórica. A taxa de desocupação fechou 2025 em 5,1% no trimestre encerrado em dezembro, menor patamar desde o início da PNAD Contínua em 2012, com média anual de 5,6%, segundo o IBGE. A população ocupada bateu recorde em 103 milhões de pessoas, e o emprego formal com carteira assinada no setor privado alcançou 38,9 milhões, alta de 2,8% no ano. O rendimento médio real subiu para R$ 3.560, crescimento de 5,7% sobre 2024. Nos primeiros meses de 2026 o ritmo de geração de vagas seguiu positivo: o Novo CAGED registrou saldo acumulado de mais de 1 milhão de empregos formais até maio. Para o imigrante e o estrangeiro, o quadro favorece quem tem qualificação técnica, principalmente em tecnologia, dados e saúde, áreas onde a demanda cresce mais rápido do que a formação de profissionais no país.\nApesar dos números fortes, persistem dois traços estruturais que o estrangeiro precisa considerar. A informalidade ainda atinge 38,1% dos ocupados e o trabalho por conta própria soma 26,1 milhões de pessoas, recorde histórico, o que mostra um mercado dual em que parte expressiva das ocupações não tem proteção formal. Os salários médios de admissão registrados no CAGED giram em torno de R$ 2.386, valor modesto em comparação a mercados de imigração tradicionais, embora o custo de vida também seja mais baixo. O ingresso formal de estrangeiros é regido pela Lei de Migração (Lei 13.445/2017) e exige, na maioria dos casos, autorização de residência laboral solicitada pelo empregador via sistema MigranteWeb, ou aporte mínimo em empresa para o visto de investidor.",
+    "updatedAt": "2026-07-20",
+    "overview": "O mercado de trabalho brasileiro atravessa em 2026 o período mais aquecido da série histórica recente. Segundo a PNAD Contínua do IBGE, a taxa de desocupação ficou em 5,6% no trimestre móvel de março a maio de 2026, com estabilidade frente ao trimestre de dezembro de 2025 a fevereiro de 2026 (5,8%) e queda de 0,6 ponto percentual na comparação com o trimestre de março a maio de 2025 (6,2%). A informalidade, contudo, segue elevada e atinge 37,3% da população ocupada no primeiro trimestre de 2026, com dispersão regional acentuada: o Maranhão registra 57,6% e o Pará 56,5%, enquanto Santa Catarina (25,4%) e o Distrito Federal (28,1%) apresentam os menores índices do país. O rendimento médio real habitual de todos os trabalhos foi estimado em R$ 3.722 no primeiro trimestre de 2026.\n\nNo emprego com carteira assinada, os dados do Novo CAGED, do Ministério do Trabalho e Emprego, mostram saldo de 72.960 postos em maio de 2026 e acumulado de 767.326 vagas nos cinco primeiros meses do ano, crescimento de 1,6% que elevou o estoque para 47.877.989 vínculos formais. Nos doze meses encerrados em maio de 2026, foram 973.285 novas vagas (alta de 2,1%). Todos os cinco grandes setores fecharam maio no positivo, com Serviços liderando (45.655 postos no mês e 493.917 no acumulado do ano) e Construção mostrando a maior taxa de expansão relativa do período (5,23% no acumulado do ano). O Comércio é a exceção relevante, com retração de 60.503 postos no acumulado de janeiro a maio de 2026.\n\nO contraste que define o momento brasileiro é a coexistência de emprego recorde com escassez de mão de obra qualificada. Nota técnica da Confederação Nacional da Indústria divulgada em 9 de fevereiro de 2026 aponta a falta de trabalhadores capacitados como o quarto maior entrave do setor industrial, atrás apenas da elevada carga tributária, dos juros altos e da demanda interna insuficiente. O Mapa do Trabalho Industrial 2025-2027 projeta necessidade de qualificar 14 milhões de pessoas em ocupações industriais no período, das quais 2,2 milhões em formação inicial. Esse descompasso abre espaço concreto para profissionais técnicos e de nível superior vindos de fora.\n\nPara o estrangeiro, o Brasil combina um regime de imigração laboral relativamente aberto com um mercado que ainda remunera abaixo do padrão de países da OCDE. A Lei de Migração (Lei 13.445/2017) e o Decreto 9.199/2017 substituíram a lógica de \"estatuto do estrangeiro\" por um sistema de autorizações de residência, com pedidos tramitando de forma eletrônica. A porta de entrada mais simples continua sendo a via do Acordo de Residência do Mercosul, disponível para nacionais de Argentina, Bolívia, Chile, Colômbia, Equador, Paraguai, Peru e Uruguai, que dispensa oferta prévia de emprego.",
     "hotSectors": [
-      "Serviços (saúde, educação, administração pública, informação e atividades financeiras), responsável por 57,3% das vagas formais geradas em 2026",
-      "Tecnologia da informação e dados, com forte escassez de talentos (apagão de mão de obra qualificada)",
-      "Construção civil, com destaque para edificações",
-      "Indústria de transformação, com destaque para alimentos e automotivo",
-      "Saúde, impulsionada pelo envelhecimento populacional e saúde mental",
-      "Agropecuária sazonal (café, maçã, alho)"
+      "Serviços em sentido amplo, responsável por 493.917 dos 767.326 postos formais criados até maio de 2026, com destaque para saúde humana, serviços sociais e atividades administrativas",
+      "Saúde humana e serviços sociais, o subsetor de serviços que mais contratou em maio de 2026 (14.478 postos), puxado pelo envelhecimento populacional e pela expansão da rede privada",
+      "Construção civil e obras de infraestrutura, o setor de maior expansão relativa do ano (5,23% no acumulado até maio de 2026), com obras de infraestrutura respondendo por 8.916 dos 12.096 postos abertos em maio",
+      "Transporte, armazenagem e correio, sustentado pela logística de comércio eletrônico e pela malha de distribuição nacional",
+      "Indústria de transformação com foco em fabricação de veículos automotores, principal destaque industrial de maio de 2026 (3.232 postos)",
+      "Automação industrial, mecatrônica e manutenção eletromecânica, apontadas pela CNI em nota técnica de fevereiro de 2026 entre as ocupações mais difíceis de preencher no país",
+      "Agropecuária e agroindústria, que somaram 16.904 postos formais no acumulado de janeiro a maio de 2026 e concentram demanda sazonal intensa nas regiões Centro-Oeste e Sul"
     ],
     "coolingSectors": [
-      "Comércio, único setor com saldo negativo de empregos formais no acumulado de 2026 (-26,6 mil até abril), com o varejo de vestuário entre os mais afetados",
-      "Serviços domésticos, em queda de 4,4% no fechamento de 2025"
+      "Comércio, único grande setor no negativo em 2026, com retração acumulada de 60.503 postos formais até maio e estabilidade no mês (saldo de apenas 40 vagas), pressionado por juros altos e migração de vendas para canais digitais"
     ],
     "inDemandRoles": [
       {
-        "role": "Desenvolvedor de software",
-        "note": "Uma das maiores carências do mercado; demanda em todos os níveis de senioridade"
+        "role": "Técnico em enfermagem e profissionais de saúde assistencial",
+        "note": "Saúde humana e serviços sociais lidera a criação de vagas em serviços segundo o Novo CAGED de maio de 2026. O exercício da profissão exige registro no conselho de classe correspondente e, para diploma obtido no exterior, revalidação junto a universidade pública pela Plataforma Carolina Bori."
       },
       {
-        "role": "Cientista de dados / analista de dados",
-        "note": "Crescimento puxado por IA e analytics"
+        "role": "Médico",
+        "note": "Demanda estrutural, sobretudo no interior e em municípios de menor porte. Para diplomas estrangeiros, a aprovação no Revalida, exame aplicado pelo INEP, é condição obrigatória antes da revalidação e do registro no Conselho Regional de Medicina."
       },
       {
-        "role": "Engenheiro de IA / machine learning",
-        "note": "Função emergente de alta procura"
+        "role": "Técnico em automação industrial e mecatrônica",
+        "note": "Figura entre as ocupações que a CNI aponta como mais difíceis de preencher em nota técnica de fevereiro de 2026. Exige formação técnica específica e costuma dispensar diploma de nível superior, o que encurta o caminho de reconhecimento para quem vem de fora."
       },
       {
-        "role": "Especialista em cibersegurança / segurança da informação",
-        "note": "Um dos maiores gargalos de talentos do país"
+        "role": "Eletrotécnico e eletromecânico",
+        "note": "Escassez apontada pela indústria em nível recorde na nota técnica da CNI de fevereiro de 2026. A demanda cresce com a modernização de plantas fabris e com a expansão de geração distribuída e energias renováveis."
       },
       {
-        "role": "Médico especialista",
-        "note": "Geriatria, psiquiatria e oncologia em alta; exige Revalida para diploma estrangeiro"
+        "role": "Engenheiro e técnico de obras de infraestrutura",
+        "note": "Obras de infraestrutura responderam pela maior parte do saldo da construção em maio de 2026. Engenheiros estrangeiros precisam de registro no CREA, o que pressupõe revalidação do diploma."
       },
       {
-        "role": "Enfermeiro e profissionais de saúde",
-        "note": "Setor em expansão estrutural"
+        "role": "Profissionais de desenvolvimento de software e dados",
+        "note": "Setor com forte absorção dentro de serviços e um dos poucos em que a barreira de diploma revalidado é baixa, já que a contratação privada raramente exige registro profissional. O inglês é diferencial e o português é exigido na maioria das posições."
       },
       {
-        "role": "Profissional de marketing digital e vendas",
-        "note": "Empregadores relatam dificuldade de contratação (21%)"
+        "role": "Motorista profissional e operadores de logística",
+        "note": "Transporte, armazenagem e correio abriu 6.227 postos em maio de 2026. A habilitação brasileira nas categorias exigidas e o registro de motorista profissional são pré-requisitos, com necessidade de conversão da carteira estrangeira."
       },
       {
-        "role": "Profissional de atendimento ao cliente",
-        "note": "29% dos empregadores relatam dificuldade de contratação"
+        "role": "Soldador, mecânico de manutenção e ocupações metalmecânicas",
+        "note": "Ocupações citadas pela CNI e pelo SENAI entre os gargalos do setor industrial. Certificações técnicas reconhecidas pesam mais que diploma acadêmico na contratação."
       },
       {
-        "role": "Profissional de ESG e sustentabilidade",
-        "note": "Tendência ligada a exigências regulatórias e corporativas"
-      },
-      {
-        "role": "Trabalhador de construção civil",
-        "note": "Edificações lideram a geração de vagas no setor"
+        "role": "Técnico em segurança do trabalho",
+        "note": "Listada pela indústria entre as vagas de difícil preenchimento. A atuação é regulamentada e exige registro junto ao Ministério do Trabalho e Emprego."
       }
     ],
     "byQualification": [
       {
-        "area": "Alta qualificação em tecnologia (TI, dados, IA, cibersegurança)",
-        "advice": "É o caminho mais acessível e bem remunerado para o estrangeiro. A demanda supera a oferta de talentos locais e há empresas dispostas a patrocinar a autorização de residência laboral. Salários sênior superam com folga a média nacional. Domínio do português ajuda, mas muitas vagas de produto e empresas globais operam em inglês."
+        "area": "Saúde",
+        "advice": "É a área de maior demanda e, ao mesmo tempo, a de maior barreira regulatória. Médicos formados no exterior dependem de aprovação no Revalida, aplicado pelo INEP, antes de revalidar o diploma na Plataforma Carolina Bori e obter registro no CRM. Enfermeiros, dentistas, farmacêuticos e fisioterapeutas seguem o rito de revalidação por universidade pública, também via Carolina Bori, seguido de registro no conselho de classe. Recomenda-se iniciar o processo com bastante antecedência, pois a revalidação é o gargalo, não a vaga."
       },
       {
-        "area": "Saúde (medicina, enfermagem)",
-        "advice": "Profissões regulamentadas com barreira alta. O diploma de medicina obtido no exterior só é revalidado pelo Revalida (Inep), única via desde a Resolução CNE/CES 2/2024, com prova duas vezes ao ano. Outras áreas usam o Portal Carolina Bori (MEC). Após revalidar, é obrigatório registro no conselho de classe (CRM, COREN). Todos os documentos exigem tradução juramentada."
+        "area": "Tecnologia da informação",
+        "advice": "É o campo com o menor atrito de entrada para o estrangeiro qualificado, porque a profissão não é regulamentada por conselho e o empregador não precisa de diploma revalidado para contratar. A contratação com carteira assinada permite pedido de autorização de residência com vínculo empregatício, formalizado pela empresa no sistema MigranteWeb. O português é exigido na maior parte das posições, ainda que times de produto com clientes internacionais operem em inglês."
       },
       {
-        "area": "Engenharia e profissões técnicas reguladas",
-        "advice": "Engenheiro formado no exterior não faz prova como o médico, mas precisa revalidar o diploma pelo Portal Carolina Bori e registrar-se no CREA. Demanda firme em construção, indústria e infraestrutura."
+        "area": "Engenharia",
+        "advice": "A demanda está concentrada em infraestrutura, energia e indústria de transformação. O exercício legal exige registro no CREA da unidade federativa, o que pressupõe revalidação do diploma por universidade pública brasileira. Enquanto a revalidação não sai, é comum a atuação em funções de gestão de projeto ou consultoria que não configurem ato privativo de engenheiro."
       },
       {
-        "area": "Negócios, gestão e empreendedorismo",
-        "advice": "Para quem tem capital, o visto de investidor é a rota mais direta: aporte mínimo de R$ 500 mil em empresa brasileira (ou R$ 150 mil em projeto de tecnologia/inovação com plano de negócios aprovado) dá direito a residência, que pode ser permanente enquanto o investimento se mantiver."
+        "area": "Construção civil",
+        "advice": "É o setor de maior crescimento relativo no acumulado até maio de 2026 e o que mais absorve trabalhador sem diploma superior. Para ocupações operacionais e técnicas, certificações e experiência comprovada valem mais que titulação acadêmica, e a exigência de revalidação praticamente desaparece. A informalidade no setor é alta, portanto vale insistir em contrato formal, que é o que sustenta o pedido de autorização de residência."
       },
       {
-        "area": "Baixa qualificação / sem diploma reconhecido",
-        "advice": "Caminho mais difícil. O mercado formal de baixa qualificação paga salários de admissão modestos (em torno de R$ 2.386) e a informalidade é alta (38,1%). Sem oferta formal de emprego que justifique a autorização de residência, o ingresso regular é limitado; vale priorizar setores com vínculo formal como construção e serviços."
+        "area": "Educação",
+        "advice": "Professores da educação básica precisam de diploma revalidado e habilitação específica na disciplina. No ensino superior e na pesquisa, o caminho é mais direto, pois há modalidade própria de autorização de residência para pesquisadores e professores, e instituições de ensino e pesquisa costumam conduzir o processo. O domínio pleno do português é indispensável fora de escolas bilíngues e internacionais."
+      },
+      {
+        "area": "Hotelaria, turismo e alimentação",
+        "advice": "A entrada é acessível para quem já está regularizado, com forte demanda sazonal no Nordeste, no Rio de Janeiro e em destinos de serra no Sul e Sudeste. Não há exigência de revalidação de diploma para a maioria das funções. O ponto de atenção é a alta informalidade do setor, que compromete a comprovação de vínculo exigida nos processos migratórios."
+      },
+      {
+        "area": "Indústria e ocupações técnicas",
+        "advice": "É onde a escassez apontada pela CNI em nota técnica de fevereiro de 2026 é mais aguda, com automação, mecatrônica, eletrotécnica e manutenção mecânica no topo da lista. Cursos técnicos e certificações de fabricantes têm peso decisivo na contratação, e o SENAI oferece formação reconhecida nacionalmente. Para quem vem de fora com formação técnica, este é o caminho mais curto entre qualificação e emprego formal."
+      },
+      {
+        "area": "Agropecuária",
+        "advice": "Setor com saldo positivo no acumulado até maio de 2026 e demanda concentrada em Centro-Oeste, Sul e Matopiba. Agrônomos e veterinários precisam de registro em conselho e, portanto, de diploma revalidado. Já operadores de máquinas agrícolas, técnicos agrícolas e profissionais de agroindústria encontram entrada mais rápida, com forte componente sazonal ligado aos calendários de safra."
+      },
+      {
+        "area": "Empreendedores e investidores",
+        "advice": "Quem pretende abrir ou capitalizar negócio no Brasil pode buscar a autorização de residência na modalidade de investidor, regida por resolução própria do Conselho Nacional de Imigração. A via não depende de oferta de emprego nem de revalidação de diploma, mas exige comprovação de aporte e de plano de investimento com geração de empregos ou de renda."
       }
     ],
     "salaries": [
       {
-        "role": "Salário médio de admissão (todos os setores)",
-        "range": "R$ 2.386,56/mês",
+        "role": "Piso nacional (salário mínimo vigente em 2026)",
+        "range": "R$ 1.621 por mês, equivalentes a R$ 54,04 por dia e R$ 7,37 por hora",
         "source": {
-          "label": "Novo CAGED / Ministério do Trabalho e Emprego (abril 2026)",
-          "url": "https://www.gov.br/trabalho-e-emprego/pt-br/noticias-e-conteudo/2026/maio/pais-gerou-85-888-empregos-em-abril-chegando-a-um-saldo-de-699-762-vagas-formais-no-ano-crescimento-de-1-5",
+          "label": "Presidência da República, decreto de reajuste do salário mínimo para 2026",
+          "url": "https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/noticias/2025/12/publicado-decreto-que-reajusta-salario-minimo-para-r-1-621-a-partir-de-1o-de-janeiro",
           "official": true
         }
       },
       {
-        "role": "Rendimento médio real do trabalhador (geral)",
-        "range": "R$ 3.560/mês",
+        "role": "Salário médio de admissão no emprego formal (todas as ocupações)",
+        "range": "R$ 2.384,10 por mês em maio de 2026, alta de 1,5% sobre maio de 2025",
         "source": {
-          "label": "IBGE / PNAD Contínua (4º tri 2025, via SECOM)",
-          "url": "https://www.gov.br/secom/pt-br/acompanhe-a-secom/noticias/2026/01/desemprego-atinge-menor-nivel-da-serie-historica-e-mercado-de-trabalho-registra-recordes-em-2025",
+          "label": "Ministério do Trabalho e Emprego, Novo CAGED de maio de 2026",
+          "url": "https://www.gov.br/trabalho-e-emprego/pt-br/noticias-e-conteudo/2026/junho/emprego-formal-gera-72-960-postos-de-trabalho-em-maio",
           "official": true
         }
       },
       {
-        "role": "Desenvolvedor de software",
-        "range": "R$ 3.532 a R$ 7.728/mês (pleno ~R$ 5.479; sênior ~R$ 11.354)",
+        "role": "Salário médio de admissão de trabalhadores em jornada típica",
+        "range": "R$ 2.428,13 por mês em maio de 2026",
         "source": {
-          "label": "Glassdoor Brasil (corroboração de comunidade, não oficial)",
-          "url": "https://www.glassdoor.com.br/Sal%C3%A1rios/desenvolvedor-de-software-sal%C3%A1rio-SRCH_KO0,25.htm",
+          "label": "Ministério do Trabalho e Emprego, Novo CAGED de maio de 2026",
+          "url": "https://www.gov.br/trabalho-e-emprego/pt-br/noticias-e-conteudo/2026/junho/emprego-formal-gera-72-960-postos-de-trabalho-em-maio",
           "official": true
         }
       },
       {
-        "role": "Cientista de dados",
-        "range": "R$ 6.508 a R$ 13.333/mês (sênior até ~R$ 21.371)",
+        "role": "Rendimento médio real habitual de todos os trabalhos (formais e informais)",
+        "range": "R$ 3.722 por mês no primeiro trimestre de 2026",
         "source": {
-          "label": "Glassdoor Brasil (corroboração de comunidade, não oficial)",
-          "url": "https://www.glassdoor.com.br/Sal%C3%A1rios/cientista-de-dados-sal%C3%A1rio-SRCH_KO0,18.htm",
-          "official": true
-        }
-      },
-      {
-        "role": "Enfermeiro",
-        "range": "~R$ 4.950/mês (até R$ 8.581 no percentil 90; SP ~R$ 5.922)",
-        "source": {
-          "label": "Glassdoor Brasil (corroboração de comunidade, não oficial)",
-          "url": "https://www.glassdoor.com.br/Sal%C3%A1rios/enfermeiro-sal%C3%A1rio-SRCH_KO0,10.htm",
-          "official": true
-        }
-      },
-      {
-        "role": "Médico",
-        "range": "~R$ 13.100/mês (até R$ 40.200 no percentil 90; SP ~R$ 15.910)",
-        "source": {
-          "label": "Glassdoor Brasil (corroboração de comunidade, não oficial)",
-          "url": "https://www.glassdoor.com.br/Sal%C3%A1rios/medico-sal%C3%A1rio-SRCH_KO0,6.htm",
+          "label": "IBGE, PNAD Contínua do primeiro trimestre de 2026",
+          "url": "https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/46676-pnad-continua-trimestral-desocupacao-sobe-em-15-das-27-ufs-no-1-trimestre-de-2026",
           "official": true
         }
       }
     ],
-    "foreignerRules": "O ingresso e a permanência de estrangeiros para trabalho são regidos pela Lei de Migração (Lei 13.445/2017) e pelo Decreto 9.199/2017. A regra geral é a autorização de residência para fins laborais: na modalidade com vínculo empregatício, a empresa brasileira contratante protocola o pedido no Ministério da Justiça e Segurança Pública pelo sistema MigranteWeb (versão 2.0) antes da emissão do visto de trabalho (VITEM V) pelo consulado. A residência laboral pode ser concedida por até 2 anos, prorrogável. Após entrar no país, o estrangeiro tem prazo improrrogável de 90 dias para comparecer à Polícia Federal e obter a Carteira de Registro Nacional Migratório (CRNM). O Decreto 12.657/2025 permite assistência técnica por até 180 dias por ano sem necessidade de visto específico de trabalho.\n\nPara quem quer empreender, o visto de investidor (VITEM IX) exige aporte mínimo de R$ 500 mil no capital de empresa brasileira (nova ou existente), com possibilidade de residência permanente enquanto o investimento for mantido; há valor reduzido de R$ 150 mil para projetos de tecnologia e inovação com plano de negócios aprovado. Há ainda a modalidade de investidor imobiliário (a partir de R$ 1 milhão, ou R$ 700 mil nas regiões Norte e Nordeste). As bases normativas são as Resoluções do Conselho Nacional de Imigração (RN 11/2017 para administradores/executivos, RN 13/2017 para investidores pessoa física, RN 36/2018 para investidor imobiliário).\n\nAtenção às profissões regulamentadas: revalidação de diploma é obrigatória e não basta sozinha, pois exige também registro no conselho de classe. Medicina passou a aceitar exclusivamente o Revalida (Inep) como via de revalidação, aplicado duas vezes ao ano (Resolução CNE/CES 2/2024); demais profissões usam o Portal Carolina Bori do MEC. Todos os documentos estrangeiros precisam de tradução juramentada por tradutor público registrado no Brasil.",
+    "foreignerRules": "O regime brasileiro é regido pela Lei de Migração (Lei 13.445, de 24 de maio de 2017) e pelo Decreto 9.199, de 20 de novembro de 2017, que substituíram os antigos vistos de permanência por um sistema de autorizações de residência. O processo é conduzido de forma integrada pelo Ministério da Justiça e Segurança Pública, pelo Ministério do Trabalho e Emprego e pelo Conselho Nacional de Imigração (CNIg), com o registro e o controle migratório executados pela Polícia Federal. As condições de cada modalidade são fixadas por Resoluções Normativas do CNIg, e os pedidos tramitam eletronicamente pelo sistema MigranteWeb.\n\nA modalidade mais usada por quem chega para trabalhar é a autorização de residência para fins laborais com vínculo empregatício, disciplinada pela Resolução Normativa nº 02/2017. Ela pressupõe contrato de trabalho regido pela legislação trabalhista brasileira. Quando o imigrante ainda está no exterior, a solicitação é feita pela empresa ou instituição brasileira interessada na contratação, no formato de residência prévia. Quando o imigrante já está em território nacional, tanto a empresa quanto o próprio imigrante podem dar entrada. Existem ainda modalidades específicas para prestação de assistência técnica sem vínculo empregatício, transferência de tecnologia, pesquisadores e professores, investidores e atividades desportivas, cada uma com resolução própria.\n\nO caminho mais simples é o do Acordo de Residência do Mercosul, promulgado pelo Decreto 6.975/2009 e operado pela Polícia Federal. Nacionais de Argentina, Bolívia, Chile, Colômbia, Equador, Paraguai, Peru e Uruguai podem obter residência temporária sem necessidade de oferta prévia de emprego, seja pelo visto VITEM XIII no exterior, seja diretamente junto à Polícia Federal se já estiverem no Brasil. Após dois anos, cumpridos os requisitos, a residência temporária pode ser transformada em residência por prazo indeterminado. Os documentos centrais são certidão de nascimento ou casamento atualizada e certidões negativas de antecedentes criminais do país de origem e de todos os países onde a pessoa residiu nos últimos cinco anos, devidamente legalizados ou apostilados.\n\nPara o trabalho remoto existe a autorização de residência para nômades digitais, criada pela Resolução CNIg/MJSP nº 45, de 9 de setembro de 2021. Exige vínculo profissional com empregador estrangeiro, comprovação de capacidade de executar as atividades à distância e renda mensal mínima de US$ 1.500 ou disponibilidade bancária de pelo menos US$ 18.000. A autorização vale por até um ano e é renovável por período igual. Para estadas de até 90 dias, o nômade digital pode simplesmente entrar como visitante, conforme as regras da sua nacionalidade.\n\nO Brasil não mantém lista oficial de ocupações em falta que dê preferência migratória, diferentemente de países europeus e da Austrália. Também não há exigência formal de exame de idioma para os vistos de trabalho, embora o português seja pré-requisito prático na quase totalidade das vagas. A barreira real está no reconhecimento de diploma: profissões regulamentadas exigem revalidação do título estrangeiro por universidade pública brasileira, com pedidos centralizados na Plataforma Carolina Bori do MEC. A medicina tem regime próprio e mais rigoroso, com aprovação obrigatória no Revalida, exame aplicado pelo INEP, antes da revalidação e do registro no conselho profissional. Após a publicação favorável no Diário Oficial da União, o interessado comparece à Polícia Federal para identificação civil biográfica e biométrica e obtém o número de Registro Nacional Migratório e a Carteira de Registro Nacional Migratório. O prazo de análise varia conforme a modalidade requerida e deve ser conferido caso a caso no Portal de Imigração Laboral do Ministério da Justiça e Segurança Pública.",
     "opportunityWindows": [
-      "Desemprego em mínima histórica (5,1% em dez/2025) e mais de 1 milhão de vagas formais geradas em 2026 ampliam a chance de patrocínio de autorização de residência por empregadores",
-      "Apagão de talentos em TI, dados e cibersegurança: 39% dos empregadores relatam dificuldade de contratar nessas áreas, abrindo espaço para estrangeiros qualificados",
-      "Visto de investidor com valor reduzido (R$ 150 mil) para projetos de tecnologia e inovação, mais acessível que o aporte padrão de R$ 500 mil",
-      "Envelhecimento populacional sustenta demanda crescente e estável por profissionais de saúde, especialmente geriatria, psiquiatria e oncologia",
-      "São Paulo, Minas Gerais e Santa Catarina lideram a geração de vagas formais em 2026, concentrando oportunidades"
+      "Acordo de Residência do Mercosul, aberto de forma permanente e sem prazo de encerramento para nacionais de Argentina, Bolívia, Chile, Colômbia, Equador, Paraguai, Peru e Uruguai. É a via mais rápida por dispensar oferta prévia de emprego, e a conversão para residência por prazo indeterminado fica disponível após dois anos.",
+      "Autorização de residência para nômades digitais, em vigor de forma contínua desde a Resolução CNIg/MJSP nº 45/2021, com concessão de até um ano renovável. A janela prática é o requisito de renda relativamente baixo, US$ 1.500 mensais ou US$ 18.000 em disponibilidade bancária.",
+      "Ciclo de qualificação industrial do Mapa do Trabalho Industrial 2025-2027, que projeta necessidade de qualificar 14 milhões de pessoas em ocupações industriais até 2027, com 2,2 milhões em formação inicial. O período concentra abertura de turmas e vagas técnicas na rede SENAI.",
+      "Temporada de contratação industrial e de serviços do primeiro semestre, quando a criação de vagas formais é historicamente mais intensa. Em 2026, fevereiro e março responderam pelos maiores saldos do ano, com mais de 255 mil e 228 mil postos respectivamente.",
+      "Expansão de obras de infraestrutura, o subsetor que puxou o crescimento da construção em 2026 e o de maior taxa de expansão relativa entre os grandes setores (5,23% no acumulado até maio de 2026), com demanda concentrada em canteiros de grande porte.",
+      "Revalida, aplicado pelo INEP em edições semestrais, é a única porta de entrada para médicos formados no exterior. O Edital INEP nº 76, de 12 de junho de 2026, rege a edição 2026/2, e a inscrição em cada edição tem prazo fechado que deve ser acompanhado no portal do INEP."
     ],
     "jobBoards": [
       {
-        "label": "Portal Emprega Brasil (Sine) - Ministério do Trabalho e Emprego",
-        "url": "https://empregabrasil.mte.gov.br/",
+        "label": "Portal Emprega Brasil, do Ministério do Trabalho e Emprego, o canal oficial do Sistema Nacional de Emprego (SINE) para cadastro de currículo e candidatura a vagas",
+        "url": "https://servicos.mte.gov.br/",
         "official": true
       },
       {
-        "label": "Buscar Emprego no Sistema Nacional de Emprego (Sine) - gov.br",
+        "label": "Serviço Buscar Emprego no SINE, na plataforma gov.br, com o passo a passo oficial e os requisitos de conta gov.br nível prata ou superior",
         "url": "https://www.gov.br/pt-br/servicos/buscar-emprego-no-sistema-nacional-de-emprego-sine",
         "official": true
       },
       {
-        "label": "Portal de Imigração Laboral - Autorização de Residência (Ministério da Justiça)",
-        "url": "https://portaldeimigracao.mj.gov.br/pt/autorizacao-de-residencia-laboral",
+        "label": "Portal de Imigração Laboral do Ministério da Justiça e Segurança Pública, referência oficial para autorizações de residência para trabalho e normas do CNIg",
+        "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/portal-de-imigracao-laboral/portal-de-imigracao-laboral",
         "official": true
       },
       {
-        "label": "LinkedIn Empregos (corroboração de comunidade, não oficial)",
-        "url": "https://www.linkedin.com/jobs/",
+        "label": "Ministério do Trabalho e Emprego, estatísticas do Novo CAGED, para acompanhar quais setores e regiões estão efetivamente contratando",
+        "url": "https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/acoes-e-programas/programas-projetos-acoes-obras-e-atividades/estatisticas-trabalho/novo-caged",
+        "official": true
+      },
+      {
+        "label": "LinkedIn Brasil, principal canal para vagas de nível superior, tecnologia e posições em multinacionais",
+        "url": "https://br.linkedin.com/jobs",
+        "official": false
+      },
+      {
+        "label": "Catho, um dos maiores portais privados de vagas do país, com forte cobertura de níveis técnico e administrativo",
+        "url": "https://www.catho.com.br/",
+        "official": false
+      },
+      {
+        "label": "Vagas.com, portal privado com ampla base de processos seletivos de grandes empregadores brasileiros",
+        "url": "https://www.vagas.com.br/",
+        "official": false
+      },
+      {
+        "label": "InfoJobs Brasil, portal privado com concentração em vagas operacionais, comerciais e de início de carreira",
+        "url": "https://www.infojobs.com.br/",
+        "official": false
+      },
+      {
+        "label": "Indeed Brasil, agregador de vagas com cobertura nacional e filtros por cidade e faixa salarial",
+        "url": "https://br.indeed.com/",
+        "official": false
+      },
+      {
+        "label": "Gupy, plataforma de recrutamento usada por boa parte das grandes empresas brasileiras para seus processos seletivos",
+        "url": "https://portal.gupy.io/",
         "official": false
       }
     ],
     "sources": [
       {
-        "label": "IBGE - Desocupação cai para 5,1% em dezembro e 2025 tem melhores resultados da série histórica (PNAD Contínua)",
-        "url": "https://www.gov.br/secom/pt-br/acompanhe-a-secom/noticias/2026/01/desemprego-atinge-menor-nivel-da-serie-historica-e-mercado-de-trabalho-registra-recordes-em-2025",
+        "label": "Ministério do Trabalho e Emprego, Novo CAGED divulga dados do mercado de trabalho formal referentes a maio de 2026",
+        "url": "https://www.gov.br/trabalho-e-emprego/pt-br/noticias-e-conteudo/2026/junho/emprego-formal-gera-72-960-postos-de-trabalho-em-maio",
         "official": true
       },
       {
-        "label": "IBGE - Desemprego (página Explica)",
-        "url": "https://www.ibge.gov.br/explica/desemprego.php",
+        "label": "Ministério do Trabalho e Emprego, página inicial do Novo CAGED de maio de 2026",
+        "url": "https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/acoes-e-programas/programas-projetos-acoes-obras-e-atividades/estatisticas-trabalho/novo-caged/2026/maio/pagina-inicial",
         "official": true
       },
       {
-        "label": "SECOM - Menor desemprego da série histórica em fevereiro: 5,8%",
-        "url": "https://www.gov.br/secom/pt-br/acompanhe-a-secom/noticias/2026/03/brasil-tem-menor-desemprego-da-serie-historica-para-trimestre-encerrado-em-fevereiro-5-8",
+        "label": "IBGE, PNAD Contínua, taxa de desocupação de 5,6% e taxa de subutilização de 13,3% no trimestre encerrado em maio de 2026",
+        "url": "https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/47316-taxa-de-desocupacao-e-de-5-6-e-taxa-de-subutilizacao-e-de-13-3-no-trimestre-encerrado-em-maio",
         "official": true
       },
       {
-        "label": "Novo CAGED - Brasil gera 85.888 empregos em abril, saldo de 699.762 no ano (MTE)",
-        "url": "https://www.gov.br/trabalho-e-emprego/pt-br/noticias-e-conteudo/2026/maio/pais-gerou-85-888-empregos-em-abril-chegando-a-um-saldo-de-699-762-vagas-formais-no-ano-crescimento-de-1-5",
+        "label": "IBGE, PNAD Contínua Trimestral do primeiro trimestre de 2026, desocupação, informalidade e rendimento médio",
+        "url": "https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/46676-pnad-continua-trimestral-desocupacao-sobe-em-15-das-27-ufs-no-1-trimestre-de-2026",
         "official": true
       },
       {
-        "label": "Novo CAGED - Brasil encerra 2025 com saldo positivo de 1,27 milhão de empregos formais (MTE)",
-        "url": "https://www.gov.br/trabalho-e-emprego/pt-br/noticias-e-conteudo/2026/janeiro/novo-caged-brasil-encerra-2025-com-saldo-positivo-de-1-27-milhao-de-empregos-formais",
+        "label": "IBGE, PNAD Contínua do trimestre encerrado em abril de 2026, taxa de desocupação de 5,8% e subutilização de 13,8%",
+        "url": "https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/46888-pnad-continua-taxa-de-desocupacao-e-de-5-8-e-taxa-de-subutilizacao-e-de-13-8-no-trimestre-encerrado-em-abril",
         "official": true
       },
       {
-        "label": "Novo CAGED - Sumário Executivo (PDF, MTE)",
-        "url": "https://www.gov.br/trabalho-e-emprego/pt-br/assuntos/estatisticas-trabalho/novo-caged/2026/marco/sumario-executivo_marco-de-2026.pdf",
+        "label": "IBGE, Indicadores da PNAD Contínua do primeiro trimestre de 2026, publicação completa em PDF",
+        "url": "https://biblioteca.ibge.gov.br/visualizacao/periodicos/2421/pnact_2026_1tri.pdf",
         "official": true
       },
       {
-        "label": "Portal de Imigração - Autorização de Residência Laboral (Ministério da Justiça)",
-        "url": "https://portaldeimigracao.mj.gov.br/pt/autorizacao-de-residencia-laboral",
+        "label": "Presidência da República, decreto que reajusta o salário mínimo para R$ 1.621 a partir de 1º de janeiro de 2026",
+        "url": "https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/noticias/2025/12/publicado-decreto-que-reajusta-salario-minimo-para-r-1-621-a-partir-de-1o-de-janeiro",
         "official": true
       },
       {
-        "label": "MRE - Visto Temporário IX (Investimento)",
-        "url": "https://www.gov.br/mre/pt-br/consulado-porto/servicos-consulares/vistos/visto-ix-investimento",
+        "label": "Ministério da Justiça e Segurança Pública, Portal de Imigração Laboral",
+        "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/portal-de-imigracao-laboral/portal-de-imigracao-laboral",
         "official": true
       },
       {
-        "label": "gov.br - Obter autorização de residência para fins laborais a imigrantes",
-        "url": "https://www.gov.br/pt-br/servicos/obter-autorizacao-de-residencia-para-fins-laborais-a-imigrantes",
+        "label": "Ministério da Justiça e Segurança Pública, página sobre autorização de residência",
+        "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/autorizacao-de-residencia",
         "official": true
       },
       {
-        "label": "Sistema Nacional de Emprego (Sine) - gov.br / MTE",
-        "url": "https://www.gov.br/trabalho-e-emprego/pt-br/assuntos/sistema-nacional-de-emprego-sine",
+        "label": "Portal de Imigração, Resolução Normativa nº 02/2017, autorização de residência para fins laborais com vínculo empregatício",
+        "url": "https://portaldeimigracao.mj.gov.br/images/resolucoes_normativas/RN_02_2017.pdf",
         "official": true
       },
       {
-        "label": "CFM/Portal Médico - Revalida é única forma de revalidação de diplomas médicos estrangeiros",
-        "url": "https://portal.cfm.org.br/noticias/revalida-e-agora-a-unica-forma-de-revalidacao-de-diplomas-estrangeiros-no-brasil/",
+        "label": "Portal de Imigração, Resolução CNIg/MJSP nº 45, de 9 de setembro de 2021, autorização de residência para nômades digitais",
+        "url": "https://portaldeimigracao.mj.gov.br/images/resolucoes_normativas/RESOLU%C3%87%C3%83O_CNIG_MJSP_N%C2%BA_45_DE_9_DE_SETEMBRO_DE_2021.pdf",
         "official": true
       },
       {
-        "label": "gov.br - Fazer o Exame Nacional de Revalidação de Diplomas Médicos (Revalida/Inep)",
-        "url": "https://www.gov.br/pt-br/servicos/fazer-o-exame-nacional-de-revalidacao-de-diplomas-medicos-expedidos-por-instituicao-de-educacao-superior-estrangeira",
+        "label": "Ministério da Justiça e Segurança Pública, guia prático de autorização de residência para nômades digitais",
+        "url": "https://portaldeimigracao.mj.gov.br/pt/destaques-e-novidades/401519-guia-pratico-de-autorizacao-de-residencia-para-nomades-digitais",
         "official": true
       },
       {
-        "label": "Glassdoor Brasil - faixas salariais por profissão (comunidade, não oficial)",
-        "url": "https://www.glassdoor.com.br/",
+        "label": "Polícia Federal, Acordo sobre Residência do Mercosul para nacionais de Argentina, Bolívia, Chile, Colômbia, Equador, Paraguai, Peru e Uruguai",
+        "url": "https://www.gov.br/pf/pt-br/assuntos/imigracao/autorizacao-residencia/acordo-de-residencia-para-nacionais-dos-estados-partes-do-mercosul-bolivia-e-chile",
+        "official": true
+      },
+      {
+        "label": "Portal de Imigração, Resoluções Normativas do Conselho Nacional de Imigração",
+        "url": "https://portaldeimigracao.mj.gov.br/pt/normas/resolucoes-normativas-1",
+        "official": true
+      },
+      {
+        "label": "MEC, Plataforma Carolina Bori, revalidação e reconhecimento de diplomas estrangeiros",
+        "url": "https://carolinabori.mec.gov.br/",
+        "official": true
+      },
+      {
+        "label": "MEC Normas, Edital INEP nº 76, de 12 de junho de 2026, referente ao Revalida 2026/2",
+        "url": "https://mecnormas.mec.gov.br/pesquisa/detalhar/12400",
+        "official": true
+      },
+      {
+        "label": "Governo Federal, serviço oficial de busca de emprego pelo Sistema Nacional de Emprego (SINE)",
+        "url": "https://www.gov.br/pt-br/servicos/buscar-emprego-no-sistema-nacional-de-emprego-sine",
+        "official": true
+      },
+      {
+        "label": "CNI, Agência de Notícias da Indústria, nota técnica de 9 de fevereiro de 2026 sobre a crise de mão de obra qualificada na indústria e o ranking de entraves do setor",
+        "url": "https://noticias.portaldaindustria.com.br/noticias/economia/entenda-a-crise-de-mao-de-obra-qualificada-na-industria-em-meio-a-um-recorde-de-empregos-no-pais/",
         "official": false
       },
       {
-        "label": "Unico - Profissões em alta para 2026 (corroboração de comunidade, não oficial)",
-        "url": "https://blog.unico.io/profissoes-em-alta-2026/",
+        "label": "CNI, Sondagem Especial sobre falta de trabalhador qualificado na indústria",
+        "url": "https://www.portaldaindustria.com.br/estatisticas/sondesp-76-falta-de-trabalhador-qualificado/",
+        "official": false
+      },
+      {
+        "label": "Agência de Notícias da Indústria, Mapa do Trabalho Industrial 2025-2027 da CNI e do SENAI, demanda por profissionais qualificados",
+        "url": "https://noticias.portaldaindustria.com.br/noticias/trabalho/mapa-do-trabalho-2025-2027-confira-a-demanda-de-profissionais-por-estado/",
         "official": false
       }
     ]
   },
   "pt": {
-    "updatedAt": "2026-06-22",
-    "overview": "O mercado de trabalho português entrou em 2026 num momento de viragem depois de mais de um ano em queda do desemprego. Segundo o Instituto Nacional de Estatística (INE), a taxa de desemprego subiu de 5,8% no quarto trimestre de 2025 para 6,1% no primeiro trimestre de 2026, interrompendo o ciclo de descida. No mesmo período a economia perdeu cerca de 39 mil postos de trabalho em termos líquidos, a maior quebra trimestral desde 2021, embora o emprego total ainda cresça em termos homólogos e ultrapasse os 5,3 milhões de pessoas. A taxa de subutilização do trabalho ronda os 10% e o desemprego jovem, apesar de recuar, mantém-se elevado, perto de 19%. O salário bruto médio mensal situou-se em torno dos 1.694 euros em 2025 e o salário mínimo nacional passou a 920 euros em janeiro de 2026.\nApesar do arrefecimento, persiste um descasamento estrutural entre a oferta e a procura de mão de obra. Há défice crónico de profissionais em saúde, tecnologia, construção e hotelaria, enquanto setores tradicionais como o têxtil, a indústria extrativa e parte do retalho perdem peso. Lisboa, Porto e Setúbal concentram os salários mais altos, puxados pelo ecossistema tecnológico, e o país continua a depender de imigração para preencher vagas que ficam abertas há mais de 90 dias. Para o estrangeiro, o quadro combina oportunidade real em setores carenciados com um sistema de vistos que ficou mais exigente em documentação a partir de 2026, sob a nova estrutura da AIMA.",
+    "updatedAt": "2026-07-20",
+    "overview": "O mercado de trabalho português entrou em 2026 com um sinal misto. Segundo as Estatísticas do Emprego do Instituto Nacional de Estatística (INE) divulgadas em 6 de maio de 2026, a taxa de desemprego do 1.º trimestre de 2026 ficou em 6,1%, o que representa uma subida de 0,3 pontos percentuais face aos 5,8% do 4.º trimestre de 2025 e, ao mesmo tempo, uma descida de 0,5 pontos percentuais na comparação com o mesmo trimestre de 2025. A população empregada foi estimada em 5.300,8 mil pessoas, com queda de 0,7% (menos 38,7 mil postos) em relação ao trimestre anterior, mas com crescimento de 2,3% (mais 119,4 mil) em termos homólogos. A população desempregada somou 346,3 mil pessoas. A subutilização do trabalho, indicador mais amplo que inclui subemprego e inativos disponíveis, abrangeu 588 mil pessoas no mesmo trimestre, equivalente a uma taxa de 10,2%.\n\nOs dados mensais harmonizados do Eurostat mostram um quadro mais favorável na leitura mais recente. Em maio de 2026, a taxa de desemprego portuguesa foi de 5,5%, abaixo dos 5,7% de abril de 2026, e claramente melhor do que a média da zona euro (6,2%) e da União Europeia (5,9%) no mesmo mês. O ponto fraco continua a ser o desemprego jovem, que atingiu 19,7% entre os menores de 25 anos em maio de 2026, bem acima da média da UE (15,2%) na mesma data. Na prática, Portugal combina desemprego agregado baixo com dificuldade estrutural de entrada dos jovens no mercado formal.\n\nDo lado dos salários, a remuneração bruta mensal média por trabalhador chegou a 1.611 euros no 1.º trimestre de 2026, com aumento nominal de 5,0% e ganho real de 2,7% em termos homólogos, segundo o destaque do INE divulgado em 15 de maio de 2026. No mesmo trimestre, a componente regular ficou em 1.428 euros e a remuneração base em 1.335 euros, ambas com subida nominal de 5,1%. O salário mínimo nacional, oficialmente designado retribuição mínima mensal garantida, subiu para 920 euros brutos a partir de 1 de janeiro de 2026, por força do Decreto-Lei n.º 139/2025, de 29 de dezembro, o que corresponde a mais 50 euros do que os 870 euros em vigor em 2025, um aumento de 5,7%. O teletrabalho abrangeu 21,1% da população empregada no 1.º trimestre de 2026.\n\nPara o estrangeiro, a mudança relevante em 2026 não está nos números, e sim nas regras. A Lei n.º 61/2025, de 22 de outubro, alterou profundamente o regime de entrada e permanência, encerrou a regularização por manifestação de interesse depois da entrada como turista e extinguiu o antigo visto de procura de trabalho de âmbito geral. O caminho legal passou a exigir visto adequado obtido no consulado do país de origem, normalmente com contrato ou promessa de contrato de trabalho já assinada com empregador em Portugal. Ao mesmo tempo, o Estudo Económico da OCDE sobre Portugal publicado em janeiro de 2026 aponta escassez de mão de obra crescente na indústria transformadora, na construção, na saúde e nos setores sazonais, num país cuja população com 65 anos ou mais deve subir de 25% para perto de 34% até ao final da década de 2040, segundo a projeção do mesmo relatório. A leitura combinada é direta: há procura real por trabalhador estrangeiro, mas a porta de entrada ficou mais estreita e mais formal.",
     "hotSectors": [
-      "Saúde (medicina e enfermagem)",
-      "Tecnologias de informação e digital (programação, cloud, cibersegurança, dados e IA)",
-      "Construção civil e obras públicas",
-      "Hotelaria, restauração e turismo",
-      "Energias renováveis (solar e eólica)",
-      "Logística e transporte rodoviário de mercadorias",
-      "Indústria transformadora qualificada (CNC, soldadura, mecânica industrial)",
-      "Engenharia"
+      "Saúde e cuidados continuados, pressionados pelo envelhecimento da população e pela saída de profissionais para o estrangeiro",
+      "Tecnologias de informação e desenvolvimento de software, com concentração forte na área metropolitana de Lisboa e no Porto",
+      "Construção civil e reabilitação urbana, puxadas por obra pública e por projetos de habitação",
+      "Indústria transformadora e metalomecânica, incluindo automóvel, moldes e componentes no Norte do país",
+      "Turismo, hotelaria e restauração, com procura permanente e forte componente sazonal no Algarve e nas ilhas",
+      "Energias renováveis, sobretudo solar e eólica, com projetos concentrados no Alentejo",
+      "Agroindústria e transformação alimentar, com necessidade de técnicos agrícolas e operadores",
+      "Logística e transportes, incluindo motoristas e operadores de armazém"
     ],
     "coolingSectors": [
-      "Indústria têxtil e do vestuário",
-      "Indústria extrativa e mineira",
-      "Retalho não especializado e venda por correspondência/Internet",
-      "Algumas especialidades tradicionais da construção sem reconversão",
-      "Funções administrativas de baixa qualificação sujeitas a automação"
+      "Profissões administrativas e de gestão de escritório, identificadas pelo EURES como área de excedente de candidatos",
+      "Profissões jurídicas, sociais e culturais, com mais diplomados do que vagas",
+      "Comércio a retalho e funções de vendas em loja",
+      "Docência no ensino básico e secundário em algumas regiões, apesar da carência pontual em disciplinas específicas",
+      "Diplomados generalistas das áreas de humanidades, com dificuldade de colocação na área de formação"
     ],
     "inDemandRoles": [
       {
-        "role": "Enfermeiro (geral e especialista em UCI, bloco operatório, oncologia)",
-        "note": "Topo da lista de carência; sistema pressionado pelo envelhecimento e pela saída de profissionais para o estrangeiro"
+        "role": "Médico",
+        "note": "Carência crítica no Serviço Nacional de Saúde. Exige inscrição na Ordem dos Médicos e reconhecimento do grau académico. Existe regime excecional e temporário de reconhecimento de diplomas estrangeiros previsto no Decreto-Lei n.º 86/2023, aplicável até 31 de dezembro de 2026 e sujeito a contingentes definidos por despacho governamental."
       },
       {
-        "role": "Médico (clínica geral e medicina familiar)",
-        "note": "Escassez crónica no SNS"
+        "role": "Enfermeiro",
+        "note": "Profissão regulamentada com procura contínua em hospitais, lares e cuidados domiciliários. O reconhecimento específico é pedido a uma instituição de ensino superior público e o curso de origem precisa de ter, no mínimo, 4.600 horas de ensino presencial, das quais pelo menos metade em contexto clínico."
       },
       {
-        "role": "Programador full-stack, backend e frontend",
-        "note": "Procura forte em Lisboa e Porto; concorrência internacional pelos perfis"
+        "role": "Programador e engenheiro de software",
+        "note": "Listado pelo EURES entre os grupos com maior incidência de carência. Inglês costuma ser suficiente em empresas de produto e em centros de serviços internacionais, o que reduz a barreira linguística para o recém-chegado."
       },
       {
-        "role": "Engenheiro DevOps, cloud e SRE",
-        "note": "Perfil técnico muito procurado"
+        "role": "Engenheiro civil",
+        "note": "Procura sustentada por obra pública e reabilitação urbana. O exercício pleno passa pela inscrição na Ordem dos Engenheiros e pelo reconhecimento do grau."
       },
       {
-        "role": "Analista de cibersegurança",
-        "note": "Setor crítico em expansão"
+        "role": "Engenheiro eletrotécnico e de energia",
+        "note": "Ligado à expansão solar e eólica. Perfis com experiência em projeto, operação e manutenção de parques renováveis têm colocação rápida, sobretudo no Alentejo."
       },
       {
-        "role": "Cientista de dados e engenheiro de IA",
-        "note": "Entre as funções adicionadas à lista de carência em 2026"
+        "role": "Eletricista",
+        "note": "Carência apontada na construção e na indústria. Não exige diploma superior, mas costuma exigir certificação profissional e experiência comprovada."
       },
       {
-        "role": "Engenheiro civil e encarregado de obra",
-        "note": "Construção com vagas abertas há mais de 90 dias"
+        "role": "Canalizador",
+        "note": "Falta persistente em obra nova e em reabilitação. Perfil de entrada acessível para quem chega com ofício aprendido no país de origem."
       },
       {
-        "role": "Eletricista (industrial e de edifícios), canalizador, pedreiro, carpinteiro e pintor",
-        "note": "Forte carência na construção"
+        "role": "Pedreiro e carpinteiro de cofragem",
+        "note": "Duas das funções com maior dificuldade de preenchimento na construção. Contratação frequente via empresas de trabalho temporário."
       },
       {
-        "role": "Soldador certificado (MIG/MAG/TIG)",
-        "note": "Indústria e construção"
+        "role": "Soldador",
+        "note": "Identificado pelo EURES no grupo de trabalhadores de metalurgia e metalomecânica. Certificação de processos de soldadura pesa mais do que escolaridade formal."
       },
       {
-        "role": "Operador CNC e mecânico industrial",
-        "note": "Indústria transformadora qualificada"
+        "role": "Operador de máquinas industriais",
+        "note": "Inclui operadores de máquinas de plásticos, de fiação e tecelagem, de tinturaria, de calçado e de gruas, todos citados pelo EURES como ocupações em falta. Concentração no eixo industrial do Norte e do Centro."
       },
       {
-        "role": "Instalador fotovoltaico e técnico de turbinas eólicas",
-        "note": "Crescimento das energias renováveis"
+        "role": "Trabalhador de hotelaria e restauração",
+        "note": "Procura elevada e rotatividade alta. Cozinha, sala e limpeza absorvem muita mão de obra estrangeira, com pico sazonal no Algarve e nas regiões autónomas. Português funcional ajuda no atendimento direto."
       },
       {
-        "role": "Chef de partie, sous-chef e pasteleiro; empregado de mesa e bar experiente",
-        "note": "Hotelaria vital para a economia, mas com alta rotatividade e precariedade"
+        "role": "Técnico agrícola e trabalhador agrícola",
+        "note": "Necessidade reconhecida no Alentejo e no Ribatejo, com forte componente sazonal. É o setor típico de utilização do visto de estada temporária para trabalho sazonal."
       },
       {
-        "role": "Motorista de pesados (carta C + CE)",
-        "note": "Logística e transporte de mercadorias"
+        "role": "Cuidador de idosos",
+        "note": "Função em expansão direta por causa do envelhecimento demográfico apontado pela OCDE. Exige domínio do português para comunicação com utentes e famílias."
+      },
+      {
+        "role": "Motorista de pesados e operador de logística",
+        "note": "Procura ligada ao crescimento do transporte e da distribuição. Exige carta de condução válida e, no caso do transporte profissional, certificado de aptidão reconhecido em Portugal."
       }
     ],
     "byQualification": [
       {
-        "area": "Saúde (medicina e enfermagem)",
-        "advice": "É a área com maior carência e maior facilidade de colocação para estrangeiros. Antecipe o reconhecimento do diploma e do registo profissional (Ordem dos Médicos ou Ordem dos Enfermeiros) ainda no país de origem, porque são profissões regulamentadas e o registo é obrigatório para exercer. Domínio do português é exigido no contacto clínico."
+        "area": "Saúde",
+        "advice": "É a área com melhor relação entre procura e barreira de entrada, desde que o candidato aceite enfrentar o processo burocrático. Médicos devem verificar de imediato o regime excecional de reconhecimento em vigor até 31 de dezembro de 2026, porque depois dessa data o caminho volta a ser o procedimento comum. Enfermeiros precisam de confirmar antes de partir se o curso de origem cumpre as 4.600 horas presenciais exigidas, sob pena de terem de fazer complemento de formação. Em ambos os casos, o registo na ordem profissional respetiva é condição para exercer, e o português é praticamente obrigatório no contacto com doentes."
       },
       {
-        "area": "Tecnologia e engenharia de software",
-        "advice": "Setor que paga ao dobro da mediana nacional e aceita inglês em muitas empresas. Aposte em Lisboa e Porto, em hubs de empresas internacionais e startups. Funções de cloud, cibersegurança, dados e IA têm via potencialmente mais rápida por entrarem na lista de profissões em falta e no visto D3 (atividade altamente qualificada)."
+        "area": "Tecnologia",
+        "advice": "É a área onde o estrangeiro entra com menos atrito. A profissão não é regulamentada, portanto não há ordem profissional nem reconhecimento obrigatório de diploma para trabalhar, e portefólio somado a experiência costuma pesar mais do que a formação formal. Lisboa e Porto concentram as vagas, muitas em empresas que operam em inglês. O contraponto é a concorrência internacional por essas mesmas vagas e o custo de habitação nas duas cidades."
       },
       {
-        "area": "Engenharia civil e construção qualificada",
-        "advice": "Procura sólida com vagas que ficam meses abertas. Engenheiros devem verificar o reconhecimento junto da Ordem dos Engenheiros. Profissões técnicas (eletricista, soldador, canalizador) ganham com certificações reconhecidas e podem usar a lista de carência a favor do visto."
+        "area": "Engenharia",
+        "advice": "Civil, eletrotécnica e ambiente aparecem entre as ocupações em falta. Para funções que impliquem assinatura de projeto ou responsabilidade técnica, a inscrição na Ordem dos Engenheiros é necessária e depende de reconhecimento do grau. Para funções de execução, obra e manutenção, a exigência é mais leve. Quem vem da área de renováveis deve olhar para o Alentejo, onde estão os grandes projetos solares."
       },
       {
-        "area": "Energias renováveis e indústria transformadora",
-        "advice": "Técnicos de fotovoltaico, eólica, CNC e mecânica industrial têm procura crescente. Certificações técnicas e experiência comprovada pesam mais do que grau académico; vale validar competências via centros do IEFP."
+        "area": "Construção",
+        "advice": "É o setor com a porta de entrada mais aberta para quem não tem diploma superior. Pedreiro, carpinteiro de cofragem, eletricista, canalizador e pintor estão entre as funções mais difíceis de preencher. A contratação passa muito por empresas de trabalho temporário e por subempreiteiros, o que aconselha atenção redobrada à formalidade do contrato, que é justamente o documento exigido para o visto."
+      },
+      {
+        "area": "Educação",
+        "advice": "O EURES classifica a docência no ensino básico e secundário como área de excedente de candidatos, o que torna Portugal um destino pouco favorável para professores estrangeiros em disciplinas generalistas. Acresce que a profissão é regulamentada, exige habilitação profissional para a docência reconhecida em Portugal e domínio pleno da língua portuguesa. O ensino superior e a investigação científica seguem lógica diferente, mais aberta ao perfil internacional e ao inglês."
       },
       {
         "area": "Hotelaria e turismo",
-        "advice": "Porta de entrada acessível para quem chega sem rede, sobretudo em zonas turísticas. Atenção à precariedade, sazonalidade e rotatividade do setor; perfis qualificados (chefs, gestão) têm melhor estabilidade e progressão."
+        "advice": "Absorve volume elevado de trabalhadores estrangeiros e aceita entrada sem qualificação formal, mas paga tipicamente perto do salário mínimo e tem rotatividade alta. A sazonalidade é o fator decisivo do planeamento: o Algarve e as regiões autónomas contratam sobretudo para a época alta, o que se enquadra no visto de estada temporária para trabalho sazonal. Quem procura estabilidade deve preferir as unidades urbanas de Lisboa e do Porto, que operam todo o ano."
       },
       {
-        "area": "Baixa qualificação / setores em queda",
-        "advice": "Têxtil, retalho tradicional e administrativo de rotina estão a perder postos e oferecem menor segurança. Recomenda-se requalificação para áreas carenciadas, aproveitando formação do IEFP, antes de migrar com base nesses setores."
+        "area": "Indústria e metalomecânica",
+        "advice": "O Norte e o Centro concentram automóvel, moldes, têxtil e calçado, e o EURES aponta carência específica em soldadores e em operadores de máquinas destes ramos. As qualificações valorizadas são certificações técnicas e experiência comprovada, não diploma universitário. O custo de vida fora das duas grandes cidades é significativamente menor, o que melhora o salário real."
+      },
+      {
+        "area": "Agricultura e agroindústria",
+        "advice": "Há procura por técnicos agrícolas e por trabalhadores de campo, com concentração no Alentejo e no Ribatejo. É o setor natural para o visto de estada temporária de trabalho sazonal, cuja duração acompanha o contrato e não pode ultrapassar nove meses em cada período de doze. Convém confirmar alojamento e condições por escrito antes de partir, porque a oferta é maioritariamente rural."
+      },
+      {
+        "area": "Administração, direito e comércio",
+        "advice": "São as áreas expressamente identificadas pelo EURES como tendo excedente de candidatos face às vagas disponíveis. Para o estrangeiro, somam-se dois obstáculos: exigência de português fluente e, no caso do direito, regulamentação pela Ordem dos Advogados com processo próprio de reconhecimento. Quem vem destas áreas deve considerar reconversão para funções de suporte em tecnologia, finanças ou centros de serviços partilhados internacionais."
       }
     ],
     "salaries": [
       {
-        "role": "Salário mínimo nacional",
-        "range": "920 euros/mês brutos (14 meses), em vigor desde janeiro de 2026",
+        "role": "Salário mínimo nacional (retribuição mínima mensal garantida)",
+        "range": "920 euros brutos por mês desde 1 de janeiro de 2026, mais 50 euros do que os 870 euros em vigor em 2025, o equivalente a uma subida de 5,7%",
         "source": {
-          "label": "Pordata / INE",
-          "url": "https://www.pordata.pt/pt/estatisticas/salarios-e-pensoes/salarios/salario-minimo-nacional",
+          "label": "Decreto-Lei n.º 139/2025, de 29 de dezembro, Diário da República",
+          "url": "https://diariodarepublica.pt/dr/detalhe/decreto-lei/139-2025-992879809",
           "official": true
         }
       },
       {
-        "role": "Remuneração bruta total mensal média (todos os setores)",
-        "range": "cerca de 1.694 euros/mês (dados 2025)",
+        "role": "Remuneração bruta mensal média por trabalhador (todos os setores)",
+        "range": "1.611 euros no 1.º trimestre de 2026, com aumento nominal de 5,0% e real de 2,7% em termos homólogos",
         "source": {
-          "label": "INE - Mercado de trabalho",
-          "url": "https://www.ine.pt/xportal/xmain?xpgid=ine_tema&xpid=INE&tema_cod=1114&xlang=pt",
+          "label": "INE, Remuneração bruta mensal média por trabalhador, 1.º trimestre de 2026 (divulgado em 15 de maio de 2026)",
+          "url": "https://www.ine.pt/xportal/xmain?xpid=INE&xpgid=ine_destaques&DESTAQUESdest_boui=771838596&DESTAQUESmodo=2&xlang=pt",
           "official": true
         }
       },
       {
-        "role": "Salário mediano bruto",
-        "range": "aproximadamente 1.240 euros/mês (14 meses)",
+        "role": "Remuneração regular mensal média por trabalhador",
+        "range": "1.428 euros no 1.º trimestre de 2026, com aumento nominal de 5,1% e real de 2,8% em termos homólogos",
         "source": {
-          "label": "INE (compilado por imprensa especializada)",
-          "url": "https://www.ine.pt/xportal/xmain?xpgid=ine_tema&xpid=INE&tema_cod=1114&xlang=pt",
+          "label": "INE, Remuneração bruta mensal média por trabalhador, 1.º trimestre de 2026 (divulgado em 15 de maio de 2026)",
+          "url": "https://www.ine.pt/xportal/xmain?xpid=INE&xpgid=ine_destaques&DESTAQUESdest_boui=771838596&DESTAQUESmodo=2&xlang=pt",
           "official": true
         }
       },
       {
-        "role": "Setor de tecnologias de informação (TIC)",
-        "range": "remuneração bruta mensal média cerca de 2.658 euros (2025), perto do dobro da mediana nacional",
+        "role": "Remuneração base mensal média por trabalhador",
+        "range": "1.335 euros no 1.º trimestre de 2026, com aumento nominal de 5,1% e real de 2,8% em termos homólogos",
         "source": {
-          "label": "INE (via Santander Salto)",
-          "url": "https://www.santander.pt/salto/salario-medio-portugal-2026",
+          "label": "INE, Remuneração bruta mensal média por trabalhador, 1.º trimestre de 2026 (divulgado em 15 de maio de 2026)",
+          "url": "https://www.ine.pt/xportal/xmain?xpid=INE&xpgid=ine_destaques&DESTAQUESdest_boui=771838596&DESTAQUESmodo=2&xlang=pt",
+          "official": true
+        }
+      },
+      {
+        "role": "Remuneração bruta mensal média na Região Autónoma da Madeira",
+        "range": "1.543 euros no 1.º trimestre de 2026, com aumento homólogo de 3,4% nominal e 0,6% real, sendo a remuneração regular de 1.360 euros e a base de 1.305 euros",
+        "source": {
+          "label": "DREM, Direção Regional de Estatística da Madeira, remunerações do 1.º trimestre de 2026 (divulgado em 15 de maio de 2026)",
+          "url": "https://estatistica.madeira.gov.pt/download-now/social/merctrab-pt/remuneracoes/noticias-remuneracoes/5780-15-05-2026-no-1-trimestre-de-2026-a-remuneracao-bruta-mensal-media-por-trabalhador-aumentou-3-4-em-termos-homologos-para-os-1-543-euros.html",
+          "official": true
+        }
+      },
+      {
+        "role": "Ganho médio bruto mensal (referência comparativa europeia)",
+        "range": "1.976 euros em Portugal em 2023, contra 3.417 euros de média na UE27 no mesmo ano",
+        "source": {
+          "label": "EURES, Informação sobre o mercado de trabalho em Portugal",
+          "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-portugal_en",
+          "official": true
+        }
+      },
+      {
+        "role": "Ganho médio líquido mensal (referência comparativa europeia)",
+        "range": "1.412 euros em Portugal em 2023, contra 2.351 euros de média na UE27 no mesmo ano",
+        "source": {
+          "label": "EURES, Informação sobre o mercado de trabalho em Portugal",
+          "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-portugal_en",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadãos da UE, EEE e Suíça trabalham livremente, sem visto. Para nacionais de países terceiros, o trabalho exige visto nacional (série D) e, depois da entrada, autorização de residência junto da AIMA (Agência para a Integração, Migrações e Asilo), que substituiu o SEF. Principais vias: D1 (atividade profissional subordinada, com contrato superior a um ano; em regra exige que a vaga tenha sido anunciada no IEFP sem candidato nacional disponível), D2 (atividade independente, empreendedores e pequenos negócios, com plano de negócios analisado pelo consulado), D3 (atividade altamente qualificada ou docente, ligada ao Cartão Azul UE) e o visto para procura de trabalho (artigo 88.º, n.º 7), válido por 120 dias, que permite entrar para procurar emprego subordinado e até trabalhar até ser concedida a autorização de residência. Existe ainda o StartUP Visa, gerido pelo IAPMEI, para projetos de inovação acolhidos por incubadora certificada, com exigência de meios de subsistência (cerca de 11.040 euros/ano) e potencial de criar emprego qualificado. O processo é em dois passos: visto no consulado/VFS Global (D1 com prazo estimado de 60 a 90 dias úteis) e depois pedido de autorização de residência à AIMA no prazo de quatro meses após a chegada; a AR inicial costuma ser de 2 anos, renovável. Atenção a duas mudanças de 2026: a AIMA deixou de aceitar pedidos com documentação incompleta e houve reestruturação de fluxos de vistos de trabalho a partir de 1 de junho de 2026, exigindo dossiê completo logo à partida. Profissões regulamentadas (medicina, enfermagem, engenharia, entre outras) exigem reconhecimento de habilitações e inscrição na respetiva Ordem antes de exercer.",
+    "foreignerRules": "A regra estruturante mudou com a Lei n.º 61/2025, de 22 de outubro, que alterou a Lei n.º 23/2007 e endureceu o regime de entrada e permanência. O ponto mais importante para quem planeia a mudança é que deixou de ser possível entrar como turista e regularizar a situação já em território português. O visto adequado tem de ser pedido no consulado ou centro de pedidos de visto do país de origem, antes da viagem.\n\nCidadãos da União Europeia, do Espaço Económico Europeu e da Suíça não precisam de visto nem de autorização de trabalho e podem exercer atividade em Portugal em igualdade de condições com os nacionais, bastando registar a residência quando a estadia ultrapassa três meses.\n\nPara nacionais de países terceiros, as vias principais são o visto de residência para exercício de atividade profissional subordinada, que dá origem à autorização de residência prevista no artigo 88.º da Lei de Estrangeiros, o visto de residência para atividade altamente qualificada previsto no artigo 90.º, o visto de residência para atividade profissional independente e empreendedores previsto no artigo 89.º, e o visto de residência para trabalho remoto prestado a entidades fora do território nacional, conhecido como visto de nómada digital. O visto de residência é emitido para duas entradas e quatro meses, prazo dentro do qual o titular tem de pedir a autorização de residência junto da Agência para a Integração, Migrações e Asilo (AIMA). A autorização de residência temporária para atividade profissional é válida por dois anos e renovável por períodos sucessivos de três anos.\n\nExiste ainda o visto de estada temporária para trabalho sazonal subordinado, aplicável a estadias superiores a 90 dias, com validade acompanhando o contrato e limite de nove meses em cada período de doze. Este é o instrumento típico da agricultura, produção animal, floresta, pesca e transportes terrestres.\n\nO antigo visto de procura de trabalho de âmbito geral foi extinto. Desde 23 de outubro de 2025 os consulados e centros externos deixaram de aceitar pedidos e os agendamentos posteriores a essa data foram cancelados. A lei criou em substituição o visto para procura de trabalho qualificado, com validade de 120 dias prorrogável por mais 60 e destinado a titulares de competências técnicas especializadas, mas o Portal Diplomático assinala que essa modalidade ainda não está disponível nos postos consulares portugueses, por aguardar a regulamentação do artigo 57.º-A da Lei de Estrangeiros. Quem não conseguir iniciar atividade profissional dentro do prazo terá de abandonar o país e só poderá apresentar novo pedido um ano depois.\n\nOs prazos de decisão também mudaram. A AIMA passou a dispor, em regra, de nove meses para decidir os pedidos de autorização de residência, prorrogáveis em casos excecionais, o que obriga a planeamento financeiro para o período de espera.\n\nQuanto ao diploma, o reconhecimento de graus e diplomas estrangeiros de ensino superior é regulado pelo Decreto-Lei n.º 66/2018 e o pedido é submetido por formulário eletrónico da Direção-Geral do Ensino Superior. Para profissões regulamentadas, como medicina, enfermagem, engenharia, arquitetura e advocacia, o reconhecimento académico não basta: é preciso inscrição na ordem profissional respetiva, com processo próprio. Médicos formados fora de Portugal beneficiam de um regime excecional e temporário previsto no Decreto-Lei n.º 86/2023, que permite reconhecimento equiparado ao mestrado integrado em Medicina até 31 de dezembro de 2026, sujeito a contingentes definidos por despacho. Enfermeiros precisam de pedir reconhecimento específico a uma instituição de ensino superior pública e o curso de origem tem de conter no mínimo 4.600 horas de ensino presencial, com pelo menos metade em contexto clínico.\n\nNão existe exame oficial de língua portuguesa exigido para a generalidade dos vistos de trabalho, e setores como tecnologia operam largamente em inglês. Na prática, porém, a maioria das vagas em saúde, educação, comércio, hotelaria e cuidados a idosos exige português funcional. O conhecimento da língua torna-se exigência formal noutro momento, o do pedido de nacionalidade portuguesa.",
     "opportunityWindows": [
-      "Lista de profissões em falta atualizada trimestralmente pelo IEFP cria via mais rápida de visto para enfermeiros, médicos, perfis de TIC (incluindo dados, IA e cibersegurança, adicionados em 2026), construção qualificada, energias renováveis e logística",
-      "Visto para procura de trabalho (120 dias) permite entrar legalmente para procurar emprego subordinado antes de ter contrato fechado",
-      "Ecossistema tecnológico de Lisboa e Porto em expansão, com salários perto do dobro da mediana e muitas vagas que aceitam inglês",
-      "Défice crónico no SNS abre colocação contínua para profissionais de saúde estrangeiros com habilitações reconhecidas",
-      "StartUP Visa do IAPMEI e visto D2 para quem quer empreender, com incubadoras certificadas a acelerar projetos de inovação",
-      "Subida do salário mínimo para 920 euros em 2026 melhora o piso de rendimento para entrada em setores como hotelaria e construção"
+      "Reconhecimento excecional de diplomas de medicina obtidos no estrangeiro, previsto no Decreto-Lei n.º 86/2023, disponível até 31 de dezembro de 2026 e sujeito a contingentes definidos por despacho governamental. É a janela mais concreta e com data marcada no calendário atual, e depois dela o processo volta ao procedimento comum.",
+      "Regulamentação pendente do visto para procura de trabalho qualificado, criado pela Lei n.º 61/2025 mas ainda indisponível nos consulados por falta do diploma regulamentar do artigo 57.º-A. Candidatos com competências técnicas especializadas devem acompanhar o Portal Diplomático, porque a abertura desta via permitirá entrar em Portugal por 120 dias, prorrogáveis por mais 60, sem contrato prévio.",
+      "Época alta do turismo no Algarve, na Madeira e nos Açores, com contratação concentrada entre a primavera e o início do outono. É a janela natural para o visto de estada temporária de trabalho sazonal subordinado.",
+      "Campanhas agrícolas no Alentejo e no Ribatejo, elegíveis para o visto de estada temporária de trabalho sazonal, com duração acompanhando o contrato e limite de nove meses em cada período de doze.",
+      "Concursos permanentes da administração pública publicados na Bolsa de Emprego Público, abertos a cidadãos da União Europeia, com prazos de candidatura próprios por aviso e forte incidência nas áreas da saúde e da educação.",
+      "Mobilidade intragrupo para trabalhadores com pelo menos um ano de vínculo à empresa de origem, via visto de transferência entre empresas, alternativa mais rápida para quem já trabalha em multinacional com operação em Portugal."
     ],
     "jobBoards": [
       {
-        "label": "IEFP - Instituto do Emprego e Formação Profissional (portal oficial de emprego)",
-        "url": "https://www.iefp.pt",
+        "label": "IEFP Online, portal do Instituto do Emprego e Formação Profissional",
+        "url": "https://iefponline.iefp.pt/",
         "official": true
       },
       {
-        "label": "Iefponline (vagas, apoios e incentivos ao emprego)",
-        "url": "https://iefponline.iefp.pt",
+        "label": "IEFP, Instituto do Emprego e Formação Profissional (inscrição para emprego)",
+        "url": "https://www.iefp.pt/en/inscricao-para-emprego",
         "official": true
       },
       {
-        "label": "EURES - Portal Europeu da Mobilidade Profissional (Portugal)",
-        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-portugal_en",
+        "label": "Bolsa de Emprego Público (administração central e local)",
+        "url": "https://www.bep.gov.pt/",
         "official": true
       },
       {
-        "label": "IAPMEI - StartUP Visa (empreendedores)",
-        "url": "https://www.iapmei.pt/Paginas/StartUP-Visa-pt.aspx",
+        "label": "EURES, portal europeu da mobilidade profissional",
+        "url": "https://eures.europa.eu/",
         "official": true
+      },
+      {
+        "label": "Direção Regional da Qualificação Profissional e Emprego dos Açores",
+        "url": "https://emprego.azores.gov.pt/",
+        "official": true
+      },
+      {
+        "label": "Instituto de Emprego da Madeira",
+        "url": "https://www.iem.madeira.gov.pt/",
+        "official": true
+      },
+      {
+        "label": "Net-Empregos, maior portal privado generalista do país",
+        "url": "https://www.net-empregos.com/",
+        "official": false
+      },
+      {
+        "label": "ITJobs, portal especializado em tecnologias de informação",
+        "url": "https://www.itjobs.pt/",
+        "official": false
+      },
+      {
+        "label": "Sapo Emprego",
+        "url": "https://emprego.sapo.pt/",
+        "official": false
+      },
+      {
+        "label": "Indeed Portugal",
+        "url": "https://pt.indeed.com/",
+        "official": false
       }
     ],
     "sources": [
       {
-        "label": "INE - Mercado de trabalho (estatísticas oficiais de emprego e desemprego)",
-        "url": "https://www.ine.pt/xportal/xmain?xpgid=ine_tema&xpid=INE&tema_cod=1114&xlang=pt",
+        "label": "INE, Estatísticas do Emprego, 1.º trimestre de 2026, a taxa de desemprego situou-se em 6,1% (divulgado em 6 de maio de 2026)",
+        "url": "https://www.ine.pt/xportal/xmain?xpid=INE&xpgid=ine_destaques&DESTAQUESdest_boui=770287955&DESTAQUESmodo=2&xlang=pt",
         "official": true
       },
       {
-        "label": "INE - Estatísticas do emprego, 1.º trimestre 2026 (desemprego 6,1%)",
-        "url": "https://www.ine.pt/ngt_server/attachfileu.jsp?look_parentBoui=711499212&att_display=n&att_download=y",
+        "label": "INE, Remuneração bruta mensal média por trabalhador, 1.º trimestre de 2026 (divulgado em 15 de maio de 2026)",
+        "url": "https://www.ine.pt/xportal/xmain?xpid=INE&xpgid=ine_destaques&DESTAQUESdest_boui=771838596&DESTAQUESmodo=2&xlang=pt",
         "official": true
       },
       {
-        "label": "AIMA - Autorização de residência com visto para procura de trabalho (art. 88.º n.º 7)",
-        "url": "https://aima.gov.pt/pt/trabalhar/autorizacao-de-residencia-para-exercicio-de-atividade-profissional-subordinada-com-visto-para-procura-de-trabalho-art-88-o-n-o7",
+        "label": "DREM, Direção Regional de Estatística da Madeira, remunerações do 1.º trimestre de 2026",
+        "url": "https://estatistica.madeira.gov.pt/download-now/social/merctrab-pt/remuneracoes/noticias-remuneracoes/5780-15-05-2026-no-1-trimestre-de-2026-a-remuneracao-bruta-mensal-media-por-trabalhador-aumentou-3-4-em-termos-homologos-para-os-1-543-euros.html",
         "official": true
       },
       {
-        "label": "AIMA - Autorização de residência com visto de residência (art. 88.º n.º 1, trabalho subordinado)",
-        "url": "https://aima.gov.pt/pt/trabalhar/autorizacao-de-residencia-para-exercicio-de-atividade-profissional-subordinada-com-visto-de-residencia-art-88-o-n-o-1",
+        "label": "Eurostat, Euro indicators, desemprego de maio de 2026 (publicado em 2 de julho de 2026)",
+        "url": "https://ec.europa.eu/eurostat/web/products-euro-indicators/w/3-02072026-ap",
         "official": true
       },
       {
-        "label": "Portal de Vistos - Ministério dos Negócios Estrangeiros (tipos de visto nacional)",
-        "url": "https://vistos.mne.gov.pt/pt/vistos-nacionais/informacao-geral/tipo-de-visto",
-        "official": true
-      },
-      {
-        "label": "gov.pt - Migrantes: vistos e autorizações para entrar e viver em Portugal",
-        "url": "https://www2.gov.pt/migrantes-viver-e-trabalhar-em-portugal/migrantes-vistos-e-autorizacoes-para-entrar-e-viver-em-portugal",
-        "official": true
-      },
-      {
-        "label": "IAPMEI - StartUP Visa (FAQ oficial)",
-        "url": "https://www.iapmei.pt/getattachment/Paginas/StartUP-Visa-pt/FAQs-PT_2julho.pdf.aspx?lang=pt-PT",
-        "official": true
-      },
-      {
-        "label": "Pordata - Salário mínimo nacional (evolução)",
-        "url": "https://www.pordata.pt/pt/estatisticas/salarios-e-pensoes/salarios/salario-minimo-nacional",
-        "official": true
-      },
-      {
-        "label": "Banco de Portugal / BPstat - estatísticas de população, emprego e desemprego 1.º tri 2026",
-        "url": "https://bpstat.bportugal.pt/conteudos/noticias/1301",
-        "official": true
-      },
-      {
-        "label": "EURES - Informação sobre o mercado de trabalho em Portugal",
+        "label": "EURES, Informação sobre o mercado de trabalho em Portugal",
         "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-portugal_en",
         "official": true
       },
       {
-        "label": "Jobbatical - Lista de profissões em falta IEFP e fast-track de visto (corroboração)",
-        "url": "https://www.jobbatical.com/blog/portugal-shortage-occupations-20-day-fast-track-visa",
-        "official": false
+        "label": "EURES, escassez e excedente de mão de obra na Europa",
+        "url": "https://eures.europa.eu/living-and-working/labour-shortages-and-surpluses-europe_en",
+        "official": true
       },
       {
-        "label": "Eurodicas - Profissionais em falta em Portugal 2026 (corroboração)",
-        "url": "https://www.eurodicas.com.br/profissionais-em-falta-em-portugal/",
-        "official": false
+        "label": "Decreto-Lei n.º 139/2025, de 29 de dezembro, retribuição mínima mensal garantida para 2026, Diário da República",
+        "url": "https://diariodarepublica.pt/dr/detalhe/decreto-lei/139-2025-992879809",
+        "official": true
       },
       {
-        "label": "Santander Salto - Salário médio em Portugal 2026 (corroboração de salário TIC)",
-        "url": "https://www.santander.pt/salto/salario-medio-portugal-2026",
-        "official": false
+        "label": "Governo de Portugal, aumento do salário mínimo para 920 euros em 2026",
+        "url": "https://portugal.gov.pt/gc25/comunicacao/noticias/governo-aumenta-salario-minimo-para-920-euros-em-2026",
+        "official": true
       },
       {
-        "label": "Diário de Notícias - INE: desemprego sobe para 6,1% no 1.º trimestre (corroboração)",
-        "url": "https://www.dn.pt/economia/ine-taxa-de-desemprego-do-1-trimestre-interrompe-ciclo-de-descida-que-durava-h-mais-de-um-ano",
-        "official": false
+        "label": "Lei n.º 61/2025, de 22 de outubro, Diário da República",
+        "url": "https://diariodarepublica.pt/dr/detalhe/lei/61-2025-941547426",
+        "official": true
+      },
+      {
+        "label": "Portal Diplomático, alteração do regime dos pedidos de visto para procura de trabalho",
+        "url": "https://portaldiplomatico.mne.gov.pt/comunicacao-e-media/comunciados-de-imprensa/alteracao-do-regime-respeitante-aos-pedidos-de-visto-para-procura-de-trabalho",
+        "official": true
+      },
+      {
+        "label": "Vistos Nacionais, tipos de visto (Ministério dos Negócios Estrangeiros)",
+        "url": "https://vistos.mne.gov.pt/pt/vistos-nacionais/informacao-geral/tipo-de-visto",
+        "official": true
+      },
+      {
+        "label": "Vistos Nacionais, documentação instrutória do visto de procura de trabalho qualificado",
+        "url": "https://vistos.mne.gov.pt/pt/vistos-nacionais/documentacao-instrutoria/procura-de-trabalho",
+        "official": true
+      },
+      {
+        "label": "AIMA, autorização de residência para atividade profissional subordinada com visto de residência (art. 88.º, n.º 1)",
+        "url": "https://aima.gov.pt/pt/trabalhar/autorizacao-de-residencia-para-exercicio-de-atividade-profissional-subordinada-com-visto-de-residencia-art-88-o-n-o-1",
+        "official": true
+      },
+      {
+        "label": "AIMA, autorização de residência para atividade altamente qualificada (art. 90.º)",
+        "url": "https://aima.gov.pt/pt/trabalhar/autorizacao-de-residencia-para-atividade-altamente-qualificada-art-90-o",
+        "official": true
+      },
+      {
+        "label": "AIMA, Decreto Regulamentar da Lei de Estrangeiros, alterações",
+        "url": "https://aima.gov.pt/pt/decreto-regulamentar-da-lei-de-estrangeiros-alteracoes",
+        "official": true
+      },
+      {
+        "label": "DGES, reconhecimento de graus e diplomas estrangeiros de ensino superior",
+        "url": "https://www.dges.gov.pt/pt/pagina/reconhecimento",
+        "official": true
+      },
+      {
+        "label": "OCDE, Estudo Económico sobre Portugal 2026, relatório completo em PDF (janeiro de 2026)",
+        "url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/01/oecd-economic-surveys-portugal-2026_0ea012e6/025b3445-en.pdf",
+        "official": true
+      },
+      {
+        "label": "OCDE, Estudo Económico sobre Portugal 2026, capítulo sobre resiliência do mercado de trabalho face à escassez de competências e ao envelhecimento",
+        "url": "https://www.oecd.org/en/publications/oecd-economic-surveys-portugal-2026_025b3445-en/full-report/strengthening-labour-market-resilience-in-the-face-of-skill-shortages-and-ageing_4c3ecd4d.html",
+        "official": true
       }
     ]
   },
   "es": {
-    "updatedAt": "2026-06-22",
-    "overview": "O mercado de trabalho espanhol chega a 2026 em um dos seus melhores momentos da última década, ainda que com sinais sazonais de freada. Segundo a Encuesta de Población Activa do INE referente ao primeiro trimestre de 2026, o país tinha 22,29 milhões de ocupados e uma taxa de desemprego de 10,83%, com 2,71 milhões de desempregados. O recuo trimestral da ocupação (170,3 mil postos a menos) concentrou-se nos Serviços, enquanto Indústria, Construção e Agricultura cresceram, num padrão típico do início de ano. No acumulado de doze meses o emprego avançou em 527,6 mil pessoas, e o fechamento de 2025 marcou recordes de afiliação à Seguridade Social, acima de 21,7 milhões de pessoas. O setor de Serviços segue como o motor estrutural da economia, respondendo pela maior parte do emprego, da contratação e também do desemprego.\n\nPara o imigrante, o cenário combina demanda real de mão de obra com gargalos importantes. O desemprego de longa duração ainda atinge quase metade dos parados, sobretudo mulheres e maiores de 45 anos, e a taxa de desemprego juvenil (menores de 25 anos) escalou para 24,5% no primeiro trimestre de 2026. Ao mesmo tempo, o SEPE alerta para escassez de mão de obra qualificada em áreas técnicas, e o novo Reglamento de Extranjería, em vigor desde 20 de maio de 2025, ampliou e simplificou as vias de regularização e contratação: as solicitações de residência e trabalho cresceram cerca de 46% nos meses seguintes à entrada em vigor da norma. O trabalhador estrangeiro, porém, sente mais o ciclo: no primeiro trimestre de 2026 o desemprego entre estrangeiros subiu mais que entre espanhóis.",
+    "updatedAt": "2026-07-20",
+    "overview": "O mercado de trabalho espanhol vive o melhor momento desde a crise financeira de 2008, ainda que carregue o maior desemprego estrutural da União Europeia. Segundo a Encuesta de Población Activa do INE referente ao primeiro trimestre de 2026 (divulgada em 28 de abril de 2026), o país tinha 22.293.000 ocupados e 2.708.600 desempregados, com taxa de desemprego de 10,83 por cento. A leitura trimestral piorou por efeito sazonal (o setor de serviços perdeu 228.400 postos após o Natal), mas a comparação anual é claramente positiva: mais 527.600 ocupados em doze meses (alta de 2,42 por cento) e menos 80.600 desempregados (queda de 2,89 por cento). A diferença por sexo permanece relevante, com 12,35 por cento de desemprego entre as mulheres e 9,47 por cento entre os homens.\n\nOs indicadores administrativos, que são mensais e mais recentes, confirmam o aquecimento. O desemprego registrado nos serviços públicos de emprego fechou junho de 2026 em 2.291.982 pessoas, queda de 28.739 no mês e de 113.981 em doze meses (menos 4,74 por cento), o menor patamar desde janeiro de 2008 segundo o SEPE. O desemprego entre menores de 25 anos caiu para 159.800 pessoas, o valor mais baixo de toda a série histórica. Na filiação à Seguridade Social, o Ministério da Inclusão registrou média de 22.466.339 cotizantes em junho de 2026, alta de 128.533 no mês e de 605.244 em um ano, crescimento anual de 2,8 por cento e recorde histórico. A temporalidade caiu para 12,3 por cento dos contratos, contra 27,9 por cento em junho de 2021, e os contratos por prazo indeterminado já representaram 41,46 por cento das 1.649.394 contratações assinadas em junho.\n\nPara o estrangeiro, o dado mais eloquente é o peso da mão de obra imigrante no crescimento. A filiação de trabalhadores estrangeiros alcançou 3,45 milhões de pessoas em junho de 2026, ou 15,3 por cento do total, com aumento de 350.163 filiados em doze meses, ritmo bem superior ao da filiação geral. A economia espanhola vem absorvendo trabalhadores de fora em construção, agricultura, hotelaria, cuidados e transporte, e o próprio Estado reconhece a escassez ao manter um catálogo trimestral de ocupações de difícil cobertura que dispensa o teste de mercado de trabalho na contratação de estrangeiros.\n\nO contraponto é a heterogeneidade regional e salarial. O emprego se concentra em Madri, Catalunha, Comunidade Valenciana e nas ilhas, enquanto Extremadura, Andaluzia e Ceuta seguem com taxas de ocupação bem inferiores, segundo o EURES. Os salários médios também variam muito por território e por setor, e a hotelaria, principal porta de entrada para quem chega sem qualificação reconhecida, é justamente a atividade que menos paga no país.",
     "hotSectors": [
-      "Tecnologia da informação e digital (TIC)",
-      "Construção",
-      "Saúde e cuidados (economia do cuidado)",
-      "Atividades profissionais, científicas e técnicas",
-      "Indústria farmacêutica",
-      "Transição verde e energias renováveis",
-      "Indústria (manufatura, com alta no 1T 2026)",
-      "Turismo e hotelaria/restauração (peso estrutural nos Serviços)"
+      "Construção civil e reforma, com crescimento de filiação de 5,6 por cento em junho de 2026 e falta persistente de pedreiros, eletricistas e operadores de guindaste",
+      "Saúde e cuidados de longa duração, apontados pelo EURES como o grupo ocupacional com maior incidência de escassez na Espanha",
+      "Tecnologia da informação e telecomunicações, com alta de 12,2 por cento entre autônomos e demanda por analistas, desenvolvedores e especialistas em bancos de dados",
+      "Energias renováveis e fornecimento de energia, com crescimento de 16,7 por cento no trabalho autônomo do setor",
+      "Atividades imobiliárias, que cresceram 6 por cento na filiação em junho de 2026",
+      "Transporte rodoviário e logística, com déficit crônico de motoristas de caminhão e operadores de empilhadeira",
+      "Hotelaria, restauração e turismo, que sustentam o pico sazonal de contratação entre a primavera e o verão",
+      "Agricultura, com necessidade recorrente de mão de obra de safra e alta de 7,5 por cento na filiação de assalariados do setor",
+      "Edição, radiodifusão e distribuição de conteúdo, o segmento que mais cresceu em junho de 2026, com 7,44 por cento"
     ],
     "coolingSectors": [
-      "Agricultura (tendência estrutural de queda no emprego, segundo INE/SEPE)",
-      "Serviços de baixa qualificação com forte sazonalidade (queda de 228,4 mil postos no 1T 2026)",
-      "Funções administrativas e rotineiras vulneráveis à automação (alerta do SEPE sobre mudanças tecnológicas)"
+      "Profissões científicas e de engenharia genéricas, listadas pelo EURES entre as ocupações com excedente de candidatos na Espanha",
+      "Funções técnicas de administração e negócios, também classificadas como excedentárias",
+      "Ocupações de serviços de baixa qualificação como limpeza, atendimento em loja e apoio administrativo, onde a oferta de trabalhadores supera a demanda"
     ],
     "inDemandRoles": [
       {
-        "role": "Médico de família e especialistas (anestesiologia, radiologia, psiquiatria)",
-        "note": "No Catálogo de Ocupaciones de Difícil Cobertura do SEPE (1T 2026); contratação de estrangeiro dispensa teste de mercado."
+        "role": "Enfermeiro e médico especialista",
+        "note": "Profissionais de saúde formam o grupo ocupacional com maior escassez segundo o EURES. São profissões reguladas, portanto exigem homologação do diploma pelo Ministério de Ciencia, Innovación y Universidades e registro no colégio profissional correspondente, além de espanhol fluente para atendimento."
       },
       {
-        "role": "Enfermeiro (especializado e não especializado)",
-        "note": "Setor sanitário é dos mais presentes no Catálogo de Difícil Cobertura."
+        "role": "Eletricista de edificação e eletricista geral",
+        "note": "Consta no Catálogo de Ocupaciones de Difícil Cobertura para todas as províncias, o que permite contratar estrangeiro sem comprovar ausência de candidatos locais. Exige experiência comprovada e, para certas instalações, carnê de instalador autorizado."
       },
       {
-        "role": "Profissionais de TIC (desenvolvedores, dados, cibersegurança)",
-        "note": "TIC entre os setores de melhor perspectiva; SEPE aponta escassez de competências digitais."
+        "role": "Operador de guindaste móvel, fixo e sobre caminhão",
+        "note": "Também incluído no catálogo oficial em todas as províncias. Requer habilitação específica de operação e formação em prevenção de riscos laborais conforme convênio da construção."
       },
       {
-        "role": "Ocupações da Marinha Mercante (maquinista naval, mecânico naval, frigorista naval)",
-        "note": "18 ocupações marítimas no Catálogo de Difícil Cobertura 1T 2026."
+        "role": "Carpinteiro e instalador de esquadrias de alumínio, metal e PVC",
+        "note": "Ocupação de difícil cobertura em todo o território. É demanda ligada ao ciclo de obra nova e reforma energética de edifícios."
       },
       {
-        "role": "Técnicos de construção e indústria (eletricista instalador, carpinteiro de alumínio, operador de guindaste)",
-        "note": "Listados no Catálogo de Difícil Cobertura; construção em alta."
+        "role": "Motorista de caminhão de carga pesada",
+        "note": "Escassez generalizada apontada pelo EURES no setor de transporte e logística. Exige carteira C ou C+E e o Certificado de Aptidão Profissional válido na União Europeia, além do canje ou revalidação da habilitação estrangeira."
       },
       {
-        "role": "Profissionais da transição verde (energias renováveis, eficiência energética)",
-        "note": "Área destacada pelo SEPE entre as de melhor perspectiva de emprego."
+        "role": "Pedreiro, soldador, encanador e encarregado de obra",
+        "note": "Déficit estrutural reconhecido no setor de construção. A entrada costuma ocorrer por convênio coletivo provincial, com salário mínimo garantido acima do salário mínimo nacional."
       },
       {
-        "role": "Profissionais altamente qualificados (engenharia, P&D, gestão técnica)",
-        "note": "Via preferencial pela Tarjeta Azul-UE; setor de atividades profissionais em alta."
+        "role": "Cuidador em residência para idosos e auxiliar de enfermagem hospitalar",
+        "note": "Área de falta crônica de pessoal qualificado. Normalmente exige certificado de profissionalidade em atenção sociossanitária, obtido na Espanha ou reconhecido, e nível funcional de espanhol."
       },
       {
-        "role": "Trabalhadores de cuidados e assistência (economia do cuidado)",
-        "note": "SEPE aponta novas oportunidades no setor de cuidados, ligado ao envelhecimento."
+        "role": "Desenvolvedor de software, analista de sistemas e especialista em dados",
+        "note": "O EURES classifica os profissionais de TIC como ocupação em falta. É a via mais compatível com a autorização de profissional altamente qualificado, que dispensa o teste de mercado de trabalho e admite inglês como língua de trabalho em parte das empresas."
+      },
+      {
+        "role": "Trabalhador agrícola de safra",
+        "note": "Escassez sazonal reconhecida pelo EURES entre trabalhadores agrícolas, florestais e de pesca. Contratações concentradas nos períodos de colheita e frequentemente canalizadas por contratação em origem."
+      },
+      {
+        "role": "Profissional da marinha mercante",
+        "note": "O catálogo oficial lista dezenas de funções embarcadas, de maquinista naval e piloto de navio mercante a cozinheiro e camareiro de bordo, válidas nas províncias litorâneas e também em Lleida e Madri. Exige titulação marítima reconhecida."
+      },
+      {
+        "role": "Garçom, cozinheiro e recepcionista de hotel",
+        "note": "Demanda alta na temporada turística, ainda que a hotelaria seja o setor de menor salário médio do país. Costuma ser a porta de entrada de quem chega sem diploma homologado."
       }
     ],
     "byQualification": [
       {
-        "area": "Alta qualificação (universitário, técnico, ciência e tecnologia)",
-        "advice": "Melhor porta de entrada. A Tarjeta Azul-UE exige salário anual mínimo de 39.269,92 euros em 2026 (coeficiente 1,4 sobre o salário médio), com redutor de 80% do limiar para ocupações de difícil cobertura ou recém-titulados. TIC, saúde, engenharia e farmacêutica concentram vagas. A via é tramitada na UGE-CE, com prazos mais rápidos que o regime geral."
+        "area": "Saúde",
+        "advice": "É a área com maior escassez declarada, mas também a mais regulada. O caminho passa por homologar o título no Ministerio de Ciencia, Innovación y Universidades, procedimento eletrônico com prazo máximo de resolução de seis meses, e depois obter a colegiação obrigatória. Médicos estrangeiros ainda precisam considerar o acesso à especialidade pela via de formação sanitária especializada. Espanhol fluente é requisito prático inegociável no atendimento direto."
       },
       {
-        "area": "Profissões de saúde (medicina, enfermagem)",
-        "advice": "Alta demanda e várias funções no Catálogo de Difícil Cobertura, o que dispensa o teste de mercado de trabalho na contratação de estrangeiro. Atenção: medicina e enfermagem são profissões reguladas, exigindo homologação do título estrangeiro pelo Ministerio de Universidades e registro no colégio profissional antes de exercer."
+        "area": "Tecnologia",
+        "advice": "É a área com menor atrito burocrático. Como informática não é profissão regulada na Espanha, não há exigência de homologação de diploma para trabalhar, e o perfil se encaixa na autorização de profissional altamente qualificado da Lei 14/2013, tramitada pela Unidade de Grandes Empresas com prazo de resolução de vinte dias e silêncio administrativo positivo. Madri, Barcelona, Valência e Málaga concentram as vagas."
       },
       {
-        "area": "Ofícios técnicos e construção (eletricista, soldador, ocupações navais, operador de guindaste)",
-        "advice": "Forte demanda concreta e presença no Catálogo de Difícil Cobertura. Caminho viável via autorização de trabalho por cuenta ajena com contrato firme; certificados profissionais e equivalência de qualificação ajudam. Construção e indústria registraram alta no 1T 2026."
+        "area": "Engenharia",
+        "advice": "Exige atenção porque o EURES classifica engenheiros genéricos entre as ocupações excedentárias, ao mesmo tempo em que há falta de engenheiros civis ligados a obra. A recomendação é especializar o perfil em construção, energia renovável, eficiência energética ou indústria, e verificar se a função pretendida é profissão regulada, pois nesse caso a homologação e a inscrição em colégio profissional passam a ser obrigatórias."
       },
       {
-        "area": "Qualificação média / serviços e cuidados",
-        "advice": "O setor de cuidados oferece novas oportunidades, mas há forte sazonalidade e desemprego de longa duração entre baixa qualificação. As vias de arraigo (sociolaboral, socioformativo) tornaram-se mais acessíveis com o novo Reglamento, exigindo dois anos de permanência e contrato de pelo menos o SMI proporcional a 20 horas semanais."
+        "area": "Construção",
+        "advice": "É a via mais aberta para quem tem ofício e não tem diploma superior. Várias funções constam no Catálogo de Ocupaciones de Difícil Cobertura, o que elimina a necessidade de comprovar que não há candidato local. Na prática o setor exige a Tarjeta Profesional de la Construcción e formação em prevenção de riscos laborais definida pelo convênio coletivo, além de experiência documentada."
       },
       {
-        "area": "Empreendedor / autônomo",
-        "advice": "Quem quer empreender pode usar o Visado de Emprendedor (Ley 14/2013) para projeto inovador com relatório favorável da ENISA, ou a via de autônomo. O novo Reglamento passou a permitir compatibilizar trabalho por cuenta ajena como atividade principal com atividade por cuenta propia. Nômades digitais têm visto próprio (renda exigida de cerca de 200% do SMI, ~2.442 euros/mês, e no máximo 20% da renda de clientes na Espanha)."
+        "area": "Educação",
+        "advice": "Para ensinar na rede regulada é necessário homologar o título ao equivalente espanhol e, no caso do ensino público, disputar processos seletivos que normalmente exigem nacionalidade de país da União Europeia ou situação equivalente. O ensino de idiomas em academias privadas e o ensino superior privado são as portas mais acessíveis para estrangeiros de fora da União Europeia."
       },
       {
-        "area": "Jovens (menores de 25 anos)",
-        "advice": "Cautela: o desemprego juvenil estava em 24,5% no 1T 2026, bem acima da média. Priorizar formação técnica/digital, estágios e a via socioformativa (autoriza trabalho de até 30 horas semanais durante estudos), que melhora a empregabilidade e a regularização."
+        "area": "Hotelaria e turismo",
+        "advice": "Absorve muita mão de obra estrangeira e não costuma exigir diploma homologado, mas é o setor de menor salário médio do país, com 17.653,42 euros brutos anuais em 2024 segundo o INE. Funciona bem como entrada no mercado e como base para regularização, com pico de contratação na temporada de verão nas ilhas, na costa mediterrânea e nas grandes cidades turísticas."
+      },
+      {
+        "area": "Transporte e logística",
+        "advice": "Há falta declarada de motoristas de caminhão e de operadores de armazém. O ponto crítico é documental, porque a habilitação estrangeira precisa ser trocada ou revalidada e o Certificado de Aptidão Profissional é obrigatório para transporte profissional na União Europeia. Quem já chega com essas habilitações resolvidas tem colocação rápida."
+      },
+      {
+        "area": "Cuidados e serviços sociais",
+        "advice": "Demanda alta e crescente por envelhecimento populacional. Costuma exigir certificado de profissionalidade em atenção sociossanitária a pessoas dependentes, que pode ser obtido na Espanha por formação profissional para o emprego. O trabalho doméstico e de cuidado tem regime próprio de Seguridade Social e está coberto pelo salário mínimo nacional."
+      },
+      {
+        "area": "Agricultura",
+        "advice": "É uma das vias com escassez reconhecida pelo EURES e com contratação em origem para safras específicas. Não exige qualificação formal, mas é trabalho sazonal, com contratos curtos e concentrados geograficamente em Andaluzia, Múrcia, Comunidade Valenciana, Aragão e Castela e Leão."
       }
     ],
     "salaries": [
       {
-        "role": "Salário médio anual (todos os setores)",
-        "range": "29.540,26 euros/ano bruto (dados de 2024, publicados em 2026)",
+        "role": "Salário mínimo interprofissional nacional (piso legal)",
+        "range": "1.221 euros brutos por mês em 14 pagamentos, equivalente a 17.094 euros brutos anuais, ou 40,70 euros por dia (valor de 2026, alta de 3,1 por cento sobre 2025)",
         "source": {
-          "label": "INE - Encuesta Anual de Estructura Salarial",
-          "url": "https://ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177025&menu=ultiDatos&idp=1254735976596",
+          "label": "BOE, Real Decreto 126/2026, de 18 de fevereiro, que fixa o salário mínimo interprofissional para 2026",
+          "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-3815",
           "official": true
         }
       },
       {
-        "role": "Salário mediano",
-        "range": "24.497,17 euros/ano bruto",
+        "role": "Salário médio bruto anual de todos os assalariados",
+        "range": "29.540,26 euros brutos por ano (média de 2024, alta de 5,3 por cento sobre 2023). O salário mediano foi de 24.497,17 euros",
         "source": {
-          "label": "INE - Encuesta Anual de Estructura Salarial",
-          "url": "https://ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177025&menu=ultiDatos&idp=1254735976596",
+          "label": "INE, Encuesta Anual de Estructura Salarial 2024, dados definitivos",
+          "url": "https://www.ine.es/dyngs/Prensa/EAES2024.htm",
           "official": true
         }
       },
       {
-        "role": "Salário mais frequente (modal)",
-        "range": "16.520,18 euros/ano bruto",
+        "role": "Diretores e gerentes",
+        "range": "63.865,45 euros brutos por ano (2024), o maior valor entre os grupos ocupacionais",
         "source": {
-          "label": "INE - Encuesta Anual de Estructura Salarial",
-          "url": "https://ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177025&menu=ultiDatos&idp=1254735976596",
+          "label": "INE, Encuesta Anual de Estructura Salarial 2024",
+          "url": "https://www.ine.es/dyngs/Prensa/EAES2024.htm",
           "official": true
         }
       },
       {
-        "role": "Salário Mínimo Interprofissional (SMI) 2026",
-        "range": "1.221 euros/mês em 14 pagas (17.094 euros/ano bruto)",
+        "role": "Trabalhadores não qualificados em serviços, exceto transporte",
+        "range": "16.062,57 euros brutos por ano (2024), cerca de 45,6 por cento abaixo da média nacional",
         "source": {
-          "label": "La Moncloa / Ministerio de Trabajo - SMI 2026",
-          "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/trabajo14/paginas/2023/140223-salario-minimo-interprofesional.aspx",
+          "label": "INE, Encuesta Anual de Estructura Salarial 2024",
+          "url": "https://www.ine.es/dyngs/Prensa/EAES2024.htm",
           "official": true
         }
       },
       {
-        "role": "Limiar salarial Tarjeta Azul-UE (altamente qualificado) 2026",
-        "range": "39.269,92 euros/ano (redutor de 80% em ocupações de difícil cobertura/recém-titulados)",
+        "role": "Setor de fornecimento de energia elétrica, gás e ar condicionado",
+        "range": "57.931,81 euros brutos por ano (2024), a atividade econômica mais bem paga do país",
         "source": {
-          "label": "BOE - Orden PJC/44/2026",
-          "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-2142",
+          "label": "INE, Encuesta Anual de Estructura Salarial 2024",
+          "url": "https://www.ine.es/dyngs/Prensa/EAES2024.htm",
           "official": true
         }
       },
       {
-        "role": "Desenvolvedor de software (mid-level, 2-5 anos)",
-        "range": "30.000 a 48.000 euros/ano (camada de comunidade, não oficial)",
+        "role": "Atividades financeiras e de seguros",
+        "range": "51.862,90 euros brutos por ano (2024)",
         "source": {
-          "label": "Glassdoor/LinkedIn/InfoJobs (estimativa de mercado)",
-          "url": "https://es.indeed.com/career/desarrollador-de-software/salaries",
+          "label": "INE, Encuesta Anual de Estructura Salarial 2024",
+          "url": "https://www.ine.es/dyngs/Prensa/EAES2024.htm",
           "official": true
         }
       },
       {
-        "role": "Desenvolvedor de software (senior, 5+ anos)",
-        "range": "48.000 a 80.000 euros/ano (camada de comunidade, não oficial)",
+        "role": "Hotelaria e restauração",
+        "range": "17.653,42 euros brutos por ano (2024), a atividade de menor remuneração média da Espanha",
         "source": {
-          "label": "Glassdoor/LinkedIn/InfoJobs (estimativa de mercado)",
-          "url": "https://es.indeed.com/career/desarrollador-de-software/salaries",
+          "label": "INE, Encuesta Anual de Estructura Salarial 2024",
+          "url": "https://www.ine.es/dyngs/Prensa/EAES2024.htm",
           "official": true
         }
       },
       {
-        "role": "Enfermeiro (sistema público, ex. SAS)",
-        "range": "2.500 a 3.100 euros/mês bruto, conforme experiência e plantões (estimativa de mercado)",
+        "role": "Atividades artísticas e recreativas",
+        "range": "20.383,16 euros brutos por ano (2024)",
         "source": {
-          "label": "InfoJobs Salarios (camada de comunidade)",
-          "url": "https://salarios.infojobs.net/",
+          "label": "INE, Encuesta Anual de Estructura Salarial 2024",
+          "url": "https://www.ine.es/dyngs/Prensa/EAES2024.htm",
+          "official": true
+        }
+      },
+      {
+        "role": "Média salarial por região, do teto ao piso",
+        "range": "País Basco 35.170,28 euros e Madri 34.410,01 euros no topo; Canárias 25.120,38 euros e Extremadura 24.979,44 euros na base (2024)",
+        "source": {
+          "label": "INE, Encuesta Anual de Estructura Salarial 2024",
+          "url": "https://www.ine.es/dyngs/Prensa/EAES2024.htm",
+          "official": true
+        }
+      },
+      {
+        "role": "Diferença salarial entre homens e mulheres",
+        "range": "Homens com 32.057,55 euros e mulheres com 26.904,90 euros brutos anuais em 2024, o que coloca o salário feminino em 83,9 por cento do masculino",
+        "source": {
+          "label": "INE, Encuesta Anual de Estructura Salarial 2024",
+          "url": "https://www.ine.es/dyngs/Prensa/EAES2024.htm",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Cidadãos da UE/EEE e Suíça não precisam de autorização de trabalho e têm livre circulação. Para extracomunitários, exige-se autorização de residência e trabalho, normalmente por cuenta ajena (com contrato firme) ou por cuenta propia (autônomo). O regime geral de cuenta ajena costuma exigir o teste de mercado de trabalho, dispensado quando a profissão está no Catálogo de Ocupaciones de Difícil Cobertura do SEPE (1T 2026 inclui 27 ocupações, com forte peso de saúde, Marinha Mercante e ofícios técnicos). O novo Reglamento de Extranjería (Real Decreto 1155/2024), em vigor desde 20 de maio de 2025 e ajustado pelo Real Decreto 316/2026, reorganizou as cinco figuras de arraigo (segunda oportunidade, sociolaboral, social, socioformativo e familiar), reduziu o tempo de permanência exigido de três para dois anos (exceto arraigo familiar) e passou a permitir compatibilizar trabalho por cuenta ajena como atividade principal com atividade por cuenta propia. O arraigo sociolaboral exige contrato(s) garantindo ao menos o SMI proporcional a jornada não inferior a 20 horas semanais; o socioformativo habilita trabalho de até 30 horas semanais. Profissionais altamente qualificados têm a Tarjeta Azul-UE (limiar de 39.269,92 euros/ano em 2026, tramitada pela UGE-CE). Para empreender há o Visado de Emprendedor da Ley 14/2013, que exige projeto inovador com relatório favorável da ENISA e avaliação pela UGE-CE; e a Visa de Nômade Digital, para teletrabalho remoto, com renda mínima em torno de 200% do SMI (~2.442 euros/mês) e no máximo 20% da renda vinda de clientes na Espanha. Profissões reguladas (medicina, enfermagem, advocacia, engenharia, arquitetura, professor, entre outras) exigem homologação/reconhecimento do título estrangeiro pelo Ministerio de Universidades e, quando aplicável, inscrição no colégio profissional antes do exercício.",
+    "foreignerRules": "Cidadãos da União Europeia, do Espaço Econômico Europeu e da Suíça trabalham na Espanha sem autorização prévia, bastando registrar-se no Registro Central de Extranjeros e obter o número de identidade de estrangeiro. Para os demais, a regra geral é que o contrato de trabalho vem antes da entrada e que a autorização inicial de residência e trabalho por conta alheia é solicitada pelo empregador, com o visto emitido depois pelo consulado espanhol no país de origem.\n\nO filtro central é o teste de mercado de trabalho, chamado de situação nacional de emprego. O empregador precisa demonstrar que não há candidato disponível na Espanha, exceto quando a vaga está no Catálogo de Ocupaciones de Difícil Cobertura, publicado trimestralmente no BOE pelo SEPE. A resolução de 28 de janeiro de 2026, referente ao primeiro trimestre do ano, cobre esportistas e treinadores profissionais, um bloco extenso de funções da marinha mercante nas províncias litorâneas mais Lleida e Madri, e um grupo de ofícios em todas as províncias que inclui carpinteiros e instaladores de esquadrias de alumínio, metal e PVC, eletricistas de edificação e eletricistas em geral e operadores de guindaste fixo, móvel e sobre caminhão. Estar nessa lista é o atalho mais direto para a contratação de estrangeiro sem burocracia adicional.\n\nO Regulamento de Estrangeria em vigor é o aprovado pelo Real Decreto 1155/2024, aplicável desde maio de 2025. Ele reduziu de três para dois anos o tempo de permanência exigido para o arraigo, unificou as modalidades da figura e passou a habilitar automaticamente para o trabalho todos os titulares de autorização de residência temporária por arraigo. No arraigo sociolaboral, exige-se um ou mais contratos que garantam ao menos o salário mínimo interprofissional ou o salário do convênio coletivo aplicável, com jornada semanal conjunta não inferior a vinte horas. O Real Decreto 316/2026, publicado em 15 de abril de 2026, acrescentou uma via extraordinária de regularização estruturada em duas figuras. A primeira, prevista na disposição adicional vigésima, alcança quem havia apresentado pedido de acesso ao procedimento de proteção internacional antes de 1 de janeiro de 2026. A segunda, na disposição adicional vigésima primeira, é um arraigo extraordinário para quem já se encontrava na Espanha antes dessa data e comprove trabalho ou intenção de trabalho, convivência com menores, pessoas com deficiência ou ascendentes, ou situação de vulnerabilidade acreditada pelas entidades competentes. Nos dois casos o prazo de apresentação se encerrou em 30 de junho de 2026, o pedido habilita provisoriamente o solicitante a residir e a trabalhar por conta alheia e por conta própria em todo o território nacional, e o prazo máximo de resolução é de três meses.\n\nPerfis qualificados têm um caminho separado e mais rápido pela Lei 14/2013. As autorizações de profissional altamente qualificado, de teletrabalho internacional, de empreendedor e de transferência intraempresarial são tramitadas eletronicamente pela Unidad de Grandes Empresas y Colectivos Estratégicos, com prazo de resolução de vinte dias e silêncio administrativo positivo, ou seja, a falta de resposta no prazo equivale a deferimento. O visto de teletrabalho internacional exige título superior ou formação equivalente, ou pelo menos três anos de experiência em funções análogas, além de vínculo com empresa estrangeira em atividade há no mínimo um ano e relação mantida há pelo menos três meses antes do pedido.\n\nNo reconhecimento de qualificações, a distinção decisiva é entre profissão regulada e não regulada. Para trabalhar em áreas como medicina, enfermagem, advocacia, arquitetura ou engenharias reguladas é obrigatória a homologação do título estrangeiro, procedimento eletrônico junto ao Ministerio de Ciencia, Innovación y Universidades com prazo máximo de resolução de seis meses, seguido da inscrição no colégio profissional. Para profissões não reguladas, como quase toda a área de tecnologia, basta a declaração de equivalência ou, na prática, nada além do próprio currículo. Não existe exame de idioma obrigatório para obter autorização de trabalho, mas o espanhol funcional é exigência real em saúde, educação, atendimento e comércio, e a exigência sobe em comunidades com língua cooficial, como Catalunha, País Basco, Galiza e Comunidade Valenciana.",
     "opportunityWindows": [
-      "Novo Reglamento de Extranjería (em vigor desde 20/05/2025) simplificou regularização e contratação: solicitações de residência e trabalho subiram ~46% nos meses seguintes, e cerca de 95 mil pessoas se regularizaram via arraigo entre maio e outubro de 2025.",
-      "Catálogo de Ocupaciones de Difícil Cobertura (1T 2026) com 27 ocupações dispensa o teste de mercado, acelerando autorizações em saúde, Marinha Mercante e ofícios técnicos.",
-      "Tarjeta Azul-UE com redutor de 80% do limiar salarial para ocupações de difícil cobertura e recém-titulados, abrindo a porta a talentos qualificados mais jovens.",
-      "Setores em expansão estrutural (TIC, transição verde, farmacêutica, cuidados) com escassez declarada de mão de obra qualificada pelo SEPE.",
-      "Visa de Nômade Digital e Visado de Emprendedor como rotas para quem trabalha remoto ou quer abrir negócio inovador, com tramitação ágil pela UGE-CE (relatório ENISA em ~10-15 dias)."
+      "O Catálogo de Ocupaciones de Difícil Cobertura é atualizado a cada trimestre e publicado no BOE. Vale acompanhar as edições porque uma ocupação recém incluída dispensa o teste de mercado de trabalho e abre uma janela imediata de contratação de estrangeiros naquela província.",
+      "A temporada turística concentra contratação entre a primavera e o começo do verão, com pico nas ilhas Baleares, nas Canárias e na costa mediterrânea. Em junho de 2026 foram assinados 1.649.394 contratos, e o desemprego caiu em serviços em 28.498 pessoas em um único mês.",
+      "As safras agrícolas abrem janelas curtas e recorrentes em Andaluzia, Múrcia, Comunidade Valenciana, Aragão e Castela e Leão, com contratação frequentemente organizada ainda no país de origem.",
+      "A via extraordinária de regularização criada pelo Real Decreto 316/2026 teve prazo de apresentação encerrado em 30 de junho de 2026. Quem apresentou pedido dentro do prazo mantém autorização provisória para residir e trabalhar por conta alheia e por conta própria em todo o território até a resolução do processo, que tem prazo máximo de três meses.",
+      "Perfis altamente qualificados podem usar a tramitação pela Unidad de Grandes Empresas, com resolução em vinte dias e silêncio administrativo positivo, o que na prática transforma um processo de meses em semanas.",
+      "A alta anual de 350.163 filiados estrangeiros à Seguridade Social até junho de 2026, contra crescimento de 2,8 por cento na filiação total, mostra uma janela ampla e aberta de absorção de mão de obra estrangeira em construção, agricultura, hotelaria, cuidados e transporte."
     ],
     "jobBoards": [
       {
-        "label": "Empléate (Portal de Empleo do SEPE)",
-        "url": "https://www.empleate.gob.es/",
+        "label": "Empléate, portal único de emprego do sistema público espanhol",
+        "url": "https://www.empleate.gob.es/empleo/",
         "official": true
       },
       {
-        "label": "SEPE - Encontrar trabajo",
-        "url": "https://www.sepe.es/HomeSepe/Personas/encontrar-trabajo.html",
+        "label": "SEPE, ofertas de emprego do Servicio Público de Empleo Estatal",
+        "url": "https://www.sepe.es/HomeSepe/es/encontrar-trabajo/ofertas-empleo.html",
         "official": true
       },
       {
-        "label": "EURES - Portal Europeu de Mobilidade Profissional",
-        "url": "https://eures.europa.eu/index_es",
+        "label": "EURES, portal europeu de mobilidade profissional com vagas na Espanha",
+        "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "SEPE - EURES / Empleo en Europa",
-        "url": "https://www.sepe.es/HomeSepe/Personas/encontrar-trabajo/empleo-europa.html",
+        "label": "Sede eletrônica do Ministério da Inclusão, para autorizações de mobilidade internacional da Lei 14/2013",
+        "url": "https://sede.inclusion.gob.es/en/w/presentacion-solicitudes-autorizacion-residencia",
         "official": true
       },
       {
-        "label": "InfoJobs (privado, líder de mercado na Espanha)",
+        "label": "InfoJobs, maior portal privado de vagas da Espanha",
         "url": "https://www.infojobs.net/",
         "official": false
       },
       {
-        "label": "LinkedIn Empregos Espanha (privado)",
+        "label": "Infoempleo, portal privado tradicional de vagas e carreira",
+        "url": "https://www.infoempleo.com/",
+        "official": false
+      },
+      {
+        "label": "LinkedIn Vagas, referência para perfis qualificados e multinacionais",
         "url": "https://www.linkedin.com/jobs/",
         "official": false
       }
     ],
     "sources": [
       {
-        "label": "INE - Encuesta de Población Activa (EPA), 1T 2026",
+        "label": "INE, Encuesta de Población Activa, primeiro trimestre de 2026",
         "url": "https://www.ine.es/dyngs/Prensa/EPA1T26.htm",
         "official": true
       },
       {
-        "label": "INE - Encuesta Anual de Estructura Salarial (últimos datos)",
-        "url": "https://ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177025&menu=ultiDatos&idp=1254735976596",
+        "label": "SEPE, nota sobre desemprego registrado de junho de 2026",
+        "url": "https://www.sepe.es/noticia/SEPE/2026/Julio/paro-baja-28739-personas-junio",
         "official": true
       },
       {
-        "label": "SEPE - Las tendencias del empleo en España (Abril 2026)",
-        "url": "https://www.sepe.es/noticia/SEPE/2026/Abril/tendencias-empleo-espana",
+        "label": "Ministerio de Inclusión, Seguridad Social y Migraciones, filiação de junho de 2026",
+        "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/inclusion/Paginas/2026/020726-afiliados-junio.aspx?qfr=2",
         "official": true
       },
       {
-        "label": "SEPE - Evolución y situación del mercado laboral en España (Abril 2026)",
-        "url": "https://www.sepe.es/noticia/SEPE/2026/Abril/evolucion-situacion-mercado-laboral-espana",
+        "label": "INE, Encuesta Anual de Estructura Salarial 2024, dados definitivos",
+        "url": "https://www.ine.es/dyngs/Prensa/EAES2024.htm",
         "official": true
       },
       {
-        "label": "SEPE - Catálogo de Ocupaciones de Difícil Cobertura",
-        "url": "https://www.sepe.es/HomeSepe/empresas/informacion-para-empresas/profesiones-de-dificil-cobertura.html",
+        "label": "BOE, Resolução de 28 de janeiro de 2026, Catálogo de Ocupaciones de Difícil Cobertura do primeiro trimestre de 2026",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-4944",
         "official": true
       },
       {
-        "label": "BOE - Real Decreto 316/2026 (modifica o Reglamento de Extranjería RD 1155/2024)",
-        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-8284",
+        "label": "BOE, Real Decreto 1155/2024, Regulamento de Estrangeria",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2024-24099",
         "official": true
       },
       {
-        "label": "BOE - Orden PJC/44/2026 (umbral salarial Tarjeta Azul-UE 2026)",
-        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-2142",
+        "label": "BOE, Real Decreto 316/2026, que modifica o Regulamento de Estrangeria e cria a via extraordinária de regularização",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-8284",
         "official": true
       },
       {
-        "label": "La Moncloa - Solicitações de residência e trabalho sobem ~46% com novo Reglamento (21/11/2025)",
-        "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/inclusion/paginas/2025/211125-solicitudes-residencia-trabajo.aspx",
+        "label": "BOE, Real Decreto 126/2026, salário mínimo interprofissional para 2026",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-3815",
         "official": true
       },
       {
-        "label": "La Moncloa - SMI 2026",
-        "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/trabajo14/paginas/2023/140223-salario-minimo-interprofesional.aspx",
+        "label": "EURES, informação de mercado de trabalho da Espanha",
+        "url": "https://eures.europa.eu/living-and-working/labour-market-information/labour-market-information-spain_en",
         "official": true
       },
       {
-        "label": "Ministerio de Inclusión - UGE / Emprendedores (Ley 14/2013)",
-        "url": "https://www.inclusion.gob.es/en/web/unidadgrandesempresas/emprendedores",
+        "label": "Ministerio de Ciencia, Innovación y Universidades, homologação de títulos estrangeiros de educação superior",
+        "url": "https://www.ciencia.gob.es/Universidades/validate/homologacion.html",
         "official": true
       },
       {
-        "label": "Exteriores - Visado para nómadas digitales",
-        "url": "https://www.exteriores.gob.es/Consulados/londres/en/ServiciosConsulares/Paginas/Consular/Digital-Nomad-Visa.aspx",
+        "label": "Ministerio de Inclusión, autorização inicial de residência e trabalho de profissionais altamente qualificados",
+        "url": "https://www.inclusion.gob.es/en/web/migraciones/w/66.-autorizacion-inicial-de-residencia-y-trabajo-de-profesionales-altamente-cualificados",
         "official": true
       },
       {
-        "label": "Idealista - Paro juvenil 24,5% no 1T 2026 (camada de imprensa, baseado em EPA/INE)",
-        "url": "https://www.idealista.com/news/finanzas/laboral/2026/04/28/895108-la-tasa-de-paro-juvenil-escala-al-24-5-hay-mas-de-440-000-menores-de-25-anos-sin-empleo",
-        "official": false
-      },
-      {
-        "label": "InfoJobs Salarios (camada de comunidade)",
-        "url": "https://salarios.infojobs.net/",
-        "official": false
-      },
-      {
-        "label": "Glassdoor / Indeed Espanha - faixas salariais de TI (camada de comunidade)",
-        "url": "https://es.indeed.com/career/desarrollador-de-software/salaries",
-        "official": false
+        "label": "Sede eletrônica do Ministério da Inclusão, autorizações de mobilidade internacional da Lei 14/2013",
+        "url": "https://sede.inclusion.gob.es/en/w/presentacion-solicitudes-autorizacion-residencia",
+        "official": true
       }
     ]
   },
   "de": {
-    "updatedAt": "2026-06-22",
-    "overview": "A Alemanha vive um paradoxo no mercado de trabalho. De um lado, o desemprego registrado pela Bundesagentur für Arbeit subiu ao patamar mais alto desde 2010, com cerca de 3,05 milhões de desempregados e taxa média em torno de 6,5% em 2026, puxado pela recessão industrial e pela crise da indústria automotiva. De outro, o país convive com escassez crônica de mão de obra qualificada: na análise oficial de gargalos (Fachkräfteengpassanalyse) da Bundesagentur, cerca de uma em cada oito profissões avaliadas é classificada como profissão de escassez, e institutos econômicos estimam centenas de milhares de vagas não preenchidas em saúde, TI, engenharia, energia e ofícios técnicos. A demografia agrava o quadro, com perda projetada de centenas de milhares de trabalhadores por ano com as aposentadorias da geração baby boomer.\n\nPara o imigrante, isso significa um mercado seletivo, mas aberto onde há qualificação reconhecida. As portas legais foram ampliadas pela reforma da Lei de Imigração de Trabalhadores Qualificados (Fachkräfteeinwanderungsgesetz), pelo EU Blue Card com limiares salariais reduzidos para profissões de escassez e pela Chancenkarte (Opportunity Card), que permite entrar no país por até 12 meses para procurar emprego sem oferta prévia. O fator decisivo costuma ser o reconhecimento do diploma estrangeiro (Anerkennung) e o nível de alemão, sobretudo em profissões regulamentadas como medicina, enfermagem e direito.",
+    "updatedAt": "2026-07-20",
+    "overview": "O mercado de trabalho alemão em 2026 vive uma fase de estagnação, e não de colapso. Segundo a Agência Federal de Emprego (Bundesagentur für Arbeit), em junho de 2026 a taxa de desemprego caiu 0,1 ponto percentual e ficou em 6,2 por cento, com 2.936.000 desempregados registrados, uma queda de 15.000 pessoas em relação a maio. Na comparação com junho de 2025, porém, o número de desempregados está 22.000 mais alto e a taxa permanece igual, o que descreve um mercado parado, sem deterioração aguda nem recuperação clara.\n\nO emprego total também recuou. O Instituto Federal de Estatística (Destatis) aponta cerca de 45,68 milhões de pessoas ocupadas em maio de 2026, praticamente estável na comparação mensal dessazonalizada, mas em tendência de queda desde agosto de 2025 (em março de 2026 houve recuo de 174.000 pessoas, ou 0,4 por cento, frente ao mesmo mês do ano anterior). O emprego sujeito à seguridade social ficou em 34,84 milhões, com queda de 71.000 vagas em um ano. No mesmo relatório de junho de 2026, a Agência Federal informa que as vagas registradas somavam 648.000 em abril de 2026, mês mais recente com dado fechado, 16.000 a menos que doze meses antes, enquanto o índice de demanda por mão de obra da própria agência (BA-X) marcava 103 pontos em junho de 2026, três pontos acima do mesmo mês do ano anterior. O trabalho reduzido (Kurzarbeit), cujos dados efetivos também só vão até abril de 2026, recuou de forma expressiva, com 133.000 beneficiários estimados naquele mês, 101.000 a menos que um ano antes, sinal de que o pior do ajuste industrial já passou.\n\nA leitura relevante para o candidato estrangeiro está na composição, não no total. A contração se concentra na indústria de transformação, enquanto o crescimento se dá em serviços ligados ao Estado e à demografia, sobretudo saúde, cuidados de longa duração, educação infantil e administração pública. A carência estrutural continua enorme: a análise anual de gargalos da Agência Federal de Emprego (Fachkräfteengpassanalyse 2025) identificou 157 profissões classificadas como Engpassberufe, ou seja, ocupações em que preencher uma vaga registrada é comprovadamente difícil, ante 163 no levantamento de 2024 e 183 no de 2023. O relatório EURES sobre escassez e excedentes de mão de obra na Europa aponta que, na Alemanha, os grupos com maior incidência de escassez são técnicos de ciências e engenharia, profissionais da construção civil (exceto eletricistas) e técnicos da área da saúde.\n\nPara quem vem de fora, o desenho legal ficou mais favorável do que o cenário macroeconômico sugere. A Lei de Imigração de Mão de Obra Qualificada, em vigor por etapas desde 2023 e 2024, reduziu limiares salariais do Cartão Azul da UE, criou a Chancenkarte por pontos para busca de emprego e permitiu iniciar o reconhecimento do diploma já dentro da Alemanha por meio da parceria de reconhecimento. O salário mínimo legal subiu para 13,90 euros por hora em 1º de janeiro de 2026 e vai a 14,60 euros em 1º de janeiro de 2027, o maior reajuste desde a criação do piso, o que eleva o patamar de entrada em setores de baixa remuneração como hotelaria e logística.",
     "hotSectors": [
-      "Saúde e cuidados (enfermagem, cuidado a idosos, medicina, fisioterapia)",
-      "Tecnologia da informação (desenvolvimento de software, cibersegurança, dados/IA, nuvem)",
-      "Engenharia (elétrica, mecânica, civil, automação, produção)",
-      "Energias renováveis e transição energética (solar, eólica, redes)",
-      "Ofícios técnicos qualificados (eletricistas, encanadores, soldadores, mecatrônicos)",
-      "Educação e creche (professores, educadores de infância)",
-      "Construção civil e engenharia de obras",
-      "Logística e transporte"
+      "Saúde e cuidados de longa duração, com déficit crônico de enfermeiros e cuidadores em praticamente todos os estados",
+      "Educação infantil e serviços sociais, com falta persistente de educadores (Erzieher) em creches e escolas",
+      "Tecnologia da informação e digitalização, área classificada de forma recorrente como profissão de gargalo",
+      "Engenharia e profissões MINT (matemática, informática, ciências naturais e tecnologia), incluindo engenharia de energia",
+      "Ofícios técnicos e construção civil, com destaque para eletricistas, instalação sanitária, aquecimento e climatização e obras de infraestrutura",
+      "Administração pública e serviços de interesse estatal, único bloco com crescimento consistente de emprego formal",
+      "Transporte rodoviário de cargas e logística, com escassez estrutural de motoristas profissionais"
     ],
     "coolingSectors": [
-      "Indústria automotiva tradicional, sobretudo linhas de montagem e motores a combustão (VW, Bosch, ZF e Audi anunciaram dezenas de milhares de cortes; até 200 mil empregos no setor podem desaparecer nos próximos anos)",
-      "Fornecedores automotivos ligados ao motor a combustão",
-      "Funções administrativas e de back-office em grandes indústrias em reestruturação",
-      "Manufatura industrial intensiva em energia, pressionada por custos altos"
+      "Indústria de transformação, que concentra a maior perda de postos com vínculo de seguridade social no período recente",
+      "Setores cíclicos ligados à exportação e à cadeia automotiva, ainda em ajuste após o ciclo de trabalho reduzido"
     ],
     "inDemandRoles": [
       {
-        "role": "Enfermeiro(a) / Pflegefachkraft e cuidador(a) de idosos",
-        "note": "Setor com a escassez mais severa; exige reconhecimento (state recognition) e em geral alemão B1/B2."
+        "role": "Enfermeiro e técnico de enfermagem (Pflegefachkraft)",
+        "note": "Profissão regulamentada e uma das mais buscadas do país. Exige reconhecimento formal do diploma junto à autoridade estadual competente e alemão em nível B2 para a habilitação plena. Consta na lista de profissões de gargalo que dá acesso ao limiar salarial reduzido do Cartão Azul da UE."
       },
       {
-        "role": "Médico(a) generalista e especialista",
-        "note": "Profissão regulamentada; exige Approbation e alemão técnico (geralmente B2 + Fachsprachprüfung)."
+        "role": "Médico, dentista, veterinário e farmacêutico",
+        "note": "Profissões regulamentadas, com licença (Approbation) obrigatória e exigência de alemão técnico. Aparecem na lista oficial de ocupações em falta reconhecida para o Cartão Azul da UE em condição salarial reduzida."
       },
       {
-        "role": "Desenvolvedor(a) de software / programador(a) de aplicações",
-        "note": "Especialistas de TI podem usar Blue Card mesmo sem diploma, com 3 anos de experiência relevante nos últimos 7."
+        "role": "Educador infantil (Erzieher) e profissional de serviço social",
+        "note": "Falta estrutural em creches e escolas. Requer reconhecimento da formação e domínio sólido do alemão, já que o trabalho é de contato direto com crianças e famílias."
       },
       {
-        "role": "Especialista em cibersegurança",
-        "note": "Alta taxa de vagas; inglês costuma bastar em muitas empresas de tecnologia."
+        "role": "Especialista de TI e liderança de serviços de TI",
+        "note": "Área classificada de forma permanente como gargalo. Profissionais de TI podem obter o Cartão Azul da UE mesmo sem diploma superior, desde que comprovem experiência qualificada e o salário mínimo aplicável, com anuência da Agência Federal de Emprego."
       },
       {
-        "role": "Engenheiro(a) eletricista / eletrônico / de telecomunicações",
-        "note": "Grupo ISCO 215 listado oficialmente entre as profissões de escassez."
+        "role": "Engenheiro (elétrica, energia, automação, mecânica) e profissional MINT",
+        "note": "Demanda sustentada pela transição energética e pela modernização industrial. Consta entre as ocupações elegíveis ao limiar reduzido do Cartão Azul da UE."
       },
       {
-        "role": "Engenheiro(a) mecânico / industrial / de produção",
-        "note": "Grupo ISCO 214 na lista oficial de Mangelberufe."
+        "role": "Eletricista, instalador de aquecimento, gás e sanitários e profissional de obras de infraestrutura",
+        "note": "Ofícios com formação dual alemã como padrão de mercado. Para estrangeiros, o caminho usual passa pelo reconhecimento da qualificação profissional ou por qualificação complementar já na Alemanha."
       },
       {
-        "role": "Engenheiro(a) civil e gestor(a) de obras",
-        "note": "Demanda forte em construção e infraestrutura."
+        "role": "Arquiteto e urbanista",
+        "note": "Incluído entre as ocupações com escassez reconhecida para fins do Cartão Azul da UE em faixa salarial reduzida. Inscrição em câmara profissional estadual é normalmente exigida."
       },
       {
-        "role": "Técnico(a) de energia solar e eólica",
-        "note": "Impulsionado pela meta de transição energética (Energiewende)."
+        "role": "Motorista profissional de caminhão pesado",
+        "note": "Escassez apontada como crítica no levantamento europeu de gargalos. Exige a carteira de habilitação alemã ou europeia da categoria correspondente e a qualificação profissional de motorista."
       },
       {
-        "role": "Eletricista, encanador e soldador (ofícios)",
-        "note": "Ofícios qualificados (Handwerk) com escassez estrutural; valoriza Ausbildung ou reconhecimento."
-      },
-      {
-        "role": "Professor(a) e educador(a) de infância (Erzieher)",
-        "note": "Grupo de ensino na lista oficial; alto déficit em creches e escolas."
-      },
-      {
-        "role": "Cientista de dados / engenheiro(a) de IA-ML",
-        "note": "Prêmio salarial de 15% a 25% sobre funções de engenharia equivalentes."
-      },
-      {
-        "role": "Farmacêutico(a), fisioterapeuta, dentista",
-        "note": "Profissões de saúde regulamentadas listadas oficialmente; exigem reconhecimento."
+        "role": "Profissional de hotelaria e serviço de restaurante",
+        "note": "Setor com falta de mão de obra apesar da baixa remuneração média. É porta de entrada frequente, mas paga perto do piso legal e não costuma atingir os limiares do Cartão Azul da UE."
       }
     ],
     "byQualification": [
       {
-        "area": "Profissionais de TI (com ou sem diploma)",
-        "advice": "Caminho mais flexível para estrangeiros. Com diploma, o EU Blue Card é direto; sem diploma, especialistas de TI conseguem o Blue Card comprovando ao menos 3 anos de experiência relevante nos últimos 7 anos. Inglês frequentemente basta no início em empresas de tecnologia, mas o alemão acelera a integração e a progressão. Verifique o diploma na base ANABIN antes de aplicar."
+        "area": "Saúde e enfermagem",
+        "advice": "Profissão regulamentada. O reconhecimento é feito pela autoridade do estado (Bundesland) onde a pessoa pretende trabalhar, e o critério é onde o diploma foi obtido, não a nacionalidade. Para a habilitação plena exige-se alemão em nível B2. Desde março de 2024 é possível vir com contrato e concluir o reconhecimento já na Alemanha por meio da parceria de reconhecimento (Anerkennungspartnerschaft), que exige alemão a partir de A2 no momento da entrada. Também existe a via de auxiliar de enfermagem para quem ainda não tem o reconhecimento completo."
       },
       {
-        "area": "Saúde (enfermagem, medicina, fisioterapia)",
-        "advice": "Profissões regulamentadas: a base ANABIN não basta. É preciso reconhecimento formal (state recognition para enfermagem, Approbation para medicina) junto ao órgão competente do estado (Land), processo que leva em média de 3 a 4 meses. O alemão é decisivo, em geral B1/B2 e, para médicos, exame de língua técnica (Fachsprachprüfung). Limiar salarial reduzido do Blue Card se aplica."
+        "area": "Tecnologia da informação",
+        "advice": "É a área com maior flexibilidade legal. Especialistas de TI podem obter o Cartão Azul da UE sem diploma superior, comprovando experiência profissional qualificada e o salário mínimo reduzido, com anuência da Agência Federal de Emprego. O inglês costuma bastar no ambiente de trabalho de grandes empresas e startups, mas o alemão amplia o leque para o mercado médio, que é onde está a maior parte das vagas."
       },
       {
-        "area": "Engenharia e MINT/STEM",
-        "advice": "Diploma superior reconhecido abre o Blue Card com limiar salarial reduzido por estar em profissão de escassez. Engenheiro não é profissão estritamente regulamentada para exercer (só o título protegido Ingenieur exige reconhecimento), então a entrada no mercado é mais ágil que na saúde. Inglês ajuda em multinacionais, mas alemão amplia muito as vagas."
+        "area": "Engenharia e áreas MINT",
+        "advice": "Engenharias e profissões MINT constam entre as ocupações em falta reconhecidas oficialmente, o que abre o limiar salarial reduzido do Cartão Azul da UE. O diploma estrangeiro precisa estar reconhecido ou ser comparável a um título alemão, verificação feita pela base de dados oficial de instituições e cursos estrangeiros. Engenharia da energia é destacada pela Agência Federal de Emprego entre os gargalos mais agudos."
       },
       {
-        "area": "Ofícios técnicos / formação profissional (Ausbildung)",
-        "advice": "A Chancenkarte por pontos e os caminhos para trabalhadores com Ausbildung favorecem eletricistas, encanadores, soldadores e mecatrônicos. O reconhecimento da formação profissional (não só acadêmica) é o passo-chave; quando parcial, dá para vir e completar a qualificação na Alemanha. Alemão em nível prático (B1) costuma ser exigido."
+        "area": "Construção civil e ofícios técnicos",
+        "advice": "O levantamento europeu coloca trabalhadores da construção entre os grupos com maior escassez na Alemanha. O mercado é organizado em torno da formação dual, então quem tem formação estrangeira geralmente precisa do procedimento de equivalência da qualificação profissional, com possibilidade de medidas de compensação. Alemão em nível operacional é praticamente obrigatório por questões de segurança do trabalho."
       },
       {
-        "area": "Recém-formados (diploma nos últimos 3 anos)",
-        "advice": "Têm acesso ao limiar salarial reduzido do EU Blue Card, o que facilita a primeira contratação. Vale combinar com a Chancenkarte para procurar emprego no local por até 12 meses."
+        "area": "Educação e cuidado infantil",
+        "advice": "Área com déficit persistente, porém fortemente regulamentada e dependente do idioma. O reconhecimento é estadual e a exigência linguística é alta porque a função envolve comunicação constante com crianças e famílias. Não é uma via realista para quem ainda não fala alemão."
       },
       {
-        "area": "Sem qualificação formal reconhecida",
-        "advice": "Caminho estreito por vias de trabalhador qualificado. A rota realista é buscar reconhecimento parcial e completar a formação na Alemanha, ou entrar pela Chancenkarte por pontos (exige alemão A1 ou inglês B2 mais critérios de pontos como idade, experiência e idioma)."
+        "area": "Hotelaria, gastronomia e serviços",
+        "advice": "Setor com vagas abertas e entrada relativamente fácil, mas com a menor remuneração média da economia alemã. Com o piso legal em 13,90 euros por hora desde janeiro de 2026 e 14,60 euros previstos para janeiro de 2027, o patamar de entrada melhorou, ainda assim os salários raramente alcançam os limiares exigidos pelo Cartão Azul da UE."
       },
       {
-        "area": "Empreendedores e autônomos",
-        "advice": "Profissionais liberais (Freiberufler, como TI, consultoria, tradução, design, jornalismo, ensino) têm a rota mais simples pela Seção 21(5) da Lei de Residência. Quem abre empresa (Gewerbe) usa a Seção 21(1) e precisa demonstrar interesse econômico/demanda regional e financiamento do plano. Permissão inicial de até 3 anos, renovável se o negócio prosperar."
+        "area": "Indústria e manufatura",
+        "advice": "É o bloco que mais perde postos com vínculo de seguridade social. Quem tem perfil industrial deve mirar nichos ligados à transição energética, automação e manutenção especializada, em vez de linhas de produção tradicionais e cadeias ligadas à exportação, que ainda estão em ajuste."
+      },
+      {
+        "area": "Logística e transporte",
+        "advice": "Motorista de caminhão pesado aparece entre as ocupações mais críticas em escassez no levantamento europeu. Exige conversão ou obtenção da habilitação europeia correspondente e a qualificação profissional de motorista, o que costuma ser o gargalo real do processo, mais do que a vaga em si."
       }
     ],
     "salaries": [
       {
-        "role": "Salário bruto anual mediano (todos os setores, tempo integral, 2025)",
-        "range": "EUR 54.066/ano (média EUR 64.441/ano)",
+        "role": "Média geral dos empregados em tempo integral (abril de 2025)",
+        "range": "4.784 euros brutos por mês, sem pagamentos extraordinários",
         "source": {
-          "label": "Destatis - comunicado PD26_113_621 (2026)",
-          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_113_621.html",
+          "label": "Destatis, ganhos brutos médios mensais por setor",
+          "url": "https://www.destatis.de/DE/Themen/Arbeit/Verdienste/Verdienste-Branche-Berufe/Tabellen/bruttomonats-verdienste-stichmonat.html",
           "official": true
         }
       },
       {
-        "role": "Setor de energia (mediano, mais alto)",
-        "range": "EUR 77.522/ano",
+        "role": "Serviços financeiros e de seguros",
+        "range": "6.279 euros brutos por mês (abril de 2025)",
         "source": {
-          "label": "Destatis - comunicado PD26_113_621 (2026)",
-          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_113_621.html",
+          "label": "Destatis, ganhos brutos médios mensais por setor",
+          "url": "https://www.destatis.de/DE/Themen/Arbeit/Verdienste/Verdienste-Branche-Berufe/Tabellen/bruttomonats-verdienste-stichmonat.html",
           "official": true
         }
       },
       {
-        "role": "Serviços financeiros e seguros (mediano)",
-        "range": "EUR 76.594/ano",
+        "role": "Informação e comunicação (inclui TI)",
+        "range": "6.141 euros brutos por mês (abril de 2025)",
         "source": {
-          "label": "Destatis - comunicado PD26_113_621 (2026)",
-          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_113_621.html",
+          "label": "Destatis, ganhos brutos médios mensais por setor",
+          "url": "https://www.destatis.de/DE/Themen/Arbeit/Verdienste/Verdienste-Branche-Berufe/Tabellen/bruttomonats-verdienste-stichmonat.html",
           "official": true
         }
       },
       {
-        "role": "Hotelaria e gastronomia (mediano, mais baixo)",
-        "range": "EUR 35.545/ano",
+        "role": "Fornecimento de energia",
+        "range": "5.966 euros brutos por mês (abril de 2025)",
         "source": {
-          "label": "Destatis - comunicado PD26_113_621 (2026)",
-          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_113_621.html",
+          "label": "Destatis, ganhos brutos médios mensais por setor",
+          "url": "https://www.destatis.de/DE/Themen/Arbeit/Verdienste/Verdienste-Branche-Berufe/Tabellen/bruttomonats-verdienste-stichmonat.html",
           "official": true
         }
       },
       {
-        "role": "Agricultura, silvicultura e pesca (mediano)",
-        "range": "EUR 35.689/ano",
+        "role": "Educação e ensino",
+        "range": "5.282 euros brutos por mês (abril de 2025)",
         "source": {
-          "label": "Destatis - comunicado PD26_113_621 (2026)",
-          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_113_621.html",
+          "label": "Destatis, ganhos brutos médios mensais por setor",
+          "url": "https://www.destatis.de/DE/Themen/Arbeit/Verdienste/Verdienste-Branche-Berufe/Tabellen/bruttomonats-verdienste-stichmonat.html",
           "official": true
         }
       },
       {
-        "role": "Comparativo regional (mediano oeste vs leste)",
-        "range": "Oeste EUR 55.435/ano; Leste (sem Berlim) EUR 46.013/ano",
+        "role": "Indústria de transformação",
+        "range": "4.913 euros brutos por mês (abril de 2025)",
         "source": {
-          "label": "Destatis - comunicado PD26_113_621 (2026)",
-          "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_113_621.html",
+          "label": "Destatis, ganhos brutos médios mensais por setor",
+          "url": "https://www.destatis.de/DE/Themen/Arbeit/Verdienste/Verdienste-Branche-Berufe/Tabellen/bruttomonats-verdienste-stichmonat.html",
           "official": true
         }
       },
       {
-        "role": "Engenheiro(a) de software / desenvolvedor(a)",
-        "range": "EUR 47.000 a 100.000+/ano (júnior ~EUR 45-47 mil; sênior EUR 75-100 mil+); mediana ~EUR 71.250 em empresas de 5.000+ funcionários",
+        "role": "Saúde e serviços sociais",
+        "range": "4.794 euros brutos por mês (abril de 2025)",
         "source": {
-          "label": "StepStone Salary Report 2025 (comunidade, corroborativo)",
-          "url": "https://www.wbscodingschool.com/blog/software-engineer-salary/",
+          "label": "Destatis, ganhos brutos médios mensais por setor",
+          "url": "https://www.destatis.de/DE/Themen/Arbeit/Verdienste/Verdienste-Branche-Berufe/Tabellen/bruttomonats-verdienste-stichmonat.html",
           "official": true
         }
       },
       {
-        "role": "Enfermeiro(a) / Pflegefachkraft",
-        "range": "Início ~EUR 2.800-3.000/mês na tabela TVöD-P; média ~EUR 2.800-3.800/mês conforme experiência e região",
+        "role": "Hotelaria e gastronomia",
+        "range": "3.185 euros brutos por mês (abril de 2025)",
         "source": {
-          "label": "Tabela TVöD-P / dados de comunidade (corroborativo)",
-          "url": "https://www.glassdoor.sg/Salaries/germany-pflegefachkraft-salary-SRCH_IL.0,7_IN96_KO8,23.htm",
+          "label": "Destatis, ganhos brutos médios mensais por setor",
+          "url": "https://www.destatis.de/DE/Themen/Arbeit/Verdienste/Verdienste-Branche-Berufe/Tabellen/bruttomonats-verdienste-stichmonat.html",
           "official": true
         }
       },
       {
-        "role": "Eletricista (ofício)",
-        "range": "~EUR 3.000-3.800/mês (EUR 36-45 mil/ano); experiente EUR 3.800-4.500/mês; Meister EUR 4.500-6.000/mês",
+        "role": "Agricultura, silvicultura e pesca",
+        "range": "3.172 euros brutos por mês (abril de 2025)",
         "source": {
-          "label": "Dados de mercado / comunidade (corroborativo)",
-          "url": "https://finanz-handbuch.de/en/personal-finance/salary/by-profession/electricians.html",
+          "label": "Destatis, ganhos brutos médios mensais por setor",
+          "url": "https://www.destatis.de/DE/Themen/Arbeit/Verdienste/Verdienste-Branche-Berufe/Tabellen/bruttomonats-verdienste-stichmonat.html",
           "official": true
         }
       },
       {
-        "role": "Limiar salarial EU Blue Card 2026 (padrão)",
-        "range": "EUR 50.700/ano (bruto)",
+        "role": "Salário mínimo legal",
+        "range": "13,90 euros brutos por hora desde 1º de janeiro de 2026, com aumento previsto para 14,60 euros em 1º de janeiro de 2027",
         "source": {
-          "label": "Make it in Germany / Auswärtiges Amt (oficial, via guias 2026)",
-          "url": "https://www.visahq.com/news/2026-01-16/de/germany-confirms-higher-2026-eu-blue-card-salary-thresholds/",
+          "label": "Ministério Federal do Trabalho e Assuntos Sociais (BMAS)",
+          "url": "https://www.bmas.de/DE/Service/Presse/Pressemitteilungen/2025/mindestlohn-steigt-zum-ersten-januar-2026.html",
           "official": true
         }
       },
       {
-        "role": "Limiar salarial EU Blue Card 2026 (profissões de escassez, recém-formados e especialistas de TI)",
-        "range": "EUR 45.934,20/ano (bruto)",
+        "role": "Piso salarial do Cartão Azul da UE, regra geral",
+        "range": "50.700 euros brutos por ano em 2026 (cerca de 4.225 euros por mês)",
         "source": {
-          "label": "Make it in Germany / Auswärtiges Amt (oficial, via guias 2026)",
-          "url": "https://www.visahq.com/news/2026-01-16/de/germany-confirms-higher-2026-eu-blue-card-salary-thresholds/",
+          "label": "Agência Federal de Emprego, informativo sobre o Cartão Azul da UE",
+          "url": "https://www.arbeitsagentur.de/vor-ort/zav/working-and-living-in-germany/newsletter-iss/03-2026/blaue-karte",
+          "official": true
+        }
+      },
+      {
+        "role": "Piso salarial do Cartão Azul da UE para profissões em falta e recém-formados",
+        "range": "45.934,20 euros brutos por ano em 2026 (cerca de 3.827 euros por mês), com anuência da Agência Federal de Emprego",
+        "source": {
+          "label": "Agência Federal de Emprego, informativo sobre o Cartão Azul da UE",
+          "url": "https://www.arbeitsagentur.de/vor-ort/zav/working-and-living-in-germany/newsletter-iss/03-2026/blaue-karte",
           "official": true
         }
       }
     ],
-    "foreignerRules": "Para trabalhar na Alemanha, cidadãos não-UE/EEE precisam de visto e autorização de residência com finalidade de trabalho. As vias principais são: (1) EU Blue Card, para quem tem diploma superior reconhecido e oferta de emprego, com limiar salarial de EUR 50.700/ano em 2026, reduzido para EUR 45.934,20/ano em profissões de escassez (cluster MINT/STEM e saúde), recém-formados (diploma nos últimos 3 anos) e especialistas de TI sem diploma com 3 anos de experiência nos últimos 7; (2) visto de trabalhador qualificado da Fachkräfteeinwanderungsgesetz, para quem tem diploma ou formação profissional (Ausbildung) reconhecidos; (3) Chancenkarte (Opportunity Card), lançada em junho de 2024, que permite entrar por até 12 meses para procurar emprego, pela Rota Direta (qualificação totalmente reconhecida, sem exigência de idioma) ou pelo Sistema de Pontos (reconhecimento parcial, exigindo alemão A1 ou inglês B2 mais pontos por idade, experiência e idioma).\n\nO reconhecimento do diploma estrangeiro (Anerkennung) é o ponto crítico. A base ANABIN indica como o diploma se compara ao padrão alemão (diplomas e instituições marcados como H+ costumam ser aceitos), mas ela não substitui o reconhecimento formal em profissões regulamentadas. Profissões regulamentadas como médico, enfermeiro, farmacêutico, dentista, professor, advogado e parte das engenharias (título Ingenieur) exigem reconhecimento formal ou licença profissional (por exemplo, Approbation para médicos, state recognition para enfermagem) junto ao órgão competente do estado. O processo leva, em geral, de 3 a 4 meses. O marco legal é a Lei Federal de Avaliação de Qualificações Profissionais (BQFG) somada às leis setoriais e estaduais. O alemão é decisivo em saúde e profissões reguladas (em geral B1/B2, com exame de língua técnica para médicos).\n\nPara empreender, a Seção 21 da Lei de Residência (AufenthG) prevê autorização de autônomo: a Seção 21(5) cobre profissionais liberais (Freiberufler/Katalogberufe, como software, consultoria, tradução, design, jornalismo, ensino), rota mais simples; a Seção 21(1) cobre quem abre empresa/negócio (Gewerbe), exigindo interesse econômico ou demanda regional, efeito positivo previsto na economia e financiamento próprio ou por empréstimo. Maiores de 45 anos precisam comprovar previdência adequada. A autorização é emitida por até 3 anos, renovável se o negócio prosperar e cobrir o sustento. Desde fevereiro de 2026, há portal digital de vistos para submissão de documentos online em todo o país. Recomenda-se sempre confirmar valores e requisitos atualizados nas fontes oficiais (Make it in Germany, BAMF, Auswärtiges Amt) antes de aplicar.",
+    "foreignerRules": "Cidadãos da União Europeia, do Espaço Econômico Europeu e da Suíça têm livre circulação e podem trabalhar na Alemanha sem visto ou autorização de trabalho. Para cidadãos de países terceiros, o marco é a Lei de Imigração de Mão de Obra Qualificada, implantada em etapas em novembro de 2023, março de 2024 e junho de 2024, que organiza a entrada em três pilares: qualificação, experiência profissional e potencial.\n\nO Cartão Azul da UE é a via principal para quem tem diploma superior. Em 2026, o limiar salarial geral é de 50.700 euros brutos por ano e dispensa anuência da Agência Federal de Emprego. Para profissões em falta e para quem se formou nos últimos três anos, o limiar cai para 45.934,20 euros brutos por ano, com anuência da Agência Federal de Emprego, que verifica se salário, jornada e férias são comparáveis aos de trabalhadores locais. A lista de ocupações elegíveis a esse limiar reduzido inclui profissões MINT, medicina, odontologia, veterinária, farmácia, enfermagem e obstetrícia, arquitetura e urbanismo, educação, além de cargos de liderança em produção, mineração, construção, logística e serviços de TI. Especialistas de TI e perfis de gestão podem obter o Cartão Azul da UE sem diploma formal, comprovando experiência profissional relevante e o salário mínimo reduzido, também com anuência da Agência Federal de Emprego.\n\nQuem ainda não tem contrato pode usar a Chancenkarte (Cartão de Oportunidade), autorização de permanência de até doze meses para procurar emprego. Ela exige um diploma superior ou uma formação profissional de pelo menos dois anos reconhecida no país de origem, conhecimento de alemão em nível A1 ou de inglês em nível B2, comprovação de meios próprios de subsistência na ordem de 1.091 euros líquidos por mês e, quando a qualificação não é plenamente reconhecida na Alemanha, no mínimo seis pontos no sistema de pontuação. Pontuam, entre outros critérios, o reconhecimento parcial da qualificação (4 pontos), alemão B2 (3 pontos), B1 (2 pontos) ou A2 (1 ponto), inglês C1 (1 ponto), cinco anos de experiência (3 pontos) ou dois anos (2 pontos), qualificação em profissão de gargalo (1 ponto), idade abaixo de 35 anos (2 pontos) ou abaixo de 40 anos (1 ponto), permanência anterior de pelo menos seis meses na Alemanha (1 ponto) e candidatura conjunta do cônjuge ou companheiro (1 ponto). Durante a busca, é permitido trabalhar até 20 horas semanais e realizar períodos de teste (Probebeschäftigung) de até duas semanas por empregador.\n\nO reconhecimento de diploma continua sendo o ponto crítico. Profissões regulamentadas, como saúde, enfermagem, ensino e áreas jurídicas, exigem reconhecimento formal antes do exercício, e a competência é do estado (Bundesland) onde a pessoa vai trabalhar. O que determina a necessidade de reconhecimento é o país onde a qualificação foi obtida, e não a nacionalidade do candidato. Desde março de 2024, a parceria de reconhecimento (Anerkennungspartnerschaft) permite entrar na Alemanha com contrato de trabalho e iniciar o procedimento de reconhecimento já no país, exigindo alemão a partir do nível A2 no momento da entrada. Para a habilitação plena em profissões de saúde e enfermagem, o padrão exigido é o alemão em nível B2. Em profissões não regulamentadas, o reconhecimento não é obrigatório para trabalhar, mas melhora sensivelmente as chances de contratação e o enquadramento salarial. O portal oficial do governo para esse procedimento é o Anerkennung in Deutschland, que oferece o localizador de reconhecimento e a central de atendimento para profissionais estrangeiros.",
     "opportunityWindows": [
-      "Chancenkarte (Opportunity Card): entrada por até 12 meses para procurar emprego sem oferta prévia, ideal para quem tem qualificação reconhecida ou pontua no sistema de pontos.",
-      "Limiar salarial reduzido do EU Blue Card (EUR 45.934,20 em 2026) para profissões de escassez, recém-formados e especialistas de TI, com dispensa do exame de prioridade que encurta a contratação de meses para semanas.",
-      "Especialistas de TI sem diploma podem entrar pelo Blue Card comprovando 3 anos de experiência relevante nos últimos 7 anos.",
-      "Saúde e cuidados com idosos: déficit estrutural e demográfico garante demanda sustentada por anos, com apoio a reconhecimento e adaptação na Alemanha.",
-      "Transição energética (Energiewende): forte demanda por técnicos e engenheiros de solar, eólica e redes elétricas.",
-      "Reconhecimento parcial de formação profissional permite vir e completar a qualificação na Alemanha, abrindo os ofícios técnicos (Handwerk) a estrangeiros.",
-      "Empreendedorismo de profissional liberal (Freiberufler) pela Seção 21(5), rota administrativamente mais leve para áreas como TI, consultoria e design.",
-      "Portal digital de vistos nacional desde fevereiro de 2026, agilizando a submissão de documentos."
+      "Chancenkarte aberta de forma permanente, sem cota anual e sem sorteio, com validade de até doze meses para busca de emprego e possibilidade de conversão em autorização de trabalho ou Cartão Azul da UE assim que houver contrato compatível",
+      "Limiares salariais do Cartão Azul da UE reajustados todo 1º de janeiro, o que torna vantajoso fechar contrato e protocolar o pedido ainda dentro do ano-calendário vigente, antes da atualização seguinte",
+      "Parceria de reconhecimento (Anerkennungspartnerschaft) em vigor desde março de 2024, que antecipa a entrada no país para antes da conclusão do reconhecimento do diploma, especialmente relevante para enfermagem e demais profissões de saúde",
+      "Salário mínimo legal em trajetória definida de alta, com 13,90 euros por hora desde 1º de janeiro de 2026 e 14,60 euros a partir de 1º de janeiro de 2027, elevando o piso de setores de entrada como hotelaria, limpeza e logística",
+      "Ano de formação profissional dual com início concentrado em agosto e setembro, e processos seletivos abertos normalmente entre o outono e o inverno do ano anterior, janela relevante para candidatos jovens que buscam a via da qualificação na própria Alemanha"
     ],
     "jobBoards": [
       {
-        "label": "Make it in Germany - Jobbörse (portal oficial do governo federal para profissionais estrangeiros)",
-        "url": "https://www.make-it-in-germany.com/en/working-in-germany/job-listings",
+        "label": "Jobbörse da Agência Federal de Emprego (Bundesagentur für Arbeit)",
+        "url": "https://www.arbeitsagentur.de/jobsuche/",
         "official": true
       },
       {
-        "label": "Bundesagentur für Arbeit - Jobbörse (Agência Federal de Emprego)",
-        "url": "https://www.arbeitsagentur.de/en",
+        "label": "Make it in Germany, portal oficial do governo federal para mão de obra qualificada",
+        "url": "https://www.make-it-in-germany.com/en/",
         "official": true
       },
       {
-        "label": "Bundesagentur für Arbeit - Como encontrar emprego (apoio internacional)",
-        "url": "https://www.arbeitsagentur.de/int/en/how-to-find-a-job",
-        "official": true
-      },
-      {
-        "label": "EURES - Portal Europeu de Mobilidade Profissional",
+        "label": "Portal EURES da mobilidade profissional europeia",
         "url": "https://eures.europa.eu/index_en",
         "official": true
       },
       {
-        "label": "EURES Deutschland - Busca de vagas",
-        "url": "https://www.eures-deutschland.de/DE/job_suchen/job_suchen_node.html",
+        "label": "Anerkennung in Deutschland, portal oficial de reconhecimento de qualificações",
+        "url": "https://www.anerkennung-in-deutschland.de/html/en/index.php",
         "official": true
       },
       {
-        "label": "Anerkennung in Deutschland - reconhecimento de qualificações",
-        "url": "https://www.anerkennung-in-deutschland.de/html/en/pro/professional-recognition.php",
-        "official": true
+        "label": "StepStone",
+        "url": "https://www.stepstone.de/",
+        "official": false
+      },
+      {
+        "label": "Indeed Alemanha",
+        "url": "https://de.indeed.com/",
+        "official": false
+      },
+      {
+        "label": "XING",
+        "url": "https://www.xing.com/jobs",
+        "official": false
+      },
+      {
+        "label": "LinkedIn Alemanha",
+        "url": "https://de.linkedin.com/jobs",
+        "official": false
       }
     ],
     "sources": [
       {
-        "label": "Make it in Germany - Lista oficial de profissões de escassez (Mangelberufe, PDF, Seção 18g AufenthG, ISCO-08)",
-        "url": "https://www.make-it-in-germany.com/fileadmin/1_Rebrush_2022/a_Fachkraefte/PDF-Dateien/3_Visum_u_Aufenthalt/2024_Mangelberufe_EN.pdf",
+        "label": "Agência Federal de Emprego, mercado de trabalho em junho de 2026",
+        "url": "https://www.arbeitsagentur.de/en/press/2026-22-labour-market-in-june-2026",
         "official": true
       },
       {
-        "label": "Make it in Germany - Profissões em demanda (portal oficial)",
-        "url": "https://www.make-it-in-germany.com/en/working-in-germany/professions-in-demand",
+        "label": "Agência Federal de Emprego, notícias e dados do mercado de trabalho",
+        "url": "https://www.arbeitsagentur.de/news/arbeitsmarkt",
         "official": true
       },
       {
-        "label": "Make it in Germany - Visto para autônomos (Seção 21 AufenthG)",
-        "url": "https://www.make-it-in-germany.com/en/visa-residence/types/other/self-employment",
+        "label": "Estatística da Agência Federal de Emprego, Fachkräfteengpassanalyse 2025 (análise anual de profissões de gargalo)",
+        "url": "https://statistik.arbeitsagentur.de/DE/Statischer-Content/Statistiken/Themen-im-Fokus/Fachkraeftebedarf/Fachkraefteengpassanalyse/Fachkraefteengpassanalyse.html",
         "official": true
       },
       {
-        "label": "Bundesagentur für Arbeit - Fachkräfteengpassanalyse (análise de gargalos de mão de obra)",
-        "url": "https://statistik.arbeitsagentur.de/DE/Navigation/Footer/Top-Produkte/Fachkraefteengpassanalyse-Nav.html",
+        "label": "Estatística da Agência Federal de Emprego, demanda por mão de obra qualificada e análise de gargalos",
+        "url": "https://statistik.arbeitsagentur.de/DE/Navigation/Statistiken/Themen-im-Fokus/Fachkraeftebedarf/Fachkraeftebedarf-Nav.html",
         "official": true
       },
       {
-        "label": "Bundesagentur für Arbeit - Profissionais qualificados ainda procurados (comunicado 2025)",
-        "url": "https://www.arbeitsagentur.de/presse/2025-25-qualifizierte-fachkraefte-weiterhin-gesucht",
+        "label": "Estatística da Agência Federal de Emprego, ferramenta interativa de análise de gargalos",
+        "url": "https://statistik.arbeitsagentur.de/DE/Navigation/Statistiken/Interaktive-Statistiken/Fachkraeftebedarf/Engpassanalyse-Nav.html",
         "official": true
       },
       {
-        "label": "Destatis - Verdiente médio/mediano 2025 (comunicado PD26_113_621)",
-        "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_113_621.html",
+        "label": "Agência Federal de Emprego, informativo sobre o Cartão Azul da UE em 2026",
+        "url": "https://www.arbeitsagentur.de/vor-ort/zav/working-and-living-in-germany/newsletter-iss/03-2026/blaue-karte",
         "official": true
       },
       {
-        "label": "Destatis - Verdienst por setores e profissões",
-        "url": "https://www.destatis.de/DE/Themen/Arbeit/Verdienste/Verdienste-Branche-Berufe/_inhalt.html",
+        "label": "Agência Federal de Emprego, informativo sobre a Chancenkarte",
+        "url": "https://www.arbeitsagentur.de/vor-ort/zav/working-and-living-in-germany/newsletter-iss/02-2026/chancenkarte",
         "official": true
       },
       {
-        "label": "Destatis - Mercado de trabalho e desemprego",
-        "url": "https://www.destatis.de/EN/Themes/Labour/Labour-Market/Unemployment/_node.html",
+        "label": "Destatis, ganhos brutos médios mensais por setor (abril de 2025)",
+        "url": "https://www.destatis.de/DE/Themen/Arbeit/Verdienste/Verdienste-Branche-Berufe/Tabellen/bruttomonats-verdienste-stichmonat.html",
         "official": true
       },
       {
-        "label": "BAMF - Atividade autônoma e freelancing",
-        "url": "https://www.bamf.de/EN/Themen/MigrationAufenthalt/ZuwandererDrittstaaten/Arbeit/SelbstaendigeTaetigkeit/selbstaendigetaetigkeit-node.html",
+        "label": "Destatis, ocupação em maio de 2026",
+        "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/06/PD26_228_132.html",
         "official": true
       },
       {
-        "label": "Comissão Europeia - Trabalhador autônomo na Alemanha (portal de imigração da UE)",
-        "url": "https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/self-employed-worker-germany_en",
+        "label": "Destatis, ocupação no 1º trimestre de 2026",
+        "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/05/PD26_167_13321.html",
         "official": true
       },
       {
-        "label": "VisaHQ - Confirmação dos limiares do EU Blue Card 2026 (corroborativo)",
-        "url": "https://www.visahq.com/news/2026-01-16/de/germany-confirms-higher-2026-eu-blue-card-salary-thresholds/",
-        "official": false
+        "label": "BMAS, aumento do salário mínimo em 1º de janeiro de 2026",
+        "url": "https://www.bmas.de/DE/Service/Presse/Pressemitteilungen/2025/mindestlohn-steigt-zum-ersten-januar-2026.html",
+        "official": true
       },
       {
-        "label": "StepStone Salary Report 2025 via WBS Coding School (salários de TI, corroborativo)",
-        "url": "https://www.wbscodingschool.com/blog/software-engineer-salary/",
-        "official": false
+        "label": "Destatis, impacto do salário mínimo de 13,90 euros sobre os postos de trabalho",
+        "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/01/PD26_025_62.html",
+        "official": true
       },
       {
-        "label": "Bloomberg / Detroit News / VDA - Crise e cortes na indústria automotiva alemã (corroborativo)",
-        "url": "https://www.detroitnews.com/story/business/autos/2025/09/26/crisis-in-german-industry-deepens-on-volkswagen-bosch-cuts/86365875007/",
-        "official": false
+        "label": "Ministério Federal do Interior, requisitos do Cartão Azul da UE",
+        "url": "https://www.bmi.bund.de/SharedDocs/faqs/DE/themen/migration/aufenthaltsrecht/09.html",
+        "official": true
+      },
+      {
+        "label": "Ministério Federal do Interior, sistema de pontos da Chancenkarte",
+        "url": "https://www.bmi.bund.de/SharedDocs/pressemitteilungen/DE/2024/05/chancenkarte-feg.html",
+        "official": true
+      },
+      {
+        "label": "Make it in Germany, Chancenkarte para busca de emprego",
+        "url": "https://www.make-it-in-germany.com/de/visum-aufenthalt/chancenkarte/chancenkarte-zur-jobsuche",
+        "official": true
+      },
+      {
+        "label": "Make it in Germany, emprego no âmbito da parceria de reconhecimento",
+        "url": "https://www.make-it-in-germany.com/de/unternehmen/einreise/beschaeftigung-anerkennungspartnerschaft",
+        "official": true
+      },
+      {
+        "label": "Make it in Germany, profissionais de enfermagem",
+        "url": "https://www.make-it-in-germany.com/de/arbeiten-in-deutschland/gefragte-berufe/pflegefachkraefte",
+        "official": true
+      },
+      {
+        "label": "Anerkennung in Deutschland, portal oficial de reconhecimento de qualificações estrangeiras",
+        "url": "https://www.anerkennung-in-deutschland.de/html/en/index.php",
+        "official": true
+      },
+      {
+        "label": "BAMF, o Cartão Azul da UE",
+        "url": "https://www.bamf.de/DE/Themen/MigrationAufenthalt/ZuwandererDrittstaaten/Migrathek/BlaueKarteEU/blauekarteeu-node.html",
+        "official": true
+      },
+      {
+        "label": "EURES, escassez e excedentes de mão de obra na Europa",
+        "url": "https://eures.europa.eu/living-and-working/labour-shortages-and-surpluses-europe_en",
+        "official": true
+      },
+      {
+        "label": "Autoridade Europeia do Trabalho, relatório EURES sobre escassez e excedentes de mão de obra 2025",
+        "url": "https://www.ela.europa.eu/en/publications/labour-shortages-and-surpluses-europe-2025",
+        "official": true
       }
     ]
   },
