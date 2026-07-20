@@ -43,14 +43,18 @@ import {
   fmtPieceDate,
   isFreshPiece,
   freshCutoffISO,
+  urgentCutoffISO,
   FRESH_WINDOW_DAYS,
 } from "@/lib/report-data";
 import {
   DESTINATIONS,
   buildPostables,
+  groupPiecesByCountry,
   consolidatedSources,
   totalPostables,
   countFreshPostables,
+  urgentPieces,
+  isUrgentPiece,
   type PostablePiece,
   type DestinationMeta,
   type EditorialSource,
@@ -63,6 +67,14 @@ const DARK = "1A1A2E";
 const HEADER_BG = "EEF2FF";
 /** Vermelho do selo NOVO (peça dentro da janela de recência). */
 const NEW_RED = "D92D20";
+/**
+ * Vermelho do selo URGENTE. Mais ESCURO e saturado que o NOVO (#D92D20), que é
+ * um vermelho-sinal claro: lado a lado no mesmo documento, o tom mais fechado
+ * lê como o mais grave, e a diferença sobrevive à impressão. Na prática os dois
+ * quase nunca aparecem juntos (URGENTE substitui NOVO na mesma peça), então o
+ * contraste que importa é o de uma peça pra outra.
+ */
+const URGENT_RED = "B42318";
 
 function link(label: string, url: string): ExternalHyperlink {
   return new ExternalHyperlink({
@@ -140,16 +152,36 @@ function destSectionTitle(text: string, colorHex: string): Paragraph {
   });
 }
 
-/** Título grande e colorido de uma peça pronta pra postar. Peça dentro da
- *  janela de recência ganha o selo NOVO em vermelho, antes do título. */
-function pieceTitle(text: string, colorHex: string, fresh = false): Paragraph {
+/** Título do bloco de um PAÍS dentro da seção de um destino. É o agrupamento
+ *  que a equipe usa pra varrer o documento. */
+function countryGroupTitle(text: string, colorHex: string): Paragraph {
   return new Paragraph({
     heading: HeadingLevel.HEADING_3,
+    spacing: { before: 260, after: 40 },
+    children: [new TextRun({ text, bold: true, color: colorHex, size: 26 })],
+  });
+}
+
+/**
+ * Título grande e colorido de uma peça pronta pra postar, com no máximo UM
+ * selo antes do texto. URGENTE tem precedência sobre NOVO: quase toda peça
+ * urgente também é fresca, e empilhar os dois polui o título e dilui os dois.
+ */
+type PieceSeal = "urgent" | "fresh" | null;
+
+function pieceTitle(text: string, colorHex: string, seal: PieceSeal = null): Paragraph {
+  const badge =
+    seal === "urgent"
+      ? [new TextRun({ text: "URGENTE · ", bold: true, color: URGENT_RED, size: 30 })]
+      : seal === "fresh"
+        ? [new TextRun({ text: "NOVO · ", bold: true, color: NEW_RED, size: 30 })]
+        : [];
+  return new Paragraph({
+    // HEADING_4 porque a peça agora vive dentro do bloco HEADING_3 do país
+    // (HEADING_2 = destino), e é isso que dá a árvore certa no painel do Word.
+    heading: HeadingLevel.HEADING_4,
     spacing: { before: 220, after: 30 },
-    children: [
-      ...(fresh ? [new TextRun({ text: "NOVO · ", bold: true, color: NEW_RED, size: 30 })] : []),
-      new TextRun({ text, bold: true, color: colorHex, size: 30 }),
-    ],
+    children: [...badge, new TextRun({ text, bold: true, color: colorHex, size: 30 })],
   });
 }
 
@@ -200,10 +232,14 @@ function sourcesLine(sources: EditorialSource[] | undefined, prefix: string): Pa
 }
 
 /** Uma peça pronta pra postar (título grande colorido + etiqueta + corpo + fontes). */
-function pieceDocx(p: PostablePiece, dest: DestinationMeta, cutoffISO: string): Paragraph[] {
+function pieceDocx(p: PostablePiece, dest: DestinationMeta, cutoffISO: string, urgentISO: string): Paragraph[] {
   const out: Paragraph[] = [];
-  const fresh = isFreshPiece(p.publishedAt, cutoffISO);
-  out.push(pieceTitle(`${flagEmoji(p.countryCode)} ${p.countryName} · ${p.title}`, dest.colorHex, fresh));
+  const seal: PieceSeal = isUrgentPiece(p, urgentISO)
+    ? "urgent"
+    : isFreshPiece(p.publishedAt, cutoffISO)
+      ? "fresh"
+      : null;
+  out.push(pieceTitle(`${flagEmoji(p.countryCode)} ${p.countryName} · ${p.title}`, dest.colorHex, seal));
   out.push(tagChip(dest.tag, dest.colorHex, fmtPieceDate(p.publishedAt)));
   if (p.standfirst) {
     out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: p.standfirst, italics: true, color: DARK })] }));
@@ -224,11 +260,12 @@ function pieceDocx(p: PostablePiece, dest: DestinationMeta, cutoffISO: string): 
   return out;
 }
 
-function summaryTable(data: ReportData, postCount: number, freshCount: number): Table {
+function summaryTable(data: ReportData, postCount: number, freshCount: number, urgentCount: number): Table {
   const { stats } = data;
   const rows: Array<[string, string]> = [
     ["📝 Peças prontas pra postar", String(postCount)],
     [`🆕 Peças novas (últimos ${FRESH_WINDOW_DAYS} dias)`, String(freshCount)],
+    ["🔴 Peças URGENTES (postar primeiro)", String(urgentCount)],
     ["✍️ Países com conteúdo editorial", String(stats.editorialCountries)],
     ["🌎 Países monitorados", String(stats.totalCountries)],
     ["📜 Boletins oficiais via cron", String(stats.totalBulletins)],
@@ -434,11 +471,14 @@ function technicalDocx(c: ReportCountry, img?: ReportImage): (Paragraph | Table)
 
 export async function renderDocx(data: ReportData): Promise<Buffer> {
   const children: (Paragraph | Table)[] = [];
-  const postables = buildPostables(data.countries);
-  const postCount = totalPostables(data.countries);
   const cutoffISO = freshCutoffISO(data.generatedAt);
+  const urgentISO = urgentCutoffISO(data.generatedAt);
+  const postables = buildPostables(data.countries, { urgentCutoffISO: urgentISO });
+  const postCount = totalPostables(data.countries);
   const freshCount = countFreshPostables(data.countries, cutoffISO);
+  const urgentes = urgentPieces(postables, urgentISO);
   const sourcesByCountry = consolidatedSources(data.countries);
+  const destTagOf = new Map(DESTINATIONS.map((d) => [d.key, d]));
 
   // Capa
   children.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: "WiseHub", bold: true, color: BLUE, size: 44 })] }));
@@ -447,7 +487,7 @@ export async function renderDocx(data: ReportData): Promise<Buffer> {
 
   // Sumário
   children.push(h1("Sumário executivo"));
-  children.push(summaryTable(data, postCount, freshCount));
+  children.push(summaryTable(data, postCount, freshCount, urgentes.length));
 
   // Legenda
   const COLOR_NAME: Record<string, string> = { community: "Azul", countryTab: "Verde", blog: "Laranja" };
@@ -480,7 +520,42 @@ export async function renderDocx(data: ReportData): Promise<Buffer> {
 
   // ── PARTE 1 · TUDO PRA POSTAR ──
   children.push(partTitle("🟦 PARTE 1 · TUDO PRA POSTAR"));
-  children.push(new Paragraph({ spacing: { after: 100 }, children: [new TextRun({ text: "Sequência pronta pra publicar, separada por destino. Cada peça indica o lugar (cor + etiqueta) e traz as fontes pra anexar.", color: DARK })] }));
+  children.push(new Paragraph({ spacing: { after: 100 }, children: [new TextRun({ text: "Sequência pronta pra publicar, separada por destino e, dentro de cada destino, agrupada por país. Cada peça indica o lugar (cor + etiqueta) e traz as fontes pra anexar.", color: DARK })] }));
+
+  // ── PRIORIDADE · urgentes de todos os países ──
+  // Índice cross-country pra quem quer agir primeiro no que corre risco de
+  // perder validade. Só ponteiro (etiqueta + país + título + data): a peça
+  // completa continua no bloco do país dela, sem duplicar corpo no documento.
+  children.push(destSectionTitle(`🔴 PRIORIDADE · urgentes de todos os países (${urgentes.length})`, URGENT_RED));
+  children.push(
+    new Paragraph({
+      spacing: { after: 80 },
+      children: [
+        new TextRun({
+          text: "Mudança de lei ou regra, ato oficial publicado, fato das últimas 48h ou prazo que abre/fecha em poucos dias. Perde validade rápido: publique estas primeiro. A peça completa está no bloco do país dela, mais abaixo.",
+          italics: true,
+          color: GREY,
+        }),
+      ],
+    }),
+  );
+  if (urgentes.length === 0) {
+    children.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: "Nada urgente nesta rodada.", italics: true, color: GREY })] }));
+  } else {
+    for (const p of urgentes) {
+      const d = destTagOf.get(p.destination);
+      const when = fmtPieceDate(p.publishedAt);
+      children.push(
+        bullet([
+          new TextRun({ text: "URGENTE ", bold: true, color: URGENT_RED, size: 18 }),
+          new TextRun({ text: `[ ${d?.tag ?? p.destination} ] `, bold: true, color: d?.colorHex ?? DARK, size: 18 }),
+          new TextRun({ text: `${flagEmoji(p.countryCode)} ${p.countryName} · ${p.title}`, color: DARK, size: 20 }),
+          ...(when ? [new TextRun({ text: `  ·  ${when}`, color: GREY, size: 18 })] : []),
+        ]),
+      );
+    }
+  }
+
   for (const { dest, pieces } of postables) {
     children.push(destSectionTitle(`${dest.emoji} ${dest.label} (${pieces.length})`, dest.colorHex));
     children.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: dest.legend, italics: true, color: GREY })] }));
@@ -488,7 +563,12 @@ export async function renderDocx(data: ReportData): Promise<Buffer> {
       children.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: "Nada nesta seção ainda.", italics: true, color: GREY })] }));
       continue;
     }
-    for (const p of pieces) children.push(...pieceDocx(p, dest, cutoffISO));
+    // Agrupado por PAÍS (o jeito que a equipe varre o documento). Dentro de cada
+    // país, urgente primeiro e depois a mais nova.
+    for (const grp of groupPiecesByCountry(pieces)) {
+      children.push(countryGroupTitle(`${flagEmoji(grp.countryCode)} ${grp.countryName} — ${dest.tag} (${grp.pieces.length})`, dest.colorHex));
+      for (const p of grp.pieces) children.push(...pieceDocx(p, dest, cutoffISO, urgentISO));
+    }
   }
 
   // ── PARTE 2 · FONTES E MATERIAIS ──

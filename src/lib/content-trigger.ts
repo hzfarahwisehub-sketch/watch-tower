@@ -34,12 +34,29 @@ export async function acionarGeracaoRoteiros(mudancas: string[], userId: string)
     });
     if (existing) return false;
 
+    // `mudancas` já chega filtrada pelo cron: boletim OFICIAL com lastStatus
+    // "changed" nas últimas 48h. Isso é, por definição, o critério de urgência
+    // do Hammis (2026-07-20): ato oficial publicado + janela de 48h. Então ter
+    // item aqui = tem notícia que corre hoje, e o pedido precisa GRITAR isso —
+    // senão a Friday gera o lote no tom perene de sempre e o fundador não tem
+    // como saber o que precisa ser gravado antes de perder validade.
+    const urgente = mudancas.length > 0;
+
     const fuel = mudancas.length
       ? `Novidades do dia pra ancorar (use como gancho, sem inventar número): ${mudancas.slice(0, 12).join(" · ")}.`
       : `Sem mudança oficial nova hoje. Puxe uma atualização ou tema relevante de imigração/empreendedorismo pra ancorar.`;
 
+    // Prefixo no INÍCIO do corpo: é a primeira coisa que a Friday e o Hammis
+    // leem na fila ⚡, antes de qualquer instrução de formato.
+    const alerta = urgente
+      ? `🚨 URGENTE · há mudança oficial nas últimas 48h (${mudancas.slice(0, 6).join(" · ")}${mudancas.length > 6 ? ` +${mudancas.length - 6}` : ""}). ` +
+        `O(s) roteiro(s) que tratar(em) dessa mudança TEM QUE sair marcado(s) como urgente no .md do lote: escreva a linha "Urgência: urgente · <motivo curto e datado>" logo abaixo da linha "Título:" (ex.: "Urgência: urgente · Regra do LMIA muda em 17/07"). ` +
+        `Isso acende o selo vermelho na aba 🎥 Conteúdo Digital e joga a peça pro topo da lista do fundador, com o recado de gravar hoje. ` +
+        `Marque SÓ o que de fato corre (lei/regra mudou, ato oficial publicado, aconteceu nas últimas 48h ou prazo fecha em poucos dias); dica prática e conteúdo perene ficam SEM a linha. `
+      : "";
+
     const body =
-      `${FRIDAY_MARKER} · ${TRIGGER_ROTEIROS_TAG} · Gerar o LOTE DIÁRIO de roteiros de vídeo da WiseHub (fundadores Lucas e Marcela, YouTube + Instagram/Reels). ` +
+      `${FRIDAY_MARKER} · ${TRIGGER_ROTEIROS_TAG} · ${alerta}Gerar o LOTE DIÁRIO de roteiros de vídeo da WiseHub (fundadores Lucas e Marcela, YouTube + Instagram/Reels). ` +
       `Estrutura: Lucas = 2 longos + 2 curtos (mercado, empreendedorismo, investimento, o provedor, equilíbrio financeiro e mental); Marcela = 2 longos + 2 curtos (família, mulher, criança, acolhimento, a mãezona) e também mercado de trabalho. ` +
       `Ângulos SEMPRE novos, nunca repetir nem copiar; personas separadas; voz WiseHub (fluida, acolhedora, sem travessão no meio da frase); sem clichê, sem escassez forçada, sem gancho de manual, sem comparação padronizada, sem dica de IA; ` +
       `honestidade obrigatória (não promete visto, renda nem resultado; conteúdo educativo não substitui profissional habilitado); NUNCA citar programa interno ou ranking. ` +
@@ -48,7 +65,9 @@ export async function acionarGeracaoRoteiros(mudancas: string[], userId: string)
       // do Hammis e a aba 🎥 Conteúdo Digital congela no lote anterior — foi
       // exatamente o que aconteceu com os lotes 01 e 02 (2026-07-13/14).
       `ENTREGA (sem isto o lote não chega nos fundadores): 1) ler os lotes anteriores em "D:\\FRIDAY-BRAIN\\05 - Conteúdo\\Roteiros Fundadores" pra não repetir eixo; ` +
-      `2) salvar o lote novo lá como "<AAAA-MM-DD> - Lote <NN>.md" no mesmo formato (## n · Persona · Canal (longo|curto) + linha "Título:"); ` +
+      `2) salvar o lote novo lá como "<AAAA-MM-DD> - Lote <NN>.md" no mesmo formato (## n · Persona · Canal (longo|curto) + linha "Título:"), ` +
+      `e — só nos roteiros que tratam de algo que perde validade — a linha OPCIONAL "Urgência: urgente · <motivo curto>" logo abaixo do "Título:" ` +
+      `(sem essa linha o roteiro é normal; critério e sintaxe completos no docstring de scripts/parse-lotes.py); ` +
       `3) rodar "python scripts/parse-lotes.py" no repo watch-tower (regenera src/lib/roteiros-data.ts); ` +
       `4) commitar e dar push na main — o deploy sai do Git (REGRA 4) e é o que publica o lote na aba 🎥 Conteúdo Digital.`;
 

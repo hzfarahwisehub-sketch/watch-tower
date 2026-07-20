@@ -7,7 +7,34 @@ Saída: src/lib/roteiros-data.ts (commitado no repo · deploy via Git, REGRA 4)
 Formato de cada roteiro no .md:
     ## <n> · <Persona> · <Canal> (<longo|curto>)
     Título: <titulo>
+    Urgência: urgente · <motivo curto>      <- OPCIONAL, ver abaixo
     <parágrafos separados por linha em branco>
+
+MARCAÇÃO DE URGÊNCIA (escrita à mão pela Friday, logo abaixo do "Título:")
+--------------------------------------------------------------------------
+    Urgência: urgente · Regra do LMIA muda em 17/07
+
+Sem essa linha, o roteiro é NORMAL. É só isso: a ausência é o padrão, então
+os lotes antigos seguem funcionando sem tocar em nada.
+
+O motivo (o texto depois do "·") é OBRIGATÓRIO na prática: o selo vermelho
+sozinho não diz ao fundador O QUE corre. Escreva curto e datado, do jeito
+que o fundador entende em 2 segundos ("Statement of changes entra em vigor
+em 22/07"), não genérico ("mudança importante").
+
+Aceita, por tolerância: "Urgencia" sem acento, "·" ou "|" ou "-" como
+separador, e "Urgência: normal" escrito explicitamente (= sem marcação).
+
+QUANDO MARCAR — critério do Hammis (2026-07-20), canônico, não inventar outro:
+  URGENTE = (a) alteração de LEI ou de REGRA de visto/imigração/residência/
+            cidadania; (b) ato oficial publicado (decreto, portaria, statement
+            of changes, decisão judicial que muda regra, novo limite/taxa/prazo
+            em vigor); (c) aconteceu HOJE ou ONTEM (janela de 48h), ou prazo/
+            janela que abre ou fecha em poucos dias.
+  NORMAL  = conteúdo que NÃO perde validade amanhã: dica prática, "o que você
+            pode fazer", "como fazer", guia, orientação, análise, matéria perene.
+  NA DÚVIDA: se a peça perde validade se for postada semana que vem, é URGENTE.
+            Se continua útil, é NORMAL.
 """
 import glob
 import json
@@ -19,6 +46,12 @@ SRC_DIR = r"D:\FRIDAY-BRAIN\05 - Conteúdo\Roteiros Fundadores"
 OUT = r"D:\FRIDAY-BRAIN\workspace\watch-tower-git\src\lib\roteiros-data.ts"
 
 HEAD = re.compile(r"^##\s+(\d+)\s+·\s+(\w+)\s+·\s+([^(]+)\(([^)]+)\)\s*$")
+
+# Linha OPCIONAL de urgência (ver docstring). Tolera "Urgencia" sem acento e
+# ·|- como separador. Sem a linha => roteiro normal.
+URGENCIA = re.compile(r"^Urg[êe]ncia:\s*([^\s·|-]+)\s*(?:[·|-]+\s*(.*))?$", re.M | re.I)
+# Remove a linha do corpo (como o "Título:"), pra não vazar no texto copiável.
+URGENCIA_STRIP = re.compile(r"^Urg[êe]ncia:.*$", re.M | re.I)
 
 
 def parse_file(path):
@@ -45,7 +78,20 @@ def parse_file(path):
         body = body.replace("\r", "")
         tm = re.search(r"^Título:\s*(.+)$", body, re.M)
         titulo = tm.group(1).strip() if tm else "(sem título)"
+        # Urgência: opcional. Só "urgente" liga o selo; qualquer outro valor
+        # (inclusive "normal") deixa o roteiro normal, sem campo no dado.
+        um = URGENCIA.search(body)
+        urgencia = None
+        urgencia_motivo = None
+        if um and um.group(1).strip().lower().rstrip(".:") == "urgente":
+            urgencia = "urgente"
+            motivo = (um.group(2) or "").strip()
+            if motivo:
+                urgencia_motivo = motivo
+            else:
+                print(f"    ! roteiro {idx} marcado urgente SEM motivo (o selo nao dira o que corre)")
         body = re.sub(r"^Título:.*$", "", body, flags=re.M)
+        body = URGENCIA_STRIP.sub("", body)
         body = re.sub(r"^-{3,}\s*$", "", body, flags=re.M)
         # Linhas ">" sao provenancia interna (fonte); nao entram no texto copiavel.
         body = re.sub(r"^>.*$", "", body, flags=re.M)
@@ -69,7 +115,7 @@ def parse_file(path):
             formato = "curto"
         else:
             formato = "longo"  # dupla/custo sao peças longas
-        scripts.append({
+        rec = {
             "id": f"{date}-{int(idx):02d}",
             "date": date,
             "lote": lote,
@@ -81,7 +127,14 @@ def parse_file(path):
             "titulo": titulo,
             "paras": paras,
             "palavras": sum(len(p.split()) for p in paras),
-        })
+        }
+        # Campos só existem quando há urgência: roteiro normal sai do parser
+        # exatamente como saía antes (retrocompatível, e o diff fica limpo).
+        if urgencia:
+            rec["urgencia"] = urgencia
+            if urgencia_motivo:
+                rec["urgenciaMotivo"] = urgencia_motivo
+        scripts.append(rec)
     return scripts
 
 
@@ -114,6 +167,14 @@ def main():
 export type RoteiroFormato = "longo" | "curto";
 /** Família do conteúdo (filtro da aba). */
 export type RoteiroTipo = "roteiro" | "dupla" | "custo";
+/**
+ * Marcação de urgência. Só existe um valor: a AUSÊNCIA do campo é "normal".
+ * Critério do Hammis (2026-07-20): urgente = mudou uma lei/regra de visto, saiu
+ * ato oficial, ou aconteceu nas últimas 48h / prazo fecha em poucos dias. Se a
+ * peça continua válida semana que vem, é normal. Escrita à mão no .md do lote
+ * (linha "Urgência: urgente · <motivo>"), ver docstring de scripts/parse-lotes.py.
+ */
+export type RoteiroUrgencia = "urgente";
 
 export type Roteiro = {{
   /** `<data>-<n>` — estável, serve de chave de "já usei este". */
@@ -133,6 +194,11 @@ export type Roteiro = {{
   /** Corpo já quebrado em parágrafos, na ordem de leitura. */
   paras: string[];
   palavras: number;
+  /** Presente só nos urgentes. Ausente = normal (os lotes antigos não têm). */
+  urgencia?: RoteiroUrgencia;
+  /** Por que corre, em uma linha ("Regra do LMIA muda em 17/07"). O selo
+   *  sozinho não diz ao fundador o que está em jogo. */
+  urgenciaMotivo?: string;
 }};
 
 export const ROTEIROS: Roteiro[] = {body};

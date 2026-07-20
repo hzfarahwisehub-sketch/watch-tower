@@ -10,6 +10,14 @@
 export type RoteiroFormato = "longo" | "curto";
 /** Família do conteúdo (filtro da aba). */
 export type RoteiroTipo = "roteiro" | "dupla" | "custo";
+/**
+ * Marcação de urgência. Só existe um valor: a AUSÊNCIA do campo é "normal".
+ * Critério do Hammis (2026-07-20): urgente = mudou uma lei/regra de visto, saiu
+ * ato oficial, ou aconteceu nas últimas 48h / prazo fecha em poucos dias. Se a
+ * peça continua válida semana que vem, é normal. Escrita à mão no .md do lote
+ * (linha "Urgência: urgente · <motivo>"), ver docstring de scripts/parse-lotes.py.
+ */
+export type RoteiroUrgencia = "urgente";
 
 export type Roteiro = {
   /** `<data>-<n>` — estável, serve de chave de "já usei este". */
@@ -29,6 +37,11 @@ export type Roteiro = {
   /** Corpo já quebrado em parágrafos, na ordem de leitura. */
   paras: string[];
   palavras: number;
+  /** Presente só nos urgentes. Ausente = normal (os lotes antigos não têm). */
+  urgencia?: RoteiroUrgencia;
+  /** Por que corre, em uma linha ("Regra do LMIA muda em 17/07"). O selo
+   *  sozinho não diz ao fundador o que está em jogo. */
+  urgenciaMotivo?: string;
 };
 
 export const ROTEIROS: Roteiro[] = [

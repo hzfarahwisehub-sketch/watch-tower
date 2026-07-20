@@ -29,14 +29,18 @@ import {
   fmtPieceDate,
   isFreshPiece,
   freshCutoffISO,
+  urgentCutoffISO,
   FRESH_WINDOW_DAYS,
 } from "@/lib/report-data";
 import {
   DESTINATIONS,
   buildPostables,
+  groupPiecesByCountry,
   consolidatedSources,
   totalPostables,
   countFreshPostables,
+  urgentPieces,
+  isUrgentPiece,
   type PostablePiece,
 } from "@/lib/editorial";
 
@@ -63,11 +67,19 @@ function sourcesInline(sources?: PostablePiece["sources"]): string {
 }
 
 /** Uma peça pronta pra postar. */
-function pieceMd(p: PostablePiece, dot: string, tag: string, cutoffISO: string): string[] {
+function pieceMd(p: PostablePiece, dot: string, tag: string, cutoffISO: string, urgentISO: string): string[] {
   const lines: string[] = [];
   const when = fmtPieceDate(p.publishedAt);
-  const novo = isFreshPiece(p.publishedAt, cutoffISO) ? `🆕 **NOVO** · ` : ``;
-  lines.push(`### ${novo}${dot} ${flagEmoji(p.countryCode)} ${p.countryName} · ${p.title}`);
+  // UM selo por peça, e URGENTE tem precedência sobre NOVO: quase toda urgente
+  // também é fresca, e empilhar os dois no título polui e dilui os dois. O
+  // sumário continua contando as duas métricas em separado.
+  const selo = isUrgentPiece(p, urgentISO)
+    ? `🔴 **URGENTE** · `
+    : isFreshPiece(p.publishedAt, cutoffISO)
+      ? `🆕 **NOVO** · `
+      : ``;
+  // #### porque agora a peça vive dentro do bloco ### do país (## = destino).
+  lines.push(`#### ${selo}${dot} ${flagEmoji(p.countryCode)} ${p.countryName} · ${p.title}`);
   lines.push(``);
   // Peça legada sem publishedAt sai sem carimbo, sem quebrar a linha da etiqueta.
   lines.push(`**[${tag}]**${when ? ` · 📅 ${when}` : ``}`);
@@ -260,11 +272,14 @@ function technicalMd(c: ReportCountry): string[] {
 export function renderMarkdown(data: ReportData): string {
   const { generatedAtStr, stats, countries } = data;
   const lines: string[] = [];
-  const postables = buildPostables(countries);
-  const postCount = totalPostables(countries);
   const cutoffISO = freshCutoffISO(data.generatedAt);
+  const urgentISO = urgentCutoffISO(data.generatedAt);
+  const postables = buildPostables(countries, { urgentCutoffISO: urgentISO });
+  const postCount = totalPostables(countries);
   const freshCount = countFreshPostables(countries, cutoffISO);
+  const urgentes = urgentPieces(postables, urgentISO);
   const sourcesByCountry = consolidatedSources(countries);
+  const destTagOf = new Map(DESTINATIONS.map((d) => [d.key, d]));
 
   lines.push(`# WiseHub · Relatório Completo`);
   lines.push(``);
@@ -280,6 +295,7 @@ export function renderMarkdown(data: ReportData): string {
   lines.push(`|---|---|`);
   lines.push(`| 📝 Peças prontas pra postar | **${postCount}** |`);
   lines.push(`| 🆕 Peças novas (últimos ${FRESH_WINDOW_DAYS} dias) | **${freshCount}** |`);
+  lines.push(`| 🔴 Peças URGENTES (postar primeiro) | **${urgentes.length}** |`);
   lines.push(`| ✍️ Países com conteúdo editorial | **${stats.editorialCountries}** |`);
   lines.push(`| 🌎 Países monitorados | **${stats.totalCountries}** |`);
   lines.push(`| 📜 Boletins oficiais via cron | **${stats.totalBulletins}** |`);
@@ -315,8 +331,31 @@ export function renderMarkdown(data: ReportData): string {
   // ── PARTE 1 · TUDO PRA POSTAR ──
   lines.push(`# 🟦 PARTE 1 · TUDO PRA POSTAR`);
   lines.push(``);
-  lines.push(`Sequência pronta pra publicar, separada por destino. Cada peça indica o lugar e traz as fontes pra anexar.`);
+  lines.push(`Sequência pronta pra publicar, separada por destino e, dentro de cada destino, agrupada por país. Cada peça indica o lugar e traz as fontes pra anexar.`);
   lines.push(``);
+
+  // ── PRIORIDADE · urgentes de todos os países ──
+  // Índice cross-country pra quem quer agir primeiro no que corre risco de
+  // perder validade. Só ponteiro (destino + país + data + título): a peça
+  // completa continua no bloco do país dela, sem duplicar corpo no documento.
+  lines.push(`## 🔴 PRIORIDADE · urgentes de todos os países (${urgentes.length})`);
+  lines.push(``);
+  lines.push(`> _Mudança de lei ou regra, ato oficial publicado, fato das últimas 48h ou prazo que abre/fecha em poucos dias. Perde validade rápido: publique estas primeiro. A peça completa está no bloco do país dela, mais abaixo._`);
+  lines.push(``);
+  if (urgentes.length === 0) {
+    lines.push(`_Nada urgente nesta rodada._`);
+    lines.push(``);
+  } else {
+    for (const p of urgentes) {
+      const d = destTagOf.get(p.destination);
+      const when = fmtPieceDate(p.publishedAt);
+      lines.push(`- 🔴 **[${d?.tag ?? p.destination}]** ${flagEmoji(p.countryCode)} **${p.countryName}** · ${p.title}${when ? ` · 📅 ${when}` : ``}`);
+    }
+    lines.push(``);
+  }
+  lines.push(`---`);
+  lines.push(``);
+
   for (const { dest, pieces } of postables) {
     lines.push(`## ${dest.emoji} ${dest.dot} ${dest.label} (${pieces.length})`);
     lines.push(``);
@@ -327,7 +366,13 @@ export function renderMarkdown(data: ReportData): string {
       lines.push(``);
       continue;
     }
-    pieces.forEach((p) => lines.push(...pieceMd(p, dest.dot, dest.tag, cutoffISO)));
+    // Agrupado por PAÍS (o jeito que a equipe varre o documento). Dentro de cada
+    // país, urgente primeiro e depois a mais nova.
+    for (const grp of groupPiecesByCountry(pieces)) {
+      lines.push(`### ${flagEmoji(grp.countryCode)} ${grp.countryName} — ${dest.tag} (${grp.pieces.length})`);
+      lines.push(``);
+      grp.pieces.forEach((p) => lines.push(...pieceMd(p, dest.dot, dest.tag, cutoffISO, urgentISO)));
+    }
   }
   lines.push(`---`);
   lines.push(``);

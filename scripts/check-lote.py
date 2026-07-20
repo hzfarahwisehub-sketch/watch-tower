@@ -27,6 +27,9 @@ def roteiros(path):
             continue
         body = b.split("\n", 1)[1] if "\n" in b else ""
         body = re.sub(r"^Título:.*$", "", body, flags=re.M)
+        # Linha opcional de urgência: metadado, não texto gravável. Fora da
+        # contagem de palavras e da checagem de duplicação, como o "Título:".
+        body = re.sub(r"^Urg[êe]ncia:.*$", "", body, flags=re.M | re.I)
         body = re.sub(r"^-{3,}\s*$", "", body, flags=re.M)
         out.append({
             "id": "%s %s %s (%s)" % (m.group(1), m.group(2), m.group(3).strip(), m.group(4).strip()),

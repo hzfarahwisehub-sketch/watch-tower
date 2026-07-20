@@ -27,14 +27,18 @@ import {
   fmtPieceDate,
   isFreshPiece,
   freshCutoffISO,
+  urgentCutoffISO,
   FRESH_WINDOW_DAYS,
 } from "@/lib/report-data";
 import {
   DESTINATIONS,
   buildPostables,
+  groupPiecesByCountry,
   consolidatedSources,
   totalPostables,
   countFreshPostables,
+  urgentPieces,
+  isUrgentPiece,
   type PostablePiece,
   type DestinationMeta,
   type EditorialSource,
@@ -51,6 +55,13 @@ const RULE = rgb(0.82, 0.84, 0.9);
 /** Vermelho do selo NOVO. No PDF o emoji não sobrevive ao pdfSafe(), então o
  *  selo é texto "[ NOVO ]" e é a COR que o faz saltar aos olhos. */
 const NEW_RED = rgb(0.851, 0.176, 0.125);
+/**
+ * Vermelho do selo URGENTE (#B42318): mais escuro e fechado que o NOVO, que é
+ * um vermelho-sinal claro. Aqui a cor é o canal PRINCIPAL do selo (o emoji não
+ * sobrevive ao pdfSafe()), então o texto "[ URGENTE ]" vai também em NEGRITO,
+ * pra diferença sobreviver a impressão em preto e branco.
+ */
+const URGENT_RED = rgb(0.706, 0.137, 0.094);
 
 function hexRgb(hex: string): RGB {
   const n = parseInt(hex, 16);
@@ -72,7 +83,7 @@ function pdfSafe(s: string): string {
     .trim();
 }
 
-type TextOpts = { size?: number; color?: RGB; oblique?: boolean; indent?: number; gapAfter?: number; spaceBefore?: number };
+type TextOpts = { size?: number; color?: RGB; oblique?: boolean; bold?: boolean; indent?: number; gapAfter?: number; spaceBefore?: number };
 type HeadingOpts = { size?: number; color?: RGB; spaceBefore?: number; gapAfter?: number };
 
 class PdfBuilder {
@@ -135,7 +146,9 @@ class PdfBuilder {
 
   text(raw: string, o: TextOpts = {}) {
     const size = o.size ?? 10;
-    const font = o.oblique ? this.obl : this.reg;
+    // A fonte negrito já estava carregada, mas text() só sabia reg/obl. O selo
+    // URGENTE precisa dela: no PDF a cor sozinha some numa impressão P&B.
+    const font = o.bold ? this.bold : o.oblique ? this.obl : this.reg;
     const color = o.color ?? DARK;
     const indent = o.indent ?? 0;
     if (o.spaceBefore) this.y -= o.spaceBefore;
@@ -243,14 +256,18 @@ function sourcesPdf(b: PdfBuilder, sources: EditorialSource[] | undefined, prefi
 }
 
 /** Uma peça pronta pra postar (título grande colorido + etiqueta + corpo + fontes). */
-function piecePdf(b: PdfBuilder, p: PostablePiece, dest: DestinationMeta, cutoffISO: string) {
+function piecePdf(b: PdfBuilder, p: PostablePiece, dest: DestinationMeta, cutoffISO: string, urgentISO: string) {
   const color = hexRgb(dest.colorHex);
   const when = fmtPieceDate(p.publishedAt);
   // O selo vai numa linha própria logo acima do título: herda o respiro que era
-  // do heading, pra não ficar solto entre as peças.
-  const fresh = isFreshPiece(p.publishedAt, cutoffISO);
-  if (fresh) b.text("[ NOVO ]", { size: 9.5, color: NEW_RED, spaceBefore: 10, gapAfter: 0 });
-  b.heading(`${p.countryName} - ${p.title}`, { size: 14, color, spaceBefore: fresh ? 0 : 10, gapAfter: 2 });
+  // do heading, pra não ficar solto entre as peças. UM selo por peça, e URGENTE
+  // tem precedência sobre NOVO. Aqui é texto e não emoji porque pdfSafe() apaga
+  // emoji sem deixar rastro; a cor (+ negrito) é o que faz o selo saltar.
+  const urgente = isUrgentPiece(p, urgentISO);
+  const fresh = !urgente && isFreshPiece(p.publishedAt, cutoffISO);
+  if (urgente) b.text("[ URGENTE ]", { size: 9.5, color: URGENT_RED, bold: true, spaceBefore: 10, gapAfter: 0 });
+  else if (fresh) b.text("[ NOVO ]", { size: 9.5, color: NEW_RED, spaceBefore: 10, gapAfter: 0 });
+  b.heading(`${p.countryName} - ${p.title}`, { size: 14, color, spaceBefore: urgente || fresh ? 0 : 10, gapAfter: 2 });
   // Peça legada sem publishedAt sai só com a etiqueta do destino.
   b.text(`[ ${dest.tag} ]${when ? `  ·  ${when}` : ""}`, { size: 9, color, gapAfter: 2 });
   if (p.standfirst) b.text(p.standfirst, { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
@@ -404,11 +421,14 @@ export async function renderPdf(data: ReportData): Promise<Uint8Array> {
   const { generatedAtStr, stats, countries } = data;
   const b = new PdfBuilder();
   await b.init();
-  const postables = buildPostables(countries);
-  const postCount = totalPostables(countries);
   const cutoffISO = freshCutoffISO(data.generatedAt);
+  const urgentISO = urgentCutoffISO(data.generatedAt);
+  const postables = buildPostables(countries, { urgentCutoffISO: urgentISO });
+  const postCount = totalPostables(countries);
   const freshCount = countFreshPostables(countries, cutoffISO);
+  const urgentes = urgentPieces(postables, urgentISO);
   const sourcesByCountry = consolidatedSources(countries);
+  const destTagOf = new Map(DESTINATIONS.map((d) => [d.key, d]));
 
   // Cabeçalho
   b.heading("WiseHub", { size: 22, color: BLUE, gapAfter: 2 });
@@ -421,6 +441,7 @@ export async function renderPdf(data: ReportData): Promise<Uint8Array> {
   const sm: Array<[string, string]> = [
     ["Peças prontas pra postar", String(postCount)],
     [`Peças novas (últimos ${FRESH_WINDOW_DAYS} dias)`, String(freshCount)],
+    ["Peças URGENTES (postar primeiro)", String(urgentes.length)],
     ["Países com conteúdo editorial", String(stats.editorialCountries)],
     ["Países monitorados", String(stats.totalCountries)],
     ["Boletins oficiais via cron", String(stats.totalBulletins)],
@@ -449,7 +470,24 @@ export async function renderPdf(data: ReportData): Promise<Uint8Array> {
 
   // ── PARTE 1 · TUDO PRA POSTAR ──
   b.heading("PARTE 1 - TUDO PRA POSTAR", { size: 19, color: BLUE, spaceBefore: 8, gapAfter: 4 });
-  b.text("Sequência pronta pra publicar, separada por destino. Cada peça indica o lugar (cor + etiqueta) e traz as fontes pra anexar.", { size: 10, gapAfter: 4 });
+  b.text("Sequência pronta pra publicar, separada por destino e, dentro de cada destino, agrupada por país. Cada peça indica o lugar (cor + etiqueta) e traz as fontes pra anexar.", { size: 10, gapAfter: 4 });
+
+  // ── PRIORIDADE · urgentes de todos os países ──
+  // Índice cross-country pra quem quer agir primeiro no que corre risco de
+  // perder validade. Só ponteiro: a peça completa continua no bloco do país.
+  b.heading(`PRIORIDADE - urgentes de todos os paises (${urgentes.length})`, { size: 16, color: URGENT_RED, spaceBefore: 12, gapAfter: 3 });
+  b.text("Mudança de lei ou regra, ato oficial publicado, fato das últimas 48h ou prazo que abre/fecha em poucos dias. Perde validade rápido: publique estas primeiro. A peça completa está no bloco do país dela, mais abaixo.", { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
+  if (urgentes.length === 0) {
+    b.text("Nada urgente nesta rodada.", { size: 9.5, color: GREY, oblique: true, gapAfter: 2 });
+  } else {
+    for (const p of urgentes) {
+      const d = destTagOf.get(p.destination);
+      const when = fmtPieceDate(p.publishedAt);
+      b.bullet(`[ URGENTE ] [ ${d?.tag ?? p.destination} ] ${p.countryName} - ${p.title}${when ? `  ·  ${when}` : ""}`, { size: 9.5, gapAfter: 0 });
+    }
+    b.text("", { gapAfter: 3 });
+  }
+
   for (const { dest, pieces } of postables) {
     b.heading(`${dest.label} (${pieces.length})`, { size: 16, color: hexRgb(dest.colorHex), spaceBefore: 12, gapAfter: 3 });
     b.text(dest.legend, { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
@@ -457,7 +495,12 @@ export async function renderPdf(data: ReportData): Promise<Uint8Array> {
       b.text("Nada nesta seção ainda.", { size: 9.5, color: GREY, oblique: true, gapAfter: 2 });
       continue;
     }
-    for (const p of pieces) piecePdf(b, p, dest, cutoffISO);
+    // Agrupado por PAÍS (o jeito que a equipe varre o documento). Dentro de cada
+    // país, urgente primeiro e depois a mais nova.
+    for (const grp of groupPiecesByCountry(pieces)) {
+      b.heading(`${grp.countryName} - ${dest.tag} (${grp.pieces.length})`, { size: 13, color: hexRgb(dest.colorHex), spaceBefore: 10, gapAfter: 2 });
+      for (const p of grp.pieces) piecePdf(b, p, dest, cutoffISO, urgentISO);
+    }
   }
   b.rule();
 

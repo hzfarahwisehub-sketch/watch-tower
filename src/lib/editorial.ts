@@ -21,6 +21,17 @@ import { RONDA_PIECES } from "./editorial-ronda";
 
 export type EditorialSource = { label: string; url: string };
 
+/**
+ * Urgência CURADA da peça, atribuída na Ronda Diária. Ausente = peça legada,
+ * nunca triada: vale NORMAL em todo lugar.
+ *
+ * União (e não `urgent?: boolean`) de propósito: `undefined` precisa continuar
+ * distinguível de "triada e classificada como normal", o mesmo contrato que
+ * `publishedAt` ausente já tem. Com booleano, `false` e ausente ficariam
+ * indistinguíveis no JSON das peças da Ronda e a distinção sumiria.
+ */
+export type PieceUrgency = "urgent" | "normal";
+
 /** Metadados de recência comuns a toda peça editorial. Preenchidos pela Ronda
  *  Diária. Ausentes = peça legada (renderiza sem selo, nunca vai pro arquivo). */
 export type RecencyMeta = {
@@ -28,6 +39,23 @@ export type RecencyMeta = {
   publishedAt?: string;
   /** Data ISO de quando foi marcada como já postada/utilizada. */
   usedAt?: string;
+  /**
+   * Critério canônico do Hammis (2026-07-20), não inventar outro:
+   *
+   * URGENTE = (a) alteração de LEI ou de REGRA de visto/imigração/residência/
+   * cidadania; (b) ato oficial publicado (decreto, portaria, statement of
+   * changes, decisão judicial que muda regra, novo limite/taxa/prazo em vigor);
+   * (c) acontecimento que ocorreu HOJE ou ONTEM (janela de 48h), ou prazo/janela
+   * que abre ou fecha em poucos dias.
+   *
+   * NORMAL = conteúdo que NÃO perde validade amanhã: dica prática, "o que você
+   * pode fazer", "como fazer", guia, orientação, análise de contexto, matéria
+   * perene.
+   *
+   * Na dúvida: se a peça perde validade caso seja postada semana que vem, é
+   * `urgent`. Se continua útil, é `normal`.
+   */
+  urgency?: PieceUrgency;
 };
 
 /** Post curto pra Comunidade: objetivo, claro, explicativo. */
@@ -233,13 +261,13 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   },
   pl: {
     community: [
-      { title: "UE acerta prorrogar até março de 2028 a proteção temporária de quem fugiu da Ucrânia", body: "Os países da União Europeia chegaram a acordo, em 15 de julho de 2026, para estender a proteção temporária concedida a pessoas deslocadas da Ucrânia até 4 de março de 2028. O regime, ativado em março de 2022, estava garantido até 4 de março de 2027, e a prorrogação cobre o período seguinte, de 5 de março de 2027 em diante.\n\nA decisão pesa especialmente na Polônia, que abriga a maior comunidade ucraniana do bloco. Na prática polonesa, é o número PESEL com status UKR que confirma o direito de residir no país sob proteção temporária. A adoção formal pelo Conselho e a publicação no Jornal Oficial da UE ainda vão acontecer, e é a partir daí que a prorrogação entra em vigor.", cta: "Se você vive na Polônia com status UKR, acompanhe os comunicados do Escritório para Estrangeiros (UDSC), porque nas prorrogações anteriores os certificados foram estendidos automaticamente, sem necessidade de pedir documento novo.", sources: [{ label: "Conselho da UE · Acordo de 15 de julho de 2026 (oficial)", url: "https://www.consilium.europa.eu/en/press/press-releases/2026/07/15/eu-countries-agree-to-extend-temporary-protection-for-those-fleeing-ukraine-until-march-2028/" }, { label: "UDSC · Proteção temporária (oficial)", url: "https://www.gov.pl/web/udsc-en/temporary-protection" }], publishedAt: "2026-07-16" },
+      { urgency: "urgent", title: "UE acerta prorrogar até março de 2028 a proteção temporária de quem fugiu da Ucrânia", body: "Os países da União Europeia chegaram a acordo, em 15 de julho de 2026, para estender a proteção temporária concedida a pessoas deslocadas da Ucrânia até 4 de março de 2028. O regime, ativado em março de 2022, estava garantido até 4 de março de 2027, e a prorrogação cobre o período seguinte, de 5 de março de 2027 em diante.\n\nA decisão pesa especialmente na Polônia, que abriga a maior comunidade ucraniana do bloco. Na prática polonesa, é o número PESEL com status UKR que confirma o direito de residir no país sob proteção temporária. A adoção formal pelo Conselho e a publicação no Jornal Oficial da UE ainda vão acontecer, e é a partir daí que a prorrogação entra em vigor.", cta: "Se você vive na Polônia com status UKR, acompanhe os comunicados do Escritório para Estrangeiros (UDSC), porque nas prorrogações anteriores os certificados foram estendidos automaticamente, sem necessidade de pedir documento novo.", sources: [{ label: "Conselho da UE · Acordo de 15 de julho de 2026 (oficial)", url: "https://www.consilium.europa.eu/en/press/press-releases/2026/07/15/eu-countries-agree-to-extend-temporary-protection-for-those-fleeing-ukraine-until-march-2028/" }, { label: "UDSC · Proteção temporária (oficial)", url: "https://www.gov.pl/web/udsc-en/temporary-protection" }], publishedAt: "2026-07-16" },
       { title: "💡 A nova regra militar vale só para quem chegar depois, não para quem já tem proteção", body: "A prorrogação vem com uma condição inédita, e ela tem sido mal contada por aí. O texto proposto pela Comissão Europeia prevê que a proteção temporária não será concedida a quem estiver em desacordo com as obrigações militares previstas na lei ucraniana e, por esse motivo, não tiver autorização das autoridades da Ucrânia para deixar o país.\n\nO ponto decisivo está na ressalva expressa do próprio artigo: ele não se aplica a quem já usufrui de proteção temporária na data em que a decisão entrar em vigor. Ou seja, não se trata de excluir homens por faixa etária, e sim de verificar, apenas para quem chegar dali em diante, a autorização de saída da Ucrânia. Quem já está protegido na Polônia não é atingido.", cta: "Desconfie de manchetes que resumem a regra como proibição a homens em idade militar, e confira o texto da proposta da Comissão antes de tomar qualquer decisão sobre a sua situação.", sources: [{ label: "Comissão Europeia · Proposta COM(2026) 345 final (oficial)", url: "https://home-affairs.ec.europa.eu/news/commission-proposes-extend-temporary-protection-people-fleeing-ukraine-additional-year-2026-06-26_en" }], publishedAt: "2026-07-16" },
       { title: "Estrangeiros já respondem por cerca de 15% da população de Varsóvia", body: "A presença estrangeira na Polônia atingiu um novo patamar. Segundo dados experimentais do escritório nacional de estatística, a GUS, referentes ao fim de 2025, os estrangeiros já representam cerca de 14,5% da população de Varsóvia, algo em torno de 301 mil pessoas. Entre as grandes cidades, Wrocław lidera, com 19,5%.\n\nNo conjunto do país, são aproximadamente 2,3 milhões de residentes estrangeiros, quase 6% da população, com os ucranianos formando a maior comunidade. A própria GUS ressalta que a metodologia ainda é experimental e que os percentuais não têm caráter oficial definitivo, mas o retrato confirma o enraizamento da imigração no tecido urbano polonês.", cta: "Se a Polônia está no seu radar, comece pelo Escritório para Estrangeiros (UDSC) e confirme a categoria de autorização que se aplica ao seu caso antes de qualquer passo.", sources: [{ label: "GUS · Statistics Poland (oficial)", url: "https://stat.gov.pl/en/" }, { label: "Notes from Poland", url: "https://notesfrompoland.com/2026/07/03/foreigners-now-account-for-15-of-warsaws-population/" }], publishedAt: "2026-07-09" },
       { title: "💡 Mais de 1,1 milhão de estrangeiros trabalhando na Polônia", body: "Os dados oficiais do mercado de trabalho reforçam o mesmo movimento. Em 31 de janeiro de 2026, havia cerca de 1,119 milhão de estrangeiros exercendo trabalho na Polônia, segundo a GUS, um crescimento de 7,1% na comparação com o mesmo mês de 2025. Homens respondem por 59,9% desse contingente e mulheres por 40,1%.\n\nA leve queda de 1,9% frente a dezembro reflete a sazonalidade típica do início do ano, não uma reversão de tendência. Para quem planeja migrar por trabalho, o recado é que a demanda por mão de obra estrangeira segue firme, sobretudo em setores que já dependem desse fluxo.", cta: "Consulte as tabelas oficiais da GUS e alinhe o processo com um empregador polonês, que costuma ser quem dá entrada no pedido de autorização de trabalho.", sources: [{ label: "GUS · Estrangeiros trabalhando na Polônia, jan/2026 (oficial)", url: "https://stat.gov.pl/en/experimental-statistics/human-capital/foreigners-performing-work-in-poland-in-january-2026,12,39.html" }], publishedAt: "2026-07-09" },
     ],
     countryTab: [
-      { headline: "Proteção temporária de ucranianos vai até março de 2028, e a Polônia é o país mais afetado", standfirst: "Acordo dos Estados membros em 15 de julho estende o regime por mais um ano e cria uma verificação de obrigações militares que só vale para quem chegar depois da entrada em vigor.", body: "Os países da União Europeia acertaram, em 15 de julho de 2026, prorrogar por mais um ano a proteção temporária concedida às pessoas deslocadas da Ucrânia. O regime, ativado em 4 de março de 2022 com base na Diretiva de Proteção Temporária de 2001, estava assegurado até 4 de março de 2027 e agora deve alcançar 4 de março de 2028, cobrindo o intervalo que começa em 5 de março de 2027.\n\nOs números explicam por que a decisão importa tanto por aqui. Segundo a proposta da Comissão Europeia, quase 4,4 milhões de pessoas deslocadas da Ucrânia estavam sob proteção temporária no bloco em abril de 2026, sendo cerca de 58% mulheres e quase 30% menores de idade. O contingente se manteve relativamente estável ao longo dos anos, passando de 4,21 milhões em abril de 2024 para 4,37 milhões em abril de 2026. A Polônia concentra a maior comunidade ucraniana da União, e é no país que o efeito prático da prorrogação se faz sentir com mais força.\n\nA novidade desta rodada é uma condição ligada ao serviço militar, e ela exige leitura cuidadosa. O texto determina que a proteção não será concedida a quem não estiver em conformidade com as obrigações militares previstas na lei ucraniana e, por isso, não for autorizado pelas autoridades da Ucrânia a deixar o país. O mesmo artigo, porém, traz ressalva explícita: a regra não se aplica a quem já usufrui de proteção temporária na data de entrada em vigor da decisão. A verificação alcança apenas os novos solicitantes, e a Comissão registra que as autoridades ucranianas desenvolvem o aplicativo Reserv+ para emitir os documentos de dispensa.\n\nNo desenho polonês, quem vive sob proteção temporária tem esse direito confirmado pelo número PESEL com status UKR, e os certificados hoje válidos alcançam 4 de março de 2027. Falta a adoção formal pelo Conselho e a publicação no Jornal Oficial da União Europeia, que faz a decisão entrar em vigor no dia seguinte. Em prorrogações anteriores, a validade dos documentos foi estendida sem que os beneficiários precisassem solicitar papéis novos.", keyFacts: ["Acordo dos Estados membros em 15 de julho de 2026 estende a proteção temporária até 4 de março de 2028", "Quase 4,4 milhões de deslocados da Ucrânia sob proteção temporária na UE em abril de 2026, cerca de 58% mulheres e quase 30% menores", "Nova condição sobre obrigações militares não se aplica a quem já tem proteção temporária na entrada em vigor", "Na Polônia, o PESEL com status UKR confirma o direito de residência, com certificados válidos até 4 de março de 2027", "Adoção formal e publicação no Jornal Oficial da UE ainda pendentes"], sources: [{ label: "Conselho da UE · Acordo de 15 de julho de 2026 (oficial)", url: "https://www.consilium.europa.eu/en/press/press-releases/2026/07/15/eu-countries-agree-to-extend-temporary-protection-for-those-fleeing-ukraine-until-march-2028/" }, { label: "Comissão Europeia · Proposta COM(2026) 345 final (oficial)", url: "https://home-affairs.ec.europa.eu/news/commission-proposes-extend-temporary-protection-people-fleeing-ukraine-additional-year-2026-06-26_en" }, { label: "UDSC · Proteção temporária (oficial)", url: "https://www.gov.pl/web/udsc-en/temporary-protection" }], publishedAt: "2026-07-16" },
+      { urgency: "urgent", headline: "Proteção temporária de ucranianos vai até março de 2028, e a Polônia é o país mais afetado", standfirst: "Acordo dos Estados membros em 15 de julho estende o regime por mais um ano e cria uma verificação de obrigações militares que só vale para quem chegar depois da entrada em vigor.", body: "Os países da União Europeia acertaram, em 15 de julho de 2026, prorrogar por mais um ano a proteção temporária concedida às pessoas deslocadas da Ucrânia. O regime, ativado em 4 de março de 2022 com base na Diretiva de Proteção Temporária de 2001, estava assegurado até 4 de março de 2027 e agora deve alcançar 4 de março de 2028, cobrindo o intervalo que começa em 5 de março de 2027.\n\nOs números explicam por que a decisão importa tanto por aqui. Segundo a proposta da Comissão Europeia, quase 4,4 milhões de pessoas deslocadas da Ucrânia estavam sob proteção temporária no bloco em abril de 2026, sendo cerca de 58% mulheres e quase 30% menores de idade. O contingente se manteve relativamente estável ao longo dos anos, passando de 4,21 milhões em abril de 2024 para 4,37 milhões em abril de 2026. A Polônia concentra a maior comunidade ucraniana da União, e é no país que o efeito prático da prorrogação se faz sentir com mais força.\n\nA novidade desta rodada é uma condição ligada ao serviço militar, e ela exige leitura cuidadosa. O texto determina que a proteção não será concedida a quem não estiver em conformidade com as obrigações militares previstas na lei ucraniana e, por isso, não for autorizado pelas autoridades da Ucrânia a deixar o país. O mesmo artigo, porém, traz ressalva explícita: a regra não se aplica a quem já usufrui de proteção temporária na data de entrada em vigor da decisão. A verificação alcança apenas os novos solicitantes, e a Comissão registra que as autoridades ucranianas desenvolvem o aplicativo Reserv+ para emitir os documentos de dispensa.\n\nNo desenho polonês, quem vive sob proteção temporária tem esse direito confirmado pelo número PESEL com status UKR, e os certificados hoje válidos alcançam 4 de março de 2027. Falta a adoção formal pelo Conselho e a publicação no Jornal Oficial da União Europeia, que faz a decisão entrar em vigor no dia seguinte. Em prorrogações anteriores, a validade dos documentos foi estendida sem que os beneficiários precisassem solicitar papéis novos.", keyFacts: ["Acordo dos Estados membros em 15 de julho de 2026 estende a proteção temporária até 4 de março de 2028", "Quase 4,4 milhões de deslocados da Ucrânia sob proteção temporária na UE em abril de 2026, cerca de 58% mulheres e quase 30% menores", "Nova condição sobre obrigações militares não se aplica a quem já tem proteção temporária na entrada em vigor", "Na Polônia, o PESEL com status UKR confirma o direito de residência, com certificados válidos até 4 de março de 2027", "Adoção formal e publicação no Jornal Oficial da UE ainda pendentes"], sources: [{ label: "Conselho da UE · Acordo de 15 de julho de 2026 (oficial)", url: "https://www.consilium.europa.eu/en/press/press-releases/2026/07/15/eu-countries-agree-to-extend-temporary-protection-for-those-fleeing-ukraine-until-march-2028/" }, { label: "Comissão Europeia · Proposta COM(2026) 345 final (oficial)", url: "https://home-affairs.ec.europa.eu/news/commission-proposes-extend-temporary-protection-people-fleeing-ukraine-additional-year-2026-06-26_en" }, { label: "UDSC · Proteção temporária (oficial)", url: "https://www.gov.pl/web/udsc-en/temporary-protection" }], publishedAt: "2026-07-16" },
       { headline: "Polônia registra presença estrangeira recorde em cidades e no mercado de trabalho", standfirst: "Dados experimentais da GUS apontam estrangeiros em torno de 14,5% da população de Varsóvia e mais de 1,1 milhão de trabalhadores estrangeiros no país no início de 2026.", body: "A imigração deixou de ser coadjuvante na demografia polonesa. Levantamento experimental do escritório nacional de estatística, a GUS, com dados do fim de 2025, indica que os estrangeiros já somam cerca de 14,5% da população de Varsóvia, algo em torno de 301 mil pessoas. Wrocław aparece à frente entre as grandes cidades, com 19,5%, seguida por Szczecin e Poznań.\n\nNo total nacional, o país abriga cerca de 2,3 milhões de residentes estrangeiros, quase 6% da população, com os ucranianos formando a maior comunidade. A GUS ressalta que a metodologia é experimental e que os percentuais não têm status oficial definitivo, mas o retrato é consistente com a expansão observada nos últimos anos.\n\nO mercado de trabalho conta a mesma história com números oficiais. Em 31 de janeiro de 2026, cerca de 1,119 milhão de estrangeiros exerciam atividade remunerada no país, alta de 7,1% na comparação anual. A distribuição por gênero mostra 59,9% de homens e 40,1% de mulheres, e a pequena retração mensal responde à sazonalidade do período. Para quem observa a Polônia como porta de entrada acessível na União Europeia, os dados confirmam uma economia que continua absorvendo trabalhadores de fora.", keyFacts: ["Estrangeiros somam cerca de 14,5% da população de Varsóvia e 19,5% em Wrocław (dados experimentais da GUS, fim de 2025)", "Cerca de 2,3 milhões de residentes estrangeiros no país, quase 6% da população, com maioria ucraniana", "Aproximadamente 1,119 milhão de estrangeiros trabalhando na Polônia em 31 de janeiro de 2026, alta de 7,1% no ano", "Autoridade competente: Urząd do Spraw Cudzoziemców (UDSC), o Escritório para Estrangeiros"], sources: [{ label: "GUS · Statistics Poland (oficial)", url: "https://stat.gov.pl/en/" }, { label: "GUS · Estrangeiros trabalhando na Polônia, jan/2026", url: "https://stat.gov.pl/en/experimental-statistics/human-capital/foreigners-performing-work-in-poland-in-january-2026,12,39.html" }], publishedAt: "2026-07-09" },
     ],
     blog: [
@@ -249,11 +277,11 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   },
   ie: {
     community: [
-      { publishedAt: "2026-07-15", title: "Irlanda libera viagem de verão com o cartão IRP vencido", body: "A Irlanda anunciou em 13 de julho de 2026 uma medida que resolve um aperto real de quem mora no país e precisa viajar nas férias. O escritório de registro de Burgh Quay, em Dublin, acumula um volume muito alto de pedidos, e a renovação do Irish Residence Permit (IRP) passou de 17 semanas em algumas categorias, mais cerca de duas semanas até o cartão novo chegar às mãos do titular.\n\nPara destravar a situação, o Immigration Service Delivery emitiu um Travel Confirmation Notice válido de 13 de julho a 31 de agosto de 2026. Com ele, o não cidadão do Espaço Econômico Europeu que já pediu a renovação antes do vencimento pode viajar apresentando o IRP recém-expirado. O aviso pede às companhias aéreas que aceitem o documento vencido nessas condições.", cta: "Baixe e imprima o aviso oficial no site do Immigration Service Delivery e leve junto o IRP vencido e o e-mail que comprova a data do pedido de renovação. Avise a companhia aérea antes de viajar e, se houver conexão fora da União Europeia, confirme se aquele país aceita o documento.", sources: [{ label: "Immigration Service Delivery · Travel Confirmation Notice (oficial)", url: "https://www.irishimmigration.ie/minister-brophy-announces-initiative-to-facilitate-customers-travelling-during-the-summer-months/" }] },
-      { publishedAt: "2026-07-15", title: "💡 IRP vencido e emprego: o que o aviso aos empregadores garante até 31 de agosto", body: "Junto com a liberação de viagem, o Immigration Service Delivery publicou um aviso provisório aos empregadores. Quem está com o IRP vencido, tem employment permit válido na data ou uma permissão que dispensa esse permit, e não conseguiu o cartão novo a tempo, segue autorizado a permanecer no país nas condições do cartão atual até 31 de agosto de 2026, independentemente de quantas semanas já tenham passado.\n\nA garantia tem uma condição que não admite exceção. É preciso comprovar que o pedido de renovação foi enviado antes do vencimento do cartão, com todos os documentos exigidos anexados, incluindo o employment permit válido quando for o caso. Se a permissão venceu antes do envio do pedido, o aviso não se aplica.", cta: "Guarde o recibo do pedido com o número OREG e o e-mail de conclusão, porque é essa dupla que comprova a situação regular perante o empregador enquanto o cartão não chega.", sources: [{ label: "Immigration Service Delivery · Aviso provisório aos empregadores (oficial)", url: "https://www.irishimmigration.ie/minister-brophy-announces-interim-notice-to-employers-regarding-renewal-of-registration/" }] },
+      { publishedAt: "2026-07-15", urgency: "urgent", title: "Irlanda libera viagem de verão com o cartão IRP vencido", body: "A Irlanda anunciou em 13 de julho de 2026 uma medida que resolve um aperto real de quem mora no país e precisa viajar nas férias. O escritório de registro de Burgh Quay, em Dublin, acumula um volume muito alto de pedidos, e a renovação do Irish Residence Permit (IRP) passou de 17 semanas em algumas categorias, mais cerca de duas semanas até o cartão novo chegar às mãos do titular.\n\nPara destravar a situação, o Immigration Service Delivery emitiu um Travel Confirmation Notice válido de 13 de julho a 31 de agosto de 2026. Com ele, o não cidadão do Espaço Econômico Europeu que já pediu a renovação antes do vencimento pode viajar apresentando o IRP recém-expirado. O aviso pede às companhias aéreas que aceitem o documento vencido nessas condições.", cta: "Baixe e imprima o aviso oficial no site do Immigration Service Delivery e leve junto o IRP vencido e o e-mail que comprova a data do pedido de renovação. Avise a companhia aérea antes de viajar e, se houver conexão fora da União Europeia, confirme se aquele país aceita o documento.", sources: [{ label: "Immigration Service Delivery · Travel Confirmation Notice (oficial)", url: "https://www.irishimmigration.ie/minister-brophy-announces-initiative-to-facilitate-customers-travelling-during-the-summer-months/" }] },
+      { publishedAt: "2026-07-15", urgency: "urgent", title: "💡 IRP vencido e emprego: o que o aviso aos empregadores garante até 31 de agosto", body: "Junto com a liberação de viagem, o Immigration Service Delivery publicou um aviso provisório aos empregadores. Quem está com o IRP vencido, tem employment permit válido na data ou uma permissão que dispensa esse permit, e não conseguiu o cartão novo a tempo, segue autorizado a permanecer no país nas condições do cartão atual até 31 de agosto de 2026, independentemente de quantas semanas já tenham passado.\n\nA garantia tem uma condição que não admite exceção. É preciso comprovar que o pedido de renovação foi enviado antes do vencimento do cartão, com todos os documentos exigidos anexados, incluindo o employment permit válido quando for o caso. Se a permissão venceu antes do envio do pedido, o aviso não se aplica.", cta: "Guarde o recibo do pedido com o número OREG e o e-mail de conclusão, porque é essa dupla que comprova a situação regular perante o empregador enquanto o cartão não chega.", sources: [{ label: "Immigration Service Delivery · Aviso provisório aos empregadores (oficial)", url: "https://www.irishimmigration.ie/minister-brophy-announces-interim-notice-to-employers-regarding-renewal-of-registration/" }] },
     ],
     countryTab: [
-      { publishedAt: "2026-07-15", headline: "Fila de 17 semanas em Dublin leva a Irlanda a criar salvo-conduto de verão", standfirst: "Immigration Service Delivery libera viagem com IRP vencido e garante permanência no emprego até 31 de agosto de 2026 para quem pediu renovação dentro do prazo.", body: "A Irlanda reconheceu oficialmente em 13 de julho de 2026 o gargalo do seu escritório de registro. O Immigration Services Registration Office, em Burgh Quay, Dublin, opera com um volume muito alto de pedidos, e o tempo de renovação do Irish Residence Permit passou de 17 semanas em algumas categorias. Concluída a renovação, ainda podem levar cerca de duas semanas até a entrega do novo cartão.\n\nA resposta veio em duas frentes, ambas temporárias. A primeira é o Travel Confirmation Notice, válido de 13 de julho a 31 de agosto de 2026, pelo qual o Departamento pede às transportadoras que permitam a viagem de residentes não cidadãos do Espaço Econômico Europeu com o IRP recém-vencido, desde que o pedido de renovação tenha sido enviado antes da data de expiração. O viajante precisa portar o aviso impresso, o cartão vencido e o e-mail que detalha a data do pedido. O Departamento informou que vai comunicar as companhias aéreas e as missões diplomáticas sobre o arranjo.\n\nA segunda frente é o aviso provisório aos empregadores. Quem tem employment permit válido, ou permissão que dispensa esse permit, e ficou sem o cartão por causa da fila, continua autorizado a permanecer nas condições do IRP atual até 31 de agosto de 2026, sem limite de semanas decorridas. A exigência é ter pedido a renovação antes do vencimento, com toda a documentação anexada. Depois de 31 de agosto de 2026, volta a valer o aviso permanente aos empregadores, que cobre um período de 12 semanas.\n\nTodas as renovações na República da Irlanda são feitas online. O sistema emite um recibo com número único de pedido, o OREG, e envia um e-mail de conclusão quando o pedido é aprovado. Esse e-mail funciona como prova de registro enquanto o cartão físico não chega. O órgão também publica, atualizada toda segunda-feira, a data de processamento em curso por categoria de Stamp.", keyFacts: ["Renovação do IRP em Burgh Quay passa de 17 semanas em algumas categorias, mais cerca de duas semanas até a entrega do cartão", "Travel Confirmation Notice válido de 13 de julho a 31 de agosto de 2026 permite viajar com o IRP recém-vencido", "Permanência no emprego garantida nas condições do cartão atual até 31 de agosto de 2026, sem limite de semanas decorridas", "As duas medidas exigem pedido de renovação enviado antes do vencimento, com todos os documentos anexados", "Quem deixou a permissão vencer antes de pedir a renovação fica fora das duas medidas", "Após 31 de agosto de 2026, volta a valer o aviso permanente aos empregadores, de 12 semanas"], sources: [{ label: "Immigration Service Delivery · Travel Confirmation Notice (oficial)", url: "https://www.irishimmigration.ie/minister-brophy-announces-initiative-to-facilitate-customers-travelling-during-the-summer-months/" }, { label: "Immigration Service Delivery · Aviso provisório aos empregadores (oficial)", url: "https://www.irishimmigration.ie/minister-brophy-announces-interim-notice-to-employers-regarding-renewal-of-registration/" }] },
+      { publishedAt: "2026-07-15", urgency: "urgent", headline: "Fila de 17 semanas em Dublin leva a Irlanda a criar salvo-conduto de verão", standfirst: "Immigration Service Delivery libera viagem com IRP vencido e garante permanência no emprego até 31 de agosto de 2026 para quem pediu renovação dentro do prazo.", body: "A Irlanda reconheceu oficialmente em 13 de julho de 2026 o gargalo do seu escritório de registro. O Immigration Services Registration Office, em Burgh Quay, Dublin, opera com um volume muito alto de pedidos, e o tempo de renovação do Irish Residence Permit passou de 17 semanas em algumas categorias. Concluída a renovação, ainda podem levar cerca de duas semanas até a entrega do novo cartão.\n\nA resposta veio em duas frentes, ambas temporárias. A primeira é o Travel Confirmation Notice, válido de 13 de julho a 31 de agosto de 2026, pelo qual o Departamento pede às transportadoras que permitam a viagem de residentes não cidadãos do Espaço Econômico Europeu com o IRP recém-vencido, desde que o pedido de renovação tenha sido enviado antes da data de expiração. O viajante precisa portar o aviso impresso, o cartão vencido e o e-mail que detalha a data do pedido. O Departamento informou que vai comunicar as companhias aéreas e as missões diplomáticas sobre o arranjo.\n\nA segunda frente é o aviso provisório aos empregadores. Quem tem employment permit válido, ou permissão que dispensa esse permit, e ficou sem o cartão por causa da fila, continua autorizado a permanecer nas condições do IRP atual até 31 de agosto de 2026, sem limite de semanas decorridas. A exigência é ter pedido a renovação antes do vencimento, com toda a documentação anexada. Depois de 31 de agosto de 2026, volta a valer o aviso permanente aos empregadores, que cobre um período de 12 semanas.\n\nTodas as renovações na República da Irlanda são feitas online. O sistema emite um recibo com número único de pedido, o OREG, e envia um e-mail de conclusão quando o pedido é aprovado. Esse e-mail funciona como prova de registro enquanto o cartão físico não chega. O órgão também publica, atualizada toda segunda-feira, a data de processamento em curso por categoria de Stamp.", keyFacts: ["Renovação do IRP em Burgh Quay passa de 17 semanas em algumas categorias, mais cerca de duas semanas até a entrega do cartão", "Travel Confirmation Notice válido de 13 de julho a 31 de agosto de 2026 permite viajar com o IRP recém-vencido", "Permanência no emprego garantida nas condições do cartão atual até 31 de agosto de 2026, sem limite de semanas decorridas", "As duas medidas exigem pedido de renovação enviado antes do vencimento, com todos os documentos anexados", "Quem deixou a permissão vencer antes de pedir a renovação fica fora das duas medidas", "Após 31 de agosto de 2026, volta a valer o aviso permanente aos empregadores, de 12 semanas"], sources: [{ label: "Immigration Service Delivery · Travel Confirmation Notice (oficial)", url: "https://www.irishimmigration.ie/minister-brophy-announces-initiative-to-facilitate-customers-travelling-during-the-summer-months/" }, { label: "Immigration Service Delivery · Aviso provisório aos empregadores (oficial)", url: "https://www.irishimmigration.ie/minister-brophy-announces-interim-notice-to-employers-regarding-renewal-of-registration/" }] },
     ],
     blog: [
       { publishedAt: "2026-07-15", headline: "O que a fila de Dublin ensina sobre morar fora: a data do pedido vale mais que o cartão", standfirst: "A Irlanda criou duas medidas de emergência para o verão de 2026, e as duas dependem de um único detalhe. Quem pediu a renovação antes do vencimento está protegido. Quem deixou vencer, não.", body: "A Irlanda seguiu por anos com a fama de resolver imigração em meses, e não em anos. O aviso publicado em 13 de julho de 2026 pelo Immigration Service Delivery mostra o outro lado dessa reputação. O escritório de registro de Burgh Quay, em Dublin, chegou a um tempo de renovação do Irish Residence Permit acima de 17 semanas em algumas categorias, com mais duas semanas até o cartão novo ser entregue. Para quem tem passagem comprada ou um empregador esperando resposta, isso deixou de ser estatística e virou problema concreto.\n\nO governo respondeu sem mudar a lei, apenas reconhecendo a realidade da fila. Criou um Travel Confirmation Notice, válido de 13 de julho a 31 de agosto de 2026, que pede às companhias aéreas que aceitem o embarque de residentes com o IRP recém-vencido. E emitiu um aviso provisório aos empregadores, garantindo que o trabalhador com employment permit válido continue autorizado a permanecer nas condições do cartão anterior até a mesma data, independentemente de quantas semanas tenham passado desde o vencimento.\n\nO ponto que amarra as duas medidas merece atenção de quem planeja qualquer mudança internacional. Nenhuma delas protege quem deixou a permissão vencer antes de enviar o pedido. O texto oficial é explícito nisso. O que separa o residente amparado do residente irregular não é o cartão na carteira, e sim a data em que o pedido de renovação entrou no sistema, com todos os documentos anexados.\n\nDaí vem a lição prática. O sistema irlandês é inteiramente online e devolve dois comprovantes que valem ouro, o recibo com o número OREG, que registra a data do pedido, e o e-mail de conclusão, aceito como prova de registro enquanto o cartão físico não chega. Guardar esses documentos, acompanhar a data de processamento por categoria de Stamp que o órgão publica toda segunda-feira e antecipar a renovação são hábitos baratos que evitam prejuízo alto.\n\nHá ainda um alerta de viagem que costuma passar batido. O aviso irlandês vale perante as transportadoras e a fronteira irlandesa, mas não obriga terceiros países. Quem faz conexão fora da União Europeia precisa checar antes se aquela jurisdição aceita o documento, sob risco de ficar parado no meio do caminho. Depois de 31 de agosto de 2026, o regime volta ao aviso permanente aos empregadores, de 12 semanas, e a margem de tolerância diminui. Planejar com a fonte oficial na mão continua sendo o método que separa a mudança tranquila do susto no aeroporto.", tags: ["Irlanda", "IRP", "renovação", "viagem", "employment permit"], sources: [{ label: "Immigration Service Delivery · Travel Confirmation Notice (oficial)", url: "https://www.irishimmigration.ie/minister-brophy-announces-initiative-to-facilitate-customers-travelling-during-the-summer-months/" }, { label: "Immigration Service Delivery · Aviso provisório aos empregadores (oficial)", url: "https://www.irishimmigration.ie/minister-brophy-announces-interim-notice-to-employers-regarding-renewal-of-registration/" }] },
@@ -271,13 +299,13 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   },
   at: {
     community: [
-      { title: "Proteção temporária de ucranianos na Áustria deve seguir até março de 2028", body: "Os Estados membros da União Europeia acertaram, em 15 de julho de 2026, prorrogar por mais um ano a proteção temporária das pessoas deslocadas da Ucrânia, que passa a valer até 4 de março de 2028. O regime estava assegurado até 4 de março de 2027, e a extensão cobre o período iniciado em 5 de março daquele ano. A medida vale para a Áustria como para os demais países do bloco.\n\nSegundo a proposta da Comissão Europeia, quase 4,4 milhões de pessoas estavam sob esse abrigo na UE em abril de 2026. A adoção formal pelo Conselho e a publicação no Jornal Oficial ainda estão pendentes, e a decisão entra em vigor no dia seguinte à publicação.", cta: "Se você acompanha um caso de proteção temporária na Áustria, confirme os prazos e os documentos direto no BFA, a autoridade federal de estrangeiros e asilo.", sources: [{ label: "Conselho da UE · Acordo de 15 de julho de 2026 (oficial)", url: "https://www.consilium.europa.eu/en/press/press-releases/2026/07/15/eu-countries-agree-to-extend-temporary-protection-for-those-fleeing-ukraine-until-march-2028/" }, { label: "BFA · Bundesamt für Fremdenwesen und Asyl (oficial)", url: "https://www.bfa.gv.at/" }], publishedAt: "2026-07-16" },
+      { urgency: "urgent", title: "Proteção temporária de ucranianos na Áustria deve seguir até março de 2028", body: "Os Estados membros da União Europeia acertaram, em 15 de julho de 2026, prorrogar por mais um ano a proteção temporária das pessoas deslocadas da Ucrânia, que passa a valer até 4 de março de 2028. O regime estava assegurado até 4 de março de 2027, e a extensão cobre o período iniciado em 5 de março daquele ano. A medida vale para a Áustria como para os demais países do bloco.\n\nSegundo a proposta da Comissão Europeia, quase 4,4 milhões de pessoas estavam sob esse abrigo na UE em abril de 2026. A adoção formal pelo Conselho e a publicação no Jornal Oficial ainda estão pendentes, e a decisão entra em vigor no dia seguinte à publicação.", cta: "Se você acompanha um caso de proteção temporária na Áustria, confirme os prazos e os documentos direto no BFA, a autoridade federal de estrangeiros e asilo.", sources: [{ label: "Conselho da UE · Acordo de 15 de julho de 2026 (oficial)", url: "https://www.consilium.europa.eu/en/press/press-releases/2026/07/15/eu-countries-agree-to-extend-temporary-protection-for-those-fleeing-ukraine-until-march-2028/" }, { label: "BFA · Bundesamt für Fremdenwesen und Asyl (oficial)", url: "https://www.bfa.gv.at/" }], publishedAt: "2026-07-16" },
       { title: "💡 Áustria reduz estrutura de fronteira na Caríntia e cita queda da migração irregular", body: "O Ministério do Interior austríaco anunciou, em 10 de julho de 2026, a redução da infraestrutura de gestão de fronteira no ponto de Thörl-Maglern, na Caríntia, junto à divisa com a Itália. A pasta atribui a decisão ao forte recuo da migração irregular, que teria aberto espaço para desmontar parte do aparato montado nos anos anteriores.\n\nO anúncio saiu após encontro entre o ministro Gerhard Karner e a cúpula do governo estadual da Caríntia sobre temas de segurança, e inclui ainda a realocação da base de operações aéreas de Klagenfurt e o remanejamento de um centro de treinamento operacional.", cta: "Controles de fronteira mudam de intensidade conforme a conjuntura, então quem circula pela região deve levar sempre documento de identidade ou passaporte, mesmo dentro do espaço Schengen.", sources: [{ label: "BMI · Ministério do Interior da Áustria (oficial)", url: "https://www.bmi.gv.at/news.aspx?id=574D5774595479647854593D" }], publishedAt: "2026-07-16" },
       { title: "Áustria: o sistema de pontos da Red-White-Red Card", body: "A Áustria organiza a imigração qualificada em torno da Red-White-Red Card, um cartão único que combina autorização de trabalho e residência para profissionais de fora do Espaço Econômico Europeu. O coração do modelo é um sistema de pontos, que avalia critérios como qualificação, experiência profissional, idade e conhecimento de idioma.\n\nEsse desenho premia quem soma pontos em várias frentes, e abre vias mais rápidas para setores em falta no mercado, como tecnologia e saúde, pelo programa de Skilled Workers in Shortage Occupations. Entender como a pontuação funciona antes de aplicar é o que separa um pedido bem montado de uma recusa por detalhe.", cta: "Simule sua pontuação nos critérios da Red-White-Red Card (qualificação, experiência, idade e idioma) usando o portal oficial de migração antes de iniciar o pedido.", sources: [{ label: "Migration.gv.at · Portal oficial de migração da Áustria", url: "https://www.migration.gv.at/en/" }] },
       { title: "💡 Idioma e diploma reconhecido pesam na pontuação", body: "No sistema austríaco, dois fatores costumam fazer diferença real na contagem de pontos e são, ao mesmo tempo, os que mais demoram para resolver: o reconhecimento da qualificação e o conhecimento de idioma. Diplomas obtidos fora da Áustria muitas vezes precisam passar por avaliação para serem considerados, e o domínio de alemão (ou, em certos casos, inglês) adiciona pontos valiosos.\n\nPor serem etapas demoradas, valem ser tratadas cedo. Iniciar o reconhecimento do diploma e investir no idioma com antecedência amplia as chances e encurta o tempo total até a decisão, em vez de virar gargalo de última hora.", cta: "Inicie cedo o reconhecimento do seu diploma e invista no idioma, porque ambos somam pontos e são as etapas mais demoradas do processo austríaco.", sources: [{ label: "Migration.gv.at · Imigração permanente", url: "https://www.migration.gv.at/en/types-of-immigration/permanent-immigration/" }] },
     ],
     countryTab: [
-      { headline: "Áustria mantém proteção temporária de ucranianos até 2028 e reduz aparato de fronteira", standfirst: "Acordo europeu de 15 de julho estende o regime por mais um ano, enquanto o Ministério do Interior desmonta parte da estrutura de controle na Caríntia.", body: "Duas decisões tomadas na mesma semana ajudam a ler o momento migratório austríaco, e elas apontam para o mesmo lado. Em 15 de julho de 2026, os países da União Europeia acertaram prorrogar até 4 de março de 2028 a proteção temporária concedida a quem foi deslocado da Ucrânia, regime que estava garantido até 4 de março de 2027. Cinco dias antes, o Ministério do Interior anunciava a redução da infraestrutura de gestão de fronteira em Thörl-Maglern, na Caríntia.\n\nA prorrogação europeia mantém em vigor o instrumento ativado em março de 2022, que abrigava quase 4,4 milhões de pessoas no bloco em abril de 2026, segundo a proposta da Comissão. A rodada traz uma condição nova, ligada às obrigações militares na lei ucraniana, que impede a concessão a quem não estiver autorizado pelas autoridades da Ucrânia a deixar o país. O próprio artigo, contudo, ressalva que a regra não alcança quem já usufrui de proteção temporária na data de entrada em vigor da decisão, de modo que a verificação recai apenas sobre novos solicitantes. Falta a adoção formal e a publicação no Jornal Oficial.\n\nNa frente doméstica, o Ministério do Interior sustenta que o forte recuo da migração irregular permite reduzir estrutura. O ponto de Thörl-Maglern, na fronteira com a Itália, terá a infraestrutura diminuída, e o pacote inclui a realocação da base de operações aéreas de Klagenfurt e o remanejamento de um centro de treinamento operacional. O anúncio veio depois de reunião do ministro Gerhard Karner com a cúpula do governo da Caríntia sobre segurança.\n\nPara quem mira a Áustria por trabalho ou estudo, nada disso altera o caminho ordinário. A Red-White-Red Card segue como principal via para qualificados de fora do Espaço Econômico Europeu, com seleção por pontos e trilhas aceleradas para profissões em falta, e as regras continuam publicadas no portal federal de migração.", keyFacts: ["Acordo europeu de 15 de julho de 2026 estende a proteção temporária até 4 de março de 2028", "Condição sobre obrigações militares não se aplica a quem já tem proteção temporária na entrada em vigor", "BMI reduz a infraestrutura de fronteira em Thörl-Maglern (Caríntia) e cita queda da migração irregular", "Vias ordinárias seguem inalteradas: Red-White-Red Card e sistema de pontos, via migration.gv.at"], sources: [{ label: "Conselho da UE · Acordo de 15 de julho de 2026 (oficial)", url: "https://www.consilium.europa.eu/en/press/press-releases/2026/07/15/eu-countries-agree-to-extend-temporary-protection-for-those-fleeing-ukraine-until-march-2028/" }, { label: "BMI · Ministério do Interior da Áustria (oficial)", url: "https://www.bmi.gv.at/news.aspx?id=574D5774595479647854593D" }, { label: "Migration.gv.at · Portal oficial de migração da Áustria", url: "https://www.migration.gv.at/en/" }], publishedAt: "2026-07-16" },
+      { urgency: "urgent", headline: "Áustria mantém proteção temporária de ucranianos até 2028 e reduz aparato de fronteira", standfirst: "Acordo europeu de 15 de julho estende o regime por mais um ano, enquanto o Ministério do Interior desmonta parte da estrutura de controle na Caríntia.", body: "Duas decisões tomadas na mesma semana ajudam a ler o momento migratório austríaco, e elas apontam para o mesmo lado. Em 15 de julho de 2026, os países da União Europeia acertaram prorrogar até 4 de março de 2028 a proteção temporária concedida a quem foi deslocado da Ucrânia, regime que estava garantido até 4 de março de 2027. Cinco dias antes, o Ministério do Interior anunciava a redução da infraestrutura de gestão de fronteira em Thörl-Maglern, na Caríntia.\n\nA prorrogação europeia mantém em vigor o instrumento ativado em março de 2022, que abrigava quase 4,4 milhões de pessoas no bloco em abril de 2026, segundo a proposta da Comissão. A rodada traz uma condição nova, ligada às obrigações militares na lei ucraniana, que impede a concessão a quem não estiver autorizado pelas autoridades da Ucrânia a deixar o país. O próprio artigo, contudo, ressalva que a regra não alcança quem já usufrui de proteção temporária na data de entrada em vigor da decisão, de modo que a verificação recai apenas sobre novos solicitantes. Falta a adoção formal e a publicação no Jornal Oficial.\n\nNa frente doméstica, o Ministério do Interior sustenta que o forte recuo da migração irregular permite reduzir estrutura. O ponto de Thörl-Maglern, na fronteira com a Itália, terá a infraestrutura diminuída, e o pacote inclui a realocação da base de operações aéreas de Klagenfurt e o remanejamento de um centro de treinamento operacional. O anúncio veio depois de reunião do ministro Gerhard Karner com a cúpula do governo da Caríntia sobre segurança.\n\nPara quem mira a Áustria por trabalho ou estudo, nada disso altera o caminho ordinário. A Red-White-Red Card segue como principal via para qualificados de fora do Espaço Econômico Europeu, com seleção por pontos e trilhas aceleradas para profissões em falta, e as regras continuam publicadas no portal federal de migração.", keyFacts: ["Acordo europeu de 15 de julho de 2026 estende a proteção temporária até 4 de março de 2028", "Condição sobre obrigações militares não se aplica a quem já tem proteção temporária na entrada em vigor", "BMI reduz a infraestrutura de fronteira em Thörl-Maglern (Caríntia) e cita queda da migração irregular", "Vias ordinárias seguem inalteradas: Red-White-Red Card e sistema de pontos, via migration.gv.at"], sources: [{ label: "Conselho da UE · Acordo de 15 de julho de 2026 (oficial)", url: "https://www.consilium.europa.eu/en/press/press-releases/2026/07/15/eu-countries-agree-to-extend-temporary-protection-for-those-fleeing-ukraine-until-march-2028/" }, { label: "BMI · Ministério do Interior da Áustria (oficial)", url: "https://www.bmi.gv.at/news.aspx?id=574D5774595479647854593D" }, { label: "Migration.gv.at · Portal oficial de migração da Áustria", url: "https://www.migration.gv.at/en/" }], publishedAt: "2026-07-16" },
       { headline: "Áustria mira qualificados com cartão único e sistema de pontos", standfirst: "A Red-White-Red Card combina trabalho e residência, e vias expressas atendem setores de tecnologia e saúde em falta no mercado.", body: "A Áustria mantém a Red-White-Red Card como principal porta de entrada para trabalhadores qualificados de fora do Espaço Econômico Europeu. Trata-se de um cartão único, que reúne numa só autorização o direito de trabalhar e de residir no país, simplificando o que em outros lugares se divide em documentos separados.\n\nO mecanismo central é um sistema de pontos. O candidato é avaliado por critérios como qualificação acadêmica, experiência profissional, idade e conhecimento de idioma, e precisa atingir um patamar mínimo para se habilitar. Esse formato dá previsibilidade, já que a pessoa consegue estimar suas chances antes mesmo de aplicar, e direciona a seleção para perfis alinhados às necessidades da economia austríaca.\n\nPara áreas com escassez declarada de mão de obra, há o programa de Skilled Workers in Shortage Occupations, que funciona como via expressa. Tecnologia e saúde estão entre os setores contemplados, com caminhos acelerados para profissionais cujas competências o mercado local não consegue suprir. Toda a informação oficial e os critérios atualizados são centralizados no portal de migração do governo federal.", keyFacts: ["Autoridade competente na esfera migratória: BMI (Ministério do Interior), com informações no portal migration.gv.at", "Red-White-Red Card combina autorização de trabalho e residência num cartão único", "Seleção baseada em sistema de pontos (qualificação, experiência, idade e idioma)", "Via expressa para setores em falta via Skilled Workers in Shortage Occupations"], sources: [{ label: "Migration.gv.at · Portal oficial de migração da Áustria", url: "https://www.migration.gv.at/en/" }] },
     ],
     blog: [
@@ -487,11 +515,11 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   },
   se: {
     community: [
-      { publishedAt: "2026-07-15", title: "Suécia passa a avaliar conduta e honestidade em pedidos de residência", body: "Desde 13 de julho de 2026 vale na Suécia uma exigência reforçada de vandel, o conceito local que reúne conduta, honestidade e respeito às regras. A mudança na Lei de Estrangeiros permite ao Migrationsverket, a agência de migração, recusar um pedido ou revogar uma autorização de residência por falta de boa conduta, e não apenas por antecedentes criminais.\n\nA avaliação alcança comportamentos que não são crime, mas contrariam regras que a sociedade quer preservar. A agência pode buscar informação em outros órgãos sobre ordens de pagamento e sobre os dados que a pessoa declarou para receber assistência social, seguro social e benefícios. Segundo o texto oficial, deslizes isolados e de menor gravidade normalmente não bastam para uma recusa, mas comportamento repetido ao longo do tempo pesa na análise.", cta: "Mantenha dívidas, declarações e pedidos de benefício em ordem e coerentes com a sua realidade, porque a partir de agora esse histórico entra na análise do seu pedido de residência.", sources: [{ label: "Migrationsverket · Exigências reforçadas de conduta (oficial)", url: "https://www.migrationsverket.se/en/news-archive/news/2026-07-13-strengthened-requirements-for-good-conduct-and-honesty.html" }] },
+      { publishedAt: "2026-07-15", urgency: "urgent", title: "Suécia passa a avaliar conduta e honestidade em pedidos de residência", body: "Desde 13 de julho de 2026 vale na Suécia uma exigência reforçada de vandel, o conceito local que reúne conduta, honestidade e respeito às regras. A mudança na Lei de Estrangeiros permite ao Migrationsverket, a agência de migração, recusar um pedido ou revogar uma autorização de residência por falta de boa conduta, e não apenas por antecedentes criminais.\n\nA avaliação alcança comportamentos que não são crime, mas contrariam regras que a sociedade quer preservar. A agência pode buscar informação em outros órgãos sobre ordens de pagamento e sobre os dados que a pessoa declarou para receber assistência social, seguro social e benefícios. Segundo o texto oficial, deslizes isolados e de menor gravidade normalmente não bastam para uma recusa, mas comportamento repetido ao longo do tempo pesa na análise.", cta: "Mantenha dívidas, declarações e pedidos de benefício em ordem e coerentes com a sua realidade, porque a partir de agora esse histórico entra na análise do seu pedido de residência.", sources: [{ label: "Migrationsverket · Exigências reforçadas de conduta (oficial)", url: "https://www.migrationsverket.se/en/news-archive/news/2026-07-13-strengthened-requirements-for-good-conduct-and-honesty.html" }] },
       { publishedAt: "2026-07-15", title: "💡 Quem fica de fora da nova régua de conduta", body: "A regra de conduta não alcança todo mundo, e essa distinção importa. Pela explicação da própria agência, as autorizações de residência que não se baseiam em direito da União Europeia estão em geral cobertas pela exigência reforçada. Já as autorizações fundadas em diretivas da União Europeia, que conforme o caso podem amparar residência para trabalho, estudo ou reunificação familiar, ficam fora. A exigência também não se aplica na análise de pedidos de proteção internacional.\n\nA avaliação é individual e depende das circunstâncias de cada caso e da base legal do pedido. A decisão precisa ser fundamentada e seguir os princípios de legalidade, objetividade e imparcialidade, pesando a eventual falta de conduta de forma proporcional aos motivos que sustentam a residência.", cta: "Antes de tirar conclusões sobre o seu caso, identifique em qual base legal o seu pedido se enquadra, porque é isso que define se a nova régua de conduta se aplica a você.", sources: [{ label: "Migrationsverket · Exigências reforçadas de conduta (oficial)", url: "https://www.migrationsverket.se/en/news-archive/news/2026-07-13-strengthened-requirements-for-good-conduct-and-honesty.html" }] },
     ],
     countryTab: [
-      { publishedAt: "2026-07-15", headline: "Suécia aperta a régua em duas frentes na mesma semana de julho", standfirst: "Exigência de boa conduta passa a valer em 13 de julho e, um dia antes, entra em vigor o pacote que adapta o país ao Pacto Europeu de Migração e Asilo e encerra a residência permanente por asilo.", body: "A Suécia concentrou em dois dias de julho de 2026 mudanças que redesenham o seu sistema migratório. Em 13 de julho passou a valer a exigência reforçada de vandel, conceito que descreve conduta, honestidade e cumprimento de regras. A alteração na Lei de Estrangeiros dá ao Migrationsverket, a agência sueca de migração, o poder de recusar pedidos ou revogar autorizações de residência por falta de boa conduta.\n\nA análise vai além da checagem criminal que já era rotina. A agência passa a avaliar se o requerente descumpre regras e exigências ligadas a conduta e comportamento cumpridor da lei, podendo obter informação de outros órgãos sobre ordens de pagamento e sobre dados declarados para obter assistência social, seguro social e benefícios. Falhas isoladas e leves em geral não derrubam um pedido, mas conduta repetida ao longo do tempo entra na conta. A avaliação é individual, precisa ser fundamentada e pesa a falta de conduta de forma proporcional aos motivos da residência. Autorizações baseadas em direito da União Europeia, que podem amparar trabalho, estudo ou reunificação familiar, ficam fora da nova régua, assim como a análise de pedidos de proteção internacional.\n\nNo dia anterior, 12 de julho, entrou em vigor o pacote que alinha a legislação sueca ao Pacto Europeu de Migração e Asilo, com base no projeto de lei 2025/26:262 do governo. Ele define que a Polícia sueca tem a responsabilidade principal pelo processo de triagem previsto no Pacto, com o Migrationsverket também designado como autoridade de triagem. Os dois órgãos assinaram acordo de cooperação, em vigor a partir de 12 de julho e até nova ordem, segundo a diretora geral da agência, Maria Mindhammar. A triagem inclui verificação de identidade, checagem de segurança, avaliação de vulnerabilidade e exame básico de saúde, este último a cargo das regiões, e começa pelos centros da agência em Boden, Märsta e Arlanda, Mölndal e Malmö.\n\nO mesmo pacote muda dois pontos sensíveis. O direito a assistência jurídica gratuita foi ajustado ao mínimo europeu, passando a garantir duas horas de aconselhamento jurídico gratuito no início do processo de asilo, com direito a defensor público custeado apenas na fase de recurso, e não mais desde a apresentação do pedido. Além disso, deixa de existir a possibilidade de autorização de residência permanente para pessoas com residência por motivos ligados a asilo, que agora terão examinada apenas a prorrogação da autorização temporária. Quem já possui residência permanente não é afetado pela mudança.", keyFacts: ["Exigência reforçada de boa conduta (vandel) em vigor desde 13 de julho de 2026, com poder de recusar pedidos e revogar autorizações", "Agência pode consultar outros órgãos sobre ordens de pagamento e dados declarados para benefícios sociais", "Autorizações baseadas em direito da União Europeia e pedidos de proteção internacional ficam fora da regra de conduta", "Desde 12 de julho de 2026 vale o pacote de adaptação ao Pacto Europeu de Migração e Asilo (projeto de lei 2025/26:262)", "Triagem sob responsabilidade principal da Polícia, com o Migrationsverket como autoridade de triagem, nos centros de Boden, Märsta e Arlanda, Mölndal e Malmö", "Assistência jurídica gratuita limitada a duas horas no início do processo de asilo, com defensor público na fase de recurso", "Fim da residência permanente para quem tem autorização ligada a asilo, sem afetar quem já a possui"], sources: [{ label: "Migrationsverket · Exigências reforçadas de conduta (oficial)", url: "https://www.migrationsverket.se/en/news-archive/news/2026-07-13-strengthened-requirements-for-good-conduct-and-honesty.html" }, { label: "Migrationsverket · Mudanças legislativas a partir de 12 de julho (oficial)", url: "https://www.migrationsverket.se/en/news-archive/news/2026-07-09-several-legislative-changes-in-the-field-of-migration-from-12-july.html" }] },
+      { publishedAt: "2026-07-15", urgency: "urgent", headline: "Suécia aperta a régua em duas frentes na mesma semana de julho", standfirst: "Exigência de boa conduta passa a valer em 13 de julho e, um dia antes, entra em vigor o pacote que adapta o país ao Pacto Europeu de Migração e Asilo e encerra a residência permanente por asilo.", body: "A Suécia concentrou em dois dias de julho de 2026 mudanças que redesenham o seu sistema migratório. Em 13 de julho passou a valer a exigência reforçada de vandel, conceito que descreve conduta, honestidade e cumprimento de regras. A alteração na Lei de Estrangeiros dá ao Migrationsverket, a agência sueca de migração, o poder de recusar pedidos ou revogar autorizações de residência por falta de boa conduta.\n\nA análise vai além da checagem criminal que já era rotina. A agência passa a avaliar se o requerente descumpre regras e exigências ligadas a conduta e comportamento cumpridor da lei, podendo obter informação de outros órgãos sobre ordens de pagamento e sobre dados declarados para obter assistência social, seguro social e benefícios. Falhas isoladas e leves em geral não derrubam um pedido, mas conduta repetida ao longo do tempo entra na conta. A avaliação é individual, precisa ser fundamentada e pesa a falta de conduta de forma proporcional aos motivos da residência. Autorizações baseadas em direito da União Europeia, que podem amparar trabalho, estudo ou reunificação familiar, ficam fora da nova régua, assim como a análise de pedidos de proteção internacional.\n\nNo dia anterior, 12 de julho, entrou em vigor o pacote que alinha a legislação sueca ao Pacto Europeu de Migração e Asilo, com base no projeto de lei 2025/26:262 do governo. Ele define que a Polícia sueca tem a responsabilidade principal pelo processo de triagem previsto no Pacto, com o Migrationsverket também designado como autoridade de triagem. Os dois órgãos assinaram acordo de cooperação, em vigor a partir de 12 de julho e até nova ordem, segundo a diretora geral da agência, Maria Mindhammar. A triagem inclui verificação de identidade, checagem de segurança, avaliação de vulnerabilidade e exame básico de saúde, este último a cargo das regiões, e começa pelos centros da agência em Boden, Märsta e Arlanda, Mölndal e Malmö.\n\nO mesmo pacote muda dois pontos sensíveis. O direito a assistência jurídica gratuita foi ajustado ao mínimo europeu, passando a garantir duas horas de aconselhamento jurídico gratuito no início do processo de asilo, com direito a defensor público custeado apenas na fase de recurso, e não mais desde a apresentação do pedido. Além disso, deixa de existir a possibilidade de autorização de residência permanente para pessoas com residência por motivos ligados a asilo, que agora terão examinada apenas a prorrogação da autorização temporária. Quem já possui residência permanente não é afetado pela mudança.", keyFacts: ["Exigência reforçada de boa conduta (vandel) em vigor desde 13 de julho de 2026, com poder de recusar pedidos e revogar autorizações", "Agência pode consultar outros órgãos sobre ordens de pagamento e dados declarados para benefícios sociais", "Autorizações baseadas em direito da União Europeia e pedidos de proteção internacional ficam fora da regra de conduta", "Desde 12 de julho de 2026 vale o pacote de adaptação ao Pacto Europeu de Migração e Asilo (projeto de lei 2025/26:262)", "Triagem sob responsabilidade principal da Polícia, com o Migrationsverket como autoridade de triagem, nos centros de Boden, Märsta e Arlanda, Mölndal e Malmö", "Assistência jurídica gratuita limitada a duas horas no início do processo de asilo, com defensor público na fase de recurso", "Fim da residência permanente para quem tem autorização ligada a asilo, sem afetar quem já a possui"], sources: [{ label: "Migrationsverket · Exigências reforçadas de conduta (oficial)", url: "https://www.migrationsverket.se/en/news-archive/news/2026-07-13-strengthened-requirements-for-good-conduct-and-honesty.html" }, { label: "Migrationsverket · Mudanças legislativas a partir de 12 de julho (oficial)", url: "https://www.migrationsverket.se/en/news-archive/news/2026-07-09-several-legislative-changes-in-the-field-of-migration-from-12-july.html" }] },
     ],
     blog: [
       { publishedAt: "2026-07-15", headline: "Vandel: a palavra sueca que agora decide quem fica", standfirst: "A Suécia passou a avaliar conduta e honestidade em pedidos de residência, num conceito que vai além da ficha criminal. Entender a base legal do seu pedido virou a informação mais valiosa do processo.", body: "Existe uma palavra sueca que quem planeja morar no país precisa aprender antes de qualquer outra, e ela não é hej. É vandel, o conceito que descreve conduta, honestidade e cumprimento de regras. Desde 13 de julho de 2026, uma exigência reforçada de vandel passou a valer para autorizações de residência, e o Migrationsverket ganhou o poder de recusar pedidos ou revogar autorizações já concedidas por falta de boa conduta.\n\nO que torna a mudança relevante é o alcance. A checagem de antecedentes criminais já era rotina em todo pedido. O que a alteração na Lei de Estrangeiros acrescenta é a avaliação de comportamentos que não configuram crime, mas contrariam regras que a sociedade quer sustentar. Nas palavras da própria agência, isso inclui descumprir regras de forma repetida ao longo do tempo, prestar informação incorreta, sustentar-se por meios desonestos ou manter ligação com redes criminosas. Para checar, a agência pode buscar dados em outros órgãos sobre ordens de pagamento e sobre o que a pessoa declarou ao pedir assistência social, seguro social e benefícios.\n\nAntes que isso vire pânico, vale ler o texto oficial com calma, porque ele traz dois freios explícitos. O primeiro é de proporção. Incidentes isolados e de menor gravidade normalmente não servem de base para recusa, e a decisão precisa ser fundamentada, seguindo os princípios de legalidade, objetividade e imparcialidade, com a eventual falta pesada de forma proporcional aos motivos que sustentam a residência. O segundo freio é de escopo, e é aqui que mora a informação mais prática de toda a mudança. Autorizações que não se baseiam em direito da União Europeia estão em geral cobertas pela nova régua. As que se baseiam em diretivas europeias, e que conforme o caso amparam residência para trabalho, estudo ou reunificação familiar, ficam fora dela. A exigência também não se aplica na análise de quem pede proteção internacional.\n\nUm dia antes, em 12 de julho, entrou em vigor o pacote que adapta a Suécia ao Pacto Europeu de Migração e Asilo. Ele organiza a triagem de chegada entre a Polícia, responsável principal, e o Migrationsverket, também designado autoridade de triagem, com atuação inicial nos centros de Boden, Märsta e Arlanda, Mölndal e Malmö. Reduz a assistência jurídica gratuita no asilo a duas horas de aconselhamento no início do processo, deixando o defensor público custeado para a fase de recurso. E encerra a possibilidade de residência permanente para quem tem autorização ligada a asilo, preservando quem já a obteve.\n\nA leitura para a comunidade WiseHub é menos alarmante e mais técnica do que as manchetes sugerem. A Suécia não fechou a porta ao profissional qualificado, e boa parte das vias de trabalho e estudo se apoia justamente em direito europeu, fora do alcance da nova régua de conduta. O que mudou foi o custo de ser desorganizado. Dívidas não resolvidas, declarações inconsistentes para obter benefício e informação prestada de qualquer jeito deixaram de ser detalhe administrativo e passaram a ser matéria de decisão migratória. Saber em qual base legal o seu pedido se apoia, e manter a própria vida documental coerente, virou parte do plano de mudança.", tags: ["Suécia", "vandel", "residência", "Pacto Europeu", "Migrationsverket"], sources: [{ label: "Migrationsverket · Exigências reforçadas de conduta (oficial)", url: "https://www.migrationsverket.se/en/news-archive/news/2026-07-13-strengthened-requirements-for-good-conduct-and-honesty.html" }, { label: "Migrationsverket · Mudanças legislativas a partir de 12 de julho (oficial)", url: "https://www.migrationsverket.se/en/news-archive/news/2026-07-09-several-legislative-changes-in-the-field-of-migration-from-12-july.html" }] },
@@ -554,28 +582,8 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   ca: {
     community: [
       {
-        title: "Canadá reajusta o piso salarial dos vistos de trabalho temporário",
-        publishedAt: "2026-07-20",
-        body:
-          "O governo federal elevou os limiares salariais que separam as faixas alta e baixa do Programa de Trabalhadores Estrangeiros Temporários. Na prática, é o número que define qual conjunto de regras se aplica ao seu contrato, do prazo do LMIA às obrigações do empregador.\n\nQuem está negociando uma oferta agora precisa conferir o salário mediano da província e da ocupação antes de assinar. Uma proposta que estava confortavelmente na faixa alta pode ter mudado de lado com o novo cálculo, e isso altera o caminho do visto.",
-        cta: "Está com uma oferta canadense em mãos? Confira o novo limiar da sua província antes de fechar o contrato, porque a faixa salarial define o rito do LMIA.",
-        sources: [
-          { label: "Canadá · Trabalhadores estrangeiros temporários (oficial)", url: "https://www.canada.ca/en/employment-social-development/services/foreign-workers.html" },
-        ],
-      },
-      {
-        title: "Julho fecha com as províncias em ritmo pesado de convites",
-        publishedAt: "2026-07-20",
-        body:
-          "Alberta convidou mais de 1.100 candidatos numa única rodada do AAIP, e a Colúmbia Britânica realizou a maior seleção provincial do ano. Saskatchewan anunciou aceleração no processamento das nomeações, e a Nova Escócia ampliou o alcance do programa para alcançar trabalhadores com permissões prestes a vencer.\n\nO recado combinado é claro. As províncias estão usando a nomeação como instrumento de retenção de quem já está no país, e não apenas de captação de quem está fora. Cada nomeação soma 600 pontos no Express Entry, o que praticamente assegura o convite federal.",
-        cta: "Tem permissão de trabalho vencendo nos próximos meses? Cheque o programa provincial onde você mora, porque vários passaram a priorizar exatamente esse perfil.",
-        sources: [
-          { label: "Alberta · AAIP (oficial)", url: "https://www.alberta.ca/alberta-advantage-immigration-program" },
-          { label: "British Columbia · BC PNP (oficial)", url: "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program" },
-        ],
-      },
-      {
         publishedAt: "2026-07-13",
+        urgency: "urgent",
         title: "Canadá reabre o LMIA de baixa remuneração em oito regiões",
         body:
           "O Canadá voltou a processar pedidos de LMIA, a avaliação de impacto no mercado de trabalho, para vagas de baixa remuneração em oito regiões metropolitanas, entre elas Halifax, Winnipeg e Regina. A restrição vinha barrando esses pedidos em áreas com desemprego mais alto.\n\nO LMIA é a peça que autoriza um empregador canadense a contratar um trabalhador estrangeiro, e sustenta boa parte dos vistos de trabalho temporário. Com a reabertura, empregadores dessas regiões voltam a poder patrocinar vagas que estavam travadas.",
@@ -653,28 +661,8 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     countryTab: [
       {
-        headline: "Canadá aperta o salário e as províncias correm para reter quem já está lá",
-        publishedAt: "2026-07-20",
-        standfirst:
-          "Novos limiares do programa de trabalho temporário mudam o rito do LMIA na mesma semana em que Alberta, Colúmbia Britânica, Saskatchewan e Nova Escócia aceleram nomeações.",
-        body:
-          "A semana consolidou dois movimentos que, juntos, redesenham o cálculo de quem planeja o Canadá. No plano federal, o governo reajustou os limiares salariais que dividem o Programa de Trabalhadores Estrangeiros Temporários entre faixa alta e faixa baixa. Esse número não é detalhe burocrático: ele determina a validade do LMIA, o volume de obrigações do empregador e a previsibilidade do processo.\n\nNo plano provincial, o ritmo foi de aceleração. Alberta emitiu mais de 1.100 convites numa rodada do AAIP. A Colúmbia Britânica realizou a maior seleção provincial do ano. Saskatchewan comunicou redução no tempo de processamento das nomeações, e a Nova Escócia ampliou os critérios para atingir trabalhadores estrangeiros com permissões próximas do vencimento.\n\nA leitura editorial é que o Canadá está deslocando o eixo. Com metas de residência permanente mais contidas, a nomeação provincial vira o mecanismo preferencial para converter quem já mora e trabalha no país em residente permanente, antes que essa gente perca status e precise sair.\n\nPara o candidato de fora, isso significa que a oferta de trabalho continua sendo a alavanca principal, mas o valor dela passou a ser lido com uma régua nova. Para quem já está no Canadá com permissão temporária, a janela de oportunidade está aberta agora e tende a ser disputada.",
-        keyFacts: [
-          "Limiares salariais do TFWP reajustados: definem faixa alta ou baixa e o rito do LMIA",
-          "Alberta: mais de 1.100 convites numa rodada do AAIP",
-          "Colúmbia Britânica: maior seleção provincial do ano",
-          "Nova Escócia amplia nomeações para trabalhadores com permissão vencendo",
-          "Cada nomeação provincial soma 600 pontos no Express Entry",
-        ],
-        sources: [
-          { label: "Canadá · Trabalhadores estrangeiros temporários (oficial)", url: "https://www.canada.ca/en/employment-social-development/services/foreign-workers.html" },
-          { label: "Alberta · AAIP (oficial)", url: "https://www.alberta.ca/alberta-advantage-immigration-program" },
-          { label: "British Columbia · BC PNP (oficial)", url: "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program" },
-          SRC.ircc,
-        ],
-      },
-      {
         publishedAt: "2026-07-13",
+        urgency: "urgent",
         headline: "Canadá abre julho com o trabalho no centro: LMIA reaberto e sorteios por categoria",
         standfirst:
           "A reabertura do LMIA de baixa remuneração em oito regiões, um novo sorteio do Express Entry para gerentes seniores e convites provinciais da Colúmbia Britânica marcaram a segunda semana de julho de 2026.",
@@ -743,19 +731,6 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       },
     ],
     blog: [
-      {
-        headline: "A nova aritmética canadense: menos vagas, mais valor em quem já está dentro",
-        publishedAt: "2026-07-20",
-        standfirst:
-          "Com o piso salarial reajustado e as províncias correndo atrás de trabalhadores com permissão vencendo, o Canadá deixa de premiar volume e passa a premiar posição.",
-        body:
-          "Durante quase uma década, a promessa canadense foi de escala. Metas ambiciosas de residência permanente, sorteios frequentes e a sensação de que bastava somar pontos e esperar. Essa fase acabou, e o que aconteceu em julho de 2026 ajuda a entender o que veio no lugar.\n\nO primeiro sinal é federal. Ao reajustar os limiares salariais do Programa de Trabalhadores Estrangeiros Temporários, o governo mexeu na régua que separa contratos de faixa alta dos de faixa baixa. É uma mudança silenciosa e de efeito grande, porque essa classificação determina prazo de validade do LMIA, exigências do empregador e, no fim, a viabilidade prática da contratação. Ofertas que pareciam sólidas podem ter atravessado a linha para o lado mais burocrático.\n\nO segundo sinal é provincial e vai na direção oposta, o que só parece contraditório. Alberta convidando mais de mil candidatos, a Colúmbia Britânica fazendo a maior rodada do ano e a Nova Escócia mirando explicitamente trabalhadores com permissão prestes a expirar não é sinal de abertura generalizada. É sinal de triagem. As províncias estão selecionando dentro do estoque que já existe no país, gente que fala o idioma local do mercado, já trabalha e não precisaria recomeçar a integração do zero.\n\nA consequência estratégica é direta. O Canadá está pagando um prêmio por posição, não por potencial. Quem já está lá dentro, mesmo em situação temporária, vale mais para o sistema do que um perfil equivalente esperando do lado de fora. Para o brasileiro que planeja a mudança, isso reordena o roteiro: a prioridade deixa de ser acumular pontos e passa a ser conquistar uma entrada legítima, ainda que temporária, com trabalho ou estudo, e depois converter.\n\nHá um risco embutido nesse desenho, e vale nomear. Um sistema que privilegia quem já está dentro cria pressão sobre quem tem permissão vencendo e depende de uma nomeação que pode não vir. Por isso a recomendação prática é a mesma para os dois lados da fronteira: não deixe o status chegar perto do vencimento sem um plano B mapeado, e trate cada rodada provincial como uma janela real, porque elas abrem e fecham sem aviso prévio.",
-        tags: ["Canadá", "Express Entry", "Nomeação provincial", "LMIA", "Mercado de trabalho"],
-        sources: [
-          { label: "Canadá · Trabalhadores estrangeiros temporários (oficial)", url: "https://www.canada.ca/en/employment-social-development/services/foreign-workers.html" },
-          SRC.ircc,
-        ],
-      },
       {
         publishedAt: "2026-07-13",
         headline: "O Canadá que contrata por recorte: a lógica das janelas segmentadas",
@@ -947,28 +922,8 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   uk: {
     community: [
       {
-        title: "Reino Unido publica novas regras e prepara a virada de outubro",
-        publishedAt: "2026-07-20",
-        body:
-          "O Home Office atualizou a orientação de verificação do direito ao trabalho antes do pacote de reformas previsto para outubro, e o novo Statement of Changes das regras de imigração já está publicado. São dois documentos que empregadores e patrocinados precisam ler juntos, porque um define a obrigação e o outro define o requisito.\n\nPara quem depende de patrocínio, o ponto de atenção é o mesmo de sempre. Falha de conformidade do empregador respinga no visto do trabalhador, e a fiscalização britânica vem sendo agressiva na revogação de licenças de patrocínio.",
-        cta: "Trabalha com visto patrocinado? Peça ao seu empregador a confirmação de que a checagem de direito ao trabalho está sendo feita no formato novo.",
-        sources: [
-          { label: "Reino Unido · Statement of Changes às regras de imigração (gov.uk)", url: "https://www.gov.uk/government/collections/immigration-rules-statement-of-changes" },
-          { label: "Reino Unido · Verificação do direito ao trabalho (gov.uk)", url: "https://www.gov.uk/check-job-applicant-right-to-work" },
-        ],
-      },
-      {
-        title: "Cidadania britânica ganha via de processamento prioritário",
-        publishedAt: "2026-07-20",
-        body:
-          "O Reino Unido passou a oferecer processamento prioritário para pedidos de naturalização, um serviço pago que encurta a espera de quem já cumpriu os requisitos de residência e de conhecimento do país.\n\nO serviço acelera a fila, não os critérios. Continua valendo o tempo mínimo de residência, o teste Life in the UK e a comprovação de idioma. Quem tem pendência de ausências do país fora do limite permitido não resolve nada pagando mais.",
-        cta: "Já cumpriu o tempo de residência? Vale comparar o custo da via prioritária com o tempo que você ganharia, mas confirme antes se não há ausências acima do limite.",
-        sources: [
-          { label: "Reino Unido · Naturalização britânica (gov.uk)", url: "https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain" },
-        ],
-      },
-      {
         publishedAt: "2026-07-13",
+        urgency: "urgent",
         title: "Reino Unido publica o Statement of Changes HC 259 e ajusta regras de fixação de filhos",
         body:
           "O Home Office publicou o Statement of Changes HC 259, o documento oficial que atualiza as Regras de Imigração britânicas. Entre os pontos estão ajustes nas regras de fixação, o settlement, de crianças previstas na Parte 8 das Regras, além de uma exceção ligada à proibição de fiança migratória.\n\nOs Statements of Changes são a forma como o Reino Unido altera suas regras de visto na prática, e cada item costuma ter a própria data de entrada em vigor. Quem tem processo de família em andamento deve conferir no texto oficial qual versão da regra se aplica ao seu caso.",
@@ -1035,26 +990,8 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
     ],
     countryTab: [
       {
-        headline: "Reino Unido acerta a régua da conformidade antes das reformas de outubro",
-        publishedAt: "2026-07-20",
-        standfirst:
-          "Orientação atualizada de direito ao trabalho, novo Statement of Changes e prioridade paga na cidadania compõem um mesmo movimento: mais rigor na entrada, mais fluidez na saída.",
-        body:
-          "O Reino Unido chega ao fim de julho com três peças que só fazem sentido lidas em conjunto. A primeira é a atualização da orientação sobre verificação do direito ao trabalho, publicada como preparação para o pacote de reformas que entra em vigor em outubro. A segunda é o novo Statement of Changes às regras de imigração. A terceira é a abertura de uma via de processamento prioritário para pedidos de cidadania britânica.\n\nO padrão que emerge é de um sistema que aperta a porta de entrada e, ao mesmo tempo, desafoga a fila de quem já está integrado. A fiscalização sobre patrocinadores segue sendo o instrumento central: o Home Office tem revogado licenças de patrocínio em volume recorde, e cada revogação atinge diretamente trabalhadores que não cometeram falta alguma.\n\nNo mesmo período, os tribunais confirmaram a legalidade da política que recusa cidadania a refugiados que entraram no país de forma irregular, o que reforça a leitura de que a linha dura sobre entrada não é retórica de campanha e sim orientação consolidada.\n\nPara a comunidade que planeja o Reino Unido, a consequência prática é priorizar rotas com lastro institucional. Estudo com instituição licenciada e emprego com patrocinador de reputação verificável continuam sendo os caminhos que menos dependem de sorte regulatória.",
-        keyFacts: [
-          "Orientação de direito ao trabalho atualizada antes das reformas de outubro",
-          "Novo Statement of Changes às regras de imigração publicado em julho de 2026",
-          "Processamento prioritário disponível para pedidos de naturalização",
-          "Revogação de licenças de patrocínio segue em nível alto e atinge o visto do trabalhador",
-        ],
-        sources: [
-          { label: "Reino Unido · Statement of Changes às regras de imigração (gov.uk)", url: "https://www.gov.uk/government/collections/immigration-rules-statement-of-changes" },
-          { label: "Reino Unido · Verificação do direito ao trabalho (gov.uk)", url: "https://www.gov.uk/check-job-applicant-right-to-work" },
-          SRC.ukSkilled,
-        ],
-      },
-      {
         publishedAt: "2026-07-13",
+        urgency: "urgent",
         headline: "Reino Unido mexe nas regras e na fronteira: HC 259 e eGates para crianças",
         standfirst:
           "Um novo Statement of Changes (HC 259) ajusta regras de fixação de filhos, enquanto o Home Office libera os eGates para crianças de 8 e 9 anos. Duas mudanças concretas na segunda semana de julho de 2026.",
@@ -1156,17 +1093,6 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   // ────────────────────────────── França ──────────────────────────────
   fr: {
     community: [
-      {
-        title: "Novo controle de fronteira europeu já incomoda os aeroportos franceses",
-        publishedAt: "2026-07-20",
-        body:
-          "Aeroportos franceses vêm relatando atrito com o sistema de entrada e saída da União Europeia, que registra biometria de viajantes de fora do bloco a cada travessia. A queixa do setor é de tempo de fila, e a preocupação declarada é perder turista para outros destinos.\n\nPara quem viaja com passaporte brasileiro, o efeito prático é planejar mais folga na conexão, principalmente no primeiro registro. A coleta inicial de digitais e foto é a etapa mais demorada, e só precisa ser feita uma vez dentro do período de validade do registro.",
-        cta: "Vai entrar na Europa pela França nos próximos meses? Chegue mais cedo no primeiro voo do trajeto, porque é nele que a biometria é coletada.",
-        sources: [
-          { label: "União Europeia · Sistema de Entrada e Saída (oficial)", url: "https://travel-europe.europa.eu/ees_en" },
-          { label: "France-Visas · Portal oficial de vistos", url: "https://france-visas.gouv.fr/" },
-        ],
-      },
       {
         title: "Política de vistos volta ao centro do debate francês",
         publishedAt: "2026-07-20",
@@ -1312,26 +1238,6 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   us: {
     community: [
       {
-        title: "EUA revogam a regra de encargo público de 2022, com novo padrão em setembro",
-        publishedAt: "2026-07-20",
-        body:
-          "O USCIS anunciou a revogação da regulamentação de encargo público editada em 2022, e o novo padrão de análise passa a valer em 18 de setembro de 2026. Encargo público é o critério que avalia se o solicitante pode se tornar dependente de assistência do governo, e ele pesa em pedidos de residência permanente.\n\nNa prática, quem tem processo em andamento precisa acompanhar qual padrão se aplica à sua data de decisão. Comprovação de renda, patrocínio financeiro e histórico de uso de benefícios voltam ao centro da preparação do dossiê.",
-        cta: "Tem pedido de green card em curso? Reforce agora a documentação de renda e de patrocínio financeiro, porque o padrão de análise muda em setembro.",
-        sources: [
-          { label: "USCIS · Revogação da regra de encargo público de 2022 (oficial)", url: "https://www.uscis.gov/newsroom/news-releases/us-citizenship-and-immigration-services-rescinds-2022-public-charge-regulation" },
-        ],
-      },
-      {
-        title: "Estudante e intercambista perdem a admissão por prazo indeterminado",
-        publishedAt: "2026-07-20",
-        body:
-          "O Departamento de Segurança Interna finalizou a regra que encerra a chamada duração de status para os vistos F, J e I. Até aqui, estudantes e intercambistas eram admitidos pelo tempo do programa, sem data fixa de término no documento de entrada. Com a mudança, a admissão passa a ter prazo determinado, e a extensão vira pedido formal.\n\nÉ uma alteração de rotina administrativa com efeito real. Perder o prazo deixa de ser uma zona cinzenta e passa a gerar permanência fora de status, com todas as consequências que isso traz para vistos futuros.",
-        cta: "Está nos EUA com visto de estudante ou intercâmbio? Anote a data de término da sua admissão e programe o pedido de extensão com folga.",
-        sources: [
-          { label: "EUA · Estudantes internacionais (Study in the States, oficial)", url: "https://studyinthestates.dhs.gov/" },
-        ],
-      },
-      {
         publishedAt: "2026-07-07",
         title: "EUA abrem escritório de asilo em Atlanta a partir de 8 de julho",
         body:
@@ -1369,26 +1275,6 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       },
     ],
     countryTab: [
-      {
-        headline: "EUA fecham julho com três mudanças que atingem estudante, patrocinado e investidor",
-        publishedAt: "2026-07-20",
-        standfirst:
-          "Revogação da regra de encargo público, fim da admissão por duração de status para F, J e I e teto do H-1B atingido sem segunda loteria compõem o novo mapa.",
-        body:
-          "A semana concentrou decisões que mudam o cálculo de quem planeja os Estados Unidos. O USCIS revogou a regulamentação de encargo público de 2022 e fixou 18 de setembro de 2026 como início do novo padrão de análise. É um critério que avalia a probabilidade de o solicitante depender de assistência governamental, e ele incide diretamente sobre pedidos de residência permanente.\n\nNa mesma janela, o Departamento de Segurança Interna finalizou a regra que encerra a admissão por duração de status para os vistos F, de estudante, J, de intercâmbio, e I, de imprensa estrangeira. A lógica antiga admitia a pessoa pelo tempo do programa. A nova fixa data de término e transforma a continuidade em pedido formal de extensão.\n\nNo capítulo do trabalho qualificado, o teto do H-1B para o ano fiscal de 2027 foi atingido, sem expectativa de segunda loteria. Quem não foi selecionado precisa olhar para alternativas como O-1, L-1 ou o caminho acadêmico com instituições isentas de teto.\n\nHá ainda um movimento em fase inicial que merece registro: o Departamento do Trabalho sinalizou proposta de modernização do PERM, o processo de certificação laboral que antecede boa parte dos pedidos de residência por emprego. Nada está em vigor, mas o assunto entra no radar de planejamento de médio prazo.",
-        keyFacts: [
-          "Regra de encargo público de 2022 revogada; novo padrão vale a partir de 18 de setembro de 2026",
-          "Vistos F, J e I deixam de ter admissão por duração de status e passam a ter prazo determinado",
-          "Teto do H-1B para o ano fiscal de 2027 atingido, sem segunda loteria prevista",
-          "Departamento do Trabalho sinaliza proposta de modernização do PERM",
-        ],
-        sources: [
-          { label: "USCIS · Revogação da regra de encargo público de 2022 (oficial)", url: "https://www.uscis.gov/newsroom/news-releases/us-citizenship-and-immigration-services-rescinds-2022-public-charge-regulation" },
-          { label: "EUA · Estudantes internacionais (Study in the States, oficial)", url: "https://studyinthestates.dhs.gov/" },
-          SRC.usH1b,
-          { label: "Federal Register · Certificação laboral (Employment and Training Administration)", url: "https://www.federalregister.gov/agencies/employment-and-training-administration" },
-        ],
-      },
       {
         publishedAt: "2026-07-07",
         headline: "USCIS abre escritório de asilo em Atlanta e amplia atendimento no sudeste dos EUA",
@@ -1434,26 +1320,13 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       },
     ],
     blog: [
-      {
-        headline: "Nos EUA, o prazo virou o novo critério de seleção",
-        publishedAt: "2026-07-20",
-        standfirst:
-          "Fim da admissão por duração de status, encargo público reescrito e H-1B esgotado apontam para a mesma direção: menos margem administrativa, mais dependência de calendário.",
-        body:
-          "Existe uma forma tradicional de ler mudanças migratórias americanas, que é medir se ficou mais fácil ou mais difícil entrar. Ela é insuficiente para explicar o que aconteceu em julho de 2026, porque as três decisões relevantes do período não mexeram principalmente em quem pode entrar. Mexeram em quanto tempo a pessoa tem, e em quem controla esse relógio.\n\nComece pelo fim da duração de status para vistos F, J e I. Por décadas, estudante e intercambista eram admitidos pela extensão do programa acadêmico. Se o curso atrasava, se a pesquisa se estendia, o vínculo com a instituição sustentava a permanência. Com a admissão por prazo determinado, esse elástico acaba. A continuidade passa a exigir pedido formal, análise e decisão, o que introduz risco de indeferimento onde antes havia automatismo. Nada disso torna o estudo nos Estados Unidos inviável, mas encarece o descuido.\n\nA segunda peça é a revogação da regra de encargo público de 2022, com padrão novo valendo a partir de 18 de setembro. Aqui o efeito é de calendário puro. Processos decididos antes e depois dessa data podem ser avaliados por réguas diferentes, e o solicitante não controla a fila. A resposta racional é preparar o dossiê para o critério mais exigente possível, com renda comprovada, patrocínio financeiro sólido e histórico limpo de dependência de benefícios.\n\nA terceira é o esgotamento do teto do H-1B para o ano fiscal de 2027, sem segunda loteria. É a confirmação anual de que a principal via de trabalho qualificado americana continua sendo sorteio, não mérito. Para o profissional brasileiro de tecnologia, a lição repetida é que apostar exclusivamente no H-1B é apostar em loteria, e vias como O-1, L-1 e emprego em instituição acadêmica isenta de teto deixaram de ser plano B para virar planejamento primário.\n\nO fio que costura tudo é a redução de margem administrativa. O sistema americano está trocando discricionariedade e elasticidade por datas rígidas e ritos formais. Isso favorece um perfil específico de candidato: o que planeja com antecedência, documenta tudo e não depende de tolerância. E penaliza duramente quem opera no improviso, mesmo estando de boa-fé.\n\nA recomendação prática que sai daí é pouco glamourosa e muito eficaz. Monte um calendário migratório próprio, com data de término de admissão, data limite para pedido de extensão, validade de documentos e marcos de fila. Nos Estados Unidos de 2026, perder uma data passou a custar mais caro do que não ter o perfil ideal.",
-        tags: ["Estados Unidos", "H-1B", "Visto de estudante", "Green card", "Planejamento"],
-        sources: [
-          { label: "USCIS · Revogação da regra de encargo público de 2022 (oficial)", url: "https://www.uscis.gov/newsroom/news-releases/us-citizenship-and-immigration-services-rescinds-2022-public-charge-regulation" },
-          { label: "EUA · Estudantes internacionais (Study in the States, oficial)", url: "https://studyinthestates.dhs.gov/" },
-          SRC.usH1b,
-        ],
-      },
     ],
   },
 
 "is": {
   "community": [
     {
+      "urgency": "urgent",
       "title": "Islândia: pedido de autorização de trabalho agora entra numa porta só",
       "body": "Desde 8 de julho de 2026, a Islândia passou a processar as autorizações de trabalho pela Útlendingastofnun (Directorate of Immigration), a mesma autoridade que já cuida da residência. Antes, o pedido de trabalho ficava na Directorate of Labour. A mudança veio das alterações no Act on Foreign Nationals e no Foreign Nationals' Right to Work Act, aprovadas pelo Parlamento islandês em 18 de junho. Os pedidos que ainda não tinham sido decididos pela Directorate of Labour passaram para a nova autoridade. Para quem vem de fora do EEE/EFTA com oferta de emprego, é uma etapa a menos de balcão.",
       "cta": "Confira a regra na página oficial da Directorate of Immigration antes de montar seu pedido.",
@@ -1466,6 +1339,7 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       "publishedAt": "2026-07-18"
     },
     {
+      "urgency": "urgent",
       "title": "Estudante na Islândia não precisa mais de autorização de trabalho separada",
       "body": "Pelas novas regras em vigor desde 8 de julho de 2026, quem tem residência de estudante na Islândia pode trabalhar sem uma autorização de trabalho à parte. O limite é de até 60% da jornada integral durante o período de aulas, somando todos os empregadores, e jornada integral nos intervalos entre os semestres, incluindo férias de verão e de fim de ano. Em troca, a renovação da residência passa a exigir progresso acadêmico satisfatório, definido como concluir pelo menos 75% da carga de um ano letivo integral. Quem administra a regra é a Útlendingastofnun.",
       "cta": "Leia os detalhes na fonte oficial da Directorate of Immigration.",
@@ -1492,6 +1366,7 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
   ],
   "countryTab": [
     {
+      "urgency": "urgent",
       "headline": "Islândia unifica residência e trabalho na Útlendingastofnun e muda as regras para estudantes",
       "standfirst": "Reforma em vigor desde 8 de julho de 2026 move o processamento das autorizações de trabalho para a Directorate of Immigration e libera estudantes da autorização separada.",
       "body": "A Islândia colocou em vigor, em 8 de julho de 2026, um pacote de alterações no Act on Foreign Nationals e no Foreign Nationals' Right to Work Act. As mudanças foram aprovadas pelo Parlamento islandês (Alþingi) em 18 de junho e reorganizam tanto a máquina administrativa quanto algumas regras de residência.\n\nA mudança estrutural é a transferência do processamento das autorizações de trabalho da Directorate of Labour para a Útlendingastofnun (Directorate of Immigration), a mesma autoridade que já decide os pedidos de residência. Segundo a Directorate of Immigration, os pedidos de autorização de trabalho que ainda não tinham sido decididos pela Directorate of Labour antes da entrada em vigor passaram a ser tratados pela nova autoridade. As páginas oficiais de residência baseada em trabalho e de pedido de autorização de trabalho seguem, por ora, como referência para candidatos e empregadores.\n\nPara estudantes, a reforma acaba com a exigência de uma autorização de trabalho separada. Quem tem residência de estudante pode trabalhar como empregado em até 60% da jornada integral durante o período de aulas, somando todos os empregadores, e em jornada integral nos intervalos entre os semestres. A renovação da residência de estudante passa a exigir progresso acadêmico satisfatório, definido como concluir pelo menos 75% da carga de um ano letivo integral.\n\nDepois da formatura, quem concluiu um diploma universitário na Islândia pode renovar a residência de estudante por até 18 meses para buscar emprego compatível com a qualificação, prazo que antes era de três anos. Para quem tem doutorado, existe a possibilidade de renovar uma residência de especialista por até 12 meses para procurar trabalho sem autorização de trabalho.\n\nA reforma também estreitou o reagrupamento familiar, que passou a valer apenas para estudos universitários em tempo integral voltados a diploma de bacharel, mestrado ou doutorado, e criou uma categoria de residência de curto prazo para estadas de mais de 90 dias e de até 180 dias, voltada a visitas familiares ou a artistas, cientistas e atletas.",
@@ -1948,8 +1823,14 @@ export const DESTINATIONS: ReadonlyArray<DestinationMeta> = [
   },
 ];
 
-/** Peça normalizada, pronta pra postar (independente do tipo de origem). */
-export type PostablePiece = {
+/**
+ * Peça normalizada, pronta pra postar (independente do tipo de origem).
+ *
+ * HERDA `RecencyMeta` em vez de re-declarar os campos: era a re-declaração que
+ * fazia `publishedAt` morrer aqui antes do conserto de 2026-07-20. Daqui em
+ * diante, campo novo de recência chega à peça achatada de graça.
+ */
+export type PostablePiece = RecencyMeta & {
   destination: Destination;
   countryCode: string;
   countryName: string;
@@ -1960,12 +1841,35 @@ export type PostablePiece = {
   keyFacts?: string[];
   tags?: string[];
   sources?: EditorialSource[];
-  /** Data ISO (YYYY-MM-DD) em que a peça foi redigida. Ausente = peça legada:
-   *  o relatório renderiza sem carimbo de data e sem selo, nunca quebra. */
-  publishedAt?: string;
-  /** Data ISO em que a peça foi marcada como já postada/utilizada. */
-  usedAt?: string;
 };
+
+/**
+ * Carrega TODO o `RecencyMeta` da peça de origem pra peça achatada. Campo novo
+ * de recência entra AQUI e os cinco destinos herdam juntos: é o que impede a
+ * regressão de "campo listado à mão em 5 lugares, esquecido em 1".
+ */
+function recencyOf(src: RecencyMeta): RecencyMeta {
+  return { publishedAt: src.publishedAt, usedAt: src.usedAt, urgency: src.urgency };
+}
+
+/**
+ * A peça é URGENTE pro relatório? Precisa ter sido CURADA como `urgent` e ainda
+ * estar dentro da janela de urgência.
+ *
+ * A urgência decai porque o próprio critério do Hammis a define por prazo: um
+ * fato de 48h ou um prazo "que fecha em poucos dias" já não é nem uma coisa nem
+ * outra duas semanas depois. Sem decaimento, o acervo acumularia peças gritando
+ * URGENTE pra sempre e o selo morreria de tanto mentir. Sem cutoff, não decai
+ * (o chamador decide).
+ */
+export function isUrgentPiece(
+  p: Pick<PostablePiece, "urgency" | "publishedAt">,
+  urgentCutoffISO?: string,
+): boolean {
+  if (p.urgency !== "urgent") return false;
+  if (!urgentCutoffISO) return true;
+  return (p.publishedAt ?? "").slice(0, 10) >= urgentCutoffISO;
+}
 
 /**
  * Ordem de leitura das peças: mais NOVA primeiro, peça sem data por último.
@@ -1981,15 +1885,35 @@ function byPublishedDesc(a: PostablePiece, b: PostablePiece): number {
   return db < da ? -1 : 1;
 }
 
+/**
+ * Ordem de leitura final: URGENTE primeiro; dentro do mesmo grupo, mais nova
+ * primeiro; peça sem data por último (`byPublishedDesc` é o desempate e não
+ * muda em nada). Sort estável: empate total preserva a ordem de país.
+ */
+function byUrgencyThenPublishedDesc(urgentCutoffISO?: string) {
+  return (a: PostablePiece, b: PostablePiece): number => {
+    const ua = isUrgentPiece(a, urgentCutoffISO) ? 0 : 1;
+    const ub = isUrgentPiece(b, urgentCutoffISO) ? 0 : 1;
+    return ua !== ub ? ua - ub : byPublishedDesc(a, b);
+  };
+}
+
 type EdCountryLike = { code: string; name: string; editorial?: CountryEditorial };
 
 /**
  * Achata todo o conteúdo curado em sequência por destino: primeiro todos os
  * posts de Comunidade, depois todas as notícias de aba do país, depois todas
- * as matérias de blog. Dentro de cada destino, na ordem dos países recebidos.
+ * as matérias de blog.
+ *
+ * Dentro de cada destino a lista sai ordenada por URGENTE > data desc > sem
+ * data. A ordenação mora AQUI (e não nos três renderizadores) de propósito: foi
+ * centralizar neste ponto que consertou o carimbo de data, e espalhar em três
+ * lugares recriaria o bug. Quem quiser a leitura agrupada por país passa o
+ * resultado por `groupPiecesByCountry`.
  */
 export function buildPostables(
   countries: ReadonlyArray<EdCountryLike>,
+  opts?: { urgentCutoffISO?: string },
 ): Array<{ dest: DestinationMeta; pieces: PostablePiece[] }> {
   return DESTINATIONS.map((dest) => {
     const pieces: PostablePiece[] = [];
@@ -1998,27 +1922,76 @@ export function buildPostables(
       if (!ed) continue;
       if (dest.key === "community") {
         for (const p of ed.community)
-          pieces.push({ destination: "community", countryCode: c.code, countryName: c.name, title: p.title, body: p.body, cta: p.cta, sources: p.sources, publishedAt: p.publishedAt, usedAt: p.usedAt });
+          pieces.push({ ...recencyOf(p), destination: "community", countryCode: c.code, countryName: c.name, title: p.title, body: p.body, cta: p.cta, sources: p.sources });
       } else if (dest.key === "countryTab") {
         for (const a of ed.countryTab)
-          pieces.push({ destination: "countryTab", countryCode: c.code, countryName: c.name, title: a.headline, standfirst: a.standfirst, body: a.body, keyFacts: a.keyFacts, sources: a.sources, publishedAt: a.publishedAt, usedAt: a.usedAt });
+          pieces.push({ ...recencyOf(a), destination: "countryTab", countryCode: c.code, countryName: c.name, title: a.headline, standfirst: a.standfirst, body: a.body, keyFacts: a.keyFacts, sources: a.sources });
       } else if (dest.key === "blog") {
         for (const p of ed.blog)
-          pieces.push({ destination: "blog", countryCode: c.code, countryName: c.name, title: p.headline, standfirst: p.standfirst, body: p.body, tags: p.tags, sources: p.sources, publishedAt: p.publishedAt, usedAt: p.usedAt });
+          pieces.push({ ...recencyOf(p), destination: "blog", countryCode: c.code, countryName: c.name, title: p.headline, standfirst: p.standfirst, body: p.body, tags: p.tags, sources: p.sources });
       } else if (dest.key === "youtube") {
         for (const p of ed.youtube ?? [])
-          pieces.push({ destination: "youtube", countryCode: c.code, countryName: c.name, title: p.title, standfirst: p.hook, body: p.body, cta: p.cta, sources: p.sources, publishedAt: p.publishedAt, usedAt: p.usedAt });
+          pieces.push({ ...recencyOf(p), destination: "youtube", countryCode: c.code, countryName: c.name, title: p.title, standfirst: p.hook, body: p.body, cta: p.cta, sources: p.sources });
       } else if (dest.key === "instagram") {
         for (const p of ed.instagram ?? [])
-          pieces.push({ destination: "instagram", countryCode: c.code, countryName: c.name, title: p.title, body: p.body, cta: p.cta, tags: p.hashtags, sources: p.sources, publishedAt: p.publishedAt, usedAt: p.usedAt });
+          pieces.push({ ...recencyOf(p), destination: "instagram", countryCode: c.code, countryName: c.name, title: p.title, body: p.body, cta: p.cta, tags: p.hashtags, sources: p.sources });
       }
     }
-    // Mais NOVA primeiro dentro do destino, pra peça fresca não ficar enterrada
-    // sob o acervo do primeiro país. Sort estável: empates preservam a ordem
-    // de país acima.
-    pieces.sort(byPublishedDesc);
+    // URGENTE primeiro, depois mais NOVA primeiro, pra peça que corre risco de
+    // perder validade não ficar enterrada sob o acervo. Sort estável: empates
+    // preservam a ordem de país acima.
+    pieces.sort(byUrgencyThenPublishedDesc(opts?.urgentCutoffISO));
     return { dest, pieces };
   });
+}
+
+/** Peças de um destino agrupadas por PAÍS. */
+export type CountryPieceGroup = {
+  countryCode: string;
+  countryName: string;
+  pieces: PostablePiece[];
+};
+
+/**
+ * Reagrupa por país a lista já ordenada de um destino, PRESERVANDO a ordem em
+ * que cada país apareceu pela primeira vez.
+ *
+ * É o que devolve ao documento o agrupamento por país que a equipe usa pra
+ * varrer (a ordenação por data de 2026-07-20 tinha passado a intercalar
+ * países), sem perder o ganho da ordenação: como a lista chega ordenada por
+ * urgência e data, o país que aparece primeiro é justamente o dono da peça mais
+ * urgente/mais nova, e dentro de cada país a ordem urgente > data desc
+ * continua valendo. Quem quer a leitura cross-country tem o bloco PRIORIDADE.
+ */
+export function groupPiecesByCountry(pieces: ReadonlyArray<PostablePiece>): CountryPieceGroup[] {
+  const out: CountryPieceGroup[] = [];
+  const byCode = new Map<string, CountryPieceGroup>();
+  for (const p of pieces) {
+    let g = byCode.get(p.countryCode);
+    if (!g) {
+      g = { countryCode: p.countryCode, countryName: p.countryName, pieces: [] };
+      byCode.set(p.countryCode, g);
+      out.push(g);
+    }
+    g.pieces.push(p);
+  }
+  return out;
+}
+
+/**
+ * Todas as peças URGENTES, de todos os países, na ordem em que os destinos
+ * aparecem e, dentro de cada um, na ordem já resolvida por `buildPostables`.
+ * Alimenta o bloco PRIORIDADE que abre a Parte 1.
+ *
+ * Recebe o resultado de `buildPostables` (e não a lista de países) de propósito:
+ * o índice PRIORIDADE tem que apontar pras MESMAS peças que o documento vai
+ * renderizar abaixo, não pra uma segunda montagem que poderia divergir.
+ */
+export function urgentPieces(
+  postables: ReadonlyArray<{ pieces: ReadonlyArray<PostablePiece> }>,
+  urgentCutoffISO?: string,
+): PostablePiece[] {
+  return postables.flatMap((g) => g.pieces.filter((p) => isUrgentPiece(p, urgentCutoffISO)));
 }
 
 /**

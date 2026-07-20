@@ -393,6 +393,17 @@ export function fmtDate(iso: string | null | undefined, opts: { full?: boolean }
 /** Janela, em dias corridos, que define uma peça editorial como NOVA. */
 export const FRESH_WINDOW_DAYS = 3;
 
+/**
+ * Janela, em dias corridos, que mantém de pé a urgência CURADA de uma peça.
+ *
+ * Bem maior que a de recência porque o selo URGENTE também cobre prazo futuro
+ * ainda aberto (ex.: pacote publicado no dia 10 com efeitos no dia 30), que uma
+ * janela de 3 dias apagaria injustamente. E finita porque o critério do Hammis
+ * define urgência por prazo: fato de 48h ou janela "que fecha em poucos dias"
+ * já não é nem uma coisa nem outra duas semanas depois.
+ */
+export const URGENT_WINDOW_DAYS = 14;
+
 /** Dia do relatório em ISO (YYYY-MM-DD), no fuso de Brasília (o do documento). */
 export function reportDayISO(when: Date = new Date()): string {
   return when.toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" });
@@ -406,6 +417,15 @@ export function reportDayISO(when: Date = new Date()): string {
 export function freshCutoffISO(when: Date = new Date(), days = FRESH_WINDOW_DAYS): string {
   const [y, m, d] = reportDayISO(when).split("-").map(Number);
   return new Date(Date.UTC(y, m - 1, d - days)).toISOString().slice(0, 10);
+}
+
+/**
+ * Data de corte do selo URGENTE: peça curada como `urgent` com publishedAt >=
+ * este dia ainda grita. Derivada da data de geração igual à do selo NOVO, então
+ * nunca vira data fixa no código.
+ */
+export function urgentCutoffISO(when: Date = new Date(), days = URGENT_WINDOW_DAYS): string {
+  return freshCutoffISO(when, days);
 }
 
 /**
