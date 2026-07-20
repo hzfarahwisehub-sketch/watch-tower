@@ -1,0 +1,11 @@
+# Segredos e estado de runtime das rotinas. Nada disto entra no git.
+# (a raiz do repo ja ignora .env*, *.pem e .vercel; isto aqui e reforco local)
+.friday-secret
+*.key
+*.pem
+*.secret
+
+# estado de runtime das rotinas (cursor da caixa, flag de maquina ativa)
+.friday-last-seen-*.json
+active-machine.json
+.friday-machine.id

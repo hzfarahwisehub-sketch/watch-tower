@@ -1040,6 +1040,7 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       {
         headline: "O risco britânico que ninguém coloca na planilha: o seu patrocinador",
         publishedAt: "2026-07-20",
+        urgency: "normal",
         standfirst:
           "No Reino Unido de 2026, o maior perigo para um visto de trabalho não é o candidato ser recusado. É o empregador perder a licença depois que ele já se mudou.",
         body:
@@ -1062,7 +1063,7 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
         standfirst:
           "Enquanto o debate político rende manchetes, as regras que de fato valem mudam num documento técnico e discreto. O HC 259 é o lembrete mais recente.",
         body:
-          "Quem acompanha a imigração britânica pelas manchetes costuma viver de sustos. Um discurso aqui, um projeto de lei ali, e a sensação é de que tudo pode virar do avesso a qualquer momento. Só que a mecânica real do sistema é bem menos dramática, e bem mais previsível, do que os títulos sugerem.\n\nNo Reino Unido, o grosso das regras de visto não muda por grandes leis, e sim por documentos chamados Statements of Changes to the Immigration Rules. São textos técnicos, publicados com regularidade, que ajustam pontos específicos das Regras de Imigração. O HC 259, publicado em julho de 2026, é o exemplo da vez: mexeu nas regras de fixação de crianças da Parte 8 e trouxe uma exceção sobre fiança migratória, cada mudança com sua data de vigência.\n\nA diferença de fonte muda a qualidade da decisão. Uma manchete diz que o Reino Unido endureceu ou afrouxou algo. O Statement of Changes diz exatamente o quê, para quem e a partir de quando. Para uma família com processo em andamento, essa precisão é a diferença entre agir na hora certa e agir no boato.\n\nPara a comunidade WiseHub, o conselho é de método. Guarde o link oficial dos Statements of Changes e trate cada novo documento como o que realmente move o jogo. No Reino Unido, quem lê a regra na fonte decide melhor do que quem reage ao primeiro título alarmante.",
+          "Quem acompanha a imigração britânica pelas manchetes costuma viver de sustos. Um discurso aqui, um projeto de lei ali, e a sensação é de que tudo pode virar do avesso a qualquer momento. Só que a mecânica real do sistema é bem menos dramática, e bem mais previsível, do que os títulos sugerem.\n\nNo Reino Unido, o grosso das regras de visto não muda por grandes leis, e sim por documentos chamados Statements of Changes to the Immigration Rules. São textos técnicos, publicados com regularidade, que ajustam pontos específicos das Regras de Imigração. O HC 259, publicado em julho de 2026, é o exemplo da vez: mexeu nas regras da Parte 8 sobre crianças que se juntam a familiares no Reino Unido e ajustou a análise de idoneidade, para que estar em fiança migratória deixe de ser motivo único de recusa de quem já se enquadra na exceção prevista para quem excedeu o prazo de permanência, cada mudança com sua data de vigência.\n\nA diferença de fonte muda a qualidade da decisão. Uma manchete diz que o Reino Unido endureceu ou afrouxou algo. O Statement of Changes diz exatamente o quê, para quem e a partir de quando. Para uma família com processo em andamento, essa precisão é a diferença entre agir na hora certa e agir no boato.\n\nPara a comunidade WiseHub, o conselho é de método. Guarde o link oficial dos Statements of Changes e trate cada novo documento como o que realmente move o jogo. No Reino Unido, quem lê a regra na fonte decide melhor do que quem reage ao primeiro título alarmante.",
         tags: ["Reino Unido", "Statement of Changes", "HC 259", "Regras de Imigração"],
         sources: [
           { label: "Reino Unido · Statement of Changes to the Immigration Rules (gov.uk, oficial)", url: "https://www.gov.uk/government/collections/immigration-rules-statement-of-changes" },
@@ -1097,6 +1098,7 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       {
         title: "Política de vistos volta ao centro do debate francês",
         publishedAt: "2026-07-20",
+        urgency: "normal",
         body:
           "A possibilidade de ampliar a concessão de vistos a cidadãos argelinos reacendeu a disputa política sobre imigração na França, com forte reação da direita e da extrema direita. O tema é bilateral e específico, mas o efeito transborda: quando a imigração vira pauta eleitoral, o rito administrativo tende a ficar mais conservador.\n\nNada muda de imediato para quem está com processo em andamento. O sinal a observar é o tom das instruções consulares nos próximos meses, especialmente em renovações e pedidos de naturalização.",
         cta: "Tem pedido em curso na França? Mantenha a documentação de residência e renda impecável, porque em ciclo político tenso a análise costuma ficar mais literal.",
@@ -1171,6 +1173,7 @@ export const EDITORIAL: Record<string, CountryEditorial> = {
       {
         headline: "A fronteira europeia virou banco de dados, e isso muda o seu planejamento",
         publishedAt: "2026-07-20",
+        urgency: "normal",
         standfirst:
           "O sistema de entrada e saída da União Europeia substitui o carimbo por registro biométrico. O incômodo é de fila hoje, mas o efeito real é de contagem de dias.",
         body:

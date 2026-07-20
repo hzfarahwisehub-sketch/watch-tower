@@ -1,0 +1,61 @@
+{
+  "_comment": "Manifesto das rotinas agendadas de PROJETO da WiseHub. Esta lista e uma ALLOWLIST: o sync-tasks.mjs so copia (nos dois sentidos) os taskId listados aqui. Rotina de assunto pessoal do Hammis NUNCA entra neste arquivo nem neste repo. Ver automation/README.md.",
+  "_generatedBy": "automation/sync-tasks.mjs",
+  "_lastExport": "2026-07-20",
+  "tasks": [
+    {
+      "taskId": "watch-tower-editorial-diario",
+      "cronExpression": "30 0 * * *",
+      "schedule": "todo dia 00:30",
+      "frequency": "daily",
+      "enabled": true,
+      "projeto": "watch-tower",
+      "description": "Curadoria editorial diaria por pais (editorial.ts), classifica urgencia e publica via Git."
+    },
+    {
+      "taskId": "watch-tower-caixa-ronda",
+      "cronExpression": "0 */6 * * *",
+      "schedule": "de 6 em 6 horas",
+      "frequency": "6h",
+      "enabled": true,
+      "projeto": "watch-tower",
+      "description": "Ronda da caixa de solicitacoes do WT, consolida em BRIEFING-INBOX.md e atualiza o cursor."
+    },
+    {
+      "taskId": "watch-tower-mercado-trabalho-semanal",
+      "cronExpression": "0 18 * * 1",
+      "schedule": "segunda 18:00",
+      "frequency": "weekly",
+      "enabled": true,
+      "projeto": "watch-tower",
+      "description": "Rodada rotativa (5 grupos) de pesquisa de mercado de trabalho + deploy-labor.sh."
+    },
+    {
+      "taskId": "revisao-semanal-watch-tower",
+      "cronExpression": "37 16 * * 5",
+      "schedule": "sexta 16:37",
+      "frequency": "weekly",
+      "enabled": true,
+      "projeto": "watch-tower",
+      "description": "Revisao semanal do Watch Tower (boletins, caixa, deploys, pendencias)."
+    },
+    {
+      "taskId": "acao-plano-paralelo-semanal",
+      "cronExpression": "17 9 * * 3",
+      "schedule": "quarta 09:17",
+      "frequency": "weekly",
+      "enabled": true,
+      "projeto": "crm-plano-alternativo",
+      "description": "Supervisao semanal do CRM Plano Alternativo (Twenty/Neon/VDS). Nao e do Watch Tower."
+    },
+    {
+      "taskId": "acompanhamento-parcerias-servico-verificacao",
+      "cronExpression": "0 9 * * 2",
+      "schedule": "terca 09:00",
+      "frequency": "weekly",
+      "enabled": true,
+      "projeto": "contratos-parcerias",
+      "description": "Acompanhamento das parcerias de servico com desconto (contrato 2, cupom). Nao e do Watch Tower."
+    }
+  ]
+}
