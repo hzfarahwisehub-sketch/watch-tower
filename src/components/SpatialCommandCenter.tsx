@@ -77,9 +77,9 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
   // arcos (o showcase que o Hammis quer). ATLAS = Google Earth (satélite + rótulos).
   // SATÉLITE = satélite puro. Um objeto evita ternário-espaguete no JSX.
   const GEO_CFG = {
-    cinematic: { globe: "night", map: "night", cls: "wb-atlas", marker: "holographic", arcs: true },
-    satellite: { globe: "satellite", map: "satellite", cls: "wb-satellite", marker: "satellite", arcs: false },
-    atlas: { globe: "google", map: "google", cls: "wb-satellite", marker: "satellite", arcs: false },
+    cinematic: { globe: "night", map: "night", cls: "wb-atlas", marker: "holographic" },
+    satellite: { globe: "satellite", map: "satellite", cls: "wb-satellite", marker: "satellite" },
+    atlas: { globe: "google", map: "google", cls: "wb-satellite", marker: "satellite" },
   } as const;
   const geo = GEO_CFG[geoMode as keyof typeof GEO_CFG] ?? GEO_CFG.cinematic;
   const countryMatches = countryQuery.trim().length > 1 ? COUNTRIES.filter(item => item.name.toLocaleLowerCase("pt-BR").includes(countryQuery.toLocaleLowerCase("pt-BR"))).slice(0, 6) : [];
@@ -164,8 +164,8 @@ export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: 
           </div>
           <div className="wb-geo-mode" role="group" aria-label="Visualização geográfica"><button className={geoMode === "cinematic" ? "active" : ""} onClick={() => setGeoMode("cinematic")}>Cinemático</button><button className={geoMode === "satellite" ? "active" : ""} onClick={() => setGeoMode("satellite")}>Satélite</button><button className={geoMode === "live" ? "active" : ""} onClick={() => setGeoMode("live")}>Mapa vivo</button><button className={geoMode === "atlas" ? "active" : ""} onClick={() => setGeoMode("atlas")}>Atlas</button></div>
           {geoMode !== "live" ? <>
-            <div className={`wb-cinematic-globe ${geo.cls} ${activeCountry ? "focused" : ""}`} style={focusStyle}><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} markerVariant={geo.marker} immersive projection="globe" stylePreset={geo.globe} showArcs={geo.arcs} spinPausesOnSelect hideChrome/><span className="wb-holo-scan" aria-hidden/><i/><i/></div>
-            <div className={`wb-cinematic-map ${geo.cls} ${activeCountry ? "focused" : ""}`} style={focusStyle}><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} markerVariant={geo.marker} immersive projection="mercator" stylePreset={geo.map} showArcs={geo.arcs} fitCountries hideChrome/><span className="wb-holo-depth" aria-hidden/><div className="wb-map-legend" aria-label="Legenda dos países"><span className="crit">CRÍTICO</span><span className="warn">ATENÇÃO</span><span className="stable">ESTÁVEL</span></div></div>
+            <div className={`wb-cinematic-globe ${geo.cls} ${activeCountry ? "focused" : ""}`} style={focusStyle}><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} markerVariant={geo.marker} immersive projection="globe" stylePreset={geo.globe} spinPausesOnSelect hideChrome/><span className="wb-holo-scan" aria-hidden/><i/><i/></div>
+            <div className={`wb-cinematic-map ${geo.cls} ${activeCountry ? "focused" : ""}`} style={focusStyle}><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} markerVariant={geo.marker} immersive projection="mercator" stylePreset={geo.map} fitCountries hideChrome/><span className="wb-holo-depth" aria-hidden/><div className="wb-map-legend" aria-label="Legenda dos países"><span className="crit">CRÍTICO</span><span className="warn">ATENÇÃO</span><span className="stable">ESTÁVEL</span></div></div>
           </> : <>
             <div className="wb-live-globe"><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} immersive projection="globe" stylePreset="dark" spinPausesOnSelect /></div>
             <div className="wb-live-map"><MapZone countries={COUNTRIES} selected={selectedCountry} onSelect={selectCountry} immersive projection="mercator" stylePreset="dark" /></div>

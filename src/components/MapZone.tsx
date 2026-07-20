@@ -23,7 +23,6 @@ interface Props {
   markerVariant?: "default" | "holographic" | "satellite";
   // Desenha arcos (grandes círculos) dourados/azuis entre os países — o look de
   // "rotas" da referência do Hammis. Usado no modo Atlas.
-  showArcs?: boolean;
   // Abre o mapa ENQUADRANDO todos os países (fitBounds) em vez do equador/zoom
   // fixo — assim cada marcador cai em cima do seu país no painel largo e baixo
   // do modo cinematográfico (sem isso, metade projeta fora da faixa visível).
@@ -158,59 +157,10 @@ function resolveStyle(key: StyleKey): string | StyleSpecification {
 // (a projeção é injetada por instância no setStyle — ver transformStyle no efeito
 // de troca de estilo; "globe" fixo aqui já causou o bug do mapa plano esférico)
 
-// ── Arcos de rota (grandes círculos) ──────────────────────────────────────
-// Interpolação esférica (slerp) entre dois pontos lng/lat → curva que acompanha
-// o globo, não uma reta chapada. Base do look de "rotas" da referência do Atlas.
-function greatCircle(a: [number, number], b: [number, number], n = 46): [number, number][] {
-  const toRad = (d: number) => (d * Math.PI) / 180;
-  const toDeg = (r: number) => (r * 180) / Math.PI;
-  const lat1 = toRad(a[1]), lon1 = toRad(a[0]), lat2 = toRad(b[1]), lon2 = toRad(b[0]);
-  const d = 2 * Math.asin(Math.sqrt(Math.sin((lat2 - lat1) / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin((lon2 - lon1) / 2) ** 2));
-  if (!d) return [a, b];
-  const pts: [number, number][] = [];
-  for (let i = 0; i <= n; i++) {
-    const f = i / n;
-    const A = Math.sin((1 - f) * d) / Math.sin(d);
-    const B = Math.sin(f * d) / Math.sin(d);
-    const x = A * Math.cos(lat1) * Math.cos(lon1) + B * Math.cos(lat2) * Math.cos(lon2);
-    const y = A * Math.cos(lat1) * Math.sin(lon1) + B * Math.cos(lat2) * Math.sin(lon2);
-    const z = A * Math.sin(lat1) + B * Math.sin(lat2);
-    pts.push([toDeg(Math.atan2(y, x)), toDeg(Math.atan2(z, Math.sqrt(x * x + y * y)))]);
-  }
-  return pts;
-}
-
-// Leque de arcos a partir de um hub (EUA se monitorado, senão Alemanha, senão o 1º)
-// pra todos os outros países — dourado/azul alternado, como a referência.
-function buildArcs(countries: Country[]): GeoJSON.FeatureCollection {
-  const hub = countries.find((c) => c.code === "us") || countries.find((c) => c.code === "de") || countries[0];
-  if (!hub) return { type: "FeatureCollection", features: [] };
-  const [hlat, hlng] = hub.coords;
-  // ~14 destinos espalhados (não os 40) → leque limpo tipo a referência, sem poluir.
-  const others = countries.filter((c) => c.code !== hub.code);
-  const step = Math.max(1, Math.floor(others.length / 14));
-  const features = others
-    .filter((_, i) => i % step === 0)
-    .slice(0, 16)
-    .map((c, i): GeoJSON.Feature => ({
-      type: "Feature",
-      properties: { color: i % 2 ? "#4fc4ff" : "#ffcf6f" },
-      geometry: { type: "LineString", coordinates: greatCircle([hlng, hlat], [c.coords[1], c.coords[0]]) },
-    }));
-  return { type: "FeatureCollection", features };
-}
-
-function addArcs(map: MLMap, data: GeoJSON.FeatureCollection) {
-  const src = map.getSource("wt-arcs");
-  if (src) { (src as maplibregl.GeoJSONSource).setData(data); return; }
-  map.addSource("wt-arcs", { type: "geojson", data });
-  map.addLayer({ id: "wt-arcs-glow", type: "line", source: "wt-arcs", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": ["get", "color"], "line-width": 3.4, "line-blur": 6, "line-opacity": 0.3 } });
-  map.addLayer({ id: "wt-arcs-core", type: "line", source: "wt-arcs", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": ["get", "color"], "line-width": 1, "line-opacity": 0.85 } });
-}
-function removeArcs(map: MLMap) {
-  ["wt-arcs-core", "wt-arcs-glow"].forEach((id) => { if (map.getLayer(id)) map.removeLayer(id); });
-  if (map.getSource("wt-arcs")) map.removeSource("wt-arcs");
-}
+// Os ARCOS de rota (grandes círculos saindo de um hub) foram REMOVIDOS a pedido do
+// Hammis (2026-07-19): "desenhos de arcos sem sentido nenhum neste mapa, remove mesmo".
+// Removido o código inteiro (slerp + camadas), não só desligado, pra não deixar
+// maquinaria morta esperando alguém religar sem querer.
 
 // Enquadra todos os países no viewport (o painel cinematográfico é largo e baixo;
 // fitBounds resolve o zoom/center pra caber a faixa de latitudes com marcadores).
@@ -238,7 +188,7 @@ function fitToCountries(map: MLMap, countries: Country[]) {
  * - Botão de estilo (gradiente + menu): Google · Satélite HD · Relevo · Escuro
  * - Markers por país (cor = status), click seleciona · voo suave ao selecionar
  */
-export default function MapZone({ countries, selected, onSelect, immersive = false, projection = "globe", stylePreset, hideChrome = false, viewport, onViewportChange, markerVariant = "default", showArcs = false, fitCountries = false, spinPausesOnSelect = false }: Props) {
+export default function MapZone({ countries, selected, onSelect, immersive = false, projection = "globe", stylePreset, hideChrome = false, viewport, onViewportChange, markerVariant = "default", fitCountries = false, spinPausesOnSelect = false }: Props) {
   const { t } = useLocale();
   const changesMap = useCountryChangesMap();
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -254,8 +204,6 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
   projectionRef.current = projection;
   const onViewportChangeRef = useRef(onViewportChange);
   onViewportChangeRef.current = onViewportChange;
-  const showArcsRef = useRef(showArcs);
-  showArcsRef.current = showArcs;
   const countriesRef = useRef(countries);
   countriesRef.current = countries;
   const fitCountriesRef = useRef(fitCountries);
@@ -340,8 +288,6 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
       // certo, nunca num mapa plano em transição.
       styleLoadingRef.current = false;
       spinGlobeRef.current?.();
-      // setStyle limpa sources/layers → (re)desenha os arcos após cada style.load.
-      if (showArcsRef.current) { try { addArcs(map, buildArcs(countriesRef.current)); } catch { /* noop */ } }
     });
 
     const resizeObserver = new ResizeObserver(() => {
@@ -490,16 +436,6 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
       if (projection === "globe") spinGlobeRef.current?.();
     } catch {}
   }, [projection]);
-
-  // Liga/desliga os arcos ao vivo (trocar pro modo Atlas reusa a mesma instância).
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !map.isStyleLoaded()) return;
-    try {
-      if (showArcs) addArcs(map, buildArcs(countries));
-      else removeArcs(map);
-    } catch { /* noop */ }
-  }, [showArcs, countries]);
 
   useEffect(() => {
     const map = mapRef.current;
