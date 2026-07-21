@@ -26,9 +26,9 @@ const eyeModes = [
   { id: "friday-flux", label: "Friday", variant: "Flux · Reativa · Voz", ownerOnly: true },
 ] as const;
 
-export function SpatialCommandCenter({ previewOwner = false }: { previewOwner?: boolean }) {
+export function SpatialCommandCenter() {
   const { data: session } = useSession();
-  const isOwner = session?.user?.email?.toLowerCase() === OWNER_EMAIL || previewOwner;
+  const isOwner = session?.user?.email?.toLowerCase() === OWNER_EMAIL;
   const [mode, setMode] = useState<(typeof modes)[number]>(isOwner ? "FRIDAY" : "WISE");
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [briefing, setBriefing] = useState(false);
