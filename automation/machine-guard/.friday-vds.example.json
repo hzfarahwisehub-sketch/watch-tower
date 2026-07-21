@@ -1,0 +1,7 @@
+{
+  "_comment": "MODELO. Copie para .friday-vds.json AO LADO dos scripts (na vault, em '00 - System\\control') e preencha com os valores reais desta casa. O arquivo real NUNCA entra no git - o .gitignore desta pasta ja o barra. Se a vault ainda nao pareou nesta maquina, pode viver em %USERPROFILE%\\.friday-vds.json.",
+  "host": "IP-OU-DNS-DA-VDS",
+  "user": "usuario-ssh",
+  "keyPath": "%USERPROFILE%\\.ssh\\NOME-DA-CHAVE-PRIVADA",
+  "controlDir": "/caminho/remoto/friday-control"
+}

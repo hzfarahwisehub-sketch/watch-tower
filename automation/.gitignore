@@ -9,3 +9,12 @@
 .friday-last-seen-*.json
 active-machine.json
 .friday-machine.id
+
+# guard de maquina ativa: config local com o endereco do servidor de coordenacao.
+# O .example fica versionado (e so um modelo); o real, NUNCA.
+.friday-vds.json
+machine-guard/.friday-vds.json
+GUARD-ERRO.log
+machine-guard/GUARD-ERRO.log
+machine-guard/presence/
+presence/

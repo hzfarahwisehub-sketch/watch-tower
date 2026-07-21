@@ -43,21 +43,36 @@ a rotina manda ler o `CRON_SECRET` de `D:\FRIDAY-BRAIN\skills\watch-tower-deploy
 O caminho pode ficar no git; o arquivo não pode, e não está. Ao editar qualquer rotina, mantenha
 esse padrão: **a rotina aponta para onde o segredo mora, nunca carrega o valor.**
 
-**3. Os scripts do guard de máquina ativa.** As seis rotinas dependem de
-`00 - System\control\friday-active-guard.ps1`, que continua fora do git. Não é esquecimento:
-esse script tem o host SSH da VDS (usuário `root`) e o caminho da chave cravados dentro dele.
-Colocá-lo num repositório compartilhável com sócios publicaria a superfície de acesso root da
-VDS. Se ele for versionado um dia, deve ser em repo privado de infraestrutura, com o host lido
-de variável de ambiente. **Enquanto isso, ele é um ponto único de falha conhecido:** máquina
-nova restaurada só por este repo instala as rotinas, mas o guard precisa ser copiado à parte.
+**3. A configuração local do guard de máquina ativa.** Os scripts do guard **passaram a ser
+versionados** em [`machine-guard/`](./machine-guard) em 20/07/2026. O que não é versionado é o
+`.friday-vds.json`: o arquivo que diz **onde** fica o servidor de coordenação, com que usuário
+e com que chave. Ele fica ao lado dos scripts na vault, é próprio de cada casa, e o
+`.gitignore` desta pasta o barra nos dois sentidos (o `sync-tasks.mjs` também se recusa a
+copiá-lo, em qualquer direção).
+
+Até 20/07 esses valores estavam **cravados dentro de seis scripts**, e era por isso que o guard
+inteiro tinha que ficar fora do git — o que fazia dele um ponto único de falha: máquina nova
+restaurada só por este repo instalava as rotinas, mas não o guard que as coordena. Agora o
+código vem do git e só a configuração é local. A regra que fica valendo é a mesma do
+`.friday-secret` no item anterior: **o script aponta onde a infra mora, nunca carrega o
+endereço dela.**
+
+Vale reforçar por que isso importa aqui e não em qualquer repo: **este repositório é público.**
+Um endereço de servidor com conta privilegiada num commit vai para a busca do GitHub e é varrido
+por scanner automatizado em horas. Não é uma preferência de estilo, é a diferença entre publicar
+e não publicar uma receita de acesso pronta.
 
 **4. O agendamento em si.** Ver a seção de instalação abaixo.
 
 ### Cobertura do `.gitignore`
 
 O `.gitignore` da raiz já cobre `.env*`, `*.pem` e `.vercel`. O `automation/.gitignore` reforça,
-para esta pasta: `.friday-secret`, `*.key`, `*.pem`, `.friday-last-seen-*.json` e
-`active-machine.json` (estado de runtime, não configuração).
+para esta pasta: `.friday-secret`, `*.key`, `*.pem`, `.friday-last-seen-*.json`,
+`active-machine.json` (estado de runtime, não configuração), `.friday-vds.json` (a config local
+do guard), `GUARD-ERRO.log` e `presence/`.
+
+O `.friday-vds.example.json` **é** versionado de propósito: é só um molde com campos vazios,
+e é o que faz uma máquina nova saber o que precisa preencher.
 
 ---
 
@@ -68,6 +83,17 @@ node automation/sync-tasks.mjs check                      # repo x máquina, byt
 node automation/sync-tasks.mjs export  [--yes]            # máquina -> repo
 node automation/sync-tasks.mjs install [--yes] [--dest D] # repo -> máquina
 ```
+
+Os três modos cobrem **duas** coisas no mesmo plano e no mesmo dry-run: os `SKILL.md` das
+rotinas (allowlist em `tasks.json`, destino `%USERPROFILE%\.claude\scheduled-tasks`) e os
+scripts do guard (allowlist literal em `machine-guard/`, destino `00 - System\control` da
+vault). O `--control <dir>` troca o destino do guard, como o `--dest` faz com as rotinas.
+
+**Por que o guard instala na vault em vez de rodar de dentro do clone.** O guard lê o
+`active-machine.json` por `$PSScriptRoot`, e esse arquivo é estado vivo que sincroniza entre
+as máquinas pela vault. Rodando de dentro do repo, ele procuraria o flag na pasta errada, não
+o acharia, e a coordenação passaria a depender só do servidor remoto. Então: **o repositório é
+a fonte do código; a vault é onde ele executa.**
 
 **Sem `--yes` nada é escrito.** O script imprime o plano, marcando em amarelo cada arquivo que
 seria sobrescrito e com quantos bytes, e sai. Rodar com `--yes` escreve só o que realmente
@@ -82,24 +108,98 @@ difere, então rodar duas vezes seguidas não muda nada na segunda.
 
 ## Instalando numa máquina nova
 
+### Passo 1 — clonar e instalar os arquivos
+
 ```bash
 git clone <este repo>
 cd watch-tower
-node automation/sync-tasks.mjs install          # confere o plano
+node automation/sync-tasks.mjs install          # confere o plano, não escreve nada
 node automation/sync-tasks.mjs install --yes    # aplica
 ```
 
-Isso deixa os seis `SKILL.md` no lugar certo em `%USERPROFILE%\.claude\scheduled-tasks`.
+Isso deixa os seis `SKILL.md` em `%USERPROFILE%\.claude\scheduled-tasks` **e** os scripts do
+guard em `00 - System\control` da vault. Se a vault não estiver em `..\..` a partir do repo,
+o script para e pede `--control <caminho da pasta control>` — ele não chuta destino.
 
-**Falta um passo, e ele não dá para automatizar por aqui.** O agendamento (cron, enabled) **não
-mora em disco** — vive do lado do serviço de tarefas e só é criado por chamada de ferramenta.
-O git restaura o texto e o manifesto; registrar as seis tarefas é uma chamada
-`create_scheduled_task` por tarefa, feita pela Friday numa sessão na máquina nova. O `install`
-imprime a tabela `taskId` / cron pronta para isso. Peça a ela: *"roda o install e recria as
-tarefas pelo tasks.json"*. É um comando, não é zero.
+### Passo 2 — dar um nome a esta máquina
 
-Além disso, copie à parte: os scripts de `00 - System\control\` (item 3 acima) e o
-`.friday-secret` referenciado pela ronda da caixa.
+Crie `%USERPROFILE%\.friday-machine.id` com o rótulo dela (o mesmo vocabulário que o
+`active-machine.json` usa, ex.: `RASTAMAX`, `GPU-NOVA`). Sem esse arquivo o guard cai no
+`COMPUTERNAME`, que provavelmente não bate com nenhum rótulo — e aí a máquina nunca se
+reconhece como a preferida.
+
+### Passo 3 — instalar a chave SSH privada
+
+Copie a chave privada de coordenação para dentro de `%USERPROFILE%\.ssh\` nesta máquina.
+**Ela não está neste repositório e nunca vai estar** — é segredo de verdade, arquivo em disco.
+Traga do gerenciador de segredos ou do canal seguro de sempre, não por e-mail nem por chat.
+
+### Passo 4 — criar a configuração local do guard
+
+```bash
+# na pasta control da vault:
+cp .friday-vds.example.json .friday-vds.json
+```
+
+Abra o `.friday-vds.json` e preencha os quatro campos: `host`, `user`, `keyPath` e `controlDir`.
+Os valores desta casa **não estão escritos em lugar nenhum deste repositório, de propósito** —
+peça ao Hammis, ou copie de uma máquina já operacional (o arquivo vive ao lado dos scripts, na
+vault). O `keyPath` aceita `%USERPROFILE%` e aponta para a chave do passo 3.
+
+Ordem de busca, se precisar variar: `$env:FRIDAY_VDS_CONFIG` (override explícito, para teste),
+depois o arquivo ao lado dos scripts, depois `%USERPROFILE%\.friday-vds.json` (útil numa máquina
+cuja vault ainda não pareou). O primeiro que existir e for válido vence.
+
+### Passo 5 — conferir antes de confiar
+
+```powershell
+powershell -File "<pasta control>\friday-guard-doctor.ps1"
+```
+
+O doutor confere identidade, config, chave, estado e conexão, e **sai com código 1 se faltar
+alguma peça**, dizendo qual. Ele não reserva período nenhum, então pode rodar à vontade. Só
+considere a máquina pronta quando ele disser *"Tudo pronto"*.
+
+### Passo 6 — registrar o agendamento (não dá para automatizar por aqui)
+
+O agendamento (cron, enabled) **não mora em disco** — vive do lado do serviço de tarefas e só é
+criado por chamada de ferramenta. O git restaura o texto e o manifesto; registrar as seis
+tarefas é uma chamada `create_scheduled_task` por tarefa, feita pela Friday numa sessão na
+máquina nova. O `install` imprime a tabela `taskId` / cron pronta para isso. Peça a ela:
+*"roda o install e recria as tarefas pelo tasks.json"*. É um comando, não é zero.
+
+### O que ainda precisa vir à parte
+
+Versionar o guard tirou um item desta lista, não a zerou:
+
+- **a chave SSH privada** (passo 3) e **os valores do `.friday-vds.json`** (passo 4);
+- **o `.friday-secret`** referenciado pela ronda da caixa;
+- **a própria vault.** As rotinas referenciam caminhos dentro dela (o clone do repo, o
+  `PENDENCIAS-ABERTAS.md`, o `.friday-secret`). Máquina com repo e sem vault não roda essas
+  rotinas de qualquer jeito — este repositório resolve o guard, não a vault.
+
+## Falha silenciosa: o que mudou no guard em 20/07
+
+O `stdout` do guard continua sendo exatamente `RUN` ou `SKIP` — nenhuma das seis rotinas mudou
+uma vírgula. O que ganhou significado foi o **código de saída**:
+
+| exit | significado |
+|---|---|
+| `0` | decisão legítima: rodou, ou cedeu porque a reserva já era de alguém |
+| `3` | **não configurado** — sem `.friday-vds.json` válido |
+| `4` | **cego** — não leu o estado nem na vault nem no servidor |
+
+Nos casos `3` e `4` o guard também escreve o motivo em `stderr` e em `GUARD-ERRO.log`.
+
+A razão: antes, um `SKIP` porque a outra máquina pegou a reserva e um `SKIP` porque a
+configuração sumiu eram **a mesma saída, com o mesmo código 0**. A automação podia morrer sem
+ninguém saber, que é exatamente o modo de falha que já mordeu esta casa antes. Agora um `SKIP`
+com exit `0` é o mecanismo funcionando, e um `SKIP` com exit `3` ou `4` é um defeito que pede
+gente.
+
+Uma exceção deliberada: o `friday-presence-hook.ps1` nunca grita, porque é hook de sessão e
+sujaria a abertura de toda conversa. Sem config ele pula o espelho remoto, segue gravando na
+vault e deixa o motivo no log.
 
 ---
 

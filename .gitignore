@@ -44,3 +44,8 @@ next-env.d.ts
 
 # labor-market: lock de runtime do deploy-labor.sh
 .deploy-labor.lock
+
+# Harness de UI local: vive no branch wip/wise-brain-preview-harness, nunca na main.
+# /preview/* nao e coberto pelo isProtectedPage do middleware, entao a pasta nao
+# pode voltar por um "git add -A" distraido.
+/src/app/preview/
