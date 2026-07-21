@@ -46,6 +46,407 @@ export type Roteiro = {
 
 export const ROTEIROS: Roteiro[] = [
   {
+    "id": "2026-07-20-08",
+    "date": "2026-07-20",
+    "lote": 8,
+    "n": 8,
+    "persona": "Marcela",
+    "canal": "Instagram",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "O primeiro Natal longe",
+    "paras": [
+      "O primeiro Natal fora não é como os outros, e ninguém te avisa direito.",
+      "Não é só a falta das pessoas. É que a data inteira funciona diferente. O clima está errado, a comida é outra, os costumes não são os seus, e as ruas comemoram uma coisa que não é bem a sua festa.",
+      "E aí chega a hora da chamada de vídeo com a família toda reunida do outro lado, e essa é a parte mais difícil, porque você vê a mesa cheia e o seu lugar vazio.",
+      "Duas coisas ajudam. Não tentar reproduzir exatamente o Natal de casa, porque a cópia imperfeita dói mais. E criar uma tradição nova, sua, mesmo que pequena, que passe a ser da sua família nesse lugar.",
+      "Na WiseHub tem gente que já passou por vários primeiros Natais em cada um dos países acompanhados. Não tira a saudade, mas passar essa data com quem entende muda o peso dela."
+    ],
+    "palavras": 157
+  },
+  {
+    "id": "2026-07-20-07",
+    "date": "2026-07-20",
+    "lote": 8,
+    "n": 7,
+    "persona": "Marcela",
+    "canal": "Reels",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "A comida que você aprende a fazer do zero",
+    "paras": [
+      "Tem um jeito curioso de a saudade aparecer: você começa a cozinhar coisas que nunca cozinhou na vida.",
+      "Pão de queijo, brigadeiro, feijão do jeito certo, aquele bolo da sua avó. Coisas que sempre alguém fez pra você, ou que se comprava pronto na esquina.",
+      "E é engraçado porque no começo dá tudo errado. O ingrediente é outro, o forno é outro, a farinha se comporta diferente. Você refaz três vezes.",
+      "Mas tem uma coisa bonita aí no meio. Você não está só matando saudade, está aprendendo a produzir sozinha uma parte da sua casa. E isso, num lugar onde tudo é novo, é uma forma silenciosa de fincar raiz.",
+      "Na WiseHub as mulheres trocam justamente esses ajustes, o que substitui o quê em cada país. Parece assunto pequeno e é dos que mais aproximam."
+    ],
+    "palavras": 135
+  },
+  {
+    "id": "2026-07-20-06",
+    "date": "2026-07-20",
+    "lote": 8,
+    "n": 6,
+    "persona": "Marcela",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "Voltar pro Brasil não é fracasso",
+    "paras": [
+      "Tem um assunto que a comunidade de imigrantes evita, e o silêncio em cima dele faz muito mal: a possibilidade de voltar.",
+      "Quem se muda vai embora sob aplausos. Todo mundo achou corajoso, todo mundo comemorou. E aí, se as coisas não saem como o planejado, a pessoa fica presa lá por um motivo que não é prático, é social. Voltar significaria admitir publicamente que não deu certo, e isso pesa mais que muita dificuldade real.",
+      "Eu queria desmontar essa ideia com cuidado, porque ela prende gente em situação ruim. Uma mudança internacional é um projeto, e projeto se avalia com dados, não com orgulho. Se as premissas que sustentavam a escolha mudaram, revisar não é fraqueza, é o que qualquer pessoa sensata faz.",
+      "As premissas mudam mesmo. O emprego que existia sumiu. A profissão exigiu revalidação que não estava prevista. A família passou por algo que exige presença. A criança não se adaptou de um jeito que preocupa. O casal se separou. A saudade se mostrou maior do que se esperava. Nada disso é fracasso pessoal, é vida acontecendo.",
+      "E tem uma coisa que quase ninguém enxerga na hora: quem passou um período fora volta diferente, e volta com bagagem que tem valor concreto. Outra língua, outra cultura de trabalho, experiência internacional no currículo, e uma capacidade de recomeçar do zero que só quem fez tem. Isso não é derrota, é uma experiência que muita gente gostaria de ter.",
+      "Também vale nomear a versão mais comum, que quase nunca é contada: muita gente volta, se reorganiza, e sai de novo depois, melhor preparada. Isso é bastante frequente e ninguém posta.",
+      "Existe uma parte prática que ajuda a decidir com clareza em vez de decidir por exaustão. Vale saber o que uma volta significa em termos de status naquele país, se existe prazo que faz perder algo já conquistado, se é possível manter alguma coisa aberta, e o que muda pras crianças em termos de escola. Ter esse mapa antes tira o pânico da conversa.",
+      "Na WiseHub esse assunto tem espaço, e isso não é pouco, porque em muitos lugares ele é tabu. Tem gente ali que voltou, gente que quase voltou e ficou, gente que voltou e saiu de novo. Ouvir os três tipos ajuda a separar cansaço passageiro de decisão de verdade. Sobre o que uma saída representa pro seu status, quem responde é advogado, porque isso é específico de cada caso.",
+      "E se o que estiver pesando for angústia constante, isso merece profissional de saúde mental, não só conversa de comunidade. Decisão grande tomada em esgotamento raramente é a decisão que a pessoa manteria.",
+      "Fique porque escolheu ficar, não porque tem vergonha de voltar. As duas saídas são dignas."
+    ],
+    "palavras": 452
+  },
+  {
+    "id": "2026-07-20-05",
+    "date": "2026-07-20",
+    "lote": 8,
+    "n": 5,
+    "persona": "Marcela",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "A avó que virou uma tela",
+    "paras": [
+      "Tem uma perda na mudança que quase ninguém coloca na conta, e ela não é sua. É dos seus pais.",
+      "Você decide, você se prepara, você escolhe. Eles não escolheram nada. Eles só recebem a notícia de que o neto vai crescer longe. E, diferente de você, eles não têm um projeto novo pra compensar, não têm a empolgação do começo. Eles ficam com o mesmo cotidiano de sempre, com uma cadeira a menos.",
+      "Isso costuma aparecer de um jeito atravessado. A mãe que não pergunta nada sobre a mudança. O pai que faz piada meio ácida. A avó que só fala do frio que vai fazer. Muita gente lê isso como falta de apoio, e quase sempre é medo e luto sem nome.",
+      "Do outro lado tem a criança, e é aí que dá pra fazer alguma coisa concreta. Vínculo de neto com avó se sustenta em convivência, e videochamada de dez minutos por semana em que o adulto pergunta \"como foi a escola\" não sustenta. Criança pequena não conversa, ela brinca. Então o que funciona é transformar a chamada em atividade: ler a mesma história, jogar junto, cozinhar a mesma receita ao mesmo tempo, mostrar o quarto, dar tour pela rua.",
+      "O que também ajuda muito, e é subestimado, é o assíncrono. Áudio curto no fim do dia, foto boba, vídeo de dez segundos. Isso constrói presença cotidiana melhor do que uma chamada longa e formal por mês, que costuma deixar todo mundo sem graça.",
+      "E vale combinar horário fixo, porque fuso horário desorganiza qualquer intenção. Sem hora marcada, vira aquele \"a gente se fala\" que não acontece.",
+      "Tem uma parte prática que muda o ano inteiro da família: planejar as visitas com antecedência real. Quando e quem viaja, quanto custa, quanto tempo fica, e o que isso exige em termos de documento e de tempo fora do país. Muita gente descobre tarde que a visita dos pais depende de exigência que precisava ser preparada com meses.",
+      "Na WiseHub isso aparece bastante, nos nove países acompanhados: como cada família organizou visita de avós, o que precisou preparar, o que atrapalhou. Vale ouvir de quem já recebeu os pais e de quem já teve o pedido negado. Sobre exigências de entrada e documentação de visitante, a fonte é oficial e a orientação é de advogado, sempre, porque isso varia e muda.",
+      "Uma coisa é honesta dizer: nada disso apaga a distância. Não existe arranjo que faça um avô deixar de perder o dia a dia. O que dá pra fazer é garantir que a criança saiba quem eles são, e que eles saibam quem a criança está virando.",
+      "Marque o horário desta semana. Vínculo não sobrevive de intenção."
+    ],
+    "palavras": 449
+  },
+  {
+    "id": "2026-07-20-04",
+    "date": "2026-07-20",
+    "lote": 8,
+    "n": 4,
+    "persona": "Lucas",
+    "canal": "Instagram",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "Seu maior custo não é dinheiro, é retrabalho",
+    "paras": [
+      "O gasto que mais dói num projeto de mudança quase nunca é o previsto. É fazer duas vezes.",
+      "Documento traduzido no formato errado e retraduzido. Processo protocolado sem uma peça e reiniciado. Curso pago que não é reconhecido lá. Mudança pra uma cidade e depois pra outra porque o trabalho não estava onde parecia.",
+      "Cada um desses custa dinheiro, e custa principalmente meses.",
+      "E quase todo retrabalho tem a mesma origem: informação desatualizada ou de fonte errada. Regra que mudou, exigência específica daquele consulado, detalhe que só quem fez sabe.",
+      "Confirmar antes leva uma tarde. Refazer leva um semestre.",
+      "Na WiseHub você confere com quem fez o processo recentemente, e confirma na fonte oficial antes de agir. É a parte mais chata e a que mais economiza."
+    ],
+    "palavras": 127
+  },
+  {
+    "id": "2026-07-20-03",
+    "date": "2026-07-20",
+    "lote": 8,
+    "n": 3,
+    "persona": "Lucas",
+    "canal": "Reels",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "A conta muda quando tem filho",
+    "paras": [
+      "Um erro comum de quem planeja mudança com família: usar a conta de custo de vida de solteiro.",
+      "Filho muda a estrutura toda. Muda o tamanho do imóvel, e imóvel maior é o maior salto de custo em quase todo lugar. Muda o bairro, porque agora depende de escola. Muda o transporte. E entra uma despesa que solteiro não tem, que é cuidado infantil, uma das mais caras em vários países.",
+      "Tem também o efeito na renda: com criança pequena e sem rede de apoio, muitas vezes um dos dois adultos não consegue trabalhar em tempo integral no começo. Isso não é detalhe, é metade da renda planejada.",
+      "Refaça a conta com o tamanho real da sua família e com renda de uma pessoa e meia no primeiro ano.",
+      "Na WiseHub tem famílias que já fizeram essa conta na prática nos países acompanhados e contam onde erraram por baixo."
+    ],
+    "palavras": 149
+  },
+  {
+    "id": "2026-07-20-02",
+    "date": "2026-07-20",
+    "lote": 8,
+    "n": 2,
+    "persona": "Lucas",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "Quanto vale um ano da sua vida",
+    "paras": [
+      "Toda decisão de mudança acaba virando uma discussão sobre dinheiro. Quanto custa o processo, quanto se ganha lá, quanto se gasta pra viver. São perguntas boas, e são incompletas, porque falta a variável mais escassa da conta, que é tempo.",
+      "Vou colocar de forma concreta. Existe um caminho que custa menos e leva quatro anos. E existe outro que custa bem mais caro e leva um ano e meio. A comparação apenas financeira escolhe o primeiro sem pensar. Mas os dois anos e meio de diferença não são abstratos. São dois anos e meio de renda na outra moeda que não entraram. São dois anos e meio da sua filha crescendo aqui em vez de lá. São dois anos e meio a mais de idade sua na hora de entrar num mercado novo, o que em várias áreas conta.",
+      "Quando a conta inclui isso, o caminho mais caro às vezes passa a ser o mais barato. E às vezes não passa, e aí a decisão fica clara pelo outro lado. O ponto não é qual é o certo, é que a decisão estava sendo tomada sem uma das variáveis principais.",
+      "Tem um segundo lugar onde o tempo aparece e quase ninguém mede: o custo de esperar a certeza. Muita gente adia por dois, três anos, esperando ter clareza total antes de dar o primeiro passo. Só que boa parte da clareza não vem de fora, ela vem de ter começado. Enquanto se espera, o relógio corre igual, e algumas portas dependem de idade, de tempo de experiência ou de janelas que abrem e fecham.",
+      "E tem o terceiro, que é o oposto e igualmente caro: pressa. Antecipar uma mudança sem reserva ou sem entender o mercado de destino costuma custar um ano de retrabalho lá na frente, exatamente o ano que a pressa queria economizar.",
+      "O que ajuda a decidir é atribuir um valor ao seu ano. Não precisa ser exato. Pegue o que você ganharia a mais por ano no destino, some o que aquele ano representa em qualidade de vida ou em oportunidade pra sua família, e use esse número pra comparar caminhos. De repente uma diferença de custo que parecia enorme vira pequena perto de dois anos de espera. Ou o contrário fica evidente.",
+      "Essa é uma conversa recorrente na WiseHub, porque quase todo mundo lá já enfrentou essa escolha entre o caminho mais barato e o mais rápido, nos nove países acompanhados. Ouvir de quem escolheu cada um, e como se sente hoje, costuma esclarecer mais que qualquer planilha.",
+      "Sendo exato: prazos de processo não são previsíveis e ninguém aqui garante tempo de análise nem resultado. Isso depende de órgão oficial e do seu caso, e quem orienta é advogado. Decisão financeira é com contador. O que a comunidade dá é a experiência de quem já pagou os dois preços.",
+      "Coloque o tempo na planilha. É a única linha que você não consegue repor depois."
+    ],
+    "palavras": 489
+  },
+  {
+    "id": "2026-07-20-01",
+    "date": "2026-07-20",
+    "lote": 8,
+    "n": 1,
+    "persona": "Lucas",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "O plano B que virou plano A sem ninguém decidir",
+    "paras": [
+      "Tem uma armadilha silenciosa em projeto de mudança internacional, e ela não é financeira nem burocrática. É de decisão.",
+      "Quase todo mundo monta um plano principal e um alternativo. O principal costuma ser o país que a pessoa realmente quer, e o alternativo é aquele que parece mais fácil de entrar. O plano B existe justamente pra tirar o desespero da jogada, e nisso ele é excelente.",
+      "O problema começa quando o plano B é o que anda primeiro. E ele quase sempre anda primeiro, porque foi escolhido por ser mais fácil. Aí a pessoa vai avançando por ali, um passo puxa o outro, e num certo momento já investiu tanto tempo e dinheiro naquele caminho que voltar parece desperdício. Dois anos depois ela está morando num lugar que nunca foi a escolha dela, sem lembrar exatamente quando isso foi decidido.",
+      "Isso tem nome em economia, é o custo afundado. A gente continua investindo numa direção pra não perder o que já gastou, e não porque aquela direção continua sendo a melhor. É um dos erros mais caros que existem, e ele é quase invisível por dentro.",
+      "O antídoto é bem simples e quase ninguém faz: escrever, antes de começar, qual é a condição que faz o plano B virar oficial. Por exemplo, se até tal data o processo principal não tiver avançado até tal ponto, mudo o foco. Definido isso com antecedência, a decisão fica sendo sua. Sem isso, a decisão vai sendo tomada pelo caminho que apresenta menos resistência, o que é outra forma de dizer que ninguém decidiu.",
+      "Vale um segundo cuidado. Plano B feito só por facilidade de entrada costuma envelhecer mal. Entrar é o primeiro dia, e você vai viver todos os outros. Um destino que abre a porta rápido mas não tem mercado pra sua área, ou custo de vida incompatível com a sua renda possível, ou nenhuma perspectiva de permanência longa, resolve o começo e complica o resto.",
+      "Por isso vale comparar os dois caminhos pelos mesmos critérios, e não só pela facilidade: o que o mercado de lá busca na sua área, quanto custa viver, quais são os caminhos reais de permanência ao longo do tempo, e o que muda pra sua família. Esse é justamente o tipo de comparação que a comunidade da WiseHub organiza entre os nove países acompanhados de perto, com quem já mora em cada um deles.",
+      "Nada disso é garantia de que o processo vai sair, e ninguém prevê tempo de análise nem resultado. A parte legal de cada caminho quem responde é advogado. O que a comunidade oferece é o retrato do dia seguinte à chegada, que é o que quase nunca entra na comparação.",
+      "Defina hoje o critério que faz seu plano virar. Se você não definir, ele vira sozinho, e provavelmente numa direção que você não escolheu."
+    ],
+    "palavras": 473
+  },
+  {
+    "id": "2026-07-19-08",
+    "date": "2026-07-19",
+    "lote": 7,
+    "n": 8,
+    "persona": "Marcela",
+    "canal": "Instagram",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "Você vai errar a etiqueta e tudo bem",
+    "paras": [
+      "Você vai cumprimentar errado. Vai chegar cedo demais ou tarde demais. Vai fazer uma pergunta que ali é considerada íntima. Vai rir alto num lugar silencioso.",
+      "Isso vai acontecer, e a vergonha é real. Só que ela é bem menor do que parece de dentro, porque na maioria dos lugares as pessoas entendem imediatamente que você é de fora e relevam.",
+      "O que costuma pegar mal não é o erro, é a insistência em fazer tudo do jeito de casa depois de já ter percebido a diferença.",
+      "Observe mais do que se explique nos primeiros meses. Você aprende os códigos assistindo, e eles são mais rápidos de aprender que a língua.",
+      "Na WiseHub a gente ri disso junto, com quem já passou pelo mesmo em cada um dos países acompanhados. Errar etiqueta não vai te tirar do lugar, e vira história boa depois."
+    ],
+    "palavras": 143
+  },
+  {
+    "id": "2026-07-19-07",
+    "date": "2026-07-19",
+    "lote": 7,
+    "n": 7,
+    "persona": "Marcela",
+    "canal": "Reels",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "O médico que não te entende",
+    "paras": [
+      "Tem um momento de vulnerabilidade que pouca gente comenta: estar doente num país onde você ainda não fala bem a língua.",
+      "Você precisa explicar uma dor, e dor é detalhe. Onde, desde quando, se irradia, se piora. Faltando palavra, você simplifica, e simplificar sintoma pode mudar o que o médico entende.",
+      "Três coisas ajudam de verdade. Escrever antes o que você quer dizer, com as palavras que faltam já traduzidas. Perguntar se existe direito a intérprete, porque em muitos serviços existe e ninguém oferece se você não pedir. E não levar seu filho como tradutor em consulta.",
+      "Na WiseHub tem gente que já passou por isso nos países acompanhados e conta como resolveu. Como funciona o atendimento e o direito a intérprete no seu caso você confirma nos canais oficiais de saúde locais."
+    ],
+    "palavras": 133
+  },
+  {
+    "id": "2026-07-19-06",
+    "date": "2026-07-19",
+    "lote": 7,
+    "n": 6,
+    "persona": "Marcela",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "O filho que se recusa a falar a língua nova em casa",
+    "paras": [
+      "Muita família imigrante vive a mesma cena, e ela costuma virar briga: a criança aprende a língua do país, passa a usá-la o dia todo na escola, e em casa se recusa a falar português. Ou o contrário, aprende a nova e resiste a manter a de origem.",
+      "Nos dois casos os pais se assustam, e o susto vem de lugares diferentes. Quando ela abandona o português, dói porque parece que ela está abandonando a família, os avós, a origem. Quando ela recusa a língua nova em casa, preocupa porque parece atraso na adaptação.",
+      "Vale saber que as duas coisas são comuns e quase sempre passageiras. Criança usa língua por função, não por lealdade. Ela fala a língua do lugar onde acontece a vida dela, e a vida dela acontece na escola, com os amigos. Não é rejeição à família, é economia mental.",
+      "Só que tem um ponto que merece atenção, porque esse não se resolve sozinho: manter a língua de origem é uma janela que fecha. Criança que para de falar português com fluência costuma manter a compreensão, mas perde a capacidade de conversar de verdade. E aí acontece o que mais dói, que é neto que não consegue ter uma conversa com avó.",
+      "O que funciona não é obrigar, porque obrigar transforma a língua da família em castigo. O que funciona é dar função à língua. Chamada de vídeo frequente com os avós, onde a única opção é o português. Desenho, jogo e música na língua de origem. Alguém do outro lado que se importe com o que ela tem pra contar. Língua sobrevive quando serve pra alguma coisa que a criança quer.",
+      "E vale tirar uma pressão de cima: criança bilíngue às vezes mistura, às vezes demora um pouco mais em uma das duas, e isso costuma se organizar. O que não se organiza sozinho é a língua que deixou de ser usada por anos.",
+      "Na WiseHub tem mães vivendo isso em cada um dos nove países acompanhados, e a troca ali é bem concreta: o que cada uma fez, o que funcionou com filho de cada idade, o que só piorou. Também aparece muito a experiência com escolas bilíngues e com apoio de língua, que muda bastante de país pra país.",
+      "Uma ressalva importante: se houver preocupação real com desenvolvimento de fala, atraso ou dificuldade que fuja do esperado, isso é avaliação de fonoaudiólogo ou pediatra, não de grupo de mães. A gente troca experiência, não avalia criança.",
+      "Não brigue pela língua. Crie motivo pra ela existir."
+    ],
+    "palavras": 421
+  },
+  {
+    "id": "2026-07-19-05",
+    "date": "2026-07-19",
+    "lote": 7,
+    "n": 5,
+    "persona": "Marcela",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "Quando toda a sua vida social passa pelo trabalho dele",
+    "paras": [
+      "Tem uma coisa que acontece devagar e que muita mulher só percebe quando já está instalada: todo o círculo social da família se formou em volta do trabalho do marido.",
+      "O começo é natural e até bom. Ele entra na empresa, conhece gente, e vêm os convites. O jantar com os colegas dele, o churrasco na casa do chefe dele, o grupo de mensagens dos casais do trabalho dele. Quando a família ainda não conhece ninguém, isso é um alívio enorme, porque é vida social pronta.",
+      "O preço aparece depois. Nessas rodas, ela costuma ser apresentada como a esposa do fulano. As conversas giram em torno de assuntos da empresa que ela não acompanha. E há uma sensação sutil, difícil de explicar sem parecer ingratidão, de estar sempre entrando na vida de outra pessoa em vez de ter a própria.",
+      "Tem um agravante prático. Se um dia esse trabalho acabar, ou o casal se separar, ou simplesmente ele mudar de empresa, ela perde de uma vez o círculo inteiro. Não porque aquela gente seja falsa, mas porque o vínculo era com ele, não com ela.",
+      "O que constrói círculo próprio raramente é grande. É a rotina que só sua: um curso, uma atividade, um trabalho voluntário, o grupo de mães da escola, a academia no mesmo horário todo dia. Coisas em que você aparece com regularidade e as pessoas passam a te conhecer pelo seu nome e pelo que você faz, e não por quem é seu marido.",
+      "Isso costuma exigir um empurrão desconfortável, porque no começo é tudo constrangedor: você fala mal a língua, não conhece os códigos, e é bem mais fácil ficar em casa. Vale ir mesmo assim. Círculo social não se forma por afinidade instantânea, se forma por repetição.",
+      "E tem um ponto que vale nomear: isso não é vaidade nem capricho. Ter uma vida própria naquele lugar é o que sustenta a mulher quando algo dá errado, e é também o que torna o casamento mais leve, porque tira dele o peso de ser a única fonte de mundo dela.",
+      "Na WiseHub tem muita mulher que passou exatamente por isso, nos nove países acompanhados, e a conversa ali costuma ser bem prática: por onde cada uma começou, o que funcionou naquele país, quanto tempo levou até ter gente sua. Vale ouvir de quem já está do outro lado.",
+      "Uma coisa é honesta dizer: se a sensação de estar sumindo dentro da própria vida for pesada e constante, isso merece profissional, não só conversa de grupo. A gente caminha junto, não substitui apoio clínico.",
+      "Comece por uma coisa só, que seja sua e que se repita toda semana. É assim que se deixa de ser a esposa do fulano naquele lugar."
+    ],
+    "palavras": 455
+  },
+  {
+    "id": "2026-07-19-04",
+    "date": "2026-07-19",
+    "lote": 7,
+    "n": 4,
+    "persona": "Lucas",
+    "canal": "Instagram",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "Ninguém vê seu esforço, vê seu resultado",
+    "paras": [
+      "Uma coisa que pega o brasileiro trabalhando fora: a quantidade de esforço deixa de ser moeda.",
+      "Aqui a gente aprendeu a mostrar dedicação. Ficar até tarde, responder no fim de semana, estar sempre disponível. Em vários mercados isso não impressiona, e em alguns preocupa, porque sugere que você não dá conta no horário.",
+      "O que conta é entrega no prazo combinado, comunicação clara quando algo atrasa, e previsibilidade.",
+      "Isso é libertador quando você entende. Dá pra trabalhar menos horas e ser melhor avaliado, desde que o resultado apareça e a comunicação funcione.",
+      "Na WiseHub tem gente que já fez essa transição de cultura de trabalho e conta o que mudou na prática, nos países acompanhados."
+    ],
+    "palavras": 115
+  },
+  {
+    "id": "2026-07-19-03",
+    "date": "2026-07-19",
+    "lote": 7,
+    "n": 3,
+    "persona": "Lucas",
+    "canal": "Reels",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "O preço de aceitar a primeira oferta",
+    "paras": [
+      "Chegou proposta e o alívio é imenso. A vontade é dizer sim na hora.",
+      "Só que a primeira oferta define mais coisa do que o mês seguinte. Em muitos mercados, o próximo salário é calculado a partir do atual, e a próxima empresa pergunta quanto você ganha hoje. Você não está negociando um contrato, está calibrando uma faixa.",
+      "Não estou dizendo pra recusar. Estou dizendo pra não aceitar em dois minutos por medo de perder. Pedir um ou dois dias pra pensar é normal na maioria dos lugares e não queima ninguém.",
+      "E vale perguntar o que é negociável além do valor. Às vezes o salário está travado, mas outras condições não estão.",
+      "Na WiseHub dá pra ouvir de quem já negociou naquele mercado o que é comum e o que é ofensa cultural. O que vale pro seu contrato específico é conversa com profissional."
+    ],
+    "palavras": 145
+  },
+  {
+    "id": "2026-07-19-02",
+    "date": "2026-07-19",
+    "lote": 7,
+    "n": 2,
+    "persona": "Lucas",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "Emprego ou empresa própria: a escolha que muda tudo lá fora",
+    "paras": [
+      "Quem já empreendeu no Brasil costuma chegar em outro país com uma pergunta que parece de gosto pessoal, mas é estrutural: procuro emprego ou abro meu negócio aqui?",
+      "A resposta honesta é que essa decisão raramente é só sobre preferência. Ela é limitada, antes de tudo, pelo que a sua situação permite. Nem toda autorização de permanência habilita a exercer atividade por conta própria, e nem toda habilita a ser contratado. Em vários lugares as duas coisas exigem enquadramentos diferentes. Ou seja: a primeira pergunta não é o que você quer, é o que você pode, e isso muda de país pra país.",
+      "Passada essa porta, aparece a diferença que ninguém fala. Emprego formal, em muitos países, não é só renda. Ele costuma vir amarrado a coisas que pesam bastante na vida prática: acesso a certos serviços, histórico que facilita aluguel, comprovação estável para processos futuros, previsibilidade. Empreender pode render mais, e frequentemente rende, mas costuma tornar tudo isso mais difícil no começo, porque o mercado local ainda não tem histórico seu.",
+      "Tem também uma questão de tempo que é fácil subestimar. Abrir negócio num país que você não conhece exige entender o cliente daquele lugar, a forma como ele compra, o que ele espera de atendimento, quanto ele aceita pagar. Isso é aprendizado de mercado, e ele leva meses mesmo pra quem já foi muito bem sucedido em outro lugar. Fazer isso queimando reserva é uma pressão pesada.",
+      "Por isso o caminho mais comum entre quem deu certo não é escolher um dos dois, é sequenciar. Entrar com renda mais previsível, usar esse período pra entender o mercado por dentro, construir rede e reputação local, e abrir o próprio quando já se sabe pra quem se está vendendo. Não é o caminho mais rápido, é o que quebra menos gente.",
+      "Isso não é regra e não vale pra todo mundo. Tem área onde entrar como autônomo é o caminho natural, e tem gente que já chega com cliente contratado. O ponto é decidir com informação, e não por identidade, aquele \"eu sou empreendedor, não volto a ser empregado\" que já custou caro pra muita gente no primeiro ano.",
+      "Na WiseHub, entre os nove países acompanhados, tem gente dos dois lados dessa escolha, e ouvir os dois muda a decisão. Dá pra perguntar quanto tempo levou até o negócio andar, o que foi exigido pra formalizar, e o que a pessoa faria diferente.",
+      "Duas ressalvas que não são detalhe. O que a sua autorização permite quem responde é advogado. Formalização, imposto e estrutura de empresa quem responde é contador daquele país. Comunidade não faz nenhum dos dois, e ninguém aqui garante resultado de negócio.",
+      "Decida pela sequência que te deixa em pé no segundo ano, não pela que soa melhor de contar."
+    ],
+    "palavras": 462
+  },
+  {
+    "id": "2026-07-19-01",
+    "date": "2026-07-19",
+    "lote": 7,
+    "n": 1,
+    "persona": "Lucas",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "Por que a reserva derrete mais rápido do que a conta previa",
+    "paras": [
+      "Quase toda pessoa que se muda faz uma reserva. Calcula os meses de custo de vida, arredonda pra cima achando que está sendo conservadora, e embarca tranquila. Aí a reserva acaba antes, e quase sempre pelos mesmos motivos.",
+      "O primeiro é que a conta cobre o custo de viver, mas não cobre o custo de instalar. São coisas diferentes. Viver é aluguel, comida, transporte. Instalar é depósito de garantia, mobiliar do zero, taxa de tradução de documento, aparelho novo porque o seu não funciona ali, seguro exigido no contrato, primeira consulta médica antes do sistema estar resolvido. Isso é uma onda de gasto que acontece uma vez só e concentrada nas primeiras semanas, exatamente quando ainda não entrou renda nenhuma.",
+      "O segundo é o tempo até o primeiro dinheiro entrar. Mesmo com emprego contratado, existe um intervalo entre chegar e receber, e ele costuma ser maior do que se imagina, porque depende de abrir conta, de documento sair, de fechar mês. Quando não há emprego garantido, esse intervalo é a maior incógnita do projeto e é aí que a maioria das reservas quebra.",
+      "O terceiro é mais sutil e vale prestar atenção. No começo você gasta mais porque ainda não sabe economizar naquele lugar. Não conhece o mercado mais barato, não sabe qual transporte compensa, compra errado e compra de novo. Isso é uma taxa de aprendizado, ela é real, e some depois de uns meses. Só que ela pesa justamente no período mais frágil.",
+      "Então a conta boa tem três blocos, não um. Custo de instalação, que é uma vez. Custo de vida mensal, multiplicado por um número de meses. E uma margem específica pro tempo até a primeira renda, que deve ser maior do que a sua estimativa otimista, porque a estimativa otimista é a que quebra.",
+      "Uma coisa que muda muito o cálculo e quase ninguém pesquisa antes: quanto custa instalar naquele país específico. Depósito de aluguel varia muito, exigência de garantia varia, se o imóvel vem mobiliado ou vazio varia. Duas cidades com custo de vida parecido podem ter custos de entrada completamente diferentes.",
+      "É isso que a comunidade da WiseHub tem organizado nos nove países acompanhados: não só quanto custa viver, mas quanto custou entrar, contado por quem entrou. Você monta sua reserva com número de gente que fez, não com estimativa de internet.",
+      "Preciso ser exato: isso não é orientação financeira nem promessa de que a conta vai fechar. Cada caso tem variáveis próprias, e decisão sobre patrimônio e investimento é conversa com profissional habilitado. O que existe aqui é experiência real, que serve pra você não subestimar o começo.",
+      "Faça a conta com os três blocos. Se ela ficar assustadora, melhor descobrir isso agora do que no quinto mês."
+    ],
+    "palavras": 456
+  },
+  {
+    "id": "2026-07-18-08",
+    "date": "2026-07-18",
+    "lote": 6,
+    "n": 8,
+    "persona": "Marcela",
+    "canal": "Instagram",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "Você não precisa gostar no primeiro mês",
+    "paras": [
+      "Existe uma cobrança silenciosa em cima de quem acabou de mudar de país: a de estar feliz.",
+      "Você lutou pra chegar, sonhou com isso, contou pra todo mundo. Aí você chega e sente um vazio estranho, e vem a culpa junto.",
+      "Quero te dizer que isso é comum e não significa que você errou. Adaptação tem uma fase que não tem nada de encantadora. É cansaço, é burocracia, é não entender nada, é sentir falta de coisas bobas.",
+      "Gostar de um lugar leva tempo, porque gostar depende de pertencer, e pertencer se constrói.",
+      "Na WiseHub tem gente que passou por esse começo sem graça e hoje ama onde mora. Se o vazio virar peso que não passa, isso é conversa pra profissional, não pra grupo."
+    ],
+    "palavras": 125
+  },
+  {
+    "id": "2026-07-18-07",
+    "date": "2026-07-18",
+    "lote": 6,
+    "n": 7,
+    "persona": "Marcela",
+    "canal": "Reels",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "A amizade que não sobreviveu",
+    "paras": [
+      "Ninguém te prepara pra isso: algumas amizades não atravessam a mudança.",
+      "Não tem briga, não tem motivo. Aos poucos as mensagens ficam mais raras, os assuntos param de coincidir, e um dia você percebe que já faz meses.",
+      "Dói mais do que parece, porque a gente esperava perder o país, não as pessoas.",
+      "Uma coisa que ajuda a entender: amizade se sustenta muito no cotidiano compartilhado, e é exatamente isso que a distância tira. Não é falta de amor, é falta de rotina em comum.",
+      "Algumas voltam com o tempo, e várias voltam diferentes. E aparecem outras, que você ainda não conhece.",
+      "Na WiseHub tem gente que já sentiu isso e continuou. Não devolve o que passou, mas ajuda saber que não é você que está fazendo algo errado."
+    ],
+    "palavras": 129
+  },
+  {
+    "id": "2026-07-18-06",
+    "date": "2026-07-18",
+    "lote": 6,
+    "n": 6,
+    "persona": "Marcela",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "Quando o filho vira o seu tradutor",
+    "paras": [
+      "Tem uma cena que acontece em quase toda família imigrante, e ela é mais complicada do que parece. A criança aprende a língua nova primeiro, e vira a intérprete da casa.",
+      "No começo até tem graça. Ela pede na padaria, explica pro vizinho, corrige a sua pronúncia rindo. A família comemora, e é justo comemorar, porque é sinal de que ela está se adaptando.",
+      "O problema começa quando isso deixa de ser eventual e vira função. Quando ela é chamada pra traduzir a conversa com o médico. Pra explicar o que o dono do apartamento está dizendo. Pra ajudar a mãe a entender um documento. Nessas horas, uma criança está carregando informação de adulto e responsabilidade de adulto, e ela não tem estrutura pra isso.",
+      "Duas coisas costumam acontecer com ela, e as duas são silenciosas. A primeira é ansiedade, porque ela percebe que se errar a tradução alguma coisa importante da família dá errado. A segunda é uma inversão de papéis desconfortável, onde ela passa a se sentir responsável pelos pais, e crianças que assumem esse lugar cedo costumam ter dificuldade em voltar a ser cuidadas depois.",
+      "Também tem um efeito no adulto, e esse a gente não fala. Quando existe alguém que resolve, a pressão pra aprender a língua diminui. Muita mãe fica anos numa dependência confortável do filho, e depois se vê sem autonomia justamente quando ele cresce e sai de casa.",
+      "O ajuste não precisa ser dramático. É separar o que é ajuda cotidiana, que pode continuar e até é boa, do que é assunto de adulto, que não deve passar por ela. Consulta médica, dinheiro, documento, conflito com terceiros, isso é dos pais. Em muitos lugares existe direito a intérprete em serviço de saúde e em serviço público, e vale perguntar antes de levar a criança como tradutora.",
+      "E o passo que resolve de verdade, mesmo que devagar, é a mãe estudar a língua. Não pra falar bonito, pra conseguir se virar sozinha no essencial. Meia hora por dia muda o jogo em alguns meses, e devolve pra ela uma coisa que a mudança tirou, que é a capacidade de resolver a própria vida.",
+      "Na WiseHub tem muita mulher exatamente nesse ponto, em vários dos nove países acompanhados, e a troca ali costuma ser sobre isso: por onde começou, o que funcionou de fato, como encaixou estudo numa rotina que já está cheia. Se existe apoio gratuito de língua na sua região, isso você confirma nos canais oficiais locais, que variam bastante de lugar pra lugar.",
+      "Deixe seu filho ser criança. Ele pode ajudar, mas não pode ser o adulto responsável pela comunicação da família."
+    ],
+    "palavras": 440
+  },
+  {
     "id": "2026-07-18-05",
     "date": "2026-07-18",
     "lote": 1,
@@ -69,6 +470,29 @@ export const ROTEIROS: Roteiro[] = [
     "palavras": 461
   },
   {
+    "id": "2026-07-18-05",
+    "date": "2026-07-18",
+    "lote": 6,
+    "n": 5,
+    "persona": "Marcela",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "A divisão que ninguém combinou",
+    "paras": [
+      "Antes de mudar de país, o casal conversa sobre muita coisa. Cidade, escola, orçamento, prazo. E quase nunca conversa sobre a única coisa que vai decidir o clima dentro de casa no primeiro ano: quem faz o quê.",
+      "Parece pequeno, mas não é. Quando a família chega, aparece uma quantidade absurda de tarefas novas que não existiam antes, e elas não vêm com nome de responsável. Abrir conta, entender contrato de aluguel, matricular criança, achar pediatra, decifrar sistema de saúde, resolver documento, descobrir transporte, aprender onde se compra cada coisa. Isso é um segundo emprego, e ele aparece exatamente no momento em que uma pessoa da casa já começou o primeiro.",
+      "O que costuma acontecer é silencioso e injusto. Quem tem horário de trabalho fixo fica com o trabalho pago, e todo o resto escorre pra quem está com a agenda \"livre\". Só que a agenda não estava livre, ela estava sem nome. E aí, semanas depois, uma pessoa está exausta e a outra genuinamente não entende por quê, porque do lado de fora não parece trabalho.",
+      "O segundo movimento é ainda mais delicado. Quem assume essa carga vai acumulando um conhecimento que ninguém mais tem: só ela sabe onde ficam os documentos, como se marca consulta, qual é o prazo de tal coisa. Isso parece competência, e é, mas também é uma armadilha, porque torna impossível dividir depois. A tarefa gruda em quem começou.",
+      "Tem um jeito de evitar isso, e ele precisa acontecer antes da mudança. Sentar os dois e listar as frentes, não as tarefas soltas. Saúde é de quem. Escola é de quem. Burocracia é de quem. Casa é de quem. E combinar que a pessoa responsável por uma frente é responsável de verdade, incluindo pesquisar e decidir, não apenas executar o que a outra mandou.",
+      "Uma coisa que ajuda muito e quase ninguém faz: marcar uma conversa fixa, curta, uma vez por semana, só sobre logística da família. Sem cobrança e sem discussão de relação, só o que precisa ser feito e por quem. Parece burocrático demais pra casamento, e é exatamente por parecer que quase todo mundo pula e depois briga.",
+      "Essa é uma das conversas mais recorrentes entre as mulheres da WiseHub, nos nove países acompanhados, porque o padrão se repete em todos eles. Ouvir de quem já está dois anos à frente como resolveu a divisão em casa costuma poupar meses de desgaste.",
+      "E vale dizer com clareza: quando o desgaste do casal passa do ponto de logística e vira mágoa acumulada, isso é assunto pra profissional, e não pra grupo. A gente troca experiência, não faz terapia de casal.",
+      "Combine antes de embarcar. É uma conversa de uma hora que evita um ano de ressentimento."
+    ],
+    "palavras": 454
+  },
+  {
     "id": "2026-07-18-04",
     "date": "2026-07-18",
     "lote": 1,
@@ -90,6 +514,25 @@ export const ROTEIROS: Roteiro[] = [
       "FECHAMENTO (o Lucas escolhe uma):\nOpção 1: É isso, pessoal. Número na mesa, e a decisão fica com você.\nOpção 2: Pesquisa o seu caso, roda a sua conta, e me conta aqui embaixo o que achou.\nOpção 3: Cabeça fria e planilha aberta. Te espero no próximo."
     ],
     "palavras": 488
+  },
+  {
+    "id": "2026-07-18-04",
+    "date": "2026-07-18",
+    "lote": 6,
+    "n": 4,
+    "persona": "Lucas",
+    "canal": "Instagram",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "Seu concorrente não é quem você pensa",
+    "paras": [
+      "Quando alguém se candidata a uma vaga em outro país, imagina competir com os profissionais daquele país.",
+      "Na maioria das áreas, não é bem isso. Você compete com quem já está autorizado a trabalhar ali, o que inclui muito imigrante que chegou antes, já tem documento resolvido, já fala a língua e já tem referência local.",
+      "Isso muda a estratégia. Não adianta só ser bom tecnicamente. Pesa o quanto você reduz o trabalho de quem contrata: documentação clara, disponibilidade real, comunicação sem atrito.",
+      "Quem entende isso para de vender só competência e passa a vender previsibilidade.",
+      "Na WiseHub você conversa com quem já foi contratado nos países acompanhados e sabe o que pesou de verdade. Sobre o que sua situação permite legalmente, quem responde é advogado."
+    ],
+    "palavras": 126
   },
   {
     "id": "2026-07-18-03",
@@ -117,6 +560,25 @@ export const ROTEIROS: Roteiro[] = [
     "palavras": 348
   },
   {
+    "id": "2026-07-18-03",
+    "date": "2026-07-18",
+    "lote": 6,
+    "n": 3,
+    "persona": "Lucas",
+    "canal": "Reels",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "Networking não é evento",
+    "paras": [
+      "Muita gente entende networking como ir a evento, apertar mão e distribuir contato. Depois de mudar de país, esse formato costuma render pouco.",
+      "O que funciona lá fora tem outro ritmo. É conversa individual, é ajudar antes de precisar, é aparecer com consistência no mesmo lugar até virar rosto conhecido. Leva mais tempo e dá muito mais resultado.",
+      "Tem uma diferença que pega o brasileiro de surpresa: em vários mercados, pedir uma conversa de vinte minutos pra entender a área é absolutamente normal, e quase todo mundo aceita. A gente não pede porque acha invasivo, e perde a porta mais aberta que existe.",
+      "Comece por quem já esteve na sua posição. Quem migrou há dois anos lembra do caminho e costuma responder.",
+      "Na WiseHub essa conversa acontece toda semana, com gente que já está do outro lado. Ninguém garante vaga nem indicação, mas o caminho fica menos solitário."
+    ],
+    "palavras": 148
+  },
+  {
     "id": "2026-07-18-02",
     "date": "2026-07-18",
     "lote": 1,
@@ -140,6 +602,29 @@ export const ROTEIROS: Roteiro[] = [
       "**[Marcela]** A WiseHub está esperando por você. E não se esqueça: os seus sonhos merecem ser realizados."
     ],
     "palavras": 402
+  },
+  {
+    "id": "2026-07-18-02",
+    "date": "2026-07-18",
+    "lote": 6,
+    "n": 2,
+    "persona": "Lucas",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "A armadilha de ganhar numa moeda e viver em outra",
+    "paras": [
+      "Tem um arranjo que parece perfeito no papel e que quebra muita gente na prática: manter o trabalho no Brasil, ganhando em real, e ir morar num país de moeda forte.",
+      "A lógica inicial faz sentido. Você já tem a renda, já tem o cliente, não precisa procurar emprego lá fora, e ainda ganha tempo pra se estabelecer. É um plano razoável de transição. O problema é quando ele deixa de ser transição e vira o plano definitivo, sem ninguém ter decidido isso.",
+      "O primeiro aperto é aritmético. Seu ganho está numa moeda e seu custo está em outra, e as duas se movem sem combinar com você. Um período ruim de câmbio não reduz seu salário, reduz a sua vida. O mesmo trabalho, no mesmo volume, de repente paga menos aluguel. E você não tem nenhuma alavanca sobre isso.",
+      "O segundo é mais lento e mais perigoso, porque não dói no começo. Trabalhando exclusivamente pra fora, você não constrói presença no mercado onde mora. Não faz rede local, não acumula referência local, não aprende como aquele mercado contrata. Passam dois anos e você continua sendo, profissionalmente, alguém que mora ali mas não pertence dali. Aí, quando você precisa ou quer virar a chave, começa do zero, só que agora com mais idade e mais pressa.",
+      "O terceiro é que esse arranjo costuma vir com uma bagunça de formalização. Onde a renda é declarada, o que aquele país exige de quem trabalha de dentro dele para fora, o que a sua autorização de permanência permite e o que não permite. Isso varia bastante, e é o tipo de detalhe que ninguém confere enquanto está dando certo.",
+      "Não estou dizendo pra não fazer. Estou dizendo pra fazer com data. Se a renda de fora é a ponte, defina quando a ponte acaba e o que precisa estar de pé até lá: quantos contatos locais, qual primeira experiência no mercado de lá, que percentual da renda já vem na moeda em que você vive.",
+      "Na WiseHub tem bastante gente exatamente nessa situação, em vários dos países acompanhados, e a troca ali costuma ser sobre isso mesmo: quanto tempo cada um levou pra virar a chave, o que fez a diferença, o que atrasou. Dá pra perguntar pra quem está seis meses à sua frente, que é o conselho mais útil que existe.",
+      "Duas ressalvas honestas. A parte legal, sobre o que sua autorização permite em cada país, é conversa com advogado. A parte de onde declarar renda é conversa com contador. Comunidade não faz nenhum dos dois papéis e ninguém aqui garante que sua transição vai dar certo.",
+      "Ponte é boa. Só não pode virar endereço fixo sem alguém ter escolhido isso."
+    ],
+    "palavras": 450
   },
   {
     "id": "2026-07-18-01",
@@ -167,6 +652,192 @@ export const ROTEIROS: Roteiro[] = [
       "**[Marcela]** A WiseHub está esperando por você. E não se esqueça: os seus sonhos merecem ser realizados."
     ],
     "palavras": 389
+  },
+  {
+    "id": "2026-07-18-01",
+    "date": "2026-07-18",
+    "lote": 6,
+    "n": 1,
+    "persona": "Lucas",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "Mudar de país não te desliga automaticamente do sistema anterior",
+    "paras": [
+      "Existe uma suposição silenciosa que atrapalha muita gente: a ideia de que, no dia em que o avião decola, sua vida anterior se encerra sozinha. Vida financeira não funciona assim, e é bom saber disso antes.",
+      "O ponto central é que residência fiscal não é a mesma coisa que endereço. São conceitos diferentes, definidos por regras próprias em cada país, e mudar de casa não muda automaticamente a segunda. Existe procedimento, existem prazos, e existe a possibilidade de você ser considerado ligado a dois lugares ao mesmo tempo, com obrigações nos dois.",
+      "Isso importa por uma razão bem prática: gente que não organiza essa transição costuma descobrir a pendência tarde, quando ela já acumulou. E o pior é que essas descobertas costumam vir em momentos ruins, na hora de comprar um imóvel, de fazer um processo, de justificar patrimônio.",
+      "Tem um segundo ponto que quase ninguém considera na hora de escolher destino. Cada país trata de forma diferente a renda que você recebe de fora, o patrimônio que você mantém no país de origem, e o que acontece quando você tem investimentos nos dois lados. Duas pessoas com a mesma renda podem ter situações completamente distintas dependendo de onde escolheram morar e de como organizaram a saída.",
+      "E tem o terceiro, que é sobre timing. A ordem em que você faz as coisas muda o resultado. Vender um bem antes ou depois de mudar de residência fiscal não é indiferente. Iniciar uma atividade lá antes ou depois de encerrar formalmente algo aqui não é indiferente. Nada disso é armadilha, é só sequência, e sequência se planeja.",
+      "O que a comunidade faz aqui é te dar o mapa de perguntas. Na WiseHub, entre os nove países acompanhados, você encontra gente que já organizou essa transição e sabe exatamente quais foram as decisões que precisaram tomar e em que ordem. Isso te permite chegar no profissional certo já sabendo o que perguntar, o que costuma economizar tempo e dinheiro.",
+      "Agora eu preciso ser bem direto, porque esse é o tipo de assunto onde conselho errado custa caro. Nada disso é orientação tributária. Não somos consultoria, não existe resposta única, e a sua situação depende de detalhes que só um contador olhando o seu caso consegue avaliar. Conteúdo educativo serve pra você saber que o tema existe e que ele tem prazo, não pra substituir profissional habilitado.",
+      "O recado é um só: coloque isso na sua lista antes da mudança, não depois. É das poucas coisas do projeto que ficam mais caras exatamente por serem adiadas."
+    ],
+    "palavras": 423
+  },
+  {
+    "id": "2026-07-17-08",
+    "date": "2026-07-17",
+    "lote": 5,
+    "n": 8,
+    "persona": "Marcela",
+    "canal": "Instagram",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "A professora ainda não entende seu filho",
+    "paras": [
+      "Tem uma cena que aperta o coração de qualquer mãe: você deixa seu filho na escola nova sabendo que ele vai passar horas sem conseguir dizer direito o que sente.",
+      "Ele vai querer água e não vai saber pedir. Vai se machucar e não vai saber explicar onde dói. Vai ouvir uma piada e rir depois de todo mundo, ou não rir.",
+      "Essa fase é real, é desconfortável, e ela é mais curta do que parece de dentro. Criança pega língua em contexto, e escola é contexto o dia inteiro.",
+      "O que ajuda é combinar com a escola antes: como eles avisam se algo acontecer, se existe apoio de língua e quem é a pessoa de referência dele nos primeiros meses.",
+      "Na WiseHub tem mãe que já viveu esse começo em cada um dos países acompanhados e conta como foi na prática. Como funciona apoio escolar em cada lugar você confirma na própria escola e nos canais oficiais, que é onde a resposta do seu caso mora."
+    ],
+    "palavras": 167
+  },
+  {
+    "id": "2026-07-17-07",
+    "date": "2026-07-17",
+    "lote": 5,
+    "n": 7,
+    "persona": "Marcela",
+    "canal": "Reels",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "O aniversário que você organiza sozinha",
+    "paras": [
+      "O primeiro aniversário do seu filho em outro país tem uma cena que ninguém fotografa: você fazendo tudo sozinha.",
+      "Não tem sua mãe pra ajudar com a comida. Não tem sua irmã pra segurar o bolo. Não tem aquele grupo que aparecia uma hora antes pra montar mesa. E não é que faltou gente. É que a sua gente ainda não existe ali.",
+      "Isso bate mais forte do que a gente imagina, porque festa de criança é feita de rede, e a rede é justamente o que a mudança desmonta.",
+      "Duas coisas ajudam. A primeira é aceitar que a primeira festa vai ser menor, e menor não é pior. A segunda é convidar quem você mal conhece, mesmo com vergonha. É assim que rede começa, com um convite feito antes de existir intimidade.",
+      "Na WiseHub tem mães que passaram por esse primeiro aniversário e contam como foi. Não resolve saudade, mas ajuda saber que a próxima festa costuma ter mais gente."
+    ],
+    "palavras": 161
+  },
+  {
+    "id": "2026-07-17-06",
+    "date": "2026-07-17",
+    "lote": 5,
+    "n": 6,
+    "persona": "Marcela",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "Quando alguém adoece e você está longe",
+    "paras": [
+      "Tem um medo que quase toda pessoa que mora fora carrega em silêncio, e ele costuma aparecer de madrugada. É o medo do telefonema. Aquele em que alguém da família adoece e você está a um oceano de distância.",
+      "Quero falar disso com cuidado, porque é o tipo de assunto que a gente evita justamente por doer. Só que evitar não protege ninguém, e chegar despreparada nesse momento torna tudo mais difícil do que precisa ser.",
+      "A primeira coisa que costuma pegar é a sensação de inutilidade. Você está longe, não pode levar ao médico, não pode dormir no hospital, não pode resolver. E aí vem uma culpa pesada, que sussurra que você escolheu estar longe. Eu queria ser bem clara aqui: cuidar não é só presença física. Organizar informação, coordenar quem vai a qual consulta, entender o que o médico disse e traduzir isso pra família, ajudar financeiramente quando é possível, isso tudo é cuidado, e muitas vezes é o cuidado que a família mais precisa naquele momento.",
+      "A segunda coisa é prática, e é sobre a viagem. Quando a notícia chega, todo mundo quer ir imediatamente, e nem sempre imediatamente é o melhor momento. Às vezes o momento em que a família mais vai precisar de você é semanas depois, quando os primeiros socorros passaram e todo mundo já está exausto. Ir de cabeça quente pode gastar o recurso e o tempo que fariam mais diferença adiante. Isso não é frieza, é conseguir estar presente quando presença importa mais.",
+      "E tem a parte que ninguém quer olhar antes, mas que muda tudo. Saber, com calma e antecedência, qual é a sua situação de deslocamento. Se o seu documento permite sair e voltar sem risco, se há prazo de processo em andamento que uma viagem atrapalha, quanto tempo você pode ficar fora sem afetar sua residência. Muita gente descobre isso na pior hora possível, com passagem na mão.",
+      "Essas respostas dependem do seu status em cada país e não são iguais pra todo mundo. Na WiseHub dá pra entender como isso funciona nos nove países acompanhados e ouvir de quem já teve que viajar às pressas o que aprendeu, inclusive sobre o que deixar organizado antes de precisar. O que vale pro seu caso específico, principalmente se houver processo em andamento, quem responde é advogado, sempre.",
+      "E quando a dor for maior que o que a família consegue segurar sozinha, isso é hora de profissional de saúde, não de grupo. A gente caminha junto, não substitui cuidado clínico.",
+      "Deixe isso organizado enquanto está tudo bem. Não é atrair coisa ruim, é o contrário. É garantir que, se o telefonema vier, você vá gastar sua energia com quem você ama e não com burocracia que podia estar resolvida."
+    ],
+    "palavras": 458
+  },
+  {
+    "id": "2026-07-17-05",
+    "date": "2026-07-17",
+    "lote": 5,
+    "n": 5,
+    "persona": "Marcela",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "A casa que você monta duas vezes",
+    "paras": [
+      "Ninguém avisa que mudar de país é montar uma casa duas vezes. A primeira é a que você desmonta, e a segunda é a que você levanta do zero, muitas vezes sozinha, num lugar onde você ainda não sabe onde se compra um martelo.",
+      "A parte de desmontar é a que dói de um jeito que surpreende. Você abre armários que estavam fechados há anos e cada objeto vira uma decisão. Isso vai, isso fica, isso eu dou. Só que não é sobre objeto, e é por isso que cansa tanto. É a roupinha que os dois filhos usaram. É a louça da sua mãe. É o desenho pregado na geladeira. Cada escolha dessas custa um pedacinho, e você faz dezenas por dia, enquanto ainda resolve documento, escola e passagem.",
+      "Depois vem a segunda casa, e ela começa vazia num sentido que vai além dos móveis. Você não sabe qual mercado tem o que você precisa. Não conhece a farmácia. Não tem aquela vizinha pra quem se pede socorro. Cada coisa banal vira uma pequena expedição, e você faz todas ao mesmo tempo, geralmente enquanto alguém da família já entrou na rotina de trabalho ou de escola.",
+      "Tem uma coisa que ajuda de verdade nessa fase, e ela não é organização. É baixar a régua. A casa não precisa estar pronta em um mês. Ela vai levar tempo, e tudo bem que leve. O que precisa funcionar rápido é o essencial, cama, cozinha, banho, rotina das crianças. O resto pode se acomodar devagar, e vai se acomodar melhor quando você já conhecer o lugar.",
+      "E tem o lado prático, que é onde a informação certa poupa semanas. Como funciona aluguel naquele país, o que se costuma exigir de garantia, o que já vem mobiliado, o que é normal ou absurdo no preço da região, como se resolve internet, conta de luz, transporte. Essas respostas mudam de país pra país e não estão em lugar nenhum de forma organizada, elas estão na cabeça de quem já fez.",
+      "É esse tipo de coisa que a comunidade da WiseHub tem mastigado, nos nove países acompanhados de perto, com gente que montou a segunda casa e lembra exatamente onde perdeu tempo. Dá pra chegar sabendo o que perguntar, em vez de descobrir tudo no susto e na pressa.",
+      "Uma coisa eu preciso dizer com honestidade. Nenhuma comunidade resolve contrato de aluguel, exigência de fiador ou questão legal de moradia. Isso depende do país, do seu caso, e às vezes de um profissional. O que a gente faz é encurtar a curva do que é prático e humano.",
+      "Se você está no meio da primeira casa, chorando em cima de uma caixa, saiba que isso é normal e que passa. E se você já está na segunda, com metade das coisas ainda no chão, também. Casa não se faz num mês. Se faz morando."
+    ],
+    "palavras": 479
+  },
+  {
+    "id": "2026-07-17-04",
+    "date": "2026-07-17",
+    "lote": 5,
+    "n": 4,
+    "persona": "Lucas",
+    "canal": "Instagram",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "Diploma não é passaporte",
+    "paras": [
+      "Existe uma frase que atrapalha muita gente: com o meu diploma eu trabalho em qualquer lugar.",
+      "Depende inteiramente da profissão. Algumas atravessam fronteira quase sem atrito. Outras exigem revalidação formal, exame, estágio supervisionado ou registro em conselho local, e isso pode levar de meses a anos, dependendo do país e da área.",
+      "O erro caro não é a exigência existir. É descobrir dela depois de já ter se mudado, quando o orçamento foi feito contando com uma renda que ainda não pode ser exercida.",
+      "Essa é a primeira pergunta a fazer, antes de escolher destino: minha profissão é regulamentada lá, e se for, qual é o caminho e quanto tempo leva.",
+      "Na WiseHub dá pra ouvir de quem já passou por esse processo na sua área, nos países acompanhados. O que vale pro seu caso específico quem responde é o órgão oficial e um profissional habilitado, e vale confirmar sempre na fonte antes de decidir."
+    ],
+    "palavras": 155
+  },
+  {
+    "id": "2026-07-17-03",
+    "date": "2026-07-17",
+    "lote": 5,
+    "n": 3,
+    "persona": "Lucas",
+    "canal": "Reels",
+    "formato": "curto",
+    "tipo": "roteiro",
+    "titulo": "O sócio que fica no Brasil",
+    "paras": [
+      "Tem uma dúvida que trava muito empreendedor na hora de se mudar: e o sócio que fica?",
+      "A resposta honesta é que sociedade à distância funciona, mas não do mesmo jeito. O que sustentava a parceria era muita conversa não combinada. Café, corredor, decisão rápida no fim do dia. Isso some, e ninguém percebe que sumiu até começar o ruído.",
+      "O que costuma salvar é bem chato e bem simples: escrever o que antes era combinado no ar. Quem decide o quê sozinho, o que precisa dos dois, e em que ritmo vocês se falam de verdade sobre número, não sobre tarefa.",
+      "Isso vale a conversa antes de você embarcar, não depois. Fuso horário não perdoa combinação vaga.",
+      "Na WiseHub tem gente que atravessou exatamente isso, e conta o que quebrou e o que aguentou. Contrato, responsabilidade e a parte jurídica da sociedade quem trata é advogado, não comunidade."
+    ],
+    "palavras": 149
+  },
+  {
+    "id": "2026-07-17-02",
+    "date": "2026-07-17",
+    "lote": 5,
+    "n": 2,
+    "persona": "Lucas",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "Quem está pagando a conta do câmbio na sua mudança",
+    "paras": [
+      "Todo projeto de mudança internacional tem uma despesa que não aparece em planilha nenhuma, e ela costuma comer mais que muita passagem aérea. É o custo de mover dinheiro entre países.",
+      "A confusão começa porque quase todo mundo olha só a tarifa. O banco anuncia uma taxa baixa, você acha que fez um bom negócio, e o dinheiro chega menor do que a conta prometia. O motivo é que a tarifa raramente é a maior parte do custo. A maior parte está na cotação usada na conversão, que costuma ser diferente daquela que você viu no aplicativo de notícias. Essa diferença tem nome, chama-se spread, e ela é silenciosa por desenho.",
+      "Faça a conta uma vez e você não esquece mais. Numa mudança comum, entre reserva inicial, depósito de aluguel, primeiros meses de custo de vida e eventuais taxas de processo, é fácil movimentar valores altos em poucos meses. Um ponto percentual a mais de diferença nessa movimentação toda vira uma quantia que paga móveis, ou um mês inteiro de aluguel.",
+      "Existe um segundo custo, e esse é mais sutil. É a decisão de quando converter. Muita gente converte tudo de uma vez, num dia qualquer, sem pensar. Câmbio oscila, e concentrar toda a conversão num único momento é uma aposta que ninguém escolheu conscientemente fazer. Distribuir em algumas etapas não garante melhor resultado, mas reduz a chance de você ter feito tudo justo no pior dia do ano.",
+      "E tem o terceiro, que só aparece depois. Muita gente mantém obrigação financeira nos dois países durante um tempo, e cada ida e volta de dinheiro paga o pedágio de novo. Vale mapear isso antes: o que realmente precisa atravessar fronteira, o que pode ficar onde está, e o que pode ser encerrado antes da mudança.",
+      "A WiseHub não move dinheiro nem indica onde você deve converter, e é bom que fique claro. O que existe ali é gente que já fez esses movimentos nos nove países acompanhados e conta o que aprendeu na prática, quais foram os custos que pegaram de surpresa e o que fariam diferente. Você chega na sua decisão com o mapa dos pedágios, e não descobrindo cada um deles no susto.",
+      "Preciso ser exato numa coisa. Nada disso é recomendação de investimento nem de operação financeira. Não somos consultoria e não existe garantia de resultado em câmbio, que oscila por motivos que ninguém controla. Decisão sobre dinheiro, imposto e remessa tem endereço certo, que é contador e profissional habilitado do seu caso.",
+      "Coloque o custo de mover dinheiro como uma linha própria no seu orçamento, com nome e valor estimado. Ela existe de qualquer jeito. A diferença é se ela vai aparecer no seu planejamento ou só no seu extrato."
+    ],
+    "palavras": 454
+  },
+  {
+    "id": "2026-07-17-01",
+    "date": "2026-07-17",
+    "lote": 5,
+    "n": 1,
+    "persona": "Lucas",
+    "canal": "YouTube",
+    "formato": "longo",
+    "tipo": "roteiro",
+    "titulo": "A entrevista começou antes de você ser chamado",
+    "paras": [
+      "Existe uma etapa do processo seletivo internacional que quase ninguém trata como etapa, e ela acontece antes de qualquer contato. É o momento em que alguém do outro lado digita seu nome e olha o que aparece.",
+      "Não é sobre ter presença digital bonita. É sobre coerência. Quem contrata de outro país tem menos informação sobre você do que teria sobre um candidato local. Não conhece sua empresa anterior, não conhece a faculdade, não tem um conhecido em comum pra perguntar. Então ele preenche essas lacunas com o que encontra. E o que encontra costuma ser um perfil profissional desatualizado, dizendo um cargo que você não ocupa mais, numa língua que o mercado dele não lê.",
+      "O efeito prático é cruel na sua discrição. Você nunca recebe um retorno dizendo que foi descartado ali. Simplesmente não vem convite, e você atribui isso à concorrência, ao visto, ao mercado difícil. A causa real ficou numa aba de navegador que você nunca viu.",
+      "Arrumar isso é das poucas coisas do projeto de mudança que dependem só de você, não custam nada e podem ser feitas neste fim de semana. Descrever a função pelo nome que o mercado de destino usa. Trazer resultado em número quando existir número. Deixar claro em que país você está e o que está buscando, porque recrutador nenhum vai adivinhar se você já tem autorização, se está se mudando ou se quer trabalho remoto.",
+      "Tem um detalhe que muda a leitura de tudo isso. O que conta como \"bom perfil\" varia de mercado pra mercado. Em alguns lugares valoriza-se um relato mais direto e sóbrio. Em outros, mostrar trajetória e propósito pesa. Copiar o padrão de um país aplicando em outro produz aquele efeito estranho de texto traduzido, que soa competente e ao mesmo tempo deslocado.",
+      "É esse tipo de calibragem que fica mais rápido com quem já está lá dentro. Na WiseHub você encontra gente trabalhando nos nove países que a comunidade acompanha de perto, e dá pra perguntar como é lido um perfil na área específica em que você atua, o que costuma chamar atenção e o que costuma queimar. Você leva sua dúvida pra uma live e sai com o ajuste, em vez de descobrir isso depois de meses de silêncio.",
+      "Nada disso garante entrevista, e ninguém aqui consegue prometer processo seletivo pra você. Contratação depende do mercado, do momento da empresa e de fatores que ninguém controla. Questões de visto e autorização de trabalho quem responde é advogado. O que a comunidade oferece é o espelho antes da vitrine.",
+      "Olhe seu perfil hoje como se você fosse o recrutador. Se ele não conta em trinta segundos quem você é e o que sabe fazer, essa é a primeira entrevista que você está perdendo, e ela é gratuita de consertar."
+    ],
+    "palavras": 465
   },
   {
     "id": "2026-07-16-08",
