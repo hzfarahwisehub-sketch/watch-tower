@@ -313,6 +313,137 @@ export const LABOR_MARKET: LaborMarketMap = {
       }
     ]
   },
+  "mx": {
+    "updatedAt": "2026-07-22",
+    "overview": "O mercado de trabalho mexicano em 2026 combina desemprego baixo com alta informalidade e um vetor de crescimento claro, o nearshoring. Segundo a Encuesta Nacional de Ocupación y Empleo do INEGI, a taxa de desocupação ficou em torno de 2,6% da população economicamente ativa no primeiro trimestre de 2026, enquanto a informalidade ainda concentrava cerca de 54,8% da força de trabalho. O emprego formal cresce puxado pela relocalização de cadeias produtivas para o país.\n\nO nearshoring é o motor da demanda por mão de obra qualificada. A Secretaría de Economía registrou investimento estrangeiro direto recorde para um primeiro trimestre em 2026, com destaque para automotivo e eletromobilidade, eletroeletrônico, semicondutores, dispositivos médicos e aeroespacial. A concentração está no norte do país e no Bajío, onde fábricas e fornecedores globais estão se instalando ou ampliando operações.\n\nPara o estrangeiro, porém, o acesso ao emprego formal passa quase sempre por uma oferta de trabalho de empresa mexicana que patrocine o trâmite migratório. Não existe visto de busca de emprego, e o trabalho remunerado só é permitido com a autorização correspondente na condição de residência.",
+    "hotSectors": [
+      "Automotivo e eletromobilidade, principal captador de investimento do nearshoring no norte e no Bajío",
+      "Eletroeletrônico e semicondutores, com fornecedores globais instalando operações no país",
+      "Aeroespacial, concentrado em polos como Querétaro e a região Nordeste",
+      "Dispositivos médicos e eletrodomésticos, ligados às cadeias de exportação",
+      "Logística e parques industriais, puxados pela ampliação da capacidade instalada",
+      "Tecnologia da informação e desenvolvimento de software, com destaque para Guadalajara"
+    ],
+    "coolingSectors": [
+      "Ocupações informais, que ainda respondem por cerca de 54,8% da força de trabalho e oferecem pouca via de regularização migratória",
+      "Vagas sem exigência de qualificação, mais expostas à concorrência local e à baixa remuneração"
+    ],
+    "inDemandRoles": [
+      {
+        "role": "Engenheiro de manufatura e de processos",
+        "note": "Perfil dos mais buscados pelas fábricas do nearshoring, sobretudo nos setores automotivo, eletrônico e aeroespacial. Engenharia com responsabilidade técnica pode exigir cédula profissional."
+      },
+      {
+        "role": "Técnico em automação, mecatrônica e manutenção industrial",
+        "note": "Demanda alta nas linhas de produção que estão sendo instaladas ou ampliadas no norte e no Bajío."
+      },
+      {
+        "role": "Profissional bilíngue em espanhol e inglês",
+        "note": "O inglês é diferencial forte em multinacionais, centros de serviços compartilhados e áreas de comércio exterior."
+      },
+      {
+        "role": "Especialista em logística e cadeia de suprimentos",
+        "note": "A expansão de parques industriais e de operações de exportação aquece a demanda por gestão logística."
+      },
+      {
+        "role": "Desenvolvedor de software e profissional de tecnologia",
+        "note": "O polo de tecnologia de Guadalajara e os centros de serviços concentram vagas de desenvolvimento e de dados."
+      }
+    ],
+    "byQualification": [
+      {
+        "area": "Engenharia",
+        "advice": "É a formação mais alinhada ao nearshoring, com demanda concentrada em manufatura, automação e aeroespacial. Profissões de engenharia com responsabilidade técnica podem exigir cédula profissional, o que passa pela revalidação do diploma estrangeiro."
+      },
+      {
+        "area": "Tecnologia e computação",
+        "advice": "Boa combinação de demanda e mobilidade, com polos em Guadalajara, Cidade do México e Monterrey. Parte das vagas aceita trabalho remoto ou híbrido, o que se conecta à residência por solvência econômica para quem mantém contrato no exterior."
+      },
+      {
+        "area": "Saúde",
+        "advice": "É profissão regulamentada. Exercer no México exige cédula profissional e, para diploma obtido fora, revalidação de estudos e registro no órgão competente, um processo que deve começar antes da mudança."
+      },
+      {
+        "area": "Comércio exterior e administração",
+        "advice": "Beneficia-se da expansão industrial e exportadora, com valor extra para quem domina inglês e conhece regras de comércio internacional."
+      }
+    ],
+    "salaries": [
+      {
+        "role": "Salário mínimo geral",
+        "range": "315,04 pesos por dia, cerca de 9.582 pesos por mês, a partir de 1º de janeiro de 2026",
+        "source": {
+          "label": "CONASAMI, Incremento a los salarios mínimos para 2026",
+          "url": "https://www.gob.mx/conasami/articulos/incremento-a-los-salarios-minimos-para-2026",
+          "official": true
+        }
+      },
+      {
+        "role": "Salário mínimo na Zona Livre da Fronteira Norte",
+        "range": "440,87 pesos por dia, a partir de 1º de janeiro de 2026",
+        "source": {
+          "label": "CONASAMI, Incremento a los salarios mínimos para 2026",
+          "url": "https://www.gob.mx/conasami/articulos/incremento-a-los-salarios-minimos-para-2026",
+          "official": true
+        }
+      }
+    ],
+    "foreignerRules": "Trabalhar legalmente no México quase sempre depende de uma oferta de emprego de uma empresa mexicana que patrocine o trâmite. Não existe visto de busca de trabalho, e o trabalho remunerado só é permitido quando a condição de residência traz a autorização correspondente.\n\nO caminho padrão é a residência temporária com permissão para realizar atividades remuneradas. O empregador inicia o processo perante o INM, obtém um Número Único de Trámite e, aprovada a oferta, o candidato conclui a emissão do visto no consulado mexicano do país de origem. O prazo de análise da autorização costuma girar em torno de 20 dias úteis, e a residência temporária pode ser concedida por um a quatro anos.\n\nProfissões regulamentadas, como saúde, direito e engenharia com responsabilidade técnica, exigem cédula profissional. Para diploma obtido no exterior, isso implica revalidação de estudos e registro no órgão competente antes de exercer. Como as regras migratórias e de reconhecimento variam por caso e por consulado, convém confirmar cada exigência com o INM, com o consulado e, quando possível, com um profissional habilitado antes de assumir compromissos.",
+    "opportunityWindows": [
+      "Contratação ligada ao nearshoring nos estados do norte e do Bajío, onde se concentram as fábricas de automóveis, eletrônicos e autopeças que estão sendo instaladas ou ampliadas.",
+      "Expansão de parques industriais, acompanhando o investimento estrangeiro direto recorde registrado pela Secretaría de Economía no início de 2026.",
+      "Vagas em centros de tecnologia e de serviços compartilhados, sobretudo em Guadalajara, Monterrey e Cidade do México, com peso maior para quem é bilíngue."
+    ],
+    "jobBoards": [
+      {
+        "label": "México Te Emplea, portal do Servicio Nacional de Empleo (STPS), com seção para pessoas estrangeiras com residência",
+        "url": "https://mexicoteemplea.gob.mx/",
+        "official": true
+      },
+      {
+        "label": "INM, Preguntas frecuentes para obtener permiso de trabajo",
+        "url": "https://www.gob.mx/inm/documentos/preguntas-frecuentes-para-obtener-permiso-de-trabajo",
+        "official": true
+      },
+      {
+        "label": "LinkedIn Empregos, principal canal para vagas qualificadas e contato com recrutadores",
+        "url": "https://www.linkedin.com/jobs/",
+        "official": false
+      },
+      {
+        "label": "OCC, um dos maiores agregadores privados de vagas do México",
+        "url": "https://www.occ.com.mx/",
+        "official": false
+      }
+    ],
+    "sources": [
+      {
+        "label": "INEGI, Empleo y ocupación (ENOE)",
+        "url": "https://www.inegi.org.mx/temas/empleo/",
+        "official": true
+      },
+      {
+        "label": "CONASAMI, Incremento a los salarios mínimos para 2026",
+        "url": "https://www.gob.mx/conasami/articulos/incremento-a-los-salarios-minimos-para-2026",
+        "official": true
+      },
+      {
+        "label": "Secretaría de Economía, Inversión Extranjera Directa",
+        "url": "https://www.gob.mx/se/acciones-y-programas/competitividad-y-normatividad-inversion-extranjera-directa",
+        "official": true
+      },
+      {
+        "label": "INM, Preguntas frecuentes para obtener permiso de trabajo",
+        "url": "https://www.gob.mx/inm/documentos/preguntas-frecuentes-para-obtener-permiso-de-trabajo",
+        "official": true
+      },
+      {
+        "label": "INM, Tarifas de derechos migratorios 2026",
+        "url": "https://www.gob.mx/inm/articulos/tarifas-de-derechos-migratorios-2026",
+        "official": true
+      }
+    ]
+  },
   "au": {
     "updatedAt": "2026-06-22",
     "overview": "Australia entra em 2026 com um mercado de trabalho ainda apertado, mas em afrouxamento gradual. A taxa de desemprego ficou em 4,4% em maio de 2026 (ajustada sazonalmente), com 671,3 mil pessoas desempregadas, segundo a Australian Bureau of Statistics. O salario medio semanal de tempo integral (AWOTE) atingiu 2.051,10 dolares australianos em novembro de 2025, alta anual de 3,8%. A escassez de mao de obra recuou em relacao ao ano anterior, mas continua estrutural: a Jobs and Skills Australia (JSA) apontou que 29% das ocupacoes avaliadas (293 de 1.022) estavam em falta no pais em 2025, ante 33% em 2024. As lacunas se concentram em saude, construcao e trades qualificados, ensino e educacao infantil, engenharia e ciencia. Tecnicos e trabalhadores de trades respondem por cerca de metade da escassez persistente; 139 ocupacoes estao em falta todos os anos desde 2021. Ha um descompasso claro de qualificacao: em media havia 27,4 candidatos por vaga, mas apenas 9,3 considerados qualificados e 4,3 adequados. Para o imigrante, o caminho principal e a migracao qualificada via Core Skills Occupation List (CSOL) e o visto Skills in Demand (subclasse 482), que substituiu o antigo Temporary Skill Shortage em dezembro de 2024. Regioes fora das capitais oferecem janela extra: 21 ocupacoes estao em falta exclusivamente em areas regionais, e os programas de patrocinio estadual e regional priorizam essas vagas. Empreender e possivel, mas o sistema nao permite autossponsorship simples no 482; quem quer abrir negocio recorre a vistos de inovacao ou estrutura societaria com separacao genuina de controle.",

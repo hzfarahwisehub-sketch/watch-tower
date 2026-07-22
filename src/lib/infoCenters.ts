@@ -146,6 +146,20 @@ export const INFO_CENTERS: CountryInfoCenter[] = [
       { name: "Folha de S.Paulo · Mundo", url: "https://feeds.folha.uol.com.br/", category: "news", language: "pt", note: "Jornal nacional de referência, seção Mundo (relações exteriores/imigração). RSS 0.91 com 100 itens, testado vi", rss: "https://feeds.folha.uol.com.br/mundo/rss091.xml" },
     ],
   },
+  {
+    countryCode: "mx",
+    countryName: "México",
+    flag: "🇲🇽",
+    sources: [
+      { name: "INM · Instituto Nacional de Migración", url: "https://www.gob.mx/inm", category: "legal", language: "es", note: "Autoridade migratória do México (INM) · trâmites de residência, permissão de trabalho e controle de entrada" },
+      { name: "SRE · Relaciones Exteriores", url: "https://www.gob.mx/sre", category: "legal", language: "es", note: "Secretaria de Relações Exteriores · rede de consulados que emitem os vistos de residência" },
+      { name: "SRE · Información Consular", url: "https://informacionconsular.sre.gob.mx/", category: "legal", language: "es", note: "Portal consular do SRE · requisitos de visto e agendamento de citas nos consulados" },
+      { name: "DOF · Diario Oficial de la Federación", url: "https://www.dof.gob.mx/", category: "legal", language: "es", note: "Diário oficial federal · publica a normativa migratória e a Ley Federal de Derechos" },
+      { name: "Reuters · Americas", url: "https://www.reuters.com/world/americas", category: "news", language: "en" },
+      { name: "Mexperience", url: "https://www.mexperience.com/", category: "legal", language: "en", community: true, note: "Portal especializado em morar, se aposentar e obter residência no México (em inglês) · residência temporária/permanente e solvência econômica. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://www.mexperience.com/feed/" },
+      { name: "Mexico News Daily", url: "https://mexiconewsdaily.com/", category: "news", language: "en", community: true, note: "Maior jornal em inglês sobre o México · cobre política migratória, vistos e economia. NÃO-oficial: 'a confirmar' + checagem cruzada da Friday.", rss: "https://mexiconewsdaily.com/feed/" },
+    ],
+  },
 
   // ===== EUROPA =====
   {
