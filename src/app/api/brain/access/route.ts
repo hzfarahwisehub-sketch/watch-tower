@@ -18,11 +18,19 @@ const DEFAULT_BRAIN_URL = "https://wise.wisehubnow.online";
 const TOKEN_TTL_SECONDS = 45;
 
 type BrainProfile = "friday" | "wise";
+type BrainLayout = "clean" | "sentient" | "classic";
 
 function requestedProfile(req: Request, email: string): BrainProfile {
   const requested = new URL(req.url).searchParams.get("perfil")?.toLowerCase();
   if (email.toLowerCase() !== OWNER_EMAIL) return "wise";
   return requested === "wise" ? "wise" : "friday";
+}
+
+function requestedLayout(req: Request, profile: BrainProfile): BrainLayout {
+  const requested = new URL(req.url).searchParams.get("layout")?.toLowerCase();
+  if (requested === "sentient") return "sentient";
+  if (requested === "classic" && profile === "friday") return "classic";
+  return "clean";
 }
 
 function brainUrl(pathname: string): URL {
@@ -64,6 +72,8 @@ export async function GET(req: Request) {
   }
 
   const profile = requestedProfile(req, email);
+  const layout = requestedLayout(req, profile);
+  const embedded = new URL(req.url).searchParams.get("embed") === "1";
   const secret = process.env.WT_BRAIN_SSO_SECRET?.trim();
 
   // Fallback seguro durante rollout: abre o login certo, sem tentar reutilizar
@@ -71,11 +81,15 @@ export async function GET(req: Request) {
   if (!secret) {
     const target = brainUrl("/login");
     target.searchParams.set("perfil", profile);
+    target.searchParams.set("layout", layout);
+    if (embedded) target.searchParams.set("embed", "1");
     return redirectNoStore(target);
   }
 
   const target = brainUrl("/sso");
   target.searchParams.set("token", signAccess(email, profile, secret));
   target.searchParams.set("perfil", profile);
+  target.searchParams.set("layout", layout);
+  if (embedded) target.searchParams.set("embed", "1");
   return redirectNoStore(target);
 }
