@@ -9,6 +9,8 @@ const dict = {
     "map.style.satellite.label": "Satélite HD",
     "map.style.relief.label": "Relevo",
     "map.style.dark.label": "Escuro",
+    "map.back.label": "Voltar",
+    "map.back.title": "Sair do país · voltar pra vista geral e retomar o giro",
     "map.marker.title": "{name} · {n} mudança(s) · {authority}",
   },
   en: {
@@ -18,6 +20,8 @@ const dict = {
     "map.style.satellite.label": "Satellite HD",
     "map.style.relief.label": "Relief",
     "map.style.dark.label": "Dark",
+    "map.back.label": "Back",
+    "map.back.title": "Leave country · back to the overview and resume spin",
     "map.marker.title": "{name} · {n} change(s) · {authority}",
   },
 } as const;

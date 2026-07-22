@@ -549,7 +549,7 @@ export function Dashboard() {
           </div>
           <div key="map">
             <GridCell panelId="map" locked={locked}>
-              <MapZone countries={COUNTRIES} selected={mapSelected} onSelect={selectOnMap} />
+              <MapZone countries={COUNTRIES} selected={mapSelected} onSelect={selectOnMap} onBack={() => setMapSelected(null)} />
             </GridCell>
           </div>
           <div key="countries">

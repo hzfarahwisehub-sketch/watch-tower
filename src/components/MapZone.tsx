@@ -31,6 +31,11 @@ interface Props {
   // globo voa até o país e FICA nele). A aba Mapa não usa — lá o Hammis quer o
   // giro constante mesmo com seleção (que aliás é restaurada do localStorage).
   spinPausesOnSelect?: boolean;
+  // "Voltar" (sair do país): o globo do dashboard (com chrome) mostra um botão
+  // compacto ao lado do seletor de estilo. Ao clicar, além de afastar pra vista
+  // geral e retomar o giro, LIMPA a seleção no pai (onBack) — assim o mesmo país
+  // volta a poder ser clicado e o Benchmark acompanha (fica em sincronia).
+  onBack?: () => void;
 }
 
 const STATUS_COLOR: Record<Status, string> = {
@@ -188,7 +193,7 @@ function fitToCountries(map: MLMap, countries: Country[]) {
  * - Botão de estilo (gradiente + menu): Google · Satélite HD · Relevo · Escuro
  * - Markers por país (cor = status), click seleciona · voo suave ao selecionar
  */
-export default function MapZone({ countries, selected, onSelect, immersive = false, projection = "globe", stylePreset, hideChrome = false, viewport, onViewportChange, markerVariant = "default", fitCountries = false, spinPausesOnSelect = false }: Props) {
+export default function MapZone({ countries, selected, onSelect, immersive = false, projection = "globe", stylePreset, hideChrome = false, viewport, onViewportChange, markerVariant = "default", fitCountries = false, spinPausesOnSelect = false, onBack }: Props) {
   const { t } = useLocale();
   const changesMap = useCountryChangesMap();
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -210,6 +215,13 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
   fitCountriesRef.current = fitCountries;
   const spinPausesOnSelectRef = useRef(spinPausesOnSelect);
   spinPausesOnSelectRef.current = spinPausesOnSelect;
+  // FOCO TRAVADO (só o globo do dashboard, que tem chrome/botão Voltar): quando
+  // há um país em foco, o giro automático PARA e o globo fica ESTÁTICO nele. Só
+  // o botão Voltar solta. focusedRef é lido dentro do loop do giro (closure), o
+  // state hasFocus governa a aparição do botão. Nunca é ligado no globo do
+  // SpatialCommandCenter (hideChrome) — lá o giro segue por spinPausesOnSelect.
+  const focusedRef = useRef(false);
+  const [hasFocus, setHasFocus] = useState(false);
   const [styleKey, setStyleKey] = useState<StyleKey>(stylePreset ?? "dark");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -344,6 +356,9 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
       // Brain: com país selecionado o globo FICA no país (o giro pós-voo levava
       // os marcadores pro lado escuro — as "luzes espalhadas" do Hammis).
       if (spinPausesOnSelectRef.current && selectedRef.current) return;
+      // Dashboard: país em foco = globo ESTÁTICO. O giro só volta pelo botão
+      // Voltar (que zera focusedRef). Só o globo com chrome liga esse trinco.
+      if (focusedRef.current) return;
       if (m.isMoving()) return; // deixa a inércia / animação atual terminar antes
       const zoom = m.getZoom();
       if (zoom >= MAX_SPIN_ZOOM) return;
@@ -501,15 +516,38 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
     if (!map) return;
     Object.entries(markersRef.current).forEach(([code, marker]) => marker.getElement().classList.toggle("is-selected", code === selected));
     if (!selected) {
-      // o loop do giro tinha morrido com o país em foco; reativa
+      // sem país em foco: solta o trinco e revive o loop do giro
+      focusedRef.current = false;
+      setHasFocus(false);
       spinGlobeRef.current?.();
       return;
     }
     const c = countries.find((c) => c.code === selected);
     if (!c) return;
+    // Trava o giro no país em foco — SÓ no globo do dashboard (com chrome, que
+    // tem o botão Voltar pra soltar). No globo do SpatialCommandCenter
+    // (hideChrome) o giro segue governado por spinPausesOnSelect, intocado.
+    if (!hideChrome) {
+      focusedRef.current = true;
+      setHasFocus(true);
+    }
     const [lat, lng] = c.coords;
     map.flyTo({ center: [lng, lat], zoom: 3.5, pitch: 45, bearing: 0, speed: 0.9, curve: 1.6, essential: true });
-  }, [selected, countries]);
+  }, [selected, countries, hideChrome]);
+
+  // Botão VOLTAR (sair do país): solta o trinco, afasta pra vista geral e retoma
+  // o giro. onBack limpa a seleção no pai (Benchmark acompanha; o mesmo país
+  // volta a ser clicável). O giro em si retoma sozinho no moveend do easeTo.
+  const handleBack = () => {
+    focusedRef.current = false;
+    setHasFocus(false);
+    const map = mapRef.current;
+    if (map) {
+      const c = map.getCenter();
+      map.easeTo({ center: [c.lng, 0], zoom: immersive ? 1.35 : 0.6, pitch: 0, bearing: 0, duration: 900, essential: true });
+    }
+    onBack?.();
+  };
 
   const current = STYLE_OPTIONS.find((o) => o.key === styleKey) ?? STYLE_OPTIONS[3];
   const currentLabel = t(`map.style.${current.key}.label`);
@@ -527,8 +565,27 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
           🗺 {t("map.title")}
         </h2>
 
+        {/* Grupo à direita: botão Voltar (só com país em foco) + seletor de estilo */}
+        <div className="flex items-center gap-2 shrink-0">
+        {hasFocus && (
+          <button
+            type="button"
+            onClick={handleBack}
+            title={t("map.back.title")}
+            className="inline-flex items-center gap-1 px-2.5 py-[7px] rounded-[16px] text-[11px] font-bold tracking-wide cursor-pointer transition-all hover:-translate-y-px"
+            style={{
+              color: "var(--text)",
+              background: "rgba(255,255,255,.06)",
+              border: "1px solid var(--border-hi)",
+            }}
+          >
+            <span style={{ fontSize: 12, lineHeight: 1 }}>←</span>
+            <span>{t("map.back.label")}</span>
+          </button>
+        )}
+
         {/* Botão de estilo (gradiente + menu) */}
-        <div className="relative shrink-0">
+        <div className="relative">
           <button
             type="button"
             onClick={() => setMenuOpen((v) => !v)}
@@ -585,6 +642,7 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
               </div>
             </>
           )}
+        </div>
         </div>
       </div>}
       <div
