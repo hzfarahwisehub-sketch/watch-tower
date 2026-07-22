@@ -4,7 +4,7 @@
 
 .wb-unified-brain .wise-brain-topbar{
   display:grid;
-  grid-template-columns:minmax(190px,240px) minmax(520px,1fr) auto;
+  grid-template-columns:minmax(190px,240px) minmax(360px,1fr) auto;
   gap:18px;
   min-width:0;
   padding:10px 18px;
@@ -34,7 +34,6 @@
   text-transform:uppercase;
 }
 
-.wb-unified-brain .wb-modes,
 .wb-view-switcher{
   display:flex;
   height:38px;
@@ -44,11 +43,6 @@
   background:#06131f;
 }
 
-.wb-unified-brain .wb-modes{
-  width:176px;
-}
-
-.wb-unified-brain .wb-modes button,
 .wb-view-switcher button{
   position:relative;
   display:flex;
@@ -68,13 +62,8 @@
   transition:background-color .2s ease,color .2s ease,box-shadow .2s ease;
 }
 
-.wb-unified-brain .wb-modes button:last-child,
 .wb-view-switcher button:last-child{
   border-right:0;
-}
-
-.wb-unified-brain .wb-modes button{
-  flex:1;
 }
 
 .wb-view-switcher button{
@@ -90,13 +79,11 @@
   box-shadow:0 0 7px #54c1ff77;
 }
 
-.wb-unified-brain .wb-modes button:hover:not(:disabled),
 .wb-view-switcher button:hover{
   background:#10283b;
   color:#e8f6ff;
 }
 
-.wb-unified-brain .wb-modes button.active,
 .wb-view-switcher button.active{
   background:linear-gradient(180deg,#1a5c8a,#0a2a44);
   color:#fff;
@@ -156,7 +143,20 @@
 }
 
 .wb-unified-brain .wise-brain-body{
-  grid-template-columns:minmax(350px,400px) minmax(620px,1fr) minmax(300px,340px);
+  grid-template-columns:64px minmax(350px,400px) minmax(620px,1fr) minmax(300px,340px);
+}
+
+.wb-unified-brain .wb-rail{
+  min-width:0;
+}
+
+.wb-unified-brain .wb-rail button{
+  transition:background-color .2s ease,color .2s ease,box-shadow .2s ease;
+}
+
+.wb-unified-brain .wb-rail button:hover{
+  background:#0d2638;
+  color:#e8f6ff;
 }
 
 .wb-unified-brain .wb-assistant{
@@ -203,11 +203,11 @@
 
 @media(max-width:1500px){
   .wb-unified-brain .wise-brain-body{
-    grid-template-columns:minmax(340px,390px) minmax(580px,1fr);
+    grid-template-columns:64px minmax(340px,390px) minmax(580px,1fr);
   }
   .wb-unified-brain .wb-insights{display:none}
   .wb-unified-brain .wise-brain-topbar{
-    grid-template-columns:190px minmax(500px,1fr) auto;
+    grid-template-columns:190px minmax(360px,1fr) auto;
     gap:12px;
   }
   .wb-session-actions .wb-live{display:none}
@@ -226,7 +226,7 @@
   .wb-control-block>span{display:none}
   .wb-view-switcher button{padding:0 9px}
   .wb-unified-brain .wise-brain-body{
-    grid-template-columns:minmax(330px,38vw) minmax(520px,1fr);
+    grid-template-columns:56px minmax(330px,38vw) minmax(520px,1fr);
   }
 }
 
@@ -249,8 +249,7 @@
   .wb-unified-brain .wb-brand span{font-size:8px}
   .wb-unified-controls{
     grid-column:1/-1;
-    display:grid;
-    grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);
+    display:block;
     order:3;
     width:100%;
     gap:8px;
@@ -259,7 +258,6 @@
     display:block;
     width:100%;
   }
-  .wb-unified-brain .wb-modes,
   .wb-view-switcher{
     width:100%;
     height:auto;
@@ -289,6 +287,29 @@
     flex-direction:column;
     min-width:0;
   }
+  .wb-unified-brain .wb-rail{
+    position:static;
+    width:100%;
+    height:62px;
+    flex:0 0 62px;
+    flex-direction:row;
+    justify-content:flex-start;
+    overflow-x:auto;
+    border-right:0;
+    border-bottom:1px solid #244158;
+  }
+  .wb-unified-brain .wb-rail button{
+    width:88px;
+    height:62px;
+    flex:0 0 88px;
+    border-right:1px solid #20384a;
+    border-bottom:0;
+    gap:1px;
+  }
+  .wb-unified-brain .wb-rail-ico{
+    width:36px;
+    height:36px;
+  }
   .wb-unified-brain .wb-assistant{
     width:100%!important;
     min-width:0!important;
@@ -303,7 +324,7 @@
 }
 
 @media(prefers-reduced-motion:reduce){
-  .wb-unified-brain .wb-modes button,
+  .wb-unified-brain .wb-rail button,
   .wb-view-switcher button,
   .wb-logout{transition:none}
 }

@@ -13,9 +13,8 @@ const PARTNER_ACCESS_ENABLED = process.env.NEXT_PUBLIC_WT_BRAIN_PARTNERS === "1"
 // dos sócios. Ele entra SEMPRE como Friday; o botão WISE existe pra ele entrar na
 // PELE DO SÓCIO e testar a usabilidade que eles têm (qual tela veem, que problema
 // sentem). O DUAL foi removido: não fazia nada e ele não quer botão morto.
-const modes = ["FRIDAY", "WISE"] as const;
 const BRAIN_ACCESS_URL = "/api/brain/access";
-type BrainMode = (typeof modes)[number];
+type BrainMode = "FRIDAY" | "WISE";
 type BrainView = "clean" | "sentient" | "classic";
 
 const sharedViews: ReadonlyArray<{ id: BrainView; label: string; detail: string }> = [
@@ -116,12 +115,6 @@ export function SpatialCommandCenter() {
       <header className="wise-brain-topbar">
         <div className="wb-brand"><b>{isOwner ? "Friday Brain" : "Wise Brain"}</b><span>WISEHUB · WATCH TOWER</span></div>
         <div className="wb-unified-controls">
-          <div className="wb-control-block">
-            <span>Perfil</span>
-            <div className="wb-modes" role="group" aria-label="Perfil ativo">
-              {modes.map(item => <button type="button" key={item} disabled={!isOwner && item !== "WISE"} className={mode === item ? "active" : ""} onClick={() => setMode(item)}>{item}</button>)}
-            </div>
-          </div>
           <div className="wb-control-block wb-view-control">
             <span>Visual</span>
             <div className="wb-view-switcher" role="group" aria-label={`Visual do ${mode}`}>
@@ -143,6 +136,19 @@ export function SpatialCommandCenter() {
       </header>
 
       <div className="wise-brain-body">
+        <nav className="wb-rail" aria-label="Alternar aplicativo">
+          {isOwner && (
+            <button type="button" className={mode === "FRIDAY" ? "active" : ""} aria-pressed={mode === "FRIDAY"} title="Abrir Friday" onClick={() => setMode("FRIDAY")}>
+              <b><img src="/wise-brain/friday-helmet.png" alt="" className="wb-rail-ico" /></b>
+              <small>FRIDAY</small>
+            </button>
+          )}
+          <button type="button" className={mode === "WISE" ? "active" : ""} aria-pressed={mode === "WISE"} title={isOwner ? "Abrir Wise como sócio" : "Abrir Wise"} onClick={() => setMode("WISE")}>
+            <b><img src="/wise-brain/logo-wise-w.png" alt="" className="wb-rail-ico" /></b>
+            <small>WISE</small>
+          </button>
+        </nav>
+
         <aside className="wb-assistant">
           <div className="wb-friday">
             <div className="wb-section-title"><b>{mode === "FRIDAY" ? "Friday Sentient" : "Wise Sentient"}</b><span><i /> online</span></div>
