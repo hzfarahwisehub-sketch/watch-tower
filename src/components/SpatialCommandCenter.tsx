@@ -180,9 +180,12 @@ export function SpatialCommandCenter() {
   if (!isOwner && !PARTNER_ACCESS_ENABLED) return <section className="wb-locked" aria-label="Wise Brain bloqueado"><div className="wb-locked-seal"><span>⌾</span><i>🔒</i></div><small>WISEHUB · WATCH TOWER</small><h2>Wise Brain</h2><p>Ambiente de inteligência em preparação. O acesso será liberado após validação do proprietário.</p><div><b>ACESSO PROTEGIDO</b><span>Somente Hammis pode alterar esta permissão.</span></div></section>;
 
   return (
-    <section ref={rootRef} className={`wise-brain wb-visual-${visual} wb-unified-brain`} aria-label={isOwner ? "Friday Brain" : "Wise Brain"}>
+    <section ref={rootRef} className={`wise-brain wb-visual-${visual} wb-unified-brain`} aria-label={mode === "WISE" ? "Wise Brain" : "Friday Brain"}>
       <header className="wise-brain-topbar">
-        <div className="wb-brand"><b>{isOwner ? "Friday Brain" : "Wise Brain"}</b><span>WISEHUB · WATCH TOWER</span></div>
+        {/* Nome segue o MODO (não isOwner): no modo WISE mostra "Wise Brain", no
+            FRIDAY mostra "Friday Brain" — antes o dono via sempre "Friday Brain"
+            mesmo testando como sócio (Hammis, 2026-07-22). */}
+        <div className="wb-brand"><b>{mode === "WISE" ? "Wise Brain" : "Friday Brain"}</b><span>WISEHUB · WATCH TOWER</span></div>
         <div className="wb-unified-controls">
           <div className="wb-control-block wb-view-control">
             <span>Visual</span>

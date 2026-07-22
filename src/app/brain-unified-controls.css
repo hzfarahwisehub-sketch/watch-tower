@@ -386,3 +386,8 @@
   .wb-view-switcher button,
   .wb-app-session{transition:none}
 }
+
+/* Nome do brain (Friday Brain / Wise Brain) estava colado/cortado na borda esquerda
+   do painel (Hammis, 2026-07-22). Respiro à esquerda + não cortar o texto. */
+.wb-unified-brain .wb-brand{padding-left:8px;min-width:0;overflow:visible}
+.wb-unified-brain .wb-brand b{white-space:nowrap;overflow:visible}
