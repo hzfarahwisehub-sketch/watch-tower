@@ -2,10 +2,11 @@
 // Compositor de e-mail (mini-cliente do Inbox Fase 3). Modal em portal:
 // De (escolhe a conta), Para/Cc/Cco, Assunto, Corpo, Anexos. Envia via
 // /api/mail/send (guarda cópia em Enviados) ou salva em /api/mail/draft.
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useLocale } from "./LocaleProvider";
 import { useToast } from "./ToastProvider";
+import { MailRichEditor, type MailRichEditorHandle } from "./MailRichEditor";
 import type { MailAccountStatus } from "@/lib/mail/types";
 
 export interface ComposePrefill {
@@ -26,6 +27,15 @@ function fmtBytes(n: number): string {
   if (n >= 1024 * 1024) return `${(n / (1024 * 1024)).toFixed(1)}MB`;
   if (n >= 1024) return `${Math.round(n / 1024)}KB`;
   return `${n}B`;
+}
+
+const MAX_TOTAL_BYTES = 4 * 1024 * 1024;
+
+/** Corpo de prefill (reply/forward) vem em texto puro → HTML pro editor rico. */
+function textToHtml(text: string): string {
+  if (!text) return "";
+  const esc = text.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c] as string));
+  return esc.replace(/\r\n|\r|\n/g, "<br>");
 }
 
 export function MailCompose({
@@ -53,13 +63,18 @@ export function MailCompose({
   const [bcc, setBcc] = useState("");
   const [showCc, setShowCc] = useState(!!prefill.cc);
   const [subject, setSubject] = useState(prefill.subject ?? "");
-  const [body, setBody] = useState(prefill.body ?? "");
   const [files, setFiles] = useState<File[]>(prefill.attachments ?? []);
   const [sending, setSending] = useState(false);
   const [savingDraft, setSavingDraft] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const toRef = useRef<HTMLInputElement>(null);
+
+  // corpo = editor rico (HTML). O prefill de reply/forward vem em texto puro.
+  const initialBodyHtml = useMemo(() => textToHtml(prefill.body ?? ""), [prefill.body]);
+  const editorApiRef = useRef<MailRichEditorHandle | null>(null);
+  const [bodyEmpty, setBodyEmpty] = useState(!(prefill.body ?? "").trim());
+  const [inlineBytes, setInlineBytes] = useState(0);
 
   useEffect(() => {
     if (prefill.mode === "forward" || !prefill.to) toRef.current?.focus();
@@ -77,16 +92,36 @@ export function MailCompose({
       setError(t("mail.compose.needFrom"));
       return null;
     }
+    const filesBytes = files.reduce((s, f) => s + f.size, 0);
+    if (filesBytes + inlineBytes > MAX_TOTAL_BYTES) {
+      setError(t("mail.compose.err.attachments_too_large"));
+      return null;
+    }
+    const api = editorApiRef.current;
+    const html = api ? api.getHtml() : "";
+    const text = api ? api.getText() : "";
     const fd = new FormData();
     fd.set("account", fromId);
     fd.set("to", to);
     fd.set("cc", cc);
     fd.set("bcc", bcc);
     fd.set("subject", subject);
-    fd.set("text", body);
+    fd.set("text", text);
+    if (html.trim()) fd.set("html", html);
     if (prefill.inReplyTo) fd.set("inReplyTo", prefill.inReplyTo);
     if (prefill.references?.length) fd.set("references", prefill.references.join(" "));
     for (const f of files) fd.append("attachments", f);
+    // imagens inline: cada File casa por ordem com um cid (parseComposeForm no
+    // servidor as transforma em anexo inline referenciado por src="cid:…").
+    const inline = api ? api.getInlineImages() : [];
+    if (inline.length) {
+      const cids: string[] = [];
+      for (const im of inline) {
+        fd.append("inlineImages", im.file);
+        cids.push(im.cid);
+      }
+      fd.set("inlineCids", JSON.stringify(cids));
+    }
     return fd;
   };
 
@@ -154,7 +189,7 @@ export function MailCompose({
   };
 
   const tryClose = () => {
-    const dirty = to || cc || bcc || subject || body || files.length;
+    const dirty = to || cc || bcc || subject || !bodyEmpty || files.length;
     if (dirty && !window.confirm(t("mail.compose.discardConfirm"))) return;
     onClose();
   };
@@ -173,7 +208,24 @@ export function MailCompose({
     setFiles((prev) => [...prev, ...picked]);
     if (fileRef.current) fileRef.current.value = "";
   };
-  const totalBytes = files.reduce((s, f) => s + f.size, 0);
+  const filesBytes = files.reduce((s, f) => s + f.size, 0);
+  const totalBytes = filesBytes + inlineBytes; // anexos + imagens inline (teto único de 4MB)
+
+  const onEditorError = (key: "image_type" | "image_too_large") => {
+    toast(t(`mail.compose.err.${key}`));
+  };
+  const editorLabels = {
+    bold: t("mail.compose.fmt.bold"),
+    italic: t("mail.compose.fmt.italic"),
+    underline: t("mail.compose.fmt.underline"),
+    bulletList: t("mail.compose.fmt.bulletList"),
+    numberList: t("mail.compose.fmt.numberList"),
+    link: t("mail.compose.fmt.link"),
+    linkPrompt: t("mail.compose.fmt.linkPrompt"),
+    image: t("mail.compose.fmt.image"),
+    ariaLabel: t("mail.compose.editor.label"),
+    placeholder: t("mail.compose.body"),
+  };
 
   const inputStyle: React.CSSProperties = {
     background: "var(--bg2)",
@@ -284,17 +336,21 @@ export function MailCompose({
           <input type="text" value={subject} onChange={(e) => setSubject(e.target.value)} className="flex-1 px-2 py-1 rounded-md text-[12px] outline-none" style={inputStyle} autoComplete="off" />
         </div>
 
-        {/* Corpo */}
-        <textarea
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          placeholder={t("mail.compose.body")}
-          className="flex-1 min-h-[220px] px-4 py-3 text-[13px] leading-relaxed outline-none resize-none"
-          style={{ background: "transparent", color: "var(--text)" }}
+        {/* Corpo — editor rico (HTML + imagem inline) */}
+        <MailRichEditor
+          initialHtml={initialBodyHtml}
+          labels={editorLabels}
+          otherBytes={filesBytes}
+          apiRef={editorApiRef}
+          onChange={({ empty, inlineBytes: ib }) => {
+            setBodyEmpty(empty);
+            setInlineBytes(ib);
+          }}
+          onError={onEditorError}
         />
 
-        {/* anexos escolhidos */}
-        {files.length > 0 && (
+        {/* anexos escolhidos + medidor do teto (inclui imagens inline) */}
+        {(files.length > 0 || inlineBytes > 0) && (
           <div className="flex flex-wrap gap-1.5 px-4 py-2" style={{ borderTop: "1px solid var(--border)" }}>
             {files.map((f, i) => (
               <span
@@ -313,7 +369,7 @@ export function MailCompose({
                 </button>
               </span>
             ))}
-            <span className="text-[9px] self-center" style={{ color: totalBytes > 4 * 1024 * 1024 ? "var(--color-status-critical)" : "var(--text-3)" }}>
+            <span className="text-[9px] self-center" style={{ color: totalBytes > MAX_TOTAL_BYTES ? "var(--color-status-critical)" : "var(--text-3)" }}>
               {fmtBytes(totalBytes)} / 4MB
             </span>
           </div>

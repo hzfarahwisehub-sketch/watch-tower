@@ -7,6 +7,10 @@ export const MAX_RECIPIENTS = 50;
 export const MAX_TOTAL_ATTACH = 4 * 1024 * 1024; // 4MB (limite de request serverless)
 export const MAX_SUBJECT = 500;
 export const MAX_BODY = 200_000; // ~200KB de texto
+export const MAX_HTML = 1_000_000; // ~1MB de HTML (imagens viram cid, não incham o HTML)
+export const MAX_INLINE_IMAGES = 20;
+// cid seguro pra referenciar no HTML e no header Content-ID (sem injeção de MIME).
+const CID_RE = /^[A-Za-z0-9._@+-]{1,120}$/;
 
 /** Divide "a@x.com, b@y.com; c@z.com" em lista de e-mails válidos e únicos. */
 export function parseRecipients(raw: string | null): string[] {
@@ -39,8 +43,11 @@ export interface ParsedCompose {
   bcc: string[];
   subject: string;
   text: string;
+  /** Corpo em HTML (editor rico). undefined quando o corpo é só texto puro. */
+  html?: string;
   inReplyTo?: string;
   references?: string[];
+  /** Anexos comuns + imagens inline (estas com cid + contentDisposition inline). */
   attachments: OutgoingAttachment[];
 }
 
@@ -72,14 +79,19 @@ export async function parseComposeForm(
 
   const subject = ((form.get("subject") as string) ?? "").slice(0, MAX_SUBJECT);
   const text = ((form.get("text") as string) ?? "").slice(0, MAX_BODY);
+  const htmlRaw = ((form.get("html") as string) ?? "").slice(0, MAX_HTML);
+  const html = htmlRaw.trim() ? htmlRaw : undefined;
   const inReplyTo = ((form.get("inReplyTo") as string) ?? "").trim() || undefined;
   const refsRaw = ((form.get("references") as string) ?? "").trim();
   const references = refsRaw ? refsRaw.split(/\s+/).slice(0, 50) : undefined;
 
-  // anexos
-  const files = form.getAll("attachments").filter((f): f is File => f instanceof File);
+  // Teto de 4MB compartilhado entre anexos comuns E imagens inline (ambos
+  // viajam como partes MIME no mesmo request serverless).
   let total = 0;
   const attachments: OutgoingAttachment[] = [];
+
+  // anexos comuns
+  const files = form.getAll("attachments").filter((f): f is File => f instanceof File);
   for (const f of files) {
     if (f.size === 0) continue;
     total += f.size;
@@ -92,5 +104,38 @@ export async function parseComposeForm(
     });
   }
 
-  return { ok: true, to, cc, bcc, subject, text, inReplyTo, references, attachments };
+  // imagens inline: cada File em "inlineImages" casa por ordem com um cid em
+  // "inlineCids"; entram como anexo inline (cid + contentDisposition inline)
+  // referenciado no HTML por <img src="cid:…">.
+  const inlineFiles = form.getAll("inlineImages").filter((f): f is File => f instanceof File);
+  if (inlineFiles.length) {
+    let inlineCids: string[] = [];
+    try {
+      const parsed = JSON.parse(((form.get("inlineCids") as string) ?? "[]"));
+      if (Array.isArray(parsed)) inlineCids = parsed.map((c) => String(c));
+    } catch {
+      inlineCids = [];
+    }
+    if (inlineFiles.length > MAX_INLINE_IMAGES) return { ok: false, error: "attachments_too_large" };
+    for (let i = 0; i < inlineFiles.length; i++) {
+      const f = inlineFiles[i];
+      if (f.size === 0) continue;
+      const cid = inlineCids[i];
+      // sem cid válido ou não é imagem → ignora (não vira anexo fantasma)
+      if (!cid || !CID_RE.test(cid)) continue;
+      if (!/^image\//i.test(f.type || "")) continue;
+      total += f.size;
+      if (total > MAX_TOTAL_ATTACH) return { ok: false, error: "attachments_too_large" };
+      const buf = Buffer.from(await f.arrayBuffer());
+      attachments.push({
+        filename: f.name || "imagem",
+        content: buf,
+        contentType: f.type || "application/octet-stream",
+        cid,
+        contentDisposition: "inline",
+      });
+    }
+  }
+
+  return { ok: true, to, cc, bcc, subject, text, html, inReplyTo, references, attachments };
 }

@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
     bcc: parsed.bcc,
     subject: parsed.subject,
     text: parsed.text,
+    html: parsed.html,
     inReplyTo: parsed.inReplyTo,
     references: parsed.references,
     attachments: parsed.attachments,

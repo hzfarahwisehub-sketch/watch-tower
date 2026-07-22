@@ -10,6 +10,10 @@ export interface OutgoingAttachment {
   filename: string;
   content: Buffer;
   contentType?: string;
+  /** Content-ID pra imagem inline referenciada no HTML por <img src="cid:…">. */
+  cid?: string;
+  /** "inline" pra imagem embutida no corpo; ausente = anexo comum. */
+  contentDisposition?: "inline" | "attachment";
 }
 
 export interface OutgoingMessage {
@@ -53,6 +57,10 @@ function mailOptions(msg: OutgoingMessage): Record<string, unknown> {
       filename: a.filename,
       content: a.content,
       contentType: a.contentType,
+      // cid + contentDisposition inline: nodemailer monta multipart/related e o
+      // cliente casa a imagem com <img src="cid:…"> no HTML.
+      ...(a.cid ? { cid: a.cid } : {}),
+      ...(a.contentDisposition ? { contentDisposition: a.contentDisposition } : {}),
     })),
   };
 }
