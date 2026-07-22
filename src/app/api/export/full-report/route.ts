@@ -18,7 +18,7 @@
  */
 
 import { NextResponse, type NextRequest } from "next/server";
-import { gatherReportData, type ReportData } from "@/lib/report-data";
+import { gatherReportData, parseSector, SECTOR_FILE_SLUG, type ReportData } from "@/lib/report-data";
 import { renderMarkdown } from "@/lib/report-markdown";
 import { renderDocx } from "@/lib/report-docx";
 import { renderPdf } from "@/lib/report-pdf";
@@ -56,6 +56,8 @@ export async function GET(req: NextRequest) {
   const format: Format = raw === "docx" || raw === "pdf" ? raw : "md";
   const meta = FORMAT_META[format];
   const lang: "pt" | "en" = req.nextUrl.searchParams.get("lang") === "en" ? "en" : "pt";
+  // Setor do menu por assunto: default "all" = documento completo (intacto).
+  const sector = parseSector(req.nextUrl.searchParams.get("sector"));
 
   // Coleta (compartilhada entre formatos) com cache de 30min, por idioma
   let cacheState: "HIT" | "MISS" = "HIT";
@@ -72,11 +74,11 @@ export async function GET(req: NextRequest) {
   // notícias novas (sob solicitação, decisão do Hammis). Best-effort + dedup 12h.
   await acionarGeracaoConteudo(data, result.session.userId);
 
-  // Renderiza o formato pedido
+  // Renderiza o formato pedido, recortado pelo setor (all = documento completo)
   let body: string | Uint8Array;
-  if (format === "docx") body = await renderDocx(data);
-  else if (format === "pdf") body = await renderPdf(data);
-  else body = renderMarkdown(data);
+  if (format === "docx") body = await renderDocx(data, sector);
+  else if (format === "pdf") body = await renderPdf(data, sector);
+  else body = renderMarkdown(data, sector);
 
   // Binário (docx/pdf): copia pra um Uint8Array com ArrayBuffer dedicado e
   // entrega via Blob — satisfaz o BodyInit do tipo Response sem casts.
@@ -95,7 +97,7 @@ export async function GET(req: NextRequest) {
       "X-Cache": cacheState,
       "X-Generated-At": new Date(slot.generatedAt).toISOString(),
       "Cache-Control": "private, max-age=300",
-      "Content-Disposition": `attachment; filename="watch-tower-relatorio-${dateStamp()}.${meta.ext}"`,
+      "Content-Disposition": `attachment; filename="watch-tower-${SECTOR_FILE_SLUG[sector]}-${dateStamp()}.${meta.ext}"`,
     },
   });
 }

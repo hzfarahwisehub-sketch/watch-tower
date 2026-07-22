@@ -16,6 +16,9 @@
 import {
   type ReportData,
   type ReportCountry,
+  type Sector,
+  SECTOR_DOC_TITLE,
+  SECTOR_TO_DESTINATION,
   fmtDate,
   relativeAge,
   statusLabel,
@@ -32,6 +35,7 @@ import {
   urgentCutoffISO,
   FRESH_WINDOW_DAYS,
 } from "@/lib/report-data";
+import type { LaborMarketCountry } from "@/lib/labor-market";
 import {
   DESTINATIONS,
   buildPostables,
@@ -111,6 +115,54 @@ function pieceMd(p: PostablePiece, dot: string, tag: string, cutoffISO: string, 
   return lines;
 }
 
+/** Bloco Mercado de Trabalho de um país. Reusado pela Parte 3 (com sub-heading)
+ *  e pelo setor "labor" (sem o sub-heading redundante, pois o doc já é só isso). */
+function laborMd(L: LaborMarketCountry, opts: { heading?: boolean } = {}): string[] {
+  const lines: string[] = [];
+  if (opts.heading !== false) {
+    lines.push(`### 💼 Mercado de Trabalho`);
+    lines.push(``);
+  }
+  lines.push(L.overview);
+  lines.push(``);
+  if (L.hotSectors.length) { lines.push(`**Setores em alta:** ${L.hotSectors.join(" · ")}`); lines.push(``); }
+  if (L.coolingSectors?.length) { lines.push(`**Setores em baixa:** ${L.coolingSectors.join(" · ")}`); lines.push(``); }
+  if (L.inDemandRoles.length) {
+    lines.push(`**Profissões em demanda:**`);
+    lines.push(``);
+    L.inDemandRoles.forEach((r) => lines.push(`- **${r.role}**${r.note ? `: ${r.note}` : ""}`));
+    lines.push(``);
+  }
+  if (L.byQualification?.length) {
+    lines.push(`**Por formação:**`);
+    lines.push(``);
+    L.byQualification.forEach((q) => lines.push(`- **${q.area}:** ${q.advice}`));
+    lines.push(``);
+  }
+  if (L.salaries?.length) {
+    lines.push(`**Faixas salariais:**`);
+    lines.push(``);
+    L.salaries.forEach((s) => {
+      const srcTag = s.source ? provenanceTag(s.source.url) : "";
+      const srcTxt = s.source ? ` ([${s.source.label}](${s.source.url})${srcTag ? ` ${srcTag}` : ""})` : "";
+      lines.push(`- ${s.role}: ${s.range}${srcTxt}`);
+    });
+    lines.push(``);
+  }
+  if (L.foreignerRules) { lines.push(`**Regras pra estrangeiro:** ${L.foreignerRules}`); lines.push(``); }
+  if (L.opportunityWindows?.length) {
+    lines.push(`**Janelas de oportunidade:**`);
+    lines.push(``);
+    L.opportunityWindows.forEach((w) => lines.push(`- ${w}`));
+    lines.push(``);
+  }
+  if (L.jobBoards.length) {
+    lines.push(`**Onde se candidatar:** ${L.jobBoards.map((bd) => `[${bd.label}](${bd.url})`).join(" · ")}`);
+    lines.push(``);
+  }
+  return lines;
+}
+
 /** Bloco de dados técnicos de um país. */
 function technicalMd(c: ReportCountry): string[] {
   const lines: string[] = [];
@@ -133,46 +185,7 @@ function technicalMd(c: ReportCountry): string[] {
   }
 
   if (c.labor) {
-    const L = c.labor;
-    lines.push(`### 💼 Mercado de Trabalho`);
-    lines.push(``);
-    lines.push(L.overview);
-    lines.push(``);
-    if (L.hotSectors.length) { lines.push(`**Setores em alta:** ${L.hotSectors.join(" · ")}`); lines.push(``); }
-    if (L.coolingSectors?.length) { lines.push(`**Setores em baixa:** ${L.coolingSectors.join(" · ")}`); lines.push(``); }
-    if (L.inDemandRoles.length) {
-      lines.push(`**Profissões em demanda:**`);
-      lines.push(``);
-      L.inDemandRoles.forEach((r) => lines.push(`- **${r.role}**${r.note ? `: ${r.note}` : ""}`));
-      lines.push(``);
-    }
-    if (L.byQualification?.length) {
-      lines.push(`**Por formação:**`);
-      lines.push(``);
-      L.byQualification.forEach((q) => lines.push(`- **${q.area}:** ${q.advice}`));
-      lines.push(``);
-    }
-    if (L.salaries?.length) {
-      lines.push(`**Faixas salariais:**`);
-      lines.push(``);
-      L.salaries.forEach((s) => {
-        const srcTag = s.source ? provenanceTag(s.source.url) : "";
-        const srcTxt = s.source ? ` ([${s.source.label}](${s.source.url})${srcTag ? ` ${srcTag}` : ""})` : "";
-        lines.push(`- ${s.role}: ${s.range}${srcTxt}`);
-      });
-      lines.push(``);
-    }
-    if (L.foreignerRules) { lines.push(`**Regras pra estrangeiro:** ${L.foreignerRules}`); lines.push(``); }
-    if (L.opportunityWindows?.length) {
-      lines.push(`**Janelas de oportunidade:**`);
-      lines.push(``);
-      L.opportunityWindows.forEach((w) => lines.push(`- ${w}`));
-      lines.push(``);
-    }
-    if (L.jobBoards.length) {
-      lines.push(`**Onde se candidatar:** ${L.jobBoards.map((bd) => `[${bd.label}](${bd.url})`).join(" · ")}`);
-      lines.push(``);
-    }
+    lines.push(...laborMd(c.labor));
   }
 
   if (c.bulletin) {
@@ -269,7 +282,105 @@ function technicalMd(c: ReportCountry): string[] {
   return lines;
 }
 
-export function renderMarkdown(data: ReportData): string {
+/** Contexto pré-computado (cutoffs + postables + urgentes) compartilhado pelo
+ *  recorte de setor, pra não recalcular o que o render completo já montou. */
+type MdSectorCtx = {
+  cutoffISO: string;
+  urgentISO: string;
+  postables: ReturnType<typeof buildPostables>;
+  urgentes: PostablePiece[];
+  destTagOf: Map<string, (typeof DESTINATIONS)[number]>;
+};
+
+/**
+ * Recorte por assunto: emite SÓ o bloco do setor pedido (community/countrytab/
+ * blog = aquela seção, todos os países; urgent = PRIORIDADE + peças completas;
+ * labor = Mercado de Trabalho, todos os países). Setor vazio sai com aviso
+ * limpo, nunca quebra. O documento completo ("all") não passa por aqui.
+ */
+function renderMarkdownSector(data: ReportData, sector: Exclude<Sector, "all">, ctx: MdSectorCtx): string {
+  const lines: string[] = [];
+  lines.push(`# WiseHub · ${SECTOR_DOC_TITLE[sector]}`);
+  lines.push(``);
+  lines.push(`**Gerado em:** ${data.generatedAtStr} (BRT)`);
+  lines.push(``);
+  lines.push(`---`);
+  lines.push(``);
+
+  if (sector === "urgent") {
+    lines.push(`## 🔴 PRIORIDADE · urgentes de todos os países (${ctx.urgentes.length})`);
+    lines.push(``);
+    lines.push(`> _Mudança de lei ou regra, ato oficial publicado, fato das últimas 48h ou prazo que abre/fecha em poucos dias. Perde validade rápido: publique estas primeiro._`);
+    lines.push(``);
+    if (ctx.urgentes.length === 0) {
+      lines.push(`_Nada urgente nesta rodada._`);
+      lines.push(``);
+    } else {
+      // Índice rápido (só ponteiro: destino + país + data + título).
+      for (const p of ctx.urgentes) {
+        const d = ctx.destTagOf.get(p.destination);
+        const when = fmtPieceDate(p.publishedAt);
+        lines.push(`- 🔴 **[${d?.tag ?? p.destination}]** ${flagEmoji(p.countryCode)} **${p.countryName}** · ${p.title}${when ? ` · 📅 ${when}` : ``}`);
+      }
+      lines.push(``);
+      lines.push(`---`);
+      lines.push(``);
+      // Peças completas (o doc é standalone, então traz o corpo inteiro).
+      for (const p of ctx.urgentes) {
+        const d = ctx.destTagOf.get(p.destination);
+        if (!d) continue;
+        lines.push(...pieceMd(p, d.dot, d.tag, ctx.cutoffISO, ctx.urgentISO));
+      }
+    }
+  } else if (sector === "labor") {
+    lines.push(`Análise de mercado de trabalho por país: setores em alta, profissões em demanda, faixas salariais, regras pra estrangeiro e onde se candidatar.`);
+    lines.push(``);
+    const withLabor = data.countries.filter((c) => c.labor);
+    if (withLabor.length === 0) {
+      lines.push(`_Sem dados de mercado de trabalho nesta rodada._`);
+      lines.push(``);
+    } else {
+      for (const c of withLabor) {
+        lines.push(`## ${flagEmoji(c.code)} ${c.name}`);
+        lines.push(``);
+        lines.push(...laborMd(c.labor!, { heading: false }));
+      }
+    }
+  } else {
+    // community / countrytab / blog → aquela seção de "TUDO PRA POSTAR".
+    const destKey = SECTOR_TO_DESTINATION[sector];
+    const group = ctx.postables.find((g) => g.dest.key === destKey);
+    if (!group) {
+      lines.push(`_Seção não encontrada._`);
+      lines.push(``);
+    } else {
+      const { dest, pieces } = group;
+      lines.push(`## ${dest.emoji} ${dest.dot} ${dest.label} (${pieces.length})`);
+      lines.push(``);
+      lines.push(`> _${dest.legend}_`);
+      lines.push(``);
+      if (pieces.length === 0) {
+        lines.push(`_Nada nesta seção ainda._`);
+        lines.push(``);
+      } else {
+        for (const grp of groupPiecesByCountry(pieces)) {
+          lines.push(`### ${flagEmoji(grp.countryCode)} ${grp.countryName} — ${dest.tag} (${grp.pieces.length})`);
+          lines.push(``);
+          grp.pieces.forEach((p) => lines.push(...pieceMd(p, dest.dot, dest.tag, ctx.cutoffISO, ctx.urgentISO)));
+        }
+      }
+    }
+  }
+
+  lines.push(`---`);
+  lines.push(``);
+  lines.push(`Gerado automaticamente pela WiseHub em ${data.generatedAtStr}.`);
+  lines.push(``);
+  lines.push(`© WiseHub US LLC · Friday`);
+  return lines.join("\n");
+}
+
+export function renderMarkdown(data: ReportData, sector: Sector = "all"): string {
   const { generatedAtStr, stats, countries } = data;
   const lines: string[] = [];
   const cutoffISO = freshCutoffISO(data.generatedAt);
@@ -280,6 +391,11 @@ export function renderMarkdown(data: ReportData): string {
   const urgentes = urgentPieces(postables, urgentISO);
   const sourcesByCountry = consolidatedSources(countries);
   const destTagOf = new Map(DESTINATIONS.map((d) => [d.key, d]));
+
+  // Menu por assunto: cada setor (menos "all") recorta um único bloco.
+  if (sector !== "all") {
+    return renderMarkdownSector(data, sector, { cutoffISO, urgentISO, postables, urgentes, destTagOf });
+  }
 
   lines.push(`# WiseHub · Relatório Completo`);
   lines.push(``);

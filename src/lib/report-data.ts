@@ -90,6 +90,53 @@ export type ReportData = {
   countries: ReportCountry[];
 };
 
+// ─────────────────────────────────────────────────────────────────────────
+// SETORES DO REPAVET · o menu por assunto (parâmetro ?sector= da rota de export)
+// Cada setor recorta o mesmo ReportData (cacheado por idioma) num documento só
+// daquele assunto. "all" = documento completo (comportamento histórico).
+//   - community/countrytab/blog → só aquela seção de "TUDO PRA POSTAR", todos os países
+//   - urgent                    → só o bloco PRIORIDADE (urgentes cross-country)
+//   - labor                     → só o Mercado de Trabalho, todos os países
+// O filtro é no RENDER: gatherReportData continua igual e cacheado.
+// ─────────────────────────────────────────────────────────────────────────
+
+export type Sector = "all" | "community" | "countrytab" | "blog" | "urgent" | "labor";
+
+export const SECTORS: readonly Sector[] = ["all", "community", "countrytab", "blog", "urgent", "labor"] as const;
+
+/** Título PT do documento por setor (o "chrome" do doc é sempre PT, como o resto). */
+export const SECTOR_DOC_TITLE: Record<Sector, string> = {
+  all: "Relatório Completo",
+  community: "Posts pra Comunidade",
+  countrytab: "Notícias por país",
+  blog: "WiseHub News",
+  urgent: "Só os urgentes",
+  labor: "Mercado de Trabalho",
+};
+
+/** Slug do setor pro nome do arquivo baixado (pra downloads não se sobreporem). */
+export const SECTOR_FILE_SLUG: Record<Sector, string> = {
+  all: "relatorio",
+  community: "comunidade",
+  countrytab: "noticias-por-pais",
+  blog: "wisehub-news",
+  urgent: "urgentes",
+  labor: "mercado-de-trabalho",
+};
+
+/** Mapeia o id do setor de destino ("countrytab") pra chave de Destination ("countryTab"). */
+export const SECTOR_TO_DESTINATION: Partial<Record<Sector, "community" | "countryTab" | "blog">> = {
+  community: "community",
+  countrytab: "countryTab",
+  blog: "blog",
+};
+
+/** Lê e valida o parâmetro ?sector=, caindo pra "all" (comportamento atual) se ausente/inválido. */
+export function parseSector(raw: string | null | undefined): Sector {
+  const s = (raw ?? "").toLowerCase();
+  return (SECTORS as readonly string[]).includes(s) ? (s as Sector) : "all";
+}
+
 // Busca as manchetes pelo MESMO /api/rss de produção que o app + o cron usam,
 // pra os títulos virem idênticos (mesmo parse/decode) e baterem com as chaves do
 // rss-translated.json — senão a tradução do relatório não casaria nas manchetes

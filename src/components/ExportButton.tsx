@@ -4,19 +4,42 @@ import { useToast } from "./ToastProvider";
 import { useLocale } from "./LocaleProvider";
 
 /**
- * Menu de exportação do relatório completo. Junta TODAS as informações do
- * Watch Tower (país a país: panorama, boletins oficiais, marcos editoriais,
- * RSS ao vivo e Centros de Informação) e baixa em 2 formatos:
- *   - PDF   → leitura/compartilhamento
- *   - Word  → editável no Word (.docx)
+ * Menu de exportação do REPAVET, agora POR ASSUNTO. Uma linha por setor; em cada
+ * linha, o nome do assunto (com ícone) e, ao lado, dois botõezinhos compactos:
+ * PDF e Word. Clicar chama /api/export/full-report?format=<fmt>&sector=<id> e
+ * baixa só aquele recorte (o nome do arquivo carrega o setor pra não se
+ * sobrepor). "Relatório completo" (all) mantém o comportamento histórico.
  *
- * Cache no servidor de 30min compartilhado entre formatos — a 1ª geração
- * leva ~30-60s (busca ~32 feeds RSS); as seguintes são instantâneas.
+ * Cache no servidor de 30min compartilhado entre formatos e setores (o filtro é
+ * no render) — a 1ª geração leva ~30-60s (busca ~32 feeds RSS); as seguintes são
+ * instantâneas.
  */
 
 type Format = "pdf" | "docx";
 
 const FORMAT_IDS: Format[] = ["pdf", "docx"];
+
+/** Setores do menu por assunto. `id` vai no ?sector= da rota; `slug` só serve de
+ *  fallback pro nome do arquivo (a fonte da verdade é o Content-Disposition). */
+const SECTORS: ReadonlyArray<{ id: string; emoji: string; slug: string }> = [
+  { id: "all", emoji: "🗂", slug: "relatorio" },
+  { id: "community", emoji: "📣", slug: "comunidade" },
+  { id: "countrytab", emoji: "📰", slug: "noticias-por-pais" },
+  { id: "blog", emoji: "📝", slug: "wisehub-news" },
+  { id: "urgent", emoji: "🔴", slug: "urgentes" },
+  { id: "labor", emoji: "💼", slug: "mercado-de-trabalho" },
+];
+
+/** Nome do arquivo: usa o Content-Disposition do servidor; se faltar, monta a
+ *  partir do slug do setor (espelho do SECTOR_FILE_SLUG do backend). */
+function filenameFromResponse(res: Response, sectorId: string, format: Format): string {
+  const cd = res.headers.get("Content-Disposition") || "";
+  const m = /filename\*?=(?:UTF-8''|")?([^";]+)"?/i.exec(cd);
+  if (m?.[1]) return decodeURIComponent(m[1].trim());
+  const stamp = new Date().toISOString().slice(0, 10);
+  const slug = SECTORS.find((s) => s.id === sectorId)?.slug ?? "relatorio";
+  return `watch-tower-${slug}-${stamp}.${format}`;
+}
 
 export function ExportButton({
   minimal = false,
@@ -28,7 +51,8 @@ export function ExportButton({
   title?: string;
 }) {
   const { t, locale } = useLocale();
-  const [downloading, setDownloading] = useState<Format | null>(null);
+  // Chave "<setor>-<formato>" do botão em download (spinner só no que foi clicado).
+  const [downloading, setDownloading] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [lastDownload, setLastDownload] = useState<{ url: string; filename: string } | null>(null);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -64,11 +88,11 @@ export function ExportButton({
     if (lastDownload) window.open(lastDownload.url, "_blank", "noopener");
   }
 
-  async function download(format: Format) {
+  async function download(sectorId: string, format: Format) {
     if (downloading) return;
-    setDownloading(format);
+    setDownloading(`${sectorId}-${format}`);
     try {
-      const res = await fetch(`/api/export/full-report?format=${format}&lang=${locale === "en" ? "en" : "pt"}`);
+      const res = await fetch(`/api/export/full-report?format=${format}&lang=${locale === "en" ? "en" : "pt"}&sector=${sectorId}`);
       if (!res.ok) {
         if (res.status === 401) toast(t("exportbtn.toast.needLogin"));
         else if (res.status === 403) toast(t("exportbtn.toast.adminOnly"));
@@ -77,8 +101,7 @@ export function ExportButton({
       }
       const blob = await res.blob();
       const cacheHeader = res.headers.get("X-Cache");
-      const stamp = new Date().toISOString().slice(0, 10);
-      const filename = `watch-tower-relatorio-${stamp}.${format}`;
+      const filename = filenameFromResponse(res, sectorId, format);
 
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
@@ -148,30 +171,53 @@ export function ExportButton({
           <div className="fixed inset-0 z-40" onClick={() => !busy && setOpen(false)} />
           <div
             role="menu"
-            className="absolute right-0 top-[44px] z-50 w-[min(260px,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] rounded-xl py-2 wt-card"
+            className="absolute right-0 top-[44px] z-50 w-[min(320px,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] rounded-xl py-2 wt-card"
             style={{ border: "1px solid var(--border-hi)", boxShadow: "var(--shadow-bar)" }}
           >
             <div className="px-4 py-1.5 text-[10px] uppercase tracking-[1.5px] font-bold" style={{ color: "var(--text-3)" }}>
-              {t("exportbtn.menu.heading")}
+              {t("exportbtn.menu.subject")}
             </div>
-            {FORMAT_IDS.map((id) => (
-              <button
-                key={id}
-                type="button"
-                role="menuitem"
-                onClick={() => download(id)}
-                disabled={busy}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-white/5 disabled:cursor-wait"
-              >
-                <span className="flex items-center justify-center w-[26px] h-[26px] rounded-md flex-shrink-0" style={{ background: "rgba(74,122,255,.12)", color: "var(--color-wh-blue-light)" }}>
-                  {downloading === id ? <Spinner size={14} /> : <DownloadIcon size={14} />}
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-[12.5px] font-bold truncate" style={{ color: "var(--text)" }}>{t(`exportbtn.format.${id}.label`)}</span>
-                  <span className="block text-[10.5px] truncate" style={{ color: "var(--text-3)" }}>{t(`exportbtn.format.${id}.hint`)}</span>
-                </span>
-              </button>
-            ))}
+            {/* Uma linha por assunto; compacto, com leve scroll interno se estourar. */}
+            <div className="max-h-[min(58vh,360px)] overflow-y-auto">
+              {SECTORS.map((s, i) => (
+                <div key={s.id}>
+                  {i > 0 && <div className="mx-3 border-t" style={{ borderColor: "var(--border)" }} />}
+                  <div className="flex items-center gap-2 px-3 py-2">
+                    <span className="flex items-center gap-2 min-w-0 flex-1">
+                      <span className="text-[15px] leading-none flex-shrink-0" aria-hidden>{s.emoji}</span>
+                      <span className="text-[12.5px] font-bold truncate" style={{ color: "var(--text)" }}>
+                        {t(`exportbtn.sector.${s.id}.label`)}
+                      </span>
+                    </span>
+                    <span className="flex items-center gap-1.5 flex-shrink-0">
+                      {FORMAT_IDS.map((fmt) => {
+                        const isThis = downloading === `${s.id}-${fmt}`;
+                        return (
+                          <button
+                            key={fmt}
+                            type="button"
+                            role="menuitem"
+                            onClick={() => download(s.id, fmt)}
+                            disabled={busy}
+                            title={`${t(`exportbtn.sector.${s.id}.label`)} · ${t(`exportbtn.compact.${fmt}`)}`}
+                            className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10.5px] font-bold transition-all hover:brightness-110 disabled:cursor-wait"
+                            style={{
+                              border: "1px solid var(--border)",
+                              background: "rgba(74,122,255,.10)",
+                              color: "var(--color-wh-blue-light)",
+                              opacity: busy && !isThis ? 0.45 : 1,
+                            }}
+                          >
+                            {isThis ? <Spinner size={11} /> : <DownloadIcon size={11} />}
+                            {t(`exportbtn.compact.${fmt}`)}
+                          </button>
+                        );
+                      })}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
             <div className="px-4 pt-1.5 mt-1 text-[10px] leading-snug border-t" style={{ color: "var(--text-3)", borderColor: "var(--border)" }}>
               {t("exportbtn.menu.footer")}
             </div>

@@ -16,6 +16,9 @@ import { PDFDocument, type PDFFont, type PDFPage, type PDFImage, StandardFonts, 
 import {
   type ReportData,
   type ReportCountry,
+  type Sector,
+  SECTOR_DOC_TITLE,
+  SECTOR_TO_DESTINATION,
   fmtDate,
   relativeAge,
   statusText,
@@ -30,6 +33,7 @@ import {
   urgentCutoffISO,
   FRESH_WINDOW_DAYS,
 } from "@/lib/report-data";
+import type { LaborMarketCountry } from "@/lib/labor-market";
 import {
   DESTINATIONS,
   buildPostables,
@@ -282,6 +286,49 @@ function piecePdf(b: PdfBuilder, p: PostablePiece, dest: DestinationMeta, cutoff
   sourcesPdf(b, p.sources, "Fontes pra inserir no post:");
 }
 
+/** Bloco Mercado de Trabalho de um país. Reusado pela Parte 3 (com heading) e
+ *  pelo setor "labor" (sem o heading redundante). */
+function laborPdf(b: PdfBuilder, L: LaborMarketCountry, opts: { heading?: boolean } = {}) {
+  if (opts.heading !== false) b.heading("Mercado de Trabalho", H2);
+  b.text(L.overview, { size: 10, gapAfter: 3 });
+  if (L.hotSectors.length) b.text(`Setores em alta: ${L.hotSectors.join(" · ")}`, { size: 10, gapAfter: 1 });
+  if (L.coolingSectors?.length) b.text(`Setores em baixa: ${L.coolingSectors.join(" · ")}`, { size: 10, gapAfter: 2 });
+  if (L.inDemandRoles.length) {
+    b.heading("Profissões em demanda", H3);
+    L.inDemandRoles.forEach((r) => b.bullet(`${r.role}${r.note ? `: ${r.note}` : ""}`, { size: 10, gapAfter: 0 }));
+    b.text("", { gapAfter: 2 });
+  }
+  if (L.byQualification?.length) {
+    b.heading("Por formação", H3);
+    L.byQualification.forEach((q) => b.bullet(`${q.area}: ${q.advice}`, { size: 10, gapAfter: 0 }));
+    b.text("", { gapAfter: 2 });
+  }
+  if (L.salaries?.length) {
+    b.heading("Faixas salariais", H3);
+    L.salaries.forEach((s) => {
+      b.bullet(`${s.role}: ${s.range}`, { size: 10, gapAfter: 0 });
+      if (s.source) b.text(`${s.source.label}: ${s.source.url}`, { size: 8, color: GREY, indent: 12, gapAfter: 1 });
+    });
+    b.text("", { gapAfter: 2 });
+  }
+  if (L.foreignerRules) {
+    b.heading("Regras pra estrangeiro", H3);
+    b.text(L.foreignerRules, { size: 10, gapAfter: 2 });
+  }
+  if (L.opportunityWindows?.length) {
+    b.heading("Janelas de oportunidade", H3);
+    L.opportunityWindows.forEach((w) => b.bullet(w, { size: 10, gapAfter: 0 }));
+    b.text("", { gapAfter: 2 });
+  }
+  if (L.jobBoards.length) {
+    b.heading("Onde se candidatar", H3);
+    L.jobBoards.forEach((bd) => {
+      b.bullet(bd.label, { size: 10, gapAfter: 0 });
+      b.text(bd.url, { size: 8, color: GREY, indent: 12, gapAfter: 1 });
+    });
+  }
+}
+
 /** Bloco de dados técnicos de um país. */
 function technicalPdf(b: PdfBuilder, c: ReportCountry, img?: PDFImage) {
   b.heading(c.name, { size: 15, color: BLUE, spaceBefore: 14, gapAfter: 4 });
@@ -296,45 +343,7 @@ function technicalPdf(b: PdfBuilder, c: ReportCountry, img?: PDFImage) {
   }
 
   if (c.labor) {
-    const L = c.labor;
-    b.heading("Mercado de Trabalho", H2);
-    b.text(L.overview, { size: 10, gapAfter: 3 });
-    if (L.hotSectors.length) b.text(`Setores em alta: ${L.hotSectors.join(" · ")}`, { size: 10, gapAfter: 1 });
-    if (L.coolingSectors?.length) b.text(`Setores em baixa: ${L.coolingSectors.join(" · ")}`, { size: 10, gapAfter: 2 });
-    if (L.inDemandRoles.length) {
-      b.heading("Profissões em demanda", H3);
-      L.inDemandRoles.forEach((r) => b.bullet(`${r.role}${r.note ? `: ${r.note}` : ""}`, { size: 10, gapAfter: 0 }));
-      b.text("", { gapAfter: 2 });
-    }
-    if (L.byQualification?.length) {
-      b.heading("Por formação", H3);
-      L.byQualification.forEach((q) => b.bullet(`${q.area}: ${q.advice}`, { size: 10, gapAfter: 0 }));
-      b.text("", { gapAfter: 2 });
-    }
-    if (L.salaries?.length) {
-      b.heading("Faixas salariais", H3);
-      L.salaries.forEach((s) => {
-        b.bullet(`${s.role}: ${s.range}`, { size: 10, gapAfter: 0 });
-        if (s.source) b.text(`${s.source.label}: ${s.source.url}`, { size: 8, color: GREY, indent: 12, gapAfter: 1 });
-      });
-      b.text("", { gapAfter: 2 });
-    }
-    if (L.foreignerRules) {
-      b.heading("Regras pra estrangeiro", H3);
-      b.text(L.foreignerRules, { size: 10, gapAfter: 2 });
-    }
-    if (L.opportunityWindows?.length) {
-      b.heading("Janelas de oportunidade", H3);
-      L.opportunityWindows.forEach((w) => b.bullet(w, { size: 10, gapAfter: 0 }));
-      b.text("", { gapAfter: 2 });
-    }
-    if (L.jobBoards.length) {
-      b.heading("Onde se candidatar", H3);
-      L.jobBoards.forEach((bd) => {
-        b.bullet(bd.label, { size: 10, gapAfter: 0 });
-        b.text(bd.url, { size: 8, color: GREY, indent: 12, gapAfter: 1 });
-      });
-    }
+    laborPdf(b, c.labor);
   }
 
   if (c.bulletin) {
@@ -417,18 +426,105 @@ function technicalPdf(b: PdfBuilder, c: ReportCountry, img?: PDFImage) {
   b.rule();
 }
 
-export async function renderPdf(data: ReportData): Promise<Uint8Array> {
+/** Contexto pré-computado compartilhado pelo recorte de setor. */
+type PdfSectorCtx = {
+  cutoffISO: string;
+  urgentISO: string;
+  postables: ReturnType<typeof buildPostables>;
+  urgentes: PostablePiece[];
+  destTagOf: Map<string, DestinationMeta>;
+};
+
+/**
+ * Recorte por assunto (PDF): emite SÓ o bloco do setor pedido, reusando o mesmo
+ * PdfBuilder já inicializado. Documento curto e autossuficiente; setor vazio sai
+ * com aviso limpo, nunca quebra.
+ */
+async function renderPdfSector(b: PdfBuilder, data: ReportData, sector: Exclude<Sector, "all">, ctx: PdfSectorCtx): Promise<Uint8Array> {
+  // Cabeçalho curto
+  b.heading("WiseHub", { size: 22, color: BLUE, gapAfter: 2 });
+  b.text(SECTOR_DOC_TITLE[sector], { size: 12, color: DARK, gapAfter: 2 });
+  b.text(`Gerado em: ${data.generatedAtStr} (BRT)`, { size: 9, color: GREY, oblique: true, gapAfter: 4 });
+  b.rule();
+
+  if (sector === "urgent") {
+    b.heading(`PRIORIDADE - urgentes de todos os paises (${ctx.urgentes.length})`, { size: 16, color: URGENT_RED, spaceBefore: 6, gapAfter: 3 });
+    b.text("Mudança de lei ou regra, ato oficial publicado, fato das últimas 48h ou prazo que abre/fecha em poucos dias. Perde validade rápido: publique estas primeiro.", { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
+    if (ctx.urgentes.length === 0) {
+      b.text("Nada urgente nesta rodada.", { size: 9.5, color: GREY, oblique: true, gapAfter: 2 });
+    } else {
+      // Índice rápido (só ponteiro).
+      for (const p of ctx.urgentes) {
+        const d = ctx.destTagOf.get(p.destination);
+        const when = fmtPieceDate(p.publishedAt);
+        b.bullet(`[ URGENTE ] [ ${d?.tag ?? p.destination} ] ${p.countryName} - ${p.title}${when ? `  ·  ${when}` : ""}`, { size: 9.5, gapAfter: 0 });
+      }
+      b.text("", { gapAfter: 3 });
+      b.rule();
+      // Peças completas (doc standalone).
+      for (const p of ctx.urgentes) {
+        const d = ctx.destTagOf.get(p.destination);
+        if (!d) continue;
+        piecePdf(b, p, d, ctx.cutoffISO, ctx.urgentISO);
+      }
+    }
+  } else if (sector === "labor") {
+    b.heading("Mercado de Trabalho", { size: 19, color: BLUE, spaceBefore: 6, gapAfter: 4 });
+    b.text("Análise de mercado de trabalho por país: setores em alta, profissões em demanda, faixas salariais, regras pra estrangeiro e onde se candidatar.", { size: 10, gapAfter: 4 });
+    const withLabor = data.countries.filter((c) => c.labor);
+    if (withLabor.length === 0) {
+      b.text("Sem dados de mercado de trabalho nesta rodada.", { size: 9.5, color: GREY, oblique: true, gapAfter: 2 });
+    } else {
+      for (const c of withLabor) {
+        b.heading(c.name, { size: 15, color: BLUE, spaceBefore: 12, gapAfter: 4 });
+        laborPdf(b, c.labor!, { heading: false });
+      }
+    }
+  } else {
+    // community / countrytab / blog → aquela seção de "TUDO PRA POSTAR".
+    const destKey = SECTOR_TO_DESTINATION[sector];
+    const group = ctx.postables.find((g) => g.dest.key === destKey);
+    if (!group) {
+      b.text("Seção não encontrada.", { size: 9.5, color: GREY, oblique: true, gapAfter: 2 });
+    } else {
+      const { dest, pieces } = group;
+      b.heading(`${dest.label} (${pieces.length})`, { size: 19, color: hexRgb(dest.colorHex), spaceBefore: 6, gapAfter: 3 });
+      b.text(dest.legend, { size: 9.5, color: GREY, oblique: true, gapAfter: 3 });
+      if (pieces.length === 0) {
+        b.text("Nada nesta seção ainda.", { size: 9.5, color: GREY, oblique: true, gapAfter: 2 });
+      } else {
+        for (const grp of groupPiecesByCountry(pieces)) {
+          b.heading(`${grp.countryName} - ${dest.tag} (${grp.pieces.length})`, { size: 13, color: hexRgb(dest.colorHex), spaceBefore: 10, gapAfter: 2 });
+          for (const p of grp.pieces) piecePdf(b, p, dest, ctx.cutoffISO, ctx.urgentISO);
+        }
+      }
+    }
+  }
+
+  // Rodapé
+  b.text(`Gerado automaticamente pela WiseHub em ${data.generatedAtStr}.`, { size: 8, color: GREY, gapAfter: 1 });
+  b.text("© WiseHub US LLC · Conteúdo curado pela Friday", { size: 8, color: GREY });
+  return b.bytes();
+}
+
+export async function renderPdf(data: ReportData, sector: Sector = "all"): Promise<Uint8Array> {
   const { generatedAtStr, stats, countries } = data;
   const b = new PdfBuilder();
   await b.init();
   const cutoffISO = freshCutoffISO(data.generatedAt);
   const urgentISO = urgentCutoffISO(data.generatedAt);
   const postables = buildPostables(countries, { urgentCutoffISO: urgentISO });
+  const urgentes = urgentPieces(postables, urgentISO);
+  const destTagOf = new Map(DESTINATIONS.map((d) => [d.key, d]));
+
+  // Menu por assunto: cada setor (menos "all") recorta um único bloco.
+  if (sector !== "all") {
+    return renderPdfSector(b, data, sector, { cutoffISO, urgentISO, postables, urgentes, destTagOf });
+  }
+
   const postCount = totalPostables(countries);
   const freshCount = countFreshPostables(countries, cutoffISO);
-  const urgentes = urgentPieces(postables, urgentISO);
   const sourcesByCountry = consolidatedSources(countries);
-  const destTagOf = new Map(DESTINATIONS.map((d) => [d.key, d]));
 
   // Cabeçalho
   b.heading("WiseHub", { size: 22, color: BLUE, gapAfter: 2 });

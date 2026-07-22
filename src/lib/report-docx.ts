@@ -28,6 +28,9 @@ import {
 import {
   type ReportData,
   type ReportCountry,
+  type Sector,
+  SECTOR_DOC_TITLE,
+  SECTOR_TO_DESTINATION,
   fmtDate,
   relativeAge,
   statusLabel,
@@ -46,6 +49,7 @@ import {
   urgentCutoffISO,
   FRESH_WINDOW_DAYS,
 } from "@/lib/report-data";
+import type { LaborMarketCountry } from "@/lib/labor-market";
 import {
   DESTINATIONS,
   buildPostables,
@@ -310,6 +314,53 @@ function summaryTable(data: ReportData, postCount: number, freshCount: number, u
   });
 }
 
+/** Bloco Mercado de Trabalho de um país. Reusado pela Parte 3 (com sub-heading)
+ *  e pelo setor "labor" (sem o sub-heading redundante). */
+function laborDocx(L: LaborMarketCountry, opts: { heading?: boolean } = {}): Paragraph[] {
+  const out: Paragraph[] = [];
+  if (opts.heading !== false) out.push(h2("💼 Mercado de Trabalho"));
+  out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: L.overview, color: DARK })] }));
+  if (L.hotSectors.length) out.push(metaLine("Setores em alta", L.hotSectors.join(" · ")));
+  if (L.coolingSectors?.length) out.push(metaLine("Setores em baixa", L.coolingSectors.join(" · ")));
+  if (L.inDemandRoles.length) {
+    out.push(h3("Profissões em demanda"));
+    L.inDemandRoles.forEach((r) =>
+      out.push(bullet([new TextRun({ text: r.role, bold: true, color: DARK }), ...(r.note ? [new TextRun({ text: `: ${r.note}`, color: DARK })] : [])])),
+    );
+  }
+  if (L.byQualification?.length) {
+    out.push(h3("Por formação"));
+    L.byQualification.forEach((q) =>
+      out.push(bullet([new TextRun({ text: `${q.area}: `, bold: true, color: DARK }), new TextRun({ text: q.advice, color: DARK })])),
+    );
+  }
+  if (L.salaries?.length) {
+    out.push(h3("Faixas salariais"));
+    L.salaries.forEach((s) =>
+      out.push(
+        bullet([
+          new TextRun({ text: `${s.role}: `, bold: true, color: DARK }),
+          new TextRun({ text: s.range, color: DARK }),
+          ...(s.source ? [new TextRun({ text: " · ", color: GREY }), link(s.source.label, s.source.url)] : []),
+        ]),
+      ),
+    );
+  }
+  if (L.foreignerRules) {
+    out.push(h3("Regras pra estrangeiro"));
+    out.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: L.foreignerRules, color: DARK })] }));
+  }
+  if (L.opportunityWindows?.length) {
+    out.push(h3("Janelas de oportunidade"));
+    L.opportunityWindows.forEach((w) => out.push(bullet([new TextRun({ text: w, color: DARK })])));
+  }
+  if (L.jobBoards.length) {
+    out.push(h3("Onde se candidatar"));
+    L.jobBoards.forEach((bd) => out.push(bullet([link(bd.label, bd.url)])));
+  }
+  return out;
+}
+
 /** Bloco de dados técnicos de um país. */
 function technicalDocx(c: ReportCountry, img?: ReportImage): (Paragraph | Table)[] {
   const out: (Paragraph | Table)[] = [];
@@ -329,47 +380,7 @@ function technicalDocx(c: ReportCountry, img?: ReportImage): (Paragraph | Table)
   }
 
   if (c.labor) {
-    const L = c.labor;
-    out.push(h2("💼 Mercado de Trabalho"));
-    out.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: L.overview, color: DARK })] }));
-    if (L.hotSectors.length) out.push(metaLine("Setores em alta", L.hotSectors.join(" · ")));
-    if (L.coolingSectors?.length) out.push(metaLine("Setores em baixa", L.coolingSectors.join(" · ")));
-    if (L.inDemandRoles.length) {
-      out.push(h3("Profissões em demanda"));
-      L.inDemandRoles.forEach((r) =>
-        out.push(bullet([new TextRun({ text: r.role, bold: true, color: DARK }), ...(r.note ? [new TextRun({ text: `: ${r.note}`, color: DARK })] : [])])),
-      );
-    }
-    if (L.byQualification?.length) {
-      out.push(h3("Por formação"));
-      L.byQualification.forEach((q) =>
-        out.push(bullet([new TextRun({ text: `${q.area}: `, bold: true, color: DARK }), new TextRun({ text: q.advice, color: DARK })])),
-      );
-    }
-    if (L.salaries?.length) {
-      out.push(h3("Faixas salariais"));
-      L.salaries.forEach((s) =>
-        out.push(
-          bullet([
-            new TextRun({ text: `${s.role}: `, bold: true, color: DARK }),
-            new TextRun({ text: s.range, color: DARK }),
-            ...(s.source ? [new TextRun({ text: " · ", color: GREY }), link(s.source.label, s.source.url)] : []),
-          ]),
-        ),
-      );
-    }
-    if (L.foreignerRules) {
-      out.push(h3("Regras pra estrangeiro"));
-      out.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: L.foreignerRules, color: DARK })] }));
-    }
-    if (L.opportunityWindows?.length) {
-      out.push(h3("Janelas de oportunidade"));
-      L.opportunityWindows.forEach((w) => out.push(bullet([new TextRun({ text: w, color: DARK })])));
-    }
-    if (L.jobBoards.length) {
-      out.push(h3("Onde se candidatar"));
-      L.jobBoards.forEach((bd) => out.push(bullet([link(bd.label, bd.url)])));
-    }
+    out.push(...laborDocx(c.labor));
   }
 
   if (c.bulletin) {
@@ -469,16 +480,133 @@ function technicalDocx(c: ReportCountry, img?: ReportImage): (Paragraph | Table)
   return out;
 }
 
-export async function renderDocx(data: ReportData): Promise<Buffer> {
+/** Contexto pré-computado compartilhado pelo recorte de setor. */
+type DocxSectorCtx = {
+  cutoffISO: string;
+  urgentISO: string;
+  postables: ReturnType<typeof buildPostables>;
+  urgentes: PostablePiece[];
+  destTagOf: Map<string, DestinationMeta>;
+};
+
+/**
+ * Recorte por assunto (.docx): emite SÓ o bloco do setor pedido. Documento curto
+ * e autossuficiente, com a mesma linguagem visual dos blocos do relatório
+ * completo. Setor vazio sai com aviso limpo, nunca quebra.
+ */
+async function renderDocxSector(data: ReportData, sector: Exclude<Sector, "all">, ctx: DocxSectorCtx): Promise<Buffer> {
+  const children: (Paragraph | Table)[] = [];
+
+  // Capa curta
+  children.push(new Paragraph({ spacing: { after: 40 }, children: [new TextRun({ text: "WiseHub", bold: true, color: BLUE, size: 40 })] }));
+  children.push(new Paragraph({ spacing: { after: 40 }, children: [new TextRun({ text: SECTOR_DOC_TITLE[sector], color: DARK, size: 26 })] }));
+  children.push(new Paragraph({ spacing: { after: 160 }, children: [new TextRun({ text: `Gerado em: ${data.generatedAtStr} (BRT)`, italics: true, color: GREY })] }));
+
+  if (sector === "urgent") {
+    children.push(destSectionTitle(`🔴 PRIORIDADE · urgentes de todos os países (${ctx.urgentes.length})`, URGENT_RED));
+    children.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: "Mudança de lei ou regra, ato oficial publicado, fato das últimas 48h ou prazo que abre/fecha em poucos dias. Perde validade rápido: publique estas primeiro.", italics: true, color: GREY })] }));
+    if (ctx.urgentes.length === 0) {
+      children.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: "Nada urgente nesta rodada.", italics: true, color: GREY })] }));
+    } else {
+      // Índice rápido (só ponteiro: etiqueta + país + título + data).
+      for (const p of ctx.urgentes) {
+        const d = ctx.destTagOf.get(p.destination);
+        const when = fmtPieceDate(p.publishedAt);
+        children.push(
+          bullet([
+            new TextRun({ text: "URGENTE ", bold: true, color: URGENT_RED, size: 18 }),
+            new TextRun({ text: `[ ${d?.tag ?? p.destination} ] `, bold: true, color: d?.colorHex ?? DARK, size: 18 }),
+            new TextRun({ text: `${flagEmoji(p.countryCode)} ${p.countryName} · ${p.title}`, color: DARK, size: 20 }),
+            ...(when ? [new TextRun({ text: `  ·  ${when}`, color: GREY, size: 18 })] : []),
+          ]),
+        );
+      }
+      // Peças completas (doc standalone).
+      for (const p of ctx.urgentes) {
+        const d = ctx.destTagOf.get(p.destination);
+        if (!d) continue;
+        children.push(...pieceDocx(p, d, ctx.cutoffISO, ctx.urgentISO));
+      }
+    }
+  } else if (sector === "labor") {
+    children.push(destSectionTitle("💼 Mercado de Trabalho", BLUE_LIGHT));
+    children.push(new Paragraph({ spacing: { after: 100 }, children: [new TextRun({ text: "Análise de mercado de trabalho por país: setores em alta, profissões em demanda, faixas salariais, regras pra estrangeiro e onde se candidatar.", color: DARK })] }));
+    const withLabor = data.countries.filter((c) => c.labor);
+    if (withLabor.length === 0) {
+      children.push(new Paragraph({ children: [new TextRun({ text: "Sem dados de mercado de trabalho nesta rodada.", italics: true, color: GREY })] }));
+    } else {
+      for (const c of withLabor) {
+        children.push(h1(`${flagEmoji(c.code)} ${c.name}`));
+        children.push(...laborDocx(c.labor!, { heading: false }));
+      }
+    }
+  } else {
+    // community / countrytab / blog → aquela seção de "TUDO PRA POSTAR".
+    const destKey = SECTOR_TO_DESTINATION[sector];
+    const group = ctx.postables.find((g) => g.dest.key === destKey);
+    if (!group) {
+      children.push(new Paragraph({ children: [new TextRun({ text: "Seção não encontrada.", italics: true, color: GREY })] }));
+    } else {
+      const { dest, pieces } = group;
+      children.push(destSectionTitle(`${dest.emoji} ${dest.label} (${pieces.length})`, dest.colorHex));
+      children.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: dest.legend, italics: true, color: GREY })] }));
+      if (pieces.length === 0) {
+        children.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: "Nada nesta seção ainda.", italics: true, color: GREY })] }));
+      } else {
+        for (const grp of groupPiecesByCountry(pieces)) {
+          children.push(countryGroupTitle(`${flagEmoji(grp.countryCode)} ${grp.countryName} — ${dest.tag} (${grp.pieces.length})`, dest.colorHex));
+          for (const p of grp.pieces) children.push(...pieceDocx(p, dest, ctx.cutoffISO, ctx.urgentISO));
+        }
+      }
+    }
+  }
+
+  // Rodapé
+  children.push(
+    new Paragraph({
+      spacing: { before: 280, after: 40 },
+      border: { top: { style: BorderStyle.SINGLE, size: 4, color: "D0D7E6", space: 8 } },
+      children: [new TextRun({ text: `Gerado automaticamente pela WiseHub em ${data.generatedAtStr}.`, color: GREY, size: 18 })],
+    }),
+  );
+  children.push(
+    new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { before: 80 },
+      children: [new TextRun({ text: "© WiseHub US LLC · Conteúdo curado pela Friday", color: GREY, size: 16 })],
+    }),
+  );
+
+  const doc = new Document({
+    creator: "WiseHub",
+    title: `WiseHub — ${SECTOR_DOC_TITLE[sector]}`,
+    description: "Recorte por assunto do relatório WiseHub",
+    sections: [
+      {
+        properties: { page: { margin: { top: 1080, bottom: 1080, left: 1080, right: 1080 } } },
+        children,
+      },
+    ],
+  });
+  return Packer.toBuffer(doc);
+}
+
+export async function renderDocx(data: ReportData, sector: Sector = "all"): Promise<Buffer> {
   const children: (Paragraph | Table)[] = [];
   const cutoffISO = freshCutoffISO(data.generatedAt);
   const urgentISO = urgentCutoffISO(data.generatedAt);
   const postables = buildPostables(data.countries, { urgentCutoffISO: urgentISO });
+  const urgentes = urgentPieces(postables, urgentISO);
+  const destTagOf = new Map(DESTINATIONS.map((d) => [d.key, d]));
+
+  // Menu por assunto: cada setor (menos "all") recorta um único bloco.
+  if (sector !== "all") {
+    return renderDocxSector(data, sector, { cutoffISO, urgentISO, postables, urgentes, destTagOf });
+  }
+
   const postCount = totalPostables(data.countries);
   const freshCount = countFreshPostables(data.countries, cutoffISO);
-  const urgentes = urgentPieces(postables, urgentISO);
   const sourcesByCountry = consolidatedSources(data.countries);
-  const destTagOf = new Map(DESTINATIONS.map((d) => [d.key, d]));
 
   // Capa
   children.push(new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: "WiseHub", bold: true, color: BLUE, size: 44 })] }));
