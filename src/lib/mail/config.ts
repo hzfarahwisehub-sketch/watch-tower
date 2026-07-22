@@ -20,9 +20,8 @@ export const WEBMAIL_URL = "https://mail.wisehubnow.com/webmail";
 
 // ---------------------------------------------------------------------------
 // Senhas candidatas das caixas @wisehubnow.com (corporativas + pessoais).
-// Aceita mais de uma pra cobrir o período em que umas estão com Tradeiros*#2026
-// e outras com Wisehub2026$. O motor tenta cada uma e cacheia a que funcionou
-// (imap.ts). Se alguma caixa tiver uma 3ª senha, é só somar aqui/no env.
+// Os valores existem exclusivamente nas variáveis protegidas do ambiente.
+// Nunca documente senhas reais no código, histórico ou exemplos de configuração.
 // ---------------------------------------------------------------------------
 export function wisehubPasswordCandidates(): string[] {
   const list = [

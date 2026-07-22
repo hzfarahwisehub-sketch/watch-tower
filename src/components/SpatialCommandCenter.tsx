@@ -16,7 +16,7 @@ const modules = ["Panorama global", "Inteligência", "Riscos", "Operações", "C
 // PELE DO SÓCIO e testar a usabilidade que eles têm (qual tela veem, que problema
 // sentem). O DUAL foi removido: não fazia nada e ele não quer botão morto.
 const modes = ["FRIDAY", "WISE"] as const;
-const APP_URL = "https://wise.wisehubnow.online/";
+const BRAIN_ACCESS_URL = "/api/brain/access";
 const eyeModes = [
   { id: "eye", label: "Wise Eye", variant: "Metallic Azure", ownerOnly: false },
   { id: "eye-cobalt", label: "Wise Eye", variant: "Cobalt Lens", ownerOnly: false },
@@ -139,7 +139,7 @@ export function SpatialCommandCenter() {
             {embedOn ? (
               // key={mode} força o iframe a remontar na troca de perfil: só mudar o
               // src deixaria estado velho do app anterior vivo lá dentro.
-              <iframe key={mode} className="wb-brain-embed" src={`${APP_URL}?perfil=${mode === "WISE" ? "wise" : "friday"}`} title={mode === "WISE" ? "Wise (visão do sócio)" : "Friday"} allow="microphone; autoplay; clipboard-write; camera" />
+              <iframe key={mode} className="wb-brain-embed" src={`${BRAIN_ACCESS_URL}?perfil=${mode === "WISE" ? "wise" : "friday"}`} title={mode === "WISE" ? "Wise (visão do sócio)" : "Friday"} referrerPolicy="no-referrer" allow="microphone; autoplay; clipboard-write; camera" />
             ) : (
               <>
                 <div className="wb-eye-library">
