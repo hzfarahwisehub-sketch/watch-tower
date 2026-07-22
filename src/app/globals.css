@@ -11,6 +11,7 @@
 @import "./brain-cinematic.css";
 @import "./brain-vitality.css";
 @import "./brain-typography.css";
+@import "./brain-unified-controls.css";
 
 @theme {
   --color-wh-blue: #1F55FF;

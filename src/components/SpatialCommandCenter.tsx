@@ -1,43 +1,41 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { COUNTRIES } from "@/lib/data";
-import { FridayEyeReactive } from "./FridayEyeReactive";
 
 const MapZone = dynamic(() => import("./MapZone"), { ssr: false });
 
 const OWNER_EMAIL = "hzfarah.wisehub@gmail.com";
 const PARTNER_ACCESS_ENABLED = process.env.NEXT_PUBLIC_WT_BRAIN_PARTNERS === "1";
-const modules = ["Panorama global", "Inteligência", "Riscos", "Operações", "Comunicações", "Ativos", "Arquivos", "Configurações"];
 // Dois apps, dois perfis (regra do Hammis, 2026-07-20): a FRIDAY é dele e o WISE é
 // dos sócios. Ele entra SEMPRE como Friday; o botão WISE existe pra ele entrar na
 // PELE DO SÓCIO e testar a usabilidade que eles têm (qual tela veem, que problema
 // sentem). O DUAL foi removido: não fazia nada e ele não quer botão morto.
 const modes = ["FRIDAY", "WISE"] as const;
 const BRAIN_ACCESS_URL = "/api/brain/access";
-const eyeModes = [
-  { id: "eye", label: "Wise Eye", variant: "Metallic Azure", ownerOnly: false },
-  { id: "eye-cobalt", label: "Wise Eye", variant: "Cobalt Lens", ownerOnly: false },
-  { id: "friday", label: "Friday", variant: "Phoenix", ownerOnly: true },
-  { id: "friday-ember", label: "Friday", variant: "Ember Sentinel", ownerOnly: true },
-  { id: "friday-sentient", label: "Friday Sentient", variant: "Original", ownerOnly: true },
-  { id: "friday-flux", label: "Friday", variant: "Flux · Reativa · Voz", ownerOnly: true },
-] as const;
+type BrainMode = (typeof modes)[number];
+type BrainView = "clean" | "sentient" | "classic";
+
+const sharedViews: ReadonlyArray<{ id: BrainView; label: string; detail: string }> = [
+  { id: "clean", label: "Olho azul", detail: "núcleo limpo" },
+  { id: "sentient", label: "Olho sentiente", detail: "presença completa" },
+];
+const fridayViews: ReadonlyArray<{ id: BrainView; label: string; detail: string }> = [
+  ...sharedViews,
+  { id: "classic", label: "Painel Friday", detail: "exclusivo" },
+];
 
 export function SpatialCommandCenter() {
   const { data: session } = useSession();
   const isOwner = session?.user?.email?.toLowerCase() === OWNER_EMAIL;
-  const [mode, setMode] = useState<(typeof modes)[number]>(isOwner ? "FRIDAY" : "WISE");
-  const [drawerOpen, setDrawerOpen] = useState(true);
-  const [briefing, setBriefing] = useState(false);
+  const [mode, setMode] = useState<BrainMode>(isOwner ? "FRIDAY" : "WISE");
+  const [brainViews, setBrainViews] = useState<Record<BrainMode, BrainView>>({
+    FRIDAY: "clean",
+    WISE: "clean",
+  });
   const visual = "meridian";
-  const [eyeStyle, setEyeStyle] = useState<(typeof eyeModes)[number]["id"]>("eye");
-  const [eyeShelfOpen, setEyeShelfOpen] = useState(false);
-  // Embed do app REAL (conversa+voz+IA de wise.wisehubnow.online) dentro do painel.
-  // Abre nele por padrão (é o que o Hammis quer); alterna com o olho decorativo.
-  const [embedOn, setEmbedOn] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [countryQuery, setCountryQuery] = useState("");
   const [geoMode, setGeoMode] = useState<"cinematic" | "satellite" | "live" | "atlas">("cinematic");
@@ -50,6 +48,7 @@ export function SpatialCommandCenter() {
   // vazando embaixo). Aqui medimos a posição REAL do painel e fixamos a altura pra
   // caber exata no viewport, onde quer que ele esteja montado.
   const rootRef = useRef<HTMLElement>(null);
+  const ownerModeInitializedRef = useRef(false);
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
@@ -65,17 +64,21 @@ export function SpatialCommandCenter() {
     const t = setTimeout(fit, 350);
     return () => { window.removeEventListener("resize", fit); clearTimeout(t); };
   }, []);
-  const availableEyes = eyeModes.filter(item => isOwner || !item.ownerOnly);
-  const currentEye = availableEyes.find(item => item.id === eyeStyle) ?? availableEyes[0];
+
+  useEffect(() => {
+    if (isOwner && !ownerModeInitializedRef.current) {
+      ownerModeInitializedRef.current = true;
+      setMode("FRIDAY");
+    }
+  }, [isOwner]);
+  const availableViews = mode === "FRIDAY" ? fridayViews : sharedViews;
+  const activeView = brainViews[mode];
   const summary = useMemo(() => ({
     critical: COUNTRIES.filter(c => c.status === "crit").length,
     warning: COUNTRIES.filter(c => c.status === "warn").length,
     events: COUNTRIES.reduce((n, c) => n + c.events.length, 0),
   }), []);
   const activeCountry = selectedCountry ? COUNTRIES.find(item => item.code === selectedCountry) ?? null : null;
-  const responseText = activeCountry
-    ? `Analisando ${activeCountry.name}. ${activeCountry.summary ?? `${activeCountry.events.length} registros disponíveis.`}`
-    : "Bom dia, Hammis. Selecione ou solicite um país para abrir o panorama geográfico e o benchmark correspondente.";
   const activeCoords = activeCountry?.coords ?? [0, 0];
   const focusStyle = { "--focus-x": `${((activeCoords[1] + 180) / 360) * 100}%`, "--focus-y": `${((90 - activeCoords[0]) / 180) * 100}%` } as CSSProperties;
   // Config de cada modo geográfico (não-live). CINEMÁTICO = Terra noturna real +
@@ -106,61 +109,53 @@ export function SpatialCommandCenter() {
     return () => window.removeEventListener("wt:brain-country", receiveCountryCommand);
   }, []);
 
-  useEffect(() => { if (isOwner) setEyeStyle("friday-sentient"); }, [isOwner]);
-
   if (!isOwner && !PARTNER_ACCESS_ENABLED) return <section className="wb-locked" aria-label="Wise Brain bloqueado"><div className="wb-locked-seal"><span>⌾</span><i>🔒</i></div><small>WISEHUB · WATCH TOWER</small><h2>Wise Brain</h2><p>Ambiente de inteligência em preparação. O acesso será liberado após validação do proprietário.</p><div><b>ACESSO PROTEGIDO</b><span>Somente Hammis pode alterar esta permissão.</span></div></section>;
 
   return (
-    <section ref={rootRef} className={`wise-brain wb-visual-${visual} wb-eye-${eyeStyle} ${drawerOpen ? "drawer-open" : "drawer-closed"}`} aria-label={isOwner ? "Friday Brain" : "Wise Brain"}>
+    <section ref={rootRef} className={`wise-brain wb-visual-${visual} wb-unified-brain`} aria-label={isOwner ? "Friday Brain" : "Wise Brain"}>
       <header className="wise-brain-topbar">
         <div className="wb-brand"><b>{isOwner ? "Friday Brain" : "Wise Brain"}</b><span>WISEHUB · WATCH TOWER</span></div>
-        <div className="wb-studio"><small>Studio de presença 🔒</small><b>Somente Hammis</b></div>
-        <div className="wb-modes" role="group" aria-label="Presença">
-          {modes.map(item => <button key={item} disabled={!isOwner && item !== "WISE"} className={mode === item ? "active" : ""} onClick={() => setMode(item)}>{item}</button>)}
+        <div className="wb-unified-controls">
+          <div className="wb-control-block">
+            <span>Perfil</span>
+            <div className="wb-modes" role="group" aria-label="Perfil ativo">
+              {modes.map(item => <button type="button" key={item} disabled={!isOwner && item !== "WISE"} className={mode === item ? "active" : ""} onClick={() => setMode(item)}>{item}</button>)}
+            </div>
+          </div>
+          <div className="wb-control-block wb-view-control">
+            <span>Visual</span>
+            <div className="wb-view-switcher" role="group" aria-label={`Visual do ${mode}`}>
+              {availableViews.map(item => (
+                <button type="button" key={item.id} className={activeView === item.id ? "active" : ""} title={item.detail} onClick={() => setBrainViews(current => ({ ...current, [mode]: item.id }))}>
+                  <i aria-hidden />{item.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="wb-live"><span /> LEITURAS REAIS · {COUNTRIES.length} PAÍSES</div>
+        <div className="wb-session-actions">
+          <div className="wb-live"><span /> LEITURAS REAIS · {COUNTRIES.length} PAÍSES</div>
+          <button type="button" className="wb-logout" onClick={() => signOut({ callbackUrl: "/auth/signin" })} aria-label="Sair da Watch Tower">
+            <svg viewBox="0 0 24 24" aria-hidden><path d="M10 5H6.8A1.8 1.8 0 0 0 5 6.8v10.4A1.8 1.8 0 0 0 6.8 19H10M14.5 8.5 18 12l-3.5 3.5M9 12h9" /></svg>
+            Sair
+          </button>
+        </div>
       </header>
 
       <div className="wise-brain-body">
-        <nav className="wb-rail" aria-label="Wise Brain">
-          {isOwner && <button className={mode === "FRIDAY" ? "active" : ""} onClick={() => setMode("FRIDAY")} title="Sua Friday completa"><b><img src="/wise-brain/friday-helmet.png" alt="" className="wb-rail-ico" /></b><small>FRIDAY</small></button>}
-          <button className={mode === "WISE" ? "active" : ""} onClick={() => setMode("WISE")} title={isOwner ? "Ver como sócio: a mesma tela que eles usam" : "Wise"}><b><img src="/wise-brain/logo-wise-w.png" alt="" className="wb-rail-ico" /></b><small>WISE</small></button>
-          <button className="wb-collapse" onClick={() => setDrawerOpen(v => !v)} aria-label={drawerOpen ? "Recolher painel" : "Abrir painel"}>{drawerOpen ? "‹" : "›"}</button>
-        </nav>
-
         <aside className="wb-assistant">
           <div className="wb-friday">
-            <div className="wb-section-title"><b>{currentEye.label}</b><span>● online</span></div>
-            <small>{!embedOn ? "BRIEFING DE VOZ · AGORA" : isOwner && mode === "WISE" ? "🧪 VENDO COMO SÓCIO · TESTE DE USABILIDADE" : "CONVERSA AO VIVO · VOZ + IA"}</small>
-            <div className="wb-brain-embed-toggle" role="group" aria-label="Modo da Friday">
-              <button type="button" className={embedOn ? "active" : ""} onClick={() => setEmbedOn(true)}>💬 Conversar</button>
-              <button type="button" className={!embedOn ? "active" : ""} onClick={() => setEmbedOn(false)}>👁 Olho</button>
-            </div>
-            {embedOn ? (
-              // key={mode} força o iframe a remontar na troca de perfil: só mudar o
-              // src deixaria estado velho do app anterior vivo lá dentro.
-              <iframe key={mode} className="wb-brain-embed" src={`${BRAIN_ACCESS_URL}?perfil=${mode === "WISE" ? "wise" : "friday"}`} title={mode === "WISE" ? "Wise (visão do sócio)" : "Friday"} referrerPolicy="no-referrer" allow="microphone; autoplay; clipboard-write; camera" />
-            ) : (
-              <>
-                <div className="wb-eye-library">
-                  <button type="button" className="wb-eye-library-trigger" onClick={() => setEyeShelfOpen(value => !value)} aria-expanded={eyeShelfOpen} aria-controls="wb-eye-shelf"><span className={`wb-eye-thumb wb-thumb-${eyeStyle}`} /><span><b>{currentEye.label}</b><small>{currentEye.variant}</small></span><em>{eyeShelfOpen ? "‹" : "›"}</em></button>
-                  <div id="wb-eye-shelf" className={`wb-eye-shelf ${eyeShelfOpen ? "open" : ""}`} aria-label="Biblioteca de olhos">
-                    <div className="wb-eye-shelf-head"><span>Biblioteca de olhos</span><small>{availableEyes.length} opções</small></div>
-                    <div className="wb-eye-options">
-                      {availableEyes.map(item => <button type="button" key={item.id} className={eyeStyle === item.id ? "active" : ""} onClick={() => { setEyeStyle(item.id); setEyeShelfOpen(false); }}><span className={`wb-eye-thumb wb-thumb-${item.id}`} /><span><b>{item.label}</b><small>{item.variant}</small></span><em>›</em></button>)}
-                    </div>
-                  </div>
-                </div>
-                <FridayEyeReactive eyeStyle={eyeStyle} text={responseText} />
-              </>
-            )}
+            <div className="wb-section-title"><b>{mode === "FRIDAY" ? "Friday Sentient" : "Wise Sentient"}</b><span><i /> online</span></div>
+            <small>{isOwner && mode === "WISE" ? "VISÃO DO SÓCIO · TESTE DE USABILIDADE" : "CONVERSA AO VIVO · VOZ + IA"}</small>
+            <iframe
+              key={`${mode}-${activeView}`}
+              className="wb-brain-embed"
+              src={`${BRAIN_ACCESS_URL}?perfil=${mode === "WISE" ? "wise" : "friday"}&layout=${activeView}&embed=1`}
+              title={mode === "WISE" ? `Wise · ${availableViews.find(item => item.id === activeView)?.label}` : `Friday · ${availableViews.find(item => item.id === activeView)?.label}`}
+              referrerPolicy="no-referrer"
+              allow="microphone; autoplay; clipboard-write; camera"
+            />
           </div>
-          <div className="wb-modules">
-            <h3>WISE</h3><small>MÓDULOS OPERACIONAIS</small>
-            {modules.map((item,i)=><button key={item}><span>{["◎","▣","△","⚙","▤","▱","□","⚙"][i]}</span><b>{item}</b><em>›</em></button>)}
-          </div>
-          <div className="wb-response-box"><div><span className="wb-response-live"/><b>{currentEye.label} · resposta</b><button className="wb-briefing" onClick={() => setBriefing(v => !v)}>{briefing ? "Pausar" : "Ouvir"}</button></div><p>{responseText}</p></div>
-          {isOwner && <div className="wb-lock">🔒 Personalização visível apenas para o proprietário.</div>}
         </aside>
 
         <main className="wb-stage">
