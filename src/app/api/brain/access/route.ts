@@ -19,6 +19,7 @@ const TOKEN_TTL_SECONDS = 45;
 
 type BrainProfile = "friday" | "wise";
 type BrainLayout = "clean" | "sentient" | "classic";
+type BrainIntent = "connect" | "login" | "logout";
 
 function requestedProfile(req: Request, email: string): BrainProfile {
   const requested = new URL(req.url).searchParams.get("perfil")?.toLowerCase();
@@ -31,6 +32,13 @@ function requestedLayout(req: Request, profile: BrainProfile): BrainLayout {
   if (requested === "sentient") return "sentient";
   if (requested === "classic" && profile === "friday") return "classic";
   return "clean";
+}
+
+function requestedIntent(req: Request): BrainIntent {
+  const requested = new URL(req.url).searchParams.get("intent")?.toLowerCase();
+  if (requested === "logout") return "logout";
+  if (requested === "login") return "login";
+  return "connect";
 }
 
 function brainUrl(pathname: string): URL {
@@ -62,6 +70,13 @@ function redirectNoStore(target: URL): NextResponse {
   return response;
 }
 
+function addSafeContext(target: URL, profile: BrainProfile, layout: BrainLayout, embedded: boolean) {
+  target.searchParams.set("perfil", profile);
+  target.searchParams.set("layout", layout);
+  if (embedded) target.searchParams.set("embed", "1");
+  target.searchParams.set("return_to", "watchtower");
+}
+
 export async function GET(req: Request) {
   const gate = await requireSession();
   if (!gate.ok) return gate.response;
@@ -74,22 +89,27 @@ export async function GET(req: Request) {
   const profile = requestedProfile(req, email);
   const layout = requestedLayout(req, profile);
   const embedded = new URL(req.url).searchParams.get("embed") === "1";
+  const intent = requestedIntent(req);
   const secret = process.env.WT_BRAIN_SSO_SECRET?.trim();
+
+  // Desconectar um app nunca encerra a sessão da Watch Tower e nunca toca no
+  // cookie do outro perfil. O Friday Cloud devolve o login dentro do iframe.
+  if (intent === "logout") {
+    const target = brainUrl("/logout");
+    addSafeContext(target, profile, layout, embedded);
+    return redirectNoStore(target);
+  }
 
   // Fallback seguro durante rollout: abre o login certo, sem tentar reutilizar
   // outro segredo nem expor uma configuracao parcial como se fosse SSO valido.
-  if (!secret) {
+  if (!secret || intent === "login") {
     const target = brainUrl("/login");
-    target.searchParams.set("perfil", profile);
-    target.searchParams.set("layout", layout);
-    if (embedded) target.searchParams.set("embed", "1");
+    addSafeContext(target, profile, layout, embedded);
     return redirectNoStore(target);
   }
 
   const target = brainUrl("/sso");
   target.searchParams.set("token", signAccess(email, profile, secret));
-  target.searchParams.set("perfil", profile);
-  target.searchParams.set("layout", layout);
-  if (embedded) target.searchParams.set("embed", "1");
+  addSafeContext(target, profile, layout, embedded);
   return redirectNoStore(target);
 }

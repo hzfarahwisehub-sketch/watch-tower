@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { COUNTRIES } from "@/lib/data";
 
@@ -14,8 +14,11 @@ const PARTNER_ACCESS_ENABLED = process.env.NEXT_PUBLIC_WT_BRAIN_PARTNERS === "1"
 // PELE DO SÓCIO e testar a usabilidade que eles têm (qual tela veem, que problema
 // sentem). O DUAL foi removido: não fazia nada e ele não quer botão morto.
 const BRAIN_ACCESS_URL = "/api/brain/access";
+const BRAIN_CONNECTIONS_KEY = "wt-brain-connections-v1";
+const BRAIN_MESSAGE_ORIGIN = "https://wise.wisehubnow.online";
 type BrainMode = "FRIDAY" | "WISE";
 type BrainView = "clean" | "sentient" | "classic";
+type BrainConnections = Record<BrainMode, boolean>;
 
 const sharedViews: ReadonlyArray<{ id: BrainView; label: string; detail: string }> = [
   { id: "clean", label: "Olho azul", detail: "núcleo limpo" },
@@ -29,11 +32,17 @@ const fridayViews: ReadonlyArray<{ id: BrainView; label: string; detail: string 
 export function SpatialCommandCenter() {
   const { data: session } = useSession();
   const isOwner = session?.user?.email?.toLowerCase() === OWNER_EMAIL;
+  const connectionStorageKey = `${BRAIN_CONNECTIONS_KEY}:${session?.user?.email?.toLowerCase() ?? "anonymous"}`;
   const [mode, setMode] = useState<BrainMode>(isOwner ? "FRIDAY" : "WISE");
   const [brainViews, setBrainViews] = useState<Record<BrainMode, BrainView>>({
     FRIDAY: "clean",
     WISE: "clean",
   });
+  const [brainConnections, setBrainConnections] = useState<BrainConnections>({
+    FRIDAY: true,
+    WISE: true,
+  });
+  const [brainSessionReady, setBrainSessionReady] = useState(false);
   const visual = "meridian";
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [countryQuery, setCountryQuery] = useState("");
@@ -48,6 +57,7 @@ export function SpatialCommandCenter() {
   // caber exata no viewport, onde quer que ele esteja montado.
   const rootRef = useRef<HTMLElement>(null);
   const ownerModeInitializedRef = useRef(false);
+  const connectionInitializedRef = useRef(false);
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
@@ -67,11 +77,70 @@ export function SpatialCommandCenter() {
   useEffect(() => {
     if (isOwner && !ownerModeInitializedRef.current) {
       ownerModeInitializedRef.current = true;
-      setMode("FRIDAY");
+      const params = new URLSearchParams(window.location.search);
+      const requestedMode = params.get("brain") === "wise" ? "WISE" : "FRIDAY";
+      setMode(requestedMode);
+      const requestedView = params.get("brainLayout");
+      if (requestedView === "clean" || requestedView === "sentient" || (requestedView === "classic" && requestedMode === "FRIDAY")) {
+        setBrainViews(current => ({ ...current, [requestedMode]: requestedView }));
+      }
+    } else if (session?.user?.email && !isOwner) {
+      ownerModeInitializedRef.current = true;
+      setMode("WISE");
     }
-  }, [isOwner]);
+  }, [isOwner, session?.user?.email]);
+
+  useEffect(() => {
+    if (!session?.user?.email || connectionInitializedRef.current) return;
+    connectionInitializedRef.current = true;
+    let next: BrainConnections = { FRIDAY: true, WISE: true };
+    try {
+      const saved = localStorage.getItem(connectionStorageKey);
+      if (saved) {
+        const parsed = JSON.parse(saved) as Partial<BrainConnections>;
+        next = {
+          FRIDAY: parsed.FRIDAY !== false,
+          WISE: parsed.WISE !== false,
+        };
+      }
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("brainConnected") === "1") {
+        const confirmedMode: BrainMode = isOwner && params.get("brain") === "friday" ? "FRIDAY" : "WISE";
+        next[confirmedMode] = true;
+      }
+      localStorage.setItem(connectionStorageKey, JSON.stringify(next));
+    } catch {}
+    setBrainConnections(next);
+    setBrainSessionReady(true);
+  }, [connectionStorageKey, isOwner, session?.user?.email]);
+
+  const updateBrainConnection = (targetMode: BrainMode, connected: boolean) => {
+    setBrainConnections(current => {
+      const next = { ...current, [targetMode]: connected };
+      try { localStorage.setItem(connectionStorageKey, JSON.stringify(next)); } catch {}
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    const receiveAuthState = (event: MessageEvent) => {
+      if (event.origin !== BRAIN_MESSAGE_ORIGIN || event.data?.type !== "wisehub:brain-auth") return;
+      const targetMode: BrainMode = event.data.profile === "friday" ? "FRIDAY" : "WISE";
+      if (targetMode === "FRIDAY" && !isOwner) return;
+      updateBrainConnection(targetMode, event.data.authenticated === true);
+    };
+    window.addEventListener("message", receiveAuthState);
+    return () => window.removeEventListener("message", receiveAuthState);
+  }, [connectionStorageKey, isOwner]);
   const availableViews = mode === "FRIDAY" ? fridayViews : sharedViews;
   const activeView = brainViews[mode];
+  const activeProfile = mode === "FRIDAY" ? "friday" : "wise";
+  const activeAppName = mode === "FRIDAY" ? "Friday" : "Wise";
+  const activeConnected = brainConnections[mode];
+  const brainIntent = activeConnected ? "connect" : "logout";
+  const activeSessionAction = activeConnected
+    ? (mode === "FRIDAY" ? "Sair da Friday" : "Sair do Wise")
+    : (mode === "FRIDAY" ? "Entrar na Friday" : "Entrar no Wise");
   const summary = useMemo(() => ({
     critical: COUNTRIES.filter(c => c.status === "crit").length,
     warning: COUNTRIES.filter(c => c.status === "warn").length,
@@ -128,9 +197,16 @@ export function SpatialCommandCenter() {
         </div>
         <div className="wb-session-actions">
           <div className="wb-live"><span /> LEITURAS REAIS · {COUNTRIES.length} PAÍSES</div>
-          <button type="button" className="wb-logout" onClick={() => signOut({ callbackUrl: "/auth/signin" })} aria-label="Sair da Watch Tower">
-            <svg viewBox="0 0 24 24" aria-hidden><path d="M10 5H6.8A1.8 1.8 0 0 0 5 6.8v10.4A1.8 1.8 0 0 0 6.8 19H10M14.5 8.5 18 12l-3.5 3.5M9 12h9" /></svg>
-            Sair
+          <button
+            type="button"
+            className={`wb-app-session ${activeConnected ? "connected" : "disconnected"}`}
+            onClick={() => updateBrainConnection(mode, !activeConnected)}
+            aria-label={activeSessionAction}
+            aria-pressed={activeConnected}
+            disabled={!brainSessionReady}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden><path d="M12 3v9M7.2 6.8a7 7 0 1 0 9.6 0" /></svg>
+            <span><small>Sessão {activeAppName}</small>{activeSessionAction}</span>
           </button>
         </div>
       </header>
@@ -138,29 +214,31 @@ export function SpatialCommandCenter() {
       <div className="wise-brain-body">
         <nav className="wb-rail" aria-label="Alternar aplicativo">
           {isOwner && (
-            <button type="button" className={mode === "FRIDAY" ? "active" : ""} aria-pressed={mode === "FRIDAY"} title="Abrir Friday" onClick={() => setMode("FRIDAY")}>
+            <button type="button" className={mode === "FRIDAY" ? "active" : ""} data-connected={brainConnections.FRIDAY} aria-pressed={mode === "FRIDAY"} title="Abrir Friday" onClick={() => setMode("FRIDAY")}>
               <b><img src="/wise-brain/friday-helmet.png" alt="" className="wb-rail-ico" /></b>
-              <small>FRIDAY</small>
+              <small>FRIDAY<i aria-label={brainConnections.FRIDAY ? "conectada" : "desconectada"} /></small>
             </button>
           )}
-          <button type="button" className={mode === "WISE" ? "active" : ""} aria-pressed={mode === "WISE"} title={isOwner ? "Abrir Wise como sócio" : "Abrir Wise"} onClick={() => setMode("WISE")}>
+          <button type="button" className={mode === "WISE" ? "active" : ""} data-connected={brainConnections.WISE} aria-pressed={mode === "WISE"} title={isOwner ? "Abrir Wise como sócio" : "Abrir Wise"} onClick={() => setMode("WISE")}>
             <b><img src="/wise-brain/logo-wise-w.png" alt="" className="wb-rail-ico" /></b>
-            <small>WISE</small>
+            <small>WISE<i aria-label={brainConnections.WISE ? "conectado" : "desconectado"} /></small>
           </button>
         </nav>
 
         <aside className="wb-assistant">
           <div className="wb-friday">
-            <div className="wb-section-title"><b>{mode === "FRIDAY" ? "Friday Sentient" : "Wise Sentient"}</b><span><i /> online</span></div>
+            <div className="wb-section-title"><b>{mode === "FRIDAY" ? "Friday Sentient" : "Wise Sentient"}</b><span className={activeConnected ? "connected" : "disconnected"}><i /> {activeConnected ? "conectado" : "desconectado"}</span></div>
             <small>{isOwner && mode === "WISE" ? "VISÃO DO SÓCIO · TESTE DE USABILIDADE" : "CONVERSA AO VIVO · VOZ + IA"}</small>
-            <iframe
-              key={`${mode}-${activeView}`}
-              className="wb-brain-embed"
-              src={`${BRAIN_ACCESS_URL}?perfil=${mode === "WISE" ? "wise" : "friday"}&layout=${activeView}&embed=1`}
-              title={mode === "WISE" ? `Wise · ${availableViews.find(item => item.id === activeView)?.label}` : `Friday · ${availableViews.find(item => item.id === activeView)?.label}`}
-              referrerPolicy="no-referrer"
-              allow="microphone; autoplay; clipboard-write; camera"
-            />
+            {brainSessionReady ? (
+              <iframe
+                key={`${mode}-${activeView}-${brainIntent}`}
+                className="wb-brain-embed"
+                src={`${BRAIN_ACCESS_URL}?perfil=${activeProfile}&layout=${activeView}&embed=1&intent=${brainIntent}`}
+                title={mode === "WISE" ? `Wise · ${availableViews.find(item => item.id === activeView)?.label}` : `Friday · ${availableViews.find(item => item.id === activeView)?.label}`}
+                referrerPolicy="no-referrer"
+                allow="microphone; autoplay; clipboard-write; camera"
+              />
+            ) : <div className="wb-brain-session-loading" role="status">Preparando sessão do {activeAppName}…</div>}
           </div>
         </aside>
 

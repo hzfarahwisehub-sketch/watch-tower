@@ -107,32 +107,55 @@
   gap:12px;
 }
 
-.wb-logout{
+.wb-app-session{
   display:inline-flex;
   align-items:center;
   justify-content:center;
   gap:7px;
   min-height:38px;
-  padding:0 13px;
-  border:1px solid #ff6b4f88;
+  padding:5px 12px;
+  border:1px solid #2ed7a088;
   border-radius:9px;
-  background:#2a100e;
-  color:#ffad9d;
+  background:#0b2923;
+  color:#9cf1d5;
   font-size:10px;
   font-weight:800;
   letter-spacing:.06em;
-  text-transform:uppercase;
   cursor:pointer;
   transition:background-color .2s ease,border-color .2s ease,color .2s ease;
 }
 
-.wb-logout:hover{
+.wb-app-session span,
+.wb-app-session small{
+  display:block;
+  text-align:left;
+}
+
+.wb-app-session small{
+  margin-bottom:2px;
+  color:#6fa99a;
+  font-size:7px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.wb-app-session.connected:hover{
   border-color:#ff6b4f;
   background:#4a1711;
   color:#fff;
 }
 
-.wb-logout svg{
+.wb-app-session.disconnected{
+  border-color:#4eaee0aa;
+  background:#0b2332;
+  color:#b9e9ff;
+}
+
+.wb-app-session.disconnected small{color:#76a9c0}
+.wb-app-session.disconnected:hover{border-color:#63cfff;background:#12364a;color:#fff}
+.wb-app-session:disabled{cursor:wait;opacity:.55}
+
+.wb-app-session svg{
   width:15px;
   height:15px;
   fill:none;
@@ -140,6 +163,26 @@
   stroke-width:1.8;
   stroke-linecap:round;
   stroke-linejoin:round;
+}
+
+.wb-unified-brain .wb-rail button small{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+}
+
+.wb-unified-brain .wb-rail button small i{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#2ed7a0;
+  box-shadow:0 0 7px #2ed7a0;
+}
+
+.wb-unified-brain .wb-rail button[data-connected="false"] small i{
+  background:#71808b;
+  box-shadow:none;
 }
 
 .wb-unified-brain .wise-brain-body{
@@ -189,6 +232,9 @@
   box-shadow:0 0 8px #2ed7a0;
 }
 
+.wb-unified-brain .wb-section-title span.disconnected{color:#8293a0}
+.wb-unified-brain .wb-section-title span.disconnected i{background:#71808b;box-shadow:none}
+
 .wb-unified-brain .wb-friday>small{
   margin:3px 0 9px;
 }
@@ -199,6 +245,18 @@
   min-height:0;
   border-color:#315a73;
   border-radius:13px;
+}
+
+.wb-brain-session-loading{
+  display:grid;
+  min-height:0;
+  place-items:center;
+  border:1px solid #315a73;
+  border-radius:13px;
+  background:#020812;
+  color:#8ca8ba;
+  font-size:11px;
+  letter-spacing:.08em;
 }
 
 @media(max-width:1500px){
@@ -281,7 +339,7 @@
     border-right:0;
   }
   .wb-session-actions{align-self:start}
-  .wb-logout{min-width:74px}
+  .wb-app-session{min-width:118px}
   .wb-unified-brain .wise-brain-body{
     display:flex!important;
     flex-direction:column;
@@ -326,5 +384,5 @@
 @media(prefers-reduced-motion:reduce){
   .wb-unified-brain .wb-rail button,
   .wb-view-switcher button,
-  .wb-logout{transition:none}
+  .wb-app-session{transition:none}
 }

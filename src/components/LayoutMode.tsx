@@ -14,6 +14,12 @@ export function LayoutModeProvider({ children }: { children: ReactNode }) {
   const [mode, setModeState] = useState<LayoutMode>("tabs");
   useEffect(() => {
     try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("panel") === "spatial" || params.has("brain")) {
+        setModeState("tabs");
+        localStorage.setItem("wt-layout-mode", "tabs");
+        return;
+      }
       const m = localStorage.getItem("wt-layout-mode");
       if (m === "tabs" || m === "classic") setModeState(m);
     } catch {}
