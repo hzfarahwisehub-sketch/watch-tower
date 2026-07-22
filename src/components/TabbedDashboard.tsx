@@ -180,6 +180,8 @@ export function TabbedDashboard() {
       const tabSaved = localStorage.getItem("wt-active-tab");
       if (tabSaved && TABS.some((x) => x.id === tabSaved)) setActive(tabSaved);
     } catch {}
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("panel") === "spatial" || params.has("brain")) setActive("brain");
     setMounted(true);
   }, []);
 
