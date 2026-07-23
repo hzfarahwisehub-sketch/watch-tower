@@ -44,6 +44,183 @@ function textToHtml(text: string): string {
   return esc.replace(/\r\n|\r|\n/g, "<br>");
 }
 
+// ---- Agenda de contatos (Onda 3): autocomplete + auto-save ----
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+type ContactSuggestion = { id: string; name: string | null; email: string };
+
+/** "Fulano <a@x.com>" | "a@x.com" → {email, name?}. null se não for e-mail. */
+function parseAddress(part: string): { email: string; name?: string } | null {
+  const angle = part.match(/^\s*"?([^"<]*?)"?\s*<\s*([^>]+?)\s*>\s*$/);
+  if (angle) {
+    const email = angle[2].trim().toLowerCase();
+    const name = angle[1].trim();
+    return EMAIL_RE.test(email) ? { email, name: name || undefined } : null;
+  }
+  const email = part.trim().toLowerCase();
+  return EMAIL_RE.test(email) ? { email } : null;
+}
+
+/** Junta destinatários únicos de vários campos (Para/Cc/Cco) pro auto-save. */
+function collectContacts(fields: string[]): { email: string; name?: string }[] {
+  const seen = new Set<string>();
+  const out: { email: string; name?: string }[] = [];
+  for (const f of fields) {
+    for (const part of f.split(/[,;\n]/)) {
+      const a = parseAddress(part);
+      if (a && !seen.has(a.email)) {
+        seen.add(a.email);
+        out.push(a);
+      }
+    }
+  }
+  return out;
+}
+
+const recipInputStyle: React.CSSProperties = {
+  background: "var(--bg2)",
+  border: "1px solid var(--border)",
+  color: "var(--text)",
+};
+
+/**
+ * Campo de destinatário (Para/Cc/Cco) com autocomplete da agenda: ao digitar o
+ * trecho depois da última vírgula, busca /api/contacts?q= (debounce) e sugere
+ * nome+e-mail; escolher preenche o campo. Best-effort — se a busca falhar, o
+ * campo continua um input de texto normal.
+ */
+function RecipientInput({
+  value,
+  onChange,
+  placeholder,
+  listLabel,
+  inputRef,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder: string;
+  listLabel: string;
+  inputRef?: React.RefObject<HTMLInputElement | null>;
+}) {
+  const localRef = useRef<HTMLInputElement>(null);
+  const ref = inputRef ?? localRef;
+  const [suggestions, setSuggestions] = useState<ContactSuggestion[]>([]);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(0);
+
+  // token = trecho depois do último separador (o e-mail sendo digitado agora)
+  const token = useMemo(() => {
+    const lastSep = Math.max(value.lastIndexOf(","), value.lastIndexOf(";"));
+    return value.slice(lastSep + 1).trim();
+  }, [value]);
+
+  useEffect(() => {
+    if (token.length < 1) {
+      setSuggestions([]);
+      return;
+    }
+    const ctrl = new AbortController();
+    const id = setTimeout(() => {
+      fetch(`/api/contacts?q=${encodeURIComponent(token)}`, { signal: ctrl.signal })
+        .then((r) => (r.ok ? r.json() : { contacts: [] }))
+        .then((d: { contacts?: ContactSuggestion[] }) => {
+          setSuggestions(Array.isArray(d.contacts) ? d.contacts : []);
+          setActive(0);
+        })
+        .catch(() => {});
+    }, 200);
+    return () => {
+      clearTimeout(id);
+      ctrl.abort();
+    };
+  }, [token]);
+
+  const choose = (c: ContactSuggestion) => {
+    const lastSep = Math.max(value.lastIndexOf(","), value.lastIndexOf(";"));
+    const prefix = lastSep >= 0 ? value.slice(0, lastSep + 1) + " " : "";
+    onChange(prefix + c.email + ", ");
+    setSuggestions([]);
+    setOpen(false);
+    ref.current?.focus();
+  };
+
+  const visible = open && suggestions.length > 0;
+
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (!visible) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActive((a) => Math.min(a + 1, suggestions.length - 1));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActive((a) => Math.max(a - 1, 0));
+    } else if (e.key === "Enter") {
+      // só sequestra o Enter quando há item destacado — não bloqueia o submit
+      if (suggestions[active]) {
+        e.preventDefault();
+        choose(suggestions[active]);
+      }
+    } else if (e.key === "Escape") {
+      setOpen(false);
+    }
+  };
+
+  return (
+    <div className="relative flex-1">
+      <input
+        ref={ref}
+        type="text"
+        value={value}
+        onChange={(e) => {
+          onChange(e.target.value);
+          setOpen(true);
+        }}
+        onFocus={() => setOpen(true)}
+        onBlur={() => setTimeout(() => setOpen(false), 120)}
+        onKeyDown={onKeyDown}
+        placeholder={placeholder}
+        className="w-full px-2 py-1 rounded-md text-[12px] outline-none"
+        style={recipInputStyle}
+        autoComplete="off"
+        role="combobox"
+        aria-expanded={visible}
+        aria-autocomplete="list"
+      />
+      {visible && (
+        <ul
+          role="listbox"
+          aria-label={listLabel}
+          className="absolute left-0 right-0 top-full mt-1 z-[2060] max-h-[190px] overflow-auto rounded-md py-1"
+          style={{ background: "var(--bg2)", border: "1px solid var(--border-hi)", boxShadow: "0 8px 24px rgba(0,0,0,.35)" }}
+        >
+          {suggestions.map((c, i) => (
+            <li
+              key={c.id}
+              role="option"
+              aria-selected={i === active}
+              onMouseDown={(e) => e.preventDefault()}
+              onMouseEnter={() => setActive(i)}
+              onClick={() => choose(c)}
+              className="px-2 py-1.5 cursor-pointer text-[12px] flex flex-col"
+              style={{ background: i === active ? "rgba(31,85,255,.14)" : "transparent" }}
+            >
+              {c.name ? (
+                <>
+                  <span style={{ color: "var(--text)" }}>{c.name}</span>
+                  <span className="text-[10px]" style={{ color: "var(--text-3)" }}>
+                    {c.email}
+                  </span>
+                </>
+              ) : (
+                <span style={{ color: "var(--text)" }}>{c.email}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 export function MailCompose({
   accounts,
   prefill,
@@ -178,6 +355,16 @@ export function MailCompose({
       if (res.ok) {
         const data = (await res.json().catch(() => ({}))) as { savedToSent?: boolean };
         toast(data.savedToSent === false ? t("mail.compose.sentNoCopy") : t("mail.compose.sent"));
+        // Agenda cresce sozinha: salva os destinatários novos (best-effort, não
+        // bloqueia o fechamento nem falha o envio se o banco estiver fora).
+        const contacts = collectContacts([to, cc, bcc]);
+        if (contacts.length) {
+          void fetch("/api/contacts", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ contacts }),
+          }).catch(() => {});
+        }
         removeOriginalDraft();
         onClose();
         return;
@@ -314,15 +501,12 @@ export function MailCompose({
           <span className="text-[10px] uppercase tracking-wide font-bold w-[52px]" style={{ color: "var(--text-3)" }}>
             {t("mail.compose.to")}
           </span>
-          <input
-            ref={toRef}
-            type="text"
+          <RecipientInput
+            inputRef={toRef}
             value={to}
-            onChange={(e) => setTo(e.target.value)}
-            placeholder="nome@exemplo.com, outro@exemplo.com"
-            className="flex-1 px-2 py-1 rounded-md text-[12px] outline-none"
-            style={inputStyle}
-            autoComplete="off"
+            onChange={setTo}
+            placeholder={t("mail.compose.recipientPlaceholder")}
+            listLabel={t("mail.compose.contacts.listLabel")}
           />
           {!showCc && (
             <button
@@ -343,13 +527,13 @@ export function MailCompose({
               <span className="text-[10px] uppercase tracking-wide font-bold w-[52px]" style={{ color: "var(--text-3)" }}>
                 {t("mail.compose.cc")}
               </span>
-              <input type="text" value={cc} onChange={(e) => setCc(e.target.value)} className="flex-1 px-2 py-1 rounded-md text-[12px] outline-none" style={inputStyle} autoComplete="off" />
+              <RecipientInput value={cc} onChange={setCc} placeholder={t("mail.compose.recipientPlaceholder")} listLabel={t("mail.compose.contacts.listLabel")} />
             </div>
             <div className="flex items-center gap-2 px-4 py-2" style={rowStyle}>
               <span className="text-[10px] uppercase tracking-wide font-bold w-[52px]" style={{ color: "var(--text-3)" }}>
                 {t("mail.compose.bcc")}
               </span>
-              <input type="text" value={bcc} onChange={(e) => setBcc(e.target.value)} className="flex-1 px-2 py-1 rounded-md text-[12px] outline-none" style={inputStyle} autoComplete="off" />
+              <RecipientInput value={bcc} onChange={setBcc} placeholder={t("mail.compose.recipientPlaceholder")} listLabel={t("mail.compose.contacts.listLabel")} />
             </div>
           </>
         )}

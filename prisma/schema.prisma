@@ -86,6 +86,7 @@ model User {
   pushSubscriptions PushSubscription[]
   suggestions       Suggestion[]
   roteiroUsages     RoteiroUsage[]
+  contacts          Contact[]
 }
 
 // ============================================================
@@ -284,4 +285,28 @@ model RoteiroUsage {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([usedAt])
+}
+
+// ============================================================
+// Agenda de contatos (Onda 3 do e-mail) · cada usuário tem a SUA.
+// Cresce sozinha: ao enviar um e-mail, os destinatários novos viram
+// contato (best-effort, POST /api/contacts). Serve o autocomplete de
+// Para/Cc/Cco no compositor. Só o dono lê/edita (escopo por userId).
+// Nada de segredo aqui — só nome + endereço.
+//
+// Sem @@map: a tabela no Postgres é "Contact" (nome default do Prisma).
+// A rota /api/internal/contacts-migrate cria essa mesma tabela por DDL.
+// ============================================================
+model Contact {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String? // rótulo amigável (opcional; auto-save às vezes só tem o e-mail)
+  email     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, email])
+  @@index([userId])
 }
