@@ -414,8 +414,8 @@
 .wb-eye-reader .wb-eye-meter{width:100%;max-width:324px;margin:0 auto;gap:9px}
 .wb-eye-reader .wb-eye-meter-track{height:9px}
 .wb-eye-reader .wb-eye-meter-db{font-size:11px;min-width:52px}
-/* Hands-free: a Watch Tower escuta ("diga Wise/Friday") e injeta o comando no app. */
-.wb-handsfree{margin:8px 14px 2px;display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border:1px solid #2a5a73;border-radius:9px;background:#071b2d;color:#a9d9ff;font-size:11px;letter-spacing:.4px;cursor:pointer;transition:.15s}
+/* Hands-free (COMPACTO, no cabecalho): a Watch Tower escuta ("diga Wise/Friday") e
+   injeta no app. Fica fora da coluna do painel pra NUNCA virar caixa/empurrar o olho. */
+.wb-handsfree{flex:0 0 auto;align-self:center;display:inline-flex;align-items:center;gap:6px;max-width:190px;height:34px;padding:0 11px;border:1px solid #2a5a73;border-radius:8px;background:#071b2d;color:#a9d9ff;font-size:10px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;transition:.15s}
 .wb-handsfree:hover{border-color:#54c1ff;color:#d7f0ff}
 .wb-handsfree.on{background:linear-gradient(180deg,#1a5c8a,#0a2a44);border-color:#54c1ff;color:#fff;box-shadow:0 0 12px #3aa0ff66}
-.wb-handsfree-heard{display:block;margin:5px 14px 0;font-size:10px;color:#7fb0cc;font-style:italic}

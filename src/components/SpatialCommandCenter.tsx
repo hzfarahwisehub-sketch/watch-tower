@@ -267,6 +267,11 @@ export function SpatialCommandCenter() {
           </div>
         </div>
         <div className="wb-session-actions">
+          {!isEyeView && (
+            <button type="button" className={`wb-handsfree${handsFree ? " on" : ""}`} onClick={() => { setHandsFree(v => !v); setHandsFreeHeard(""); }} title={handsFree && handsFreeHeard ? `ouvi: ${handsFreeHeard}` : `Hands-free por voz: diga "${mode === "FRIDAY" ? "Friday" : "Wise"}" e o comando`}>
+              {handsFree ? `🎧 diga "${mode === "FRIDAY" ? "Friday" : "Wise"}"` : "🎙 Hands-free"}
+            </button>
+          )}
           <div className="wb-live"><span /> LEITURAS REAIS · {COUNTRIES.length} PAÍSES</div>
           <button
             type="button"
@@ -300,12 +305,6 @@ export function SpatialCommandCenter() {
           <div className="wb-friday">
             <div className="wb-section-title"><b>{mode === "FRIDAY" ? "Friday Sentient" : "Wise Sentient"}</b><span className={activeConnected ? "connected" : "disconnected"}><i /> {activeConnected ? "conectado" : "desconectado"}</span></div>
             <small>{isOwner && mode === "WISE" ? "VISÃO DO SÓCIO · TESTE DE USABILIDADE" : "CONVERSA AO VIVO · VOZ + IA"}</small>
-            {!isEyeView && (
-              <button type="button" className={`wb-handsfree${handsFree ? " on" : ""}`} onClick={() => { setHandsFree(v => !v); setHandsFreeHeard(""); }} title={`Hands-free: diga "${mode === "FRIDAY" ? "Friday" : "Wise"}" e o comando`}>
-                {handsFree ? `● Ouvindo. Diga "${mode === "FRIDAY" ? "Friday" : "Wise"}"` : "🎙 Hands-free"}
-              </button>
-            )}
-            {handsFree && handsFreeHeard ? <span className="wb-handsfree-heard">ouvi: {handsFreeHeard}</span> : null}
             {isEyeView ? (
               <div className={`wb-eye-reader wb-eye-${eyeStyle}`}>
                 <div className="wb-eye-library">
