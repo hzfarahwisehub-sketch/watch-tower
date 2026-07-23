@@ -37,6 +37,11 @@ export interface AgendaItem {
   title: string;
   where: string;
   author?: string;
+  /** description CRU do banco: texto humano + sidecar de meta rica (Onda 4).
+   *  Não é exibido direto; o form da Agenda decodifica com lib/calendar/rich. */
+  description?: string;
+  /** Duração em minutos (default 30) — Onda 4. */
+  durationMin?: number;
 }
 
 export interface Reminder {

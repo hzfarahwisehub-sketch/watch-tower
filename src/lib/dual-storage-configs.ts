@@ -111,20 +111,27 @@ export const agendaConfig: DualStorageConfig<AgendaItem, DbAgenda> = {
     time: isoToTimeStr(db.scheduledAt),
     title: db.title,
     where: db.location ?? "",
+    // description CRU (texto humano + sidecar de meta rica). O form decodifica.
+    description: db.description ?? "",
+    durationMin: db.durationMin,
     author: (db as { author?: string }).author,
   }),
   toCreatePayload: (item) => ({
     title: item.title,
     scheduledAt: dateTimeToIso(item.date, item.time),
     location: item.where || null,
-    durationMin: 30,
+    description: item.description ?? null,
+    durationMin: item.durationMin ?? 30,
   }),
   // A UI sempre manda date + time juntos quando mexe no horário, pra reconstruir
-  // o scheduledAt sem perder a outra metade.
+  // o scheduledAt sem perder a outra metade. `description` (com sidecar de meta)
+  // e `durationMin` só vão quando o form de detalhes ricos os manda.
   toPatchPayload: (patch) => {
     const out: Record<string, unknown> = {};
     if (patch.title !== undefined) out.title = patch.title;
     if (patch.where !== undefined) out.location = patch.where || null;
+    if (patch.description !== undefined) out.description = patch.description || null;
+    if (patch.durationMin !== undefined) out.durationMin = patch.durationMin;
     if (patch.date !== undefined && patch.time !== undefined) {
       out.scheduledAt = dateTimeToIso(patch.date, patch.time);
     }

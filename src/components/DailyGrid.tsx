@@ -15,6 +15,8 @@ import { DailyCard } from "./DailyCard";
 import { InboxCard } from "./InboxCard";
 import { GoogleCalendar } from "./GoogleCalendar";
 import { SafeBoundary } from "./SafeBoundary";
+import { AgendaRichFields, emptyRichDraft, fromDraft, toDraft, type RichDraft } from "./AgendaRichFields";
+import { decodeDescription, rruleToRepeat, GOOGLE_EVENT_COLORS } from "@/lib/calendar/rich";
 
 export type DailyBlock = "inbox" | "scheduled" | "agenda" | "tasks" | "reminders";
 
@@ -90,6 +92,10 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
   const [agendaFormOpen, setAgendaFormOpen] = useState(false);
   const [agForm, setAgForm] = useState({ date: "", time: "09:00", title: "", where: "" });
   const [syncing, setSyncing] = useState(false);
+  // Detalhes ricos (Onda 4): rascunho do form de criação + editor por linha.
+  const [newRich, setNewRich] = useState<RichDraft>(emptyRichDraft);
+  const [showNewRich, setShowNewRich] = useState(false);
+  const [rowEdit, setRowEdit] = useState<{ id: number; draft: RichDraft } | null>(null);
 
   // Undo/redo de "apagar" (só escopo Pessoal — itens de Equipe/Friday ficam de
   // fora, alterá-los passa pelo aviso ao Hammis). Refs garantem o hook atual.
@@ -228,15 +234,30 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
       toast(t("daily.agenda.form.needTitle"));
       return;
     }
+    // Detalhes ricos → sidecar de meta no description + duração.
+    const { description, durationMin } = fromDraft(newRich);
     await agendaHook.add({
       date: agForm.date || todayStr(),
       time: agForm.time || "09:00",
       title,
       where: agForm.where.trim(),
+      ...(description ? { description } : {}),
+      durationMin,
     });
     setAgForm({ date: "", time: "09:00", title: "", where: "" });
+    setNewRich(emptyRichDraft());
+    setShowNewRich(false);
     setAgendaFormOpen(false);
     doGcalSync(true);
+  };
+
+  // Salva os detalhes ricos editados numa linha existente e sincroniza.
+  const saveRowEdit = () => {
+    if (!rowEdit) return;
+    const { description, durationMin } = fromDraft(rowEdit.draft);
+    agendaHookFor(rowEdit.id).update(rowEdit.id, { description: description ?? "", durationMin });
+    setRowEdit(null);
+    scheduleSync();
   };
 
   const deleteAgenda = (id: number) => {
@@ -456,10 +477,20 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
               className="w-full bg-transparent text-[11px] outline-none mb-2 px-1.5 py-1 rounded"
               style={{ color: "var(--text-2)", border: "1px solid var(--border)" }}
             />
-            <div className="flex gap-2 justify-end">
+            {/* Detalhes ricos (convidados, Meet, cor, lembrete, fuso, recorrência) */}
+            <button
+              type="button"
+              onClick={() => setShowNewRich((v) => !v)}
+              className="text-[10px] font-bold uppercase tracking-wide cursor-pointer mb-1"
+              style={{ color: "var(--color-wh-blue-light)" }}
+            >
+              {showNewRich ? t("daily.agenda.form.detailsClose") : t("daily.agenda.form.details")}
+            </button>
+            {showNewRich && <AgendaRichFields draft={newRich} onChange={setNewRich} t={t} />}
+            <div className="flex gap-2 justify-end mt-2">
               <button
                 type="button"
-                onClick={() => { setAgendaFormOpen(false); setAgForm({ date: "", time: "09:00", title: "", where: "" }); }}
+                onClick={() => { setAgendaFormOpen(false); setAgForm({ date: "", time: "09:00", title: "", where: "" }); setNewRich(emptyRichDraft()); setShowNewRich(false); }}
                 className="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wide cursor-pointer"
                 style={{ color: "var(--text-3)", background: "rgba(255,255,255,.05)" }}
               >
@@ -477,11 +508,22 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
           </div>
         )}
 
-        {sortedAgenda.map((a) => (
+        {sortedAgenda.map((a) => {
+          // Onda 4: lê o sidecar de meta rica (cor, convidados, Meet, recorrência)
+          // pra desenhar os selos da linha e alimentar o editor de detalhes.
+          const meta = decodeDescription(a.description).meta;
+          const colorHex = meta.colorId ? GOOGLE_EVENT_COLORS.find((c) => c.id === meta.colorId)?.hex : null;
+          const rep = rruleToRepeat(meta.rrule);
+          const repKey = rep ? `daily.agenda.form.repeat${rep.charAt(0).toUpperCase()}${rep.slice(1)}` : "";
+          const guestCount = meta.attendees?.length ?? 0;
+          const hasMeet = !!(meta.meet || meta.hangoutLink);
+          const hasBadges = !!colorHex || guestCount > 0 || hasMeet || !!rep;
+          const editing = rowEdit?.id === a.id;
+          return (
+          <div key={a.id} className="my-1">
           <div
-            key={a.id}
-            className="grid grid-cols-[auto_auto_1fr_22px] gap-2 px-3 py-2.5 rounded-lg my-1 items-center group"
-            style={{ borderLeft: "3px solid var(--color-wh-blue)", background: "rgba(31,85,255,.05)" }}
+            className="grid grid-cols-[auto_auto_1fr_22px_22px] gap-2 px-3 py-2.5 rounded-lg items-center group"
+            style={{ borderLeft: `3px solid ${colorHex || "var(--color-wh-blue)"}`, background: "rgba(31,85,255,.05)" }}
           >
             <input
               type="date"
@@ -526,6 +568,21 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
             </div>
             <button
               type="button"
+              onClick={() => setRowEdit(editing ? null : { id: a.id, draft: toDraft(a.description, a.durationMin) })}
+              title={t("daily.agenda.rowDetails")}
+              aria-label={t("daily.agenda.rowDetails")}
+              aria-expanded={editing}
+              className="w-[22px] h-[22px] flex items-center justify-center rounded-md opacity-60 group-hover:opacity-100 transition-all cursor-pointer text-[12px] leading-none flex-shrink-0 hover:scale-110"
+              style={{
+                color: "var(--color-wh-blue-light)",
+                background: editing ? "rgba(31,85,255,.18)" : "rgba(31,85,255,.08)",
+                border: "1px solid var(--border-hi)",
+              }}
+            >
+              ⚙
+            </button>
+            <button
+              type="button"
               onClick={() => deleteAgenda(a.id)}
               title={t("daily.agenda.remove")}
               aria-label={t("daily.agenda.removeNamed", { title: a.title })}
@@ -539,7 +596,57 @@ export function DailyGrid({ only }: { only?: DailyBlock } = {}) {
               ✕
             </button>
           </div>
-        ))}
+
+          {hasBadges && (
+            <div className="flex flex-wrap items-center gap-2 px-3 pt-1 text-[9px]" style={{ color: "var(--text-3)" }}>
+              {colorHex && (
+                <span aria-hidden style={{ width: 8, height: 8, borderRadius: "50%", background: colorHex, display: "inline-block" }} />
+              )}
+              {guestCount > 0 && <span>👥 {t("daily.agenda.badge.guests", { n: guestCount })}</span>}
+              {hasMeet &&
+                (meta.hangoutLink ? (
+                  <a
+                    href={meta.hangoutLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold underline"
+                    style={{ color: "var(--color-wh-blue-light)" }}
+                  >
+                    🎥 {t("daily.agenda.badge.meet")}
+                  </a>
+                ) : (
+                  <span>🎥 {t("daily.agenda.badge.meet")}</span>
+                ))}
+              {rep && <span>🔁 {t(repKey)}</span>}
+            </div>
+          )}
+
+          {editing && rowEdit && (
+            <div className="mt-1 p-2.5 rounded-lg" style={{ background: "rgba(31,85,255,.05)", border: "1px solid var(--border-hi)" }}>
+              <AgendaRichFields draft={rowEdit.draft} onChange={(d) => setRowEdit({ id: a.id, draft: d })} t={t} />
+              <div className="flex gap-2 justify-end mt-2">
+                <button
+                  type="button"
+                  onClick={() => setRowEdit(null)}
+                  className="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wide cursor-pointer"
+                  style={{ color: "var(--text-3)", background: "rgba(255,255,255,.05)" }}
+                >
+                  {t("daily.agenda.form.cancel")}
+                </button>
+                <button
+                  type="button"
+                  onClick={saveRowEdit}
+                  className="px-3 py-1 rounded text-[10px] font-bold uppercase tracking-wide cursor-pointer"
+                  style={{ color: "#fff", background: "var(--color-wh-blue)" }}
+                >
+                  {t("daily.agenda.form.saveDetails")}
+                </button>
+              </div>
+            </div>
+          )}
+          </div>
+          );
+        })}
       </DailyCard>
   );
 

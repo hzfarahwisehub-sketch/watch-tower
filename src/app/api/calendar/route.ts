@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { buildIcs, verifyCalendarToken, type CalEvent } from "@/lib/calendar-feed";
 import { friendlyName } from "@/lib/api-helpers";
+import { humanDescription } from "@/lib/calendar/rich";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -50,13 +51,15 @@ export async function GET(req: NextRequest) {
 
   for (const a of agenda) {
     const start = new Date(a.scheduledAt);
+    // Só o texto humano no feed .ics — o sidecar de meta rica (Onda 4) fica fora.
+    const desc = humanDescription(a.description);
     events.push({
       uid: `wt-agd-${a.id}@${DOMAIN}`,
       start,
       end: new Date(start.getTime() + (a.durationMin || 30) * 60_000),
       summary: a.title,
       location: a.location ?? undefined,
-      description: a.description ?? undefined,
+      description: desc || undefined,
     });
   }
 
