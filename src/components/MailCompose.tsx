@@ -10,17 +10,23 @@ import { MailRichEditor, type MailRichEditorHandle } from "./MailRichEditor";
 import type { MailAccountStatus } from "@/lib/mail/types";
 
 export interface ComposePrefill {
-  mode: "new" | "reply" | "forward";
+  mode: "new" | "reply" | "forward" | "draft";
   /** id da conta remetente sugerida (ex.: a caixa onde a mensagem foi lida) */
   fromAccountId?: string;
   to?: string;
   cc?: string;
   subject?: string;
   body?: string;
+  /** Corpo já em HTML (edição de rascunho) — usado direto no editor rico, sem
+   *  passar pelo textToHtml (que é só pro prefill de texto puro reply/forward). */
+  bodyHtml?: string;
   inReplyTo?: string;
   references?: string[];
   /** anexos já carregados (ex.: encaminhamento leva os anexos do original) */
   attachments?: File[];
+  /** UID do rascunho original (modo "draft"): removido ao enviar/salvar de novo,
+   *  pra não deixar rascunho duplicado. Vive na conta `fromAccountId`. */
+  draftUid?: number;
 }
 
 function fmtBytes(n: number): string {
@@ -70,10 +76,14 @@ export function MailCompose({
   const fileRef = useRef<HTMLInputElement>(null);
   const toRef = useRef<HTMLInputElement>(null);
 
-  // corpo = editor rico (HTML). O prefill de reply/forward vem em texto puro.
-  const initialBodyHtml = useMemo(() => textToHtml(prefill.body ?? ""), [prefill.body]);
+  // corpo = editor rico (HTML). Reply/forward vêm em texto puro (→ textToHtml);
+  // a edição de rascunho já traz HTML pronto (bodyHtml) e entra direto.
+  const initialBodyHtml = useMemo(
+    () => (prefill.bodyHtml != null ? prefill.bodyHtml : textToHtml(prefill.body ?? "")),
+    [prefill.bodyHtml, prefill.body],
+  );
   const editorApiRef = useRef<MailRichEditorHandle | null>(null);
-  const [bodyEmpty, setBodyEmpty] = useState(!(prefill.body ?? "").trim());
+  const [bodyEmpty, setBodyEmpty] = useState(!(prefill.bodyHtml ?? prefill.body ?? "").trim());
   const [inlineBytes, setInlineBytes] = useState(0);
 
   useEffect(() => {
@@ -85,7 +95,21 @@ export function MailCompose({
       ? t("mail.compose.title.reply")
       : prefill.mode === "forward"
         ? t("mail.compose.title.forward")
-        : t("mail.compose.title.new");
+        : prefill.mode === "draft"
+          ? t("mail.compose.title.draft")
+          : t("mail.compose.title.new");
+
+  // Ao enviar/salvar de novo um rascunho aberto, remove o original pra não
+  // duplicar em Rascunhos (best-effort: se falhar, não bloqueia). Sempre usa a
+  // conta ONDE o rascunho estava (fromAccountId), não o "De" que pode ter mudado.
+  const removeOriginalDraft = () => {
+    if (prefill.mode !== "draft" || !prefill.draftUid || !prefill.fromAccountId) return;
+    void fetch("/api/mail/delete", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ account: prefill.fromAccountId, uid: prefill.draftUid, mailbox: "drafts" }),
+    }).catch(() => {});
+  };
 
   const buildForm = (): FormData | null => {
     if (!fromId) {
@@ -154,6 +178,7 @@ export function MailCompose({
       if (res.ok) {
         const data = (await res.json().catch(() => ({}))) as { savedToSent?: boolean };
         toast(data.savedToSent === false ? t("mail.compose.sentNoCopy") : t("mail.compose.sent"));
+        removeOriginalDraft();
         onClose();
         return;
       }
@@ -176,6 +201,7 @@ export function MailCompose({
       const res = await fetch("/api/mail/draft", { method: "POST", body: fd });
       if (res.ok) {
         toast(t("mail.compose.draftSaved"));
+        removeOriginalDraft();
         onClose();
         return;
       }

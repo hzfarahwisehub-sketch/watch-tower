@@ -8,6 +8,7 @@ import { requireSession, notFound } from "@/lib/api-helpers";
 import { resolveAccount } from "@/lib/mail/accounts";
 import { setSeen, bustStatusCache } from "@/lib/mail/imap";
 import { rateAllow } from "@/lib/mail/ratelimit";
+import { MAILBOX_KINDS } from "@/lib/mail/types";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -17,6 +18,7 @@ const Body = z.object({
   account: z.string().min(1).max(100),
   uid: z.number().int().positive(),
   seen: z.boolean(),
+  mailbox: z.enum(MAILBOX_KINDS).optional(),
 });
 
 export async function POST(req: NextRequest) {
@@ -40,7 +42,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    await setSeen(account.creds, parsed.data.uid, parsed.data.seen);
+    await setSeen(account.creds, parsed.data.uid, parsed.data.seen, parsed.data.mailbox ?? "inbox");
     bustStatusCache(account.address);
     return NextResponse.json({ ok: true });
   } catch {

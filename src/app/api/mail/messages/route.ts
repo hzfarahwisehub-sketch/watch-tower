@@ -8,7 +8,7 @@ import { requireSession, notFound } from "@/lib/api-helpers";
 import { resolveAccount } from "@/lib/mail/accounts";
 import { listMessages } from "@/lib/mail/imap";
 import { rateAllow } from "@/lib/mail/ratelimit";
-import type { MailListResponse } from "@/lib/mail/types";
+import { asMailboxKind, type MailListResponse } from "@/lib/mail/types";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -27,6 +27,8 @@ export async function GET(req: NextRequest) {
   const accountId = url.searchParams.get("account") || "";
   const offset = Math.max(0, Math.min(10_000, Number(url.searchParams.get("offset")) || 0));
   const limit = Math.max(1, Math.min(50, Number(url.searchParams.get("limit")) || 25));
+  const mailbox = asMailboxKind(url.searchParams.get("mailbox"));
+  const q = (url.searchParams.get("q") || "").trim().slice(0, 200);
 
   const account = await resolveAccount(accountId, session.email).catch(() => null);
   if (!account) return notFound();
@@ -35,8 +37,22 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const { total, unseen, items } = await listMessages(account.creds, offset, limit);
-    const body: MailListResponse = { account: account.id, total, unseen, offset, items };
+    const { total, unseen, items } = await listMessages(
+      account.creds,
+      mailbox,
+      offset,
+      limit,
+      q || undefined,
+    );
+    const body: MailListResponse = {
+      account: account.id,
+      total,
+      unseen,
+      offset,
+      items,
+      mailbox,
+      search: q.length > 0,
+    };
     return NextResponse.json(body);
   } catch (err) {
     const msg = String((err as Error)?.message ?? err);

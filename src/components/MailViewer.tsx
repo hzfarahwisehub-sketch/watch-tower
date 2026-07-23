@@ -3,13 +3,15 @@
 // coluna de mensagens + painel de leitura. O HTML da mensagem chega SANITIZADO
 // do servidor (sem script; imagens remotas bloqueadas até o usuário pedir).
 // Abrir uma mensagem marca como lida (vale pra caixa toda, como em webmail).
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import { createPortal } from "react-dom";
 import { useLocale } from "./LocaleProvider";
 import { useToast } from "./ToastProvider";
 import type { ComposePrefill } from "./MailCompose";
+import { MAILBOX_KINDS } from "@/lib/mail/types";
 import type {
   MailAccountStatus,
+  MailboxKind,
   MailDetail,
   MailListItem,
   MailListResponse,
@@ -61,6 +63,12 @@ export function MailViewer({
   const [markingUnread, setMarkingUnread] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
+  // ---- Onda 2: pasta atual + busca ----
+  const [mailbox, setMailbox] = useState<MailboxKind>("inbox");
+  const [searchInput, setSearchInput] = useState("");
+  const [activeQuery, setActiveQuery] = useState("");
+  const [editingDraft, setEditingDraft] = useState(false);
+
   const itemsRef = useRef(items);
   itemsRef.current = items;
   // uids com fetch de mensagem em voo — evita decrementar o contador 2x no
@@ -72,9 +80,14 @@ export function MailViewer({
       if (offset === 0) setListState("loading");
       else setLoadingMore(true);
       try {
-        const res = await fetch(
-          `/api/mail/messages?account=${encodeURIComponent(account.id)}&offset=${offset}&limit=${PAGE}`,
-        );
+        const params = new URLSearchParams({
+          account: account.id,
+          offset: String(offset),
+          limit: String(PAGE),
+          mailbox,
+        });
+        if (activeQuery) params.set("q", activeQuery);
+        const res = await fetch(`/api/mail/messages?${params.toString()}`);
         if (!res.ok) throw new Error(String(res.status));
         const data: MailListResponse = await res.json();
         setTotal(data.total);
@@ -98,7 +111,7 @@ export function MailViewer({
         setLoadingMore(false);
       }
     },
-    [account.id],
+    [account.id, mailbox, activeQuery],
   );
 
   useEffect(() => {
@@ -129,9 +142,12 @@ export function MailViewer({
       setDetailUid(uid);
       setDetailState("loading");
       setImagesOn(withImages);
+      // markSeen só faz sentido na Entrada (as demais pastas já vêm lidas e o
+      // contador de não-lidas é da INBOX). Evita escrita à toa em Enviados/etc.
+      const doMark = mailbox === "inbox";
       try {
         const res = await fetch(
-          `/api/mail/message?account=${encodeURIComponent(account.id)}&uid=${uid}&markSeen=1${withImages ? "&images=1" : ""}`,
+          `/api/mail/message?account=${encodeURIComponent(account.id)}&uid=${uid}&mailbox=${mailbox}${doMark ? "&markSeen=1" : ""}${withImages ? "&images=1" : ""}`,
         );
         if (!res.ok) throw new Error(String(res.status));
         const d: MailDetail = await res.json();
@@ -141,7 +157,7 @@ export function MailViewer({
         // como não lido (idempotente mesmo com chamadas concorrentes).
         setItems((prev) => {
           const it = prev.find((i) => i.uid === uid);
-          if (it && !it.seen) setUnseen((u) => Math.max(0, u - 1));
+          if (it && !it.seen && doMark) setUnseen((u) => Math.max(0, u - 1));
           return prev.map((i) => (i.uid === uid ? { ...i, seen: true } : i));
         });
       } catch {
@@ -150,7 +166,7 @@ export function MailViewer({
         openingRef.current.delete(uid);
       }
     },
-    [account.id],
+    [account.id, mailbox],
   );
 
   const markUnread = useCallback(async () => {
@@ -163,7 +179,7 @@ export function MailViewer({
       const res = await fetch("/api/mail/seen", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ account: account.id, uid: detailUid, seen: false }),
+        body: JSON.stringify({ account: account.id, uid: detailUid, seen: false, mailbox }),
       });
       if (!res.ok) throw new Error(String(res.status));
       setItems((prev) => {
@@ -177,7 +193,7 @@ export function MailViewer({
     } finally {
       setMarkingUnread(false);
     }
-  }, [account.id, detailUid, markingUnread, t, toast]);
+  }, [account.id, detailUid, markingUnread, mailbox, t, toast]);
 
   // ---- citação pra responder/encaminhar ----
   const quotedBody = useCallback(
@@ -244,7 +260,7 @@ export function MailViewer({
             continue;
           }
           const res = await fetch(
-            `/api/mail/attachment?account=${encodeURIComponent(account.id)}&uid=${d.uid}&index=${a.index}`,
+            `/api/mail/attachment?account=${encodeURIComponent(account.id)}&uid=${d.uid}&index=${a.index}&mailbox=${mailbox}`,
           );
           if (!res.ok) {
             skipped++;
@@ -268,17 +284,59 @@ export function MailViewer({
       body: quotedBody(d, true),
       attachments: files.length ? files : undefined,
     });
-  }, [detail, forwarding, account.id, onCompose, t, toast, quotedBody]);
+  }, [detail, forwarding, account.id, mailbox, onCompose, t, toast, quotedBody]);
+
+  // ---- editar rascunho: carrega o rascunho aberto no compositor ----
+  const doEditDraft = useCallback(async () => {
+    const d = detail;
+    if (!d || editingDraft) return;
+    // baixa os anexos do rascunho (dentro do teto de 4MB), como no encaminhar.
+    const files: File[] = [];
+    if (d.attachments.length) {
+      setEditingDraft(true);
+      let budget = 4 * 1024 * 1024;
+      try {
+        for (const a of d.attachments) {
+          if (a.size > budget) continue;
+          const res = await fetch(
+            `/api/mail/attachment?account=${encodeURIComponent(account.id)}&uid=${d.uid}&index=${a.index}&mailbox=${mailbox}`,
+          );
+          if (!res.ok) continue;
+          const blob = await res.blob();
+          budget -= blob.size;
+          files.push(new File([blob], a.filename, { type: a.contentType }));
+        }
+      } catch {
+        /* segue com o que deu pra baixar */
+      } finally {
+        setEditingDraft(false);
+      }
+    }
+    onCompose({
+      mode: "draft",
+      fromAccountId: account.id,
+      to: d.to.join(", "),
+      cc: d.cc.join(", "),
+      subject: d.subject,
+      // corpo do rascunho já é HTML (sanitizado no servidor); vai direto pro
+      // editor. Só-texto cai no `body` (o compositor converte pra HTML).
+      ...(d.html ? { bodyHtml: d.html } : { body: d.text ?? "" }),
+      attachments: files.length ? files : undefined,
+      draftUid: d.uid,
+    });
+  }, [detail, editingDraft, account.id, mailbox, onCompose]);
 
   const doDelete = useCallback(async () => {
     if (!detailUid || deleting) return;
-    if (!window.confirm(t("mail.viewer.delete.confirm"))) return;
+    // Apagar de DENTRO da Lixeira é definitivo (o backend expunge); avisa disso.
+    const permanent = mailbox === "trash";
+    if (!window.confirm(t(permanent ? "mail.viewer.delete.confirmPermanent" : "mail.viewer.delete.confirm"))) return;
     setDeleting(true);
     try {
       const res = await fetch("/api/mail/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ account: account.id, uid: detailUid }),
+        body: JSON.stringify({ account: account.id, uid: detailUid, mailbox }),
       });
       if (!res.ok) throw new Error(String(res.status));
       const wasUnseen = itemsRef.current.some((i) => i.uid === detailUid && !i.seen);
@@ -288,14 +346,38 @@ export function MailViewer({
       setDetail(null);
       setDetailUid(null);
       setDetailState("idle");
-      toast(t("mail.viewer.deleted"));
+      toast(t(permanent ? "mail.viewer.deletedPermanent" : "mail.viewer.deleted"));
       onDeleted();
     } catch {
       toast(t("mail.viewer.deleteError"));
     } finally {
       setDeleting(false);
     }
-  }, [account.id, detailUid, deleting, onDeleted, t, toast]);
+  }, [account.id, detailUid, deleting, mailbox, onDeleted, t, toast]);
+
+  // troca de pasta: limpa a busca e a leitura aberta (o efeito de loadList
+  // recarrega a lista quando `mailbox`/`activeQuery` mudam).
+  const switchFolder = useCallback((mb: MailboxKind) => {
+    setMailbox((cur) => {
+      if (cur === mb) return cur;
+      setSearchInput("");
+      setActiveQuery("");
+      return mb;
+    });
+  }, []);
+
+  const submitSearch = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+      setActiveQuery(searchInput.trim());
+    },
+    [searchInput],
+  );
+
+  const clearSearch = useCallback(() => {
+    setSearchInput("");
+    setActiveQuery("");
+  }, []);
 
   const dateShort = (iso: string | null) =>
     iso
@@ -377,11 +459,67 @@ export function MailViewer({
 
         {/* corpo: lista + leitura */}
         <div className="flex flex-1 min-h-0">
-          {/* lista */}
+          {/* lista + pastas + busca */}
           <div
-            className={`${detailUid ? "hidden md:flex" : "flex"} flex-col w-full md:w-[320px] md:flex-shrink-0 min-h-0 overflow-y-auto`}
+            className={`${detailUid ? "hidden md:flex" : "flex"} flex-col w-full md:w-[320px] md:flex-shrink-0 min-h-0`}
             style={{ borderRight: "1px solid var(--border)" }}
           >
+            {/* sub-header fixo: abas de pasta + campo de busca */}
+            <div className="flex-shrink-0" style={{ borderBottom: "1px solid var(--border)" }}>
+              <div className="flex items-stretch gap-1 px-1.5 pt-1.5">
+                {MAILBOX_KINDS.map((mb) => (
+                  <button
+                    key={mb}
+                    type="button"
+                    onClick={() => switchFolder(mb)}
+                    title={t(`mail.folder.${mb}`)}
+                    className="flex-1 min-w-0 py-1.5 rounded-t-md text-[9px] font-extrabold uppercase tracking-wide cursor-pointer transition-colors truncate"
+                    style={{
+                      color: mb === mailbox ? "var(--color-wh-blue-light)" : "var(--text-3)",
+                      background: mb === mailbox ? "rgba(31,85,255,.12)" : "transparent",
+                      borderBottom: `2px solid ${mb === mailbox ? "var(--color-wh-blue)" : "transparent"}`,
+                    }}
+                  >
+                    {t(`mail.folder.${mb}`)}
+                  </button>
+                ))}
+              </div>
+              <form onSubmit={submitSearch} className="flex items-center gap-1 px-2 py-2">
+                <input
+                  type="search"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  placeholder={t("mail.search.placeholder")}
+                  aria-label={t("mail.search.placeholder")}
+                  className="flex-1 min-w-0 px-2 py-1 rounded-md text-[11px] outline-none"
+                  style={{ background: "var(--bg2)", border: "1px solid var(--border)", color: "var(--text)" }}
+                />
+                {activeQuery && (
+                  <button
+                    type="button"
+                    onClick={clearSearch}
+                    title={t("mail.search.clear")}
+                    aria-label={t("mail.search.clear")}
+                    className="px-1.5 py-1 rounded-md text-[11px] font-bold cursor-pointer flex-shrink-0"
+                    style={{ color: "var(--text-3)", background: "rgba(255,255,255,.05)", border: "1px solid var(--border)" }}
+                  >
+                    ✕
+                  </button>
+                )}
+                <button
+                  type="submit"
+                  title={t("mail.search.button")}
+                  aria-label={t("mail.search.button")}
+                  className="px-2 py-1 rounded-md text-[11px] font-bold cursor-pointer flex-shrink-0"
+                  style={{ color: "var(--color-wh-blue-light)", background: "rgba(31,85,255,.12)", border: "1px solid var(--border-hi)" }}
+                >
+                  🔍
+                </button>
+              </form>
+            </div>
+
+            {/* área rolável da lista */}
+            <div className="flex-1 min-h-0 overflow-y-auto">
             {listState === "loading" && (
               <div className="p-4 text-[11px]" style={{ color: "var(--text-3)" }}>
                 {t("mail.viewer.loadingList")}
@@ -394,7 +532,7 @@ export function MailViewer({
             )}
             {listState === "ok" && items.length === 0 && (
               <div className="p-4 text-[11px]" style={{ color: "var(--text-3)" }}>
-                {t("mail.viewer.empty")}
+                {activeQuery ? t("mail.search.empty") : t("mail.viewer.empty")}
               </div>
             )}
             {items.map((m) => (
@@ -456,6 +594,7 @@ export function MailViewer({
                 {loadingMore ? t("mail.viewer.loadingList") : t("mail.viewer.loadMore")}
               </button>
             )}
+            </div>
           </div>
 
           {/* leitura */}
@@ -510,15 +649,17 @@ export function MailViewer({
                 )}
 
                 <div className="flex flex-wrap items-center gap-2 mt-3">
-                  <button
-                    type="button"
-                    onClick={() => doReply(false)}
-                    className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide cursor-pointer"
-                    style={{ background: "rgba(31,85,255,.15)", color: "var(--color-wh-blue-light)", border: "1px solid var(--border-hi)" }}
-                  >
-                    {t("mail.viewer.reply")}
-                  </button>
-                  {(detail.to.length + detail.cc.length > 1) && (
+                  {mailbox === "inbox" && (
+                    <button
+                      type="button"
+                      onClick={() => doReply(false)}
+                      className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide cursor-pointer"
+                      style={{ background: "rgba(31,85,255,.15)", color: "var(--color-wh-blue-light)", border: "1px solid var(--border-hi)" }}
+                    >
+                      {t("mail.viewer.reply")}
+                    </button>
+                  )}
+                  {mailbox === "inbox" && detail.to.length + detail.cc.length > 1 && (
                     <button
                       type="button"
                       onClick={() => doReply(true)}
@@ -528,15 +669,28 @@ export function MailViewer({
                       {t("mail.viewer.replyAll")}
                     </button>
                   )}
-                  <button
-                    type="button"
-                    onClick={doForward}
-                    disabled={forwarding}
-                    className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide cursor-pointer"
-                    style={{ background: "rgba(255,255,255,.05)", color: "var(--text-2)", border: "1px solid var(--border)", opacity: forwarding ? 0.5 : 1 }}
-                  >
-                    {forwarding ? t("mail.viewer.forwarding") : t("mail.viewer.forward")}
-                  </button>
+                  {mailbox === "drafts" && (
+                    <button
+                      type="button"
+                      onClick={doEditDraft}
+                      disabled={editingDraft}
+                      className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide cursor-pointer"
+                      style={{ background: "rgba(31,85,255,.15)", color: "var(--color-wh-blue-light)", border: "1px solid var(--border-hi)", opacity: editingDraft ? 0.5 : 1 }}
+                    >
+                      {editingDraft ? t("mail.viewer.editing") : t("mail.viewer.edit")}
+                    </button>
+                  )}
+                  {mailbox !== "drafts" && (
+                    <button
+                      type="button"
+                      onClick={doForward}
+                      disabled={forwarding}
+                      className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide cursor-pointer"
+                      style={{ background: "rgba(255,255,255,.05)", color: "var(--text-2)", border: "1px solid var(--border)", opacity: forwarding ? 0.5 : 1 }}
+                    >
+                      {forwarding ? t("mail.viewer.forwarding") : t("mail.viewer.forward")}
+                    </button>
+                  )}
                   <button
                     type="button"
                     onClick={doDelete}
@@ -546,20 +700,22 @@ export function MailViewer({
                   >
                     {t("mail.viewer.delete")}
                   </button>
-                  <button
-                    type="button"
-                    onClick={markUnread}
-                    disabled={markingUnread}
-                    className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide cursor-pointer"
-                    style={{
-                      background: "rgba(255,255,255,.05)",
-                      color: "var(--text-2)",
-                      border: "1px solid var(--border)",
-                      opacity: markingUnread ? 0.5 : 1,
-                    }}
-                  >
-                    {t("mail.viewer.markUnread")}
-                  </button>
+                  {mailbox === "inbox" && (
+                    <button
+                      type="button"
+                      onClick={markUnread}
+                      disabled={markingUnread}
+                      className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide cursor-pointer"
+                      style={{
+                        background: "rgba(255,255,255,.05)",
+                        color: "var(--text-2)",
+                        border: "1px solid var(--border)",
+                        opacity: markingUnread ? 0.5 : 1,
+                      }}
+                    >
+                      {t("mail.viewer.markUnread")}
+                    </button>
+                  )}
                   {detail.remoteImagesBlocked && !imagesOn && (
                     <button
                       type="button"
@@ -604,7 +760,7 @@ export function MailViewer({
                         ) : (
                           <a
                             key={a.index}
-                            href={`/api/mail/attachment?account=${encodeURIComponent(account.id)}&uid=${detail.uid}&index=${a.index}`}
+                            href={`/api/mail/attachment?account=${encodeURIComponent(account.id)}&uid=${detail.uid}&index=${a.index}&mailbox=${mailbox}`}
                             className="px-2 py-1 rounded-md text-[10px] font-semibold"
                             style={{
                               background: "rgba(31,85,255,.1)",

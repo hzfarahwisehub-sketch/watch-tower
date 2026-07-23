@@ -8,6 +8,7 @@ import { requireSession, notFound } from "@/lib/api-helpers";
 import { resolveAccount } from "@/lib/mail/accounts";
 import { deleteMessage, bustStatusCache } from "@/lib/mail/imap";
 import { rateAllow } from "@/lib/mail/ratelimit";
+import { MAILBOX_KINDS } from "@/lib/mail/types";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -16,6 +17,7 @@ export const maxDuration = 30;
 const Body = z.object({
   account: z.string().min(1).max(100),
   uid: z.number().int().positive(),
+  mailbox: z.enum(MAILBOX_KINDS).optional(),
 });
 
 export async function POST(req: NextRequest) {
@@ -35,7 +37,7 @@ export async function POST(req: NextRequest) {
   if (!account.creds) return NextResponse.json({ error: "account_off" }, { status: 409 });
 
   try {
-    await deleteMessage(account.creds, parsed.data.uid);
+    await deleteMessage(account.creds, parsed.data.uid, parsed.data.mailbox ?? "inbox");
     bustStatusCache(account.address);
     return NextResponse.json({ ok: true });
   } catch (err) {

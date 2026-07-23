@@ -5,7 +5,7 @@
 // martelar o cPanel a cada abertura do dashboard.
 import { ImapFlow } from "imapflow";
 import { simpleParser, type AddressObject } from "mailparser";
-import type { MailListItem, MailDetail, MailAttachmentMeta } from "./types";
+import type { MailListItem, MailDetail, MailAttachmentMeta, MailboxKind } from "./types";
 import { sanitizeEmailHtml } from "./sanitize";
 import { assertPublicHost } from "./net-guard";
 
@@ -263,18 +263,103 @@ export function bustPasswordCache(address: string): void {
 }
 
 // ---------------------------------------------------------------------------
-// Lista de mensagens (envelopes, mais recentes primeiro)
+// Lista de mensagens (envelopes, mais recentes primeiro) + busca por pasta
 // ---------------------------------------------------------------------------
+
+// Forma mínima e estrutural do envelope (evita acoplar ao tipo do imapflow).
+interface EnvelopeAddr {
+  name?: string;
+  address?: string;
+}
+interface EnvelopeLike {
+  subject?: string;
+  from?: EnvelopeAddr[];
+  to?: EnvelopeAddr[];
+  date?: Date | string;
+}
+
+/** Monta um item de lista a partir do envelope. Nas pastas de SAÍDA (Enviados/
+ *  Rascunhos) mostra o destinatário; nas de entrada, o remetente. */
+function envelopeToItem(
+  uid: number,
+  env: EnvelopeLike | undefined,
+  seen: boolean,
+  outgoing: boolean,
+): MailListItem {
+  const party = outgoing ? env?.to?.[0] : env?.from?.[0];
+  return {
+    uid,
+    subject: env?.subject || "",
+    fromName: party?.name || "",
+    fromAddress: party?.address || "",
+    date: env?.date ? new Date(env.date).toISOString() : null,
+    seen,
+  };
+}
+
+/** Resolve o caminho REAL de uma pasta. INBOX é universal; as especiais vêm do
+ *  flag SPECIAL-USE com fallback pelos nomes comuns (ver findSpecialFolder). */
+async function resolveMailboxPath(client: ImapFlow, mailbox: MailboxKind): Promise<string | null> {
+  if (mailbox === "inbox") return "INBOX";
+  return findSpecialFolder(client, mailbox);
+}
+
+/** Busca (IMAP SEARCH) por assunto/remetente/destinatário/corpo dentro da pasta
+ *  já travada. Retorna os mais recentes primeiro, paginados por offset. */
+async function searchInBox(
+  client: ImapFlow,
+  q: string,
+  offset: number,
+  limit: number,
+  outgoing: boolean,
+): Promise<{ total: number; unseen: number; items: MailListItem[] }> {
+  let uids: number[] = [];
+  try {
+    const res = await client.search(
+      { or: [{ subject: q }, { from: q }, { to: q }, { body: q }] },
+      { uid: true },
+    );
+    uids = Array.isArray(res) ? res : [];
+  } catch {
+    uids = []; // SEARCH não suportada/erro → resultado vazio (fallback gracioso)
+  }
+  const total = uids.length;
+  // UID cresce com a chegada → ordena desc pra ter os mais recentes primeiro.
+  const ordered = uids.slice().sort((a, b) => b - a);
+  const pageUids = ordered.slice(offset, offset + limit);
+  const byUid = new Map<number, MailListItem>();
+  if (pageUids.length) {
+    for await (const msg of client.fetch(
+      pageUids,
+      { envelope: true, flags: true, uid: true },
+      { uid: true },
+    )) {
+      byUid.set(msg.uid, envelopeToItem(msg.uid, msg.envelope, msg.flags?.has("\\Seen") ?? false, outgoing));
+    }
+  }
+  // reordena na ordem dos uids (o fetch volta em ordem crescente de seq).
+  const items = pageUids.map((u) => byUid.get(u)).filter((x): x is MailListItem => !!x);
+  const unseen = items.filter((i) => !i.seen).length;
+  return { total, unseen, items };
+}
 
 export async function listMessages(
   creds: MailCreds,
+  mailbox: MailboxKind = "inbox",
   offset = 0,
   limit = 25,
+  query?: string,
 ): Promise<{ total: number; unseen: number; items: MailListItem[] }> {
+  const q = (query ?? "").trim().slice(0, 200);
   return withTimeout(
     withImap(creds, async (client) => {
-      const lock = await client.getMailboxLock("INBOX", { readOnly: true });
+      const path = await resolveMailboxPath(client, mailbox);
+      // Pasta especial inexistente no servidor → caixa vazia (não é erro).
+      if (!path) return { total: 0, unseen: 0, items: [] };
+      const outgoing = mailbox === "sent" || mailbox === "drafts";
+      const lock = await client.getMailboxLock(path, { readOnly: true });
       try {
+        if (q) return await searchInBox(client, q, offset, limit, outgoing);
         const box = client.mailbox;
         const total = typeof box === "object" && box ? box.exists : 0;
         const unseenSeqs = await client.search({ seen: false });
@@ -288,16 +373,7 @@ export async function listMessages(
             flags: true,
             uid: true,
           })) {
-            const env = msg.envelope;
-            const from = env?.from?.[0];
-            items.push({
-              uid: msg.uid,
-              subject: env?.subject || "",
-              fromName: from?.name || "",
-              fromAddress: from?.address || "",
-              date: env?.date ? new Date(env.date).toISOString() : null,
-              seen: msg.flags?.has("\\Seen") ?? false,
-            });
+            items.push(envelopeToItem(msg.uid, msg.envelope, msg.flags?.has("\\Seen") ?? false, outgoing));
           }
           items.reverse();
         }
@@ -307,7 +383,7 @@ export async function listMessages(
       }
     }),
     25_000,
-    `list ${creds.address}`,
+    `list ${mailbox} ${creds.address}`,
   );
 }
 
@@ -331,11 +407,13 @@ function refsOf(refs: string | string[] | undefined): string[] {
 export async function fetchMessage(
   creds: MailCreds,
   uid: number,
-  opts: { markSeen?: boolean; allowRemoteImages?: boolean } = {},
+  opts: { markSeen?: boolean; allowRemoteImages?: boolean; mailbox?: MailboxKind } = {},
 ): Promise<MailDetail | null> {
   return withTimeout(
     withImap(creds, async (client) => {
-      const lock = await client.getMailboxLock("INBOX", { readOnly: !opts.markSeen });
+      const path = await resolveMailboxPath(client, opts.mailbox ?? "inbox");
+      if (!path) return null;
+      const lock = await client.getMailboxLock(path, { readOnly: !opts.markSeen });
       try {
         const msg = await client.fetchOne(
           String(uid),
@@ -477,10 +555,17 @@ export async function fetchMessage(
   );
 }
 
-export async function setSeen(creds: MailCreds, uid: number, seen: boolean): Promise<void> {
+export async function setSeen(
+  creds: MailCreds,
+  uid: number,
+  seen: boolean,
+  mailbox: MailboxKind = "inbox",
+): Promise<void> {
   await withTimeout(
     withImap(creds, async (client) => {
-      const lock = await client.getMailboxLock("INBOX");
+      const path = await resolveMailboxPath(client, mailbox);
+      if (!path) return;
+      const lock = await client.getMailboxLock(path);
       try {
         if (seen) await client.messageFlagsAdd(String(uid), ["\\Seen"], { uid: true });
         else await client.messageFlagsRemove(String(uid), ["\\Seen"], { uid: true });
@@ -489,7 +574,7 @@ export async function setSeen(creds: MailCreds, uid: number, seen: boolean): Pro
       }
     }),
     20_000,
-    `seen ${creds.address}#${uid}`,
+    `seen ${mailbox} ${creds.address}#${uid}`,
   );
 }
 
@@ -497,10 +582,13 @@ export async function fetchAttachment(
   creds: MailCreds,
   uid: number,
   index: number,
+  mailbox: MailboxKind = "inbox",
 ): Promise<{ filename: string; contentType: string; content: Buffer } | null> {
   return withTimeout(
     withImap(creds, async (client) => {
-      const lock = await client.getMailboxLock("INBOX", { readOnly: true });
+      const path = await resolveMailboxPath(client, mailbox);
+      if (!path) return null;
+      const lock = await client.getMailboxLock(path, { readOnly: true });
       try {
         const msg = await client.fetchOne(
           String(uid),
@@ -572,14 +660,23 @@ async function findSpecialFolder(
   }
 }
 
-/** Move uma mensagem da INBOX pra Lixeira (ou apaga de vez se não houver Trash). */
-export async function deleteMessage(creds: MailCreds, uid: number): Promise<void> {
+/** Move uma mensagem da pasta de origem pra Lixeira. Se a origem JÁ é a Lixeira
+ *  (ou não há Trash), apaga de vez (\Deleted + expunge). */
+export async function deleteMessage(
+  creds: MailCreds,
+  uid: number,
+  mailbox: MailboxKind = "inbox",
+): Promise<void> {
   await withTimeout(
     withImap(creds, async (client) => {
       const trash = await findSpecialFolder(client, "trash");
-      const lock = await client.getMailboxLock("INBOX");
+      const source = await resolveMailboxPath(client, mailbox);
+      if (!source) return; // pasta de origem inexistente → nada a apagar
+      const lock = await client.getMailboxLock(source);
       try {
-        if (trash && trash !== "INBOX") {
+        // Só move quando a Lixeira existe E é diferente da origem (apagar de
+        // dentro da própria Lixeira = remoção definitiva).
+        if (trash && trash !== source) {
           try {
             // messageMove NÃO lança em falha comum (pasta inexistente/permissão):
             // retorna false. Só damos por movido se o retorno for verdadeiro.
@@ -589,7 +686,7 @@ export async function deleteMessage(creds: MailCreds, uid: number): Promise<void
             /* cai pro delete definitivo abaixo */
           }
         }
-        // sem Trash (ou move falhou): marca \Deleted e expunge (remoção definitiva)
+        // sem Trash / origem = Trash / move falhou: marca \Deleted e expunge.
         await client.messageFlagsAdd(String(uid), ["\\Deleted"], { uid: true });
         await client.messageDelete(String(uid), { uid: true });
       } finally {
@@ -597,7 +694,7 @@ export async function deleteMessage(creds: MailCreds, uid: number): Promise<void
       }
     }),
     25_000,
-    `delete ${creds.address}#${uid}`,
+    `delete ${mailbox} ${creds.address}#${uid}`,
   );
 }
 

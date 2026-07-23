@@ -34,6 +34,16 @@ const dict = {
     "mail.noSubject": "(sem assunto)",
     "mail.row.webmail": "Abrir no webmail",
 
+    // ---- pastas + busca (Onda 2) ----
+    "mail.folder.inbox": "Entrada",
+    "mail.folder.sent": "Enviados",
+    "mail.folder.drafts": "Rascunhos",
+    "mail.folder.trash": "Lixeira",
+    "mail.search.placeholder": "Buscar nesta pasta…",
+    "mail.search.button": "Buscar",
+    "mail.search.clear": "Limpar busca",
+    "mail.search.empty": "Nada encontrado pra essa busca",
+
     // ---- formulário de conta pessoal ----
     "mail.add.title": "Conectar conta pessoal",
     "mail.add.desc":
@@ -88,13 +98,18 @@ const dict = {
     "mail.viewer.fwdSkipped": "{n} anexo(s) não foram encaminhados (acima de 4MB no total)",
     "mail.viewer.delete": "🗑 Apagar",
     "mail.viewer.delete.confirm": "Mover esta mensagem pra Lixeira?",
+    "mail.viewer.delete.confirmPermanent": "Apagar esta mensagem de vez? Não dá pra desfazer.",
     "mail.viewer.deleted": "Mensagem movida pra Lixeira",
+    "mail.viewer.deletedPermanent": "Mensagem apagada de vez",
     "mail.viewer.deleteError": "Não deu pra apagar a mensagem",
+    "mail.viewer.edit": "✎ Editar",
+    "mail.viewer.editing": "✎ Carregando…",
     // ---- compositor ----
     "mail.compose.new": "✎ Escrever",
     "mail.compose.title.new": "Nova mensagem",
     "mail.compose.title.reply": "Responder",
     "mail.compose.title.forward": "Encaminhar",
+    "mail.compose.title.draft": "Editar rascunho",
     "mail.compose.from": "De",
     "mail.compose.to": "Para",
     "mail.compose.cc": "Cc",
@@ -169,6 +184,16 @@ const dict = {
     "mail.noSubject": "(no subject)",
     "mail.row.webmail": "Open in webmail",
 
+    // ---- folders + search (Wave 2) ----
+    "mail.folder.inbox": "Inbox",
+    "mail.folder.sent": "Sent",
+    "mail.folder.drafts": "Drafts",
+    "mail.folder.trash": "Trash",
+    "mail.search.placeholder": "Search this folder…",
+    "mail.search.button": "Search",
+    "mail.search.clear": "Clear search",
+    "mail.search.empty": "Nothing found for that search",
+
     // ---- personal account form ----
     "mail.add.title": "Connect personal account",
     "mail.add.desc":
@@ -222,13 +247,18 @@ const dict = {
     "mail.viewer.fwdSkipped": "{n} attachment(s) not forwarded (over 4MB total)",
     "mail.viewer.delete": "🗑 Delete",
     "mail.viewer.delete.confirm": "Move this message to Trash?",
+    "mail.viewer.delete.confirmPermanent": "Delete this message permanently? This can't be undone.",
     "mail.viewer.deleted": "Message moved to Trash",
+    "mail.viewer.deletedPermanent": "Message permanently deleted",
     "mail.viewer.deleteError": "Couldn't delete the message",
+    "mail.viewer.edit": "✎ Edit",
+    "mail.viewer.editing": "✎ Loading…",
     // ---- composer ----
     "mail.compose.new": "✎ Compose",
     "mail.compose.title.new": "New message",
     "mail.compose.title.reply": "Reply",
     "mail.compose.title.forward": "Forward",
+    "mail.compose.title.draft": "Edit draft",
     "mail.compose.from": "From",
     "mail.compose.to": "To",
     "mail.compose.cc": "Cc",

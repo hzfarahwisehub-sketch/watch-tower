@@ -9,6 +9,7 @@ import { requireSession, notFound, badRequest } from "@/lib/api-helpers";
 import { resolveAccount } from "@/lib/mail/accounts";
 import { fetchMessage, bustStatusCache } from "@/lib/mail/imap";
 import { rateAllow } from "@/lib/mail/ratelimit";
+import { asMailboxKind } from "@/lib/mail/types";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -29,6 +30,7 @@ export async function GET(req: NextRequest) {
   if (!Number.isInteger(uid) || uid <= 0) return badRequest("uid inválido");
   const markSeen = url.searchParams.get("markSeen") === "1";
   const allowRemoteImages = url.searchParams.get("images") === "1";
+  const mailbox = asMailboxKind(url.searchParams.get("mailbox"));
 
   const account = await resolveAccount(accountId, session.email).catch(() => null);
   if (!account) return notFound();
@@ -37,7 +39,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const detail = await fetchMessage(account.creds, uid, { markSeen, allowRemoteImages });
+    const detail = await fetchMessage(account.creds, uid, { markSeen, allowRemoteImages, mailbox });
     if (!detail) return notFound();
     if (markSeen) bustStatusCache(account.address);
     return NextResponse.json(detail);

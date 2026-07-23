@@ -8,6 +8,7 @@ import { requireSession, notFound, badRequest } from "@/lib/api-helpers";
 import { resolveAccount } from "@/lib/mail/accounts";
 import { fetchAttachment } from "@/lib/mail/imap";
 import { rateAllow } from "@/lib/mail/ratelimit";
+import { asMailboxKind } from "@/lib/mail/types";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -31,6 +32,7 @@ export async function GET(req: NextRequest) {
   const accountId = url.searchParams.get("account") || "";
   const uid = Number(url.searchParams.get("uid"));
   const index = Number(url.searchParams.get("index"));
+  const mailbox = asMailboxKind(url.searchParams.get("mailbox"));
   if (!Number.isInteger(uid) || uid <= 0) return badRequest("uid inválido");
   if (!Number.isInteger(index) || index < 0 || index > 200) return badRequest("index inválido");
 
@@ -41,7 +43,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const att = await fetchAttachment(account.creds, uid, index);
+    const att = await fetchAttachment(account.creds, uid, index, mailbox);
     if (!att) return notFound();
     const filename = safeFilename(att.filename);
     return new NextResponse(new Uint8Array(att.content), {
