@@ -222,6 +222,10 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
   // SpatialCommandCenter (hideChrome) — lá o giro segue por spinPausesOnSelect.
   const focusedRef = useRef(false);
   const [hasFocus, setHasFocus] = useState(false);
+  // O globo abre GIRANDO. Um país restaurado do localStorage ao abrir a página
+  // (primeira vez que o efeito de seleção roda com país válido) não pode travar
+  // o giro — só clique real do usuário trava. Este trinco distingue os dois.
+  const firstSelectionRun = useRef(true);
   const [styleKey, setStyleKey] = useState<StyleKey>(stylePreset ?? "dark");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -519,11 +523,19 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
       // sem país em foco: solta o trinco e revive o loop do giro
       focusedRef.current = false;
       setHasFocus(false);
+      firstSelectionRun.current = false;
       spinGlobeRef.current?.();
       return;
     }
     const c = countries.find((c) => c.code === selected);
     if (!c) return;
+    // País RESTAURADO do localStorage ao abrir (1ª rodada com país válido): NÃO
+    // trava o giro nem voa pra ele. O globo segue girando na vista geral e o
+    // Benchmark mostra o país. Só um clique real do usuário depois disso trava.
+    if (firstSelectionRun.current) {
+      firstSelectionRun.current = false;
+      return;
+    }
     // Trava o giro no país em foco — SÓ no globo do dashboard (com chrome, que
     // tem o botão Voltar pra soltar). No globo do SpatialCommandCenter
     // (hideChrome) o giro segue governado por spinPausesOnSelect, intocado.
