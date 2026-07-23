@@ -520,10 +520,14 @@ export default function MapZone({ countries, selected, onSelect, immersive = fal
     if (!map) return;
     Object.entries(markersRef.current).forEach(([code, marker]) => marker.getElement().classList.toggle("is-selected", code === selected));
     if (!selected) {
-      // sem país em foco: solta o trinco e revive o loop do giro
+      // sem país em foco: solta o trinco e revive o loop do giro. NÃO consome
+      // firstSelectionRun aqui: o pai restaura o país de forma ASSÍNCRONA
+      // (mapSelected começa null e um efeito seta depois), então consumir o flag
+      // neste render inicial fazia o país restaurado TRAVAR o giro em vez de abrir
+      // girando — era o bug do "globo travado". O flag só é consumido na 1ª
+      // seleção real de país (abaixo).
       focusedRef.current = false;
       setHasFocus(false);
-      firstSelectionRun.current = false;
       spinGlobeRef.current?.();
       return;
     }
