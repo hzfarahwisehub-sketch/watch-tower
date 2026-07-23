@@ -72,6 +72,7 @@ function canalEmoji(canal: string): string {
 function personaColor(p: string): string {
   if (p === "Lucas") return "#4A7AFF";
   if (p === "Dupla") return "#10A570"; // casal Lucas+Marcela (verde WiseHub)
+  if (p === "Hubby") return "#5AC8E0"; // mascote, ciano pra não repetir Lucas/Dupla/Marcela
   return "#D8AF54"; // Marcela
 }
 
@@ -88,6 +89,7 @@ const TIPO_LABEL: Record<string, string> = {
   roteiro: "Roteiros",
   dupla: "Dupla (casal)",
   custo: "Dicas de custo",
+  dicas: "Dicas Práticas",
 };
 
 export function ContentStudio() {
@@ -105,9 +107,9 @@ export function ContentStudio() {
   const [openId, setOpenId] = useState<string | null>(null);
   const [copied, setCopied] = useState<string | null>(null);
 
-  // Ordem fixa pros tipos (Roteiros, Dupla, Dicas de custo), não a de aparição.
+  // Ordem fixa pros tipos (Roteiros, Dupla, Dicas de custo, Dicas Práticas), não a de aparição.
   const tipos = useMemo(
-    () => ["roteiro", "dupla", "custo"].filter((tp) => ROTEIROS.some((r) => r.tipo === tp)),
+    () => ["roteiro", "dupla", "custo", "dicas"].filter((tp) => ROTEIROS.some((r) => r.tipo === tp)),
     [],
   );
   const personas = useMemo(() => [...new Set(ROTEIROS.map((r) => r.persona))], []);

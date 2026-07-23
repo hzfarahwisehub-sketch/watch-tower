@@ -43,6 +43,7 @@ import re
 import sys
 
 SRC_DIR = r"D:\FRIDAY-BRAIN\05 - Conteúdo\Roteiros Fundadores"
+HUBBY_DIR = r"D:\FRIDAY-BRAIN\05 - Conteúdo\Hubby - Dicas Diarias"
 OUT = r"D:\FRIDAY-BRAIN\workspace\watch-tower-git\src\lib\roteiros-data.ts"
 
 HEAD = re.compile(r"^##\s+(\d+)\s+·\s+(\w+)\s+·\s+([^(]+)\(([^)]+)\)\s*$")
@@ -138,6 +139,52 @@ def parse_file(path):
     return scripts
 
 
+HUBBY_NAME = re.compile(r"^(\d{4}-\d{2}-\d{2})\s+-\s+(.+)\.md$")
+
+
+def parse_hubby(path):
+    """Dicas Práticas do Hubby: 1 arquivo = 1 peça (roteiro de vídeo narrado).
+
+    Formato (ver 05 - Conteúdo\\Hubby - Dicas Diarias\\*.md): frontmatter YAML
+    (data/pais/tema/...) + corpo com "# Titulo" e "# Roteiro (voz do Hubby)".
+    A seção "# Notas de producao" é interna e não entra no texto copiável.
+    """
+    name = os.path.basename(path)
+    m = HUBBY_NAME.match(name)
+    if not m:
+        print("  ! nome fora do padrao, pulando (hubby):", name)
+        return None
+    date = m.group(1)
+
+    raw = open(path, encoding="utf-8").read()
+    # Corta o frontmatter --- ... --- do início, se existir.
+    body = re.sub(r"^---\n.*?\n---\n", "", raw, count=1, flags=re.S)
+
+    tm = re.search(r"^#\s*Titulo\s*\n+(.+)$", body, re.M)
+    titulo = tm.group(1).strip() if tm else "(sem título)"
+
+    rm = re.search(r"^#\s*Roteiro[^\n]*\n+(.*?)(?=^#\s|\Z)", body, re.M | re.S)
+    roteiro_body = rm.group(1) if rm else ""
+    paras = [p.strip() for p in re.split(r"\n\s*\n", roteiro_body) if p.strip()]
+    if not paras:
+        return None
+
+    rec = {
+        "id": f"hubby-{date}",
+        "date": date,
+        "lote": 0,
+        "n": 0,
+        "persona": "Hubby",
+        "canal": "YouTube",
+        "formato": "curto",
+        "tipo": "dicas",
+        "titulo": titulo,
+        "paras": paras,
+        "palavras": sum(len(p.split()) for p in paras),
+    }
+    return [rec]
+
+
 def main():
     files = sorted(glob.glob(os.path.join(SRC_DIR, "*.md")))
     all_scripts = []
@@ -145,6 +192,13 @@ def main():
         s = parse_file(f)
         if s:
             print(f"  {os.path.basename(f)} -> {len(s)} roteiros")
+            all_scripts.extend(s)
+
+    hubby_files = sorted(glob.glob(os.path.join(HUBBY_DIR, "*.md")))
+    for f in hubby_files:
+        s = parse_hubby(f)
+        if s:
+            print(f"  {os.path.basename(f)} -> {len(s)} dica(s) do Hubby")
             all_scripts.extend(s)
 
     if not all_scripts:
@@ -166,7 +220,7 @@ def main():
 
 export type RoteiroFormato = "longo" | "curto";
 /** Família do conteúdo (filtro da aba). */
-export type RoteiroTipo = "roteiro" | "dupla" | "custo";
+export type RoteiroTipo = "roteiro" | "dupla" | "custo" | "dicas";
 /**
  * Marcação de urgência. Só existe um valor: a AUSÊNCIA do campo é "normal".
  * Critério do Hammis (2026-07-20): urgente = mudou uma lei/regra de visto, saiu
@@ -188,7 +242,7 @@ export type Roteiro = {{
   /** "YouTube" | "Reels" | "Instagram" */
   canal: string;
   formato: RoteiroFormato;
-  /** roteiro comum · dupla (casal) · custo (dica de custo do Lucas). */
+  /** roteiro comum · dupla (casal) · custo (dica de custo do Lucas) · dicas (Dicas Práticas do Hubby). */
   tipo: RoteiroTipo;
   titulo: string;
   /** Corpo já quebrado em parágrafos, na ordem de leitura. */
