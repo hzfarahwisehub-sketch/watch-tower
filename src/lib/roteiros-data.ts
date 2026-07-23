@@ -9,7 +9,7 @@
 
 export type RoteiroFormato = "longo" | "curto";
 /** Família do conteúdo (filtro da aba). */
-export type RoteiroTipo = "roteiro" | "dupla" | "custo";
+export type RoteiroTipo = "roteiro" | "dupla" | "custo" | "dicas";
 /**
  * Marcação de urgência. Só existe um valor: a AUSÊNCIA do campo é "normal".
  * Critério do Hammis (2026-07-20): urgente = mudou uma lei/regra de visto, saiu
@@ -31,7 +31,7 @@ export type Roteiro = {
   /** "YouTube" | "Reels" | "Instagram" */
   canal: string;
   formato: RoteiroFormato;
-  /** roteiro comum · dupla (casal) · custo (dica de custo do Lucas). */
+  /** roteiro comum · dupla (casal) · custo (dica de custo do Lucas) · dicas (Dicas Práticas do Hubby). */
   tipo: RoteiroTipo;
   titulo: string;
   /** Corpo já quebrado em parágrafos, na ordem de leitura. */
@@ -46,6 +46,66 @@ export type Roteiro = {
 
 export const ROTEIROS: Roteiro[] = [
   {
+    "id": "hubby-2026-07-23",
+    "date": "2026-07-23",
+    "lote": 0,
+    "n": 0,
+    "persona": "Hubby",
+    "canal": "YouTube",
+    "formato": "curto",
+    "tipo": "dicas",
+    "titulo": "A Alemanha segue conferindo documento na fronteira, mesmo com a Justica contra",
+    "paras": [
+      "Oi, eu sou o Hubby, e hoje eu vim conversar com voce que mora na Alemanha ou pretende chegar por la, sobre uma situacao que mexe com a sua rotina de viagem.",
+      "Desde setembro de dois mil e vinte e quatro, a Alemanha voltou a fazer controles extras nas suas fronteiras internas, aquelas com os paises vizinhos que fazem parte do espaco de livre circulacao. A medida foi apresentada como temporaria, mas vem sendo prorrogada, e a extensao atual vai ate setembro de dois mil e vinte e seis.",
+      "O tema esta cheio de idas e vindas, e eu quero que voce entenda o essencial. Em abril de dois mil e vinte e seis, um tribunal administrativo alemao, o de Koblenz, decidiu que esses controles extras numa fronteira violaram as regras do espaco comum, porque o governo nao comprovou a ameaca grave que a lei exige. Ate a Comissao Europeia pediu que a Alemanha encerrasse a pratica. Mesmo assim, o governo recorreu e manteve a fiscalizacao. Ou seja, na vida real, a conferencia de documento na fronteira continua acontecendo.",
+      "Aqui vai o cuidado importante: nada disso muda o seu direito de residencia nem a validade do seu visto. O que muda e a sua rotina de deslocamento por terra. Se voce cruza a fronteira de onibus, de trem ou de carro, pode haver parada e checagem de documentos, e isso pede tempo.",
+      "Entao a acao de hoje e bem pratica: sempre que for atravessar a fronteira alema por terra, leve o passaporte e o comprovante do seu status de residencia a mao, nao guardados no fundo da mala. E reserve uma folga no horario, pra que uma eventual fila nao faca voce perder uma conexao ou um compromisso.",
+      "Eu fico de olho nessas mudancas pra que a burocracia nao te pegue desprevenido. Pode contar comigo. A gente caminha junto nessa jornada, um passo de cada vez."
+    ],
+    "palavras": 316
+  },
+  {
+    "id": "hubby-2026-07-22",
+    "date": "2026-07-22",
+    "lote": 0,
+    "n": 0,
+    "persona": "Hubby",
+    "canal": "YouTube",
+    "formato": "curto",
+    "tipo": "dicas",
+    "titulo": "O Canada mudou a cidadania por descendencia, e voce pode ter direito sem saber",
+    "paras": [
+      "Oi, eu sou o Hubby. Hoje eu trago uma noticia que pode ser uma virada de chave pra muita gente que tem raiz canadense na familia. E dessas que valem a pena ouvir ate o fim.",
+      "Durante anos, o Canada tinha um limite duro na cidadania por descendencia. So a primeira geracao nascida fora do pais herdava a cidadania. Quer dizer, se o seu vinculo canadense vinha de mais longe, de um avo ou de um bisavo, muita gente simplesmente se dava por excluida e nem tentava.",
+      "Isso mudou. Uma nova lei, o projeto conhecido como Bill C tres, recebeu aprovacao final em vinte de novembro de dois mil e vinte e cinco e passou a valer em quinze de dezembro do mesmo ano. Ela derruba aquele limite de primeira geracao. Agora, um pai ou uma mae que e canadense por descendencia pode transmitir a cidadania a um filho nascido no exterior, desde que tenha vivido pelo menos tres anos no Canada antes do nascimento. E o que eles chamam de conexao real com o pais.",
+      "O que isso quer dizer pra voce, na pratica? Que muita gente que se achava sem direito, na verdade, pode ja ter caminho pro reconhecimento. Nao presuma que a porta esta fechada so porque o seu vinculo vem de duas ou tres geracoes atras.",
+      "Entao a acao de hoje e leve e vale o esforco: se voce tem avos ou bisavos canadenses, va ate o site oficial da imigracao do Canada e confira a sua elegibilidade na ferramenta que eles disponibilizam. E gratuito, e o primeiro passo antes de qualquer pedido, e pode te reservar uma bela surpresa.",
+      "Desconfie de quem promete resultado garantido cobrando por fora. A informacao oficial esta ali, ao seu alcance. Eu fico de olho nessas mudancas pra te avisar quando uma porta se abre. Pode contar comigo, a gente caminha junto, um passo de cada vez."
+    ],
+    "palavras": 317
+  },
+  {
+    "id": "hubby-2026-07-21",
+    "date": "2026-07-21",
+    "lote": 0,
+    "n": 0,
+    "persona": "Hubby",
+    "canal": "YouTube",
+    "formato": "curto",
+    "tipo": "dicas",
+    "titulo": "A data do seu agendamento pode valer tanto quanto o sangue italiano agora",
+    "paras": [
+      "Oi, eu sou o Hubby, e hoje eu vim conversar com voce que sonha com a cidadania italiana por descendencia. Teve uma novidade nos tribunais da Italia que eu faco questao de te explicar com calma, porque ela pode mudar o rumo do seu caso.",
+      "Primeiro, o contexto. No ano passado, a Italia endureceu a regra da cidadania por descendencia. Uma nova lei, que ficou conhecida como Decreto Tajani, colocou um marco no calendario: o dia vinte e sete de marco de dois mil e vinte e cinco. De forma bem resumida, quem nao tinha buscado o reconhecimento ate essa data passou a enfrentar limites bem maiores.",
+      "Agora vem a parte que traz esperanca. Em julho, o Tribunal de Napoles reconheceu a cidadania de dois brasileiros mesmo com a acao entrando depois desse prazo. O que pesou na decisao foi a prova de que eles tinham tentado agendar no sistema consular oficial dentro do prazo, e nao conseguiram por falha do proprio sistema. Pro juiz, ninguem pode ser punido por um problema que nao era culpa sua.",
+      "Percebe o que isso significa? A data em que voce tentou, e a prova dessa tentativa, podem valer tanto quanto o vinculo de sangue. Nao e so de quem voce descende, e tambem quando voce agiu e o que voce guardou.",
+      "Por isso, a acao de hoje e um pedido de guardiao pra voce: se voce tentou agendar ou protocolar antes de vinte e sete de marco de dois mil e vinte e cinco, salve tudo. Capturas de tela, e-mails, comprovantes de tentativa, protocolos. Guarde com carinho, organizado por data. Um dia esses registros podem ser exatamente o que decide o seu direito.",
+      "Cada caso e um caso, entao diante de qualquer duvida, procure orientacao de um profissional habilitado antes de dar entrada. Eu fico de olho nessas mudancas pra voce nunca ser pego de surpresa. Pode contar comigo, um passo de cada vez."
+    ],
+    "palavras": 321
+  },
+  {
     "id": "2026-07-20-08",
     "date": "2026-07-20",
     "lote": 8,
@@ -56,13 +116,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "O primeiro Natal longe",
     "paras": [
-      "O primeiro Natal fora não é como os outros, e ninguém te avisa direito.",
-      "Não é só a falta das pessoas. É que a data inteira funciona diferente. O clima está errado, a comida é outra, os costumes não são os seus, e as ruas comemoram uma coisa que não é bem a sua festa.",
-      "E aí chega a hora da chamada de vídeo com a família toda reunida do outro lado, e essa é a parte mais difícil, porque você vê a mesa cheia e o seu lugar vazio.",
-      "Duas coisas ajudam. Não tentar reproduzir exatamente o Natal de casa, porque a cópia imperfeita dói mais. E criar uma tradição nova, sua, mesmo que pequena, que passe a ser da sua família nesse lugar.",
-      "Na WiseHub tem gente que já passou por vários primeiros Natais em cada um dos países acompanhados. Não tira a saudade, mas passar essa data com quem entende muda o peso dela."
+      "🎣 Gancho: O primeiro Natal fora não é como os outros, e ninguém te avisa direito.",
+      "🎬 Oi, meus amores, Marcela aqui. Não é só a falta das pessoas. É a data inteira funcionando diferente: o clima errado, a comida outra, a rua comemorando uma festa que não é bem a sua. E aí chega a videochamada com todo mundo reunido do outro lado, e essa é a parte que mais aperta, porque você vê a mesa cheia e o seu lugar vazio. Duas coisas ajudam, meu amor: não tentar copiar igualzinho o Natal de casa, porque a cópia imperfeita dói mais. E criar uma tradição nova, sua, mesmo que pequena, que passe a ser da sua família nesse lugar.",
+      "✅ Passar essa data com quem entende muda o peso dela. Na WiseHub tem gente que já viveu vários primeiros Natais lá fora. Marca aqui alguém que vai passar o primeiro Natal longe esse ano. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: O primeiro Natal longe pesa diferente. Não copia o de casa. Cria o seu. Marca alguém que precisa ler isso. #primeironatalfora #imigração #morarfora #maeleoa #wisehub"
     ],
-    "palavras": 157
+    "palavras": 192
   },
   {
     "id": "2026-07-20-07",
@@ -75,13 +134,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "A comida que você aprende a fazer do zero",
     "paras": [
-      "Tem um jeito curioso de a saudade aparecer: você começa a cozinhar coisas que nunca cozinhou na vida.",
-      "Pão de queijo, brigadeiro, feijão do jeito certo, aquele bolo da sua avó. Coisas que sempre alguém fez pra você, ou que se comprava pronto na esquina.",
-      "E é engraçado porque no começo dá tudo errado. O ingrediente é outro, o forno é outro, a farinha se comporta diferente. Você refaz três vezes.",
-      "Mas tem uma coisa bonita aí no meio. Você não está só matando saudade, está aprendendo a produzir sozinha uma parte da sua casa. E isso, num lugar onde tudo é novo, é uma forma silenciosa de fincar raiz.",
-      "Na WiseHub as mulheres trocam justamente esses ajustes, o que substitui o quê em cada país. Parece assunto pequeno e é dos que mais aproximam."
+      "🎣 Gancho: A saudade chega de um jeito engraçado: você começa a cozinhar coisa que nunca cozinhou na vida.",
+      "🎬 Oi, meus amores, Marcela aqui. Pão de queijo, brigadeiro, o feijão do jeito certo, aquele bolo da sua avó. Coisa que sempre alguém fez pra você. E no começo dá tudo errado: o ingrediente é outro, o forno é outro, a farinha se comporta diferente, e você refaz três vezes. Mas tem uma beleza aí no meio: você não tá só matando saudade, tá aprendendo a produzir sozinha um pedaço da sua casa. Num lugar onde tudo é novo, isso é uma forma silenciosa de fincar raiz.",
+      "✅ Na comunidade da WiseHub as mulheres trocam justamente esses ajustes, o que substitui o quê em cada país. Salva esse vídeo pra quando bater a saudade na cozinha. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: A saudade vira receita, e a receita vira raiz. Salva pra quando der aquela vontade de casa. #morarfora #saudadedobrasil #imigração #maeleoa #wisehub"
     ],
-    "palavras": 135
+    "palavras": 170
   },
   {
     "id": "2026-07-20-06",
@@ -94,18 +152,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "Voltar pro Brasil não é fracasso",
     "paras": [
-      "Tem um assunto que a comunidade de imigrantes evita, e o silêncio em cima dele faz muito mal: a possibilidade de voltar.",
-      "Quem se muda vai embora sob aplausos. Todo mundo achou corajoso, todo mundo comemorou. E aí, se as coisas não saem como o planejado, a pessoa fica presa lá por um motivo que não é prático, é social. Voltar significaria admitir publicamente que não deu certo, e isso pesa mais que muita dificuldade real.",
-      "Eu queria desmontar essa ideia com cuidado, porque ela prende gente em situação ruim. Uma mudança internacional é um projeto, e projeto se avalia com dados, não com orgulho. Se as premissas que sustentavam a escolha mudaram, revisar não é fraqueza, é o que qualquer pessoa sensata faz.",
-      "As premissas mudam mesmo. O emprego que existia sumiu. A profissão exigiu revalidação que não estava prevista. A família passou por algo que exige presença. A criança não se adaptou de um jeito que preocupa. O casal se separou. A saudade se mostrou maior do que se esperava. Nada disso é fracasso pessoal, é vida acontecendo.",
-      "E tem uma coisa que quase ninguém enxerga na hora: quem passou um período fora volta diferente, e volta com bagagem que tem valor concreto. Outra língua, outra cultura de trabalho, experiência internacional no currículo, e uma capacidade de recomeçar do zero que só quem fez tem. Isso não é derrota, é uma experiência que muita gente gostaria de ter.",
-      "Também vale nomear a versão mais comum, que quase nunca é contada: muita gente volta, se reorganiza, e sai de novo depois, melhor preparada. Isso é bastante frequente e ninguém posta.",
-      "Existe uma parte prática que ajuda a decidir com clareza em vez de decidir por exaustão. Vale saber o que uma volta significa em termos de status naquele país, se existe prazo que faz perder algo já conquistado, se é possível manter alguma coisa aberta, e o que muda pras crianças em termos de escola. Ter esse mapa antes tira o pânico da conversa.",
-      "Na WiseHub esse assunto tem espaço, e isso não é pouco, porque em muitos lugares ele é tabu. Tem gente ali que voltou, gente que quase voltou e ficou, gente que voltou e saiu de novo. Ouvir os três tipos ajuda a separar cansaço passageiro de decisão de verdade. Sobre o que uma saída representa pro seu status, quem responde é advogado, porque isso é específico de cada caso.",
-      "E se o que estiver pesando for angústia constante, isso merece profissional de saúde mental, não só conversa de comunidade. Decisão grande tomada em esgotamento raramente é a decisão que a pessoa manteria.",
-      "Fique porque escolheu ficar, não porque tem vergonha de voltar. As duas saídas são dignas."
+      "🎣 Gancho: Voltar pro Brasil não é fracasso. Quem te disse que é nunca fez a mala sozinho.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar de um assunto que a comunidade de imigrante evita, e esse silêncio machuca muita gente: a possibilidade de voltar. Você foi embora sob aplauso, todo mundo achou corajoso, todo mundo comemorou. Aí, se as coisas apertam, você fica preso lá por um motivo que não é prático, é vergonha. Voltar viraria admitir em público que não deu certo, e isso pesa mais que muita dificuldade real. Eu quero desmontar isso com você, com cuidado, porque essa ideia prende gente boa numa situação ruim. Mudança é um projeto, meu amor, e projeto a gente revê com dado, não com orgulho. Se as premissas mudaram, o emprego sumiu, a profissão pediu uma revalidação que ninguém tinha avisado, a família precisou de você, a criança não se adaptou de um jeito que preocupa; isso não é fracasso pessoal, é a vida acontecendo. E tem uma coisa que quase ninguém enxerga: quem passa um tempo fora volta diferente. Volta com outra língua, outra cultura de trabalho, e uma coragem de recomeçar do zero que só quem fez tem. Isso não é derrota, é bagagem. Eu vim do Padre Bento, da periferia de Guarulhos, e aprendi cedo que origem não é teto, e o caminho de volta também não é. Antes de decidir, vale ter o mapa: o que uma saída significa pro seu status naquele país, se tem prazo que faz perder algo já conquistado, o que muda pras crianças na escola. Sobre o que uma saída representa pro seu status, quem responde é advogado, porque isso é específico do seu caso. E se o que estiver pesando for uma angústia constante, isso merece profissional de saúde mental, não só conversa de comunidade. Na WiseHub esse assunto tem espaço, e isso não é pouco, porque em muito lugar ele é tabu: tem gente que voltou, gente que quase voltou e ficou, gente que voltou e saiu de novo, mais preparada.",
+      "✅ Fica porque você escolheu ficar, não porque tem vergonha de voltar. As duas saídas são dignas, viu? Comenta VERDADE aqui embaixo que eu continuo essa conversa com você. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Ninguém conta, mas voltar não é derrota, é revisar um projeto com honestidade. Origem não é teto, e recomeço nenhum é. Comenta VERDADE. #voltarpraobrasil #imigração #maeleoa #origemnaoeteto #wisehub"
     ],
-    "palavras": 452
+    "palavras": 413
   },
   {
     "id": "2026-07-20-05",
@@ -118,18 +170,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "A avó que virou uma tela",
     "paras": [
-      "Tem uma perda na mudança que quase ninguém coloca na conta, e ela não é sua. É dos seus pais.",
-      "Você decide, você se prepara, você escolhe. Eles não escolheram nada. Eles só recebem a notícia de que o neto vai crescer longe. E, diferente de você, eles não têm um projeto novo pra compensar, não têm a empolgação do começo. Eles ficam com o mesmo cotidiano de sempre, com uma cadeira a menos.",
-      "Isso costuma aparecer de um jeito atravessado. A mãe que não pergunta nada sobre a mudança. O pai que faz piada meio ácida. A avó que só fala do frio que vai fazer. Muita gente lê isso como falta de apoio, e quase sempre é medo e luto sem nome.",
-      "Do outro lado tem a criança, e é aí que dá pra fazer alguma coisa concreta. Vínculo de neto com avó se sustenta em convivência, e videochamada de dez minutos por semana em que o adulto pergunta \"como foi a escola\" não sustenta. Criança pequena não conversa, ela brinca. Então o que funciona é transformar a chamada em atividade: ler a mesma história, jogar junto, cozinhar a mesma receita ao mesmo tempo, mostrar o quarto, dar tour pela rua.",
-      "O que também ajuda muito, e é subestimado, é o assíncrono. Áudio curto no fim do dia, foto boba, vídeo de dez segundos. Isso constrói presença cotidiana melhor do que uma chamada longa e formal por mês, que costuma deixar todo mundo sem graça.",
-      "E vale combinar horário fixo, porque fuso horário desorganiza qualquer intenção. Sem hora marcada, vira aquele \"a gente se fala\" que não acontece.",
-      "Tem uma parte prática que muda o ano inteiro da família: planejar as visitas com antecedência real. Quando e quem viaja, quanto custa, quanto tempo fica, e o que isso exige em termos de documento e de tempo fora do país. Muita gente descobre tarde que a visita dos pais depende de exigência que precisava ser preparada com meses.",
-      "Na WiseHub isso aparece bastante, nos nove países acompanhados: como cada família organizou visita de avós, o que precisou preparar, o que atrapalhou. Vale ouvir de quem já recebeu os pais e de quem já teve o pedido negado. Sobre exigências de entrada e documentação de visitante, a fonte é oficial e a orientação é de advogado, sempre, porque isso varia e muda.",
-      "Uma coisa é honesta dizer: nada disso apaga a distância. Não existe arranjo que faça um avô deixar de perder o dia a dia. O que dá pra fazer é garantir que a criança saiba quem eles são, e que eles saibam quem a criança está virando.",
-      "Marque o horário desta semana. Vínculo não sobrevive de intenção."
+      "🎣 Gancho: Tem uma perda na sua mudança que não é sua. É da sua mãe e do seu pai. E ninguém te avisa disso.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar dos avós que ficam pra trás quando a gente muda. Você decide, você se prepara, você tem um projeto novo te puxando pra frente. Eles não escolheram nada, só recebem a notícia de que o neto vai crescer longe, e ficam com a mesma casa de sempre, só que com uma cadeira a menos. Isso costuma vir atravessado: a mãe que não pergunta nada, o pai que faz uma piada ácida, a avó que só fala do frio que você vai passar. A gente lê como falta de apoio, e quase sempre é medo e saudade sem nome. Mas tem o que fazer, meu amor, e é com a criança. Vínculo de neto com avó vive de convivência, e chamada de dez minutos onde o adulto pergunta \"como foi a escola\" não segura ninguém. Criança pequena não conversa, ela brinca. Então transforma a chamada em atividade: ler a mesma história, cozinhar a mesma receita ao mesmo tempo, dar um tour pela rua. E aposta no dia a dia: áudio curto, foto boba, vídeo de dez segundos constroem mais presença que uma ligação formal por mês. Combina um horário fixo, porque o fuso desorganiza qualquer boa intenção. E um cuidado que muita gente esquece: planeja a visita dos avós com antecedência de verdade. Sobre exigência de entrada e documento de visitante, a fonte é sempre oficial e quem orienta é advogado, porque isso muda de país pra país. Vou ser honesta com você: nada disso apaga a distância. O que dá pra fazer é garantir que a criança saiba quem são os avós dela, e que eles saibam quem essa criança está virando. Na comunidade da WiseHub, quem já mora fora conta como organizou a visita dos pais nos países que a gente acompanha.",
+      "✅ Marca o horário dessa semana com a sua mãe, meu amor. Vínculo não sobrevive só de intenção. Comenta CUIDAR aqui embaixo que eu te mando o que funciona pra manter os avós presentes. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: O neto vai crescer longe, e quem mais sente é quem ficou. Dá pra manter esse vínculo vivo, mas tem que ser de propósito. Comenta CUIDAR. #imigração #maeleoa #familia #morarfora #wisehub"
     ],
-    "palavras": 449
+    "palavras": 405
   },
   {
     "id": "2026-07-20-04",
@@ -217,6 +263,26 @@ export const ROTEIROS: Roteiro[] = [
     "palavras": 473
   },
   {
+    "id": "hubby-2026-07-20",
+    "date": "2026-07-20",
+    "lote": 0,
+    "n": 0,
+    "persona": "Hubby",
+    "canal": "YouTube",
+    "formato": "curto",
+    "tipo": "dicas",
+    "titulo": "A protecao dos ucranianos na Polonia foi esticada ate 2028, e a letra miuda importa",
+    "paras": [
+      "Oi, eu sou o Hubby. Hoje eu quero conversar com voce que vive na Polonia sob protecao temporaria, ou que tem alguem querido nessa situacao, porque saiu uma noticia que traz alivio, e tambem um cuidado.",
+      "No dia quinze de julho, os paises da Uniao Europeia chegaram a um acordo pra estender a protecao temporaria de quem fugiu da guerra na Ucrania. Antes, essa protecao estava garantida ate quatro de marco de dois mil e vinte e sete. Agora ela deve alcancar quatro de marco de dois mil e vinte e oito, mais um ano inteiro de tranquilidade. E isso pesa muito por aqui, porque a Polonia abriga a maior comunidade ucraniana do bloco.",
+      "Mas eu preciso te contar a letra miuda, porque ela anda sendo mal contada por ai. Junto com a extensao veio uma regra nova ligada as obrigacoes militares na Ucrania. Muita manchete resumiu isso como se fosse uma proibicao pra todos os homens em idade militar, e nao e. O proprio texto diz, com todas as letras, que essa verificacao vale so pra quem chegar depois da regra entrar em vigor. Quem ja esta protegido na Polonia nao e atingido.",
+      "Entao respira. Se voce ja tem a sua protecao aqui, o seu direito continua de pe. Na pratica polonesa, e o numero PESEL com o status UKR que confirma que voce pode residir no pais.",
+      "A acao de hoje e simples: nao tome nenhuma decisao com base em manchete assustadora que chega pelo celular. Antes de mudar qualquer coisa, acompanhe os comunicados oficiais do escritorio para estrangeiros, o UDSC. Nas vezes anteriores, os certificados foram estendidos de forma automatica, sem voce precisar pedir documento novo.",
+      "Eu leio a fonte oficial pra te trazer o que e verdade, sem susto e sem exagero. Pode contar comigo. A gente caminha junto nessa jornada, um passo de cada vez."
+    ],
+    "palavras": 310
+  },
+  {
     "id": "2026-07-19-08",
     "date": "2026-07-19",
     "lote": 7,
@@ -227,13 +293,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "Você vai errar a etiqueta e tudo bem",
     "paras": [
-      "Você vai cumprimentar errado. Vai chegar cedo demais ou tarde demais. Vai fazer uma pergunta que ali é considerada íntima. Vai rir alto num lugar silencioso.",
-      "Isso vai acontecer, e a vergonha é real. Só que ela é bem menor do que parece de dentro, porque na maioria dos lugares as pessoas entendem imediatamente que você é de fora e relevam.",
-      "O que costuma pegar mal não é o erro, é a insistência em fazer tudo do jeito de casa depois de já ter percebido a diferença.",
-      "Observe mais do que se explique nos primeiros meses. Você aprende os códigos assistindo, e eles são mais rápidos de aprender que a língua.",
-      "Na WiseHub a gente ri disso junto, com quem já passou pelo mesmo em cada um dos países acompanhados. Errar etiqueta não vai te tirar do lugar, e vira história boa depois."
+      "🎣 Gancho: Você vai cumprimentar errado, vai rir alto num lugar silencioso, e vai sentir aquela vergonha quente subir no rosto. Respira, tá tudo bem.",
+      "🎬 Oi, meus amores, Marcela aqui. Escuta uma coisa de quem já viu muita gente passar por isso: essa vergonha é bem menor por fora do que por dentro, porque na maioria dos lugares as pessoas percebem na hora que você é de fora e relevam. O que pega mal não é errar, é insistir em fazer tudo do jeito de casa depois que você já viu a diferença. Meu cuidado de mãe: nos primeiros meses, observe mais do que se explique, porque os códigos daquele lugar a gente aprende assistindo, e bem mais rápido que a língua. Sotaque nenhum, etiqueta nenhuma, vai te tirar do lugar que é seu.",
+      "✅ Marca alguém que está de mala pronta e precisa ouvir isso, e comenta CERTO se você também já pagou um mico desses lá fora. Origem não é teto, e errar etiqueta vira história boa depois. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Você vai errar os códigos, e isso não te faz menos capaz. Observa, respira, e segue. #imigrantesbrasileiros #morarforadobrasil #origemnaoeteto #recomecolafora #wisehub"
     ],
-    "palavras": 143
+    "palavras": 204
   },
   {
     "id": "2026-07-19-07",
@@ -246,12 +311,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "O médico que não te entende",
     "paras": [
-      "Tem um momento de vulnerabilidade que pouca gente comenta: estar doente num país onde você ainda não fala bem a língua.",
-      "Você precisa explicar uma dor, e dor é detalhe. Onde, desde quando, se irradia, se piora. Faltando palavra, você simplifica, e simplificar sintoma pode mudar o que o médico entende.",
-      "Três coisas ajudam de verdade. Escrever antes o que você quer dizer, com as palavras que faltam já traduzidas. Perguntar se existe direito a intérprete, porque em muitos serviços existe e ninguém oferece se você não pedir. E não levar seu filho como tradutor em consulta.",
-      "Na WiseHub tem gente que já passou por isso nos países acompanhados e conta como resolveu. Como funciona o atendimento e o direito a intérprete no seu caso você confirma nos canais oficiais de saúde locais."
+      "🎣 Gancho: Estar doente num país onde você ainda não fala bem a língua é um tipo de solidão que ninguém te conta.",
+      "🎬 Oi, meus amores, Marcela aqui. Você precisa explicar uma dor, e dor é detalhe: onde, desde quando, se piora, se irradia. Quando falta palavra, você simplifica, e simplificar sintoma pode mudar o que o médico entende de você. Meu cuidado pra você: escreva antes o que quer dizer, já com as palavras que faltam traduzidas, e pergunte se você tem direito a intérprete, porque em muito lugar esse direito existe e ninguém oferece se você não pedir. E, por favor, não leve o seu filho de tradutor pra dentro do consultório, criança não carrega esse peso.",
+      "✅ Comenta CUIDAR se você já se sentiu assim numa consulta lá fora, e marca alguém que vai precisar ouvir isso. Como funciona o atendimento e o direito a intérprete no seu caso, confirma sempre nos canais oficiais de saúde de lá. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Ninguém devia adoecer sozinha longe de casa. Se prepara antes, pede o intérprete, e não bota o filho de tradutor. #saudeimigrante #morarforadobrasil #imigrantesbrasileiros #cuidado #wisehub"
     ],
-    "palavras": 133
+    "palavras": 199
   },
   {
     "id": "2026-07-19-06",
@@ -264,17 +329,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "O filho que se recusa a falar a língua nova em casa",
     "paras": [
-      "Muita família imigrante vive a mesma cena, e ela costuma virar briga: a criança aprende a língua do país, passa a usá-la o dia todo na escola, e em casa se recusa a falar português. Ou o contrário, aprende a nova e resiste a manter a de origem.",
-      "Nos dois casos os pais se assustam, e o susto vem de lugares diferentes. Quando ela abandona o português, dói porque parece que ela está abandonando a família, os avós, a origem. Quando ela recusa a língua nova em casa, preocupa porque parece atraso na adaptação.",
-      "Vale saber que as duas coisas são comuns e quase sempre passageiras. Criança usa língua por função, não por lealdade. Ela fala a língua do lugar onde acontece a vida dela, e a vida dela acontece na escola, com os amigos. Não é rejeição à família, é economia mental.",
-      "Só que tem um ponto que merece atenção, porque esse não se resolve sozinho: manter a língua de origem é uma janela que fecha. Criança que para de falar português com fluência costuma manter a compreensão, mas perde a capacidade de conversar de verdade. E aí acontece o que mais dói, que é neto que não consegue ter uma conversa com avó.",
-      "O que funciona não é obrigar, porque obrigar transforma a língua da família em castigo. O que funciona é dar função à língua. Chamada de vídeo frequente com os avós, onde a única opção é o português. Desenho, jogo e música na língua de origem. Alguém do outro lado que se importe com o que ela tem pra contar. Língua sobrevive quando serve pra alguma coisa que a criança quer.",
-      "E vale tirar uma pressão de cima: criança bilíngue às vezes mistura, às vezes demora um pouco mais em uma das duas, e isso costuma se organizar. O que não se organiza sozinho é a língua que deixou de ser usada por anos.",
-      "Na WiseHub tem mães vivendo isso em cada um dos nove países acompanhados, e a troca ali é bem concreta: o que cada uma fez, o que funcionou com filho de cada idade, o que só piorou. Também aparece muito a experiência com escolas bilíngues e com apoio de língua, que muda bastante de país pra país.",
-      "Uma ressalva importante: se houver preocupação real com desenvolvimento de fala, atraso ou dificuldade que fuja do esperado, isso é avaliação de fonoaudiólogo ou pediatra, não de grupo de mães. A gente troca experiência, não avalia criança.",
-      "Não brigue pela língua. Crie motivo pra ela existir."
+      "🎣 Gancho: Seu filho aprende a língua nova num piscar de olhos e de repente se recusa a falar português com você em casa. Calma, isso não é rejeição.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar do filho que chega em casa e não quer mais falar a nossa língua, e eu sei o quanto isso dói, parece que ele está deixando a família, os avós, a origem pra trás. Mas eu te dou um cuidado que eu aprendi de perto: criança usa língua por função, não por lealdade, ela fala a língua do lugar onde a vida dela acontece, e nessa idade a vida acontece na escola. O que não volta sozinho é a língua que ficou anos sem ser usada, então o segredo não é obrigar, porque obrigar vira castigo, o segredo é dar motivo. Chamada de vídeo com os avós onde só rola o português, música, jogo, alguém do outro lado que se importe de verdade com o que ela tem pra contar.",
+      "✅ Se você vive isso na sua casa, comenta CERTO que eu quero saber o que funcionou com o seu, e salva esse vídeo. E se você sentir que é mais que fase, um atraso de fala de verdade, isso é conversa com fonoaudiólogo ou pediatra, não é comigo, tá? Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Não brigue pela língua. Crie motivo pra ela existir, pra que um dia o seu neto ainda saiba conversar com a avó. #familiaimigrante #filhosbilingues #maeimigrante #origemnaoeteto #wisehub"
     ],
-    "palavras": 421
+    "palavras": 258
   },
   {
     "id": "2026-07-19-05",
@@ -287,18 +347,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "Quando toda a sua vida social passa pelo trabalho dele",
     "paras": [
-      "Tem uma coisa que acontece devagar e que muita mulher só percebe quando já está instalada: todo o círculo social da família se formou em volta do trabalho do marido.",
-      "O começo é natural e até bom. Ele entra na empresa, conhece gente, e vêm os convites. O jantar com os colegas dele, o churrasco na casa do chefe dele, o grupo de mensagens dos casais do trabalho dele. Quando a família ainda não conhece ninguém, isso é um alívio enorme, porque é vida social pronta.",
-      "O preço aparece depois. Nessas rodas, ela costuma ser apresentada como a esposa do fulano. As conversas giram em torno de assuntos da empresa que ela não acompanha. E há uma sensação sutil, difícil de explicar sem parecer ingratidão, de estar sempre entrando na vida de outra pessoa em vez de ter a própria.",
-      "Tem um agravante prático. Se um dia esse trabalho acabar, ou o casal se separar, ou simplesmente ele mudar de empresa, ela perde de uma vez o círculo inteiro. Não porque aquela gente seja falsa, mas porque o vínculo era com ele, não com ela.",
-      "O que constrói círculo próprio raramente é grande. É a rotina que só sua: um curso, uma atividade, um trabalho voluntário, o grupo de mães da escola, a academia no mesmo horário todo dia. Coisas em que você aparece com regularidade e as pessoas passam a te conhecer pelo seu nome e pelo que você faz, e não por quem é seu marido.",
-      "Isso costuma exigir um empurrão desconfortável, porque no começo é tudo constrangedor: você fala mal a língua, não conhece os códigos, e é bem mais fácil ficar em casa. Vale ir mesmo assim. Círculo social não se forma por afinidade instantânea, se forma por repetição.",
-      "E tem um ponto que vale nomear: isso não é vaidade nem capricho. Ter uma vida própria naquele lugar é o que sustenta a mulher quando algo dá errado, e é também o que torna o casamento mais leve, porque tira dele o peso de ser a única fonte de mundo dela.",
-      "Na WiseHub tem muita mulher que passou exatamente por isso, nos nove países acompanhados, e a conversa ali costuma ser bem prática: por onde cada uma começou, o que funcionou naquele país, quanto tempo levou até ter gente sua. Vale ouvir de quem já está do outro lado.",
-      "Uma coisa é honesta dizer: se a sensação de estar sumindo dentro da própria vida for pesada e constante, isso merece profissional, não só conversa de grupo. A gente caminha junto, não substitui apoio clínico.",
-      "Comece por uma coisa só, que seja sua e que se repita toda semana. É assim que se deixa de ser a esposa do fulano naquele lugar."
+      "🎣 Gancho: Um dia você acorda naquele país novo e percebe: todos os seus amigos, na verdade, são amigos do seu marido.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar de uma coisa que eu vejo acontecer com tanta mulher forte: você chega lá fora e a vida social inteira se forma em volta do trabalho dele, o jantar dos colegas dele, o churrasco do chefe dele, o grupo dos casais do trabalho dele. No começo é um alívio enorme, porque é companhia pronta num lugar onde você ainda não conhece ninguém. Mas eu preciso te dar um cuidado de mãe: se um dia esse trabalho mudar, você perde o círculo inteiro de uma vez, porque o vínculo era com ele, não era com você. Vida própria a gente constrói na repetição, uma coisa só que seja sua e que se repita toda semana, até as pessoas te conhecerem pelo seu nome e não por quem é o seu marido.",
+      "✅ Se você se reconheceu, comenta CUIDAR aqui embaixo e marca aquela amiga que foi morar longe e sumiu dentro da vida do marido. Ter vida sua não é vaidade, é o que te segura em pé. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Origem não é teto, e nem a sua vida lá fora precisa ser a sombra da vida dele. Começa por uma coisa só que seja sua. #mulherimigrante #morarforadobrasil #origemnaoeteto #recomecar #wisehub"
     ],
-    "palavras": 455
+    "palavras": 242
   },
   {
     "id": "2026-07-19-04",
@@ -385,6 +439,26 @@ export const ROTEIROS: Roteiro[] = [
     "palavras": 456
   },
   {
+    "id": "hubby-2026-07-19",
+    "date": "2026-07-19",
+    "lote": 0,
+    "n": 0,
+    "persona": "Hubby",
+    "canal": "YouTube",
+    "formato": "curto",
+    "tipo": "dicas",
+    "titulo": "Irlanda criou uma janela de verao pra quem esta com o cartao de residencia vencido",
+    "paras": [
+      "Oi, eu sou o Hubby, e hoje eu vim conversar com voce que mora na Irlanda e estava com um aperto no peito por causa das ferias. Aconteceu uma coisa boa, dessas que tiram um peso das costas, e eu quero te contar com calma.",
+      "O escritorio de registro de Dublin, em Burgh Quay, esta com uma fila enorme. A renovacao do cartao de residencia, que na Irlanda se chama IRP, passou de dezessete semanas em algumas categorias, e ainda leva mais umas duas semanas ate o cartao novo chegar na sua mao. Quem tinha viagem marcada pras ferias ficou com medo de embarcar com o cartao vencido.",
+      "Foi por isso que o servico de imigracao criou uma medida temporaria. Entre treze de julho e trinta e um de agosto, quem ja pediu a renovacao antes do cartao vencer pode viajar apresentando o cartao recem-expirado, junto com um aviso oficial que a propria imigracao publicou. E tem mais: nesse mesmo periodo, quem continua trabalhando com o pedido em andamento segue autorizado a permanecer, mesmo com o cartao vencido.",
+      "Agora, presta atencao na parte que decide tudo, porque aqui mora o cuidado. Essa protecao so vale pra quem enviou o pedido de renovacao antes da data de vencimento. Quem deixou o cartao vencer primeiro fica de fora. Entao, a acao de hoje e simples e importante: guarde o recibo do pedido, com o numero de protocolo que eles chamam de OREG, e o e-mail de confirmacao, porque e essa dupla que prova que voce esta em dia.",
+      "Se voce vai viajar, baixe e imprima o aviso oficial no site da imigracao, leve o cartao vencido e o comprovante do pedido, e avise a companhia aerea antes de ir. E se tiver conexao fora da Uniao Europeia, confirme se aquele pais aceita o documento.",
+      "Eu fico de olho nessas mudancas justamente pra voce nao ser pego de surpresa. Pode contar comigo. A gente caminha junto, um passo de cada vez."
+    ],
+    "palavras": 328
+  },
+  {
     "id": "2026-07-18-08",
     "date": "2026-07-18",
     "lote": 6,
@@ -395,13 +469,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "Você não precisa gostar no primeiro mês",
     "paras": [
-      "Existe uma cobrança silenciosa em cima de quem acabou de mudar de país: a de estar feliz.",
-      "Você lutou pra chegar, sonhou com isso, contou pra todo mundo. Aí você chega e sente um vazio estranho, e vem a culpa junto.",
-      "Quero te dizer que isso é comum e não significa que você errou. Adaptação tem uma fase que não tem nada de encantadora. É cansaço, é burocracia, é não entender nada, é sentir falta de coisas bobas.",
-      "Gostar de um lugar leva tempo, porque gostar depende de pertencer, e pertencer se constrói.",
-      "Na WiseHub tem gente que passou por esse começo sem graça e hoje ama onde mora. Se o vazio virar peso que não passa, isso é conversa pra profissional, não pra grupo."
+      "🎣 Gancho: Você mudou de país e ainda não está feliz? Respira. Isso não quer dizer que você errou.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar da cobrança silenciosa de estar feliz. Você lutou pra chegar, sonhou com isso, contou pra todo mundo. Aí chega e sente um vazio estranho, e vem a culpa junto. Eu quero te dizer que isso é comum e não significa que você se enganou. Adaptação tem uma fase que não tem nada de encantadora: é cansaço, é burocracia, é não entender nada, é sentir falta de bobagem.",
+      "✅ Gostar de um lugar leva tempo, porque gostar depende de pertencer, e pertencer se constrói devagar. Salva esse vídeo pra quando a culpa bater de novo. Na WiseHub tem gente que passou por esse começo sem graça e hoje ama onde mora, e ninguém precisa atravessar isso sozinha. Se o vazio virar peso que não passa, isso é conversa pra profissional, não pra grupo. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Não precisa amar o país novo no primeiro mês. Adaptação tem uma fase sem graça, e ela passa. Salva pra quando a culpa bater. #MudarDePais #VidaDeImigrante #Adaptacao #OrigemNaoETeto #WiseHub"
     ],
-    "palavras": 125
+    "palavras": 202
   },
   {
     "id": "2026-07-18-07",
@@ -414,14 +487,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "A amizade que não sobreviveu",
     "paras": [
-      "Ninguém te prepara pra isso: algumas amizades não atravessam a mudança.",
-      "Não tem briga, não tem motivo. Aos poucos as mensagens ficam mais raras, os assuntos param de coincidir, e um dia você percebe que já faz meses.",
-      "Dói mais do que parece, porque a gente esperava perder o país, não as pessoas.",
-      "Uma coisa que ajuda a entender: amizade se sustenta muito no cotidiano compartilhado, e é exatamente isso que a distância tira. Não é falta de amor, é falta de rotina em comum.",
-      "Algumas voltam com o tempo, e várias voltam diferentes. E aparecem outras, que você ainda não conhece.",
-      "Na WiseHub tem gente que já sentiu isso e continuou. Não devolve o que passou, mas ajuda saber que não é você que está fazendo algo errado."
+      "🎣 Gancho: Ninguém te avisa: tem amizade que não atravessa a mudança de país. E não, não é culpa sua.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar da amizade que ficou pra trás. Não teve briga, não teve motivo. As mensagens foram ficando raras, os assuntos pararam de coincidir, e um dia você percebe que já faz meses. Dói mais do que parece, porque a gente se preparou pra perder o país, não as pessoas. Mas escuta: amizade se sustenta no cotidiano que a distância tirou. Não é falta de amor, é falta de rotina em comum.",
+      "✅ Algumas voltam com o tempo, várias voltam diferentes, e aparecem outras que você ainda nem conhece. Marca aqui alguém que também sentiu isso na pele. Na WiseHub tem gente que passou por isso e continuou, não devolve o que passou, mas ajuda saber que você não está fazendo nada de errado. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Algumas amizades não atravessam a mudança, e não é culpa sua. É falta de rotina em comum, não falta de amor. Marca quem também sentiu isso. #VidaDeImigrante #MudarDePais #SaudadeDoBrasil #OrigemNaoETeto #WiseHub"
     ],
-    "palavras": 129
+    "palavras": 195
   },
   {
     "id": "2026-07-18-06",
@@ -434,17 +505,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "Quando o filho vira o seu tradutor",
     "paras": [
-      "Tem uma cena que acontece em quase toda família imigrante, e ela é mais complicada do que parece. A criança aprende a língua nova primeiro, e vira a intérprete da casa.",
-      "No começo até tem graça. Ela pede na padaria, explica pro vizinho, corrige a sua pronúncia rindo. A família comemora, e é justo comemorar, porque é sinal de que ela está se adaptando.",
-      "O problema começa quando isso deixa de ser eventual e vira função. Quando ela é chamada pra traduzir a conversa com o médico. Pra explicar o que o dono do apartamento está dizendo. Pra ajudar a mãe a entender um documento. Nessas horas, uma criança está carregando informação de adulto e responsabilidade de adulto, e ela não tem estrutura pra isso.",
-      "Duas coisas costumam acontecer com ela, e as duas são silenciosas. A primeira é ansiedade, porque ela percebe que se errar a tradução alguma coisa importante da família dá errado. A segunda é uma inversão de papéis desconfortável, onde ela passa a se sentir responsável pelos pais, e crianças que assumem esse lugar cedo costumam ter dificuldade em voltar a ser cuidadas depois.",
-      "Também tem um efeito no adulto, e esse a gente não fala. Quando existe alguém que resolve, a pressão pra aprender a língua diminui. Muita mãe fica anos numa dependência confortável do filho, e depois se vê sem autonomia justamente quando ele cresce e sai de casa.",
-      "O ajuste não precisa ser dramático. É separar o que é ajuda cotidiana, que pode continuar e até é boa, do que é assunto de adulto, que não deve passar por ela. Consulta médica, dinheiro, documento, conflito com terceiros, isso é dos pais. Em muitos lugares existe direito a intérprete em serviço de saúde e em serviço público, e vale perguntar antes de levar a criança como tradutora.",
-      "E o passo que resolve de verdade, mesmo que devagar, é a mãe estudar a língua. Não pra falar bonito, pra conseguir se virar sozinha no essencial. Meia hora por dia muda o jogo em alguns meses, e devolve pra ela uma coisa que a mudança tirou, que é a capacidade de resolver a própria vida.",
-      "Na WiseHub tem muita mulher exatamente nesse ponto, em vários dos nove países acompanhados, e a troca ali costuma ser sobre isso: por onde começou, o que funcionou de fato, como encaixou estudo numa rotina que já está cheia. Se existe apoio gratuito de língua na sua região, isso você confirma nos canais oficiais locais, que variam bastante de lugar pra lugar.",
-      "Deixe seu filho ser criança. Ele pode ajudar, mas não pode ser o adulto responsável pela comunicação da família."
+      "🎣 Gancho: Se o seu filho já traduziu o médico pra você, para tudo e escuta: essa conta não é dele pra pagar.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar de uma cena que acontece em quase toda família que muda de país. A criança aprende a língua nova primeiro, e vira a intérprete da casa. No começo tem graça: ela pede na padaria, corrige a sua pronúncia rindo. E é justo comemorar, porque é sinal de que ela está se adaptando. Mas presta atenção no dia em que isso deixa de ser eventual e vira função. Quando ela é chamada pra traduzir a conversa com o médico, pra explicar o que o dono do apartamento falou, pra te ajudar a entender um documento. Aí uma criança está carregando informação de adulto e responsabilidade de adulto, e ela não tem estrutura pra isso. Isso gera ansiedade nela, porque ela sente que se errar a tradução alguma coisa importante da família dá errado. E inverte os papéis: ela começa a se sentir responsável por você. Cuidado com isso, meu amor, porque criança que vira adulto cedo demais tem dificuldade de voltar a ser cuidada depois.",
+      "✅ O ajuste não precisa ser dramático. Separa o que é ajuda do dia a dia, que pode continuar, do que é assunto de adulto, que não passa por ela: consulta, dinheiro, documento, conflito com terceiros, isso é seu. Em muito lugar você tem direito a um intérprete de graça no serviço de saúde e no serviço público, vale perguntar antes de levar seu filho como tradutor [CONFERIR COM A MARCELA]. E o passo que resolve de verdade é você estudar a língua, nem que seja meia hora por dia. Não pra falar bonito, pra se virar sozinha no essencial e voltar a resolver a sua própria vida. Na WiseHub tem muita mãe exatamente nesse ponto, e a troca é sobre isso: por onde começar e como encaixar o estudo numa rotina já cheia. Deixa o seu filho ser criança: ele pode ajudar, mas não pode ser o adulto responsável pela comunicação da família. Comenta CUIDAR aqui embaixo que eu te respondo. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Seu filho pode ajudar com a língua, mas não pode ser o adulto responsável pela comunicação da família. Consulta, dinheiro e documento é dos pais. Comenta CUIDAR. #FamiliaImigrante #FilhosDeImigrantes #MudarDePais #OrigemNaoETeto #WiseHub"
     ],
-    "palavras": 440
+    "palavras": 403
   },
   {
     "id": "2026-07-18-05",
@@ -480,17 +546,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "A divisão que ninguém combinou",
     "paras": [
-      "Antes de mudar de país, o casal conversa sobre muita coisa. Cidade, escola, orçamento, prazo. E quase nunca conversa sobre a única coisa que vai decidir o clima dentro de casa no primeiro ano: quem faz o quê.",
-      "Parece pequeno, mas não é. Quando a família chega, aparece uma quantidade absurda de tarefas novas que não existiam antes, e elas não vêm com nome de responsável. Abrir conta, entender contrato de aluguel, matricular criança, achar pediatra, decifrar sistema de saúde, resolver documento, descobrir transporte, aprender onde se compra cada coisa. Isso é um segundo emprego, e ele aparece exatamente no momento em que uma pessoa da casa já começou o primeiro.",
-      "O que costuma acontecer é silencioso e injusto. Quem tem horário de trabalho fixo fica com o trabalho pago, e todo o resto escorre pra quem está com a agenda \"livre\". Só que a agenda não estava livre, ela estava sem nome. E aí, semanas depois, uma pessoa está exausta e a outra genuinamente não entende por quê, porque do lado de fora não parece trabalho.",
-      "O segundo movimento é ainda mais delicado. Quem assume essa carga vai acumulando um conhecimento que ninguém mais tem: só ela sabe onde ficam os documentos, como se marca consulta, qual é o prazo de tal coisa. Isso parece competência, e é, mas também é uma armadilha, porque torna impossível dividir depois. A tarefa gruda em quem começou.",
-      "Tem um jeito de evitar isso, e ele precisa acontecer antes da mudança. Sentar os dois e listar as frentes, não as tarefas soltas. Saúde é de quem. Escola é de quem. Burocracia é de quem. Casa é de quem. E combinar que a pessoa responsável por uma frente é responsável de verdade, incluindo pesquisar e decidir, não apenas executar o que a outra mandou.",
-      "Uma coisa que ajuda muito e quase ninguém faz: marcar uma conversa fixa, curta, uma vez por semana, só sobre logística da família. Sem cobrança e sem discussão de relação, só o que precisa ser feito e por quem. Parece burocrático demais pra casamento, e é exatamente por parecer que quase todo mundo pula e depois briga.",
-      "Essa é uma das conversas mais recorrentes entre as mulheres da WiseHub, nos nove países acompanhados, porque o padrão se repete em todos eles. Ouvir de quem já está dois anos à frente como resolveu a divisão em casa costuma poupar meses de desgaste.",
-      "E vale dizer com clareza: quando o desgaste do casal passa do ponto de logística e vira mágoa acumulada, isso é assunto pra profissional, e não pra grupo. A gente troca experiência, não faz terapia de casal.",
-      "Combine antes de embarcar. É uma conversa de uma hora que evita um ano de ressentimento."
+      "🎣 Gancho: Sabe o que quebra mais casamento que muda de país? Não é dinheiro, não é saudade. É uma pilha de tarefas que ninguém combinou quem ia carregar.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar de uma conversa que quase todo casal pula antes de embarcar. Vocês combinam cidade, escola, orçamento, prazo. E esquecem da única coisa que decide o clima dentro de casa no primeiro ano: quem faz o quê. Porque quando a família chega, aparece um segundo emprego que ninguém contratou. Abrir conta, entender aluguel, matricular criança, achar médico, decifrar o sistema de saúde. E isso quase sempre escorre pra quem está com a agenda \"livre\", só que ela nunca esteve livre, ela só estava sem nome. Aí uma pessoa se esgota e a outra genuinamente não entende por quê, porque de fora não parece trabalho. Eu vou te dar o atalho, meu amor: antes de mudar, sentem os dois e dividam as frentes, não as tarefas soltas. Saúde é de quem. Escola é de quem. Burocracia é de quem. E quem cuida de uma frente cuida de verdade, pesquisa e decide, não só executa o que o outro mandou. E marca uma conversa curta, uma vez por semana, só sobre a logística da casa. Parece burocrático demais pra casamento, e é justamente por parecer que quase todo mundo pula e depois briga.",
+      "✅ Essa é uma das conversas que mais se repete entre as mulheres da WiseHub, porque o padrão é o mesmo em todo país que a gente acompanha. Ouvir de quem já está dois anos na frente como resolveu a divisão em casa poupa meses de desgaste, e você não precisa descobrir isso sozinha. Uma coisa eu preciso te falar com o coração: quando o cansaço vira mágoa acumulada, isso é conversa pra um profissional, não pra grupo. A gente troca experiência, não faz terapia de casal. Salva esse vídeo e marca a pessoa que vai com você, façam essa conversa antes de embarcar. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: A divisão de tarefas que ninguém combina é o que mais desgasta casal recém-chegado. Combina antes de embarcar. Salva e marca quem vai com você. #MudarDePais #VidaDeImigrante #MulheresQueMigram #OrigemNaoETeto #WiseHub"
     ],
-    "palavras": 454
+    "palavras": 375
   },
   {
     "id": "2026-07-18-04",
@@ -545,7 +606,7 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "dupla",
     "titulo": "A Espanha encurtou o caminho da regularização, e mudou a conta do tempo",
     "paras": [
-      "**[Marcela]** Oi meus amores, meu nome é Marcela Nogueira, e eu estou muito feliz de ter você aqui comigo. Se você sonha com a Espanha, presta atenção nessa.",
+      "**[Marcela]** Oi meus amores, meu nome é Marcela, e eu estou muito feliz de ter você aqui comigo. Se você sonha com a Espanha, presta atenção nessa.",
       "**[Lucas]** Pessoal, hoje eu não vim com achismo, vim com lei na mão. E a Espanha acabou de encurtar um caminho que era longo demais.",
       "**[Marcela]** Muita gente vai pra Espanha e vive anos ali, trabalhando, construindo vida, esperando poder se regularizar. E esse tempo de espera acabou de diminuir.",
       "**[Lucas]** O fato: o novo Regulamento de Estrangeiros, o Real Decreto 1155/2024, entrou em vigor em maio de 2025. Ele mexeu no arraigo, que é o caminho de quem já está lá pra conseguir a residência.",
@@ -557,7 +618,7 @@ export const ROTEIROS: Roteiro[] = [
       "**[Lucas]** Se a Espanha está no seu radar, começa contando o seu tempo de vínculo com o país. É a peça central. É isso, pessoal. Número na mesa, e a decisão fica com você.",
       "**[Marcela]** A WiseHub está esperando por você. E não se esqueça: os seus sonhos merecem ser realizados."
     ],
-    "palavras": 348
+    "palavras": 347
   },
   {
     "id": "2026-07-18-03",
@@ -589,7 +650,7 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "dupla",
     "titulo": "O Canadá acabou de devolver a cidadania pra quem tinha perdido",
     "paras": [
-      "**[Marcela]** Oi meus amores, meu nome é Marcela Nogueira, e eu estou muito feliz de ter você aqui comigo. Essa aqui é uma notícia boa, dessas de arrepiar.",
+      "**[Marcela]** Oi meus amores, meu nome é Marcela, e eu estou muito feliz de ter você aqui comigo. Essa aqui é uma notícia boa, dessas de arrepiar.",
       "**[Lucas]** Pessoal, hoje eu não vim com achismo, vim com lei na mão. E dessa vez a lei abriu porta, em vez de fechar.",
       "**[Marcela]** O Canadá acabou de devolver a cidadania pra um monte de gente que tinha perdido por um detalhe da lei antiga. São os que chamam lá de canadenses perdidos.",
       "**[Lucas]** Os fatos. Em 15 de dezembro de 2025 entrou em vigor o Bill C-3, que mexeu na Lei da Cidadania. Ele derrubou o chamado limite de primeira geração, uma regra de 2009 que cortava a cidadania de quem nascia fora a partir da segunda geração.",
@@ -601,7 +662,7 @@ export const ROTEIROS: Roteiro[] = [
       "**[Lucas]** Confere a sua linha de descendência e a data do seu nascimento. É por aí que começa. É isso, pessoal. Número na mesa, e a decisão fica com você.",
       "**[Marcela]** A WiseHub está esperando por você. E não se esqueça: os seus sonhos merecem ser realizados."
     ],
-    "palavras": 402
+    "palavras": 401
   },
   {
     "id": "2026-07-18-02",
@@ -637,7 +698,7 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "dupla",
     "titulo": "A cidadania italiana mudou em 2025, e muita família ainda planeja pela regra velha",
     "paras": [
-      "**[Marcela]** Oi meus amores, meu nome é Marcela Nogueira, e eu estou muito feliz de ter você aqui comigo. E hoje eu não vim sozinha.",
+      "**[Marcela]** Oi meus amores, meu nome é Marcela, e eu estou muito feliz de ter você aqui comigo. E hoje eu não vim sozinha.",
       "**[Lucas]** Pessoal, hoje eu não vim com achismo, vim com lei na mão. E o assunto é sério pra quem tem sangue italiano na família.",
       "**[Marcela]** A Itália mudou a regra da cidadania por descendência em 2025. Isso mexe com o sonho de muita gente que tem uma bisavó, um bisavô que veio de lá.",
       "**[Lucas]** Vamos aos fatos, sem drama. Em 28 de março de 2025 saiu o decreto que virou a Lei 74 de 2025, confirmada em maio. Ela colocou um limite de gerações que antes não existia.",
@@ -651,7 +712,7 @@ export const ROTEIROS: Roteiro[] = [
       "**[Lucas]** Antes de gastar sola de sapato, confere em qual geração você está. É a primeira conta. É isso, pessoal. Número na mesa, e a decisão fica com você.",
       "**[Marcela]** A WiseHub está esperando por você. E não se esqueça: os seus sonhos merecem ser realizados."
     ],
-    "palavras": 389
+    "palavras": 388
   },
   {
     "id": "2026-07-18-01",
@@ -686,13 +747,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "A professora ainda não entende seu filho",
     "paras": [
-      "Tem uma cena que aperta o coração de qualquer mãe: você deixa seu filho na escola nova sabendo que ele vai passar horas sem conseguir dizer direito o que sente.",
-      "Ele vai querer água e não vai saber pedir. Vai se machucar e não vai saber explicar onde dói. Vai ouvir uma piada e rir depois de todo mundo, ou não rir.",
-      "Essa fase é real, é desconfortável, e ela é mais curta do que parece de dentro. Criança pega língua em contexto, e escola é contexto o dia inteiro.",
-      "O que ajuda é combinar com a escola antes: como eles avisam se algo acontecer, se existe apoio de língua e quem é a pessoa de referência dele nos primeiros meses.",
-      "Na WiseHub tem mãe que já viveu esse começo em cada um dos países acompanhados e conta como foi na prática. Como funciona apoio escolar em cada lugar você confirma na própria escola e nos canais oficiais, que é onde a resposta do seu caso mora."
+      "🎣 Gancho: Tem uma cena que aperta o meu coração de mãe: você deixa seu filho na escola nova sabendo que ele vai passar horas sem conseguir dizer o que sente.",
+      "🎬 Oi, meus amores, Marcela aqui. Ele vai querer água e não vai saber pedir, vai se machucar e não vai saber explicar onde dói. Eu sei o tamanho desse aperto. Mas escuta de mãe: essa fase é mais curta do que parece de dentro, porque criança pega língua no contexto, e escola é contexto o dia inteiro. O que ajuda é combinar com a escola antes: como eles te avisam se acontecer algo, se existe apoio de língua e quem é a pessoa de referência dele nos primeiros meses. Na WiseHub tem mãe que já viveu esse começo nos países que a comunidade acompanha e conta como foi na prática. Agora, como funciona o apoio escolar em cada lugar, você confirma na própria escola e nos canais oficiais, que é onde mora a resposta do seu caso.",
+      "✅ Se seu filho está nessa fase, comenta ESCOLA aqui embaixo que eu quero te acalmar o coração. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: A fase do silêncio na escola nova é real, e é mais curta do que parece de dentro. Comenta ESCOLA. #FilhosNoExterior #MaeLeoa #EscolaNova #MudarDePais #WiseHub"
     ],
-    "palavras": 167
+    "palavras": 224
   },
   {
     "id": "2026-07-17-07",
@@ -705,13 +765,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "O aniversário que você organiza sozinha",
     "paras": [
-      "O primeiro aniversário do seu filho em outro país tem uma cena que ninguém fotografa: você fazendo tudo sozinha.",
-      "Não tem sua mãe pra ajudar com a comida. Não tem sua irmã pra segurar o bolo. Não tem aquele grupo que aparecia uma hora antes pra montar mesa. E não é que faltou gente. É que a sua gente ainda não existe ali.",
-      "Isso bate mais forte do que a gente imagina, porque festa de criança é feita de rede, e a rede é justamente o que a mudança desmonta.",
-      "Duas coisas ajudam. A primeira é aceitar que a primeira festa vai ser menor, e menor não é pior. A segunda é convidar quem você mal conhece, mesmo com vergonha. É assim que rede começa, com um convite feito antes de existir intimidade.",
-      "Na WiseHub tem mães que passaram por esse primeiro aniversário e contam como foi. Não resolve saudade, mas ajuda saber que a próxima festa costuma ter mais gente."
+      "🎣 Gancho: O primeiro aniversário do seu filho em outro país tem uma cena que ninguém fotografa: você fazendo tudo sozinha.",
+      "🎬 Oi, meus amores, Marcela aqui. Não tem a sua mãe pra ajudar na comida, não tem a sua irmã pra segurar o bolo, e não é que faltou gente, é que a sua gente ainda não existe ali. Isso bate mais forte do que parece, porque festa de criança é feita de rede, e a rede é justamente o que a mudança desmonta. Mas escuta de mãe: a primeira festa vai ser menor, e menor não é pior. E convida quem você mal conhece, mesmo morrendo de vergonha, porque é assim que rede começa, com um convite feito antes de existir intimidade. Na WiseHub tem mãe que já passou por esse primeiro aniversário longe e conta que a próxima festa costuma ter bem mais gente.",
+      "✅ Marca aqui embaixo uma mãe que vai viver esse primeiro aniversário longe, pra ela não achar que está sozinha. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: A primeira festa longe é menor, e menor não é pior. Marca uma mãe que precisa ler isso. #MaeNoExterior #MaeLeoa #MudarDePais #RedeDeApoio #WiseHub"
     ],
-    "palavras": 161
+    "palavras": 202
   },
   {
     "id": "2026-07-17-06",
@@ -724,16 +783,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "Quando alguém adoece e você está longe",
     "paras": [
-      "Tem um medo que quase toda pessoa que mora fora carrega em silêncio, e ele costuma aparecer de madrugada. É o medo do telefonema. Aquele em que alguém da família adoece e você está a um oceano de distância.",
-      "Quero falar disso com cuidado, porque é o tipo de assunto que a gente evita justamente por doer. Só que evitar não protege ninguém, e chegar despreparada nesse momento torna tudo mais difícil do que precisa ser.",
-      "A primeira coisa que costuma pegar é a sensação de inutilidade. Você está longe, não pode levar ao médico, não pode dormir no hospital, não pode resolver. E aí vem uma culpa pesada, que sussurra que você escolheu estar longe. Eu queria ser bem clara aqui: cuidar não é só presença física. Organizar informação, coordenar quem vai a qual consulta, entender o que o médico disse e traduzir isso pra família, ajudar financeiramente quando é possível, isso tudo é cuidado, e muitas vezes é o cuidado que a família mais precisa naquele momento.",
-      "A segunda coisa é prática, e é sobre a viagem. Quando a notícia chega, todo mundo quer ir imediatamente, e nem sempre imediatamente é o melhor momento. Às vezes o momento em que a família mais vai precisar de você é semanas depois, quando os primeiros socorros passaram e todo mundo já está exausto. Ir de cabeça quente pode gastar o recurso e o tempo que fariam mais diferença adiante. Isso não é frieza, é conseguir estar presente quando presença importa mais.",
-      "E tem a parte que ninguém quer olhar antes, mas que muda tudo. Saber, com calma e antecedência, qual é a sua situação de deslocamento. Se o seu documento permite sair e voltar sem risco, se há prazo de processo em andamento que uma viagem atrapalha, quanto tempo você pode ficar fora sem afetar sua residência. Muita gente descobre isso na pior hora possível, com passagem na mão.",
-      "Essas respostas dependem do seu status em cada país e não são iguais pra todo mundo. Na WiseHub dá pra entender como isso funciona nos nove países acompanhados e ouvir de quem já teve que viajar às pressas o que aprendeu, inclusive sobre o que deixar organizado antes de precisar. O que vale pro seu caso específico, principalmente se houver processo em andamento, quem responde é advogado, sempre.",
-      "E quando a dor for maior que o que a família consegue segurar sozinha, isso é hora de profissional de saúde, não de grupo. A gente caminha junto, não substitui cuidado clínico.",
-      "Deixe isso organizado enquanto está tudo bem. Não é atrair coisa ruim, é o contrário. É garantir que, se o telefonema vier, você vá gastar sua energia com quem você ama e não com burocracia que podia estar resolvida."
+      "🎣 Gancho: Tem um medo que eu carrego calada, e talvez você também: o medo do telefonema de madrugada. Aquele em que alguém da sua família adoece e você está a um oceano de distância.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar disso com cuidado, porque é o assunto que a gente foge justamente por doer. A primeira coisa que pega é a culpa, aquela que sussurra que você escolheu estar longe. Então escuta de mãe: cuidar não é só presença física. Organizar informação, entender o que o médico disse, ajudar quem está lá, isso é cuidado, e muitas vezes é o cuidado que a família mais precisa. A segunda coisa é a viagem, porque nem sempre correr no primeiro susto é a melhor hora, às vezes você faz mais falta semanas depois, quando todo mundo já está exausto. E tem a parte que ninguém quer olhar antes: saber com calma como está a sua situação pra sair e voltar, e se um processo em andamento pode ser atrapalhado por uma viagem. Na WiseHub você entende como isso funciona nos países que a comunidade acompanha e ouve de quem já viajou às pressas o que deixou organizado antes. Só que o que vale pro seu caso, ainda mais com processo em andamento, quem responde é advogado, sempre. E quando a dor for maior do que a família aguenta sozinha, isso é hora de profissional de saúde, não de grupo.",
+      "✅ Deixa isso organizado agora, enquanto está tudo bem, não é atrair coisa ruim, é o contrário. Comenta CUIDAR aqui embaixo que eu te mostro por onde começar, e me segue pra você não descobrir essas coisas na pior hora. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: O medo do telefonema é real, mas dá pra se preparar com cuidado antes que ele venha. Comenta CUIDAR. #MorarFora #MaeLeoa #Cuidado #FamiliaLonge #WiseHub"
     ],
-    "palavras": 458
+    "palavras": 318
   },
   {
     "id": "2026-07-17-05",
@@ -746,16 +801,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "A casa que você monta duas vezes",
     "paras": [
-      "Ninguém avisa que mudar de país é montar uma casa duas vezes. A primeira é a que você desmonta, e a segunda é a que você levanta do zero, muitas vezes sozinha, num lugar onde você ainda não sabe onde se compra um martelo.",
-      "A parte de desmontar é a que dói de um jeito que surpreende. Você abre armários que estavam fechados há anos e cada objeto vira uma decisão. Isso vai, isso fica, isso eu dou. Só que não é sobre objeto, e é por isso que cansa tanto. É a roupinha que os dois filhos usaram. É a louça da sua mãe. É o desenho pregado na geladeira. Cada escolha dessas custa um pedacinho, e você faz dezenas por dia, enquanto ainda resolve documento, escola e passagem.",
-      "Depois vem a segunda casa, e ela começa vazia num sentido que vai além dos móveis. Você não sabe qual mercado tem o que você precisa. Não conhece a farmácia. Não tem aquela vizinha pra quem se pede socorro. Cada coisa banal vira uma pequena expedição, e você faz todas ao mesmo tempo, geralmente enquanto alguém da família já entrou na rotina de trabalho ou de escola.",
-      "Tem uma coisa que ajuda de verdade nessa fase, e ela não é organização. É baixar a régua. A casa não precisa estar pronta em um mês. Ela vai levar tempo, e tudo bem que leve. O que precisa funcionar rápido é o essencial, cama, cozinha, banho, rotina das crianças. O resto pode se acomodar devagar, e vai se acomodar melhor quando você já conhecer o lugar.",
-      "E tem o lado prático, que é onde a informação certa poupa semanas. Como funciona aluguel naquele país, o que se costuma exigir de garantia, o que já vem mobiliado, o que é normal ou absurdo no preço da região, como se resolve internet, conta de luz, transporte. Essas respostas mudam de país pra país e não estão em lugar nenhum de forma organizada, elas estão na cabeça de quem já fez.",
-      "É esse tipo de coisa que a comunidade da WiseHub tem mastigado, nos nove países acompanhados de perto, com gente que montou a segunda casa e lembra exatamente onde perdeu tempo. Dá pra chegar sabendo o que perguntar, em vez de descobrir tudo no susto e na pressa.",
-      "Uma coisa eu preciso dizer com honestidade. Nenhuma comunidade resolve contrato de aluguel, exigência de fiador ou questão legal de moradia. Isso depende do país, do seu caso, e às vezes de um profissional. O que a gente faz é encurtar a curva do que é prático e humano.",
-      "Se você está no meio da primeira casa, chorando em cima de uma caixa, saiba que isso é normal e que passa. E se você já está na segunda, com metade das coisas ainda no chão, também. Casa não se faz num mês. Se faz morando."
+      "🎣 Gancho: Ninguém te avisa, mas mudar de país é montar uma casa duas vezes. A primeira você desmonta chorando em cima de uma caixa. A segunda você levanta do zero, sozinha, num lugar onde nem sabe onde se compra um martelo.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar da casa que a gente monta duas vezes. Desmontar dói porque cada objeto vira uma decisão, e não é sobre objeto: é a roupinha que os dois filhos usaram, é a louça da sua mãe. Depois a segunda casa começa vazia num sentido que vai além de móvel, você não conhece o mercado, a farmácia, a vizinha pra pedir socorro. O que ajuda de verdade não é organização, é baixar a régua: deixa pronto só o essencial, cama, cozinha, banho, rotina das crianças, que o resto se acomoda morando. Na WiseHub você acha quem já levantou essa segunda casa nos países que a comunidade acompanha de perto e lembra exatamente onde perdeu tempo, então você chega sabendo o que perguntar. Agora, com o coração na mão: contrato de aluguel, fiador, questão legal de moradia, isso depende do seu caso e às vezes de um profissional, não é comunidade que resolve.",
+      "✅ Se você está no meio da primeira casa, chorando em cima de uma caixa, comenta CASA aqui embaixo que eu quero saber de você, e me segue pra não montar essa casa sozinha. Origem não é teto, e casa não se faz num mês, se faz morando. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Mudar de país é montar uma casa duas vezes, e ninguém te conta o peso da primeira. Comenta CASA que eu te respondo. #MudarDePais #MaeLeoa #OrigemNaoETeto #VidaLaFora #WiseHub"
     ],
-    "palavras": 479
+    "palavras": 290
   },
   {
     "id": "2026-07-17-04",
@@ -848,14 +899,14 @@ export const ROTEIROS: Roteiro[] = [
     "canal": "Instagram",
     "formato": "curto",
     "tipo": "roteiro",
-    "titulo": "A primeira vez que ela dirigiu sozinha",
+    "titulo": "A primeira vez que você dirige sozinha lá fora",
     "paras": [
-      "Tem um momento que não aparece em nenhuma lista de como foi se adaptar, e que muita mulher lembra com clareza: a primeira vez que ela dirigiu sozinha no país novo. Sem o marido no banco do carona indicando o caminho, sem aplicativo aberto o tempo todo. Só ela, o carro, e uma rua que já não era mais estranha.",
-      "Não parece muito, de fora. De dentro, é a primeira prova de que ela consegue se mover sozinha naquele lugar. Que aquele mapa que só existia na cabeça de outra pessoa já existe também na dela.",
-      "Adaptação não chega de uma vez, num anúncio grande. Ela chega em momentos pequenos como esse, que a gente quase deixa passar sem comemorar.",
-      "Na WiseHub, mulheres trocam esses momentos pequenos também, não só os grandes marcos. Às vezes é isso que mais ajuda: saber que a primeira vez sozinha ao volante já foi comemorada por outra, antes."
+      "🎣 Gancho: Sabe qual foi o dia que eu soube que uma mulher tinha vencido lá fora? Não foi a cidadania. Foi a primeira vez que ela dirigiu sozinha na cidade nova.",
+      "🎬 Oi, meus amores, Marcela aqui. Sem o marido do lado indicando o caminho, sem o aplicativo aberto o tempo todo. Só ela, o carro, e uma rua que já não era estranha. Parece pouco de fora. De dentro, é a prova de que ela consegue se mover sozinha naquele lugar. Adaptação não chega num anúncio grande, meu amor. Ela chega nesses momentos pequenos, que a gente quase deixa passar sem comemorar.",
+      "✅ Qual foi a sua \"primeira vez sozinha\" lá fora? Comenta aqui embaixo, que eu quero comemorar com você. E se você ainda vai viver isso, na WiseHub tem mulheres que já passaram e comemoram junto, pra você não fazer sozinha. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Adaptação chega nos momentos pequenos. Qual foi a sua primeira vez sozinha lá fora? Comenta. #MãeLeoa #PrimeiraVezSozinha #VidaLáFora #OrigemNãoÉTeto #WiseHub"
     ],
-    "palavras": 154
+    "palavras": 177
   },
   {
     "id": "2026-07-16-07",
@@ -868,12 +919,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "A gente volta?",
     "paras": [
-      "Tem uma pergunta que criança pequena faz sem aviso, no meio do jantar, no banho, no carro. Mãe, a gente volta?",
-      "Ela não está pedindo uma data. Está testando se o chão embaixo dela é firme. Criança pequena não entende fronteira nem visto, entende se a rotina dela é previsível e se as pessoas que ama estão por perto.",
-      "Responder com uma data que você não tem certeza é pior do que não responder. O que acalma de verdade é o que se repete: a mesma hora de dormir, o mesmo boneco na cama, o mesmo colo depois de um dia ruim. É isso que vira chão pra ela, não o endereço.",
-      "Na WiseHub, mães trocam justamente isso: como responder essa pergunta sem prometer o que não sabem, e como construir previsibilidade num lugar novo. Ninguém aqui garante como o seu filho vai reagir. Cada criança processa mudança no próprio tempo, e isso, às vezes, também é hora de conversar com um profissional."
+      "🎣 Gancho: Seu filho pequeno já te perguntou, do nada, \"mãe, a gente volta?\". Ele não está pedindo uma data.",
+      "🎬 Oi, meus amores, Marcela aqui. Seu filho ainda não entende fronteira nem visto. Ele pergunta isso pra testar se o chão embaixo dele é firme. Responder com uma data que você não tem é pior do que não responder. O que acalma de verdade é o que se repete: a mesma hora de dormir, o mesmo bonequinho na cama, o mesmo colo depois do dia ruim. É isso que vira chão pra ele, não o endereço.",
+      "✅ Salva esse vídeo pra lembrar no dia que a pergunta vier. Na WiseHub as mães trocam justamente isso, como dar firmeza sem prometer o que não sabem. Cada criança tem o seu tempo, e às vezes é hora de conversar com um profissional também. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: \"Mãe, a gente volta?\" não é sobre data. É sobre chão. Salva pra lembrar. #MãeLeoa #FilhosNaMudança #MudarDePaís #Maternidade #WiseHub"
     ],
-    "palavras": 163
+    "palavras": 173
   },
   {
     "id": "2026-07-16-06",
@@ -886,15 +937,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "Voltar a trabalhar depois de anos em casa, num país que não é o seu",
     "paras": [
-      "Tem uma pergunta que aperta o peito de muita mulher depois que os filhos crescem um pouco e a rotina de casa afrouxa: e agora, como eu volto pro mercado, se nem sei mais como ele funciona, e ainda por cima nesse país que não é o meu?",
-      "O medo tem camada dupla. Uma é a pausa em si: anos fora do mercado formal mexem com a confiança de qualquer pessoa, em qualquer país. A outra é o lugar novo: além de voltar, ela precisa entender as regras de um mercado que nunca trabalhou, muitas vezes numa língua que ainda está treinando.",
-      "O erro mais comum nessa hora é achar que o currículo tem que explicar os anos de casa como se fossem um vazio a esconder. Não são. Administrar casa, rotina de filhos e mudança de país exige organização, resolução de problema sob pressão e gestão de múltiplas frentes ao mesmo tempo, competências que qualquer área valoriza, quando descritas do jeito certo.",
-      "O caminho de volta costuma passar por um degrau, não por um salto. Um curso curto que atualiza uma ferramenta específica. Um trabalho parcial ou voluntário que devolve rotina e referência recente. Uma conversa com quem já contrata na área dela, naquele país, pra entender o que pesa mais na hora da entrevista. Esse degrau é mais curto do que parece de longe, mas fica invisível pra quem está sozinha tentando enxergar o caminho inteiro de uma vez.",
-      "Na WiseHub tem mulheres que voltaram a trabalhar depois da pausa, em cada um dos nove países acompanhados, contando qual foi o primeiro passo real que deram, não o currículo perfeito que gostariam de ter tido. Dá pra perguntar numa live o que pesou na entrevista dela, o que ela faria diferente, por onde ela começaria se fosse hoje.",
-      "Nenhuma comunidade garante vaga nem entrevista. Currículo, direito trabalhista e revalidação de diploma, quando exigida, são conversa pra profissional da área. O que existe aqui é o mapa de quem já andou o caminho e sabe onde ele aperta.",
-      "Anos em casa não apagaram sua capacidade de trabalhar. Eles só mudaram o ponto de partida. E ponto de partida diferente não é o mesmo que não ter caminho."
+      "🎣 Gancho: Você passou anos cuidando da casa e agora acha que não sabe mais voltar pro mercado? E ainda num país que não é o seu? Fica comigo.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar de voltar a trabalhar depois de anos em casa. Eu sei o seu medo, meu amor: a pausa mexe com a confiança de qualquer uma, e ainda tem a língua que você está treinando e as regras de um mercado novo. Mas escuta. Cuidar de casa, de filho e de uma mudança de país é organização, é resolver problema sob pressão, é gerir mil frentes ao mesmo tempo. Isso não é buraco no currículo. E o caminho de volta costuma ser um degrau, não um salto.",
+      "✅ Quer dar esse primeiro passo? Me chama no direct, que eu te aponto por onde começar. Na WiseHub tem mulheres que voltaram a trabalhar depois da pausa, em vários países, contando o primeiro passo real que deram, não o currículo perfeito que gostariam de ter tido. Revalidação de diploma e direito trabalhista são conversa de profissional da área, combinado? Origem não é teto, e pausa não é ponto final. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Anos em casa não apagaram sua capacidade de trabalhar. Só mudaram o ponto de partida. Me chama no direct. #MãeLeoa #VoltarAoMercado #OrigemNãoÉTeto #MulheresQueMigram #WiseHub"
     ],
-    "palavras": 368
+    "palavras": 231
   },
   {
     "id": "2026-07-16-05",
@@ -905,17 +953,14 @@ export const ROTEIROS: Roteiro[] = [
     "canal": "YouTube",
     "formato": "longo",
     "tipo": "roteiro",
-    "titulo": "O trabalho que ninguém vê ela fazendo",
+    "titulo": "O trabalho que ninguém vê você fazer",
     "paras": [
-      "Quando a família muda de país, alguém tem que descobrir a escola, marcar a consulta médica, entender o transporte, achar o mercado que vende o tempero certo, aprender o sistema de coleta de lixo, fazer amizade com a vizinha pra ter alguém a quem recorrer numa emergência. Na maioria das famílias, esse alguém é a mulher.",
-      "Esse trabalho não aparece em nenhuma conversa sobre como foi a mudança. Ele não tem linha no currículo, não gera contrato, não sai em post de conquista. E é ele que decide se a família cria raiz de verdade ou fica flutuando no país novo, sem chão.",
-      "Tem um nome pra isso: infraestrutura social. É o conjunto de pequenas coisas que fazem um lugar virar casa, e alguém precisa construir do zero, sozinha, ao mesmo tempo em que tenta lidar com a própria adaptação. Enquanto o marido entra no primeiro dia de trabalho, ela está montando o resto da vida, sem folga combinada com ninguém.",
-      "Quando essa mulher diz que está cansada, a resposta mais comum que ela escuta é que ela nem trabalha ainda. Essa frase erra o alvo inteiro. Ela está trabalhando, só que num trabalho que não tem contracheque nem reconhecimento, e que é, sem exagero, o que sustenta a adaptação de todo mundo em casa.",
-      "Esse peso fica mais leve quando divide de forma explícita, não perguntando se ela precisa de ajuda, pergunta que costuma virar não automático, mas combinando tarefa por tarefa antes da mudança acontecer. E fica mais leve também quando ela encontra outras mulheres que já fizeram exatamente essa lista, no mesmo país, e sabem quais atalhos existem.",
-      "Na WiseHub essa troca acontece entre mulheres que já resolveram escola, saúde e rotina em cada um dos nove países acompanhados, e contam o caminho mais curto que aprenderam na marra. Ninguém aqui resolve a burocracia da sua família à distância, isso depende de cada caso e muitas vezes de advogado, mas dá pra chegar sabendo o que perguntar, em vez de descobrir tudo sozinha, no susto.",
-      "Se você é essa mulher, o trabalho que você está fazendo tem nome, e ele sustenta a casa tanto quanto qualquer salário. Ele só ainda não tem o reconhecimento que merece."
+      "🎣 Gancho: Se você mudou de país e passou a semana inteira resolvendo escola, médico e mercado, e ninguém viu, esse vídeo é pra você.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar do trabalho que ninguém vê você fazer. Quando a família muda, alguém acha a escola, marca a consulta, entende o transporte, faz amizade com a vizinha pra ter a quem recorrer numa emergência. Na maioria das casas, esse alguém é você. E aí você escuta que \"nem trabalha ainda\". Meu amor, você trabalha sim. Esse trabalho não tem contracheque, mas é ele que faz o lugar novo virar casa. Sem ele, a família fica flutuando, sem chão.",
+      "✅ Se isso é você, comenta CUIDAR aqui embaixo, que eu quero te enxergar. Na WiseHub você encontra outras mulheres que já montaram essa vida do zero em vários países e sabem o atalho, pra você chegar sabendo o que perguntar em vez de descobrir tudo sozinha, no susto. A burocracia de cada caso é conversa de advogado, viu? Mas o mapa de quem já andou, esse a gente divide. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: O trabalho invisível de criar raiz tem nome, e segura a casa inteira. Se é você, comenta CUIDAR. #MãeLeoa #OrigemNãoÉTeto #MudarDePaís #VidaLáFora #WiseHub"
     ],
-    "palavras": 369
+    "palavras": 217
   },
   {
     "id": "2026-07-16-04",
@@ -1007,13 +1052,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "Um dia você chora no mercado",
     "paras": [
-      "Ninguém te prepara pra isso, e acontece cedo ou tarde.",
-      "Você está no supermercado de um país novo, empurrando o carrinho, tudo bem. Aí você vê alguma coisa. Um pacote parecido com o que a sua mãe comprava. Ou o cheiro errado no corredor certo. E do nada os olhos enchem, no meio do arroz, sem aviso.",
-      "A saudade não chega nas datas grandes, onde a gente espera. Ela chega assim, numa quarta-feira qualquer, num detalhe minúsculo que só significa alguma coisa pra você.",
-      "Chorar ali é o que raiz faz quando encosta em alguma coisa conhecida.",
-      "Aqui dentro a gente fala disso também, com gente que já chorou no mercado e continuou. Se a saudade virar peso que não passa, isso é conversa pra profissional, não pra grupo. Pro resto, tem quem entenda por que era o arroz."
+      "🎣 Gancho: Um dia você vai chorar no meio do supermercado, num país novo, sem aviso nenhum. E ninguém te prepara pra isso.",
+      "🎬 Oi, meus amores, Marcela aqui. Você está empurrando o carrinho, tudo bem, e aí vê alguma coisa: um pacote parecido com o que a sua mãe comprava, ou um cheiro no corredor errado. E do nada os olhos enchem, no meio do arroz. A saudade não chega nas datas grandes, onde a gente espera. Ela chega assim, numa quarta-feira qualquer, num detalhe minúsculo. Chorar ali não é fraqueza, meu amor. É a sua raiz encostando em alguma coisa conhecida.",
+      "✅ Se você já chorou num corredor de mercado longe de casa, comenta CUIDAR que eu quero saber que era o seu arroz. Aqui dentro tem mulher que já passou por isso e continuou. E cuidado: se a saudade virar um peso que não passa, isso é conversa pra profissional, não pra grupo; pro resto, tem quem entenda por que era o arroz. Origem não é teto, e sentir falta de casa não te faz voltar atrás. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Um dia a saudade te encontra no corredor do arroz. Chorar ali é raiz, não fraqueza. Comenta CUIDAR se já aconteceu com você. 💛 #Saudade #VidaFora #MãeLeoa #OrigemNãoÉTeto #WiseHub"
     ],
-    "palavras": 139
+    "palavras": 221
   },
   {
     "id": "2026-07-15-07",
@@ -1026,13 +1070,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "A foto da amiga que ficou",
     "paras": [
-      "Você muda de país, e um dia abre o celular e vê a foto. O aniversário, a mesa cheia, todo mundo que você ama junto. E você não está.",
-      "Aí vem uma pergunta feia, dessas que a gente não fala em voz alta: será que valeu a pena?",
-      "Eu queria te dizer uma coisa sobre essa pergunta. Ela sempre chega num dia ruim, nunca num dia bom. Ela põe a sua terça-feira cansada contra a melhor noite da vida de outra pessoa, editada e escolhida. Chamar aquilo de comparação é generoso demais. Aquilo é uma emboscada.",
-      "A saudade é real e merece respeito. Só não deixe ela julgar a sua decisão inteira sozinha, num dia em que você estava no fim das forças.",
-      "Aqui dentro tem gente que já sentiu isso e continuou. Quando essa pergunta parar de ir embora, ela vira assunto de terapeuta, e a gente não faz esse papel. Enquanto ela só passa de vez em quando, você tem com quem dividir."
+      "🎣 Gancho: Você muda de país, abre o celular e vê a foto: o aniversário, a mesa cheia, todo mundo que você ama junto. E você não está.",
+      "🎬 Aí vem aquela pergunta feia, dessas que a gente não fala em voz alta: será que valeu a pena? Oi, meus amores, Marcela aqui. E eu quero te dizer uma coisa sobre essa pergunta. Ela sempre chega num dia ruim, nunca num dia bom. Ela põe a sua terça-feira cansada contra a melhor noite da vida de outra pessoa, editada e escolhida. Isso não é comparação, meu amor. Isso é uma emboscada.",
+      "✅ A saudade é real e merece respeito, só não deixa ela julgar sozinha a sua decisão inteira num dia em que você estava sem forças. Marca aqui uma amiga que também mudou e precisa ouvir isso. E cuidado: se essa pergunta parar de ir embora, ela vira assunto de terapeuta, não de grupo; enquanto ela só passa de vez em quando, aqui dentro tem gente pra dividir com você. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: A foto da mesa cheia sempre chega num dia ruim. Não deixa ela julgar a sua vida inteira. Marca uma amiga que precisa ler isso. 💛 #Saudade #QuemMigra #MãeLeoa #OrigemNãoÉTeto #WiseHub"
     ],
-    "palavras": 165
+    "palavras": 214
   },
   {
     "id": "2026-07-15-06",
@@ -1045,16 +1088,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "Mudar com adolescente é outro processo",
     "paras": [
-      "Toda mãe que muda de país com filho pequeno ouve a mesma frase: criança se adapta rápido. Muitas vezes é verdade. Mas e quando o filho tem quinze?",
-      "Aí é outra história, e eu queria que mais gente falasse dela. A criança pequena vai onde a família vai, porque o mundo dela é a família. O adolescente já tem mundo próprio. Ele tem grupo, tem apelido, tem uma reputação que levou anos construindo, tem uma pessoa de quem gosta e não te contou. Ele está deixando pra trás a versão dele que só existe naquele lugar, com aquelas pessoas. Quarto se remonta. Aquilo não.",
-      "Por isso a reação costuma ser mais dura, e mais parecida com raiva do que com tristeza. E a raiva dele tem lógica. Ele não escolheu, é velho o bastante pra entender o tamanho da perda, e novo o bastante pra não ter voto. Essa combinação é cruel, e quando a mãe interpreta aquilo como ingratidão, os dois se afastam bem na hora em que mais precisavam um do outro.",
-      "Uma coisa costuma ajudar, e ela custa: dar a ele alguma coisa real pra decidir. Não a decisão de ir, que não é dele. Mas o bairro, entre dois possíveis. A escola, entre duas. Como vai ser a rotina com os amigos daqui, com horário combinado e respeitado. Quando ele participa de escolhas de verdade, ele para de ser bagagem e vira parte. Isso não apaga a dor, mas muda a posição dele dentro dela.",
-      "E tem a parte concreta, que muda de país pra país e vale saber antes. Como funciona a escola na idade dele. Se existe apoio de língua pra quem chega mais velho. Em que ano letivo ele cai, e se aquele sistema tem prova que decide caminho, e com que idade. Adolescente que chega no meio de um ciclo escolar mal escolhido perde ano, e isso ninguém avisa na hora de escolher o destino.",
-      "Essas respostas são chatas de caçar sozinha, e é uma das coisas que a comunidade já tem mastigado: como a educação funciona em cada um dos nove países, na idade que interessa pra você. Você organiza o passo a passo com calma, pergunta na live pra quem entende do sistema de lá, e sobretudo escuta mãe que já atravessou isso com um adolescente batendo porta em casa.",
-      "E quando a dor dele passar do tamanho que a família dá conta, isso é hora de profissional, não de comunidade. Nada que a gente conversa aqui ocupa o lugar de um psicólogo, e ninguém aqui vai te dizer que a adaptação dele vai ser tranquila, porque a gente não sabe.",
-      "Se o seu filho está com raiva de você por causa dessa mudança, olha essa raiva de perto. Por baixo dela tem luto, e ele ainda não tem palavra pra isso. Segura a mão dele mesmo quando ela estiver fechada. E procura quem já segurou uma dessas."
+      "🎣 Gancho: Todo mundo repete que \"criança se adapta rápido\". Mas ninguém te avisa o que acontece quando o seu filho tem quinze.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar de mudar de país com um adolescente em casa, porque isso é outro processo. A criança pequena vai onde a família vai, porque o mundo dela é a família. O adolescente já tem mundo próprio: grupo, apelido, uma reputação que levou anos construindo, uma pessoa de quem ele gosta e não te contou. Ele não escolheu ir, é velho o bastante pra entender o tamanho da perda e novo o bastante pra não ter voto, e por isso a reação dele parece mais raiva do que tristeza. Uma coisa costuma ajudar: dar a ele alguma coisa real pra decidir, não a mudança em si, mas o bairro entre dois, a escola entre duas, o horário pra falar com os amigos daqui. Quando ele participa de escolha de verdade, ele para de ser bagagem e vira parte.",
+      "✅ Se você tem um adolescente batendo porta em casa por causa dessa mudança, salva esse vídeo pra reler no dia em que a raiva apertar. Na WiseHub dá pra entender como a escola costuma funcionar na idade dele em cada país e escutar mãe que já atravessou isso, pra você não escolher destino no escuro. E eu preciso ser honesta: quando a dor dele passar do tamanho que a família dá conta, isso é hora de profissional, não de comunidade. Eu não prometo que a adaptação vai ser tranquila, porque eu não sei. O que eu sei é que por baixo dessa raiva tem luto, e ele ainda não tem palavra pra isso. Segura a mão dele mesmo quando ela estiver fechada. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: \"Criança se adapta rápido.\" E o adolescente? Mudar aos quinze é outro processo. Salva esse vídeo pra reler no dia difícil. 💛 #MudançaComFilhos #Adolescentes #MãeLeoa #OrigemNãoÉTeto #WiseHub"
     ],
-    "palavras": 488
+    "palavras": 331
   },
   {
     "id": "2026-07-15-05",
@@ -1067,16 +1106,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "A palavra que o formulário usa pra te chamar",
     "paras": [
-      "Tem uma palavra que aparece no processo de imigração e que machuca mais do que parece. Dependente.",
-      "É um termo técnico, frio, de formulário. O visto sai no nome de quem tem o contrato de trabalho, e quem vai junto entra como dependente. Cônjuge dependente. Filhos dependentes. Faz sentido burocrático, e ninguém escreveu aquilo pra ferir ninguém. Mas você lê e alguma coisa afunda. Porque você não depende de ninguém. Você é adulta, é competente, sustentou casa, tomou decisão difícil, e de repente está num papel que te chama de anexo.",
-      "E às vezes o papel contamina a vida. Ele chega antes de você, e vai te esperando lá. É a conta bancária que pede a assinatura dele. É o telefone da escola que liga primeiro pro nome que está no contrato. É a pergunta na roda, com toda a inocência do mundo: e você, o que faz? E você trava, porque a resposta honesta naquele mês é que você está montando uma casa num país que não conhece, com uma língua que ainda te cansa, e isso não tem nome de profissão.",
-      "Eu quero te dizer uma coisa com clareza. Aquele campo do formulário responde uma pergunta só: quem assinou o contrato de trabalho. É toda a informação que ele carrega. Quem você é, e quem você vai ser lá, fica fora do alcance daquela linha.",
-      "Agora, o lado prático de virar esse jogo começa antes de embarcar. A regra que diz se você pode trabalhar, e a partir de quando, está escrita de um jeito diferente em cada país. Muita mulher descobre isso tarde, quando já está lá. Junto com ela vem a pergunta da revalidação: se a sua profissão exige, quanto tempo leva, e o que dá pra adiantar daqui.",
-      "Essas duas respostas mudam o seu primeiro ano inteiro, e elas existem. Na WiseHub elas ficam à mão: o que o visto de acompanhante autoriza em cada um dos nove países, e o que o mercado de lá costuma pedir de quem vem de fora. Dá pra levantar isso com calma ainda daqui, perguntar numa live pra quem lida com esses processos todo dia, e chegar em parceiro verificado com condição especial se virar caso jurídico. Do lado, mulheres que já leram a própria palavra \"dependente\" num formulário e construíram vida própria depois dela.",
-      "Preciso ser exata numa coisa. Nenhum conteúdo aqui muda o que está escrito no seu visto, nem antecipa em um dia a data em que ele te libera pra trabalhar. Quem lê o seu caso e responde por ele é advogado. A comunidade te ajuda a saber o que perguntar, e caminha junto enquanto a resposta não chega.",
-      "Papel é papel. Do lado de cá tem mulher que já leu essa palavra no próprio formulário e construiu vida inteira depois dela. A sua vaga nessa conversa está aberta."
+      "🎣 Gancho: Tem uma palavra nesse processo de imigração que faz mulher adulta se sentir pequena, e ela vem escrita bem no seu nome: dependente.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar dessa palavra, porque ela machuca mais do que parece. É um termo frio de formulário: o visto sai no nome de quem assinou o contrato, e você entra como \"dependente\". Aí você lê aquilo e alguma coisa afunda, porque você não depende de ninguém. Você já sustentou casa, já tomou decisão difícil, e de repente está num papel que te chama de anexo. Então escuta com clareza: aquele campo responde uma pergunta só, quem assinou o contrato de trabalho. Quem você é, e quem você vai ser lá, isso não cabe naquela linha. E o lado prático de virar esse jogo começa antes de embarcar: a regra que diz se você pode trabalhar, e a partir de quando, muda de país pra país, e muita mulher descobre isso tarde demais.",
+      "✅ Se essa palavra já te apertou, comenta CUIDAR aqui embaixo que eu quero saber de você. Na WiseHub você não precisa atravessar isso sozinha: dá pra entender o que o visto de acompanhante costuma permitir em cada país e chegar perto de quem já construiu vida própria depois de ler \"dependente\" no próprio formulário. Só que eu faço questão de ser honesta com você: eu não mudo o que está escrito no seu visto, e quem lê o seu caso é advogado. A comunidade caminha junto enquanto a resposta não chega. Papel é papel, meu amor. Origem não é teto. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: \"Dependente\" é o que o formulário te chama. Não é quem você é. Comenta CUIDAR se essa palavra já te apertou. 💛 #ImigraçãoComCuidado #OrigemNãoÉTeto #MulheresQueMigram #MãeLeoa #WiseHub"
     ],
-    "palavras": 475
+    "palavras": 305
   },
   {
     "id": "2026-07-15-04",
@@ -1169,12 +1204,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "Antes do visto, a conversa que trava dentro de casa",
     "paras": [
-      "Tem um casal em que um quer muito ir e o outro sorri e muda de assunto. Os dois acham que estão sendo generosos. Um não quer pressionar, o outro não quer ser o motivo de o sonho não acontecer. E a conversa que decide a vida dos dois vai ficando para depois.",
-      "Só que visto não resolve casamento. Documento aprovado com um dos dois em dúvida põe uma família inteira do outro lado do mundo com uma conversa por terminar.",
-      "O que costuma destravar é sair do sim ou não e ir para o concreto. Como seria a nossa rotina lá. O que cada um perde, o que cada um ganha. O que precisa ser verdade para os dois quererem.",
-      "É esse tipo de conversa que acontece aqui dentro, com casais que já passaram por ela. A gente não promete visto nem resultado, e nada disso substitui um profissional quando o caso pedir. Só ajuda vocês dois a chegarem na mesma página antes do carimbo."
+      "🎣 Gancho: Visto não resolve casamento. E é aí que muita família trava sem perceber.",
+      "🎬 Oi, meus amores, Marcela aqui. Talvez na sua casa um quer muito ir e o outro sorri e muda de assunto, os dois se calando achando que estão sendo generosos, e a conversa que decide a vida de vocês vai ficando pra depois. Só que documento aprovado com um de vocês em dúvida põe a família inteira do outro lado do mundo com uma conversa por terminar. O que costuma destravar é sair do sim ou não e ir pro concreto: como seria a nossa rotina lá, o que cada um perde, o que cada um ganha, o que precisa ser verdade pros dois quererem.",
+      "✅ Me chama no direct se essa conversa está travada aí na sua casa, e vem pra WiseHub, onde tem casal que já passou por isso. A gente não promete visto nem resultado, e nada disso substitui um profissional quando o caso pedir. Só ajuda vocês dois a chegarem na mesma página antes do carimbo. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: A conversa mais importante da mudança não é com o consulado. É na sua mesa. Me chama no direct. #casalquemigra #conversadecasal #mudardevida #antesdovisto #WiseHub"
     ],
-    "palavras": 166
+    "palavras": 212
   },
   {
     "id": "2026-07-14-07",
@@ -1187,12 +1222,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "A sua mãe vai aprender a te ver por uma tela",
     "paras": [
-      "Quando a gente fala em mudar de país, fala da coragem de quem vai. E quem fica?",
-      "Da sua mãe, que vai aprender a te ver por uma tela. Do seu pai, que vai contar os meses até o próximo abraço. Dos avós que vão perder o cotidiano do neto, o dente que caiu, o primeiro dia de aula, e vão sorrir e dizer que está tudo bem, porque querem o seu bem mais do que querem a própria companhia.",
-      "Se você sente culpa disso, é porque você ama. Culpa e amor andam bem juntos nessa hora.",
-      "E dá para cuidar desse laço com plano, com rotina, com presença combinada, do mesmo jeito que a gente cuida de documento e de custo. Aqui dentro a gente conversa sobre isso também, com gente que já atravessou. Nada do que a gente conversa substitui um profissional quando a dor pede, e ninguém aqui promete que vai ser fácil. Mas você não atravessa sozinha."
+      "🎣 Gancho: A gente sempre fala da coragem de quem vai. E quem fica?",
+      "🎬 Oi, meus amores, Marcela aqui. A sua mãe vai aprender a te ver por uma tela. O seu pai vai contar os meses até o próximo abraço. Os avós vão perder o dente que caiu e o primeiro dia de aula, e mesmo assim vão sorrir e dizer que está tudo bem, porque querem o seu bem mais do que querem a sua companhia. Se você sente culpa disso, é porque você ama. E dá pra cuidar desse laço com plano, com rotina, com presença combinada, do mesmo jeito que a gente cuida de documento e de custo.",
+      "✅ Salva esse vídeo pra quando bater a culpa, e vem conversar sobre isso aqui dentro da WiseHub, com gente que já atravessou. Ninguém promete que é fácil, e nada disso substitui um profissional quando a dor pedir. Mas você não atravessa sozinha. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Pra quem vai, coragem. Pra quem fica, saudade. Dá pra cuidar dos dois. Salva esse vídeo. #quemfica #saudade #familia #migrarcomamor #WiseHub"
     ],
-    "palavras": 161
+    "palavras": 189
   },
   {
     "id": "2026-07-14-06",
@@ -1205,16 +1240,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "O tempo da criança é diferente do tempo do adulto, e isso muda tudo na adaptação",
     "paras": [
-      "Toda mãe que pensa em mudar o país da família chega numa pergunta que aperta o peito. Como vai ser para o meu filho. E tem uma parte da resposta que eu demorei a entender, e que muda o jeito de olhar tudo. O tempo da criança é diferente do seu.",
-      "O adulto adapta pela lógica. Ele entende o motivo da mudança, ele fez a conta, ele escolheu. Então ele aguenta o desconforto, porque o desconforto tem sentido. A criança não escolheu nada. Ela foi. E ela adapta pelo corpo e pelo vínculo. Explicar para uma criança que aquela mudança é boa para o futuro dela resolve muito pouco, porque futuro é um conceito de adulto. O que ela sente é o presente, e no presente ela perdeu a professora, o quarto, o cheiro da casa da avó e a única língua em que ela sabia fazer piada.",
-      "Por isso a curva dela costuma ser diferente. Muitas vezes ela vai parecer bem nos primeiros meses e desabar depois, quando a novidade passa e a saudade chega. Ou o contrário, sofrer no começo e florescer de um jeito que te surpreende. Tem criança que passa meses quieta na escola nova, absorvendo som, e um dia abre a boca falando a língua inteira. Isso é processo, e o processo tem o tempo dele. Quando a mãe não sabe que existe processo, ela se culpa. Ela olha o filho calado e pensa que arruinou a vida dele.",
-      "Talvez não tenha arruinado. Talvez ele só esteja no meio do caminho.",
-      "E eu preciso ser honesta com você aqui. Não existe país onde a criança não sofre. O que existe é chegar preparada. Saber como funciona a escola de lá, se existe apoio de língua para aluno estrangeiro, em que mês começa o ano letivo, o que a rede pública oferece e o que não oferece. Isso é informação concreta, ela existe, e ela muda o tamanho da surpresa que espera por você.",
-      "E ajuda outra coisa, que nenhum documento oficial entrega. Ouvir uma mãe que já atravessou aquilo contar como foi com a filha dela. Isso não resolve o processo do seu filho, cada criança é uma, mas tira você do escuro. E quando a adaptação preocupa de verdade, existe profissional para isso, e conversa de comunidade nunca substitui esse acompanhamento.",
-      "É essa a WiseHub. Uma família que cresce junto, com método para organizar o caminho passo a passo, lives para você perguntar para quem entende, parceiros verificados com condições especiais quando o caso pede apoio jurídico, e sobretudo gente que já esteve onde você está. A gente não promete visto, nem que a adaptação vai ser tranquila.",
-      "Se você está com medo pelo seu filho, esse medo tem mais de cuidado do que de aviso. Só não carregue ele sozinha, e não confunda o tempo dele com fracasso seu. Vem atravessar isso perto de quem entende o tamanho."
+      "🎣 Gancho: O seu filho não escolheu mudar de país. Ele foi. E é por isso que ele se adapta num tempo totalmente diferente do seu.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar do medo que aperta o peito de toda mãe: como vai ser pro meu filho. O adulto se adapta pela lógica, porque entendeu o motivo. A criança se adapta pelo corpo e pelo vínculo, e no presente dela ela perdeu a professora, o quarto e a língua em que sabia fazer piada. Tem criança que parece bem e desaba depois, e tem criança que sofre no começo e floresce de um jeito que te surpreende. Isso é processo, e processo tem o tempo dele. Você não arruinou a vida do seu filho. Talvez ele só esteja no meio do caminho.",
+      "✅ Cuidado pra não confundir o tempo dele com fracasso seu, e não carrega esse medo sozinha. Comenta CUIDAR aqui embaixo e vem atravessar isso na WiseHub, perto de mãe que já passou por isso e com informação de verdade sobre a escola lá fora. A gente não promete que vai ser tranquilo, e quando a adaptação preocupa de verdade tem profissional pra isso. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: O tempo da criança não é o seu. Saber disso muda tudo na adaptação. Comenta CUIDAR. #maeleoa #filhosnoexterior #adaptação #mudardepais #WiseHub"
     ],
-    "palavras": 485
+    "palavras": 233
   },
   {
     "id": "2026-07-14-05",
@@ -1227,16 +1258,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "A carreira que você construiu não cabe na mala",
     "paras": [
-      "Quero conversar com a mulher que está no meio de uma decisão de mudança e que carrega uma pergunta que raramente encontra espaço na mesa de casa. E eu, como fico nessa história.",
-      "Porque a conversa sobre mudar de país costuma girar em torno do visto, do custo, da escola das crianças, da carreira de quem tem o contrato de trabalho no nome. E aí tem você, que construiu uma carreira durante anos, com competência, com noites mal dormidas, com uma reputação que as pessoas ao seu redor reconhecem. E de repente essa carreira inteira não cabe na mala. Ela não atravessa. Do outro lado, o seu nome ainda não diz nada para ninguém.",
-      "Isso dói, e a dor tem nome. Chama-se luto. Você está de luto por uma versão sua que era competente, requisitada, segura do próprio valor. E ninguém prepara a mulher para esse luto, porque todo mundo está ocupado te dizendo o quanto aquela mudança vai ser boa para as crianças. E vai ser. Mas você também está indo.",
-      "Eu quero te dizer o que costuma ficar de fora dessa conversa. Recomeçar parece voltar à estaca zero, e não é a mesma coisa. O que se perde é o contexto, a rede, o reconhecimento local. O que não se perde é o que você é. A sua capacidade de resolver, de ler gente, de sustentar um projeto de pé. Isso viaja com você.",
-      "E tem uma parte prática que ajuda a diminuir o tamanho do escuro. Saber, antes de embarcar, se a sua profissão exige revalidação naquele país, o que a sua área costuma pedir de quem chega de fora, como aquele mercado enxerga uma pausa no currículo. Isso serve para você chegar sabendo onde pisa, em vez de descobrir tudo já cansada, num país novo, com a casa para montar.",
-      "É esse silêncio que a WiseHub quebra. A comunidade acompanha nove países e mais de cem vistos, e olha o mercado de trabalho junto com a parte migratória, a economia, a educação e a saúde, porque é isso que decide como vai ser a sua vida lá, não só a sua entrada. Você organiza o seu passo a passo com calma, leva as dúvidas para as lives com profissionais, e quando o caso pede, chega a parceiros verificados com condições especiais. E do lado, o que mais importa, mulheres que já reconstruíram carreira do outro lado e conhecem os buracos do caminho.",
-      "E aqui eu não vou te vender facilidade. A WiseHub não consegue te dar visto, não consegue te dar emprego e não vai fazer isso acontecer rápido. O que ela faz é te dar método, informação atual, acolhimento e companhia. O conteúdo é educativo, ajuda você a enxergar o caminho, e não ocupa o lugar de um profissional habilitado quando o seu caso pedir.",
-      "Se você está prestes a atravessar isso, se permita sentir o tamanho do que está deixando para trás. E depois, se permita reconstruir cercada de mulheres que já fizeram esse mesmo caminho. A porta está aberta, e tem gente aqui dentro que conhece essa dor."
+      "🎣 Gancho: Ninguém te avisa, mas mudar de país tem um luto escondido. O luto da mulher que você era no trabalho.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar da carreira que você construiu e que não cabe na mala. Você passou anos virando referência, e do outro lado o seu nome ainda não diz nada pra ninguém, e isso dói tanto que tem nome: chama luto. Mas escuta uma coisa. O que se perde é o contexto, a rede, o reconhecimento de lugar. O que você É viaja com você, e antes de embarcar dá pra saber se a sua profissão pede revalidação lá fora e o que aquele mercado espera de quem chega, pra você pisar sabendo onde pisa.",
+      "✅ Marca uma mulher que precisa ouvir isso, e vem reconstruir cercada de quem já fez esse caminho, aqui na WiseHub. A gente não promete visto nem emprego, e o conteúdo não substitui um profissional quando o seu caso pedir. Promete método, informação de agora e companhia. Origem não é teto, meu amor. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: A sua carreira não atravessa a fronteira sozinha. Mas quem você é, sim. Marca uma mulher que precisa ler isso. #origemnaoeteto #mulheresquemigram #recomeço #vidalafora #WiseHub"
     ],
-    "palavras": 515
+    "palavras": 214
   },
   {
     "id": "2026-07-14-04",
@@ -1327,13 +1354,14 @@ export const ROTEIROS: Roteiro[] = [
     "canal": "Instagram",
     "formato": "curto",
     "tipo": "roteiro",
-    "titulo": "Existe um lugar onde a saudade encontra gente que entende — Short",
+    "titulo": "Existe um lugar onde a saudade encontra gente que entende",
     "paras": [
-      "Tem uma solidão específica em querer uma vida em outro país. É a solidão de olhar em volta e sentir que ninguém perto de você entende bem o que se passa aí dentro. A mistura de esperança, medo e saudade antecipada de um lugar que você ainda nem deixou.",
-      "Eu queria que você soubesse que existe um lugar onde essa mistura toda encontra gente que entende. Onde a sua dúvida vira conversa, o seu medo vira plano, e a sua saudade encontra quem já sentiu a mesma coisa e seguiu em frente.",
-      "A WiseHub é esse lugar. Não é sobre estar certa o tempo todo. É sobre não caminhar sozinha. E quem descobre esse acolhimento raramente quer voltar a ficar de fora. Te espero lá dentro."
+      "🎣 Gancho: Existe uma solidão que só quem sonha em morar fora conhece, e ninguém perto de você entende direito.",
+      "🎬 Oi, meus amores, Marcela aqui. É aquela mistura de esperança, medo e saudade antecipada de um lugar que você ainda nem deixou. Eu queria que você soubesse que existe um lugar onde essa mistura toda encontra gente que entende: onde a sua dúvida vira conversa, o seu medo vira plano e a sua saudade encontra quem já sentiu o mesmo e seguiu em frente. A WiseHub é esse lugar, e não é sobre estar certa o tempo todo, é sobre não caminhar sozinha.",
+      "✅ Cuidado com atravessar isso calada, achando que é só com você, porque não é. Me chama no direct que eu te mostro por onde começar. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: A saudade de um lugar que você ainda nem deixou tem nome, e tem gente que entende. Você não precisa caminhar sozinha. #vidanoexterior #saudade #imigracao #origemnaoeteto #wisehub"
     ],
-    "palavras": 126
+    "palavras": 169
   },
   {
     "id": "2026-07-13-07",
@@ -1344,13 +1372,14 @@ export const ROTEIROS: Roteiro[] = [
     "canal": "Reels",
     "formato": "curto",
     "tipo": "roteiro",
-    "titulo": "Você não precisa ser forte o tempo todo — Short",
+    "titulo": "Você não precisa ser forte o tempo todo",
     "paras": [
-      "Para a mulher que está segurando a decisão de mudar o país da família inteira nos ombros, eu queria dizer uma coisa. Você não precisa ser forte o tempo todo, e não precisa saber de tudo sozinha.",
-      "Tem uma diferença enorme entre atravessar isso na base do achismo, contando cada medo em silêncio, e atravessar cercada de gente que entende. Mães que já mudaram, mulheres que reconstruíram a vida do outro lado, famílias que já passaram pela escola nova e pela saudade e sobreviveram para contar.",
-      "É isso que a WiseHub é, uma família que cresce junto, com método para organizar o caminho e colo para as horas difíceis. A gente não promete que vai ser fácil. A gente promete que você não vai estar só. E isso, para uma mãe, já é quase tudo. Te espero lá dentro."
+      "🎣 Gancho: Você não precisa ser forte o tempo todo.",
+      "🎬 Oi, meus amores, Marcela aqui. Se você é a mulher que tá segurando nos ombros a decisão de mudar o país da família inteira, essa é pra você. Tem uma diferença enorme entre atravessar isso no achismo, engolindo cada medo em silêncio, e atravessar cercada de gente que entende: mães que já mudaram, mulheres que reconstruíram a vida do outro lado, famílias que passaram pela escola nova e pela saudade e sobreviveram pra contar. É isso que a WiseHub é, uma família que cresce junto, com método pra organizar o caminho e colo pras horas difíceis.",
+      "✅ A gente não promete que vai ser fácil; promete que você não vai estar só, e pra uma mãe isso já é quase tudo. Marca aqui uma mãe que precisa se sentir menos sozinha hoje. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Você não precisa ser forte o tempo todo, nem saber de tudo sozinha. Marca uma mãe que precisa ler isso. #maeleoa #vidanoexterior #mulheresqueinspiram #familiafora #wisehub"
     ],
-    "palavras": 139
+    "palavras": 180
   },
   {
     "id": "2026-07-13-06",
@@ -1363,15 +1392,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "A boa notícia que muitas famílias ainda não descobriram, e por que informação a tempo muda tudo",
     "paras": [
-      "Nem toda mudança nas regras de imigração é uma má notícia. Às vezes, é o contrário. Às vezes, um país reescreve os seus caminhos e abre uma porta que estava fechada, e muitas famílias que se encaixam nessa porta seguem a vida inteira sem descobrir que ela abriu.",
-      "A Espanha é um exemplo recente e bonito disso. O país reformou o seu regulamento de estrangeiros e tornou mais claros e mais acessíveis os caminhos ligados à família, à reunião de quem se ama e à regularização de quem já construiu uma vida por lá. Para muita gente que sonhava em levar a família junto, ou em reencontrar quem já foi na frente, o terreno ficou mais gentil do que era. E, no entanto, quantas dessas famílias sabem disso a tempo de agir.",
-      "Esse é o ponto que me toca. A informação que muda uma vida existe, ela está lá, mas ela chega para tão poucas pessoas, e quase sempre tarde. Fica escondida em documento oficial, em outra língua, em meio a uma burocracia que assusta. E enquanto isso, uma família que se encaixava perfeitamente adia o sonho por mais um ano, achando que o caminho era mais difícil do que passou a ser.",
-      "É contra esse silêncio que a WiseHub trabalha, todos os dias. A comunidade acompanha o que se move em nove países e mais de cem vistos, e traduz a mudança para a vida real, o que ela significa para você, para os seus filhos, para o seu recomeço. A informação importante não fica presa num portal frio, ela chega até você com contexto, com cuidado, e com a leitura de quem está vivendo aquilo agora.",
-      "E é essa última parte que faz a diferença que nenhum site consegue fazer. Ao lado da notícia, tem uma mãe que já passou por aquele processo, um casal que já reuniu a família, alguém que pega na sua mão e diz por onde começar. Informação a tempo, somada a gente que já trilhou o caminho, é o que transforma uma boa notícia distante numa decisão possível para a sua família.",
-      "Com a honestidade de sempre, porque é assim que a gente cuida de você. A WiseHub não promete visto nem resultado. Ela entrega informação atual, contexto e acolhimento, e o conteúdo é educativo, não substitui a orientação de um profissional habilitado quando o seu caso exigir.",
-      "O mundo está mudando as regras o tempo todo, e nem sempre para pior. A pergunta é se você vai ser das primeiras a saber, ou das últimas. Aqui dentro, você fica do lado de quem sabe primeiro, e nunca sozinha. Te espero lá."
+      "🎣 Gancho: Você acha que toda mudança na lei de imigração é má notícia? Nem sempre. Às vezes uma porta que estava fechada abre, e quase ninguém descobre a tempo de passar por ela.",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar de uma boa notícia que muita família ainda não descobriu. Às vezes um país mexe nas regras e facilita justamente o caminho de quem quer levar a família junto, ou reencontrar quem já foi na frente. A Espanha, pelo que se comenta, mexeu em regras ligadas à família e a quem já construiu uma vida por lá [CONFERIR COM A MARCELA]. Só que essa informação que muda uma vida quase sempre chega tarde, escondida num documento oficial, em outra língua, e a família adia o sonho por mais um ano achando que o caminho era mais difícil do que é.",
+      "✅ É contra esse silêncio que a WiseHub trabalha todo dia: a comunidade acompanha o que se move lá fora e traduz pra vida real, com a leitura de quem já passou por aquilo e pega na sua mão. Com honestidade, porque é assim que eu cuido de você: a gente não promete visto nem resultado, entrega informação atual, contexto e acolhimento. Salva esse vídeo pra ter essa informação do lado certo na hora que ela contar pra sua família. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Nem toda mudança na lei é má notícia. Às vezes uma porta abre e quase ninguém sabe a tempo. Fica do lado de quem sabe primeiro. #imigracao #vidanaespanha #familiafora #origemnaoeteto #wisehub"
     ],
-    "palavras": 439
+    "palavras": 267
   },
   {
     "id": "2026-07-13-05",
@@ -1384,15 +1410,12 @@ export const ROTEIROS: Roteiro[] = [
     "tipo": "roteiro",
     "titulo": "Quando a mudança é com a família inteira, o medo tem outro tamanho",
     "paras": [
-      "Quero conversar com quem não está pensando em mudar de país só por si, mas com a família inteira junto. Porque, quando é assim, o peso é outro, e o medo tem outro tamanho.",
-      "Uma coisa é você arriscar a sua própria adaptação. Outra, bem diferente, é deitar a cabeça no travesseiro pensando no seu filho. Será que ele vai se adaptar na escola nova. Será que vai fazer amigos, aprender a língua sem sofrer, sentir que pertence àquele lugar. Será que estou tirando as raízes dele cedo demais, ou dando a ele um mundo maior. Essas perguntas não aparecem nas planilhas de custo de vida, mas são elas que apertam o coração de mãe e de pai de madrugada.",
-      "E tem a mulher que, no meio disso tudo, também está recomeçando. Que deixa para trás uma carreira construída, uma rede de apoio, a mãe por perto, as amigas de sempre, e precisa reconstruir tudo isso do zero, muitas vezes cuidando de todos antes de cuidar de si. Ninguém fala o suficiente sobre esse recomeço silencioso, e ele é um dos mais corajosos que existem.",
-      "Eu não vou te dizer que é fácil, porque não é. Mas vou te dizer o que faz toda a diferença. Você não precisa carregar isso sozinha. Foi para segurar a mão de quem está nessa travessia que a WiseHub existe. Ela não é um feed de notícias soltas, é uma família que cresce junto, com gente em todas as etapas do mesmo caminho. Mães que já mudaram e sabem exatamente onde dói. Mulheres que reconstruíram a carreira do outro lado e voltaram para contar como. Famílias que já passaram pela escola nova, pela saudade, pela primeira festa junina longe de casa, e que estendem a mão para quem está começando agora.",
-      "Dentro dela, a sua decisão deixa de ser um salto no vazio e vira um plano construído com calma, passo a passo, olhando o que importa de verdade, a documentação, o custo de vida, o trabalho, o idioma, a escola das crianças, e também o seu recomeço. Você tira dúvidas reais nas lives, com profissionais e com quem já viveu aquilo. E quando o caso pede apoio jurídico, você chega através de parceiros verificados, com condições especiais, acolhida, não perdida.",
-      "Preciso ser honesta com você, com todo o carinho. A WiseHub não promete visto, nem ganho, nem que tudo vai ser simples. O que a gente entrega é método, contexto, acompanhamento e, acima de tudo, companhia. O conteúdo é educativo, ajuda você a enxergar caminhos e riscos, e não substitui um profissional habilitado quando o seu caso pedir.",
-      "Se você está carregando essa decisão pela família inteira, respira. Você não precisa saber de tudo, e não precisa fazer sozinha. Vem construir isso com gente que entende o tamanho do que você está sentindo. A porta está aberta, e eu te espero lá dentro."
+      "🎣 Gancho: Você já deitou a cabeça no travesseiro com medo, não de você, mas do seu filho não se adaptar do outro lado do mundo?",
+      "🎬 Oi, meus amores, Marcela aqui. Hoje eu quero falar de mudar de país com a família inteira. Uma coisa é arriscar a sua própria adaptação; outra, bem diferente, é pensar se o seu filho vai fazer amigo, aprender a língua e pertencer àquele lugar. E, no meio disso tudo, tem você recomeçando do zero: carreira, a mãe por perto, as amigas de sempre, tudo pra reconstruir, muitas vezes cuidando de todo mundo antes de cuidar de si. Eu não vou mentir que é fácil, mas cuidado com quem te faz achar que precisa atravessar isso sozinha, porque não precisa.",
+      "✅ Se você carrega essa decisão pela família inteira, respira: a WiseHub é uma família que cresce junto, com gente que já passou pela escola nova, pela saudade e pela primeira festa junina longe de casa, e estende a mão pra você, com método pra organizar cada passo e colo pras horas difíceis. A gente não promete que vai ser fácil, promete que você não vai estar só. Marca aqui embaixo uma mãe que precisa ouvir isso hoje. Os seus sonhos merecem uma chance. Um beijo no coração!",
+      "📝 Legenda: Mudar de país com a família inteira dá medo, e tudo bem. O que não dá é atravessar sozinha. Marca uma mãe que precisa ler isso. #vidanoexterior #maeleoa #familiafora #origemnaoeteto #wisehub"
     ],
-    "palavras": 480
+    "palavras": 247
   },
   {
     "id": "2026-07-13-04",
@@ -1403,7 +1426,7 @@ export const ROTEIROS: Roteiro[] = [
     "canal": "Instagram",
     "formato": "curto",
     "tipo": "roteiro",
-    "titulo": "O mundo virou um mapa de oportunidades, e quase ninguém sabe ler esse mapa — Short",
+    "titulo": "O mundo virou um mapa de oportunidades, e quase ninguém sabe ler esse mapa",
     "paras": [
       "Nunca foi tão possível construir renda, negócio e vida em mais de um país ao mesmo tempo. E, ao mesmo tempo, nunca foi tão fácil se perder tentando, porque oportunidade sem direção vira só ansiedade.",
       "O que separa quem realiza de quem só sonha raramente é talento. É estar no ambiente certo, com informação atual e com gente construindo junto. A WiseHub é esse ambiente, um ecossistema de imigração e empreendedorismo global onde a oportunidade encontra método e companhia.",
@@ -1420,7 +1443,7 @@ export const ROTEIROS: Roteiro[] = [
     "canal": "Reels",
     "formato": "curto",
     "tipo": "roteiro",
-    "titulo": "Vou conseguir sustentar minha família lá fora? — Short",
+    "titulo": "Vou conseguir sustentar minha família lá fora?",
     "paras": [
       "A pergunta que tira o sono de quem provê uma família não é se a vida fora vai ser bonita. É se ela vai ser sustentável. Vou dar conta, no país novo, na moeda nova, com o custo novo. Essa pergunta é séria, e ela merece uma resposta séria, não uma frase motivacional.",
       "A resposta honesta é que sustentabilidade não vem de coragem, vem de preparo. Vem de saber o custo de vida real do destino antes de ir, de entender o mercado de trabalho de lá, de organizar as etapas na ordem certa, e de chegar aos profissionais certos já com condições de quem é da comunidade.",
@@ -1469,5 +1492,72 @@ export const ROTEIROS: Roteiro[] = [
       "Se você está planejando construir uma vida fora, comece pela conta que a maioria evita. E não faça essa conta sozinho, no escuro. Venha para onde ela vira estratégia, e onde tem gente construindo junto com você. Há um lugar reservado para você nesse movimento."
     ],
     "palavras": 456
+  },
+  {
+    "id": "hubby-2026-06-11",
+    "date": "2026-06-11",
+    "lote": 0,
+    "n": 0,
+    "persona": "Hubby",
+    "canal": "YouTube",
+    "formato": "curto",
+    "tipo": "dicas",
+    "titulo": "Tres novidades de imigracao: Canada, Reino Unido e Finlandia",
+    "paras": [
+      "## Canada, Express Entry",
+      "Oi, eu sou o Hubby, e hoje eu quero te mostrar um detalhe importante sobre o Canada. O Express Entry continua sendo uma das portas mais conhecidas para quem busca residencia permanente, mas ele nao funciona apenas como uma fila de pontos. Cada convite depende do tipo de rodada que o governo decide abrir, e isso muda bastante a leitura do seu perfil.",
+      "Existem rodadas gerais, rodadas por programa e rodadas por categoria. Na pratica, isso significa que duas pessoas com pontuacoes parecidas podem viver momentos bem diferentes, porque o Canada tambem observa areas de interesse, como idioma, experiencia profissional e setores que precisam de mao de obra. Por isso, acompanhar so a pontuacao de corte nao basta.",
+      "A propria pagina oficial do IRCC trouxe uma atualizacao sobre uma rodada de proficiencia em frances, realizada em vinte e oito de maio. O governo informou que esta revisando um problema tecnico ligado aos convites daquela rodada, mas tambem deixou claro que os candidatos ja convidados nao foram afetados e nao precisam tomar nenhuma acao por enquanto.",
+      "A dica e simples, mas faz muita diferenca. Antes de esperar o proximo convite, confira se o seu perfil esta completo, se o teste de idioma esta valido, se a sua ocupacao foi informada corretamente e se voce entende em qual categoria realmente se encaixa. No Canada, planejamento bom nao e ansiedade. E perfil bem cuidado, documento certo e acompanhamento constante da fonte oficial.",
+      "## Reino Unido, eVisa e ETA",
+      "Oi, eu sou o Hubby. O Reino Unido esta caminhando cada vez mais para um sistema migratorio digital. Para muita gente, isso significa que o status de imigracao deixa de depender de um documento fisico e passa a ser comprovado pelo eVisa, dentro de uma conta online do UKVI.",
+      "Na pratica, essa conta precisa estar bem cuidada. E por ela que a pessoa acessa o status digital, atualiza dados importantes e gera codigos para comprovar direito de trabalho, aluguel ou outros servicos. Antes de viajar, tambem e essencial confirmar se o passaporte usado na viagem esta vinculado ao status digital.",
+      "Outro ponto importante e a ETA, a autorizacao eletronica de viagem para quem nao precisa de visto, mas precisa de permissao previa para entrar como visitante. O governo britanico explica que a ETA permite viagens curtas, geralmente de ate seis meses, mas ela nao garante entrada automatica. A decisao final continua sendo na fronteira.",
+      "A dica do Hubby e tratar o digital como documento de viagem. Antes de comprar passagem ou aceitar uma data de inicio, entre na sua conta oficial, confira passaporte, eVisa ou ETA, salve os comprovantes certos e evite sites que imitam o governo. No Reino Unido, um detalhe de conta online pode virar um problema real no aeroporto, no trabalho ou na universidade.",
+      "## Finlandia, residencia permanente",
+      "Oi, eu sou o Hubby, e hoje a dica vem da Finlandia. A partir de oito de janeiro de dois mil e vinte e seis, os pedidos de residencia permanente passaram a seguir regras mais exigentes. Para quem sonha em construir uma vida no pais, isso muda a forma de planejar tempo, trabalho, idioma e documentos.",
+      "A regra geral agora exige seis anos de residencia continua antes do pedido. Existem caminhos mais curtos, mas eles dependem de condicoes especificas, como renda anual mais alta, formacao obtida na Finlandia, historico profissional, ou qualificacao em nivel avancado. Ou seja, nao e uma regra igual para todos.",
+      "A Finlandia tambem passou a olhar com mais atencao para integracao. Conhecimento de finlandes ou sueco, tempo de trabalho ou atividade empresarial, e historico regular de permanencia podem fazer diferenca. Ausencias longas, dependencia prolongada de beneficios e falta de documentacao organizada podem pesar contra o planejamento.",
+      "A dica pratica e comecar cedo. Use o Enter Finland sempre que possivel, mantenha comprovantes de emprego, estudos, renda e idioma em ordem, e acompanhe os prazos de atendimento. O proprio Migri informou aumento de demanda e reducao de pessoal, entao resolver tudo na ultima hora pode custar tempo. Na Finlandia, residencia permanente virou um projeto de consistencia, nao apenas de calendario."
+    ],
+    "palavras": 682
+  },
+  {
+    "id": "hubby-2026-06-08",
+    "date": "2026-06-08",
+    "lote": 0,
+    "n": 0,
+    "persona": "Hubby",
+    "canal": "YouTube",
+    "formato": "curto",
+    "tipo": "dicas",
+    "titulo": "A Europa vai pedir uma autorizacao nova pra voce entrar, e o viajante esperto ja se prepara",
+    "paras": [
+      "Oi, eu sou o Hubby, e hoje eu trago uma novidade que vai mexer com quem sonha em conhecer a Europa, ou ja vai e volta de la com frequencia. A Uniao Europeia esta colocando de pe um sistema novo de autorizacao de viagem, chamado ETIAS, e voce, brasileiro, vai precisar dele.",
+      "Calma que eu te explico com carinho. Hoje, pra passear pela Europa por ate noventa dias, o brasileiro nao precisa de visto, e isso nao muda. O que muda e que, antes de embarcar, voce vai ter que pedir uma autorizacao eletronica, o ETIAS, ligada ao seu passaporte. A previsao e que ele comece a funcionar no fim de 2026, com alguns meses de adaptacao antes de virar obrigatorio de vez.",
+      "E aqui vem a parte que eu faco questao de te avisar, porque e onde muita gente vai cair em cilada. O pedido e simples, feito pela internet, e custa apenas sete euros no site oficial. Sete euros, e olha que importante, a autorizacao vale por varios anos, entao voce faz uma vez e usa em varias viagens. Ja vao aparecer, e talvez ja estejam aparecendo, sites espertos cobrando bem mais caro por isso. Nao caia. Use so o site oficial da Uniao Europeia, confira o endereco com atencao, e desconfie de qualquer pagina que peca um valor alto ou dados demais.",
+      "Entao, se a Europa esta nos seus planos, deixe o seu passaporte com validade folgada, separe um cartao e um e-mail, e fique de olho na abertura do sistema pra fazer o seu ETIAS com tranquilidade, sem correria de ultima hora.",
+      "Eu fico de olho nessas mudancas justamente pra voce nunca ser pego de surpresa na hora de viajar. Pode contar comigo. A gente caminha junto nessa jornada, um passo de cada vez."
+    ],
+    "palavras": 298
+  },
+  {
+    "id": "hubby-2026-06-07",
+    "date": "2026-06-07",
+    "lote": 0,
+    "n": 0,
+    "persona": "Hubby",
+    "canal": "YouTube",
+    "formato": "curto",
+    "tipo": "dicas",
+    "titulo": "Portugal mudou a regra da cidadania, e quem e brasileiro precisa entender isso agora",
+    "paras": [
+      "Oi, eu sou o Hubby, e hoje eu vim conversar com voce sobre uma mudanca importante, dessas que podem mexer com o seu plano de vida. Portugal acabou de alterar a sua Lei da Nacionalidade, e isso toca diretamente quem e brasileiro.",
+      "Ate bem pouco tempo, um brasileiro que morava legalmente em Portugal podia pedir a cidadania depois de cinco anos de residencia. Desde o dia dezenove de maio, essa conta mudou. O tempo minimo passou a ser de sete anos para quem e brasileiro e para os demais cidadaos da comunidade de lingua portuguesa. Para as outras nacionalidades, o prazo subiu para dez anos.",
+      "Eu sei que parece uma noticia dura, e foi exatamente por isso que eu fiz questao de trazer essa noticia com calma, junto com a informacao que realmente faz diferenca. Existe uma janela, e ela muda tudo. Quem ja tinha o pedido de cidadania protocolado antes da nova lei entrar em vigor continua sendo avaliado pelas regras antigas. Quer dizer, o que pesa nao e apenas o tempo que voce morou, e tambem a data em que o seu pedido deu entrada.",
+      "Entao, se voce esta perto de completar o seu tempo de residencia, esse e o momento de organizar tudo com cuidado. Reuna os seus comprovantes de residencia legal, confira se o seu titulo esta valido e renovado, sem nenhum periodo em aberto no meio do caminho, porque qualquer lapso pode quebrar a contagem dos seus anos. E diante de qualquer duvida sobre o seu caso, busque orientacao antes de protocolar, para nao perder nem prazo nem documento.",
+      "Eu fico de olho nessas mudancas justamente para que voce nunca seja pego de surpresa. Pode contar comigo. A gente caminha junto nessa jornada, um passo de cada vez."
+    ],
+    "palavras": 293
   }
 ];
