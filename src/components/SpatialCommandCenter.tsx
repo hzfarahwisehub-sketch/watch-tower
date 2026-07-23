@@ -142,7 +142,15 @@ export function SpatialCommandCenter() {
   const availableViews = mode === "FRIDAY" ? fridayViews : sharedViews;
   const activeView = brainViews[mode];
   const isEyeView = activeView === "leitura";
-  const eyeStyle = mode === "FRIDAY" ? "friday-sentient" : "eye";
+  // Só os 2 olhos que o Hammis curtiu (2026-07-23): azul reativo (Sentient) e Friday
+  // com brilho (Flux). Os estáticos saíram; o seletor volta na MESMA posição de antes.
+  const eyeOptions = [
+    { id: "friday-sentient", label: "Sentient", variant: "Azul · reativo" },
+    { id: "friday-flux", label: "Friday Flux", variant: "Brilho · reativo" },
+  ];
+  const [eyeStyle, setEyeStyle] = useState<string>("friday-sentient");
+  const [eyeShelfOpen, setEyeShelfOpen] = useState(false);
+  const currentEye = eyeOptions.find(item => item.id === eyeStyle) ?? eyeOptions[0];
   const activeProfile = mode === "FRIDAY" ? "friday" : "wise";
   const activeAppName = mode === "FRIDAY" ? "Friday" : "Wise";
   const activeConnected = brainConnections[mode];
@@ -247,6 +255,15 @@ export function SpatialCommandCenter() {
             <small>{isOwner && mode === "WISE" ? "VISÃO DO SÓCIO · TESTE DE USABILIDADE" : "CONVERSA AO VIVO · VOZ + IA"}</small>
             {isEyeView ? (
               <div className={`wb-eye-reader wb-eye-${eyeStyle}`}>
+                <div className="wb-eye-library">
+                  <button type="button" className="wb-eye-library-trigger" onClick={() => setEyeShelfOpen(value => !value)} aria-expanded={eyeShelfOpen} aria-controls="wb-eye-shelf"><span className={`wb-eye-thumb wb-thumb-${eyeStyle}`} /><span><b>{currentEye.label}</b><small>{currentEye.variant}</small></span><em>{eyeShelfOpen ? "‹" : "›"}</em></button>
+                  <div id="wb-eye-shelf" className={`wb-eye-shelf ${eyeShelfOpen ? "open" : ""}`} aria-label="Biblioteca de olhos">
+                    <div className="wb-eye-shelf-head"><span>Olhos</span><small>{eyeOptions.length} opções</small></div>
+                    <div className="wb-eye-options">
+                      {eyeOptions.map(item => <button type="button" key={item.id} className={eyeStyle === item.id ? "active" : ""} onClick={() => { setEyeStyle(item.id); setEyeShelfOpen(false); }}><span className={`wb-eye-thumb wb-thumb-${item.id}`} /><span><b>{item.label}</b><small>{item.variant}</small></span><em>›</em></button>)}
+                    </div>
+                  </div>
+                </div>
                 <FridayEyeReactive eyeStyle={eyeStyle} text={responseText} />
                 <p className="wb-eye-reader-text">{responseText}</p>
               </div>
