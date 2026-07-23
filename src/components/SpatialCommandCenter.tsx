@@ -50,6 +50,9 @@ export function SpatialCommandCenter() {
     WISE: true,
   });
   const [brainSessionReady, setBrainSessionReady] = useState(false);
+  const embedRef = useRef<HTMLIFrameElement>(null);
+  const [handsFree, setHandsFree] = useState(false);
+  const [handsFreeHeard, setHandsFreeHeard] = useState("");
   const visual = "meridian";
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [countryQuery, setCountryQuery] = useState("");
@@ -80,6 +83,50 @@ export function SpatialCommandCenter() {
     const t = setTimeout(fit, 350);
     return () => { window.removeEventListener("resize", fit); clearTimeout(t); };
   }, []);
+
+  // HANDS-FREE de verdade (Hammis, 2026-07-23): a Watch Tower (mesma origem) ESCUTA a
+  // voz — o webkitSpeechRecognition funciona AQUI, ao contrário do iframe cross-origin —
+  // e INJETA o comando no app via postMessage. Diga "Wise"/"Friday" + o comando.
+  useEffect(() => {
+    if (!handsFree) return;
+    type Recog = {
+      lang: string; continuous: boolean; interimResults: boolean;
+      start: () => void; abort: () => void;
+      onresult: ((e: { resultIndex: number; results: ArrayLike<{ 0: { transcript: string }; isFinal: boolean }> }) => void) | null;
+      onend: (() => void) | null; onerror: (() => void) | null;
+    };
+    const w = window as unknown as { SpeechRecognition?: new () => Recog; webkitSpeechRecognition?: new () => Recog };
+    const SRClass = w.SpeechRecognition || w.webkitSpeechRecognition;
+    if (!SRClass) { setHandsFree(false); return; }
+    const wake = mode === "FRIDAY" ? "friday" : "wise";
+    const norm = (s: string) => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+    let rec: Recog | null = null;
+    let stopped = false;
+    const start = () => {
+      if (stopped) return;
+      rec = new SRClass();
+      rec.lang = "pt-BR"; rec.continuous = true; rec.interimResults = false;
+      rec.onresult = (ev) => {
+        for (let i = ev.resultIndex; i < ev.results.length; i++) {
+          const r = ev.results[i];
+          if (!r.isFinal) continue;
+          const t = norm(r[0].transcript);
+          const idx = t.indexOf(wake);
+          if (idx < 0) continue;   // exige "wise"/"friday" (filtra ruído e a própria voz dela)
+          const cmd = t.slice(idx + wake.length).replace(/^[\s,.:;!?]+/, "").trim();
+          if (cmd) {
+            setHandsFreeHeard(cmd);
+            embedRef.current?.contentWindow?.postMessage({ type: "wisehub:voice-command", text: cmd }, BRAIN_MESSAGE_ORIGIN);
+          }
+        }
+      };
+      rec.onend = () => { if (!stopped) setTimeout(start, 300); };
+      rec.onerror = () => {};
+      try { rec.start(); } catch { /* reagenda no onend */ }
+    };
+    start();
+    return () => { stopped = true; try { rec?.abort(); } catch { /* noop */ } };
+  }, [handsFree, mode]);
 
   useEffect(() => {
     if (isOwner && !ownerModeInitializedRef.current) {
@@ -253,6 +300,12 @@ export function SpatialCommandCenter() {
           <div className="wb-friday">
             <div className="wb-section-title"><b>{mode === "FRIDAY" ? "Friday Sentient" : "Wise Sentient"}</b><span className={activeConnected ? "connected" : "disconnected"}><i /> {activeConnected ? "conectado" : "desconectado"}</span></div>
             <small>{isOwner && mode === "WISE" ? "VISÃO DO SÓCIO · TESTE DE USABILIDADE" : "CONVERSA AO VIVO · VOZ + IA"}</small>
+            {!isEyeView && (
+              <button type="button" className={`wb-handsfree${handsFree ? " on" : ""}`} onClick={() => { setHandsFree(v => !v); setHandsFreeHeard(""); }} title={`Hands-free: diga "${mode === "FRIDAY" ? "Friday" : "Wise"}" e o comando`}>
+                {handsFree ? `● Ouvindo. Diga "${mode === "FRIDAY" ? "Friday" : "Wise"}"` : "🎙 Hands-free"}
+              </button>
+            )}
+            {handsFree && handsFreeHeard ? <span className="wb-handsfree-heard">ouvi: {handsFreeHeard}</span> : null}
             {isEyeView ? (
               <div className={`wb-eye-reader wb-eye-${eyeStyle}`}>
                 <div className="wb-eye-library">
@@ -269,6 +322,7 @@ export function SpatialCommandCenter() {
               </div>
             ) : brainSessionReady ? (
               <iframe
+                ref={embedRef}
                 key={`${mode}-${activeView}-${brainIntent}`}
                 className="wb-brain-embed"
                 src={`${BRAIN_ACCESS_URL}?perfil=${activeProfile}&layout=${activeView}&embed=1&intent=${brainIntent}`}
