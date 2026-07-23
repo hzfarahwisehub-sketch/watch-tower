@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { COUNTRIES } from "@/lib/data";
+import { FridayEyeReactive } from "./FridayEyeReactive";
 
 const MapZone = dynamic(() => import("./MapZone"), { ssr: false });
 
@@ -17,10 +18,16 @@ const BRAIN_ACCESS_URL = "/api/brain/access";
 const BRAIN_CONNECTIONS_KEY = "wt-brain-connections-v1";
 const BRAIN_MESSAGE_ORIGIN = "https://wise.wisehubnow.online";
 type BrainMode = "FRIDAY" | "WISE";
-type BrainView = "clean" | "sentient" | "classic";
+type BrainView = "clean" | "sentient" | "classic" | "leitura";
 type BrainConnections = Record<BrainMode, boolean>;
 
+// "leitura" = o OLHO que narra cada país (FridayEyeReactive + voz). O Hammis pediu
+// de volta (2026-07-22): a "unified brain" tinha trocado tudo pelo app embutido e
+// sumido com a leitura de tela. Agora é uma OPÇÃO ao lado dos painéis, nos DOIS
+// perfis (ele quer o olho no Wise dos sócios também). Não abre iframe: renderiza o
+// olho, que fala sobre o país selecionado no mapa.
 const sharedViews: ReadonlyArray<{ id: BrainView; label: string; detail: string }> = [
+  { id: "leitura", label: "Leitura de tela", detail: "o olho narra cada país" },
   { id: "clean", label: "Olho azul", detail: "núcleo limpo" },
   { id: "sentient", label: "Olho sentiente", detail: "presença completa" },
 ];
@@ -81,7 +88,7 @@ export function SpatialCommandCenter() {
       const requestedMode = params.get("brain") === "wise" ? "WISE" : "FRIDAY";
       setMode(requestedMode);
       const requestedView = params.get("brainLayout");
-      if (requestedView === "clean" || requestedView === "sentient" || (requestedView === "classic" && requestedMode === "FRIDAY")) {
+      if (requestedView === "clean" || requestedView === "sentient" || requestedView === "leitura" || (requestedView === "classic" && requestedMode === "FRIDAY")) {
         setBrainViews(current => ({ ...current, [requestedMode]: requestedView }));
       }
     } else if (session?.user?.email && !isOwner) {
@@ -134,6 +141,8 @@ export function SpatialCommandCenter() {
   }, [connectionStorageKey, isOwner]);
   const availableViews = mode === "FRIDAY" ? fridayViews : sharedViews;
   const activeView = brainViews[mode];
+  const isEyeView = activeView === "leitura";
+  const eyeStyle = mode === "FRIDAY" ? "friday-sentient" : "eye";
   const activeProfile = mode === "FRIDAY" ? "friday" : "wise";
   const activeAppName = mode === "FRIDAY" ? "Friday" : "Wise";
   const activeConnected = brainConnections[mode];
@@ -147,6 +156,10 @@ export function SpatialCommandCenter() {
     events: COUNTRIES.reduce((n, c) => n + c.events.length, 0),
   }), []);
   const activeCountry = selectedCountry ? COUNTRIES.find(item => item.code === selectedCountry) ?? null : null;
+  // Narração do olho (leitura de tela): fala sobre o país selecionado no mapa.
+  const responseText = activeCountry
+    ? `Analisando ${activeCountry.name}. ${activeCountry.summary ?? `${activeCountry.events.length} registros disponíveis.`}`
+    : "Bom dia, Hammis. Selecione ou solicite um país para abrir o panorama geográfico e o benchmark correspondente.";
   const activeCoords = activeCountry?.coords ?? [0, 0];
   const focusStyle = { "--focus-x": `${((activeCoords[1] + 180) / 360) * 100}%`, "--focus-y": `${((90 - activeCoords[0]) / 180) * 100}%` } as CSSProperties;
   // Config de cada modo geográfico (não-live). CINEMÁTICO = Terra noturna real +
@@ -232,7 +245,12 @@ export function SpatialCommandCenter() {
           <div className="wb-friday">
             <div className="wb-section-title"><b>{mode === "FRIDAY" ? "Friday Sentient" : "Wise Sentient"}</b><span className={activeConnected ? "connected" : "disconnected"}><i /> {activeConnected ? "conectado" : "desconectado"}</span></div>
             <small>{isOwner && mode === "WISE" ? "VISÃO DO SÓCIO · TESTE DE USABILIDADE" : "CONVERSA AO VIVO · VOZ + IA"}</small>
-            {brainSessionReady ? (
+            {isEyeView ? (
+              <div className={`wb-eye-reader wb-eye-${eyeStyle}`}>
+                <FridayEyeReactive eyeStyle={eyeStyle} text={responseText} />
+                <p className="wb-eye-reader-text">{responseText}</p>
+              </div>
+            ) : brainSessionReady ? (
               <iframe
                 key={`${mode}-${activeView}-${brainIntent}`}
                 className="wb-brain-embed"
