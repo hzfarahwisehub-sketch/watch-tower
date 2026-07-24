@@ -57,4 +57,15 @@
   /* o SCAN (a barrinha que DESCE lendo o olho) — o efeito "vivo" do Sentient que o
      Hammis queria de volta. So o Sentient tem essa barra (o Flux e' video). */
   .wb-eye-reader .wb-eye-scan{animation:wb-scan 2.7s ease-in-out infinite alternate!important}
+  .wb-eye-reader.wb-eye-friday-sentient .wb-eye::before{animation:wb-sentient-swirl 7s linear infinite!important}
+  .wb-eye-reader.wb-eye-friday-sentient .wb-eye::after{animation:wb-sentient-swirl 11s linear infinite reverse!important}
 }
+/* MOVIMENTO DE LUZ POR DENTRO do olho Sentient: uma "corrente" que percorre os
+   circuitos da iris e ACENDE os detalhes da imagem (Hammis 2026-07-23: quer o olho
+   vivo por dentro, tipo o Flux). Duas camadas girando em velocidades diferentes,
+   blend screen; a mascara confina a luz ao anel da iris (nao na pupila nem na borda). */
+.wb-eye-reader.wb-eye-friday-sentient .wb-eye::before,
+.wb-eye-reader.wb-eye-friday-sentient .wb-eye::after{content:"";position:absolute;inset:5%;border-radius:50%;pointer-events:none;mix-blend-mode:screen}
+.wb-eye-reader.wb-eye-friday-sentient .wb-eye::before{background:conic-gradient(from 0deg,transparent 0 6%,rgba(120,220,255,.55) 13%,transparent 26% 52%,rgba(150,225,255,.42) 62%,transparent 74% 100%);-webkit-mask:radial-gradient(circle,transparent 20%,#000 29%,#000 73%,transparent 82%);mask:radial-gradient(circle,transparent 20%,#000 29%,#000 73%,transparent 82%);animation:wb-sentient-swirl 7s linear infinite}
+.wb-eye-reader.wb-eye-friday-sentient .wb-eye::after{background:conic-gradient(from 160deg,transparent 0 18%,rgba(205,240,255,.4) 27%,transparent 40% 100%);-webkit-mask:radial-gradient(circle,transparent 30%,#000 38%,#000 65%,transparent 73%);mask:radial-gradient(circle,transparent 30%,#000 38%,#000 65%,transparent 73%);animation:wb-sentient-swirl 11s linear infinite reverse}
+@keyframes wb-sentient-swirl{to{transform:rotate(360deg)}}
