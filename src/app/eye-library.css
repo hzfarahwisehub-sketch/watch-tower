@@ -54,4 +54,7 @@
 @media(prefers-reduced-motion:reduce){
   .wb-eye-reader .wb-eye.wb-eye-reactive{animation:wb-breathe 4.2s ease-in-out infinite!important}
   .wb-eye-reader.wb-eye-friday-flux .wb-eye-ring{animation:wb-flux-live 3.4s ease-in-out infinite!important}
+  /* o SCAN (a barrinha que DESCE lendo o olho) — o efeito "vivo" do Sentient que o
+     Hammis queria de volta. So o Sentient tem essa barra (o Flux e' video). */
+  .wb-eye-reader .wb-eye-scan{animation:wb-scan 2.7s ease-in-out infinite alternate!important}
 }
