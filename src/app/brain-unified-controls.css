@@ -209,7 +209,7 @@
 
 .wb-unified-brain .wb-friday{
   display:grid;
-  grid-template-rows:auto auto minmax(0,1fr);
+  grid-template-rows:auto auto minmax(0,1fr) auto;
   height:100%;
   min-height:0;
   box-sizing:border-box;
@@ -414,8 +414,19 @@
 .wb-eye-reader .wb-eye-meter{width:100%;max-width:324px;margin:0 auto;gap:9px}
 .wb-eye-reader .wb-eye-meter-track{height:9px}
 .wb-eye-reader .wb-eye-meter-db{font-size:11px;min-width:52px}
-/* Hands-free (COMPACTO, no cabecalho): a Watch Tower escuta ("diga Wise/Friday") e
-   injeta no app. Fica fora da coluna do painel pra NUNCA virar caixa/empurrar o olho. */
-.wb-handsfree{flex:0 0 auto;align-self:center;display:inline-flex;align-items:center;gap:6px;max-width:190px;height:34px;padding:0 11px;border:1px solid #2a5a73;border-radius:8px;background:#071b2d;color:#a9d9ff;font-size:10px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;transition:.15s}
+/* Hands-free NO RODAPE DO PAINEL: a Watch Tower escuta ("diga Wise/Friday") e injeta
+   no app. Antes vivia no cabecalho, do outro lado da tela — o Hammis reclamou que o
+   botao ficava longe de onde ele fala (2026-07-24). Agora e uma barra colada no painel. */
+.wb-panel-voice{display:flex;align-items:center;gap:10px;margin-top:11px;min-width:0}
+.wb-handsfree{flex:1 1 auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;padding:0 14px;border:1px solid #2a5a73;border-radius:12px;background:#071b2d;color:#a9d9ff;font-size:12px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;transition:.15s}
 .wb-handsfree:hover{border-color:#54c1ff;color:#d7f0ff}
-.wb-handsfree.on{background:linear-gradient(180deg,#1a5c8a,#0a2a44);border-color:#54c1ff;color:#fff;box-shadow:0 0 12px #3aa0ff66}
+.wb-handsfree.on{background:linear-gradient(180deg,#1a5c8a,#0a2a44);border-color:#54c1ff;color:#fff;box-shadow:0 0 14px #3aa0ff66;animation:wb-hf-pulse 1.8s ease-in-out infinite}
+.wb-hf-heard{flex:0 1 auto;max-width:46%;font-size:11px;color:#8fd0ff;opacity:.92;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@keyframes wb-hf-pulse{0%,100%{box-shadow:0 0 10px #3aa0ff44}50%{box-shadow:0 0 20px #3aa0ffaa}}
+/* No app FRIDAY o painel e vermelho/laranja; o hands-free acompanha (senao vira um
+   botao azul solto no meio do vermelho). O WISE fica no azul acima. */
+.wb-unified-brain[data-mode="FRIDAY"] .wb-handsfree{border-color:#7a2f1e;background:#1e0a06;color:#ffb59c}
+.wb-unified-brain[data-mode="FRIDAY"] .wb-handsfree:hover{border-color:#ff7a45;color:#ffe0d3}
+.wb-unified-brain[data-mode="FRIDAY"] .wb-handsfree.on{background:linear-gradient(180deg,#8a2f16,#3a1207);border-color:#ff7a45;color:#fff;box-shadow:0 0 14px #ff6a3566;animation:wb-hf-pulse-f 1.8s ease-in-out infinite}
+.wb-unified-brain[data-mode="FRIDAY"] .wb-hf-heard{color:#ffb59c}
+@keyframes wb-hf-pulse-f{0%,100%{box-shadow:0 0 10px #ff6a3544}50%{box-shadow:0 0 20px #ff6a35aa}}

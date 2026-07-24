@@ -248,7 +248,7 @@ export function SpatialCommandCenter() {
   if (!isOwner && !PARTNER_ACCESS_ENABLED) return <section className="wb-locked" aria-label="Wise Brain bloqueado"><div className="wb-locked-seal"><span>⌾</span><i>🔒</i></div><small>WISEHUB · WATCH TOWER</small><h2>Wise Brain</h2><p>Ambiente de inteligência em preparação. O acesso será liberado após validação do proprietário.</p><div><b>ACESSO PROTEGIDO</b><span>Somente Hammis pode alterar esta permissão.</span></div></section>;
 
   return (
-    <section ref={rootRef} className={`wise-brain wb-visual-${visual} wb-unified-brain`} aria-label={mode === "WISE" ? "Wise Brain" : "Friday Brain"}>
+    <section ref={rootRef} data-mode={mode} className={`wise-brain wb-visual-${visual} wb-unified-brain`} aria-label={mode === "WISE" ? "Wise Brain" : "Friday Brain"}>
       <header className="wise-brain-topbar">
         {/* Nome segue o MODO (não isOwner): no modo WISE mostra "Wise Brain", no
             FRIDAY mostra "Friday Brain" — antes o dono via sempre "Friday Brain"
@@ -267,11 +267,6 @@ export function SpatialCommandCenter() {
           </div>
         </div>
         <div className="wb-session-actions">
-          {!isEyeView && (
-            <button type="button" className={`wb-handsfree${handsFree ? " on" : ""}`} onClick={() => { setHandsFree(v => !v); setHandsFreeHeard(""); }} title={handsFree && handsFreeHeard ? `ouvi: ${handsFreeHeard}` : `Hands-free por voz: diga "${mode === "FRIDAY" ? "Friday" : "Wise"}" e o comando`}>
-              {handsFree ? `🎧 diga "${mode === "FRIDAY" ? "Friday" : "Wise"}"` : "🎙 Hands-free"}
-            </button>
-          )}
           <div className="wb-live"><span /> LEITURAS REAIS · {COUNTRIES.length} PAÍSES</div>
           <button
             type="button"
@@ -330,6 +325,14 @@ export function SpatialCommandCenter() {
                 allow="microphone; autoplay; clipboard-write; camera"
               />
             ) : <div className="wb-brain-session-loading" role="status">Preparando sessão do {activeAppName}…</div>}
+            {!isEyeView && brainSessionReady && (
+              <div className="wb-panel-voice">
+                <button type="button" className={`wb-handsfree${handsFree ? " on" : ""}`} onClick={() => { setHandsFree(v => !v); setHandsFreeHeard(""); }} title={`Mãos livres: ligue e fale "${mode === "FRIDAY" ? "Friday" : "Wise"}" + o comando, sem tocar em nada`}>
+                  {handsFree ? `🎧 Ouvindo — diga "${mode === "FRIDAY" ? "Friday" : "Wise"}"` : "🎙 Ativar mãos livres"}
+                </button>
+                {handsFree && handsFreeHeard && <span className="wb-hf-heard">ouvi: {handsFreeHeard}</span>}
+              </div>
+            )}
           </div>
         </aside>
 
