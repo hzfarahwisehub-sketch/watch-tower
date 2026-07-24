@@ -48,4 +48,10 @@
   0%,100%{box-shadow:inset 0 0 10px rgba(140,210,255,.28),0 0 18px 2px rgba(255,140,45,.34)}
   50%{box-shadow:inset 0 0 22px rgba(150,220,255,.6),0 0 42px 6px rgba(255,150,55,.62)}
 }
-@media(prefers-reduced-motion:reduce){.wb-eye-flux .wb-eye-ring{animation:none}}
+/* O olho VIVO e' o coracao do recurso: mantem o pulso de luz MESMO com "reduzir
+   animacoes" ligado (Windows/SO), senao o olho fica morto pro Hammis (2026-07-23).
+   Vale so pro olho da LEITURA DE TELA (.wb-eye-reader), nao mexe no resto. */
+@media(prefers-reduced-motion:reduce){
+  .wb-eye-reader .wb-eye.wb-eye-reactive{animation:wb-breathe 4.2s ease-in-out infinite!important}
+  .wb-eye-reader.wb-eye-friday-flux .wb-eye-ring{animation:wb-flux-live 3.4s ease-in-out infinite!important}
+}
